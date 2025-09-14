@@ -1,27 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  collection, 
-  query, 
-  orderBy, 
-  onSnapshot, 
-  doc, 
+import {
+  collection,
+  query,
+  orderBy,
+  onSnapshot,
+  doc,
   updateDoc,
-  where,
-  Timestamp 
+  Timestamp
 } from 'firebase/firestore';
 import { db } from '../firebase';
 import {
   FaEye,
-  FaEdit,
   FaPhone,
   FaEnvelope,
-  FaWhatsapp,
-  FaFilter,
   FaDownload,
   FaCalendarAlt,
   FaBriefcase,
-  FaDollarSign,
   FaUser,
   FaBuilding,
   FaGlobe,

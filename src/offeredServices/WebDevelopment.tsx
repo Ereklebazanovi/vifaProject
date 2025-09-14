@@ -1,17 +1,11 @@
 import {
   FaReact,
-  FaWhatsapp,
-  FaPhone,
-  FaMapMarkerAlt,
-  FaImages,
   FaMobile,
-  FaCode,
   FaCheckCircle,
   FaClock,
   FaShieldAlt,
   FaChartLine,
   FaUsers,
-  FaDollarSign,
   FaRocket,
   FaGlobe,
   FaTachometerAlt,
@@ -24,7 +18,6 @@ import {
 } from "react-icons/fa";
 import {
   SiFirebase,
-  SiTailwindcss,
   SiTypescript,
   SiVercel,
 } from "react-icons/si";

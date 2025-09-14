@@ -838,13 +838,7 @@ const translations = {
     'ads.cta.button1': 'Free Advertising Audit',
     'ads.cta.button2': 'Contact Us',
     'ads.cta.benefits': '🎁 Free campaign audit • 📊 ROI forecast • 🚀 Quick start',
-    
-    // Content service
-    'home.services.content.title': 'Content Production',
-    'home.services.content.description': 'Professional photo/video services and branding',
-    'home.services.content.price': 'From ₾300',
-    'home.services.content.button': 'Learn More',
-    
+
     // Social Media Service Page
     'social.hero.title': 'Social Media',
     'social.hero.subtitle': 'Professional Management',
@@ -1371,7 +1365,8 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   };
 
   const t = (key: string): string => {
-    return translations[currentLanguage][key] || key;
+    const currentTranslations = translations[currentLanguage];
+    return (currentTranslations as any)[key] || key;
   };
 
   return (

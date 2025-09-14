@@ -9,7 +9,6 @@ import {
   FaChevronDown,
   FaTimes,
   FaBars,
-  FaRocket,
 } from "react-icons/fa";
 import ThemeToggle from "../components/ThemeToggle";
 import LanguageToggle from "../components/LanguageToggle";

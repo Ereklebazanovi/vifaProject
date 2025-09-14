@@ -1,27 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { 
-  FaRocket, 
-  FaUsers, 
-  FaHeart, 
-  FaLightbulb, 
+import {
+  FaRocket,
+  FaUsers,
+  FaHeart,
+  FaLightbulb,
   FaAward,
   FaCode,
   FaCamera,
   FaChartLine,
-  FaInstagram,
-  FaLinkedin,
-  FaTwitter,
-  FaGithub
+  FaInstagram
 } from 'react-icons/fa';
 import { useTheme } from '../contexts/ThemeContext';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const AboutPage = () => {
-  const [activeSection, setActiveSection] = useState(0);
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 300], [0, -50]);
-  const y2 = useTransform(scrollY, [0, 300], [0, -100]);
   const { isDarkMode } = useTheme();
   const { t } = useLanguage();
 
@@ -43,7 +38,7 @@ const AboutPage = () => {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut"
+        ease: [0.25, 0.46, 0.45, 0.94]
       }
     }
   };
@@ -78,42 +73,6 @@ const AboutPage = () => {
     }
   ];
 
-  const team = [
-    {
-      name: t('about.team.ceo.name'),
-      role: t('about.team.ceo.role'),
-      bio: t('about.team.ceo.bio'),
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop",
-      social: {
-        linkedin: "#",
-        twitter: "#",
-        github: "#"
-      },
-      skills: [t('about.team.ceo.skill1'), t('about.team.ceo.skill2'), t('about.team.ceo.skill3')]
-    },
-    {
-      name: t('about.team.creative.name'),
-      role: t('about.team.creative.role'),
-      bio: t('about.team.creative.bio'),
-      image: "https://images.unsplash.com/photo-1494790108755-2616c88474bd?w=300&h=300&fit=crop",
-      social: {
-        linkedin: "#",
-        instagram: "#"
-      },
-      skills: [t('about.team.creative.skill1'), t('about.team.creative.skill2'), t('about.team.creative.skill3')]
-    },
-    {
-      name: t('about.team.developer.name'),
-      role: t('about.team.developer.role'),
-      bio: t('about.team.developer.bio'),
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop",
-      social: {
-        github: "#",
-        linkedin: "#"
-      },
-      skills: [t('about.team.developer.skill1'), t('about.team.developer.skill2'), t('about.team.developer.skill3')]
-    }
-  ];
 
   const services = [
     {
@@ -172,7 +131,7 @@ const AboutPage = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
             <h1 className={`text-4xl md:text-6xl font-bold mb-6 leading-tight ${
               isDarkMode ? 'text-white' : 'text-slate-900'

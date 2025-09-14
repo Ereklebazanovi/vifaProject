@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   FaInstagram,
   FaFacebook,
@@ -15,7 +15,6 @@ import {
   FaRocket,
   FaBullseye,
   FaCrown,
-  FaFire,
 } from "react-icons/fa";
 import { useTheme } from '../contexts/ThemeContext';
 import { useLanguage } from '../contexts/LanguageContext';

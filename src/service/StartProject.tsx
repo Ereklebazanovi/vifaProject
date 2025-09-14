@@ -23,19 +23,6 @@ import {
 
 import { submitLead, type LeadData } from "../leadService"
 
-interface FormData {
-  services: string[]
-  businessType: string
-  budget: string
-  name: string
-  email: string
-  phone: string
-  businessName: string
-  currentWebsite: string
-  goals: string
-  timeline: string
-  preferredContact: string
-}
 
 const StartProject: React.FC = () => {
   const { isDarkMode } = useTheme()

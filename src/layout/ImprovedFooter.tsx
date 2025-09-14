@@ -3,15 +3,14 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../contexts/ThemeContext';
-import { 
-  FaFacebookF, 
-  FaInstagram, 
-  FaLinkedinIn, 
-  FaTwitter, 
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaTwitter,
   FaCode,
   FaCamera,
   FaChartLine,
-  FaRocket,
   FaPhone,
   FaEnvelope,
   FaMapMarkerAlt,
@@ -21,7 +20,6 @@ import {
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
   const [email, setEmail] = useState("");
-  const [showBackToTop, setShowBackToTop] = useState(true);
   const { t } = useLanguage();
   const { isDarkMode } = useTheme();
 
@@ -115,7 +113,7 @@ const Footer: React.FC = () => {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut"
+        ease: [0.25, 0.46, 0.45, 0.94]
       }
     }
   };
