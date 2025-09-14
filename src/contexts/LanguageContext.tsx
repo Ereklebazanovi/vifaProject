@@ -678,6 +678,31 @@ const translations = {
 
     // Footer
     'startProject.footer.trustIndicators': '🔒 თქვენი ინფორმაცია დაცულია • 🎁 უფასო კონსულტაცია • ⚡ სწრაფი პასუხი',
+
+    // SEO Meta Tags
+    'seo.home.title': 'VIFA - ციფრული მარკეტინგის სააგენტო საქართველოში',
+    'seo.home.description': 'VIFA - წამყვანი ციფრული მარკეტინგის სააგენტო საქართველოში. ვებსაიტების განვითარება, სოციალური მედიის მართვა, ციფრული რეკლამა. პროფესიონალური სერვისები თბილისში.',
+    'seo.home.keywords': 'ციფრული მარკეტინგი, ვებსაიტის შექმნა, სოციალური მედია, რეკლამა, საქართველო, თბილისი, VIFA',
+
+    'seo.about.title': 'ჩვენ შესახებ - VIFA Team',
+    'seo.about.description': 'VIFA-ს გუნდის შესახებ. ჩვენი გამოცდილება, მიზნები და ღირებულებები ციფრული მარკეტინგის სფეროში საქართველოში.',
+    'seo.about.keywords': 'VIFA გუნდი, ციფრული მარკეტინგის კომპანია, ვებ განვითარება, საქართველო',
+
+    'seo.services.social.title': 'სოციალური მედიის მართვა - VIFA',
+    'seo.services.social.description': 'პროფესიონალური სოციალური მედიის მართვა Instagram, Facebook, TikTok-ზე. შინაარსის შექმნა, გამოქვეყნება და ანალიზი.',
+    'seo.services.social.keywords': 'სოციალური მედია, Instagram მართვა, Facebook მარკეტინგი, TikTok, შინაარსის შექმნა',
+
+    'seo.services.ads.title': 'ციფრული რეკლამა - VIFA',
+    'seo.services.ads.description': 'Google Ads, Facebook და Instagram რეკლამების კამპანიების მართვა. ROI ოპტიმიზაცია და გაყიდვების ზრდა.',
+    'seo.services.ads.keywords': 'Google Ads, Facebook რეკლამა, Instagram რეკლამა, PPC, ციფრული რეკლამა',
+
+    'seo.services.webdev.title': 'ვებსაიტის განვითარება - VIFA',
+    'seo.services.webdev.description': 'რესპონსიული ვებსაიტების და ონლაინ მაღაზიების შექმნა. SEO ოპტიმიზაცია, უსაფრთხოება და სწრაფი ჩატვირთვა.',
+    'seo.services.webdev.keywords': 'ვებსაიტის შექმნა, ონლაინ მაღაზია, ვებ განვითარება, SEO, რესპონსიული დიზაინი',
+
+    'seo.startProject.title': 'პროექტის დაწყება - VIFA',
+    'seo.startProject.description': 'დაიწყეთ თქვენი ციფრული პროექტი VIFA-სთან ერთად. უფასო კონსულტაცია და პერსონალიზებული გადაწყვეტები.',
+    'seo.startProject.keywords': 'პროექტის დაწყება, კონსულტაცია, ციფრული მარკეტინგი, ვება განვითარება',
   },
 
   
@@ -1342,6 +1367,31 @@ const translations = {
 
     // Footer
     'startProject.footer.trustIndicators': '🔒 Your information is secure • 🎁 Free consultation • ⚡ Quick response',
+
+    // SEO Meta Tags
+    'seo.home.title': 'VIFA - Digital Marketing Agency in Georgia',
+    'seo.home.description': 'VIFA - Leading digital marketing agency in Georgia. Web development, social media management, digital advertising. Professional services in Tbilisi.',
+    'seo.home.keywords': 'digital marketing, web development, social media, advertising, Georgia, Tbilisi, VIFA',
+
+    'seo.about.title': 'About Us - VIFA Team',
+    'seo.about.description': 'About VIFA team. Our experience, goals and values in digital marketing field in Georgia.',
+    'seo.about.keywords': 'VIFA team, digital marketing company, web development, Georgia',
+
+    'seo.services.social.title': 'Social Media Management - VIFA',
+    'seo.services.social.description': 'Professional social media management for Instagram, Facebook, TikTok. Content creation, publishing and analytics.',
+    'seo.services.social.keywords': 'social media, Instagram management, Facebook marketing, TikTok, content creation',
+
+    'seo.services.ads.title': 'Digital Advertising - VIFA',
+    'seo.services.ads.description': 'Google Ads, Facebook and Instagram advertising campaigns management. ROI optimization and sales growth.',
+    'seo.services.ads.keywords': 'Google Ads, Facebook advertising, Instagram ads, PPC, digital advertising',
+
+    'seo.services.webdev.title': 'Web Development - VIFA',
+    'seo.services.webdev.description': 'Responsive websites and online stores development. SEO optimization, security and fast loading.',
+    'seo.services.webdev.keywords': 'web development, online store, website creation, SEO, responsive design',
+
+    'seo.startProject.title': 'Start Project - VIFA',
+    'seo.startProject.description': 'Start your digital project with VIFA. Free consultation and personalized solutions.',
+    'seo.startProject.keywords': 'start project, consultation, digital marketing, web development',
   }
 };
 
@@ -1365,8 +1415,8 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   };
 
   const t = (key: string): string => {
-    const currentTranslations = translations[currentLanguage];
-    return (currentTranslations as any)[key] || key;
+    const currentTranslations = translations[currentLanguage] as Record<string, string>;
+    return currentTranslations[key] || key;
   };
 
   return (

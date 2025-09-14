@@ -3,6 +3,7 @@
 import type React from "react"
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import SEO from '../components/SEO'
 import { useTheme } from "../contexts/ThemeContext"
 import { useLanguage } from "../contexts/LanguageContext"
 import {
@@ -178,12 +179,32 @@ const StartProject: React.FC = () => {
     exit: { opacity: 0, y: -20 },
   }
 
+  const startProjectStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": t('seo.startProject.title'),
+    "description": t('seo.startProject.description'),
+    "provider": {
+      "@type": "Organization",
+      "name": "VIFA",
+      "url": "https://vifa.ge"
+    }
+  };
+
   return (
-    <div className={`min-h-screen pt-12 pb-12 transition-colors duration-300 ${
-        isDarkMode
-          ? 'bg-slate-950 text-white'
-          : 'bg-slate-50 text-slate-900'
-      }`}>
+    <>
+      <SEO
+        title={t('seo.startProject.title')}
+        description={t('seo.startProject.description')}
+        keywords={t('seo.startProject.keywords')}
+        type="website"
+        structuredData={startProjectStructuredData}
+      />
+      <div className={`min-h-screen pt-12 pb-12 transition-colors duration-300 ${
+          isDarkMode
+            ? 'bg-slate-950 text-white'
+            : 'bg-slate-50 text-slate-900'
+        }`}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
         
@@ -695,7 +716,8 @@ const StartProject: React.FC = () => {
           <p className="mb-4">{t('startProject.footer.trustIndicators')}</p>
         </motion.div>
       </div>
-    </div>
+      </div>
+    </>
   )
 }
 

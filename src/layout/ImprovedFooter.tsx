@@ -9,7 +9,6 @@ import {
   FaLinkedinIn,
   FaTwitter,
   FaCode,
-  FaCamera,
   FaChartLine,
   FaPhone,
   FaEnvelope,
@@ -53,7 +52,6 @@ const Footer: React.FC = () => {
 
   const services = [
     { name: t('footer.services.webdev'), href: "/services/web-development", icon: <FaCode className="w-4 h-4" /> },
-    { name: t('footer.services.content'), href: "/services/content-production", icon: <FaCamera className="w-4 h-4" /> },
     { name: t('footer.services.ads'), href: "/services/digital-advertising", icon: <FaChartLine className="w-4 h-4" /> },
     { name: t('footer.services.social'), href: "/services/social-media", icon: <FaInstagram className="w-4 h-4" /> },
   ];

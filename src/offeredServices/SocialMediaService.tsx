@@ -16,6 +16,7 @@ import {
   FaBullseye,
   FaCrown,
 } from "react-icons/fa";
+import SEO from '../components/SEO';
 import { useTheme } from '../contexts/ThemeContext';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -370,8 +371,31 @@ const SocialMediaService = () => {
     return platforms.find((p) => p.id === activeTab) || platforms[0];
   };
 
+  const socialStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": t('seo.services.social.title'),
+    "description": t('seo.services.social.description'),
+    "provider": {
+      "@type": "Organization",
+      "name": "VIFA",
+      "url": "https://vifa.ge"
+    },
+    "areaServed": {
+      "@type": "Place",
+      "name": "Georgia"
+    }
+  };
+
   return (
     <>
+      <SEO
+        title={t('seo.services.social.title')}
+        description={t('seo.services.social.description')}
+        keywords={t('seo.services.social.keywords')}
+        type="service"
+        structuredData={socialStructuredData}
+      />
       <style>{animationClasses}</style>
       <div className={`min-h-screen transition-colors duration-500 ${isLoaded ? 'page-transition' : ''} ${
         isDarkMode 

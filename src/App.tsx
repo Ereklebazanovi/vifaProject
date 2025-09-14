@@ -1,6 +1,7 @@
 import type React from "react"
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom"
 import { Suspense, lazy, useState, useEffect } from "react"
+import { HelmetProvider } from 'react-helmet-async'
 import Layout from "./layout/Layout"
 import { ThemeProvider } from "./contexts/ThemeContext"
 import { LanguageProvider } from "./contexts/LanguageContext"
@@ -75,33 +76,35 @@ const RouteTransition: React.FC<{ children: React.ReactNode }> = ({ children }) 
 
 const App: React.FC = () => {
   return (
-    <ThemeProvider>
-      <LanguageProvider>
-        <Router>
-          <Suspense fallback={<LoadingSpinner />}>
-            <RouteTransition>
-              <Routes>
-                <Route path="/" element={<Layout />}>
-                  <Route index element={<Home />} />
-                  <Route path="services/social-media" element={<SocialMediaService />} />
-                  <Route path="services/digital-advertising" element={<DigitalAdvertising />} />
-                  <Route path="services/web-development" element={<WebDevelopment />} />
+    <HelmetProvider>
+      <ThemeProvider>
+        <LanguageProvider>
+          <Router>
+            <Suspense fallback={<LoadingSpinner />}>
+              <RouteTransition>
+                <Routes>
+                  <Route path="/" element={<Layout />}>
+                    <Route index element={<Home />} />
+                    <Route path="services/social-media" element={<SocialMediaService />} />
+                    <Route path="services/digital-advertising" element={<DigitalAdvertising />} />
+                    <Route path="services/web-development" element={<WebDevelopment />} />
 
-                  <Route path="about" element={<AboutPage />} />
-                  
-                  <Route path="contact" element={<Contact />} />
-                  <Route path="start-project" element={<StartProject />} />
-                </Route>
+                    <Route path="about" element={<AboutPage />} />
 
-                {/* Admin routes without Layout (no navbar/footer) */}
-                <Route path="/admin" element={<AdminDashboard />} />
-                <Route path="/admin/leads" element={<AdminDashboard />} />
-              </Routes>
-            </RouteTransition>
-          </Suspense>
-        </Router>
-      </LanguageProvider>
-    </ThemeProvider>
+                    <Route path="contact" element={<Contact />} />
+                    <Route path="start-project" element={<StartProject />} />
+                  </Route>
+
+                  {/* Admin routes without Layout (no navbar/footer) */}
+                  <Route path="/admin" element={<AdminDashboard />} />
+                  <Route path="/admin/leads" element={<AdminDashboard />} />
+                </Routes>
+              </RouteTransition>
+            </Suspense>
+          </Router>
+        </LanguageProvider>
+      </ThemeProvider>
+    </HelmetProvider>
   )
 }
 

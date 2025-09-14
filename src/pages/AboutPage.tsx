@@ -10,6 +10,7 @@ import {
   FaChartLine,
   FaInstagram
 } from 'react-icons/fa';
+import SEO from '../components/SEO';
 import { useTheme } from '../contexts/ThemeContext';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -95,12 +96,39 @@ const AboutPage = () => {
     }
   ];
 
+  const aboutStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "VIFA",
+      "description": t('seo.about.description'),
+      "foundingDate": "2023",
+      "location": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "GE",
+          "addressLocality": "Tbilisi"
+        }
+      }
+    }
+  };
+
   return (
-    <div className={`min-h-screen overflow-hidden transition-colors duration-500 ${
-      isDarkMode 
-        ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white' 
-        : 'bg-gradient-to-br from-slate-50 via-white to-blue-50 text-slate-900'
-    }`}>
+    <>
+      <SEO
+        title={t('seo.about.title')}
+        description={t('seo.about.description')}
+        keywords={t('seo.about.keywords')}
+        type="website"
+        structuredData={aboutStructuredData}
+      />
+      <div className={`min-h-screen overflow-hidden transition-colors duration-500 ${
+        isDarkMode
+          ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white'
+          : 'bg-gradient-to-br from-slate-50 via-white to-blue-50 text-slate-900'
+      }`}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
         
@@ -370,7 +398,8 @@ const AboutPage = () => {
           </motion.div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 };
 

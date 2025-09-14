@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FaCode,
-  FaCamera,
   FaInstagram,
   FaChartLine,
   FaChevronDown,
@@ -70,13 +69,6 @@ const Navbar: React.FC = () => {
       label: t('services.webdev.title'),
       description: t('services.webdev.description'),
       icon: <FaCode className="w-5 h-5" />,
-    },
-    {
-      key: "content",
-      path: "/services/content-production",
-      label: t('services.content.title'),
-      description: t('services.content.description'),
-      icon: <FaCamera className="w-5 h-5" />,
     },
   ];
 

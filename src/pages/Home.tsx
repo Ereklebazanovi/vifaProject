@@ -10,6 +10,8 @@ import {
   FaCheckCircle,
 } from "react-icons/fa";
 import OfficeLocation from "../ui/OfficeLocation";
+import SEO from "../components/SEO";
+import { siteConfig } from "../config/siteConfig";
 import { useTheme } from "../contexts/ThemeContext";
 import { useLanguage } from "../contexts/LanguageContext";
 
@@ -18,12 +20,49 @@ const Home: React.FC = () => {
   const { isDarkMode } = useTheme();
   const { t } = useLanguage();
 
+  const homeStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": siteConfig.siteName,
+    "description": t('seo.home.description'),
+    "url": siteConfig.url,
+    "logo": `${siteConfig.url}/vifa.jpg`,
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": siteConfig.location.countryCode,
+      "addressLocality": siteConfig.location.city
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": siteConfig.phone,
+      "contactType": "customer service",
+      "email": siteConfig.email
+    },
+    "sameAs": [
+      siteConfig.social.instagram,
+      siteConfig.social.facebook,
+      siteConfig.social.linkedin
+    ],
+    "offers": {
+      "@type": "Offer",
+      "category": "Digital Marketing Services"
+    }
+  };
+
   return (
-    <div className={`relative overflow-hidden transition-colors duration-500 ${
-      isDarkMode 
-        ? 'bg-slate-950 text-white' 
-        : 'bg-white text-slate-900'
-    }`}>
+    <>
+      <SEO
+        title={t('seo.home.title')}
+        description={t('seo.home.description')}
+        keywords={t('seo.home.keywords')}
+        type="website"
+        structuredData={homeStructuredData}
+      />
+      <div className={`relative overflow-hidden transition-colors duration-500 ${
+        isDarkMode
+          ? 'bg-slate-950 text-white'
+          : 'bg-white text-slate-900'
+      }`}>
       {/* Theme-Aware Background */}
       <div className="fixed inset-0 z-0">
         {isDarkMode ? (
@@ -571,7 +610,8 @@ const Home: React.FC = () => {
           </div>
         </section>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 
