@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import {
   FaRocket,
@@ -37,8 +36,7 @@ const AboutPage = () => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94]
+        duration: 0.6
       }
     }
   };
@@ -131,7 +129,7 @@ const AboutPage = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+            transition={{ duration: 0.8 }}
           >
             <h1 className={`text-4xl md:text-6xl font-bold mb-6 leading-tight ${
               isDarkMode ? 'text-white' : 'text-slate-900'

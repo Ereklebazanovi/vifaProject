@@ -6,6 +6,7 @@ import {
   FaShieldAlt,
   FaChartLine,
   FaUsers,
+  FaDollarSign,
   FaRocket,
   FaGlobe,
   FaTachometerAlt,
