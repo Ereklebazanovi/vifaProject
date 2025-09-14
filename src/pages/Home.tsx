@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   FaCamera,
   FaChartLine,
@@ -464,12 +465,12 @@ const Home: React.FC = () => {
                     ))}
                   </div>
 
-                  <a
-                    href={service.link}
+                  <Link
+                    to={service.link}
                     className="block mt-4 bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-lg font-semibold transition-all w-full cta-button text-center text-sm"
                   >
                     {t('home.services.webdev.button')}
-                  </a>
+                  </Link>
                 </div>
               ))}
             </div>
