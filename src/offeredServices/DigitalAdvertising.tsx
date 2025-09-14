@@ -1,26 +1,27 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   FaGoogle,
   FaFacebook,
- 
+
   FaYoutube,
   FaTiktok,
   FaLinkedin,
   FaChartLine,
   FaBullseye,
-  
+
   FaEye,
- 
+
   FaRocket,
   FaCheckCircle,
   FaArrowRight,
-  
+
   FaSearchDollar,
- 
+
   FaFileAlt,
   FaPlayCircle,
   FaShoppingCart,
-  
+
 } from "react-icons/fa";
 import { useTheme } from '../contexts/ThemeContext';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -503,13 +504,13 @@ const DigitalAdvertising: React.FC = () => {
               {t('ads.cta.description')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center fade-in-up delay-200">
-              <a
-                href="/start-project"
+              <Link
+                to="/start-project"
                 className="cta-button bg-gradient-to-r from-red-500 to-orange-500 px-8 py-4 rounded-lg font-semibold inline-flex items-center gap-2 text-center justify-center"
               >
                 <FaRocket />
                 {t('ads.cta.button1')}
-              </a>
+              </Link>
               <a
                 href="tel:+995555123456"
                 className="cta-button border border-red-500 px-8 py-4 rounded-lg font-semibold hover:bg-red-500/10 transition-all duration-300 text-center"

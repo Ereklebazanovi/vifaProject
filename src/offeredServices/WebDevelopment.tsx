@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   FaReact,
   FaMobile,
@@ -335,12 +336,12 @@ const WebDevelopment = () => {
                 </div>
 
                 <div className="text-center">
-                  <a
-                    href="/start-project?package=basic"
+                  <Link
+                    to="/start-project?package=basic"
                     className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg text-sm transition-colors"
                   >
                     {t('webdev.packages.basic.button')}
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -419,12 +420,12 @@ const WebDevelopment = () => {
                 </div>
 
                 <div className="text-center">
-                  <a
-                    href="/start-project?package=standard"
+                  <Link
+                    to="/start-project?package=standard"
                     className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-6 rounded-lg text-sm transition-colors"
                   >
                     {t('webdev.packages.standard.button')}
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -517,12 +518,12 @@ const WebDevelopment = () => {
                 </div>
 
                 <div className="text-center">
-                  <a
-                    href="/start-project?package=premium"
+                  <Link
+                    to="/start-project?package=premium"
                     className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-6 rounded-lg text-sm transition-colors"
                   >
                     {t('webdev.packages.premium.button')}
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -914,18 +915,18 @@ const WebDevelopment = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-              <a
-                href="/start-project"
+              <Link
+                to="/start-project"
                 className="hover-scale bg-gradient-to-r from-green-500 to-blue-500 px-10 py-4 rounded-xl font-bold text-lg shadow-xl"
               >
                 {t('webdev.cta.button1')}
-              </a>
+              </Link>
               <a
                 href="https://wa.me/995555123456"
                 className="hover-scale border-2 border-green-500 px-10 py-4 rounded-xl font-bold text-lg hover:bg-green-500/10 transition-all duration-300"
               >
                 {t('webdev.cta.button2')}
-              </a>
+              </Link>
             </div>
 
             <div className={`rounded-xl p-6 max-w-2xl mx-auto border ${isDarkMode ? 'bg-slate-800/50 border-slate-600/50' : 'bg-white/70 border-slate-300/50'}`}>

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from 'framer-motion';
 import {
   FaRocket,
@@ -378,14 +379,17 @@ const AboutPage = () => {
               {t('about.cta.description')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.a
-                href="/start-project"
+              <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:shadow-lg hover:shadow-red-500/30"
               >
-                {t('about.cta.startProject')}
-              </motion.a>
+                <Link
+                  to="/start-project"
+                  className="block px-8 py-4 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:shadow-lg hover:shadow-red-500/30"
+                >
+                  {t('about.cta.startProject')}
+                </Link>
+              </motion.div>
               <motion.a
                 href="/contact"
                 whileHover={{ scale: 1.05 }}
