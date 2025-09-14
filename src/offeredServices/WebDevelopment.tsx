@@ -926,7 +926,7 @@ const WebDevelopment = () => {
                 className="hover-scale border-2 border-green-500 px-10 py-4 rounded-xl font-bold text-lg hover:bg-green-500/10 transition-all duration-300"
               >
                 {t('webdev.cta.button2')}
-              </Link>
+              </a>
             </div>
 
             <div className={`rounded-xl p-6 max-w-2xl mx-auto border ${isDarkMode ? 'bg-slate-800/50 border-slate-600/50' : 'bg-white/70 border-slate-300/50'}`}>
