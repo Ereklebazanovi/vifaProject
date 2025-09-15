@@ -503,7 +503,7 @@ const DigitalAdvertising: React.FC = () => {
             <p className={`text-xl mb-8 ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>
               {t('ads.cta.description')}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center fade-in-up delay-200">
+            <div className="flex justify-center fade-in-up delay-200">
               <Link
                 to="/start-project"
                 className="cta-button bg-gradient-to-r from-red-500 to-orange-500 px-8 py-4 rounded-lg font-semibold inline-flex items-center gap-2 text-center justify-center"
@@ -511,12 +511,6 @@ const DigitalAdvertising: React.FC = () => {
                 <FaRocket />
                 {t('ads.cta.button1')}
               </Link>
-              <a
-                href="tel:+995555123456"
-                className="cta-button border border-red-500 px-8 py-4 rounded-lg font-semibold hover:bg-red-500/10 transition-all duration-300 text-center"
-              >
-                📞 {t('ads.cta.button2')}
-              </a>
             </div>
             <p className={`mt-6 fade-in-up delay-300 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
               {t('ads.cta.benefits')}

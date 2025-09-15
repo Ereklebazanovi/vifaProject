@@ -171,7 +171,7 @@ const translations = {
     'ads.cta.highlight': 'გაზარდოთ',
     'ads.cta.suffix': 'გაყიდვები?',
     'ads.cta.description': 'დაიწყეთ უფასო რეკლამის აუდიტით და ნახეთ თქვენი პოტენციალი',
-    'ads.cta.button1': 'უფასო რეკლამის აუდიტი',
+    'ads.cta.button1': 'პროექტის დაგეგმვა',
     'ads.cta.button2': 'დაგვიკავშირდით',
     'ads.cta.benefits': '🎁 უფასო კამპეინის აუდიტი • 📊 ROI პროგნოზი • 🚀 სწრაფი სტარტი',
     
@@ -860,7 +860,7 @@ const translations = {
     'ads.cta.highlight': 'Increase',
     'ads.cta.suffix': 'Sales?',
     'ads.cta.description': 'Start with a free advertising audit and see your potential',
-    'ads.cta.button1': 'Free Advertising Audit',
+    'ads.cta.button1': 'Project Planning',
     'ads.cta.button2': 'Contact Us',
     'ads.cta.benefits': '🎁 Free campaign audit • 📊 ROI forecast • 🚀 Quick start',
 
