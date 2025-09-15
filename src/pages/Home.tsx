@@ -349,143 +349,380 @@ const Home: React.FC = () => {
         }
       `}</style>
 
-          {/* SERVICES SECTION */}
-          <section
-            id="services"
-            className="relative py-9 px-6 max-w-7xl mx-auto overflow-hidden"
-          >
-            {/* Contextual Background Elements */}
-            <div className="absolute inset-0"></div>
-
-            {/* Subtle Service Accents */}
-            <div className="absolute top-20 right-20 text-blue-300/5 text-5xl">
-              <FaCode />
+          {/* HERO SECTION WITH CREATIVE VISUALS */}
+          <section className="relative py-20 px-6 max-w-7xl mx-auto overflow-hidden">
+            {/* Floating geometric shapes */}
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full blur-xl"></div>
+              <div className="absolute bottom-32 right-20 w-48 h-48 bg-gradient-to-br from-green-500/10 to-blue-500/10 rounded-full blur-xl"></div>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-full blur-2xl"></div>
             </div>
-            <div className="absolute bottom-20 left-20 text-slate-300/5 text-4xl">
-              <FaCamera />
-            </div>
-            <div className="absolute top-1/2 right-10 text-blue-200/5 text-3xl">
-              <FaChartLine />
-            </div>
-
-            {/* Soft Ambient Light */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-32 "></div>
 
             <div className="relative z-10">
-              <div className="text-center mb-8 fade-in">
-                <h2
-                  className={`section-title text-2xl md:text-4xl font-bold mb-4 ${
-                    isDarkMode ? "text-white" : "text-slate-900"
-                  }`}
-                >
-                  {t("home.services.title")}
-                </h2>
-                <p
-                  className={`body-text text-base md:text-lg ${
-                    isDarkMode ? "text-slate-400" : "text-slate-600"
-                  }`}
-                >
-                  {t("home.services.subtitle")}
+              {/* Main Hero */}
+              <div className="text-center mb-20 fade-in">
+                <h1 className={`hero-title text-5xl md:text-7xl font-bold mb-6 leading-tight ${
+                  isDarkMode ? "text-white" : "text-slate-900"
+                }`}>
+                  {t("home.hero.title").split(" ").map((word, i) => (
+                    <span key={i} className={i === 2 ? "text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600" : ""}>
+                      {word}{" "}
+                    </span>
+                  ))}
+                </h1>
+                <p className={`text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed mb-8 ${
+                  isDarkMode ? "text-slate-300" : "text-slate-600"
+                }`}>
+                  {t("home.hero.subtitle")}
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-6 mb-8">
+              {/* Problem-Solution Cards */}
+              <div className="grid md:grid-cols-2 gap-8 mb-20">
+                {/* Problem Card */}
+                <div className={`p-8 rounded-3xl backdrop-blur-sm border-2 border-dashed transition-all duration-500 hover:scale-105 fade-in delay-200 ${
+                  isDarkMode
+                    ? "bg-red-900/10 border-red-400/30 hover:border-red-400/50"
+                    : "bg-red-50/80 border-red-300/50 hover:border-red-400/60"
+                }`}>
+                  <div className="text-center mb-6">
+                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center">
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                      </svg>
+                    </div>
+                    <h3 className={`text-2xl font-bold mb-4 ${
+                      isDarkMode ? "text-red-300" : "text-red-700"
+                    }`}>
+                      {t("home.problems.title")}
+                    </h3>
+                  </div>
+                  <div className="space-y-4">
+                    {[
+                      { icon: "📉", text: t("home.problems.lowSales") },
+                      { icon: "👻", text: t("home.problems.noOnlinePresence") },
+                      { icon: "💸", text: t("home.problems.ineffectiveMarketing") }
+                    ].map((problem, i) => (
+                      <div key={i} className={`flex items-start gap-4 p-4 rounded-xl transition-all duration-300 hover:scale-105 ${
+                        isDarkMode ? "bg-slate-800/30" : "bg-white/60"
+                      }`}>
+                        <span className="text-2xl">{problem.icon}</span>
+                        <p className={`${isDarkMode ? "text-slate-300" : "text-slate-700"}`}>
+                          {problem.text}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Solution Card */}
+                <div className={`p-8 rounded-3xl backdrop-blur-sm border-2 border-dashed transition-all duration-500 hover:scale-105 fade-in delay-400 ${
+                  isDarkMode
+                    ? "bg-green-900/10 border-green-400/30 hover:border-green-400/50"
+                    : "bg-green-50/80 border-green-300/50 hover:border-green-400/60"
+                }`}>
+                  <div className="text-center mb-6">
+                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                      <FaRocket className="text-white text-2xl" />
+                    </div>
+                    <h3 className={`text-2xl font-bold mb-4 ${
+                      isDarkMode ? "text-green-300" : "text-green-700"
+                    }`}>
+                      {t("home.solutions.title")}
+                    </h3>
+                  </div>
+                  <div className="space-y-4">
+                    {[
+                      { icon: <FaChartLine />, text: t("home.solutions.digitalStrategy") },
+                      { icon: <FaUsers />, text: t("home.solutions.brandVisibility") },
+                      { icon: <FaRocket />, text: t("home.solutions.targetedMarketing") }
+                    ].map((solution, i) => (
+                      <div key={i} className={`flex items-start gap-4 p-4 rounded-xl transition-all duration-300 hover:scale-105 ${
+                        isDarkMode ? "bg-slate-800/30" : "bg-white/60"
+                      }`}>
+                        <div className="text-green-500 text-xl mt-1">{solution.icon}</div>
+                        <p className={`${isDarkMode ? "text-slate-300" : "text-slate-700"}`}>
+                          {solution.text}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Call to Action */}
+              <div className="text-center fade-in delay-600">
+                <div className="inline-flex items-center gap-4 p-4 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-blue-400/20">
+                  <Link
+                    to="/start-project"
+                    className="bg-gradient-to-r from-blue-500 to-purple-600 px-8 py-4 rounded-full font-semibold text-white hover:scale-105 transition-all duration-300 shadow-lg"
+                  >
+                    {t("home.hero.getStarted")}
+                  </Link>
+                  <span className={`text-sm ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>
+                    უფასო კონსულტაცია
+                  </span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* STATS & ACHIEVEMENTS SECTION */}
+          <section className={`py-20 px-6 ${isDarkMode ? 'bg-slate-900/30' : 'bg-slate-50/50'}`}>
+            <div className="max-w-7xl mx-auto">
+              <div className="grid md:grid-cols-4 gap-8 mb-16">
                 {[
                   {
-                    icon: <FaCode />,
-                    title: t("home.services.webdev.title"),
-                    desc: t("home.services.webdev.description"),
-                    price: t("home.services.webdev.price"),
-                    link: "/services/web-development",
-                    features: [
-                      "Enterprise Hosting (Vercel) - 99.99% Uptime",
-                      t("webdev.features.lightningSpeed"),
-                      "Professional SEO + Google Analytics",
-                      "Mobile Optimized + SSL Security",
-                    ],
+                    number: "50+",
+                    label: "დასრულებული პროექტი",
+                    icon: <FaRocket />,
+                    color: "from-blue-500 to-blue-600"
                   },
                   {
-                    icon: <FaCamera />,
-                    title: t("home.services.ads.title"),
-                    desc: t("home.services.ads.description"),
-                    price: t("home.services.ads.price"),
-                    link: "/services/digital-advertising",
-                    features: [
-                      "Google & Meta Ads",
-                      t("ads.features.targetAudience"),
-                      t("ads.features.abTesting"),
-                      t("ads.features.roiTracking"),
-                    ],
+                    number: "98%",
+                    label: "კმაყოფილი კლიენტები",
+                    icon: <FaUsers />,
+                    color: "from-green-500 to-green-600"
                   },
                   {
-                    icon: <FaInstagram />,
-                    title: t("home.services.social.title"),
-                    desc: t("home.services.social.description"),
-                    price: t("home.services.social.price"),
-                    link: "/services/social-media",
-                    features: [
-                      t("social.features.postsPerWeek"),
-                      t("social.features.storiesReels"),
-                      t("social.features.commentManagement"),
-                      t("social.features.monthlyReports"),
-                    ],
+                    number: "2.5x",
+                    label: "საშუალო ROI გაზრდა",
+                    icon: <FaChartLine />,
+                    color: "from-purple-500 to-purple-600"
                   },
-                ].map((service, i) => (
-                  <div
-                    key={i}
-                    className={`service-card p-6 backdrop-blur-sm rounded-2xl border relative overflow-hidden fade-in delay-${
-                      (i + 1) * 100
-                    } ${
-                      isDarkMode
-                        ? "bg-slate-900/20 border-slate-700/30 hover:border-blue-400/40"
-                        : "bg-white/60 border-slate-300/50 hover:border-blue-500/50 shadow-lg"
-                    }`}
-                  >
-                    <div className="absolute top-0 right-0 bg-blue-500 text-white px-3 py-1 rounded-bl-lg text-sm font-semibold">
-                      {service.price}
+                  {
+                    number: "24/7",
+                    label: "მხარდაჭერა",
+                    icon: <FaCheckCircle />,
+                    color: "from-orange-500 to-orange-600"
+                  }
+                ].map((stat, i) => (
+                  <div key={i} className={`text-center p-6 rounded-2xl backdrop-blur-sm border transition-all duration-500 hover:scale-105 fade-in delay-${(i + 1) * 100} ${
+                    isDarkMode
+                      ? "bg-slate-800/20 border-slate-700/30"
+                      : "bg-white/80 border-slate-200/50"
+                  }`}>
+                    <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-r ${stat.color} flex items-center justify-center text-white text-2xl shadow-lg`}>
+                      {stat.icon}
                     </div>
-
-                    <div className="text-3xl text-blue-400 mb-4 transition-transform hover:scale-110">
-                      {service.icon}
+                    <div className={`text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
+                      {stat.number}
                     </div>
-                    <h3
-                      className={`section-title text-xl font-semibold mb-3 ${
-                        isDarkMode ? "text-white" : "text-slate-900"
-                      }`}
-                    >
-                      {service.title}
-                    </h3>
-                    <p
-                      className={`body-text text-sm leading-relaxed mb-4 ${
-                        isDarkMode ? "text-slate-400" : "text-slate-600"
-                      }`}
-                    >
-                      {service.desc}
-                    </p>
-
-                    <div className="space-y-1 mb-4">
-                      {service.features.map((feature, idx) => (
-                        <div
-                          key={idx}
-                          className={`flex items-center gap-2 text-xs ${
-                            isDarkMode ? "text-slate-300" : "text-slate-600"
-                          }`}
-                        >
-                          <FaCheckCircle className="text-green-400 text-xs" />
-                          {feature}
-                        </div>
-                      ))}
+                    <div className={`text-sm font-medium ${
+                      isDarkMode ? "text-slate-400" : "text-slate-600"
+                    }`}>
+                      {stat.label}
                     </div>
-
-                    <Link
-                      to={service.link}
-                      className="block mt-4 bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-lg font-semibold transition-all w-full cta-button text-center text-sm"
-                    >
-                      {t("home.services.webdev.button")}
-                    </Link>
                   </div>
                 ))}
               </div>
+            </div>
+          </section>
+
+          {/* CREATIVE PROCESS VISUALIZATION */}
+          <section className="py-20 px-6">
+            <div className="max-w-7xl mx-auto">
+              <div className="text-center mb-16 fade-in">
+                <h2 className={`section-title text-4xl md:text-5xl font-bold mb-6 ${
+                  isDarkMode ? "text-white" : "text-slate-900"
+                }`}>
+                  {t("home.journey.title")}
+                </h2>
+                <p className={`text-xl max-w-3xl mx-auto ${
+                  isDarkMode ? "text-slate-400" : "text-slate-600"
+                }`}>
+                  ყოველი წარმატებული პროექტი იწყება სწორი მეთოდოლოგიით
+                </p>
+              </div>
+
+              {/* Process Flow */}
+              <div className="relative">
+                {/* Connection Lines */}
+                <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-green-500 opacity-30"></div>
+
+                <div className="grid md:grid-cols-3 gap-8 lg:gap-16">
+                  {[
+                    {
+                      step: "01",
+                      icon: <FaUsers />,
+                      title: t("home.journey.step1.title"),
+                      desc: t("home.journey.step1.description"),
+                      color: "from-blue-400 to-blue-600",
+                      bg: "from-blue-500/10 to-blue-600/10",
+                      details: ["კონკურენტების ანალიზი", "აუდიტორიის კვლევა", "სტრატეგიის დაგეგმვა"]
+                    },
+                    {
+                      step: "02",
+                      icon: <FaRocket />,
+                      title: t("home.journey.step2.title"),
+                      desc: t("home.journey.step2.description"),
+                      color: "from-purple-400 to-purple-600",
+                      bg: "from-purple-500/10 to-purple-600/10",
+                      details: ["კრეატიული შემუშავება", "ტექნიკური განხორციელება", "ხარისხის კონტროლი"]
+                    },
+                    {
+                      step: "03",
+                      icon: <FaChartLine />,
+                      title: t("home.journey.step3.title"),
+                      desc: t("home.journey.step3.description"),
+                      color: "from-green-400 to-green-600",
+                      bg: "from-green-500/10 to-green-600/10",
+                      details: ["შედეგების ანალიზი", "A/B ტესტირება", "სტრატეგიის გამოსწორება"]
+                    }
+                  ].map((step, i) => (
+                    <div key={i} className={`relative fade-in delay-${(i + 1) * 200}`}>
+                      {/* Step Card */}
+                      <div className={`relative p-8 rounded-3xl backdrop-blur-sm border transition-all duration-500 hover:scale-105 group ${
+                        isDarkMode
+                          ? "bg-slate-800/30 border-slate-700/30"
+                          : "bg-white/80 border-slate-200/50"
+                      }`}>
+                        {/* Background Pattern */}
+                        <div className={`absolute inset-0 bg-gradient-to-br ${step.bg} rounded-3xl opacity-50 group-hover:opacity-70 transition-opacity`}></div>
+
+                        <div className="relative z-10">
+                          {/* Step Number */}
+                          <div className="text-right mb-4">
+                            <span className={`text-6xl font-bold bg-gradient-to-r ${step.color} bg-clip-text text-transparent opacity-20`}>
+                              {step.step}
+                            </span>
+                          </div>
+
+                          {/* Icon */}
+                          <div className={`w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-r ${step.color} flex items-center justify-center text-white text-3xl shadow-2xl group-hover:scale-110 transition-transform`}>
+                            {step.icon}
+                          </div>
+
+                          {/* Content */}
+                          <h3 className={`text-2xl font-bold mb-4 text-center ${
+                            isDarkMode ? "text-white" : "text-slate-900"
+                          }`}>
+                            {step.title}
+                          </h3>
+                          <p className={`text-center mb-6 ${
+                            isDarkMode ? "text-slate-400" : "text-slate-600"
+                          }`}>
+                            {step.desc}
+                          </p>
+
+                          {/* Details */}
+                          <div className="space-y-3">
+                            {step.details.map((detail, idx) => (
+                              <div key={idx} className="flex items-center gap-3">
+                                <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${step.color}`}></div>
+                                <span className={`text-sm ${
+                                  isDarkMode ? "text-slate-300" : "text-slate-600"
+                                }`}>
+                                  {detail}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Arrow for connection */}
+                        {i < 2 && (
+                          <div className="hidden lg:block absolute -right-8 top-1/2 transform -translate-y-1/2 text-2xl text-gray-400">
+                            →
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* OUR APPROACH SECTION */}
+          <section className="relative py-16 px-6 max-w-7xl mx-auto">
+            <div className="text-center mb-12 fade-in">
+              <h2 className={`section-title text-3xl md:text-4xl font-bold mb-4 ${
+                isDarkMode ? "text-white" : "text-slate-900"
+              }`}>
+                {t("home.approach.title")}
+              </h2>
+              <p className={`text-lg ${
+                isDarkMode ? "text-slate-400" : "text-slate-600"
+              }`}>
+                {t("home.approach.subtitle")}
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                {
+                  icon: <FaCode />,
+                  title: t("home.services.webdev.title"),
+                  desc: t("home.approach.webdev.description"),
+                  benefits: [
+                    t("home.approach.webdev.benefit1"),
+                    t("home.approach.webdev.benefit2"),
+                    t("home.approach.webdev.benefit3")
+                  ]
+                },
+                {
+                  icon: <FaChartLine />,
+                  title: t("home.services.ads.title"),
+                  desc: t("home.approach.ads.description"),
+                  benefits: [
+                    t("home.approach.ads.benefit1"),
+                    t("home.approach.ads.benefit2"),
+                    t("home.approach.ads.benefit3")
+                  ]
+                },
+                {
+                  icon: <FaInstagram />,
+                  title: t("home.services.social.title"),
+                  desc: t("home.approach.social.description"),
+                  benefits: [
+                    t("home.approach.social.benefit1"),
+                    t("home.approach.social.benefit2"),
+                    t("home.approach.social.benefit3")
+                  ]
+                }
+              ].map((service, i) => (
+                <div key={i} className={`p-8 rounded-2xl backdrop-blur-sm border transition-all duration-300 hover:scale-105 fade-in delay-${(i + 1) * 100} ${
+                  isDarkMode
+                    ? "bg-slate-900/20 border-slate-700/30 hover:border-blue-400/50"
+                    : "bg-white/80 border-slate-300/50 hover:border-blue-500/50 shadow-lg"
+                }`}>
+                  <div className="text-4xl text-blue-400 mb-6 mx-auto w-fit">
+                    {service.icon}
+                  </div>
+                  <h3 className={`text-xl font-semibold mb-4 text-center ${
+                    isDarkMode ? "text-white" : "text-slate-900"
+                  }`}>
+                    {service.title}
+                  </h3>
+                  <p className={`text-center mb-6 ${
+                    isDarkMode ? "text-slate-400" : "text-slate-600"
+                  }`}>
+                    {service.desc}
+                  </p>
+                  <div className="space-y-3">
+                    {service.benefits.map((benefit, idx) => (
+                      <div key={idx} className="flex items-center gap-3">
+                        <FaCheckCircle className="text-green-400 text-sm" />
+                        <span className={`text-sm ${
+                          isDarkMode ? "text-slate-300" : "text-slate-600"
+                        }`}>
+                          {benefit}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-6 text-center">
+                    <Link
+                      to={`/services/${service.title === t("home.services.webdev.title") ? "web-development" :
+                           service.title === t("home.services.ads.title") ? "digital-advertising" : "social-media"}`}
+                      className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-medium transition-colors"
+                    >
+                      {t("home.approach.learnMore")} <FaRocket />
+                    </Link>
+                  </div>
+                </div>
+              ))}
             </div>
           </section>
 

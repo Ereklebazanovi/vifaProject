@@ -20,11 +20,48 @@ const translations = {
   ka: {
     // Home page
     'home.hero.title': 'შექმენი წარმატებული ბიზნესი ციფრული გზით',
-    'home.hero.subtitle': 'ვიფა - თქვენი ნდობილი პარტნიორი ციფრული წარმატებისთვის',
+    'home.hero.subtitle': 'ვიფა - თქვენი სანდო პარტნიორი ციფრული წარმატებისთვის',
     'home.hero.description': 'ჩვენ გთავაზობთ სრულ ციფრულ სერვისებს: ვებსაიტის შექმნა, სოციალური მედია მართვა, ციფრული რეკლამა და კონტენტ პროდუქცია',
     'home.hero.getStarted': 'დაიწყე პროექტი',
     'home.hero.ourServices': 'ჩვენი სერვისები',
-    
+
+    // Problem-Solution Section
+    'home.problems.title': 'ხომ არ გაქვს ეს პრობლემები?',
+    'home.problems.lowSales': 'ნაკლები გაყიდვები და კლიენტები ვერ პოულობ',
+    'home.problems.noOnlinePresence': 'შენი ბიზნესი ონლაინ პრაქტიკულად არ ჩანს',
+    'home.problems.ineffectiveMarketing': 'რეკლამაზე ფულს ხარჯავ, მაგრამ შედეგი არაფერი',
+
+    'home.solutions.title': 'ჩვენ გვაქვს გამოსავალი',
+    'home.solutions.digitalStrategy': 'სრული ციფრული სტრატეგია შენი ბიზნესისთვის',
+    'home.solutions.brandVisibility': 'ბრენდის ხილვადობის გაზრდა სწორ ადამიანებთან',
+    'home.solutions.targetedMarketing': 'დამიზნებული მარკეტინგი მდგრადი შედეგებისთვის',
+
+    // Journey Section
+    'home.journey.title': 'როგორ მუშაობს ჩვენი თანამშრომლობა',
+    'home.journey.step1.title': 'კვლევა & სტრატეგია',
+    'home.journey.step1.description': 'ანალიზი და საუკეთესო სტრატეგიის შემუშავება შენი ბიზნესისთვის',
+    'home.journey.step2.title': 'განხორციელება',
+    'home.journey.step2.description': 'ფოკუსირებული მუშაობა მაღალი ხარისხის შედეგებისთვის',
+    'home.journey.step3.title': 'მუდმივი ოპტიმიზაცია',
+    'home.journey.step3.description': 'რეგულარული მონიტორინგი და გაუმჯობესება შედეგების მიღწევისთვის',
+
+    // Approach Section
+    'home.approach.title': 'რით ვეხმარებით შენს ბიზნესს',
+    'home.approach.subtitle': 'ყოველი პროექტი უნიკალურია - ამიტომ ინდივიდუალურ მიდგომას ვიყენებთ',
+    'home.approach.webdev.description': 'თანამედროვე, სწრაფი ვებსაიტები რომლებიც კლიენტებს მოიზიდავს',
+    'home.approach.webdev.benefit1': 'მობილურ მოწყობილობებზე სრულიად ადაპტირებული',
+    'home.approach.webdev.benefit2': 'Google-ში მაღალ პოზიციაზე გამოსაჩენი SEO',
+    'home.approach.webdev.benefit3': 'უსაფრთხო და სწრაფი ჰოსტინგი',
+    'home.approach.ads.description': 'დამიზნებული რეკლამა რომელიც შედეგებს იღებს',
+    'home.approach.ads.benefit1': 'Google და Facebook-ზე ექსპერტული მენეჯმენტი',
+    'home.approach.ads.benefit2': 'ხარჯების ოპტიმიზაცია და ROI გაზრდა',
+    'home.approach.ads.benefit3': 'რეგულარული ანგარიშები და ღია კომუნიკაცია',
+    'home.approach.social.description': 'სოციალური მედიის სტრატეგია ბრენდის ზრდისთვის',
+    'home.approach.social.benefit1': 'ყოველდღიური კონტენტი და ინტერაქცია',
+    'home.approach.social.benefit2': 'ფოლოუერების ორგანული ზრდა',
+    'home.approach.social.benefit3': 'ბრენდის ცნობადობის გაზრდა',
+    'home.approach.learnMore': 'იხილე დეტალები',
+
     // Services section
     'home.services.title': 'ჩვენი სერვისები',
     'home.services.subtitle': 'სრული ციფრული გადაწყვეტები თქვენი ბიზნესისთვის',
@@ -713,7 +750,44 @@ const translations = {
     'home.hero.description': 'We offer complete digital services: website creation, social media management, digital advertising, and content production',
     'home.hero.getStarted': 'Start Project',
     'home.hero.ourServices': 'Our Services',
-    
+
+    // Problem-Solution Section
+    'home.problems.title': 'Do you have these problems?',
+    'home.problems.lowSales': 'Low sales and can\'t find clients',
+    'home.problems.noOnlinePresence': 'Your business is practically invisible online',
+    'home.problems.ineffectiveMarketing': 'You spend money on ads but see no results',
+
+    'home.solutions.title': 'We have the solution',
+    'home.solutions.digitalStrategy': 'Complete digital strategy for your business',
+    'home.solutions.brandVisibility': 'Increase brand visibility with the right people',
+    'home.solutions.targetedMarketing': 'Targeted marketing for sustainable results',
+
+    // Journey Section
+    'home.journey.title': 'How our collaboration works',
+    'home.journey.step1.title': 'Research & Strategy',
+    'home.journey.step1.description': 'Analysis and developing the best strategy for your business',
+    'home.journey.step2.title': 'Implementation',
+    'home.journey.step2.description': 'Focused work for high-quality results',
+    'home.journey.step3.title': 'Continuous Optimization',
+    'home.journey.step3.description': 'Regular monitoring and improvement to achieve results',
+
+    // Approach Section
+    'home.approach.title': 'How we help your business',
+    'home.approach.subtitle': 'Every project is unique - that\'s why we use an individual approach',
+    'home.approach.webdev.description': 'Modern, fast websites that attract clients',
+    'home.approach.webdev.benefit1': 'Fully adapted for mobile devices',
+    'home.approach.webdev.benefit2': 'High-ranking SEO for Google visibility',
+    'home.approach.webdev.benefit3': 'Secure and fast hosting',
+    'home.approach.ads.description': 'Targeted advertising that gets results',
+    'home.approach.ads.benefit1': 'Expert management on Google and Facebook',
+    'home.approach.ads.benefit2': 'Cost optimization and ROI increase',
+    'home.approach.ads.benefit3': 'Regular reports and transparent communication',
+    'home.approach.social.description': 'Social media strategy for brand growth',
+    'home.approach.social.benefit1': 'Daily content and interaction',
+    'home.approach.social.benefit2': 'Organic follower growth',
+    'home.approach.social.benefit3': 'Brand awareness increase',
+    'home.approach.learnMore': 'Learn more',
+
     // Services section
     'home.services.title': 'Our Services',
     'home.services.subtitle': 'Complete digital solutions for your business',
