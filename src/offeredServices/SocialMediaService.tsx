@@ -18,13 +18,11 @@ import {
   FaCrown,
 } from "react-icons/fa";
 import SEO from '../components/SEO';
-import { useTheme } from '../contexts/ThemeContext';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const SocialMediaService = () => {
   const [activeTab, setActiveTab] = useState("facebook");
   const [isLoaded, setIsLoaded] = useState(false);
-  const { isDarkMode } = useTheme();
   const { t } = useLanguage();
 
   // Animation classes - immediately available, no delays
@@ -399,13 +397,13 @@ const SocialMediaService = () => {
       />
       <style>{animationClasses}</style>
       <div className={`min-h-screen transition-colors duration-500 ${isLoaded ? 'page-transition' : ''} ${
-        isDarkMode 
+        true 
           ? 'bg-slate-950 text-white' 
           : 'bg-gradient-to-br from-slate-50 via-white to-pink-50 text-slate-900'
       }`}>
         {/* Hero Section with Platform Showcase */}
         <section className={`py-12 px-6 ${
-          isDarkMode 
+          true 
             ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900' 
             : 'bg-gradient-to-br from-pink-50/30 via-purple-50/20 to-transparent'
         }`}>
@@ -413,10 +411,10 @@ const SocialMediaService = () => {
             <div className="text-center mb-12 fade-in-up">
               <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                 {t('social.hero.title')} <br />
-                <span className={isDarkMode ? 'text-white' : 'text-slate-900'}>{t('social.hero.subtitle')}</span>
+                <span className={true ? 'text-white' : 'text-slate-900'}>{t('social.hero.subtitle')}</span>
               </h1>
               <p className={`text-lg mb-6 max-w-3xl mx-auto leading-relaxed ${
-                isDarkMode ? 'text-slate-300' : 'text-slate-600'
+                true ? 'text-slate-300' : 'text-slate-600'
               }`}>
                 {t('social.hero.description')}
               </p>
@@ -431,7 +429,7 @@ const SocialMediaService = () => {
                   className={`platform-tab flex items-center gap-2 px-4 py-2 rounded-full font-semibold text-sm ${
                     activeTab === platform.id
                       ? `bg-gradient-to-r ${platform.color} shadow-lg text-white`
-                      : isDarkMode 
+                      : true 
                         ? "bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white"
                         : "bg-white hover:bg-slate-100 border border-slate-300 text-slate-900"
                   }`}
@@ -461,21 +459,21 @@ const SocialMediaService = () => {
                       {getCurrentPlatform().icon}
                     </div>
                     <div>
-                      <h3 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+                      <h3 className={`text-xl font-bold ${true ? 'text-white' : 'text-slate-900'}`}>
                         {getCurrentPlatform().name}
                       </h3>
-                      <p className={`text-sm ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>
+                      <p className={`text-sm ${true ? 'text-slate-300' : 'text-slate-600'}`}>
                         {getCurrentPlatform().description}
                       </p>
                     </div>
                   </div>
 
                   <div className="mb-4">
-                    <div className={`flex items-center gap-2 text-xs mb-1 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+                    <div className={`flex items-center gap-2 text-xs mb-1 ${true ? 'text-slate-400' : 'text-slate-600'}`}>
                       <FaUsers className="text-blue-400" />
                       <span>{getCurrentPlatform().stats}</span>
                     </div>
-                    <div className={`flex items-center gap-2 text-xs ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+                    <div className={`flex items-center gap-2 text-xs ${true ? 'text-slate-400' : 'text-slate-600'}`}>
                       <FaBullseye className="text-green-400" />
                       <span>{getCurrentPlatform().bestFor}</span>
                     </div>
@@ -490,7 +488,7 @@ const SocialMediaService = () => {
                     {getCurrentPlatform().features.map((feature, idx) => (
                       <li key={idx} className="flex items-center gap-2 text-sm">
                         <FaCheckCircle className="text-green-400 flex-shrink-0 text-xs" />
-                        <span className={isDarkMode ? 'text-slate-300' : 'text-slate-600'}>{feature}</span>
+                        <span className={true ? 'text-slate-300' : 'text-slate-600'}>{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -501,10 +499,10 @@ const SocialMediaService = () => {
         </section>
 
         {/* Platform Success Stats */}
-        <section className={`py-12 px-6 ${isDarkMode ? 'bg-slate-900' : 'bg-slate-100/30'}`}>
+        <section className={`py-12 px-6 ${true ? 'bg-slate-900' : 'bg-slate-100/30'}`}>
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-8 fade-in-up">
-              <h2 className={`text-2xl md:text-3xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+              <h2 className={`text-2xl md:text-3xl font-bold mb-3 ${true ? 'text-white' : 'text-slate-900'}`}>
                 <FaCrown className="inline text-yellow-400 mr-2" />
                 {t('social.stats.title')}
               </h2>
@@ -543,12 +541,12 @@ const SocialMediaService = () => {
               ].map((item, i) => (
                 <div
                   key={i}
-                  className={`service-card p-6 rounded-2xl text-center fade-in-up ${isDarkMode ? `bg-gradient-to-br ${item.color} bg-opacity-20 border border-opacity-30` : 'bg-white/80 border border-slate-300'}`}
+                  className={`service-card p-6 rounded-2xl text-center fade-in-up ${true ? `bg-gradient-to-br ${item.color} bg-opacity-20 border border-opacity-30` : 'bg-white/80 border border-slate-300'}`}
                   style={{ animationDelay: `${(i + 1) * 0.1}s` }}
                 >
                   <div className="text-4xl mb-4 opacity-80">{item.icon}</div>
-                  <div className={`text-2xl font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{item.stat}</div>
-                  <div className={`text-sm ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>{item.desc}</div>
+                  <div className={`text-2xl font-bold mb-2 ${true ? 'text-white' : 'text-slate-900'}`}>{item.stat}</div>
+                  <div className={`text-sm ${true ? 'text-slate-300' : 'text-slate-600'}`}>{item.desc}</div>
                 </div>
               ))}
             </div>
@@ -556,13 +554,13 @@ const SocialMediaService = () => {
         </section>
 
         {/* Services Section */}
-        <section className={`py-16 px-6 ${isDarkMode ? 'bg-slate-800' : 'bg-slate-100/30'}`}>
+        <section className={`py-16 px-6 ${true ? 'bg-slate-800' : 'bg-slate-100/30'}`}>
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16 fade-in-up">
-              <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+              <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${true ? 'text-white' : 'text-slate-900'}`}>
                 {t('social.services.title')}
               </h2>
-              <p className={`text-lg ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+              <p className={`text-lg ${true ? 'text-slate-400' : 'text-slate-600'}`}>
                 {t('social.services.subtitle')}
               </p>
             </div>
@@ -571,19 +569,19 @@ const SocialMediaService = () => {
               {services.map((service, i) => (
                 <div
                   key={i}
-                  className={`service-card p-8 rounded-2xl border hover:border-blue-400/50 group fade-in-up ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white/80 border-slate-300'}`}
+                  className={`service-card p-8 rounded-2xl border hover:border-blue-400/50 group fade-in-up ${true ? 'bg-slate-900 border-slate-700' : 'bg-white/80 border-slate-300'}`}
                   style={{ animationDelay: `${(i + 1) * 0.1}s` }}
                 >
                   <div className="text-4xl text-blue-400 mb-6 group-hover:scale-110 transition-transform duration-300 scale-in delay-200">
                     {service.icon}
                   </div>
-                  <h3 className={`text-2xl font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{service.title}</h3>
-                  <p className={`mb-6 ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>{service.description}</p>
+                  <h3 className={`text-2xl font-semibold mb-4 ${true ? 'text-white' : 'text-slate-900'}`}>{service.title}</h3>
+                  <p className={`mb-6 ${true ? 'text-slate-300' : 'text-slate-600'}`}>{service.description}</p>
                   <div className="grid grid-cols-2 gap-3">
                     {service.features.map((feature, idx) => (
                       <div key={idx} className="flex items-center gap-2 text-sm">
                         <FaCheckCircle className="text-green-400" />
-                        <span className={isDarkMode ? 'text-slate-300' : 'text-slate-600'}>{feature}</span>
+                        <span className={true ? 'text-slate-300' : 'text-slate-600'}>{feature}</span>
                       </div>
                     ))}
                   </div>
@@ -594,13 +592,13 @@ const SocialMediaService = () => {
         </section>
 
         {/* Process Section */}
-        <section className={`py-16 px-6 ${isDarkMode ? '' : 'bg-gradient-to-br from-slate-50 to-blue-50/30'}`}>
+        <section className={`py-16 px-6 ${true ? '' : 'bg-gradient-to-br from-slate-50 to-blue-50/30'}`}>
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16 fade-in-up">
-              <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+              <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${true ? 'text-white' : 'text-slate-900'}`}>
                 {t('social.process.title')}
               </h2>
-              <p className={`text-lg ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+              <p className={`text-lg ${true ? 'text-slate-400' : 'text-slate-600'}`}>
                 {t('social.process.subtitle')}
               </p>
             </div>
@@ -609,7 +607,7 @@ const SocialMediaService = () => {
               {processSteps.map((step, i) => (
                 <div
                   key={i}
-                  className={`process-card text-center relative p-6 rounded-2xl border hover:border-blue-400/50 fade-in-up ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white/80 border-slate-300'}`}
+                  className={`process-card text-center relative p-6 rounded-2xl border hover:border-blue-400/50 fade-in-up ${true ? 'bg-slate-900 border-slate-700' : 'bg-white/80 border-slate-300'}`}
                   style={{ animationDelay: `${(i + 1) * 0.2}s` }}
                 >
                   <div className="text-6xl font-bold text-blue-400/20 mb-4">
@@ -618,11 +616,11 @@ const SocialMediaService = () => {
                   <div className="text-3xl text-blue-400 mb-4 scale-in delay-400">
                     {step.icon}
                   </div>
-                  <h3 className={`text-xl font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{step.title}</h3>
-                  <p className={isDarkMode ? 'text-slate-400' : 'text-slate-600'}>{step.description}</p>
+                  <h3 className={`text-xl font-semibold mb-4 ${true ? 'text-white' : 'text-slate-900'}`}>{step.title}</h3>
+                  <p className={true ? 'text-slate-400' : 'text-slate-600'}>{step.description}</p>
                   {i < processSteps.length - 1 && (
                     <div className="hidden lg:block absolute top-1/2 -right-4 text-blue-400 z-10 fade-in-up delay-600">
-                      <FaArrowRight className={`p-2 rounded-full text-3xl ${isDarkMode ? 'bg-slate-900' : 'bg-white'}`} />
+                      <FaArrowRight className={`p-2 rounded-full text-3xl ${true ? 'bg-slate-900' : 'bg-white'}`} />
                     </div>
                   )}
                 </div>
@@ -632,10 +630,10 @@ const SocialMediaService = () => {
         </section>
 
         {/* Testimonials */}
-        <section className={`py-16 px-6 ${isDarkMode ? 'bg-slate-800' : 'bg-slate-100/30'}`}>
+        <section className={`py-16 px-6 ${true ? 'bg-slate-800' : 'bg-slate-100/30'}`}>
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16 fade-in-up">
-              <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+              <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${true ? 'text-white' : 'text-slate-900'}`}>
                 {t('social.testimonials.title')}
               </h2>
             </div>
@@ -644,7 +642,7 @@ const SocialMediaService = () => {
               {testimonials.map((testimonial, i) => (
                 <div
                   key={i}
-                  className={`testimonial-card p-8 rounded-2xl border hover:border-blue-400/50 fade-in-up ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white/80 border-slate-300'}`}
+                  className={`testimonial-card p-8 rounded-2xl border hover:border-blue-400/50 fade-in-up ${true ? 'bg-slate-900 border-slate-700' : 'bg-white/80 border-slate-300'}`}
                   style={{ animationDelay: `${(i + 1) * 0.2}s` }}
                 >
                   <div className="flex gap-1 mb-4">
@@ -658,14 +656,14 @@ const SocialMediaService = () => {
                       {testimonial.platform}
                     </span>
                   </div>
-                  <p className={`mb-6 text-lg leading-relaxed ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
+                  <p className={`mb-6 text-lg leading-relaxed ${true ? 'text-slate-300' : 'text-slate-700'}`}>
                     "{testimonial.text}"
                   </p>
                   <div>
-                    <h4 className={`font-semibold text-lg ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+                    <h4 className={`font-semibold text-lg ${true ? 'text-white' : 'text-slate-900'}`}>
                       {testimonial.author}
                     </h4>
-                    <p className={isDarkMode ? 'text-slate-400' : 'text-slate-600'}>{testimonial.business}</p>
+                    <p className={true ? 'text-slate-400' : 'text-slate-600'}>{testimonial.business}</p>
                   </div>
                 </div>
               ))}
@@ -674,14 +672,14 @@ const SocialMediaService = () => {
         </section>
 
         {/* Enhanced CTA Section */}
-        <section className={`py-16 px-6 relative overflow-hidden ${isDarkMode ? 'bg-gradient-to-br from-blue-900/40 via-slate-900 to-purple-900/30' : 'bg-gradient-to-br from-blue-100/50 to-purple-100/50'}`}>
+        <section className={`py-16 px-6 relative overflow-hidden ${true ? 'bg-gradient-to-br from-blue-900/40 via-slate-900 to-purple-900/30' : 'bg-gradient-to-br from-blue-100/50 to-purple-100/50'}`}>
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10"></div>
           <div className="max-w-4xl mx-auto text-center relative z-10">
             <div className="fade-in-up">
-              <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+              <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${true ? 'text-white' : 'text-slate-900'}`}>
                 {t('social.cta.title')} <span className="text-blue-500">{t('social.cta.highlight')}</span> {t('social.cta.subtitle')}
                 <br />
-                <span className={`text-2xl md:text-3xl ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>
+                <span className={`text-2xl md:text-3xl ${true ? 'text-slate-300' : 'text-slate-600'}`}>
                   {t('social.cta.suffix')}
                 </span>
               </h2>
@@ -697,12 +695,12 @@ const SocialMediaService = () => {
                     <div className="text-3xl mb-2 platform-icon">
                       {platform.icon}
                     </div>
-                    <div className={`text-xs ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>{platform.name}</div>
+                    <div className={`text-xs ${true ? 'text-slate-400' : 'text-slate-600'}`}>{platform.name}</div>
                   </div>
                 ))}
               </div>
 
-              <p className={`text-xl mb-8 leading-relaxed ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
+              <p className={`text-xl mb-8 leading-relaxed ${true ? 'text-slate-300' : 'text-slate-700'}`}>
                 {t('social.cta.description')}
               </p>
 
@@ -720,13 +718,13 @@ const SocialMediaService = () => {
         </section>
 
         {/* FAQ Section */}
-        <section className={`py-16 px-6 ${isDarkMode ? 'bg-slate-950' : 'bg-slate-100/30'}`}>
+        <section className={`py-16 px-6 ${true ? 'bg-slate-950' : 'bg-slate-100/30'}`}>
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16 fade-in-up">
-              <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+              <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${true ? 'text-white' : 'text-slate-900'}`}>
                 {t('social.faq.title')}
               </h2>
-              <p className={`text-lg ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+              <p className={`text-lg ${true ? 'text-slate-400' : 'text-slate-600'}`}>
                 {t('social.faq.subtitle')}
               </p>
             </div>
@@ -756,13 +754,13 @@ const SocialMediaService = () => {
               ].map((faq, i) => (
                 <div
                   key={i}
-                  className={`rounded-2xl p-6 border hover:border-blue-400/50 transition-all duration-300 fade-in-up ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white/80 border-slate-300'}`}
+                  className={`rounded-2xl p-6 border hover:border-blue-400/50 transition-all duration-300 fade-in-up ${true ? 'bg-slate-900 border-slate-700' : 'bg-white/80 border-slate-300'}`}
                   style={{ animationDelay: `${(i + 1) * 0.1}s` }}
                 >
                   <h3 className="text-lg font-semibold mb-3 text-blue-400">
                     {faq.q}
                   </h3>
-                  <p className={`leading-relaxed ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>{faq.a}</p>
+                  <p className={`leading-relaxed ${true ? 'text-slate-300' : 'text-slate-700'}`}>{faq.a}</p>
                 </div>
               ))}
             </div>
@@ -770,10 +768,10 @@ const SocialMediaService = () => {
         </section>
 
         {/* Contact Section */}
-        <section className={`py-16 px-6 ${isDarkMode ? 'bg-slate-900' : 'bg-slate-100/30'}`}>
+        <section className={`py-16 px-6 ${true ? 'bg-slate-900' : 'bg-slate-100/30'}`}>
           <div className="max-w-4xl mx-auto text-center">
             <div className="fade-in-up">
-              <h2 className={`text-2xl md:text-3xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+              <h2 className={`text-2xl md:text-3xl font-bold mb-6 ${true ? 'text-white' : 'text-slate-900'}`}>
                 {t('social.contact.title')}
               </h2>
               <div className="grid md:grid-cols-3 gap-6 mb-8 fade-in-up delay-200">
@@ -784,16 +782,16 @@ const SocialMediaService = () => {
                 ].map((contact, i) => (
                   <div 
                     key={i}
-                    className={`contact-card p-6 rounded-xl border hover:border-blue-400/50 fade-in-up ${isDarkMode ? 'bg-slate-800 border-slate-700' : 'bg-white/80 border-slate-300'}`}
+                    className={`contact-card p-6 rounded-xl border hover:border-blue-400/50 fade-in-up ${true ? 'bg-slate-800 border-slate-700' : 'bg-white/80 border-slate-300'}`}
                     style={{ animationDelay: `${(i + 1) * 0.1 + 0.3}s` }}
                   >
                     <div className="text-3xl mb-3">{contact.emoji}</div>
-                    <h3 className={`font-semibold mb-2 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{contact.title}</h3>
+                    <h3 className={`font-semibold mb-2 ${true ? 'text-white' : 'text-slate-900'}`}>{contact.title}</h3>
                     <p className="text-blue-400">{contact.info}</p>
                   </div>
                 ))}
               </div>
-              <p className={isDarkMode ? 'text-slate-400' : 'text-slate-600'}>
+              <p className={true ? 'text-slate-400' : 'text-slate-600'}>
                 {t('social.contact.hours')}
               </p>
             </div>

@@ -3,11 +3,9 @@
 import type React from "react"
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { useLanguage } from "../contexts/LanguageContext"
 import SEO from "../components/SEO"
 
 const NewHome: React.FC = () => {
-  const { t } = useLanguage()
   const [activeClient, setActiveClient] = useState<number>(0)
   const [videoLoaded, setVideoLoaded] = useState(false)
   const [videoError, setVideoError] = useState(false)

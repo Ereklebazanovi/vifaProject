@@ -4,7 +4,6 @@ import type React from "react"
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import SEO from '../components/SEO'
-import { useTheme } from "../contexts/ThemeContext"
 import { useLanguage } from "../contexts/LanguageContext"
 import {
   FaCode,
@@ -26,7 +25,6 @@ import { submitLead, type LeadData } from "../leadService"
 
 
 const StartProject: React.FC = () => {
-  const { isDarkMode } = useTheme()
   const { t } = useLanguage()
   const [currentStep, setCurrentStep] = useState(1)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -201,7 +199,7 @@ const StartProject: React.FC = () => {
         structuredData={startProjectStructuredData}
       />
       <div className={`min-h-screen pt-12 pb-12 transition-colors duration-300 ${
-          isDarkMode
+          true
             ? 'bg-slate-950 text-white'
             : 'bg-slate-50 text-slate-900'
         }`}>
@@ -222,7 +220,7 @@ const StartProject: React.FC = () => {
         {/* Header */}
         <motion.div initial="hidden" animate="visible" variants={fadeIn} className="text-center mb-12">
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
-            {t('startProject.hero.title')} <span className={isDarkMode ? 'text-blue-400' : 'text-blue-600'}>{t('startProject.hero.titleHighlight')}</span> {t('startProject.hero.titleSuffix')}
+            {t('startProject.hero.title')} <span className={true ? 'text-blue-400' : 'text-blue-600'}>{t('startProject.hero.titleHighlight')}</span> {t('startProject.hero.titleSuffix')}
           </h1>
         </motion.div>
 
@@ -235,7 +233,7 @@ const StartProject: React.FC = () => {
                 className={`flex items-center justify-center w-10 h-10 rounded-full border-2 transition-all duration-300 ${
                   i + 1 <= currentStep 
                     ? 'bg-blue-500 border-blue-500 text-white' 
-                    : isDarkMode 
+                    : true 
                       ? 'border-slate-600 text-slate-600'
                       : 'border-slate-300 text-slate-400'
                 }`}
@@ -245,7 +243,7 @@ const StartProject: React.FC = () => {
             ))}
           </div>
           <div className={`w-full rounded-full h-2 ${
-            isDarkMode ? 'bg-slate-800' : 'bg-slate-200'
+            true ? 'bg-slate-800' : 'bg-slate-200'
           }`}>
             <motion.div
               className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full"
@@ -255,7 +253,7 @@ const StartProject: React.FC = () => {
             />
           </div>
           <div className={`text-center mt-2 ${
-            isDarkMode ? 'text-slate-400' : 'text-slate-500'
+            true ? 'text-slate-400' : 'text-slate-500'
           }`}>
             {t('startProject.progress.step')} {currentStep} / {totalSteps}
           </div>
@@ -263,7 +261,7 @@ const StartProject: React.FC = () => {
 
         {/* Form Steps */}
         <div className={`rounded-2xl p-8 min-h-[400px] transition-colors duration-300 ${
-          isDarkMode ? 'bg-slate-900' : 'bg-white shadow-xl'
+          true ? 'bg-slate-900' : 'bg-white shadow-xl'
         }`}>
           {isSuccess ? (
             // Success State
@@ -276,7 +274,7 @@ const StartProject: React.FC = () => {
               <div className="text-6xl text-green-400 mb-6">✅</div>
               <h2 className="text-3xl font-bold mb-4 text-green-400">{t('startProject.success.title')}</h2>
               <p className={`text-lg mb-8 max-w-2xl mx-auto ${
-                isDarkMode ? 'text-slate-300' : 'text-slate-600'
+                true ? 'text-slate-300' : 'text-slate-600'
               }`}>
                 {t('startProject.success.description')}
               </p>
@@ -285,21 +283,21 @@ const StartProject: React.FC = () => {
                 <div className="text-center p-4">
                   <div className="text-2xl text-blue-400 mb-2">📧</div>
                   <div className={`text-sm ${
-                    isDarkMode ? 'text-slate-400' : 'text-slate-500'
+                    true ? 'text-slate-400' : 'text-slate-500'
                   }`}>{t('startProject.success.email.subtitle')}</div>
                   <div className="font-semibold">{t('startProject.success.email.title')}</div>
                 </div>
                 <div className="text-center p-4">
                   <div className="text-2xl text-green-400 mb-2">📞</div>
                   <div className={`text-sm ${
-                    isDarkMode ? 'text-slate-400' : 'text-slate-500'
+                    true ? 'text-slate-400' : 'text-slate-500'
                   }`}>{t('startProject.success.phone.subtitle')}</div>
                   <div className="font-semibold">{t('startProject.success.phone.title')}</div>
                 </div>
                 <div className="text-center p-4">
                   <div className="text-2xl text-purple-400 mb-2">🎯</div>
                   <div className={`text-sm ${
-                    isDarkMode ? 'text-slate-400' : 'text-slate-500'
+                    true ? 'text-slate-400' : 'text-slate-500'
                   }`}>{t('startProject.success.consultation.subtitle')}</div>
                   <div className="font-semibold">{t('startProject.success.consultation.title')}</div>
                 </div>
@@ -311,7 +309,7 @@ const StartProject: React.FC = () => {
                   whileTap={{ scale: 0.95 }}
                   onClick={resetForm}
                   className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
-                    isDarkMode 
+                    true 
                       ? 'bg-slate-700 hover:bg-slate-600 text-white'
                       : 'bg-slate-200 hover:bg-slate-300 text-slate-800'
                   }`}
@@ -342,7 +340,7 @@ const StartProject: React.FC = () => {
                 >
                   <h2 className="text-2xl font-bold mb-6 text-center">{t('startProject.step1.title')}</h2>
                   <p className={`text-center mb-8 ${
-                    isDarkMode ? 'text-slate-400' : 'text-slate-600'
+                    true ? 'text-slate-400' : 'text-slate-600'
                   }`}>{t('startProject.step1.subtitle')}</p>
 
                   <div className="grid md:grid-cols-2 gap-4">
@@ -355,21 +353,21 @@ const StartProject: React.FC = () => {
                         className={`p-6 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
                           formData.services.includes(service.id)
                             ? 'border-blue-500 bg-blue-500/10'
-                            : isDarkMode
+                            : true
                               ? 'border-slate-700 hover:border-slate-600'
                               : 'border-slate-200 hover:border-slate-300 bg-slate-50'
                         }`}
                       >
                         <div className="flex items-start space-x-4">
-                          <div className={isDarkMode ? 'text-3xl text-blue-400' : 'text-3xl text-blue-500'}>{service.icon}</div>
+                          <div className={true ? 'text-3xl text-blue-400' : 'text-3xl text-blue-500'}>{service.icon}</div>
                           <div className="flex-1">
                             <h3 className="font-semibold mb-2">{service.title}</h3>
                             <p className={`text-sm mb-3 ${
-                              isDarkMode ? 'text-slate-400' : 'text-slate-600'
+                              true ? 'text-slate-400' : 'text-slate-600'
                             }`}>{service.description}</p>
-                            <div className={isDarkMode ? 'text-blue-400 font-semibold' : 'text-blue-600 font-semibold'}>{service.price}</div>
+                            <div className={true ? 'text-blue-400 font-semibold' : 'text-blue-600 font-semibold'}>{service.price}</div>
                           </div>
-                          {formData.services.includes(service.id) && <FaCheck className={isDarkMode ? 'text-blue-400' : 'text-blue-600'} />}
+                          {formData.services.includes(service.id) && <FaCheck className={true ? 'text-blue-400' : 'text-blue-600'} />}
                         </div>
                       </motion.div>
                     ))}
@@ -389,7 +387,7 @@ const StartProject: React.FC = () => {
                 >
                   <h2 className="text-2xl font-bold mb-6 text-center">{t('startProject.step2.title')}</h2>
                   <p className={`text-center mb-8 ${
-                    isDarkMode ? 'text-slate-400' : 'text-slate-600'
+                    true ? 'text-slate-400' : 'text-slate-600'
                   }`}>{t('startProject.step2.subtitle')}</p>
 
                   <div className="grid md:grid-cols-3 gap-4">
@@ -407,13 +405,13 @@ const StartProject: React.FC = () => {
                         className={`p-6 rounded-xl border-2 cursor-pointer text-center transition-all duration-300 ${
                           formData.businessType === type.id
                             ? 'border-blue-500 bg-blue-500/10'
-                            : isDarkMode
+                            : true
                               ? 'border-slate-700 hover:border-slate-600'
                               : 'border-slate-200 hover:border-slate-300 bg-slate-50'
                         }`}
                       >
                         <div className={`text-4xl mb-4 ${
-                          isDarkMode ? 'text-blue-400' : 'text-blue-500'
+                          true ? 'text-blue-400' : 'text-blue-500'
                         }`}>{type.icon}</div>
                         <h3 className="font-semibold">{type.title}</h3>
                       </motion.div>
@@ -434,7 +432,7 @@ const StartProject: React.FC = () => {
                 >
                   <h2 className="text-2xl font-bold mb-6 text-center">{t('startProject.step3.title')}</h2>
                   <p className={`text-center mb-8 ${
-                    isDarkMode ? 'text-slate-400' : 'text-slate-600'
+                    true ? 'text-slate-400' : 'text-slate-600'
                   }`}>{t('startProject.step3.subtitle')}</p>
 
                   <div className="space-y-4">
@@ -452,7 +450,7 @@ const StartProject: React.FC = () => {
                         className={`p-6 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
                           formData.budget === budget.id
                             ? 'border-blue-500 bg-blue-500/10'
-                            : isDarkMode
+                            : true
                               ? 'border-slate-700 hover:border-slate-600'
                               : 'border-slate-200 hover:border-slate-300 bg-slate-50'
                         }`}
@@ -460,10 +458,10 @@ const StartProject: React.FC = () => {
                         <div className="flex items-center justify-between">
                           <div>
                             <h3 className="font-semibold text-lg">{budget.range}</h3>
-                            <p className={isDarkMode ? 'text-slate-400' : 'text-slate-600'}>{budget.description}</p>
+                            <p className={true ? 'text-slate-400' : 'text-slate-600'}>{budget.description}</p>
                           </div>
                           {formData.budget === budget.id && <FaCheck className={`text-xl ${
-                            isDarkMode ? 'text-blue-400' : 'text-blue-600'
+                            true ? 'text-blue-400' : 'text-blue-600'
                           }`} />}
                         </div>
                       </motion.div>
@@ -484,7 +482,7 @@ const StartProject: React.FC = () => {
                 >
                   <h2 className="text-2xl font-bold mb-6 text-center">{t('startProject.step4.title')}</h2>
                   <p className={`text-center mb-8 ${
-                    isDarkMode ? 'text-slate-400' : 'text-slate-600'
+                    true ? 'text-slate-400' : 'text-slate-600'
                   }`}>{t('startProject.step4.subtitle')}</p>
 
                   <div className="space-y-6 max-w-2xl mx-auto">
@@ -501,7 +499,7 @@ const StartProject: React.FC = () => {
                             }))
                           }
                           className={`w-full px-4 py-3 rounded-lg focus:outline-none transition-colors ${
-                            isDarkMode
+                            true
                               ? 'bg-slate-800 border border-slate-600 focus:border-blue-500 text-white'
                               : 'bg-white border border-slate-300 focus:border-blue-500 text-slate-900'
                           }`}
@@ -520,7 +518,7 @@ const StartProject: React.FC = () => {
                             }))
                           }
                           className={`w-full px-4 py-3 rounded-lg focus:outline-none transition-colors ${
-                            isDarkMode
+                            true
                               ? 'bg-slate-800 border border-slate-600 focus:border-blue-500 text-white'
                               : 'bg-white border border-slate-300 focus:border-blue-500 text-slate-900'
                           }`}
@@ -542,7 +540,7 @@ const StartProject: React.FC = () => {
                             }))
                           }
                           className={`w-full px-4 py-3 rounded-lg focus:outline-none transition-colors ${
-                            isDarkMode
+                            true
                               ? 'bg-slate-800 border border-slate-600 focus:border-blue-500 text-white'
                               : 'bg-white border border-slate-300 focus:border-blue-500 text-slate-900'
                           }`}
@@ -561,7 +559,7 @@ const StartProject: React.FC = () => {
                             }))
                           }
                           className={`w-full px-4 py-3 rounded-lg focus:outline-none transition-colors ${
-                            isDarkMode
+                            true
                               ? 'bg-slate-800 border border-slate-600 focus:border-blue-500 text-white'
                               : 'bg-white border border-slate-300 focus:border-blue-500 text-slate-900'
                           }`}
@@ -585,7 +583,7 @@ const StartProject: React.FC = () => {
                 >
                   <h2 className="text-2xl font-bold mb-6 text-center">{t('startProject.step5.title')}</h2>
                   <p className={`text-center mb-8 ${
-                    isDarkMode ? 'text-slate-400' : 'text-slate-600'
+                    true ? 'text-slate-400' : 'text-slate-600'
                   }`}>{t('startProject.step5.subtitle')}</p>
 
                   <div className="space-y-6 max-w-2xl mx-auto">
@@ -601,7 +599,7 @@ const StartProject: React.FC = () => {
                         }
                         rows={4}
                         className={`w-full px-4 py-3 rounded-lg focus:outline-none transition-colors resize-none ${
-                          isDarkMode
+                          true
                             ? 'bg-slate-800 border border-slate-600 focus:border-blue-500 text-white'
                             : 'bg-white border border-slate-300 focus:border-blue-500 text-slate-900'
                         }`}
@@ -621,7 +619,7 @@ const StartProject: React.FC = () => {
                         }
                         rows={3}
                         className={`w-full px-4 py-3 rounded-lg focus:outline-none transition-colors resize-none ${
-                          isDarkMode
+                          true
                             ? 'bg-slate-800 border border-slate-600 focus:border-blue-500 text-white'
                             : 'bg-white border border-slate-300 focus:border-blue-500 text-slate-900'
                         }`}
@@ -645,10 +643,10 @@ const StartProject: React.FC = () => {
               disabled={currentStep === 1}
               className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
                 currentStep === 1
-                  ? isDarkMode
+                  ? true
                     ? 'bg-slate-800 text-slate-600 cursor-not-allowed'
                     : 'bg-slate-200 text-slate-400 cursor-not-allowed'
-                  : isDarkMode
+                  : true
                     ? 'bg-slate-700 hover:bg-slate-600 text-white'
                     : 'bg-slate-200 hover:bg-slate-300 text-slate-800'
               }`}
@@ -666,7 +664,7 @@ const StartProject: React.FC = () => {
                 className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
                   canProceed()
                     ? 'bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white'
-                    : isDarkMode
+                    : true
                       ? 'bg-slate-800 text-slate-600 cursor-not-allowed'
                       : 'bg-slate-200 text-slate-400 cursor-not-allowed'
                 }`}
@@ -682,7 +680,7 @@ const StartProject: React.FC = () => {
                 disabled={isSubmitting}
                 className={`flex items-center gap-2 px-8 py-3 rounded-lg font-semibold transition-all duration-300 text-white ${
                   isSubmitting
-                    ? isDarkMode
+                    ? true
                       ? 'bg-slate-600 cursor-not-allowed'
                       : 'bg-slate-400 cursor-not-allowed'
                     : 'bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600'
@@ -710,7 +708,7 @@ const StartProject: React.FC = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
           className={`text-center mt-12 ${
-            isDarkMode ? 'text-slate-400' : 'text-slate-500'
+            true ? 'text-slate-400' : 'text-slate-500'
           }`}
         >
           <p className="mb-4">{t('startProject.footer.trustIndicators')}</p>

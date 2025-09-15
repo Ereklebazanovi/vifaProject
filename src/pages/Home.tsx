@@ -12,14 +12,12 @@ import {
 import OfficeLocation from "../ui/OfficeLocation";
 import SEO from "../components/SEO";
 import { siteConfig } from "../config/siteConfig";
-import { useTheme } from "../contexts/ThemeContext";
 import { useLanguage } from "../contexts/LanguageContext";
 import WebDevelopment from "../offeredServices/WebDevelopment";
 import DigitalAdvertising from "../offeredServices/DigitalAdvertising";
 
 // Lightweight CSS animations instead of framer-motion
 const Home: React.FC = () => {
-  const { isDarkMode } = useTheme();
   const { t } = useLanguage();
 
   const homeStructuredData = {
@@ -62,12 +60,12 @@ const Home: React.FC = () => {
       />
       <div
         className={`relative overflow-hidden transition-colors duration-500 ${
-          isDarkMode ? "bg-slate-950 text-white" : "bg-white text-slate-900"
+          true ? "bg-slate-950 text-white" : "bg-white text-slate-900"
         }`}
       >
         {/* Theme-Aware Background */}
         <div className="fixed inset-0 z-0">
-          {isDarkMode ? (
+          {true ? (
             <>
               {/* Space Background for Dark Mode */}
               <div
@@ -360,7 +358,7 @@ const Home: React.FC = () => {
               {/* Main Hero */}
               <div className="text-center mb-20 fade-in">
                 <h1 className={`hero-title text-5xl md:text-7xl font-bold mb-6 leading-tight ${
-                  isDarkMode ? "text-white" : "text-slate-900"
+                  true ? "text-white" : "text-slate-900"
                 }`}>
                   {t("home.hero.title").split(" ").map((word, i) => (
                     <span key={i} className={i === 2 ? "text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600" : ""}>
@@ -369,7 +367,7 @@ const Home: React.FC = () => {
                   ))}
                 </h1>
                 <p className={`text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed mb-8 ${
-                  isDarkMode ? "text-slate-300" : "text-slate-600"
+                  true ? "text-slate-300" : "text-slate-600"
                 }`}>
                   {t("home.hero.subtitle")}
                 </p>
@@ -379,7 +377,7 @@ const Home: React.FC = () => {
               <div className="grid md:grid-cols-2 gap-8 mb-20">
                 {/* Problem Card */}
                 <div className={`p-8 rounded-3xl backdrop-blur-sm border-2 border-dashed transition-all duration-500 hover:scale-105 fade-in delay-200 ${
-                  isDarkMode
+                  true
                     ? "bg-red-900/10 border-red-400/30 hover:border-red-400/50"
                     : "bg-red-50/80 border-red-300/50 hover:border-red-400/60"
                 }`}>
@@ -390,7 +388,7 @@ const Home: React.FC = () => {
                       </svg>
                     </div>
                     <h3 className={`text-2xl font-bold mb-4 ${
-                      isDarkMode ? "text-red-300" : "text-red-700"
+                      true ? "text-red-300" : "text-red-700"
                     }`}>
                       {t("home.problems.title")}
                     </h3>
@@ -402,10 +400,10 @@ const Home: React.FC = () => {
                       { icon: "💸", text: t("home.problems.ineffectiveMarketing") }
                     ].map((problem, i) => (
                       <div key={i} className={`flex items-start gap-4 p-4 rounded-xl transition-all duration-300 hover:scale-105 ${
-                        isDarkMode ? "bg-slate-800/30" : "bg-white/60"
+                        true ? "bg-slate-800/30" : "bg-white/60"
                       }`}>
                         <span className="text-2xl">{problem.icon}</span>
-                        <p className={`${isDarkMode ? "text-slate-300" : "text-slate-700"}`}>
+                        <p className={`${true ? "text-slate-300" : "text-slate-700"}`}>
                           {problem.text}
                         </p>
                       </div>
@@ -415,7 +413,7 @@ const Home: React.FC = () => {
 
                 {/* Solution Card */}
                 <div className={`p-8 rounded-3xl backdrop-blur-sm border-2 border-dashed transition-all duration-500 hover:scale-105 fade-in delay-400 ${
-                  isDarkMode
+                  true
                     ? "bg-green-900/10 border-green-400/30 hover:border-green-400/50"
                     : "bg-green-50/80 border-green-300/50 hover:border-green-400/60"
                 }`}>
@@ -424,7 +422,7 @@ const Home: React.FC = () => {
                       <FaRocket className="text-white text-2xl" />
                     </div>
                     <h3 className={`text-2xl font-bold mb-4 ${
-                      isDarkMode ? "text-green-300" : "text-green-700"
+                      true ? "text-green-300" : "text-green-700"
                     }`}>
                       {t("home.solutions.title")}
                     </h3>
@@ -436,10 +434,10 @@ const Home: React.FC = () => {
                       { icon: <FaRocket />, text: t("home.solutions.targetedMarketing") }
                     ].map((solution, i) => (
                       <div key={i} className={`flex items-start gap-4 p-4 rounded-xl transition-all duration-300 hover:scale-105 ${
-                        isDarkMode ? "bg-slate-800/30" : "bg-white/60"
+                        true ? "bg-slate-800/30" : "bg-white/60"
                       }`}>
                         <div className="text-green-500 text-xl mt-1">{solution.icon}</div>
-                        <p className={`${isDarkMode ? "text-slate-300" : "text-slate-700"}`}>
+                        <p className={`${true ? "text-slate-300" : "text-slate-700"}`}>
                           {solution.text}
                         </p>
                       </div>
@@ -457,7 +455,7 @@ const Home: React.FC = () => {
                   >
                     {t("home.hero.getStarted")}
                   </Link>
-                  <span className={`text-sm ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>
+                  <span className={`text-sm ${true ? "text-slate-400" : "text-slate-600"}`}>
                     უფასო კონსულტაცია
                   </span>
                 </div>
@@ -466,7 +464,7 @@ const Home: React.FC = () => {
           </section>
 
           {/* STATS & ACHIEVEMENTS SECTION */}
-          <section className={`py-20 px-6 ${isDarkMode ? 'bg-slate-900/30' : 'bg-slate-50/50'}`}>
+          <section className={`py-20 px-6 ${true ? 'bg-slate-900/30' : 'bg-slate-50/50'}`}>
             <div className="max-w-7xl mx-auto">
               <div className="grid md:grid-cols-4 gap-8 mb-16">
                 {[
@@ -496,7 +494,7 @@ const Home: React.FC = () => {
                   }
                 ].map((stat, i) => (
                   <div key={i} className={`text-center p-6 rounded-2xl backdrop-blur-sm border transition-all duration-500 hover:scale-105 fade-in delay-${(i + 1) * 100} ${
-                    isDarkMode
+                    true
                       ? "bg-slate-800/20 border-slate-700/30"
                       : "bg-white/80 border-slate-200/50"
                   }`}>
@@ -507,7 +505,7 @@ const Home: React.FC = () => {
                       {stat.number}
                     </div>
                     <div className={`text-sm font-medium ${
-                      isDarkMode ? "text-slate-400" : "text-slate-600"
+                      true ? "text-slate-400" : "text-slate-600"
                     }`}>
                       {stat.label}
                     </div>
@@ -522,12 +520,12 @@ const Home: React.FC = () => {
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-16 fade-in">
                 <h2 className={`section-title text-4xl md:text-5xl font-bold mb-6 ${
-                  isDarkMode ? "text-white" : "text-slate-900"
+                  true ? "text-white" : "text-slate-900"
                 }`}>
                   {t("home.journey.title")}
                 </h2>
                 <p className={`text-xl max-w-3xl mx-auto ${
-                  isDarkMode ? "text-slate-400" : "text-slate-600"
+                  true ? "text-slate-400" : "text-slate-600"
                 }`}>
                   ყოველი წარმატებული პროექტი იწყება სწორი მეთოდოლოგიით
                 </p>
@@ -571,7 +569,7 @@ const Home: React.FC = () => {
                     <div key={i} className={`relative fade-in delay-${(i + 1) * 200}`}>
                       {/* Step Card */}
                       <div className={`relative p-8 rounded-3xl backdrop-blur-sm border transition-all duration-500 hover:scale-105 group ${
-                        isDarkMode
+                        true
                           ? "bg-slate-800/30 border-slate-700/30"
                           : "bg-white/80 border-slate-200/50"
                       }`}>
@@ -593,12 +591,12 @@ const Home: React.FC = () => {
 
                           {/* Content */}
                           <h3 className={`text-2xl font-bold mb-4 text-center ${
-                            isDarkMode ? "text-white" : "text-slate-900"
+                            true ? "text-white" : "text-slate-900"
                           }`}>
                             {step.title}
                           </h3>
                           <p className={`text-center mb-6 ${
-                            isDarkMode ? "text-slate-400" : "text-slate-600"
+                            true ? "text-slate-400" : "text-slate-600"
                           }`}>
                             {step.desc}
                           </p>
@@ -609,7 +607,7 @@ const Home: React.FC = () => {
                               <div key={idx} className="flex items-center gap-3">
                                 <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${step.color}`}></div>
                                 <span className={`text-sm ${
-                                  isDarkMode ? "text-slate-300" : "text-slate-600"
+                                  true ? "text-slate-300" : "text-slate-600"
                                 }`}>
                                   {detail}
                                 </span>
@@ -636,12 +634,12 @@ const Home: React.FC = () => {
           <section className="relative py-16 px-6 max-w-7xl mx-auto">
             <div className="text-center mb-12 fade-in">
               <h2 className={`section-title text-3xl md:text-4xl font-bold mb-4 ${
-                isDarkMode ? "text-white" : "text-slate-900"
+                true ? "text-white" : "text-slate-900"
               }`}>
                 {t("home.approach.title")}
               </h2>
               <p className={`text-lg ${
-                isDarkMode ? "text-slate-400" : "text-slate-600"
+                true ? "text-slate-400" : "text-slate-600"
               }`}>
                 {t("home.approach.subtitle")}
               </p>
@@ -681,7 +679,7 @@ const Home: React.FC = () => {
                 }
               ].map((service, i) => (
                 <div key={i} className={`p-8 rounded-2xl backdrop-blur-sm border transition-all duration-300 hover:scale-105 fade-in delay-${(i + 1) * 100} ${
-                  isDarkMode
+                  true
                     ? "bg-slate-900/20 border-slate-700/30 hover:border-blue-400/50"
                     : "bg-white/80 border-slate-300/50 hover:border-blue-500/50 shadow-lg"
                 }`}>
@@ -689,12 +687,12 @@ const Home: React.FC = () => {
                     {service.icon}
                   </div>
                   <h3 className={`text-xl font-semibold mb-4 text-center ${
-                    isDarkMode ? "text-white" : "text-slate-900"
+                    true ? "text-white" : "text-slate-900"
                   }`}>
                     {service.title}
                   </h3>
                   <p className={`text-center mb-6 ${
-                    isDarkMode ? "text-slate-400" : "text-slate-600"
+                    true ? "text-slate-400" : "text-slate-600"
                   }`}>
                     {service.desc}
                   </p>
@@ -703,7 +701,7 @@ const Home: React.FC = () => {
                       <div key={idx} className="flex items-center gap-3">
                         <FaCheckCircle className="text-green-400 text-sm" />
                         <span className={`text-sm ${
-                          isDarkMode ? "text-slate-300" : "text-slate-600"
+                          true ? "text-slate-300" : "text-slate-600"
                         }`}>
                           {benefit}
                         </span>
@@ -729,14 +727,14 @@ const Home: React.FC = () => {
             <div className="relative z-10 max-w-7xl mx-auto">
               <h2
                 className={`section-title text-2xl md:text-4xl font-bold text-center mb-4 fade-in ${
-                  isDarkMode ? "text-white" : "text-slate-900"
+                  true ? "text-white" : "text-slate-900"
                 }`}
               >
                 {t("home.whyUs.title")}
               </h2>
               <p
                 className={`body-text text-center text-base md:text-lg mb-8 fade-in delay-100 ${
-                  isDarkMode ? "text-slate-400" : "text-slate-600"
+                  true ? "text-slate-400" : "text-slate-600"
                 }`}
               >
                 {t("home.whyUs.subtitle")}
@@ -765,7 +763,7 @@ const Home: React.FC = () => {
                     className={`text-center p-6 backdrop-blur-sm rounded-xl border transition-all duration-300 fade-in delay-${
                       (i + 1) * 100
                     } ${
-                      isDarkMode
+                      true
                         ? "bg-slate-900/15 border-slate-700/25 hover:border-blue-400/30"
                         : "bg-white/60 border-slate-300/40 hover:border-blue-500/50 shadow-lg"
                     }`}
@@ -775,14 +773,14 @@ const Home: React.FC = () => {
                     </div>
                     <h3
                       className={`section-title text-lg font-semibold mb-3 ${
-                        isDarkMode ? "text-white" : "text-slate-900"
+                        true ? "text-white" : "text-slate-900"
                       }`}
                     >
                       {item.title}
                     </h3>
                     <p
                       className={`body-text text-sm ${
-                        isDarkMode ? "text-slate-400" : "text-slate-600"
+                        true ? "text-slate-400" : "text-slate-600"
                       }`}
                     >
                       {item.desc}
@@ -802,14 +800,14 @@ const Home: React.FC = () => {
               <div className="text-center mb-8 fade-in">
                 <h2
                   className={`section-title text-2xl md:text-4xl font-bold mb-4 ${
-                    isDarkMode ? "text-white" : "text-slate-900"
+                    true ? "text-white" : "text-slate-900"
                   }`}
                 >
                   {t("office.title")}
                 </h2>
                 <p
                   className={`body-text text-base md:text-lg ${
-                    isDarkMode ? "text-slate-400" : "text-slate-600"
+                    true ? "text-slate-400" : "text-slate-600"
                   }`}
                 >
                   {t("office.subtitle")}
@@ -840,7 +838,7 @@ const Home: React.FC = () => {
             <div className="relative z-10 max-w-4xl mx-auto fade-in">
               <h2
                 className={`hero-title text-3xl md:text-5xl font-bold mb-6 ${
-                  isDarkMode ? "text-white" : "text-slate-900"
+                  true ? "text-white" : "text-slate-900"
                 }`}
               >
                 {t("home.cta.title").split(" ").slice(0, -1).join(" ")}{" "}
@@ -850,7 +848,7 @@ const Home: React.FC = () => {
               </h2>
               <p
                 className={`body-text text-lg md:text-xl mb-8 ${
-                  isDarkMode ? "text-slate-300" : "text-slate-600"
+                  true ? "text-slate-300" : "text-slate-600"
                 }`}
               >
                 {t("home.cta.description")}
@@ -871,7 +869,7 @@ const Home: React.FC = () => {
                 </a>
               </div>
 
-              <p className={isDarkMode ? "text-slate-400" : "text-slate-500"}>
+              <p className={true ? "text-slate-400" : "text-slate-500"}>
                 {t("home.cta.benefits")}
               </p>
             </div>

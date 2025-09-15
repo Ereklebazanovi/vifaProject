@@ -23,11 +23,9 @@ import {
   FaShoppingCart,
 
 } from "react-icons/fa";
-import { useTheme } from '../contexts/ThemeContext';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const DigitalAdvertising: React.FC = () => {
-  const { isDarkMode } = useTheme();
   const { t } = useLanguage();
   const [videoLoaded, setVideoLoaded] = React.useState(false);
   const [videoError, setVideoError] = React.useState(false);
@@ -175,7 +173,7 @@ const DigitalAdvertising: React.FC = () => {
 
   return (
     <div className={`min-h-screen transition-colors duration-500 ${
-      isDarkMode 
+      true 
         ? 'bg-slate-950 text-white' 
         : 'bg-gradient-to-br from-slate-50 via-white to-blue-50 text-slate-900'
     }`}>
@@ -388,7 +386,7 @@ const DigitalAdvertising: React.FC = () => {
               poster="/advertising-hero-poster.jpg"
               className={`video-background ${videoLoaded ? 'video-loaded' : ''}`}
               style={{
-                filter: isDarkMode ? 'brightness(0.8) contrast(1.3) saturate(1.2)' : 'brightness(1.0) contrast(1.2) saturate(1.3)',
+                filter: true ? 'brightness(0.8) contrast(1.3) saturate(1.2)' : 'brightness(1.0) contrast(1.2) saturate(1.3)',
                 opacity: videoLoaded ? 1 : 0
               }}
               onLoadedData={() => setVideoLoaded(true)}
@@ -404,12 +402,12 @@ const DigitalAdvertising: React.FC = () => {
               src="/advertising-hero-fallback.jpg"
               alt="Advertising Services"
               className="w-full h-full object-cover"
-              style={{ filter: isDarkMode ? 'brightness(0.8) contrast(1.3) saturate(1.2)' : 'brightness(1.0) contrast(1.2) saturate(1.3)' }}
+              style={{ filter: true ? 'brightness(0.8) contrast(1.3) saturate(1.2)' : 'brightness(1.0) contrast(1.2) saturate(1.3)' }}
             />
           )}
           {/* Overlay for better text readability */}
           <div className={`absolute inset-0 ${
-            isDarkMode
+            true
               ? 'bg-gradient-to-br from-slate-900/40 via-slate-800/30 to-slate-900/50'
               : 'bg-gradient-to-br from-white/20 via-slate-100/15 to-white/25'
           }`}></div>
@@ -418,16 +416,16 @@ const DigitalAdvertising: React.FC = () => {
         <div className="relative z-10 max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h1 className={`text-4xl md:text-6xl font-bold mb-6 fade-in-up ${
-              isDarkMode ? 'text-white' : 'text-slate-900'
+              true ? 'text-white' : 'text-slate-900'
             }`}>
               <span className="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">
                 {t('ads.hero.title')}
               </span>
               <br />
-              <span className={isDarkMode ? 'text-white' : 'text-slate-900'}>{t('ads.hero.subtitle')}</span>
+              <span className={true ? 'text-white' : 'text-slate-900'}>{t('ads.hero.subtitle')}</span>
             </h1>
             <p className={`text-xl max-w-3xl mx-auto mb-8 fade-in-up delay-100 ${
-              isDarkMode ? 'text-slate-300' : 'text-slate-600'
+              true ? 'text-slate-300' : 'text-slate-600'
             }`}>
               {t('ads.hero.description')}
             </p>
@@ -440,7 +438,7 @@ const DigitalAdvertising: React.FC = () => {
                   <div className="text-2xl md:text-3xl font-bold text-red-400 mb-2">
                     {stat.number}
                   </div>
-                  <div className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>{stat.label}</div>
+                  <div className={`text-sm ${true ? 'text-slate-400' : 'text-slate-600'}`}>{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -458,8 +456,8 @@ const DigitalAdvertising: React.FC = () => {
                 >
                   {platform.icon}
                 </div>
-                <h3 className={`font-semibold mb-1 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{platform.name}</h3>
-                <p className={`text-sm mb-1 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+                <h3 className={`font-semibold mb-1 ${true ? 'text-white' : 'text-slate-900'}`}>{platform.name}</h3>
+                <p className={`text-sm mb-1 ${true ? 'text-slate-400' : 'text-slate-600'}`}>
                   {platform.description}
                 </p>
                 <p className="text-xs text-red-400 font-medium">
@@ -472,15 +470,15 @@ const DigitalAdvertising: React.FC = () => {
       </section>
 
       {/* Ad Types Section */}
-      <section className={`py-20 px-6 ${isDarkMode ? 'bg-slate-900' : 'bg-slate-100/30'}`}>
+      <section className={`py-20 px-6 ${true ? 'bg-slate-900' : 'bg-slate-100/30'}`}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 fade-in-up">
             <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
-              isDarkMode ? 'text-white' : 'text-slate-900'
+              true ? 'text-white' : 'text-slate-900'
             }`}>
               {t('ads.types.title')}
             </h2>
-            <p className={`text-lg ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+            <p className={`text-lg ${true ? 'text-slate-400' : 'text-slate-600'}`}>
               {t('ads.types.subtitle')}
             </p>
           </div>
@@ -489,13 +487,13 @@ const DigitalAdvertising: React.FC = () => {
             {adTypes.map((type, i) => (
               <div
                 key={i}
-                className={`ad-type-card p-6 rounded-2xl border text-center group fade-in-up delay-${(i + 1) * 100} ${isDarkMode ? 'bg-slate-800 border-slate-700 hover:border-red-400/50' : 'bg-white/80 border-slate-200 hover:border-red-400/30'}`}
+                className={`ad-type-card p-6 rounded-2xl border text-center group fade-in-up delay-${(i + 1) * 100} ${true ? 'bg-slate-800 border-slate-700 hover:border-red-400/50' : 'bg-white/80 border-slate-200 hover:border-red-400/30'}`}
               >
                 <div className="text-4xl text-red-400 mb-4 group-hover:scale-110 transition-transform duration-300">
                   {type.icon}
                 </div>
-                <h3 className={`text-xl font-semibold mb-3 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{type.title}</h3>
-                <p className={`mb-4 ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>{type.description}</p>
+                <h3 className={`text-xl font-semibold mb-3 ${true ? 'text-white' : 'text-slate-900'}`}>{type.title}</h3>
+                <p className={`mb-4 ${true ? 'text-slate-300' : 'text-slate-600'}`}>{type.description}</p>
                 <div className="space-y-2">
                   {type.benefits.map((benefit, idx) => (
                     <div
@@ -503,7 +501,7 @@ const DigitalAdvertising: React.FC = () => {
                       className="flex items-center justify-center gap-2 text-sm"
                     >
                       <FaCheckCircle className="text-green-400" />
-                      <span className={isDarkMode ? 'text-slate-300' : 'text-slate-600'}>{benefit}</span>
+                      <span className={true ? 'text-slate-300' : 'text-slate-600'}>{benefit}</span>
                     </div>
                   ))}
                 </div>
@@ -517,10 +515,10 @@ const DigitalAdvertising: React.FC = () => {
       <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 fade-in-up">
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${true ? 'text-white' : 'text-slate-900'}`}>
               {t('ads.services.title')}
             </h2>
-            <p className={`text-lg ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+            <p className={`text-lg ${true ? 'text-slate-400' : 'text-slate-600'}`}>
               {t('ads.services.subtitle')}
             </p>
           </div>
@@ -529,18 +527,18 @@ const DigitalAdvertising: React.FC = () => {
             {services.map((service, i) => (
               <div
                 key={i}
-                className={`service-card p-8 rounded-2xl border group fade-in-up delay-${(i + 1) * 100} ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white/80 border-slate-200'}`}
+                className={`service-card p-8 rounded-2xl border group fade-in-up delay-${(i + 1) * 100} ${true ? 'bg-slate-900 border-slate-700' : 'bg-white/80 border-slate-200'}`}
               >
                 <div className="text-4xl text-red-400 mb-6 group-hover:scale-110 transition-transform duration-300 scale-in delay-200">
                   {service.icon}
                 </div>
-                <h3 className={`text-2xl font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{service.title}</h3>
-                <p className={`mb-6 ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>{service.description}</p>
+                <h3 className={`text-2xl font-semibold mb-4 ${true ? 'text-white' : 'text-slate-900'}`}>{service.title}</h3>
+                <p className={`mb-6 ${true ? 'text-slate-300' : 'text-slate-600'}`}>{service.description}</p>
                 <div className="grid grid-cols-2 gap-3">
                   {service.features.map((feature, idx) => (
                     <div key={idx} className="flex items-center gap-2 text-sm">
                       <FaCheckCircle className="text-green-400" />
-                      <span className={isDarkMode ? 'text-slate-300' : 'text-slate-600'}>{feature}</span>
+                      <span className={true ? 'text-slate-300' : 'text-slate-600'}>{feature}</span>
                     </div>
                   ))}
                 </div>
@@ -551,13 +549,13 @@ const DigitalAdvertising: React.FC = () => {
       </section>
 
       {/* Process Section */}
-      <section className={`py-20 px-6 ${isDarkMode ? 'bg-slate-900' : 'bg-slate-100/30'}`}>
+      <section className={`py-20 px-6 ${true ? 'bg-slate-900' : 'bg-slate-100/30'}`}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 fade-in-up">
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${true ? 'text-white' : 'text-slate-900'}`}>
               {t('ads.process.title')}
             </h2>
-            <p className={`text-lg ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+            <p className={`text-lg ${true ? 'text-slate-400' : 'text-slate-600'}`}>
               {t('ads.process.subtitle')}
             </p>
           </div>
@@ -571,8 +569,8 @@ const DigitalAdvertising: React.FC = () => {
                 <div className="text-6xl font-bold text-red-400/20 mb-4 scale-in delay-200">
                   {step.step}
                 </div>
-                <h3 className={`text-xl font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{step.title}</h3>
-                <p className={`${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>{step.description}</p>
+                <h3 className={`text-xl font-semibold mb-4 ${true ? 'text-white' : 'text-slate-900'}`}>{step.title}</h3>
+                <p className={`${true ? 'text-slate-400' : 'text-slate-600'}`}>{step.description}</p>
                 {i < processSteps.length - 1 && (
                   <div className="hidden lg:block absolute top-12 -right-4 text-red-400 fade-in-up delay-400">
                     <FaArrowRight />
@@ -585,13 +583,13 @@ const DigitalAdvertising: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className={`py-20 px-6 ${isDarkMode ? 'bg-gradient-to-r from-red-900/40 via-slate-900 to-orange-900/30' : 'bg-gradient-to-r from-slate-100 via-white to-blue-100/50'}`}>
+      <section className={`py-20 px-6 ${true ? 'bg-gradient-to-r from-red-900/40 via-slate-900 to-orange-900/30' : 'bg-gradient-to-r from-slate-100 via-white to-blue-100/50'}`}>
         <div className="max-w-4xl mx-auto text-center">
           <div className="fade-in-up">
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${true ? 'text-white' : 'text-slate-900'}`}>
               {t('ads.cta.title')} <span className="text-red-400">{t('ads.cta.highlight')}</span> {t('ads.cta.suffix')}
             </h2>
-            <p className={`text-xl mb-8 ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>
+            <p className={`text-xl mb-8 ${true ? 'text-slate-300' : 'text-slate-600'}`}>
               {t('ads.cta.description')}
             </p>
             <div className="flex justify-center fade-in-up delay-200">
@@ -603,7 +601,7 @@ const DigitalAdvertising: React.FC = () => {
                 {t('ads.cta.button1')}
               </Link>
             </div>
-            <p className={`mt-6 fade-in-up delay-300 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+            <p className={`mt-6 fade-in-up delay-300 ${true ? 'text-slate-400' : 'text-slate-600'}`}>
               {t('ads.cta.benefits')}
             </p>
           </div>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FaMapMarkerAlt, FaClock, FaPhone, FaEnvelope, FaDirections, FaShareAlt, FaSatellite, FaMap, FaStreetView, FaExpand } from 'react-icons/fa';
 import { useLanguage } from '../contexts/LanguageContext';
-import { useTheme } from '../contexts/ThemeContext';
 
 interface OfficeLocationProps {
   address?: string;
@@ -24,7 +23,6 @@ const OfficeLocation: React.FC<OfficeLocationProps> = ({
   compactMode = false
 }) => {
   const { t } = useLanguage();
-  const { isDarkMode } = useTheme();
   const [mapType, setMapType] = useState<'roadmap' | 'satellite' | 'hybrid' | 'terrain'>('roadmap');
   const [isLoading, setIsLoading] = useState(true);
   const [mapError, setMapError] = useState(false);
@@ -58,7 +56,7 @@ const OfficeLocation: React.FC<OfficeLocationProps> = ({
   if (compactMode) {
     return (
       <div className={`rounded-xl p-6 border transition-colors duration-500 ${
-        isDarkMode 
+        true 
           ? 'bg-slate-800 border-slate-700' 
           : 'bg-white border-slate-300'
       }`}>
@@ -67,11 +65,11 @@ const OfficeLocation: React.FC<OfficeLocationProps> = ({
             <div className="flex items-center gap-2 mb-3">
               <FaMapMarkerAlt className="text-blue-400" />
               <h3 className={`text-lg font-semibold ${
-                isDarkMode ? 'text-white' : 'text-slate-900'
+                true ? 'text-white' : 'text-slate-900'
               }`}>{t('office.title')}</h3>
             </div>
             <p className={`mb-2 ${
-              isDarkMode ? 'text-slate-300' : 'text-slate-600'
+              true ? 'text-slate-300' : 'text-slate-600'
             }`}>{address || t('office.address.full')}</p>
             <div className="flex gap-4 text-sm">
               <a 
@@ -92,7 +90,7 @@ const OfficeLocation: React.FC<OfficeLocationProps> = ({
             </div>
           </div>
           <div className={`w-24 h-24 rounded-lg overflow-hidden border ${
-            isDarkMode ? 'border-slate-600' : 'border-slate-300'
+            true ? 'border-slate-600' : 'border-slate-300'
           }`}>
             <iframe
               src={mapEmbedUrl}
@@ -113,7 +111,7 @@ const OfficeLocation: React.FC<OfficeLocationProps> = ({
 
   return (
     <div className={`rounded-2xl p-8 border transition-colors duration-500 ${
-      isDarkMode 
+      true 
         ? 'bg-slate-900 border-slate-700' 
         : 'bg-white border-slate-300'
     }`}>
@@ -123,17 +121,17 @@ const OfficeLocation: React.FC<OfficeLocationProps> = ({
           <div className="flex items-center gap-3 mb-6">
             <FaMapMarkerAlt className="text-2xl text-blue-400" />
             <h3 className={`text-2xl font-bold ${
-              isDarkMode ? 'text-white' : 'text-slate-900'
+              true ? 'text-white' : 'text-slate-900'
             }`}>{t('office.title')}</h3>
           </div>
           
           <div className="space-y-6">
             <div>
               <h4 className={`text-lg font-semibold mb-2 ${
-                isDarkMode ? 'text-white' : 'text-slate-900'
+                true ? 'text-white' : 'text-slate-900'
               }`}>{t('office.address')}</h4>
               <p className={`leading-relaxed ${
-                isDarkMode ? 'text-slate-300' : 'text-slate-600'
+                true ? 'text-slate-300' : 'text-slate-600'
               }`}>{address || t('office.address.full')}</p>
               <a 
                 href={googleMapsLink}
@@ -148,28 +146,28 @@ const OfficeLocation: React.FC<OfficeLocationProps> = ({
 
             <div>
               <h4 className={`text-lg font-semibold mb-2 flex items-center gap-2 ${
-                isDarkMode ? 'text-white' : 'text-slate-900'
+                true ? 'text-white' : 'text-slate-900'
               }`}>
                 <FaClock className="text-blue-400" />
                 {t('office.workingHours')}
               </h4>
               <div className="space-y-1">
                 {(businessHours || [t('office.hours.weekdays'), t('office.hours.saturday'), t('office.hours.sunday')]).map((hours, index) => (
-                  <p key={index} className={isDarkMode ? 'text-slate-300' : 'text-slate-600'}>{hours}</p>
+                  <p key={index} className={true ? 'text-slate-300' : 'text-slate-600'}>{hours}</p>
                 ))}
               </div>
             </div>
 
             <div className="space-y-3">
               <h4 className={`text-lg font-semibold mb-2 ${
-                isDarkMode ? 'text-white' : 'text-slate-900'
+                true ? 'text-white' : 'text-slate-900'
               }`}>{t('office.contact')}</h4>
               <div className="flex items-center gap-3">
                 <FaPhone className="text-blue-400" />
                 <a 
                   href={`tel:${phone}`}
                   className={`transition-colors ${
-                    isDarkMode 
+                    true 
                       ? 'text-slate-300 hover:text-white' 
                       : 'text-slate-600 hover:text-slate-900'
                   }`}
@@ -182,7 +180,7 @@ const OfficeLocation: React.FC<OfficeLocationProps> = ({
                 <a 
                   href={`mailto:${email}`}
                   className={`transition-colors ${
-                    isDarkMode 
+                    true 
                       ? 'text-slate-300 hover:text-white' 
                       : 'text-slate-600 hover:text-slate-900'
                   }`}
@@ -223,11 +221,11 @@ const OfficeLocation: React.FC<OfficeLocationProps> = ({
         {/* Enhanced Interactive Map */}
         <div>
           <div className={`rounded-xl p-4 ${
-            isDarkMode ? 'bg-slate-800' : 'bg-slate-100'
+            true ? 'bg-slate-800' : 'bg-slate-100'
           }`}>
             {/* Map Controls */}
             <div className={`flex justify-between items-center mb-4 p-2 rounded-lg ${
-              isDarkMode ? 'bg-slate-700' : 'bg-slate-200'
+              true ? 'bg-slate-700' : 'bg-slate-200'
             }`}>
               <div className="flex gap-2">
                 <button
@@ -235,7 +233,7 @@ const OfficeLocation: React.FC<OfficeLocationProps> = ({
                   className={`px-3 py-1 rounded text-xs font-medium transition-all ${
                     mapType === 'roadmap' 
                       ? 'bg-blue-500 text-white' 
-                      : isDarkMode 
+                      : true 
                         ? 'bg-slate-600 text-slate-300 hover:bg-slate-500'
                         : 'bg-slate-300 text-slate-700 hover:bg-slate-400'
                   }`}
@@ -248,7 +246,7 @@ const OfficeLocation: React.FC<OfficeLocationProps> = ({
                   className={`px-3 py-1 rounded text-xs font-medium transition-all ${
                     mapType === 'satellite' 
                       ? 'bg-blue-500 text-white' 
-                      : isDarkMode 
+                      : true 
                         ? 'bg-slate-600 text-slate-300 hover:bg-slate-500'
                         : 'bg-slate-300 text-slate-700 hover:bg-slate-400'
                   }`}
@@ -261,7 +259,7 @@ const OfficeLocation: React.FC<OfficeLocationProps> = ({
                   className={`px-3 py-1 rounded text-xs font-medium transition-all ${
                     mapType === 'hybrid' 
                       ? 'bg-blue-500 text-white' 
-                      : isDarkMode 
+                      : true 
                         ? 'bg-slate-600 text-slate-300 hover:bg-slate-500'
                         : 'bg-slate-300 text-slate-700 hover:bg-slate-400'
                   }`}
@@ -273,7 +271,7 @@ const OfficeLocation: React.FC<OfficeLocationProps> = ({
               <button
                 onClick={() => window.open(googleMapsLink, '_blank')}
                 className={`transition-colors ${
-                  isDarkMode 
+                  true 
                     ? 'text-slate-300 hover:text-white' 
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
@@ -287,10 +285,10 @@ const OfficeLocation: React.FC<OfficeLocationProps> = ({
             <div className="relative h-96 rounded-lg overflow-hidden">
               {isLoading && (
                 <div className={`absolute inset-0 flex items-center justify-center ${
-                  isDarkMode ? 'bg-slate-700' : 'bg-slate-300'
+                  true ? 'bg-slate-700' : 'bg-slate-300'
                 }`}>
                   <div className={`text-center ${
-                    isDarkMode ? 'text-white' : 'text-slate-900'
+                    true ? 'text-white' : 'text-slate-900'
                   }`}>
                     <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
                     <p className="text-sm">{t('office.mapLoading')}</p>
@@ -300,10 +298,10 @@ const OfficeLocation: React.FC<OfficeLocationProps> = ({
               
               {mapError ? (
                 <div className={`h-full flex items-center justify-center ${
-                  isDarkMode ? 'bg-slate-700' : 'bg-slate-300'
+                  true ? 'bg-slate-700' : 'bg-slate-300'
                 }`}>
                   <div className={`text-center ${
-                    isDarkMode ? 'text-slate-300' : 'text-slate-600'
+                    true ? 'text-slate-300' : 'text-slate-600'
                   }`}>
                     <FaMapMarkerAlt className="text-4xl mb-2 mx-auto" />
                     <p>{t('office.mapError')}</p>
@@ -334,18 +332,18 @@ const OfficeLocation: React.FC<OfficeLocationProps> = ({
           
           {/* Enhanced Info Bar */}
           <div className={`mt-4 rounded-lg p-4 ${
-            isDarkMode ? 'bg-slate-800' : 'bg-slate-100'
+            true ? 'bg-slate-800' : 'bg-slate-100'
           }`}>
             <div className="flex justify-between items-center text-sm">
               <div className={`flex items-center gap-2 ${
-                isDarkMode ? 'text-slate-400' : 'text-slate-600'
+                true ? 'text-slate-400' : 'text-slate-600'
               }`}>
                 <FaMapMarkerAlt className="text-blue-400" />
                 <span>{t('office.address.full')}</span>
               </div>
               <div className="flex gap-3">
                 <span className="text-green-400">• {t('office.status.open')}</span>
-                <span className={isDarkMode ? 'text-slate-400' : 'text-slate-600'}>10:00-18:00</span>
+                <span className={true ? 'text-slate-400' : 'text-slate-600'}>10:00-18:00</span>
               </div>
             </div>
           </div>

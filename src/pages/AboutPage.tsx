@@ -12,13 +12,11 @@ import {
   FaInstagram
 } from 'react-icons/fa';
 import SEO from '../components/SEO';
-import { useTheme } from '../contexts/ThemeContext';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const AboutPage = () => {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 300], [0, -50]);
-  const { isDarkMode } = useTheme();
   const { t } = useLanguage();
 
   // Animation variants
@@ -126,7 +124,7 @@ const AboutPage = () => {
         structuredData={aboutStructuredData}
       />
       <div className={`min-h-screen overflow-hidden transition-colors duration-500 ${
-        isDarkMode
+        true
           ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white'
           : 'bg-gradient-to-br from-slate-50 via-white to-blue-50 text-slate-900'
       }`}>
@@ -146,7 +144,7 @@ const AboutPage = () => {
       {/* Hero Section */}
       <section className="relative pt-24 pb-20 px-4 sm:px-6 lg:px-8">
         <div className={`absolute inset-0 ${
-          isDarkMode 
+          true 
             ? 'bg-gradient-to-br from-red-500/10 to-transparent' 
             : 'bg-gradient-to-br from-blue-500/5 to-transparent'
         }`}></div>
@@ -161,7 +159,7 @@ const AboutPage = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className={`text-4xl md:text-6xl font-bold mb-6 leading-tight ${
-              isDarkMode ? 'text-white' : 'text-slate-900'
+              true ? 'text-white' : 'text-slate-900'
             }`}>
               {t('about.hero.title')}{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600">
@@ -169,7 +167,7 @@ const AboutPage = () => {
               </span>
             </h1>
             <p className={`text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed mb-12 ${
-              isDarkMode ? 'text-slate-300' : 'text-slate-600'
+              true ? 'text-slate-300' : 'text-slate-600'
             }`}>
               {t('about.hero.description')}
             </p>
@@ -192,12 +190,12 @@ const AboutPage = () => {
                   {stat.icon}
                 </div>
                 <div className={`text-3xl md:text-4xl font-bold mb-2 ${
-                  isDarkMode ? 'text-white' : 'text-slate-900'
+                  true ? 'text-white' : 'text-slate-900'
                 }`}>
                   {stat.number}
                 </div>
                 <div className={`font-medium ${
-                  isDarkMode ? 'text-slate-400' : 'text-slate-600'
+                  true ? 'text-slate-400' : 'text-slate-600'
                 }`}>
                   {stat.label}
                 </div>
@@ -209,7 +207,7 @@ const AboutPage = () => {
 
       {/* Story Section */}
       <section className={`py-20 px-4 sm:px-6 lg:px-8 ${
-        isDarkMode ? 'bg-slate-800/50' : 'bg-slate-100/30'
+        true ? 'bg-slate-800/50' : 'bg-slate-100/30'
       }`}>
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -220,23 +218,23 @@ const AboutPage = () => {
             className="text-center mb-16"
           >
             <h2 className={`text-3xl md:text-4xl font-bold mb-6 ${
-              isDarkMode ? 'text-white' : 'text-slate-900'
+              true ? 'text-white' : 'text-slate-900'
             }`}>
               {t('about.story.title')} <span className="text-red-400">{t('about.story.titleHighlight')}</span>
             </h2>
             <div className="max-w-4xl mx-auto">
               <p className={`text-lg leading-relaxed mb-6 ${
-                isDarkMode ? 'text-slate-300' : 'text-slate-600'
+                true ? 'text-slate-300' : 'text-slate-600'
               }`}>
                 {t('about.story.paragraph1')}
               </p>
               <p className={`text-lg leading-relaxed mb-6 ${
-                isDarkMode ? 'text-slate-300' : 'text-slate-600'
+                true ? 'text-slate-300' : 'text-slate-600'
               }`}>
                 {t('about.story.paragraph2')}
               </p>
               <p className={`text-lg leading-relaxed ${
-                isDarkMode ? 'text-slate-300' : 'text-slate-600'
+                true ? 'text-slate-300' : 'text-slate-600'
               }`}>
                 {t('about.story.paragraph3')}
               </p>
@@ -256,12 +254,12 @@ const AboutPage = () => {
             className="text-center mb-16"
           >
             <h2 className={`text-3xl md:text-4xl font-bold mb-6 ${
-              isDarkMode ? 'text-white' : 'text-slate-900'
+              true ? 'text-white' : 'text-slate-900'
             }`}>
               {t('about.values.title')} <span className="text-red-400">{t('about.values.titleHighlight')}</span>
             </h2>
             <p className={`text-xl max-w-3xl mx-auto ${
-              isDarkMode ? 'text-slate-300' : 'text-slate-600'
+              true ? 'text-slate-300' : 'text-slate-600'
             }`}>
               {t('about.values.description')}
             </p>
@@ -279,7 +277,7 @@ const AboutPage = () => {
                 key={index}
                 variants={itemVariants}
                 className={`group p-8 backdrop-blur-sm rounded-2xl border transition-all duration-500 hover:shadow-2xl hover:shadow-red-500/10 transform hover:-translate-y-2 ${
-                  isDarkMode
+                  true
                     ? 'bg-slate-800/50 border-slate-700/50 hover:border-red-400/30'
                     : 'bg-white/60 border-slate-300/40 hover:border-red-400/40 shadow-lg'
                 }`}
@@ -288,12 +286,12 @@ const AboutPage = () => {
                   {value.icon}
                 </div>
                 <h3 className={`text-xl font-bold mb-4 ${
-                  isDarkMode ? 'text-white' : 'text-slate-900'
+                  true ? 'text-white' : 'text-slate-900'
                 }`}>
                   {value.title}
                 </h3>
                 <p className={`leading-relaxed ${
-                  isDarkMode ? 'text-slate-300' : 'text-slate-600'
+                  true ? 'text-slate-300' : 'text-slate-600'
                 }`}>
                   {value.description}
                 </p>
@@ -316,12 +314,12 @@ const AboutPage = () => {
             className="text-center mb-16"
           >
             <h2 className={`text-3xl md:text-4xl font-bold mb-6 ${
-              isDarkMode ? 'text-white' : 'text-slate-900'
+              true ? 'text-white' : 'text-slate-900'
             }`}>
               {t('about.whatWeDo.title')} <span className="text-red-400">{t('about.whatWeDo.titleHighlight')}</span>
             </h2>
             <p className={`text-xl max-w-3xl mx-auto ${
-              isDarkMode ? 'text-slate-300' : 'text-slate-600'
+              true ? 'text-slate-300' : 'text-slate-600'
             }`}>
               {t('about.whatWeDo.description')}
             </p>
@@ -369,12 +367,12 @@ const AboutPage = () => {
             viewport={{ once: true }}
           >
             <h2 className={`text-3xl md:text-4xl font-bold mb-6 ${
-              isDarkMode ? 'text-white' : 'text-slate-900'
+              true ? 'text-white' : 'text-slate-900'
             }`}>
               {t('about.cta.title')}
             </h2>
             <p className={`text-xl mb-8 max-w-2xl mx-auto ${
-              isDarkMode ? 'text-slate-300' : 'text-slate-600'
+              true ? 'text-slate-300' : 'text-slate-600'
             }`}>
               {t('about.cta.description')}
             </p>
