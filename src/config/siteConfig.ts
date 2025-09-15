@@ -2,8 +2,8 @@
 
 export const siteConfig = {
   // Basic Site Info
-  siteName: "VIFA Digital",
-  siteTitle: "VIFA Digital - ციფრული მარკეტინგის სააგენტო საქართველოში",
+  siteName: "Vifa Digital",
+  siteTitle: "Vifa Digital - ციფრული მარკეტინგის სააგენტო საქართველოში",
 
   // Domain - UPDATE WHEN DOMAIN IS PURCHASED
   domain: "vifadigital.ge", // placeholder - change when domain is ready

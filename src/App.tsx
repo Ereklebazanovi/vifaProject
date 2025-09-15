@@ -1,21 +1,29 @@
-import type React from "react"
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom"
-import { Suspense, lazy, useState, useEffect } from "react"
-import { HelmetProvider } from 'react-helmet-async'
-import Layout from "./layout/Layout"
-import { ThemeProvider } from "./contexts/ThemeContext"
-import { LanguageProvider } from "./contexts/LanguageContext"
-import "./index.css"
+import type React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
+import { Suspense, lazy, useState, useEffect } from "react";
+import { HelmetProvider } from "react-helmet-async";
+import Layout from "./layout/Layout";
+import { ThemeProvider } from "./contexts/ThemeContext";
+import { LanguageProvider } from "./contexts/LanguageContext";
+import "./index.css";
 
 // Lazy load components
-const Home = lazy(() => import("./pages/Home"))
-const AboutPage = lazy(() => import("./pages/AboutPage"))
-const StartProject = lazy(() => import("./service/StartProject"))
-const AdminDashboard = lazy(() => import("./admin/AdminDashboard"))
-const SocialMediaService = lazy(() => import("./offeredServices/SocialMediaService"))
-const DigitalAdvertising = lazy(() => import("./offeredServices/DigitalAdvertising"))
-const WebDevelopment = lazy(() => import("./offeredServices/WebDevelopment"))
-
+const Home = lazy(() => import("./pages/Home"));
+const AboutPage = lazy(() => import("./pages/AboutPage"));
+const StartProject = lazy(() => import("./service/StartProject"));
+const AdminDashboard = lazy(() => import("./admin/AdminDashboard"));
+const SocialMediaService = lazy(
+  () => import("./offeredServices/SocialMediaService")
+);
+const DigitalAdvertising = lazy(
+  () => import("./offeredServices/DigitalAdvertising")
+);
+const WebDevelopment = lazy(() => import("./offeredServices/WebDevelopment"));
 
 // Enhanced Loading component
 const LoadingSpinner = () => (
@@ -30,19 +38,28 @@ const LoadingSpinner = () => (
         {/* Inner dot */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
       </div>
-      
+
       {/* Loading text */}
       <div className="flex flex-col items-center space-y-2">
         <p className="text-white text-lg font-medium">იტვირთება</p>
         <div className="flex space-x-1">
-          <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-          <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-          <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+          <div
+            className="w-2 h-2 bg-blue-400 rounded-full animate-bounce"
+            style={{ animationDelay: "0ms" }}
+          ></div>
+          <div
+            className="w-2 h-2 bg-blue-400 rounded-full animate-bounce"
+            style={{ animationDelay: "150ms" }}
+          ></div>
+          <div
+            className="w-2 h-2 bg-blue-400 rounded-full animate-bounce"
+            style={{ animationDelay: "300ms" }}
+          ></div>
         </div>
       </div>
     </div>
   </div>
-)
+);
 
 const Contact = () => (
   <div className="pt-24 pb-20">
@@ -51,28 +68,30 @@ const Contact = () => (
       <p className="text-gray-400 text-center">Contact page coming soon...</p>
     </div>
   </div>
-)
+);
 
 // Route transition wrapper component
-const RouteTransition: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const location = useLocation()
-  const [loading, setLoading] = useState(false)
+const RouteTransition: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const location = useLocation();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     const timer = setTimeout(() => {
-      setLoading(false)
-    }, 200) // Minimum loading time for smooth UX
+      setLoading(false);
+    }, 200); // Minimum loading time for smooth UX
 
-    return () => clearTimeout(timer)
-  }, [location.pathname])
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
 
   if (loading) {
-    return <LoadingSpinner />
+    return <LoadingSpinner />;
   }
 
-  return <>{children}</>
-}
+  return <>{children}</>;
+};
 
 const App: React.FC = () => {
   return (
@@ -85,9 +104,18 @@ const App: React.FC = () => {
                 <Routes>
                   <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
-                    <Route path="services/social-media" element={<SocialMediaService />} />
-                    <Route path="services/digital-advertising" element={<DigitalAdvertising />} />
-                    <Route path="services/web-development" element={<WebDevelopment />} />
+                    <Route
+                      path="services/social-media"
+                      element={<SocialMediaService />}
+                    />
+                    <Route
+                      path="services/digital-advertising"
+                      element={<DigitalAdvertising />}
+                    />
+                    <Route
+                      path="services/web-development"
+                      element={<WebDevelopment />}
+                    />
 
                     <Route path="about" element={<AboutPage />} />
 
@@ -96,7 +124,7 @@ const App: React.FC = () => {
                   </Route>
 
                   {/* Admin routes without Layout (no navbar/footer) */}
-                  <Route path="/admin" element={<AdminDashboard />} />
+
                   <Route path="/admin/leads" element={<AdminDashboard />} />
                 </Routes>
               </RouteTransition>
@@ -105,7 +133,7 @@ const App: React.FC = () => {
         </LanguageProvider>
       </ThemeProvider>
     </HelmetProvider>
-  )
-}
+  );
+};
 
-export default App
+export default App;

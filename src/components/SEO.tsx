@@ -15,7 +15,7 @@ interface SEOProps {
 const SEO: React.FC<SEOProps> = ({
   title,
   description,
-  keywords = "ვებსაიტის განვითარება, სოციალური მედია, ციფრული რეკლამა, მარკეტინგი, საქართველო, თბილისი, VIFA",
+  keywords = "ვებსაიტის განვითარება, სოციალური მედია, ციფრული რეკლამა, მარკეტინგი, საქართველო, თბილისი, Vifa Digital",
   image = "/vifa.jpg",
   url,
   type = 'website',
@@ -25,7 +25,7 @@ const SEO: React.FC<SEOProps> = ({
 
   const siteTitle = siteConfig.siteTitle;
   const siteName = siteConfig.siteName;
-  const defaultDescription = "VIFA Digital - წამყვანი ციფრული მარკეტინგის სააგენტო საქართველოში. ვებსაიტების განვითარება, სოციალური მედიის მართვა, ციფრული რეკლამა. პროფესიონალური სერვისები თბილისში.";
+  const defaultDescription = "Vifa Digital - წამყვანი ციფრული მარკეტინგის სააგენტო საქართველოში. ვებსაიტების განვითარება, სოციალური მედიის მართვა, ციფრული რეკლამა. პროფესიონალური სერვისები თბილისში.";
 
   const fullTitle = title ? `${title} | ${siteName}` : siteTitle;
   const metaDescription = description || defaultDescription;
@@ -39,7 +39,7 @@ const SEO: React.FC<SEOProps> = ({
       <title>{fullTitle}</title>
       <meta name="description" content={metaDescription} />
       <meta name="keywords" content={keywords} />
-      <meta name="author" content="VIFA Team" />
+      <meta name="author" content="Vifa Digital Team" />
       <meta name="robots" content="index, follow" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />

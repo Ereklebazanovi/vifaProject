@@ -102,7 +102,7 @@ const AboutPage = () => {
     "@type": "AboutPage",
     "mainEntity": {
       "@type": "Organization",
-      "name": "VIFA",
+      "name": "Vifa Digital",
       "description": t('seo.about.description'),
       "foundingDate": "2023",
       "location": {
@@ -165,7 +165,7 @@ const AboutPage = () => {
             }`}>
               {t('about.hero.title')}{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600">
-                VIFA
+                Vifa Digital
               </span>
             </h1>
             <p className={`text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed mb-12 ${

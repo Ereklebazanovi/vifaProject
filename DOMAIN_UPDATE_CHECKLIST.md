@@ -1,4 +1,4 @@
-# 🚀 VIFA Digital Domain & Social Media Setup Checklist
+# 🚀 Vifa Digital Domain & Social Media Setup Checklist
 
 ## 📋 რა მზადაა ახლა:
 - ✅ SEO კომპონენტი და მეტა ტაგები

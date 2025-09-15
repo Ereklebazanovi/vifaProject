@@ -148,7 +148,7 @@ const Footer: React.FC = () => {
               >
                 <img 
                   src="/vifa.jpg" 
-                  alt="VIFA Logo" 
+                  alt="Vifa Digital Logo" 
                   className="w-10 h-10 rounded-lg object-cover"
                 />
               </motion.div>
@@ -156,8 +156,8 @@ const Footer: React.FC = () => {
                 <div className="text-2xl font-bold">
                   <span className={`group-hover:text-blue-200 transition-colors duration-300 ${
                     isDarkMode ? 'text-white' : 'text-slate-900'
-                  }`}>VI</span>
-                  <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">FA</span>
+                  }`}>Vifa</span>
+                  <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">{" "}Digital</span>
                 </div>
                 <div className={`text-xs font-medium -mt-1 group-hover:text-slate-300 transition-colors duration-300 ${
                   isDarkMode ? 'text-slate-400' : 'text-slate-500'
@@ -332,7 +332,7 @@ const Footer: React.FC = () => {
             <div className={`text-sm mb-4 sm:mb-0 ${
               isDarkMode ? 'text-slate-500' : 'text-slate-600'
             }`}>
-              © {currentYear} VIFA. {t('footer.copyright')} 
+              © {currentYear} Vifa Digital. {t('footer.copyright')} 
               <span className="mx-2">•</span>
               <Link to="/privacy" className="hover:text-blue-400 transition-colors duration-300">
                 {t('footer.privacy')}
@@ -347,7 +347,7 @@ const Footer: React.FC = () => {
               <p className={`text-sm ${
                 isDarkMode ? 'text-slate-500' : 'text-slate-600'
               }`}>
-                {t('footer.createdBy')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 font-semibold">VIFA</span> {t('footer.createdByTeam')}
+                {t('footer.createdBy')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 font-semibold">Vifa Digital</span> {t('footer.createdByTeam')}
               </p>
               
               {/* Back to Top Button */}

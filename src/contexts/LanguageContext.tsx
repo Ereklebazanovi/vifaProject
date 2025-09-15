@@ -29,7 +29,7 @@ const translations = {
     'home.services.title': 'ჩვენი სერვისები',
     'home.services.subtitle': 'სრული ციფრული გადაწყვეტები თქვენი ბიზნესისთვის',
     
-    'home.services.webdev.title': 'ვებსაიტი + ონლაინ მაღაზია',
+    'home.services.webdev.title': 'ვებსაიტი',
     'home.services.webdev.description': 'პროფესიონალური, მობილურზე ოპტიმიზებული ვებსაიტები და ონლაინ მაღაზიები',
     'home.services.webdev.price': '800₾-დან',
     'home.services.webdev.button': 'შეიტყვე მეტი',
@@ -282,7 +282,7 @@ const translations = {
     // Testimonials section
     'social.testimonials.title': 'მომხმარებლების შეფასებები',
     
-    'social.testimonials.testimonial1.text': 'VIFA-მ ჩვენი Instagram გვერდი სრულიად გარდაქმნა. კლიენტები ყოველდღე გვიკითხავენ სად ვნახეთ ეს ლამაზი ფოტოებო.',
+    'social.testimonials.testimonial1.text': 'Vifa Digital-მ ჩვენი Instagram გვერდი სრულიად გარდაქმნა. კლიენტები ყოველდღე გვიკითხავენ სად ვნახეთ ეს ლამაზი ფოტოებო.',
     'social.testimonials.testimonial1.author': 'ანა გ.',
     'social.testimonials.testimonial1.business': 'სილამაზის სალონი',
     'social.testimonials.testimonial1.platform': 'Instagram',
@@ -538,7 +538,7 @@ const translations = {
 
     'about.story.title': 'ჩვენი',
     'about.story.titleHighlight': 'ისტორია',
-    'about.story.paragraph1': 'VIFA დაფუძნდა 2021 წელს, როდესაც ჩვენმა გუნდმა გადაწყვიტა შექმნათ ციფრული სააგენტო, რომელიც დაეხმარებოდა ქართულ ბიზნესებს წარმატებულად ფუნქციონირებაში ციფრულ სივრცეში.',
+    'about.story.paragraph1': 'Vifa Digital დაფუძნდა 2021 წელს, როდესაც ჩვენმა გუნდმა გადაწყვიტა შექმნათ ციფრული სააგენტო, რომელიც დაეხმარებოდა ქართულ ბიზნესებს წარმატებულად ფუნქციონირებაში ციფრულ სივრცეში.',
     'about.story.paragraph2': 'დღეს ჩვენ ვართ წამყვანი ციფრული სააგენტო საქართველოში, რომელიც მომსახურებას უწევს როგორც მცირე ბიზნესებს, ასევე დიდ კორპორაციებს. ჩვენი მიზანია ყოველი კლიენტისთვის შევქმნათ უნიკალური და ეფექტური ციფრული გადაწყვეტილება.',
     'about.story.paragraph3': 'ჩვენ გვწამს, რომ ყოველი ბიზნესი უნიკალურია და საჭიროებს ინდივიდუალურ მიდგომას. ამიტომაც ჩვენი ყოველი პროექტი იწყება კლიენტის საჭიროებების ღრმა გაგებით.',
 
@@ -680,28 +680,28 @@ const translations = {
     'startProject.footer.trustIndicators': '🔒 თქვენი ინფორმაცია დაცულია • 🎁 უფასო კონსულტაცია • ⚡ სწრაფი პასუხი',
 
     // SEO Meta Tags
-    'seo.home.title': 'VIFA - ციფრული მარკეტინგის სააგენტო საქართველოში',
-    'seo.home.description': 'VIFA - წამყვანი ციფრული მარკეტინგის სააგენტო საქართველოში. ვებსაიტების განვითარება, სოციალური მედიის მართვა, ციფრული რეკლამა. პროფესიონალური სერვისები თბილისში.',
-    'seo.home.keywords': 'ციფრული მარკეტინგი, ვებსაიტის შექმნა, სოციალური მედია, რეკლამა, საქართველო, თბილისი, VIFA',
+    'seo.home.title': 'Vifa Digital - ციფრული მარკეტინგის სააგენტო საქართველოში',
+    'seo.home.description': 'Vifa Digital - წამყვანი ციფრული მარკეტინგის სააგენტო საქართველოში. ვებსაიტების განვითარება, სოციალური მედიის მართვა, ციფრული რეკლამა. პროფესიონალური სერვისები თბილისში.',
+    'seo.home.keywords': 'ციფრული მარკეტინგი, ვებსაიტის შექმნა, სოციალური მედია, რეკლამა, საქართველო, თბილისი, Vifa Digital',
 
-    'seo.about.title': 'ჩვენ შესახებ - VIFA Team',
-    'seo.about.description': 'VIFA-ს გუნდის შესახებ. ჩვენი გამოცდილება, მიზნები და ღირებულებები ციფრული მარკეტინგის სფეროში საქართველოში.',
-    'seo.about.keywords': 'VIFA გუნდი, ციფრული მარკეტინგის კომპანია, ვებ განვითარება, საქართველო',
+    'seo.about.title': 'ჩვენ შესახებ - Vifa Digital Team',
+    'seo.about.description': 'Vifa Digital-ს გუნდის შესახებ. ჩვენი გამოცდილება, მიზნები და ღირებულებები ციფრული მარკეტინგის სფეროში საქართველოში.',
+    'seo.about.keywords': 'Vifa Digital გუნდი, ციფრული მარკეტინგის კომპანია, ვებ განვითარება, საქართველო',
 
-    'seo.services.social.title': 'სოციალური მედიის მართვა - VIFA',
+    'seo.services.social.title': 'სოციალური მედიის მართვა - Vifa Digital',
     'seo.services.social.description': 'პროფესიონალური სოციალური მედიის მართვა Instagram, Facebook, TikTok-ზე. შინაარსის შექმნა, გამოქვეყნება და ანალიზი.',
     'seo.services.social.keywords': 'სოციალური მედია, Instagram მართვა, Facebook მარკეტინგი, TikTok, შინაარსის შექმნა',
 
-    'seo.services.ads.title': 'ციფრული რეკლამა - VIFA',
+    'seo.services.ads.title': 'ციფრული რეკლამა - Vifa Digital',
     'seo.services.ads.description': 'Google Ads, Facebook და Instagram რეკლამების კამპანიების მართვა. ROI ოპტიმიზაცია და გაყიდვების ზრდა.',
     'seo.services.ads.keywords': 'Google Ads, Facebook რეკლამა, Instagram რეკლამა, PPC, ციფრული რეკლამა',
 
-    'seo.services.webdev.title': 'ვებსაიტის განვითარება - VIFA',
+    'seo.services.webdev.title': 'ვებსაიტის განვითარება - Vifa Digital',
     'seo.services.webdev.description': 'რესპონსიული ვებსაიტების და ონლაინ მაღაზიების შექმნა. SEO ოპტიმიზაცია, უსაფრთხოება და სწრაფი ჩატვირთვა.',
     'seo.services.webdev.keywords': 'ვებსაიტის შექმნა, ონლაინ მაღაზია, ვებ განვითარება, SEO, რესპონსიული დიზაინი',
 
-    'seo.startProject.title': 'პროექტის დაწყება - VIFA',
-    'seo.startProject.description': 'დაიწყეთ თქვენი ციფრული პროექტი VIFA-სთან ერთად. უფასო კონსულტაცია და პერსონალიზებული გადაწყვეტები.',
+    'seo.startProject.title': 'პროექტის დაწყება - Vifa Digital',
+    'seo.startProject.description': 'დაიწყეთ თქვენი ციფრული პროექტი Vifa Digital-სთან ერთად. უფასო კონსულტაცია და პერსონალიზებული გადაწყვეტები.',
     'seo.startProject.keywords': 'პროექტის დაწყება, კონსულტაცია, ციფრული მარკეტინგი, ვება განვითარება',
   },
 
@@ -718,7 +718,7 @@ const translations = {
     'home.services.title': 'Our Services',
     'home.services.subtitle': 'Complete digital solutions for your business',
     
-    'home.services.webdev.title': 'Website + Online Store',
+    'home.services.webdev.title': 'Website',
     'home.services.webdev.description': 'Professional, mobile-optimized websites and online stores',
     'home.services.webdev.price': 'From ₾800',
     'home.services.webdev.button': 'Learn More',
@@ -971,7 +971,7 @@ const translations = {
     // Testimonials section
     'social.testimonials.title': 'User Reviews',
     
-    'social.testimonials.testimonial1.text': 'VIFA completely transformed our Instagram page. Clients ask us daily where did you see these beautiful photos.',
+    'social.testimonials.testimonial1.text': 'Vifa Digital completely transformed our Instagram page. Clients ask us daily where did you see these beautiful photos.',
     'social.testimonials.testimonial1.author': 'Ana G.',
     'social.testimonials.testimonial1.business': 'Beauty Salon',
     'social.testimonials.testimonial1.platform': 'Instagram',
@@ -1227,7 +1227,7 @@ const translations = {
 
     'about.story.title': 'Our',
     'about.story.titleHighlight': 'Story',
-    'about.story.paragraph1': 'VIFA was founded in 2021, when our team decided to create a digital agency that would help Georgian businesses successfully operate in the digital space.',
+    'about.story.paragraph1': 'Vifa Digital was founded in 2021, when our team decided to create a digital agency that would help Georgian businesses successfully operate in the digital space.',
     'about.story.paragraph2': 'Today we are a leading digital agency in Georgia, serving both small businesses and large corporations. Our goal is to create unique and effective digital solutions for every client.',
     'about.story.paragraph3': 'We believe that every business is unique and requires an individual approach. That\'s why every project of ours starts with a deep understanding of the client\'s needs.',
 
@@ -1369,28 +1369,28 @@ const translations = {
     'startProject.footer.trustIndicators': '🔒 Your information is secure • 🎁 Free consultation • ⚡ Quick response',
 
     // SEO Meta Tags
-    'seo.home.title': 'VIFA - Digital Marketing Agency in Georgia',
-    'seo.home.description': 'VIFA - Leading digital marketing agency in Georgia. Web development, social media management, digital advertising. Professional services in Tbilisi.',
-    'seo.home.keywords': 'digital marketing, web development, social media, advertising, Georgia, Tbilisi, VIFA',
+    'seo.home.title': 'Vifa Digital - Digital Marketing Agency in Georgia',
+    'seo.home.description': 'Vifa Digital - Leading digital marketing agency in Georgia. Web development, social media management, digital advertising. Professional services in Tbilisi.',
+    'seo.home.keywords': 'digital marketing, web development, social media, advertising, Georgia, Tbilisi, Vifa Digital',
 
-    'seo.about.title': 'About Us - VIFA Team',
-    'seo.about.description': 'About VIFA team. Our experience, goals and values in digital marketing field in Georgia.',
-    'seo.about.keywords': 'VIFA team, digital marketing company, web development, Georgia',
+    'seo.about.title': 'About Us - Vifa Digital Team',
+    'seo.about.description': 'About Vifa Digital team. Our experience, goals and values in digital marketing field in Georgia.',
+    'seo.about.keywords': 'Vifa Digital team, digital marketing company, web development, Georgia',
 
-    'seo.services.social.title': 'Social Media Management - VIFA',
+    'seo.services.social.title': 'Social Media Management - Vifa Digital',
     'seo.services.social.description': 'Professional social media management for Instagram, Facebook, TikTok. Content creation, publishing and analytics.',
     'seo.services.social.keywords': 'social media, Instagram management, Facebook marketing, TikTok, content creation',
 
-    'seo.services.ads.title': 'Digital Advertising - VIFA',
+    'seo.services.ads.title': 'Digital Advertising - Vifa Digital',
     'seo.services.ads.description': 'Google Ads, Facebook and Instagram advertising campaigns management. ROI optimization and sales growth.',
     'seo.services.ads.keywords': 'Google Ads, Facebook advertising, Instagram ads, PPC, digital advertising',
 
-    'seo.services.webdev.title': 'Web Development - VIFA',
+    'seo.services.webdev.title': 'Web Development - Vifa Digital',
     'seo.services.webdev.description': 'Responsive websites and online stores development. SEO optimization, security and fast loading.',
     'seo.services.webdev.keywords': 'web development, online store, website creation, SEO, responsive design',
 
-    'seo.startProject.title': 'Start Project - VIFA',
-    'seo.startProject.description': 'Start your digital project with VIFA. Free consultation and personalized solutions.',
+    'seo.startProject.title': 'Start Project - Vifa Digital',
+    'seo.startProject.description': 'Start your digital project with Vifa Digital. Free consultation and personalized solutions.',
     'seo.startProject.keywords': 'start project, consultation, digital marketing, web development',
   }
 };

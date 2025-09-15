@@ -186,7 +186,7 @@ const StartProject: React.FC = () => {
     "description": t('seo.startProject.description'),
     "provider": {
       "@type": "Organization",
-      "name": "VIFA",
+      "name": "Vifa Digital",
       "url": "https://vifa.ge"
     }
   };

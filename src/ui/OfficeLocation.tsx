@@ -42,7 +42,7 @@ const OfficeLocation: React.FC<OfficeLocationProps> = ({
   const shareLocation = () => {
     if (navigator.share) {
       navigator.share({
-        title: 'VIFA Office Location',
+        title: 'Vifa Digital Office Location',
         text: `Visit our office at ${address}`,
         url: googleMapsLink,
       });
@@ -324,7 +324,7 @@ const OfficeLocation: React.FC<OfficeLocationProps> = ({
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="VIFA Office Location"
+                  title="Vifa Digital Office Location"
                   onLoad={handleMapLoad}
                   onError={handleMapError}
                 />

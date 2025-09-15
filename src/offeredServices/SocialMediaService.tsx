@@ -379,7 +379,7 @@ const SocialMediaService = () => {
     "description": t('seo.services.social.description'),
     "provider": {
       "@type": "Organization",
-      "name": "VIFA",
+      "name": "Vifa Digital",
       "url": "https://vifa.ge"
     },
     "areaServed": {
