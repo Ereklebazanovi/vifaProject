@@ -8,12 +8,11 @@ import {
 import { Suspense, lazy, useState, useEffect } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import Layout from "./layout/Layout";
-import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import "./index.css";
 
 // Lazy load components
-const Home = lazy(() => import("./pages/Home"));
+const Home = lazy(() => import("./pages/NewHome"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const StartProject = lazy(() => import("./service/StartProject"));
 const AdminDashboard = lazy(() => import("./admin/AdminDashboard"));
@@ -96,8 +95,7 @@ const RouteTransition: React.FC<{ children: React.ReactNode }> = ({
 const App: React.FC = () => {
   return (
     <HelmetProvider>
-      <ThemeProvider>
-        <LanguageProvider>
+      <LanguageProvider>
           <Router>
             <Suspense fallback={<LoadingSpinner />}>
               <RouteTransition>
@@ -130,8 +128,7 @@ const App: React.FC = () => {
               </RouteTransition>
             </Suspense>
           </Router>
-        </LanguageProvider>
-      </ThemeProvider>
+      </LanguageProvider>
     </HelmetProvider>
   );
 };

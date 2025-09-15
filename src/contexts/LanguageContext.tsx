@@ -152,6 +152,9 @@ const translations = {
     'services.webdev.description': 'ვებსაიტები და ონლაინ მაღაზიები',
     'services.content.title': 'კონტენტ პროდუქცია',
     'services.content.description': 'ფოტო, ვიდეო და ბრენდინგი',
+
+    'services.advertising.title': 'სარეკლამო მომსახურებები',
+    'services.advertising.description': 'სრული რეკლამის მენეჯმენტი და მარკეტინგი',
     
     // Digital Advertising Page
     'ads.hero.title': 'ციფრული რეკლამით',
@@ -878,6 +881,9 @@ const translations = {
     'services.webdev.description': 'Websites and online stores',
     'services.content.title': 'Content Production',
     'services.content.description': 'Photo, video and branding',
+
+    'services.advertising.title': 'Advertising Services',
+    'services.advertising.description': 'Complete advertising management and marketing',
     
     // Digital Advertising Page
     'ads.hero.title': 'Digital Advertising',

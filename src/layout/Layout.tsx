@@ -1,18 +1,11 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Navbar from './ImprovedNavbar';
+import Navbar from './SimpleNavbar';
 import Footer from './ImprovedFooter';
-import { useTheme } from '../contexts/ThemeContext';
 
 const Layout: React.FC = () => {
-  const { isDarkMode } = useTheme();
-
   return (
-    <div className={`min-h-screen transition-colors duration-500 ${
-      isDarkMode 
-        ? 'bg-slate-950 text-white' 
-        : 'bg-white text-slate-900'
-    }`}>
+    <div className="min-h-screen bg-slate-950 text-white">
       <Navbar />
       <main>
         <Outlet />

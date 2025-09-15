@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {
-  
   FaChartLine,
   FaInstagram,
   FaCode,
@@ -17,7 +16,6 @@ import { useTheme } from "../contexts/ThemeContext";
 import { useLanguage } from "../contexts/LanguageContext";
 import WebDevelopment from "../offeredServices/WebDevelopment";
 import DigitalAdvertising from "../offeredServices/DigitalAdvertising";
-import SocialMediaService from "../offeredServices/SocialMediaService";
 
 // Lightweight CSS animations instead of framer-motion
 const Home: React.FC = () => {
@@ -886,9 +884,6 @@ const Home: React.FC = () => {
             <DigitalAdvertising />
           </section>
 
-          <section>
-            <SocialMediaService />
-          </section>
         </div>
       </div>
     </>

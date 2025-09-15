@@ -29,6 +29,8 @@ import { useLanguage } from '../contexts/LanguageContext';
 const DigitalAdvertising: React.FC = () => {
   const { isDarkMode } = useTheme();
   const { t } = useLanguage();
+  const [videoLoaded, setVideoLoaded] = React.useState(false);
+  const [videoError, setVideoError] = React.useState(false);
   const platforms = [
     {
       icon: <FaGoogle />,
@@ -320,11 +322,100 @@ const DigitalAdvertising: React.FC = () => {
         .stat-card:hover {
           transform: translateY(-4px);
         }
+
+        /* Video Background Optimization */
+        .video-container {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: -1;
+          overflow: hidden;
+        }
+
+        .video-background {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          min-width: 100%;
+          min-height: 100%;
+          width: auto;
+          height: auto;
+          transform: translateX(-50%) translateY(-50%);
+          background-size: cover;
+          transition: opacity 0.3s ease-in-out;
+        }
+
+        /* Smooth loading animation */
+        @keyframes videoFadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        .video-loaded {
+          animation: videoFadeIn 1s ease-in-out;
+        }
+
+        /* Performance optimizations */
+        @media (prefers-reduced-motion: reduce) {
+          .video-background {
+            animation: none !important;
+            transform: none !important;
+          }
+        }
+
+        /* Mobile optimization */
+        @media (max-width: 768px) {
+          .video-background {
+            /* On mobile, consider using poster image instead for performance */
+            display: block;
+          }
+        }
       `}</style>
 
-      {/* Hero Section */}
-      <section className="px-6 py-16">
-        <div className="max-w-7xl mx-auto">
+      {/* Hero Section with Video Background */}
+      <section className="relative px-6 py-16 overflow-hidden">
+        {/* Video Background */}
+        <div className="absolute inset-0 w-full h-full">
+          {!videoError ? (
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster="/advertising-hero-poster.jpg"
+              className={`video-background ${videoLoaded ? 'video-loaded' : ''}`}
+              style={{
+                filter: isDarkMode ? 'brightness(0.8) contrast(1.3) saturate(1.2)' : 'brightness(1.0) contrast(1.2) saturate(1.3)',
+                opacity: videoLoaded ? 1 : 0
+              }}
+              onLoadedData={() => setVideoLoaded(true)}
+              onError={() => setVideoError(true)}
+            >
+              <source src="/advertising-hero-video.mp4" type="video/mp4" />
+              <source src="/advertising-hero-video.mov" type="video/quicktime" />
+              <source src="/advertising-hero-video.webm" type="video/webm" />
+            </video>
+          ) : (
+            /* Fallback image if video fails to load */
+            <img
+              src="/advertising-hero-fallback.jpg"
+              alt="Advertising Services"
+              className="w-full h-full object-cover"
+              style={{ filter: isDarkMode ? 'brightness(0.8) contrast(1.3) saturate(1.2)' : 'brightness(1.0) contrast(1.2) saturate(1.3)' }}
+            />
+          )}
+          {/* Overlay for better text readability */}
+          <div className={`absolute inset-0 ${
+            isDarkMode
+              ? 'bg-gradient-to-br from-slate-900/40 via-slate-800/30 to-slate-900/50'
+              : 'bg-gradient-to-br from-white/20 via-slate-100/15 to-white/25'
+          }`}></div>
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h1 className={`text-4xl md:text-6xl font-bold mb-6 fade-in-up ${
               isDarkMode ? 'text-white' : 'text-slate-900'
