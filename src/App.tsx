@@ -10,8 +10,6 @@ import { HelmetProvider } from "react-helmet-async";
 import Layout from "./layout/Layout";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import "./index.css";
-import NewDigitalAdvertising from "./offeredServices/NewDigitalAdvertising";
-
 // Lazy load components
 const Home = lazy(() => import("./pages/NewHome"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
@@ -109,7 +107,7 @@ const App: React.FC = () => {
                     />
                     <Route
                       path="services/digital-advertising"
-                      element={<NewDigitalAdvertising />}
+                      element={<DigitalAdvertising />}
                     />
                     <Route
                       path="services/web-development"

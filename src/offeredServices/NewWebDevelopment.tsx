@@ -8,9 +8,7 @@ import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import {
   FaReact,
   FaMobile,
-  FaDesktop,
   FaRocket,
-  FaShieldAlt,
   FaCode,
   FaDatabase,
   FaPaintBrush,
@@ -19,7 +17,6 @@ import {
   FaArrowRight,
   FaChartLine,
   FaBolt,
-  FaGlobe,
   FaServer,
   FaShoppingCart
 } from "react-icons/fa";
@@ -36,7 +33,6 @@ import {
 import SEO from "../components/SEO";
 
 const NewWebDevelopment: React.FC = () => {
-  const { t } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
   const [activeService, setActiveService] = useState<number>(0);
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -415,7 +411,7 @@ const NewWebDevelopment: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6">
-              {technologies.map((tech, index) => (
+              {technologies.map((tech) => (
                 <div
                   key={tech.name}
                   className={`group cursor-pointer p-4 rounded-xl border-2 ${getColorClass(tech.color)}

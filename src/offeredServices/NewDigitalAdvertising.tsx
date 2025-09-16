@@ -20,13 +20,11 @@ import {
   FaTiktok,
   FaLinkedin,
   FaRocket,
-  FaCheckCircle,
   FaArrowRight,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
 
 const NewDigitalAdvertising: React.FC = () => {
-  const { t } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
   const [activeService, setActiveService] = useState<number>(0);
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -439,7 +437,7 @@ const NewDigitalAdvertising: React.FC = () => {
             </div>
 
             <div className="flex justify-center items-center gap-8 flex-wrap">
-              {platforms.map((platform, index) => (
+              {platforms.map((platform) => (
                 <div
                   key={platform.name}
                   className={`group cursor-pointer p-6 rounded-xl border-2 ${getColorClass(
