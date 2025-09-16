@@ -157,9 +157,16 @@ const translations = {
     'services.advertising.description': 'სრული რეკლამის მენეჯმენტი და მარკეტინგი',
     
     // Digital Advertising Page
-    'ads.hero.title': 'ციფრული რეკლამით',
-    'ads.hero.subtitle': 'ზრდა და მოგება',
+    'ads.badge': 'ციფრული რეკლამა',
+    'ads.hero.title': 'ციფრული რეკლამით ზრდა და მოგება',
     'ads.hero.description': 'Google, Facebook, Instagram და სხვა პლატფორმებზე ეფექტური რეკლამური კამპანიებით მოიზიდეთ ახალი კლიენტები და გაზარდეთ გაყიდვები',
+    'ads.hero.startProject': 'პროექტის დაწყება',
+    'ads.hero.aboutUs': 'ჩვენ შესახებ',
+    'ads.visual.ads': 'რეკლამა',
+    'ads.visual.customers': 'კლიენტები',
+    'ads.visual.description': 'ციფრული რეკლამის ხიდი',
+    'ads.platforms.title': 'რეკლამის პლატფორმები',
+    'ads.platforms.subtitle': 'ეფექტური კამპეინები ყველაზე პოპულარულ პლატფორმებზე',
     'ads.stats.roi': 'საშუალო ROI ზრდა',
     'ads.stats.cpa': 'CPA შემცირება',
     'ads.stats.campaigns': 'წარმატებული კამპეინი',
@@ -743,6 +750,42 @@ const translations = {
     'seo.startProject.title': 'პროექტის დაწყება - Vifa Digital',
     'seo.startProject.description': 'დაიწყეთ თქვენი ციფრული პროექტი Vifa Digital-სთან ერთად. უფასო კონსულტაცია და პერსონალიზებული გადაწყვეტები.',
     'seo.startProject.keywords': 'პროექტის დაწყება, კონსულტაცია, ციფრული მარკეტინგი, ვება განვითარება',
+
+    // NewHome page
+    'newHome.badge': 'გააციფრულე ბიზნესი',
+    'newHome.hero.title': 'კომუნიკაციის ხიდი',
+    'newHome.hero.brand': 'ბრენდსა',
+    'newHome.hero.connection': 'და მომხარებლის შორის',
+    'newHome.hero.description': 'ვქმნით ციფრული მარკეტინგის სტრატეგიებს, რომლებიც აერთებს ბრენდებს მათ აუდიტორიასთან',
+    'newHome.hero.startProject': 'პროექტის დაწყება',
+    'newHome.hero.aboutUs': 'ჩვენ შესახებ',
+    'newHome.visual.description': 'ვირტუალური კომუნიკაციის ხიდი',
+    'newHome.visual.brand': 'ბრენდი',
+    'newHome.visual.audience': 'აუდიტორია',
+    'newHome.services.strategic': 'სტრატეგიული მიდგომა თითოეული ბრენდისთვის',
+    'newHome.services.digital': 'სრული ციფრული მარკეტინგის გადაწყვეტები',
+    'newHome.services.results': 'რეალური შედეგები და მზარდი ROI',
+    'newHome.partners.title': 'ვინ გვენდობა',
+    'newHome.partners.subtitle': 'იხილეთ ჩვენი წარმატებული პარტნიორები',
+    'newHome.partners.projects': 'პროექტი',
+    'newHome.partners.satisfaction': 'მყარები',
+    'newHome.partners.experience': 'წელი',
+    'newHome.clients.technology': 'ტექნოლოგია',
+    'newHome.clients.food': 'კვება',
+    'newHome.clients.medicine': 'მედიცინა',
+    'newHome.clients.commerce': 'ვაჭრობა',
+    'newHome.clients.education': 'განათლება',
+    'newHome.clients.fashion': 'მოდა',
+    'newHome.clients.tech.description': 'ვებსაიტი და ციფრული მარკეტინგი',
+    'newHome.clients.restaurant.description': 'სოციალური მედია მართვა',
+    'newHome.clients.healthcare.description': 'სრული ციფრული მარკეტინგი',
+    'newHome.clients.ecommerce.description': 'ვებ განვითარება და რეკლამა',
+    'newHome.clients.education.description': 'ბრენდინგი და მარკეტინგი',
+    'newHome.clients.fashion.description': 'სოციალური მედია და კონტენტი',
+    'newHome.cta.question': 'გსურთ შეუერთდეთ ჩვენს წარმატებულ კლიენტებს?',
+    'newHome.cta.button': 'დაიწყეთ თანამშრომლობა',
+    'newHome.final.question': 'მზადა ხარ დაიწყო თანამშრომლობა?',
+    'newHome.final.button': 'დაიწყეთ პროექტი',
   },
 
   
@@ -886,9 +929,16 @@ const translations = {
     'services.advertising.description': 'Complete advertising management and marketing',
     
     // Digital Advertising Page
-    'ads.hero.title': 'Digital Advertising',
-    'ads.hero.subtitle': 'Growth and Profit',
+    'ads.badge': 'Digital Advertising',
+    'ads.hero.title': 'Growth and Profit through Digital Advertising',
     'ads.hero.description': 'Attract new customers and increase sales with effective advertising campaigns on Google, Facebook, Instagram and other platforms',
+    'ads.hero.startProject': 'Start Project',
+    'ads.hero.aboutUs': 'About Us',
+    'ads.visual.ads': 'Ads',
+    'ads.visual.customers': 'Customers',
+    'ads.visual.description': 'Digital Advertising Bridge',
+    'ads.platforms.title': 'Advertising Platforms',
+    'ads.platforms.subtitle': 'Effective campaigns on the most popular platforms',
     'ads.stats.roi': 'Average ROI Growth',
     'ads.stats.cpa': 'CPA Reduction',
     'ads.stats.campaigns': 'Successful Campaigns',
@@ -1472,6 +1522,42 @@ const translations = {
     'seo.startProject.title': 'Start Project - Vifa Digital',
     'seo.startProject.description': 'Start your digital project with Vifa Digital. Free consultation and personalized solutions.',
     'seo.startProject.keywords': 'start project, consultation, digital marketing, web development',
+
+    // NewHome page
+    'newHome.badge': 'Digitalize Your Business',
+    'newHome.hero.title': 'Communication Bridge',
+    'newHome.hero.brand': 'Brand',
+    'newHome.hero.connection': 'and Customer',
+    'newHome.hero.description': 'We create digital marketing strategies that connect brands with their audience',
+    'newHome.hero.startProject': 'Start Project',
+    'newHome.hero.aboutUs': 'About Us',
+    'newHome.visual.description': 'Virtual Communication Bridge',
+    'newHome.visual.brand': 'Brand',
+    'newHome.visual.audience': 'Audience',
+    'newHome.services.strategic': 'Strategic approach for each brand',
+    'newHome.services.digital': 'Complete digital marketing solutions',
+    'newHome.services.results': 'Real results and growing ROI',
+    'newHome.partners.title': 'Who Trusts Us',
+    'newHome.partners.subtitle': 'See our successful partners',
+    'newHome.partners.projects': 'Projects',
+    'newHome.partners.satisfaction': 'Satisfied',
+    'newHome.partners.experience': 'Years',
+    'newHome.clients.technology': 'Technology',
+    'newHome.clients.food': 'Food',
+    'newHome.clients.medicine': 'Medicine',
+    'newHome.clients.commerce': 'Commerce',
+    'newHome.clients.education': 'Education',
+    'newHome.clients.fashion': 'Fashion',
+    'newHome.clients.tech.description': 'Website and digital marketing',
+    'newHome.clients.restaurant.description': 'Social media management',
+    'newHome.clients.healthcare.description': 'Full digital marketing',
+    'newHome.clients.ecommerce.description': 'Web development and advertising',
+    'newHome.clients.education.description': 'Branding and marketing',
+    'newHome.clients.fashion.description': 'Social media and content',
+    'newHome.cta.question': 'Want to join our successful clients?',
+    'newHome.cta.button': 'Start Collaboration',
+    'newHome.final.question': 'Ready to start collaboration?',
+    'newHome.final.button': 'Start Project',
   }
 };
 
@@ -1482,16 +1568,30 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     return savedLanguage && (savedLanguage === 'ka' || savedLanguage === 'en') ? savedLanguage : 'ka';
   });
 
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
   useEffect(() => {
     // Save language preference to localStorage
     localStorage.setItem('language', currentLanguage);
-    
+
     // Set document language attribute
     document.documentElement.lang = currentLanguage === 'ka' ? 'ka-GE' : 'en-US';
   }, [currentLanguage]);
 
   const toggleLanguage = () => {
-    setCurrentLanguage(prev => prev === 'ka' ? 'en' : 'ka');
+    if (isTransitioning) return; // Prevent multiple rapid clicks
+
+    setIsTransitioning(true);
+
+    // Add a smooth transition delay
+    setTimeout(() => {
+      setCurrentLanguage(prev => prev === 'ka' ? 'en' : 'ka');
+
+      // Reset transition state after language change
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 300); // Allow time for content to update
+    }, 150); // Small delay before changing language
   };
 
   const t = (key: string): string => {

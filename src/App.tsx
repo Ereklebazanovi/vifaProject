@@ -10,6 +10,7 @@ import { HelmetProvider } from "react-helmet-async";
 import Layout from "./layout/Layout";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import "./index.css";
+import NewDigitalAdvertising from "./offeredServices/NewDigitalAdvertising";
 
 // Lazy load components
 const Home = lazy(() => import("./pages/NewHome"));
@@ -20,9 +21,9 @@ const SocialMediaService = lazy(
   () => import("./offeredServices/SocialMediaService")
 );
 const DigitalAdvertising = lazy(
-  () => import("./offeredServices/DigitalAdvertising")
+  () => import("./offeredServices/NewDigitalAdvertising")
 );
-const WebDevelopment = lazy(() => import("./offeredServices/WebDevelopment"));
+const WebDevelopment = lazy(() => import("./offeredServices/NewWebDevelopment"));
 
 // Enhanced Loading component
 const LoadingSpinner = () => (
@@ -108,7 +109,7 @@ const App: React.FC = () => {
                     />
                     <Route
                       path="services/digital-advertising"
-                      element={<DigitalAdvertising />}
+                      element={<NewDigitalAdvertising />}
                     />
                     <Route
                       path="services/web-development"

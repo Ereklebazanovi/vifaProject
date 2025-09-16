@@ -13,11 +13,13 @@ import {
 } from 'react-icons/fa';
 import SEO from '../components/SEO';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguageTransition } from '../hooks/useLanguageTransition';
 
 const AboutPage = () => {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 300], [0, -50]);
   const { t } = useLanguage();
+  const { getTransitionClasses } = useLanguageTransition();
 
   // Animation variants
   const containerVariants = {
@@ -123,11 +125,7 @@ const AboutPage = () => {
         type="website"
         structuredData={aboutStructuredData}
       />
-      <div className={`min-h-screen overflow-hidden transition-colors duration-500 ${
-        true
-          ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white'
-          : 'bg-gradient-to-br from-slate-50 via-white to-blue-50 text-slate-900'
-      }`}>
+      <div className={`min-h-screen overflow-hidden transition-colors duration-500 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white ${getTransitionClasses()}`}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
         
@@ -172,7 +170,7 @@ const AboutPage = () => {
               {t('about.hero.description')}
             </p>
           </motion.div>
-
+ 
           {/* Stats */}
           <motion.div
             variants={containerVariants}

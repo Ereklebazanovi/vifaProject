@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguageTransition } from '../hooks/useLanguageTransition';
 import {
   FaFacebookF,
   FaInstagram,
@@ -20,31 +21,32 @@ const Footer: React.FC = () => {
   const [email, setEmail] = useState("");
   const [showBackToTop] = useState(true);
   const { t } = useLanguage();
+  const { getTransitionClasses } = useLanguageTransition();
 
   const socialLinks = [
-    { 
-      icon: <FaFacebookF />, 
-      href: "https://facebook.com/vifa.ge", 
+    {
+      icon: <FaFacebookF />,
+      href: "https://facebook.com/vifa.ge",
       label: "Facebook",
-      color: "hover:text-blue-400 hover:bg-blue-400/10"
+      color: "hover:text-blue-400 hover:bg-slate-800/30"
     },
-    { 
-      icon: <FaInstagram />, 
-      href: "https://instagram.com/vifa.ge", 
+    {
+      icon: <FaInstagram />,
+      href: "https://instagram.com/vifa.ge",
       label: "Instagram",
-      color: "hover:text-pink-400 hover:bg-pink-400/10"
+      color: "hover:text-blue-400 hover:bg-slate-800/30"
     },
-    { 
-      icon: <FaLinkedinIn />, 
-      href: "https://linkedin.com/company/vifa-ge", 
+    {
+      icon: <FaLinkedinIn />,
+      href: "https://linkedin.com/company/vifa-ge",
       label: "LinkedIn",
-      color: "hover:text-blue-500 hover:bg-blue-500/10"
+      color: "hover:text-blue-400 hover:bg-slate-800/30"
     },
-    { 
-      icon: <FaTwitter />, 
-      href: "https://twitter.com/vifa_ge", 
+    {
+      icon: <FaTwitter />,
+      href: "https://twitter.com/vifa_ge",
       label: "Twitter",
-      color: "hover:text-cyan-400 hover:bg-cyan-400/10"
+      color: "hover:text-blue-400 hover:bg-slate-800/30"
     },
   ];
 
@@ -61,23 +63,23 @@ const Footer: React.FC = () => {
   ];
 
   const contactInfo = [
-    { 
-      icon: <FaPhone className="w-4 h-4" />, 
-      text: "+995 555 123 456", 
+    {
+      icon: <FaPhone className="w-4 h-4" />,
+      text: "+995 555 123 456",
       href: "tel:+995555123456",
-      color: "text-green-400"
+      color: "text-blue-400"
     },
-    { 
-      icon: <FaEnvelope className="w-4 h-4" />, 
-      text: "info@vifa.ge", 
+    {
+      icon: <FaEnvelope className="w-4 h-4" />,
+      text: "info@vifa.ge",
       href: "mailto:info@vifa.ge",
       color: "text-blue-400"
     },
-    { 
-      icon: <FaMapMarkerAlt className="w-4 h-4" />, 
-      text: t('footer.contact.location'), 
+    {
+      icon: <FaMapMarkerAlt className="w-4 h-4" />,
+      text: t('footer.contact.location'),
       href: "#",
-      color: "text-purple-400"
+      color: "text-blue-400"
     },
   ];
 
@@ -115,17 +117,9 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className={`relative overflow-hidden transition-colors duration-500 ${
-      true 
-        ? 'bg-slate-900 border-t border-slate-800/50 text-slate-300' 
-        : 'bg-slate-100 border-t border-slate-300/50 text-slate-700'
-    }`}>
+    <footer className={`relative overflow-hidden transition-colors duration-500 ${getTransitionClasses()} bg-slate-950/80 backdrop-blur-xl border-t border-slate-700/20 text-slate-300`}>
       {/* Background Gradient */}
-      <div className={`absolute inset-0 pointer-events-none ${
-        true 
-          ? 'bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-transparent' 
-          : 'bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-transparent'
-      }`} />
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-slate-950/90 via-slate-950/60 to-transparent" />
       
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
@@ -142,7 +136,7 @@ const Footer: React.FC = () => {
               <motion.div 
                 whileHover={{ rotate: 12 }}
                 transition={{ duration: 0.3 }}
-                className="w-12 h-12 bg-gradient-to-br from-blue-500 via-purple-500 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/25 group-hover:shadow-blue-500/40 transition-all duration-300 overflow-hidden"
+                className="w-12 h-12 bg-slate-800/50 border border-slate-600/30 rounded-xl flex items-center justify-center hover:bg-blue-500/10 hover:border-blue-400/40 transition-all duration-300 overflow-hidden"
               >
                 <img 
                   src="/vifa.jpg" 
@@ -151,15 +145,11 @@ const Footer: React.FC = () => {
                 />
               </motion.div>
               <div>
-                <div className="text-2xl font-bold">
-                  <span className={`group-hover:text-blue-200 transition-colors duration-300 ${
-                    true ? 'text-white' : 'text-slate-900'
-                  }`}>Vifa</span>
-                  <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">{" "}Digital</span>
+                <div className="text-2xl font-light tracking-wider">
+                  <span className="text-white group-hover:text-blue-300 transition-colors duration-300">VIFA</span>
+                  <span className="text-blue-400 font-normal">{" "}ADVERTISING</span>
                 </div>
-                <div className={`text-xs font-medium -mt-1 group-hover:text-slate-300 transition-colors duration-300 ${
-                  true ? 'text-slate-400' : 'text-slate-500'
-                }`}>
+                <div className="text-xs font-light tracking-wide -mt-1 text-slate-500 group-hover:text-slate-400 transition-colors duration-300">
                   {t('footer.brand.tagline')}
                 </div>
               </div>

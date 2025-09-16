@@ -24,9 +24,11 @@ import {
   SiVercel,
 } from "react-icons/si";
 import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguageTransition } from '../hooks/useLanguageTransition';
 
 const WebDevelopment = () => {
   const { t } = useLanguage();
+  const { getTransitionClasses } = useLanguageTransition();
   const businessResults = [
     {
       icon: <FaChartLine />,
@@ -55,9 +57,9 @@ const WebDevelopment = () => {
   ];
 
   return (
-    <div className={`min-h-screen transition-colors duration-500 ${
-      true 
-        ? 'bg-slate-950 text-white' 
+    <div className={`min-h-screen transition-colors duration-500 ${getTransitionClasses()} ${
+      true
+        ? 'bg-slate-950 text-white'
         : 'bg-gradient-to-br from-slate-50 via-white to-green-50 text-slate-900'
     }`}>
       <style>{`

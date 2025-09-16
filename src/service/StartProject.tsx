@@ -5,6 +5,7 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import SEO from '../components/SEO'
 import { useLanguage } from "../contexts/LanguageContext"
+import { useLanguageTransition } from "../hooks/useLanguageTransition"
 import {
   FaCode,
   FaCamera,
@@ -26,6 +27,7 @@ import { submitLead, type LeadData } from "../leadService"
 
 const StartProject: React.FC = () => {
   const { t } = useLanguage()
+  const { getTransitionClasses } = useLanguageTransition()
   const [currentStep, setCurrentStep] = useState(1)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
@@ -198,11 +200,7 @@ const StartProject: React.FC = () => {
         type="website"
         structuredData={startProjectStructuredData}
       />
-      <div className={`min-h-screen pt-12 pb-12 transition-colors duration-300 ${
-          true
-            ? 'bg-slate-950 text-white'
-            : 'bg-slate-50 text-slate-900'
-        }`}>
+      <div className={`min-h-screen pt-12 pb-12 transition-colors duration-300 bg-slate-950 text-white ${getTransitionClasses()}`}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
         

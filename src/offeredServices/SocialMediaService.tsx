@@ -19,11 +19,13 @@ import {
 } from "react-icons/fa";
 import SEO from '../components/SEO';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguageTransition } from '../hooks/useLanguageTransition';
 
 const SocialMediaService = () => {
   const [activeTab, setActiveTab] = useState("facebook");
   const [isLoaded, setIsLoaded] = useState(false);
   const { t } = useLanguage();
+  const { getTransitionClasses } = useLanguageTransition();
 
   // Animation classes - immediately available, no delays
   const animationClasses = `
@@ -396,9 +398,9 @@ const SocialMediaService = () => {
         structuredData={socialStructuredData}
       />
       <style>{animationClasses}</style>
-      <div className={`min-h-screen transition-colors duration-500 ${isLoaded ? 'page-transition' : ''} ${
-        true 
-          ? 'bg-slate-950 text-white' 
+      <div className={`min-h-screen transition-colors duration-500 ${isLoaded ? 'page-transition' : ''} ${getTransitionClasses()} ${
+        true
+          ? 'bg-slate-950 text-white'
           : 'bg-gradient-to-br from-slate-50 via-white to-pink-50 text-slate-900'
       }`}>
         {/* Hero Section with Platform Showcase */}

@@ -3,75 +3,72 @@ import { Link } from "react-router-dom";
 import {
   FaGoogle,
   FaFacebook,
-
   FaYoutube,
   FaTiktok,
   FaLinkedin,
   FaChartLine,
   FaBullseye,
-
   FaEye,
-
   FaRocket,
   FaCheckCircle,
   FaArrowRight,
-
   FaSearchDollar,
-
   FaFileAlt,
   FaPlayCircle,
   FaShoppingCart,
-
 } from "react-icons/fa";
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from "../contexts/LanguageContext";
+import { useLanguageTransition } from "../hooks/useLanguageTransition";
 
 const DigitalAdvertising: React.FC = () => {
   const { t } = useLanguage();
+  const { getTransitionClasses } = useLanguageTransition();
   const [videoLoaded, setVideoLoaded] = React.useState(false);
   const [videoError, setVideoError] = React.useState(false);
+
   const platforms = [
     {
       icon: <FaGoogle />,
       name: "Google Ads",
       description: "Search, Display, YouTube, Shopping",
       color: "from-blue-500 to-green-500",
-      audience: t('ads.platforms.google.audience'),
+      audience: t("ads.platforms.google.audience"),
     },
     {
       icon: <FaFacebook />,
       name: "Meta Ads",
       description: "Facebook & Instagram Advertising",
       color: "from-blue-600 to-purple-600",
-      audience: t('ads.platforms.meta.audience'),
+      audience: t("ads.platforms.meta.audience"),
     },
     {
       icon: <FaYoutube />,
       name: "YouTube Ads",
       description: "Video Advertising & Campaigns",
       color: "from-red-500 to-red-600",
-      audience: t('ads.platforms.youtube.audience'),
+      audience: t("ads.platforms.youtube.audience"),
     },
     {
       icon: <FaTiktok />,
       name: "TikTok Ads",
       description: "Short-form Video Marketing",
       color: "from-black to-red-400",
-      audience: t('ads.platforms.tiktok.audience'),
+      audience: t("ads.platforms.tiktok.audience"),
     },
     {
       icon: <FaLinkedin />,
       name: "LinkedIn Ads",
       description: "B2B Professional Targeting",
       color: "from-blue-700 to-blue-800",
-      audience: t('ads.platforms.linkedin.audience'),
+      audience: t("ads.platforms.linkedin.audience"),
     },
   ];
 
   const services = [
     {
       icon: <FaBullseye />,
-      title: t('ads.services.targeting.title'),
-      description: t('ads.services.targeting.description'),
+      title: t("ads.services.targeting.title"),
+      description: t("ads.services.targeting.description"),
       features: [
         "Demographics ანალიზი",
         "Psychographic profiling",
@@ -81,8 +78,8 @@ const DigitalAdvertising: React.FC = () => {
     },
     {
       icon: <FaFileAlt />,
-      title: t('ads.services.strategy.title'),
-      description: t('ads.services.strategy.description'),
+      title: t("ads.services.strategy.title"),
+      description: t("ads.services.strategy.description"),
       features: [
         "Campaign planning",
         "Budget allocation",
@@ -92,8 +89,8 @@ const DigitalAdvertising: React.FC = () => {
     },
     {
       icon: <FaPlayCircle />,
-      title: t('ads.services.creative.title'),
-      description: t('ads.services.creative.description'),
+      title: t("ads.services.creative.title"),
+      description: t("ads.services.creative.description"),
       features: [
         "Ad design",
         "Copy writing",
@@ -103,8 +100,8 @@ const DigitalAdvertising: React.FC = () => {
     },
     {
       icon: <FaChartLine />,
-      title: t('ads.services.optimization.title'),
-      description: t('ads.services.optimization.description'),
+      title: t("ads.services.optimization.title"),
+      description: t("ads.services.optimization.description"),
       features: [
         "Performance tracking",
         "Cost optimization",
@@ -118,65 +115,79 @@ const DigitalAdvertising: React.FC = () => {
     {
       icon: <FaSearchDollar />,
       title: "Search Ads",
-      description: t('ads.types.search.description'),
-      benefits: [t('ads.types.search.benefit1'), t('ads.types.search.benefit2'), t('ads.types.search.benefit3')],
+      description: t("ads.types.search.description"),
+      benefits: [
+        t("ads.types.search.benefit1"),
+        t("ads.types.search.benefit2"),
+        t("ads.types.search.benefit3"),
+      ],
     },
     {
       icon: <FaEye />,
       title: "Display Ads",
-      description: t('ads.types.display.description'),
-      benefits: [t('ads.types.display.benefit1'), t('ads.types.display.benefit2'), t('ads.types.display.benefit3')],
+      description: t("ads.types.display.description"),
+      benefits: [
+        t("ads.types.display.benefit1"),
+        t("ads.types.display.benefit2"),
+        t("ads.types.display.benefit3"),
+      ],
     },
     {
       icon: <FaPlayCircle />,
       title: "Video Ads",
-      description: t('ads.types.video.description'),
-      benefits: [t('ads.types.video.benefit1'), t('ads.types.video.benefit2'), t('ads.types.video.benefit3')],
+      description: t("ads.types.video.description"),
+      benefits: [
+        t("ads.types.video.benefit1"),
+        t("ads.types.video.benefit2"),
+        t("ads.types.video.benefit3"),
+      ],
     },
     {
       icon: <FaShoppingCart />,
       title: "Shopping Ads",
-      description: t('ads.types.shopping.description'),
-      benefits: [t('ads.types.shopping.benefit1'), t('ads.types.shopping.benefit2'), t('ads.types.shopping.benefit3')],
+      description: t("ads.types.shopping.description"),
+      benefits: [
+        t("ads.types.shopping.benefit1"),
+        t("ads.types.shopping.benefit2"),
+        t("ads.types.shopping.benefit3"),
+      ],
     },
   ];
 
   const processSteps = [
     {
       step: "01",
-      title: t('ads.process.step1.title'),
-      description: t('ads.process.step1.description'),
+      title: t("ads.process.step1.title"),
+      description: t("ads.process.step1.description"),
     },
     {
       step: "02",
-      title: t('ads.process.step2.title'),
-      description: t('ads.process.step2.description'),
+      title: t("ads.process.step2.title"),
+      description: t("ads.process.step2.description"),
     },
     {
       step: "03",
-      title: t('ads.process.step3.title'),
-      description: t('ads.process.step3.description'),
+      title: t("ads.process.step3.title"),
+      description: t("ads.process.step3.description"),
     },
     {
       step: "04",
-      title: t('ads.process.step4.title'),
-      description: t('ads.process.step4.description'),
+      title: t("ads.process.step4.title"),
+      description: t("ads.process.step4.description"),
     },
   ];
 
   const stats = [
-    { number: "300%", label: t('ads.stats.roi') },
-    { number: "45%", label: t('ads.stats.cpa') },
-    { number: "200+", label: t('ads.stats.campaigns') },
-    { number: "24/7", label: t('ads.stats.monitoring') },
+    { number: "300%", label: t("ads.stats.roi") },
+    { number: "45%", label: t("ads.stats.cpa") },
+    { number: "200+", label: t("ads.stats.campaigns") },
+    { number: "24/7", label: t("ads.stats.monitoring") },
   ];
 
   return (
-    <div className={`min-h-screen transition-colors duration-500 ${
-      true 
-        ? 'bg-slate-950 text-white' 
-        : 'bg-gradient-to-br from-slate-50 via-white to-blue-50 text-slate-900'
-    }`}>
+    <div
+      className={`min-h-screen transition-colors duration-500 bg-slate-950 text-white ${getTransitionClasses()}`}
+    >
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
         
@@ -320,180 +331,114 @@ const DigitalAdvertising: React.FC = () => {
         .stat-card:hover {
           transform: translateY(-4px);
         }
-
-        /* Video Background Optimization */
-        .video-container {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          z-index: -1;
-          overflow: hidden;
-        }
-
-        .video-background {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          min-width: 100%;
-          min-height: 100%;
-          width: auto;
-          height: auto;
-          transform: translateX(-50%) translateY(-50%);
-          background-size: cover;
-          transition: opacity 0.3s ease-in-out;
-        }
-
-        /* Smooth loading animation */
-        @keyframes videoFadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-
-        .video-loaded {
-          animation: videoFadeIn 1s ease-in-out;
-        }
-
-        /* Performance optimizations */
-        @media (prefers-reduced-motion: reduce) {
-          .video-background {
-            animation: none !important;
-            transform: none !important;
-          }
-        }
-
-        /* Mobile optimization */
-        @media (max-width: 768px) {
-          .video-background {
-            /* On mobile, consider using poster image instead for performance */
-            display: block;
-          }
-        }
       `}</style>
 
-      {/* Hero Section with Video Background */}
-      <section className="relative px-6 py-16 overflow-hidden">
-        {/* Video Background */}
-        <div className="absolute inset-0 w-full h-full">
-          {!videoError ? (
+      {/* Video Background - Full Page Coverage */}
+      <div className="fixed inset-0 z-0">
+        <div className="absolute inset-0">
+          {!videoError && (
             <video
               autoPlay
               muted
               loop
               playsInline
-              preload="metadata"
-              poster="/advertising-hero-poster.jpg"
-              className={`video-background ${videoLoaded ? 'video-loaded' : ''}`}
+              className="w-full h-full object-cover"
               style={{
-                filter: true ? 'brightness(0.8) contrast(1.3) saturate(1.2)' : 'brightness(1.0) contrast(1.2) saturate(1.3)',
-                opacity: videoLoaded ? 1 : 0
+                filter: `brightness(0.4) contrast(1.2) saturate(1.1)`,
               }}
               onLoadedData={() => setVideoLoaded(true)}
               onError={() => setVideoError(true)}
             >
-              <source src="/advertising-hero-video.mp4" type="video/mp4" />
-              <source src="/advertising-hero-video.mov" type="video/quicktime" />
-              <source src="/advertising-hero-video.webm" type="video/webm" />
+              <source src="/digital-advertising-video.mp4" type="video/mp4" />
             </video>
-          ) : (
-            /* Fallback image if video fails to load */
-            <img
-              src="/advertising-hero-fallback.jpg"
-              alt="Advertising Services"
-              className="w-full h-full object-cover"
-              style={{ filter: true ? 'brightness(0.8) contrast(1.3) saturate(1.2)' : 'brightness(1.0) contrast(1.2) saturate(1.3)' }}
-            />
           )}
-          {/* Overlay for better text readability */}
-          <div className={`absolute inset-0 ${
-            true
-              ? 'bg-gradient-to-br from-slate-900/40 via-slate-800/30 to-slate-900/50'
-              : 'bg-gradient-to-br from-white/20 via-slate-100/15 to-white/25'
-          }`}></div>
+
+          {/* Fallback gradient background */}
+          {(videoError || !videoLoaded) && (
+            <div className="w-full h-full bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
+          )}
+
+          <div className="absolute inset-0 bg-slate-950/30" />
         </div>
+      </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h1 className={`text-4xl md:text-6xl font-bold mb-6 fade-in-up ${
-              true ? 'text-white' : 'text-slate-900'
-            }`}>
-              <span className="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">
-                {t('ads.hero.title')}
-              </span>
-              <br />
-              <span className={true ? 'text-white' : 'text-slate-900'}>{t('ads.hero.subtitle')}</span>
-            </h1>
-            <p className={`text-xl max-w-3xl mx-auto mb-8 fade-in-up delay-100 ${
-              true ? 'text-slate-300' : 'text-slate-600'
-            }`}>
-              {t('ads.hero.description')}
-            </p>
-           
+      <div className="relative z-10 min-h-screen">
+        <div className="container mx-auto px-8 py-10">
+          {/* Hero Section */}
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16 mt-25">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
+                <span className="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">
+                  {t("ads.hero.title")}
+                </span>
+              </h1>
+              <p className="text-xl max-w-3xl mx-auto mb-8 text-slate-300">
+                {t("ads.hero.description")}
+              </p>
 
-            {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto fade-in-up delay-300">
-              {stats.map((stat, i) => (
-                <div key={i} className={`stat-card text-center delay-${(i + 1) * 100}`}>
-                  <div className="text-2xl md:text-3xl font-bold text-red-400 mb-2">
-                    {stat.number}
+              {/* Stats */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                {stats.map((stat, i) => (
+                  <div key={i} className="text-center">
+                    <div className="text-2xl md:text-3xl font-bold text-red-400 mb-2">
+                      {stat.number}
+                    </div>
+                    <div className="text-sm text-slate-400">{stat.label}</div>
                   </div>
-                  <div className={`text-sm ${true ? 'text-slate-400' : 'text-slate-600'}`}>{stat.label}</div>
+                ))}
+              </div>
+            </div>
+
+            {/* Platform Icons */}
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-8 max-w-5xl mx-auto">
+              {platforms.map((platform, i) => (
+                <div key={i} className="text-center group cursor-pointer">
+                  <div
+                    className={`text-4xl mb-3 p-4 rounded-2xl bg-gradient-to-r ${platform.color} text-white mx-auto w-fit group-hover:scale-110 transition-transform duration-300`}
+                  >
+                    {platform.icon}
+                  </div>
+                  <h3 className="font-semibold mb-1 text-white">
+                    {platform.name}
+                  </h3>
+                  <p className="text-sm mb-1 text-slate-400">
+                    {platform.description}
+                  </p>
+                  <p className="text-xs text-red-400 font-medium">
+                    {platform.audience}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
-
-          {/* Platform Icons */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 max-w-5xl mx-auto">
-            {platforms.map((platform, i) => (
-              <div
-                key={i}
-                className={`platform-card text-center group cursor-pointer fade-in-up delay-${(i + 1) * 100}`}
-              >
-                <div
-                  className={`text-4xl mb-3 p-4 rounded-2xl bg-gradient-to-r ${platform.color} text-white mx-auto w-fit group-hover:scale-110 transition-transform duration-300`}
-                >
-                  {platform.icon}
-                </div>
-                <h3 className={`font-semibold mb-1 ${true ? 'text-white' : 'text-slate-900'}`}>{platform.name}</h3>
-                <p className={`text-sm mb-1 ${true ? 'text-slate-400' : 'text-slate-600'}`}>
-                  {platform.description}
-                </p>
-                <p className="text-xs text-red-400 font-medium">
-                  {platform.audience}
-                </p>
-              </div>
-            ))}
-          </div>
         </div>
-      </section>
+      </div>
 
       {/* Ad Types Section */}
-      <section className={`py-20 px-6 ${true ? 'bg-slate-900' : 'bg-slate-100/30'}`}>
+      <section className="py-20 px-6 bg-slate-900">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 fade-in-up">
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
-              true ? 'text-white' : 'text-slate-900'
-            }`}>
-              {t('ads.types.title')}
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+              {t("ads.types.title")}
             </h2>
-            <p className={`text-lg ${true ? 'text-slate-400' : 'text-slate-600'}`}>
-              {t('ads.types.subtitle')}
-            </p>
+            <p className="text-lg text-slate-400">{t("ads.types.subtitle")}</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {adTypes.map((type, i) => (
               <div
                 key={i}
-                className={`ad-type-card p-6 rounded-2xl border text-center group fade-in-up delay-${(i + 1) * 100} ${true ? 'bg-slate-800 border-slate-700 hover:border-red-400/50' : 'bg-white/80 border-slate-200 hover:border-red-400/30'}`}
+                className={`ad-type-card p-6 rounded-2xl border text-center group fade-in-up delay-${
+                  (i + 1) * 100
+                } bg-slate-800 border-slate-700 hover:border-red-400/50`}
               >
                 <div className="text-4xl text-red-400 mb-4 group-hover:scale-110 transition-transform duration-300">
                   {type.icon}
                 </div>
-                <h3 className={`text-xl font-semibold mb-3 ${true ? 'text-white' : 'text-slate-900'}`}>{type.title}</h3>
-                <p className={`mb-4 ${true ? 'text-slate-300' : 'text-slate-600'}`}>{type.description}</p>
+                <h3 className="text-xl font-semibold mb-3 text-white">
+                  {type.title}
+                </h3>
+                <p className="mb-4 text-slate-300">{type.description}</p>
                 <div className="space-y-2">
                   {type.benefits.map((benefit, idx) => (
                     <div
@@ -501,7 +446,7 @@ const DigitalAdvertising: React.FC = () => {
                       className="flex items-center justify-center gap-2 text-sm"
                     >
                       <FaCheckCircle className="text-green-400" />
-                      <span className={true ? 'text-slate-300' : 'text-slate-600'}>{benefit}</span>
+                      <span className="text-slate-300">{benefit}</span>
                     </div>
                   ))}
                 </div>
@@ -515,11 +460,11 @@ const DigitalAdvertising: React.FC = () => {
       <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 fade-in-up">
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${true ? 'text-white' : 'text-slate-900'}`}>
-              {t('ads.services.title')}
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+              {t("ads.services.title")}
             </h2>
-            <p className={`text-lg ${true ? 'text-slate-400' : 'text-slate-600'}`}>
-              {t('ads.services.subtitle')}
+            <p className="text-lg text-slate-400">
+              {t("ads.services.subtitle")}
             </p>
           </div>
 
@@ -527,18 +472,22 @@ const DigitalAdvertising: React.FC = () => {
             {services.map((service, i) => (
               <div
                 key={i}
-                className={`service-card p-8 rounded-2xl border group fade-in-up delay-${(i + 1) * 100} ${true ? 'bg-slate-900 border-slate-700' : 'bg-white/80 border-slate-200'}`}
+                className={`service-card p-8 rounded-2xl border group fade-in-up delay-${
+                  (i + 1) * 100
+                } bg-slate-900 border-slate-700`}
               >
                 <div className="text-4xl text-red-400 mb-6 group-hover:scale-110 transition-transform duration-300 scale-in delay-200">
                   {service.icon}
                 </div>
-                <h3 className={`text-2xl font-semibold mb-4 ${true ? 'text-white' : 'text-slate-900'}`}>{service.title}</h3>
-                <p className={`mb-6 ${true ? 'text-slate-300' : 'text-slate-600'}`}>{service.description}</p>
+                <h3 className="text-2xl font-semibold mb-4 text-white">
+                  {service.title}
+                </h3>
+                <p className="mb-6 text-slate-300">{service.description}</p>
                 <div className="grid grid-cols-2 gap-3">
                   {service.features.map((feature, idx) => (
                     <div key={idx} className="flex items-center gap-2 text-sm">
                       <FaCheckCircle className="text-green-400" />
-                      <span className={true ? 'text-slate-300' : 'text-slate-600'}>{feature}</span>
+                      <span className="text-slate-300">{feature}</span>
                     </div>
                   ))}
                 </div>
@@ -549,14 +498,14 @@ const DigitalAdvertising: React.FC = () => {
       </section>
 
       {/* Process Section */}
-      <section className={`py-20 px-6 ${true ? 'bg-slate-900' : 'bg-slate-100/30'}`}>
+      <section className="py-20 px-6 bg-slate-900">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 fade-in-up">
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${true ? 'text-white' : 'text-slate-900'}`}>
-              {t('ads.process.title')}
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+              {t("ads.process.title")}
             </h2>
-            <p className={`text-lg ${true ? 'text-slate-400' : 'text-slate-600'}`}>
-              {t('ads.process.subtitle')}
+            <p className="text-lg text-slate-400">
+              {t("ads.process.subtitle")}
             </p>
           </div>
 
@@ -564,13 +513,17 @@ const DigitalAdvertising: React.FC = () => {
             {processSteps.map((step, i) => (
               <div
                 key={i}
-                className={`process-card text-center relative fade-in-up delay-${(i + 1) * 100}`}
+                className={`process-card text-center relative fade-in-up delay-${
+                  (i + 1) * 100
+                }`}
               >
                 <div className="text-6xl font-bold text-red-400/20 mb-4 scale-in delay-200">
                   {step.step}
                 </div>
-                <h3 className={`text-xl font-semibold mb-4 ${true ? 'text-white' : 'text-slate-900'}`}>{step.title}</h3>
-                <p className={`${true ? 'text-slate-400' : 'text-slate-600'}`}>{step.description}</p>
+                <h3 className="text-xl font-semibold mb-4 text-white">
+                  {step.title}
+                </h3>
+                <p className="text-slate-400">{step.description}</p>
                 {i < processSteps.length - 1 && (
                   <div className="hidden lg:block absolute top-12 -right-4 text-red-400 fade-in-up delay-400">
                     <FaArrowRight />
@@ -583,14 +536,16 @@ const DigitalAdvertising: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className={`py-20 px-6 ${true ? 'bg-gradient-to-r from-red-900/40 via-slate-900 to-orange-900/30' : 'bg-gradient-to-r from-slate-100 via-white to-blue-100/50'}`}>
+      <section className="py-20 px-6 bg-gradient-to-r from-red-900/40 via-slate-900 to-orange-900/30">
         <div className="max-w-4xl mx-auto text-center">
           <div className="fade-in-up">
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${true ? 'text-white' : 'text-slate-900'}`}>
-              {t('ads.cta.title')} <span className="text-red-400">{t('ads.cta.highlight')}</span> {t('ads.cta.suffix')}
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+              {t("ads.cta.title")}{" "}
+              <span className="text-red-400">{t("ads.cta.highlight")}</span>{" "}
+              {t("ads.cta.suffix")}
             </h2>
-            <p className={`text-xl mb-8 ${true ? 'text-slate-300' : 'text-slate-600'}`}>
-              {t('ads.cta.description')}
+            <p className="text-xl mb-8 text-slate-300">
+              {t("ads.cta.description")}
             </p>
             <div className="flex justify-center fade-in-up delay-200">
               <Link
@@ -598,11 +553,11 @@ const DigitalAdvertising: React.FC = () => {
                 className="cta-button bg-gradient-to-r from-red-500 to-orange-500 px-8 py-4 rounded-lg font-semibold inline-flex items-center gap-2 text-center justify-center"
               >
                 <FaRocket />
-                {t('ads.cta.button1')}
+                {t("ads.cta.button1")}
               </Link>
             </div>
-            <p className={`mt-6 fade-in-up delay-300 ${true ? 'text-slate-400' : 'text-slate-600'}`}>
-              {t('ads.cta.benefits')}
+            <p className="mt-6 fade-in-up delay-300 text-slate-400">
+              {t("ads.cta.benefits")}
             </p>
           </div>
         </div>

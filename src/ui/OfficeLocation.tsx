@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaMapMarkerAlt, FaClock, FaPhone, FaEnvelope, FaDirections, FaShareAlt, FaSatellite, FaMap, FaStreetView, FaExpand } from 'react-icons/fa';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguageTransition } from '../hooks/useLanguageTransition';
 
 interface OfficeLocationProps {
   address?: string;
@@ -23,6 +24,7 @@ const OfficeLocation: React.FC<OfficeLocationProps> = ({
   compactMode = false
 }) => {
   const { t } = useLanguage();
+  const { getTransitionClasses } = useLanguageTransition();
   const [mapType, setMapType] = useState<'roadmap' | 'satellite' | 'hybrid' | 'terrain'>('roadmap');
   const [isLoading, setIsLoading] = useState(true);
   const [mapError, setMapError] = useState(false);
@@ -55,9 +57,9 @@ const OfficeLocation: React.FC<OfficeLocationProps> = ({
 
   if (compactMode) {
     return (
-      <div className={`rounded-xl p-6 border transition-colors duration-500 ${
-        true 
-          ? 'bg-slate-800 border-slate-700' 
+      <div className={`rounded-xl p-6 border transition-colors duration-500 ${getTransitionClasses()} ${
+        true
+          ? 'bg-slate-800 border-slate-700'
           : 'bg-white border-slate-300'
       }`}>
         <div className="flex items-start gap-4">
@@ -110,9 +112,9 @@ const OfficeLocation: React.FC<OfficeLocationProps> = ({
   }
 
   return (
-    <div className={`rounded-2xl p-8 border transition-colors duration-500 ${
-      true 
-        ? 'bg-slate-900 border-slate-700' 
+    <div className={`rounded-2xl p-8 border transition-colors duration-500 ${getTransitionClasses()} ${
+      true
+        ? 'bg-slate-900 border-slate-700'
         : 'bg-white border-slate-300'
     }`}>
       <div className="grid lg:grid-cols-2 gap-8">
