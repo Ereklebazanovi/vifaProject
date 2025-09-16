@@ -46,6 +46,7 @@ const SimpleNavbar: React.FC = () => {
     },
     { path: "/services/web-development", label: t("services.webdev.title") },
     { path: "/about", label: t("nav.about") },
+    { path: "/start-project", label: t("nav.startProject") },
   ];
 
   return (
@@ -57,7 +58,7 @@ const SimpleNavbar: React.FC = () => {
         }`}
       >
         <div
-          className={`max-w-4xl mx-auto px-6 transition-all duration-300 ${
+          className={`max-w-4xl mx-auto px-6  transition-all duration-300 ${
             isScrolled ? "py-2" : "py-4"
           }`}
         >

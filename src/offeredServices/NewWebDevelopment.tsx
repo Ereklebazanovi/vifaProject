@@ -244,20 +244,7 @@ const NewWebDevelopment: React.FC = () => {
                 </div>
               </div>
 
-              <div className="flex justify-center gap-6">
-                <Link
-                  to="/start-project"
-                  className="bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600 text-white px-8 py-4 font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-                >
-                  პროექტის დაწყება
-                </Link>
-                <Link
-                  to="#services"
-                  className="border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 font-semibold rounded-lg backdrop-blur-sm hover:bg-white/10 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-                >
-                  ჩვენი სერვისები
-                </Link>
-              </div>
+         
             </div>
 
             {/* Development Process Visualization */}
