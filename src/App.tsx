@@ -64,37 +64,25 @@ class ErrorBoundary extends React.Component<
   }
 }
 
-// Enhanced Loading component with skeleton
+// Smooth loading component that maintains visual continuity
 const LoadingSpinner = () => (
-  <div className="flex items-center justify-center min-h-screen bg-slate-950">
-    <div className="flex flex-col items-center space-y-6">
-      {/* Main spinner */}
-      <div className="relative">
-        {/* Outer ring */}
-        <div className="w-16 h-16 border-4 border-slate-700 rounded-full"></div>
-        {/* Animated ring */}
-        <div className="absolute top-0 left-0 w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-        {/* Inner dot */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
-      </div>
+  <div className="min-h-screen bg-slate-950">
+    {/* Dark gradient background similar to video backgrounds */}
+    <div className="fixed inset-0 z-0">
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
+      <div className="absolute inset-0 bg-slate-950/30" />
+    </div>
 
-      {/* Loading text */}
-      <div className="flex flex-col items-center space-y-2">
-        <p className="text-white text-lg font-medium">იტვირთება</p>
-        <div className="flex space-x-1">
-          <div
-            className="w-2 h-2 bg-blue-400 rounded-full animate-bounce"
-            style={{ animationDelay: "0ms" }}
-          ></div>
-          <div
-            className="w-2 h-2 bg-blue-400 rounded-full animate-bounce"
-            style={{ animationDelay: "150ms" }}
-          ></div>
-          <div
-            className="w-2 h-2 bg-blue-400 rounded-full animate-bounce"
-            style={{ animationDelay: "300ms" }}
-          ></div>
+    {/* Minimal loading indicator */}
+    <div className="relative z-10 flex items-center justify-center min-h-screen">
+      <div className="flex flex-col items-center space-y-4">
+        {/* Subtle spinner */}
+        <div className="relative">
+          <div className="w-8 h-8 border-2 border-slate-600 rounded-full"></div>
+          <div className="absolute top-0 left-0 w-8 h-8 border-2 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
         </div>
+        {/* Subtle loading text */}
+        <p className="text-slate-400 text-sm font-light">იტვირთება</p>
       </div>
     </div>
   </div>
@@ -109,11 +97,30 @@ const Contact = () => (
   </div>
 );
 
-// Route transition wrapper component - REMOVED ARTIFICIAL DELAY
+// Route transition wrapper component with smooth fade
 const RouteTransition: React.FC<{ children: React.ReactNode }> = React.memo(({
   children,
 }) => {
-  return <>{children}</>;
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    // Smooth fade in
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 50);
+
+    return () => clearTimeout(timer);
+  }, [children]);
+
+  return (
+    <div
+      className={`transition-opacity duration-300 ${
+        isVisible ? 'opacity-100' : 'opacity-0'
+      }`}
+    >
+      {children}
+    </div>
+  );
 });
 
 const App: React.FC = () => {

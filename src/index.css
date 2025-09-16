@@ -2,6 +2,18 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Prevent white flash during page transitions */
+html, body {
+  background-color: #0f172a; /* slate-950 */
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  min-height: 100vh;
+  background-color: #0f172a; /* slate-950 */
+}
+
 :root {
   /* Updated to premium green-based color palette */
   --background: #ffffff;

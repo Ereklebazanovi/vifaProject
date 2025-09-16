@@ -82,13 +82,19 @@ const NewHome: React.FC = () => {
       {/* Video Background - Full Page Coverage */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0">
+          {/* Always show dark background first for smooth loading */}
+          <div className="w-full h-full bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
+
+          {/* Video loads on top with smooth fade */}
           {!videoError && (
             <video
               autoPlay
               muted
               loop
               playsInline
-              className="w-full h-full object-cover"
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+                videoLoaded ? 'opacity-100' : 'opacity-0'
+              }`}
               style={{
                 filter: `brightness(0.4) contrast(1.2) saturate(1.1)`,
               }}
@@ -97,11 +103,6 @@ const NewHome: React.FC = () => {
             >
               <source src="/advertising-hero-video.mp4" type="video/mp4" />
             </video>
-          )}
-
-          {/* Fallback gradient background */}
-          {(videoError || !videoLoaded) && (
-            <div className="w-full h-full bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
           )}
 
           <div className="absolute inset-0 bg-slate-950/30" />
