@@ -125,20 +125,36 @@ const AboutPage = () => {
         type="website"
         structuredData={aboutStructuredData}
       />
-      <div className={`min-h-screen overflow-hidden transition-colors duration-500 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white ${getTransitionClasses()}`}>
+      {/* Background - Full Page Coverage */}
+      <div className="fixed inset-0 z-0">
+        <div className="absolute inset-0">
+          <div className="w-full h-full bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
+          <div className="absolute inset-0 bg-slate-950/30" />
+        </div>
+      </div>
+
+      <div className="relative z-10 min-h-screen">
+        <div className={`transition-colors duration-500 text-white ${getTransitionClasses()}`}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-        
-        * {
+
+        /* Apply fonts only to page content, not navbar */
+        .about-page-content * {
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
-        
-        h1, h2, h3, h4, h5, h6 {
+
+        .about-page-content h1,
+        .about-page-content h2,
+        .about-page-content h3,
+        .about-page-content h4,
+        .about-page-content h5,
+        .about-page-content h6 {
           font-family: 'Space Grotesk', 'Inter', sans-serif;
           font-weight: 600;
           letter-spacing: -0.02em;
         }
       `}</style>
+      <div className="about-page-content">
       {/* Hero Section */}
       <section className="relative pt-24 pb-20 px-4 sm:px-6 lg:px-8">
         <div className={`absolute inset-0 ${
@@ -156,7 +172,7 @@ const AboutPage = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className={`text-4xl md:text-6xl font-bold mb-6 leading-tight ${
+            <h1 className={`mt-8 text-4xl md:text-6xl font-bold mb-6 leading-tight ${
               true ? 'text-white' : 'text-slate-900'
             }`}>
               {t('about.hero.title')}{' '}
@@ -398,6 +414,8 @@ const AboutPage = () => {
           </motion.div>
         </div>
       </section>
+      </div>
+        </div>
       </div>
     </>
   );

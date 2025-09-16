@@ -202,20 +202,36 @@ const StartProject: React.FC = () => {
         type="website"
         structuredData={startProjectStructuredData}
       />
-      <div className={`min-h-screen pt-12 pb-12 transition-colors duration-300 bg-slate-950 text-white ${getTransitionClasses()}`}>
+      {/* Background - Full Page Coverage */}
+      <div className="fixed inset-0 z-0">
+        <div className="absolute inset-0">
+          <div className="w-full h-full bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
+          <div className="absolute inset-0 bg-slate-950/30" />
+        </div>
+      </div>
+
+      <div className="relative z-10 min-h-screen">
+        <div className={`pt-12 pb-12 transition-colors duration-300 text-white ${getTransitionClasses()}`}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-        
-        * {
+
+        /* Apply fonts only to page content, not navbar */
+        .start-project-content * {
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
-        
-        h1, h2, h3, h4, h5, h6 {
+
+        .start-project-content h1,
+        .start-project-content h2,
+        .start-project-content h3,
+        .start-project-content h4,
+        .start-project-content h5,
+        .start-project-content h6 {
           font-family: 'Space Grotesk', 'Inter', sans-serif;
           font-weight: 600;
           letter-spacing: -0.02em;
         }
       `}</style>
+      <div className="start-project-content">
       <div className="max-w-4xl mx-auto px-6 mt-20">
         {/* Header */}
         <motion.div initial="hidden" animate="visible" variants={fadeIn} className="text-center mb-12">
@@ -713,6 +729,8 @@ const StartProject: React.FC = () => {
         >
           <p className="mb-4">{t('startProject.footer.trustIndicators')}</p>
         </motion.div>
+      </div>
+        </div>
       </div>
       </div>
     </>
