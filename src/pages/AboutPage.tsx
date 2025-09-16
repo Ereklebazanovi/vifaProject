@@ -161,7 +161,7 @@ const AboutPage = () => {
               onLoadedData={() => setVideoLoaded(true)}
               onError={() => setVideoError(true)}
             >
-              <source src="/about-hero-video.mp4" type="video/mp4" />
+              <source src="/about-hero-videooo.mp4" type="video/mp4" />
             </video>
           )}
 
