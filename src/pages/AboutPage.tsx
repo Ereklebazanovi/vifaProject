@@ -169,8 +169,8 @@ const AboutPage = () => {
         </div>
       </div>
 
-      <div className="relative z-10 min-h-screen">
-        <div className={`container mx-auto px-8 py-10 ${getTransitionClasses()}`}>
+      <div className="relative z-10 min-h-screen mt-16">
+        <div className={`container mx-auto px-4 sm:px-6 lg:px-8 py-10 ${getTransitionClasses()}`}>
 
           {/* Hero Section */}
           <div className="max-w-5xl mx-auto mb-24 mt-25">

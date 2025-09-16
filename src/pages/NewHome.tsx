@@ -109,12 +109,12 @@ const NewHome: React.FC = () => {
         </div>
       </div>
 
-      <div className="relative z-10 min-h-screen">
+      <div className="relative z-10 min-h-screen mt-15">
         <div
-          className={`container mx-auto px-8 py-10 ${getTransitionClasses()}`}
+          className={`container mx-auto px-4 sm:px-6 lg:px-8 py-10 ${getTransitionClasses()}`}
         >
           {/* Hero Section */}
-          <div className="max-w-5xl mx-auto mb-24 mt-25">
+          <div className="max-w-5xl mx-auto mb-24 mt-28">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
                 <div className="mb-6">

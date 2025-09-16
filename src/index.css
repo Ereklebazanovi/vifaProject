@@ -7,11 +7,22 @@ html, body {
   background-color: #0f172a; /* slate-950 */
   margin: 0;
   padding: 0;
+  /* Prevent horizontal scroll on mobile */
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 #root {
   min-height: 100vh;
   background-color: #0f172a; /* slate-950 */
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Ensure all containers don't exceed viewport */
+* {
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 :root {

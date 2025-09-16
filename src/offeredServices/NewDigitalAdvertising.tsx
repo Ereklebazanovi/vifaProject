@@ -213,9 +213,9 @@ const NewDigitalAdvertising: React.FC = () => {
         </div>
       </div>
 
-      <div className="relative z-10 min-h-screen">
+      <div className="relative z-10 min-h-screen mt-16">
         <div
-          className={`container mx-auto px-8 py-10 ${getTransitionClasses()}`}
+          className={`container mx-auto px-4 sm:px-6 lg:px-8 py-10 ${getTransitionClasses()}`}
         >
           {/* Hero Section */}
           <div className="max-w-6xl mx-auto mb-32 mt-25">
@@ -226,13 +226,13 @@ const NewDigitalAdvertising: React.FC = () => {
                 </span>
               </div>
 
-              <h1 className="text-4xl md:text-6xl font-light text-white mb-8 leading-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-light text-white mb-8 leading-tight">
                 თქვენი ბრენდის{" "}
                 <span className="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent font-medium">
                   ციფრული ზრდა
                 </span>
                 <br />
-                <span className="text-slate-300 text-3xl md:text-5xl">
+                <span className="text-slate-300 text-xl sm:text-2xl md:text-4xl lg:text-5xl">
                   დღეს იწყება
                 </span>
               </h1>
@@ -245,7 +245,7 @@ const NewDigitalAdvertising: React.FC = () => {
               </p>
 
               {/* Stats Row */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-16">
                 <div className="text-center">
                   <div className="text-3xl font-bold text-red-400 mb-2">
                     200+
@@ -294,7 +294,7 @@ const NewDigitalAdvertising: React.FC = () => {
 
             {/* Digital Marketing Process Visualization */}
             <div className="relative">
-              <div className="flex justify-center items-center gap-8 flex-wrap">
+              <div className="flex justify-center items-center gap-3 sm:gap-6 lg:gap-8 flex-wrap">
                 {/* Step 1: Strategy */}
                 <div className="group cursor-pointer">
                   <div className="w-32 h-32 border-2 border-blue-400/30 rounded-2xl flex items-center justify-center bg-blue-500/5 group-hover:border-blue-400 transition-all duration-300 group-hover:scale-110">
@@ -360,12 +360,12 @@ const NewDigitalAdvertising: React.FC = () => {
           </div>
 
           {/* Services Grid */}
-          <div className="max-w-7xl mx-auto mb-32">
+          <div className="max-w-6xl mx-auto mb-32">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-light text-white mb-4">
                 ჩვენი სერვისები
               </h2>
-              <div className="flex justify-center items-center gap-12 text-sm text-slate-400">
+              <div className="flex justify-center items-center gap-4 sm:gap-8 lg:gap-12 text-sm text-slate-400">
                 <div>
                   <span className="text-2xl font-bold text-red-400">8+</span>{" "}
                   სერვისი
@@ -436,7 +436,7 @@ const NewDigitalAdvertising: React.FC = () => {
               </p>
             </div>
 
-            <div className="flex justify-center items-center gap-8 flex-wrap">
+            <div className="flex justify-center items-center gap-3 sm:gap-6 lg:gap-8 flex-wrap">
               {platforms.map((platform) => (
                 <div
                   key={platform.name}
@@ -472,17 +472,17 @@ const NewDigitalAdvertising: React.FC = () => {
                 დაუკავშირდი ჩვენს გუნდს და დავიწყოთ შენი წარმატებული სარეკლამო
                 კამპანიის შექმნა დღესვე.
               </p>
-              <div className="flex justify-center gap-4">
+              <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
                 <Link
                   to="/start-project"
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-red-500 to-orange-500 text-white px-10 py-4 text-lg font-medium hover:from-red-600 hover:to-orange-600 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-red-500 to-orange-500 text-white px-6 sm:px-8 lg:px-10 py-4 text-lg font-medium hover:from-red-600 hover:to-orange-600 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105"
                 >
                   <FaRocket />
                   პროექტის დაწყება
                 </Link>
                 <Link
                   to="/about"
-                  className="inline-flex items-center gap-2 border-2 border-white/30 hover:border-white/60 text-white px-10 py-4 text-lg font-medium rounded-lg backdrop-blur-sm hover:bg-white/10 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+                  className="inline-flex items-center gap-2 border-2 border-white/30 hover:border-white/60 text-white px-4 sm:px-6 lg:px-10 py-4 text-lg font-medium rounded-lg backdrop-blur-sm hover:bg-white/10 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
                 >
                   <FaArrowRight />
                   მეტი ინფორმაცია

@@ -636,7 +636,7 @@ const translations = {
     'about.services.ads.description': 'ეფექტური რეკლამური კამპანიები და მარკეტინგული სტრატეგია',
 
     'about.cta.title': 'მზად ხართ დაიწყოთ მომავლის შენება?',
-    'about.cta.description': 'მოდით ერთად შევქმნათ რაღაც შესანიშნავი. ჩვენ ველოდებით თქვენს იდეებს და ვნახავთ როგორ შეგვიძლია მათი რეალიზება.',
+    'about.cta.description': 'ჩვენ ველოდებით თქვენს იდეებს და ვნახავთ როგორ შეგვიძლია მათი რეალიზება.',
     'about.cta.startProject': 'პროექტის დაწყება',
     'about.cta.contactUs': 'დაგვიკავშირდით',
 
@@ -644,6 +644,7 @@ const translations = {
     'startProject.hero.title': 'დაიწყე',
     'startProject.hero.titleHighlight': 'წარმატებული',
     'startProject.hero.titleSuffix': 'ბიზნესის შენება',
+    'startProject.hero.description': 'დაწყებისთვის უბრალოდ შეავსეთ ქვემოთ მოცემული ინფორმაცია.',
 
     'startProject.progress.step': 'ნაბიჯი',
 
@@ -1416,6 +1417,7 @@ const translations = {
     'startProject.hero.title': 'Start Building',
     'startProject.hero.titleHighlight': 'Successful',
     'startProject.hero.titleSuffix': 'Business',
+    'startProject.hero.description': 'Let\'s create your business\'s successful digital solution together. To get started, simply fill out the information below.',
 
     'startProject.progress.step': 'Step',
 

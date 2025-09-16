@@ -192,10 +192,11 @@ const NewWebDevelopment: React.FC = () => {
         </div>
       </div>
 
-      <div className="relative z-10 min-h-screen">
-        <div className={`container mx-auto px-8 py-10 ${getTransitionClasses()}`}>
+      <div className="relative z-10 min-h-screen mt-15">
+        {/* Main container with top padding to account for fixed navbar */}
+        <div className={`container mx-auto px-4 sm:px-6 lg:px-8 pt-32 sm:pt-36 md:pt-40 pb-10 ${getTransitionClasses()}`}>
           {/* Hero Section */}
-          <div className="max-w-6xl mx-auto mb-32 mt-25">
+          <div className="max-w-6xl mx-auto mb-32">
             <div className="text-center mb-16">
               <div className="mb-8">
                 <span className="text-blue-400 text-sm font-medium tracking-wider uppercase border border-blue-400/30 px-4 py-2 rounded">
@@ -305,7 +306,7 @@ const NewWebDevelopment: React.FC = () => {
               <h2 className="text-3xl font-light text-white mb-4">
                 ჩვენი სერვისები
               </h2>
-              <div className="flex justify-center items-center gap-12 text-sm text-slate-400">
+              <div className="flex justify-center items-center gap-4 sm:gap-8 lg:gap-12 text-sm text-slate-400">
                 <div>
                   <span className="text-2xl font-bold text-blue-400">8+</span> სერვისი
                 </div>
@@ -423,14 +424,14 @@ const NewWebDevelopment: React.FC = () => {
               <div className="flex justify-center gap-4">
                 <Link
                   to="/start-project"
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-green-500 text-white px-10 py-4 text-lg font-medium hover:from-blue-600 hover:to-green-600 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-green-500 text-white px-6 sm:px-8 lg:px-10 py-4 text-lg font-medium hover:from-blue-600 hover:to-green-600 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105"
                 >
                   <FaRocket />
                   პროექტის დაწყება
                 </Link>
                 <Link
                   to="/about"
-                  className="inline-flex items-center gap-2 border-2 border-white/30 hover:border-white/60 text-white px-10 py-4 text-lg font-medium rounded-lg backdrop-blur-sm hover:bg-white/10 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+                  className="inline-flex items-center gap-2 border-2 border-white/30 hover:border-white/60 text-white px-6 sm:px-8 lg:px-10 py-4 text-lg font-medium rounded-lg backdrop-blur-sm hover:bg-white/10 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
                 >
                   <FaArrowRight />
                   მეტი ინფორმაცია
