@@ -3,7 +3,6 @@
 import type React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import {
   FaVideo,
