@@ -9,6 +9,7 @@ import { HelmetProvider } from "react-helmet-async";
 import Layout from "./layout/Layout";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { addResourceHints } from "./utils/preload";
+import MouseTrail from "./components/MouseTrail";
 import "./index.css";
 
 // Simple lazy loading - back to basics
@@ -135,6 +136,7 @@ const App: React.FC = () => {
         <LanguageProvider>
           <Router>
             <ErrorBoundary>
+              <MouseTrail />
               <Suspense fallback={<LoadingSpinner />}>
                 <RouteTransition>
                   <Routes>
