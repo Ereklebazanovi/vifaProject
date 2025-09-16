@@ -16,18 +16,17 @@ const SimpleNavbar: React.FC = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      // Check if scrolled past 100px
-      setIsScrolled(currentScrollY > 100);
+      // Check if scrolled past 50px
+      setIsScrolled(currentScrollY > 50);
 
-      // Show/hide navbar based on scroll direction
-      if (currentScrollY > lastScrollY && currentScrollY > 300) {
-        // Scrolling down & past 300px - hide navbar
+      // Show/hide navbar based on scroll direction with faster response
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down & past 100px - hide navbar (reduced from 300px)
         setIsVisible(false);
-      } else if (currentScrollY < 100) {
-        // Show navbar only when near the top (less than 100px)
+      } else if (currentScrollY < lastScrollY && currentScrollY < 50) {
+        // Show navbar when scrolling up and near top (less than 50px)
         setIsVisible(true);
       }
-      // When scrolling up but not near top, keep navbar hidden
 
       setLastScrollY(currentScrollY);
     };
@@ -53,7 +52,7 @@ const SimpleNavbar: React.FC = () => {
     <>
       {/* Main Navbar */}
       <nav
-        className={`fixed w-full top-0 z-[100] transition-transform duration-300 ${
+        className={`fixed w-full top-0 z-[100] transition-transform duration-150 ${
           isVisible ? "translate-y-0" : "-translate-y-full"
         }`}
       >
