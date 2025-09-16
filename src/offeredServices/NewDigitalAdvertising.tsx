@@ -22,12 +22,11 @@ import {
   FaArrowRight,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
+import OptimizedVideo from "../components/OptimizedVideo";
 
 const NewDigitalAdvertising: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
   const [activeService, setActiveService] = useState<number>(0);
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  const [videoError, setVideoError] = useState(false);
 
   // Main advertising services
   const services = [
@@ -186,28 +185,16 @@ const NewDigitalAdvertising: React.FC = () => {
       {/* Video Background - Full Page Coverage */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0">
-          {!videoError && (
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="w-full h-full object-cover"
-              style={{
-                filter: `brightness(0.25) contrast(1.3) saturate(1.0)`,
-              }}
-              onLoadedData={() => setVideoLoaded(true)}
-              onError={() => setVideoError(true)}
-            >
-              <source src="/digital-advertising-video.mp4" type="video/mp4" />
-            </video>
-          )}
-
-          {/* Fallback gradient background */}
-          {(videoError || !videoLoaded) && (
-            <div className="w-full h-full bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
-          )}
-
+          <OptimizedVideo
+            src="/digital-advertising-video.mp4"
+            className="w-full h-full"
+            onCanPlay={() => {
+              console.log('Digital advertising video loaded successfully');
+            }}
+            style={{
+              filter: `brightness(0.25) contrast(1.3) saturate(1.0)`,
+            }}
+          />
           <div className="absolute inset-0 bg-slate-950/30" />
         </div>
       </div>

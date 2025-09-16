@@ -6,13 +6,12 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import SEO from "../components/SEO";
+import OptimizedVideo from "../components/OptimizedVideo";
 
 const NewHome: React.FC = () => {
   const { t } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
   const [activeClient, setActiveClient] = useState<number>(0);
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  const [videoError, setVideoError] = useState(false);
 
   // Client companies data
   const clients = [
@@ -82,28 +81,16 @@ const NewHome: React.FC = () => {
       {/* Video Background - Full Page Coverage */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0">
-          {!videoError && (
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="w-full h-full object-cover"
-              style={{
-                filter: `brightness(0.4) contrast(1.2) saturate(1.1)`,
-              }}
-              onLoadedData={() => setVideoLoaded(true)}
-              onError={() => setVideoError(true)}
-            >
-              <source src="/advertising-hero-video.mp4" type="video/mp4" />
-            </video>
-          )}
-
-          {/* Fallback gradient background */}
-          {(videoError || !videoLoaded) && (
-            <div className="w-full h-full bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
-          )}
-
+          <OptimizedVideo
+            src="/advertising-hero-video.mp4"
+            className="w-full h-full"
+            onCanPlay={() => {
+              console.log('Home hero video loaded successfully');
+            }}
+            style={{
+              filter: `brightness(0.4) contrast(1.2) saturate(1.1)`,
+            }}
+          />
           <div className="absolute inset-0 bg-slate-950/30" />
         </div>
       </div>

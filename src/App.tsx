@@ -1,4 +1,4 @@
-import type React from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -9,21 +9,84 @@ import { Suspense, lazy, useState, useEffect } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import Layout from "./layout/Layout";
 import { LanguageProvider } from "./contexts/LanguageContext";
+import { performanceMonitor } from "./utils/performance";
+import { preloadAssets, addResourceHints } from "./utils/preload";
 import "./index.css";
-// Lazy load components
-const Home = lazy(() => import("./pages/NewHome"));
-const AboutPage = lazy(() => import("./pages/AboutPage"));
-const StartProject = lazy(() => import("./service/StartProject"));
-const AdminDashboard = lazy(() => import("./admin/AdminDashboard"));
-const SocialMediaService = lazy(
-  () => import("./offeredServices/SocialMediaService")
-);
-const DigitalAdvertising = lazy(
-  () => import("./offeredServices/NewDigitalAdvertising")
-);
-const WebDevelopment = lazy(() => import("./offeredServices/NewWebDevelopment"));
 
-// Enhanced Loading component
+// Enhanced lazy loading with retry mechanism
+const lazyRetry = (componentImport: () => Promise<any>, name: string) =>
+  lazy(async () => {
+    const pageHasAlreadyBeenForceRefreshed = JSON.parse(
+      window.sessionStorage.getItem(`retry-${name}`) || 'false'
+    );
+
+    try {
+      const component = await componentImport();
+      window.sessionStorage.setItem(`retry-${name}`, 'false');
+      return component;
+    } catch (error) {
+      if (!pageHasAlreadyBeenForceRefreshed) {
+        window.sessionStorage.setItem(`retry-${name}`, 'true');
+        return window.location.reload();
+      }
+      throw error;
+    }
+  });
+
+// Lazy load components with retry
+const Home = lazyRetry(() => import("./pages/NewHome"), 'home');
+const AboutPage = lazyRetry(() => import("./pages/AboutPage"), 'about');
+const StartProject = lazyRetry(() => import("./service/StartProject"), 'start-project');
+const AdminDashboard = lazyRetry(() => import("./admin/AdminDashboard"), 'admin');
+const SocialMediaService = lazyRetry(
+  () => import("./offeredServices/SocialMediaService"), 'social-media'
+);
+const DigitalAdvertising = lazyRetry(
+  () => import("./offeredServices/NewDigitalAdvertising"), 'digital-ads'
+);
+const WebDevelopment = lazyRetry(() => import("./offeredServices/NewWebDevelopment"), 'web-dev');
+
+// Error Boundary Component
+class ErrorBoundary extends React.Component<
+  { children: React.ReactNode; fallback?: React.ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: { children: React.ReactNode; fallback?: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.error('Error boundary caught an error:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback || (
+        <div className="flex items-center justify-center min-h-screen bg-slate-950">
+          <div className="text-center text-white">
+            <h1 className="text-2xl font-bold mb-4">დაფიქსირდა შეცდომა</h1>
+            <p className="text-slate-400 mb-4">გვერდის ჩატვირთვისას მოხდა შეცდომა</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg transition-colors"
+            >
+              გვერდის განახლება
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
+// Enhanced Loading component with skeleton
 const LoadingSpinner = () => (
   <div className="flex items-center justify-center min-h-screen bg-slate-950">
     <div className="flex flex-col items-center space-y-6">
@@ -69,7 +132,7 @@ const Contact = () => (
 );
 
 // Route transition wrapper component
-const RouteTransition: React.FC<{ children: React.ReactNode }> = ({
+const RouteTransition: React.FC<{ children: React.ReactNode }> = React.memo(({
   children,
 }) => {
   const location = useLocation();
@@ -79,7 +142,7 @@ const RouteTransition: React.FC<{ children: React.ReactNode }> = ({
     setLoading(true);
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 200); // Minimum loading time for smooth UX
+    }, 100); // Reduced loading time for faster transitions
 
     return () => clearTimeout(timer);
   }, [location.pathname]);
@@ -89,46 +152,60 @@ const RouteTransition: React.FC<{ children: React.ReactNode }> = ({
   }
 
   return <>{children}</>;
-};
+});
 
 const App: React.FC = () => {
+  useEffect(() => {
+    // Initialize performance monitoring
+    performanceMonitor.init();
+
+    // Add resource hints
+    addResourceHints();
+
+    // Initialize asset preloading
+    preloadAssets.init();
+  }, []);
+
   return (
-    <HelmetProvider>
-      <LanguageProvider>
+    <ErrorBoundary>
+      <HelmetProvider>
+        <LanguageProvider>
           <Router>
-            <Suspense fallback={<LoadingSpinner />}>
-              <RouteTransition>
-                <Routes>
-                  <Route path="/" element={<Layout />}>
-                    <Route index element={<Home />} />
-                    <Route
-                      path="services/social-media"
-                      element={<SocialMediaService />}
-                    />
-                    <Route
-                      path="services/digital-advertising"
-                      element={<DigitalAdvertising />}
-                    />
-                    <Route
-                      path="services/web-development"
-                      element={<WebDevelopment />}
-                    />
+            <ErrorBoundary>
+              <Suspense fallback={<LoadingSpinner />}>
+                <RouteTransition>
+                  <Routes>
+                    <Route path="/" element={<Layout />}>
+                      <Route index element={<Home />} />
+                      <Route
+                        path="services/social-media"
+                        element={<SocialMediaService />}
+                      />
+                      <Route
+                        path="services/digital-advertising"
+                        element={<DigitalAdvertising />}
+                      />
+                      <Route
+                        path="services/web-development"
+                        element={<WebDevelopment />}
+                      />
 
-                    <Route path="about" element={<AboutPage />} />
+                      <Route path="about" element={<AboutPage />} />
 
-                    <Route path="contact" element={<Contact />} />
-                    <Route path="start-project" element={<StartProject />} />
-                  </Route>
+                      <Route path="contact" element={<Contact />} />
+                      <Route path="start-project" element={<StartProject />} />
+                    </Route>
 
-                  {/* Admin routes without Layout (no navbar/footer) */}
-
-                  <Route path="/admin/leads" element={<AdminDashboard />} />
-                </Routes>
-              </RouteTransition>
-            </Suspense>
+                    {/* Admin routes without Layout (no navbar/footer) */}
+                    <Route path="/admin/leads" element={<AdminDashboard />} />
+                  </Routes>
+                </RouteTransition>
+              </Suspense>
+            </ErrorBoundary>
           </Router>
-      </LanguageProvider>
-    </HelmetProvider>
+        </LanguageProvider>
+      </HelmetProvider>
+    </ErrorBoundary>
   );
 };
 
