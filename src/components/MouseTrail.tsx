@@ -14,7 +14,7 @@ interface TrailPoint {
 const MouseTrail: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const trailPoints = useRef<TrailPoint[]>([]);
-  const animationId = useRef<number>();
+  const animationId = useRef<number | undefined>(undefined);
   const mousePos = useRef({ x: -100, y: -100 });
   const smoothMousePos = useRef({ x: -100, y: -100 });
   const lastMoveTime = useRef<number>(0);
