@@ -30,11 +30,12 @@ import {
   SiPostgresql
 } from "react-icons/si";
 import SEO from "../components/SEO";
-import OptimizedVideo from "../components/OptimizedVideo";
 
 const NewWebDevelopment: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
   const [activeService, setActiveService] = useState<number>(0);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoError, setVideoError] = useState(false);
 
   // Main web development services
   const services = [
@@ -158,16 +159,34 @@ const NewWebDevelopment: React.FC = () => {
       {/* Video Background - Full Page Coverage */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0">
-          <OptimizedVideo
-            src="/web-development-bg.mp4"
-            className="w-full h-full"
-            onCanPlay={() => {
-              console.log('Web development video loaded successfully');
-            }}
-            style={{
-              filter: `brightness(0.3) contrast(1.2) saturate(1.0)`,
-            }}
-          />
+          {!videoError && (
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-cover"
+              style={{
+                filter: `brightness(0.3) contrast(1.2) saturate(1.0)`,
+              }}
+              onLoadedData={() => {
+                setVideoLoaded(true);
+                console.log('Web development video loaded successfully');
+              }}
+              onError={(e) => {
+                setVideoError(true);
+                console.error('Web development video failed to load:', e);
+              }}
+            >
+              <source src="/web-development-bg.mp4" type="video/mp4" />
+            </video>
+          )}
+
+          {/* Fallback gradient background */}
+          {(videoError || !videoLoaded) && (
+            <div className="w-full h-full bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
+          )}
+
           <div className="absolute inset-0 bg-slate-950/40" />
         </div>
       </div>

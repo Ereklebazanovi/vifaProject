@@ -3,48 +3,26 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useLocation,
 } from "react-router-dom";
-import { Suspense, lazy, useState, useEffect } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import Layout from "./layout/Layout";
 import { LanguageProvider } from "./contexts/LanguageContext";
-import { performanceMonitor } from "./utils/performance";
-import { preloadAssets, addResourceHints } from "./utils/preload";
+import { addResourceHints } from "./utils/preload";
 import "./index.css";
 
-// Enhanced lazy loading with retry mechanism
-const lazyRetry = (componentImport: () => Promise<any>, name: string) =>
-  lazy(async () => {
-    const pageHasAlreadyBeenForceRefreshed = JSON.parse(
-      window.sessionStorage.getItem(`retry-${name}`) || 'false'
-    );
-
-    try {
-      const component = await componentImport();
-      window.sessionStorage.setItem(`retry-${name}`, 'false');
-      return component;
-    } catch (error) {
-      if (!pageHasAlreadyBeenForceRefreshed) {
-        window.sessionStorage.setItem(`retry-${name}`, 'true');
-        return window.location.reload();
-      }
-      throw error;
-    }
-  });
-
-// Lazy load components with retry
-const Home = lazyRetry(() => import("./pages/NewHome"), 'home');
-const AboutPage = lazyRetry(() => import("./pages/AboutPage"), 'about');
-const StartProject = lazyRetry(() => import("./service/StartProject"), 'start-project');
-const AdminDashboard = lazyRetry(() => import("./admin/AdminDashboard"), 'admin');
-const SocialMediaService = lazyRetry(
-  () => import("./offeredServices/SocialMediaService"), 'social-media'
+// Simple lazy loading - back to basics
+const Home = lazy(() => import("./pages/NewHome"));
+const AboutPage = lazy(() => import("./pages/AboutPage"));
+const StartProject = lazy(() => import("./service/StartProject"));
+const AdminDashboard = lazy(() => import("./admin/AdminDashboard"));
+const SocialMediaService = lazy(
+  () => import("./offeredServices/SocialMediaService")
 );
-const DigitalAdvertising = lazyRetry(
-  () => import("./offeredServices/NewDigitalAdvertising"), 'digital-ads'
+const DigitalAdvertising = lazy(
+  () => import("./offeredServices/NewDigitalAdvertising")
 );
-const WebDevelopment = lazyRetry(() => import("./offeredServices/NewWebDevelopment"), 'web-dev');
+const WebDevelopment = lazy(() => import("./offeredServices/NewWebDevelopment"));
 
 // Error Boundary Component
 class ErrorBoundary extends React.Component<
@@ -131,39 +109,17 @@ const Contact = () => (
   </div>
 );
 
-// Route transition wrapper component
+// Route transition wrapper component - REMOVED ARTIFICIAL DELAY
 const RouteTransition: React.FC<{ children: React.ReactNode }> = React.memo(({
   children,
 }) => {
-  const location = useLocation();
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 100); // Reduced loading time for faster transitions
-
-    return () => clearTimeout(timer);
-  }, [location.pathname]);
-
-  if (loading) {
-    return <LoadingSpinner />;
-  }
-
   return <>{children}</>;
 });
 
 const App: React.FC = () => {
   useEffect(() => {
-    // Initialize performance monitoring
-    performanceMonitor.init();
-
-    // Add resource hints
+    // Only add basic resource hints - no aggressive monitoring
     addResourceHints();
-
-    // Initialize asset preloading
-    preloadAssets.init();
   }, []);
 
   return (

@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import LanguageToggle from "../components/LanguageToggle";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
-import { throttle } from "../utils/performance";
 
 const SimpleNavbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -13,8 +12,8 @@ const SimpleNavbar: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
   const location = useLocation();
 
-  const handleScroll = useCallback(
-    throttle(() => {
+  useEffect(() => {
+    const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
       // Check if scrolled past 100px
@@ -31,19 +30,16 @@ const SimpleNavbar: React.FC = () => {
       // When scrolling up but not near top, keep navbar hidden
 
       setLastScrollY(currentScrollY);
-    }, 16), // ~60fps
-    [lastScrollY]
-  );
+    };
 
-  useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [handleScroll]);
+  }, [lastScrollY]);
 
-  const navLinks = useMemo(() => [
+  const navLinks = [
     {
       path: "/services/digital-advertising",
       label: t("services.advertising.title"),
@@ -51,7 +47,7 @@ const SimpleNavbar: React.FC = () => {
     { path: "/services/web-development", label: t("services.webdev.title") },
     { path: "/about", label: t("nav.about") },
     { path: "/start-project", label: t("nav.startProject") },
-  ], [t]);
+  ];
 
   return (
     <>
@@ -137,4 +133,4 @@ const SimpleNavbar: React.FC = () => {
   );
 };
 
-export default React.memo(SimpleNavbar);
+export default SimpleNavbar;

@@ -10,13 +10,10 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom', 'react-router-dom'],
-          framer: ['framer-motion'],
-          icons: ['react-icons'],
-          antd: ['antd']
+          framer: ['framer-motion']
         }
       }
-    },
-    chunkSizeWarningLimit: 1000
+    }
   },
   server: {
     hmr: {
