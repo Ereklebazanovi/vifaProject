@@ -1,120 +1,133 @@
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useState } from "react";
+import { motion } from 'framer-motion';
 import {
-  FaRocket,
   FaUsers,
-  FaHeart,
   FaLightbulb,
+  FaHandshake,
   FaAward,
+  FaArrowUp,
   FaCode,
   FaCamera,
-  FaChartLine,
-  FaInstagram
+  FaShare,
+  FaBullhorn
 } from 'react-icons/fa';
 import SEO from '../components/SEO';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useLanguageTransition } from '../hooks/useLanguageTransition';
 
 const AboutPage = () => {
-  const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 300], [0, -50]);
   const { t } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoError, setVideoError] = useState(false);
 
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
+  const aboutStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": t('seo.about.title'),
+    "description": t('seo.about.description'),
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "Vifa Digital",
+      "description": t('seo.about.description'),
+      "url": "https://vifa.ge/about"
     }
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6
-      }
-    }
-  };
-
+  // Stats data
   const stats = [
-    { number: "50+", label: t('about.stats.projects'), icon: <FaRocket /> },
-    { number: "25+", label: t('about.stats.clients'), icon: <FaUsers /> },
-    { number: "3+", label: t('about.stats.experience'), icon: <FaAward /> },
-    { number: "24/7", label: t('about.stats.support'), icon: <FaHeart /> }
-  ];
-
-  const values = [
     {
-      icon: <FaLightbulb />,
-      title: t('about.values.innovation.title'),
-      description: t('about.values.innovation.description')
+      number: "50+",
+      label: t('about.stats.projects'),
+      color: "text-blue-400"
     },
     {
-      icon: <FaUsers />,
-      title: t('about.values.partnership.title'),
-      description: t('about.values.partnership.description')
+      number: "100+",
+      label: t('about.stats.clients'),
+      color: "text-green-400"
     },
     {
-      icon: <FaHeart />,
-      title: t('about.values.quality.title'),
-      description: t('about.values.quality.description')
+      number: "3+",
+      label: t('about.stats.experience'),
+      color: "text-purple-400"
     },
     {
-      icon: <FaRocket />,
-      title: t('about.values.growth.title'),
-      description: t('about.values.growth.description')
+      number: "24/7",
+      label: t('about.stats.support'),
+      color: "text-yellow-400"
     }
   ];
 
-
+  // Services data
   const services = [
     {
-      icon: <FaCode />,
+      icon: <FaCode className="text-4xl text-blue-400" />,
       title: t('about.services.webdev.title'),
       description: t('about.services.webdev.description')
     },
     {
-      icon: <FaCamera />,
+      icon: <FaCamera className="text-4xl text-green-400" />,
       title: t('about.services.content.title'),
       description: t('about.services.content.description')
     },
     {
-      icon: <FaInstagram />,
+      icon: <FaShare className="text-4xl text-purple-400" />,
       title: t('about.services.social.title'),
       description: t('about.services.social.description')
     },
     {
-      icon: <FaChartLine />,
+      icon: <FaBullhorn className="text-4xl text-orange-400" />,
       title: t('about.services.ads.title'),
       description: t('about.services.ads.description')
     }
   ];
 
-  const aboutStructuredData = {
-    "@context": "https://schema.org",
-    "@type": "AboutPage",
-    "mainEntity": {
-      "@type": "Organization",
-      "name": "Vifa Digital",
-      "description": t('seo.about.description'),
-      "foundingDate": "2023",
-      "location": {
-        "@type": "Place",
-        "address": {
-          "@type": "PostalAddress",
-          "addressCountry": "GE",
-          "addressLocality": "Tbilisi"
-        }
-      }
+  // Team values
+  const values = [
+    {
+      icon: <FaLightbulb className="text-4xl text-yellow-400" />,
+      title: t('about.values.innovation.title'),
+      description: t('about.values.innovation.description')
+    },
+    {
+      icon: <FaHandshake className="text-4xl text-blue-400" />,
+      title: t('about.values.partnership.title'),
+      description: t('about.values.partnership.description')
+    },
+    {
+      icon: <FaAward className="text-4xl text-green-400" />,
+      title: t('about.values.quality.title'),
+      description: t('about.values.quality.description')
+    },
+    {
+      icon: <FaArrowUp className="text-4xl text-purple-400" />,
+      title: t('about.values.growth.title'),
+      description: t('about.values.growth.description')
     }
-  };
+  ];
+
+  // Team members
+  const teamMembers = [
+    {
+      name: t('about.team.ceo.name'),
+      role: t('about.team.ceo.role'),
+      bio: t('about.team.ceo.bio'),
+      skills: [t('about.team.ceo.skill1'), t('about.team.ceo.skill2'), t('about.team.ceo.skill3')]
+    },
+    {
+      name: t('about.team.creative.name'),
+      role: t('about.team.creative.role'),
+      bio: t('about.team.creative.bio'),
+      skills: [t('about.team.creative.skill1'), t('about.team.creative.skill2'), t('about.team.creative.skill3')]
+    },
+    {
+      name: t('about.team.developer.name'),
+      role: t('about.team.developer.role'),
+      bio: t('about.team.developer.bio'),
+      skills: [t('about.team.developer.skill1'), t('about.team.developer.skill2'), t('about.team.developer.skill3')]
+    }
+  ];
 
   return (
     <>
@@ -125,296 +138,236 @@ const AboutPage = () => {
         type="website"
         structuredData={aboutStructuredData}
       />
-      {/* Background - Full Page Coverage */}
+
+      {/* Video Background - Full Page Coverage */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0">
+          {/* Always show dark background first for smooth loading */}
           <div className="w-full h-full bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
+
+          {/* Video loads on top with smooth fade */}
+          {!videoError && (
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+                videoLoaded ? 'opacity-100' : 'opacity-0'
+              }`}
+              style={{
+                filter: `brightness(0.4) contrast(1.2) saturate(1.1)`,
+              }}
+              onLoadedData={() => setVideoLoaded(true)}
+              onError={() => setVideoError(true)}
+            >
+              <source src="/about-hero-video.mp4" type="video/mp4" />
+            </video>
+          )}
+
           <div className="absolute inset-0 bg-slate-950/30" />
         </div>
       </div>
 
       <div className="relative z-10 min-h-screen">
-        <div className={`transition-colors duration-500 text-white ${getTransitionClasses()}`}>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+        <div className={`container mx-auto px-8 py-10 ${getTransitionClasses()}`}>
 
-        /* Apply fonts only to page content, not navbar */
-        .about-page-content * {
-          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-
-        .about-page-content h1,
-        .about-page-content h2,
-        .about-page-content h3,
-        .about-page-content h4,
-        .about-page-content h5,
-        .about-page-content h6 {
-          font-family: 'Space Grotesk', 'Inter', sans-serif;
-          font-weight: 600;
-          letter-spacing: -0.02em;
-        }
-      `}</style>
-      <div className="about-page-content">
-      {/* Hero Section */}
-      <section className="relative pt-24 pb-20 px-4 sm:px-6 lg:px-8">
-        <div className={`absolute inset-0 ${
-          true 
-            ? 'bg-gradient-to-br from-red-500/10 to-transparent' 
-            : 'bg-gradient-to-br from-blue-500/5 to-transparent'
-        }`}></div>
-        
-        <motion.div
-          style={{ y: y1 }}
-          className="relative max-w-7xl mx-auto text-center"
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className={`mt-8 text-4xl md:text-6xl font-bold mb-6 leading-tight ${
-              true ? 'text-white' : 'text-slate-900'
-            }`}>
-              {t('about.hero.title')}{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600">
-                Vifa Digital
-              </span>
-            </h1>
-            <p className={`text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed mb-12 ${
-              true ? 'text-slate-300' : 'text-slate-600'
-            }`}>
-              {t('about.hero.description')}
-            </p>
-          </motion.div>
- 
-          {/* Stats */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16"
-          >
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="text-center group"
+          {/* Hero Section */}
+          <div className="max-w-5xl mx-auto mb-24 mt-25">
+            <div className="text-center">
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="text-4xl md:text-5xl font-light text-white mb-6 leading-tight"
               >
-                <div className="text-4xl text-red-400 mb-4 transform group-hover:scale-110 transition-transform duration-300">
-                  {stat.icon}
-                </div>
-                <div className={`text-3xl md:text-4xl font-bold mb-2 ${
-                  true ? 'text-white' : 'text-slate-900'
-                }`}>
-                  {stat.number}
-                </div>
-                <div className={`font-medium ${
-                  true ? 'text-slate-400' : 'text-slate-600'
-                }`}>
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
-      </section>
+                {t('about.hero.title')}{" "}
+                <span className="text-blue-400">Vifa Digital</span>
+              </motion.h1>
 
-      {/* Story Section */}
-      <section className={`py-20 px-4 sm:px-6 lg:px-8 ${
-        true ? 'bg-slate-800/50' : 'bg-slate-100/30'
-      }`}>
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-6 ${
-              true ? 'text-white' : 'text-slate-900'
-            }`}>
-              {t('about.story.title')} <span className="text-red-400">{t('about.story.titleHighlight')}</span>
-            </h2>
-            <div className="max-w-4xl mx-auto">
-              <p className={`text-lg leading-relaxed mb-6 ${
-                true ? 'text-slate-300' : 'text-slate-600'
-              }`}>
-                {t('about.story.paragraph1')}
-              </p>
-              <p className={`text-lg leading-relaxed mb-6 ${
-                true ? 'text-slate-300' : 'text-slate-600'
-              }`}>
-                {t('about.story.paragraph2')}
-              </p>
-              <p className={`text-lg leading-relaxed ${
-                true ? 'text-slate-300' : 'text-slate-600'
-              }`}>
-                {t('about.story.paragraph3')}
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-lg text-slate-400 mb-12 max-w-3xl mx-auto leading-relaxed"
+              >
+                {t('about.hero.description')}
+              </motion.p>
+
+              {/* Stats Row */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="grid grid-cols-2 md:grid-cols-4 gap-8"
+              >
+                {stats.map((stat, index) => (
+                  <div key={index} className="text-center">
+                    <div className={`text-2xl font-bold ${stat.color} mb-2`}>{stat.number}</div>
+                    <div className="text-sm text-slate-400">{stat.label}</div>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Our Story Section */}
+          <div className="max-w-4xl mx-auto mb-24">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-light text-white mb-6">
+                {t('about.story.title')}{" "}
+                <span className="text-blue-400">{t('about.story.titleHighlight')}</span>
+              </h2>
+            </div>
+
+            <div className="space-y-6 text-slate-300 leading-relaxed">
+              <p>{t('about.story.paragraph1')}</p>
+              <p>{t('about.story.paragraph2')}</p>
+              <p>{t('about.story.paragraph3')}</p>
+            </div>
+          </div>
+
+          {/* What We Do Section */}
+          <div className="max-w-6xl mx-auto mb-24">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-light text-white mb-6">
+                {t('about.whatWeDo.title')}{" "}
+                <span className="text-blue-400">{t('about.whatWeDo.titleHighlight')}</span>
+              </h2>
+              <p className="text-lg text-slate-400 max-w-3xl mx-auto">
+                {t('about.whatWeDo.description')}
               </p>
             </div>
-          </motion.div>
-        </div>
-      </section>
 
-      {/* Values Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-6 ${
-              true ? 'text-white' : 'text-slate-900'
-            }`}>
-              {t('about.values.title')} <span className="text-red-400">{t('about.values.titleHighlight')}</span>
-            </h2>
-            <p className={`text-xl max-w-3xl mx-auto ${
-              true ? 'text-slate-300' : 'text-slate-600'
-            }`}>
-              {t('about.values.description')}
-            </p>
-          </motion.div>
-
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
-          >
-            {values.map((value, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className={`group p-8 backdrop-blur-sm rounded-2xl border transition-all duration-500 hover:shadow-2xl hover:shadow-red-500/10 transform hover:-translate-y-2 ${
-                  true
-                    ? 'bg-slate-800/50 border-slate-700/50 hover:border-red-400/30'
-                    : 'bg-white/60 border-slate-300/40 hover:border-red-400/40 shadow-lg'
-                }`}
-              >
-                <div className="text-4xl text-red-400 mb-6 transform group-hover:scale-110 transition-transform duration-300">
-                  {value.icon}
-                </div>
-                <h3 className={`text-xl font-bold mb-4 ${
-                  true ? 'text-white' : 'text-slate-900'
-                }`}>
-                  {value.title}
-                </h3>
-                <p className={`leading-relaxed ${
-                  true ? 'text-slate-300' : 'text-slate-600'
-                }`}>
-                  {value.description}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-    
-
-      {/* Services Overview */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-6 ${
-              true ? 'text-white' : 'text-slate-900'
-            }`}>
-              {t('about.whatWeDo.title')} <span className="text-red-400">{t('about.whatWeDo.titleHighlight')}</span>
-            </h2>
-            <p className={`text-xl max-w-3xl mx-auto ${
-              true ? 'text-slate-300' : 'text-slate-600'
-            }`}>
-              {t('about.whatWeDo.description')}
-            </p>
-          </motion.div>
-
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid md:grid-cols-2 gap-8"
-          >
-            {services.map((service, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="group p-8 bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700/50 hover:border-red-400/30 transition-all duration-500 hover:shadow-2xl hover:shadow-red-500/10"
-              >
-                <div className="flex items-start space-x-6">
-                  <div className="text-4xl text-red-400 transform group-hover:scale-110 transition-transform duration-300">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {services.map((service, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 hover:border-blue-400/30 rounded-xl p-6 text-center hover:bg-slate-800/60 transition-all duration-300"
+                >
+                  <div className="mb-4">
                     {service.icon}
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-white mb-4">
-                      {service.title}
-                    </h3>
-                    <p className="text-slate-300 leading-relaxed">
-                      {service.description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+                  <h3 className="text-lg font-medium text-white mb-3">
+                    {service.title}
+                  </h3>
+                  <p className="text-sm text-slate-400 leading-relaxed">
+                    {service.description}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
 
-      {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-red-500/10 to-red-600/10 border-t border-red-400/20">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-6 ${
-              true ? 'text-white' : 'text-slate-900'
-            }`}>
-              {t('about.cta.title')}
-            </h2>
-            <p className={`text-xl mb-8 max-w-2xl mx-auto ${
-              true ? 'text-slate-300' : 'text-slate-600'
-            }`}>
-              {t('about.cta.description')}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
+          {/* Values Section */}
+          <div className="max-w-6xl mx-auto mb-24">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-light text-white mb-6">
+                {t('about.values.title')}{" "}
+                <span className="text-blue-400">{t('about.values.titleHighlight')}</span>
+              </h2>
+              <p className="text-lg text-slate-400 max-w-3xl mx-auto">
+                {t('about.values.description')}
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {values.map((value, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 hover:border-purple-400/30 rounded-xl p-6 text-center hover:bg-slate-800/60 transition-all duration-300"
+                >
+                  <div className="mb-4">
+                    {value.icon}
+                  </div>
+                  <h3 className="text-lg font-medium text-white mb-3">
+                    {value.title}
+                  </h3>
+                  <p className="text-sm text-slate-400 leading-relaxed">
+                    {value.description}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Team Section */}
+          <div className="max-w-6xl mx-auto mb-24">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-light text-white mb-6">
+                ჩვენი <span className="text-blue-400">გუნდი</span>
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {teamMembers.map((member, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 text-center"
+                >
+                  <div className="w-20 h-20 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <FaUsers className="text-2xl text-white" />
+                  </div>
+                  <h3 className="text-xl font-medium text-white mb-2">
+                    {member.name}
+                  </h3>
+                  <p className="text-blue-400 mb-3">
+                    {member.role}
+                  </p>
+                  <p className="text-slate-400 text-sm mb-4">
+                    {member.bio}
+                  </p>
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    {member.skills.map((skill, skillIndex) => (
+                      <span
+                        key={skillIndex}
+                        className="bg-slate-700/50 text-slate-300 px-3 py-1 rounded-full text-xs"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* CTA Section */}
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-blue-400/20 rounded-2xl p-12">
+              <h2 className="text-3xl font-light text-white mb-6">
+                {t('about.cta.title')}
+              </h2>
+              <p className="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
+                {t('about.cta.description')}
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   to="/start-project"
-                  className="block px-8 py-4 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:shadow-lg hover:shadow-red-500/30"
+                  className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-8 py-4 font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
                 >
                   {t('about.cta.startProject')}
                 </Link>
-              </motion.div>
-              <motion.a
-                href="/contact"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-slate-800/50 hover:bg-slate-700/50 text-white font-semibold rounded-xl border border-slate-600/30 hover:border-red-400/30 transition-all duration-300"
-              >
-                {t('about.cta.contactUs')}
-              </motion.a>
+                <Link
+                  to="/contact"
+                  className="border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 font-semibold rounded-lg backdrop-blur-sm hover:bg-white/10 transform hover:scale-105 transition-all duration-300"
+                >
+                  {t('about.cta.contactUs')}
+                </Link>
+              </div>
             </div>
-          </motion.div>
-        </div>
-      </section>
-      </div>
+          </div>
+
         </div>
       </div>
     </>
