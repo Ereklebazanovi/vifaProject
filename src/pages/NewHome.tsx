@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import SEO from "../components/SEO";
-import OptimizedVideo from "../components/OptimizedVideo";
+import SimpleVideo from "../components/SimpleVideo";
 
 const NewHome: React.FC = () => {
   const { t } = useLanguage();
@@ -85,9 +85,9 @@ const NewHome: React.FC = () => {
           {/* Always show dark background first for smooth loading */}
           <div className="w-full h-full bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
 
-          {/* Optimized video with mobile detection */}
+          {/* Simple video that always tries to load */}
           {!videoError && (
-            <OptimizedVideo
+            <SimpleVideo
               src="/advertising-hero-video.mp4"
               className="absolute inset-0 w-full h-full object-cover"
               style={{
