@@ -110,9 +110,46 @@ const RouteTransition: React.FC<{ children: React.ReactNode }> = React.memo(({
   );
 });
 
-const App: React.FC = () => {
-  useRoutePreload(); // Enable route preloading
+// Component that uses router hooks - must be inside Router
+const AppWithRouter: React.FC = () => {
+  useRoutePreload(); // Now safely inside Router context
 
+  return (
+    <ErrorBoundary>
+      <MouseTrail />
+      <Suspense fallback={<LoadingSpinner />}>
+        <RouteTransition>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route
+                path="services/social-media"
+                element={<SocialMediaService />}
+              />
+              <Route
+                path="services/digital-advertising"
+                element={<DigitalAdvertising />}
+              />
+              <Route
+                path="services/web-development"
+                element={<WebDevelopment />}
+              />
+              <Route path="about" element={<AboutPage />} />
+              <Route path="contact" element={<Contact />} />
+              <Route path="start-project" element={<StartProject />} />
+            </Route>
+
+            {/* Admin routes without Layout (no navbar/footer) */}
+            <Route path="/admin/leads" element={<AdminDashboard />} />
+          </Routes>
+        </RouteTransition>
+      </Suspense>
+    </ErrorBoundary>
+  );
+};
+
+// Main App component
+const App: React.FC = () => {
   useEffect(() => {
     // Only add basic resource hints - no aggressive monitoring
     addResourceHints();
@@ -123,38 +160,7 @@ const App: React.FC = () => {
       <HelmetProvider>
         <LanguageProvider>
           <Router>
-            <ErrorBoundary>
-              <MouseTrail />
-              <Suspense fallback={<LoadingSpinner />}>
-                <RouteTransition>
-                  <Routes>
-                    <Route path="/" element={<Layout />}>
-                      <Route index element={<Home />} />
-                      <Route
-                        path="services/social-media"
-                        element={<SocialMediaService />}
-                      />
-                      <Route
-                        path="services/digital-advertising"
-                        element={<DigitalAdvertising />}
-                      />
-                      <Route
-                        path="services/web-development"
-                        element={<WebDevelopment />}
-                      />
-
-                      <Route path="about" element={<AboutPage />} />
-
-                      <Route path="contact" element={<Contact />} />
-                      <Route path="start-project" element={<StartProject />} />
-                    </Route>
-
-                    {/* Admin routes without Layout (no navbar/footer) */}
-                    <Route path="/admin/leads" element={<AdminDashboard />} />
-                  </Routes>
-                </RouteTransition>
-              </Suspense>
-            </ErrorBoundary>
+            <AppWithRouter />
           </Router>
         </LanguageProvider>
       </HelmetProvider>
