@@ -4,7 +4,7 @@ import type React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
-import OptimizedVideo from "../components/OptimizedVideo";
+import BeautifulBackground from "../components/BeautifulBackground";
 import {
   FaVideo,
   FaCamera,
@@ -27,7 +27,6 @@ import SEO from "../components/SEO";
 const NewDigitalAdvertising: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
   const [activeService, setActiveService] = useState<number>(0);
-  const [videoError, setVideoError] = useState(false);
 
   // Main advertising services
   const services = [
@@ -183,27 +182,11 @@ const NewDigitalAdvertising: React.FC = () => {
         description="Professional digital advertising services including video production, photography, social media management, and creative content."
       />
 
-      {/* Video Background - Full Page Coverage */}
-      <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0">
-          {/* Always show dark background first for smooth loading */}
-          <div className="w-full h-full bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
-
-          {/* Optimized video with mobile detection */}
-          {!videoError && (
-            <OptimizedVideo
-              src="/digital-advertising-video.mp4"
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{
-                filter: `brightness(0.25) contrast(1.3) saturate(1.0)`,
-              }}
-              onError={() => setVideoError(true)}
-            />
-          )}
-
-          <div className="absolute inset-0 bg-slate-950/30" />
-        </div>
-      </div>
+      {/* Beautiful Animated Background - Full Page Coverage */}
+      <BeautifulBackground
+        className="fixed inset-0 z-0"
+        variant="purple"
+      />
 
       <div className="relative z-10 min-h-screen mt-16">
         <div
@@ -232,7 +215,8 @@ const NewDigitalAdvertising: React.FC = () => {
               <p className="text-xl text-slate-300 mb-12 max-w-4xl mx-auto leading-relaxed">
                 დღევანდელ ციფრულ ეპოქაში, თქვენი ბრენდი უნდა იყოს ხილული,
                 მიმზიდველი და დამაჯერებელი. ჩვენ ვქმნით სრულყოფილ ციფრულ
-                ეკოსისტემას თქვენი ბიზნესისთვის - ვიდეო კონტენტიდან სოციალურ
+                ეკოსისტემას თქვენ
+                ი ბიზნესისთვის - ვიდეო კონტენტიდან სოციალურ
                 მედიამდე.
               </p>
 

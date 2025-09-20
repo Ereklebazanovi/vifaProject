@@ -4,7 +4,7 @@ import type React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
-import OptimizedVideo from "../components/OptimizedVideo";
+import BeautifulBackground from "../components/BeautifulBackground";
 import {
   FaReact,
   FaMobile,
@@ -35,7 +35,6 @@ import SEO from "../components/SEO";
 const NewWebDevelopment: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
   const [activeService, setActiveService] = useState<number>(0);
-  const [videoError, setVideoError] = useState(false);
 
   // Main web development services
   const services = [
@@ -156,30 +155,11 @@ const NewWebDevelopment: React.FC = () => {
         description="Professional web development services including React, Node.js, mobile responsive design, and modern web applications."
       />
 
-      {/* Video Background - Full Page Coverage */}
-      <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0">
-          {/* Always show dark background first for smooth loading */}
-          <div className="w-full h-full bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
-
-          {/* Optimized video with mobile detection */}
-          {!videoError && (
-            <OptimizedVideo
-              src="/web-development-bg.mp4"
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{
-                filter: `brightness(0.3) contrast(1.2) saturate(1.0)`,
-              }}
-              onError={() => {
-                setVideoError(true);
-                console.error('Web development video failed to load');
-              }}
-            />
-          )}
-
-          <div className="absolute inset-0 bg-slate-950/40" />
-        </div>
-      </div>
+      {/* Beautiful Animated Background - Full Page Coverage */}
+      <BeautifulBackground
+        className="fixed inset-0 z-0"
+        variant="green"
+      />
 
       <div className="relative z-10 min-h-screen mt-15">
         {/* Main container with top padding to account for fixed navbar */}

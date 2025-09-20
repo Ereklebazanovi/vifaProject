@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import { motion } from 'framer-motion';
-import OptimizedVideo from '../components/OptimizedVideo';
+import BeautifulBackground from '../components/BeautifulBackground';
 import {
   FaUsers,
   FaLightbulb,
@@ -20,7 +19,6 @@ import { useLanguageTransition } from '../hooks/useLanguageTransition';
 const AboutPage = () => {
   const { t } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
-  const [videoError, setVideoError] = useState(false);
 
   const aboutStructuredData = {
     "@context": "https://schema.org",
@@ -139,27 +137,11 @@ const AboutPage = () => {
         structuredData={aboutStructuredData}
       />
 
-      {/* Video Background - Full Page Coverage */}
-      <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0">
-          {/* Always show dark background first for smooth loading */}
-          <div className="w-full h-full bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
-
-          {/* Optimized video with mobile detection */}
-          {!videoError && (
-            <OptimizedVideo
-              src="/about-hero-videooo.mp4"
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{
-                filter: `brightness(0.4) contrast(1.2) saturate(1.1)`,
-              }}
-              onError={() => setVideoError(true)}
-            />
-          )}
-
-          <div className="absolute inset-0 bg-slate-950/30" />
-        </div>
-      </div>
+      {/* Beautiful Animated Background - Full Page Coverage */}
+      <BeautifulBackground
+        className="fixed inset-0 z-0"
+        variant="blue"
+      />
 
       <div className="relative z-10 min-h-screen mt-16">
         <div className={`container mx-auto px-4 sm:px-6 lg:px-8 py-10 ${getTransitionClasses()}`}>

@@ -27,6 +27,11 @@ const SimpleVideo: React.FC<SimpleVideoProps> = ({
     setIsLoaded(true);
   };
 
+  const handleCanPlay = () => {
+    console.log('Video can play:', src);
+    setIsLoaded(true); // Force show video when it can play
+  };
+
   if (hasError) {
     // Beautiful CSS-only animated background as fallback
     return (
@@ -72,7 +77,7 @@ const SimpleVideo: React.FC<SimpleVideoProps> = ({
         style={style}
         onLoadedData={handleLoad}
         onError={handleError}
-        onCanPlay={() => console.log('Video can play:', src)}
+        onCanPlay={handleCanPlay}
         preload="metadata"
       >
         <source src={src} type="video/mp4" />
