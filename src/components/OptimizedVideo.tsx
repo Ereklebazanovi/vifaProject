@@ -23,21 +23,38 @@ const OptimizedVideo: React.FC<OptimizedVideoProps> = ({
   const { shouldLoadMedia, settings, deviceInfo } = useDeviceOptimizations();
 
   useEffect(() => {
-    // Desktop with good connection: Load video immediately
-    // Mobile or slow connection: Use animated gradient instead
     const shouldLoadVideo = shouldLoadMedia('video');
 
+    // Debug logging
+    console.log('OptimizedVideo debug:', {
+      shouldLoadVideo,
+      isMobile: deviceInfo.isMobile,
+      hasSlowConnection: deviceInfo.hasSlowConnection,
+      screenWidth: deviceInfo.screenWidth,
+      src
+    });
+
     if (shouldLoadVideo) {
-      const delay = deviceInfo.hasSlowConnection ? 1500 : 300;
+      // Load videos with minimal delay
+      const delay = deviceInfo.hasSlowConnection ? 1000 : 100;
       const timer = setTimeout(() => {
         setShouldLoad(true);
       }, delay);
       return () => clearTimeout(timer);
     } else {
-      // Never load video on mobile/slow connections - use beautiful animated background
+      // Show animated background initially, but try loading video after delay
       setIsLoading(false);
+      console.log('Using animated background initially for:', src);
+
+      // Fallback: Try loading video after 3 seconds anyway (for better UX)
+      const fallbackTimer = setTimeout(() => {
+        console.log('Fallback: Attempting to load video after delay for:', src);
+        setShouldLoad(true);
+      }, 3000);
+
+      return () => clearTimeout(fallbackTimer);
     }
-  }, [shouldLoadMedia, deviceInfo.hasSlowConnection]);
+  }, [shouldLoadMedia, deviceInfo.hasSlowConnection, deviceInfo.isMobile, deviceInfo.screenWidth, src]);
 
   const handleLoadedData = () => {
     setIsLoading(false);

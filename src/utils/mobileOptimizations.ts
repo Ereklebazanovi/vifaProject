@@ -27,18 +27,19 @@ export const getDeviceInfo = (): DeviceInfo => {
   const screenWidth = window.innerWidth;
   const screenHeight = window.innerHeight;
 
-  // Device detection
-  const isMobile = /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent) || screenWidth < 768;
-  const isTablet = /iPad|Android(?!.*Mobile)/i.test(userAgent) || (screenWidth >= 768 && screenWidth <= 1024);
+  // More accurate device detection
+  const isMobileDevice = /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+  const isSmallScreen = screenWidth < 640; // Only very small screens
+  const isMobile = isMobileDevice || (isSmallScreen && screenWidth < 480); // Only truly mobile
+  const isTablet = /iPad|Android(?!.*Mobile)/i.test(userAgent) || (screenWidth >= 640 && screenWidth <= 1024 && !isMobileDevice);
   const isDesktop = !isMobile && !isTablet;
 
-  // Connection detection
+  // Less aggressive connection detection
   const connection = (navigator as any).connection;
   const hasSlowConnection = connection && (
     connection.effectiveType === 'slow-2g' ||
     connection.effectiveType === '2g' ||
-    connection.effectiveType === '3g' ||
-    connection.downlink < 1.5
+    (connection.effectiveType === '3g' && connection.downlink < 1.0) // Only very slow 3G
   );
 
   // Touch detection
@@ -60,8 +61,8 @@ export const getOptimizationSettings = (deviceInfo: DeviceInfo) => {
   const { isMobile, hasSlowConnection, screenWidth } = deviceInfo;
 
   return {
-    // Video settings
-    shouldLoadVideo: !isMobile && !hasSlowConnection,
+    // Video settings - Much more permissive
+    shouldLoadVideo: !isMobile || (!hasSlowConnection && screenWidth > 480), // Allow tablets and small laptops
     videoQuality: isMobile ? 'low' : hasSlowConnection ? 'medium' : 'high',
     videoPreload: hasSlowConnection ? 'none' : isMobile ? 'metadata' : 'auto',
 
