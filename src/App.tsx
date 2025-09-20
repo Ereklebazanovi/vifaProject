@@ -10,6 +10,7 @@ import Layout from "./layout/Layout";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { addResourceHints } from "./utils/preload";
 import MouseTrail from "./components/MouseTrail";
+import { useRoutePreload } from "./hooks/useRoutePreload";
 import "./index.css";
 
 // Simple lazy loading - back to basics
@@ -98,33 +99,20 @@ const Contact = () => (
   </div>
 );
 
-// Route transition wrapper component with smooth fade
+// Optimized route transition with immediate rendering
 const RouteTransition: React.FC<{ children: React.ReactNode }> = React.memo(({
   children,
 }) => {
-  const [isVisible, setIsVisible] = React.useState(false);
-
-  React.useEffect(() => {
-    // Smooth fade in
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 50);
-
-    return () => clearTimeout(timer);
-  }, [children]);
-
   return (
-    <div
-      className={`transition-opacity duration-300 ${
-        isVisible ? 'opacity-100' : 'opacity-0'
-      }`}
-    >
+    <div className="transition-opacity duration-200 opacity-100">
       {children}
     </div>
   );
 });
 
 const App: React.FC = () => {
+  useRoutePreload(); // Enable route preloading
+
   useEffect(() => {
     // Only add basic resource hints - no aggressive monitoring
     addResourceHints();

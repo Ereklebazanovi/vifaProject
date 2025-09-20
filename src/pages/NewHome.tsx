@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import SEO from "../components/SEO";
+import OptimizedVideo from "../components/OptimizedVideo";
 
 const NewHome: React.FC = () => {
   const { t } = useLanguage();
@@ -85,24 +86,17 @@ const NewHome: React.FC = () => {
           {/* Always show dark background first for smooth loading */}
           <div className="w-full h-full bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
 
-          {/* Video loads on top with smooth fade */}
+          {/* Optimized video with mobile detection */}
           {!videoError && (
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-                videoLoaded ? 'opacity-100' : 'opacity-0'
-              }`}
+            <OptimizedVideo
+              src="/advertising-hero-video.mp4"
+              className="absolute inset-0 w-full h-full object-cover"
               style={{
                 filter: `brightness(0.4) contrast(1.2) saturate(1.1)`,
               }}
               onLoadedData={() => setVideoLoaded(true)}
               onError={() => setVideoError(true)}
-            >
-              <source src="/advertising-hero-video.mp4" type="video/mp4" />
-            </video>
+            />
           )}
 
           <div className="absolute inset-0 bg-slate-950/30" />
