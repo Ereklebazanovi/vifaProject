@@ -79,7 +79,7 @@ const CSSBackground: React.FC<CSSBackgroundProps> = ({
       <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-slate-950/40" />
 
       {/* CSS Animations */}
-      <style jsx>{`
+      <style>{`
         @keyframes float {
           0%, 100% {
             transform: translateY(0px) scale(1);
