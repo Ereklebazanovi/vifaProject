@@ -34,11 +34,13 @@ const OptimizedVideo: React.FC<OptimizedVideoProps> = ({
       src
     });
 
-    if (shouldLoadVideo) {
-      // Load videos with minimal delay
+    // Always try to load video for desktop - simplified logic
+    if (shouldLoadVideo || deviceInfo.screenWidth > 1024) {
+      console.log('Setting shouldLoad to true for:', src);
       const delay = deviceInfo.hasSlowConnection ? 1000 : 100;
       const timer = setTimeout(() => {
         setShouldLoad(true);
+        console.log('shouldLoad state updated to true for:', src);
       }, delay);
       return () => clearTimeout(timer);
     } else {
@@ -57,18 +59,28 @@ const OptimizedVideo: React.FC<OptimizedVideoProps> = ({
   }, [shouldLoadMedia, deviceInfo.hasSlowConnection, deviceInfo.isMobile, deviceInfo.screenWidth, src]);
 
   const handleLoadedData = () => {
+    console.log('Video loaded successfully:', src);
     setIsLoading(false);
     onLoadedData?.();
   };
 
-  const handleError = () => {
+  const handleError = (e: any) => {
+    console.error('Video failed to load:', src, e);
     setHasError(true);
     setIsLoading(false);
     onError?.();
   };
 
+  // Check what should be rendered
+  console.log('Render decision for', src, {
+    hasError,
+    shouldLoadMedia: shouldLoadMedia('video'),
+    shouldLoad,
+    isLoading
+  });
+
   // For mobile/slow connections or errors, show beautiful animated gradient
-  if (hasError || !shouldLoadMedia('video')) {
+  if (hasError || (!shouldLoadMedia('video') && deviceInfo.screenWidth <= 1024)) {
     return (
       <div
         className={`${className} bg-gradient-to-br from-slate-950 via-slate-800 to-slate-950 relative overflow-hidden`}
@@ -115,10 +127,22 @@ const OptimizedVideo: React.FC<OptimizedVideoProps> = ({
           style={style}
           onLoadedData={handleLoadedData}
           onError={handleError}
+          onLoadStart={() => console.log('Video load started:', src)}
+          onCanPlay={() => console.log('Video can play:', src)}
+          onPlaying={() => console.log('Video is playing:', src)}
           preload={settings.videoPreload as 'none' | 'metadata' | 'auto'}
         >
           <source src={src} type="video/mp4" />
         </video>
+      )}
+
+      {/* Debug info */}
+      {shouldLoad && (
+        <div className="absolute top-4 left-4 bg-black/50 text-white text-xs p-2 rounded z-50">
+          Video: {src.split('/').pop()}<br/>
+          Loading: {isLoading ? 'Yes' : 'No'}<br/>
+          ShouldLoad: {shouldLoad ? 'Yes' : 'No'}
+        </div>
       )}
     </div>
   );
