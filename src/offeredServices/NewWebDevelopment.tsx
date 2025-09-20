@@ -4,6 +4,7 @@ import type React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
+import OptimizedVideo from "../components/OptimizedVideo";
 import {
   FaReact,
   FaMobile,
@@ -34,7 +35,6 @@ import SEO from "../components/SEO";
 const NewWebDevelopment: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
   const [activeService, setActiveService] = useState<number>(0);
-  const [videoLoaded, setVideoLoaded] = useState(false);
   const [videoError, setVideoError] = useState(false);
 
   // Main web development services
@@ -162,30 +162,19 @@ const NewWebDevelopment: React.FC = () => {
           {/* Always show dark background first for smooth loading */}
           <div className="w-full h-full bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
 
-          {/* Video loads on top with smooth fade */}
+          {/* Optimized video with mobile detection */}
           {!videoError && (
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-                videoLoaded ? 'opacity-100' : 'opacity-0'
-              }`}
+            <OptimizedVideo
+              src="/web-development-bg.mp4"
+              className="absolute inset-0 w-full h-full object-cover"
               style={{
                 filter: `brightness(0.3) contrast(1.2) saturate(1.0)`,
               }}
-              onLoadedData={() => {
-                setVideoLoaded(true);
-                console.log('Web development video loaded successfully');
-              }}
-              onError={(e) => {
+              onError={() => {
                 setVideoError(true);
-                console.error('Web development video failed to load:', e);
+                console.error('Web development video failed to load');
               }}
-            >
-              <source src="/web-development-bg.mp4" type="video/mp4" />
-            </video>
+            />
           )}
 
           <div className="absolute inset-0 bg-slate-950/40" />

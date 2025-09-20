@@ -4,6 +4,7 @@ import type React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
+import OptimizedVideo from "../components/OptimizedVideo";
 import {
   FaVideo,
   FaCamera,
@@ -26,7 +27,6 @@ import SEO from "../components/SEO";
 const NewDigitalAdvertising: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
   const [activeService, setActiveService] = useState<number>(0);
-  const [videoLoaded, setVideoLoaded] = useState(false);
   const [videoError, setVideoError] = useState(false);
 
   // Main advertising services
@@ -189,24 +189,16 @@ const NewDigitalAdvertising: React.FC = () => {
           {/* Always show dark background first for smooth loading */}
           <div className="w-full h-full bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
 
-          {/* Video loads on top with smooth fade */}
+          {/* Optimized video with mobile detection */}
           {!videoError && (
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-                videoLoaded ? 'opacity-100' : 'opacity-0'
-              }`}
+            <OptimizedVideo
+              src="/digital-advertising-video.mp4"
+              className="absolute inset-0 w-full h-full object-cover"
               style={{
                 filter: `brightness(0.25) contrast(1.3) saturate(1.0)`,
               }}
-              onLoadedData={() => setVideoLoaded(true)}
               onError={() => setVideoError(true)}
-            >
-              <source src="/digital-advertising-video.mp4" type="video/mp4" />
-            </video>
+            />
           )}
 
           <div className="absolute inset-0 bg-slate-950/30" />

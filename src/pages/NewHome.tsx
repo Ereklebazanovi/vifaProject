@@ -12,7 +12,6 @@ const NewHome: React.FC = () => {
   const { t } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
   const [activeClient, setActiveClient] = useState<number>(0);
-  const [videoLoaded, setVideoLoaded] = useState(false);
   const [videoError, setVideoError] = useState(false);
 
   // Client companies data
@@ -94,7 +93,6 @@ const NewHome: React.FC = () => {
               style={{
                 filter: `brightness(0.4) contrast(1.2) saturate(1.1)`,
               }}
-              onLoadedData={() => setVideoLoaded(true)}
               onError={() => setVideoError(true)}
             />
           )}
