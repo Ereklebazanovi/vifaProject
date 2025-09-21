@@ -19,7 +19,6 @@ import {
   FaChartLine,
   FaBolt,
   FaServer,
-  FaShoppingCart,
   FaBrain,
 } from "react-icons/fa";
 import {
