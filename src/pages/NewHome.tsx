@@ -8,69 +8,89 @@ import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import SEO from "../components/SEO";
 import Hyperspeed from "../components/Hyperspeed";
 import { hyperspeedPresets } from "../components/hyperspeedPresets";
-
+import LogoLoop from "../components/LogoLoop";
 const NewHome: React.FC = () => {
   const { t } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
   const [activeClient, setActiveClient] = useState<number>(0);
 
-  // Client companies data
+  // Partner logos data - simple array
+  const partnerLogos = [
+    { src: "/saitislogoebi/Untitled-1.png", alt: "Partner 1" },
+    { src: "/saitislogoebi/Untitled-2.png", alt: "Partner 2" },
+    { src: "/saitislogoebi/Untitled-3.png", alt: "Partner 3" },
+    { src: "/saitislogoebi/Untitled-4.png", alt: "Partner 4" },
+    { src: "/saitislogoebi/Untitled-5.png", alt: "Partner 5" },
+    { src: "/saitislogoebi/Untitled-6.png", alt: "Partner 6" },
+    { src: "/saitislogoebi/Untitled-7.png", alt: "Partner 7" },
+    { src: "/saitislogoebi/Untitled-8.png", alt: "Partner 8" },
+    { src: "/saitislogoebi/Untitled-9.png", alt: "Partner 9" },
+    { src: "/saitislogoebi/Untitled-10.png", alt: "Partner 10" },
+  ];
+
+  // Client companies data for detail view
   const clients = [
     {
       id: "client1",
-      name: "TechCorp",
-      category: t("newHome.clients.technology"),
+      name: "Partner 1",
+      logo: "/saitislogoebi/Untitled-1.png",
       description: t("newHome.clients.tech.description"),
-      color: "blue",
     },
     {
       id: "client2",
-      name: "RestaurantChain",
-      category: t("newHome.clients.food"),
+      name: "Partner 2",
+      logo: "/saitislogoebi/Untitled-2.png",
       description: t("newHome.clients.restaurant.description"),
-      color: "green",
     },
     {
       id: "client3",
-      name: "HealthCare",
-      category: t("newHome.clients.medicine"),
+      name: "Partner 3",
+      logo: "/saitislogoebi/Untitled-3.png",
       description: t("newHome.clients.healthcare.description"),
-      color: "red",
     },
     {
       id: "client4",
-      name: "ECommerce",
-      category: t("newHome.clients.commerce"),
+      name: "Partner 4",
+      logo: "/saitislogoebi/Untitled-4.png",
       description: t("newHome.clients.ecommerce.description"),
-      color: "purple",
     },
     {
       id: "client5",
-      name: "Education",
-      category: t("newHome.clients.education"),
+      name: "Partner 5",
+      logo: "/saitislogoebi/Untitled-5.png",
       description: t("newHome.clients.education.description"),
-      color: "orange",
     },
     {
       id: "client6",
-      name: "Fashion",
-      category: t("newHome.clients.fashion"),
+      name: "Partner 6",
+      logo: "/saitislogoebi/Untitled-6.png",
       description: t("newHome.clients.fashion.description"),
-      color: "pink",
+    },
+    {
+      id: "client7",
+      name: "Partner 7",
+      logo: "/saitislogoebi/Untitled-7.png",
+      description: t("newHome.clients.tech.description"),
+    },
+    {
+      id: "client8",
+      name: "Partner 8",
+      logo: "/saitislogoebi/Untitled-8.png",
+      description: t("newHome.clients.restaurant.description"),
+    },
+    {
+      id: "client9",
+      name: "Partner 9",
+      logo: "/saitislogoebi/Untitled-9.png",
+      description: t("newHome.clients.healthcare.description"),
+    },
+    {
+      id: "client10",
+      name: "Partner 10",
+      logo: "/saitislogoebi/Untitled-10.png",
+      description: t("newHome.clients.ecommerce.description"),
     },
   ];
-
-  const getColorClass = (color: string) => {
-    const colors = {
-      blue: "border-blue-400 bg-blue-500/10",
-      green: "border-green-400 bg-green-500/10",
-      red: "border-red-400 bg-red-500/10",
-      purple: "border-purple-400 bg-purple-500/10",
-      orange: "border-orange-400 bg-orange-500/10",
-      pink: "border-pink-400 bg-pink-500/10",
-    };
-    return colors[color as keyof typeof colors] || colors.blue;
-  };
 
   return (
     <>
@@ -226,65 +246,16 @@ const NewHome: React.FC = () => {
               </div>
             </div>
 
-            {/* Moving Logo Strip */}
-            <div className="relative overflow-hidden bg-black/30 rounded-2xl border border-slate-800/20 mb-12">
-              <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black z-10 pointer-events-none"></div>
-
-              {/* First Row - Moving Right */}
-              <div className="flex animate-scroll-right py-8">
-                {[...clients, ...clients].map((client, index) => (
-                  <div
-                    key={`row1-${index}`}
-                    className="flex-shrink-0 mx-8 group cursor-pointer"
-                    onClick={() => setActiveClient(index % clients.length)}
-                  >
-                    <div
-                      className={`w-32 h-20 rounded-xl border-2 ${getColorClass(
-                        client.color
-                      )}
-                      flex items-center justify-center transition-all duration-300
-                      group-hover:scale-110 group-hover:border-opacity-100`}
-                    >
-                      <div className="text-center">
-                        <div className="text-white font-bold text-xl mb-1">
-                          {client.name.slice(0, 2)}
-                        </div>
-                        <div className="text-xs opacity-70">
-                          {client.category}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Second Row - Moving Left */}
-              <div className="flex animate-scroll-left pb-8">
-                {[
-                  ...clients.slice().reverse(),
-                  ...clients.slice().reverse(),
-                ].map((client, index) => (
-                  <div
-                    key={`row2-${index}`}
-                    className="flex-shrink-0 mx-8 group cursor-pointer"
-                    onClick={() => setActiveClient(index % clients.length)}
-                  >
-                    <div
-                      className={`w-32 h-20 rounded-xl border-2 ${getColorClass(
-                        client.color
-                      )}
-                      flex items-center justify-center transition-all duration-300
-                      group-hover:scale-110 group-hover:border-opacity-100`}
-                    >
-                      <div className="text-center">
-                        <div className="text-white font-bold text-xl mb-1">
-                          {client.name.slice(0, 2)}
-                        </div>
-                        <div className="text-xs opacity-70">
-                          {client.category}
-                        </div>
-                      </div>
-                    </div>
+            {/* Partner Logos - Simple Moving Strip */}
+            <div className="mb-12 overflow-hidden">
+              <div className="flex animate-scroll-infinite space-x-12 py-8">
+                {[...partnerLogos, ...partnerLogos, ...partnerLogos, ...partnerLogos].map((logo, index) => (
+                  <div key={index} className="flex-shrink-0">
+                    <img
+                      src={logo.src}
+                      alt={logo.alt}
+                      className="h-16 w-auto object-contain"
+                    />
                   </div>
                 ))}
               </div>
@@ -297,19 +268,16 @@ const NewHome: React.FC = () => {
                   <h3 className="text-2xl font-medium text-white">
                     {clients[activeClient].name}
                   </h3>
-                  <p className="text-blue-400">
-                    {clients[activeClient].category}
-                  </p>
                 </div>
                 <div
-                  className={`w-20 h-20 border-2 rounded-xl ${getColorClass(
-                    clients[activeClient].color
-                  )}
-                  flex items-center justify-center animate-pulse`}
+                  className="w-20 h-20 border-2 rounded-xl border-slate-600/30 bg-white/5
+                  flex items-center justify-center animate-pulse p-2"
                 >
-                  <span className="text-white font-bold text-xl">
-                    {clients[activeClient].name.slice(0, 2)}
-                  </span>
+                  <img
+                    src={clients[activeClient].logo}
+                    alt={clients[activeClient].name}
+                    className="w-full h-full object-contain filter brightness-0 invert opacity-70"
+                  />
                 </div>
               </div>
               <p className="text-slate-300 text-lg leading-relaxed">
