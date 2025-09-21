@@ -3,6 +3,7 @@
 import type React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { motion } from 'framer-motion';
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import BeautifulBackground from "../components/BeautifulBackground";
 import {
@@ -32,7 +33,7 @@ import {
 } from "react-icons/si";
 import SEO from "../components/SEO";
 
-const NewWebDevelopment: React.FC = () => {
+const WebDev: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
   const [activeService, setActiveService] = useState<number>(0);
 
@@ -173,23 +174,38 @@ const NewWebDevelopment: React.FC = () => {
                 </span>
               </div>
 
-              <h1 className="text-4xl md:text-6xl font-light text-white mb-8 leading-tight">
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="text-4xl md:text-6xl font-light text-white mb-8 leading-tight"
+              >
                 შექმენი თქვენი{" "}
                 <span className="bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent font-medium">
                   ციფრული ბიზნესი
                 </span>
                 <br />
                 <span className="text-slate-300 text-3xl md:text-5xl">მომავლისთვის</span>
-              </h1>
+              </motion.h1>
 
-              <p className="text-xl text-slate-300 mb-12 max-w-4xl mx-auto leading-relaxed">
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-xl text-slate-300 mb-12 max-w-4xl mx-auto leading-relaxed"
+              >
                 დღევანდელ ციფრულ სამყაროში, თქვენი ვებსაიტი არის თქვენი ბიზნესის სახე.
                 ჩვენ ვქმნით მოდერნულ, სწრაფ და ეფექტურ ვებ აპლიკაციებს, რომლებიც
                 ზრდის თქვენს ბიზნესს და აუმჯობესებს მომხმარებელთა გამოცდილებას.
-              </p>
+              </motion.p>
 
               {/* Stats Row */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16"
+              >
                 <div className="text-center">
                   <div className="text-3xl font-bold text-blue-400 mb-2">150+</div>
                   <div className="text-sm text-slate-400">განხორციელებული პროექტი</div>
@@ -206,7 +222,7 @@ const NewWebDevelopment: React.FC = () => {
                   <div className="text-3xl font-bold text-orange-400 mb-2">24/7</div>
                   <div className="text-sm text-slate-400">ტექნიკური მხარდაჭერა</div>
                 </div>
-              </div>
+              </motion.div>
 
          
             </div>
@@ -291,8 +307,11 @@ const NewWebDevelopment: React.FC = () => {
             {/* Services Grid - Fixed height for all cards */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
               {services.map((service, index) => (
-                <div
+                <motion.div
                   key={service.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
                   className={`group cursor-pointer transition-all duration-300 hover:scale-105`}
                   onClick={() => setActiveService(index)}
                 >
@@ -309,16 +328,16 @@ const NewWebDevelopment: React.FC = () => {
                         {service.title}
                       </h3>
                     </div>
-                    <p className="text-slate-400 text-sm leading-relaxed">
+                    <p className="text-slate-300 text-sm leading-relaxed">
                       {service.description}
                     </p>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
 
             {/* Active Service Display */}
-            <div className="border border-slate-600 bg-slate-900/30 p-8 rounded-2xl backdrop-blur-sm">
+            <div className="border border-slate-700/30 bg-black/50 p-8 rounded-2xl backdrop-blur-md">
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <h3 className="text-2xl font-medium text-white">
@@ -361,9 +380,12 @@ const NewWebDevelopment: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6">
-              {technologies.map((tech) => (
-                <div
+              {technologies.map((tech, index) => (
+                <motion.div
                   key={tech.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
                   className={`group cursor-pointer p-4 rounded-xl border-2 ${getColorClass(tech.color)}
                   border-opacity-30 hover:border-opacity-100 transition-all duration-300 hover:scale-110`}
                 >
@@ -375,7 +397,7 @@ const NewWebDevelopment: React.FC = () => {
                       {tech.name}
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -386,7 +408,7 @@ const NewWebDevelopment: React.FC = () => {
               <h3 className="text-3xl font-light text-white mb-6">
                 მზად ხართ თქვენი ციფრული ბიზნესის ტრანსფორმაციისთვის?
               </h3>
-              <p className="text-lg text-slate-400 mb-8">
+              <p className="text-lg text-slate-300 mb-8">
                 დაუკავშირდით ჩვენს გუნდს და დავიწყოთ თქვენი მომავლისგან ვებსაიტის შექმნა დღესვე.
                 გარანტირებული ხარისხი და სწრაფი ვადები.
               </p>
@@ -414,4 +436,4 @@ const NewWebDevelopment: React.FC = () => {
   );
 };
 
-export default NewWebDevelopment;
+export default WebDev;

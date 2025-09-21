@@ -220,7 +220,7 @@ const AboutPage = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 hover:border-blue-400/30 rounded-xl p-6 text-center hover:bg-slate-800/60 transition-all duration-300"
+                  className="bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-blue-400/50 rounded-xl p-6 text-center hover:bg-black/70 transition-all duration-300"
                 >
                   <div className="mb-4">
                     {service.icon}
@@ -255,7 +255,7 @@ const AboutPage = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 hover:border-purple-400/30 rounded-xl p-6 text-center hover:bg-slate-800/60 transition-all duration-300"
+                  className="bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-purple-400/50 rounded-xl p-6 text-center hover:bg-black/70 transition-all duration-300"
                 >
                   <div className="mb-4">
                     {value.icon}
@@ -286,7 +286,7 @@ const AboutPage = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.2 }}
-                  className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 text-center"
+                  className="bg-black/50 backdrop-blur-md border border-slate-800/30 rounded-xl p-6 text-center"
                 >
                   <div className="w-20 h-20 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full flex items-center justify-center mx-auto mb-4">
                     <FaUsers className="text-2xl text-white" />
@@ -317,7 +317,7 @@ const AboutPage = () => {
 
           {/* CTA Section */}
           <div className="max-w-4xl mx-auto text-center">
-            <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-blue-400/20 rounded-2xl p-12">
+            <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-lg border border-blue-400/30 rounded-2xl p-12">
               <h2 className="text-3xl font-light text-white mb-6">
                 {t('about.cta.title')}
               </h2>

@@ -3,6 +3,7 @@
 import type React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { motion } from 'framer-motion';
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import BeautifulBackground from "../components/BeautifulBackground";
 import {
@@ -24,7 +25,7 @@ import {
 } from "react-icons/fa";
 import SEO from "../components/SEO";
 
-const NewDigitalAdvertising: React.FC = () => {
+const Marketing: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
   const [activeService, setActiveService] = useState<number>(0);
 
@@ -188,7 +189,7 @@ const NewDigitalAdvertising: React.FC = () => {
         variant="purple"
       />
 
-      <div className="relative z-10 min-h-screen mt-16">
+      <div className="relative z-10 min-h-screen mt-20">
         <div
           className={`container mx-auto px-4 sm:px-6 lg:px-8 py-10 ${getTransitionClasses()}`}
         >
@@ -201,7 +202,12 @@ const NewDigitalAdvertising: React.FC = () => {
                 </span>
               </div>
 
-              <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-light text-white mb-8 leading-tight">
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-light text-white mb-8 leading-tight"
+              >
                 თქვენი ბრენდის{" "}
                 <span className="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent font-medium">
                   ციფრული ზრდა
@@ -210,18 +216,28 @@ const NewDigitalAdvertising: React.FC = () => {
                 <span className="text-slate-300 text-xl sm:text-2xl md:text-4xl lg:text-5xl">
                   დღეს იწყება
                 </span>
-              </h1>
+              </motion.h1>
 
-              <p className="text-xl text-slate-300 mb-12 max-w-4xl mx-auto leading-relaxed">
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-xl text-slate-200 mb-12 max-w-4xl mx-auto leading-relaxed"
+              >
                 დღევანდელ ციფრულ ეპოქაში, თქვენი ბრენდი უნდა იყოს ხილული,
                 მიმზიდველი და დამაჯერებელი. ჩვენ ვქმნით სრულყოფილ ციფრულ
                 ეკოსისტემას თქვენ
                 ი ბიზნესისთვის - ვიდეო კონტენტიდან სოციალურ
                 მედიამდე.
-              </p>
+              </motion.p>
 
               {/* Stats Row */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-16"
+              >
                 <div className="text-center">
                   <div className="text-3xl font-bold text-red-400 mb-2">
                     200+
@@ -250,7 +266,7 @@ const NewDigitalAdvertising: React.FC = () => {
                   </div>
                   <div className="text-sm text-slate-400">მხარდაჭერა</div>
                 </div>
-              </div>
+              </motion.div>
 
               <div className="flex justify-center gap-6">
                 <Link
@@ -364,19 +380,22 @@ const NewDigitalAdvertising: React.FC = () => {
             {/* Services Grid - Fixed height for all cards */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
               {services.map((service, index) => (
-                <div
+                <motion.div
                   key={service.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
                   className={`group cursor-pointer transition-all duration-300 hover:scale-105`}
                   onClick={() => setActiveService(index)}
                 >
                   <div
-                    className={`p-6 rounded-xl border-2 h-44 flex flex-col justify-between ${getColorClass(
+                    className={`p-6 rounded-xl border-2 h-44 flex flex-col justify-between bg-black/60 backdrop-blur-lg ${getColorClass(
                       service.color
-                    )}
+                    ).replace('bg-', 'border-')}
                     ${
                       activeService === index
                         ? "border-opacity-100 scale-105"
-                        : "border-opacity-30"
+                        : "border-opacity-40"
                     }
                     transition-all duration-300 group-hover:border-opacity-100`}
                   >
@@ -392,11 +411,11 @@ const NewDigitalAdvertising: React.FC = () => {
                         {service.title}
                       </h3>
                     </div>
-                    <p className="text-slate-400 text-sm leading-relaxed">
+                    <p className="text-slate-300 text-sm leading-relaxed">
                       {service.description}
                     </p>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -413,13 +432,16 @@ const NewDigitalAdvertising: React.FC = () => {
             </div>
 
             <div className="flex justify-center items-center gap-3 sm:gap-6 lg:gap-8 flex-wrap">
-              {platforms.map((platform) => (
-                <div
+              {platforms.map((platform, index) => (
+                <motion.div
                   key={platform.name}
-                  className={`group cursor-pointer p-6 rounded-xl border-2 ${getColorClass(
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className={`group cursor-pointer p-6 rounded-xl border-2 bg-black/60 backdrop-blur-lg ${getColorClass(
                     platform.color
-                  )}
-                  border-opacity-30 hover:border-opacity-100 transition-all duration-300 hover:scale-110`}
+                  ).replace('bg-', 'border-')}
+                  border-opacity-40 hover:border-opacity-100 transition-all duration-300 hover:scale-110`}
                 >
                   <div className="text-center">
                     <div
@@ -433,7 +455,7 @@ const NewDigitalAdvertising: React.FC = () => {
                       {platform.name}
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -472,4 +494,4 @@ const NewDigitalAdvertising: React.FC = () => {
   );
 };
 
-export default NewDigitalAdvertising;
+export default Marketing;

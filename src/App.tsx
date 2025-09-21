@@ -8,23 +8,19 @@ import { Suspense, lazy, useEffect } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import Layout from "./layout/Layout";
 import { LanguageProvider } from "./contexts/LanguageContext";
+import { NavigationProvider } from "./contexts/NavigationContext";
 import { addResourceHints } from "./utils/preload";
 import MouseTrail from "./components/MouseTrail";
 import { useRoutePreload } from "./hooks/useRoutePreload";
 import "./index.css";
 
-// Simple lazy loading - back to basics
+// Simple lazy loading - no artificial delays
 const Home = lazy(() => import("./pages/NewHome"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const StartProject = lazy(() => import("./service/StartProject"));
 const AdminDashboard = lazy(() => import("./admin/AdminDashboard"));
-const SocialMediaService = lazy(
-  () => import("./offeredServices/SocialMediaService")
-);
-const DigitalAdvertising = lazy(
-  () => import("./offeredServices/NewDigitalAdvertising")
-);
-const WebDevelopment = lazy(() => import("./offeredServices/NewWebDevelopment"));
+const Marketing = lazy(() => import("./offeredServices/Marketing"));
+const WebDev = lazy(() => import("./offeredServices/WebDev"));
 
 // Error Boundary Component
 class ErrorBoundary extends React.Component<
@@ -66,25 +62,39 @@ class ErrorBoundary extends React.Component<
   }
 }
 
-// Smooth loading component that maintains visual continuity
+// Beautiful blue loading component with enhanced design
 const LoadingSpinner = () => (
   <div className="min-h-screen bg-slate-950">
-    {/* Dark gradient background similar to video backgrounds */}
+    {/* Dark gradient background similar to other pages */}
     <div className="fixed inset-0 z-0">
       <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
-      <div className="absolute inset-0 bg-slate-950/30" />
+      <div className="absolute inset-0 bg-slate-950/40" />
     </div>
 
-    {/* Minimal loading indicator */}
+    {/* Enhanced loading indicator */}
     <div className="relative z-10 flex items-center justify-center min-h-screen">
-      <div className="flex flex-col items-center space-y-4">
-        {/* Subtle spinner */}
+      <div className="flex flex-col items-center space-y-6">
+        {/* Beautiful multi-layer spinner */}
         <div className="relative">
-          <div className="w-8 h-8 border-2 border-slate-600 rounded-full"></div>
-          <div className="absolute top-0 left-0 w-8 h-8 border-2 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+          {/* Outer ring */}
+          <div className="w-16 h-16 border-2 border-slate-700/30 rounded-full"></div>
+          {/* Middle ring */}
+          <div className="absolute top-1 left-1 w-14 h-14 border-2 border-blue-500/20 rounded-full"></div>
+          {/* Inner spinning ring */}
+          <div className="absolute top-2 left-2 w-12 h-12 border-2 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+          {/* Center dot */}
+          <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-blue-400 rounded-full transform -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
         </div>
-        {/* Subtle loading text */}
-        <p className="text-slate-400 text-sm font-light">იტვირთება</p>
+
+        {/* Loading text with animation */}
+        <div className="text-center space-y-2">
+          <p className="text-blue-400 text-lg font-medium animate-pulse">იტვირთება</p>
+          <div className="flex space-x-1 justify-center">
+            <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{animationDelay: '0ms'}}></div>
+            <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{animationDelay: '150ms'}}></div>
+            <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{animationDelay: '300ms'}}></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -117,33 +127,26 @@ const AppWithRouter: React.FC = () => {
   return (
     <ErrorBoundary>
       <MouseTrail />
-      <Suspense fallback={<LoadingSpinner />}>
-        <RouteTransition>
+      <RouteTransition>
+        <Suspense fallback={<LoadingSpinner />}>
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
-              <Route
-                path="services/social-media"
-                element={<SocialMediaService />}
-              />
-              <Route
-                path="services/digital-advertising"
-                element={<DigitalAdvertising />}
-              />
-              <Route
-                path="services/web-development"
-                element={<WebDevelopment />}
-              />
+              <Route path="services/digital-advertising" element={<Marketing />} />
+              <Route path="services/web-development" element={<WebDev />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="contact" element={<Contact />} />
               <Route path="start-project" element={<StartProject />} />
             </Route>
 
             {/* Admin routes without Layout (no navbar/footer) */}
-            <Route path="/admin/leads" element={<AdminDashboard />} />
+            <Route
+              path="/admin/leads"
+              element={<AdminDashboard />}
+            />
           </Routes>
-        </RouteTransition>
-      </Suspense>
+        </Suspense>
+      </RouteTransition>
     </ErrorBoundary>
   );
 };
@@ -159,9 +162,11 @@ const App: React.FC = () => {
     <ErrorBoundary>
       <HelmetProvider>
         <LanguageProvider>
-          <Router>
-            <AppWithRouter />
-          </Router>
+          <NavigationProvider>
+            <Router>
+              <AppWithRouter />
+            </Router>
+          </NavigationProvider>
         </LanguageProvider>
       </HelmetProvider>
     </ErrorBoundary>

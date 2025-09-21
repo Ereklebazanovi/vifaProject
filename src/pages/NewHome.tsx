@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import SEO from "../components/SEO";
-import BeautifulBackground from "../components/BeautifulBackground";
+import Hyperspeed from "../components/Hyperspeed";
+import { hyperspeedPresets } from "../components/hyperspeedPresets";
 
 const NewHome: React.FC = () => {
   const { t } = useLanguage();
@@ -78,11 +79,14 @@ const NewHome: React.FC = () => {
         description={t("seo.home.description")}
       />
 
-      {/* Beautiful Animated Background - Full Page Coverage */}
-      <BeautifulBackground
+      {/* Hyperspeed Background - Full Page Coverage */}
+      <Hyperspeed
         className="fixed inset-0 z-0"
-        variant="default"
+        effectOptions={hyperspeedPresets.one}
       />
+
+      {/* Light overlay for text readability */}
+      <div className="fixed inset-0 z-5 bg-black/15"></div>
 
       <div className="relative z-10 min-h-screen mt-15">
         <div
@@ -106,7 +110,7 @@ const NewHome: React.FC = () => {
                   {t("newHome.hero.connection")}
                 </h1>
 
-                <p className="text-lg text-slate-400 mb-8 leading-relaxed">
+                <p className="text-lg text-slate-300 mb-8 leading-relaxed">
                   {t("newHome.hero.description")}
                 </p>
 
@@ -174,7 +178,7 @@ const NewHome: React.FC = () => {
                   .slice(0, 2)
                   .join(" ")}
               </h3>
-              <p className="text-slate-400">
+              <p className="text-slate-300">
                 {t("newHome.services.strategic")}
               </p>
             </div>
@@ -186,7 +190,7 @@ const NewHome: React.FC = () => {
               <h3 className="text-xl font-medium text-white mb-3">
                 {t("newHome.services.digital").split(" ").slice(0, 2).join(" ")}
               </h3>
-              <p className="text-slate-400">{t("newHome.services.digital")}</p>
+              <p className="text-slate-300">{t("newHome.services.digital")}</p>
             </div>
 
             <div className="text-center">
@@ -196,7 +200,7 @@ const NewHome: React.FC = () => {
               <h3 className="text-xl font-medium text-white mb-3">
                 {t("newHome.services.results").split(" ").slice(0, 2).join(" ")}
               </h3>
-              <p className="text-slate-400">{t("newHome.services.results")}</p>
+              <p className="text-slate-300">{t("newHome.services.results")}</p>
             </div>
           </div>
 
@@ -223,8 +227,8 @@ const NewHome: React.FC = () => {
             </div>
 
             {/* Moving Logo Strip */}
-            <div className="relative overflow-hidden bg-slate-900/20 rounded-2xl border border-slate-700/30 mb-12">
-              <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-transparent to-slate-900 z-10 pointer-events-none"></div>
+            <div className="relative overflow-hidden bg-black/30 rounded-2xl border border-slate-800/20 mb-12">
+              <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black z-10 pointer-events-none"></div>
 
               {/* First Row - Moving Right */}
               <div className="flex animate-scroll-right py-8">
@@ -287,7 +291,7 @@ const NewHome: React.FC = () => {
             </div>
 
             {/* Active Client Display */}
-            <div className="border border-slate-600 bg-slate-900/30 p-8 rounded-2xl backdrop-blur-sm">
+            <div className="border border-slate-700/30 bg-black/40 p-8 rounded-2xl backdrop-blur-md">
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <h3 className="text-2xl font-medium text-white">

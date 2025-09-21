@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import LanguageToggle from "../components/LanguageToggle";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
+import { useNavigation } from "../contexts/NavigationContext";
 
 const SimpleNavbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -11,6 +12,17 @@ const SimpleNavbar: React.FC = () => {
   const { t } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
   const location = useLocation();
+  const navigate = useNavigate();
+  const { startNavigation, stopNavigation } = useNavigation();
+
+  const handleNavigation = (path: string) => {
+    if (location.pathname !== path) {
+      startNavigation();
+      navigate(path);
+      // Stop navigation after a short delay to ensure component loads
+      setTimeout(() => stopNavigation(), 100);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -90,9 +102,9 @@ const SimpleNavbar: React.FC = () => {
             className={`hidden lg:flex justify-center items-center space-x-8 ${getTransitionClasses()}`}
           >
             {navLinks.map((link, index) => (
-              <Link
+              <button
                 key={index}
-                to={link.path}
+                onClick={() => handleNavigation(link.path)}
                 className={`px-4 py-2 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 transform hover:scale-105 ${
                   location.pathname === link.path
                     ? "text-blue-300 bg-blue-500/10 border-b-2 border-blue-400 shadow-lg"
@@ -100,7 +112,7 @@ const SimpleNavbar: React.FC = () => {
                 }`}
               >
                 {link.label}
-              </Link>
+              </button>
             ))}
           </div>
 
@@ -109,9 +121,9 @@ const SimpleNavbar: React.FC = () => {
             className={`hidden md:flex lg:hidden justify-center items-center space-x-4 ${getTransitionClasses()}`}
           >
             {navLinks.map((link, index) => (
-              <Link
+              <button
                 key={index}
-                to={link.path}
+                onClick={() => handleNavigation(link.path)}
                 className={`px-3 py-2 text-xs font-medium rounded-md transition-all duration-300 transform hover:scale-105 text-center ${
                   location.pathname === link.path
                     ? "text-blue-300 bg-blue-500/10 border-b-2 border-blue-400 shadow-sm"
@@ -119,7 +131,7 @@ const SimpleNavbar: React.FC = () => {
                 }`}
               >
                 <span className="block leading-tight">{link.label}</span>
-              </Link>
+              </button>
             ))}
           </div>
 
@@ -129,9 +141,9 @@ const SimpleNavbar: React.FC = () => {
           >
             <div className="flex justify-center items-center space-x-2">
               {navLinks.slice(0, 2).map((link, index) => (
-                <Link
+                <button
                   key={index}
-                  to={link.path}
+                  onClick={() => handleNavigation(link.path)}
                   className={`px-2 py-1.5 text-xs font-medium rounded-md transition-all duration-300 transform active:scale-95 text-center flex-1 max-w-[120px] ${
                     location.pathname === link.path
                       ? "text-blue-300 bg-blue-500/10 border-b border-blue-400 shadow-sm"
@@ -139,14 +151,14 @@ const SimpleNavbar: React.FC = () => {
                   }`}
                 >
                   <span className="block leading-tight">{link.label}</span>
-                </Link>
+                </button>
               ))}
             </div>
             <div className="flex justify-center items-center space-x-2">
               {navLinks.slice(2).map((link, index) => (
-                <Link
+                <button
                   key={index + 2}
-                  to={link.path}
+                  onClick={() => handleNavigation(link.path)}
                   className={`px-2 py-1.5 text-xs font-medium rounded-md transition-all duration-300 transform active:scale-95 text-center flex-1 max-w-[120px] ${
                     location.pathname === link.path
                       ? "text-blue-300 bg-blue-500/10 border-b border-blue-400 shadow-sm"
@@ -154,7 +166,7 @@ const SimpleNavbar: React.FC = () => {
                   }`}
                 >
                   <span className="block leading-tight">{link.label}</span>
-                </Link>
+                </button>
               ))}
             </div>
           </div>
