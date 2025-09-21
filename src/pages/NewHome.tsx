@@ -8,11 +8,9 @@ import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import SEO from "../components/SEO";
 import Hyperspeed from "../components/Hyperspeed";
 import { hyperspeedPresets } from "../components/hyperspeedPresets";
-import LogoLoop from "../components/LogoLoop";
 const NewHome: React.FC = () => {
   const { t } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
-  const [activeClient, setActiveClient] = useState<number>(0);
 
   // Partner logos data - simple array
   const partnerLogos = [
@@ -266,7 +264,7 @@ const NewHome: React.FC = () => {
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <h3 className="text-2xl font-medium text-white">
-                    {clients[activeClient].name}
+                    {clients[0].name}
                   </h3>
                 </div>
                 <div
@@ -274,14 +272,14 @@ const NewHome: React.FC = () => {
                   flex items-center justify-center animate-pulse p-2"
                 >
                   <img
-                    src={clients[activeClient].logo}
-                    alt={clients[activeClient].name}
+                    src={clients[0].logo}
+                    alt={clients[0].name}
                     className="w-full h-full object-contain filter brightness-0 invert opacity-70"
                   />
                 </div>
               </div>
               <p className="text-slate-300 text-lg leading-relaxed">
-                {clients[activeClient].description}
+                {clients[0].description}
               </p>
             </div>
           </div>
