@@ -26,69 +26,7 @@ const NewHome: React.FC = () => {
     { src: "/saitislogoebi/Untitled-10.png", alt: "Partner 10" },
   ];
 
-  // Client companies data for detail view
-  const clients = [
-    {
-      id: "client1",
-      name: "Partner 1",
-      logo: "/saitislogoebi/Untitled-1.png",
-      description: t("newHome.clients.tech.description"),
-    },
-    {
-      id: "client2",
-      name: "Partner 2",
-      logo: "/saitislogoebi/Untitled-2.png",
-      description: t("newHome.clients.restaurant.description"),
-    },
-    {
-      id: "client3",
-      name: "Partner 3",
-      logo: "/saitislogoebi/Untitled-3.png",
-      description: t("newHome.clients.healthcare.description"),
-    },
-    {
-      id: "client4",
-      name: "Partner 4",
-      logo: "/saitislogoebi/Untitled-4.png",
-      description: t("newHome.clients.ecommerce.description"),
-    },
-    {
-      id: "client5",
-      name: "Partner 5",
-      logo: "/saitislogoebi/Untitled-5.png",
-      description: t("newHome.clients.education.description"),
-    },
-    {
-      id: "client6",
-      name: "Partner 6",
-      logo: "/saitislogoebi/Untitled-6.png",
-      description: t("newHome.clients.fashion.description"),
-    },
-    {
-      id: "client7",
-      name: "Partner 7",
-      logo: "/saitislogoebi/Untitled-7.png",
-      description: t("newHome.clients.tech.description"),
-    },
-    {
-      id: "client8",
-      name: "Partner 8",
-      logo: "/saitislogoebi/Untitled-8.png",
-      description: t("newHome.clients.restaurant.description"),
-    },
-    {
-      id: "client9",
-      name: "Partner 9",
-      logo: "/saitislogoebi/Untitled-9.png",
-      description: t("newHome.clients.healthcare.description"),
-    },
-    {
-      id: "client10",
-      name: "Partner 10",
-      logo: "/saitislogoebi/Untitled-10.png",
-      description: t("newHome.clients.ecommerce.description"),
-    },
-  ];
+  
 
   return (
     <>
@@ -259,29 +197,7 @@ const NewHome: React.FC = () => {
               </div>
             </div>
 
-            {/* Active Client Display */}
-            <div className="border border-slate-700/30 bg-black/40 p-8 rounded-2xl backdrop-blur-md">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h3 className="text-2xl font-medium text-white">
-                    {clients[0].name}
-                  </h3>
-                </div>
-                <div
-                  className="w-20 h-20 border-2 rounded-xl border-slate-600/30 bg-white/5
-                  flex items-center justify-center animate-pulse p-2"
-                >
-                  <img
-                    src={clients[0].logo}
-                    alt={clients[0].name}
-                    className="w-full h-full object-contain filter brightness-0 invert opacity-70"
-                  />
-                </div>
-              </div>
-              <p className="text-slate-300 text-lg leading-relaxed">
-                {clients[0].description}
-              </p>
-            </div>
+           
           </div>
 
           {/* CTA Section */}
