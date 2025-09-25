@@ -129,13 +129,10 @@ const NewHome: React.FC = () => {
                 <div className="w-6 h-6 border-2 border-blue-400 rounded"></div>
               </div>
               <h3 className="text-xl font-medium text-white mb-3">
-                {t("newHome.services.strategic")
-                  .split(" ")
-                  .slice(0, 2)
-                  .join(" ")}
+                {t("newHome.services.research.title")}
               </h3>
               <p className="text-slate-300">
-                {t("newHome.services.strategic")}
+                {t("newHome.services.research.description")}
               </p>
             </div>
 
@@ -144,9 +141,9 @@ const NewHome: React.FC = () => {
                 <div className="w-6 h-6 border-2 border-green-400 rounded-full"></div>
               </div>
               <h3 className="text-xl font-medium text-white mb-3">
-                {t("newHome.services.digital").split(" ").slice(0, 2).join(" ")}
+                {t("newHome.services.strategy.title")}
               </h3>
-              <p className="text-slate-300">{t("newHome.services.digital")}</p>
+              <p className="text-slate-300">{t("newHome.services.strategy.description")}</p>
             </div>
 
             <div className="text-center">
@@ -154,9 +151,9 @@ const NewHome: React.FC = () => {
                 <div className="w-6 h-6 border-2 border-purple-400"></div>
               </div>
               <h3 className="text-xl font-medium text-white mb-3">
-                {t("newHome.services.results").split(" ").slice(0, 2).join(" ")}
+                {t("newHome.services.execution.title")}
               </h3>
-              <p className="text-slate-300">{t("newHome.services.results")}</p>
+              <p className="text-slate-300">{t("newHome.services.execution.description")}</p>
             </div>
           </div>
 
@@ -198,6 +195,108 @@ const NewHome: React.FC = () => {
             </div>
 
            
+          </div>
+
+          {/* Interactive Information Section */}
+          <div className="max-w-7xl mx-auto mt-32 mb-24">
+            {/* Section Header */}
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-light text-white mb-6">
+                {t("newHome.interactive.title")}{" "}
+                <span className="text-blue-400">
+                  {t("newHome.interactive.titleHighlight")}
+                </span>
+              </h2>
+              <p className="text-xl text-slate-300 max-w-4xl mx-auto leading-relaxed">
+                {t("newHome.interactive.intro")}
+              </p>
+            </div>
+
+            {/* Two-Column Layout */}
+            <div className="grid lg:grid-cols-2 gap-16 items-start">
+
+              {/* Left Side - Process Animation */}
+              <div className="space-y-8">
+                <div className="text-center lg:text-left mb-12">
+                  <h3 className="text-2xl md:text-3xl font-light text-white mb-4">
+                    {t("newHome.interactive.processTitle")}{" "}
+                    <span className="text-green-400">
+                      {t("newHome.interactive.processTitleHighlight")}
+                    </span>
+                  </h3>
+                </div>
+
+                {/* Process Steps */}
+                <div className="space-y-6">
+                  {[1, 2, 3, 4].map((stepNum) => (
+                    <div key={stepNum} className="flex items-start gap-6 group">
+                      {/* Step Circle with Animation */}
+                      <div className="flex-shrink-0">
+                        <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500/20 to-green-500/20 border border-blue-400/30 flex items-center justify-center group-hover:border-blue-400/60 transition-all duration-300 group-hover:scale-110">
+                          <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-400 to-green-400 flex items-center justify-center text-white font-bold text-sm">
+                            {stepNum}
+                          </div>
+                        </div>
+                        {/* Connection Line */}
+                        {stepNum < 4 && (
+                          <div className="w-px h-12 bg-gradient-to-b from-blue-400/30 to-green-400/30 mx-auto mt-2"></div>
+                        )}
+                      </div>
+
+                      {/* Step Content */}
+                      <div className="flex-1 pb-8">
+                        <h4 className="text-lg font-medium text-white mb-1 group-hover:text-blue-300 transition-colors">
+                          {t(`newHome.interactive.step${stepNum}.title`)}
+                        </h4>
+                        <p className="text-blue-400 text-sm font-medium mb-2">
+                          {t(`newHome.interactive.step${stepNum}.subtitle`)}
+                        </p>
+                        <p className="text-slate-300 text-sm leading-relaxed">
+                          {t(`newHome.interactive.step${stepNum}.description`)}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right Side - 21st Century Challenges */}
+              <div className="space-y-8">
+                <div className="text-center lg:text-left mb-12">
+                  <h3 className="text-2xl md:text-3xl font-light text-white mb-8">
+                    {t("newHome.interactive.challengesTitle")}
+                  </h3>
+                </div>
+
+                {/* Challenge Cards */}
+                <div className="grid gap-6">
+                  {[1, 2, 3, 4].map((challengeNum) => (
+                    <div key={challengeNum} className="group">
+                      <div className="bg-black/30 backdrop-blur-sm border border-slate-700/30 rounded-xl p-6 hover:bg-black/50 hover:border-slate-600/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-500/10">
+                        <div className="flex items-start gap-4">
+                          {/* Icon */}
+                          <div className="flex-shrink-0">
+                            <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-400/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
+                              {t(`newHome.interactive.challenge${challengeNum}.icon`)}
+                            </div>
+                          </div>
+
+                          {/* Content */}
+                          <div className="flex-1">
+                            <h4 className="text-lg font-medium text-white mb-2 group-hover:text-blue-300 transition-colors">
+                              {t(`newHome.interactive.challenge${challengeNum}.title`)}
+                            </h4>
+                            <p className="text-slate-400 text-sm leading-relaxed">
+                              {t(`newHome.interactive.challenge${challengeNum}.description`)}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* CTA Section */}

@@ -86,15 +86,14 @@ const SimpleNavbar: React.FC = () => {
               <h1
                 className={`font-light tracking-wider sm:tracking-[0.2em] transition-all duration-300 text-white break-words hyphens-auto leading-tight ${
                   isScrolled
-                    ? "text-sm xs:text-base sm:text-lg md:text-xl"
-                    : "text-base xs:text-lg sm:text-2xl md:text-3xl"
+                    ? "text-lg xs:text-xl sm:text-xl md:text-2xl"
+                    : "text-xl xs:text-2xl sm:text-3xl md:text-4xl"
                 }`}
               >
-                <span className="block xs:inline">VIFA </span>
-                <span className="font-normal text-blue-400 block xs:inline">
-                  ADVERTISING
-                </span>{" "}
-                <span className="block xs:inline">AGENCY</span>
+                <span className="inline">VIFA </span>
+                <span className="font-normal text-blue-400 inline">
+                  DIGITAL
+                </span>
               </h1>
             </Link>
           </div>

@@ -174,7 +174,7 @@ const AboutPage = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               <h2 className="text-3xl font-light text-white mb-6">
-                ჩვენ ვართ <span className="text-blue-400">VIFA</span>
+                ჩვენ ვართ <span className="text-blue-400">Vifa Digital</span>
               </h2>
             </motion.div>
 
@@ -189,35 +189,15 @@ const AboutPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.8 }}
               >
-                VIFA შეიქმნა 2020 წელს — ჩვენი გუნდი მიზნად ისახავდა ისეთი
-                ციფრული სააგენტოს შექმნას, რომელიც ქართულ ბიზნესებს დაეხმარებოდა
-                წარმატებით ფუნქციონირებაში ონლაინ სივრცეში.
+                Vifa Digital შეიქმნა 2021 წელს, ჩვენმა გუნდმა გადაწყვიტა შეექმნა ციფრული სააგენტო, რომელიც დაეხმარებოდა ქართულ ბიზნესებს წარმატებულად ფუნქციონირებაში ციფრულ სივრცეში.
               </motion.p>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1.0 }}
               >
-                დღეს ჩვენ ვართ წამყვანი ციფრული სააგენტო საქართველოში.
-                ვემსახურებით როგორც მცირე ბიზნესებს, ისე დიდ კორპორაციებს. ჩვენი
-                მისიაა თითოეული კლიენტისთვის შევქმნათ უნიკალური და ეფექტური
-                ციფრული გადაწყვეტა.
+                დღეს ჩვენ ვართ წამყვანი ციფრული სააგენტო საქართველოში, რომელიც მომსახურებას უწევს როგორც მცირე ბიზნესებს, ასევე დიდ კორპორაციებს. ჩვენი მიზანია ყოველი კლიენტისთვის შევქმნათ უნიკალური და ეფექტური ციფრული გადაწყვეტილება.
               </motion.p>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 1.2 }}
-              >{t("about.story.paragraph1")}</motion.p>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 1.4 }}
-              >{t("about.story.paragraph2")}</motion.p>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 1.6 }}
-              >{t("about.story.paragraph3")}</motion.p>
             </motion.div>
           </motion.div>
 

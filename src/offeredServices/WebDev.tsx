@@ -586,7 +586,7 @@ const WebDev: React.FC = () => {
           <div id="services" className="max-w-7xl mx-auto mb-32">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-light text-white mb-4">
-                რას გთვაზობთ
+                რას გთავაზობთ
               </h2>
             </div>
 

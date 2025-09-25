@@ -146,8 +146,8 @@ const Footer: React.FC = () => {
               </motion.div>
               <div>
                 <div className="text-2xl font-light tracking-wider">
-                  <span className="text-white group-hover:text-blue-300 transition-colors duration-300">VIFA</span>
-                  <span className="text-blue-400 font-normal">{" "}ADVERTISING</span>
+                  <span className="text-blue-600 font-normal group-hover:text-blue-300 transition-colors duration-300">VIFA DIGITAL</span>
+                  <span className="text-blue-400 font-normal">{" "}</span>
                 </div>
                 <div className="text-xs font-light tracking-wide -mt-1 text-slate-500 group-hover:text-slate-400 transition-colors duration-300">
                   {t('footer.brand.tagline')}

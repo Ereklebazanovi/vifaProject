@@ -5,20 +5,20 @@ export const siteConfig = {
   siteName: "Vifa Digital",
   siteTitle: "Vifa Digital - ციფრული მარკეტინგის სააგენტო საქართველოში",
 
-  // Domain - UPDATE WHEN DOMAIN IS PURCHASED
-  domain: "vifadigital.ge", // placeholder - change when domain is ready
-  url: "https://vifadigital.ge", // placeholder - change when domain is ready
+  // Domain
+  domain: "vifadigital.com",
+  url: "https://vifadigital.com",
 
   // Contact Info
-  email: "info@vifadigital.ge", // UPDATE when domain is ready
-  phone: "+995 555 123 456", // UPDATE with real phone number
+  email: "info@vifadigital.com",
+  phone: "+995 557 62 42 43", // UPDATE with real phone number
 
-  // Social Media - UPDATE WHEN FACEBOOK PAGE IS CREATED
+  // Social Media
   social: {
-    facebook: "https://www.facebook.com/vifadigital", // placeholder
-    instagram: "https://www.instagram.com/vifa_digital", // placeholder
-    linkedin: "https://www.linkedin.com/company/vifadigital", // placeholder
-    twitter: "https://twitter.com/vifadigital", // placeholder
+    facebook: "https://www.facebook.com/vifadigital.official",
+    instagram: "https://www.instagram.com/vifadigital.official",
+    linkedin: "https://www.linkedin.com/company/vifadigital",
+    twitter: "https://twitter.com/vifadigital",
   },
 
   // SEO

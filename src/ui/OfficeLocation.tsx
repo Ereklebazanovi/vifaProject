@@ -19,7 +19,7 @@ const OfficeLocation: React.FC<OfficeLocationProps> = ({
   address,
   coordinates = { lat: 41.7151, lng: 44.8271 }, // Tbilisi center as default
   businessHours,
-  phone = "+995 555 123 456",
+  phone = "+995 557 62 42 43",
   email = "info@vifa.ge",
   compactMode = false
 }) => {
