@@ -5,7 +5,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
-import BeautifulBackground from "../components/BeautifulBackground";
 import {
   FaVideo,
   FaCamera,

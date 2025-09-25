@@ -33,30 +33,6 @@ const AboutPage = () => {
     },
   };
 
-  // Stats data
-  const stats = [
-    {
-      number: "50+",
-      label: t("about.stats.projects"),
-      color: "text-blue-400",
-    },
-    {
-      number: "100+",
-      label: t("about.stats.clients"),
-      color: "text-green-400",
-    },
-    {
-      number: "3+",
-      label: t("about.stats.experience"),
-      color: "text-purple-400",
-    },
-    {
-      number: "24/7",
-      label: t("about.stats.support"),
-      color: "text-yellow-400",
-    },
-  ];
-
   // Services data
   const services = [
     {

@@ -459,7 +459,7 @@ const translations = {
     "newHome.cta.question": "გსურთ შეუერთდეთ ჩვენს წარმატებულ კლიენტებს?",
     "newHome.cta.button": "დაიწყეთ თანამშრომლობა",
     // Interactive Information Section
-    "newHome.interactive.title": "რატომ არის ვებსაიტი აუცილებელი",
+    "newHome.interactive.title": "რატომ არის ციფრული წარმატება დღეს აუცილებელი?",
     "newHome.interactive.titleHighlight": "დღეს?",
     "newHome.interactive.intro": "21-ე საუკუნეში მომხმარებლები პირველ რიგში ონლაინ ეძებენ ბიზნესს. ვებსაიტი არის შენი სანდოობის, ხილვადობის და ზრდის მთავარი ინსტრუმენტი.",
 
@@ -555,8 +555,9 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
       string,
       string
     >;
+    const georgianTranslations = translations.ka as Record<string, string>;
     // If English translation doesn't exist, fall back to Georgian
-    return currentTranslations[key] || translations.ka[key] || key;
+    return currentTranslations[key] || georgianTranslations[key] || key;
   };
 
   return (
