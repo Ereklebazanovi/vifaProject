@@ -52,11 +52,13 @@ const SimpleNavbar: React.FC = () => {
   }, [lastScrollY]);
 
   const navLinks = [
+    { path: "/services/web-development", label: t("services.webdev.title") },
+
     {
       path: "/services/digital-advertising",
       label: t("services.advertising.title"),
     },
-    { path: "/services/web-development", label: t("services.webdev.title") },
+
     { path: "/about", label: t("nav.about") },
     { path: "/start-project", label: t("nav.startProject") },
   ];
@@ -83,12 +85,12 @@ const SimpleNavbar: React.FC = () => {
             <Link to="/" className="inline-block">
               <h1
                 className={`font-light tracking-wider sm:tracking-[0.2em] transition-all duration-300 text-white break-words hyphens-auto leading-tight ${
-                  isScrolled 
-                    ? "text-sm xs:text-base sm:text-lg md:text-xl" 
+                  isScrolled
+                    ? "text-sm xs:text-base sm:text-lg md:text-xl"
                     : "text-base xs:text-lg sm:text-2xl md:text-3xl"
                 }`}
               >
-                <span className="block xs:inline">VIFA{" "}</span>
+                <span className="block xs:inline">VIFA </span>
                 <span className="font-normal text-blue-400 block xs:inline">
                   ADVERTISING
                 </span>{" "}
@@ -137,7 +139,7 @@ const SimpleNavbar: React.FC = () => {
 
           {/* Mobile Navigation - Vertical layout for better space usage */}
           <div
-            className={`md:hidden flex flex-col space-y-1 ${getTransitionClasses()}`}
+            className={`mt-7 md:hidden flex flex-col space-y-1 ${getTransitionClasses()}`}
           >
             <div className="flex justify-center items-center space-x-2">
               {navLinks.slice(0, 2).map((link, index) => (
@@ -174,8 +176,8 @@ const SimpleNavbar: React.FC = () => {
           {/* Language Toggle - Responsive positioning */}
           <div
             className={`absolute transition-all duration-300 ${
-              isScrolled 
-                ? "top-1 right-2 sm:top-2 sm:right-3" 
+              isScrolled
+                ? "top-1 right-2 sm:top-2 sm:right-3"
                 : "top-2 right-2 sm:top-4 sm:right-4"
             }`}
           >

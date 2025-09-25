@@ -53,7 +53,7 @@ const Footer: React.FC = () => {
   const services = [
     { name: t('footer.services.webdev'), href: "/services/web-development", icon: <FaCode className="w-4 h-4" /> },
     { name: t('footer.services.ads'), href: "/services/digital-advertising", icon: <FaChartLine className="w-4 h-4" /> },
-    { name: t('footer.services.social'), href: "/services/social-media", icon: <FaInstagram className="w-4 h-4" /> },
+    
   ];
 
   const quickLinks = [
@@ -65,8 +65,8 @@ const Footer: React.FC = () => {
   const contactInfo = [
     {
       icon: <FaPhone className="w-4 h-4" />,
-      text: "+995 555 123 456",
-      href: "tel:+995555123456",
+      text: "+995 557 62 42 43",
+      href: "tel:+995557624243",
       color: "text-blue-400"
     },
     {

@@ -3,7 +3,7 @@
 import type React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import BeautifulBackground from "../components/BeautifulBackground";
 import {
@@ -12,7 +12,6 @@ import {
   FaShare,
   FaEdit,
   FaChartLine,
-  FaBullseye,
   FaPaintBrush,
   FaStar,
   FaInstagram,
@@ -22,6 +21,10 @@ import {
   FaLinkedin,
   FaRocket,
   FaArrowRight,
+  FaCheckCircle,
+  FaBullseye,
+  FaBolt,
+  FaCog,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
 
@@ -183,11 +186,18 @@ const Marketing: React.FC = () => {
         description="Professional digital advertising services including video production, photography, social media management, and creative content."
       />
 
-      {/* Beautiful Animated Background - Full Page Coverage */}
-      <BeautifulBackground
+      {/* Background Image with Overlay */}
+      <div
         className="fixed inset-0 z-0"
-        variant="purple"
-      />
+        style={{
+          backgroundImage: 'url(https://images.pexels.com/photos/315938/pexels-photo-315938.jpeg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
+        <div className="absolute inset-0 bg-black/70"></div>
+      </div>
 
       <div className="relative z-10 min-h-screen mt-20">
         <div
@@ -197,7 +207,7 @@ const Marketing: React.FC = () => {
           <div className="max-w-6xl mx-auto mb-32 mt-25">
             <div className="text-center mb-16">
               <div className="mb-8">
-                <span className="text-red-400 text-sm font-medium tracking-wider uppercase border border-red-400/30 px-4 py-2 rounded">
+                <span className="text-red-400 text-sm font-semibold tracking-widest uppercase border border-red-400/30 px-5 py-2 rounded-full">
                   Digital Marketing Agency
                 </span>
               </div>
@@ -206,82 +216,29 @@ const Marketing: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-light text-white mb-8 leading-tight"
+                className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-normal text-white mb-8 leading-tight tracking-tight"
+                style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
               >
                 თქვენი ბრენდის{" "}
-                <span className="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent font-medium">
+                <span className="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent font-semibold">
                   ციფრული ზრდა
                 </span>
                 <br />
-                <span className="text-slate-300 text-xl sm:text-2xl md:text-4xl lg:text-5xl">
-                  დღეს იწყება
-                </span>
+                <span className="text-slate-300 text-xl sm:text-2xl md:text-4xl lg:text-5xl font-light"></span>
               </motion.h1>
 
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-xl text-slate-200 mb-12 max-w-4xl mx-auto leading-relaxed"
+                className="text-xl text-slate-200 mb-12 max-w-4xl mx-auto leading-relaxed font-light"
+                style={{ fontFamily: 'Inter, system-ui, sans-serif', lineHeight: '1.7' }}
               >
-                დღევანდელ ციფრულ ეპოქაში, თქვენი ბრენდი უნდა იყოს ხილული,
+                დღევანდელ ციფრულ ეპოქაში თქვენი ბრენდი უნდა იყოს ხილული,
                 მიმზიდველი და დამაჯერებელი. ჩვენ ვქმნით სრულყოფილ ციფრულ
-                ეკოსისტემას თქვენ
-                ი ბიზნესისთვის - ვიდეო კონტენტიდან სოციალურ
-                მედიამდე.
+                ეკოსისტემას თქვენი ბიზნესისთვის — ვიდეოკონტენტიდან დაწყებული
+                სოციალურ მედიამდე.{" "}
               </motion.p>
-
-              {/* Stats Row */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-16"
-              >
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-red-400 mb-2">
-                    200+
-                  </div>
-                  <div className="text-sm text-slate-400">
-                    წარმატებული პროექტი
-                  </div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-orange-400 mb-2">
-                    98%
-                  </div>
-                  <div className="text-sm text-slate-400">
-                    კმაყოფილი კლიენტები
-                  </div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-yellow-400 mb-2">
-                    5x
-                  </div>
-                  <div className="text-sm text-slate-400">ROI გაზრდა</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-green-400 mb-2">
-                    24/7
-                  </div>
-                  <div className="text-sm text-slate-400">მხარდაჭერა</div>
-                </div>
-              </motion.div>
-
-              <div className="flex justify-center gap-6">
-                <Link
-                  to="/start-project"
-                  className="bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white px-8 py-4 font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-                >
-                  პროექტის დაწყება
-                </Link>
-                <Link
-                  to="#services"
-                  className="border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 font-semibold rounded-lg backdrop-blur-sm hover:bg-white/10 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-                >
-                  ჩვენი სერვისები
-                </Link>
-              </div>
             </div>
 
             {/* Digital Marketing Process Visualization */}
@@ -351,30 +308,154 @@ const Marketing: React.FC = () => {
             </div>
           </div>
 
-          {/* Services Grid */}
-          <div className="max-w-6xl mx-auto mb-32">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-light text-white mb-4">
-                ჩვენი სერვისები
-              </h2>
-              <div className="flex justify-center items-center gap-4 sm:gap-8 lg:gap-12 text-sm text-slate-400">
-                <div>
-                  <span className="text-2xl font-bold text-red-400">8+</span>{" "}
-                  სერვისი
+          
+          {/* Marketing Packages */}
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Basic Package */}
+            <div className="bg-gradient-to-br from-red-500/10 to-orange-500/10 p-6 rounded-xl border border-red-500/20 flex flex-col h-full">
+              <div className="text-4xl mb-4 text-red-400">
+                <FaVideo />
+              </div>
+              <h4 className="text-xl font-medium text-white mb-3">
+                ბაზისური პაკეტი
+              </h4>
+              <div className="text-slate-300 text-sm mb-4 leading-relaxed space-y-2 flex-grow">
+                <div className="flex items-center gap-2">
+                  <FaCheckCircle className="text-red-400 text-xs" />
+                  <span>საკომუნიკაციო მიზნების ჩამოყალიბება</span>
                 </div>
-                <div>
-                  <span className="text-2xl font-bold text-orange-400">
-                    100%
-                  </span>{" "}
-                  ხარისხი
+                <div className="flex items-center gap-2">
+                  <FaCheckCircle className="text-red-400 text-xs" />
+                  <span>საკომუნიკაციო მიზნების მიხედვით ვიდეო რილები</span>
                 </div>
-                <div>
-                  <span className="text-2xl font-bold text-yellow-400">
-                    24/7
-                  </span>{" "}
-                  მხარდაჭერა
+                <div className="flex items-center gap-2">
+                  <FaCheckCircle className="text-red-400 text-xs" />
+                  <span>სპეციალური ფოტო სესიები ბრენდებისთვის</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FaCheckCircle className="text-red-400 text-xs" />
+                  <span>ბრენდის იდენტობის განვითარება</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FaCheckCircle className="text-red-400 text-xs" />
+                  <span>თვეში 10+ პოსტი სოციალურ მედიაში</span>
                 </div>
               </div>
+              <div className="mt-auto">
+                <div className="text-2xl font-bold text-red-400 mt-6">
+                  1000₾
+                  <span className="text-sm text-slate-400"> საორიენტაციო</span>
+                </div>
+                <div className="text-xs text-slate-500 mt-2">
+                  ფასები ცვალებადია და დამოკიდებულია მომხმარებლის მოთხოვნებსა და
+                  კომუნიკაციის მიზნებზე.
+                </div>
+              </div>
+            </div>
+
+            {/* Standard Package */}
+            <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 p-6 rounded-xl border border-green-500/20 flex flex-col h-full">
+              <div className="text-4xl mb-4 text-green-400">
+                <FaShare />
+              </div>
+              <h4 className="text-xl font-medium text-white mb-3">
+                სტანდარტული პაკეტი
+              </h4>
+              <div className="text-slate-300 text-sm mb-4 leading-relaxed space-y-2 flex-grow">
+                <div className="flex items-center gap-2">
+                  <FaCheckCircle className="text-green-400 text-xs" />
+                  <span>საკომუნიკაციო მიზნების ჩამოყალიბება</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FaCheckCircle className="text-green-400 text-xs" />
+                  <span>კონტენტის შექმნა</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FaCheckCircle className="text-green-400 text-xs" />
+                  <span>ვიდეო გადაღება</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FaCheckCircle className="text-green-400 text-xs" />
+                  <span>ფოტო გადაღება</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FaCheckCircle className="text-green-400 text-xs" />
+                  <span>სოციალური მედიის მენეჯმენტი</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FaCheckCircle className="text-green-400 text-xs" />
+                  <span>სოციალური მედიის პოსტერების შექმნა</span>
+                </div>
+              </div>
+              <div className="mt-auto">
+                <div className="text-2xl font-bold text-green-400 mt-6">
+                  1500₾
+                  <span className="text-sm text-slate-400"> საორიენტაციო</span>
+                </div>
+                <div className="text-xs text-slate-500 mt-2">
+                  ფასები ცვალებადია და დამოკიდებულია მომხმარებლის მოთხოვნებსა და
+                  კომუნიკაციის მიზნებზე.
+                </div>
+              </div>
+            </div>
+
+            {/* Premium Package */}
+            <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-6 rounded-xl border border-purple-500/20 flex flex-col h-full">
+              <div className="text-4xl mb-4 text-purple-400">
+                <FaStar />
+              </div>
+              <h4 className="text-xl font-medium text-white mb-3">
+                პრემიუმ პაკეტი
+              </h4>
+              <div className="text-slate-300 text-sm mb-4 leading-relaxed space-y-2 flex-grow">
+                <div className="flex items-center gap-2">
+                  <FaCheckCircle className="text-purple-400 text-xs" />
+                  <span>საკომუნიკაციო მიზნების ჩამოყალიბება</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FaCheckCircle className="text-purple-400 text-xs" />
+                  <span>კონტენტის შექმნა</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FaCheckCircle className="text-purple-400 text-xs" />
+                  <span>ვიდეო გადაღება</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FaCheckCircle className="text-purple-400 text-xs" />
+                  <span>ფოტო გადაღება</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FaCheckCircle className="text-purple-400 text-xs" />
+                  <span>სოციალური მედიის მენეჯმენტი</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FaCheckCircle className="text-purple-400 text-xs" />
+                  <span>სოციალური მედიის პოსტერების შექმნა</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FaCheckCircle className="text-purple-400 text-xs" />
+                  <span>ლოგოს შექმნა</span>
+                </div>
+              </div>
+              <div className="mt-auto">
+                <div className="text-2xl font-bold text-purple-400 mt-6">
+                  2000₾
+                  <span className="text-sm text-slate-400"> საორიენტაციო</span>
+                </div>
+                <div className="text-xs text-slate-500 mt-2">
+                  ფასები ცვალებადია და დამოკიდებულია მომხმარებლის მოთხოვნებსა და
+                  კომუნიკაციის მიზნებზე.
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Services Grid */}
+          <div className="max-w-6xl mx-auto mb-32 mt-18">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-light text-white mb-4">
+                რას გთავაზობთ
+              </h2>
+            
             </div>
 
             {/* Services Grid - Fixed height for all cards */}
@@ -391,7 +472,7 @@ const Marketing: React.FC = () => {
                   <div
                     className={`p-6 rounded-xl border-2 h-44 flex flex-col justify-between bg-black/60 backdrop-blur-lg ${getColorClass(
                       service.color
-                    ).replace('bg-', 'border-')}
+                    ).replace("bg-", "border-")}
                     ${
                       activeService === index
                         ? "border-opacity-100 scale-105"
@@ -440,7 +521,7 @@ const Marketing: React.FC = () => {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   className={`group cursor-pointer p-6 rounded-xl border-2 bg-black/60 backdrop-blur-lg ${getColorClass(
                     platform.color
-                  ).replace('bg-', 'border-')}
+                  ).replace("bg-", "border-")}
                   border-opacity-40 hover:border-opacity-100 transition-all duration-300 hover:scale-110`}
                 >
                   <div className="text-center">
@@ -460,30 +541,83 @@ const Marketing: React.FC = () => {
             </div>
           </div>
 
+          {/* Marketing Packages Section */}
+          <div className="mb-20">
+            <div className="text-center mb-12">
+              <h3 className="text-3xl font-light text-white mb-4">
+                ინდივიდუალური ფასები
+              </h3>
+              <p className="text-lg text-slate-300 max-w-3xl mx-auto">
+                ყველა პროექტი უნიკალურია. ჩვენი მიზანია მაქსიმალური ღირებულების
+                მიწოდება კლიენტის ბიუჯეტისა და მოთხოვნების მიხედვით.
+              </p>
+            </div>
+
+            {/* Why Individual Pricing */}
+            <div className="bg-gradient-to-r from-slate-800/50 to-slate-700/50 rounded-2xl p-8 border border-slate-600/30 mb-12">
+              <div className="grid md:grid-cols-3 gap-8 text-center">
+                <div>
+                  <div className="text-4xl mb-4 text-blue-400">
+                    <FaBullseye />
+                  </div>
+                  <h4 className="text-xl font-medium text-white mb-3">
+                    თქვენი მოთხოვნების მიხედვით
+                  </h4>
+                  <p className="text-slate-300 text-sm leading-relaxed">
+                    ბაზისური ბრენდინგიდან სრულ მარკეტინგ სტრატეგიამდე - ყველა
+                    პროექტს განსხვავებული მიდგომა სჭირდება.
+                  </p>
+                </div>
+                <div>
+                  <div className="text-4xl mb-4 text-green-400">
+                    <FaBolt />
+                  </div>
+                  <h4 className="text-xl font-medium text-white mb-3">
+                    სწრაფი შეფასება
+                  </h4>
+                  <p className="text-slate-300 text-sm leading-relaxed">
+                    უფასო კონსულტაციის შემდეგ 24 საათში მიიღებთ ზუსტ ფასს და
+                    პროექტის გეგმას.
+                  </p>
+                </div>
+                <div>
+                  <div className="text-4xl mb-4 text-purple-400">
+                    <FaCog />
+                  </div>
+                  <h4 className="text-xl font-medium text-white mb-3">
+                    გამჭვირვალე პროცესი
+                  </h4>
+                  <p className="text-slate-300 text-sm leading-relaxed">
+                    გვისაუბრეთ თქვენი იდეის შესახებ, ჩვენ გავცემთ მიწერას ყველა
+                    დეტალთან ერთად.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-center mt-12">
+              <h3 className="text-3xl font-light text-white mb-4">
+                კონსულტაცია და თანამშრომლობის დაგეგმვა უფასოა
+              </h3>
+             
+            </div>
+          </div>
+
           {/* CTA Section */}
           <div className="text-center">
             <div className="max-w-3xl mx-auto">
-              <h3 className="text-3xl font-light text-white mb-6">
-                მზად ხარ შენი ბრენდის ციფრული ტრანსფორმაციისთვის?
+               <h3 className="text-3xl font-light text-blue-800 mb-6">
+                მზად ხართ თქვენი ციფრული ბიზნესის ტრანსფორმაციისთვის?
               </h3>
-              <p className="text-lg text-slate-400 mb-8">
-                დაუკავშირდი ჩვენს გუნდს და დავიწყოთ შენი წარმატებული სარეკლამო
-                კამპანიის შექმნა დღესვე.
-              </p>
-              <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+
+            
+              <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-12">
                 <Link
                   to="/start-project"
                   className="inline-flex items-center gap-2 bg-gradient-to-r from-red-500 to-orange-500 text-white px-6 sm:px-8 lg:px-10 py-4 text-lg font-medium hover:from-red-600 hover:to-orange-600 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105"
                 >
                   <FaRocket />
                   პროექტის დაწყება
-                </Link>
-                <Link
-                  to="/about"
-                  className="inline-flex items-center gap-2 border-2 border-white/30 hover:border-white/60 text-white px-4 sm:px-6 lg:px-10 py-4 text-lg font-medium rounded-lg backdrop-blur-sm hover:bg-white/10 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-                >
-                  <FaArrowRight />
-                  მეტი ინფორმაცია
                 </Link>
               </div>
             </div>

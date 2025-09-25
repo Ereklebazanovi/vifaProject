@@ -50,7 +50,7 @@ export const submitLead = async (leadData: LeadData) => {
 export const createWhatsAppMessage = (leadData: LeadData): string => {
   const servicesText = leadData.services.map(service => {
     switch(service) {
-      case 'website': return 'ვებსაიტი + ონლაინ მაღაზია';
+      case 'website': return 'ვებსაიტი';
       case 'content': return 'კონტენტ პროდუქცია';
       case 'social': return 'სოციალური მედია';
       case 'ads': return 'ციფრული რეკლამა';

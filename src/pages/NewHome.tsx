@@ -41,15 +41,15 @@ const NewHome: React.FC = () => {
         effectOptions={hyperspeedPresets.one}
       />
 
-      {/* Light overlay for text readability */}
-      <div className="fixed inset-0 z-5 bg-black/15"></div>
+      {/* Light overlay for text readability - limited to main content area */}
+      <div className="fixed inset-0 z-5 bg-black/15 pointer-events-none"></div>
 
       <div className="relative z-10 min-h-screen mt-15">
         <div
           className={`container mx-auto px-4 sm:px-6 lg:px-8 py-10 ${getTransitionClasses()}`}
         >
           {/* Hero Section */}
-          <div className="max-w-5xl mx-auto mb-24 mt-28">
+          <div className="max-w-5xl mx-auto mb-24 mt-30">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
                 <div className="mb-6">
