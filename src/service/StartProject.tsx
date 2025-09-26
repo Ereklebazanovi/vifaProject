@@ -141,7 +141,12 @@ const StartProject: React.FC = () => {
       case 1:
         return formData.services.length > 0;
       case 2:
-        return formData.name && formData.email && formData.businessName && formData.phone;
+        return (
+          formData.name &&
+          formData.email &&
+          formData.businessName &&
+          formData.phone
+        );
       default:
         return false;
     }
@@ -464,7 +469,8 @@ const StartProject: React.FC = () => {
                                 </p>
                                 <div className="bg-blue-500/10 border border-blue-400/30 rounded-xl p-4 max-w-2xl mx-auto">
                                   <p className="text-blue-300 text-sm">
-                                    🙏 გთხოვთ შეავსოთ ყველა ველი, რათა ვიცოდეთ სად და როგორ დაგიკავშირდეთ
+                                    გთხოვთ შეავსოთ ყველა ველი, რათა ვიცოდეთ სად
+                                    და როგორ დაგიკავშირდეთ
                                   </p>
                                 </div>
                               </div>
@@ -532,7 +538,8 @@ const StartProject: React.FC = () => {
                                     </div>
                                     <div>
                                       <label className="block text-sm font-medium mb-3 text-slate-300">
-                                        📞 {t("startProject.form.phone")} * (რეკომენდებული)
+                                        📞 {t("startProject.form.phone")} *
+                                        (რეკომენდებული)
                                       </label>
                                       <input
                                         type="tel"
@@ -554,13 +561,16 @@ const StartProject: React.FC = () => {
                                       💬 ალტერნატიული საკომუნიკაციო გზები
                                     </h4>
                                     <p className="text-slate-300 text-sm mb-4">
-                                      ტელეფონის გარდა, შეგიძლიათ ასევე დაგვიკავშირდეთ:
+                                      ტელეფონის გარდა, შეგიძლიათ ასევე
+                                      დაგვიკავშირდეთ:
                                     </p>
                                     <div className="grid md:grid-cols-2 gap-4">
                                       <div className="bg-blue-600/20 border border-blue-500/30 rounded-lg p-4">
                                         <div className="flex items-center gap-3 mb-2">
                                           <div className="text-2xl">📘</div>
-                                          <div className="text-blue-300 font-semibold">Facebook Messenger</div>
+                                          <div className="text-blue-300 font-semibold">
+                                            Facebook Messenger
+                                          </div>
                                         </div>
                                         <div className="text-slate-400 text-sm mb-2">
                                           მოგვწერეთ პირდაპირ Facebook-ზე:
@@ -572,10 +582,13 @@ const StartProject: React.FC = () => {
                                       <div className="bg-green-600/20 border border-green-500/30 rounded-lg p-4">
                                         <div className="flex items-center gap-3 mb-2">
                                           <div className="text-2xl">📱</div>
-                                          <div className="text-green-300 font-semibold">WhatsApp</div>
+                                          <div className="text-green-300 font-semibold">
+                                            WhatsApp
+                                          </div>
                                         </div>
                                         <div className="text-slate-400 text-sm">
-                                          თქვენი ტელეფონის ნომრით WhatsApp-ზე დაგიკავშირდებით
+                                          თქვენი ტელეფონის ნომრით WhatsApp-ზე
+                                          დაგიკავშირდებით
                                         </div>
                                       </div>
                                     </div>

@@ -100,7 +100,7 @@ const SimpleNavbar: React.FC = () => {
 
           {/* Desktop Navigation Links - Hidden on small screens */}
           <div
-            className={`hidden lg:flex justify-center items-center space-x-8 ${getTransitionClasses()}`}
+            className={`mt-4 hidden lg:flex justify-center items-center space-x-8 ${getTransitionClasses()}`}
           >
             {navLinks.map((link, index) => (
               <button

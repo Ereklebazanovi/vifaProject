@@ -10,7 +10,6 @@ import Layout from "./layout/Layout";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { NavigationProvider } from "./contexts/NavigationContext";
 import { addResourceHints } from "./utils/preload";
-import MouseTrail from "./components/MouseTrail";
 import { useRoutePreload } from "./hooks/useRoutePreload";
 import "./index.css";
 
@@ -21,6 +20,8 @@ const StartProject = lazy(() => import("./service/StartProject"));
 const AdminDashboard = lazy(() => import("./admin/AdminDashboard"));
 const Marketing = lazy(() => import("./offeredServices/Marketing"));
 const WebDev = lazy(() => import("./offeredServices/WebDev"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 
 // Error Boundary Component
 class ErrorBoundary extends React.Component<
@@ -126,7 +127,6 @@ const AppWithRouter: React.FC = () => {
 
   return (
     <ErrorBoundary>
-      <MouseTrail />
       <RouteTransition>
         <Suspense fallback={<LoadingSpinner />}>
           <Routes>
@@ -137,6 +137,8 @@ const AppWithRouter: React.FC = () => {
               <Route path="about" element={<AboutPage />} />
               <Route path="contact" element={<Contact />} />
               <Route path="start-project" element={<StartProject />} />
+              <Route path="privacy" element={<PrivacyPolicy />} />
+              <Route path="terms" element={<TermsOfService />} />
             </Route>
 
             {/* Admin routes without Layout (no navbar/footer) */}

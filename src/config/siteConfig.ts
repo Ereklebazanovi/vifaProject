@@ -10,7 +10,8 @@ export const siteConfig = {
   url: "https://vifadigital.com",
 
   // Contact Info
-  email: "info@vifadigital.com",
+  email: "vifa.official2020@gmail.com",
+
   phone: "+995 557 62 42 43", // UPDATE with real phone number
 
   // Social Media

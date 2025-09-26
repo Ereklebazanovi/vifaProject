@@ -34,6 +34,7 @@ import {
   SiPostgresql,
 } from "react-icons/si";
 import SEO from "../components/SEO";
+import RotatingText from "../components/RotatingText";
 
 const WebDev: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
@@ -178,56 +179,126 @@ const WebDev: React.FC = () => {
         description="Professional web development services including React, Node.js, mobile responsive design, and modern web applications."
       />
 
-      {/* Background Image with Overlay */}
-      <div
-        className="fixed inset-0 z-0"
-        style={{
-          backgroundImage: 'url(https://images.pexels.com/photos/315938/pexels-photo-315938.jpeg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      >
-        <div className="absolute inset-0 bg-black/70"></div>
+      {/* Animated Background with Mobile Optimization */}
+      <div className="fixed inset-0 z-0 overflow-hidden">
+        {/* Animated background image */}
+        <div
+          className="absolute inset-0 transform scale-105 animate-slow-pan"
+          style={{
+            backgroundImage:
+              "url(https://images.unsplash.com/photo-1495420378468-78588a508652?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            willChange: "transform",
+          }}
+        ></div>
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-black/75"></div>
+
+        {/* Subtle gradient overlay for depth */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-transparent to-slate-900/30"></div>
       </div>
+
+      <style>{`
+        @keyframes slow-pan {
+          0% { transform: scale(1.05) translateX(0) translateY(0); }
+          25% { transform: scale(1.06) translateX(-2%) translateY(-1%); }
+          50% { transform: scale(1.05) translateX(-3%) translateY(-2%); }
+          75% { transform: scale(1.055) translateX(-1%) translateY(-1%); }
+          100% { transform: scale(1.05) translateX(0) translateY(0); }
+        }
+
+        .animate-slow-pan {
+          animation: slow-pan 60s ease-in-out infinite;
+        }
+
+        /* Reduce animation on mobile and slow connections */
+        @media (max-width: 768px), (prefers-reduced-motion: reduce) {
+          .animate-slow-pan {
+            animation: none;
+            transform: scale(1.05);
+          }
+        }
+      `}</style>
 
       <div className="relative z-10 min-h-screen mt-15">
         {/* Main container with top padding to account for fixed navbar */}
         <div
-          className={`container mx-auto px-4 sm:px-6 lg:px-8 pt-32 sm:pt-36 md:pt-40 pb-10 ${getTransitionClasses()}`}
+          className={`container mx-auto px-4 sm:px-6 lg:px-8 pt-25 sm:pt-28 md:pt-34 pb-10 ${getTransitionClasses()}`}
         >
           {/* Hero Section */}
           <div className="max-w-6xl mx-auto mb-32">
             <div className="text-center mb-16">
-              <div className="mb-8">
-                <span className="text-blue-400 text-sm font-semibold tracking-widest uppercase border border-blue-400/30 px-5 py-2 rounded-full">
-                  Web Development Agency
-                </span>
-              </div>
+              <div className="mb-8 flex items-center justify-center">
+                {/* Unified container for both texts */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="flex items-center gap-3 sm:gap-4 md:gap-5 bg-gradient-to-r from-slate-800/40 via-slate-700/30 to-slate-800/40 backdrop-blur-lg rounded-2xl px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 border border-slate-600/30 shadow-xl"
+                  style={{ fontFamily: "Inter, system-ui, sans-serif" }}
+                >
+                  {/* Left side - Creative text */}
+                  <h2
+                    className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-widest"
+                    style={{
+                      fontFamily:
+                        'SF Pro Display, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+                      letterSpacing: '0.15em',
+                    }}
+                  >
+                    creative
+                  </h2>
 
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="text-4xl md:text-6xl font-normal text-white mb-8 leading-tight tracking-tight"
-                style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
-              >
-                ბიზნესი, რომელიც{" "}
-                <span className="text-slate-300 text-3xl md:text-5xl font-light">
-                  მუშაობს
-                </span>
-                <br />
-                <span className="bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent font-semibold">
-                  ციფრულ სივრცეში
-                </span>
-              </motion.h1>
+                  {/* Right side - Rotating text box */}
+                  <div className="w-44 sm:w-52 md:w-60 lg:w-64">
+                    <RotatingText
+                      texts={[
+                        "Solutions",
+                        "Mind",
+                        "Thinking",
+                        "Modern Web Apps",
+                        "Systems",
+                        "Vision",
+                        "Design",
+                      ]}
+                      mainClassName="w-full px-3 sm:px-4 md:px-5 bg-gradient-to-r from-blue-500 to-cyan-400 text-white overflow-hidden py-2 sm:py-2.5 md:py-3 justify-center rounded-xl font-light text-sm sm:text-base md:text-lg tracking-widest shadow-lg shadow-blue-400/30"
+                      elementLevelClassName="inline-block"
+                      style={{
+                        fontFamily: 'SF Pro Display, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+                        letterSpacing: '0.1em'
+                      }}
+                      staggerFrom="center"
+                      initial={{ y: "100%", opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: "-120%", opacity: 0 }}
+                      staggerDuration={0.03}
+                      splitLevelClassName="overflow-hidden"
+                      transition={{
+                        type: "spring",
+                        damping: 25,
+                        stiffness: 300,
+                      }}
+                      rotationInterval={3000}
+                      style={{
+                        fontFamily:
+                          'SF Pro Display, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+                      }}
+                    />
+                  </div>
+                </motion.div>
+              </div>
 
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-xl text-slate-300 mb-12 max-w-4xl mx-auto leading-relaxed font-light"
-                style={{ fontFamily: 'Inter, system-ui, sans-serif', lineHeight: '1.7' }}
+                className="text-xl text-slate-300 mb-12 max-w-4xl mx-auto leading-relaxed font-light pt-10"
+                style={{
+                  fontFamily: "Inter, system-ui, sans-serif",
+                  lineHeight: "1.7",
+                }}
               >
                 ვებსაიტი თქვენი ბიზნესის სახეა. ჩვენ ვამზადებთ სწრაფ და
                 თანამედროვე ვებაპლიკაციებს, რომლებიც არამხოლოდ იზიდავს
@@ -340,11 +411,13 @@ const WebDev: React.FC = () => {
             </div>
           </div>
 
-
-  {/* Pricing Approach Section */}
+          {/* Pricing Approach Section */}
           <div className="mb-20">
             <div className="text-center mb-12">
-              <h3 className="text-3xl font-semibold text-white mb-4 tracking-tight" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
+              <h3
+                className="text-3xl font-semibold text-white mb-4 tracking-tight"
+                style={{ fontFamily: "Inter, system-ui, sans-serif" }}
+              >
                 ინდივიდუალური ფასები
               </h3>
               <p className="text-lg text-slate-300 max-w-3xl mx-auto">
@@ -461,11 +534,12 @@ const WebDev: React.FC = () => {
             </div>
           </div>
 
-   {/* AI Chatbot for Business Section */}
+          {/* AI Chatbot for Business Section */}
           <div className="mb-20">
             <div className="text-center mb-12">
               <h3 className="text-3xl font-light text-white mb-4">
-                <FaBrain className="text-orange-400 inline mr-2" /> AI ჩატბოტი თქვენი ბიზნესისთვის
+                <FaBrain className="text-orange-400 inline mr-2" /> AI ჩატბოტი
+                თქვენი ბიზნესისთვის
               </h3>
               <p className="text-lg text-slate-300 max-w-3xl mx-auto">
                 Facebook Messenger, WhatsApp, Instagram-ში ჭკვიანი ასისტენტი
@@ -494,7 +568,8 @@ const WebDev: React.FC = () => {
                   გვერდზე არასოდეს დარჩებიან უპასუხოდ.
                 </p>
                 <div className="text-xs text-blue-400 font-medium">
-                  <FaCheckCircle className="text-blue-400 text-xs inline mr-2" />მყისიერი პასუხები 24/7
+                  <FaCheckCircle className="text-blue-400 text-xs inline mr-2" />
+                  მყისიერი პასუხები 24/7
                 </div>
               </motion.div>
 
@@ -517,7 +592,8 @@ const WebDev: React.FC = () => {
                   არასოდეს დარჩებიან უპასუხოდ.{" "}
                 </p>
                 <div className="text-xs text-green-400 font-medium mt-9">
-                  <FaCheckCircle className="text-green-400 text-xs inline mr-2" />მყისიერი პასუხები 24/7
+                  <FaCheckCircle className="text-green-400 text-xs inline mr-2" />
+                  მყისიერი პასუხები 24/7
                 </div>
               </motion.div>
 
@@ -540,7 +616,8 @@ const WebDev: React.FC = () => {
                   არასოდეს დარჩებიან უპასუხოდ.
                 </p>
                 <div className="text-xs text-purple-400 font-medium">
-                  <FaCheckCircle className="text-purple-400 text-xs inline mr-2" />მყისიერი პასუხები 24/7
+                  <FaCheckCircle className="text-purple-400 text-xs inline mr-2" />
+                  მყისიერი პასუხები 24/7
                 </div>
               </motion.div>
             </div>
@@ -589,8 +666,6 @@ const WebDev: React.FC = () => {
               </h2>
             </div>
 
-
-
             {/* Services Grid - Fixed height for all cards */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
               {services.map((service, index) => (
@@ -632,8 +707,6 @@ const WebDev: React.FC = () => {
                 </motion.div>
               ))}
             </div>
-
-
 
             {/* Active Service Display */}
             <div className="border border-slate-700/30 bg-black/50 p-8 rounded-2xl backdrop-blur-md">
@@ -677,8 +750,6 @@ const WebDev: React.FC = () => {
             </div>
           </div>
 
-       
-
           {/* Technology Stack */}
           <div className="max-w-6xl mx-auto mb-32">
             <div className="text-center mb-12">
@@ -718,8 +789,6 @@ const WebDev: React.FC = () => {
               ))}
             </div>
           </div>
-
-        
 
           {/* CTA Section */}
           <div className="text-center">

@@ -71,8 +71,8 @@ const Footer: React.FC = () => {
     },
     {
       icon: <FaEnvelope className="w-4 h-4" />,
-      text: "info@vifa.ge",
-      href: "mailto:info@vifa.ge",
+      text: "vifadigital.com",
+      // href: "vifadigital.com",
       color: "text-blue-400"
     },
     {

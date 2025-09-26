@@ -257,43 +257,188 @@ const AboutPage = () => {
             </div>
           </div>
 
-          {/* Team Section */}
-          <div className="max-w-6xl mx-auto mb-24">
+
+          {/* Portfolio Section - Shorts Style */}
+          <div className="max-w-7xl mx-auto mb-24">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-light text-white mb-6">
-                ჩვენი <span className="text-blue-400">გუნდი</span>
+                ჩვენი <span className="text-blue-400">პორტფოლიო</span>
               </h2>
+              <p className="text-lg text-slate-400 max-w-3xl mx-auto">
+                ნახეთ ჩვენი წარმატებული პროექტები და კლიენტების შედეგები
+              </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              {teamMembers.map((member, index) => (
+            {/* Horizontal Scrollable Container */}
+            <div className="relative">
+              <div className="flex gap-4 overflow-x-auto pb-6 scroll-smooth scrollbar-hide" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
+                <style jsx>{`
+                  .scrollbar-hide::-webkit-scrollbar {
+                    display: none;
+                  }
+                `}</style>
+
+                {/* Shorts Video 1 */}
                 <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
-                  className="bg-black/50 backdrop-blur-md border border-slate-800/30 rounded-xl p-6 text-center"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  className="flex-shrink-0 w-[280px] h-[500px] bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-blue-400/50 rounded-2xl overflow-hidden hover:bg-black/70 transition-all duration-300 relative group"
                 >
-                  <div className="w-20 h-20 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <FaUsers className="text-2xl text-white" />
-                  </div>
-                  <h3 className="text-xl font-medium text-white mb-2">
-                    {member.name}
-                  </h3>
-                  <p className="text-blue-400 mb-3">{member.role}</p>
-                  <p className="text-slate-400 text-sm mb-4">{member.bio}</p>
-                  <div className="flex flex-wrap gap-2 justify-center">
-                    {member.skills.map((skill, skillIndex) => (
-                      <span
-                        key={skillIndex}
-                        className="bg-slate-700/50 text-slate-300 px-3 py-1 rounded-full text-xs"
-                      >
-                        {skill}
-                      </span>
-                    ))}
+                  <div className="relative w-full h-full">
+                    <iframe
+                      src="https://www.youtube-nocookie.com/embed/TazE0o2dLUI"
+                      title="Portfolio Shorts 1"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      className="w-full h-full rounded-2xl"
+                      loading="lazy"
+                    />
+
+                    {/* Overlay Info - positioned to not block iframe */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 pointer-events-none">
+                      <h3 className="text-white font-semibold text-lg mb-2">რესტორნის მარკეტინგი</h3>
+                      <p className="text-slate-300 text-sm">სოციალური მედია კამპანია</p>
+                    </div>
                   </div>
                 </motion.div>
-              ))}
+
+                {/* Shorts Video 2 */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="flex-shrink-0 w-[280px] h-[500px] bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-blue-400/50 rounded-2xl overflow-hidden hover:bg-black/70 transition-all duration-300 relative group"
+                >
+                  <div className="relative w-full h-full">
+                    <iframe
+                      src="https://www.youtube-nocookie.com/embed/aOeZnTV3V3k"
+                      title="Portfolio Shorts 2"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      className="w-full h-full rounded-2xl"
+                      loading="lazy"
+                    />
+
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 pointer-events-none">
+                      <h3 className="text-white font-semibold text-lg mb-2">ვებსაიტის განვითარება</h3>
+                      <p className="text-slate-300 text-sm">E-commerce პლატფორმა</p>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Shorts Video 3 */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  className="flex-shrink-0 w-[280px] h-[500px] bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-blue-400/50 rounded-2xl overflow-hidden hover:bg-black/70 transition-all duration-300 relative group"
+                >
+                  <div className="relative w-full h-full">
+                    <iframe
+                      src="https://www.youtube.com/embed/VIDEO_ID_3?autoplay=0&mute=1"
+                      title="Portfolio Shorts 3"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full rounded-2xl"
+                    />
+
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
+                      <h3 className="text-white font-semibold text-lg mb-2">ბრენდინგი</h3>
+                      <p className="text-slate-300 text-sm">ლოგო და ვიზუალური იდენტობა</p>
+                    </div>
+
+                  </div>
+                </motion.div>
+
+                {/* Shorts Video 4 */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="flex-shrink-0 w-[280px] h-[500px] bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-blue-400/50 rounded-2xl overflow-hidden hover:bg-black/70 transition-all duration-300 relative group"
+                >
+                  <div className="relative w-full h-full">
+                    <iframe
+                      src="https://www.youtube.com/embed/VIDEO_ID_4?autoplay=0&mute=1"
+                      title="Portfolio Shorts 4"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full rounded-2xl"
+                    />
+
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
+                      <h3 className="text-white font-semibold text-lg mb-2">კონტენტ მარკეტინგი</h3>
+                      <p className="text-slate-300 text-sm">ვიდეო პროდუქცია</p>
+                    </div>
+
+                  </div>
+                </motion.div>
+
+                {/* Shorts Video 5 */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                  className="flex-shrink-0 w-[280px] h-[500px] bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-blue-400/50 rounded-2xl overflow-hidden hover:bg-black/70 transition-all duration-300 relative group"
+                >
+                  <div className="relative w-full h-full">
+                    <iframe
+                      src="https://www.youtube.com/embed/VIDEO_ID_5?autoplay=0&mute=1"
+                      title="Portfolio Shorts 5"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full rounded-2xl"
+                    />
+
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
+                      <h3 className="text-white font-semibold text-lg mb-2">SEO ოპტიმიზაცია</h3>
+                      <p className="text-slate-300 text-sm">Google რეიტინგის გაუმजობესება</p>
+                    </div>
+
+                  </div>
+                </motion.div>
+
+                {/* Shorts Video 6 */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                  className="flex-shrink-0 w-[280px] h-[500px] bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-blue-400/50 rounded-2xl overflow-hidden hover:bg-black/70 transition-all duration-300 relative group"
+                >
+                  <div className="relative w-full h-full">
+                    <iframe
+                      src="https://www.youtube.com/embed/VIDEO_ID_6?autoplay=0&mute=1"
+                      title="Portfolio Shorts 6"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full rounded-2xl"
+                    />
+
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
+                      <h3 className="text-white font-semibold text-lg mb-2">PPC რეკლამა</h3>
+                      <p className="text-slate-300 text-sm">Google Ads კამპანია</p>
+                    </div>
+
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Scroll Indicator */}
+              <div className="absolute top-1/2 right-4 transform -translate-y-1/2 text-blue-400 animate-pulse">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </div>
+
+            {/* Mobile Swipe Hint */}
+            <div className="text-center mt-6 md:hidden">
+              <p className="text-slate-400 text-sm">👈 გადაფურცლე ვიდეოების სანახავად</p>
             </div>
           </div>
 

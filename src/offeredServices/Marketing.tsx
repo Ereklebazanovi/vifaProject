@@ -26,6 +26,7 @@ import {
   FaCog,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
+import TrueFocus from "../components/TrueFocus";
 
 const Marketing: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
@@ -185,52 +186,75 @@ const Marketing: React.FC = () => {
         description="Professional digital advertising services including video production, photography, social media management, and creative content."
       />
 
-      {/* Background Image with Overlay */}
-      <div
-        className="fixed inset-0 z-0"
-        style={{
-          backgroundImage: 'url(https://images.pexels.com/photos/315938/pexels-photo-315938.jpeg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      >
-        <div className="absolute inset-0 bg-black/70"></div>
+      {/* Animated Background with Mobile Optimization */}
+      <div className="fixed inset-0 z-0 overflow-hidden">
+        {/* Animated background image */}
+        <div
+          className="absolute inset-0 transform scale-105 animate-slow-pan"
+          style={{
+            backgroundImage: 'url(https://images.unsplash.com/photo-1495420378468-78588a508652?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            willChange: 'transform'
+          }}
+        >
+        </div>
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-black/75"></div>
+
+        {/* Subtle gradient overlay for marketing feel */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/15 via-transparent to-blue-900/20"></div>
       </div>
 
-      <div className="relative z-10 min-h-screen mt-20">
+      <style>{`
+        @keyframes slow-pan {
+          0% { transform: scale(1.05) translateX(0) translateY(0); }
+          25% { transform: scale(1.06) translateX(-2%) translateY(-1%); }
+          50% { transform: scale(1.05) translateX(-3%) translateY(-2%); }
+          75% { transform: scale(1.055) translateX(-1%) translateY(-1%); }
+          100% { transform: scale(1.05) translateX(0) translateY(0); }
+        }
+
+        .animate-slow-pan {
+          animation: slow-pan 60s ease-in-out infinite;
+        }
+
+        /* Reduce animation on mobile and slow connections */
+        @media (max-width: 768px), (prefers-reduced-motion: reduce) {
+          .animate-slow-pan {
+            animation: none;
+            transform: scale(1.05);
+          }
+        }
+      `}</style>
+
+      <div className="relative z-10 min-h-screen mt-17">
         <div
           className={`container mx-auto px-4 sm:px-6 lg:px-8 py-10 ${getTransitionClasses()}`}
         >
           {/* Hero Section */}
-          <div className="max-w-6xl mx-auto mb-32 mt-25">
+          <div className="max-w-6xl mx-auto mb-32 mt-20">
             <div className="text-center mb-16">
-              <div className="mb-8">
-                <span className="text-red-400 text-sm font-semibold tracking-widest uppercase border border-red-400/30 px-5 py-2 rounded-full">
-                  Digital Marketing Agency
-                </span>
+              <div className="mb-8 flex justify-center">
+                <div className="w-64 sm:w-72 md:w-80 lg:w-96">
+                  <TrueFocus
+                    sentence="Digital Marketing"
+                    blurAmount={4}
+                    borderColor="#ef4444"
+                    glowColor="rgba(239, 68, 68, 0.6)"
+                    animationDuration={0.8}
+                    pauseBetweenAnimations={2}
+                  />
+                </div>
               </div>
 
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-normal text-white mb-8 leading-tight tracking-tight"
-                style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
-              >
-                თქვენი ბრენდის{" "}
-                <span className="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent font-semibold">
-                  ციფრული ზრდა
-                </span>
-                <br />
-                <span className="text-slate-300 text-xl sm:text-2xl md:text-4xl lg:text-5xl font-light"></span>
-              </motion.h1>
-
+           
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-xl text-slate-200 mb-12 max-w-4xl mx-auto leading-relaxed font-light"
+                className="text-xl text-slate-200 mb-12 max-w-4xl mx-auto leading-relaxed font-light pt-10"
                 style={{ fontFamily: 'Inter, system-ui, sans-serif', lineHeight: '1.7' }}
               >
                 დღევანდელ ციფრულ ეპოქაში თქვენი ბრენდი უნდა იყოს ხილული,
