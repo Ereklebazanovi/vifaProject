@@ -474,9 +474,9 @@ const translations = {
     "newHome.interactive.processTitleHighlight": "ციფრული მარკეტინგი?",
 
     "newHome.interactive.step1.title": "1. კვლევა",
-    "newHome.interactive.step1.subtitle": "აუდიტორიის ანალიზი",
+    "newHome.interactive.step1.subtitle": "აუდიტორიის გაცნობა",
     "newHome.interactive.step1.description":
-      "ვიკვლევთ შენს კლიენტებს: ვინ არიან, სად ატარებენ დროს ონლაინ, რა აინტერესებთ",
+      "ვიგებთ, რა სჭირდება თქვენს კლიენტებს, რა სირთულეებს აწყდებიან და როგორ შეიძლება თქვენმა ბიზნესმა რეალური ღირებულება შესთავაზოს",
 
     "newHome.interactive.step2.title": "2. სტრატეგია",
     "newHome.interactive.step2.subtitle": "სწორი გზის დაგეგმვა",
