@@ -193,7 +193,7 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
         className={cn('flex flex-wrap whitespace-pre-wrap relative', mainClassName)}
         {...rest}
         layout
-        transition={transition}
+        transition={transition as any}
       >
         <span className="sr-only">{texts[currentTextIndex]}</span>
         <AnimatePresence mode={animatePresenceMode} initial={animatePresenceInitial}>
