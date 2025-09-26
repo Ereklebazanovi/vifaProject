@@ -81,39 +81,6 @@ const AboutPage = () => {
   ];
 
   // Team members
-  // const teamMembers = [
-    {
-      name: t("about.team.ceo.name"),
-      role: t("about.team.ceo.role"),
-      bio: t("about.team.ceo.bio"),
-      skills: [
-        t("about.team.ceo.skill1"),
-        t("about.team.ceo.skill2"),
-        t("about.team.ceo.skill3"),
-      ],
-    },
-    {
-      name: t("about.team.creative.name"),
-      role: t("about.team.creative.role"),
-      bio: t("about.team.creative.bio"),
-      skills: [
-        t("about.team.creative.skill1"),
-        t("about.team.creative.skill2"),
-        t("about.team.creative.skill3"),
-      ],
-    },
-    {
-      name: t("about.team.developer.name"),
-      role: t("about.team.developer.role"),
-      bio: t("about.team.developer.bio"),
-      skills: [
-        t("about.team.developer.skill1"),
-        t("about.team.developer.skill2"),
-        t("about.team.developer.skill3"),
-      ],
-    },
-  ]; */
-
   return (
     <>
       <SEO
