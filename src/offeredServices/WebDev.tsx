@@ -281,10 +281,6 @@ const WebDev: React.FC = () => {
                         stiffness: 300,
                       }}
                       rotationInterval={3000}
-                      style={{
-                        fontFamily:
-                          'SF Pro Display, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-                      }}
                     />
                   </div>
                 </motion.div>

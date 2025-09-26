@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import BeautifulBackground from "../components/BeautifulBackground";
 import {
-  FaUsers,
   FaLightbulb,
   FaHandshake,
   FaAward,
@@ -82,7 +81,7 @@ const AboutPage = () => {
   ];
 
   // Team members
-  const teamMembers = [
+  // const teamMembers = [
     {
       name: t("about.team.ceo.name"),
       role: t("about.team.ceo.role"),
@@ -113,7 +112,7 @@ const AboutPage = () => {
         t("about.team.developer.skill3"),
       ],
     },
-  ];
+  ]; */
 
   return (
     <>
@@ -272,11 +271,13 @@ const AboutPage = () => {
             {/* Horizontal Scrollable Container */}
             <div className="relative">
               <div className="flex gap-4 overflow-x-auto pb-6 scroll-smooth scrollbar-hide" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
-                <style jsx>{`
-                  .scrollbar-hide::-webkit-scrollbar {
-                    display: none;
-                  }
-                `}</style>
+                <style dangerouslySetInnerHTML={{
+                  __html: `
+                    .scrollbar-hide::-webkit-scrollbar {
+                      display: none;
+                    }
+                  `
+                }} />
 
                 {/* Shorts Video 1 */}
                 <motion.div

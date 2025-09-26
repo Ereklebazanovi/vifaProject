@@ -8,7 +8,7 @@ import {
 } from 'framer-motion';
 
 // Define Transition type manually since it's not exported by framer-motion
-type Transition = {
+type CustomTransition = {
   type?: string;
   damping?: number;
   stiffness?: number;
@@ -35,7 +35,7 @@ export interface RotatingTextProps
     'children' | 'transition' | 'initial' | 'animate' | 'exit'
   > {
   texts: string[];
-  transition?: Transition;
+  transition?: CustomTransition;
   initial?: boolean | Target | VariantLabels;
   animate?: boolean | VariantLabels | TargetAndTransition;
   exit?: Target | VariantLabels;
@@ -57,7 +57,7 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
   (
     {
       texts,
-      transition = { type: 'spring', damping: 25, stiffness: 300 },
+      transition = { type: 'spring', damping: 25, stiffness: 300 } as CustomTransition,
       initial = { y: '100%', opacity: 0 },
       animate = { y: 0, opacity: 1 },
       exit = { y: '-120%', opacity: 0 },
@@ -221,7 +221,7 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
                           previousCharsCount + charIndex,
                           array.reduce((sum, word) => sum + word.characters.length, 0)
                         )
-                      }}
+                      } as any}
                       className={cn('inline-block', elementLevelClassName)}
                     >
                       {char}
