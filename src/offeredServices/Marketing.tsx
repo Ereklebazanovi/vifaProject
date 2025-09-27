@@ -26,7 +26,7 @@ import {
   FaCog,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
-import Silk from "../components/Silk";
+// import Silk from "../components/Silk";
 import TrueFocus from "../components/TrueFocus";
 
 const Marketing: React.FC = () => {
@@ -187,15 +187,8 @@ const Marketing: React.FC = () => {
         description="Professional digital advertising services including video production, photography, social media management, and creative content."
       />
 
-      {/* Silk Shader Background */}
-      <div className="fixed inset-0 z-0">
-        <Silk
-          speed={4}
-          scale={1.1}
-          color="#2d1b69"
-          noiseIntensity={0.9}
-          rotation={0.15}
-        />
+      {/* Temporary fallback background while fixing Silk component */}
+      <div className="fixed inset-0 z-0 bg-gradient-to-br from-purple-900 via-slate-800 to-purple-800">
         {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-black/55"></div>
         {/* Subtle purple accent overlay */}

@@ -34,7 +34,7 @@ import {
 } from "react-icons/si";
 import SEO from "../components/SEO";
 import RotatingText from "../components/RotatingText";
-import Silk from "../components/Silk";
+// import Silk from "../components/Silk";
 
 const WebDev: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
@@ -179,15 +179,8 @@ const WebDev: React.FC = () => {
         description="Professional web development services including React, Node.js, mobile responsive design, and modern web applications."
       />
 
-      {/* Silk Shader Background */}
-      <div className="fixed inset-0 z-0">
-        <Silk
-          speed={3}
-          scale={1.2}
-          color="#1e293b"
-          noiseIntensity={0.8}
-          rotation={0.1}
-        />
+      {/* Temporary fallback background while fixing Silk component */}
+      <div className="fixed inset-0 z-0 bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900">
         {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-black/50"></div>
         {/* Subtle blue accent overlay */}
