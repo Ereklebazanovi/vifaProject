@@ -468,7 +468,7 @@ const AIChatbot: React.FC = () => {
               transition={{ duration: 0.8 }}
               className="bg-gradient-to-br from-slate-800/50 to-blue-900/20 rounded-2xl p-8 border border-slate-700/30"
             >
-        {/* cool */}
+        {/* cool s */}
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
                   <h4 className="text-xl font-bold text-white mb-6">რას შეძლებთ:</h4>
