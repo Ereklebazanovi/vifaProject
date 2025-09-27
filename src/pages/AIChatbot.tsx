@@ -29,7 +29,7 @@ import {
   FaPhoneAlt,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
-// import Silk from "../components/Silk";
+import Silk from "../components/Silk";
 
 const AIChatbot: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
@@ -264,8 +264,15 @@ const AIChatbot: React.FC = () => {
         description="AI ჩატბოტები Facebook, WhatsApp და Instagram-ისთვის. 24/7 მომხმარებელთა მხარდაჭერა, გაყიდვების ზრდა და ხარჯების ოპტიმიზაცია. Google Gemini AI ტექნოლოგია."
       />
 
-      {/* Temporary fallback background while fixing Silk component */}
-      <div className="fixed inset-0 z-0 bg-gradient-to-br from-slate-900 via-slate-800 to-orange-900">
+      {/* Silk Shader Background */}
+      <div className="fixed inset-0 z-0">
+        <Silk
+          speed={3}
+          scale={1.2}
+          color="#1e293b"
+          noiseIntensity={0.8}
+          rotation={0.1}
+        />
         <div className="absolute inset-0 bg-black/50"></div>
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900/60 via-transparent to-orange-900/20"></div>
       </div>

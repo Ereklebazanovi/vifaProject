@@ -1,5 +1,5 @@
 
-import React, { forwardRef, useMemo, useRef, useLayoutEffect } from 'react';
+import React, { forwardRef, useMemo, useRef, useLayoutEffect, Suspense, ErrorBoundary, Component } from 'react';
 import { Canvas, useFrame, useThree, type RootState } from '@react-three/fiber';
 import { Color, Mesh, ShaderMaterial } from 'three';
 
@@ -125,6 +125,32 @@ export interface SilkProps {
   rotation?: number;
 }
 
+// Error Boundary for Three.js Canvas
+class SilkErrorBoundary extends Component<
+  { children: React.ReactNode; fallback: React.ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: { children: React.ReactNode; fallback: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(): { hasError: boolean } {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.warn('Silk component error:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback;
+    }
+    return this.props.children;
+  }
+}
+
 const Silk: React.FC<SilkProps> = ({ speed = 5, scale = 1, color = '#7B7481', noiseIntensity = 1.5, rotation = 0 }) => {
   const meshRef = useRef<Mesh>(null);
 
@@ -140,10 +166,32 @@ const Silk: React.FC<SilkProps> = ({ speed = 5, scale = 1, color = '#7B7481', no
     [speed, scale, noiseIntensity, color, rotation]
   );
 
+  // Fallback gradient background if Three.js fails
+  const fallbackStyle = {
+    background: `linear-gradient(135deg, ${color} 0%, ${color}88 50%, ${color} 100%)`,
+    width: '100%',
+    height: '100%'
+  };
+
   return (
-    <Canvas dpr={[1, 2]} frameloop="always">
-      <SilkPlane ref={meshRef} uniforms={uniforms} />
-    </Canvas>
+    <SilkErrorBoundary fallback={<div style={fallbackStyle} />}>
+      <Suspense fallback={<div style={fallbackStyle} />}>
+        <Canvas
+          dpr={[1, 2]}
+          frameloop="always"
+          gl={{
+            antialias: false,
+            alpha: false,
+            preserveDrawingBuffer: false
+          }}
+          onCreated={({ gl }) => {
+            gl.setClearColor(color);
+          }}
+        >
+          <SilkPlane ref={meshRef} uniforms={uniforms} />
+        </Canvas>
+      </Suspense>
+    </SilkErrorBoundary>
   );
 };
 
