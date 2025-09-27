@@ -1,5 +1,5 @@
 
-import React, { forwardRef, useMemo, useRef, useLayoutEffect, Suspense, ErrorBoundary, Component } from 'react';
+import React, { forwardRef, useMemo, useRef, useLayoutEffect, Suspense, Component } from 'react';
 import { Canvas, useFrame, useThree, type RootState } from '@react-three/fiber';
 import { Color, Mesh, ShaderMaterial } from 'three';
 
