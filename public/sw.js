@@ -1,105 +1,119 @@
-// Simple service worker for caching critical assets
-const CACHE_NAME = 'vifa-v1';
-const CRITICAL_ASSETS = [
+// Service Worker for VIFA Digital
+// Version 1.0
+
+const CACHE_NAME = 'vifa-digital-v1';
+const urlsToCache = [
   '/',
-  '/manifest.json',
-  // Add other critical assets that should be cached
+  '/static/js/bundle.js',
+  '/static/css/main.css',
+  '/vifa.jpg',
+  '/manifest.json'
 ];
 
-const VIDEO_ASSETS = [
-  '/advertising-hero-video.mp4',
-  '/digital-advertising-video.mp4',
-  '/web-development-bg.mp4'
-];
-
-// Install event - cache critical assets
+// Install Service Worker
 self.addEventListener('install', (event) => {
+  console.log('Service Worker: Install Event');
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        console.log('Service Worker: Caching critical assets');
-        return cache.addAll(CRITICAL_ASSETS);
+        console.log('Service Worker: Caching Files');
+        return cache.addAll(urlsToCache);
       })
-      .then(() => {
-        console.log('Service Worker: Critical assets cached');
-        return self.skipWaiting();
-      })
+      .then(() => self.skipWaiting())
   );
 });
 
-// Activate event - clean up old caches
+// Activate Service Worker
 self.addEventListener('activate', (event) => {
+  console.log('Service Worker: Activate Event');
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
-            console.log('Service Worker: Deleting old cache', cacheName);
-            return caches.delete(cacheName);
+        cacheNames.map((cache) => {
+          if (cache !== CACHE_NAME) {
+            console.log('Service Worker: Clearing Old Cache');
+            return caches.delete(cache);
           }
         })
       );
-    }).then(() => {
-      console.log('Service Worker: Activated');
-      return self.clients.claim();
     })
   );
+  return self.clients.claim();
 });
 
-// Fetch event - serve from cache, fallback to network
+// Fetch Event - Cache First Strategy for static assets, Network First for API calls
 self.addEventListener('fetch', (event) => {
-  const { request } = event;
-  const url = new URL(request.url);
+  console.log('Service Worker: Fetch Event', event.request.url);
 
-  // Handle video files with special strategy
-  if (VIDEO_ASSETS.some(asset => url.pathname.includes(asset.split('/').pop()))) {
+  if (event.request.url.includes('/api/')) {
+    // Network First for API calls
     event.respondWith(
-      caches.match(request).then((cachedResponse) => {
-        if (cachedResponse) {
-          return cachedResponse;
-        }
-
-        // If not in cache, fetch and cache for next time
-        return fetch(request).then((response) => {
-          if (response.status === 200) {
-            const responseClone = response.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(request, responseClone);
-            });
-          }
-          return response;
-        });
-      }).catch(() => {
-        // Return a placeholder or error response for videos
-        return new Response('', { status: 404 });
-      })
-    );
-    return;
-  }
-
-  // Handle other requests with network-first strategy
-  if (request.method === 'GET') {
-    event.respondWith(
-      fetch(request)
+      fetch(event.request)
         .then((response) => {
-          // Cache successful responses
-          if (response.status === 200 && response.type === 'basic') {
-            const responseClone = response.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(request, responseClone);
+          // Clone the response
+          const responseClone = response.clone();
+
+          // Store in cache
+          caches.open(CACHE_NAME)
+            .then((cache) => {
+              cache.put(event.request, responseClone);
             });
-          }
+
           return response;
         })
         .catch(() => {
-          // Fallback to cache
-          return caches.match(request).then((cachedResponse) => {
-            return cachedResponse || new Response('', {
-              status: 404,
-              statusText: 'Not Found'
+          // Fallback to cache if network fails
+          return caches.match(event.request);
+        })
+    );
+  } else {
+    // Cache First for static assets
+    event.respondWith(
+      caches.match(event.request)
+        .then((response) => {
+          // Return cached version or fetch from network
+          return response || fetch(event.request)
+            .then((fetchResponse) => {
+              // Check if valid response
+              if (!fetchResponse || fetchResponse.status !== 200 || fetchResponse.type !== 'basic') {
+                return fetchResponse;
+              }
+
+              // Clone the response
+              const responseToCache = fetchResponse.clone();
+
+              // Store in cache
+              caches.open(CACHE_NAME)
+                .then((cache) => {
+                  cache.put(event.request, responseToCache);
+                });
+
+              return fetchResponse;
             });
-          });
+        })
+        .catch(() => {
+          // Fallback for offline navigation
+          if (event.request.destination === 'document') {
+            return caches.match('/');
+          }
         })
     );
   }
 });
+
+// Background Sync for form submissions
+self.addEventListener('sync', (event) => {
+  if (event.tag === 'contact-form') {
+    console.log('Service Worker: Background sync for contact form');
+    // Handle offline form submissions here
+    event.waitUntil(
+      // Process queued form submissions
+      processQueuedFormSubmissions()
+    );
+  }
+});
+
+// Helper function to process queued form submissions
+async function processQueuedFormSubmissions() {
+  console.log('Processing queued form submissions...');
+}

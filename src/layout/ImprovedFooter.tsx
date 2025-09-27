@@ -138,10 +138,12 @@ const Footer: React.FC = () => {
                 transition={{ duration: 0.3 }}
                 className="w-12 h-12 bg-slate-800/50 border border-slate-600/30 rounded-xl flex items-center justify-center hover:bg-blue-500/10 hover:border-blue-400/40 transition-all duration-300 overflow-hidden"
               >
-                <img 
-                  src="/vifa.jpg" 
-                  alt="Vifa Digital Logo" 
+                <img
+                  src="/vifa.jpg"
+                  alt="VIFA Digital - ციფრული მარკეტინგი და ვებ განვითარება საქართველოში"
                   className="w-10 h-10 rounded-lg object-cover"
+                  loading="lazy"
+                  decoding="async"
                 />
               </motion.div>
               <div>

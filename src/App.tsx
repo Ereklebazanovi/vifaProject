@@ -11,6 +11,8 @@ import { LanguageProvider } from "./contexts/LanguageContext";
 import { NavigationProvider } from "./contexts/NavigationContext";
 import { addResourceHints } from "./utils/preload";
 import { useRoutePreload } from "./hooks/useRoutePreload";
+import { initializePerformanceOptimizations } from "./utils/performanceOptimizations";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 import "./index.css";
 
 // Simple lazy loading - no artificial delays
@@ -22,6 +24,7 @@ const Marketing = lazy(() => import("./offeredServices/Marketing"));
 const WebDev = lazy(() => import("./offeredServices/WebDev"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Error Boundary Component
 class ErrorBoundary extends React.Component<
@@ -139,6 +142,9 @@ const AppWithRouter: React.FC = () => {
               <Route path="start-project" element={<StartProject />} />
               <Route path="privacy" element={<PrivacyPolicy />} />
               <Route path="terms" element={<TermsOfService />} />
+
+              {/* 404 Not Found - Catch all unmatched routes */}
+              <Route path="*" element={<NotFound />} />
             </Route>
 
             {/* Admin routes without Layout (no navbar/footer) */}
@@ -156,7 +162,8 @@ const AppWithRouter: React.FC = () => {
 // Main App component
 const App: React.FC = () => {
   useEffect(() => {
-    // Only add basic resource hints - no aggressive monitoring
+    // Initialize comprehensive performance optimizations
+    initializePerformanceOptimizations();
     addResourceHints();
   }, []);
 
@@ -166,6 +173,10 @@ const App: React.FC = () => {
         <LanguageProvider>
           <NavigationProvider>
             <Router>
+              {/* Google Analytics */}
+              {import.meta.env.VITE_GA_MEASUREMENT_ID && (
+                <GoogleAnalytics measurementId={import.meta.env.VITE_GA_MEASUREMENT_ID} />
+              )}
               <AppWithRouter />
             </Router>
           </NavigationProvider>

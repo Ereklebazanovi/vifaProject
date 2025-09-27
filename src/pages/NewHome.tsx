@@ -14,18 +14,18 @@ const NewHome: React.FC = () => {
   const [showDigitalConsequences, setShowDigitalConsequences] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  // Partner logos data - simple array
+  // Partner logos data - with descriptive alt tags for SEO
   const partnerLogos = [
-    { src: "/saitislogoebi/Untitled-1.png", alt: "Partner 1" },
-    { src: "/saitislogoebi/Untitled-2.png", alt: "Partner 2" },
-    { src: "/saitislogoebi/Untitled-3.png", alt: "Partner 3" },
-    { src: "/saitislogoebi/Untitled-4.png", alt: "Partner 4" },
-    { src: "/saitislogoebi/Untitled-5.png", alt: "Partner 5" },
-    { src: "/saitislogoebi/Untitled-6.png", alt: "Partner 6" },
-    { src: "/saitislogoebi/Untitled-7.png", alt: "Partner 7" },
-    { src: "/saitislogoebi/Untitled-8.png", alt: "Partner 8" },
-    { src: "/saitislogoebi/Untitled-9.png", alt: "Partner 9" },
-    { src: "/saitislogoebi/Untitled-10.png", alt: "Partner 10" },
+    { src: "/saitislogoebi/Untitled-1.png", alt: "ვისფა დიჯითალის პარტნიორი კომპანია - ბიზნეს წარმატების მისღწევა" },
+    { src: "/saitislogoebi/Untitled-2.png", alt: "VIFA Digital-ის საქმიანი პარტნიორი - ციფრული მარკეტინგის სფეროში" },
+    { src: "/saitislogoebi/Untitled-3.png", alt: "სანდო ბიზნეს პარტნიორი - ვებ განვითარებისა და მარკეტინგის მიმართულებით" },
+    { src: "/saitislogoebi/Untitled-4.png", alt: "წარმატებული თანამშრომლობის პარტნიორი - ონლაინ ბიზნეს ზრდისთვის" },
+    { src: "/saitislogoebi/Untitled-5.png", alt: "VIFA Digital თანამშრომელი - ციფრული ტრანსფორმაციის მხარდაჭერა" },
+    { src: "/saitislogoebi/Untitled-6.png", alt: "ნდობის ღირსი პარტნიორი - ვებსაიტებისა და მარკეტინგის სერვისები" },
+    { src: "/saitislogoebi/Untitled-7.png", alt: "სტრატეგიული პარტნიორი - ციფრული ზრდისა და წარმატებისთვის" },
+    { src: "/saitislogoebi/Untitled-8.png", alt: "ბიზნეს კლიენტი - VIFA Digital-ის პროფესიონალური სერვისების ბენეფიციარი" },
+    { src: "/saitislogoebi/Untitled-9.png", alt: "წარმატებული პროექტის კლიენტი - ონლაინ თანდასწრების გაძლიერება" },
+    { src: "/saitislogoebi/Untitled-10.png", alt: "დაკმაყოფილებული კლიენტი - ციფრული მარკეტინგისა და ვებ განვითარების მიღწევები" },
   ];
 
   return (

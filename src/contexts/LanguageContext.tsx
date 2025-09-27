@@ -464,7 +464,7 @@ const translations = {
     "newHome.cta.button": "დაიწყეთ თანამშრომლობა",
     // Interactive Information Section
     "newHome.interactive.title":
-      "რატომ არის ციფრული წარმატება დღეს აუცილებელი?",
+      "რატომ არის ციფრული წარმატება აუცილებელი",
     "newHome.interactive.titleHighlight": "დღეს?",
     "newHome.interactive.intro":
       "21-ე საუკუნეში მომხმარებლები პირველ რიგში ონლაინ ეძებენ ბიზნესს. ვებსაიტი არის შენი სანდოობის, ხილვადობის და ზრდის მთავარი ინსტრუმენტი.",
