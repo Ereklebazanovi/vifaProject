@@ -3,10 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaHome, FaArrowLeft, FaSearch, FaPhone } from 'react-icons/fa';
 import SEO from '../components/SEO';
-import { useLanguage } from '../contexts/LanguageContext';
-
 const NotFound: React.FC = () => {
-  const { t } = useLanguage();
 
   return (
     <>

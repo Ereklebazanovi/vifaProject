@@ -101,12 +101,12 @@ export const optimizeImageLoading = (img: HTMLImageElement) => {
 // Performance monitoring
 export const measureWebVitals = () => {
   // Import web-vitals library dynamically
-  import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
-    getCLS(console.log);
-    getFID(console.log);
-    getFCP(console.log);
-    getLCP(console.log);
-    getTTFB(console.log);
+  import('web-vitals').then((webVitals) => {
+    if (webVitals.onCLS) webVitals.onCLS(console.log);
+    if (webVitals.onFID) webVitals.onFID(console.log);
+    if (webVitals.onFCP) webVitals.onFCP(console.log);
+    if (webVitals.onLCP) webVitals.onLCP(console.log);
+    if (webVitals.onTTFB) webVitals.onTTFB(console.log);
   }).catch(() => {
     console.log('Web Vitals measurement not available');
   });
