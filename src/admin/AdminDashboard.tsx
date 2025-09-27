@@ -333,7 +333,10 @@ const AdminDashboard: React.FC = () => {
                       <div>
                         <div className="font-medium">{lead.name}</div>
                         <div className="text-sm text-slate-400">{lead.businessName}</div>
-                        <div className="text-sm text-slate-400">{lead.email}</div>
+                        <div className="text-sm text-blue-400 font-medium">{lead.email}</div>
+                        {lead.phone && (
+                          <div className="text-sm text-green-400 font-medium">{lead.phone}</div>
+                        )}
                       </div>
                     </td>
                     <td className="px-6 py-4">
@@ -368,31 +371,13 @@ const AdminDashboard: React.FC = () => {
                       {new Date(lead.submittedAt.toDate()).toLocaleDateString('ka-GE')}
                     </td>
                     <td className="px-6 py-4">
-                      <div className="flex gap-2">
-                        <button
-                          onClick={() => setSelectedLead(lead)}
-                          className="p-2 text-blue-400 hover:bg-blue-500/20 rounded-lg transition-colors"
-                          title="დეტალები"
-                        >
-                          <FaEye />
-                        </button>
-                        <a
-                          href={`mailto:${lead.email}`}
-                          className="p-2 text-green-400 hover:bg-green-500/20 rounded-lg transition-colors"
-                          title="ემაილი"
-                        >
-                          <FaEnvelope />
-                        </a>
-                        {lead.phone && (
-                          <a
-                            href={`tel:${lead.phone}`}
-                            className="p-2 text-yellow-400 hover:bg-yellow-500/20 rounded-lg transition-colors"
-                            title="ზარი"
-                          >
-                            <FaPhone />
-                          </a>
-                        )}
-                      </div>
+                      <button
+                        onClick={() => setSelectedLead(lead)}
+                        className="px-4 py-2 text-blue-400 hover:bg-blue-500/20 rounded-lg transition-colors border border-blue-400/30 hover:border-blue-400/50"
+                        title="დეტალების ნახვა"
+                      >
+                        მეტი ინფო
+                      </button>
                     </td>
                   </motion.tr>
                 ))}

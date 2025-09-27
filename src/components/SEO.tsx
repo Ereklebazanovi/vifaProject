@@ -23,7 +23,7 @@ interface SEOProps {
 const SEO: React.FC<SEOProps> = ({
   title,
   description,
-  keywords = "ვებსაიტის განვითარება, სოციალური მედია, ციფრული რეკლამა, მარკეტინგი, საქართველო, თბილისი, Vifa Digital, ციფრული მარკეტინგი, SEO ოპტიმიზაცია, გუგლის რეკლამა, ვებდიზაინი",
+  keywords = "საიტის შექმნა, ვებსაიტის შექმნა, საიტის გაკეთება, ვებსაიტის გაკეთება, საიტი, ვებსაიტი, ai chatbot ინტეგრაცია, ვებსაიტის განვითარება, სოციალური მედია, ციფრული რეკლამა, მარკეტინგი, საქართველო, თბილისი, VIFA Digital, ციფრული მარკეტინგი, SEO ოპტიმიზაცია, გუგლის რეკლამა, ვებდიზაინი, ონლაინ მაღაზია, ბიზნეს ვებსაიტი, კორპორატიული ვებსაიტი, რესტორნის ვებსაიტი, ვებ დეველოპმენტი, ვებ პროგრამირება, საიტების შექმნა, ვებ სერვისები, ციფრული გადაწყვეტები, ai ჩატბოტი, Facebook reklama, Instagram reklama, Google Ads, სოციალური მედია მენეჯმენტი",
   image = "/vifa.jpg",
   url,
   type = 'website',
@@ -34,7 +34,7 @@ const SEO: React.FC<SEOProps> = ({
 
   const siteTitle = siteConfig.siteTitle;
   const siteName = siteConfig.siteName;
-  const defaultDescription = "VIFA Digital - საქართველოში ციფრული მარკეტინგისა და ვებ განვითარების ლიდერი კომპანია. შექმენით თქვენი ბიზნესისთვის ძლიერი ონლაინ თანდასწრება. ვებსაიტების შექმნა, SEO, გუგლის რეკლამა, სოციალური მედია.";
+  const defaultDescription = "VIFA Digital - საიტის შექმნა, ვებსაიტის შექმნა და ციფრული მარკეტინგის სპეციალისტები საქართველოში. საიტის გაკეთება, AI chatbot ინტეგრაცია, ონლაინ მაღაზიების შექმნა, Google Ads, Facebook რეკლამა. პროფესიონალური ვებ სერვისები თბილისში.";
 
   const fullTitle = title ? `${title} | ${siteName}` : siteTitle;
   const metaDescription = description || defaultDescription;
@@ -73,12 +73,24 @@ const SEO: React.FC<SEOProps> = ({
     ],
     foundingDate: "2020",
     knowsAbout: [
+      "საიტის შექმნა",
+      "ვებსაიტის შექმნა",
+      "საიტის გაკეთება",
+      "ვებსაიტის გაკეთება",
+      "AI chatbot ინტეგრაცია",
       "Digital Marketing",
       "Web Development",
-      "SEO",
+      "SEO ოპტიმიზაცია",
       "Social Media Marketing",
       "Google Ads",
-      "Website Design"
+      "Facebook რეკლამა",
+      "Instagram რეკლამა",
+      "Website Design",
+      "ონლაინ მაღაზია",
+      "ბიზნეს ვებსაიტი",
+      "ვებ დეველოპმენტი",
+      "ციფრული მარკეტინგი",
+      "სოციალური მედია მენეჯმენტი"
     ],
     serviceArea: {
       "@type": "Country",
