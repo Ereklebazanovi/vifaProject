@@ -29,7 +29,7 @@ import {
   FaPhoneAlt,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
-import Silk from "../components/Silk";
+// import Silk from "../components/Silk";
 
 const AIChatbot: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
