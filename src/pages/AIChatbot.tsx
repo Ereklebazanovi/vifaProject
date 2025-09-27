@@ -1,7 +1,6 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
@@ -313,7 +312,7 @@ const AIChatbot: React.FC = () => {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16"
               >
-                {statistics.map((stat, index) => (
+                {statistics.map((stat) => (
                   <div key={stat.label} className="text-center">
                     <div className={`text-3xl font-bold ${getTextColorClass(stat.color)} mb-2`}>
                       {stat.value}
@@ -449,7 +448,7 @@ const AIChatbot: React.FC = () => {
             <div className="bg-slate-800/50 rounded-2xl p-8 border border-slate-700/30">
               <h4 className="text-xl font-bold text-white mb-6 text-center">რეალური მაგალითები - თვიური API ღირებულება</h4>
               <div className="grid md:grid-cols-3 gap-6">
-                {apiCosts.map((cost, index) => (
+                {apiCosts.map((cost) => (
                   <div key={cost.business} className="text-center">
                     <div className="text-white font-medium mb-2">{cost.business}</div>
                     <div className="text-slate-400 text-sm mb-2">{cost.queries}</div>
@@ -486,7 +485,7 @@ const AIChatbot: React.FC = () => {
                       "პროდუქტების მენეჯმენტი",
                       "საუბრების ისტორია",
                       "დეტალური ანალიტიკა"
-                    ].map((feature, index) => (
+                    ].map((feature) => (
                       <div key={feature} className="flex items-center gap-3">
                         <FaCheck className="text-green-400" />
                         <span className="text-slate-300">{feature}</span>

@@ -21,7 +21,6 @@ import {
   FaBrain,
   FaBullseye,
   FaFacebook,
-  FaInstagram,
 } from "react-icons/fa";
 import {
   SiFirebase,
@@ -330,15 +329,9 @@ const WebDev: React.FC = () => {
                       splitLevelClassName="overflow-hidden perspective-1000"
                       transition={{
                         type: "spring",
-                        damping: 18,
-                        stiffness: 250,
-                        mass: 0.8,
-                      }}
-                      rotationInterval={3000}
-                      transition={{
-                        type: "spring",
                         damping: 25,
                         stiffness: 300,
+                        mass: 0.8,
                       }}
                       rotationInterval={3000}
                     />
