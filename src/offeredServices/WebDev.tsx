@@ -35,6 +35,7 @@ import {
 } from "react-icons/si";
 import SEO from "../components/SEO";
 import RotatingText from "../components/RotatingText";
+import Silk from "../components/Silk";
 
 const WebDev: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
@@ -179,45 +180,81 @@ const WebDev: React.FC = () => {
         description="Professional web development services including React, Node.js, mobile responsive design, and modern web applications."
       />
 
-      {/* Animated Background with Mobile Optimization */}
-      <div className="fixed inset-0 z-0 overflow-hidden">
-        {/* Animated background image */}
-        <div
-          className="absolute inset-0 transform scale-105 animate-slow-pan"
-          style={{
-            backgroundImage:
-              "url(https://images.unsplash.com/photo-1495420378468-78588a508652?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            willChange: "transform",
-          }}
-        ></div>
+      {/* Silk Shader Background */}
+      <div className="fixed inset-0 z-0">
+        <Silk
+          speed={3}
+          scale={1.2}
+          color="#1e293b"
+          noiseIntensity={0.8}
+          rotation={0.1}
+        />
         {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-black/75"></div>
-
-        {/* Subtle gradient overlay for depth */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-transparent to-slate-900/30"></div>
+        <div className="absolute inset-0 bg-black/50"></div>
+        {/* Subtle blue accent overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/60 via-transparent to-blue-900/20"></div>
       </div>
 
       <style>{`
-        @keyframes slow-pan {
-          0% { transform: scale(1.05) translateX(0) translateY(0); }
-          25% { transform: scale(1.06) translateX(-2%) translateY(-1%); }
-          50% { transform: scale(1.05) translateX(-3%) translateY(-2%); }
-          75% { transform: scale(1.055) translateX(-1%) translateY(-1%); }
-          100% { transform: scale(1.05) translateX(0) translateY(0); }
+        @keyframes gradient-shift {
+          0%, 100% {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+          }
+          25% {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #1e293b 100%);
+          }
+          50% {
+            background: linear-gradient(135deg, #334155 0%, #475569 50%, #334155 100%);
+          }
+          75% {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #334155 100%);
+          }
         }
 
-        .animate-slow-pan {
-          animation: slow-pan 60s ease-in-out infinite;
+        @keyframes float-slow {
+          0%, 100% { transform: translate(0, 0) rotate(0deg); }
+          25% { transform: translate(30px, -20px) rotate(90deg); }
+          50% { transform: translate(-20px, -40px) rotate(180deg); }
+          75% { transform: translate(-40px, 20px) rotate(270deg); }
+        }
+
+        @keyframes float-reverse {
+          0%, 100% { transform: translate(0, 0) rotate(0deg); }
+          25% { transform: translate(-30px, 20px) rotate(-90deg); }
+          50% { transform: translate(20px, 40px) rotate(-180deg); }
+          75% { transform: translate(40px, -20px) rotate(-270deg); }
+        }
+
+        @keyframes float-diagonal {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          25% { transform: translate(40px, -30px) scale(1.1); }
+          50% { transform: translate(-30px, -50px) scale(0.9); }
+          75% { transform: translate(-50px, 30px) scale(1.05); }
+        }
+
+        .animate-gradient-shift {
+          animation: gradient-shift 20s ease-in-out infinite;
+        }
+
+        .animate-float-slow {
+          animation: float-slow 30s ease-in-out infinite;
+        }
+
+        .animate-float-reverse {
+          animation: float-reverse 35s ease-in-out infinite;
+        }
+
+        .animate-float-diagonal {
+          animation: float-diagonal 25s ease-in-out infinite;
         }
 
         /* Reduce animation on mobile and slow connections */
         @media (max-width: 768px), (prefers-reduced-motion: reduce) {
-          .animate-slow-pan {
+          .animate-gradient-shift,
+          .animate-float-slow,
+          .animate-float-reverse,
+          .animate-float-diagonal {
             animation: none;
-            transform: scale(1.05);
           }
         }
       `}</style>
@@ -236,7 +273,7 @@ const WebDev: React.FC = () => {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
-                  className="flex items-center gap-3 sm:gap-4 md:gap-5 bg-gradient-to-r from-slate-800/40 via-slate-700/30 to-slate-800/40 backdrop-blur-lg rounded-2xl px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 border border-slate-600/30 shadow-xl"
+                  className="flex items-center gap-2 sm:gap-3 md:gap-3 px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5"
                   style={{ fontFamily: "Inter, system-ui, sans-serif" }}
                 >
                   {/* Left side - Creative text */}
@@ -245,36 +282,59 @@ const WebDev: React.FC = () => {
                     style={{
                       fontFamily:
                         'SF Pro Display, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-                      letterSpacing: '0.15em',
+                      letterSpacing: "0.09em",
                     }}
                   >
                     creative
                   </h2>
 
                   {/* Right side - Rotating text box */}
-                  <div className="w-44 sm:w-52 md:w-60 lg:w-64">
+                  <div className="ml-2 sm:ml-3">
                     <RotatingText
                       texts={[
-                        "Solutions",
-                        "Mind",
-                        "Thinking",
-                        "Modern Web Apps",
-                        "Systems",
-                        "Vision",
-                        "Design",
+                        "thinking",
+                        "solutions",
+                        "innovation",
+                        "future",
+                        "design",
+                        "vision",
+                        "ideas",
                       ]}
-                      mainClassName="w-full px-3 sm:px-4 md:px-5 bg-gradient-to-r from-blue-500 to-cyan-400 text-white overflow-hidden py-2 sm:py-2.5 md:py-3 justify-center rounded-xl font-light text-sm sm:text-base md:text-lg tracking-widest shadow-lg shadow-blue-400/30"
-                      elementLevelClassName="inline-block"
+                      mainClassName="px-4 py-2 bg-slate-900/30 backdrop-blur-md text-blue-400 justify-center items-center rounded-lg font-medium text-base sm:text-lg md:text-xl lg:text-2xl xl:text-lg tracking-normal shadow-lg shadow-blue-400/20 hover:shadow-blue-400/40 transition-all duration-300 hover:scale-102 border border-blue-400/20 hover:border-blue-400/40"
+                      elementLevelClassName="inline-block transition-all duration-200 ease-out"
                       style={{
-                        fontFamily: 'SF Pro Display, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-                        letterSpacing: '0.1em'
+                        fontFamily:
+                          "Inter, system-ui, -apple-system, sans-serif",
+                        fontWeight: "500",
                       }}
                       staggerFrom="center"
-                      initial={{ y: "100%", opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      exit={{ y: "-120%", opacity: 0 }}
-                      staggerDuration={0.03}
-                      splitLevelClassName="overflow-hidden"
+                      initial={{
+                        y: "120%",
+                        opacity: 0,
+                        rotateX: 90,
+                        scale: 0.8,
+                      }}
+                      animate={{
+                        y: 0,
+                        opacity: 1,
+                        rotateX: 0,
+                        scale: 1,
+                      }}
+                      exit={{
+                        y: "-120%",
+                        opacity: 0,
+                        rotateX: -90,
+                        scale: 0.8,
+                      }}
+                      staggerDuration={0.035}
+                      splitLevelClassName="overflow-hidden perspective-1000"
+                      transition={{
+                        type: "spring",
+                        damping: 18,
+                        stiffness: 250,
+                        mass: 0.8,
+                      }}
+                      rotationInterval={3000}
                       transition={{
                         type: "spring",
                         damping: 25,
@@ -407,6 +467,145 @@ const WebDev: React.FC = () => {
             </div>
           </div>
 
+          {/* Main Services Highlight - რაღაც ასე უნდა იყოს პიორიტეტი */}
+          <div className="mb-32">
+            <div className="text-center mb-16">
+              <h3
+                className="text-4xl font-bold text-white mb-6 tracking-tight"
+                style={{ fontFamily: "Inter, system-ui, sans-serif" }}
+              >
+                ჩვენი ძირითადი სერვისები
+              </h3>
+              <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+                ყველაზე მოთხოვნადი და ეფექტური გადაწყვეტები თქვენი ბიზნესისთვის
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+              {/* Website Development - პირველი პრიორიტეტი */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="bg-gradient-to-br from-blue-900/30 via-slate-800/40 to-slate-900/60 rounded-2xl p-8 border border-blue-400/20 hover:border-blue-400/40 transition-all duration-300 hover:scale-105 group"
+              >
+                <div className="flex items-center mb-6">
+                  <div className="w-16 h-16 bg-blue-500/20 rounded-xl flex items-center justify-center mr-4 group-hover:bg-blue-500/30 transition-colors">
+                    <FaCode className="text-blue-400 text-2xl" />
+                  </div>
+                  <div>
+                    <h4 className="text-2xl font-bold text-white mb-2">
+                      ვებსაიტის შექმნა
+                    </h4>
+                    <div className="text-blue-400 font-medium">
+                      პროფესიონალური ვებგვერდები
+                    </div>
+                  </div>
+                </div>
+
+                <p className="text-slate-300 mb-6 leading-relaxed">
+                  თანამედროვე, სწრაფი და SEO-ოპტიმიზირებული ვებსაიტები, რომლებიც
+                  ზრდის თქვენი ბიზნესის ხილვადობას და მომხმარებლების ჩართულობას.
+                </p>
+
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-center text-slate-300">
+                    <FaMobile className="text-blue-400 mr-3 flex-shrink-0" />
+                    მობილური ოპტიმიზაცია
+                  </li>
+                  <li className="flex items-center text-slate-300">
+                    <FaChartLine className="text-blue-400 mr-3 flex-shrink-0" />
+                    SEO-ღია სტრუქტურა
+                  </li>
+                  <li className="flex items-center text-slate-300">
+                    <FaBolt className="text-blue-400 mr-3 flex-shrink-0" />
+                    სწრაფი ჩატვირთვა
+                  </li>
+                  <li className="flex items-center text-slate-300">
+                    <FaCog className="text-blue-400 mr-3 flex-shrink-0" />
+                    მარტივი ადმინ პანელი
+                  </li>
+                </ul>
+
+                <div className="flex items-center justify-between pt-4 border-t border-slate-700">
+                  <div className="text-slate-400">
+                    <span className="text-sm">ფასი დამოკიდებულია</span>
+                    <div className="text-lg font-medium text-blue-400">
+                      პროექტზე
+                    </div>
+                  </div>
+                  <Link
+                    to="/start-project"
+                    className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg transition-colors font-medium"
+                  >
+                    დაიწყეთ ახლავე
+                  </Link>
+                </div>
+              </motion.div>
+
+              {/* AI Chatbot - მეორე პრიორიტეტი */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="bg-gradient-to-br from-orange-900/30 via-slate-800/40 to-slate-900/60 rounded-2xl p-8 border border-orange-400/20 hover:border-orange-400/40 transition-all duration-300 hover:scale-105 group"
+              >
+                <div className="flex items-center mb-6">
+                  <div className="w-16 h-16 bg-orange-500/20 rounded-xl flex items-center justify-center mr-4 group-hover:bg-orange-500/30 transition-colors">
+                    <FaBrain className="text-orange-400 text-2xl" />
+                  </div>
+                  <div>
+                    <h4 className="text-2xl font-bold text-white mb-2">
+                      AI ჩატბოტი
+                    </h4>
+                    <div className="text-orange-400 font-medium">
+                      ავტომატური მომხმარებელთა მხარდაჭერა
+                    </div>
+                  </div>
+                </div>
+
+                <p className="text-slate-300 mb-6 leading-relaxed">
+                  ინტელექტუალური ჩატბოტი, რომელიც 24/7 პასუხობს მომხმარებელთა
+                  კითხვებს და უზრუნველყოფს სწრაფ მხარდაჭერას.
+                </p>
+
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-center text-slate-300">
+                    <FaRocket className="text-orange-400 mr-3 flex-shrink-0" />
+                    24/7 ხელმისაწვდომობა
+                  </li>
+                  <li className="flex items-center text-slate-300">
+                    <FaBullseye className="text-orange-400 mr-3 flex-shrink-0" />
+                    პერსონალიზებული პასუხები
+                  </li>
+                  <li className="flex items-center text-slate-300">
+                    <FaDatabase className="text-orange-400 mr-3 flex-shrink-0" />
+                    ლიდების შეგროვება და მართვა
+                  </li>
+                  <li className="flex items-center text-slate-300">
+                    <FaFacebook className="text-orange-400 mr-3 flex-shrink-0" />
+                    Facebook/Instagram/WhatsApp ინტეგრაცია
+                  </li>
+                </ul>
+
+                <div className="flex items-center justify-between pt-4 border-t border-slate-700">
+                  <div className="text-slate-400">
+                    <span className="text-sm">ფასი დამოკიდებულია</span>
+                    <div className="text-lg font-medium text-blue-400">
+                      პროექტზე
+                    </div>
+                  </div>
+                  <Link
+                    to="/services/ai-chatbot"
+                    className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg transition-colors font-medium"
+                  >
+                    მეტი ინფორმაცია
+                  </Link>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+
           {/* Pricing Approach Section */}
           <div className="mb-20">
             <div className="text-center mb-12">
@@ -446,8 +645,8 @@ const WebDev: React.FC = () => {
                     სწრაფი შეფასება
                   </h4>
                   <p className="text-slate-300 text-sm leading-relaxed">
-                    უფასო კონსულტაციის შემდეგ 24 საათში მიიღებთ ზუსტ ფასს და
-                    პროექტის გეგმას.
+                    უფასო კონსულტაციის შემდეგ მაქსიმუმ 12 საათში მიიღებთ ზუსტ
+                    ფასს და პროექტის გეგმას.
                   </p>
                 </div>
                 <div>
@@ -458,8 +657,9 @@ const WebDev: React.FC = () => {
                     გამჭვირვალე პროცესი
                   </h4>
                   <p className="text-slate-300 text-sm leading-relaxed">
-                    გვისაუბრეთ თქვენი იდეის შესახებ, ჩვენ გავცემთ მიწერას ყველა
-                    დეტალთან ერთად.
+                    ჩვენი მიზანია, ყველა ეტაპი იყოს მაქსიმალურად ღია და
+                    გასაგები. ნდობაზე დაფუძნებული თანამშრომლობა ყოველთვის
+                    მომგებიანია.
                   </p>
                 </div>
               </div>
@@ -527,130 +727,6 @@ const WebDev: React.FC = () => {
               <h3 className="text-3xl font-light text-white">
                 კონსულტაცია და თანამშრომლობის დაგეგმვა უფასოა
               </h3>
-            </div>
-          </div>
-
-          {/* AI Chatbot for Business Section */}
-          <div className="mb-20">
-            <div className="text-center mb-12">
-              <h3 className="text-3xl font-light text-white mb-4">
-                <FaBrain className="text-orange-400 inline mr-2" /> AI ჩატბოტი
-                თქვენი ბიზნესისთვის
-              </h3>
-              <p className="text-lg text-slate-300 max-w-3xl mx-auto">
-                Facebook Messenger, WhatsApp, Instagram-ში ჭკვიანი ასისტენტი
-                24/7
-              </p>
-            </div>
-
-            {/* Social Media Platforms Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Facebook Messenger */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="group bg-gradient-to-br from-blue-500/10 to-blue-600/10 p-6 rounded-xl border border-blue-500/20 hover:border-blue-400/40 transition-all duration-300 hover:scale-105"
-              >
-                <div className="text-4xl mb-4 text-blue-400">
-                  <FaFacebook />
-                </div>
-                <h4 className="text-xl font-medium text-white mb-3">
-                  Facebook Messenger
-                </h4>
-                <p className="text-slate-300 mb-4 text-sm leading-relaxed">
-                  AI ჩატბოტი რომელიც სრულიად იქნება მორგებული თქვენს ბიზნეს
-                  ლოგიკაზე! დაინტერესებული კლიენტები თქვენს facebook/messenger
-                  გვერდზე არასოდეს დარჩებიან უპასუხოდ.
-                </p>
-                <div className="text-xs text-blue-400 font-medium">
-                  <FaCheckCircle className="text-blue-400 text-xs inline mr-2" />
-                  მყისიერი პასუხები 24/7
-                </div>
-              </motion.div>
-
-              {/* WhatsApp Business */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="group bg-gradient-to-br from-green-500/10 to-emerald-500/10 p-6 rounded-xl border border-green-500/20 hover:border-green-400/40 transition-all duration-300 hover:scale-105"
-              >
-                <div className="text-4xl mb-4 text-green-400">
-                  <FaMobile />
-                </div>
-                <h4 className="text-xl font-medium text-white mb-3">
-                  WhatsApp Business
-                </h4>
-                <p className="text-slate-300 mb-4 text-sm leading-relaxed">
-                  AI ჩატბოტი რომელიც სრულიად იქნება მორგებული თქვენს ბიზნეს
-                  ლოგიკაზე! დაინტერესებული კლიენტები თქვენს WhatsApp ჩატში
-                  არასოდეს დარჩებიან უპასუხოდ.{" "}
-                </p>
-                <div className="text-xs text-green-400 font-medium mt-9">
-                  <FaCheckCircle className="text-green-400 text-xs inline mr-2" />
-                  მყისიერი პასუხები 24/7
-                </div>
-              </motion.div>
-
-              {/* Instagram DM */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="group bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-6 rounded-xl border border-purple-500/20 hover:border-purple-400/40 transition-all duration-300 hover:scale-105"
-              >
-                <div className="text-4xl mb-4 text-purple-400">
-                  <FaInstagram />
-                </div>
-                <h4 className="text-xl font-medium text-white mb-3">
-                  Instagram Messages
-                </h4>
-                <p className="text-slate-300 mb-4 text-sm leading-relaxed">
-                  AI ჩატბოტი რომელიც სრულიად იქნება მორგებული თქვენს ბიზნეს
-                  ლოგიკაზე! დაინტერესებული კლიენტები თქვენს Instagram გვერდზე
-                  არასოდეს დარჩებიან უპასუხოდ.
-                </p>
-                <div className="text-xs text-purple-400 font-medium">
-                  <FaCheckCircle className="text-purple-400 text-xs inline mr-2" />
-                  მყისიერი პასუხები 24/7
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Business Benefits Banner */}
-            <div className="mt-12 bg-gradient-to-r from-slate-800/50 to-slate-700/50 rounded-xl p-8 border border-slate-600/30">
-              <div className="grid md:grid-cols-3 gap-6 text-center">
-                <div>
-                  <div className="text-2xl font-bold text-blue-400 mb-2">
-                    <FaCog />
-                  </div>
-                  <h5 className="text-white font-medium mb-1">
-                    თქვენი ბიზნეს ლოგიკა
-                  </h5>
-                  <p className="text-sm text-slate-400">
-                    ჩატბოტმა იცის თქვენი სერვისები, ფასები, რეგულაციები
-                  </p>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-green-400 mb-2">
-                    <FaBolt />
-                  </div>
-                  <h5 className="text-white font-medium mb-1">24/7 მუშაობა</h5>
-                  <p className="text-sm text-slate-400">
-                    არასოდეს კარგავს კლიენტს - ყოველთვის აბრუნებს პასუხს
-                  </p>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-purple-400 mb-2">
-                    <FaChartLine />
-                  </div>
-                  <h5 className="text-white font-medium mb-1">გაყიდვები</h5>
-                  <p className="text-sm text-slate-400">
-                    სწრაფი პასუხები = კმაყოფილი კლიენტები = მეტი შემოსავალი
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
 

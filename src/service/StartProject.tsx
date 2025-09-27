@@ -208,7 +208,7 @@ const StartProject: React.FC = () => {
         </div>
       </div>
 
-      <div className="relative z-10 min-h-screen pt-20 sm:pt-24 md:pt-32 lg:pt-44">
+      <div className="relative z-10 min-h-screen pt-20 sm:pt-24 md:pt-32 lg:pt-30">
         <div
           className={`container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10 ${getTransitionClasses()}`}
         >
@@ -231,7 +231,7 @@ const StartProject: React.FC = () => {
           letter-spacing: -0.02em;
         }
       `}</style>
-          <div className="start-project-content">
+          <div className="start-project-content lg:mt-0 mt-15 md:mt-0">
             {/* Smart container that adapts to screen size */}
             <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
               <div className="max-w-6xl mx-auto">
@@ -610,11 +610,11 @@ const StartProject: React.FC = () => {
 
                     {currentStep < totalSteps ? (
                       <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         onClick={nextStep}
                         disabled={!canProceed()}
-                        className={`flex items-center justify-center gap-2 px-4 sm:px-6 py-3 rounded-lg sm:rounded-xl font-semibold transition-all duration-300 text-sm sm:text-base order-1 sm:order-2 ${
+                        className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
                           canProceed()
                             ? "bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white"
                             : "bg-slate-800 text-slate-600 cursor-not-allowed"
@@ -625,11 +625,11 @@ const StartProject: React.FC = () => {
                       </motion.button>
                     ) : (
                       <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         onClick={handleSubmit}
                         disabled={isSubmitting}
-                        className={`flex items-center justify-center gap-2 px-6 sm:px-8 py-3 rounded-lg sm:rounded-xl font-semibold transition-all duration-300 text-white text-sm sm:text-base order-1 sm:order-2 ${
+                        className={`flex items-center gap-2 px-8 py-3 rounded-xl font-semibold transition-all duration-300 text-white ${
                           isSubmitting
                             ? "bg-slate-600 cursor-not-allowed"
                             : "bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600"

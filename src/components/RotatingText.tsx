@@ -189,17 +189,43 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
     }, [next, rotationInterval, auto]);
 
     return (
-      <motion.span
+      <motion.div
         className={cn('flex flex-wrap whitespace-pre-wrap relative', mainClassName)}
         {...rest}
         layout
         transition={transition as any}
+        whileHover={{
+          scale: 1.02,
+          transition: { duration: 0.3, ease: "easeOut" }
+        }}
       >
         <span className="sr-only">{texts[currentTextIndex]}</span>
+
+        {/* Subtle blue glow effect */}
+        <motion.div
+          className="absolute inset-0 rounded-lg opacity-20"
+          style={{
+            background: 'radial-gradient(circle, #60a5fa, transparent)',
+          }}
+          animate={{
+            scale: [1, 1.05, 1],
+            opacity: [0.1, 0.2, 0.1],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+
         <AnimatePresence mode={animatePresenceMode} initial={animatePresenceInitial}>
           <motion.span
             key={currentTextIndex}
-            className={cn(splitBy === 'lines' ? 'flex flex-col w-full' : 'flex flex-wrap whitespace-pre-wrap relative')}
+            className={cn(
+              splitBy === 'lines'
+                ? 'flex flex-col w-full relative z-10'
+                : 'flex flex-wrap whitespace-pre-wrap relative z-10'
+            )}
             layout
             aria-hidden="true"
           >
@@ -223,6 +249,22 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
                         )
                       } as any}
                       className={cn('inline-block', elementLevelClassName)}
+                      whileHover={{
+                        scale: 1.1,
+                        y: -2,
+                        color: "#93c5fd",
+                        textShadow: "0 2px 8px rgba(96, 165, 250, 0.8)",
+                        filter: "brightness(1.3)",
+                        transition: {
+                          type: "spring",
+                          stiffness: 300,
+                          damping: 15,
+                          duration: 0.2
+                        }
+                      }}
+                      style={{
+                        transformOrigin: "center bottom"
+                      }}
                     >
                       {char}
                     </motion.span>
@@ -233,7 +275,7 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
             })}
           </motion.span>
         </AnimatePresence>
-      </motion.span>
+      </motion.div>
     );
   }
 );

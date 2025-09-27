@@ -22,6 +22,7 @@ const StartProject = lazy(() => import("./service/StartProject"));
 const AdminDashboard = lazy(() => import("./admin/AdminDashboard"));
 const Marketing = lazy(() => import("./offeredServices/Marketing"));
 const WebDev = lazy(() => import("./offeredServices/WebDev"));
+const AIChatbot = lazy(() => import("./pages/AIChatbot"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -137,6 +138,7 @@ const AppWithRouter: React.FC = () => {
               <Route index element={<Home />} />
               <Route path="services/digital-advertising" element={<Marketing />} />
               <Route path="services/web-development" element={<WebDev />} />
+              <Route path="services/ai-chatbot" element={<AIChatbot />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="contact" element={<Contact />} />
               <Route path="start-project" element={<StartProject />} />

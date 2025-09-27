@@ -26,6 +26,7 @@ import {
   FaCog,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
+import Silk from "../components/Silk";
 import TrueFocus from "../components/TrueFocus";
 
 const Marketing: React.FC = () => {
@@ -186,45 +187,81 @@ const Marketing: React.FC = () => {
         description="Professional digital advertising services including video production, photography, social media management, and creative content."
       />
 
-      {/* Animated Background with Mobile Optimization */}
-      <div className="fixed inset-0 z-0 overflow-hidden">
-        {/* Animated background image */}
-        <div
-          className="absolute inset-0 transform scale-105 animate-slow-pan"
-          style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1495420378468-78588a508652?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            willChange: 'transform'
-          }}
-        >
-        </div>
+      {/* Silk Shader Background */}
+      <div className="fixed inset-0 z-0">
+        <Silk
+          speed={4}
+          scale={1.1}
+          color="#2d1b69"
+          noiseIntensity={0.9}
+          rotation={0.15}
+        />
         {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-black/75"></div>
-
-        {/* Subtle gradient overlay for marketing feel */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/15 via-transparent to-blue-900/20"></div>
+        <div className="absolute inset-0 bg-black/55"></div>
+        {/* Subtle purple accent overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/40 via-transparent to-slate-900/30"></div>
       </div>
 
       <style>{`
-        @keyframes slow-pan {
-          0% { transform: scale(1.05) translateX(0) translateY(0); }
-          25% { transform: scale(1.06) translateX(-2%) translateY(-1%); }
-          50% { transform: scale(1.05) translateX(-3%) translateY(-2%); }
-          75% { transform: scale(1.055) translateX(-1%) translateY(-1%); }
-          100% { transform: scale(1.05) translateX(0) translateY(0); }
+        @keyframes gradient-shift-marketing {
+          0%, 100% {
+            background: linear-gradient(135deg, #581c87 0%, #1e293b 50%, #581c87 100%);
+          }
+          25% {
+            background: linear-gradient(135deg, #7c3aed 0%, #6366f1 50%, #ec4899 100%);
+          }
+          50% {
+            background: linear-gradient(135deg, #a855f7 0%, #8b5cf6 50%, #d946ef 100%);
+          }
+          75% {
+            background: linear-gradient(135deg, #6366f1 0%, #581c87 50%, #7c3aed 100%);
+          }
         }
 
-        .animate-slow-pan {
-          animation: slow-pan 60s ease-in-out infinite;
+        @keyframes float-slow {
+          0%, 100% { transform: translate(0, 0) rotate(0deg); }
+          25% { transform: translate(30px, -20px) rotate(90deg); }
+          50% { transform: translate(-20px, -40px) rotate(180deg); }
+          75% { transform: translate(-40px, 20px) rotate(270deg); }
+        }
+
+        @keyframes float-reverse {
+          0%, 100% { transform: translate(0, 0) rotate(0deg); }
+          25% { transform: translate(-30px, 20px) rotate(-90deg); }
+          50% { transform: translate(20px, 40px) rotate(-180deg); }
+          75% { transform: translate(40px, -20px) rotate(-270deg); }
+        }
+
+        @keyframes float-diagonal {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          25% { transform: translate(40px, -30px) scale(1.1); }
+          50% { transform: translate(-30px, -50px) scale(0.9); }
+          75% { transform: translate(-50px, 30px) scale(1.05); }
+        }
+
+        .animate-gradient-shift-marketing {
+          animation: gradient-shift-marketing 25s ease-in-out infinite;
+        }
+
+        .animate-float-slow {
+          animation: float-slow 28s ease-in-out infinite;
+        }
+
+        .animate-float-reverse {
+          animation: float-reverse 32s ease-in-out infinite;
+        }
+
+        .animate-float-diagonal {
+          animation: float-diagonal 30s ease-in-out infinite;
         }
 
         /* Reduce animation on mobile and slow connections */
         @media (max-width: 768px), (prefers-reduced-motion: reduce) {
-          .animate-slow-pan {
+          .animate-gradient-shift-marketing,
+          .animate-float-slow,
+          .animate-float-reverse,
+          .animate-float-diagonal {
             animation: none;
-            transform: scale(1.05);
           }
         }
       `}</style>
@@ -249,13 +286,15 @@ const Marketing: React.FC = () => {
                 </div>
               </div>
 
-           
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-xl text-slate-200 mb-12 max-w-4xl mx-auto leading-relaxed font-light pt-10"
-                style={{ fontFamily: 'Inter, system-ui, sans-serif', lineHeight: '1.7' }}
+                style={{
+                  fontFamily: "Inter, system-ui, sans-serif",
+                  lineHeight: "1.7",
+                }}
               >
                 დღევანდელ ციფრულ ეპოქაში თქვენი ბრენდი უნდა იყოს ხილული,
                 მიმზიდველი და დამაჯერებელი. ჩვენ ვქმნით სრულყოფილ ციფრულ
@@ -331,7 +370,6 @@ const Marketing: React.FC = () => {
             </div>
           </div>
 
-          
           {/* Marketing Packages */}
           <div className="grid md:grid-cols-3 gap-8">
             {/* Basic Package */}
@@ -478,7 +516,6 @@ const Marketing: React.FC = () => {
               <h2 className="text-3xl font-light text-white mb-4">
                 რას გთავაზობთ
               </h2>
-            
             </div>
 
             {/* Services Grid - Fixed height for all cards */}
@@ -599,7 +636,7 @@ const Marketing: React.FC = () => {
                     სწრაფი შეფასება
                   </h4>
                   <p className="text-slate-300 text-sm leading-relaxed">
-                    უფასო კონსულტაციის შემდეგ 24 საათში მიიღებთ ზუსტ ფასს და
+                    უფასო კონსულტაციის მაქსიმუმ 12 საათში მიიღებთ ზუსტ ფასს და
                     პროექტის გეგმას.
                   </p>
                 </div>
@@ -611,8 +648,9 @@ const Marketing: React.FC = () => {
                     გამჭვირვალე პროცესი
                   </h4>
                   <p className="text-slate-300 text-sm leading-relaxed">
-                    გვისაუბრეთ თქვენი იდეის შესახებ, ჩვენ გავცემთ მიწერას ყველა
-                    დეტალთან ერთად.
+                    ჩვენი მიზანია, ყველა ეტაპი იყოს მაქსიმალურად ღია და
+                    გასაგები. ნდობაზე დაფუძნებული თანამშრომლობა ყოველთვის
+                    მომგებიანია.
                   </p>
                 </div>
               </div>
@@ -622,18 +660,16 @@ const Marketing: React.FC = () => {
               <h3 className="text-3xl font-light text-white mb-4">
                 კონსულტაცია და თანამშრომლობის დაგეგმვა უფასოა
               </h3>
-             
             </div>
           </div>
 
           {/* CTA Section */}
           <div className="text-center">
             <div className="max-w-3xl mx-auto">
-               <h3 className="text-3xl font-light text-blue-800 mb-6">
+              <h3 className="text-3xl font-light text-blue-800 mb-6">
                 მზად ხართ თქვენი ციფრული ბიზნესის ტრანსფორმაციისთვის?
               </h3>
 
-            
               <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-12">
                 <Link
                   to="/start-project"
