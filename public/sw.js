@@ -1,7 +1,7 @@
 // Service Worker for VIFA Digital
 // Version 1.0
 
-const CACHE_NAME = 'vifa-digital-v1';
+const CACHE_NAME = 'vifa-digital-v2';
 const urlsToCache = [
   '/',
   '/static/js/bundle.js',
