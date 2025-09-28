@@ -65,7 +65,7 @@ const SimpleNavbar: React.FC = () => {
   // Special highlighted link for AI Chatbot
   const aiChatbotLink = {
     path: "/services/ai-chatbot",
-    label: "AI ჩატბოტი"
+    label: "AI სერვისი"
   };
 
   return (

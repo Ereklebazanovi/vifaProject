@@ -12,17 +12,10 @@ import {
   FaInstagram,
   FaWhatsapp,
   FaRocket,
-  FaStore,
-  FaUtensils,
   FaCheck,
   FaShieldAlt,
   FaCog,
-  FaHospital,
-  FaTools,
   FaCloud,
-  FaPlayCircle,
-  FaCode,
-  FaPhoneAlt,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
 import { ChatbotDemoTerminal } from "../components/Terminal";
@@ -72,61 +65,6 @@ const AIChatbot: React.FC = () => {
         "ვიზუალური ძალა და მაღალი conversion",
         "Stories და Direct ინტეგრაცია",
         "სრული ფუნქციონალური ეკოსისტემა",
-      ],
-    },
-  ];
-
-  const industries = [
-    {
-      icon: <FaStore />,
-      title: "E-commerce",
-      description:
-        "პროდუქტის ძებნა, რეკომენდაციები, კალათაში დამატება და შეკვეთის ტრეკინგი",
-      result: "საშუალოდ 35% გაყიდვების ზრდა",
-      features: [
-        "პროდუქტის ძებნა კატეგორიების მიხედვით",
-        "ინტელექტუალური რეკომენდაციები",
-        "კალათაში დამატება და checkout",
-        "შეკვეთის სტატუსის ტრეკინგი",
-      ],
-    },
-    {
-      icon: <FaTools />,
-      title: "სერვისები",
-      description:
-        "დანიშვნების ბუკინგი, კონსულტაციები, კალკულატორი და ექსპერტის არჩევა",
-      result: "60% მეტი ბუკინგი",
-      features: [
-        "დანიშვნების ავტომატური ბუკინგი",
-        "კონსულტაციების რეზერვაცია",
-        "საფასური კალკულატორი",
-        "ექსპერტის არჩევა",
-      ],
-    },
-    {
-      icon: <FaUtensils />,
-      title: "HoReCa",
-      description:
-        "ინტერაქტიული მენიუ, პერსონალიზირებული რეკომენდაციები და მიტანის ტრეკინგი",
-      result: "50% მეტი ონლაინ შეკვეთა",
-      features: [
-        "ინტერაქტიული მენიუ",
-        "პერსონალიზირებული რეკომენდაციები",
-        "ონლაინ შეკვეთა და გადახდა",
-        "მიტანის ტრეკინგი",
-      ],
-    },
-    {
-      icon: <FaHospital />,
-      title: "ჯანდაცვა",
-      description:
-        "სპეციალისტებთან ჩაწერა, სიმპტომების სკრინინგი და სერვისების აღწერა",
-      result: "40% ნაკლები გაუქმებული ვიზიტი",
-      features: [
-        "სპეციალისტებთან ჩაწერა",
-        "სიმპტომების პრე-სკრინინგი",
-        "სერვისების აღწერა და ფასები",
-        "მომზადების ინსტრუქციები",
       ],
     },
   ];
@@ -183,36 +121,41 @@ const AIChatbot: React.FC = () => {
     {
       question: "რამდენ დროს საჭიროებს ჩატბოტის გაშვება?",
       answer: "მზა AI ასისტენტს მიიღებთ 7-14 სამუშაო დღეში.",
-      details: "დრო დამოკიდებულია თქვენი ბიზნესის სირთულესა და საჭირო ინტეგრაციების რაოდენობაზე.",
+      details:
+        "დრო დამოკიდებულია თქვენი ბიზნესის სირთულესა და საჭირო ინტეგრაციების რაოდენობაზე.",
     },
     {
       question: "შემიძლია თუ არა კონტენტის შეცვლა გაშვების შემდეგ?",
       answer: "დიახ, ნებისმიერ დროს.",
-      details: "თქვენ შეგიძლიათ დაარედაქტიროთ AI-ს ცოდნის ბაზა და პასუხები ადმინ პანელიდან, ცვლილებები ძალაში შედის რეალურ დროში.",
+      details:
+        "თქვენ შეგიძლიათ დაარედაქტიროთ AI-ს ცოდნის ბაზა და პასუხები ადმინ პანელიდან, ცვლილებები ძალაში შედის რეალურ დროში.",
     },
     {
       question: "რა მოხდება Google API-ის გადახდის შეფერხების შემთხვევაში?",
       answer: "მონაცემები და კონფიგურაცია შენარჩუნდება.",
-      details: "Google-ის წესების თანახმად, ჩატბოტი დროებით შეწყვეტს მუშაობას, თუმცა თქვენი ყველა მონაცემი და სისტემის გამართვა სრულად შეინახება.",
+      details:
+        "Google-ის წესების თანახმად, ჩატბოტი დროებით შეწყვეტს მუშაობას, თუმცა თქვენი ყველა მონაცემი და სისტემის გამართვა სრულად შეინახება.",
     },
     {
       question: "არის თუ არა შესაძლებელი ვებსაიტზე ინტეგრაცია?",
       answer: "დიახ, რა თქმა უნდა.",
-      details: "ვებსაიტის (Web Widget) ინტეგრაცია შესაძლებელია Business და Enterprise პაკეტების ფარგლებში.",
+      details:
+        "ვებსაიტის (Web Widget) ინტეგრაცია შესაძლებელია Business და Enterprise პაკეტების ფარგლებში.",
     },
     {
       question: "რამდენ ენაზე შეუძლია AI-ს საუბარი?",
       answer: "ძირითადად, ქართულად და ინგლისურად.",
-      details: "AI-ს შეუძლია მუშაობა მრავალ ენაზე, თუმცა ძირითად ტრენინგს გადიან ქართულ და ინგლისურ ენებზე. საჭიროების შემთხვევაში, დამატებითი ენების სწავლება შესაძლებელია.",
+      details:
+        "AI-ს შეუძლია მუშაობა მრავალ ენაზე, თუმცა ძირითად ტრენინგს გადიან ქართულ და ინგლისურ ენებზე. საჭიროების შემთხვევაში, დამატებითი ენების სწავლება შესაძლებელია.",
     },
   ];
 
-  const getColorClass = (color: string) => {
+  const getColorClass = () => {
     // Simplified to use only subtle blue tones
     return "border-slate-600 bg-slate-800/30";
   };
 
-  const getTextColorClass = (color: string) => {
+  const getTextColorClass = () => {
     // Simplified to use only blue tones
     return "text-blue-400";
   };
@@ -326,14 +269,10 @@ const AIChatbot: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.2 }}
-                  className={`p-8 rounded-2xl border-2 ${getColorClass(
-                    platform.color
-                  )} border-opacity-30 hover:border-opacity-100 transition-all duration-300 hover:scale-105`}
+                  className={`p-8 rounded-2xl border-2 ${getColorClass()} border-opacity-30 hover:border-opacity-100 transition-all duration-300 hover:scale-105`}
                 >
                   <div
-                    className={`text-4xl ${getTextColorClass(
-                      platform.color
-                    )} mb-4`}
+                    className={`text-4xl ${getTextColorClass()} mb-4`}
                   >
                     {platform.icon}
                   </div>
@@ -341,9 +280,7 @@ const AIChatbot: React.FC = () => {
                     {platform.name}
                   </h3>
                   <p
-                    className={`text-sm ${getTextColorClass(
-                      platform.color
-                    )} mb-4 font-medium`}
+                    className={`text-sm ${getTextColorClass()} mb-4 font-medium`}
                   >
                     {platform.stats}
                   </p>
@@ -354,9 +291,7 @@ const AIChatbot: React.FC = () => {
                         className="flex items-start gap-2 text-slate-300"
                       >
                         <FaCheck
-                          className={`${getTextColorClass(
-                            platform.color
-                          )} mt-1 flex-shrink-0`}
+                          className={`${getTextColorClass()} mt-1 flex-shrink-0`}
                         />
                         <span className="text-sm">{feature}</span>
                       </li>
@@ -565,7 +500,6 @@ const AIChatbot: React.FC = () => {
               ))}
             </div>
           </div>
-
         </div>
 
         {/* FAQ Section */}
@@ -593,8 +527,12 @@ const AIChatbot: React.FC = () => {
                   {item.question}
                 </h3>
                 <div className="ml-4">
-                  <p className="text-blue-300 font-medium mb-2">{item.answer}</p>
-                  <p className="text-slate-400 text-sm leading-relaxed">{item.details}</p>
+                  <p className="text-blue-300 font-medium mb-2">
+                    {item.answer}
+                  </p>
+                  <p className="text-slate-400 text-sm leading-relaxed">
+                    {item.details}
+                  </p>
                 </div>
               </motion.div>
             ))}
@@ -604,7 +542,9 @@ const AIChatbot: React.FC = () => {
 
       {/* CTA Section - Back inside container */}
       <div className="relative z-10 min-h-screen mt-15">
-        <div className={`container mx-auto px-4 sm:px-6 lg:px-8 pt-25 sm:pt-28 md:pt-34 pb-10 ${getTransitionClasses()}`}>
+        <div
+          className={`container mx-auto px-4 sm:px-6 lg:px-8 pt-25 sm:pt-28 md:pt-34 pb-10 ${getTransitionClasses()}`}
+        >
           {/* CTA Section */}
 
           {/* CTA Section */}
