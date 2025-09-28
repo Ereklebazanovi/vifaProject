@@ -136,18 +136,7 @@ export const trackBundleSize = () => {
   }
 };
 
-// Service Worker registration for caching
-export const registerServiceWorker = () => {
-  if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
-    navigator.serviceWorker.register('/sw.js')
-      .then(registration => {
-        console.log('SW registered: ', registration);
-      })
-      .catch(registrationError => {
-        console.log('SW registration failed: ', registrationError);
-      });
-  }
-};
+// Service Worker removed for better cache management
 
 // Initialize all performance optimizations
 export const initializePerformanceOptimizations = () => {
@@ -163,6 +152,5 @@ export const initializePerformanceOptimizations = () => {
   window.addEventListener('load', () => {
     optimizeThirdPartyScripts();
     measureWebVitals();
-    registerServiceWorker();
   });
 };
