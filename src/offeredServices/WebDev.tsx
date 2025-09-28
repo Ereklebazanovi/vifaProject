@@ -2,9 +2,10 @@
 
 import type React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
+import { useNavigation } from "../contexts/NavigationContext";
 import {
   FaReact,
   FaMobile,
@@ -38,7 +39,16 @@ import Silk from "../components/Silk";
 
 const WebDev: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
+  const { startNavigation, stopNavigation } = useNavigation();
+  const navigate = useNavigate();
   const [activeService, setActiveService] = useState<number>(0);
+
+  const handleNavigation = (path: string) => {
+    startNavigation();
+    navigate(path);
+    // Very short timeout for fast UX
+    setTimeout(() => stopNavigation(), 300);
+  };
 
   // Main web development services
   const services = [
@@ -588,12 +598,12 @@ const WebDev: React.FC = () => {
                       პროექტზე
                     </div>
                   </div>
-                  <Link
-                    to="/services/ai-chatbot"
+                  <button
+                    onClick={() => handleNavigation("/services/ai-chatbot")}
                     className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg transition-colors font-medium"
                   >
                     მეტი ინფორმაცია
-                  </Link>
+                  </button>
                 </div>
               </motion.div>
             </div>

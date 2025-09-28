@@ -4,6 +4,7 @@ import LanguageToggle from "../components/LanguageToggle";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import { useNavigation } from "../contexts/NavigationContext";
+import { FaRobot } from "react-icons/fa";
 
 const SimpleNavbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -19,8 +20,8 @@ const SimpleNavbar: React.FC = () => {
     if (location.pathname !== path) {
       startNavigation();
       navigate(path);
-      // Stop navigation after a short delay to ensure component loads
-      setTimeout(() => stopNavigation(), 100);
+      // Very short timeout for fast UX
+      setTimeout(() => stopNavigation(), 300);
     }
   };
 
@@ -53,15 +54,19 @@ const SimpleNavbar: React.FC = () => {
 
   const navLinks = [
     { path: "/services/web-development", label: t("services.webdev.title") },
-
     {
       path: "/services/digital-advertising",
       label: t("services.advertising.title"),
     },
-
     { path: "/about", label: t("nav.about") },
     { path: "/start-project", label: t("nav.startProject") },
   ];
+
+  // Special highlighted link for AI Chatbot
+  const aiChatbotLink = {
+    path: "/services/ai-chatbot",
+    label: "AI ჩატბოტი"
+  };
 
   return (
     <>
@@ -100,7 +105,7 @@ const SimpleNavbar: React.FC = () => {
 
           {/* Desktop Navigation Links - Hidden on small screens */}
           <div
-            className={`mt-4 hidden lg:flex justify-center items-center space-x-8 ${getTransitionClasses()}`}
+            className={`mt-4 hidden lg:flex justify-center items-center space-x-6 ${getTransitionClasses()}`}
           >
             {navLinks.map((link, index) => (
               <button
@@ -115,11 +120,37 @@ const SimpleNavbar: React.FC = () => {
                 {link.label}
               </button>
             ))}
+
+            {/* Special AI Chatbot Button - Futuristic Design */}
+            <button
+              onClick={() => handleNavigation(aiChatbotLink.path)}
+              className={`group relative px-4 py-2 text-sm font-medium tracking-wide rounded-lg transition-all duration-500 transform hover:scale-110 border ${
+                location.pathname === aiChatbotLink.path
+                  ? "text-cyan-300 bg-gradient-to-r from-slate-800/90 to-slate-700/90 border-cyan-400 shadow-lg shadow-cyan-400/50"
+                  : "text-cyan-400 bg-gradient-to-r from-slate-800/30 to-slate-700/30 border-cyan-500/30 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-400/30"
+              }`}
+            >
+              <div className="flex items-center gap-2">
+                <FaRobot className={`transition-all duration-300 ${
+                  location.pathname === aiChatbotLink.path
+                    ? "text-cyan-300 animate-pulse"
+                    : "text-cyan-400 group-hover:animate-spin"
+                }`} />
+                <span className="relative">
+                  {aiChatbotLink.label}
+                  <span className={`absolute -top-1 -right-2 w-2 h-2 rounded-full transition-all duration-300 ${
+                    location.pathname === aiChatbotLink.path
+                      ? "bg-cyan-300 animate-ping"
+                      : "bg-cyan-400 opacity-70 group-hover:animate-pulse"
+                  }`}></span>
+                </span>
+              </div>
+            </button>
           </div>
 
           {/* Tablet Navigation - Optimized for medium screens */}
           <div
-            className={`hidden md:flex lg:hidden justify-center items-center space-x-4 ${getTransitionClasses()}`}
+            className={`hidden md:flex lg:hidden justify-center items-center space-x-3 ${getTransitionClasses()}`}
           >
             {navLinks.map((link, index) => (
               <button
@@ -134,11 +165,30 @@ const SimpleNavbar: React.FC = () => {
                 <span className="block leading-tight">{link.label}</span>
               </button>
             ))}
+
+            {/* Special AI Chatbot Button for Tablet - Futuristic */}
+            <button
+              onClick={() => handleNavigation(aiChatbotLink.path)}
+              className={`group relative px-3 py-2 text-xs font-medium rounded-md transition-all duration-500 transform hover:scale-110 text-center border ${
+                location.pathname === aiChatbotLink.path
+                  ? "text-cyan-300 bg-gradient-to-r from-slate-800/90 to-slate-700/90 border-cyan-400 shadow-sm shadow-cyan-400/50"
+                  : "text-cyan-400 bg-gradient-to-r from-slate-800/30 to-slate-700/30 border-cyan-500/30 hover:border-cyan-400 hover:shadow-sm hover:shadow-cyan-400/30"
+              }`}
+            >
+              <div className="flex items-center justify-center gap-1">
+                <FaRobot className={`text-xs transition-all duration-300 ${
+                  location.pathname === aiChatbotLink.path
+                    ? "text-cyan-300 animate-pulse"
+                    : "text-cyan-400 group-hover:animate-spin"
+                }`} />
+                <span className="block leading-tight">{aiChatbotLink.label}</span>
+              </div>
+            </button>
           </div>
 
           {/* Mobile Navigation - Vertical layout for better space usage */}
           <div
-            className={`mt-7 md:hidden flex flex-col space-y-1 ${getTransitionClasses()}`}
+            className={`mt-7 md:hidden flex flex-col space-y-2 ${getTransitionClasses()}`}
           >
             <div className="flex justify-center items-center space-x-2">
               {navLinks.slice(0, 2).map((link, index) => (
@@ -169,6 +219,37 @@ const SimpleNavbar: React.FC = () => {
                   <span className="block leading-tight">{link.label}</span>
                 </button>
               ))}
+            </div>
+
+            {/* Special AI Chatbot Button - Futuristic Mobile Design */}
+            <div className="flex justify-center items-center mt-2">
+              <button
+                onClick={() => handleNavigation(aiChatbotLink.path)}
+                className={`group relative px-4 py-2.5 text-xs font-medium rounded-lg transition-all duration-500 transform active:scale-95 text-center max-w-[160px] border ${
+                  location.pathname === aiChatbotLink.path
+                    ? "text-cyan-300 bg-gradient-to-r from-slate-800/90 to-slate-700/90 border-cyan-400 shadow-lg shadow-cyan-400/50"
+                    : "text-cyan-400 bg-gradient-to-r from-slate-800/40 to-slate-700/40 border-cyan-500/40 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-400/40"
+                }`}
+              >
+                <div className="flex items-center justify-center gap-2">
+                  <FaRobot className={`text-sm transition-all duration-300 ${
+                    location.pathname === aiChatbotLink.path
+                      ? "text-cyan-300 animate-pulse"
+                      : "text-cyan-400 group-hover:animate-spin"
+                  }`} />
+                  <span className="relative font-semibold">
+                    {aiChatbotLink.label}
+                    <span className={`absolute -top-1 -right-3 w-2 h-2 rounded-full transition-all duration-300 ${
+                      location.pathname === aiChatbotLink.path
+                        ? "bg-cyan-300 animate-ping"
+                        : "bg-cyan-400 opacity-70 group-hover:animate-pulse"
+                    }`}></span>
+                  </span>
+                  <div className={`absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
+                    location.pathname === aiChatbotLink.path ? "opacity-30" : ""
+                  }`}></div>
+                </div>
+              </button>
             </div>
           </div>
 

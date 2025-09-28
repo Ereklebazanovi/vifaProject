@@ -8,6 +8,7 @@ const routeMap: Record<string, () => Promise<any>> = {
 
   "/services/digital-advertising": () => import("../offeredServices/Marketing"),
   "/services/web-development": () => import("../offeredServices/WebDev"),
+  // Note: AIChatbot deliberately not preloaded to show loading spinner
 };
 
 export const useRoutePreload = () => {
@@ -32,7 +33,7 @@ export const useRoutePreload = () => {
           case "/services/digital-advertising":
             return ["/services/web-development", "/services/social-media"];
           case "/services/web-development":
-            return ["/services/social-media", "/start-project"];
+            return ["/start-project"];
           case "/services/social-media":
             return ["/start-project", "/about"];
           default:

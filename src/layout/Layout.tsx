@@ -45,11 +45,15 @@ const NavigationSpinner = () => (
 const Layout: React.FC = () => {
   const { isNavigating } = useNavigation();
 
+  if (isNavigating) {
+    return <NavigationSpinner />;
+  }
+
   return (
     <div className="min-h-screen bg-transparent text-white">
       <Navbar />
       <main>
-        {isNavigating ? <NavigationSpinner /> : <Outlet />}
+        <Outlet />
       </main>
       <Footer />
     </div>
