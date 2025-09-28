@@ -62,7 +62,7 @@ const SimpleNavbar: React.FC = () => {
     { path: "/start-project", label: t("nav.startProject") },
   ];
 
-  // Special highlighted link for AI Chatbot
+  // Special highlighted link for AI Chatbott
   const aiChatbotLink = {
     path: "/services/ai-chatbot",
     label: "AI სერვისი"
