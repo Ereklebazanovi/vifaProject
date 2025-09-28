@@ -7,6 +7,18 @@
     "react-helmet-async": {
       "react": "$react",
       "react-dom": "$react-dom"
+    },
+    "@react-three/fiber": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    },
+    "antd": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    },
+    "framer-motion": {
+      "react": "$react",
+      "react-dom": "$react-dom"
     }
   },
   "scripts": {
@@ -35,8 +47,8 @@
   "devDependencies": {
     "@eslint/js": "^9.33.0",
     "@types/antd": "^0.12.32",
-    "@types/react": "^19.1.10",
-    "@types/react-dom": "^19.1.7",
+    "@types/react": "^19.1.14",
+    "@types/react-dom": "^19.1.9",
     "@types/react-router-dom": "^5.3.3",
     "@types/three": "^0.180.0",
     "@vitejs/plugin-react": "^5.0.0",
