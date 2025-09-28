@@ -1,376 +1,438 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import BeautifulBackground from "../components/BeautifulBackground";
 import {
-  FaRocket,
-  FaUsers,
-  FaHeart,
   FaLightbulb,
+  FaHandshake,
   FaAward,
+  FaArrowUp,
   FaCode,
   FaCamera,
-  FaChartLine,
-  FaInstagram
-} from 'react-icons/fa';
-import { useTheme } from '../contexts/ThemeContext';
-import { useLanguage } from '../contexts/LanguageContext';
+  FaShare,
+  FaBullhorn,
+} from "react-icons/fa";
+import SEO from "../components/SEO";
+import { useLanguage } from "../contexts/LanguageContext";
+import { useLanguageTransition } from "../hooks/useLanguageTransition";
 
 const AboutPage = () => {
-  const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 300], [0, -50]);
-  const { isDarkMode } = useTheme();
   const { t } = useLanguage();
+  const { getTransitionClasses } = useLanguageTransition();
 
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
+  const aboutStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    name: t("seo.about.title"),
+    description: t("seo.about.description"),
+    mainEntity: {
+      "@type": "Organization",
+      name: "Vifa Digital",
+      description: t("seo.about.description"),
+      url: "https://vifa.ge/about",
+    },
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6
-      }
-    }
-  };
-
-  const stats = [
-    { number: "50+", label: t('about.stats.projects'), icon: <FaRocket /> },
-    { number: "25+", label: t('about.stats.clients'), icon: <FaUsers /> },
-    { number: "3+", label: t('about.stats.experience'), icon: <FaAward /> },
-    { number: "24/7", label: t('about.stats.support'), icon: <FaHeart /> }
-  ];
-
-  const values = [
-    {
-      icon: <FaLightbulb />,
-      title: t('about.values.innovation.title'),
-      description: t('about.values.innovation.description')
-    },
-    {
-      icon: <FaUsers />,
-      title: t('about.values.partnership.title'),
-      description: t('about.values.partnership.description')
-    },
-    {
-      icon: <FaHeart />,
-      title: t('about.values.quality.title'),
-      description: t('about.values.quality.description')
-    },
-    {
-      icon: <FaRocket />,
-      title: t('about.values.growth.title'),
-      description: t('about.values.growth.description')
-    }
-  ];
-
-
+  // Services data
   const services = [
     {
-      icon: <FaCode />,
-      title: t('about.services.webdev.title'),
-      description: t('about.services.webdev.description')
+      icon: <FaCode className="text-4xl text-blue-400" />,
+      title: t("about.services.webdev.title"),
+      description: t("about.services.webdev.description"),
     },
     {
-      icon: <FaCamera />,
-      title: t('about.services.content.title'),
-      description: t('about.services.content.description')
+      icon: <FaCamera className="text-4xl text-green-400" />,
+      title: t("about.services.content.title"),
+      description: t("about.services.content.description"),
     },
     {
-      icon: <FaInstagram />,
-      title: t('about.services.social.title'),
-      description: t('about.services.social.description')
+      icon: <FaShare className="text-4xl text-purple-400" />,
+      title: t("about.services.social.title"),
+      description: t("about.services.social.description"),
     },
     {
-      icon: <FaChartLine />,
-      title: t('about.services.ads.title'),
-      description: t('about.services.ads.description')
-    }
+      icon: <FaBullhorn className="text-4xl text-orange-400" />,
+      title: t("about.services.ads.title"),
+      description: t("about.services.ads.description"),
+    },
   ];
 
+  // Team values
+  const values = [
+    {
+      icon: <FaLightbulb className="text-4xl text-yellow-400" />,
+      title: t("about.values.innovation.title"),
+      description: t("about.values.innovation.description"),
+    },
+    {
+      icon: <FaHandshake className="text-4xl text-blue-400" />,
+      title: t("about.values.partnership.title"),
+      description: t("about.values.partnership.description"),
+    },
+    {
+      icon: <FaAward className="text-4xl text-green-400" />,
+      title: t("about.values.quality.title"),
+      description: t("about.values.quality.description"),
+    },
+    {
+      icon: <FaArrowUp className="text-4xl text-purple-400" />,
+      title: t("about.values.growth.title"),
+      description: t("about.values.growth.description"),
+    },
+  ];
+
+  // Team members
   return (
-    <div className={`min-h-screen overflow-hidden transition-colors duration-500 ${
-      isDarkMode 
-        ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white' 
-        : 'bg-gradient-to-br from-slate-50 via-white to-blue-50 text-slate-900'
-    }`}>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-        
-        * {
-          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-        
-        h1, h2, h3, h4, h5, h6 {
-          font-family: 'Space Grotesk', 'Inter', sans-serif;
-          font-weight: 600;
-          letter-spacing: -0.02em;
-        }
-      `}</style>
-      {/* Hero Section */}
-      <section className="relative pt-24 pb-20 px-4 sm:px-6 lg:px-8">
-        <div className={`absolute inset-0 ${
-          isDarkMode 
-            ? 'bg-gradient-to-br from-red-500/10 to-transparent' 
-            : 'bg-gradient-to-br from-blue-500/5 to-transparent'
-        }`}></div>
-        
-        <motion.div
-          style={{ y: y1 }}
-          className="relative max-w-7xl mx-auto text-center"
+    <>
+      <SEO
+        title={t("seo.about.title")}
+        description={t("seo.about.description")}
+        keywords={t("seo.about.keywords")}
+        type="website"
+        structuredData={aboutStructuredData}
+      />
+
+      {/* Beautiful Animated Background - Full Page Coverage */}
+      <BeautifulBackground className="fixed inset-0 z-0" variant="blue" />
+
+      <div className="relative z-10 min-h-screen mt-16">
+        <div
+          className={`container mx-auto px-4 sm:px-6 lg:px-8 py-10 ${getTransitionClasses()}`}
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className={`text-4xl md:text-6xl font-bold mb-6 leading-tight ${
-              isDarkMode ? 'text-white' : 'text-slate-900'
-            }`}>
-              {t('about.hero.title')}{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600">
-                VIFA
-              </span>
-            </h1>
-            <p className={`text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed mb-12 ${
-              isDarkMode ? 'text-slate-300' : 'text-slate-600'
-            }`}>
-              {t('about.hero.description')}
-            </p>
+          {/* Hero Section */}
+          <motion.div>
           </motion.div>
 
-          {/* Stats */}
+          {/* Our Story Section */}
           <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16"
+            className="max-w-3xl mx-auto mb-24 mt-28"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="text-center group"
+            <motion.div
+              className="text-center mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <h2 className="text-3xl font-light text-white mb-6">
+                ჩვენ ვართ <span className="text-blue-400">Vifa Digital</span>
+              </h2>
+            </motion.div>
+
+            <motion.div
+              className="mx-auto max-w-2xl px-4 space-y-8 text-slate-200 text-lg leading-8 font-light"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
               >
-                <div className="text-4xl text-red-400 mb-4 transform group-hover:scale-110 transition-transform duration-300">
-                  {stat.icon}
-                </div>
-                <div className={`text-3xl md:text-4xl font-bold mb-2 ${
-                  isDarkMode ? 'text-white' : 'text-slate-900'
-                }`}>
-                  {stat.number}
-                </div>
-                <div className={`font-medium ${
-                  isDarkMode ? 'text-slate-400' : 'text-slate-600'
-                }`}>
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
+                Vifa Digital შეიქმნა 2021 წელს, ჩვენმა გუნდმა გადაწყვიტა შეექმნა ციფრული სააგენტო, რომელიც დაეხმარებოდა ქართულ ბიზნესებს წარმატებულად ფუნქციონირებაში ციფრულ სივრცეში.
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 1.0 }}
+              >
+                დღეს ჩვენ ვართ წამყვანი ციფრული სააგენტო საქართველოში, რომელიც მომსახურებას უწევს როგორც მცირე ბიზნესებს, ასევე დიდ კორპორაციებს. ჩვენი მიზანია ყოველი კლიენტისთვის შევქმნათ უნიკალური და ეფექტური ციფრული გადაწყვეტილება.
+              </motion.p>
+            </motion.div>
           </motion.div>
-        </motion.div>
-      </section>
 
-      {/* Story Section */}
-      <section className={`py-20 px-4 sm:px-6 lg:px-8 ${
-        isDarkMode ? 'bg-slate-800/50' : 'bg-slate-100/30'
-      }`}>
-        <div className="max-w-7xl mx-auto">
+          {/* What We Do Section */}
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
+            className="max-w-6xl mx-auto mb-24"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.8 }}
           >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-6 ${
-              isDarkMode ? 'text-white' : 'text-slate-900'
-            }`}>
-              {t('about.story.title')} <span className="text-red-400">{t('about.story.titleHighlight')}</span>
-            </h2>
-            <div className="max-w-4xl mx-auto">
-              <p className={`text-lg leading-relaxed mb-6 ${
-                isDarkMode ? 'text-slate-300' : 'text-slate-600'
-              }`}>
-                {t('about.story.paragraph1')}
+            <motion.div
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 2.0 }}
+            >
+              <h2 className="text-3xl font-light text-white mb-6">
+                {t("about.whatWeDo.title")}{" "}
+                <span className="text-blue-400">
+                  {t("about.whatWeDo.titleHighlight")}
+                </span>
+              </h2>
+              <p className="text-lg text-slate-400 max-w-3xl mx-auto">
+                {t("about.whatWeDo.description")}
               </p>
-              <p className={`text-lg leading-relaxed mb-6 ${
-                isDarkMode ? 'text-slate-300' : 'text-slate-600'
-              }`}>
-                {t('about.story.paragraph2')}
-              </p>
-              <p className={`text-lg leading-relaxed ${
-                isDarkMode ? 'text-slate-300' : 'text-slate-600'
-              }`}>
-                {t('about.story.paragraph3')}
-              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {services.map((service, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-blue-400/50 rounded-xl p-6 text-center hover:bg-black/70 transition-all duration-300"
+                >
+                  <div className="mb-4">{service.icon}</div>
+                  <h3 className="text-lg font-medium text-white mb-3">
+                    {service.title}
+                  </h3>
+                  <p className="text-sm text-slate-400 leading-relaxed">
+                    {service.description}
+                  </p>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
-        </div>
-      </section>
 
-      {/* Values Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-6 ${
-              isDarkMode ? 'text-white' : 'text-slate-900'
-            }`}>
-              {t('about.values.title')} <span className="text-red-400">{t('about.values.titleHighlight')}</span>
-            </h2>
-            <p className={`text-xl max-w-3xl mx-auto ${
-              isDarkMode ? 'text-slate-300' : 'text-slate-600'
-            }`}>
-              {t('about.values.description')}
-            </p>
-          </motion.div>
-
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
-          >
-            {values.map((value, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className={`group p-8 backdrop-blur-sm rounded-2xl border transition-all duration-500 hover:shadow-2xl hover:shadow-red-500/10 transform hover:-translate-y-2 ${
-                  isDarkMode
-                    ? 'bg-slate-800/50 border-slate-700/50 hover:border-red-400/30'
-                    : 'bg-white/60 border-slate-300/40 hover:border-red-400/40 shadow-lg'
-                }`}
-              >
-                <div className="text-4xl text-red-400 mb-6 transform group-hover:scale-110 transition-transform duration-300">
-                  {value.icon}
-                </div>
-                <h3 className={`text-xl font-bold mb-4 ${
-                  isDarkMode ? 'text-white' : 'text-slate-900'
-                }`}>
-                  {value.title}
-                </h3>
-                <p className={`leading-relaxed ${
-                  isDarkMode ? 'text-slate-300' : 'text-slate-600'
-                }`}>
-                  {value.description}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-    
-
-      {/* Services Overview */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-6 ${
-              isDarkMode ? 'text-white' : 'text-slate-900'
-            }`}>
-              {t('about.whatWeDo.title')} <span className="text-red-400">{t('about.whatWeDo.titleHighlight')}</span>
-            </h2>
-            <p className={`text-xl max-w-3xl mx-auto ${
-              isDarkMode ? 'text-slate-300' : 'text-slate-600'
-            }`}>
-              {t('about.whatWeDo.description')}
-            </p>
-          </motion.div>
-
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid md:grid-cols-2 gap-8"
-          >
-            {services.map((service, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="group p-8 bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700/50 hover:border-red-400/30 transition-all duration-500 hover:shadow-2xl hover:shadow-red-500/10"
-              >
-                <div className="flex items-start space-x-6">
-                  <div className="text-4xl text-red-400 transform group-hover:scale-110 transition-transform duration-300">
-                    {service.icon}
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-white mb-4">
-                      {service.title}
-                    </h3>
-                    <p className="text-slate-300 leading-relaxed">
-                      {service.description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-red-500/10 to-red-600/10 border-t border-red-400/20">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-6 ${
-              isDarkMode ? 'text-white' : 'text-slate-900'
-            }`}>
-              {t('about.cta.title')}
-            </h2>
-            <p className={`text-xl mb-8 max-w-2xl mx-auto ${
-              isDarkMode ? 'text-slate-300' : 'text-slate-600'
-            }`}>
-              {t('about.cta.description')}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.a
-                href="/start-project"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:shadow-lg hover:shadow-red-500/30"
-              >
-                {t('about.cta.startProject')}
-              </motion.a>
-              <motion.a
-                href="/contact"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-slate-800/50 hover:bg-slate-700/50 text-white font-semibold rounded-xl border border-slate-600/30 hover:border-red-400/30 transition-all duration-300"
-              >
-                {t('about.cta.contactUs')}
-              </motion.a>
+          {/* Values Section */}
+          <div className="max-w-6xl mx-auto mb-24">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-light text-white mb-6">
+                {t("about.values.title")}{" "}
+                <span className="text-blue-400">
+                  {t("about.values.titleHighlight")}
+                </span>
+              </h2>
+              <p className="text-lg text-slate-400 max-w-3xl mx-auto">
+                {t("about.values.description")}
+              </p>
             </div>
-          </motion.div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {values.map((value, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-purple-400/50 rounded-xl p-6 text-center hover:bg-black/70 transition-all duration-300"
+                >
+                  <div className="mb-4">{value.icon}</div>
+                  <h3 className="text-lg font-medium text-white mb-3">
+                    {value.title}
+                  </h3>
+                  <p className="text-sm text-slate-400 leading-relaxed">
+                    {value.description}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+
+          {/* Portfolio Section - Shorts Style */}
+          <div className="max-w-7xl mx-auto mb-24">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-light text-white mb-6">
+                ჩვენი <span className="text-blue-400">პორტფოლიო</span>
+              </h2>
+              <p className="text-lg text-slate-400 max-w-3xl mx-auto">
+                ნახეთ ჩვენი წარმატებული პროექტები და კლიენტების შედეგები
+              </p>
+            </div>
+
+            {/* Horizontal Scrollable Container */}
+            <div className="relative">
+              <div className="flex gap-4 overflow-x-auto pb-6 scroll-smooth scrollbar-hide" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
+                <style dangerouslySetInnerHTML={{
+                  __html: `
+                    .scrollbar-hide::-webkit-scrollbar {
+                      display: none;
+                    }
+                  `
+                }} />
+
+                {/* Shorts Video 1 */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  className="flex-shrink-0 w-[280px] h-[500px] bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-blue-400/50 rounded-2xl overflow-hidden hover:bg-black/70 transition-all duration-300 relative group"
+                >
+                  <div className="relative w-full h-full">
+                    <iframe
+                      src="https://www.youtube-nocookie.com/embed/TazE0o2dLUI"
+                      title="Portfolio Shorts 1"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      className="w-full h-full rounded-2xl"
+                      loading="lazy"
+                    />
+
+                    {/* Overlay Info - positioned to not block iframe */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 pointer-events-none">
+                      <h3 className="text-white font-semibold text-lg mb-2">რესტორნის მარკეტინგი</h3>
+                      <p className="text-slate-300 text-sm">სოციალური მედია კამპანია</p>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Shorts Video 2 */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="flex-shrink-0 w-[280px] h-[500px] bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-blue-400/50 rounded-2xl overflow-hidden hover:bg-black/70 transition-all duration-300 relative group"
+                >
+                  <div className="relative w-full h-full">
+                    <iframe
+                      src="https://www.youtube-nocookie.com/embed/aOeZnTV3V3k"
+                      title="Portfolio Shorts 2"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      className="w-full h-full rounded-2xl"
+                      loading="lazy"
+                    />
+
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 pointer-events-none">
+                      <h3 className="text-white font-semibold text-lg mb-2">ვებსაიტის განვითარება</h3>
+                      <p className="text-slate-300 text-sm">E-commerce პლატფორმა</p>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Shorts Video 3 */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  className="flex-shrink-0 w-[280px] h-[500px] bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-blue-400/50 rounded-2xl overflow-hidden hover:bg-black/70 transition-all duration-300 relative group"
+                >
+                  <div className="relative w-full h-full">
+                    <iframe
+                      src="https://www.youtube.com/embed/VIDEO_ID_3?autoplay=0&mute=1"
+                      title="Portfolio Shorts 3"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full rounded-2xl"
+                    />
+
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
+                      <h3 className="text-white font-semibold text-lg mb-2">ბრენდინგი</h3>
+                      <p className="text-slate-300 text-sm">ლოგო და ვიზუალური იდენტობა</p>
+                    </div>
+
+                  </div>
+                </motion.div>
+
+                {/* Shorts Video 4 */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="flex-shrink-0 w-[280px] h-[500px] bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-blue-400/50 rounded-2xl overflow-hidden hover:bg-black/70 transition-all duration-300 relative group"
+                >
+                  <div className="relative w-full h-full">
+                    <iframe
+                      src="https://www.youtube.com/embed/VIDEO_ID_4?autoplay=0&mute=1"
+                      title="Portfolio Shorts 4"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full rounded-2xl"
+                    />
+
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
+                      <h3 className="text-white font-semibold text-lg mb-2">კონტენტ მარკეტინგი</h3>
+                      <p className="text-slate-300 text-sm">ვიდეო პროდუქცია</p>
+                    </div>
+
+                  </div>
+                </motion.div>
+
+                {/* Shorts Video 5 */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                  className="flex-shrink-0 w-[280px] h-[500px] bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-blue-400/50 rounded-2xl overflow-hidden hover:bg-black/70 transition-all duration-300 relative group"
+                >
+                  <div className="relative w-full h-full">
+                    <iframe
+                      src="https://www.youtube.com/embed/VIDEO_ID_5?autoplay=0&mute=1"
+                      title="Portfolio Shorts 5"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full rounded-2xl"
+                    />
+
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
+                      <h3 className="text-white font-semibold text-lg mb-2">SEO ოპტიმიზაცია</h3>
+                      <p className="text-slate-300 text-sm">Google რეიტინგის გაუმजობესება</p>
+                    </div>
+
+                  </div>
+                </motion.div>
+
+                {/* Shorts Video 6 */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                  className="flex-shrink-0 w-[280px] h-[500px] bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-blue-400/50 rounded-2xl overflow-hidden hover:bg-black/70 transition-all duration-300 relative group"
+                >
+                  <div className="relative w-full h-full">
+                    <iframe
+                      src="https://www.youtube.com/embed/VIDEO_ID_6?autoplay=0&mute=1"
+                      title="Portfolio Shorts 6"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full rounded-2xl"
+                    />
+
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
+                      <h3 className="text-white font-semibold text-lg mb-2">PPC რეკლამა</h3>
+                      <p className="text-slate-300 text-sm">Google Ads კამპანია</p>
+                    </div>
+
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Scroll Indicator */}
+              <div className="absolute top-1/2 right-4 transform -translate-y-1/2 text-blue-400 animate-pulse">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </div>
+
+            {/* Mobile Swipe Hint */}
+            <div className="text-center mt-6 md:hidden">
+              <p className="text-slate-400 text-sm">👈 გადაფურცლე ვიდეოების სანახავად</p>
+            </div>
+          </div>
+
+          {/* CTA Section */}
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-lg border border-blue-400/30 rounded-2xl p-12">
+              <h2 className="text-3xl font-light text-white mb-6">
+                {t("about.cta.title")}
+              </h2>
+              <p className="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
+                {t("about.cta.description")}
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  to="/start-project"
+                  className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-8 py-4 font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                >
+                  {t("about.cta.startProject")}
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </>
   );
 };
 

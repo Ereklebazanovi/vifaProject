@@ -1,0 +1,86 @@
+{
+  "name": "VIFA Digital - ციფრული მარკეტინგი და ვებ განვითარება",
+  "short_name": "VIFA Digital",
+  "description": "საქართველოში ციფრული მარკეტინგისა და ვებ განვითარების ლიდერი კომპანია. შექმენით თქვენი ბიზნესისთვის ძლიერი ონლაინ თანდასწრება.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "ka",
+  "dir": "ltr",
+  "categories": ["business", "marketing", "technology"],
+  "icons": [
+    {
+      "src": "/vifa.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/vifa.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-mobile.jpg",
+      "sizes": "640x1136",
+      "type": "image/jpeg",
+      "platform": "narrow"
+    },
+    {
+      "src": "/screenshot-desktop.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "platform": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "პროექტის დაწყება",
+      "short_name": "პროექტი",
+      "description": "დაიწყეთ ახალი პროექტი ჩვენთან ერთად",
+      "url": "/start-project",
+      "icons": [
+        {
+          "src": "/vifa.jpg",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "ვებ განვითარება",
+      "short_name": "ვებ",
+      "description": "ვებსაიტის შექმნისა და განვითარების სერვისები",
+      "url": "/services/web-development",
+      "icons": [
+        {
+          "src": "/vifa.jpg",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "ციფრული მარკეტინგი",
+      "short_name": "მარკეტინგი",
+      "description": "ციფრული მარკეტინგისა და რეკლამის სერვისები",
+      "url": "/services/digital-advertising",
+      "icons": [
+        {
+          "src": "/vifa.jpg",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "display_override": ["window-controls-overlay", "standalone"],
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
+}

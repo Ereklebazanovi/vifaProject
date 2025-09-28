@@ -1,53 +1,30 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
-import { useTheme } from '../contexts/ThemeContext';
 
 const LanguageToggle: React.FC = () => {
   const { currentLanguage, toggleLanguage } = useLanguage();
-  const { isDarkMode } = useTheme();
 
   return (
     <motion.button
       onClick={toggleLanguage}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      className={`relative flex items-center space-x-2 px-3 py-2 rounded-lg border transition-all duration-300 ${
-        isDarkMode
-          ? 'bg-slate-800/50 hover:bg-slate-700/50 border-slate-700/50 hover:border-blue-400/30 text-slate-300 hover:text-white'
-          : 'bg-slate-100/50 hover:bg-slate-200/50 border-slate-300/50 hover:border-blue-400/30 text-slate-700 hover:text-slate-900'
-      }`}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      className="w-8 h-8 rounded-full bg-slate-800/80 hover:bg-slate-700/80 border border-slate-600/50 hover:border-blue-400/50 text-white text-xs font-bold transition-all duration-300 backdrop-blur-sm flex items-center justify-center shadow-lg"
       title={currentLanguage === 'ka' ? 'Switch to English' : 'Switch to Georgian'}
     >
-      <div className="flex items-center space-x-1">
-        <span className={`text-sm font-semibold ${
-          currentLanguage === 'ka' ? 'opacity-100' : 'opacity-50'
-        }`}>
-          ქა
-        </span>
-        <motion.div
-          className={`w-8 h-4 rounded-full border-2 relative ${
-            isDarkMode ? 'bg-slate-700 border-slate-600' : 'bg-slate-300 border-slate-400'
-          }`}
-          animate={{
-            backgroundColor: currentLanguage === 'en' ? '#3b82f6' : isDarkMode ? '#475569' : '#cbd5e1',
-            borderColor: currentLanguage === 'en' ? '#3b82f6' : isDarkMode ? '#64748b' : '#94a3b8'
-          }}
-        >
-          <motion.div
-            className="absolute top-0.5 w-2.5 h-2.5 bg-white rounded-full shadow-sm"
-            animate={{
-              x: currentLanguage === 'en' ? 16 : 2
-            }}
-            transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-          />
-        </motion.div>
-        <span className={`text-sm font-semibold ${
-          currentLanguage === 'en' ? 'opacity-100' : 'opacity-50'
-        }`}>
-          EN
-        </span>
-      </div>
+      <motion.span
+        key={currentLanguage}
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.5 }}
+        transition={{ duration: 0.2 }}
+        className={`${
+          currentLanguage === 'ka' ? 'text-blue-400' : 'text-green-400'
+        }`}
+      >
+        {currentLanguage === 'ka' ? 'ქა' : 'EN'}
+      </motion.span>
     </motion.button>
   );
 };

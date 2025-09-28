@@ -50,7 +50,7 @@ export const submitLead = async (leadData: LeadData) => {
 export const createWhatsAppMessage = (leadData: LeadData): string => {
   const servicesText = leadData.services.map(service => {
     switch(service) {
-      case 'website': return 'ვებსაიტი + ონლაინ მაღაზია';
+      case 'website': return 'ვებსაიტი';
       case 'content': return 'კონტენტ პროდუქცია';
       case 'social': return 'სოციალური მედია';
       case 'ads': return 'ციფრული რეკლამა';
@@ -80,7 +80,7 @@ export const createWhatsAppMessage = (leadData: LeadData): string => {
     }
   })();
 
-  return `გამარჯობა! ახალი შეკვეთა VIFA-ს ვებსაიტიდან:
+  return `გამარჯობა! ახალი შეკვეთა Vifa Digital-ს ვებსაიტიდან:
 
 📋 სერვისები: ${servicesText}
 🏢 ბიზნესის ტიპი: ${businessTypeText}
