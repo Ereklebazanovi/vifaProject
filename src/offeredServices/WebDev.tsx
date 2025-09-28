@@ -633,7 +633,7 @@ const WebDev: React.FC = () => {
                     <FaBullseye />
                   </div>
                   <h4 className="text-xl font-medium text-white mb-3">
-                    თქვენი მოთხოვნების მიხედვით !!!!!!!!!!!
+                    თქვენი მოთხოვნების მიხედვით, ბრო
                   </h4>
                   <p className="text-slate-300 text-sm leading-relaxed">
                     მარტივი ლენდინგ გვერდიდან რთულ e-commerce პლატფორმამდე -
