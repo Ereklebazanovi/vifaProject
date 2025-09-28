@@ -397,7 +397,7 @@ const AIChatbot: React.FC = () => {
           </div>
 
           {/* Admin Panel Features */}
-          <div className="max-w-6xl mx-auto mb-32">
+          <div className="!max-w-5xl mx-auto mb-32">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold text-white mb-4">
                 <FaCog className="text-blue-400 mr-3 inline" />
@@ -464,7 +464,7 @@ const AIChatbot: React.FC = () => {
           </div>
 
           {/* Technical Features */}
-          <div className="max-w-5xl mx-auto mb-24">
+          <div className="!max-w-6xl mx-auto mb-24">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-white mb-4">
                 ტექნიკური უპირატესობები

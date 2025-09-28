@@ -294,20 +294,20 @@ const WebDev: React.FC = () => {
                       letterSpacing: "0.09em",
                     }}
                   >
-                    creative
+                    ℂ𝕣𝕖𝕒𝕥𝕚𝕧𝕖
                   </h2>
 
                   {/* Right side - Rotating text box */}
                   <div className="ml-2 sm:ml-3">
                     <RotatingText
                       texts={[
-                        "thinking",
-                        "solutions",
-                        "innovation",
-                        "future",
-                        "design",
-                        "vision",
-                        "ideas",
+                        "𝕥𝕙𝕚𝕟𝕜𝕚𝕟𝕘",
+                        "𝕤𝕠𝕝𝕦𝕥𝕚𝕠𝕟𝕤",
+                        "𝕚𝕟𝕟𝕠𝕧𝕒𝕥𝕚𝕠𝕟",
+                        "𝕗𝕦𝕥𝕦𝕣𝕖",
+                        "𝕕𝕖𝕤𝕚𝕘𝕟",
+                        "𝕧𝕚𝕤𝕚𝕠𝕟",
+                        "𝕚𝕕𝕖𝕒𝕤",
                       ]}
                       mainClassName="px-4 py-2 bg-slate-900/30 backdrop-blur-md text-blue-400 justify-center items-center rounded-lg font-medium text-base sm:text-lg md:text-xl lg:text-2xl xl:text-lg tracking-normal shadow-lg shadow-blue-400/20 hover:shadow-blue-400/40 transition-all duration-300 hover:scale-102 border border-blue-400/20 hover:border-blue-400/40"
                       elementLevelClassName="inline-block transition-all duration-200 ease-out"

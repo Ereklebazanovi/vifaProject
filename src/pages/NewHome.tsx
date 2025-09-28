@@ -167,20 +167,7 @@ const NewHome: React.FC = () => {
               <h2 className="text-3xl font-light text-white mb-4">
                 {t("newHome.partners.title")}
               </h2>
-              <div className="flex justify-center items-center gap-12 text-sm text-slate-400">
-                <div>
-                  <span className="text-2xl font-bold text-blue-400">50+</span>{" "}
-                  {t("newHome.partners.projects")}
-                </div>
-                <div>
-                  <span className="text-2xl font-bold text-green-400">98%</span>{" "}
-                  {t("newHome.partners.satisfaction")}
-                </div>
-                <div>
-                  <span className="text-2xl font-bold text-purple-400">3+</span>{" "}
-                  {t("newHome.partners.experience")}
-                </div>
-              </div>
+            
             </div>
 
             {/* Partner Logos - Simple Moving Strip */}
