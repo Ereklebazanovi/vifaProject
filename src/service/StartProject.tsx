@@ -231,7 +231,7 @@ const StartProject: React.FC = () => {
           letter-spacing: -0.02em;
         }
       `}</style>
-          <div className="start-project-content lg:mt-0 mt-15 md:mt-0">
+          <div className="start-project-content lg:mt-0 mt-26 md:mt-0">
             {/* Smart container that adapts to screen size */}
             <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
               <div className="max-w-6xl mx-auto">

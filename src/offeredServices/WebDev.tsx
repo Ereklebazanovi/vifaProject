@@ -268,15 +268,15 @@ const WebDev: React.FC = () => {
         }
       `}</style>
 
-      <div className="relative z-10 min-h-screen mt-15">
+      <div className="relative z-10 min-h-screen mt-50">
         {/* Main container with top padding to account for fixed navbar */}
         <div
-          className={`container mx-auto px-4 sm:px-6 lg:px-8 pt-25 sm:pt-28 md:pt-34 pb-10 ${getTransitionClasses()}`}
+          className={`container mx-auto px-4 sm:px-6 lg:px-8 language-transition language-fade-in ${getTransitionClasses()}`}
         >
           {/* Hero Section */}
           <div className="max-w-6xl mx-auto mb-32">
             <div className="text-center mb-16">
-              <div className="mb-8 flex items-center justify-center">
+              <div className="flex items-center justify-center">
                 {/* Unified container for both texts */}
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
