@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import BeautifulBackground from "../components/BeautifulBackground";
 import {
@@ -18,6 +19,11 @@ import { useLanguageTransition } from "../hooks/useLanguageTransition";
 const AboutPage = () => {
   const { t } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const aboutStructuredData = {
     "@context": "https://schema.org",

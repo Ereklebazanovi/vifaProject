@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import SEO from "../components/SEO";
 import { useLanguage } from "../contexts/LanguageContext";
@@ -42,6 +42,11 @@ const StartProject: React.FC = () => {
   });
 
   const totalSteps = 2;
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const services = [
     {
@@ -233,7 +238,7 @@ const StartProject: React.FC = () => {
       `}</style>
           <div className="start-project-content lg:mt-0 mt-26 md:mt-0">
             {/* Smart container that adapts to screen size */}
-            <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+            <div className="w-full !max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
               <div className="max-w-6xl mx-auto">
                 {/* Hero Section */}
                 <motion.div
@@ -256,9 +261,7 @@ const StartProject: React.FC = () => {
                     {t("startProject.hero.titleSuffix")}
                   </h1>
 
-                  <p className="text-base sm:text-lg lg:text-xl text-slate-300 mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed px-4">
-                    {t("startProject.hero.description")}
-                  </p>
+              
                 </motion.div>
 
                 {/* Progress Bar */}
@@ -302,7 +305,7 @@ const StartProject: React.FC = () => {
                 {/* Main Content Area - Responsive layout */}
                 <div className="w-full">
                   {/* Form Content - Full width on mobile, centered on desktop */}
-                  <div className="max-w-5xl mx-auto">
+                  <div className="!max-w-5xl mx-auto">
                     <div className="bg-slate-900/50 sm:bg-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 min-h-[400px] sm:min-h-[500px] border border-slate-700/30">
                       {isSuccess ? (
                         // Success State

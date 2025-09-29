@@ -180,9 +180,9 @@ const AIChatbot: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900/80 via-transparent to-blue-900/30"></div>
       </div>
 
-      <div className="relative z-10 min-h-screen mt-15">
+      <div className="relative z-10 min-h-screen lg:mt-15">
         <div
-          className={`container mx-auto px-4 sm:px-6 lg:px-8 pt-25 sm:pt-28 md:pt-34 pb-10 ${getTransitionClasses()}`}
+          className={`container mx-auto px-4 sm:px-6 lg:px-8 pt-58 sm:pt-28 md:pt-34 pb-10 ${getTransitionClasses()}`}
         >
           {/* Hero Section - Side-to-Side Layout */}
           <div className="max-w-7xl mx-auto mb-32">

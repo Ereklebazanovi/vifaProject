@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
@@ -42,6 +42,11 @@ const WebDev: React.FC = () => {
   const { startNavigation, stopNavigation } = useNavigation();
   const navigate = useNavigate();
   const [activeService, setActiveService] = useState<number>(0);
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleNavigation = (path: string) => {
     startNavigation();
@@ -872,7 +877,7 @@ const WebDev: React.FC = () => {
                 მზად ხართ თქვენი ციფრული ბიზნესის ტრანსფორმაციისთვის?
               </h3>
 
-              <div className="flex justify-center gap-4 mt-11">
+              <div className="flex justify-center gap-4 mt-11 mb-7">
                 <Link
                   to="/start-project"
                   className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-green-500 text-white px-6 sm:px-8 lg:px-10 py-4 text-lg font-medium hover:from-blue-600 hover:to-green-600 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105"
