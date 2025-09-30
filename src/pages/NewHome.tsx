@@ -49,7 +49,7 @@ const NewHome: React.FC = () => {
           className={`container mx-auto px-4 sm:px-6 lg:px-8 py-10 ${getTransitionClasses()}`}
         >
           {/* Hero Section */}
-          <div className="max-w-5xl mx-auto mb-24 mt-30">
+          <div className="max-w-5xl mx-auto mb-35 mt-30">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
                 <div className="mb-6">
@@ -161,35 +161,6 @@ const NewHome: React.FC = () => {
             </div>
           </div>
 
-          {/* Partners Section with Moving Logos */}
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-light text-white mb-4">
-                {t("newHome.partners.title")}
-              </h2>
-            
-            </div>
-
-            {/* Partner Logos - Simple Moving Strip */}
-            <div className="mb-12 overflow-hidden">
-              <div className="flex animate-scroll-infinite space-x-12 py-8">
-                {[
-                  ...partnerLogos,
-                  ...partnerLogos,
-                  ...partnerLogos,
-                  ...partnerLogos,
-                ].map((logo, index) => (
-                  <div key={index} className="flex-shrink-0">
-                    <img
-                      src={logo.src}
-                      alt={logo.alt}
-                      className="h-16 w-auto object-contain"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
 
           {/* Interactive Information Section */}
           <div

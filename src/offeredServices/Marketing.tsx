@@ -291,21 +291,7 @@ const Marketing: React.FC = () => {
                 </div>
               </div>
 
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-xl text-slate-200 mb-12 max-w-4xl mx-auto leading-relaxed font-light pt-10"
-                style={{
-                  fontFamily: "Inter, system-ui, sans-serif",
-                  lineHeight: "1.7",
-                }}
-              >
-                დღევანდელ ციფრულ ეპოქაში თქვენი ბრენდი უნდა იყოს ხილული,
-                მიმზიდველი და დამაჯერებელი. ჩვენ ვქმნით სრულყოფილ ციფრულ
-                ეკოსისტემას თქვენი ბიზნესისთვის — ვიდეოკონტენტიდან დაწყებული
-                სოციალურ მედიამდე.{" "}
-              </motion.p>
+             
             </div>
 
             {/* Digital Marketing Process Visualization */}

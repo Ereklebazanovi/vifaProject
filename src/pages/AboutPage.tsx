@@ -105,8 +105,7 @@ const AboutPage = () => {
           className={`container mx-auto px-4 sm:px-6 lg:px-8 py-10 ${getTransitionClasses()}`}
         >
           {/* Hero Section */}
-          <motion.div>
-          </motion.div>
+          <motion.div></motion.div>
 
           {/* Our Story Section */}
           <motion.div
@@ -137,14 +136,25 @@ const AboutPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.8 }}
               >
-                Vifa Digital შეიქმნა 2021 წელს, ჩვენმა გუნდმა გადაწყვიტა შეექმნა ციფრული სააგენტო, რომელიც დაეხმარებოდა ქართულ ბიზნესებს წარმატებულად ფუნქციონირებაში ციფრულ სივრცეში.
+                VIFA შეიქმნა 2020წელს, ჩვენმა გუნდმა გადაწყვიტა შეექმნა ციფრული
+                სააგენტო, რომელიც დაეხმარებოდა ქართულ ბიზნესებს წარმატებულად
+                ფუნქციონირებაში ციფრულ სივრცეში. დღეს ჩვენ ვართ წამყვანი ციფრული
+                სააგენტო საქართველოში, რომელიც მომსახურებას უწევს როგორც მცირე
+                ბიზნესებს, ასევე დიდ კორპორაციებს. ჩვენი მიზანია ყოველი
+                კლიენტისთვის შევქმნათ უნიკალური და ეფექტური ციფრული
+                გადაწყვეტილება.
               </motion.p>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1.0 }}
               >
-                დღეს ჩვენ ვართ წამყვანი ციფრული სააგენტო საქართველოში, რომელიც მომსახურებას უწევს როგორც მცირე ბიზნესებს, ასევე დიდ კორპორაციებს. ჩვენი მიზანია ყოველი კლიენტისთვის შევქმნათ უნიკალური და ეფექტური ციფრული გადაწყვეტილება.
+                როგორც წამყვანი ციფრული სააგენტო საქართველოში, ჩვენ ღრმად
+                გვესმის ადგილობრივი ბაზრის სპეციფიკა. ჩვენი მისიაა, გავზარდოთ
+                ჩვენი კლიენტების კონკურენტუნარიანობა ციფრულ სამყაროში. თითოეული
+                პროექტი, იქნება ეს მცირე ბიზნესის თუ მსხვილი კორპორაციისთვის,
+                იქმნება ინდივიდუალური სტრატეგიით, რათა მიიღოთ არა მხოლოდ AI
+                ტექნოლოგია, არამედ რეალური სტრატეგიული უპირატესობა.
               </motion.p>
             </motion.div>
           </motion.div>
@@ -229,7 +239,6 @@ const AboutPage = () => {
             </div>
           </div>
 
-
           {/* Portfolio Section - Shorts Style */}
           <div className="max-w-7xl mx-auto mb-24">
             <div className="text-center mb-16">
@@ -243,14 +252,19 @@ const AboutPage = () => {
 
             {/* Horizontal Scrollable Container */}
             <div className="relative">
-              <div className="flex gap-4 overflow-x-auto pb-6 scroll-smooth scrollbar-hide" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
-                <style dangerouslySetInnerHTML={{
-                  __html: `
+              <div
+                className="flex gap-4 overflow-x-auto pb-6 scroll-smooth scrollbar-hide"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
+                <style
+                  dangerouslySetInnerHTML={{
+                    __html: `
                     .scrollbar-hide::-webkit-scrollbar {
                       display: none;
                     }
-                  `
-                }} />
+                  `,
+                  }}
+                />
 
                 {/* Shorts Video 1 */}
                 <motion.div
@@ -273,8 +287,12 @@ const AboutPage = () => {
 
                     {/* Overlay Info - positioned to not block iframe */}
                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 pointer-events-none">
-                      <h3 className="text-white font-semibold text-lg mb-2">რესტორნის მარკეტინგი</h3>
-                      <p className="text-slate-300 text-sm">სოციალური მედია კამპანია</p>
+                      <h3 className="text-white font-semibold text-lg mb-2">
+                        რესტორნის მარკეტინგი
+                      </h3>
+                      <p className="text-slate-300 text-sm">
+                        სოციალური მედია კამპანია
+                      </p>
                     </div>
                   </div>
                 </motion.div>
@@ -299,8 +317,12 @@ const AboutPage = () => {
                     />
 
                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 pointer-events-none">
-                      <h3 className="text-white font-semibold text-lg mb-2">ვებსაიტის განვითარება</h3>
-                      <p className="text-slate-300 text-sm">E-commerce პლატფორმა</p>
+                      <h3 className="text-white font-semibold text-lg mb-2">
+                        ვებსაიტის განვითარება
+                      </h3>
+                      <p className="text-slate-300 text-sm">
+                        E-commerce პლატფორმა
+                      </p>
                     </div>
                   </div>
                 </motion.div>
@@ -322,10 +344,13 @@ const AboutPage = () => {
                     />
 
                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
-                      <h3 className="text-white font-semibold text-lg mb-2">ბრენდინგი</h3>
-                      <p className="text-slate-300 text-sm">ლოგო და ვიზუალური იდენტობა</p>
+                      <h3 className="text-white font-semibold text-lg mb-2">
+                        ბრენდინგი
+                      </h3>
+                      <p className="text-slate-300 text-sm">
+                        ლოგო და ვიზუალური იდენტობა
+                      </p>
                     </div>
-
                   </div>
                 </motion.div>
 
@@ -346,10 +371,11 @@ const AboutPage = () => {
                     />
 
                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
-                      <h3 className="text-white font-semibold text-lg mb-2">კონტენტ მარკეტინგი</h3>
+                      <h3 className="text-white font-semibold text-lg mb-2">
+                        კონტენტ მარკეტინგი
+                      </h3>
                       <p className="text-slate-300 text-sm">ვიდეო პროდუქცია</p>
                     </div>
-
                   </div>
                 </motion.div>
 
@@ -370,10 +396,13 @@ const AboutPage = () => {
                     />
 
                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
-                      <h3 className="text-white font-semibold text-lg mb-2">SEO ოპტიმიზაცია</h3>
-                      <p className="text-slate-300 text-sm">Google რეიტინგის გაუმजობესება</p>
+                      <h3 className="text-white font-semibold text-lg mb-2">
+                        SEO ოპტიმიზაცია
+                      </h3>
+                      <p className="text-slate-300 text-sm">
+                        Google რეიტინგის გაუმजობესება
+                      </p>
                     </div>
-
                   </div>
                 </motion.div>
 
@@ -394,25 +423,40 @@ const AboutPage = () => {
                     />
 
                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
-                      <h3 className="text-white font-semibold text-lg mb-2">PPC რეკლამა</h3>
-                      <p className="text-slate-300 text-sm">Google Ads კამპანია</p>
+                      <h3 className="text-white font-semibold text-lg mb-2">
+                        PPC რეკლამა
+                      </h3>
+                      <p className="text-slate-300 text-sm">
+                        Google Ads კამპანია
+                      </p>
                     </div>
-
                   </div>
                 </motion.div>
               </div>
 
               {/* Scroll Indicator */}
               <div className="absolute top-1/2 right-4 transform -translate-y-1/2 text-blue-400 animate-pulse">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
                 </svg>
               </div>
             </div>
 
             {/* Mobile Swipe Hint */}
             <div className="text-center mt-6 md:hidden">
-              <p className="text-slate-400 text-sm">👈 გადაფურცლე ვიდეოების სანახავად</p>
+              <p className="text-slate-400 text-sm">
+                👈 გადაფურცლე ვიდეოების სანახავად
+              </p>
             </div>
           </div>
 

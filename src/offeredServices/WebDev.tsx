@@ -354,28 +354,12 @@ const WebDev: React.FC = () => {
                 </motion.div>
               </div>
 
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-xl text-slate-300 mb-12 max-w-4xl mx-auto leading-relaxed font-light pt-10"
-                style={{
-                  fontFamily: "Inter, system-ui, sans-serif",
-                  lineHeight: "1.7",
-                }}
-              >
-                ვებსაიტი თქვენი ბიზნესის სახეა. ჩვენ ვამზადებთ სწრაფ და
-                თანამედროვე ვებაპლიკაციებს, რომლებიც არამხოლოდ იზიდავს
-                მომხმარებელს, არამედ რეალურად ეხმარება თქვენს ბიზნესს
-                განვითარებაში
-              </motion.p>
-
               {/* Stats Row */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16"
+                className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16 mt-14"
               >
                 <div className="text-center">
                   <div className="text-3xl font-bold text-blue-400 mb-2">

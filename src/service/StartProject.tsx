@@ -15,6 +15,7 @@ import {
   FaArrowLeft,
   FaCheck,
   FaSpinner,
+  FaBrain,
 } from "react-icons/fa";
 
 import { submitLead, type LeadData } from "../leadService";
@@ -247,11 +248,7 @@ const StartProject: React.FC = () => {
                   variants={fadeIn}
                   className="text-center mb-8 sm:mb-12 lg:mb-16"
                 >
-                  <div className="mb-6 sm:mb-8">
-                    <span className="text-blue-400 text-xs sm:text-sm font-medium tracking-wider uppercase border border-blue-400/30 px-3 sm:px-4 py-2 rounded">
-                      Start Your Project
-                    </span>
-                  </div>
+                
 
                   <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light text-white mb-6 sm:mb-8 leading-tight px-2">
                     {t("startProject.hero.title")}{" "}
@@ -261,7 +258,52 @@ const StartProject: React.FC = () => {
                     {t("startProject.hero.titleSuffix")}
                   </h1>
 
-              
+                  {/* Free Consultation Notice */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3, duration: 0.6 }}
+                    className="bg-slate-800/60 backdrop-blur-sm border border-blue-400/40 rounded-xl sm:rounded-2xl p-4 sm:p-5 mb-6 sm:mb-8 max-w-4xl mx-auto shadow-xl"
+                  >
+                    <div className="text-center mb-4">
+                      <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-500/20 rounded-full border border-blue-400/50 mb-3">
+                        <FaCheck className="text-blue-400 text-lg" />
+                      </div>
+                      <h3 className="text-lg sm:text-xl font-bold text-white mb-1">
+                        უფასო კონსულტაცია და საუბარი
+                      </h3>
+                      <p className="text-slate-300 text-xs sm:text-sm">
+                        პროფესიონალური რჩევები და შეფასება ყოველთვის უფასოდ
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      <div className="bg-slate-700/50 rounded-lg p-3 border border-slate-600/50">
+                        <div className="flex items-center gap-2 mb-1">
+                          <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                          <span className="text-white font-semibold text-xs sm:text-sm">პროექტის განხილვა</span>
+                        </div>
+                        <p className="text-slate-400 text-xs">დეტალური ანალიზი და რეკომენდაციები</p>
+                      </div>
+
+                      <div className="bg-slate-700/50 rounded-lg p-3 border border-slate-600/50">
+                        <div className="flex items-center gap-2 mb-1">
+                          <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                          <span className="text-white font-semibold text-xs sm:text-sm">ტექნიკური კონსულტაცია</span>
+                        </div>
+                        <p className="text-slate-400 text-xs">საუკეთესო გადაწყვეტილებების არჩევა</p>
+                      </div>
+
+                      <div className="bg-slate-700/50 rounded-lg p-3 border border-slate-600/50">
+                        <div className="flex items-center gap-2 mb-1">
+                          <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                          <span className="text-white font-semibold text-xs sm:text-sm">საწყისი შეფასება</span>
+                        </div>
+                        <p className="text-slate-400 text-xs">ღირებულება და ვადების განსაზღვრა</p>
+                      </div>
+                    </div>
+                  </motion.div>
+
                 </motion.div>
 
                 {/* Progress Bar */}

@@ -49,22 +49,22 @@ const AIChatbot: React.FC = () => {
       icon: <FaWhatsapp />,
       name: "WhatsApp Business",
       color: "green",
-      stats: "წვდომა 2.3 მილიონზე მეტ პოტენციურ კლიენტზე საქართველოში.",
+      stats: "2.3 მილიონზე მეტი აქტიური მომხმარებელი საქართველოში",
       features: [
-        "ელფოსტისგან განსხვავებით, თქვენი შეტყობინებები 98%-ით ხვდება ადრესატთან.	",
-        "მდიდარი მულტიმედია ფუნქციები (სურათები, დოკუმენტები, ვიდეო).",
-        "მობილური კომუნიკაციის ლიდერი",
+        "95%-ით სწრაფი კომუნიკაცია ელფოსტასთან შედარებით.",
+        "3-ჯერ მაღალი კონვერსიის (გაყიდვის) მაჩვენებელი.",
+        "მყისიერი კომუნიკაცია 24/7 რეჟიმში",
       ],
     },
     {
       icon: <FaInstagram />,
-      name: "Instagram",
+      name: "Instagram Direct",
       color: "pink",
-      stats: "18-34 წლის ასაკის 80% მომხმარებელი",
+      stats: "2.3 მილიონზე მეტი აქტიური მომხმარებელი საქართველოში",
       features: [
-        "ვიზუალური ძალა და მაღალი conversion",
-        "Stories და Direct ინტეგრაცია",
-        "სრული ფუნქციონალური ეკოსისტემა",
+        "95%-ით სწრაფი კომუნიკაცია ელფოსტასთან შედარებით.",
+        "3-ჯერ მაღალი კონვერსიის (გაყიდვის) მაჩვენებელი.",
+        "მყისიერი კომუნიკაცია 24/7 რეჟიმში",
       ],
     },
   ];
@@ -72,29 +72,32 @@ const AIChatbot: React.FC = () => {
   const technicalFeatures = [
     {
       icon: <FaBrain />,
-      title: "Google Gemini AI",
+      title: "ინტელექტუალური ბირთვი: Google Gemini",
+      subtitle: "",
       features: [
-        "ქართული ენის სრული მხარდაჭერა",
-        "კონტექსტური მეხსიერება",
-        "მულტი-ტასკინგი",
+        "ქართული ენის სრული მხარდაჭერა - ზუსტი და ბუნებრივი კომუნიკაცია.",
+        "კონტექსტური მეხსიერება - სისტემას ახსოვს საუბრის ისტორია და არ იმეორებს შეცდომებს.",
+        "მულტი-ტასკინგი - რთული ამოცანების ერთდროულად და ეფექტურად შესრულება.",
       ],
     },
     {
       icon: <FaCloud />,
-      title: "მოდერნული ინფრასტრუქტურა",
+      title: "ოპერაციული საიმედოობა და სისწრაფე",
+      subtitle: "",
       features: [
-        "99.9% Uptime",
-        "0.5 წამი საშუალო პასუხის დრო",
-        "ათასობით ერთდროული მომხმარებელი",
+        "99.9% Uptime - თქვენი სერვისი ხელმისაწვდომია თითქმის 24/7 შეფერხების გარეშე.",
+        "0.5 წამი საშუალო პასუხის დრო - მყისიერი რეაგირება მომხმარებლის მოთხოვნებზე.",
+        "ათასობით ერთდროული მომხმარებელი - მარტივი მასშტაბირება, ნებისმიერი დატვირთვისთვის მზადყოფნა.",
       ],
     },
     {
       icon: <FaShieldAlt />,
-      title: "უსაფრთხოება",
+      title: "უსაფრთხოება და კონფიდენციალურობა",
+      subtitle: "",
       features: [
-        "ბანკის დონის უსაფრთხოება",
-        "GDPR კომპლაინსი",
-        "ყველა მონაცემი დაშიფრულია",
+        "ბანკის დონის უსაფრთხოება - თქვენი მონაცემების დაცვა უმაღლესი სტანდარტით.",
+        "GDPR დაცვა - მონაცემთა დაცვის საერთაშორისო მოთხოვნებთან სრული შესაბამისობა.",
+        "ყველა მონაცემი დაშიფრულია - ინფორმაციის სრული კონფიდენციალურობა გადაცემისა და შენახვისას.",
       ],
     },
   ];
@@ -119,34 +122,34 @@ const AIChatbot: React.FC = () => {
 
   const faq = [
     {
-      question: "რამდენ დროს საჭიროებს ჩატბოტის გაშვება?",
-      answer: "მზა AI ასისტენტს მიიღებთ 7-14 სამუშაო დღეში.",
+      question: "რამდენ დროს მოითხოვს ჩატბოტის გაშვება?",
+      answer: "7-14 სამუშაო დღე.",
       details:
-        "დრო დამოკიდებულია თქვენი ბიზნესის სირთულესა და საჭირო ინტეგრაციების რაოდენობაზე.",
+        "მზა AI ასისტენტს მიიღებთ 7-14 სამუშაო დღეში. ზუსტი ვადები დამოკიდებულია თქვენი ბიზნესის სირთულესა და საჭირო ინტეგრაციების რაოდენობაზე.",
     },
     {
-      question: "შემიძლია თუ არა კონტენტის შეცვლა გაშვების შემდეგ?",
-      answer: "დიახ, ნებისმიერ დროს.",
+      question: "შესაძლებელია თუ არა კონტენტის შეცვლა გაშვების შემდეგ?",
+      answer: "დიახ, ნებისმიერ დროს, რეალურ დროში.",
       details:
-        "თქვენ შეგიძლიათ დაარედაქტიროთ AI-ს ცოდნის ბაზა და პასუხები ადმინ პანელიდან, ცვლილებები ძალაში შედის რეალურ დროში.",
+        "თქვენ შეგიძლიათ თავად დაარედაქტიროთ AI-ს ცოდნის ბაზა და პასუხები ჩვენი ადმინ პანელიდან. ცვლილებები ძალაში შედის მყისიერად.",
     },
     {
       question: "რა მოხდება Google API-ის გადახდის შეფერხების შემთხვევაში?",
-      answer: "მონაცემები და კონფიგურაცია შენარჩუნდება.",
+      answer: "თქვენი მონაცემები სრულად შენარჩუნდება.",
       details:
-        "Google-ის წესების თანახმად, ჩატბოტი დროებით შეწყვეტს მუშაობას, თუმცა თქვენი ყველა მონაცემი და სისტემის გამართვა სრულად შეინახება.",
+        "Google-ის წესების მიხედვით, ჩატბოტი დროებით შეწყვეტს მუშაობას, თუმცა თქვენი ყველა მონაცემი და სისტემის გამართვა სრულად და უსაფრთხოდ შეინახება.",
     },
     {
       question: "არის თუ არა შესაძლებელი ვებსაიტზე ინტეგრაცია?",
-      answer: "დიახ, რა თქმა უნდა.",
+      answer: "რა თქმა უნდა, დიახ (Web Widget).",
       details:
-        "ვებსაიტის (Web Widget) ინტეგრაცია შესაძლებელია Business და Enterprise პაკეტების ფარგლებში.",
+        "ვებსაიტის Live Chat Widget-ის ინტეგრაცია ხელმისაწვდომია Business და Enterprise პაკეტების ფარგლებში.",
     },
     {
       question: "რამდენ ენაზე შეუძლია AI-ს საუბარი?",
       answer: "ძირითადად, ქართულად და ინგლისურად.",
       details:
-        "AI-ს შეუძლია მუშაობა მრავალ ენაზე, თუმცა ძირითად ტრენინგს გადიან ქართულ და ინგლისურ ენებზე. საჭიროების შემთხვევაში, დამატებითი ენების სწავლება შესაძლებელია.",
+        "AI-ს აქვს მრავალენოვანი შესაძლებლობები. ჩვენ ტრენინგს ვატარებთ ძირითადად ქართულ და ინგლისურ ენებზე, მაგრამ საჭიროების შემთხვევაში, დამატებითი ენების სწავლება შესაძლებელია.",
     },
   ];
 
@@ -271,9 +274,7 @@ const AIChatbot: React.FC = () => {
                   transition={{ duration: 0.6, delay: index * 0.2 }}
                   className={`p-8 rounded-2xl border-2 ${getColorClass()} border-opacity-30 hover:border-opacity-100 transition-all duration-300 hover:scale-105`}
                 >
-                  <div
-                    className={`text-4xl ${getTextColorClass()} mb-4`}
-                  >
+                  <div className={`text-4xl ${getTextColorClass()} mb-4`}>
                     {platform.icon}
                   </div>
                   <h3 className="text-xl font-bold text-white mb-2">
@@ -303,14 +304,15 @@ const AIChatbot: React.FC = () => {
           </div>
 
           {/* Cost Structure Section */}
-          <div className="max-w-6xl mx-auto mb-32">
+          <div className="!max-w-6xl mx-auto mb-32">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold text-white mb-4">
                 ფინანსური სტრუქტურა და API ხარჯები
               </h2>
               <p className="text-xl text-slate-300">
-                ჩვენი საბოლოო ფასი დამოკიდებულია პროექტის სირთულესა და თქვენს
-                ინდივიდუალურ მოთხოვნებზე
+                ჩვენი ფასები მორგებულია კონკრეტული პროექტის სირთულესა და
+                საჭიროებებზე. გთავაზობთ გამჭვირვალე და მარტივად გასაგებ საფასო
+                მოდელს:
               </p>
             </div>
 
@@ -320,24 +322,37 @@ const AIChatbot: React.FC = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
-                className="bg-slate-800/30 rounded-2xl p-8 border border-slate-600"
+                className="bg-slate-800/30 rounded-2xl p-8 border border-slate-600 h-full"
               >
-                <h3 className="text-2xl font-bold text-white mb-4">
+                <h3 className="text-2xl font-bold text-white mb-6">
                   <FaRocket className="text-blue-400 mr-3 inline" />
-                  ერთჯერადი საწყისი ინვესტიცია
+                  საწყისი ინვესტიცია
                 </h3>
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center">
-                    <span className="text-slate-300">
-                      შექმნა და კონფიგურაცია
-                    </span>
-                    <span className="text-blue-400 font-bold">500₾-დან</span>
+                  <div className="text-center mb-4">
+                    <div className="text-3xl font-bold text-blue-400 mb-2">
+                      300₾-დან
+                    </div>
+                    <div className="text-sm text-slate-400">
+                      ფასი დამოკიდებულია მოთხოვნებზე
+                    </div>
                   </div>
-                  <div className="text-sm text-slate-400">
-                    ფასი განისაზღვრება ინდივიდუალურად. მოიცავს: AI ტრენინგს
-                    თქვენს ბიზნეს მონაცემებზე, პლატფორმების ინტეგრაცია
-                    (WhatsApp, Messenger), სრული ადმინ პანელი, ანალიტიკა და
-                    უფასო მხარდაჭერა
+                  <div className="text-sm text-slate-400 mb-4">მოიცავს:</div>
+                  <div className="space-y-3">
+                    {[
+                      "AI მოდელის გაწვრთნა თქვენი მონაცემებით",
+                      "WhatsApp, Messenger და სხვა პლატფორმებთან ინტეგრაცია",
+                      "სრულად ფუნქციონალური ადმინ პანელი",
+                      "ანალიტიკა და სტატისტიკა",
+                      "საწყისი ტექნიკური მხარდაჭერა – უფასოდ",
+                    ].map((feature, idx) => (
+                      <div key={idx} className="flex items-start gap-3">
+                        <FaCheck className="text-blue-400 text-sm mt-1 flex-shrink-0" />
+                        <span className="text-slate-300 text-sm">
+                          {feature}
+                        </span>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </motion.div>
@@ -347,36 +362,69 @@ const AIChatbot: React.FC = () => {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="bg-slate-800/30 rounded-2xl p-8 border border-slate-600"
+                className="bg-slate-800/30 rounded-2xl p-8 border border-slate-600 h-full"
               >
-                <h3 className="text-2xl font-bold text-white mb-4">
+                <h3 className="text-2xl font-bold text-white mb-6">
                   <FaCloud className="text-blue-400 mr-3 inline" />
-                  ყოველთვიური ოპერაციული ხარჯები
+                  ყოველთვიური ხარჯები
                 </h3>
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center">
-                    <span className="text-slate-300">Google Gemini API</span>
-                    <span className="text-blue-400 font-bold">
-                      0.20₾ - 0.40₾/1000 ტოკენზე
-                    </span>
+                  <div className="text-center mb-4">
+                    <div className="text-3xl font-bold text-blue-400 mb-2">
+                      Google Gemini API
+                    </div>
+                    <div className="text-sm text-slate-400">
+                      0.20₾ – 0.40₾ / 1,000 ტოკენზე
+                    </div>
                   </div>
-                  <div className="text-sm text-slate-400">
-                    სრული გამჭვირვალობა: ხარჯი გენერირდება უშუალოდ თქვენს Google
-                    Cloud ანგარიშზე. არანაირი დამალული ხარჯი და რეალურ დროში
-                    მონიტორინგი
+                  <div className="space-y-3">
+                    <div className="flex items-start gap-3">
+                      <FaCheck className="text-blue-400 text-sm mt-1 flex-shrink-0" />
+                      <div>
+                        <span className="text-slate-300 text-sm font-medium">
+                          ბილინგი:{" "}
+                        </span>
+                        <span className="text-slate-300 text-sm">
+                          ხარჯი გენერირდება უშუალოდ თქვენს Google Cloud
+                          ანგარიშზე
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <FaCheck className="text-blue-400 text-sm mt-1 flex-shrink-0" />
+                      <div>
+                        <span className="text-slate-300 text-sm font-medium">
+                          მონიტორინგი:{" "}
+                        </span>
+                        <span className="text-slate-300 text-sm">
+                          რეალურ დროში ხარჯების ნახვა
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <FaCheck className="text-blue-400 text-sm mt-1 flex-shrink-0" />
+                      <div>
+                        <span className="text-slate-300 text-sm font-medium">
+                          გამჭვირვალობა:{" "}
+                        </span>
+                        <span className="text-slate-300 text-sm">
+                          არანაირი დამალული გადასახადი
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </motion.div>
             </div>
 
             {/* API Cost Examples */}
-            <div className="bg-slate-800/50 rounded-2xl p-8 border border-slate-700/30">
+            <div className="bg-slate-800/50 rounded-2xl p-8 border border-slate-700/30 mb-8">
               <h4 className="text-xl font-bold text-white mb-4 text-center">
-                რეალური მაგალითები: სავარაუდო თვიური API ღირებულება
+                სავარაუდო API ხარჯები (ტოკენების გამოყენების მიხედვით)
               </h4>
               <p className="text-sm text-slate-400 mb-6 text-center">
-                შენიშვნა: ხარჯი დამოკიდებულია დამუშავებული ინფორმაციის
-                მოცულობაზე (ტოკენებზე), და არა მხოლოდ შეკითხვების რაოდენობაზე
+                შენიშვნა: ხარჯი დამოკიდებულია ტოკენების რაოდენობაზე, ანუ
+                დამუშავებული ინფორმაციის მოცულობაზე.
               </p>
               <div className="grid md:grid-cols-3 gap-6">
                 {apiCosts.map((cost) => (
@@ -394,72 +442,77 @@ const AIChatbot: React.FC = () => {
                 ))}
               </div>
             </div>
-          </div>
 
-          {/* Admin Panel Features */}
-          <div className="!max-w-5xl mx-auto mb-32">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-white mb-4">
-                <FaCog className="text-blue-400 mr-3 inline" />
-                ადმინ პანელი - სრული კონტროლი
-              </h2>
-              <p className="text-xl text-slate-300">
-                მართეთ ყველაფერი მარტივად, რეალურ დროში
-              </p>
-            </div>
+            {/* Admin Panel Section */}
+            <div className="!max-w-6xl mx-auto mb-32">
+              <div className="text-center mb-16">
+                <h2 className="text-3xl font-bold text-white mb-4">
+                  <FaCog className="text-blue-400 mr-3 inline" />
+                  ადმინ პანელი - სრული კონტროლი
+                </h2>
+                <p className="text-xl text-slate-300">
+                  მართეთ ყველაფერი მარტივად, რეალურ დროში
+                </p>
+              </div>
 
-            <div className="max-w-5xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="bg-gradient-to-br from-slate-800/50 to-blue-900/20 rounded-2xl p-6 border border-slate-700/30"
-              >
-                {/* cool s */}
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <h4 className="text-lg font-bold text-white mb-4">
-                      რას შეძლებთ:
-                    </h4>
-                    <div className="space-y-3">
-                      {[
-                        "რეალურ დროში რედაქტირება",
-                        "ახალი კითხვა-პასუხების დამატება",
-                        "პროდუქტების მენეჯმენტი",
-                        "საუბრების ისტორია",
-                        "დეტალური ანალიტიკა",
-                      ].map((feature) => (
-                        <div key={feature} className="flex items-center gap-2">
-                          <FaCheck className="text-blue-400 text-sm" />
-                          <span className="text-slate-300 text-sm">
-                            {feature}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-bold text-white mb-4">
-                      როგორ მუშაობს:
-                    </h4>
-                    <div className="space-y-3">
-                      {[
-                        "შედით ბრაუზერიდან ნებისმიერი მოწყობილობიდან",
-                        "აირჩიეთ სექცია (პროდუქტები, კითხვები)",
-                        "შეცვალეთ ტექსტი მარტივ ედიტორში",
-                        "დააჭირეთ 'შენახვა' - მაშინვე ძალაში შედის!",
-                      ].map((step, index) => (
-                        <div key={step} className="flex items-start gap-2">
-                          <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold mt-0.5 flex-shrink-0">
-                            {index + 1}
+              <div className="mx-auto">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8 }}
+                  className="bg-gradient-to-br from-slate-800/50 to-blue-900/20 rounded-2xl p-6 border border-slate-700/30"
+                >
+                  {/* cool s */}
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 className="text-lg font-bold text-white mb-4">
+                        რას შეძლებთ:
+                      </h4>
+                      <div className="space-y-3">
+                        {[
+                          "რეალურ დროში რედაქტირება",
+                          "ახალი კითხვა-პასუხების დამატება",
+                          "პროდუქტების მენეჯმენტი",
+                          "საუბრების ისტორია",
+                          "დეტალური ანალიტიკა",
+                        ].map((feature) => (
+                          <div
+                            key={feature}
+                            className="flex items-center gap-2"
+                          >
+                            <FaCheck className="text-blue-400 text-sm" />
+                            <span className="text-slate-300 text-sm">
+                              {feature}
+                            </span>
                           </div>
-                          <span className="text-slate-300 text-sm">{step}</span>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-bold text-white mb-4">
+                        როგორ მუშაობს:
+                      </h4>
+                      <div className="space-y-3">
+                        {[
+                          "შედით ბრაუზერიდან ნებისმიერი მოწყობილობიდან",
+                          "აირჩიეთ სექცია (პროდუქტები, კითხვები)",
+                          "შეცვალეთ ტექსტი მარტივ ედიტორში",
+                          "დააჭირეთ 'შენახვა' - მაშინვე ძალაში შედის!",
+                        ].map((step, index) => (
+                          <div key={step} className="flex items-start gap-2">
+                            <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold mt-0.5 flex-shrink-0">
+                              {index + 1}
+                            </div>
+                            <span className="text-slate-300 text-sm">
+                              {step}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
+                </motion.div>
+              </div>
             </div>
           </div>
 
@@ -474,27 +527,34 @@ const AIChatbot: React.FC = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="space-y-8">
               {technicalFeatures.map((feature, index) => (
                 <motion.div
                   key={feature.title}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.2 }}
-                  className="bg-slate-800/50 rounded-2xl p-5 border border-slate-700/30 text-center"
+                  className="bg-slate-800/50 rounded-2xl p-8 border border-slate-700/30"
                 >
-                  <div className="text-4xl text-blue-400 mb-4">
-                    {feature.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-4">
-                    {feature.title}
-                  </h3>
-                  <div className="space-y-2">
-                    {feature.features.map((item, idx) => (
-                      <div key={idx} className="text-slate-300 text-sm">
-                        {item}
+                  <div className="flex items-start gap-6">
+                    <div className="text-5xl text-blue-400 flex-shrink-0 mt-2">
+                      {feature.icon}
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold text-white mb-6">
+                        {feature.title}
+                      </h3>
+                      <div className="space-y-4">
+                        {feature.features.map((item, idx) => (
+                          <div key={idx} className="flex items-start gap-3">
+                            <FaCheck className="text-blue-400 text-sm mt-1 flex-shrink-0" />
+                            <span className="text-slate-300 text-sm leading-relaxed">
+                              {item}
+                            </span>
+                          </div>
+                        ))}
                       </div>
-                    ))}
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -508,9 +568,7 @@ const AIChatbot: React.FC = () => {
             <h2 className="text-3xl font-bold text-white mb-4">
               ხშირად დასმული შეკითხვები
             </h2>
-            <p className="text-slate-300">
-              მიიღეთ პასუხები ყველაზე ხშირ კითხვებზე
-            </p>
+           
           </div>
 
           <div className="max-w-2xl mx-auto space-y-6">
@@ -541,9 +599,9 @@ const AIChatbot: React.FC = () => {
       </div>
 
       {/* CTA Section - Back inside container */}
-      <div className="relative z-10 min-h-screen mt-15">
+      <div className="relative z-10 min-h-screen">
         <div
-          className={`container mx-auto px-4 sm:px-6 lg:px-8 pt-25 sm:pt-28 md:pt-34 pb-10 ${getTransitionClasses()}`}
+          className={`!max-w-5xl container mx-auto px-4 sm:px-6 lg:px-8 sm:pt-28 md:pt-34 pb-10 ${getTransitionClasses()}`}
         >
           {/* CTA Section */}
 
@@ -557,12 +615,9 @@ const AIChatbot: React.FC = () => {
                 className="bg-gradient-to-r from-blue-500/10 to-blue-600/10 rounded-2xl p-8 border border-blue-400/20"
               >
                 <h3 className="text-3xl font-bold text-white mb-6">
-                  მზად ხართ რომ გადააქციოთ თქვენი ბიზნესი?
+                  მზად ხარ გამოსცადო?
                 </h3>
-                <p className="text-xl text-slate-300 mb-8">
-                  ჩვენ არ ვქმნით უბრალო ჩატბოტებს - ჩვენ ვქმნით ციფრულ
-                  გაყიდვების მანქანებს თქვენი ბიზნესისთვის
-                </p>
+            
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link
@@ -572,13 +627,7 @@ const AIChatbot: React.FC = () => {
                     <FaRocket />
                     უფასო კონსულტაცია
                   </Link>
-                  <a
-                    href="tel:+995555123456"
-                    className="inline-flex items-center gap-2 border-2 border-blue-400 text-blue-400 px-8 py-4 text-lg font-medium hover:bg-blue-400 hover:text-white transition-all duration-300 rounded-lg"
-                  >
-                    <FaWhatsapp />
-                    555 123 456
-                  </a>
+                 
                 </div>
               </motion.div>
             </div>
