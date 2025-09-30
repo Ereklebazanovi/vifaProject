@@ -52,30 +52,30 @@ const StartProject: React.FC = () => {
     {
       id: "website",
       icon: <FaCode />,
-      title: t("startProject.services.website.title"),
-      description: t("startProject.services.website.description"),
-      price: t("startProject.services.website.price"),
+      title: "ვებსაიტის შექმნა",
+      description: "თანამედროვე და SEO-ოპტიმიზირებული ვებსაიტები",
+      price: "ფასი: ინდივიდუალური",
     },
     {
-      id: "content",
-      icon: <FaCamera />,
-      title: t("startProject.services.content.title"),
-      description: t("startProject.services.content.description"),
-      price: t("startProject.services.content.price"),
-    },
-    {
-      id: "social",
-      icon: <FaInstagram />,
-      title: t("startProject.services.social.title"),
-      description: t("startProject.services.social.description"),
-      price: t("startProject.services.social.price"),
-    },
-    {
-      id: "ads",
+      id: "ai-chatbot",
       icon: <FaChartLine />,
-      title: t("startProject.services.ads.title"),
-      description: t("startProject.services.ads.description"),
-      price: t("startProject.services.ads.price"),
+      title: "AI ჩატბოტი",
+      description: "24/7 ავტომატური მომხმარებელთა მხარდაჭერა",
+      price: "ფასი: ინდივიდუალური",
+    },
+    {
+      id: "marketing",
+      icon: <FaCamera />,
+      title: "ვიდეო და ფოტო კონტენტი",
+      description: "პროფესიონალური ვიდეო/ფოტო სესიები ბრენდისთვის",
+      price: "ფასი: ინდივიდუალური",
+    },
+    {
+      id: "social-media",
+      icon: <FaInstagram />,
+      title: "სოციალური მედია მართვა",
+      description: "სრული სოციალური მედიის მენეჯმენტი და კონტენტი",
+      price: "ფასი: ინდივიდუალური",
     },
   ];
 
@@ -435,10 +435,10 @@ const StartProject: React.FC = () => {
                             >
                               <div className="text-center mb-8 sm:mb-12">
                                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-white mb-4 px-2">
-                                  {t("startProject.step1.title")}
+                                  რომელი სერვისები გაინტერესებთ?
                                 </h2>
                                 <p className="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto px-4">
-                                  {t("startProject.step1.subtitle")}
+                                  აირჩიეთ სერვისები, რომლებიც ყველაზე მეტად შეესაბამება თქვენი ბიზნესის მოთხოვნებს
                                 </p>
                               </div>
 
@@ -471,9 +471,12 @@ const StartProject: React.FC = () => {
                                         <h3 className="font-semibold mb-2 sm:mb-3 text-lg sm:text-xl text-white">
                                           {service.title}
                                         </h3>
-                                        <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                                        <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-2">
                                           {service.description}
                                         </p>
+                                        <div className="text-blue-400 font-medium text-sm">
+                                          {service.price}
+                                        </div>
                                       </div>
                                       {formData.services.includes(
                                         service.id

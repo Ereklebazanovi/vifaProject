@@ -84,32 +84,6 @@ const PrivacyPolicy: React.FC = () => {
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mt-16 text-center"
-        >
-          <div className="bg-slate-800/30 backdrop-blur-xl border border-slate-700/20 rounded-2xl p-8">
-            <h3 className="text-2xl font-bold text-white mb-4">{t('privacy.contact.title')}</h3>
-            <p className="text-slate-300 mb-6">{t('privacy.contact.description')}</p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href="mailto:info@vifadigital.com"
-                className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40"
-              >
-                {t('privacy.contact.email')}
-              </a>
-              <a
-                href="tel:+995557624243"
-                className="px-6 py-3 border border-slate-600/50 text-slate-300 hover:text-white hover:border-slate-500 rounded-xl transition-all duration-300"
-              >
-                {t('privacy.contact.phone')}
-              </a>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </div>
   );

@@ -143,14 +143,12 @@ const WebDev: React.FC = () => {
     },
   ];
 
-  // Technology stack
+  // Technology stack - მხოლოდ ის ტექნოლოგიები რომლებსაც ნამდვილად ვიყენებთ
   const technologies = [
     { icon: <SiReact />, name: "React", color: "blue" },
     { icon: <SiTypescript />, name: "TypeScript", color: "blue" },
     { icon: <SiNodedotjs />, name: "Node.js", color: "green" },
     { icon: <SiTailwindcss />, name: "Tailwind", color: "cyan" },
-    { icon: <SiMongodb />, name: "MongoDB", color: "green" },
-    { icon: <SiPostgresql />, name: "PostgreSQL", color: "blue" },
     { icon: <SiFirebase />, name: "Firebase", color: "orange" },
     { icon: <SiVercel />, name: "Vercel", color: "black" },
   ];
@@ -299,7 +297,7 @@ const WebDev: React.FC = () => {
                       letterSpacing: "0.09em",
                     }}
                   >
-                    ℂ𝕣𝕖𝕒𝕥𝕚𝕧𝕖
+                    creative{" "}
                   </h2>
 
                   {/* Right side - Rotating text box */}
@@ -723,7 +721,7 @@ const WebDev: React.FC = () => {
           </div>
 
           {/* Services Grid */}
-          <div id="services" className="max-w-7xl mx-auto mb-32">
+          <div id="services" className="!max-w-7xl mx-auto mb-32">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-light text-white mb-4">
                 რას გთავაზობთ
@@ -815,37 +813,37 @@ const WebDev: React.FC = () => {
           </div>
 
           {/* Technology Stack */}
-          <div className="max-w-6xl mx-auto mb-32">
+          <div className="!max-w-7xl mx-auto mb-32">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-light text-white mb-4">
                 ტექნოლოგიები
               </h2>
               <p className="text-slate-400">
-                მოდერნული და სანდო ტექნოლოგიები საუკეთესო შედეგისთვის
+                მოდერნული და სანდო ტექნოლოგიები, რომლებსაც ნამდვილად ვიყენებთ
               </p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
               {technologies.map((tech, index) => (
                 <motion.div
                   key={tech.name}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className={`group cursor-pointer p-4 rounded-xl border-2 ${getColorClass(
+                  className={`group cursor-pointer p-6 rounded-xl border-2 ${getColorClass(
                     tech.color
                   )}
-                  border-opacity-30 hover:border-opacity-100 transition-all duration-300 hover:scale-110`}
+                  border-opacity-30 hover:border-opacity-100 transition-all duration-300 hover:scale-105`}
                 >
                   <div className="text-center">
                     <div
-                      className={`text-3xl mb-2 ${getTextColorClass(
+                      className={`text-4xl mb-3 ${getTextColorClass(
                         tech.color
                       )} group-hover:scale-110 transition-transform duration-300`}
                     >
                       {tech.icon}
                     </div>
-                    <div className="text-white font-medium text-sm">
+                    <div className="text-white font-medium text-base">
                       {tech.name}
                     </div>
                   </div>
