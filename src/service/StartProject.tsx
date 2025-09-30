@@ -15,7 +15,6 @@ import {
   FaArrowLeft,
   FaCheck,
   FaSpinner,
-  FaBrain,
 } from "react-icons/fa";
 
 import { submitLead, type LeadData } from "../leadService";

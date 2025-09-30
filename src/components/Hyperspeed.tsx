@@ -1028,9 +1028,9 @@ class App {
     this.bloomPass = new EffectPass(
       this.camera,
       new BloomEffect({
-        luminanceThreshold: 0.2,
-        luminanceSmoothing: 0,
-        resolutionScale: 1
+        luminanceThreshold: 0.6,
+        luminanceSmoothing: 0.05,
+        resolutionScale: 0.6
       })
     );
 
