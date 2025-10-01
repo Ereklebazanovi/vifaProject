@@ -1,54 +1,15 @@
 # robots.txt for VIFA Digital
-# https://vifadigital.ge/robots.txt
 
 User-agent: *
 Allow: /
 
-# Allow all major search engine crawlers
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Slurp
-Allow: /
-
-User-agent: DuckDuckBot
-Allow: /
-
-User-agent: Baiduspider
-Allow: /
-
-User-agent: YandexBot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: LinkedInBot
-Allow: /
-
 # Disallow admin and private areas
 Disallow: /admin/
-Disallow: /private/
-Disallow: /*.pdf$
 Disallow: /api/
-Disallow: /*?*
 
-# Allow CSS and JS files for better crawling
-Allow: /static/
+# Allow CSS and JS for better crawling
 Allow: /*.css$
 Allow: /*.js$
 
-# Crawl delay to be respectful
-Crawl-delay: 1
-
 # Sitemap location
 Sitemap: https://vifadigital.ge/sitemap.xml
-
-# Host specification
-Host: vifadigital.ge
