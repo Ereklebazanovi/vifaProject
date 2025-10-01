@@ -30,8 +30,7 @@ import {
   SiReact,
   SiNodedotjs,
   SiTailwindcss,
-  SiMongodb,
-  SiPostgresql,
+  
 } from "react-icons/si";
 import SEO from "../components/SEO";
 import RotatingText from "../components/RotatingText";
@@ -611,7 +610,7 @@ const WebDev: React.FC = () => {
                 ღირებულების მიწოდება კლიენტის ბიუჯეტის ფარგლებში.
               </p>
             </div>
-
+{/* ერე */}
             {/* Why Individual Pricing */}
             <div className="bg-gradient-to-r from-slate-800/50 to-slate-700/50 rounded-2xl p-8 border border-slate-600/30 mb-12">
               <div className="grid md:grid-cols-3 gap-8 text-center">
