@@ -16,7 +16,7 @@ class HighwayRenderer {
     speed: number;
     color: string;
     size: number;
-    type: 'star' | 'light' | 'line';
+    type: 'star' | 'light' | 'line' | 'shooting';
     opacity: number;
   }> = [];
   private isSpeedUp: boolean = false;
