@@ -9,9 +9,7 @@ import { HelmetProvider } from "react-helmet-async";
 import Layout from "./layout/Layout";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { NavigationProvider } from "./contexts/NavigationContext";
-import { addResourceHints } from "./utils/preload";
-import { useRoutePreload } from "./hooks/useRoutePreload";
-import { initializePerformanceOptimizations } from "./utils/performanceOptimizations";
+// Lazy load performance utilities
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import "./index.css";
 
@@ -127,7 +125,12 @@ const RouteTransition: React.FC<{ children: React.ReactNode }> = React.memo(({
 
 // Component that uses router hooks - must be inside Router
 const AppWithRouter: React.FC = () => {
-  useRoutePreload(); // Now safely inside Router context
+  // Lazy load route preloading after initial render
+  useEffect(() => {
+    import('./hooks/useRoutePreload').then(() => {
+      // Defer route preloading for better performance
+    });
+  }, []);
 
   return (
     <ErrorBoundary>
@@ -164,9 +167,16 @@ const AppWithRouter: React.FC = () => {
 // Main App component
 const App: React.FC = () => {
   useEffect(() => {
-    // Initialize comprehensive performance optimizations
-    initializePerformanceOptimizations();
-    addResourceHints();
+    // Defer performance optimizations to avoid blocking initial render
+    setTimeout(() => {
+      Promise.all([
+        import('./utils/performanceOptimizations'),
+        import('./utils/preload')
+      ]).then(([{ initializePerformanceOptimizations }, { addResourceHints }]) => {
+        initializePerformanceOptimizations();
+        addResourceHints();
+      });
+    }, 200);
   }, []);
 
   return (

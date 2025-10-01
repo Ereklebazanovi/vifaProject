@@ -165,7 +165,7 @@ const translations = {
 
     "footer.newsletter.title": "სიახლეები",
     "footer.newsletter.placeholder": "შეიყვანეთ თქვენი ელ-ფოსტა",
-    "footer.newsletter.subscribe": "გამოწერა",
+    "footer.newsletter.subscribe": "დადასტურება",
 
     "footer.copyright": "ყველა უფლება დაცულია.",
     "footer.privacy": "კონფიდენციალურობის პოლიტიკა",

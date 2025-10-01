@@ -136,7 +136,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ className = '' }) => {
             დაუკავშირდით ჩვენ
           </h3>
           <p className="text-slate-400">
-            მიიღეთ უფასო კონსულტაცია და შეფასება
+            უფასო სტრატეგიული კონსულტაცია
           </p>
         </div>
 

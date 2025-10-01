@@ -6,8 +6,7 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import SEO from "../components/SEO";
-import Hyperspeed from "../components/Hyperspeed";
-import { hyperspeedPresets } from "../components/hyperspeedPresets";
+import Canvas2DHighway from "../components/Canvas2DHighway";
 const NewHome: React.FC = () => {
   const { t } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
@@ -35,11 +34,8 @@ const NewHome: React.FC = () => {
         description={t("seo.home.description")}
       />
 
-      {/* Hyperspeed Background - Full Page Coverage */}
-      <Hyperspeed
-        className="fixed inset-0 z-0"
-        effectOptions={hyperspeedPresets.one}
-      />
+      {/* Canvas 2D Highway Background - Full Page Coverage */}
+      <Canvas2DHighway className="fixed inset-0 z-0" />
 
       {/* Light overlay for text readability - limited to main content area */}
       <div className="fixed inset-0 z-5 bg-black/15 pointer-events-none"></div>

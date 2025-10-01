@@ -146,7 +146,12 @@ const StartProject: React.FC = () => {
       case 1:
         return formData.services.length > 0;
       case 2:
-        return formData.name && formData.email && formData.businessName && formData.phone;
+        return (
+          formData.name &&
+          formData.email &&
+          formData.businessName &&
+          formData.phone
+        );
       default:
         return false;
     }
@@ -247,8 +252,6 @@ const StartProject: React.FC = () => {
                   variants={fadeIn}
                   className="text-center mb-8 sm:mb-12 lg:mb-16"
                 >
-                
-
                   <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light text-white mb-6 sm:mb-8 leading-tight px-2">
                     {t("startProject.hero.title")}{" "}
                     <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-medium">
@@ -269,40 +272,49 @@ const StartProject: React.FC = () => {
                         <FaCheck className="text-blue-400 text-lg" />
                       </div>
                       <h3 className="text-lg sm:text-xl font-bold text-white mb-1">
-                        უფასო კონსულტაცია და საუბარი
+                        უფასო სტრატეგიული კონსულტაცია{" "}
                       </h3>
-                      <p className="text-slate-300 text-xs sm:text-sm">
-                        პროფესიონალური რჩევები და შეფასება ყოველთვის უფასოდ
-                      </p>
+                   
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       <div className="bg-slate-700/50 rounded-lg p-3 border border-slate-600/50">
                         <div className="flex items-center gap-2 mb-1">
                           <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                          <span className="text-white font-semibold text-xs sm:text-sm">პროექტის განხილვა</span>
+                          <span className="text-white font-semibold text-xs sm:text-sm">
+                            პროექტის განხილვა
+                          </span>
                         </div>
-                        <p className="text-slate-400 text-xs">დეტალური ანალიზი და რეკომენდაციები</p>
+                        <p className="text-slate-400 text-xs">
+                          დეტალური ანალიზი და რეკომენდაციები
+                        </p>
                       </div>
 
                       <div className="bg-slate-700/50 rounded-lg p-3 border border-slate-600/50">
                         <div className="flex items-center gap-2 mb-1">
                           <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                          <span className="text-white font-semibold text-xs sm:text-sm">ტექნიკური კონსულტაცია</span>
+                          <span className="text-white font-semibold text-xs sm:text-sm">
+                            ტექნიკური კონსულტაცია
+                          </span>
                         </div>
-                        <p className="text-slate-400 text-xs">საუკეთესო გადაწყვეტილებების არჩევა</p>
+                        <p className="text-slate-400 text-xs">
+                          საუკეთესო გადაწყვეტილებების არჩევა
+                        </p>
                       </div>
 
                       <div className="bg-slate-700/50 rounded-lg p-3 border border-slate-600/50">
                         <div className="flex items-center gap-2 mb-1">
                           <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                          <span className="text-white font-semibold text-xs sm:text-sm">საწყისი შეფასება</span>
+                          <span className="text-white font-semibold text-xs sm:text-sm">
+                            საწყისი შეფასება
+                          </span>
                         </div>
-                        <p className="text-slate-400 text-xs">ღირებულება და ვადების განსაზღვრა</p>
+                        <p className="text-slate-400 text-xs">
+                          ღირებულება და ვადების განსაზღვრა
+                        </p>
                       </div>
                     </div>
                   </motion.div>
-
                 </motion.div>
 
                 {/* Progress Bar */}
@@ -438,7 +450,8 @@ const StartProject: React.FC = () => {
                                   რომელი სერვისები გაინტერესებთ?
                                 </h2>
                                 <p className="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto px-4">
-                                  აირჩიეთ სერვისები, რომლებიც ყველაზე მეტად შეესაბამება თქვენი ბიზნესის მოთხოვნებს
+                                  აირჩიეთ სერვისები, რომლებიც ყველაზე მეტად
+                                  შეესაბამება თქვენი ბიზნესის მოთხოვნებს
                                 </p>
                               </div>
 
@@ -511,7 +524,8 @@ const StartProject: React.FC = () => {
                                 </p>
                                 <div className="bg-blue-500/10 border border-blue-400/30 rounded-lg sm:rounded-xl p-3 sm:p-4 max-w-2xl mx-auto mx-4">
                                   <p className="text-blue-300 text-xs sm:text-sm">
-                                    🙏 გთხოვთ შეავსოთ ყველა ველი, რათა ვიცოდეთ სად და როგორ დაგიკავშირდეთ
+                                    🙏 გთხოვთ შეავსოთ ყველა ველი, რათა ვიცოდეთ
+                                    სად და როგორ დაგიკავშირდეთ
                                   </p>
                                 </div>
                               </div>
@@ -579,7 +593,8 @@ const StartProject: React.FC = () => {
                                     </div>
                                     <div>
                                       <label className="block text-xs sm:text-sm font-medium mb-2 sm:mb-3 text-slate-300">
-                                        📞 {t("startProject.form.phone")} * (რეკომენდებული)
+                                        📞 {t("startProject.form.phone")} *
+                                        (რეკომენდებული)
                                       </label>
                                       <input
                                         type="tel"
@@ -601,13 +616,16 @@ const StartProject: React.FC = () => {
                                       💬 ალტერნატიული საკომუნიკაციო გზები
                                     </h4>
                                     <p className="text-slate-300 text-sm mb-4">
-                                      ტელეფონის გარდა, შეგიძლიათ ასევე დაგვიკავშირდეთ:
+                                      ტელეფონის გარდა, შეგიძლიათ ასევე
+                                      დაგვიკავშირდეთ:
                                     </p>
                                     <div className="grid md:grid-cols-2 gap-4">
                                       <div className="bg-blue-600/20 border border-blue-500/30 rounded-lg p-4">
                                         <div className="flex items-center gap-3 mb-2">
                                           <div className="text-2xl">📘</div>
-                                          <div className="text-blue-300 font-semibold">Facebook Messenger</div>
+                                          <div className="text-blue-300 font-semibold">
+                                            Facebook Messenger
+                                          </div>
                                         </div>
                                         <div className="text-slate-400 text-sm mb-2">
                                           მოგვწერეთ პირდაპირ Facebook-ზე:
@@ -619,10 +637,13 @@ const StartProject: React.FC = () => {
                                       <div className="bg-green-600/20 border border-green-500/30 rounded-lg p-4">
                                         <div className="flex items-center gap-3 mb-2">
                                           <div className="text-2xl">📱</div>
-                                          <div className="text-green-300 font-semibold">WhatsApp</div>
+                                          <div className="text-green-300 font-semibold">
+                                            WhatsApp
+                                          </div>
                                         </div>
                                         <div className="text-slate-400 text-sm">
-                                          თქვენი ტელეფონის ნომრით WhatsApp-ზე დაგიკავშირდებით
+                                          თქვენი ტელეფონის ნომრით WhatsApp-ზე
+                                          დაგიკავშირდებით
                                         </div>
                                       </div>
                                     </div>
