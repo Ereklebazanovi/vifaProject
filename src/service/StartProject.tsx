@@ -8,7 +8,6 @@ import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import {
   FaCamera,
- 
   FaArrowRight,
   FaArrowLeft,
   FaCheck,
@@ -174,7 +173,7 @@ const StartProject: React.FC = () => {
     provider: {
       "@type": "Organization",
       name: "Vifa Digital",
-      url: "https://vifa.ge",
+      url: "https://vifadigital.ge",
     },
   };
 
@@ -265,11 +264,9 @@ const StartProject: React.FC = () => {
                     className="bg-slate-800/60 backdrop-blur-sm border border-blue-400/40 rounded-xl sm:rounded-2xl p-4 sm:p-5 mb-6 sm:mb-8 max-w-4xl mx-auto shadow-xl"
                   >
                     <div className="text-center mb-4">
-                  
                       <h3 className="text-lg sm:text-xl font-bold text-white mb-1">
                         უფასო სტრატეგიული კონსულტაცია{" "}
                       </h3>
-                   
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -397,9 +394,7 @@ const StartProject: React.FC = () => {
                               </div>
                             </div>
                             <div className="text-center p-4 bg-slate-800/40 rounded-xl">
-                              <div className="text-2xl text-green-400 mb-2">
-                                
-                              </div>
+                              <div className="text-2xl text-green-400 mb-2"></div>
                               <div className="text-sm text-slate-400">
                                 Personal consultation
                               </div>
@@ -519,8 +514,8 @@ const StartProject: React.FC = () => {
                                 </p>
                                 <div className="bg-blue-500/10 border border-blue-400/30 rounded-lg sm:rounded-xl p-3 sm:p-4 max-w-2xl mx-auto mx-4">
                                   <p className="text-blue-300 text-xs sm:text-sm">
-                                    გთხოვთ შეავსოთ ყველა ველი, რათა ვიცოდეთ
-                                    სად და როგორ დაგიკავშირდეთ
+                                    გთხოვთ შეავსოთ ყველა ველი, რათა ვიცოდეთ სად
+                                    და როგორ დაგიკავშირდეთ
                                   </p>
                                 </div>
                               </div>
@@ -588,7 +583,7 @@ const StartProject: React.FC = () => {
                                     </div>
                                     <div>
                                       <label className="block text-xs sm:text-sm font-medium mb-2 sm:mb-3 text-slate-300">
-                                         {t("startProject.form.phone")} *
+                                        {t("startProject.form.phone")} *
                                       </label>
                                       <input
                                         type="tel"
@@ -616,7 +611,9 @@ const StartProject: React.FC = () => {
                                     <div className="grid md:grid-cols-2 gap-4">
                                       <div className="bg-blue-600/20 border border-blue-500/30 rounded-lg p-4">
                                         <div className="flex items-center gap-3 mb-2">
-                                          <div className="text-2xl text-blue-400"><FaFacebookMessenger /></div>
+                                          <div className="text-2xl text-blue-400">
+                                            <FaFacebookMessenger />
+                                          </div>
                                           <div className="text-blue-300 font-semibold">
                                             Facebook Messenger
                                           </div>
@@ -625,12 +622,14 @@ const StartProject: React.FC = () => {
                                           მოგვწერეთ პირდაპირ Facebook-ზე:
                                         </div>
                                         <div className="text-blue-300 font-mono text-sm bg-blue-900/30 px-2 py-1 rounded">
-                                          m.me/vifadigital
+                                          facebook.com/vifaweb
                                         </div>
                                       </div>
                                       <div className="bg-green-600/20 border border-green-500/30 rounded-lg p-4">
                                         <div className="flex items-center gap-3 mb-2">
-                                          <div className="text-2xl text-green-400"><FaWhatsapp /></div>
+                                          <div className="text-2xl text-green-400">
+                                            <FaWhatsapp />
+                                          </div>
                                           <div className="text-green-300 font-semibold">
                                             WhatsApp
                                           </div>

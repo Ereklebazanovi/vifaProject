@@ -34,7 +34,7 @@ const AboutPage = () => {
       "@type": "Organization",
       name: "Vifa Digital",
       description: t("seo.about.description"),
-      url: "https://vifa.ge/about",
+      url: "https://vifadigital.ge/about",
     },
   };
 

@@ -13,7 +13,12 @@ import {
   FaPhone,
   FaEnvelope,
   FaMapMarkerAlt,
-  FaArrowUp
+  FaArrowUp,
+  FaRobot,
+  FaBullhorn,
+  FaHome,
+  FaUser,
+  FaProjectDiagram
 } from "react-icons/fa";
 
 const Footer: React.FC = () => {
@@ -26,40 +31,24 @@ const Footer: React.FC = () => {
   const socialLinks = [
     {
       icon: <FaFacebookF />,
-      href: "https://facebook.com/vifa.ge",
-      label: "Facebook",
-      color: "hover:text-blue-400 hover:bg-slate-800/30"
-    },
-    {
-      icon: <FaInstagram />,
-      href: "https://instagram.com/vifa.ge",
-      label: "Instagram",
-      color: "hover:text-blue-400 hover:bg-slate-800/30"
-    },
-    {
-      icon: <FaLinkedinIn />,
-      href: "https://linkedin.com/company/vifa-ge",
-      label: "LinkedIn",
-      color: "hover:text-blue-400 hover:bg-slate-800/30"
-    },
-    {
-      icon: <FaTwitter />,
-      href: "https://twitter.com/vifa_ge",
-      label: "Twitter",
-      color: "hover:text-blue-400 hover:bg-slate-800/30"
+      href: "https://facebook.com/vifaweb",
+      label: "VIFA WEB • ვიფა ვებ",
+      color: "hover:text-blue-400 hover:bg-blue-500/10 hover:border-blue-400/50"
     },
   ];
 
   const services = [
     { name: t('footer.services.webdev'), href: "/services/web-development", icon: <FaCode className="w-4 h-4" /> },
     { name: t('footer.services.ads'), href: "/services/digital-advertising", icon: <FaChartLine className="w-4 h-4" /> },
-    
+    { name: "AI ჩატბოტები", href: "/services/ai-chatbot", icon: <FaRobot className="w-4 h-4" /> },
+  
   ];
 
   const quickLinks = [
-    { name: t('footer.quickLinks.home'), href: "/" },
-    { name: t('footer.quickLinks.about'), href: "/about" },
-    { name: t('footer.quickLinks.contact'), href: "/contact" },
+    { name: t('footer.quickLinks.home'), href: "/", icon: <FaHome className="w-4 h-4" /> },
+    { name: t('footer.quickLinks.about'), href: "/about", icon: <FaUser className="w-4 h-4" /> },
+    { name: "პროექტის დაწყება", href: "/start-project", icon: <FaProjectDiagram className="w-4 h-4" /> },
+    
   ];
 
   const contactInfo = [
@@ -164,23 +153,33 @@ const Footer: React.FC = () => {
             </p>
             
             {/* Social Links */}
-            <div className="flex space-x-3">
+            <div className="space-y-4">
               {socialLinks.map((social, index) => (
                 <motion.a
                   key={index}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`w-10 h-10 flex items-center justify-center rounded-xl border transition-all duration-300 ${social.color} hover:border-current ${
-                    true 
-                      ? 'border-slate-700/50 text-slate-400' 
-                      : 'border-slate-300/50 text-slate-500 hover:text-current'
+                  className={`flex items-center gap-3 p-3 rounded-xl border transition-all duration-300 ${social.color} hover:shadow-lg hover:shadow-blue-500/20 ${
+                    true
+                      ? 'border-slate-700/50 text-slate-400 bg-slate-800/30'
+                      : 'border-slate-300/50 text-slate-500 bg-white/80'
                   }`}
                   title={social.label}
                 >
-                  {social.icon}
+                  <div className="text-xl">
+                    {social.icon}
+                  </div>
+                  <div>
+                    <div className="font-medium text-white text-sm">
+                      დაგვიკავშირდი Facebook-ზე
+                    </div>
+                    <div className="text-xs text-slate-400">
+                      {social.label}
+                    </div>
+                  </div>
                 </motion.a>
               ))}
             </div>
@@ -200,14 +199,16 @@ const Footer: React.FC = () => {
                   <Link
                     to={link.href}
                     className={`flex items-center hover:translate-x-1 transition-all duration-300 group ${
-                      true 
-                        ? 'text-slate-400 hover:text-white' 
+                      true
+                        ? 'text-slate-400 hover:text-white'
                         : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
-                    <span className={`w-1 h-1 rounded-full mr-3 group-hover:bg-blue-400 transition-colors duration-300 ${
-                      true ? 'bg-slate-600' : 'bg-slate-400'
-                    }`}></span>
+                    <span className={`mr-3 group-hover:text-blue-400 transition-colors duration-300 ${
+                      true ? 'text-slate-600' : 'text-slate-500'
+                    }`}>
+                      {link.icon}
+                    </span>
                     {link.name}
                   </Link>
                 </li>
@@ -337,7 +338,7 @@ const Footer: React.FC = () => {
               <p className={`text-sm ${
                 true ? 'text-slate-500' : 'text-slate-600'
               }`}>
-                {t('footer.createdBy')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 font-semibold">Vifa Digital</span> {t('footer.createdByTeam')}
+                {t('footer.createdBy')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 font-semibold">VIFA DIGITAL</span> {t('footer.createdByTeam')}
               </p>
               
               {/* Back to Top Button */}
