@@ -75,7 +75,7 @@ const NewHome: React.FC = () => {
                     ვებ განვითარება
                   </Link>
                   <Link
-                    to="/services/marketing"
+                    to="/services/digital-advertising"
                     className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base font-medium rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center"
                   >
                     მარკეტინგი

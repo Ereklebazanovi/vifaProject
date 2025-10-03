@@ -186,7 +186,7 @@ const AIChatbot: React.FC = () => {
 
       <div className="relative z-10 min-h-screen lg:mt-15">
         <div
-          className={`container mx-auto px-4 sm:px-6 lg:px-8 pt-58 sm:pt-28 md:pt-34 pb-10 ${getTransitionClasses()}`}
+          className={`container mx-auto px-4 sm:px-6 lg:px-8 pt-55 sm:pt-28 md:pt-34 pb-10 ${getTransitionClasses()}`}
         >
           {/* Hero Section - Side-to-Side Layout */}
           <div className="max-w-7xl mx-auto mb-32">
@@ -198,7 +198,7 @@ const AIChatbot: React.FC = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="space-y-8 max-w-lg flex flex-col justify-center h-full"
               >
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight tracking-tight font-['Inter','Noto_Sans_Georgian',sans-serif]">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight tracking-tight font-['Inter','Noto_Sans_Georgian',sans-serif] text-center lg:text-left">
                   თქვენი ბიზნესის{" "}
                   <span className="text-transparent bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text">
                     ციფრული რევოლუცია
@@ -237,10 +237,10 @@ const AIChatbot: React.FC = () => {
                 </div>
 
                 <div className="text-center lg:text-left">
-                  <p className="text-lg text-blue-400 font-bold mb-2 font-['Inter','Noto_Sans_Georgian',sans-serif]">
+                  <p className="text-base sm:text-lg text-blue-400 font-bold mb-2 font-['Inter','Noto_Sans_Georgian',sans-serif]">
                     იხილეთ როგორ მუშაობს ჩვენი AI ასისტენტი →
                   </p>
-                  <p className="text-sm text-slate-400 font-['Inter','Noto_Sans_Georgian',sans-serif]">
+                  <p className="text-xs sm:text-sm text-slate-400 font-['Inter','Noto_Sans_Georgian',sans-serif]">
                     რეალური საუბარი სალონის მფლობელთან
                   </p>
                 </div>
@@ -260,25 +260,25 @@ const AIChatbot: React.FC = () => {
 
           {/* Platforms Section - Enhanced */}
           <div className="max-w-6xl mx-auto mb-32">
-            <div className="text-center mb-16">
-              <h2 className="text-2xl text-slate-300">
+            <div className="text-center mb-12 sm:mb-16">
+              <h2 className="text-xl sm:text-2xl text-slate-300">
                 ინტეგრაცია ყველა მთავარ პლატფორმაზე
               </h2>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {platforms.map((platform, index) => (
                 <motion.div
                   key={platform.name}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.2 }}
-                  className={`p-8 rounded-2xl border-2 ${getColorClass()} border-opacity-30 hover:border-opacity-100 transition-all duration-300 hover:scale-105`}
+                  className={`p-4 sm:p-6 lg:p-8 rounded-2xl border-2 ${getColorClass()} border-opacity-30 hover:border-opacity-100 transition-all duration-300 hover:scale-105`}
                 >
                   <div className={`text-4xl ${getTextColorClass()} mb-4`}>
                     {platform.icon}
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-2">
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-2">
                     {platform.name}
                   </h3>
                   <p
@@ -317,13 +317,13 @@ const AIChatbot: React.FC = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-12">
               {/* One-time Investment */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
-                className="bg-slate-800/30 rounded-2xl p-8 border border-slate-600 h-full"
+                className="bg-slate-800/30 rounded-2xl p-4 sm:p-6 lg:p-8 border border-slate-600 h-full"
               >
                 <h3 className="text-2xl font-bold text-white mb-6">
                   <FaRocket className="text-blue-400 mr-3 inline" />
@@ -363,7 +363,7 @@ const AIChatbot: React.FC = () => {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="bg-slate-800/30 rounded-2xl p-8 border border-slate-600 h-full"
+                className="bg-slate-800/30 rounded-2xl p-4 sm:p-6 lg:p-8 border border-slate-600 h-full"
               >
                 <h3 className="text-2xl font-bold text-white mb-6">
                   <FaCloud className="text-blue-400 mr-3 inline" />
@@ -427,7 +427,7 @@ const AIChatbot: React.FC = () => {
                 შენიშვნა: ხარჯი დამოკიდებულია ტოკენების რაოდენობაზე, ანუ
                 დამუშავებული ინფორმაციის მოცულობაზე.
               </p>
-              <div className="grid md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
                 {apiCosts.map((cost) => (
                   <div key={cost.business} className="text-center">
                     <div className="text-white font-medium mb-2">
@@ -451,9 +451,6 @@ const AIChatbot: React.FC = () => {
                   <FaCog className="text-blue-400 mr-3 inline" />
                   ადმინ პანელი - სრული კონტროლი
                 </h2>
-                <p className="text-xl text-slate-300">
-                  მართეთ ყველაფერი მარტივად, რეალურ დროში
-                </p>
               </div>
 
               <div className="mx-auto">
@@ -464,7 +461,7 @@ const AIChatbot: React.FC = () => {
                   className="bg-gradient-to-br from-slate-800/50 to-blue-900/20 rounded-2xl p-6 border border-slate-700/30"
                 >
                   {/* cool s */}
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <div>
                       <h4 className="text-lg font-bold text-white mb-4">
                         რას შეძლებთ:
@@ -519,37 +516,37 @@ const AIChatbot: React.FC = () => {
 
           {/* Technical Features */}
           <div className="!max-w-6xl mx-auto mb-24">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-white mb-4">
+            <div className="text-center mb-8 sm:mb-12">
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
                 ტექნიკური უპირატესობები
               </h2>
-              <p className="text-xl text-slate-300">
+              <p className="text-lg sm:text-xl text-slate-300 px-4">
                 მოწინავე ტექნოლოგიები საუკეთესო შედეგისთვის
               </p>
             </div>
 
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               {technicalFeatures.map((feature, index) => (
                 <motion.div
                   key={feature.title}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.2 }}
-                  className="bg-slate-800/50 rounded-2xl p-8 border border-slate-700/30"
+                  className="bg-slate-800/50 rounded-2xl p-4 sm:p-6 lg:p-8 border border-slate-700/30"
                 >
-                  <div className="flex items-start gap-6">
-                    <div className="text-5xl text-blue-400 flex-shrink-0 mt-2">
+                  <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+                    <div className="text-3xl sm:text-4xl lg:text-5xl text-blue-400 flex-shrink-0 mt-1 sm:mt-2">
                       {feature.icon}
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-2xl font-bold text-white mb-6">
+                      <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
                         {feature.title}
                       </h3>
-                      <div className="space-y-4">
+                      <div className="space-y-3 sm:space-y-4">
                         {feature.features.map((item, idx) => (
-                          <div key={idx} className="flex items-start gap-3">
-                            <FaCheck className="text-blue-400 text-sm mt-1 flex-shrink-0" />
-                            <span className="text-slate-300 text-sm leading-relaxed">
+                          <div key={idx} className="flex items-start gap-2 sm:gap-3">
+                            <FaCheck className="text-blue-400 text-xs sm:text-sm mt-1 flex-shrink-0" />
+                            <span className="text-slate-300 text-xs sm:text-sm leading-relaxed">
                               {item}
                             </span>
                           </div>
@@ -601,7 +598,7 @@ const AIChatbot: React.FC = () => {
       {/* CTA Section - Back inside container */}
       <div className="relative z-10 min-h-screen">
         <div
-          className={`!max-w-5xl container mx-auto px-4 sm:px-6 lg:px-8 sm:pt-28 md:pt-34 pb-10 ${getTransitionClasses()}`}
+          className={`!max-w-5xl container mx-auto px-4 sm:px-6 lg:px-8 pb-10 ${getTransitionClasses()}`}
         >
           {/* CTA Section */}
 
@@ -621,7 +618,7 @@ const AIChatbot: React.FC = () => {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link
                     to="/start-project"
-                    className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-4 text-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105"
+                    className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105"
                   >
                     <FaRocket />
                     უფასო კონსულტაცია

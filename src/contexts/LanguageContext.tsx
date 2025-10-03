@@ -283,7 +283,7 @@ const translations = {
     "about.team.developer.skill2": "Facebook Ads",
     "about.team.developer.skill3": "SEO/SEM",
 
-    "about.cta.title": "მზად ხარ ჩვენთან მუშაობისთვის?",
+    "about.cta.title": "მზად ხარ დაიწყო თანამშრომლობა?",
     "about.cta.startProject": "დაიწყე პროექტი",
     "about.cta.contactUs": "დაგვიკავშირდი",
 
@@ -514,7 +514,7 @@ const translations = {
       "ონლაინ სივრცეში კონკურენცია გლობალურია. უნიკალური სტრატეგია და პროფესიონალური მიდგომა აუცილებელია იმისათვის, რომ გამოირჩეთ და მოიპოვოთ მომხმარებლის ყურადღება",
 
     "newHome.final.question": "მზად ხარ დაიწყო თანამშრომლობა?",
-    "newHome.final.button": "დაიწყეთ პროექტი",
+    "newHome.final.button": "დაიწყე პროექტი",
 
     // Privacy Policy
     "privacy.title": "კონფიდენციალურობის პოლიტიკა",
