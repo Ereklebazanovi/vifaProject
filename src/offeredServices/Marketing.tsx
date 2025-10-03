@@ -17,7 +17,6 @@ import {
   FaFacebook,
   FaYoutube,
   FaTiktok,
-  FaLinkedin,
   FaRocket,
   FaArrowRight,
   FaCheckCircle,
@@ -152,7 +151,6 @@ const Marketing: React.FC = () => {
     { icon: <FaFacebook />, name: "Facebook", color: "blue" },
     { icon: <FaYoutube />, name: "YouTube", color: "red" },
     { icon: <FaTiktok />, name: "TikTok", color: "black" },
-    { icon: <FaLinkedin />, name: "LinkedIn", color: "blue" },
   ];
 
   const getColorClass = (color: string) => {
@@ -290,8 +288,6 @@ const Marketing: React.FC = () => {
                   />
                 </div>
               </div>
-
-             
             </div>
 
             {/* Digital Marketing Process Visualization */}
@@ -400,7 +396,7 @@ const Marketing: React.FC = () => {
                 </div>
                 <div className="text-xs text-slate-500 mt-2">
                   ფასები ცვალებადია და დამოკიდებულია მომხმარებლის მოთხოვნებსა და
-                  კომუნიკაციის მიზნებზე.
+                  მიზნებზე.
                 </div>
               </div>
             </div>
@@ -446,7 +442,7 @@ const Marketing: React.FC = () => {
                 </div>
                 <div className="text-xs text-slate-500 mt-2">
                   ფასები ცვალებადია და დამოკიდებულია მომხმარებლის მოთხოვნებსა და
-                  კომუნიკაციის მიზნებზე.
+                  მიზნებზე.
                 </div>
               </div>
             </div>
@@ -496,7 +492,7 @@ const Marketing: React.FC = () => {
                 </div>
                 <div className="text-xs text-slate-500 mt-2">
                   ფასები ცვალებადია და დამოკიდებულია მომხმარებლის მოთხოვნებსა და
-                  კომუნიკაციის მიზნებზე.
+                  მიზნებზე.
                 </div>
               </div>
             </div>
@@ -657,8 +653,8 @@ const Marketing: React.FC = () => {
           {/* CTA Section */}
           <div className="text-center">
             <div className="max-w-3xl mx-auto">
-              <h3 className="text-3xl font-light text-blue-800 mb-6">
-                მზად ხართ თქვენი ციფრული ბიზნესის ტრანსფორმაციისთვის?
+              <h3 className="text-3xl font-light mb-6">
+                მზად ხარ ბიზნესის ციფრული ტრანსფორმაციისთვის?
               </h3>
 
               <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-12">

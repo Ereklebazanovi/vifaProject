@@ -30,7 +30,6 @@ import {
   SiReact,
   SiNodedotjs,
   SiTailwindcss,
-  
 } from "react-icons/si";
 import SEO from "../components/SEO";
 import RotatingText from "../components/RotatingText";
@@ -465,7 +464,7 @@ const WebDev: React.FC = () => {
               >
                 ჩვენი ძირითადი სერვისები
               </h3>
-              <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-loose">
                 ყველაზე მოთხოვნადი და ეფექტური გადაწყვეტები თქვენი ბიზნესისთვის
               </p>
             </div>
@@ -492,7 +491,7 @@ const WebDev: React.FC = () => {
                   </div>
                 </div>
 
-                <p className="text-slate-300 mb-6 leading-relaxed">
+                <p className="text-slate-300 mb-6 leading-loose">
                   თანამედროვე, სწრაფი და SEO-ოპტიმიზირებული ვებსაიტები, რომლებიც
                   ზრდის თქვენი ბიზნესის ხილვადობას და მომხმარებლების ჩართულობას.
                 </p>
@@ -527,7 +526,7 @@ const WebDev: React.FC = () => {
                     to="/start-project"
                     className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg transition-colors font-medium"
                   >
-                    დაიწყეთ ახლავე
+                    დაიწყე ახლავე
                   </Link>
                 </div>
               </motion.div>
@@ -553,7 +552,7 @@ const WebDev: React.FC = () => {
                   </div>
                 </div>
 
-                <p className="text-slate-300 mb-6 leading-relaxed">
+                <p className="text-slate-300 mb-6 leading-loose">
                   ინტელექტუალური ჩატბოტი, რომელიც 24/7 პასუხობს მომხმარებელთა
                   კითხვებს და უზრუნველყოფს სწრაფ მხარდაჭერას.
                 </p>
@@ -569,7 +568,7 @@ const WebDev: React.FC = () => {
                   </li>
                   <li className="flex items-center text-slate-300">
                     <FaDatabase className="text-orange-400 mr-3 flex-shrink-0" />
-                    ლიდების შეგროვება და მართვა
+                    ახალი კლიენტების მოზიდვა და გაყიდვების ზრდა
                   </li>
                   <li className="flex items-center text-slate-300">
                     <FaFacebook className="text-orange-400 mr-3 flex-shrink-0" />
@@ -610,7 +609,7 @@ const WebDev: React.FC = () => {
                 ღირებულების მიწოდება კლიენტის ბიუჯეტის ფარგლებში.
               </p>
             </div>
-{/* ერე */}
+            {/* ერე */}
             {/* Why Individual Pricing */}
             <div className="bg-gradient-to-r from-slate-800/50 to-slate-700/50 rounded-2xl p-8 border border-slate-600/30 mb-12">
               <div className="grid md:grid-cols-3 gap-8 text-center">
@@ -621,7 +620,7 @@ const WebDev: React.FC = () => {
                   <h4 className="text-xl font-medium text-white mb-3">
                     თქვენი მოთხოვნების მიხედვით, ბროსკი
                   </h4>
-                  <p className="text-slate-300 text-sm leading-relaxed">
+                  <p className="text-slate-300 text-sm leading-loose">
                     მარტივი ლენდინგ გვერდიდან რთულ e-commerce პლატფორმამდე -
                     ყველა პროექტს განსხვავებული მიდგომა სჭირდება.
                   </p>
@@ -633,7 +632,7 @@ const WebDev: React.FC = () => {
                   <h4 className="text-xl font-medium text-white mb-3">
                     სწრაფი შეფასება
                   </h4>
-                  <p className="text-slate-300 text-sm leading-relaxed">
+                  <p className="text-slate-300 text-sm leading-loose">
                     უფასო კონსულტაციის შემდეგ მაქსიმუმ 12 საათში მიიღებთ ზუსტ
                     ფასს და პროექტის გეგმას.
                   </p>
@@ -645,7 +644,7 @@ const WebDev: React.FC = () => {
                   <h4 className="text-xl font-medium text-white mb-3">
                     გამჭვირვალე პროცესი
                   </h4>
-                  <p className="text-slate-300 text-sm leading-relaxed">
+                  <p className="text-slate-300 text-sm leading-loose">
                     ჩვენი მიზანია, ყველა ეტაპი იყოს მაქსიმალურად ღია და
                     გასაგები. ნდობაზე დაფუძნებული თანამშრომლობა ყოველთვის
                     მომგებიანია.
@@ -662,12 +661,14 @@ const WebDev: React.FC = () => {
                   <FaRocket />
                 </div>
                 <h4 className="text-xl font-medium text-white mb-3">
-                  სავიზიტო ვებსაიტი{" "}
+                  სავიზიტო ვებსაიტი
                 </h4>
-                <p className="text-slate-300 text-sm mb-4 leading-relaxed">
-                  მარტივი ვებსაიტი 2-4 გვერდით. იდეალურია სერვისების ან
-                  პროდუქტების ეფექტური პრეზენტაციისთვის - სწრაფად, მარტივად და
-                  ბიუჯეტურად.
+                <p className="text-slate-300 text-sm mb-4 leading-loose">
+                  კომპაქტური და ეფექტური ვებგვერდი 2-4 გვერდით, რომელიც
+                  შექმნილია თქვენი სერვისების ან პროდუქტების მიმზიდველი
+                  პრეზენტაციისთვის. იდეალური გამოსავალი მცირე ბიზნესისთვის ან
+                  პირადი ბრენდისთვის, რომელიც სწრაფად გაზრდის თქვენს ონლაინ
+                  ხილვადობას და მოიზიდავს ახალ კლიენტებს.
                 </p>
                 <div className="text-2xl font-bold text-blue-400 mt-15">
                   300₾<span className="text-sm text-slate-400">-დან</span>
@@ -682,11 +683,13 @@ const WebDev: React.FC = () => {
                 <h4 className="text-xl font-medium text-white mb-3">
                   სტანდარტული ბიზნეს ვებსაიტი
                 </h4>
-                <p className="text-slate-300 text-sm mb-4 leading-relaxed">
-                  სრული ვებსაიტი თქვენი კომპანიისთვის: რამდენიმე გვერდი, მარტივი
-                  მართვის სისტემა, ძიების ძრავებში უკეთესი ჩვენება და
-                  ადმინისტრატორის პანელი. მარტივად მართეთ და მიიზიდეთ მეტი
-                  კლიენტი.
+                <p className="text-slate-300 text-sm mb-4 leading-loose">
+                  სრულფასოვანი და პროფესიონალური ვებგვერდი თქვენი კომპანიისთვის.
+                  მრავალგვერდიანი სტრუქტურა, მარტივი კონტენტის მართვის სისტემა (CMS),
+                  SEO ოპტიმიზაცია საძიებო სისტემებში უმაღლესი პოზიციებისთვის და
+                  მოქნილი ადმინისტრაციული პანელი. მარტივად მართეთ კონტენტი,
+                  გაზარდეთ ონლაინ ხილვადობა და მოიზიდეთ მეტი კლიენტი ეფექტურად
+                  და ეკონომიურად.
                 </p>
                 <div className="text-2xl font-bold text-green-400 mt-10">
                   600₾<span className="text-sm text-slate-400">-დან</span>
@@ -701,12 +704,15 @@ const WebDev: React.FC = () => {
                 <h4 className="text-xl font-medium text-white mb-3">
                   AI ჩატბოტი
                 </h4>
-                <p className="text-slate-300 text-sm mb-4 leading-relaxed">
-                  ავტომატური მხარდაჭერა სოციალურ ქსელებში - სწრაფი პასუხები
-                  თქვენს მომხმარებლებს, დაფუძნებული თვენს ბიზნეს ლოგიკასა და
-                  თქვენი სოციალურ ქსელებში ხშირად დასმულ შეკითხვებზე.
+                <p className="text-slate-300 text-sm mb-4 leading-loose">
+                  ინტელექტუალური ასისტენტი სოციალურ ქსელებში, რომელიც
+                  უზრუნველყოფს სწრაფ და პროფესიონალურ პასუხებს თქვენი
+                  მომხმარებლებისთვის. დაფუძნებულია თქვენი ბიზნესის ლოგიკაზე და
+                  ხშირად დასმულ შეკითხვებზე. ავტომატურად ამცირებს რესურსების
+                  ხარჯს, ზრდის კლიენტების კმაყოფილებას და ხელს უწყობს გაყიდვების
+                  ზრდას.
                 </p>
-                <div className="text-2xl font-bold text-purple-400 mt-10">
+                <div className="text-2xl font-bold text-purple-400 mt-14">
                   300₾<span className="text-sm text-slate-400">-დან</span>
                 </div>
               </div>
@@ -761,7 +767,7 @@ const WebDev: React.FC = () => {
                         {service.title}
                       </h3>
                     </div>
-                    <p className="text-slate-300 text-sm leading-relaxed">
+                    <p className="text-slate-300 text-sm leading-loose">
                       {service.description}
                     </p>
                   </div>
@@ -854,8 +860,8 @@ const WebDev: React.FC = () => {
           {/* CTA Section */}
           <div className="text-center">
             <div className="max-w-3xl mx-auto">
-              <h3 className="text-3xl font-light text-blue-800 mb-6">
-                მზად ხართ თქვენი ციფრული ბიზნესის ტრანსფორმაციისთვის?
+              <h3 className="text-3xl font-light mb-6">
+                მზად ხარ ბიზნესის ციფრული ტრანსფორმაციისთვის?
               </h3>
 
               <div className="flex justify-center gap-4 mt-11 mb-7">

@@ -216,9 +216,7 @@ const AboutPage = () => {
                   {t("about.values.titleHighlight")}
                 </span>
               </h2>
-              <p className="text-lg text-slate-400 max-w-3xl mx-auto">
-                {t("about.values.description")}
-              </p>
+              
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -441,7 +439,7 @@ const AboutPage = () => {
             {/* Mobile Swipe Hint */}
             <div className="text-center mt-6 md:hidden">
               <p className="text-slate-400 text-sm">
-                👈 გადაფურცლე ვიდეოების სანახავად
+                გასქროლე ვიდეოების სანახავად
               </p>
             </div>
           </div>
@@ -452,9 +450,7 @@ const AboutPage = () => {
               <h2 className="text-3xl font-light text-white mb-6">
                 {t("about.cta.title")}
               </h2>
-              <p className="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
-                {t("about.cta.description")}
-              </p>
+           
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link

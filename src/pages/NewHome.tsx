@@ -7,6 +7,7 @@ import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import SEO from "../components/SEO";
 import Canvas2DHighway from "../components/Canvas2DHighway";
+import { FaCogs, FaBriefcase, FaChartLine, FaBullseye } from "react-icons/fa";
 const NewHome: React.FC = () => {
   const { t } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
@@ -66,18 +67,24 @@ const NewHome: React.FC = () => {
                   {t("newHome.hero.description")}
                 </p>
 
-                <div className="flex gap-4">
+                <div className="flex flex-col space-y-3 max-w-xs mx-auto sm:max-w-none sm:flex-row sm:space-y-0 sm:space-x-4 sm:justify-center">
                   <Link
-                    to="/start-project"
-                    className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-8 py-4 font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                    to="/services/web-development"
+                    className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base font-medium rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center"
                   >
-                    {t("newHome.hero.startProject")}
+                    ვებ განვითარება
                   </Link>
                   <Link
-                    to="/about"
-                    className="border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 font-semibold rounded-lg backdrop-blur-sm hover:bg-white/10 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                    to="/services/marketing"
+                    className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base font-medium rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center"
                   >
-                    {t("newHome.hero.aboutUs")}
+                    მარკეტინგი
+                  </Link>
+                  <Link
+                    to="/start-project"
+                    className="border-2 border-white/30 hover:border-white/60 text-white px-4 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base font-medium rounded-lg backdrop-blur-sm hover:bg-white/10 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl text-center"
+                  >
+                    პროექტის დაწყება
                   </Link>
                 </div>
               </div>
@@ -161,26 +168,26 @@ const NewHome: React.FC = () => {
           {/* Interactive Information Section */}
           <div
             ref={sectionRef}
-            className="max-w-7xl mx-auto mt-32 mb-24"
+            className="max-w-6xl mx-auto mt-24 mb-20"
             style={{ position: "relative" }}
           >
             {/* მთავარი კონტენტი */}
             <div className={showDigitalConsequences ? "hidden" : "block"}>
               {/* Section Header */}
-              <div className="text-center mb-16">
-                <h2 className="text-4xl md:text-5xl font-light text-white mb-6">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-light text-white mb-4">
                   {t("newHome.interactive.title")}{" "}
                   <span className="text-blue-400">
                     {t("newHome.interactive.titleHighlight")}
                   </span>
                 </h2>
-                <p className="text-xl text-slate-300 max-w-4xl mx-auto leading-relaxed">
+                <p className="text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed">
                   {t("newHome.interactive.intro")}
                 </p>
               </div>
 
               {/* Two-Column Layout */}
-              <div className="grid lg:grid-cols-2 gap-16 items-start">
+              <div className="grid lg:grid-cols-2 gap-12 items-start">
                 {/* Left Side - Process Animation */}
                 <div className="space-y-8">
                   <div className="text-center lg:text-left mb-12">
@@ -247,10 +254,11 @@ const NewHome: React.FC = () => {
                           <div className="flex items-start gap-4">
                             {/* Icon */}
                             <div className="flex-shrink-0">
-                              <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-400/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
-                                {t(
-                                  `newHome.interactive.challenge${challengeNum}.icon`
-                                )}
+                              <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-400/20 flex items-center justify-center text-xl text-blue-400 group-hover:scale-110 transition-transform duration-300">
+                                {challengeNum === 1 && <FaCogs />}
+                                {challengeNum === 2 && <FaBriefcase />}
+                                {challengeNum === 3 && <FaChartLine />}
+                                {challengeNum === 4 && <FaBullseye />}
                               </div>
                             </div>
 
@@ -314,7 +322,11 @@ const NewHome: React.FC = () => {
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {/* პრობლემა 1 */}
                   <div className="bg-red-900/20 border border-red-500/30 rounded-xl p-6">
-                    <div className="text-4xl mb-4 text-red-400">📉</div>
+                    <div className="w-12 h-12 mb-4 bg-red-500/20 rounded-lg flex items-center justify-center">
+                      <svg className="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
+                      </svg>
+                    </div>
                     <h3 className="text-xl font-medium text-white mb-3">
                       გაყიდვების შემცირება
                     </h3>
@@ -327,7 +339,11 @@ const NewHome: React.FC = () => {
 
                   {/* პრობლემა 2 */}
                   <div className="bg-orange-900/20 border border-orange-500/30 rounded-xl p-6">
-                    <div className="text-4xl mb-4 text-orange-400">🏃‍♂️</div>
+                    <div className="w-12 h-12 mb-4 bg-orange-500/20 rounded-lg flex items-center justify-center">
+                      <svg className="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
                     <h3 className="text-xl font-medium text-white mb-3">
                       კონკურენტების ჩამორჩენა
                     </h3>
@@ -339,7 +355,11 @@ const NewHome: React.FC = () => {
 
                   {/* პრობლემა 3 */}
                   <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-xl p-6">
-                    <div className="text-4xl mb-4 text-yellow-400">👥</div>
+                    <div className="w-12 h-12 mb-4 bg-yellow-500/20 rounded-lg flex items-center justify-center">
+                      <svg className="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                      </svg>
+                    </div>
                     <h3 className="text-xl font-medium text-white mb-3">
                       ნდობის დაკარგვა
                     </h3>
@@ -351,7 +371,11 @@ const NewHome: React.FC = () => {
 
                   {/* პრობლემა 4 */}
                   <div className="bg-purple-900/20 border border-purple-500/30 rounded-xl p-6">
-                    <div className="text-4xl mb-4 text-purple-400">📱</div>
+                    <div className="w-12 h-12 mb-4 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                      <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a1 1 0 001-1V4a1 1 0 00-1-1H8a1 1 0 00-1 1v16a1 1 0 001 1z" />
+                      </svg>
+                    </div>
                     <h3 className="text-xl font-medium text-white mb-3">
                       მობილური გამოცდილება
                     </h3>
@@ -363,7 +387,11 @@ const NewHome: React.FC = () => {
 
                   {/* პრობლემა 5 */}
                   <div className="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6">
-                    <div className="text-4xl mb-4 text-blue-400">⏰</div>
+                    <div className="w-12 h-12 mb-4 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                      <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
                     <h3 className="text-xl font-medium text-white mb-3">
                       24/7 ხელმისაწვდომობა
                     </h3>
@@ -375,7 +403,11 @@ const NewHome: React.FC = () => {
 
                   {/* პრობლემა 6 */}
                   <div className="bg-green-900/20 border border-green-500/30 rounded-xl p-6">
-                    <div className="text-4xl mb-4 text-green-400">📊</div>
+                    <div className="w-12 h-12 mb-4 bg-green-500/20 rounded-lg flex items-center justify-center">
+                      <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                      </svg>
+                    </div>
                     <h3 className="text-xl font-medium text-white mb-3">
                       მონაცემების ანალიზი
                     </h3>

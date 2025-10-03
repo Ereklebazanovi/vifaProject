@@ -241,8 +241,6 @@ const translations = {
     // Values Section
     "about.values.sectionTitle": "ჩვენი",
     "about.values.titleHighlight": "ღირებულებები",
-    "about.values.description":
-      "ეს პრინციპები განსაზღვრავს ჩვენს მუშაობას და დამოკიდებულებას კლიენტებთან.",
 
     "about.values.innovation.title": "ინოვაცია",
     "about.values.innovation.description":
@@ -286,8 +284,6 @@ const translations = {
     "about.team.developer.skill3": "SEO/SEM",
 
     "about.cta.title": "მზად ხარ ჩვენთან მუშაობისთვის?",
-    "about.cta.description":
-      "მოდი განვიხილოთ თქვენი პროექტი და შევქმნათ ხარისხიანი პროდუქტი ერთად",
     "about.cta.startProject": "დაიწყე პროექტი",
     "about.cta.contactUs": "დაგვიკავშირდი",
 
@@ -497,22 +493,22 @@ const translations = {
     // Right Side - 21st Century Challenges
     "newHome.interactive.challengesTitle": "21-ე საუკუნის გამოწვევები",
 
-    "newHome.interactive.challenge1.icon": "⚡",
+    "newHome.interactive.challenge1.icon": "⚙️",
     "newHome.interactive.challenge1.title": "ინფორმაციის სიჭარბე",
     "newHome.interactive.challenge1.description":
       "მომხმარებლის ყურადღება მხოლოდ 3-8 წამით იზიდება. პირველი შთაბეჭდილება გადამწყვეტია.",
 
-    "newHome.interactive.challenge2.icon": "📱",
+    "newHome.interactive.challenge2.icon": "💼",
     "newHome.interactive.challenge2.title": "მობილური გამოცდილება",
     "newHome.interactive.challenge2.description":
       "75%-ზე მეტი ტრეფიკი მოდის სმარტფონიდან. ვებსაიტი უნდა იყოს სწრაფი და მარტივი მობილურზე.",
 
-    "newHome.interactive.challenge3.icon": "🤖",
+    "newHome.interactive.challenge3.icon": "📊",
     "newHome.interactive.challenge3.title": "ახალი ტექნოლოგიები",
     "newHome.interactive.challenge3.description":
       "AI, ავტომატიზაცია და სწრაფად ცვალებადი პლატფორმები. ყოველთვის უნდა იყო განახლებული.",
 
-    "newHome.interactive.challenge4.icon": "🌍",
+    "newHome.interactive.challenge4.icon": "🎯",
     "newHome.interactive.challenge4.title": "გლობალური კონკურენცია",
     "newHome.interactive.challenge4.description":
       "ონლაინ სივრცეში ყველა კონკურენტი ხილულია. გამოსარჩევად უნდა იყო უნიკალური და პროფესიონალური.",

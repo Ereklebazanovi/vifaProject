@@ -25,8 +25,7 @@ const StartProject: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  const [videoError, setVideoError] = useState(false);
+  // Removed video states for better performance
   const [formData, setFormData] = useState<LeadData>({
     services: [],
     businessType: "",
@@ -185,36 +184,30 @@ const StartProject: React.FC = () => {
         structuredData={startProjectStructuredData}
       />
 
-      {/* Video Background - Full Page Coverage */}
+      {/* Animated Background - Full Page Coverage */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0">
-          {/* Always show dark background first for smooth loading */}
-          <div className="w-full h-full bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
+          {/* Dark solid background */}
+          <div className="w-full h-full bg-gradient-to-br from-black via-slate-950 to-black" />
 
-          {/* Video loads on top with smooth fade */}
-          {!videoError && (
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-                videoLoaded ? "opacity-100" : "opacity-0"
-              }`}
-              style={{
-                filter: `brightness(0.4) contrast(1.2) saturate(1.1)`,
-              }}
-              onLoadedData={() => setVideoLoaded(true)}
-              onError={() => setVideoError(true)}
-            >
-              <source
-                src="https://www.pexels.com/download/video/7615682/"
-                type="video/mp4"
+          {/* Subtle floating particles */}
+          <div className="absolute inset-0">
+            {[...Array(12)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute w-1 h-1 bg-white/20 rounded-full animate-float"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 8}s`,
+                  animationDuration: `${8 + Math.random() * 4}s`,
+                }}
               />
-            </video>
-          )}
+            ))}
+          </div>
 
-          <div className="absolute inset-0 bg-slate-950/30" />
+          {/* Dark overlay for better text readability */}
+          <div className="absolute inset-0 bg-black/40" />
         </div>
       </div>
 
@@ -268,9 +261,7 @@ const StartProject: React.FC = () => {
                     className="bg-slate-800/60 backdrop-blur-sm border border-blue-400/40 rounded-xl sm:rounded-2xl p-4 sm:p-5 mb-6 sm:mb-8 max-w-4xl mx-auto shadow-xl"
                   >
                     <div className="text-center mb-4">
-                      <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-500/20 rounded-full border border-blue-400/50 mb-3">
-                        <FaCheck className="text-blue-400 text-lg" />
-                      </div>
+                  
                       <h3 className="text-lg sm:text-xl font-bold text-white mb-1">
                         უფასო სტრატეგიული კონსულტაცია{" "}
                       </h3>
