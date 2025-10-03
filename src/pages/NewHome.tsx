@@ -13,10 +13,8 @@ import {
   FaBriefcase,
   FaChartLine,
   FaBullseye,
-  FaCode,
   FaBrain,
-  FaCheck,
-  FaRobot,
+  
   FaLaptopCode,
   FaChartPie,
   FaArrowRight,

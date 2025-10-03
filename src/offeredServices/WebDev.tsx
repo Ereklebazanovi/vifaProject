@@ -22,14 +22,7 @@ import {
   FaBrain,
   FaBullseye,
   FaFacebook,
-  FaUtensils,
-  FaUser,
-  FaCalendarAlt,
-  FaStore,
-  FaShoppingCart,
-  FaCogs,
-  FaCheck,
-} from "react-icons/fa";
+ } from "react-icons/fa";
 import {
   SiFirebase,
   SiTypescript,
