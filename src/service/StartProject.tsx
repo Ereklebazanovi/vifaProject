@@ -15,6 +15,12 @@ import {
   FaArrowLeft,
   FaCheck,
   FaSpinner,
+  FaRobot,
+  FaBullhorn,
+  FaGlobe,
+  FaFacebookMessenger,
+  FaWhatsapp,
+  FaEnvelope,
 } from "react-icons/fa";
 
 import { submitLead, type LeadData } from "../leadService";
@@ -50,14 +56,14 @@ const StartProject: React.FC = () => {
   const services = [
     {
       id: "website",
-      icon: <FaCode />,
+      icon: <FaGlobe />,
       title: "ვებსაიტის შექმნა",
       description: "თანამედროვე და SEO-ოპტიმიზირებული ვებსაიტები",
       price: "ფასი: ინდივიდუალური",
     },
     {
       id: "ai-chatbot",
-      icon: <FaChartLine />,
+      icon: <FaRobot />,
       title: "AI ჩატბოტი",
       description: "24/7 ავტომატური მომხმარებელთა მხარდაჭერა",
       price: "ფასი: ინდივიდუალური",
@@ -71,7 +77,7 @@ const StartProject: React.FC = () => {
     },
     {
       id: "social-media",
-      icon: <FaInstagram />,
+      icon: <FaBullhorn />,
       title: "სოციალური მედია მართვა",
       description: "სრული სოციალური მედიის მენეჯმენტი და კონტენტი",
       price: "ფასი: ინდივიდუალური",
@@ -383,7 +389,7 @@ const StartProject: React.FC = () => {
                           <div className="grid md:grid-cols-2 gap-6 mb-8 max-w-lg mx-auto">
                             <div className="text-center p-4 bg-slate-800/40 rounded-xl">
                               <div className="text-2xl text-blue-400 mb-2">
-                                📧
+                                <FaEnvelope />
                               </div>
                               <div className="text-sm text-slate-400">
                                 Check your email
@@ -394,7 +400,7 @@ const StartProject: React.FC = () => {
                             </div>
                             <div className="text-center p-4 bg-slate-800/40 rounded-xl">
                               <div className="text-2xl text-green-400 mb-2">
-                                📞
+                                
                               </div>
                               <div className="text-sm text-slate-400">
                                 Personal consultation
@@ -446,24 +452,24 @@ const StartProject: React.FC = () => {
                                 </p>
                               </div>
 
-                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto">
+                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
                                 {services.map((service) => (
                                   <motion.div
                                     key={service.id}
-                                    whileHover={{ scale: 1.02, y: -5 }}
+                                    whileHover={{ scale: 1.02, y: -2 }}
                                     whileTap={{ scale: 0.98 }}
                                     onClick={() =>
                                       handleServiceToggle(service.id)
                                     }
-                                    className={`relative bg-slate-800/40 backdrop-blur-sm border rounded-xl sm:rounded-2xl p-4 sm:p-6 cursor-pointer transition-all duration-300 group ${
+                                    className={`relative bg-slate-800/40 backdrop-blur-sm border rounded-lg p-4 cursor-pointer transition-all duration-300 group ${
                                       formData.services.includes(service.id)
                                         ? "border-blue-400/50 bg-blue-500/10 shadow-lg shadow-blue-500/20"
                                         : "border-slate-700/50 hover:border-blue-400/30 hover:bg-slate-800/60"
                                     }`}
                                   >
-                                    <div className="flex flex-col items-center text-center space-y-3 sm:space-y-4">
+                                    <div className="flex flex-col items-center text-center space-y-3">
                                       <div
-                                        className={`text-3xl sm:text-4xl transition-transform duration-300 group-hover:scale-110 ${
+                                        className={`text-2xl transition-transform duration-300 group-hover:scale-110 ${
                                           formData.services.includes(service.id)
                                             ? "text-blue-400"
                                             : "text-blue-400"
@@ -472,13 +478,13 @@ const StartProject: React.FC = () => {
                                         {service.icon}
                                       </div>
                                       <div className="flex-1">
-                                        <h3 className="font-semibold mb-2 sm:mb-3 text-lg sm:text-xl text-white">
+                                        <h3 className="font-semibold mb-2 text-base text-white">
                                           {service.title}
                                         </h3>
-                                        <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-2">
+                                        <p className="text-xs text-slate-400 leading-relaxed mb-2">
                                           {service.description}
                                         </p>
-                                        <div className="text-blue-400 font-medium text-sm">
+                                        <div className="text-blue-400 font-medium text-xs">
                                           {service.price}
                                         </div>
                                       </div>
@@ -515,7 +521,7 @@ const StartProject: React.FC = () => {
                                 </p>
                                 <div className="bg-blue-500/10 border border-blue-400/30 rounded-lg sm:rounded-xl p-3 sm:p-4 max-w-2xl mx-auto mx-4">
                                   <p className="text-blue-300 text-xs sm:text-sm">
-                                    🙏 გთხოვთ შეავსოთ ყველა ველი, რათა ვიცოდეთ
+                                    გთხოვთ შეავსოთ ყველა ველი, რათა ვიცოდეთ
                                     სად და როგორ დაგიკავშირდეთ
                                   </p>
                                 </div>
@@ -584,8 +590,7 @@ const StartProject: React.FC = () => {
                                     </div>
                                     <div>
                                       <label className="block text-xs sm:text-sm font-medium mb-2 sm:mb-3 text-slate-300">
-                                        📞 {t("startProject.form.phone")} *
-                                        (რეკომენდებული)
+                                         {t("startProject.form.phone")} *
                                       </label>
                                       <input
                                         type="tel"
@@ -604,7 +609,7 @@ const StartProject: React.FC = () => {
 
                                   <div className="bg-slate-700/30 border border-slate-600/50 rounded-xl p-6">
                                     <h4 className="text-white font-semibold mb-3 flex items-center gap-2">
-                                      💬 ალტერნატიული საკომუნიკაციო გზები
+                                      ალტერნატიული საკომუნიკაციო გზები
                                     </h4>
                                     <p className="text-slate-300 text-sm mb-4">
                                       ტელეფონის გარდა, შეგიძლიათ ასევე
@@ -613,7 +618,7 @@ const StartProject: React.FC = () => {
                                     <div className="grid md:grid-cols-2 gap-4">
                                       <div className="bg-blue-600/20 border border-blue-500/30 rounded-lg p-4">
                                         <div className="flex items-center gap-3 mb-2">
-                                          <div className="text-2xl">📘</div>
+                                          <div className="text-2xl text-blue-400"><FaFacebookMessenger /></div>
                                           <div className="text-blue-300 font-semibold">
                                             Facebook Messenger
                                           </div>
@@ -627,7 +632,7 @@ const StartProject: React.FC = () => {
                                       </div>
                                       <div className="bg-green-600/20 border border-green-500/30 rounded-lg p-4">
                                         <div className="flex items-center gap-3 mb-2">
-                                          <div className="text-2xl">📱</div>
+                                          <div className="text-2xl text-green-400"><FaWhatsapp /></div>
                                           <div className="text-green-300 font-semibold">
                                             WhatsApp
                                           </div>
@@ -651,7 +656,7 @@ const StartProject: React.FC = () => {
 
                 {/* Navigation Buttons */}
                 {!isSuccess && (
-                  <div className="flex flex-col sm:flex-row justify-between gap-4 sm:gap-0 mt-6 sm:mt-8 max-w-4xl mx-auto px-4">
+                  <div className="flex flex-col sm:flex-row justify-end gap-4 mt-6 sm:mt-8 max-w-4xl mx-auto px-4">
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}

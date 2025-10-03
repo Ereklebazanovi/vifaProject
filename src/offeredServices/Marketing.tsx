@@ -632,7 +632,7 @@ const Marketing: React.FC = () => {
                     <FaCog />
                   </div>
                   <h4 className="text-xl font-medium text-white mb-3">
-                    გამჭვირვალე პროცესი
+                    გამჭირვალე პროცესი
                   </h4>
                   <p className="text-slate-300 text-sm leading-relaxed">
                     ჩვენი მიზანია, ყველა ეტაპი იყოს მაქსიმალურად ღია და

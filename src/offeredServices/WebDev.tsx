@@ -195,7 +195,7 @@ const WebDev: React.FC = () => {
         <Silk
           speed={3}
           scale={1.2}
-          color="#1e293b"
+          color="#0f172a"
           noiseIntensity={0.8}
           rotation={0.1}
         />
@@ -642,7 +642,7 @@ const WebDev: React.FC = () => {
                     <FaCog />
                   </div>
                   <h4 className="text-xl font-medium text-white mb-3">
-                    გამჭვირვალე პროცესი
+                    გამჭირვალე პროცესი
                   </h4>
                   <p className="text-slate-300 text-sm leading-loose">
                     ჩვენი მიზანია, ყველა ეტაპი იყოს მაქსიმალურად ღია და
