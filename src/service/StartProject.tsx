@@ -7,10 +7,8 @@ import SEO from "../components/SEO";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import {
-  FaCode,
   FaCamera,
-  FaInstagram,
-  FaChartLine,
+ 
   FaArrowRight,
   FaArrowLeft,
   FaCheck,
