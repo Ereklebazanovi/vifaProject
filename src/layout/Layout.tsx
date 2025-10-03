@@ -1,5 +1,5 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from './SimpleNavbar';
 import Footer from './ImprovedFooter';
 import { useNavigation } from '../contexts/NavigationContext';
@@ -44,7 +44,24 @@ const NavigationSpinner = () => (
 );
 
 const Layout: React.FC = () => {
-  const { isNavigating } = useNavigation();
+  const { isNavigating, stopNavigation } = useNavigation();
+  const location = useLocation();
+
+  // Stop navigation when location changes
+  useEffect(() => {
+    if (isNavigating) {
+      const timer = setTimeout(() => {
+        stopNavigation();
+      }, 500); // Small delay for smooth transition
+
+      return () => clearTimeout(timer);
+    }
+  }, [location, isNavigating, stopNavigation]);
+
+  // Also stop navigation immediately on path change
+  useEffect(() => {
+    stopNavigation();
+  }, [location.pathname, stopNavigation]);
 
   if (isNavigating) {
     return <NavigationSpinner />;

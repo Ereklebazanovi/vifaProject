@@ -22,6 +22,13 @@ import {
   FaBrain,
   FaBullseye,
   FaFacebook,
+  FaUtensils,
+  FaUser,
+  FaCalendarAlt,
+  FaStore,
+  FaShoppingCart,
+  FaCogs,
+  FaCheck,
 } from "react-icons/fa";
 import {
   SiFirebase,
@@ -466,9 +473,6 @@ const WebDev: React.FC = () => {
               >
                 ჩვენი ძირითადი სერვისები
               </h3>
-              <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-loose">
-                ყველაზე მოთხოვნადი და ეფექტური გადაწყვეტები თქვენი ბიზნესისთვის
-              </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
@@ -494,7 +498,7 @@ const WebDev: React.FC = () => {
                 </div>
 
                 <p className="text-slate-300 mb-6 leading-loose">
-                  თანამედროვე, სწრაფი და SEO-ოპტიმიზირებული ვებსაიტები, რომლებიც
+                  თანამედროვე, სწრაფი და SEO-ოპტიმიზირებული ვებსაიტი, რომელიც
                   ზრდის თქვენი ბიზნესის ხილვადობას და მომხმარებლების ჩართულობას.
                 </p>
 
@@ -648,7 +652,9 @@ const WebDev: React.FC = () => {
                     პროცესის გამჭვირვალობა{" "}
                   </h4>
                   <p className="text-slate-300 text-sm leading-loose">
-                   ჩვენი თანამშრომლობა ეფუძნება მაქსიმალურ ღიაობას მუშაობის ყველა ეტაპზე. მკაფიო პროცესი უზრუნველყოფს ორმხრივ მომგებიან და ეფექტურ შედეგებს.
+                    ჩვენი თანამშრომლობა ეფუძნება მაქსიმალურ ღიაობას მუშაობის
+                    ყველა ეტაპზე. მკაფიო პროცესი უზრუნველყოფს ორმხრივ მომგებიან
+                    და ეფექტურ შედეგებს.
                   </p>
                 </div>
               </div>
