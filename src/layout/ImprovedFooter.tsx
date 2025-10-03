@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useLanguage } from '../contexts/LanguageContext';
-import { useLanguageTransition } from '../hooks/useLanguageTransition';
+import { useLanguage } from "../contexts/LanguageContext";
+import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import {
   FaFacebookF,
-  FaInstagram,
-  FaLinkedinIn,
-  FaTwitter,
   FaCode,
   FaChartLine,
   FaPhone,
@@ -15,10 +12,9 @@ import {
   FaMapMarkerAlt,
   FaArrowUp,
   FaRobot,
-  FaBullhorn,
   FaHome,
   FaUser,
-  FaProjectDiagram
+  FaProjectDiagram,
 } from "react-icons/fa";
 
 const Footer: React.FC = () => {
@@ -33,22 +29,45 @@ const Footer: React.FC = () => {
       icon: <FaFacebookF />,
       href: "https://facebook.com/vifaweb",
       label: "VIFA WEB • ვიფა ვებ",
-      color: "hover:text-blue-400 hover:bg-blue-500/10 hover:border-blue-400/50"
+      color:
+        "hover:text-blue-400 hover:bg-blue-500/10 hover:border-blue-400/50",
     },
   ];
 
   const services = [
-    { name: t('footer.services.webdev'), href: "/services/web-development", icon: <FaCode className="w-4 h-4" /> },
-    { name: t('footer.services.ads'), href: "/services/digital-advertising", icon: <FaChartLine className="w-4 h-4" /> },
-    { name: "AI ჩატბოტები", href: "/services/ai-chatbot", icon: <FaRobot className="w-4 h-4" /> },
-  
+    {
+      name: t("footer.services.webdev"),
+      href: "/services/web-development",
+      icon: <FaCode className="w-4 h-4" />,
+    },
+    {
+      name: t("footer.services.ads"),
+      href: "/services/digital-advertising",
+      icon: <FaChartLine className="w-4 h-4" />,
+    },
+    {
+      name: "AI ჩატბოტები",
+      href: "/services/ai-chatbot",
+      icon: <FaRobot className="w-4 h-4" />,
+    },
   ];
 
   const quickLinks = [
-    { name: t('footer.quickLinks.home'), href: "/", icon: <FaHome className="w-4 h-4" /> },
-    { name: t('footer.quickLinks.about'), href: "/about", icon: <FaUser className="w-4 h-4" /> },
-    { name: "პროექტის დაწყება", href: "/start-project", icon: <FaProjectDiagram className="w-4 h-4" /> },
-    
+    {
+      name: t("footer.quickLinks.home"),
+      href: "/",
+      icon: <FaHome className="w-4 h-4" />,
+    },
+    {
+      name: t("footer.quickLinks.about"),
+      href: "/about",
+      icon: <FaUser className="w-4 h-4" />,
+    },
+    {
+      name: "პროექტის დაწყება",
+      href: "/start-project",
+      icon: <FaProjectDiagram className="w-4 h-4" />,
+    },
   ];
 
   const contactInfo = [
@@ -56,19 +75,19 @@ const Footer: React.FC = () => {
       icon: <FaPhone className="w-4 h-4" />,
       text: "+995 557 62 42 43",
       href: "tel:+995557624243",
-      color: "text-blue-400"
+      color: "text-blue-400",
     },
     {
       icon: <FaEnvelope className="w-4 h-4" />,
       text: "vifa.official2020@gmail.com",
       // href: "vifadigital.com",
-      color: "text-blue-400"
+      color: "text-blue-400",
     },
     {
       icon: <FaMapMarkerAlt className="w-4 h-4" />,
-      text: t('footer.contact.location'),
+      text: t("footer.contact.location"),
       href: "#",
-      color: "text-blue-400"
+      color: "text-blue-400",
     },
   ];
 
@@ -81,7 +100,7 @@ const Footer: React.FC = () => {
   };
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const containerVariants = {
@@ -89,9 +108,9 @@ const Footer: React.FC = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const itemVariants = {
@@ -100,16 +119,18 @@ const Footer: React.FC = () => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6
-      }
-    }
+        duration: 0.6,
+      },
+    },
   };
 
   return (
-    <footer className={`relative overflow-hidden transition-colors duration-500 ${getTransitionClasses()} bg-slate-950/80 backdrop-blur-xl border-t border-slate-700/20 text-slate-300`}>
+    <footer
+      className={`relative overflow-hidden transition-colors duration-500 ${getTransitionClasses()} bg-slate-950/80 backdrop-blur-xl border-t border-slate-700/20 text-slate-300`}
+    >
       {/* Background Gradient */}
       <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-slate-950/90 via-slate-950/60 to-transparent" />
-      
+
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
         <motion.div
@@ -122,7 +143,7 @@ const Footer: React.FC = () => {
           {/* Brand Section */}
           <motion.div variants={itemVariants} className="lg:col-span-1">
             <Link to="/" className="flex items-center space-x-3 mb-6 group">
-              <motion.div 
+              <motion.div
                 whileHover={{ rotate: 12 }}
                 transition={{ duration: 0.3 }}
                 className="w-12 h-12 bg-slate-800/50 border border-slate-600/30 rounded-xl flex items-center justify-center hover:bg-blue-500/10 hover:border-blue-400/40 transition-all duration-300 overflow-hidden"
@@ -137,21 +158,25 @@ const Footer: React.FC = () => {
               </motion.div>
               <div>
                 <div className="text-2xl font-light tracking-wider">
-                  <span className="text-blue-600 font-normal group-hover:text-blue-300 transition-colors duration-300">VIFA DIGITAL</span>
-                  <span className="text-blue-400 font-normal">{" "}</span>
+                  <span className="text-blue-600 font-normal group-hover:text-blue-300 transition-colors duration-300">
+                    VIFA DIGITAL
+                  </span>
+                  <span className="text-blue-400 font-normal"> </span>
                 </div>
                 <div className="text-xs font-light tracking-wide -mt-1 text-slate-500 group-hover:text-slate-400 transition-colors duration-300">
-                  {t('footer.brand.tagline')}
+                  {t("footer.brand.tagline")}
                 </div>
               </div>
             </Link>
-            
-            <p className={`leading-relaxed mb-6 ${
-              true ? 'text-slate-400' : 'text-slate-600'
-            }`}>
-              {t('footer.brand.description')}
+
+            <p
+              className={`leading-relaxed mb-6 ${
+                true ? "text-slate-400" : "text-slate-600"
+              }`}
+            >
+              {t("footer.brand.description")}
             </p>
-            
+
             {/* Social Links */}
             <div className="space-y-4">
               {socialLinks.map((social, index) => (
@@ -162,23 +187,21 @@ const Footer: React.FC = () => {
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`flex items-center gap-3 p-3 rounded-xl border transition-all duration-300 ${social.color} hover:shadow-lg hover:shadow-blue-500/20 ${
+                  className={`flex items-center gap-3 p-3 rounded-xl border transition-all duration-300 ${
+                    social.color
+                  } hover:shadow-lg hover:shadow-blue-500/20 ${
                     true
-                      ? 'border-slate-700/50 text-slate-400 bg-slate-800/30'
-                      : 'border-slate-300/50 text-slate-500 bg-white/80'
+                      ? "border-slate-700/50 text-slate-400 bg-slate-800/30"
+                      : "border-slate-300/50 text-slate-500 bg-white/80"
                   }`}
                   title={social.label}
                 >
-                  <div className="text-xl">
-                    {social.icon}
-                  </div>
+                  <div className="text-xl">{social.icon}</div>
                   <div>
                     <div className="font-medium text-white text-sm">
                       დაგვიკავშირდი Facebook-ზე
                     </div>
-                    <div className="text-xs text-slate-400">
-                      {social.label}
-                    </div>
+                    <div className="text-xs text-slate-400">{social.label}</div>
                   </div>
                 </motion.a>
               ))}
@@ -187,11 +210,13 @@ const Footer: React.FC = () => {
 
           {/* Quick Links */}
           <motion.div variants={itemVariants}>
-            <h3 className={`text-lg font-semibold mb-6 flex items-center ${
-              true ? 'text-white' : 'text-slate-900'
-            }`}>
+            <h3
+              className={`text-lg font-semibold mb-6 flex items-center ${
+                true ? "text-white" : "text-slate-900"
+              }`}
+            >
               <span className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full mr-3"></span>
-              {t('footer.quickLinks.title')}
+              {t("footer.quickLinks.title")}
             </h3>
             <ul className="space-y-3">
               {quickLinks.map((link, index) => (
@@ -200,13 +225,15 @@ const Footer: React.FC = () => {
                     to={link.href}
                     className={`flex items-center hover:translate-x-1 transition-all duration-300 group ${
                       true
-                        ? 'text-slate-400 hover:text-white'
-                        : 'text-slate-600 hover:text-slate-900'
+                        ? "text-slate-400 hover:text-white"
+                        : "text-slate-600 hover:text-slate-900"
                     }`}
                   >
-                    <span className={`mr-3 group-hover:text-blue-400 transition-colors duration-300 ${
-                      true ? 'text-slate-600' : 'text-slate-500'
-                    }`}>
+                    <span
+                      className={`mr-3 group-hover:text-blue-400 transition-colors duration-300 ${
+                        true ? "text-slate-600" : "text-slate-500"
+                      }`}
+                    >
                       {link.icon}
                     </span>
                     {link.name}
@@ -218,11 +245,13 @@ const Footer: React.FC = () => {
 
           {/* Services */}
           <motion.div variants={itemVariants}>
-            <h3 className={`text-lg font-semibold mb-6 flex items-center ${
-              true ? 'text-white' : 'text-slate-900'
-            }`}>
+            <h3
+              className={`text-lg font-semibold mb-6 flex items-center ${
+                true ? "text-white" : "text-slate-900"
+              }`}
+            >
               <span className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mr-3"></span>
-              {t('footer.services.title')}
+              {t("footer.services.title")}
             </h3>
             <ul className="space-y-3">
               {services.map((service, index) => (
@@ -230,14 +259,16 @@ const Footer: React.FC = () => {
                   <Link
                     to={service.href}
                     className={`flex items-center hover:translate-x-1 transition-all duration-300 group ${
-                      true 
-                        ? 'text-slate-400 hover:text-white' 
-                        : 'text-slate-600 hover:text-slate-900'
+                      true
+                        ? "text-slate-400 hover:text-white"
+                        : "text-slate-600 hover:text-slate-900"
                     }`}
                   >
-                    <span className={`mr-3 group-hover:text-blue-400 transition-colors duration-300 ${
-                      true ? 'text-slate-600' : 'text-slate-500'
-                    }`}>
+                    <span
+                      className={`mr-3 group-hover:text-blue-400 transition-colors duration-300 ${
+                        true ? "text-slate-600" : "text-slate-500"
+                      }`}
+                    >
                       {service.icon}
                     </span>
                     {service.name}
@@ -249,13 +280,15 @@ const Footer: React.FC = () => {
 
           {/* Contact & Newsletter */}
           <motion.div variants={itemVariants}>
-            <h3 className={`text-lg font-semibold mb-6 flex items-center ${
-              true ? 'text-white' : 'text-slate-900'
-            }`}>
+            <h3
+              className={`text-lg font-semibold mb-6 flex items-center ${
+                true ? "text-white" : "text-slate-900"
+              }`}
+            >
               <span className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full mr-3"></span>
-              {t('footer.contact.title')}
+              {t("footer.contact.title")}
             </h3>
-            
+
             {/* Contact Info */}
             <div className="space-y-4 mb-6">
               {contactInfo.map((contact, index) => (
@@ -263,12 +296,14 @@ const Footer: React.FC = () => {
                   key={index}
                   href={contact.href}
                   className={`flex items-center transition-all duration-300 group ${
-                    true 
-                      ? 'text-slate-400 hover:text-white' 
-                      : 'text-slate-600 hover:text-slate-900'
+                    true
+                      ? "text-slate-400 hover:text-white"
+                      : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
-                  <span className={`mr-3 ${contact.color} group-hover:scale-110 transition-transform duration-300`}>
+                  <span
+                    className={`mr-3 ${contact.color} group-hover:scale-110 transition-transform duration-300`}
+                  >
                     {contact.icon}
                   </span>
                   <span className="group-hover:translate-x-1 transition-transform duration-300">
@@ -280,20 +315,24 @@ const Footer: React.FC = () => {
 
             {/* Newsletter Signup */}
             <div>
-              <h4 className={`font-medium mb-3 ${
-                true ? 'text-white' : 'text-slate-900'
-              }`}>{t('footer.newsletter.title')}</h4>
+              <h4
+                className={`font-medium mb-3 ${
+                  true ? "text-white" : "text-slate-900"
+                }`}
+              >
+                {t("footer.newsletter.title")}
+              </h4>
               <form onSubmit={handleNewsletterSubmit} className="space-y-3">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder={t('footer.newsletter.placeholder')}
+                  placeholder={t("footer.newsletter.placeholder")}
                   required
                   className={`w-full px-4 py-3 rounded-xl border focus:outline-none focus:border-blue-400 transition-all duration-300 ${
                     true
-                      ? 'bg-slate-800/50 border-slate-700/50 focus:bg-slate-800/70 text-white placeholder-slate-500'
-                      : 'bg-white/80 border-slate-300/50 focus:bg-white text-slate-900 placeholder-slate-400'
+                      ? "bg-slate-800/50 border-slate-700/50 focus:bg-slate-800/70 text-white placeholder-slate-500"
+                      : "bg-white/80 border-slate-300/50 focus:bg-white text-slate-900 placeholder-slate-400"
                   }`}
                 />
                 <motion.button
@@ -302,7 +341,7 @@ const Footer: React.FC = () => {
                   whileTap={{ scale: 0.98 }}
                   className="w-full px-4 py-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40"
                 >
-                  {t('footer.newsletter.subscribe')}
+                  {t("footer.newsletter.subscribe")}
                 </motion.button>
               </form>
             </div>
@@ -316,31 +355,45 @@ const Footer: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}
           className={`border-t pt-8 ${
-            true ? 'border-slate-800/50' : 'border-slate-300/50'
+            true ? "border-slate-800/50" : "border-slate-300/50"
           }`}
         >
           <div className="flex flex-col sm:flex-row justify-between items-center">
-            <div className={`text-sm mb-4 sm:mb-0 ${
-              true ? 'text-slate-500' : 'text-slate-600'
-            }`}>
-              © {currentYear} Vifa Digital. {t('footer.copyright')} 
+            <div
+              className={`text-sm mb-4 sm:mb-0 ${
+                true ? "text-slate-500" : "text-slate-600"
+              }`}
+            >
+              © {currentYear} Vifa Digital. {t("footer.copyright")}
               <span className="mx-2">•</span>
-              <Link to="/privacy" className="hover:text-blue-400 transition-colors duration-300">
-                {t('footer.privacy')}
+              <Link
+                to="/privacy"
+                className="hover:text-blue-400 transition-colors duration-300"
+              >
+                {t("footer.privacy")}
               </Link>
               <span className="mx-2">•</span>
-              <Link to="/terms" className="hover:text-blue-400 transition-colors duration-300">
-                {t('footer.terms')}
+              <Link
+                to="/terms"
+                className="hover:text-blue-400 transition-colors duration-300"
+              >
+                {t("footer.terms")}
               </Link>
             </div>
-            
+
             <div className="flex items-center space-x-4">
-              <p className={`text-sm ${
-                true ? 'text-slate-500' : 'text-slate-600'
-              }`}>
-                {t('footer.createdBy')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 font-semibold">VIFA DIGITAL</span> {t('footer.createdByTeam')}
+              <p
+                className={`text-sm ${
+                  true ? "text-slate-500" : "text-slate-600"
+                }`}
+              >
+                {t("footer.createdBy")}{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 font-semibold">
+                  VIFA DIGITAL
+                </span>{" "}
+                {t("footer.createdByTeam")}
               </p>
-              
+
               {/* Back to Top Button */}
               {showBackToTop && (
                 <motion.button
@@ -349,10 +402,10 @@ const Footer: React.FC = () => {
                   whileTap={{ scale: 0.9 }}
                   className={`p-2 rounded-xl hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-purple-500/20 border hover:border-blue-400/50 hover:text-blue-400 transition-all duration-300 ${
                     true
-                      ? 'bg-slate-800/50 border-slate-700/50 text-slate-400'
-                      : 'bg-white/80 border-slate-300/50 text-slate-500'
+                      ? "bg-slate-800/50 border-slate-700/50 text-slate-400"
+                      : "bg-white/80 border-slate-300/50 text-slate-500"
                   }`}
-                  title={t('footer.backToTop')}
+                  title={t("footer.backToTop")}
                 >
                   <FaArrowUp className="w-4 h-4" />
                 </motion.button>
