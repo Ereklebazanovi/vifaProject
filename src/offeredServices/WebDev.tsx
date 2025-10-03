@@ -94,7 +94,7 @@ const WebDev: React.FC = () => {
       icon: <FaBrain />,
       title: "AI ინტეგრაციები",
       description: "მარტივი კავშირი ხელოვნური ინტელექტის API-ებთან",
-      color: "orange",
+      color: "cyan",
       features: [
         "Chatbot APIs",
         "AI Analysis",
@@ -147,7 +147,7 @@ const WebDev: React.FC = () => {
     { icon: <SiTypescript />, name: "TypeScript", color: "blue" },
     { icon: <SiNodedotjs />, name: "Node.js", color: "green" },
     { icon: <SiTailwindcss />, name: "Tailwind", color: "cyan" },
-    { icon: <SiFirebase />, name: "Firebase", color: "orange" },
+    { icon: <SiFirebase />, name: "Firebase", color: "emerald" },
     { icon: <SiVercel />, name: "Vercel", color: "black" },
   ];
 
@@ -156,7 +156,8 @@ const WebDev: React.FC = () => {
       blue: "border-blue-400 bg-blue-500/10",
       green: "border-green-400 bg-green-500/10",
       purple: "border-purple-400 bg-purple-500/10",
-      orange: "border-orange-400 bg-orange-500/10",
+      emerald: "border-emerald-400 bg-emerald-500/10",
+      violet: "border-violet-400 bg-violet-500/10",
       indigo: "border-indigo-400 bg-indigo-500/10",
       red: "border-red-400 bg-red-500/10",
       pink: "border-pink-400 bg-pink-500/10",
@@ -172,7 +173,8 @@ const WebDev: React.FC = () => {
       blue: "text-blue-400",
       green: "text-green-400",
       purple: "text-purple-400",
-      orange: "text-orange-400",
+      emerald: "text-emerald-400",
+      violet: "text-violet-400",
       indigo: "text-indigo-400",
       red: "text-red-400",
       pink: "text-pink-400",
@@ -202,7 +204,7 @@ const WebDev: React.FC = () => {
         {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-black/50"></div>
         {/* Subtle blue accent overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/60 via-transparent to-blue-900/20"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-transparent to-black"></div>
       </div>
 
       <style>{`
@@ -435,10 +437,10 @@ const WebDev: React.FC = () => {
 
                 {/* Step 4: Launch */}
                 <div className="group cursor-pointer">
-                  <div className="w-32 h-32 border-2 border-orange-400/30 rounded-2xl flex items-center justify-center bg-orange-500/5 group-hover:border-orange-400 transition-all duration-300 group-hover:scale-110">
+                  <div className="w-32 h-32 border-2 border-violet-400/30 rounded-2xl flex items-center justify-center bg-violet-500/5 group-hover:border-violet-400 transition-all duration-300 group-hover:scale-110">
                     <div className="text-center">
-                      <FaRocket className="text-orange-400 text-3xl mb-2 mx-auto" />
-                      <div className="text-orange-400 text-xs font-medium">
+                      <FaRocket className="text-violet-400 text-3xl mb-2 mx-auto" />
+                      <div className="text-violet-400 text-xs font-medium">
                         გაშვება
                       </div>
                     </div>
@@ -536,17 +538,17 @@ const WebDev: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="bg-gradient-to-br from-orange-900/30 via-slate-800/40 to-slate-900/60 rounded-2xl p-8 border border-orange-400/20 hover:border-orange-400/40 transition-all duration-300 hover:scale-105 group"
+                className="bg-gradient-to-br from-cyan-950/30 via-slate-800/40 to-slate-900/60 rounded-2xl p-8 border border-cyan-400/20 hover:border-cyan-400/40 transition-all duration-300 hover:scale-105 group"
               >
                 <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 bg-orange-500/20 rounded-xl flex items-center justify-center mr-4 group-hover:bg-orange-500/30 transition-colors">
-                    <FaBrain className="text-orange-400 text-2xl" />
+                  <div className="w-16 h-16 bg-cyan-500/20 rounded-xl flex items-center justify-center mr-4 group-hover:bg-cyan-500/30 transition-colors">
+                    <FaBrain className="text-cyan-400 text-2xl" />
                   </div>
                   <div>
                     <h4 className="text-2xl font-bold text-white mb-2">
                       AI ჩატბოტი
                     </h4>
-                    <div className="text-orange-400 font-medium">
+                    <div className="text-cyan-400 font-medium">
                       ავტომატური მომხმარებელთა მხარდაჭერა
                     </div>
                   </div>
@@ -559,19 +561,19 @@ const WebDev: React.FC = () => {
 
                 <ul className="space-y-3 mb-8">
                   <li className="flex items-center text-slate-300">
-                    <FaRocket className="text-orange-400 mr-3 flex-shrink-0" />
+                    <FaRocket className="text-cyan-400 mr-3 flex-shrink-0" />
                     24/7 ხელმისაწვდომობა
                   </li>
                   <li className="flex items-center text-slate-300">
-                    <FaBullseye className="text-orange-400 mr-3 flex-shrink-0" />
+                    <FaBullseye className="text-cyan-400 mr-3 flex-shrink-0" />
                     პერსონალიზებული პასუხები
                   </li>
                   <li className="flex items-center text-slate-300">
-                    <FaDatabase className="text-orange-400 mr-3 flex-shrink-0" />
+                    <FaDatabase className="text-cyan-400 mr-3 flex-shrink-0" />
                     ახალი კლიენტების მოზიდვა და გაყიდვების ზრდა
                   </li>
                   <li className="flex items-center text-slate-300">
-                    <FaFacebook className="text-orange-400 mr-3 flex-shrink-0" />
+                    <FaFacebook className="text-cyan-400 mr-3 flex-shrink-0" />
                     Facebook/Instagram/WhatsApp ინტეგრაცია
                   </li>
                 </ul>
@@ -585,7 +587,7 @@ const WebDev: React.FC = () => {
                   </div>
                   <button
                     onClick={() => handleNavigation("/services/ai-chatbot")}
-                    className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg transition-colors font-medium"
+                    className="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-lg transition-colors font-medium cursor-pointer"
                   >
                     მეტი ინფორმაცია
                   </button>
@@ -618,11 +620,11 @@ const WebDev: React.FC = () => {
                     <FaBullseye />
                   </div>
                   <h4 className="text-xl font-medium text-white mb-3">
-                    თქვენი მოთხოვნების მიხედვით, ბროსკი
+                    თქვენი პროექტის სპეციფიკა
                   </h4>
                   <p className="text-slate-300 text-sm leading-loose">
-                    მარტივი ლენდინგ გვერდიდან რთულ e-commerce პლატფორმამდე -
-                    ყველა პროექტს განსხვავებული მიდგომა სჭირდება.
+                    თითოეული პროექტი მოითხოვს უნიკალურ ანალიზს და სპეციფიკურ
+                    სტრატეგიას, რათა მივაღწიოთ მაქსიმალურ შედეგს.
                   </p>
                 </div>
                 <div>
@@ -630,11 +632,12 @@ const WebDev: React.FC = () => {
                     <FaBolt />
                   </div>
                   <h4 className="text-xl font-medium text-white mb-3">
-                    სწრაფი შეფასება
+                    პროექტის სწრაფი შეფასება
                   </h4>
                   <p className="text-slate-300 text-sm leading-loose">
-                    უფასო კონსულტაციის შემდეგ მაქსიმუმ 12 საათში მიიღებთ ზუსტ
-                    ფასს და პროექტის გეგმას.
+                    უფასო კონსულტაციის შემდეგ, ჩვენ გარანტიას გაძლევთ, რომ
+                    მაქსიმუმ 12 საათში მიიღებთ ზუსტ ფინანსურ შეთავაზებას და
+                    დეტალურ გეგმას პროექტის განსახორციელებლად.
                   </p>
                 </div>
                 <div>
@@ -642,12 +645,10 @@ const WebDev: React.FC = () => {
                     <FaCog />
                   </div>
                   <h4 className="text-xl font-medium text-white mb-3">
-                    გამჭირვალე პროცესი
+                    პროცესის გამჭვირვალობა{" "}
                   </h4>
                   <p className="text-slate-300 text-sm leading-loose">
-                    ჩვენი მიზანია, ყველა ეტაპი იყოს მაქსიმალურად ღია და
-                    გასაგები. ნდობაზე დაფუძნებული თანამშრომლობა ყოველთვის
-                    მომგებიანია.
+                   ჩვენი თანამშრომლობა ეფუძნება მაქსიმალურ ღიაობას მუშაობის ყველა ეტაპზე. მკაფიო პროცესი უზრუნველყოფს ორმხრივ მომგებიან და ეფექტურ შედეგებს.
                   </p>
                 </div>
               </div>
@@ -670,7 +671,7 @@ const WebDev: React.FC = () => {
                   პირადი ბრენდისთვის, რომელიც სწრაფად გაზრდის თქვენს ონლაინ
                   ხილვადობას და მოიზიდავს ახალ კლიენტებს.
                 </p>
-                <div className="text-2xl font-bold text-blue-400 mt-15">
+                <div className="text-2xl font-bold text-blue-400 mt-16">
                   300₾<span className="text-sm text-slate-400">-დან</span>
                 </div>
               </div>
@@ -685,13 +686,13 @@ const WebDev: React.FC = () => {
                 </h4>
                 <p className="text-slate-300 text-sm mb-4 leading-loose">
                   სრულფასოვანი და პროფესიონალური ვებგვერდი თქვენი კომპანიისთვის.
-                  მრავალგვერდიანი სტრუქტურა, მარტივი კონტენტის მართვის სისტემა (CMS),
-                  SEO ოპტიმიზაცია საძიებო სისტემებში უმაღლესი პოზიციებისთვის და
-                  მოქნილი ადმინისტრაციული პანელი. მარტივად მართეთ კონტენტი,
-                  გაზარდეთ ონლაინ ხილვადობა და მოიზიდეთ მეტი კლიენტი ეფექტურად
-                  და ეკონომიურად.
+                  მრავალგვერდიანი სტრუქტურა, მარტივი კონტენტის მართვის სისტემა
+                  (CMS), SEO ოპტიმიზაცია საძიებო სისტემებში უმაღლესი
+                  პოზიციებისთვის და მოქნილი ადმინისტრაციული პანელი. მარტივად
+                  მართეთ კონტენტი, გაზარდეთ ონლაინ ხილვადობა და მოიზიდეთ მეტი
+                  კლიენტი ეფექტურად და ეკონომიურად.
                 </p>
-                <div className="text-2xl font-bold text-green-400 mt-10">
+                <div className="text-2xl font-bold text-green-400 mt-9">
                   600₾<span className="text-sm text-slate-400">-დან</span>
                 </div>
               </div>
@@ -712,7 +713,7 @@ const WebDev: React.FC = () => {
                   ხარჯს, ზრდის კლიენტების კმაყოფილებას და ხელს უწყობს გაყიდვების
                   ზრდას.
                 </p>
-                <div className="text-2xl font-bold text-purple-400 mt-14">
+                <div className="text-2xl font-bold text-purple-400 mt-16">
                   300₾<span className="text-sm text-slate-400">-დან</span>
                 </div>
               </div>
