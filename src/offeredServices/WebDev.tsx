@@ -15,14 +15,14 @@ import {
   FaPaintBrush,
   FaCog,
   FaCheckCircle,
-  FaArrowRight,
   FaChartLine,
   FaBolt,
   FaServer,
   FaBrain,
   FaBullseye,
   FaFacebook,
- } from "react-icons/fa";
+} from "react-icons/fa";
+
 import {
   SiFirebase,
   SiTypescript,
@@ -34,6 +34,7 @@ import {
 import SEO from "../components/SEO";
 import RotatingText from "../components/RotatingText";
 import Silk from "../components/Silk";
+import TechStackShowcase from "../components/TechStackShowcase";
 
 const WebDev: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
@@ -277,7 +278,7 @@ const WebDev: React.FC = () => {
           className={`container mx-auto px-4 sm:px-6 lg:px-8 language-transition language-fade-in ${getTransitionClasses()}`}
         >
           {/* Hero Section */}
-          <div className="max-w-6xl mx-auto mb-32">
+          <div className="max-w-6xl mx-auto mb-15">
             <div className="text-center mb-16">
               <div className="flex items-center justify-center">
                 {/* Unified container for both texts */}
@@ -299,6 +300,8 @@ const WebDev: React.FC = () => {
                   >
                     creative{" "}
                   </h2>
+
+               
 
                   {/* Right side - Rotating text box */}
                   <div className="ml-2 sm:ml-3">
@@ -352,109 +355,10 @@ const WebDev: React.FC = () => {
                 </motion.div>
               </div>
 
-              {/* Stats Row */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16 mt-14"
-              >
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-400 mb-2">
-                    Individual
-                  </div>
-                  <div className="text-sm text-slate-400">პირადი მიდგომა</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-green-400 mb-2">
-                    Quality
-                  </div>
-                  <div className="text-sm text-slate-400">
-                    ხარისხზე ფოკუსირება
-                  </div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-400 mb-2">
-                    Fresh
-                  </div>
-                  <div className="text-sm text-slate-400">
-                    ახალი ტექნოლოგიები
-                  </div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-orange-400 mb-2">
-                    Flexible
-                  </div>
-                  <div className="text-sm text-slate-400">მოქნილი ვადები</div>
-                </div>
-              </motion.div>
+             
             </div>
 
-            {/* Development Process Visualization */}
-            <div className="relative">
-              <div className="flex justify-center items-center gap-8 flex-wrap">
-                {/* Step 1: Planning */}
-                <div className="group cursor-pointer">
-                  <div className="w-32 h-32 border-2 border-blue-400/30 rounded-2xl flex items-center justify-center bg-blue-500/5 group-hover:border-blue-400 transition-all duration-300 group-hover:scale-110">
-                    <div className="text-center">
-                      <FaChartLine className="text-blue-400 text-3xl mb-2 mx-auto" />
-                      <div className="text-blue-400 text-xs font-medium">
-                        დაგეგმვა
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <FaArrowRight className="text-slate-500 text-xl hidden md:block" />
-
-                {/* Step 2: Design */}
-                <div className="group cursor-pointer">
-                  <div className="w-32 h-32 border-2 border-purple-400/30 rounded-2xl flex items-center justify-center bg-purple-500/5 group-hover:border-purple-400 transition-all duration-300 group-hover:scale-110">
-                    <div className="text-center">
-                      <FaPaintBrush className="text-purple-400 text-3xl mb-2 mx-auto" />
-                      <div className="text-purple-400 text-xs font-medium">
-                        დიზაინი
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <FaArrowRight className="text-slate-500 text-xl hidden md:block" />
-
-                {/* Step 3: Development */}
-                <div className="group cursor-pointer">
-                  <div className="w-32 h-32 border-2 border-green-400/30 rounded-2xl flex items-center justify-center bg-green-500/5 group-hover:border-green-400 transition-all duration-300 group-hover:scale-110">
-                    <div className="text-center">
-                      <FaCode className="text-green-400 text-3xl mb-2 mx-auto" />
-                      <div className="text-green-400 text-xs font-medium">
-                        დეველოპმენტი
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <FaArrowRight className="text-slate-500 text-xl hidden md:block" />
-
-                {/* Step 4: Launch */}
-                <div className="group cursor-pointer">
-                  <div className="w-32 h-32 border-2 border-violet-400/30 rounded-2xl flex items-center justify-center bg-violet-500/5 group-hover:border-violet-400 transition-all duration-300 group-hover:scale-110">
-                    <div className="text-center">
-                      <FaRocket className="text-violet-400 text-3xl mb-2 mx-auto" />
-                      <div className="text-violet-400 text-xs font-medium">
-                        გაშვება
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="text-center mt-8">
-                <p className="text-slate-400 text-sm max-w-2xl mx-auto">
-                  ჩვენი მიდგომა: სტრატეგიული დაგეგმვა → UI/UX დიზაინი →
-                  ტექნიკური განხორციელება → ტესტირება და გაშვება
-                </p>
-              </div>
-            </div>
+          
           </div>
 
           {/* Main Services Highlight - რაღაც ასე უნდა იყოს პიორიტეტი */}
@@ -559,11 +463,11 @@ const WebDev: React.FC = () => {
                 <ul className="space-y-3 mb-8">
                   <li className="flex items-center text-slate-300">
                     <FaRocket className="text-cyan-400 mr-3 flex-shrink-0" />
-                    24/7 ხელმისაწვდომობა
+                    დაფუძნებული თქვენს ბიზნეს ლოგიკაზე
                   </li>
                   <li className="flex items-center text-slate-300">
                     <FaBullseye className="text-cyan-400 mr-3 flex-shrink-0" />
-                    პერსონალიზებული პასუხები
+                    ინტელექტუალური პასუხები
                   </li>
                   <li className="flex items-center text-slate-300">
                     <FaDatabase className="text-cyan-400 mr-3 flex-shrink-0" />
@@ -602,11 +506,6 @@ const WebDev: React.FC = () => {
               >
                 ინდივიდუალური ფასები
               </h3>
-              <p className="text-lg text-slate-300 max-w-3xl mx-auto">
-                ყველა პროექტი უნიკალურია, ამიტომ კლიენტებს ვთავაზობთ
-                ინდივიდუალურ ფასებს. <br /> ჩვენი მიზანია მაქსიმალური
-                ღირებულების მიწოდება კლიენტის ბიუჯეტის ფარგლებში.
-              </p>
             </div>
             {/* ერე */}
             {/* Why Individual Pricing */}
@@ -688,8 +587,8 @@ const WebDev: React.FC = () => {
                   მრავალგვერდიანი სტრუქტურა, მარტივი კონტენტის მართვის სისტემა
                   (CMS), SEO ოპტიმიზაცია საძიებო სისტემებში უმაღლესი
                   პოზიციებისთვის და მოქნილი ადმინისტრაციული პანელი. მარტივად
-                  მართეთ კონტენტი, გაზარდეთ ონლაინ ხილვადობა და მოიზიდეთ მეტი
-                  კლიენტი ეფექტურად და ეკონომიურად.
+                  მართვადი კონტენტი, ონლაინ ხილვადობა და მეტი პოტენციური
+                  მომხარებელი.
                 </p>
                 <div className="text-2xl font-bold text-green-400 mt-9">
                   600₾<span className="text-sm text-slate-400">-დან</span>
@@ -709,8 +608,8 @@ const WebDev: React.FC = () => {
                   უზრუნველყოფს სწრაფ და პროფესიონალურ პასუხებს თქვენი
                   მომხმარებლებისთვის. დაფუძნებულია თქვენი ბიზნესის ლოგიკაზე და
                   ხშირად დასმულ შეკითხვებზე. ავტომატურად ამცირებს რესურსების
-                  ხარჯს, ზრდის კლიენტების კმაყოფილებას და ხელს უწყობს გაყიდვების
-                  ზრდას.
+                  ხარჯს, ზრდის კლიენტების კმაყოფილებას და შესაბამისად იზრდება
+                  გაყიდვები.
                 </p>
                 <div className="text-2xl font-bold text-purple-400 mt-16">
                   300₾<span className="text-sm text-slate-400">-დან</span>
@@ -817,44 +716,9 @@ const WebDev: React.FC = () => {
             </div>
           </div>
 
-          {/* Technology Stack */}
+          {/* Interactive Technology Stack Showcase */}
           <div className="!max-w-7xl mx-auto mb-32">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-light text-white mb-4">
-                ტექნოლოგიები
-              </h2>
-              <p className="text-slate-400">
-                მოდერნული და სანდო ტექნოლოგიები, რომლებსაც ნამდვილად ვიყენებთ
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-              {technologies.map((tech, index) => (
-                <motion.div
-                  key={tech.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className={`group cursor-pointer p-6 rounded-xl border-2 ${getColorClass(
-                    tech.color
-                  )}
-                  border-opacity-30 hover:border-opacity-100 transition-all duration-300 hover:scale-105`}
-                >
-                  <div className="text-center">
-                    <div
-                      className={`text-4xl mb-3 ${getTextColorClass(
-                        tech.color
-                      )} group-hover:scale-110 transition-transform duration-300`}
-                    >
-                      {tech.icon}
-                    </div>
-                    <div className="text-white font-medium text-base">
-                      {tech.name}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            <TechStackShowcase />
           </div>
 
           {/* CTA Section */}

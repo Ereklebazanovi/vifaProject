@@ -212,9 +212,7 @@ export const ChatbotDemoTerminal: React.FC = () => {
               <div className="text-green-300">
                 • დღეში +15-20 ჯავშანი ღამის საათებში
               </div>
-              <div className="text-green-300">
-                • 0% გამოტოვებული ზარი = +40% შემოსავალი
-              </div>
+             
             </div>
           </div>
         </div>

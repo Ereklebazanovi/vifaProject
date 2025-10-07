@@ -644,9 +644,7 @@ const Marketing: React.FC = () => {
             </div>
 
             <div className="text-center mt-12">
-              <h3 className="text-3xl font-light text-white mb-4">
-                კონსულტაცია და თანამშრომლობის დაგეგმვა უფასოა
-              </h3>
+            
             </div>
           </div>
 
