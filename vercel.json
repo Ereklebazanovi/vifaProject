@@ -1,7 +1,14 @@
 {
+  "redirects": [
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
-      "source": "/((?!api).*)",
+      "source": "/((?!api|home).*)",
       "destination": "/index.html"
     }
   ],
@@ -22,13 +29,6 @@
           "value": "1; mode=block"
         }
       ]
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/home",
-      "destination": "/",
-      "permanent": true
     }
   ]
 }
