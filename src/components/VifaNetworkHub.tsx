@@ -107,7 +107,7 @@ const VifaNetworkHub: React.FC = () => {
 
         {/* Service grid */}
         <div className="flex-1 grid grid-cols-4 gap-3">
-          {services.map((service, index) => (
+          {services.map((service) => (
             <div
               key={service.id}
               className={`relative group cursor-pointer transition-all duration-300 ${
@@ -173,12 +173,6 @@ const VifaNetworkHub: React.FC = () => {
         </div>
       </div>
 
-      <style jsx>{`
-        @keyframes scan {
-          0% { top: 0; }
-          100% { top: 100%; }
-        }
-      `}</style>
     </div>
   );
 };

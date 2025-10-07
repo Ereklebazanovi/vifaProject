@@ -143,14 +143,6 @@ const WebDev: React.FC = () => {
   ];
 
   // Technology stack - მხოლოდ ის ტექნოლოგიები რომლებსაც ნამდვილად ვიყენებთ
-  const technologies = [
-    { icon: <SiReact />, name: "React", color: "blue" },
-    { icon: <SiTypescript />, name: "TypeScript", color: "blue" },
-    { icon: <SiNodedotjs />, name: "Node.js", color: "green" },
-    { icon: <SiTailwindcss />, name: "Tailwind", color: "cyan" },
-    { icon: <SiFirebase />, name: "Firebase", color: "emerald" },
-    { icon: <SiVercel />, name: "Vercel", color: "black" },
-  ];
 
   const getColorClass = (color: string) => {
     const colors = {
