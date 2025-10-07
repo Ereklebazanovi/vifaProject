@@ -23,14 +23,6 @@ import {
   FaFacebook,
 } from "react-icons/fa";
 
-import {
-  SiFirebase,
-  SiTypescript,
-  SiVercel,
-  SiReact,
-  SiNodedotjs,
-  SiTailwindcss,
-} from "react-icons/si";
 import SEO from "../components/SEO";
 import RotatingText from "../components/RotatingText";
 import Silk from "../components/Silk";
@@ -293,8 +285,6 @@ const WebDev: React.FC = () => {
                     creative{" "}
                   </h2>
 
-               
-
                   {/* Right side - Rotating text box */}
                   <div className="ml-2 sm:ml-3">
                     <RotatingText
@@ -346,11 +336,7 @@ const WebDev: React.FC = () => {
                   </div>
                 </motion.div>
               </div>
-
-             
             </div>
-
-          
           </div>
 
           {/* Main Services Highlight - რაღაც ასე უნდა იყოს პიორიტეტი */}
