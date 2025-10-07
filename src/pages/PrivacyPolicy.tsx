@@ -37,7 +37,7 @@ const PrivacyPolicy: React.FC = () => {
   ];
 
   return (
-    <div className={`mt-20 min-h-screen transition-colors duration-500 ${getTransitionClasses()} bg-slate-950/80`}>
+    <div className={`mt-20 min-h-screen transition-colors duration-500 ${getTransitionClasses()} bg-black`}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

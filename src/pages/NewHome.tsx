@@ -17,6 +17,9 @@ import {
   FaLaptopCode,
   FaChartPie,
   FaArrowRight,
+  FaLightbulb,
+  FaSearch,
+  FaRocket,
 } from "react-icons/fa";
 
 import {
@@ -27,6 +30,7 @@ import {
   SiGoogle,
   SiInstagram,
 } from "react-icons/si";
+import { motion } from "framer-motion";
 const NewHome: React.FC = () => {
   const { t } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
@@ -365,44 +369,109 @@ const NewHome: React.FC = () => {
             </div>
           </div>
 
-          {/* Services Section */}
-          <div className="grid md:grid-cols-3 gap-8 mb-32">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-500/20 border border-blue-400/30 rounded mx-auto mb-4 flex items-center justify-center">
-                <div className="w-6 h-6 border-2 border-blue-400 rounded"></div>
-              </div>
-              <h3 className="text-xl font-medium text-white mb-3">
-                {t("newHome.services.research.title")}
-              </h3>
-              <p className="text-slate-300">
-                {t("newHome.services.research.description")}
-              </p>
-            </div>
+        <div className="grid md:grid-cols-3 gap-8 mb-32">
+  {/* Research Card */}
+  <motion.div 
+    className="text-center group cursor-pointer relative"
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    viewport={{ once: true }}
+    whileHover={{ y: -10, scale: 1.02 }}
+  >
+    <div className="w-20 h-20 bg-blue-500/10 border border-blue-400/20 rounded-xl mx-auto mb-6 flex items-center justify-center relative overflow-hidden group-hover:border-blue-400/40 transition-all duration-300">
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent rounded-xl -z-10 group-hover:opacity-100 transition-opacity" />
+      <motion.div
+        className="text-2xl text-blue-400 relative z-10"
+        whileHover={{ scale: 1.2, rotate: 5 }}
+        transition={{ type: "spring", stiffness: 300 }}
+      >
+        <FaSearch />
+      </motion.div>
+    </div>
+    <motion.h3 className="text-xl font-semibold text-white mb-3 transition-all duration-300 group-hover:font-bold">
+      {t("newHome.services.research.title")}
+    </motion.h3>
+    <motion.p className="text-slate-400 leading-relaxed max-w-xs mx-auto transition-all duration-300 group-hover:text-slate-300">
+      {t("newHome.services.research.description")}
+    </motion.p>
+    <motion.div
+      className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+      initial={{ x: 10 }}
+      whileHover={{ x: 5 }}
+    >
+      <span className="text-slate-500 text-sm font-mono">→ Learn more</span>
+    </motion.div>
+  </motion.div>
 
-            <div className="text-center">
-              <div className="w-16 h-16 bg-purple-500/20 border border-purple-400/30 rounded mx-auto mb-4 flex items-center justify-center">
-                <div className="w-6 h-6 border-2 border-purple-400 rounded-full"></div>
-              </div>
-              <h3 className="text-xl font-medium text-white mb-3">
-                {t("newHome.services.strategy.title")}
-              </h3>
-              <p className="text-slate-300">
-                {t("newHome.services.strategy.description")}
-              </p>
-            </div>
+  {/* Strategy Card */}
+  <motion.div 
+    className="text-center group cursor-pointer relative"
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5, delay: 0.2 }}
+    viewport={{ once: true }}
+    whileHover={{ y: -10, scale: 1.02 }}
+  >
+    <div className="w-20 h-20 bg-purple-500/10 border border-purple-400/20 rounded-xl mx-auto mb-6 flex items-center justify-center relative overflow-hidden group-hover:border-purple-400/40 transition-all duration-300">
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent rounded-xl -z-10 group-hover:opacity-100 transition-opacity" />
+      <motion.div
+        className="text-2xl text-purple-400 relative z-10"
+        whileHover={{ scale: 1.2, rotate: 5 }}
+        transition={{ type: "spring", stiffness: 300 }}
+      >
+        <FaLightbulb />
+      </motion.div>
+    </div>
+    <motion.h3 className="text-xl font-semibold text-white mb-3 transition-all duration-300 group-hover:font-bold">
+      {t("newHome.services.strategy.title")}
+    </motion.h3>
+    <motion.p className="text-slate-400 leading-relaxed max-w-xs mx-auto transition-all duration-300 group-hover:text-slate-300">
+      {t("newHome.services.strategy.description")}
+    </motion.p>
+    <motion.div
+      className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+      initial={{ x: 10 }}
+      whileHover={{ x: 5 }}
+    >
+      <span className="text-slate-500 text-sm font-mono">→ Learn more</span>
+    </motion.div>
+  </motion.div>
 
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-500/20 border border-green-400/30 rounded mx-auto mb-4 flex items-center justify-center">
-                <div className="w-6 h-6 border-2 border-green-400"></div>
-              </div>
-              <h3 className="text-xl font-medium text-white mb-3">
-                {t("newHome.services.execution.title")}
-              </h3>
-              <p className="text-slate-300">
-                {t("newHome.services.execution.description")}
-              </p>
-            </div>
-          </div>
+  {/* Execution Card */}
+  <motion.div 
+    className="text-center group cursor-pointer relative"
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5, delay: 0.4 }}
+    viewport={{ once: true }}
+    whileHover={{ y: -10, scale: 1.02 }}
+  >
+    <div className="w-20 h-20 bg-green-500/10 border border-green-400/20 rounded-xl mx-auto mb-6 flex items-center justify-center relative overflow-hidden group-hover:border-green-400/40 transition-all duration-300">
+      <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent rounded-xl -z-10 group-hover:opacity-100 transition-opacity" />
+      <motion.div
+        className="text-2xl text-green-400 relative z-10"
+        whileHover={{ scale: 1.2, rotate: 5 }}
+        transition={{ type: "spring", stiffness: 300 }}
+      >
+        <FaRocket />
+      </motion.div>
+    </div>
+    <motion.h3 className="text-xl font-semibold text-white mb-3 transition-all duration-300 group-hover:font-bold">
+      {t("newHome.services.execution.title")}
+    </motion.h3>
+    <motion.p className="text-slate-400 leading-relaxed max-w-xs mx-auto transition-all duration-300 group-hover:text-slate-300">
+      {t("newHome.services.execution.description")}
+    </motion.p>
+    <motion.div
+      className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+      initial={{ x: 10 }}
+      whileHover={{ x: 5 }}
+    >
+      <span className="text-slate-500 text-sm font-mono">→ Learn more</span>
+    </motion.div>
+  </motion.div>
+</div>
 
           {/* Interactive Information Section */}
           <div

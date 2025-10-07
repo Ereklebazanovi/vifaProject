@@ -43,7 +43,7 @@ const TermsOfService: React.FC = () => {
 
   return (
     <div
-      className={`mt-20 min-h-screen transition-colors duration-500 ${getTransitionClasses()} bg-slate-950/80`}
+      className={`mt-20 min-h-screen transition-colors duration-500 ${getTransitionClasses()} bg-black`}
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <motion.div
