@@ -17,7 +17,7 @@ const NotFound: React.FC = () => {
         type="website"
       />
 
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center px-4">
+      <div className="min-h-screen mt-35 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center px-4">
         {/* Background */}
         <div className="fixed inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
@@ -122,7 +122,7 @@ const NotFound: React.FC = () => {
               <p className="text-sm">
                 თუ მაინც გჭირდებათ დახმარება, დაგვიკავშირდით:{' '}
                 <a
-                  href="mailto:info@vifadigital.ge"
+                  href="vifa.official2020@gmail.com"
                   className="text-blue-400 hover:text-blue-300 hover:underline transition-colors"
                 >
                   info@vifadigital.ge
