@@ -6,7 +6,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import { useNavigation } from "../contexts/NavigationContext";
-import vifaLogo from "../../public/vifa.jpg"
 import {
   FaReact,
   FaMobile,
