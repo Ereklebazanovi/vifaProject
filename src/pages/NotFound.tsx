@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { FaHome, FaArrowLeft, FaSearch, FaPhone } from 'react-icons/fa';
-import SEO from '../components/SEO';
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { FaHome, FaArrowLeft, FaSearch, FaPhone } from "react-icons/fa";
+import SEO from "../components/SEO";
 const NotFound: React.FC = () => {
   // Scroll to top when component mounts
   useEffect(() => {
@@ -43,7 +43,7 @@ const NotFound: React.FC = () => {
               გვერდი ვერ მოიძებნა
             </h2>
             <p className="text-xl text-slate-300 mb-8 leading-relaxed">
-              ბოდიშს ვიხდით, მოძებნილი გვერდი არ არსებობს ან გადატანილია სხვა ლოკაციაზე.
+              მოძებნილი გვერდი არ არსებობს ან გადატანილია სხვა ლოკაციაზე.
               გთხოვთ, ისარგებლოთ ქვემოთ მოცემული ღილაკებით ნავიგაციისთვის.
             </p>
 
@@ -120,7 +120,7 @@ const NotFound: React.FC = () => {
               className="mt-8 text-slate-400"
             >
               <p className="text-sm">
-                თუ მაინც გჭირდებათ დახმარება, დაგვიკავშირდით:{' '}
+                თუ მაინც გჭირდებათ დახმარება, დაგვიკავშირდით:{" "}
                 <a
                   href="vifa.official2020@gmail.com"
                   className="text-blue-400 hover:text-blue-300 hover:underline transition-colors"

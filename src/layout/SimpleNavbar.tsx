@@ -107,21 +107,6 @@ const SimpleNavbar: React.FC = () => {
           <div
             className={`mt-4 hidden lg:flex justify-center items-center space-x-6 ${getTransitionClasses()}`}
           >
-            {navLinks.map((link, index) => (
-              <button
-                key={index}
-                onClick={() => handleNavigation(link.path)}
-                className={`px-4 py-2 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 transform hover:scale-105 ${
-                  location.pathname === link.path
-                    ? "text-blue-300 bg-blue-500/10 border-b-2 border-blue-400 shadow-lg"
-                    : "text-slate-300 hover:text-white hover:bg-white/5 hover:shadow-md"
-                }`}
-              >
-                {link.label}
-              </button>
-            ))}
-
-            {/* Special AI Chatbot Button - Futuristic Design */}
             <button
               onClick={() => handleNavigation(aiChatbotLink.path)}
               className={`group relative px-4 py-2 text-sm font-medium tracking-wide rounded-lg transition-all duration-500 transform hover:scale-110 border ${
@@ -146,6 +131,22 @@ const SimpleNavbar: React.FC = () => {
                 </span>
               </div>
             </button>
+            {navLinks.map((link, index) => (
+              <button
+                key={index}
+                onClick={() => handleNavigation(link.path)}
+                className={`px-4 py-2 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 transform hover:scale-105 ${
+                  location.pathname === link.path
+                    ? "text-blue-300 bg-blue-500/10 border-b-2 border-blue-400 shadow-lg"
+                    : "text-slate-300 hover:text-white hover:bg-white/5 hover:shadow-md"
+                }`}
+              >
+                {link.label}
+              </button>
+            ))}
+
+            {/* Special AI Chatbot Button - Futuristic Design */}
+            
           </div>
 
           {/* Tablet Navigation - Optimized for medium screens */}

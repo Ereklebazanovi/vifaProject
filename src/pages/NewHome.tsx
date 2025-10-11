@@ -8,6 +8,7 @@ import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import { useNavigation } from "../contexts/NavigationContext";
 import SEO from "../components/SEO";
 import Canvas2DHighway from "../components/Canvas2DHighway";
+
 import {
   FaCogs,
   FaBriefcase,
@@ -37,20 +38,6 @@ const NewHome: React.FC = () => {
   const { startNavigation } = useNavigation();
   const [showDigitalConsequences, setShowDigitalConsequences] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
-
-  // Partner logos data - with descriptive alt tags for SEO
-  // const partnerLogos = [
-  //   { src: "/saitislogoebi/Untitled-1.png", alt: "ვისფა დიჯითალის პარტნიორი კომპანია - ბიზნეს წარმატების მისღწევა" },
-  //   { src: "/saitislogoebi/Untitled-2.png", alt: "VIFA Digital-ის საქმიანი პარტნიორი - ციფრული მარკეტინგის სფეროში" },
-  //   { src: "/saitislogoebi/Untitled-3.png", alt: "სანდო ბიზნეს პარტნიორი - ვებ განვითარებისა და მარკეტინგის მიმართულებით" },
-  //   { src: "/saitislogoebi/Untitled-4.png", alt: "წარმატებული თანამშრომლობის პარტნიორი - ონლაინ ბიზნეს ზრდისთვის" },
-  //   { src: "/saitislogoebi/Untitled-5.png", alt: "VIFA Digital თანამშრომელი - ციფრული ტრანსფორმაციის მხარდაჭერა" },
-  //   { src: "/saitislogoebi/Untitled-6.png", alt: "ნდობის ღირსი პარტნიორი - ვებსაიტებისა და მარკეტინგის სერვისები" },
-  //   { src: "/saitislogoebi/Untitled-7.png", alt: "სტრატეგიული პარტნიორი - ციფრული ზრდისა და წარმატებისთვის" },
-  //   { src: "/saitislogoebi/Untitled-8.png", alt: "ბიზნეს კლიენტი - VIFA Digital-ის პროფესიონალური სერვისების ბენეფიციარი" },
-  //   { src: "/saitislogoebi/Untitled-9.png", alt: "წარმატებული პროექტის კლიენტი - ონლაინ თანდასწრების გაძლიერება" },
-  //   { src: "/saitislogoebi/Untitled-10.png", alt: "დაკმაყოფილებული კლიენტი - ციფრული მარკეტინგისა და ვებ განვითარების მიღწევები" },
-  // ];
 
   return (
     <>
@@ -180,8 +167,8 @@ const NewHome: React.FC = () => {
                     Web Development
                   </h3>
                   <p className="text-slate-400 mb-4 text-sm leading-relaxed">
-                    ბიზნესის ციფრული ტრანსფორმაციისთვის განკუთვნილი თანამედროვე
-                    ვებ სისტემები
+                    ბიზნესის სრული ციფრული ტრანსფორმაციისთვის განკუთვნილი
+                    თანამედროვე ვებ სისტემები
                   </p>
 
                   {/* Floating Tech Icons */}
@@ -201,15 +188,15 @@ const NewHome: React.FC = () => {
                   <div className="space-y-3 flex-1 mb-6">
                     <div className="flex items-center text-sm text-slate-300 group-hover:text-cyan-200 transition-colors">
                       <div className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mr-3 animate-pulse"></div>
-                      კორპორატიული ვებ პლატფორმები
+                      სავიზიტო და კორპორატიული ვებ-გვერდების შექმნა
                     </div>
                     <div className="flex items-center text-sm text-slate-300 group-hover:text-cyan-200 transition-colors">
                       <div className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mr-3 animate-pulse"></div>
-                      E-commerce სისტემების განვითარება
+                      მძლავრი ონლაინ გაყიდვების სისტემები{" "}
                     </div>
                     <div className="flex items-center text-sm text-slate-300 group-hover:text-cyan-200 transition-colors">
                       <div className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mr-3 animate-pulse"></div>
-                      CRM & ERP ინტეგრაციები
+                      ბიზნეს პროცესების სრული ავტომატიზაცია
                     </div>
                   </div>
 
@@ -250,7 +237,7 @@ const NewHome: React.FC = () => {
                     AI Chatbot
                   </h3>
                   <p className="text-slate-400 mb-4 text-sm leading-relaxed">
-                    მომხმარებელთა მომსახურებისა და ბიზნეს-პროცესების
+                    მომხმარებელთან კომუნიკაციისა და ბიზნეს პროცესების სრული
                     ავტომატიზაცია
                   </p>
 
@@ -280,15 +267,15 @@ const NewHome: React.FC = () => {
                   <div className="space-y-3 flex-1 mb-6">
                     <div className="flex items-center text-sm text-slate-300 group-hover:text-purple-200 transition-colors">
                       <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full mr-3 animate-pulse"></div>
-                      მულტი-პლატფორმა ინტეგრაცია
+                      მომსახურება ყველა პლატფორმაზე
                     </div>
                     <div className="flex items-center text-sm text-slate-300 group-hover:text-purple-200 transition-colors">
                       <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full mr-3 animate-pulse"></div>
-                      ქართული ენის ნატურალური დამუშავება
+                      ქართულად კომუნიკაციის მაღალი მხარდაჭერა
                     </div>
                     <div className="flex items-center text-sm text-slate-300 group-hover:text-purple-200 transition-colors">
                       <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full mr-3 animate-pulse"></div>
-                      24/7 ავტომატური მომსახურება
+                      პასუხების დაბრუნება 24 საათის განმავლობაში
                     </div>
                   </div>
 
@@ -323,7 +310,8 @@ const NewHome: React.FC = () => {
                     Digital Marketing
                   </h3>
                   <p className="text-slate-400 mb-4 text-sm leading-relaxed">
-                    ღრმა ანალიტიკითა და სტრატეგიული მიდგომით ბაზრის განვითარება
+                    სარეკლამო სტრატეგიები თქვენი ბიზნესის მასშტაბური ზრდისა და
+                    ბაზარზე ლიდერობისთვის.
                   </p>
 
                   {/* Floating Platform Icons */}
@@ -342,15 +330,15 @@ const NewHome: React.FC = () => {
                   <div className="space-y-3 flex-1 mb-6">
                     <div className="flex items-center text-sm text-slate-300 group-hover:text-green-200 transition-colors">
                       <div className="w-2 h-2 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full mr-3 animate-pulse"></div>
-                      სოციალური მედიის სტრატეგიული მართვა
+                      სოციალური მედიის მძლავრი ბრენდინგი{" "}
                     </div>
                     <div className="flex items-center text-sm text-slate-300 group-hover:text-green-200 transition-colors">
                       <div className="w-2 h-2 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full mr-3 animate-pulse"></div>
-                      ROI-ზე ორიენტირებული კამპაინები
+                      მოგებაზე ორიენტირებული სარეკლამო კამპანიები
                     </div>
                     <div className="flex items-center text-sm text-slate-300 group-hover:text-green-200 transition-colors">
                       <div className="w-2 h-2 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full mr-3 animate-pulse"></div>
-                      დეტალური ანალიტიკა და რეპორტინგი
+                      შედეგების სრული ანალიზი და პროგნოზირება
                     </div>
                   </div>
 
@@ -369,109 +357,115 @@ const NewHome: React.FC = () => {
             </div>
           </div>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-32">
-  {/* Research Card */}
-  <motion.div 
-    className="text-center group cursor-pointer relative"
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
-    viewport={{ once: true }}
-    whileHover={{ y: -10, scale: 1.02 }}
-  >
-    <div className="w-20 h-20 bg-blue-500/10 border border-blue-400/20 rounded-xl mx-auto mb-6 flex items-center justify-center relative overflow-hidden group-hover:border-blue-400/40 transition-all duration-300">
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent rounded-xl -z-10 group-hover:opacity-100 transition-opacity" />
-      <motion.div
-        className="text-2xl text-blue-400 relative z-10"
-        whileHover={{ scale: 1.2, rotate: 5 }}
-        transition={{ type: "spring", stiffness: 300 }}
-      >
-        <FaSearch />
-      </motion.div>
-    </div>
-    <motion.h3 className="text-xl font-semibold text-white mb-3 transition-all duration-300 group-hover:font-bold">
-      {t("newHome.services.research.title")}
-    </motion.h3>
-    <motion.p className="text-slate-400 leading-relaxed max-w-xs mx-auto transition-all duration-300 group-hover:text-slate-300">
-      {t("newHome.services.research.description")}
-    </motion.p>
-    <motion.div
-      className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-      initial={{ x: 10 }}
-      whileHover={{ x: 5 }}
-    >
-      <span className="text-slate-500 text-sm font-mono">→ Learn more</span>
-    </motion.div>
-  </motion.div>
+          <div className="grid md:grid-cols-3 gap-8 mb-32">
+            {/* Research Card */}
+            <motion.div
+              className="text-center group cursor-pointer relative"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -10, scale: 1.02 }}
+            >
+              <div className="w-20 h-20 bg-blue-500/10 border border-blue-400/20 rounded-xl mx-auto mb-6 flex items-center justify-center relative overflow-hidden group-hover:border-blue-400/40 transition-all duration-300">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent rounded-xl -z-10 group-hover:opacity-100 transition-opacity" />
+                <motion.div
+                  className="text-2xl text-blue-400 relative z-10"
+                  whileHover={{ scale: 1.2, rotate: 5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <FaSearch />
+                </motion.div>
+              </div>
+              <motion.h3 className="text-xl font-semibold text-white mb-3 transition-all duration-300 group-hover:font-bold">
+                {t("newHome.services.research.title")}
+              </motion.h3>
+              <motion.p className="text-slate-400 leading-relaxed max-w-xs mx-auto transition-all duration-300 group-hover:text-slate-300">
+                {t("newHome.services.research.description")}
+              </motion.p>
+              <motion.div
+                className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                initial={{ x: 10 }}
+                whileHover={{ x: 5 }}
+              >
+                <span className="text-slate-500 text-sm font-mono">
+                  → Learn more
+                </span>
+              </motion.div>
+            </motion.div>
 
-  {/* Strategy Card */}
-  <motion.div 
-    className="text-center group cursor-pointer relative"
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, delay: 0.2 }}
-    viewport={{ once: true }}
-    whileHover={{ y: -10, scale: 1.02 }}
-  >
-    <div className="w-20 h-20 bg-purple-500/10 border border-purple-400/20 rounded-xl mx-auto mb-6 flex items-center justify-center relative overflow-hidden group-hover:border-purple-400/40 transition-all duration-300">
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent rounded-xl -z-10 group-hover:opacity-100 transition-opacity" />
-      <motion.div
-        className="text-2xl text-purple-400 relative z-10"
-        whileHover={{ scale: 1.2, rotate: 5 }}
-        transition={{ type: "spring", stiffness: 300 }}
-      >
-        <FaLightbulb />
-      </motion.div>
-    </div>
-    <motion.h3 className="text-xl font-semibold text-white mb-3 transition-all duration-300 group-hover:font-bold">
-      {t("newHome.services.strategy.title")}
-    </motion.h3>
-    <motion.p className="text-slate-400 leading-relaxed max-w-xs mx-auto transition-all duration-300 group-hover:text-slate-300">
-      {t("newHome.services.strategy.description")}
-    </motion.p>
-    <motion.div
-      className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-      initial={{ x: 10 }}
-      whileHover={{ x: 5 }}
-    >
-      <span className="text-slate-500 text-sm font-mono">→ Learn more</span>
-    </motion.div>
-  </motion.div>
+            {/* Strategy Card */}
+            <motion.div
+              className="text-center group cursor-pointer relative"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -10, scale: 1.02 }}
+            >
+              <div className="w-20 h-20 bg-purple-500/10 border border-purple-400/20 rounded-xl mx-auto mb-6 flex items-center justify-center relative overflow-hidden group-hover:border-purple-400/40 transition-all duration-300">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent rounded-xl -z-10 group-hover:opacity-100 transition-opacity" />
+                <motion.div
+                  className="text-2xl text-purple-400 relative z-10"
+                  whileHover={{ scale: 1.2, rotate: 5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <FaLightbulb />
+                </motion.div>
+              </div>
+              <motion.h3 className="text-xl font-semibold text-white mb-3 transition-all duration-300 group-hover:font-bold">
+                {t("newHome.services.strategy.title")}
+              </motion.h3>
+              <motion.p className="text-slate-400 leading-relaxed max-w-xs mx-auto transition-all duration-300 group-hover:text-slate-300">
+                {t("newHome.services.strategy.description")}
+              </motion.p>
+              <motion.div
+                className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                initial={{ x: 10 }}
+                whileHover={{ x: 5 }}
+              >
+                <span className="text-slate-500 text-sm font-mono">
+                  → Learn more
+                </span>
+              </motion.div>
+            </motion.div>
 
-  {/* Execution Card */}
-  <motion.div 
-    className="text-center group cursor-pointer relative"
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, delay: 0.4 }}
-    viewport={{ once: true }}
-    whileHover={{ y: -10, scale: 1.02 }}
-  >
-    <div className="w-20 h-20 bg-green-500/10 border border-green-400/20 rounded-xl mx-auto mb-6 flex items-center justify-center relative overflow-hidden group-hover:border-green-400/40 transition-all duration-300">
-      <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent rounded-xl -z-10 group-hover:opacity-100 transition-opacity" />
-      <motion.div
-        className="text-2xl text-green-400 relative z-10"
-        whileHover={{ scale: 1.2, rotate: 5 }}
-        transition={{ type: "spring", stiffness: 300 }}
-      >
-        <FaRocket />
-      </motion.div>
-    </div>
-    <motion.h3 className="text-xl font-semibold text-white mb-3 transition-all duration-300 group-hover:font-bold">
-      {t("newHome.services.execution.title")}
-    </motion.h3>
-    <motion.p className="text-slate-400 leading-relaxed max-w-xs mx-auto transition-all duration-300 group-hover:text-slate-300">
-      {t("newHome.services.execution.description")}
-    </motion.p>
-    <motion.div
-      className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-      initial={{ x: 10 }}
-      whileHover={{ x: 5 }}
-    >
-      <span className="text-slate-500 text-sm font-mono">→ Learn more</span>
-    </motion.div>
-  </motion.div>
-</div>
+            {/* Execution Card */}
+            <motion.div
+              className="text-center group cursor-pointer relative"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -10, scale: 1.02 }}
+            >
+              <div className="w-20 h-20 bg-green-500/10 border border-green-400/20 rounded-xl mx-auto mb-6 flex items-center justify-center relative overflow-hidden group-hover:border-green-400/40 transition-all duration-300">
+                <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent rounded-xl -z-10 group-hover:opacity-100 transition-opacity" />
+                <motion.div
+                  className="text-2xl text-green-400 relative z-10"
+                  whileHover={{ scale: 1.2, rotate: 5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <FaRocket />
+                </motion.div>
+              </div>
+              <motion.h3 className="text-xl font-semibold text-white mb-3 transition-all duration-300 group-hover:font-bold">
+                {t("newHome.services.execution.title")}
+              </motion.h3>
+              <motion.p className="text-slate-400 leading-relaxed max-w-xs mx-auto transition-all duration-300 group-hover:text-slate-300">
+                {t("newHome.services.execution.description")}
+              </motion.p>
+              <motion.div
+                className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                initial={{ x: 10 }}
+                whileHover={{ x: 5 }}
+              >
+                <span className="text-slate-500 text-sm font-mono">
+                  → Learn more
+                </span>
+              </motion.div>
+            </motion.div>
+          </div>
 
           {/* Interactive Information Section */}
           <div
