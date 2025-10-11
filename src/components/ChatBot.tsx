@@ -104,13 +104,19 @@ VIFA Digital Agency - ვიფა ციფრული სააგენტ�
     try {
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
+      console.log('🔑 API Key exists:', !!apiKey);
+      console.log('📝 User message:', userMessage);
+      console.log('🌐 Full API Key:', apiKey ? `${apiKey.substring(0, 10)}...` : 'undefined');
+
       if (!apiKey) {
-        return "ბოდიშს ვიხდი, ტექნიკური პრობლემაა. გთხოვთ, დაუკავშირდეთ ჩვენს ტექნიკურ ჯგუფს.";
+        console.error('❌ No API key found in environment');
+        return "ბოდიშს ვიხდი, API Key არ არის კონფიგურირებული. გთხოვთ, დაუკავშირდეთ ჩვენს ტექნიკურ ჯგუფს.";
       }
 
-      const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`,
-        {
+      const apiUrl = `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`;
+      console.log('🚀 Making request to:', apiUrl.replace(apiKey, 'API_KEY_HIDDEN'));
+
+      const response = await fetch(apiUrl, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -140,15 +146,40 @@ VIFA Digital Agency - ვიფა ციფრული სააგენტ�
         }
       );
 
+      console.log('📡 Response status:', response.status);
+      console.log('✅ Response ok:', response.ok);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('❌ API Error:', response.status, response.statusText);
+        console.error('❌ Error body:', errorText);
+
+        if (response.status === 400) {
+          return "ბოდიშს ვიხდი, API მოთხოვნაში შეცდომაა 🔧";
+        } else if (response.status === 403) {
+          return "ბოდიშს ვიხდი, API Key პრობლემაა 🔑";
+        } else if (response.status === 404) {
+          return "ბოდიშს ვიხდი, API endpoint ვერ მოიძებნა 🔍";
+        } else {
+          return `ბოდიშს ვიხდი, სერვერის შეცდომაა (${response.status}) 🛠️`;
+        }
+      }
+
       const data = await response.json();
+      console.log('🎯 Full API Response:', data);
 
       if (data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
-        return data.candidates[0].content.parts[0].text;
+        const responseText = data.candidates[0].content.parts[0].text;
+        console.log('✅ Got response:', responseText.substring(0, 100) + '...');
+        return responseText;
       } else {
+        console.error('❌ Invalid response structure:', data);
         return "ბოდიშს ვიხდი, რაღაც შეცდომაა 😅 შეგიძლიათ თავიდან სცადოთ ან დაუკავშირდეთ ჩვენს გუნდს!";
       }
     } catch (error) {
-      console.error("Error calling Gemini API:", error);
+      console.error('💥 Full error object:', error);
+      console.error('💥 Error message:', error.message);
+      console.error('💥 Error stack:', error.stack);
       return "ბოდიშს ვიხდი, ტექნიკური პრობლემაა. მალე აღვდგები! 😊 დაუკავშირდი ჩვენს გუნდს.";
     }
   };
