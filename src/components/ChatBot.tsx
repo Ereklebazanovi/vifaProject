@@ -84,12 +84,12 @@ VIFA Digital Agency - ვიფა ციფრული სააგენტ�
 - Vercel
 - Google Gemini AI
 
-განსაკუთრებულობები:
+უპირატესობები:
 - ინდივიდუალური მიდგომა
 - ხარისხზე ფოკუსირება
 - თანამედროვე ტექნოლოგიები
 - მოქნილი ვადები
-- გამჭვირვალე ფასწარმოება
+- გამჭირვალე დანახარჯები
 - უფასო კონსულტაცია
 
 კონტაქტი:
@@ -113,7 +113,7 @@ VIFA Digital Agency - ვიფა ციფრული სააგენტ�
         return "ბოდიშს ვიხდი, API Key არ არის კონფიგურირებული. გთხოვთ, დაუკავშირდეთ ჩვენს ტექნიკურ ჯგუფს.";
       }
 
-      const apiUrl = `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`;
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
       console.log('🚀 Making request to:', apiUrl.replace(apiKey, 'API_KEY_HIDDEN'));
 
       const response = await fetch(apiUrl, {
