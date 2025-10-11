@@ -178,8 +178,10 @@ VIFA Digital Agency - ვიფა ციფრული სააგენტ�
       }
     } catch (error) {
       console.error('💥 Full error object:', error);
-      console.error('💥 Error message:', error.message);
-      console.error('💥 Error stack:', error.stack);
+      if (error instanceof Error) {
+        console.error('💥 Error message:', error.message);
+        console.error('💥 Error stack:', error.stack);
+      }
       return "ბოდიშს ვიხდი, ტექნიკური პრობლემაა. მალე აღვდგები! 😊 დაუკავშირდი ჩვენს გუნდს.";
     }
   };
