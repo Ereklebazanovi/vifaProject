@@ -163,7 +163,6 @@ ${companyInfo}
 
 
       if (!response.ok) {
-        const errorText = await response.text();
 
         if (response.status === 400) {
           return "ბოდიშს ვიხდი, API მოთხოვნაში შეცდომაა 🔧";
