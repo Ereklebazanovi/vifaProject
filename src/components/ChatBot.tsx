@@ -93,8 +93,8 @@ VIFA Digital Agency - ვიფა ციფრული სააგენტ�
 - უფასო კონსულტაცია
 
 კონტაქტი:
-- ტელეფონი: +995555123456
-- Email: info@vifadigital.ge
+- ტელეფონი: +995 557 62 42 43
+- Email: vifa.official2020@gmail.com
 - მისამართი: თბილისი, საქართველო
 
 ფასები ინდივიდუალურია და დამოკიდებულია პროექტის სირთულესა და მოთხოვნებზე.
@@ -109,7 +109,7 @@ VIFA Digital Agency - ვიფა ციფრული სააგენტ�
       }
 
       const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`,
+        `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
         {
           method: "POST",
           headers: {
