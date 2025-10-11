@@ -104,17 +104,11 @@ VIFA Digital Agency - ვიფა ციფრული სააგენტ�
     try {
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
-      console.log('🔑 API Key exists:', !!apiKey);
-      console.log('📝 User message:', userMessage);
-      console.log('🌐 Full API Key:', apiKey ? `${apiKey.substring(0, 10)}...` : 'undefined');
-
       if (!apiKey) {
-        console.error('❌ No API key found in environment');
         return "ბოდიშს ვიხდი, API Key არ არის კონფიგურირებული. გთხოვთ, დაუკავშირდეთ ჩვენს ტექნიკურ ჯგუფს.";
       }
 
       const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-      console.log('🚀 Making request to:', apiUrl.replace(apiKey, 'API_KEY_HIDDEN'));
 
       const response = await fetch(apiUrl, {
           method: "POST",
@@ -167,13 +161,9 @@ ${companyInfo}
         }
       );
 
-      console.log('📡 Response status:', response.status);
-      console.log('✅ Response ok:', response.ok);
 
       if (!response.ok) {
         const errorText = await response.text();
-        console.error('❌ API Error:', response.status, response.statusText);
-        console.error('❌ Error body:', errorText);
 
         if (response.status === 400) {
           return "ბოდიშს ვიხდი, API მოთხოვნაში შეცდომაა 🔧";
@@ -187,22 +177,14 @@ ${companyInfo}
       }
 
       const data = await response.json();
-      console.log('🎯 Full API Response:', data);
 
       if (data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
         const responseText = data.candidates[0].content.parts[0].text;
-        console.log('✅ Got response:', responseText.substring(0, 100) + '...');
         return responseText;
       } else {
-        console.error('❌ Invalid response structure:', data);
         return "ბოდიშს ვიხდი, რაღაც შეცდომაა 😅 შეგიძლიათ თავიდან სცადოთ ან დაუკავშირდეთ ჩვენს გუნდს!";
       }
     } catch (error) {
-      console.error('💥 Full error object:', error);
-      if (error instanceof Error) {
-        console.error('💥 Error message:', error.message);
-        console.error('💥 Error stack:', error.stack);
-      }
       return "ბოდიშს ვიხდი, ტექნიკური პრობლემაა. მალე აღვდგები! 😊 დაუკავშირდი ჩვენს გუნდს.";
     }
   };
@@ -235,7 +217,7 @@ ${companyInfo}
     } catch (error) {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: "ბოდიშს ვიხდი, მენტალური პრობლემები მაქვს 😅 სცადეთ თავიდან!",
+        text: "ბოდიშს ვიხდი, ძალიან გადავიღალე 😅 სცადეთ თავიდან!",
         isBot: true,
         timestamp: new Date(),
       };
