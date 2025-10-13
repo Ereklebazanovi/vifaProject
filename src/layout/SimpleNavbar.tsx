@@ -135,10 +135,10 @@ const SimpleNavbar: React.FC = () => {
               <button
                 key={index}
                 onClick={() => handleNavigation(link.path)}
-                className={`px-4 py-2 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 transform hover:scale-105 ${
+                className={`px-4 py-2 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 transform hover:scale-105 border ${
                   location.pathname === link.path
-                    ? "text-blue-300 bg-blue-500/10 border-b-2 border-blue-400 shadow-lg"
-                    : "text-slate-300 hover:text-white hover:bg-white/5 hover:shadow-md"
+                    ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-lg"
+                    : "text-slate-300 hover:text-white hover:bg-white/5 hover:shadow-md border-blue-500/30 hover:border-blue-400"
                 }`}
               >
                 {link.label}
@@ -157,10 +157,10 @@ const SimpleNavbar: React.FC = () => {
               <button
                 key={index}
                 onClick={() => handleNavigation(link.path)}
-                className={`px-3 py-2 text-xs font-medium rounded-md transition-all duration-300 transform hover:scale-105 text-center ${
+                className={`px-3 py-2 text-xs font-medium rounded-md transition-all duration-300 transform hover:scale-105 text-center border ${
                   location.pathname === link.path
-                    ? "text-blue-300 bg-blue-500/10 border-b-2 border-blue-400 shadow-sm"
-                    : "text-slate-300 hover:text-white hover:bg-white/5 hover:shadow-sm"
+                    ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-sm"
+                    : "text-slate-300 hover:text-white hover:bg-white/5 hover:shadow-sm border-blue-500/30 hover:border-blue-400"
                 }`}
               >
                 <span className="block leading-tight">{link.label}</span>
@@ -196,10 +196,10 @@ const SimpleNavbar: React.FC = () => {
                 <button
                   key={index}
                   onClick={() => handleNavigation(link.path)}
-                  className={`px-2 py-1.5 text-xs font-medium rounded-md transition-all duration-300 transform active:scale-95 text-center flex-1 max-w-[120px] ${
+                  className={`px-2 py-1.5 text-xs font-medium rounded-md transition-all duration-300 transform active:scale-95 text-center flex-1 max-w-[120px] border ${
                     location.pathname === link.path
-                      ? "text-blue-300 bg-blue-500/10 border-b border-blue-400 shadow-sm"
-                      : "text-slate-300 hover:text-white hover:bg-white/5 hover:shadow-sm"
+                      ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-sm"
+                      : "text-slate-300 hover:text-white hover:bg-white/5 hover:shadow-sm border-blue-500/30 hover:border-blue-400"
                   }`}
                 >
                   <span className="block leading-tight">{link.label}</span>
@@ -211,10 +211,10 @@ const SimpleNavbar: React.FC = () => {
                 <button
                   key={index + 2}
                   onClick={() => handleNavigation(link.path)}
-                  className={`px-2 py-1.5 text-xs font-medium rounded-md transition-all duration-300 transform active:scale-95 text-center flex-1 max-w-[120px] ${
+                  className={`px-2 py-1.5 text-xs font-medium rounded-md transition-all duration-300 transform active:scale-95 text-center flex-1 max-w-[120px] border ${
                     location.pathname === link.path
-                      ? "text-blue-300 bg-blue-500/10 border-b border-blue-400 shadow-sm"
-                      : "text-slate-300 hover:text-white hover:bg-white/5 hover:shadow-sm"
+                      ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-sm"
+                      : "text-slate-300 hover:text-white hover:bg-white/5 hover:shadow-sm border-blue-500/30 hover:border-blue-400"
                   }`}
                 >
                   <span className="block leading-tight">{link.label}</span>
