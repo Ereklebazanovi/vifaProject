@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import { useNavigation } from "../contexts/NavigationContext";
+import TrueFocus from "../components/TrueFocus";
 import {
   FaReact,
   FaMobile,
@@ -32,9 +33,6 @@ import {
   SiTailwindcss,
 } from "react-icons/si";
 import SEO from "../components/SEO";
-import RotatingText from "../components/RotatingText";
-import Silk from "../components/Silk";
-import TrueFocus from "../components/TrueFocus";
 
 const WebDev: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();

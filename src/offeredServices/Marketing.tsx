@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
+import TrueFocus from "../components/TrueFocus";
 import {
   FaVideo,
   FaCamera,
@@ -25,8 +26,6 @@ import {
   FaCog,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
-import Silk from "../components/Silk";
-import TrueFocus from "../components/TrueFocus";
 
 const Marketing: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();

@@ -79,16 +79,27 @@ const TrueFocus: React.FC<TrueFocusProps> = ({
     <div className="relative flex gap-2 sm:gap-3 md:gap-4 justify-center items-center" ref={containerRef}>
       {words.map((word, index) => {
         const isActive = index === currentIndex;
+        // ელეგანტური ფერები სხვადასხვა სიტყვებისთვის
+        const getWordColor = (wordText: string) => {
+          if (wordText === 'WEB') return '#06b6d4'; // cyan-500
+          if (wordText === 'DEVELOPMENT') return '#8b5cf6'; // purple-500
+          if (wordText === 'Digital') return '#ef4444'; // red-500
+          if (wordText === 'Marketing') return '#f59e0b'; // amber-500
+          return '#3b82f6'; // blue-500 default
+        };
+
         return (
           <span
             key={index}
             ref={el => {
               wordRefs.current[index] = el;
             }}
-            className="relative text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light cursor-pointer whitespace-nowrap tracking-widest"
+            className="relative text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium cursor-pointer whitespace-nowrap tracking-wide"
             style={{
               fontFamily: 'SF Pro Display, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-              letterSpacing: '0.15em',
+              letterSpacing: '0.08em',
+              color: getWordColor(word),
+              textShadow: `0 0 20px ${getWordColor(word)}40`,
               ...({
                 filter: manualMode
                   ? isActive
