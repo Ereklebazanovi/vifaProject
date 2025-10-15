@@ -93,6 +93,7 @@ const AboutPage = () => {
         title={t("seo.about.title")}
         description={t("seo.about.description")}
         keywords={t("seo.about.keywords")}
+        url="https://vifadigital.ge/about"
         type="website"
         structuredData={aboutStructuredData}
       />

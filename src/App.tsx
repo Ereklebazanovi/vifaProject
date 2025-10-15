@@ -11,6 +11,7 @@ import { LanguageProvider } from "./contexts/LanguageContext";
 import { NavigationProvider } from "./contexts/NavigationContext";
 // Lazy load performance utilities
 import GoogleAnalytics from "./components/GoogleAnalytics";
+import SEO from "./components/SEO";
 import "./index.css";
 
 // Simple lazy loading - no artificial delays
@@ -21,6 +22,8 @@ const AdminDashboard = lazy(() => import("./admin/AdminDashboard"));
 const Marketing = lazy(() => import("./offeredServices/Marketing"));
 const WebDev = lazy(() => import("./offeredServices/WebDev"));
 const AIChatbot = lazy(() => import("./pages/AIChatbot"));
+const BlogPage = lazy(() => import("./pages/BlogPage"));
+const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -104,12 +107,20 @@ const LoadingSpinner = () => (
 );
 
 const Contact = () => (
-  <div className="pt-24 pb-20">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 className="text-4xl font-bold text-center mb-8">Contact Us</h1>
-      <p className="text-gray-400 text-center">Contact page coming soon...</p>
+  <>
+    <SEO
+      title="კონტაქტი"
+      description="დაუკავშირდით VIFA Digital-ს - ვებსაიტის შექმნა, ციფრული მარკეტინგი და AI ჩატბოტები საქართველოში. ჩვენი ექსპერტების გუნდი მზად არის თქვენი ბიზნესის ზრდისთვის."
+      url="https://vifadigital.ge/contact"
+      keywords="კონტაქტი, VIFA Digital, ვებსაიტის შექმნა კონტაქტი, ციფრული მარკეტინგი კონტაქტი, საქართველო, თბილისი"
+    />
+    <div className="pt-24 pb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 className="text-4xl font-bold text-center mb-8">Contact Us</h1>
+        <p className="text-gray-400 text-center">Contact page coming soon...</p>
+      </div>
     </div>
-  </div>
+  </>
 );
 
 // Optimized route transition with immediate rendering
@@ -144,6 +155,8 @@ const AppWithRouter: React.FC = () => {
               <Route path="services/ai-chatbot" element={<AIChatbot />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="contact" element={<Contact />} />
+              <Route path="blog" element={<BlogPage />} />
+              <Route path="blog/:slug" element={<BlogPostPage />} />
               <Route path="start-project" element={<StartProject />} />
               <Route path="privacy" element={<PrivacyPolicy />} />
               <Route path="terms" element={<TermsOfService />} />

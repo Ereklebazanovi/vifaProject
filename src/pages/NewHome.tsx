@@ -44,6 +44,7 @@ const NewHome: React.FC = () => {
       <SEO
         title={t("seo.home.title")}
         description={t("seo.home.description")}
+        url="https://vifadigital.ge"
       />
 
       {/* Canvas 2D Highway Background - Full Page Coverage */}
@@ -147,211 +148,214 @@ const NewHome: React.FC = () => {
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-              {/* Web Development Card */}
-              <div className="group relative bg-black/40 backdrop-blur-xl border border-cyan-500/20 rounded-2xl p-8 overflow-hidden hover:border-cyan-400/60 transition-all duration-700 hover:transform hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/20 h-[520px] flex flex-col">
-                {/* Animated Background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-cyan-400/10 to-blue-500/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+            {/* Elegant Compact Service Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+
+              {/* Web Development - Compact Elegant Card */}
+              <div className="group relative bg-gradient-to-br from-black/80 via-slate-900/90 to-black/80 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-6 overflow-hidden hover:border-cyan-500/60 transition-all duration-500 hover:transform hover:scale-[1.02] hover:shadow-xl hover:shadow-cyan-500/25">
+                {/* Sophisticated Dark Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute -top-10 -right-10 w-20 h-20 bg-gradient-to-br from-cyan-400/10 to-blue-500/10 rounded-full blur-2xl opacity-0 group-hover:opacity-80 transition-opacity duration-500"></div>
 
                 <div className="relative z-10">
-                  {/* Icon with Glow */}
-                  <div className="relative mb-6">
-                    <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-cyan-500/25">
-                      <FaLaptopCode className="text-white text-2xl" />
+                  {/* Compact Header */}
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="relative">
+                      <div className="w-12 h-12 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-500/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-all duration-300 backdrop-blur-sm">
+                        <FaLaptopCode className="text-cyan-400 text-xl" />
+                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-blue-500/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
-                    <div className="absolute inset-0 w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-xl blur-lg opacity-0 group-hover:opacity-40 transition-opacity duration-500"></div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors duration-300">
+                        Web Development
+                      </h3>
+                      <div className="flex space-x-2 mt-1">
+                        <div className="w-6 h-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex items-center justify-center group-hover:bg-cyan-500/20 transition-all duration-300">
+                          <SiReact className="text-cyan-400 text-xs" />
+                        </div>
+                        <div className="w-6 h-6 bg-green-500/10 border border-green-500/30 rounded-lg flex items-center justify-center group-hover:bg-green-500/20 transition-all duration-300">
+                          <SiNodedotjs className="text-green-400 text-xs" />
+                        </div>
+                        <div className="w-6 h-6 bg-blue-500/10 border border-blue-500/30 rounded-lg flex items-center justify-center group-hover:bg-blue-500/20 transition-all duration-300">
+                          <SiTypescript className="text-blue-400 text-xs" />
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors duration-300">
-                    Web Development
-                  </h3>
                   <p className="text-slate-400 mb-4 text-sm leading-relaxed">
-                    ბიზნესის სრული ციფრული ტრანსფორმაციისთვის განკუთვნილი
-                    თანამედროვე ვებ სისტემები
+                    ბიზნესის სრული ციფრული ტრანსფორმაციისთვის განკუთვნილი თანამედროვე ვებ სისტემები
                   </p>
 
-                  {/* Floating Tech Icons */}
-                  <div className="flex space-x-3 mb-4">
-                    <div className="w-12 h-12 bg-cyan-500/10 border border-cyan-500/30 rounded-xl flex items-center justify-center hover:bg-cyan-500/20 hover:border-cyan-400/50 transition-all duration-300 hover:scale-110 animate-float-slow">
-                      <SiReact className="text-cyan-400 text-lg" />
+                  {/* Compact Feature List */}
+                  <div className="space-y-2 mb-5">
+                    <div className="flex items-center text-sm text-slate-300 group-hover:text-cyan-200 transition-colors">
+                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mr-3"></div>
+                      სავიზიტო და კორპორატიული ვებ-გვერდები
                     </div>
-                    <div className="w-12 h-12 bg-blue-500/10 border border-blue-500/30 rounded-xl flex items-center justify-center hover:bg-blue-500/20 hover:border-blue-400/50 transition-all duration-300 hover:scale-110 animate-float-medium">
-                      <SiNodedotjs className="text-blue-400 text-lg" />
+                    <div className="flex items-center text-sm text-slate-300 group-hover:text-cyan-200 transition-colors">
+                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mr-3"></div>
+                      ონლაინ გაყიდვების სისტემები
                     </div>
-                    <div className="w-12 h-12 bg-purple-500/10 border border-purple-500/30 rounded-xl flex items-center justify-center hover:bg-purple-500/20 hover:border-purple-400/50 transition-all duration-300 hover:scale-110 animate-float-fast">
-                      <SiTypescript className="text-purple-400 text-lg" />
+                    <div className="flex items-center text-sm text-slate-300 group-hover:text-cyan-200 transition-colors">
+                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mr-3"></div>
+                      ბიზნეს პროცესების ავტომატიზაცია
                     </div>
                   </div>
 
-                  {/* Feature List */}
-                  <div className="space-y-3 flex-1 mb-6">
-                    <div className="flex items-center text-sm text-slate-300 group-hover:text-cyan-200 transition-colors">
-                      <div className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mr-3 animate-pulse"></div>
-                      სავიზიტო და კორპორატიული ვებ-გვერდების შექმნა
-                    </div>
-                    <div className="flex items-center text-sm text-slate-300 group-hover:text-cyan-200 transition-colors">
-                      <div className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mr-3 animate-pulse"></div>
-                      მძლავრი ონლაინ გაყიდვების სისტემები{" "}
-                    </div>
-                    <div className="flex items-center text-sm text-slate-300 group-hover:text-cyan-200 transition-colors">
-                      <div className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mr-3 animate-pulse"></div>
-                      ბიზნეს პროცესების სრული ავტომატიზაცია
-                    </div>
-                  </div>
-
-                  {/* Glowing Button */}
-                  <div className="relative mt-auto">
-                    <Link
-                      to="/services/web-development"
-                      className="block"
-                      onClick={startNavigation}
-                    >
-                      <div className="flex items-center justify-between p-4 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-xl border border-cyan-500/20 group-hover:border-cyan-400/40 transition-all duration-300 cursor-pointer lg:mt-17">
-                        <span className="text-cyan-400 font-medium text-sm">
+                  {/* Elegant CTA Button */}
+                  <Link to="/services/web-development" className="block" onClick={startNavigation}>
+                    <div className="relative group/btn">
+                      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-xl blur opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                      <div className="relative flex items-center justify-between p-3 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-xl border border-cyan-500/20 group-hover/btn:border-cyan-400/50 group-hover/btn:bg-gradient-to-r group-hover/btn:from-cyan-500/20 group-hover/btn:to-blue-500/20 transition-all duration-300 cursor-pointer">
+                        <span className="text-cyan-400 font-semibold text-sm group-hover/btn:text-cyan-300 transition-colors">
                           იხილეთ მეტი
                         </span>
-                        <FaArrowRight className="text-cyan-400 text-sm group-hover:translate-x-2 transition-transform duration-300" />
+                        <FaArrowRight className="text-cyan-400 text-sm group-hover/btn:text-cyan-300 group-hover/btn:translate-x-1 transition-all duration-300" />
                       </div>
-                    </Link>
-                  </div>
+                    </div>
+                  </Link>
                 </div>
               </div>
 
-              {/* AI Chatbot Card */}
-              <div className="group relative bg-black/40 backdrop-blur-xl border border-purple-500/20 rounded-2xl p-8 overflow-hidden hover:border-purple-400/60 transition-all duration-700 hover:transform hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 h-[520px] flex flex-col">
-                {/* Animated Background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-purple-400/10 to-pink-500/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+              {/* AI Chatbot - Compact Elegant Card */}
+              <div className="group relative bg-gradient-to-br from-black/80 via-slate-900/90 to-black/80 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-6 overflow-hidden hover:border-purple-500/60 transition-all duration-500 hover:transform hover:scale-[1.02] hover:shadow-xl hover:shadow-purple-500/25">
+                {/* Sophisticated Dark Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute -top-10 -right-10 w-20 h-20 bg-gradient-to-br from-purple-400/10 to-pink-500/10 rounded-full blur-2xl opacity-0 group-hover:opacity-80 transition-opacity duration-500"></div>
 
                 <div className="relative z-10">
-                  {/* Pulsing AI Icon */}
-                  <div className="relative mb-6">
-                    <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-purple-500/25">
-                      <FaBrain className="text-white text-2xl animate-pulse" />
-                    </div>
-                    <div className="absolute inset-0 w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-500 rounded-xl blur-lg opacity-0 group-hover:opacity-40 transition-opacity duration-500"></div>
-                  </div>
-
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-purple-300 transition-colors duration-300">
-                    AI Chatbot
-                  </h3>
-                  <p className="text-slate-400 mb-4 text-sm leading-relaxed">
-                    მომხმარებელთან კომუნიკაციისა და ბიზნეს პროცესების სრული
-                    ავტომატიზაცია
-                  </p>
-
-                  {/* Holographic Chat Interface */}
-                  <div className="relative bg-black/30 backdrop-blur-sm rounded-xl p-3 mb-4 border border-purple-500/30 group-hover:border-purple-400/50 transition-all duration-300">
-                    <div className="space-y-2">
-                      <div className="flex justify-end">
-                        <div className="bg-gradient-to-r from-blue-500/30 to-cyan-500/30 text-white text-xs px-3 py-1.5 rounded-lg border border-blue-400/30 animate-glow">
-                          გამარჯობა!
-                        </div>
+                  {/* Compact Header */}
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="relative">
+                      <div className="w-12 h-12 bg-gradient-to-br from-purple-500/20 to-pink-600/20 border border-purple-500/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-all duration-300 backdrop-blur-sm">
+                        <FaBrain className="text-purple-400 text-xl animate-pulse" />
                       </div>
-                      <div className="flex justify-start">
-                        <div className="bg-gradient-to-r from-purple-500/30 to-pink-500/30 text-white text-xs px-3 py-1.5 rounded-lg border border-purple-400/30">
-                          <div className="flex items-center">
-                            <div className="typing-dots-ai mr-1">
-                              <span></span>
-                              <span></span>
-                              <span></span>
+                      <div className="absolute inset-0 bg-gradient-to-br from-purple-400/20 to-pink-500/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-white group-hover:text-purple-300 transition-colors duration-300">
+                        AI Chatbot
+                      </h3>
+                      {/* Compact Chat Interface */}
+                      <div className="relative bg-gradient-to-br from-black/30 to-purple-900/20 backdrop-blur-sm rounded-lg p-2 mt-2 border border-purple-500/30 group-hover:border-purple-400/50 transition-all duration-300">
+                        <div className="space-y-1">
+                          <div className="flex justify-end">
+                            <div className="bg-gradient-to-r from-blue-500/30 to-cyan-500/30 text-white text-xs px-2 py-1 rounded border border-blue-400/30">
+                              🇬🇪 გამარჯობა!
                             </div>
-                            AI ფიქრობს...
+                          </div>
+                          <div className="flex justify-start">
+                            <div className="bg-gradient-to-r from-purple-500/30 to-pink-500/30 text-white text-xs px-2 py-1 rounded border border-purple-400/30">
+                              🤖 AI ფიქრობს...
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="space-y-3 flex-1 mb-6">
+                  <p className="text-slate-400 mb-4 text-sm leading-relaxed">
+                    მომხმარებელთან კომუნიკაციისა და ბიზნეს პროცესების სრული ავტომატიზაცია AI ტექნოლოგიებით
+                  </p>
+
+                  {/* Compact Feature List */}
+                  <div className="space-y-2 mb-5">
                     <div className="flex items-center text-sm text-slate-300 group-hover:text-purple-200 transition-colors">
-                      <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full mr-3 animate-pulse"></div>
+                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full mr-3"></div>
                       მომსახურება ყველა პლატფორმაზე
                     </div>
                     <div className="flex items-center text-sm text-slate-300 group-hover:text-purple-200 transition-colors">
-                      <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full mr-3 animate-pulse"></div>
-                      ქართულად კომუნიკაციის მაღალი მხარდაჭერა
+                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full mr-3"></div>
+                      ქართულად კომუნიკაციის მხარდაჭერა
                     </div>
                     <div className="flex items-center text-sm text-slate-300 group-hover:text-purple-200 transition-colors">
-                      <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full mr-3 animate-pulse"></div>
-                      პასუხების დაბრუნება 24 საათის განმავლობაში
+                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full mr-3"></div>
+                      24 საათის განმავლობაში პასუხი
                     </div>
                   </div>
 
-                  <div className="relative mt-auto">
-                    <Link to="/services/ai-chatbot" className="block">
-                      <div className="flex items-center justify-between p-4 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-xl border border-purple-500/20 group-hover:border-purple-400/40 transition-all duration-300 cursor-pointer">
-                        <span className="text-purple-400 font-medium text-sm">
+                  {/* Elegant CTA Button */}
+                  <Link to="/services/ai-chatbot" className="block">
+                    <div className="relative group/btn">
+                      <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-xl blur opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                      <div className="relative flex items-center justify-between p-3 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-xl border border-purple-500/20 group-hover/btn:border-purple-400/50 group-hover/btn:bg-gradient-to-r group-hover/btn:from-purple-500/20 group-hover/btn:to-pink-500/20 transition-all duration-300 cursor-pointer">
+                        <span className="text-purple-400 font-semibold text-sm group-hover/btn:text-purple-300 transition-colors">
                           იხილეთ მეტი
                         </span>
-                        <FaArrowRight className="text-purple-400 text-sm group-hover:translate-x-2 transition-transform duration-300" />
+                        <FaArrowRight className="text-purple-400 text-sm group-hover/btn:text-purple-300 group-hover/btn:translate-x-1 transition-all duration-300" />
                       </div>
-                    </Link>
-                  </div>
+                    </div>
+                  </Link>
                 </div>
               </div>
 
-              {/* Digital Marketing Card */}
-              <div className="group relative bg-black/40 backdrop-blur-xl border border-green-500/20 rounded-2xl p-8 overflow-hidden hover:border-green-400/60 transition-all duration-700 hover:transform hover:scale-105 hover:shadow-2xl hover:shadow-green-500/20 h-[520px] flex flex-col">
-                {/* Animated Background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 via-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-green-400/10 to-emerald-500/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+              {/* Digital Marketing - Compact Elegant Card */}
+              <div className="group relative bg-gradient-to-br from-black/80 via-slate-900/90 to-black/80 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-6 overflow-hidden hover:border-green-500/60 transition-all duration-500 hover:transform hover:scale-[1.02] hover:shadow-xl hover:shadow-green-500/25">
+                {/* Sophisticated Dark Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 via-transparent to-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute -top-10 -right-10 w-20 h-20 bg-gradient-to-br from-green-400/10 to-emerald-500/10 rounded-full blur-2xl opacity-0 group-hover:opacity-80 transition-opacity duration-500"></div>
 
                 <div className="relative z-10">
-                  <div className="relative mb-6">
-                    <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-green-500/25">
-                      <FaChartPie className="text-white text-2xl" />
+                  {/* Compact Header */}
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="relative">
+                      <div className="w-12 h-12 bg-gradient-to-br from-green-500/20 to-emerald-600/20 border border-green-500/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-all duration-300 backdrop-blur-sm">
+                        <FaChartPie className="text-green-400 text-xl" />
+                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-br from-green-400/20 to-emerald-500/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
-                    <div className="absolute inset-0 w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-xl blur-lg opacity-0 group-hover:opacity-40 transition-opacity duration-500"></div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white group-hover:text-green-300 transition-colors duration-300">
+                        Digital Marketing
+                      </h3>
+                      <div className="flex space-x-2 mt-1">
+                        <div className="w-6 h-6 bg-blue-500/10 border border-blue-500/30 rounded-lg flex items-center justify-center group-hover:bg-blue-500/20 transition-all duration-300">
+                          <SiFacebook className="text-blue-400 text-xs" />
+                        </div>
+                        <div className="w-6 h-6 bg-red-500/10 border border-red-500/30 rounded-lg flex items-center justify-center group-hover:bg-red-500/20 transition-all duration-300">
+                          <SiGoogle className="text-red-400 text-xs" />
+                        </div>
+                        <div className="w-6 h-6 bg-pink-500/10 border border-pink-500/30 rounded-lg flex items-center justify-center group-hover:bg-pink-500/20 transition-all duration-300">
+                          <SiInstagram className="text-pink-400 text-xs" />
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-green-300 transition-colors duration-300">
-                    Digital Marketing
-                  </h3>
                   <p className="text-slate-400 mb-4 text-sm leading-relaxed">
-                    სარეკლამო სტრატეგიები თქვენი ბიზნესის მასშტაბური ზრდისა და
-                    ბაზარზე ლიდერობისთვის.
+                    სარეკლამო სტრატეგიები თქვენი ბიზნესის მასშტაბური ზრდისა და ბაზარზე ლიდერობისთვის
                   </p>
 
-                  {/* Floating Platform Icons */}
-                  <div className="flex space-x-3 mb-4">
-                    <div className="w-12 h-12 bg-blue-500/10 border border-blue-500/30 rounded-xl flex items-center justify-center hover:bg-blue-500/20 hover:border-blue-400/50 transition-all duration-300 hover:scale-110 hover:rotate-12">
-                      <SiFacebook className="text-blue-400 text-lg" />
+                  {/* Compact Feature List */}
+                  <div className="space-y-2 mb-5">
+                    <div className="flex items-center text-sm text-slate-300 group-hover:text-green-200 transition-colors">
+                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full mr-3"></div>
+                      სოციალური მედიის მძლავრი ბრენდინგი
                     </div>
-                    <div className="w-12 h-12 bg-red-500/10 border border-red-500/30 rounded-xl flex items-center justify-center hover:bg-red-500/20 hover:border-red-400/50 transition-all duration-300 hover:scale-110 hover:rotate-12">
-                      <SiGoogle className="text-red-400 text-lg" />
+                    <div className="flex items-center text-sm text-slate-300 group-hover:text-green-200 transition-colors">
+                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full mr-3"></div>
+                      მოგებაზე ორიენტირებული კამპანიები
                     </div>
-                    <div className="w-12 h-12 bg-pink-500/10 border border-pink-500/30 rounded-xl flex items-center justify-center hover:bg-pink-500/20 hover:border-pink-400/50 transition-all duration-300 hover:scale-110 hover:rotate-12">
-                      <SiInstagram className="text-pink-400 text-lg" />
+                    <div className="flex items-center text-sm text-slate-300 group-hover:text-green-200 transition-colors">
+                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full mr-3"></div>
+                      შედეგების ანალიზი და პროგნოზირება
                     </div>
                   </div>
 
-                  <div className="space-y-3 flex-1 mb-6">
-                    <div className="flex items-center text-sm text-slate-300 group-hover:text-green-200 transition-colors">
-                      <div className="w-2 h-2 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full mr-3 animate-pulse"></div>
-                      სოციალური მედიის მძლავრი ბრენდინგი{" "}
-                    </div>
-                    <div className="flex items-center text-sm text-slate-300 group-hover:text-green-200 transition-colors">
-                      <div className="w-2 h-2 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full mr-3 animate-pulse"></div>
-                      მოგებაზე ორიენტირებული სარეკლამო კამპანიები
-                    </div>
-                    <div className="flex items-center text-sm text-slate-300 group-hover:text-green-200 transition-colors">
-                      <div className="w-2 h-2 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full mr-3 animate-pulse"></div>
-                      შედეგების სრული ანალიზი და პროგნოზირება
-                    </div>
-                  </div>
-
-                  <div className="relative mt-auto">
-                    <Link to="/services/digital-advertising" className="block">
-                      <div className="flex items-center justify-between p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-xl border border-green-500/20 group-hover:border-green-400/40 transition-all duration-300 cursor-pointer lg:mt-17">
-                        <span className="text-green-400 font-medium text-sm">
+                  {/* Elegant CTA Button */}
+                  <Link to="/services/digital-advertising" className="block">
+                    <div className="relative group/btn">
+                      <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-xl blur opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                      <div className="relative flex items-center justify-between p-3 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-xl border border-green-500/20 group-hover/btn:border-green-400/50 group-hover/btn:bg-gradient-to-r group-hover/btn:from-green-500/20 group-hover/btn:to-emerald-500/20 transition-all duration-300 cursor-pointer">
+                        <span className="text-green-400 font-semibold text-sm group-hover/btn:text-green-300 transition-colors">
                           იხილეთ მეტი
                         </span>
-                        <FaArrowRight className="text-green-400 text-sm group-hover:translate-x-2 transition-transform duration-300" />
+                        <FaArrowRight className="text-green-400 text-sm group-hover/btn:text-green-300 group-hover/btn:translate-x-1 transition-all duration-300" />
                       </div>
-                    </Link>
-                  </div>
+                    </div>
+                  </Link>
                 </div>
               </div>
             </div>

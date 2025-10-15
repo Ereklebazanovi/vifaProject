@@ -6,8 +6,8 @@ export const siteConfig = {
   siteTitle: "Vifa Digital - ციფრული მარკეტინგის სააგენტო საქართველოში",
 
   // Domain
-  domain: "vifadigital.com",
-  url: "https://vifadigital.com",
+  domain: "vifadigital.ge",
+  url: "https://vifadigital.ge",
 
   // Contact Info
   email: "vifa.official2020@gmail.com",

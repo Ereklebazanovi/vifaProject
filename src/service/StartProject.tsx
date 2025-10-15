@@ -183,6 +183,7 @@ const StartProject: React.FC = () => {
         title={t("seo.startProject.title")}
         description={t("seo.startProject.description")}
         keywords={t("seo.startProject.keywords")}
+        url="https://vifadigital.ge/start-project"
         type="website"
         structuredData={startProjectStructuredData}
       />

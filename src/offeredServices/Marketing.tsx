@@ -188,84 +188,88 @@ const Marketing: React.FC = () => {
       <SEO
         title="Digital Advertising Services - VIFA"
         description="Professional digital advertising services including video production, photography, social media management, and creative content."
+        url="https://vifadigital.ge/services/digital-advertising"
       />
 
-      {/* Silk Shader Background */}
+      {/* Professional Marketing Background - Ultra Dark */}
       <div className="fixed inset-0 z-0">
-        <Silk
-          speed={4}
-          scale={1.1}
-          color="#2d1b69"
-          noiseIntensity={0.9}
-          rotation={0.15}
-        />
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-black/55"></div>
-        {/* Subtle purple accent overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/40 via-transparent to-slate-900/30"></div>
+        {/* Ultra dark base */}
+        <div className="absolute inset-0 bg-black"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-black to-gray-950"></div>
+
+        {/* Very subtle marketing elements */}
+        <div className="absolute inset-0 marketing-pattern opacity-4"></div>
+
+        {/* Minimal animated overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-red-950/15 via-transparent to-orange-950/15 animate-marketing-glow"></div>
+
+        {/* Darker depth layers */}
+        <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-gray-950/25 to-transparent"></div>
+        <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-gray-950/25 to-transparent"></div>
+
+        {/* Very subtle branding accent */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-red-950/5 via-transparent to-amber-950/5"></div>
+
+        {/* Reduced texture overlay */}
+        <div className="absolute inset-0 bg-marketing-texture opacity-2"></div>
       </div>
 
       <style>{`
-        @keyframes gradient-shift-marketing {
-          0%, 100% {
-            background: linear-gradient(135deg, #581c87 0%, #1e293b 50%, #581c87 100%);
-          }
-          25% {
-            background: linear-gradient(135deg, #7c3aed 0%, #6366f1 50%, #ec4899 100%);
-          }
-          50% {
-            background: linear-gradient(135deg, #a855f7 0%, #8b5cf6 50%, #d946ef 100%);
-          }
-          75% {
-            background: linear-gradient(135deg, #6366f1 0%, #581c87 50%, #7c3aed 100%);
-          }
+        /* Professional marketing pattern */
+        .marketing-pattern {
+          background-image:
+            radial-gradient(circle at 25% 25%, rgba(239, 68, 68, 0.05) 0%, transparent 50%),
+            radial-gradient(circle at 75% 75%, rgba(245, 158, 11, 0.05) 0%, transparent 50%),
+            linear-gradient(45deg, rgba(239, 68, 68, 0.02) 25%, transparent 25%),
+            linear-gradient(-45deg, rgba(245, 158, 11, 0.02) 25%, transparent 25%);
+          background-size: 200px 200px, 200px 200px, 60px 60px, 60px 60px;
+          animation: marketing-drift 25s linear infinite;
         }
 
-        @keyframes float-slow {
-          0%, 100% { transform: translate(0, 0) rotate(0deg); }
-          25% { transform: translate(30px, -20px) rotate(90deg); }
-          50% { transform: translate(-20px, -40px) rotate(180deg); }
-          75% { transform: translate(-40px, 20px) rotate(270deg); }
+        @keyframes marketing-drift {
+          0% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+          100% { background-position: 200px 200px, -200px -200px, 60px 60px, -60px -60px; }
         }
 
-        @keyframes float-reverse {
-          0%, 100% { transform: translate(0, 0) rotate(0deg); }
-          25% { transform: translate(-30px, 20px) rotate(-90deg); }
-          50% { transform: translate(20px, 40px) rotate(-180deg); }
-          75% { transform: translate(40px, -20px) rotate(-270deg); }
+        /* Marketing glow animation - darker */
+        @keyframes marketing-glow {
+          0%, 100% { opacity: 0.1; transform: translateX(-50px); }
+          50% { opacity: 0.2; transform: translateX(50px); }
         }
 
-        @keyframes float-diagonal {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          25% { transform: translate(40px, -30px) scale(1.1); }
-          50% { transform: translate(-30px, -50px) scale(0.9); }
-          75% { transform: translate(-50px, 30px) scale(1.05); }
+        .animate-marketing-glow {
+          animation: marketing-glow 8s ease-in-out infinite;
         }
 
-        .animate-gradient-shift-marketing {
-          animation: gradient-shift-marketing 25s ease-in-out infinite;
+        /* Sophisticated marketing texture */
+        .bg-marketing-texture {
+          background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ef4444' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3Ccircle cx='10' cy='10' r='1'/%3E%3Ccircle cx='50' cy='50' r='1'/%3E%3Ccircle cx='10' cy='50' r='1'/%3E%3Ccircle cx='50' cy='10' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
 
-        .animate-float-slow {
-          animation: float-slow 28s ease-in-out infinite;
-        }
-
-        .animate-float-reverse {
-          animation: float-reverse 32s ease-in-out infinite;
-        }
-
-        .animate-float-diagonal {
-          animation: float-diagonal 30s ease-in-out infinite;
-        }
-
-        /* Reduce animation on mobile and slow connections */
+        /* Performance optimizations */
         @media (max-width: 768px), (prefers-reduced-motion: reduce) {
-          .animate-gradient-shift-marketing,
-          .animate-float-slow,
-          .animate-float-reverse,
-          .animate-float-diagonal {
+          .marketing-pattern,
+          .animate-marketing-glow {
             animation: none;
           }
+          .bg-marketing-texture {
+            display: none;
+          }
+        }
+
+        /* Professional accent elements */
+        .marketing-accent {
+          background: linear-gradient(135deg,
+            rgba(239, 68, 68, 0.1) 0%,
+            rgba(245, 158, 11, 0.1) 100%);
+        }
+
+        /* Subtle brand consistent elements */
+        .brand-consistent {
+          background: radial-gradient(ellipse at center,
+            rgba(239, 68, 68, 0.05) 0%,
+            rgba(245, 158, 11, 0.03) 50%,
+            transparent 100%);
         }
       `}</style>
 

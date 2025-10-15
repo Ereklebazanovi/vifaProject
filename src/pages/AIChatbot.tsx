@@ -169,6 +169,7 @@ const AIChatbot: React.FC = () => {
       <SEO
         title="AI ჩატბოტები - თქვენი ბიზნესის ციფრული რევოლუცია - VIFA"
         description="AI ჩატბოტები Facebook, WhatsApp და Instagram-ისთვის. 24/7 მომხმარებელთა მხარდაჭერა, გაყიდვების ზრდა და ხარჯების ოპტიმიზაცია. Google Gemini AI ტექნოლოგია."
+        url="https://vifadigital.ge/services/ai-chatbot"
       />
 
       {/* Background Image */}

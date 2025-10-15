@@ -34,6 +34,7 @@ import {
 import SEO from "../components/SEO";
 import RotatingText from "../components/RotatingText";
 import Silk from "../components/Silk";
+import TrueFocus from "../components/TrueFocus";
 
 const WebDev: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
@@ -190,84 +191,78 @@ const WebDev: React.FC = () => {
       <SEO
         title="Web Development Services - VIFA"
         description="Professional web development services including React, Node.js, mobile responsive design, and modern web applications."
+        url="https://vifadigital.ge/services/web-development"
       />
 
-      {/* Silk Shader Background */}
+      {/* Professional Tech Background - Ultra Dark */}
       <div className="fixed inset-0 z-0">
-        <Silk
-          speed={3}
-          scale={1.2}
-          color="#0f172a"
-          noiseIntensity={0.8}
-          rotation={0.1}
-        />
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-black/50"></div>
-        {/* Subtle blue accent overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-transparent to-black"></div>
+        {/* Ultra dark base */}
+        <div className="absolute inset-0 bg-black"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-black to-gray-950"></div>
+
+        {/* Very subtle tech grid overlay */}
+        <div className="absolute inset-0 tech-grid opacity-5"></div>
+
+        {/* Minimal animated gradients */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-950/15 via-transparent to-purple-950/15 animate-pulse-slow"></div>
+
+        {/* Darker accent overlays */}
+        <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-gray-950/20 to-transparent"></div>
+        <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-gray-950/20 to-transparent"></div>
+
+        {/* Very subtle noise texture */}
+        <div className="absolute inset-0 bg-noise opacity-2"></div>
       </div>
 
       <style>{`
-        @keyframes gradient-shift {
-          0%, 100% {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
-          }
-          25% {
-            background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #1e293b 100%);
-          }
-          50% {
-            background: linear-gradient(135deg, #334155 0%, #475569 50%, #334155 100%);
-          }
-          75% {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #334155 100%);
-          }
+        /* Professional tech grid pattern */
+        .tech-grid {
+          background-image:
+            linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+            linear-gradient(rgba(139, 92, 246, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(139, 92, 246, 0.05) 1px, transparent 1px);
+          background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+          animation: grid-move 20s linear infinite;
         }
 
-        @keyframes float-slow {
-          0%, 100% { transform: translate(0, 0) rotate(0deg); }
-          25% { transform: translate(30px, -20px) rotate(90deg); }
-          50% { transform: translate(-20px, -40px) rotate(180deg); }
-          75% { transform: translate(-40px, 20px) rotate(270deg); }
+        @keyframes grid-move {
+          0% { background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px; }
+          100% { background-position: 100px 100px, 100px 100px, 20px 20px, 20px 20px; }
         }
 
-        @keyframes float-reverse {
-          0%, 100% { transform: translate(0, 0) rotate(0deg); }
-          25% { transform: translate(-30px, 20px) rotate(-90deg); }
-          50% { transform: translate(20px, 40px) rotate(-180deg); }
-          75% { transform: translate(40px, -20px) rotate(-270deg); }
+        /* Subtle noise texture */
+        .bg-noise {
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
-        @keyframes float-diagonal {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          25% { transform: translate(40px, -30px) scale(1.1); }
-          50% { transform: translate(-30px, -50px) scale(0.9); }
-          75% { transform: translate(-50px, 30px) scale(1.05); }
+        /* Slow pulse animation - darker */
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 0.1; }
+          50% { opacity: 0.2; }
         }
 
-        .animate-gradient-shift {
-          animation: gradient-shift 20s ease-in-out infinite;
+        .animate-pulse-slow {
+          animation: pulse-slow 4s ease-in-out infinite;
         }
 
-        .animate-float-slow {
-          animation: float-slow 30s ease-in-out infinite;
-        }
-
-        .animate-float-reverse {
-          animation: float-reverse 35s ease-in-out infinite;
-        }
-
-        .animate-float-diagonal {
-          animation: float-diagonal 25s ease-in-out infinite;
-        }
-
-        /* Reduce animation on mobile and slow connections */
+        /* Performance optimizations */
         @media (max-width: 768px), (prefers-reduced-motion: reduce) {
-          .animate-gradient-shift,
-          .animate-float-slow,
-          .animate-float-reverse,
-          .animate-float-diagonal {
+          .tech-grid,
+          .animate-pulse-slow {
             animation: none;
           }
+          .bg-noise {
+            display: none;
+          }
+        }
+
+        /* Additional professional elements */
+        .tech-accent {
+          background: linear-gradient(135deg,
+            rgba(59, 130, 246, 0.1) 0%,
+            rgba(139, 92, 246, 0.1) 50%,
+            rgba(59, 130, 246, 0.1) 100%);
         }
       `}</style>
 
@@ -279,77 +274,17 @@ const WebDev: React.FC = () => {
           {/* Hero Section */}
           <div className="max-w-6xl mx-auto mb-32">
             <div className="text-center mb-16">
-              <div className="flex items-center justify-center">
-                {/* Unified container for both texts */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  className="flex items-center gap-2 sm:gap-3 md:gap-3 px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5"
-                  style={{ fontFamily: "Inter, system-ui, sans-serif" }}
-                >
-                  {/* Left side - Creative text */}
-                  <h2
-                    className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-widest"
-                    style={{
-                      fontFamily:
-                        'SF Pro Display, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-                      letterSpacing: "0.09em",
-                    }}
-                  >
-                    creative{" "}
-                  </h2>
-
-                  {/* Right side - Rotating text box */}
-                  <div className="ml-2 sm:ml-3">
-                    <RotatingText
-                      texts={[
-                        "𝕥𝕙𝕚𝕟𝕜𝕚𝕟𝕘",
-                        "𝕤𝕠𝕝𝕦𝕥𝕚𝕠𝕟𝕤",
-                        "𝕚𝕟𝕟𝕠𝕧𝕒𝕥𝕚𝕠𝕟",
-                        "𝕗𝕦𝕥𝕦𝕣𝕖",
-                        "𝕕𝕖𝕤𝕚𝕘𝕟",
-                        "𝕧𝕚𝕤𝕚𝕠𝕟",
-                        "𝕚𝕕𝕖𝕒𝕤",
-                      ]}
-                      mainClassName="px-4 py-2 bg-slate-900/30 backdrop-blur-md text-blue-400 justify-center items-center rounded-lg font-medium text-base sm:text-lg md:text-xl lg:text-2xl xl:text-lg tracking-normal shadow-lg shadow-blue-400/20 hover:shadow-blue-400/40 transition-all duration-300 hover:scale-102 border border-blue-400/20 hover:border-blue-400/40"
-                      elementLevelClassName="inline-block transition-all duration-200 ease-out"
-                      style={{
-                        fontFamily:
-                          "Inter, system-ui, -apple-system, sans-serif",
-                        fontWeight: "500",
-                      }}
-                      staggerFrom="center"
-                      initial={{
-                        y: "120%",
-                        opacity: 0,
-                        rotateX: 90,
-                        scale: 0.8,
-                      }}
-                      animate={{
-                        y: 0,
-                        opacity: 1,
-                        rotateX: 0,
-                        scale: 1,
-                      }}
-                      exit={{
-                        y: "-120%",
-                        opacity: 0,
-                        rotateX: -90,
-                        scale: 0.8,
-                      }}
-                      staggerDuration={0.035}
-                      splitLevelClassName="overflow-hidden perspective-1000"
-                      transition={{
-                        type: "spring",
-                        damping: 25,
-                        stiffness: 300,
-                        mass: 0.8,
-                      }}
-                      rotationInterval={3000}
-                    />
-                  </div>
-                </motion.div>
+              <div className="mb-8 flex justify-center">
+                <div className="w-64 sm:w-72 md:w-80 lg:w-96">
+                  <TrueFocus
+                    sentence="WEB DEVELOPMENT"
+                    blurAmount={4}
+                    borderColor="#8b5cf6"
+                    glowColor="rgba(139, 92, 246, 0.6)"
+                    animationDuration={0.8}
+                    pauseBetweenAnimations={2}
+                  />
+                </div>
               </div>
 
               {/* Stats Row */}
@@ -519,7 +454,9 @@ const WebDev: React.FC = () => {
                 {/* Footer - Mobile Optimized */}
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-4 border-t border-slate-700">
                   <div className="text-slate-400 text-center sm:text-left">
-                    <span className="text-xs sm:text-sm">ფასი დამოკიდებულია</span>
+                    <span className="text-xs sm:text-sm">
+                      ფასი დამოკიდებულია
+                    </span>
                     <div className="text-base sm:text-lg font-medium text-blue-400">
                       პროექტზე
                     </div>
@@ -583,7 +520,9 @@ const WebDev: React.FC = () => {
                 {/* Footer - Mobile Optimized */}
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-4 border-t border-slate-700">
                   <div className="text-slate-400 text-center sm:text-left">
-                    <span className="text-xs sm:text-sm">ფასი დამოკიდებულია</span>
+                    <span className="text-xs sm:text-sm">
+                      ფასი დამოკიდებულია
+                    </span>
                     <div className="text-base sm:text-lg font-medium text-cyan-400">
                       პროექტზე
                     </div>
