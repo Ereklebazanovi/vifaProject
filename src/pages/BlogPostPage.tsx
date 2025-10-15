@@ -57,7 +57,7 @@ const BlogPostPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-950 pt-32">
+      <div className="min-h-screen bg-black pt-32">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center py-20">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-400"></div>
@@ -69,7 +69,7 @@ const BlogPostPage: React.FC = () => {
 
   if (notFound || !post) {
     return (
-      <div className="min-h-screen bg-slate-950 pt-32">
+      <div className="min-h-screen bg-black pt-32">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center py-20">
             <div className="text-4xl mb-4">📄</div>
@@ -120,7 +120,7 @@ const BlogPostPage: React.FC = () => {
         <meta name="robots" content="index, follow" />
       </Helmet>
 
-      <div className="min-h-screen bg-slate-950 mt-16">
+      <div className="min-h-screen bg-black mt-16">
         <div className="pt-32 pb-20">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Back Button */}
@@ -135,7 +135,7 @@ const BlogPostPage: React.FC = () => {
             </div>
 
             {/* Article */}
-            <article className="bg-slate-800/20 border border-slate-700/30 rounded-lg overflow-hidden">
+            <article className="bg-gray-900/30 border border-gray-800/40 rounded-lg overflow-hidden">
               {/* Header */}
               <div className="p-6 sm:p-8 pb-6">
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
@@ -155,7 +155,7 @@ const BlogPostPage: React.FC = () => {
                   <span className="hidden sm:inline">{formatDate(post.publishedAt)}</span>
                   <button
                     onClick={handleShare}
-                    className="flex items-center gap-2 px-3 py-1 bg-slate-700/50 hover:bg-slate-700 rounded-lg transition-colors text-slate-300 text-xs sm:text-sm"
+                    className="flex items-center gap-2 px-3 py-1 bg-gray-800/50 hover:bg-gray-800 rounded-lg transition-colors text-slate-300 text-xs sm:text-sm"
                   >
                     <FiShare2 className="w-4 h-4" />
                     <span className="hidden sm:inline">გაზიარება</span>
@@ -167,7 +167,7 @@ const BlogPostPage: React.FC = () => {
               {/* Thumbnail Image */}
               {post.thumbnail && (
                 <div className="px-6 sm:px-8 mb-8">
-                  <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto rounded-lg overflow-hidden bg-slate-700/50">
+                  <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto rounded-lg overflow-hidden bg-gray-800/50">
                     <img
                       src={post.thumbnail}
                       alt={post.title}
@@ -185,7 +185,7 @@ const BlogPostPage: React.FC = () => {
               </div>
 
               {/* Footer */}
-              <div className="px-8 py-6 bg-slate-800/40 border-t border-slate-700/50">
+              <div className="px-8 py-6 bg-gray-900/40 border-t border-gray-800/50">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-semibold">
@@ -211,14 +211,14 @@ const BlogPostPage: React.FC = () => {
             <div className="mt-8 flex justify-between">
               <Link
                 to="/blog"
-                className="px-6 py-3 bg-slate-800/50 hover:bg-slate-800 text-slate-300 hover:text-white rounded-lg transition-colors"
+                className="px-6 py-3 bg-gray-900/50 hover:bg-gray-900 text-slate-300 hover:text-white rounded-lg transition-colors"
               >
                 ← ყველა სტატია
               </Link>
 
               <Link
                 to="/start-project"
-                className="px-6 py-3 bg-slate-800/50 hover:bg-slate-800 text-slate-300 hover:text-white rounded-lg transition-colors"
+                className="px-6 py-3 bg-gray-900/50 hover:bg-gray-900 text-slate-300 hover:text-white rounded-lg transition-colors"
               >
                 დაიწყეთ პროექტი →
               </Link>

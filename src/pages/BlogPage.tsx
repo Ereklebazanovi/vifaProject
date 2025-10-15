@@ -26,7 +26,7 @@ const BlogPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-950 pt-32">
+      <div className="min-h-screen bg-black pt-32">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center py-20">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-400"></div>
@@ -72,7 +72,7 @@ const BlogPage: React.FC = () => {
         <meta name="twitter:image" content="/images/blog/blog-cover.jpg" />
       </Helmet>
 
-      <div className="min-h-screen bg-slate-950 mt-18">
+      <div className="min-h-screen bg-black mt-15">
         <div className="pt-32 pb-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Simple Header */}
@@ -121,11 +121,11 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post, index }) => {
         animationDelay: `${index * 100}ms`,
       }}
     >
-      <article className="bg-slate-800/20 border border-slate-700/30 rounded-lg p-4 sm:p-6 hover:bg-slate-800/40 hover:border-slate-600/50 transition-all duration-300 opacity-0 animate-[fadeInUp_0.6s_ease-out_forwards]">
+      <article className="bg-gray-900/30 border border-gray-800/40 rounded-lg p-4 sm:p-6 hover:bg-gray-900/50 hover:border-gray-700/60 transition-all duration-300 opacity-0 animate-[fadeInUp_0.6s_ease-out_forwards]">
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
           {/* Small Thumbnail */}
           <div className="w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 mx-auto sm:mx-0">
-            <div className="w-full h-full bg-slate-700/50 rounded-lg overflow-hidden">
+            <div className="w-full h-full bg-gray-800/50 rounded-lg overflow-hidden">
               {post.thumbnail ? (
                 <img
                   src={post.thumbnail}

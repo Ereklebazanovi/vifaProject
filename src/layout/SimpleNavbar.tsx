@@ -73,7 +73,7 @@ const SimpleNavbar: React.FC = () => {
     <>
       {/* Main Navbar */}
       <nav
-        className={`fixed w-full top-0 z-[100] transition-transform duration-300 ease-in-out bg-slate-950/95 backdrop-blur-sm border-b border-slate-800/50 ${
+        className={`fixed w-full top-0 z-[100] transition-transform duration-300 ease-in-out backdrop-blur-sm border-b border-slate-800/50 ${
           isVisible ? "translate-y-0" : "-translate-y-full"
         }`}
       >
