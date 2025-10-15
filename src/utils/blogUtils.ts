@@ -1,5 +1,5 @@
 import { marked } from 'marked';
-import matter from 'gray-matter';
+import * as matter from 'gray-matter';
 import type { BlogPost, BlogPostMetadata } from '../types/blog';
 
 // Calculate reading time based on word count (average 200 words per minute)
