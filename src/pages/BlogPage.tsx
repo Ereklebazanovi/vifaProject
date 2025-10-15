@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { getAllBlogPosts, formatDate } from '../utils/blogUtils';
-import type { BlogPostMetadata } from '../types/blog';
-import { Helmet } from 'react-helmet-async';
-import { FiClock, FiUser, FiArrowRight } from 'react-icons/fi';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { getAllBlogPosts, formatDate } from "../utils/blogUtils";
+import type { BlogPostMetadata } from "../types/blog";
+import { Helmet } from "react-helmet-async";
+import { FiClock, FiUser, FiArrowRight } from "react-icons/fi";
 
 const BlogPage: React.FC = () => {
   const [blogPosts, setBlogPosts] = useState<BlogPostMetadata[]>([]);
@@ -15,7 +15,7 @@ const BlogPage: React.FC = () => {
         const posts = await getAllBlogPosts();
         setBlogPosts(posts);
       } catch (error) {
-        console.error('Error loading blog posts:', error);
+        console.error("Error loading blog posts:", error);
       } finally {
         setLoading(false);
       }
@@ -51,7 +51,10 @@ const BlogPage: React.FC = () => {
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="ბლოგი - Vifa Digital | ციფრული მარკეტინგის სტატიები" />
+        <meta
+          property="og:title"
+          content="ბლოგი - Vifa Digital | ციფრული მარკეტინგის სტატიები"
+        />
         <meta
           property="og:description"
           content="ციფრული მარკეტინგის, ვებ განვითარების და სოციალური მედიის შესახებ სტატიები Vifa Digital-ისგან."
@@ -69,25 +72,26 @@ const BlogPage: React.FC = () => {
         <meta name="twitter:image" content="/images/blog/blog-cover.jpg" />
       </Helmet>
 
-      <div className="min-h-screen bg-slate-950">
+      <div className="min-h-screen bg-slate-950 mt-18">
         <div className="pt-32 pb-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Simple Header */}
-            <div className="text-center mb-16">
-              <h1 className="text-4xl md:text-5xl font-light text-white mb-6">
-                ბლოგი
+            <div className="text-center mb-10">
+              <h1 className="text-2xl md:text-5xl font-light text-white mb-6">
+                სტატიები
               </h1>
-              <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-                პრაქტიკული რჩევები
-              </p>
             </div>
 
             {/* Blog Posts List */}
             {blogPosts.length === 0 ? (
               <div className="text-center py-16">
                 <div className="text-4xl mb-4">📝</div>
-                <h3 className="text-xl font-semibold text-white mb-2">სტატიები მალე დაემატება</h3>
-                <p className="text-slate-400">ჩვენ ვამზადებთ საინტერესო კონტენტს თქვენთვის</p>
+                <h3 className="text-xl font-semibold text-white mb-2">
+                  სტატიები მალე დაემატება
+                </h3>
+                <p className="text-slate-400">
+                  ჩვენ ვამზადებთ საინტერესო კონტენტს თქვენთვის
+                </p>
               </div>
             ) : (
               <div className="space-y-6">
@@ -117,12 +121,10 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post, index }) => {
         animationDelay: `${index * 100}ms`,
       }}
     >
-
-      
-      <article className="bg-slate-800/20 border border-slate-700/30 rounded-lg p-6 hover:bg-slate-800/40 hover:border-slate-600/50 transition-all duration-300 opacity-0 animate-[fadeInUp_0.6s_ease-out_forwards]">
-        <div className="flex gap-6">
+      <article className="bg-slate-800/20 border border-slate-700/30 rounded-lg p-4 sm:p-6 hover:bg-slate-800/40 hover:border-slate-600/50 transition-all duration-300 opacity-0 animate-[fadeInUp_0.6s_ease-out_forwards]">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
           {/* Small Thumbnail */}
-          <div className="w-24 h-24 flex-shrink-0">
+          <div className="w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 mx-auto sm:mx-0">
             <div className="w-full h-full bg-slate-700/50 rounded-lg overflow-hidden">
               {post.thumbnail ? (
                 <img
@@ -139,30 +141,34 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post, index }) => {
           </div>
 
           {/* Content */}
-          <div className="flex-1 min-w-0">
-            <h2 className="text-xl font-semibold text-white mb-3 group-hover:text-blue-400 transition-colors leading-tight">
+          <div className="flex-1 min-w-0 text-center sm:text-left">
+            <h2 className="text-lg sm:text-xl font-semibold text-white mb-3 group-hover:text-blue-400 transition-colors leading-tight">
               {post.title}
             </h2>
 
-            <p className="text-slate-300 mb-4 line-clamp-2">
+            <p className="text-slate-300 mb-4 line-clamp-2 text-sm sm:text-base">
               {post.description}
             </p>
 
             {/* Meta */}
-            <div className="flex items-center gap-4 text-sm text-slate-400">
-              <div className="flex items-center gap-1">
-                <FiUser className="w-4 h-4" />
-                <span>{post.author.name}</span>
+            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-xs sm:text-sm text-slate-400">
+              <div className="flex items-center gap-4 sm:gap-1">
+                <div className="flex items-center gap-1">
+                  <FiUser className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="truncate">{post.author.name}</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <FiClock className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span>{post.readingTime} წუთი</span>
+                </div>
+                <span className="hidden sm:inline">
+                  {formatDate(post.publishedAt)}
+                </span>
               </div>
-              <div className="flex items-center gap-1">
-                <FiClock className="w-4 h-4" />
-                <span>{post.readingTime} წუთი</span>
-              </div>
-              <span>{formatDate(post.publishedAt)}</span>
 
-              <div className="ml-auto flex items-center gap-1 text-blue-400 group-hover:text-blue-300 transition-colors">
+              <div className="flex items-center gap-1 text-blue-400 group-hover:text-blue-300 transition-colors sm:ml-auto">
                 <span>წაიკითხეთ</span>
-                <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <FiArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
               </div>
             </div>
           </div>
@@ -173,7 +179,7 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post, index }) => {
 };
 
 // Add the fadeInUp animation to the global styles
-const style = document.createElement('style');
+const style = document.createElement("style");
 style.textContent = `
   @keyframes fadeInUp {
     from {

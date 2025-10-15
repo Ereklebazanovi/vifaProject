@@ -120,9 +120,9 @@ const BlogPostPage: React.FC = () => {
         <meta name="robots" content="index, follow" />
       </Helmet>
 
-      <div className="min-h-screen bg-slate-950">
+      <div className="min-h-screen bg-slate-950 mt-16">
         <div className="pt-32 pb-20">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Back Button */}
             <div className="mb-8">
               <Link
@@ -137,13 +137,13 @@ const BlogPostPage: React.FC = () => {
             {/* Article */}
             <article className="bg-slate-800/20 border border-slate-700/30 rounded-lg overflow-hidden">
               {/* Header */}
-              <div className="p-8 pb-6">
-                <h1 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
+              <div className="p-6 sm:p-8 pb-6">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
                   {post.title}
                 </h1>
 
                 {/* Meta */}
-                <div className="flex flex-wrap items-center gap-6 text-sm text-slate-400 mb-6">
+                <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-sm text-slate-400 mb-6">
                   <div className="flex items-center gap-2">
                     <FiUser className="w-4 h-4" />
                     <span>{post.author.name}</span>
@@ -152,21 +152,22 @@ const BlogPostPage: React.FC = () => {
                     <FiClock className="w-4 h-4" />
                     <span>{post.readingTime} წუთი</span>
                   </div>
-                  <span>{formatDate(post.publishedAt)}</span>
+                  <span className="hidden sm:inline">{formatDate(post.publishedAt)}</span>
                   <button
                     onClick={handleShare}
-                    className="flex items-center gap-2 px-3 py-1 bg-slate-700/50 hover:bg-slate-700 rounded-lg transition-colors text-slate-300"
+                    className="flex items-center gap-2 px-3 py-1 bg-slate-700/50 hover:bg-slate-700 rounded-lg transition-colors text-slate-300 text-xs sm:text-sm"
                   >
                     <FiShare2 className="w-4 h-4" />
-                    <span>გაზიარება</span>
+                    <span className="hidden sm:inline">გაზიარება</span>
+                    <span className="sm:hidden">📤</span>
                   </button>
                 </div>
               </div>
 
-              {/* Small Hero Image */}
+              {/* Thumbnail Image */}
               {post.thumbnail && (
-                <div className="px-8 mb-8">
-                  <div className="aspect-video rounded-lg overflow-hidden bg-slate-700/50">
+                <div className="px-6 sm:px-8 mb-8">
+                  <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto rounded-lg overflow-hidden bg-slate-700/50">
                     <img
                       src={post.thumbnail}
                       alt={post.title}
@@ -177,7 +178,7 @@ const BlogPostPage: React.FC = () => {
               )}
 
               {/* Content */}
-              <div className="px-8 pb-8">
+              <div className="px-6 sm:px-8 pb-8">
                 <div className="prose prose-lg prose-invert max-w-none">
                   <div dangerouslySetInnerHTML={{ __html: post.content }} />
                 </div>
@@ -227,66 +228,233 @@ const BlogPostPage: React.FC = () => {
       </div>
 
       <style>{`
+        /* Main prose styling - optimized for readability */
         .prose {
-          color: #cbd5e1;
-          line-height: 1.75;
-        }
-        .prose h2, .prose h3, .prose h4 {
-          color: #ffffff;
-          font-weight: 600;
-          margin-top: 2rem;
-          margin-bottom: 1rem;
-        }
-        .prose h2 {
-          font-size: 1.75rem;
-          border-bottom: 1px solid #475569;
-          padding-bottom: 0.5rem;
-        }
-        .prose h3 {
-          font-size: 1.375rem;
-        }
-        .prose p {
-          margin-bottom: 1.5rem;
-        }
-        .prose ul, .prose ol {
-          margin: 1.5rem 0;
-          padding-left: 1.5rem;
-        }
-        .prose li {
-          margin-bottom: 0.5rem;
-        }
-        .prose blockquote {
-          border-left: 4px solid #3b82f6;
-          padding: 1rem 1.5rem;
-          margin: 2rem 0;
-          background: rgba(30, 41, 59, 0.5);
-          border-radius: 0.5rem;
-          color: #94a3b8;
-        }
-        .prose a {
-          color: #60a5fa;
-          text-decoration: underline;
-        }
-        .prose a:hover {
-          color: #93c5fd;
-        }
-        .prose code {
-          background: rgba(30, 41, 59, 0.8);
           color: #e2e8f0;
-          padding: 0.25rem 0.5rem;
-          border-radius: 0.25rem;
-          font-size: 0.875rem;
+          line-height: 1.75;
+          font-size: 1.125rem;
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
-        .prose pre {
-          background: rgba(15, 23, 42, 0.8);
+
+        /* Lead paragraph */
+        .prose .lead {
+          font-size: 1.25rem;
+          font-weight: 400;
+          color: #f1f5f9;
+          margin-bottom: 2.5rem;
+          line-height: 1.7;
+          border-left: 4px solid #3b82f6;
+          padding-left: 1.5rem;
+          background: rgba(59, 130, 246, 0.05);
           padding: 1.5rem;
           border-radius: 0.5rem;
-          margin: 1.5rem 0;
-          overflow-x: auto;
         }
+
+        /* Headings with better hierarchy */
+        .prose h2, .prose h3, .prose h4 {
+          color: #ffffff;
+          font-weight: 700;
+          margin-top: 3rem;
+          margin-bottom: 1.25rem;
+          scroll-margin-top: 6rem;
+        }
+
+        .prose h2 {
+          font-size: 1.875rem;
+          border-bottom: 2px solid #475569;
+          padding-bottom: 0.75rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .prose h3 {
+          font-size: 1.5rem;
+          color: #60a5fa;
+        }
+
+        .prose h4 {
+          font-size: 1.25rem;
+          color: #94a3b8;
+        }
+
+        /* Paragraph spacing for better reading flow */
+        .prose p {
+          margin-bottom: 1.75rem;
+          text-align: justify;
+          hyphens: auto;
+        }
+
+        /* Lists with better spacing */
+        .prose ul, .prose ol {
+          margin: 2rem 0;
+          padding-left: 2rem;
+        }
+
+        .prose li {
+          margin-bottom: 0.75rem;
+          line-height: 1.7;
+        }
+
+        .prose li::marker {
+          color: #60a5fa;
+        }
+
+        /* Enhanced blockquotes */
+        .prose blockquote {
+          border-left: 4px solid #3b82f6;
+          padding: 1.5rem 2rem;
+          margin: 2.5rem 0;
+          background: rgba(30, 41, 59, 0.6);
+          border-radius: 0.75rem;
+          color: #cbd5e1;
+          font-style: italic;
+          font-size: 1.1rem;
+          position: relative;
+        }
+
+        .prose blockquote::before {
+          content: '"';
+          font-size: 4rem;
+          color: #3b82f6;
+          position: absolute;
+          top: -0.5rem;
+          left: 1rem;
+          line-height: 1;
+        }
+
+        .prose blockquote p {
+          margin: 0;
+          position: relative;
+          z-index: 1;
+        }
+
+        /* Links with better hover states */
+        .prose a {
+          color: #60a5fa;
+          text-decoration: none;
+          border-bottom: 1px dotted #60a5fa;
+          transition: all 0.2s ease;
+        }
+
+        .prose a:hover {
+          color: #93c5fd;
+          border-bottom: 1px solid #93c5fd;
+          background: rgba(96, 165, 250, 0.1);
+          padding: 0.125rem 0.25rem;
+          border-radius: 0.25rem;
+          margin: 0 -0.25rem;
+        }
+
+        /* Code styling */
+        .prose code {
+          background: rgba(15, 23, 42, 0.8);
+          color: #e2e8f0;
+          padding: 0.375rem 0.5rem;
+          border-radius: 0.375rem;
+          font-size: 0.9rem;
+          border: 1px solid #334155;
+        }
+
+        .prose pre {
+          background: rgba(15, 23, 42, 0.9);
+          padding: 2rem;
+          border-radius: 0.75rem;
+          margin: 2rem 0;
+          overflow-x: auto;
+          border: 1px solid #334155;
+        }
+
+        /* Strong text */
         .prose strong {
           color: #ffffff;
-          font-weight: 600;
+          font-weight: 700;
+        }
+
+        /* Enhanced highlight boxes */
+        .prose .highlight-box {
+          background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(30, 41, 59, 0.6));
+          border: 1px solid #475569;
+          border-radius: 1rem;
+          padding: 2.5rem;
+          margin: 3rem 0;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .prose .highlight-box::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 4px;
+          background: linear-gradient(90deg, #3b82f6, #60a5fa, #93c5fd);
+        }
+
+        .prose .highlight-box h4 {
+          color: #60a5fa;
+          font-size: 1.25rem;
+          font-weight: 700;
+          margin-top: 0;
+          margin-bottom: 1rem;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .prose .highlight-box h4::before {
+          content: '▶';
+          color: #3b82f6;
+          font-size: 0.875rem;
+        }
+
+        .prose .highlight-box h4:not(:first-child) {
+          margin-top: 2rem;
+        }
+
+        .prose .highlight-box p {
+          margin-bottom: 0;
+          color: #cbd5e1;
+          line-height: 1.7;
+        }
+
+        .prose .highlight-box p:not(:last-child) {
+          margin-bottom: 1.5rem;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 640px) {
+          .prose {
+            font-size: 1rem;
+            line-height: 1.7;
+          }
+
+          .prose .lead {
+            font-size: 1.125rem;
+            padding: 1rem;
+          }
+
+          .prose h2 {
+            font-size: 1.5rem;
+          }
+
+          .prose h3 {
+            font-size: 1.25rem;
+          }
+
+          .prose blockquote {
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+          }
+
+          .prose .highlight-box {
+            padding: 1.5rem;
+            margin: 2rem 0;
+          }
+
+          .prose p {
+            text-align: left;
+          }
         }
       `}</style>
     </>

@@ -73,7 +73,7 @@ const SimpleNavbar: React.FC = () => {
     <>
       {/* Main Navbar */}
       <nav
-        className={`fixed w-full top-0 z-[100] transition-transform duration-300 ease-in-out ${
+        className={`fixed w-full top-0 z-[100] transition-transform duration-300 ease-in-out bg-slate-950/95 backdrop-blur-sm border-b border-slate-800/50 ${
           isVisible ? "translate-y-0" : "-translate-y-full"
         }`}
       >
@@ -188,68 +188,61 @@ const SimpleNavbar: React.FC = () => {
             </button>
           </div>
 
-          {/* Mobile Navigation - Vertical layout for better space usage */}
+          {/* Mobile Navigation - 3x3 symmetric layout */}
           <div
             className={`mt-7 md:hidden flex flex-col space-y-2 ${getTransitionClasses()}`}
           >
+            {/* First row - 3 buttons */}
             <div className="flex justify-center items-center space-x-2">
-              {navLinks.slice(0, 2).map((link, index) => (
+              {navLinks.slice(0, 3).map((link, index) => (
                 <button
                   key={index}
                   onClick={() => handleNavigation(link.path)}
-                  className={`px-2 py-1.5 text-xs font-medium rounded-md transition-all duration-300 transform active:scale-95 text-center flex-1 max-w-[120px] border ${
+                  className={`px-2 py-2 text-xs font-medium rounded-md transition-all duration-300 transform active:scale-95 text-center flex-1 max-w-[110px] h-12 flex items-center justify-center border ${
                     location.pathname === link.path
                       ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-sm"
                       : "text-slate-300 hover:text-white hover:bg-white/5 hover:shadow-sm border-blue-500/30 hover:border-blue-400"
                   }`}
                 >
-                  <span className="block leading-tight">{link.label}</span>
-                </button>
-              ))}
-            </div>
-            <div className="flex justify-center items-center space-x-2">
-              {navLinks.slice(2).map((link, index) => (
-                <button
-                  key={index + 2}
-                  onClick={() => handleNavigation(link.path)}
-                  className={`px-2 py-1.5 text-xs font-medium rounded-md transition-all duration-300 transform active:scale-95 text-center flex-1 max-w-[120px] border ${
-                    location.pathname === link.path
-                      ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-sm"
-                      : "text-slate-300 hover:text-white hover:bg-white/5 hover:shadow-sm border-blue-500/30 hover:border-blue-400"
-                  }`}
-                >
-                  <span className="block leading-tight">{link.label}</span>
+                  <span className="block leading-tight text-[11px] text-center">{link.label}</span>
                 </button>
               ))}
             </div>
 
-            {/* Special AI Chatbot Button - Futuristic Mobile Design */}
-            <div className="flex justify-center items-center mt-2">
+            {/* Second row - 3 buttons (2 regular + 1 AI) */}
+            <div className="flex justify-center items-center space-x-2">
+              {navLinks.slice(3).map((link, index) => (
+                <button
+                  key={index + 3}
+                  onClick={() => handleNavigation(link.path)}
+                  className={`px-2 py-2 text-xs font-medium rounded-md transition-all duration-300 transform active:scale-95 text-center flex-1 max-w-[110px] h-12 flex items-center justify-center border ${
+                    location.pathname === link.path
+                      ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-sm"
+                      : "text-slate-300 hover:text-white hover:bg-white/5 hover:shadow-sm border-blue-500/30 hover:border-blue-400"
+                  }`}
+                >
+                  <span className="block leading-tight text-[11px] text-center">{link.label}</span>
+                </button>
+              ))}
+
+              {/* AI Chatbot Button - integrated into the grid */}
               <button
                 onClick={() => handleNavigation(aiChatbotLink.path)}
-                className={`group relative px-4 py-2.5 text-xs font-medium rounded-lg transition-all duration-500 transform active:scale-95 text-center max-w-[160px] border ${
+                className={`group relative px-2 py-2 text-xs font-medium rounded-md transition-all duration-500 transform active:scale-95 text-center flex-1 max-w-[110px] h-12 flex flex-col items-center justify-center border ${
                   location.pathname === aiChatbotLink.path
-                    ? "text-cyan-300 bg-gradient-to-r from-slate-800/90 to-slate-700/90 border-cyan-400 shadow-lg shadow-cyan-400/50"
-                    : "text-cyan-400 bg-gradient-to-r from-slate-800/40 to-slate-700/40 border-cyan-500/40 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-400/40"
+                    ? "text-cyan-300 bg-gradient-to-r from-slate-800/90 to-slate-700/90 border-cyan-400 shadow-sm shadow-cyan-400/50"
+                    : "text-cyan-400 bg-gradient-to-r from-slate-800/40 to-slate-700/40 border-cyan-500/40 hover:border-cyan-400 hover:shadow-sm hover:shadow-cyan-400/40"
                 }`}
               >
-                <div className="flex items-center justify-center gap-2">
-                  <FaRobot className={`text-sm transition-all duration-300 ${
+                <div className="flex flex-col items-center justify-center gap-0.5">
+                  <FaRobot className={`text-xs transition-all duration-300 ${
                     location.pathname === aiChatbotLink.path
                       ? "text-cyan-300 animate-pulse"
                       : "text-cyan-400 group-hover:animate-spin"
                   }`} />
-                  <span className="relative font-semibold">
+                  <span className="block leading-tight text-[11px] font-semibold text-center">
                     {aiChatbotLink.label}
-                    <span className={`absolute -top-1 -right-3 w-2 h-2 rounded-full transition-all duration-300 ${
-                      location.pathname === aiChatbotLink.path
-                        ? "bg-cyan-300 animate-ping"
-                        : "bg-cyan-400 opacity-70 group-hover:animate-pulse"
-                    }`}></span>
                   </span>
-                  <div className={`absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
-                    location.pathname === aiChatbotLink.path ? "opacity-30" : ""
-                  }`}></div>
                 </div>
               </button>
             </div>
