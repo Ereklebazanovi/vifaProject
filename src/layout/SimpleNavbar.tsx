@@ -59,6 +59,7 @@ const SimpleNavbar: React.FC = () => {
       label: t("services.advertising.title"),
     },
     { path: "/about", label: t("nav.about") },
+    { path: "/blog", label: t("nav.blog") },
     { path: "/start-project", label: t("nav.startProject") },
   ];
 

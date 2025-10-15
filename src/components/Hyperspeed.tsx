@@ -964,7 +964,7 @@ class App {
 
     this.scene = new THREE.Scene();
     this.scene.background = null;
-
+    
     const fog = new THREE.Fog(options.colors.background, options.length * 0.2, options.length * 500);
     this.scene.fog = fog;
 

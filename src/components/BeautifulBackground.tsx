@@ -143,12 +143,12 @@ const BeautifulBackground: React.FC<BeautifulBackgroundProps> = ({
         // Breathing effect
         const breathe = Math.sin(orb.phase) * 0.3 + 1;
         const currentRadius = orb.radius * breathe;
-
+        
         // Create gradient
         const gradient = ctx.createRadialGradient(orb.x, orb.y, 0, orb.x, orb.y, currentRadius);
         gradient.addColorStop(0, orb.color + Math.floor(orb.opacity * 255).toString(16).padStart(2, '0'));
         gradient.addColorStop(1, orb.color + '00');
-
+        
         // Draw orb
         ctx.beginPath();
         ctx.fillStyle = gradient;
@@ -161,7 +161,7 @@ const BeautifulBackground: React.FC<BeautifulBackgroundProps> = ({
         // Update position
         particle.x += particle.speedX;
         particle.y += particle.speedY;
-
+        
         // Wrap around edges
         if (particle.x < 0) particle.x = canvas.width;
         if (particle.x > canvas.width) particle.x = 0;
@@ -235,6 +235,7 @@ const BeautifulBackground: React.FC<BeautifulBackgroundProps> = ({
             purple: 'linear-gradient(135deg, #1a0f2e 0%, #2d1b69 50%, #1a0f2e 100%)',
             green: 'linear-gradient(135deg, #0a2e1a 0%, #1f2937 50%, #0a2e1a 100%)',
             orange: 'linear-gradient(135deg, #2d1b0f 0%, #1f2937 50%, #2d1b0f 100%)'
+            
           }[variant]
         }}
       />
