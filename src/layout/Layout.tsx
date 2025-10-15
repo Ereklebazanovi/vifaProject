@@ -12,7 +12,7 @@ const NavigationSpinner = () => (
     <div className="fixed inset-0 z-0">
       <div className="absolute inset-0 bg-black" />
       <div className="absolute inset-0 bg-gradient-to-br from-gray-950/50 via-black to-gray-900/30" />
-      <div className="absolute inset-0 bg-gradient-radial from-gray-900/20 via-transparent to-transparent" />
+      <div className="absolute inset-0" style={{background: 'radial-gradient(circle at center, rgba(17, 24, 39, 0.2), transparent, transparent)'}} />
     </div>
 
     {/* Elegant loading indicator */}
@@ -30,7 +30,7 @@ const NavigationSpinner = () => (
           <div className="absolute top-2 left-2 w-16 h-16 border-2 border-gray-800/40 border-t-blue-500 border-r-blue-400 rounded-full animate-spin shadow-lg"></div>
 
           {/* Inner ring with slower rotation */}
-          <div className="absolute top-4 left-4 w-12 h-12 border border-gray-600/30 border-b-blue-300 rounded-full animate-spin animation-reverse"></div>
+          <div className="absolute top-4 left-4 w-12 h-12 border border-gray-600/30 border-b-blue-300 rounded-full animate-spin" style={{animationDirection: 'reverse', animationDuration: '2s'}}></div>
 
           {/* Center elegant dot */}
           <div className="absolute top-1/2 left-1/2 w-3 h-3 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full transform -translate-x-1/2 -translate-y-1/2 animate-pulse shadow-lg shadow-blue-500/30"></div>
@@ -55,27 +55,6 @@ const NavigationSpinner = () => (
       </div>
     </div>
 
-    <style jsx>{`
-      .animation-reverse {
-        animation-direction: reverse;
-        animation-duration: 2s;
-      }
-
-      .bg-gradient-radial {
-        background: radial-gradient(circle at center, var(--tw-gradient-stops));
-      }
-
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-    `}</style>
   </div>
 );
 
