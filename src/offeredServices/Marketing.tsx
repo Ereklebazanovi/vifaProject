@@ -277,7 +277,7 @@ const Marketing: React.FC = () => {
           className={`container mx-auto px-4 sm:px-6 lg:px-8 py-10 ${getTransitionClasses()}`}
         >
           {/* Hero Section */}
-          <div className="max-w-6xl mx-auto mb-32 mt-26">
+          <div className="max-w-6xl mx-auto mb-32 mt-24">
             <div className="text-center mb-16">
               <div className="mb-8 flex justify-center">
                 <div className="w-64 sm:w-72 md:w-80 lg:w-96">

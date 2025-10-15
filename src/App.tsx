@@ -11,7 +11,6 @@ import { LanguageProvider } from "./contexts/LanguageContext";
 import { NavigationProvider } from "./contexts/NavigationContext";
 // Lazy load performance utilities
 import GoogleAnalytics from "./components/GoogleAnalytics";
-import SEO from "./components/SEO";
 import "./index.css";
 
 // Simple lazy loading - no artificial delays
@@ -68,37 +67,51 @@ class ErrorBoundary extends React.Component<
   }
 }
 
-// Beautiful blue loading component with enhanced design
+// Elegant black loading component (consistent with Layout)
 const LoadingSpinner = () => (
-  <div className="min-h-screen bg-slate-950">
-    {/* Dark gradient background similar to other pages */}
+  <div className="min-h-screen bg-black">
+    {/* Pure black gradient background with subtle elegance */}
     <div className="fixed inset-0 z-0">
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
-      <div className="absolute inset-0 bg-slate-950/40" />
+      <div className="absolute inset-0 bg-black" />
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-950/50 via-black to-gray-900/30" />
+      <div className="absolute inset-0" style={{background: 'radial-gradient(circle at center, rgba(17, 24, 39, 0.2), transparent, transparent)'}} />
     </div>
 
-    {/* Enhanced loading indicator */}
+    {/* Elegant loading indicator */}
     <div className="relative z-10 flex items-center justify-center min-h-screen">
-      <div className="flex flex-col items-center space-y-6">
-        {/* Beautiful multi-layer spinner */}
+      <div className="flex flex-col items-center space-y-8">
+        {/* Sophisticated multi-layer spinner */}
         <div className="relative">
-          {/* Outer ring */}
-          <div className="w-16 h-16 border-2 border-slate-700/30 rounded-full"></div>
-          {/* Middle ring */}
-          <div className="absolute top-1 left-1 w-14 h-14 border-2 border-blue-500/20 rounded-full"></div>
-          {/* Inner spinning ring */}
-          <div className="absolute top-2 left-2 w-12 h-12 border-2 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
-          {/* Center dot */}
-          <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-blue-400 rounded-full transform -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
+          {/* Outer glow ring */}
+          <div className="w-20 h-20 border border-gray-800/20 rounded-full shadow-2xl"></div>
+
+          {/* Secondary ring with subtle glow */}
+          <div className="absolute top-1 left-1 w-18 h-18 border border-gray-700/30 rounded-full"></div>
+
+          {/* Main spinning ring - elegant blue accent */}
+          <div className="absolute top-2 left-2 w-16 h-16 border-2 border-gray-800/40 border-t-blue-500 border-r-blue-400 rounded-full animate-spin shadow-lg"></div>
+
+          {/* Inner ring with slower rotation */}
+          <div className="absolute top-4 left-4 w-12 h-12 border border-gray-600/30 border-b-blue-300 rounded-full animate-spin" style={{animationDirection: 'reverse', animationDuration: '2s'}}></div>
+
+          {/* Center elegant dot */}
+          <div className="absolute top-1/2 left-1/2 w-3 h-3 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full transform -translate-x-1/2 -translate-y-1/2 animate-pulse shadow-lg shadow-blue-500/30"></div>
+
+          {/* Subtle outer glow effect */}
+          <div className="absolute top-1/2 left-1/2 w-24 h-24 bg-blue-500/5 rounded-full transform -translate-x-1/2 -translate-y-1/2 animate-ping"></div>
         </div>
 
-        {/* Loading text with animation */}
-        <div className="text-center space-y-2">
-          <p className="text-blue-400 text-lg font-medium animate-pulse">იტვირთება</p>
-          <div className="flex space-x-1 justify-center">
-            <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{animationDelay: '0ms'}}></div>
-            <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{animationDelay: '150ms'}}></div>
-            <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{animationDelay: '300ms'}}></div>
+        {/* Elegant loading text */}
+        <div className="text-center space-y-3">
+          <p className="text-gray-300 text-lg font-light tracking-[0.2em] animate-pulse font-['Inter','Noto_Sans_Georgian',sans-serif] opacity-80">
+            იტვირთება
+          </p>
+
+          {/* Sophisticated dot animation */}
+          <div className="flex space-x-2 justify-center">
+            <div className="w-1.5 h-1.5 bg-gradient-to-r from-gray-400 to-blue-400 rounded-full animate-bounce opacity-70" style={{animationDelay: '0ms'}}></div>
+            <div className="w-1.5 h-1.5 bg-gradient-to-r from-gray-400 to-blue-400 rounded-full animate-bounce opacity-70" style={{animationDelay: '200ms'}}></div>
+            <div className="w-1.5 h-1.5 bg-gradient-to-r from-gray-400 to-blue-400 rounded-full animate-bounce opacity-70" style={{animationDelay: '400ms'}}></div>
           </div>
         </div>
       </div>
@@ -107,20 +120,12 @@ const LoadingSpinner = () => (
 );
 
 const Contact = () => (
-  <>
-    <SEO
-      title="კონტაქტი"
-      description="დაუკავშირდით VIFA Digital-ს - ვებსაიტის შექმნა, ციფრული მარკეტინგი და AI ჩატბოტები საქართველოში. ჩვენი ექსპერტების გუნდი მზად არის თქვენი ბიზნესის ზრდისთვის."
-      url="https://vifadigital.ge/contact"
-      keywords="კონტაქტი, VIFA Digital, ვებსაიტის შექმნა კონტაქტი, ციფრული მარკეტინგი კონტაქტი, საქართველო, თბილისი"
-    />
-    <div className="pt-24 pb-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-bold text-center mb-8">Contact Us</h1>
-        <p className="text-gray-400 text-center">Contact page coming soon...</p>
-      </div>
+  <div className="pt-24 pb-20">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 className="text-4xl font-bold text-center mb-8">Contact Us</h1>
+      <p className="text-gray-400 text-center">Contact page coming soon...</p>
     </div>
-  </>
+  </div>
 );
 
 // Optimized route transition with immediate rendering
