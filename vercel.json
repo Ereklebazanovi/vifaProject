@@ -4,17 +4,6 @@
       "source": "/home",
       "destination": "/",
       "permanent": true
-    },
-    {
-      "source": "/(.*)",
-      "destination": "https://vifadigital.ge/$1",
-      "permanent": true,
-      "has": [
-        {
-          "type": "host",
-          "value": "www.vifadigital.ge"
-        }
-      ]
     }
   ],
   "rewrites": [
