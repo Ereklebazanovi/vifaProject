@@ -38,20 +38,21 @@ const BlogPostPage: React.FC = () => {
   }, [slug]);
 
   const handleShare = async () => {
+    const shareUrl = window.location.href;
+    const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(post?.title || '')}`;
+
     if (navigator.share && post) {
       try {
         await navigator.share({
           title: post.title,
           text: post.description,
-          url: window.location.href,
+          url: shareUrl,
         });
       } catch (error) {
-        navigator.clipboard.writeText(window.location.href);
-        alert('ბმული კოპირებულია!');
+        window.open(facebookShareUrl, 'facebook-share', 'width=550,height=420');
       }
     } else {
-      navigator.clipboard.writeText(window.location.href);
-      alert('ბმული კოპირებულია!');
+      window.open(facebookShareUrl, 'facebook-share', 'width=550,height=420');
     }
   };
 
@@ -100,7 +101,11 @@ const BlogPostPage: React.FC = () => {
         <meta property="og:type" content="article" />
         <meta property="og:title" content={post.seo?.title || post.title} />
         <meta property="og:description" content={post.seo?.description || excerpt} />
-        <meta property="og:image" content={post.seo?.ogImage || post.thumbnail || '/images/blog/default-og.jpg'} />
+        <meta property="og:image" content={`https://vifadigital.com${post.seo?.ogImage || post.thumbnail || '/images/blog/default-og.jpg'}`} />
+        <meta property="og:image:secure_url" content={`https://vifadigital.com${post.seo?.ogImage || post.thumbnail || '/images/blog/default-og.jpg'}`} />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta property="og:url" content={`https://vifadigital.com/blog/${post.slug}`} />
         <meta property="article:published_time" content={post.publishedAt} />
         {post.updatedAt && <meta property="article:modified_time" content={post.updatedAt} />}
@@ -113,7 +118,7 @@ const BlogPostPage: React.FC = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={post.seo?.title || post.title} />
         <meta name="twitter:description" content={post.seo?.description || excerpt} />
-        <meta name="twitter:image" content={post.seo?.ogImage || post.thumbnail || '/images/blog/default-og.jpg'} />
+        <meta name="twitter:image" content={`https://vifadigital.com${post.seo?.ogImage || post.thumbnail || '/images/blog/default-og.jpg'}`} />
 
         {/* Additional SEO */}
         <link rel="canonical" href={`https://vifadigital.com/blog/${post.slug}`} />
