@@ -73,9 +73,17 @@ const Footer: React.FC = () => {
   const contactInfo = [
     {
       icon: <FaPhone className="w-4 h-4" />,
-      text: "+995 557 62 42 43",
+      text: "IT დეპარტამენტი",
+      subtext: "+995 557 62 42 43",
       href: "tel:+995557624243",
       color: "text-blue-400",
+    },
+    {
+      icon: <FaPhone className="w-4 h-4" />,
+      text: "ციფრული მარკეტინგი",
+      subtext: "+995 577 17 51 32",
+      href: "tel:+995577175132",
+      color: "text-green-400",
     },
     {
       icon: <FaEnvelope className="w-4 h-4" />,
@@ -290,25 +298,30 @@ const Footer: React.FC = () => {
             </h3>
 
             {/* Contact Info */}
-            <div className="space-y-4 mb-6">
+            <div className="space-y-3 mb-6">
               {contactInfo.map((contact, index) => (
                 <a
                   key={index}
                   href={contact.href}
-                  className={`flex items-center transition-all duration-300 group ${
+                  className={`flex items-start transition-all duration-300 group ${
                     true
                       ? "text-slate-400 hover:text-white"
                       : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
                   <span
-                    className={`mr-3 ${contact.color} group-hover:scale-110 transition-transform duration-300`}
+                    className={`mr-3 mt-0.5 ${contact.color} group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}
                   >
                     {contact.icon}
                   </span>
-                  <span className="group-hover:translate-x-1 transition-transform duration-300">
-                    {contact.text}
-                  </span>
+                  <div className="group-hover:translate-x-1 transition-transform duration-300">
+                    <div className="text-sm font-medium">{contact.text}</div>
+                    {contact.subtext && (
+                      <div className="text-sm font-semibold text-slate-400 group-hover:text-slate-200 transition-colors">
+                        {contact.subtext}
+                      </div>
+                    )}
+                  </div>
                 </a>
               ))}
             </div>

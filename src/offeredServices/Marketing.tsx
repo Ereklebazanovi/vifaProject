@@ -368,7 +368,7 @@ const Marketing: React.FC = () => {
                 <FaVideo />
               </div>
               <h4 className="text-xl font-medium text-white mb-3">
-                ბაზისური პაკეტი
+                საწყისი პაკეტი
               </h4>
               <div className="text-slate-300 text-sm mb-4 leading-relaxed space-y-2 flex-grow">
                 <div className="flex items-center gap-2">

@@ -566,7 +566,7 @@ const WebDev: React.FC = () => {
             </div>
             {/* ერე */}
             {/* Why Individual Pricing */}
-            <div className="relative overflow-hidden rounded-2xl backdrop-blur-xl mb-10">
+            <div className="relative overflow-hidden rounded-2xl backdrop-blur-xl mb-10 !max-w-7xl mx-auto">
               <div className="absolute inset-0 bg-gradient-to-br from-slate-700/20 via-slate-800/10 to-slate-900/20 rounded-2xl" />
               <div className="absolute inset-0 border border-slate-600/30 rounded-2xl" />
 
@@ -612,7 +612,7 @@ const WebDev: React.FC = () => {
             </div>
 
             {/* Price Ranges */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 !max-w-7xl mx-auto">
               {/* Landing Pages */}
               <div className="group relative overflow-hidden rounded-xl backdrop-blur-sm hover:shadow-xl transition-all duration-300">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-600/15 via-blue-500/5 to-slate-900/10 rounded-xl" />
@@ -630,7 +630,7 @@ const WebDev: React.FC = () => {
                   </p>
                   <div className="pt-4 border-t border-slate-700/40">
                     <div className="text-2xl font-bold text-blue-300">
-                      300₾<span className="text-xs text-slate-400 ml-1">-დან</span>
+                      500₾<span className="text-xs text-slate-400 ml-1">-დან</span>
                     </div>
                   </div>
                 </div>
@@ -646,14 +646,14 @@ const WebDev: React.FC = () => {
                     <FaCode className="text-green-300 text-xl" />
                   </div>
                   <h4 className="text-lg font-semibold text-white mb-2">
-                    ბიზნეს ვებსაიტი
+                    პრემიუმ ვებსაიტი
                   </h4>
                   <p className="text-slate-400 text-sm mb-6 leading-relaxed flex-grow">
                     სრულფასოვანი ვებგვერდი CMS, SEO ოპტიმიზაცია და ადმინისტრაციული პანელით. კომპანიების ონლაინ ხილვადობის ზრდისთვის.
                   </p>
                   <div className="pt-4 border-t border-slate-700/40">
                     <div className="text-2xl font-bold text-green-300">
-                      600₾<span className="text-xs text-slate-400 ml-1">-დან</span>
+                      800₾<span className="text-xs text-slate-400 ml-1">-დან</span>
                     </div>
                   </div>
                 </div>
@@ -681,11 +681,34 @@ const WebDev: React.FC = () => {
                   </div>
                 </div>
               </div>
+
+              {/* E-commerce Store */}
+              <div className="group relative overflow-hidden rounded-xl backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-600/15 via-amber-500/5 to-slate-900/10 rounded-xl" />
+                <div className="absolute inset-0 border border-orange-400/30 group-hover:border-orange-400/50 rounded-xl transition-colors duration-300" />
+
+                <div className="relative p-6 flex flex-col h-full">
+                  <div className="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-orange-500/30 transition-colors">
+                    <FaRocket className="text-orange-300 text-xl" />
+                  </div>
+                  <h4 className="text-lg font-semibold text-white mb-2">
+                    ელ-კომერცია
+                  </h4>
+                  <p className="text-slate-400 text-sm mb-6 leading-relaxed flex-grow">
+                    სრულფასოვანი ონლაინ მაღაზია გადახდის სისტემით, პროდუქტის მართვით და ორდერის თვალყურით.
+                  </p>
+                  <div className="pt-4 border-t border-slate-700/40">
+                    <div className="text-2xl font-bold text-orange-300">
+                      2000₾<span className="text-xs text-slate-400 ml-1">-დან</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="text-center mt-15">
               <h3 className="text-3xl font-light text-white">
-                კონსულტაცია და თანამშრომლობის დაგეგმვა უფასოა
+                კონსულტაცია უფასოა
               </h3>
             </div>
           </div>

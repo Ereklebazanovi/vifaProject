@@ -66,14 +66,14 @@ const SimpleNavbar: React.FC = () => {
   // Special highlighted link for AI Chatbott
   const aiChatbotLink = {
     path: "/services/ai-chatbot",
-    label: "AI სერვისი"
+    label: "AI სერვისი",
   };
 
   return (
     <>
       {/* Main Navbar */}
       <nav
-        className={`fixed w-full top-0 z-[100] transition-transform duration-300 ease-in-out backdrop-blur-sm border-b border-slate-800/50 ${
+        className={`fixed w-full top-0 z-[100] transition-transform duration-300 ease-in-out bg-transparent border-b border-slate-800/50 ${
           isVisible ? "translate-y-0" : "-translate-y-full"
         }`}
       >
@@ -117,18 +117,22 @@ const SimpleNavbar: React.FC = () => {
               }`}
             >
               <div className="flex items-center gap-2">
-                <FaRobot className={`transition-all duration-300 ${
-                  location.pathname === aiChatbotLink.path
-                    ? "text-cyan-300 animate-pulse"
-                    : "text-cyan-400 group-hover:animate-spin"
-                }`} />
+                <FaRobot
+                  className={`transition-all duration-300 ${
+                    location.pathname === aiChatbotLink.path
+                      ? "text-cyan-300 animate-pulse"
+                      : "text-cyan-400 group-hover:animate-spin"
+                  }`}
+                />
                 <span className="relative">
                   {aiChatbotLink.label}
-                  <span className={`absolute -top-1 -right-2 w-2 h-2 rounded-full transition-all duration-300 ${
-                    location.pathname === aiChatbotLink.path
-                      ? "bg-cyan-300 animate-ping"
-                      : "bg-cyan-400 opacity-70 group-hover:animate-pulse"
-                  }`}></span>
+                  <span
+                    className={`absolute -top-1 -right-2 w-2 h-2 rounded-full transition-all duration-300 ${
+                      location.pathname === aiChatbotLink.path
+                        ? "bg-cyan-300 animate-ping"
+                        : "bg-cyan-400 opacity-70 group-hover:animate-pulse"
+                    }`}
+                  ></span>
                 </span>
               </div>
             </button>
@@ -145,9 +149,6 @@ const SimpleNavbar: React.FC = () => {
                 {link.label}
               </button>
             ))}
-
-            {/* Special AI Chatbot Button - Futuristic Design */}
-            
           </div>
 
           {/* Tablet Navigation - Optimized for medium screens */}
@@ -178,12 +179,16 @@ const SimpleNavbar: React.FC = () => {
               }`}
             >
               <div className="flex items-center justify-center gap-1">
-                <FaRobot className={`text-xs transition-all duration-300 ${
-                  location.pathname === aiChatbotLink.path
-                    ? "text-cyan-300 animate-pulse"
-                    : "text-cyan-400 group-hover:animate-spin"
-                }`} />
-                <span className="block leading-tight">{aiChatbotLink.label}</span>
+                <FaRobot
+                  className={`text-xs transition-all duration-300 ${
+                    location.pathname === aiChatbotLink.path
+                      ? "text-cyan-300 animate-pulse"
+                      : "text-cyan-400 group-hover:animate-spin"
+                  }`}
+                />
+                <span className="block leading-tight">
+                  {aiChatbotLink.label}
+                </span>
               </div>
             </button>
           </div>
@@ -204,7 +209,9 @@ const SimpleNavbar: React.FC = () => {
                       : "text-slate-300 hover:text-white hover:bg-white/5 hover:shadow-sm border-blue-500/30 hover:border-blue-400"
                   }`}
                 >
-                  <span className="block leading-tight text-[11px] text-center">{link.label}</span>
+                  <span className="block leading-tight text-[11px] text-center">
+                    {link.label}
+                  </span>
                 </button>
               ))}
             </div>
@@ -221,7 +228,9 @@ const SimpleNavbar: React.FC = () => {
                       : "text-slate-300 hover:text-white hover:bg-white/5 hover:shadow-sm border-blue-500/30 hover:border-blue-400"
                   }`}
                 >
-                  <span className="block leading-tight text-[11px] text-center">{link.label}</span>
+                  <span className="block leading-tight text-[11px] text-center">
+                    {link.label}
+                  </span>
                 </button>
               ))}
 
@@ -235,11 +244,13 @@ const SimpleNavbar: React.FC = () => {
                 }`}
               >
                 <div className="flex flex-col items-center justify-center gap-0.5">
-                  <FaRobot className={`text-xs transition-all duration-300 ${
-                    location.pathname === aiChatbotLink.path
-                      ? "text-cyan-300 animate-pulse"
-                      : "text-cyan-400 group-hover:animate-spin"
-                  }`} />
+                  <FaRobot
+                    className={`text-xs transition-all duration-300 ${
+                      location.pathname === aiChatbotLink.path
+                        ? "text-cyan-300 animate-pulse"
+                        : "text-cyan-400 group-hover:animate-spin"
+                    }`}
+                  />
                   <span className="block leading-tight text-[11px] font-semibold text-center">
                     {aiChatbotLink.label}
                   </span>

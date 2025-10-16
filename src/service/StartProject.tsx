@@ -266,7 +266,7 @@ const StartProject: React.FC = () => {
                   >
                     <div className="text-center mb-4">
                       <h3 className="text-lg sm:text-xl font-bold text-white mb-1">
-                        უფასო სტრატეგიული კონსულტაცია{" "}
+                        უფასო კონსულტაცია{" "}
                       </h3>
                     </div>
 
