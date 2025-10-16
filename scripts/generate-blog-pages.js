@@ -1,9 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 // Import blog posts data from src/utils/blogUtils.ts
 // Since we can't directly import TS, we'll hardcode the posts
