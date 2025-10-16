@@ -129,7 +129,7 @@ export const blogPosts: BlogPost[] = [
 
       <p>დაიწყეთ თქვენი ციფრული ტრანსფორმაცია VIFA DIGITAL-თან ერთად და განცადეთ ბიზნესის ზრდის ახალი შესაძლებლობები.</p>
     `,
-    publishedAt: '2024-10-15T12:00:00Z',
+    publishedAt: '2025-01-15T12:00:00Z',
     thumbnail: '/vifa.jpg',
     author: {
       name: 'Vifa Digital Team',

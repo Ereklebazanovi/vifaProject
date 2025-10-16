@@ -79,22 +79,28 @@ const NewHome: React.FC = () => {
                   {t("newHome.hero.description")}
                 </p>
 
-                <div className="flex flex-col space-y-3 max-w-xs mx-auto sm:max-w-none sm:flex-row sm:space-y-0 sm:space-x-4 sm:justify-center">
+                <div className="flex flex-col space-y-2 max-w-xs mx-auto sm:max-w-none sm:flex-row sm:space-y-0 sm:space-x-3 sm:justify-center">
                   <Link
                     to="/services/web-development"
-                    className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base font-medium rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center"
+                    className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-medium rounded-md shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center"
                   >
                     ვებ განვითარება
                   </Link>
                   <Link
                     to="/services/digital-advertising"
-                    className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base font-medium rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center"
+                    className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-medium rounded-md shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center"
                   >
                     მარკეტინგი
                   </Link>
                   <Link
+                    to="/services/ai-chatbot"
+                    className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-4 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-medium rounded-md shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center"
+                  >
+                    AI სერვისი
+                  </Link>
+                  <Link
                     to="/start-project"
-                    className="border-2 border-white/30 hover:border-white/60 text-white px-4 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base font-medium rounded-lg backdrop-blur-sm hover:bg-white/10 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl text-center"
+                    className="border-2 border-white/30 hover:border-white/60 text-white px-4 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-medium rounded-md backdrop-blur-sm hover:bg-white/10 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl text-center"
                   >
                     პროექტის დაწყება
                   </Link>

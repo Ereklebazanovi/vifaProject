@@ -622,9 +622,14 @@ const StartProject: React.FC = () => {
                                         <div className="text-slate-400 text-sm mb-2">
                                           მოგვწერეთ პირდაპირ Facebook-ზე:
                                         </div>
-                                        <div className="text-blue-300 font-mono text-sm bg-blue-900/30 px-2 py-1 rounded">
+                                        <a
+                                          href="https://facebook.com/vifaweb"
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          className="text-blue-300 font-mono text-sm bg-blue-900/30 px-2 py-1 rounded hover:bg-blue-800/40 transition-colors duration-200 cursor-pointer inline-block"
+                                        >
                                           facebook.com/vifaweb
-                                        </div>
+                                        </a>
                                       </div>
                                       <div className="bg-green-600/20 border border-green-500/30 rounded-lg p-4">
                                         <div className="flex items-center gap-3 mb-2">
@@ -635,9 +640,12 @@ const StartProject: React.FC = () => {
                                             WhatsApp
                                           </div>
                                         </div>
-                                        <div className="text-slate-400 text-sm">
+                                        <div className="text-slate-400 text-sm mb-2">
                                           თქვენი ტელეფონის ნომრით WhatsApp-ზე
                                           დაგიკავშირდებით
+                                        </div>
+                                        <div className="text-green-300 font-mono text-sm bg-green-900/30 px-2 py-1 rounded">
+                                          +995 557 62 42 43
                                         </div>
                                       </div>
                                     </div>

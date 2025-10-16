@@ -135,90 +135,85 @@ const BlogPostPage: React.FC = () => {
             </div>
 
             {/* Article */}
-            <article className="bg-gray-900/30 border border-gray-800/40 rounded-lg overflow-hidden">
+            <article className="bg-gradient-to-br from-gray-900/80 to-slate-900/60 border border-gray-800/40 rounded-2xl overflow-hidden shadow-2xl transition-all duration-300 hover:shadow-blue-900/30">
               {/* Header */}
-              <div className="p-6 sm:p-8 pb-6">
-                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
+              <div className="p-4 sm:p-6 pb-4 flex flex-col items-center text-center">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight tracking-tight drop-shadow-lg">
                   {post.title}
                 </h1>
-
                 {/* Meta */}
-                <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-sm text-slate-400 mb-6">
+                <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-base text-slate-400 mb-6">
                   <div className="flex items-center gap-2">
-                    <FiUser className="w-4 h-4" />
+                    <FiUser className="w-5 h-5" />
                     <span>{post.author.name}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <FiClock className="w-4 h-4" />
+                    <FiClock className="w-5 h-5" />
                     <span>{post.readingTime} წუთი</span>
                   </div>
                   <span className="hidden sm:inline">{formatDate(post.publishedAt)}</span>
                   <button
                     onClick={handleShare}
-                    className="flex items-center gap-2 px-3 py-1 bg-gray-800/50 hover:bg-gray-800 rounded-lg transition-colors text-slate-300 text-xs sm:text-sm"
+                    className="flex items-center gap-2 px-3 py-1 bg-blue-700/20 hover:bg-blue-700/40 rounded-lg transition-colors text-blue-300 text-xs sm:text-base font-medium"
                   >
-                    <FiShare2 className="w-4 h-4" />
+                    <FiShare2 className="w-5 h-5" />
                     <span className="hidden sm:inline">გაზიარება</span>
                     <span className="sm:hidden">📤</span>
                   </button>
                 </div>
+                {/* Thumbnail */}
+                {post.thumbnail && (
+                  <div className="flex justify-center mb-8">
+                    <div className="w-64 h-48 rounded-xl overflow-hidden shadow-lg border border-blue-900/30 bg-gray-800/50">
+                      <img
+                        src={post.thumbnail}
+                        alt={post.title}
+                        className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-105"
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
 
-              {/* Thumbnail Image */}
-              {post.thumbnail && (
-                <div className="px-6 sm:px-8 mb-8">
-                  <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto rounded-lg overflow-hidden bg-gray-800/50">
-                    <img
-                      src={post.thumbnail}
-                      alt={post.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-              )}
-
               {/* Content */}
-              <div className="px-6 sm:px-8 pb-8">
-                <div className="prose prose-lg prose-invert max-w-none">
+              <div className="px-4 sm:px-6 pb-12 flex justify-center lg:!max-w-5xl lg:mx-auto">
+                <div className="w-full max-w-xl prose prose-lg prose-invert leading-relaxed tracking-wide text-slate-200" style={{ fontFamily: "'Inter', 'Noto Sans Georgian', sans-serif" }}>
                   <div dangerouslySetInnerHTML={{ __html: post.content }} />
                 </div>
               </div>
 
               {/* Footer */}
-              <div className="px-8 py-6 bg-gray-900/40 border-t border-gray-800/50">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-semibold">
-                      {post.author.name.charAt(0)}
-                    </div>
-                    <div>
-                      <div className="font-medium text-white">{post.author.name}</div>
-                      <div className="text-sm text-slate-400">Vifa Digital</div>
-                    </div>
+              <div className="px-8 py-8 bg-gradient-to-r from-gray-900/60 to-blue-900/30 border-t border-gray-800/50 flex flex-col sm:flex-row items-center justify-between gap-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                    {post.author.name.charAt(0)}
                   </div>
-
-                  <Link
-                    to="/start-project"
-                    className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium"
-                  >
-                    უფასო კონსულტაცია
-                  </Link>
+                  <div>
+                    <div className="font-semibold text-white">{post.author.name}</div>
+                    <div className="text-sm text-slate-400">Vifa Digital</div>
+                  </div>
                 </div>
+                <Link
+                  to="/start-project"
+                  className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-xl transition-all font-semibold shadow-md"
+                >
+                  უფასო კონსულტაცია
+                </Link>
               </div>
             </article>
 
             {/* Navigation */}
-            <div className="mt-8 flex justify-between">
+            <div className="mt-10 flex flex-col sm:flex-row justify-between gap-4">
               <Link
                 to="/blog"
-                className="px-6 py-3 bg-gray-900/50 hover:bg-gray-900 text-slate-300 hover:text-white rounded-lg transition-colors"
+                className="px-6 py-3 bg-gray-900/60 hover:bg-gray-900 text-slate-300 hover:text-white rounded-lg transition-colors text-center"
               >
                 ← ყველა სტატია
               </Link>
-
               <Link
                 to="/start-project"
-                className="px-6 py-3 bg-gray-900/50 hover:bg-gray-900 text-slate-300 hover:text-white rounded-lg transition-colors"
+                className="px-6 py-3 bg-blue-700/20 hover:bg-blue-700/40 text-blue-300 hover:text-white rounded-lg transition-colors text-center"
               >
                 დაიწყეთ პროექტი →
               </Link>
@@ -228,232 +223,150 @@ const BlogPostPage: React.FC = () => {
       </div>
 
       <style>{`
-        /* Main prose styling - optimized for readability */
         .prose {
           color: #e2e8f0;
-          line-height: 1.75;
-          font-size: 1.125rem;
-          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          line-height: 1.8;
+          font-size: 1.18rem;
+          font-family: 'Inter', 'Noto Sans Georgian', sans-serif;
+          letter-spacing: 0.01em;
         }
-
-        /* Lead paragraph */
-        .prose .lead {
-          font-size: 1.25rem;
-          font-weight: 400;
-          color: #f1f5f9;
-          margin-bottom: 2.5rem;
-          line-height: 1.7;
-          border-left: 4px solid #3b82f6;
-          padding-left: 1.5rem;
-          background: rgba(59, 130, 246, 0.05);
-          padding: 1.5rem;
-          border-radius: 0.5rem;
-        }
-
-        /* Headings with better hierarchy */
         .prose h2, .prose h3, .prose h4 {
-          color: #ffffff;
-          font-weight: 700;
-          margin-top: 3rem;
-          margin-bottom: 1.25rem;
+          color: #fff;
+          font-weight: 800;
+          margin-top: 2.5rem;
+          margin-bottom: 1.2rem;
           scroll-margin-top: 6rem;
         }
-
         .prose h2 {
-          font-size: 1.875rem;
-          border-bottom: 2px solid #475569;
-          padding-bottom: 0.75rem;
-          margin-bottom: 1.5rem;
+          font-size: 2rem;
+          border-bottom: 2px solid #334155;
+          padding-bottom: 0.5rem;
         }
-
         .prose h3 {
-          font-size: 1.5rem;
+          font-size: 1.4rem;
           color: #60a5fa;
         }
-
         .prose h4 {
-          font-size: 1.25rem;
-          color: #94a3b8;
+          font-size: 1.15rem;
+          color: #a5b4fc;
         }
-
-        /* Paragraph spacing for better reading flow */
         .prose p {
-          margin-bottom: 1.75rem;
+          margin-bottom: 1.5rem;
           text-align: justify;
           hyphens: auto;
         }
-
-        /* Lists with better spacing */
         .prose ul, .prose ol {
-          margin: 2rem 0;
+          margin: 1.5rem 0;
           padding-left: 2rem;
         }
-
         .prose li {
-          margin-bottom: 0.75rem;
+          margin-bottom: 0.7rem;
           line-height: 1.7;
         }
-
         .prose li::marker {
           color: #60a5fa;
         }
-
-        /* Enhanced blockquotes */
         .prose blockquote {
           border-left: 4px solid #3b82f6;
-          padding: 1.5rem 2rem;
-          margin: 2.5rem 0;
+          padding: 1.2rem 2rem;
+          margin: 2rem 0;
           background: rgba(30, 41, 59, 0.6);
           border-radius: 0.75rem;
           color: #cbd5e1;
           font-style: italic;
-          font-size: 1.1rem;
+          font-size: 1.08rem;
           position: relative;
         }
-
         .prose blockquote::before {
           content: '"';
-          font-size: 4rem;
+          font-size: 3rem;
           color: #3b82f6;
           position: absolute;
           top: -0.5rem;
           left: 1rem;
           line-height: 1;
         }
-
         .prose blockquote p {
           margin: 0;
           position: relative;
           z-index: 1;
         }
-
-        /* Links with better hover states */
         .prose a {
           color: #60a5fa;
           text-decoration: none;
           border-bottom: 1px dotted #60a5fa;
-          transition: all 0.2s ease;
+          transition: all 0.2s;
         }
-
         .prose a:hover {
-          color: #93c5fd;
-          border-bottom: 1px solid #93c5fd;
+          color: #a5b4fc;
+          border-bottom: 1px solid #a5b4fc;
           background: rgba(96, 165, 250, 0.1);
-          padding: 0.125rem 0.25rem;
-          border-radius: 0.25rem;
-          margin: 0 -0.25rem;
+          padding: 0.1rem 0.2rem;
+          border-radius: 0.2rem;
         }
-
-        /* Code styling */
         .prose code {
           background: rgba(15, 23, 42, 0.8);
           color: #e2e8f0;
-          padding: 0.375rem 0.5rem;
-          border-radius: 0.375rem;
-          font-size: 0.9rem;
+          padding: 0.32rem 0.5rem;
+          border-radius: 0.3rem;
+          font-size: 0.98rem;
           border: 1px solid #334155;
         }
-
         .prose pre {
-          background: rgba(15, 23, 42, 0.9);
-          padding: 2rem;
-          border-radius: 0.75rem;
+          background: rgba(15, 23, 42, 0.95);
+          padding: 1.5rem;
+          border-radius: 0.7rem;
           margin: 2rem 0;
           overflow-x: auto;
           border: 1px solid #334155;
         }
-
-        /* Strong text */
         .prose strong {
-          color: #ffffff;
+          color: #fff;
           font-weight: 700;
         }
-
-        /* Enhanced highlight boxes */
-        .prose .highlight-box {
-          background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(30, 41, 59, 0.6));
-          border: 1px solid #475569;
+        .prose img {
           border-radius: 1rem;
-          padding: 2.5rem;
-          margin: 3rem 0;
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-          position: relative;
+          margin: 2rem auto;
+          box-shadow: 0 4px 24px 0 rgba(30,41,59,0.18);
+          max-width: 100%;
+          display: block;
+        }
+        .prose table {
+          width: 100%;
+          background: rgba(30,41,59,0.7);
+          border-radius: 0.5rem;
           overflow: hidden;
+          margin: 2rem 0;
         }
-
-        .prose .highlight-box::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          height: 4px;
-          background: linear-gradient(90deg, #3b82f6, #60a5fa, #93c5fd);
+        .prose th, .prose td {
+          padding: 0.75rem 1rem;
+          border: 1px solid #334155;
         }
-
-        .prose .highlight-box h4 {
+        .prose th {
+          background: #1e293b;
           color: #60a5fa;
-          font-size: 1.25rem;
           font-weight: 700;
-          margin-top: 0;
-          margin-bottom: 1rem;
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
         }
-
-        .prose .highlight-box h4::before {
-          content: '▶';
-          color: #3b82f6;
-          font-size: 0.875rem;
+        .prose tr:nth-child(even) {
+          background: rgba(51,65,85,0.3);
         }
-
-        .prose .highlight-box h4:not(:first-child) {
-          margin-top: 2rem;
-        }
-
-        .prose .highlight-box p {
-          margin-bottom: 0;
-          color: #cbd5e1;
-          line-height: 1.7;
-        }
-
-        .prose .highlight-box p:not(:last-child) {
-          margin-bottom: 1.5rem;
-        }
-
-        /* Mobile optimizations */
         @media (max-width: 640px) {
           .prose {
-            font-size: 1rem;
+            font-size: 1.04rem;
             line-height: 1.7;
           }
-
-          .prose .lead {
-            font-size: 1.125rem;
-            padding: 1rem;
-          }
-
           .prose h2 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
           }
-
           .prose h3 {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
           }
-
           .prose blockquote {
-            padding: 1rem 1.5rem;
-            margin: 2rem 0;
+            padding: 1rem 1.2rem;
+            margin: 1.2rem 0;
           }
-
-          .prose .highlight-box {
-            padding: 1.5rem;
-            margin: 2rem 0;
-          }
-
-          .prose p {
-            text-align: left;
+          .prose img {
+            margin: 1.2rem auto;
           }
         }
       `}</style>

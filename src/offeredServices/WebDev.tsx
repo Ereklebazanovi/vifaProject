@@ -401,70 +401,79 @@ const WebDev: React.FC = () => {
               </h3>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-6xl mx-auto">
               {/* Website Development - პირველი პრიორიტეტი */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="bg-gradient-to-br from-blue-900/30 via-slate-800/50 to-slate-900/60 rounded-2xl p-6 sm:p-8 border border-blue-400/20 hover:border-blue-400/40 transition-all duration-300 hover:scale-[1.02] group backdrop-blur-sm"
+                className="group relative overflow-hidden rounded-2xl backdrop-blur-xl"
               >
-                {/* Header Section - Mobile Optimized */}
-                <div className="flex flex-col sm:flex-row sm:items-center mb-6 gap-4 sm:gap-0">
-                  <div className="w-16 h-16 bg-blue-500/20 rounded-xl flex items-center justify-center sm:mr-4 group-hover:bg-blue-500/30 transition-colors flex-shrink-0">
-                    <FaCode className="text-blue-400 text-2xl" />
-                  </div>
-                  <div className="text-center sm:text-left">
-                    <h4 className="text-xl sm:text-2xl font-bold text-white mb-2">
-                      ვებსაიტის შექმნა
-                    </h4>
-                    <div className="text-blue-400 font-medium text-sm sm:text-base">
-                      პროფესიონალური ვებგვერდები
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-blue-500/10 to-slate-900/30 rounded-2xl" />
+                <div className="absolute inset-0 border border-blue-400/30 group-hover:border-blue-400/60 rounded-2xl transition-colors duration-300" />
+
+                <div className="relative p-8 sm:p-10 flex flex-col h-full">
+                  {/* Icon and Header */}
+                  <div className="mb-8">
+                    <div className="flex items-start justify-between gap-4 mb-6">
+                      <div>
+                        <h4 className="text-2xl sm:text-3xl font-bold text-white mb-2 leading-tight">
+                          ვებსაიტის შექმნა
+                        </h4>
+                        <div className="text-blue-300 font-medium text-sm sm:text-base">
+                          პროფესიონალური ვებგვერდები
+                        </div>
+                      </div>
+                      <div className="w-20 h-20 bg-gradient-to-br from-blue-500/30 to-blue-400/10 rounded-2xl flex items-center justify-center group-hover:from-blue-500/40 group-hover:to-blue-400/20 transition-all duration-300 flex-shrink-0 shadow-lg">
+                        <FaCode className="text-blue-300 text-3xl" />
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <p className="text-slate-300 mb-6 leading-relaxed text-sm sm:text-base">
-                  თანამედროვე, სწრაფი და SEO-ოპტიმიზირებული ვებსაიტი, რომელიც
-                  ზრდის თქვენი ბიზნესის ხილვადობას და მომხმარებლების ჩართულობას.
-                </p>
+                  {/* Description */}
+                  <p className="text-slate-300 mb-8 leading-relaxed text-sm sm:text-base">
+                    თანამედროვე, სწრაფი და SEO-ოპტიმიზირებული ვებსაიტი, რომელიც
+                    ზრდის თქვენი ბიზნესის ხილვადობას და მომხმარებლების ჩართულობას.
+                  </p>
 
-                {/* Features - Responsive Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-                  <div className="flex items-center text-slate-300">
-                    <FaMobile className="text-blue-400 mr-3 flex-shrink-0 text-sm" />
-                    <span className="text-sm">მობილური ოპტიმიზაცია</span>
-                  </div>
-                  <div className="flex items-center text-slate-300">
-                    <FaChartLine className="text-blue-400 mr-3 flex-shrink-0 text-sm" />
-                    <span className="text-sm">SEO-ღია სტრუქტურა</span>
-                  </div>
-                  <div className="flex items-center text-slate-300">
-                    <FaBolt className="text-blue-400 mr-3 flex-shrink-0 text-sm" />
-                    <span className="text-sm">სწრაფი ჩატვირთვა</span>
-                  </div>
-                  <div className="flex items-center text-slate-300">
-                    <FaCog className="text-blue-400 mr-3 flex-shrink-0 text-sm" />
-                    <span className="text-sm">მარტივი ადმინ პანელი</span>
-                  </div>
-                </div>
-
-                {/* Footer - Mobile Optimized */}
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-4 border-t border-slate-700">
-                  <div className="text-slate-400 text-center sm:text-left">
-                    <span className="text-xs sm:text-sm">
-                      ფასი დამოკიდებულია
-                    </span>
-                    <div className="text-base sm:text-lg font-medium text-blue-400">
-                      პროექტზე
+                  {/* Features */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10 flex-grow">
+                    <div className="flex items-start gap-3 p-3 rounded-lg bg-blue-500/5 border border-blue-400/10 group-hover:bg-blue-500/10 transition-colors">
+                      <FaMobile className="text-blue-300 flex-shrink-0 text-lg mt-1" />
+                      <span className="text-slate-200 text-sm font-medium">მობილური ოპტიმიზაცია</span>
+                    </div>
+                    <div className="flex items-start gap-3 p-3 rounded-lg bg-blue-500/5 border border-blue-400/10 group-hover:bg-blue-500/10 transition-colors">
+                      <FaChartLine className="text-blue-300 flex-shrink-0 text-lg mt-1" />
+                      <span className="text-slate-200 text-sm font-medium">SEO-ღია სტრუქტურა</span>
+                    </div>
+                    <div className="flex items-start gap-3 p-3 rounded-lg bg-blue-500/5 border border-blue-400/10 group-hover:bg-blue-500/10 transition-colors">
+                      <FaBolt className="text-blue-300 flex-shrink-0 text-lg mt-1" />
+                      <span className="text-slate-200 text-sm font-medium">სწრაფი ჩატვირთვა</span>
+                    </div>
+                    <div className="flex items-start gap-3 p-3 rounded-lg bg-blue-500/5 border border-blue-400/10 group-hover:bg-blue-500/10 transition-colors">
+                      <FaCog className="text-blue-300 flex-shrink-0 text-lg mt-1" />
+                      <span className="text-slate-200 text-sm font-medium">მარტივი ადმინ პანელი</span>
                     </div>
                   </div>
-                  <Link
-                    to="/start-project"
-                    className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg transition-colors font-medium text-center text-sm sm:text-base w-full sm:w-auto"
-                  >
-                    დაიწყე ახლავე
-                  </Link>
+
+                  {/* Footer */}
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-6 border-t border-slate-700/50">
+                    <div className="text-center sm:text-left">
+                      <span className="text-xs sm:text-sm text-slate-400">
+                        ფასი დამოკიდებულია
+                      </span>
+                      <div className="text-lg sm:text-xl font-bold text-blue-300">
+                        პროექტზე
+                      </div>
+                    </div>
+                    <Link
+                      to="/start-project"
+                      className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-3 rounded-lg transition-all duration-300 font-semibold text-sm sm:text-base group/btn shadow-lg hover:shadow-xl transform hover:scale-105 w-full sm:w-auto"
+                    >
+                      <span>დაიწყე ახლავე</span>
+                      <FaArrowRight className="text-xs group-hover/btn:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
                 </div>
               </motion.div>
 
@@ -473,64 +482,73 @@ const WebDev: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="bg-gradient-to-br from-cyan-950/30 via-slate-800/50 to-slate-900/60 rounded-2xl p-6 sm:p-8 border border-cyan-400/20 hover:border-cyan-400/40 transition-all duration-300 hover:scale-[1.02] group backdrop-blur-sm"
+                className="group relative overflow-hidden rounded-2xl backdrop-blur-xl"
               >
-                {/* Header Section - Mobile Optimized */}
-                <div className="flex flex-col sm:flex-row sm:items-center mb-6 gap-4 sm:gap-0">
-                  <div className="w-16 h-16 bg-cyan-500/20 rounded-xl flex items-center justify-center sm:mr-4 group-hover:bg-cyan-500/30 transition-colors flex-shrink-0">
-                    <FaBrain className="text-cyan-400 text-2xl" />
-                  </div>
-                  <div className="text-center sm:text-left">
-                    <h4 className="text-xl sm:text-2xl font-bold text-white mb-2">
-                      AI ჩატბოტი
-                    </h4>
-                    <div className="text-cyan-400 font-medium text-sm sm:text-base">
-                      ავტომატური მომხმარებელთა მხარდაჭერა
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-600/20 via-cyan-500/10 to-slate-900/30 rounded-2xl" />
+                <div className="absolute inset-0 border border-cyan-400/30 group-hover:border-cyan-400/60 rounded-2xl transition-colors duration-300" />
+
+                <div className="relative p-8 sm:p-10 flex flex-col h-full">
+                  {/* Icon and Header */}
+                  <div className="mb-8">
+                    <div className="flex items-start justify-between gap-4 mb-6">
+                      <div>
+                        <h4 className="text-2xl sm:text-3xl font-bold text-white mb-2 leading-tight">
+                          AI ჩატბოტი
+                        </h4>
+                        <div className="text-cyan-300 font-medium text-sm sm:text-base">
+                          ავტომატური კომუნიკაცია მომხმარებლებთან
+                        </div>
+                      </div>
+                      <div className="w-20 h-20 bg-gradient-to-br from-cyan-500/30 to-cyan-400/10 rounded-2xl flex items-center justify-center group-hover:from-cyan-500/40 group-hover:to-cyan-400/20 transition-all duration-300 flex-shrink-0 shadow-lg">
+                        <FaBrain className="text-cyan-300 text-3xl" />
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <p className="text-slate-300 mb-6 leading-relaxed text-sm sm:text-base">
-                  ინტელექტუალური ჩატბოტი, რომელიც 24/7 პასუხობს მომხმარებელთა
-                  კითხვებს და უზრუნველყოფს სწრაფ მხარდაჭერას.
-                </p>
+                  {/* Description */}
+                  <p className="text-slate-300 mb-8 leading-relaxed text-sm sm:text-base">
+                    ინტელექტუალური ჩატბოტი, რომელიც 24/7 პასუხობს მომხმარებელთა
+                    კითხვებს და უზრუნველყოფს სწრაფ მხარდაჭერას.
+                  </p>
 
-                {/* Features - Responsive Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-                  <div className="flex items-center text-slate-300">
-                    <FaRocket className="text-cyan-400 mr-3 flex-shrink-0 text-sm" />
-                    <span className="text-sm">დაფუძნებული ბიზნეს ლოგიკაზე</span>
-                  </div>
-                  <div className="flex items-center text-slate-300">
-                    <FaBullseye className="text-cyan-400 mr-3 flex-shrink-0 text-sm" />
-                    <span className="text-sm">ინტელექტუალური პასუხები</span>
-                  </div>
-                  <div className="flex items-center text-slate-300">
-                    <FaDatabase className="text-cyan-400 mr-3 flex-shrink-0 text-sm" />
-                    <span className="text-sm">კლიენტების მოზიდვა</span>
-                  </div>
-                  <div className="flex items-center text-slate-300">
-                    <FaFacebook className="text-cyan-400 mr-3 flex-shrink-0 text-sm" />
-                    <span className="text-sm">Social Media ინტეგრაცია</span>
-                  </div>
-                </div>
-
-                {/* Footer - Mobile Optimized */}
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-4 border-t border-slate-700">
-                  <div className="text-slate-400 text-center sm:text-left">
-                    <span className="text-xs sm:text-sm">
-                      ფასი დამოკიდებულია
-                    </span>
-                    <div className="text-base sm:text-lg font-medium text-cyan-400">
-                      პროექტზე
+                  {/* Features */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10 flex-grow">
+                    <div className="flex items-start gap-3 p-3 rounded-lg bg-cyan-500/5 border border-cyan-400/10 group-hover:bg-cyan-500/10 transition-colors">
+                      <FaRocket className="text-cyan-300 flex-shrink-0 text-lg mt-1" />
+                      <span className="text-slate-200 text-sm font-medium">დაფუძნებული ბიზნეს ლოგიკაზე</span>
+                    </div>
+                    <div className="flex items-start gap-3 p-3 rounded-lg bg-cyan-500/5 border border-cyan-400/10 group-hover:bg-cyan-500/10 transition-colors">
+                      <FaBullseye className="text-cyan-300 flex-shrink-0 text-lg mt-1" />
+                      <span className="text-slate-200 text-sm font-medium">ინტელექტუალური პასუხები</span>
+                    </div>
+                    <div className="flex items-start gap-3 p-3 rounded-lg bg-cyan-500/5 border border-cyan-400/10 group-hover:bg-cyan-500/10 transition-colors">
+                      <FaDatabase className="text-cyan-300 flex-shrink-0 text-lg mt-1" />
+                      <span className="text-slate-200 text-sm font-medium">კლიენტების მოზიდვა</span>
+                    </div>
+                    <div className="flex items-start gap-3 p-3 rounded-lg bg-cyan-500/5 border border-cyan-400/10 group-hover:bg-cyan-500/10 transition-colors">
+                      <FaFacebook className="text-cyan-300 flex-shrink-0 text-lg mt-1" />
+                      <span className="text-slate-200 text-sm font-medium">Social Media ინტეგრაცია</span>
                     </div>
                   </div>
-                  <button
-                    onClick={() => handleNavigation("/services/ai-chatbot")}
-                    className="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-lg transition-colors font-medium cursor-pointer text-center text-sm sm:text-base w-full sm:w-auto"
-                  >
-                    მეტი ინფორმაცია
-                  </button>
+
+                  {/* Footer */}
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-6 border-t border-slate-700/50">
+                    <div className="text-center sm:text-left">
+                      <span className="text-xs sm:text-sm text-slate-400">
+                        ფასი დამოკიდებულია
+                      </span>
+                      <div className="text-lg sm:text-xl font-bold text-cyan-300">
+                        პროექტზე
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => handleNavigation("/services/ai-chatbot")}
+                      className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 text-white px-6 py-3 rounded-lg transition-all duration-300 font-semibold text-sm sm:text-base group/btn shadow-lg hover:shadow-xl transform hover:scale-105 w-full sm:w-auto"
+                    >
+                      <span>მეტი ინფორმაცია</span>
+                      <FaArrowRight className="text-xs group-hover/btn:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
                 </div>
               </motion.div>
             </div>
@@ -548,110 +566,119 @@ const WebDev: React.FC = () => {
             </div>
             {/* ერე */}
             {/* Why Individual Pricing */}
-            <div className="bg-gradient-to-r from-slate-800/50 to-slate-700/50 rounded-2xl p-8 border border-slate-600/30 mb-12">
-              <div className="grid md:grid-cols-3 gap-8 text-center">
-                <div>
-                  <div className="text-4xl mb-4 text-blue-400">
-                    <FaBullseye />
+            <div className="relative overflow-hidden rounded-2xl backdrop-blur-xl mb-10">
+              <div className="absolute inset-0 bg-gradient-to-br from-slate-700/20 via-slate-800/10 to-slate-900/20 rounded-2xl" />
+              <div className="absolute inset-0 border border-slate-600/30 rounded-2xl" />
+
+              <div className="relative p-6 sm:p-8">
+                <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-14 h-14 bg-blue-500/15 rounded-xl flex items-center justify-center mb-4 border border-blue-400/20 group-hover:bg-blue-500/25 transition-all">
+                      <FaBullseye className="text-blue-300 text-2xl" />
+                    </div>
+                    <h4 className="text-lg font-semibold text-white mb-2">
+                      თქვენი პროექტის სპეციფიკა
+                    </h4>
+                    <p className="text-slate-400 text-sm leading-relaxed">
+                      თითოეული პროექტი მოითხოვს უნიკალურ ანალიზს და სპეციფიკურ სტრატეგიას, რათა მივაღწიოთ მაქსიმალურ შედეგს.
+                    </p>
                   </div>
-                  <h4 className="text-xl font-medium text-white mb-3">
-                    თქვენი პროექტის სპეციფიკა
-                  </h4>
-                  <p className="text-slate-300 text-sm leading-loose">
-                    თითოეული პროექტი მოითხოვს უნიკალურ ანალიზს და სპეციფიკურ
-                    სტრატეგიას, რათა მივაღწიოთ მაქსიმალურ შედეგს.
-                  </p>
-                </div>
-                <div>
-                  <div className="text-4xl mb-4 text-green-400">
-                    <FaBolt />
+
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-14 h-14 bg-green-500/15 rounded-xl flex items-center justify-center mb-4 border border-green-400/20 group-hover:bg-green-500/25 transition-all">
+                      <FaBolt className="text-green-300 text-2xl" />
+                    </div>
+                    <h4 className="text-lg font-semibold text-white mb-2">
+                      სწრაფი შეფასება
+                    </h4>
+                    <p className="text-slate-400 text-sm leading-relaxed">
+                      უფასო კონსულტაციის შემდეგ, მაქსიმუმ 12 საათში მიიღებთ ზუსტ შეთავაზებას და დეტალურ გეგმას.
+                    </p>
                   </div>
-                  <h4 className="text-xl font-medium text-white mb-3">
-                    პროექტის სწრაფი შეფასება
-                  </h4>
-                  <p className="text-slate-300 text-sm leading-loose">
-                    უფასო კონსულტაციის შემდეგ, ჩვენ გარანტიას გაძლევთ, რომ
-                    მაქსიმუმ 12 საათში მიიღებთ ზუსტ ფინანსურ შეთავაზებას და
-                    დეტალურ გეგმას პროექტის განსახორციელებლად.
-                  </p>
-                </div>
-                <div>
-                  <div className="text-4xl mb-4 text-purple-400">
-                    <FaCog />
+
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-14 h-14 bg-purple-500/15 rounded-xl flex items-center justify-center mb-4 border border-purple-400/20 group-hover:bg-purple-500/25 transition-all">
+                      <FaCog className="text-purple-300 text-2xl" />
+                    </div>
+                    <h4 className="text-lg font-semibold text-white mb-2">
+                      სრული გამჭვირვალობა
+                    </h4>
+                    <p className="text-slate-400 text-sm leading-relaxed">
+                      ჩვენი თანამშრომლობა ეფუძნება მაქსიმალურ ღიაობას მუშაობის ყველა ეტაპზე.
+                    </p>
                   </div>
-                  <h4 className="text-xl font-medium text-white mb-3">
-                    პროცესის გამჭვირვალობა{" "}
-                  </h4>
-                  <p className="text-slate-300 text-sm leading-loose">
-                    ჩვენი თანამშრომლობა ეფუძნება მაქსიმალურ ღიაობას მუშაობის
-                    ყველა ეტაპზე. მკაფიო პროცესი უზრუნველყოფს ორმხრივ მომგებიან
-                    და ეფექტურ შედეგებს.
-                  </p>
                 </div>
               </div>
             </div>
 
             {/* Price Ranges */}
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Landing Pages */}
-              <div className="bg-gradient-to-br from-blue-500/10 to-blue-600/10 p-6 rounded-xl border border-blue-500/20">
-                <div className="text-4xl mb-4 text-blue-400">
-                  <FaRocket />
-                </div>
-                <h4 className="text-xl font-medium text-white mb-3">
-                  სავიზიტო ვებსაიტი
-                </h4>
-                <p className="text-slate-300 text-sm mb-4 leading-loose">
-                  კომპაქტური და ეფექტური ვებგვერდი 2-4 გვერდით, რომელიც
-                  შექმნილია თქვენი სერვისების ან პროდუქტების მიმზიდველი
-                  პრეზენტაციისთვის. იდეალური გამოსავალი მცირე ბიზნესისთვის ან
-                  პირადი ბრენდისთვის, რომელიც სწრაფად გაზრდის თქვენს ონლაინ
-                  ხილვადობას და მოიზიდავს ახალ კლიენტებს.
-                </p>
-                <div className="text-2xl font-bold text-blue-400 mt-16">
-                  300₾<span className="text-sm text-slate-400">-დან</span>
+              <div className="group relative overflow-hidden rounded-xl backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/15 via-blue-500/5 to-slate-900/10 rounded-xl" />
+                <div className="absolute inset-0 border border-blue-400/30 group-hover:border-blue-400/50 rounded-xl transition-colors duration-300" />
+
+                <div className="relative p-6 flex flex-col h-full">
+                  <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-500/30 transition-colors">
+                    <FaRocket className="text-blue-300 text-xl" />
+                  </div>
+                  <h4 className="text-lg font-semibold text-white mb-2">
+                    სავიზიტო ვებსაიტი
+                  </h4>
+                  <p className="text-slate-400 text-sm mb-6 leading-relaxed flex-grow">
+                    კომპაქტური და ეფექტური ვებგვერდი 2-4 გვერდით. იდეალური მცირე ბიზნესისა და პირადი ბრენდის ონლაინ ხილვადობისთვის.
+                  </p>
+                  <div className="pt-4 border-t border-slate-700/40">
+                    <div className="text-2xl font-bold text-blue-300">
+                      300₾<span className="text-xs text-slate-400 ml-1">-დან</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
               {/* Corporate Websites */}
-              <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 p-6 rounded-xl border border-green-500/20">
-                <div className="text-4xl mb-4 text-green-400">
-                  <FaCode />
-                </div>
-                <h4 className="text-xl font-medium text-white mb-3">
-                  სტანდარტული ბიზნეს ვებსაიტი
-                </h4>
-                <p className="text-slate-300 text-sm mb-4 leading-loose">
-                  სრულფასოვანი და პროფესიონალური ვებგვერდი თქვენი კომპანიისთვის.
-                  მრავალგვერდიანი სტრუქტურა, მარტივი კონტენტის მართვის სისტემა
-                  (CMS), SEO ოპტიმიზაცია საძიებო სისტემებში უმაღლესი
-                  პოზიციებისთვის და მოქნილი ადმინისტრაციული პანელი. მარტივად
-                  მართვადი კონტენტი, ონლაინ ხილვადობა და მეტი პოტენციური
-                  მომხარებელი.
-                </p>
-                <div className="text-2xl font-bold text-green-400 mt-9">
-                  600₾<span className="text-sm text-slate-400">-დან</span>
+              <div className="group relative overflow-hidden rounded-xl backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+                <div className="absolute inset-0 bg-gradient-to-br from-green-600/15 via-emerald-500/5 to-slate-900/10 rounded-xl" />
+                <div className="absolute inset-0 border border-green-400/30 group-hover:border-green-400/50 rounded-xl transition-colors duration-300" />
+
+                <div className="relative p-6 flex flex-col h-full">
+                  <div className="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-green-500/30 transition-colors">
+                    <FaCode className="text-green-300 text-xl" />
+                  </div>
+                  <h4 className="text-lg font-semibold text-white mb-2">
+                    ბიზნეს ვებსაიტი
+                  </h4>
+                  <p className="text-slate-400 text-sm mb-6 leading-relaxed flex-grow">
+                    სრულფასოვანი ვებგვერდი CMS, SEO ოპტიმიზაცია და ადმინისტრაციული პანელით. კომპანიების ონლაინ ხილვადობის ზრდისთვის.
+                  </p>
+                  <div className="pt-4 border-t border-slate-700/40">
+                    <div className="text-2xl font-bold text-green-300">
+                      600₾<span className="text-xs text-slate-400 ml-1">-დან</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
               {/* AI Chatbots */}
-              <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-6 rounded-xl border border-purple-500/20">
-                <div className="text-4xl mb-4 text-purple-400">
-                  <FaBrain />
-                </div>
-                <h4 className="text-xl font-medium text-white mb-3">
-                  AI ჩატბოტი
-                </h4>
-                <p className="text-slate-300 text-sm mb-4 leading-loose">
-                  ინტელექტუალური ასისტენტი სოციალურ ქსელებში, რომელიც
-                  უზრუნველყოფს სწრაფ და პროფესიონალურ პასუხებს თქვენი
-                  მომხმარებლებისთვის. დაფუძნებულია თქვენი ბიზნესის ლოგიკაზე და
-                  ხშირად დასმულ შეკითხვებზე. ავტომატურად ამცირებს რესურსების
-                  ხარჯს, ზრდის კლიენტების კმაყოფილებას და შესაბამისად იზრდება
-                  გაყიდვები.
-                </p>
-                <div className="text-2xl font-bold text-purple-400 mt-16">
-                  300₾<span className="text-sm text-slate-400">-დან</span>
+              <div className="group relative overflow-hidden rounded-xl backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/15 via-pink-500/5 to-slate-900/10 rounded-xl" />
+                <div className="absolute inset-0 border border-purple-400/30 group-hover:border-purple-400/50 rounded-xl transition-colors duration-300" />
+
+                <div className="relative p-6 flex flex-col h-full">
+                  <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-purple-500/30 transition-colors">
+                    <FaBrain className="text-purple-300 text-xl" />
+                  </div>
+                  <h4 className="text-lg font-semibold text-white mb-2">
+                    AI ჩატბოტი
+                  </h4>
+                  <p className="text-slate-400 text-sm mb-6 leading-relaxed flex-grow">
+                    ინტელექტუალური ასისტენტი სოციალურ ქსელებში. 24/7 ავტომატური პასუხები, კლიენტების კმაყოფილება და გაყიდვების ზრდა.
+                  </p>
+                  <div className="pt-4 border-t border-slate-700/40">
+                    <div className="text-2xl font-bold text-purple-300">
+                      300₾<span className="text-xs text-slate-400 ml-1">-დან</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -756,37 +783,37 @@ const WebDev: React.FC = () => {
           </div>
 
           {/* Technology Stack */}
-          <div className="!max-w-7xl mx-auto mb-32">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-light text-white mb-4">
+          <div className="!max-w-7xl mx-auto mb-24">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl font-semibold text-white mb-3">
                 ტექნოლოგიები
               </h2>
-              <p className="text-slate-400">
-                მოდერნული და სანდო ტექნოლოგიები, რომლებსაც ნამდვილად ვიყენებთ
+              <p className="text-slate-400 text-sm">
+                მოდერნული და სანდო ტექნოლოგიები
               </p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               {technologies.map((tech, index) => (
                 <motion.div
                   key={tech.name}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className={`group cursor-pointer p-6 rounded-xl border-2 ${getColorClass(
+                  className={`group cursor-pointer p-4 sm:p-5 rounded-lg border-2 backdrop-blur-sm ${getColorClass(
                     tech.color
                   )}
-                  border-opacity-30 hover:border-opacity-100 transition-all duration-300 hover:scale-105`}
+                  border-opacity-20 hover:border-opacity-100 transition-all duration-300 hover:scale-110 hover:shadow-lg`}
                 >
                   <div className="text-center">
                     <div
-                      className={`text-4xl mb-3 ${getTextColorClass(
+                      className={`text-3xl mb-2 ${getTextColorClass(
                         tech.color
-                      )} group-hover:scale-110 transition-transform duration-300`}
+                      )} group-hover:scale-125 transition-transform duration-300`}
                     >
                       {tech.icon}
                     </div>
-                    <div className="text-white font-medium text-base">
+                    <div className="text-white font-semibold text-sm">
                       {tech.name}
                     </div>
                   </div>
