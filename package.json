@@ -25,7 +25,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "node server.js"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -33,6 +34,7 @@
     "@tailwindcss/vite": "^4.1.12",
     "@types/next": "^8.0.7",
     "antd": "^5.27.0",
+    "express": "^5.1.0",
     "firebase": "^12.1.0",
     "framer-motion": "^12.23.12",
     "gray-matter": "^4.0.3",

@@ -1,0 +1,16 @@
+name = "vifadigital"
+type = "javascript"
+account_id = ""
+workers_dev = true
+route = ""
+zone_id = ""
+
+[env.production]
+name = "vifadigital-prod"
+routes = [
+  { pattern = "vifadigital.ge/*", zone_name = "vifadigital.ge" }
+]
+
+[build]
+command = "npm run build"
+cwd = "./"
