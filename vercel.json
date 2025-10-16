@@ -1,6 +1,16 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "cleanUrls": false,
-  "trailingSlash": false
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/blog/:slug",
+      "destination": "/blog/:slug/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
