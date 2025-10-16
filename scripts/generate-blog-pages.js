@@ -1,6 +1,13 @@
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Import blog posts data from src/utils/blogUtils.ts
+// Since we can't directly import TS, we'll hardcode the posts
+// In a production setup, you'd use a build-time data source
 const blogPosts = {
   'biznesis-cifruli-transformacia': {
     title: 'ბიზნესის ციფრული ტრანსფორმაცია – თანამედროვე სამყაროში აუცილებლობა',
@@ -11,6 +18,11 @@ const blogPosts = {
 
 const distDir = path.join(process.cwd(), 'dist');
 const indexPath = path.join(distDir, 'index.html');
+
+if (!fs.existsSync(indexPath)) {
+  console.error(`Error: ${indexPath} not found. Run 'vite build' first.`);
+  process.exit(1);
+}
 
 // Read the base index.html
 const baseHTML = fs.readFileSync(indexPath, 'utf-8');
@@ -23,9 +35,8 @@ Object.entries(blogPosts).forEach(([slug, post]) => {
     fs.mkdirSync(blogDir, { recursive: true });
   }
 
-  // Generate meta tags
-  const metaTags = `
-    <meta property="og:type" content="article" />
+  // Generate meta tags with proper www URL consistency
+  const metaTags = `<meta property="og:type" content="article" />
     <meta property="og:title" content="${escapeHTML(post.title)}" />
     <meta property="og:description" content="${escapeHTML(post.description)}" />
     <meta property="og:image" content="${post.image}" />
@@ -34,40 +45,37 @@ Object.entries(blogPosts).forEach(([slug, post]) => {
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:url" content="https://www.vifadigital.ge/blog/${slug}" />
+    <meta property="og:site_name" content="VIFA Digital" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeHTML(post.title)}" />
     <meta name="twitter:description" content="${escapeHTML(post.description)}" />
-    <meta name="twitter:image" content="${post.image}" />
-  `;
+    <meta name="twitter:image" content="${post.image}" />`;
 
-  // Remove all OG meta tags
-  let html = baseHTML.replace(
-    /<meta property="og:[^"]*"[^>]*>/g,
-    ''
-  );
+  // Aggressively remove ALL OG and Twitter meta tags using regex
+  let html = baseHTML;
 
-  // Remove all Twitter meta tags
+  // Remove all og: property meta tags
+  html = html.replace(/<meta\s+property="og:[^"]*"[^>]*>/gi, '');
+
+  // Remove all twitter: name meta tags
+  html = html.replace(/<meta\s+name="twitter:[^"]*"[^>]*>/gi, '');
+
+  // Insert new meta tags after the author meta tag
   html = html.replace(
-    /<meta name="twitter:[^"]*"[^>]*>/g,
-    ''
-  );
-
-  // Insert new meta tags after author tag
-  html = html.replace(
-    /(<meta name="author" content="VIFA Digital" \/>)/,
+    /(<meta\s+name="author"\s+content="VIFA Digital"\s*\/?>)/i,
     `$1\n    ${metaTags}`
   );
 
-  // Update title
+  // Update page title with blog post title
   html = html.replace(
-    /<title>.*?<\/title>/,
+    /<title>[^<]*<\/title>/i,
     `<title>${escapeHTML(post.title)} - Vifa Digital</title>`
   );
 
   // Write the file
   const filePath = path.join(blogDir, 'index.html');
   fs.writeFileSync(filePath, html, 'utf-8');
-  console.log(`Generated: ${filePath}`);
+  console.log(`✓ Generated: ${filePath}`);
 });
 
 function escapeHTML(str) {
@@ -79,4 +87,4 @@ function escapeHTML(str) {
     .replace(/'/g, '&#039;');
 }
 
-console.log('Blog pages generated successfully!');
+console.log('✓ Blog pages generated successfully!');
