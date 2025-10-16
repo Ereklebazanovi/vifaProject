@@ -23,7 +23,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node scripts/generate-blog-pages.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "start": "node server.js"

@@ -3,8 +3,12 @@
   "outputDirectory": "dist",
   "rewrites": [
     {
-      "source": "/blog/(.*)",
-      "destination": "/api/blog?slug=$1"
+      "source": "/api/blog",
+      "destination": "/api/blog.js"
+    },
+    {
+      "source": "/blog/:slug",
+      "destination": "/api/blog.js?slug=:slug"
     },
     {
       "source": "/(.*)",
