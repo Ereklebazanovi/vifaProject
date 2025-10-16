@@ -1,16 +1,10 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "functions": {
-    "vercel/edge-functions/blog.js": {
-      "memory": 128,
-      "maxDuration": 10
-    }
-  },
   "rewrites": [
     {
-      "source": "/blog/:slug",
-      "destination": "vercel/edge-functions/blog.js"
+      "source": "/blog/(.*)",
+      "destination": "/api/blog?slug=$1"
     },
     {
       "source": "/(.*)",

@@ -1,6 +1,5 @@
-export default async function handler(request) {
-  const url = new URL(request.url);
-  const slug = url.pathname.split('/blog/')[1];
+export default async function handler(req, res) {
+  const { slug } = req.query;
 
   // Blog posts metadata
   const blogPosts = {
@@ -14,15 +13,16 @@ export default async function handler(request) {
   const post = blogPosts[slug];
 
   if (!post) {
-    return new Response('Not Found', { status: 404 });
+    return res.status(404).json({ error: 'Not Found' });
   }
 
-  // Fetch the base index.html
-  const baseResponse = await fetch(new URL('/index.html', request.url));
-  let html = await baseResponse.text();
+  try {
+    // Fetch the base index.html from dist
+    const response = await fetch('https://www.vifadigital.ge/index.html');
+    let html = await response.text();
 
-  // Inject dynamic meta tags
-  const metaTags = `
+    // Inject dynamic meta tags
+    const metaTags = `
     <meta property="og:type" content="article" />
     <meta property="og:title" content="${escapeHTML(post.title)}" />
     <meta property="og:description" content="${escapeHTML(post.description)}" />
@@ -36,25 +36,26 @@ export default async function handler(request) {
     <meta name="twitter:title" content="${escapeHTML(post.title)}" />
     <meta name="twitter:description" content="${escapeHTML(post.description)}" />
     <meta name="twitter:image" content="${post.image}" />
-  `;
+    `;
 
-  // Replace the default meta tags
-  html = html.replace(
-    /<meta property="og:type" content="website" \/>/,
-    metaTags
-  );
+    // Replace the default meta tags
+    html = html.replace(
+      /<meta property="og:type" content="website" \/>/,
+      metaTags
+    );
 
-  html = html.replace(
-    /<title>.*?<\/title>/,
-    `<title>${escapeHTML(post.title)} - Vifa Digital</title>`
-  );
+    html = html.replace(
+      /<title>.*?<\/title>/,
+      `<title>${escapeHTML(post.title)} - Vifa Digital</title>`
+    );
 
-  return new Response(html, {
-    headers: {
-      'content-type': 'text/html;charset=UTF-8',
-      'cache-control': 'public, max-age=3600'
-    }
-  });
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.setHeader('Cache-Control', 'public, max-age=3600');
+    return res.send(html);
+  } catch (error) {
+    console.error('Error fetching index.html:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
 }
 
 function escapeHTML(str) {
