@@ -161,19 +161,7 @@ const BlogPostPage: React.FC = () => {
                     <span className="sm:hidden">📤</span>
                   </button>
                 </div>
-                {/* Thumbnail */}
-                {post.thumbnail && (
-                  <div className="flex justify-center mb-8">
-                    <div className="w-64 h-48 rounded-xl overflow-hidden shadow-lg border border-blue-900/30 bg-gray-800/50">
-                      <img
-                        src={post.thumbnail}
-                        alt={post.title}
-                        className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-105"
-                        loading="lazy"
-                      />
-                    </div>
-                  </div>
-                )}
+                
               </div>
 
               {/* Content */}
