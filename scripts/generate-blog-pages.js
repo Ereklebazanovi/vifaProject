@@ -40,10 +40,22 @@ Object.entries(blogPosts).forEach(([slug, post]) => {
     <meta name="twitter:image" content="${post.image}" />
   `;
 
-  // Replace meta tags
+  // Remove all OG meta tags
   let html = baseHTML.replace(
-    /<meta property="og:type" content="website" \/>/,
-    metaTags
+    /<meta property="og:[^"]*"[^>]*>/g,
+    ''
+  );
+
+  // Remove all Twitter meta tags
+  html = html.replace(
+    /<meta name="twitter:[^"]*"[^>]*>/g,
+    ''
+  );
+
+  // Insert new meta tags after author tag
+  html = html.replace(
+    /(<meta name="author" content="VIFA Digital" \/>)/,
+    `$1\n    ${metaTags}`
   );
 
   // Update title
