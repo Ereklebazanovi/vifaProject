@@ -179,8 +179,8 @@ const BlogPostPage: React.FC = () => {
               {/* Footer */}
               <div className="px-8 py-8 bg-gradient-to-r from-gray-900/60 to-blue-900/30 border-t border-gray-800/50 flex flex-col sm:flex-row items-center justify-between gap-6">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">
-                    {post.author.name.charAt(0)}
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg overflow-hidden">
+                    <img src="/vifa.jpg" alt="Vifa Digital Team" className="w-full h-full object-cover" />
                   </div>
                   <div>
                     <div className="font-semibold text-white">{post.author.name}</div>
