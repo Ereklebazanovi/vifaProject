@@ -96,8 +96,8 @@ const SimpleNavbar: React.FC = () => {
                     : "text-xl xs:text-2xl sm:text-3xl md:text-4xl"
                 }`}
               >
-                <span className="inline">VIFA </span>
-                <span className="font-normal text-blue-400 inline">
+                <span className="inline font-bold">VIFA </span>
+                <span className="font-bold text-blue-400 inline">
                   DIGITAL
                 </span>
               </h1>
