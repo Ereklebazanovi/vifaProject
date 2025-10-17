@@ -76,8 +76,8 @@ const BlogPage: React.FC = () => {
         <div className="pt-32 pb-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Simple Header */}
-            <div className="text-center mb-10">
-              <h1 className="text-2xl md:text-5xl font-light text-white mb-6">
+            <div className="text-center mb-10 sm:mt-4">
+              <h1 className="text-3xl md:text-4xl font-light text-white mb-6">
                 სტატიები
               </h1>
             </div>
@@ -121,7 +121,7 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post, index }) => {
         animationDelay: `${index * 100}ms`,
       }}
     >
-      <article className="bg-gray-900/30 border border-gray-800/40 rounded-lg p-4 sm:p-6 hover:bg-gray-900/50 hover:border-gray-700/60 transition-all duration-300 opacity-0 animate-[fadeInUp_0.6s_ease-out_forwards]">
+      <article className="bg-gray-900/30 border border-gray-800/40 rounded-lg p-4 sm:p-6 hover:bg-gray-900/50 hover:border-gray-700/60 transition-all duration-300 opacity-0 animate-[fadeInUp_0.6s_ease-out_forwards] !max-w-6xl mx-auto">
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
           {/* Small Thumbnail */}
           <div className="w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 mx-auto sm:mx-0">
