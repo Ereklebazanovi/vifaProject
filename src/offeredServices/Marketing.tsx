@@ -608,8 +608,7 @@ const Marketing: React.FC = () => {
 
               <div className="text-center mt-8">
                 <p className="text-slate-400 text-sm max-w-2xl mx-auto">
-                  ჩვენი მიდგომა: სტრატეგიული დაგეგმვა → კრეატიული კონტენტი →
-                  მიზნობრივი გავრცელება → მონიტორინგი და ოპტიმიზაცია
+                  {t("section.description")}
                 </p>
               </div>
             </div>
