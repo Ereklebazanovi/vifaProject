@@ -143,7 +143,7 @@ const BlogPostPage: React.FC = () => {
             <article className="bg-gradient-to-br from-gray-900/80 to-slate-900/60 border border-gray-800/40 rounded-2xl overflow-hidden shadow-2xl transition-all duration-300 hover:shadow-blue-900/30">
               {/* Header */}
               <div className="p-4 sm:p-6 pb-4 flex flex-col items-center text-center">
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight tracking-tight drop-shadow-lg">
+                <h1 className="text-3xl sm:text-4xl md:text-4xl font-extrabold text-white mb-6 leading-tight tracking-tight drop-shadow-lg">
                   {post.title}
                 </h1>
                 {/* Meta */}
