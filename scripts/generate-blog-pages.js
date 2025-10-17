@@ -47,6 +47,7 @@ Object.entries(blogPosts).forEach(([slug, post]) => {
     <meta property="og:image:height" content="630" />
     <meta property="og:url" content="https://www.vifadigital.ge/blog/${slug}" />
     <meta property="og:site_name" content="VIFA Digital" />
+    <meta property="og:locale" content="ka_GE" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeHTML(post.title)}" />
     <meta name="twitter:description" content="${escapeHTML(post.description)}" />
