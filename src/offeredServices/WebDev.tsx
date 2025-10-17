@@ -33,12 +33,250 @@ import {
   SiTailwindcss,
 } from "react-icons/si";
 import SEO from "../components/SEO";
+import { useLanguage } from "../contexts/LanguageContext";
+
+const webDevTranslations = {
+  ka: {
+    "seo.webdev.title": "ვებ განვითარება - VIFA | vifadigital.ge",
+    "seo.webdev.description":
+      "პროფესიონალური ვებ განვითარების სერვისები React, Node.js, მობილურზე მორგებული დიზაინი და თანამედროვე ვებ აპლიკაციები.",
+
+    "webdev.hero.title": "WEB DEVELOPMENT",
+    "webdev.stats.individual": "Individual",
+    "webdev.stats.individualDesc": "პირადი მიდგომა",
+    "webdev.stats.quality": "Quality",
+    "webdev.stats.qualityDesc": "ხარისხზე ფოკუსირება",
+    "webdev.stats.fresh": "Fresh",
+    "webdev.stats.freshDesc": "ახალი ტექნოლოგიები",
+    "webdev.stats.flexible": "Flexible",
+    "webdev.stats.flexibleDesc": "მოქნილი ვადები",
+
+    "webdev.process.planning": "დაგეგმვა",
+    "webdev.process.design": "დიზაინი",
+    "webdev.process.development": "დეველოპმენტი",
+    "webdev.process.launch": "გაშვება",
+    "webdev.process.description":
+      "ჩვენი მიდგომა: სტრატეგიული დაგეგმვა → UI/UX დიზაინი → ტექნიკური განხორციელება → ტესტირება და გაშვება",
+
+    "webdev.services.title": "ჩვენი ძირითადი სერვისები",
+    "webdev.service.website.title": "ვებსაიტის შექმნა",
+    "webdev.service.website.subtitle": "პროფესიონალური ვებგვერდები",
+    "webdev.service.website.description":
+      "თანამედროვე, სწრაფი და SEO-ოპტიმიზირებული ვებსაიტი, რომელიც ზრდის თქვენი ბიზნესის ხილვადობას და მომხმარებლების ჩართულობას.",
+    "webdev.service.website.feature1": "მობილური ოპტიმიზაცია",
+    "webdev.service.website.feature2": "SEO-ღია სტრუქტურა",
+    "webdev.service.website.feature3": "სწრაფი ჩატვირთვა",
+    "webdev.service.website.feature4": "მარტივი ადმინ პანელი",
+    "webdev.service.website.price": "ფასი დამოკიდებულია პროექტზე",
+    "webdev.service.website.priceValue": "500₾-დან",
+    "webdev.service.website.cta": "დაიწყე ახლავე",
+
+    "webdev.service.ai.title": "AI ჩატბოტი",
+    "webdev.service.ai.subtitle": "ავტომატური კომუნიკაცია მომხმარებლებთან",
+    "webdev.service.ai.description":
+      "ინტელექტუალური ჩატბოტი, რომელიც 24/7 პასუხობს მომხმარებელთა კითხვებს და უზრუნველყოფს სწრაფ მხარდაჭერას.",
+    "webdev.service.ai.feature1": "დაფუძნებული ბიზნეს ლოგიკაზე",
+    "webdev.service.ai.feature2": "ინტელექტუალური პასუხები",
+    "webdev.service.ai.feature3": "კლიენტების მოზიდვა",
+    "webdev.service.ai.feature4": "Social Media ინტეგრაცია",
+    "webdev.service.ai.price": "ფასი დამოკიდებულია პროექტზე",
+    "webdev.service.ai.priceValue": "300₾-დან",
+    "webdev.service.ai.cta": "მეტი ინფორმაცია",
+
+    "webdev.pricing.title": "ინდივიდუალური ფასები",
+    "webdev.pricing.reason1.title": "თქვენი პროექტის სპეციფიკა",
+    "webdev.pricing.reason1.description":
+      "თითოეული პროექტი მოითხოვს უნიკალურ ანალიზს და სპეციფიკურ სტრატეგიას, რათა მივაღწიოთ მაქსიმალურ შედეგს.",
+    "webdev.pricing.reason2.title": "სწრაფი შეფასება",
+    "webdev.pricing.reason2.description":
+      "უფასო კონსულტაციის შემდეგ, მაქსიმუმ 12 საათში მიიღებთ ზუსტ შეთავაზებას და დეტალურ გეგმას.",
+    "webdev.pricing.reason3.title": "სრული გამჭვირვალობა",
+    "webdev.pricing.reason3.description":
+      "ჩვენი თანამშრომლობა ეფუძნება მაქსიმალურ ღიაობას მუშაობის ყველა ეტაპზე.",
+
+    "webdev.pricing.landing.title": "სავიზიტო ვებსაიტი",
+    "webdev.pricing.landing.description":
+      "კომპაქტური და ეფექტური ვებგვერდი 2-4 გვერდით. იდეალური მცირე ბიზნესისა და პირადი ბრენდის ონლაინ ხილვადობისთვის.",
+    "webdev.pricing.landing.price": "500₾-დან",
+
+    "webdev.pricing.corporate.title": "პრემიუმ ვებსაიტი",
+    "webdev.pricing.corporate.description":
+      "სრულფასოვანი ვებგვერდი CMS, SEO ოპტიმიზაცია და ადმინისტრაციული პანელით. კომპანიების ონლაინ ხილვადობის ზრდისთვის.",
+    "webdev.pricing.corporate.price": "800₾-დან",
+
+    "webdev.pricing.ai.title": "AI ჩატბოტი",
+    "webdev.pricing.ai.description":
+      "ინტელექტუალური ასისტენტი სოციალურ ქსელებში. 24/7 ავტომატური პასუხები, კლიენტების კმაყოფილება და გაყიდვების ზრდა.",
+    "webdev.pricing.ai.price": "300₾-დან",
+
+    "webdev.pricing.ecommerce.title": "ელ-კომერცია",
+    "webdev.pricing.ecommerce.description":
+      "სრულფასოვანი ონლაინ მაღაზია გადახდის სისტემით, პროდუქტის მართვით და ორდერის თვალყურით.",
+    "webdev.pricing.ecommerce.price": "2000₾-დან",
+
+    "webdev.pricing.consultation": "კონსულტაცია უფასოა",
+
+    "webdev.services.label": "რას გთავაზობთ",
+
+    "webdev.frontend.title": "Frontend Development",
+    "webdev.frontend.description": "მოდერნული და ინტერაქტიული ვებ ინტერფეისები",
+
+    "webdev.backend.title": "Backend Development",
+    "webdev.backend.description": "მძლავრი სერვერული არქიტექტურა",
+
+    "webdev.mobile.title": "Mobile Responsive",
+    "webdev.mobile.description": "იდეალური ხილვადობა ყველა მოწყობილობაზე",
+
+    "webdev.ai.title": "AI ინტეგრაციები",
+    "webdev.ai.description": "მარტივი კავშირი ხელოვნური ინტელექტის API-ებთან",
+
+    "webdev.cms.title": "CMS სისტემები",
+    "webdev.cms.description": "კონტენტის მართვა მარტივად და ეფექტურად",
+
+    "webdev.database.title": "Database Design",
+    "webdev.database.description": "ოპტიმიზებული მონაცემთა ბაზები",
+
+    "webdev.ui.title": "UI/UX Design",
+    "webdev.ui.description": "მომხმარებელზე ორიენტირებული დიზაინი",
+
+    "webdev.performance.title": "Performance",
+    "webdev.performance.description": "ულტრასწრაფი ვებსაიტები",
+
+    "webdev.technologies": "ტექნოლოგიები",
+    "webdev.technologies.desc": "მოდერნული და სანდო ტექნოლოგიები",
+
+    "webdev.cta.question": "მზად ხარ ბიზნესის ციფრული ტრანსფორმაციისთვის?",
+    "webdev.cta.button": "პროექტის დაწყება",
+    "webdev.pricing.perProject": "პროექტზე",
+  },
+  en: {
+    "seo.webdev.title": "Web Development Services - VIFA | vifadigital.com",
+    "seo.webdev.description":
+      "Professional web development services including React, Node.js, mobile responsive design, and modern web applications.",
+
+    "webdev.hero.title": "WEB DEVELOPMENT",
+    "webdev.stats.individual": "Individual",
+    "webdev.stats.individualDesc": "Personal Approach",
+    "webdev.stats.quality": "Quality",
+    "webdev.stats.qualityDesc": "Focus on Quality",
+    "webdev.stats.fresh": "Fresh",
+    "webdev.stats.freshDesc": "Modern Technologies",
+    "webdev.stats.flexible": "Flexible",
+    "webdev.stats.flexibleDesc": "Flexible Timeline",
+
+    "webdev.process.planning": "Planning",
+    "webdev.process.design": "Design",
+    "webdev.process.development": "Development",
+    "webdev.process.launch": "Launch",
+    "webdev.process.description":
+      "Our Approach: Strategic Planning → UI/UX Design → Technical Implementation → Testing and Launch",
+
+    "webdev.services.title": "Our Main Services",
+    "webdev.service.website.title": "Website Creation",
+    "webdev.service.website.subtitle": "Professional Websites",
+    "webdev.service.website.description":
+      "Modern, fast and SEO-optimized website that increases your business visibility and user engagement.",
+    "webdev.service.website.feature1": "Mobile Optimization",
+    "webdev.service.website.feature2": "SEO-Friendly Structure",
+    "webdev.service.website.feature3": "Fast Loading",
+    "webdev.service.website.feature4": "Simple Admin Panel",
+    "webdev.service.website.price": "Price depends on the project",
+    "webdev.service.website.priceValue": "From 500₾",
+    "webdev.service.website.cta": "Start Now",
+
+    "webdev.service.ai.title": "AI Chatbot",
+    "webdev.service.ai.subtitle": "Automatic Customer Communication",
+    "webdev.service.ai.description":
+      "Intelligent chatbot that responds 24/7 to customer questions and provides fast support.",
+    "webdev.service.ai.feature1": "Based on Business Logic",
+    "webdev.service.ai.feature2": "Intelligent Responses",
+    "webdev.service.ai.feature3": "Customer Acquisition",
+    "webdev.service.ai.feature4": "Social Media Integration",
+    "webdev.service.ai.price": "Price depends on the project",
+    "webdev.service.ai.priceValue": "From 300₾",
+    "webdev.service.ai.cta": "More Information",
+
+    "webdev.pricing.title": "Individual Pricing",
+    "webdev.pricing.reason1.title": "Your Project Specifics",
+    "webdev.pricing.reason1.description":
+      "Each project requires unique analysis and specific strategy to achieve maximum results.",
+    "webdev.pricing.reason2.title": "Quick Assessment",
+    "webdev.pricing.reason2.description":
+      "After a free consultation, you'll receive an accurate offer and detailed plan within 12 hours.",
+    "webdev.pricing.reason3.title": "Complete Transparency",
+    "webdev.pricing.reason3.description":
+      "Our collaboration is based on maximum transparency throughout all stages of work.",
+
+    "webdev.pricing.landing.title": "Landing Page",
+    "webdev.pricing.landing.description":
+      "Compact and effective webpage with 2-4 pages. Perfect for small businesses and personal branding.",
+    "webdev.pricing.landing.price": "From 500₾",
+
+    "webdev.pricing.corporate.title": "Premium Website",
+    "webdev.pricing.corporate.description":
+      "Full-featured website with CMS, SEO optimization and admin panel. For growing company online presence.",
+    "webdev.pricing.corporate.price": "From 800₾",
+
+    "webdev.pricing.ai.title": "AI Chatbot",
+    "webdev.pricing.ai.description":
+      "Intelligent assistant on social media. 24/7 automatic responses, customer satisfaction and sales growth.",
+    "webdev.pricing.ai.price": "From 300₾",
+
+    "webdev.pricing.ecommerce.title": "E-commerce Store",
+    "webdev.pricing.ecommerce.description":
+      "Full-featured online store with payment system, product management and order tracking.",
+    "webdev.pricing.ecommerce.price": "From 2000₾",
+
+    "webdev.pricing.consultation": "Consultation is Free",
+
+    "webdev.services.label": "What We Offer",
+
+    "webdev.frontend.title": "Frontend Development",
+    "webdev.frontend.description": "Modern and interactive web interfaces",
+
+    "webdev.backend.title": "Backend Development",
+    "webdev.backend.description": "Powerful server architecture",
+
+    "webdev.mobile.title": "Mobile Responsive",
+    "webdev.mobile.description": "Perfect visibility on all devices",
+
+    "webdev.ai.title": "AI Integrations",
+    "webdev.ai.description": "Easy connection to AI APIs",
+
+    "webdev.cms.title": "CMS Systems",
+    "webdev.cms.description": "Content management made easy",
+
+    "webdev.database.title": "Database Design",
+    "webdev.database.description": "Optimized databases",
+
+    "webdev.ui.title": "UI/UX Design",
+    "webdev.ui.description": "User-centered design",
+
+    "webdev.performance.title": "Performance",
+    "webdev.performance.description": "Ultra-fast websites",
+
+    "webdev.technologies": "Technologies",
+    "webdev.technologies.desc": "Modern and reliable technologies",
+
+    "webdev.cta.question": "Ready for Digital Transformation?",
+    "webdev.cta.button": "Start Project",
+    "webdev.pricing.perProject": "Per Project",
+  },
+};
 
 const WebDev: React.FC = () => {
+  const { currentLanguage } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
   const { startNavigation, stopNavigation } = useNavigation();
   const navigate = useNavigate();
   const [activeService, setActiveService] = useState<number>(0);
+
+  const t = (key: string): string => {
+    const translations = webDevTranslations[
+      currentLanguage as keyof typeof webDevTranslations
+    ] as Record<string, string>;
+    return translations[key] || key;
+  };
 
   // Scroll to top when component mounts
   useEffect(() => {
@@ -57,16 +295,16 @@ const WebDev: React.FC = () => {
     {
       id: "frontend-development",
       icon: <FaReact />,
-      title: "Frontend Development",
-      description: "მოდერნული და ინტერაქტიული ვებ ინტერფეისები",
+      title: t("webdev.frontend.title"),
+      description: t("webdev.frontend.description"),
       color: "blue",
       features: ["React/Next.js", "TypeScript", "Responsive Design", "PWA"],
     },
     {
       id: "backend-development",
       icon: <FaServer />,
-      title: "Backend Development",
-      description: "მძლავრი სერვერული არქიტექტურა",
+      title: t("webdev.backend.title"),
+      description: t("webdev.backend.description"),
       color: "green",
       features: [
         "Node.js",
@@ -78,8 +316,8 @@ const WebDev: React.FC = () => {
     {
       id: "mobile-responsive",
       icon: <FaMobile />,
-      title: "Mobile Responsive",
-      description: "იდეალური ხილვადობა ყველა მოწყობილობაზე",
+      title: t("webdev.mobile.title"),
+      description: t("webdev.mobile.description"),
       color: "purple",
       features: [
         "Mobile First",
@@ -91,8 +329,8 @@ const WebDev: React.FC = () => {
     {
       id: "ai-integrations",
       icon: <FaBrain />,
-      title: "AI ინტეგრაციები",
-      description: "მარტივი კავშირი ხელოვნური ინტელექტის API-ებთან",
+      title: t("webdev.ai.title"),
+      description: t("webdev.ai.description"),
       color: "cyan",
       features: [
         "Chatbot APIs",
@@ -104,8 +342,8 @@ const WebDev: React.FC = () => {
     {
       id: "cms-development",
       icon: <FaCog />,
-      title: "CMS სისტემები",
-      description: "კონტენტის მართვა მარტივად და ეფექტურად",
+      title: t("webdev.cms.title"),
+      description: t("webdev.cms.description"),
       color: "indigo",
       features: [
         "Admin Panel",
@@ -117,30 +355,30 @@ const WebDev: React.FC = () => {
     {
       id: "database-design",
       icon: <FaDatabase />,
-      title: "Database Design",
-      description: "ოპტიმიზებული მონაცემთა ბაზები",
+      title: t("webdev.database.title"),
+      description: t("webdev.database.description"),
       color: "red",
       features: ["SQL/NoSQL", "Data Modeling", "Performance", "Security"],
     },
     {
       id: "ui-ux-design",
       icon: <FaPaintBrush />,
-      title: "UI/UX Design",
-      description: "მომხმარებელზე ორიენტირებული დიზაინი",
+      title: t("webdev.ui.title"),
+      description: t("webdev.ui.description"),
       color: "pink",
       features: ["User Research", "Wireframes", "Prototypes", "Design Systems"],
     },
     {
       id: "performance-optimization",
       icon: <FaBolt />,
-      title: "Performance",
-      description: "ულტრასწრაფი ვებსაიტები",
+      title: t("webdev.performance.title"),
+      description: t("webdev.performance.description"),
       color: "yellow",
       features: ["Speed Optimization", "SEO", "Core Web Vitals", "CDN"],
     },
   ];
 
-  // Technology stack - მხოლოდ ის ტექნოლოგიები რომლებსაც ნამდვილად ვიყენებთ
+  // Technology stack
   const technologies = [
     { icon: <SiReact />, name: "React", color: "blue" },
     { icon: <SiTypescript />, name: "TypeScript", color: "blue" },
@@ -187,8 +425,8 @@ const WebDev: React.FC = () => {
   return (
     <>
       <SEO
-        title="Web Development Services - VIFA"
-        description="Professional web development services including React, Node.js, mobile responsive design, and modern web applications."
+        title={t("seo.webdev.title")}
+        description={t("seo.webdev.description")}
         url="https://vifadigital.ge/services/web-development"
       />
 
@@ -294,31 +532,35 @@ const WebDev: React.FC = () => {
               >
                 <div className="text-center">
                   <div className="text-3xl font-bold text-blue-400 mb-2">
-                    Individual
+                    {t("webdev.stats.individual")}
                   </div>
-                  <div className="text-sm text-slate-400">პირადი მიდგომა</div>
+                  <div className="text-sm text-slate-400">
+                    {t("webdev.stats.individualDesc")}
+                  </div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-green-400 mb-2">
-                    Quality
+                    {t("webdev.stats.quality")}
                   </div>
                   <div className="text-sm text-slate-400">
-                    ხარისხზე ფოკუსირება
+                    {t("webdev.stats.qualityDesc")}
                   </div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-purple-400 mb-2">
-                    Fresh
+                    {t("webdev.stats.fresh")}
                   </div>
                   <div className="text-sm text-slate-400">
-                    ახალი ტექნოლოგიები
+                    {t("webdev.stats.freshDesc")}
                   </div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-orange-400 mb-2">
-                    Flexible
+                    {t("webdev.stats.flexible")}
                   </div>
-                  <div className="text-sm text-slate-400">მოქნილი ვადები</div>
+                  <div className="text-sm text-slate-400">
+                    {t("webdev.stats.flexibleDesc")}
+                  </div>
                 </div>
               </motion.div>
             </div>
@@ -332,7 +574,7 @@ const WebDev: React.FC = () => {
                     <div className="text-center">
                       <FaChartLine className="text-blue-400 text-3xl mb-2 mx-auto" />
                       <div className="text-blue-400 text-xs font-medium">
-                        დაგეგმვა
+                        {t("webdev.process.planning")}
                       </div>
                     </div>
                   </div>
@@ -346,7 +588,7 @@ const WebDev: React.FC = () => {
                     <div className="text-center">
                       <FaPaintBrush className="text-purple-400 text-3xl mb-2 mx-auto" />
                       <div className="text-purple-400 text-xs font-medium">
-                        დიზაინი
+                        {t("webdev.process.design")}
                       </div>
                     </div>
                   </div>
@@ -360,7 +602,7 @@ const WebDev: React.FC = () => {
                     <div className="text-center">
                       <FaCode className="text-green-400 text-3xl mb-2 mx-auto" />
                       <div className="text-green-400 text-xs font-medium">
-                        დეველოპმენტი
+                        {t("webdev.process.development")}
                       </div>
                     </div>
                   </div>
@@ -374,7 +616,7 @@ const WebDev: React.FC = () => {
                     <div className="text-center">
                       <FaRocket className="text-violet-400 text-3xl mb-2 mx-auto" />
                       <div className="text-violet-400 text-xs font-medium">
-                        გაშვება
+                        {t("webdev.process.launch")}
                       </div>
                     </div>
                   </div>
@@ -383,26 +625,25 @@ const WebDev: React.FC = () => {
 
               <div className="text-center mt-8">
                 <p className="text-slate-400 text-sm max-w-2xl mx-auto">
-                  ჩვენი მიდგომა: სტრატეგიული დაგეგმვა → UI/UX დიზაინი →
-                  ტექნიკური განხორციელება → ტესტირება და გაშვება
+                  {t("webdev.process.description")}
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Main Services Highlight - რაღაც ასე უნდა იყოს პიორიტეტი */}
+          {/* Main Services Highlight */}
           <div className="mb-32">
             <div className="text-center mb-16">
               <h3
                 className="text-4xl font-bold text-white mb-6 tracking-tight"
                 style={{ fontFamily: "Inter, system-ui, sans-serif" }}
               >
-                ჩვენი ძირითადი სერვისები
+                {t("webdev.services.title")}
               </h3>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-6xl mx-auto">
-              {/* Website Development - პირველი პრიორიტეტი */}
+              {/* Website Development */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -418,10 +659,10 @@ const WebDev: React.FC = () => {
                     <div className="flex items-start justify-between gap-4 mb-6">
                       <div>
                         <h4 className="text-2xl sm:text-3xl font-bold text-white mb-2 leading-tight">
-                          ვებსაიტის შექმნა
+                          {t("webdev.service.website.title")}
                         </h4>
                         <div className="text-blue-300 font-medium text-sm sm:text-base">
-                          პროფესიონალური ვებგვერდები
+                          {t("webdev.service.website.subtitle")}
                         </div>
                       </div>
                       <div className="w-20 h-20 bg-gradient-to-br from-blue-500/30 to-blue-400/10 rounded-2xl flex items-center justify-center group-hover:from-blue-500/40 group-hover:to-blue-400/20 transition-all duration-300 flex-shrink-0 shadow-lg">
@@ -432,27 +673,34 @@ const WebDev: React.FC = () => {
 
                   {/* Description */}
                   <p className="text-slate-300 mb-8 leading-relaxed text-sm sm:text-base">
-                    თანამედროვე, სწრაფი და SEO-ოპტიმიზირებული ვებსაიტი, რომელიც
-                    ზრდის თქვენი ბიზნესის ხილვადობას და მომხმარებლების ჩართულობას.
+                    {t("webdev.service.website.description")}
                   </p>
 
                   {/* Features */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10 flex-grow">
                     <div className="flex items-start gap-3 p-3 rounded-lg bg-blue-500/5 border border-blue-400/10 group-hover:bg-blue-500/10 transition-colors">
                       <FaMobile className="text-blue-300 flex-shrink-0 text-lg mt-1" />
-                      <span className="text-slate-200 text-sm font-medium">მობილური ოპტიმიზაცია</span>
+                      <span className="text-slate-200 text-sm font-medium">
+                        {t("webdev.service.website.feature1")}
+                      </span>
                     </div>
                     <div className="flex items-start gap-3 p-3 rounded-lg bg-blue-500/5 border border-blue-400/10 group-hover:bg-blue-500/10 transition-colors">
                       <FaChartLine className="text-blue-300 flex-shrink-0 text-lg mt-1" />
-                      <span className="text-slate-200 text-sm font-medium">SEO-ღია სტრუქტურა</span>
+                      <span className="text-slate-200 text-sm font-medium">
+                        {t("webdev.service.website.feature2")}
+                      </span>
                     </div>
                     <div className="flex items-start gap-3 p-3 rounded-lg bg-blue-500/5 border border-blue-400/10 group-hover:bg-blue-500/10 transition-colors">
                       <FaBolt className="text-blue-300 flex-shrink-0 text-lg mt-1" />
-                      <span className="text-slate-200 text-sm font-medium">სწრაფი ჩატვირთვა</span>
+                      <span className="text-slate-200 text-sm font-medium">
+                        {t("webdev.service.website.feature3")}
+                      </span>
                     </div>
                     <div className="flex items-start gap-3 p-3 rounded-lg bg-blue-500/5 border border-blue-400/10 group-hover:bg-blue-500/10 transition-colors">
                       <FaCog className="text-blue-300 flex-shrink-0 text-lg mt-1" />
-                      <span className="text-slate-200 text-sm font-medium">მარტივი ადმინ პანელი</span>
+                      <span className="text-slate-200 text-sm font-medium">
+                        {t("webdev.service.website.feature4")}
+                      </span>
                     </div>
                   </div>
 
@@ -460,24 +708,24 @@ const WebDev: React.FC = () => {
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-6 border-t border-slate-700/50">
                     <div className="text-center sm:text-left">
                       <span className="text-xs sm:text-sm text-slate-400">
-                        ფასი დამოკიდებულია
+                        {t("webdev.service.website.price")}
                       </span>
                       <div className="text-lg sm:text-xl font-bold text-blue-300">
-                        პროექტზე
+                        {t("webdev.pricing.landing.price")}
                       </div>
                     </div>
                     <Link
                       to="/start-project"
                       className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-3 rounded-lg transition-all duration-300 font-semibold text-sm sm:text-base group/btn shadow-lg hover:shadow-xl transform hover:scale-105 w-full sm:w-auto"
                     >
-                      <span>დაიწყე ახლავე</span>
+                      <span>{t("webdev.service.website.cta")}</span>
                       <FaArrowRight className="text-xs group-hover/btn:translate-x-1 transition-transform" />
                     </Link>
                   </div>
                 </div>
               </motion.div>
 
-              {/* AI Chatbot - მეორე პრიორიტეტი */}
+              {/* AI Chatbot */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -493,10 +741,10 @@ const WebDev: React.FC = () => {
                     <div className="flex items-start justify-between gap-4 mb-6">
                       <div>
                         <h4 className="text-2xl sm:text-3xl font-bold text-white mb-2 leading-tight">
-                          AI ჩატბოტი
+                          {t("webdev.service.ai.title")}
                         </h4>
                         <div className="text-cyan-300 font-medium text-sm sm:text-base">
-                          ავტომატური კომუნიკაცია მომხმარებლებთან
+                          {t("webdev.service.ai.subtitle")}
                         </div>
                       </div>
                       <div className="w-20 h-20 bg-gradient-to-br from-cyan-500/30 to-cyan-400/10 rounded-2xl flex items-center justify-center group-hover:from-cyan-500/40 group-hover:to-cyan-400/20 transition-all duration-300 flex-shrink-0 shadow-lg">
@@ -507,27 +755,34 @@ const WebDev: React.FC = () => {
 
                   {/* Description */}
                   <p className="text-slate-300 mb-8 leading-relaxed text-sm sm:text-base">
-                    ინტელექტუალური ჩატბოტი, რომელიც 24/7 პასუხობს მომხმარებელთა
-                    კითხვებს და უზრუნველყოფს სწრაფ მხარდაჭერას.
+                    {t("webdev.service.ai.description")}
                   </p>
 
                   {/* Features */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10 flex-grow">
                     <div className="flex items-start gap-3 p-3 rounded-lg bg-cyan-500/5 border border-cyan-400/10 group-hover:bg-cyan-500/10 transition-colors">
                       <FaRocket className="text-cyan-300 flex-shrink-0 text-lg mt-1" />
-                      <span className="text-slate-200 text-sm font-medium">დაფუძნებული ბიზნეს ლოგიკაზე</span>
+                      <span className="text-slate-200 text-sm font-medium">
+                        {t("webdev.service.ai.feature1")}
+                      </span>
                     </div>
                     <div className="flex items-start gap-3 p-3 rounded-lg bg-cyan-500/5 border border-cyan-400/10 group-hover:bg-cyan-500/10 transition-colors">
                       <FaBullseye className="text-cyan-300 flex-shrink-0 text-lg mt-1" />
-                      <span className="text-slate-200 text-sm font-medium">ინტელექტუალური პასუხები</span>
+                      <span className="text-slate-200 text-sm font-medium">
+                        {t("webdev.service.ai.feature2")}
+                      </span>
                     </div>
                     <div className="flex items-start gap-3 p-3 rounded-lg bg-cyan-500/5 border border-cyan-400/10 group-hover:bg-cyan-500/10 transition-colors">
                       <FaDatabase className="text-cyan-300 flex-shrink-0 text-lg mt-1" />
-                      <span className="text-slate-200 text-sm font-medium">კლიენტების მოზიდვა</span>
+                      <span className="text-slate-200 text-sm font-medium">
+                        {t("webdev.service.ai.feature3")}
+                      </span>
                     </div>
                     <div className="flex items-start gap-3 p-3 rounded-lg bg-cyan-500/5 border border-cyan-400/10 group-hover:bg-cyan-500/10 transition-colors">
                       <FaFacebook className="text-cyan-300 flex-shrink-0 text-lg mt-1" />
-                      <span className="text-slate-200 text-sm font-medium">Social Media ინტეგრაცია</span>
+                      <span className="text-slate-200 text-sm font-medium">
+                        {t("webdev.service.ai.feature4")}
+                      </span>
                     </div>
                   </div>
 
@@ -535,17 +790,17 @@ const WebDev: React.FC = () => {
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-6 border-t border-slate-700/50">
                     <div className="text-center sm:text-left">
                       <span className="text-xs sm:text-sm text-slate-400">
-                        ფასი დამოკიდებულია
+                        {t("webdev.service.ai.price")}
                       </span>
                       <div className="text-lg sm:text-xl font-bold text-cyan-300">
-                        პროექტზე
+                        {t("webdev.service.ai.priceValue")}
                       </div>
                     </div>
                     <button
                       onClick={() => handleNavigation("/services/ai-chatbot")}
                       className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 text-white px-6 py-3 rounded-lg transition-all duration-300 font-semibold text-sm sm:text-base group/btn shadow-lg hover:shadow-xl transform hover:scale-105 w-full sm:w-auto"
                     >
-                      <span>მეტი ინფორმაცია</span>
+                      <span>{t("webdev.service.ai.cta")}</span>
                       <FaArrowRight className="text-xs group-hover/btn:translate-x-1 transition-transform" />
                     </button>
                   </div>
@@ -561,10 +816,9 @@ const WebDev: React.FC = () => {
                 className="text-3xl font-semibold text-white mb-4 tracking-tight"
                 style={{ fontFamily: "Inter, system-ui, sans-serif" }}
               >
-                ინდივიდუალური ფასები
+                {t("webdev.pricing.title")}
               </h3>
             </div>
-            {/* ერე */}
             {/* Why Individual Pricing */}
             <div className="relative overflow-hidden rounded-2xl backdrop-blur-xl mb-10 !max-w-7xl mx-auto">
               <div className="absolute inset-0 bg-gradient-to-br from-slate-700/20 via-slate-800/10 to-slate-900/20 rounded-2xl" />
@@ -577,10 +831,10 @@ const WebDev: React.FC = () => {
                       <FaBullseye className="text-blue-300 text-2xl" />
                     </div>
                     <h4 className="text-lg font-semibold text-white mb-2">
-                      თქვენი პროექტის სპეციფიკა
+                      {t("webdev.pricing.reason1.title")}
                     </h4>
                     <p className="text-slate-400 text-sm leading-relaxed">
-                      თითოეული პროექტი მოითხოვს უნიკალურ ანალიზს და სპეციფიკურ სტრატეგიას, რათა მივაღწიოთ მაქსიმალურ შედეგს.
+                      {t("webdev.pricing.reason1.description")}
                     </p>
                   </div>
 
@@ -589,10 +843,10 @@ const WebDev: React.FC = () => {
                       <FaBolt className="text-green-300 text-2xl" />
                     </div>
                     <h4 className="text-lg font-semibold text-white mb-2">
-                      სწრაფი შეფასება
+                      {t("webdev.pricing.reason2.title")}
                     </h4>
                     <p className="text-slate-400 text-sm leading-relaxed">
-                      უფასო კონსულტაციის შემდეგ, მაქსიმუმ 12 საათში მიიღებთ ზუსტ შეთავაზებას და დეტალურ გეგმას.
+                      {t("webdev.pricing.reason2.description")}
                     </p>
                   </div>
 
@@ -601,10 +855,10 @@ const WebDev: React.FC = () => {
                       <FaCog className="text-purple-300 text-2xl" />
                     </div>
                     <h4 className="text-lg font-semibold text-white mb-2">
-                      სრული გამჭვირვალობა
+                      {t("webdev.pricing.reason3.title")}
                     </h4>
                     <p className="text-slate-400 text-sm leading-relaxed">
-                      ჩვენი თანამშრომლობა ეფუძნება მაქსიმალურ ღიაობას მუშაობის ყველა ეტაპზე.
+                      {t("webdev.pricing.reason3.description")}
                     </p>
                   </div>
                 </div>
@@ -623,14 +877,14 @@ const WebDev: React.FC = () => {
                     <FaRocket className="text-blue-300 text-xl" />
                   </div>
                   <h4 className="text-lg font-semibold text-white mb-2">
-                    სავიზიტო ვებსაიტი
+                    {t("webdev.pricing.landing.title")}
                   </h4>
                   <p className="text-slate-400 text-sm mb-6 leading-relaxed flex-grow">
-                    კომპაქტური და ეფექტური ვებგვერდი 2-4 გვერდით. იდეალური მცირე ბიზნესისა და პირადი ბრენდის ონლაინ ხილვადობისთვის.
+                    {t("webdev.pricing.landing.description")}
                   </p>
                   <div className="pt-4 border-t border-slate-700/40">
                     <div className="text-2xl font-bold text-blue-300">
-                      500₾<span className="text-xs text-slate-400 ml-1">-დან</span>
+                      {t("webdev.pricing.landing.price")}
                     </div>
                   </div>
                 </div>
@@ -646,14 +900,14 @@ const WebDev: React.FC = () => {
                     <FaCode className="text-green-300 text-xl" />
                   </div>
                   <h4 className="text-lg font-semibold text-white mb-2">
-                    პრემიუმ ვებსაიტი
+                    {t("webdev.pricing.corporate.title")}
                   </h4>
                   <p className="text-slate-400 text-sm mb-6 leading-relaxed flex-grow">
-                    სრულფასოვანი ვებგვერდი CMS, SEO ოპტიმიზაცია და ადმინისტრაციული პანელით. კომპანიების ონლაინ ხილვადობის ზრდისთვის.
+                    {t("webdev.pricing.corporate.description")}
                   </p>
                   <div className="pt-4 border-t border-slate-700/40">
                     <div className="text-2xl font-bold text-green-300">
-                      800₾<span className="text-xs text-slate-400 ml-1">-დან</span>
+                      {t("webdev.pricing.corporate.price")}
                     </div>
                   </div>
                 </div>
@@ -669,14 +923,14 @@ const WebDev: React.FC = () => {
                     <FaBrain className="text-purple-300 text-xl" />
                   </div>
                   <h4 className="text-lg font-semibold text-white mb-2">
-                    AI ჩატბოტი
+                    {t("webdev.pricing.ai.title")}
                   </h4>
                   <p className="text-slate-400 text-sm mb-6 leading-relaxed flex-grow">
-                    ინტელექტუალური ასისტენტი სოციალურ ქსელებში. 24/7 ავტომატური პასუხები, კლიენტების კმაყოფილება და გაყიდვების ზრდა.
+                    {t("webdev.pricing.ai.description")}
                   </p>
                   <div className="pt-4 border-t border-slate-700/40">
                     <div className="text-2xl font-bold text-purple-300">
-                      300₾<span className="text-xs text-slate-400 ml-1">-დან</span>
+                      {t("webdev.pricing.ai.price")}
                     </div>
                   </div>
                 </div>
@@ -692,14 +946,14 @@ const WebDev: React.FC = () => {
                     <FaRocket className="text-orange-300 text-xl" />
                   </div>
                   <h4 className="text-lg font-semibold text-white mb-2">
-                    ელ-კომერცია
+                    {t("webdev.pricing.ecommerce.title")}
                   </h4>
                   <p className="text-slate-400 text-sm mb-6 leading-relaxed flex-grow">
-                    სრულფასოვანი ონლაინ მაღაზია გადახდის სისტემით, პროდუქტის მართვით და ორდერის თვალყურით.
+                    {t("webdev.pricing.ecommerce.description")}
                   </p>
                   <div className="pt-4 border-t border-slate-700/40">
                     <div className="text-2xl font-bold text-orange-300">
-                      2000₾<span className="text-xs text-slate-400 ml-1">-დან</span>
+                      {t("webdev.pricing.ecommerce.price")}
                     </div>
                   </div>
                 </div>
@@ -708,7 +962,7 @@ const WebDev: React.FC = () => {
 
             <div className="text-center mt-15">
               <h3 className="text-3xl font-light text-white">
-                კონსულტაცია უფასოა
+                {t("webdev.pricing.consultation")}
               </h3>
             </div>
           </div>
@@ -717,7 +971,7 @@ const WebDev: React.FC = () => {
           <div id="services" className="!max-w-7xl mx-auto mb-32">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-light text-white mb-4">
-                რას გთავაზობთ
+                {t("webdev.services.label")}
               </h2>
             </div>
 
@@ -809,10 +1063,10 @@ const WebDev: React.FC = () => {
           <div className="!max-w-7xl mx-auto mb-24">
             <div className="text-center mb-10">
               <h2 className="text-3xl font-semibold text-white mb-3">
-                ტექნოლოგიები
+                {t("webdev.technologies")}
               </h2>
               <p className="text-slate-400 text-sm">
-                მოდერნული და სანდო ტექნოლოგიები
+                {t("webdev.technologies.desc")}
               </p>
             </div>
 
@@ -849,7 +1103,7 @@ const WebDev: React.FC = () => {
           <div className="text-center">
             <div className="max-w-3xl mx-auto">
               <h3 className="text-3xl font-light mb-6">
-                მზად ხარ ბიზნესის ციფრული ტრანსფორმაციისთვის?
+                {t("webdev.cta.question")}
               </h3>
 
               <div className="flex justify-center gap-4 mt-11 mb-7">
@@ -858,7 +1112,7 @@ const WebDev: React.FC = () => {
                   className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-green-500 text-white px-6 sm:px-8 lg:px-10 py-4 text-lg font-medium hover:from-blue-600 hover:to-green-600 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105"
                 >
                   <FaRocket />
-                  პროექტის დაწყება
+                  {t("webdev.cta.button")}
                 </Link>
               </div>
             </div>

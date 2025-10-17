@@ -1,5 +1,87 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "../contexts/LanguageContext";
+
+const terminalTranslations = {
+  ka: {
+    "chatbot.title": "VIFA AI ჩატბოტი - ლაივ დემო",
+    "chatbot.header": "▶ VIFA Digital AI ჩატბოტი - დემო საუბარი",
+    "chatbot.intro": "ბიზნესის მფლობელი ეკონტაქტება VIFA Digital-ის AI ასისტენტს",
+    "owner.label": "ბიზნესის მფლობელი:",
+    "owner.problem": "\"სალონი მაქვს და ძალიან ბევრი ზარი შემომდის. ყველას ვერ ვპასუხობ, განსაკუთრებით ღამით.\"",
+    "bot.label": "VIFA ჩატბოტი:",
+    "bot.response1": "გასაგებია! სალონის ბიზნესი მართლაც ინტენსიურია (ანუ: დიდ დროს მოითხოვს).",
+    "bot.analysis": "თქვენი საჭიროებების ანალიზი:",
+    "bot.analyze1": "▶ აანალიზებს: ჯავშნებს (ბუკინგებს), ფასებს, მომსახურების ტიპებს",
+    "bot.analyze2": "▶ ითვლის: ყველაზე დატვირთულ საათებს",
+    "bot.recommendation": "რეკომენდაცია: AI ასისტენტი, რომელიც:",
+    "bot.feature1": "• 24/7-ზე იღებს ჯავშნებს (ბუკინგებს)",
+    "bot.feature2": "• იცნობს თქვენი სალონის ყველა მომსახურებას",
+    "bot.feature3": "• ავტომატურად ნიშნავს შესათანხმებელ დროს\"",
+    "owner.question": "\"ასე კარგად ეცოდინება ჩემი სალონის სპეციფიკა? რა ღირს ასეთი სერვისი?\"",
+    "bot.response2": "დიახ! ტრენინგს გადის სპეციფიკურად თქვენს ბიზნესზე.",
+    "bot.pricing": "ფასი და გარანტიები:",
+    "bot.price": "▶ საწყისი ღირებულება: 500₾ - დან (კონკრეტულ ფასს მოგახსენებთ Vifa-ს გუნდი)",
+    "bot.roi": "▶ ROI გარანტია: მაღალი შედეგიანობა: სისტემა გაძლევთ საშუალებას, დაზოგოთ დრო და მიიღოთ შემოსავლების 100 %.",
+    "bot.example": "მაგალითად, თქვენი სალონისთვის:",
+    "bot.result": "• დღეში +15-20 ჯავშანი ღამის საათებში",
+    "benefits.title": "ბიზნეს ზემოქმედება - ROI კალკულატორი",
+    "benefits.header": "▶ ბიზნეს ანალიზი",
+    "benefits.description": "ყველა ბიზნეს ტიპისთვის | საშუალო ზომის კომპანია | სტანდარტული მოდელი",
+    "benefits.analyzing": "ბიზნეს მეტრიკების ანალიზი...",
+    "benefits.calculating": "ROI პოტენციალის გაანგარიშება...",
+    "benefits.assessing": "ეფექტურობის შეფასება...",
+    "benefits.title2": "▶ ძირითადი სარგებელი:",
+    "benefits.costReduction": "▶ ხარჯების შემცირება",
+    "benefits.salesGrowth": "▶ გაყიდვების ზრდა",
+    "benefits.availability": "▶ 24/7 ხელმისაწვდომობა",
+    "benefits.satisfaction": "▶ კლიენტთა კმაყოფილება",
+    "benefits.automation": "▶ ავტომატიზაცია",
+    "benefits.control": "▶ სრული კონტროლი",
+    "benefits.result": "▶ შედეგი:",
+    "benefits.conclusion": "თქვენი ბიზნესი გადაიქცევა 24/7 გაყიდვების მანქანად!",
+    "benefits.final": "მაღალი ROI | სწრაფი Break-even | გარანტირებული ზრდა",
+  },
+  en: {
+    "chatbot.title": "VIFA AI Chatbot - Live Demo",
+    "chatbot.header": "▶ VIFA Digital AI Chatbot - Demo Conversation",
+    "chatbot.intro": "Business Owner Contacting VIFA Digital's AI Assistant",
+    "owner.label": "Business Owner:",
+    "owner.problem": "\"I own a Barber Shop and get a lot of calls. I can't respond to everyone, especially at night.\"",
+    "bot.label": "VIFA Chatbot:",
+    "bot.response1": "I understand! Barber shop business is really intense (i.e., time-consuming).",
+    "bot.analysis": "Analysis of your needs:",
+    "bot.analyze1": "▶ Analyzes: Bookings, prices, service types",
+    "bot.analyze2": "▶ Calculates: Busiest hours",
+    "bot.recommendation": "Recommendation: AI assistant that:",
+    "bot.feature1": "• Takes bookings 24/7",
+    "bot.feature2": "• Knows all your Barber Shop services",
+    "bot.feature3": "• Automatically schedules available times\"",
+    "owner.question": "\"How do you know my Barber Shop so well? What does such a service cost?\"",
+    "bot.response2": "Yes! Training is conducted specifically for your business.",
+    "bot.pricing": "Pricing and Guarantees:",
+    "bot.price": "▶ Starting price: 500₾ and up (exact price will be provided by Vifa team)",
+    "bot.roi": "▶ ROI Guarantee: High results: System allows you to save time and earn 100% of revenue.",
+    "bot.example": "For example, for your Barber shop:",
+    "bot.result": "• +15-20 bookings per day during night hours",
+    "benefits.title": "Business Impact - ROI Calculator",
+    "benefits.header": "▶ Business Analysis",
+    "benefits.description": "For all business types | Medium-sized company | Standard model",
+    "benefits.analyzing": "Analyzing business metrics...",
+    "benefits.calculating": "Calculating ROI potential...",
+    "benefits.assessing": "Assessing effectiveness...",
+    "benefits.title2": "▶ Key Benefits:",
+    "benefits.costReduction": "▶ Cost Reduction",
+    "benefits.salesGrowth": "▶ Sales Growth",
+    "benefits.availability": "▶ 24/7 Availability",
+    "benefits.satisfaction": "▶ Customer Satisfaction",
+    "benefits.automation": "▶ Automation",
+    "benefits.control": "▶ Full Control",
+    "benefits.result": "▶ Result:",
+    "benefits.conclusion": "Your business will transform into a 24/7 sales machine!",
+    "benefits.final": "High ROI | Fast Break-even | Guaranteed Growth",
+  },
+};
 
 interface TerminalLineProps {
   children: React.ReactNode;
@@ -101,8 +183,15 @@ export const Terminal: React.FC<TerminalProps> = ({
 
 // Pre-built chatbot demo terminal
 export const ChatbotDemoTerminal: React.FC = () => {
+  const { currentLanguage } = useLanguage();
+
+  const t = (key: string): string => {
+    const translations = terminalTranslations[currentLanguage as keyof typeof terminalTranslations] as Record<string, string>;
+    return translations[key] || key;
+  };
+
   return (
-    <Terminal title="VIFA AI ჩატბოტი - ლაივ დემო" className="w-full">
+    <Terminal title={t("chatbot.title")} className="w-full">
       <TypingAnimation delay={0}>
         vifa-chatbot --demo-conversation start
       </TypingAnimation>
@@ -114,10 +203,10 @@ export const ChatbotDemoTerminal: React.FC = () => {
         className="bg-slate-800/50 rounded p-2.5 mt-1.5 border border-slate-600/50"
       >
         <div className="text-blue-400 font-mono text-sm mb-2">
-          ▶ VIFA Digital AI ჩატბოტი - დემო საუბარი
+          {t("chatbot.header")}
         </div>
         <div className="text-slate-300 text-sm font-mono">
-          ბიზნესის მფლობელი ეკონტაქტება VIFA Digital-ის AI ასისტენტს
+          {t("chatbot.intro")}
         </div>
       </motion.div>
 
@@ -130,11 +219,10 @@ export const ChatbotDemoTerminal: React.FC = () => {
         <div className="space-y-3 text-sm font-mono">
           <div className="flex items-start gap-2">
             <span className="text-orange-400 font-bold">
-              ბიზნესის მფლობელი:
+              {t("owner.label")}
             </span>
             <span className="text-slate-300">
-              "სალონი მაქვს და ძალიან ბევრი ზარი შემომდის. ყველას ვერ ვპასუხობ,
-              განსაკუთრებით ღამით."
+              {t("owner.problem")}
             </span>
           </div>
         </div>
@@ -148,23 +236,22 @@ export const ChatbotDemoTerminal: React.FC = () => {
       >
         <div className="space-y-2 text-sm font-mono">
           <div className="flex items-start gap-2">
-            <span className="text-green-400 font-bold">VIFA ჩატბოტი:</span>
+            <span className="text-green-400 font-bold">{t("bot.label")}</span>
             <div className="text-slate-300">
               <div>
-                "გასაგებია! სალონის ბიზნესი მართლაც ინტენსიურია (ანუ: დიდ დროს
-                მოითხოვს).
+                "{t("bot.response1")}
               </div>
-              <div className="mt-2">თქვენი საჭიროებების ანალიზი:</div>
+              <div className="mt-2">{t("bot.analysis")}</div>
               <div className="mt-2 text-yellow-400">
-                ▶ აანალიზებს: ჯავშნებს (ბუკინგებს), ფასებს, მომსახურების ტიპებს
+                {t("bot.analyze1")}
               </div>
               <div className="text-yellow-400">
-                ▶ ითვლის: ყველაზე დატვირთულ საათებს
+                {t("bot.analyze2")}
               </div>
-              <div className="mt-2">რეკომენდაცია: AI ასისტენტი, რომელიც:</div>
-              <div>• 24/7-ზე იღებს ჯავშნებს (ბუკინგებს)</div>
-              <div>• იცნობს თქვენი სალონის ყველა მომსახურებას</div>
-              <div>• ავტომატურად ნიშნავს შესათანხმებელ დროს"</div>
+              <div className="mt-2">{t("bot.recommendation")}</div>
+              <div>{t("bot.feature1")}</div>
+              <div>{t("bot.feature2")}</div>
+              <div>{t("bot.feature3")}</div>
             </div>
           </div>
         </div>
@@ -179,11 +266,10 @@ export const ChatbotDemoTerminal: React.FC = () => {
         <div className="space-y-2 text-sm font-mono">
           <div className="flex items-start gap-2">
             <span className="text-orange-400 font-bold">
-              ბიზნესის მფლობელი:
+              {t("owner.label")}
             </span>
             <span className="text-slate-300">
-              "ასე კარგად ეცოდინება ჩემი სალონის სპეციფიკა? რა ღირს ასეთი
-              სერვისი?"
+              {t("owner.question")}
             </span>
           </div>
         </div>
@@ -197,22 +283,22 @@ export const ChatbotDemoTerminal: React.FC = () => {
       >
         <div className="space-y-2 text-sm font-mono">
           <div className="flex items-start gap-2">
-            <span className="text-green-400 font-bold">VIFA ჩატბოტი:</span>
+            <span className="text-green-400 font-bold">{t("bot.label")}</span>
             <div className="text-slate-300">
-              <div>"დიახ! ტრენინგს გადის სპეციფიკურად თქვენს ბიზნესზე.</div>
-              <div className="mt-2">ფასი და გარანტიები:</div>
+              <div>"{t("bot.response2")}</div>
+              <div className="mt-2">{t("bot.pricing")}</div>
               <div className="mt-1 text-cyan-400">
-                ▶ საწყისი ღირებულება: 500₾ - დან (კონკრეტულ ფასს მოგახსენებთ Vifa-ს გუნდი)
+                {t("bot.price")}
               </div>
-             
+
               <div>
-                ▶ ROI გარანტია: მაღალი შედეგიანობა: სისტემა გაძლევთ საშუალებას, დაზოგოთ დრო და მიიღოთ შემოსავლების 100 %.
+                {t("bot.roi")}
               </div>
-              <div className="mt-2">მაგალითად, თქვენი სალონისთვის:</div>
+              <div className="mt-2">{t("bot.example")}</div>
               <div className="text-green-300">
-                • დღეში +15-20 ჯავშანი ღამის საათებში
+                {t("bot.result")}
               </div>
-             
+
             </div>
           </div>
         </div>
@@ -223,8 +309,15 @@ export const ChatbotDemoTerminal: React.FC = () => {
 
 // Business benefits terminal
 export const BusinessBenefitsTerminal: React.FC = () => {
+  const { currentLanguage } = useLanguage();
+
+  const t = (key: string): string => {
+    const translations = terminalTranslations[currentLanguage as keyof typeof terminalTranslations] as Record<string, string>;
+    return translations[key] || key;
+  };
+
   return (
-    <Terminal title="ბიზნეს ზემოქმედება - ROI კალკულატორი" className="w-full">
+    <Terminal title={t("benefits.title")} className="w-full">
       <TypingAnimation delay={0}>
         vifa-calculator --analyze-benefits
       </TypingAnimation>
@@ -236,16 +329,16 @@ export const BusinessBenefitsTerminal: React.FC = () => {
         className="bg-slate-800/50 rounded p-2.5 mt-1.5 border border-slate-600/50"
       >
         <div className="text-orange-400 font-mono text-sm mb-2">
-          ▶ ბიზნეს ანალიზი
+          {t("benefits.header")}
         </div>
         <div className="text-slate-300 text-sm font-mono">
-          ყველა ბიზნეს ტიპისთვის | საშუალო ზომის კომპანია | სტანდარტული მოდელი
+          {t("benefits.description")}
         </div>
       </motion.div>
 
-      <AnimatedSpan delay={1200}>ბიზნეს მეტრიკების ანალიზი...</AnimatedSpan>
-      <AnimatedSpan delay={1400}>ROI პოტენციალის გაანგარიშება...</AnimatedSpan>
-      <AnimatedSpan delay={1600}>ეფექტურობის შეფასება...</AnimatedSpan>
+      <AnimatedSpan delay={1200}>{t("benefits.analyzing")}</AnimatedSpan>
+      <AnimatedSpan delay={1400}>{t("benefits.calculating")}</AnimatedSpan>
+      <AnimatedSpan delay={1600}>{t("benefits.assessing")}</AnimatedSpan>
 
       <TypingAnimation delay={2000}>calculator --show-benefits</TypingAnimation>
 
@@ -256,18 +349,18 @@ export const BusinessBenefitsTerminal: React.FC = () => {
         className="bg-gradient-to-r from-slate-800 to-slate-700 rounded p-4 mt-3 border border-green-400/30"
       >
         <div className="text-green-400 font-mono text-sm mb-3">
-          ▶ ძირითადი სარგებელი:
+          {t("benefits.title2")}
         </div>
         <div className="grid grid-cols-2 gap-4 text-sm font-mono">
           <div className="space-y-2">
-            <div className="text-slate-300">▶ ხარჯების შემცირება</div>
-            <div className="text-slate-300">▶ გაყიდვების ზრდა</div>
-            <div className="text-slate-300">▶ 24/7 ხელმისაწვდომობა</div>
+            <div className="text-slate-300">{t("benefits.costReduction")}</div>
+            <div className="text-slate-300">{t("benefits.salesGrowth")}</div>
+            <div className="text-slate-300">{t("benefits.availability")}</div>
           </div>
           <div className="space-y-2">
-            <div className="text-slate-300">▶ კლიენტთა კმაყოფილება</div>
-            <div className="text-slate-300">▶ ავტომატიზაცია</div>
-            <div className="text-slate-300">▶ სრული კონტროლი</div>
+            <div className="text-slate-300">{t("benefits.satisfaction")}</div>
+            <div className="text-slate-300">{t("benefits.automation")}</div>
+            <div className="text-slate-300">{t("benefits.control")}</div>
           </div>
         </div>
       </motion.div>
@@ -282,12 +375,12 @@ export const BusinessBenefitsTerminal: React.FC = () => {
         transition={{ delay: 4.4 }}
         className="bg-gradient-to-r from-green-900/50 to-blue-900/50 rounded p-4 mt-3 border border-green-400/40"
       >
-        <div className="text-green-400 font-mono text-sm mb-3">▶ შედეგი:</div>
+        <div className="text-green-400 font-mono text-sm mb-3">{t("benefits.result")}</div>
         <div className="text-white font-mono text-sm mb-2">
-          თქვენი ბიზნესი გადაიქცევა 24/7 გაყიდვების მანქანად!
+          {t("benefits.conclusion")}
         </div>
         <div className="text-green-400 font-mono text-sm">
-          მაღალი ROI | სწრაფი Break-even | გარანტირებული ზრდა
+          {t("benefits.final")}
         </div>
       </motion.div>
     </Terminal>

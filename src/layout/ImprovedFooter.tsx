@@ -3,6 +3,68 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
+
+// Footer Translations
+const footerTranslations = {
+  ka: {
+    "footer.brand.tagline": "ციფრული პარტნიორი",
+    "footer.brand.description":
+      "შენი ბრენდის ციფრული ტრანსფორმაცია. ჩვენ გთავაზობთ სრულ ეკოსისტემას: ვებ განვითარება, SEO და სოციალური მედიის სტრატეგიული მართვა.",
+
+    "footer.quickLinks.title": "სწრაფი ბმულები",
+    "footer.quickLinks.home": "მთავარი",
+    "footer.quickLinks.about": "ჩვენ შესახებ",
+    "footer.quickLinks.contact": "კონტაქტი",
+
+    "footer.services.title": "სერვისები",
+    "footer.services.webdev": "ვებ განვითარება",
+    "footer.services.ads": "ციფრული რეკლამა",
+    "footer.services.social": "სოციალური მედია",
+
+    "footer.contact.title": "კონტაქტი",
+    "footer.contact.location": "თბილისი, საქართველო",
+
+    "footer.newsletter.title": "სიახლეები",
+    "footer.newsletter.placeholder": "შეიყვანეთ თქვენი ელ-ფოსტა",
+    "footer.newsletter.subscribe": "დადასტურება",
+
+    "footer.copyright": "ყველა უფლება დაცულია.",
+    "footer.privacy": "კონფიდენციალურობის პოლიტიკა",
+    "footer.terms": "მომსახურების პირობები",
+    "footer.createdBy": "შექმნილია",
+    "footer.createdByTeam": "გუნდის მიერ",
+    "footer.backToTop": "ზემოთ დაბრუნება",
+  },
+  en: {
+    "footer.brand.tagline": "Digital Partner",
+    "footer.brand.description":
+      "Your brand's digital transformation. We offer a complete ecosystem: web development, SEO and strategic social media management.",
+
+    "footer.quickLinks.title": "Quick Links",
+    "footer.quickLinks.home": "Home",
+    "footer.quickLinks.about": "About Us",
+    "footer.quickLinks.contact": "Contact",
+
+    "footer.services.title": "Services",
+    "footer.services.webdev": "Web Development",
+    "footer.services.ads": "Digital Ads",
+    "footer.services.social": "Social Media",
+
+    "footer.contact.title": "Contact",
+    "footer.contact.location": "Tbilisi, Georgia",
+
+    "footer.newsletter.title": "Newsletter",
+    "footer.newsletter.placeholder": "Enter your email",
+    "footer.newsletter.subscribe": "Subscribe",
+
+    "footer.copyright": "All rights reserved.",
+    "footer.privacy": "Privacy Policy",
+    "footer.terms": "Terms of Service",
+    "footer.createdBy": "Created by",
+    "footer.createdByTeam": "team",
+    "footer.backToTop": "Back to Top",
+  },
+};
 import {
   FaFacebookF,
   FaCode,
@@ -21,8 +83,13 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
   const [email, setEmail] = useState("");
   const [showBackToTop] = useState(true);
-  const { t } = useLanguage();
+  const { currentLanguage } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
+
+  const t = (key: string): string => {
+    const translations = footerTranslations[currentLanguage as keyof typeof footerTranslations] as Record<string, string>;
+    return translations[key] || key;
+  };
 
   const socialLinks = [
     {
@@ -46,7 +113,7 @@ const Footer: React.FC = () => {
       icon: <FaChartLine className="w-4 h-4" />,
     },
     {
-      name: "AI ჩატბოტები",
+      name: currentLanguage === "ka" ? "AI ჩატბოტები" : "AI Chatbots",
       href: "/services/ai-chatbot",
       icon: <FaRobot className="w-4 h-4" />,
     },
@@ -64,7 +131,7 @@ const Footer: React.FC = () => {
       icon: <FaUser className="w-4 h-4" />,
     },
     {
-      name: "პროექტის დაწყება",
+      name: currentLanguage === "ka" ? "პროექტის დაწყება" : "Start Project",
       href: "/start-project",
       icon: <FaProjectDiagram className="w-4 h-4" />,
     },
@@ -73,14 +140,14 @@ const Footer: React.FC = () => {
   const contactInfo = [
     {
       icon: <FaPhone className="w-4 h-4" />,
-      text: "IT დეპარტამენტი",
+      text: currentLanguage === "ka" ? "IT დეპარტამენტი" : "IT Department",
       subtext: "+995 557 62 42 43",
       href: "tel:+995557624243",
       color: "text-blue-400",
     },
     {
       icon: <FaPhone className="w-4 h-4" />,
-      text: "ციფრული მარკეტინგი",
+      text: currentLanguage === "ka" ? "ციფრული მარკეტინგი" : "Digital Marketing",
       subtext: "+995 577 17 51 32",
       href: "tel:+995577175132",
       color: "text-green-400",
@@ -207,7 +274,9 @@ const Footer: React.FC = () => {
                   <div className="text-xl">{social.icon}</div>
                   <div>
                     <div className="font-medium text-white text-sm">
-                      დაგვიკავშირდი Facebook-ზე
+                      {currentLanguage === "ka"
+                        ? "დაგვიკავშირდი Facebook-ზე"
+                        : "Connect on Facebook"}
                     </div>
                     <div className="text-xs text-slate-400">{social.label}</div>
                   </div>

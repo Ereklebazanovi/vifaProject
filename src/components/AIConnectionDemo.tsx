@@ -2,6 +2,36 @@ import React, { forwardRef, useRef, useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { FaUser, FaBrain, FaComments, FaLightbulb } from "react-icons/fa"
 import { AnimatedBeam } from "./AnimatedBeam"
+import { useLanguage } from "../contexts/LanguageContext"
+
+const aiConnectionDemoTranslations = {
+  ka: {
+    "title": "ჩატბოტის ინტელექტუალური კავშირი",
+    "description": "რეალურ დროში კომუნიკაცია • {count} მიმოწერა დღეს",
+    "user.label": "მომხმარებელი",
+    "user.action": "კითხვა",
+    "ai.label": "AI ჩატბოტი",
+    "ai.action": "პასუხი",
+    "stats.user": "მომხმარებლის შეკითხვა • {count} გამოგზავნილი",
+    "stats.ai": "AI ინტელექტუალური პასუხი • {count} გენერირებული",
+    "stats.title": "ლაივ სტატისტიკა",
+    "stats.conversations": "მიმოწერა დღეს",
+    "stats.accuracy": "სიზუსტე",
+  },
+  en: {
+    "title": "AI Chatbot Intelligent Connection",
+    "description": "Real-time Communication • {count} Conversations Today",
+    "user.label": "User",
+    "user.action": "Question",
+    "ai.label": "AI Chatbot",
+    "ai.action": "Response",
+    "stats.user": "User Question • {count} Sent",
+    "stats.ai": "AI Intelligent Response • {count} Generated",
+    "stats.title": "Live Statistics",
+    "stats.conversations": "Conversations Today",
+    "stats.accuracy": "Accuracy",
+  },
+}
 
 const Circle = forwardRef<
   HTMLDivElement,
@@ -20,11 +50,23 @@ const Circle = forwardRef<
 Circle.displayName = "Circle"
 
 export function AIConnectionDemo() {
+  const { currentLanguage } = useLanguage()
   const containerRef = useRef<HTMLDivElement>(null)
   const userRef = useRef<HTMLDivElement>(null)
   const aiRef = useRef<HTMLDivElement>(null)
   const [activeConnection, setActiveConnection] = useState(0)
   const [messageCount, setMessageCount] = useState(0)
+
+  const t = (key: string, variables?: Record<string, string | number>): string => {
+    const translations = aiConnectionDemoTranslations[currentLanguage as keyof typeof aiConnectionDemoTranslations] as Record<string, string>
+    let text = translations[key] || key
+    if (variables) {
+      Object.entries(variables).forEach(([key, value]) => {
+        text = text.replace(`{${key}}`, String(value))
+      })
+    }
+    return text
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -49,10 +91,10 @@ export function AIConnectionDemo() {
             textShadow: activeConnection === 0 ? "0 0 20px rgba(96, 165, 250, 0.6)" : "0 0 20px rgba(59, 130, 246, 0.6)"
           }}
         >
-          ჩატბოტის ინტელექტუალური კავშირი
+          {t("title")}
         </motion.h3>
         <p className="text-slate-400 text-xs sm:text-sm font-['Inter','Noto_Sans_Georgian',sans-serif]">
-          რეალურ დროში კომუნიკაცია • {messageCount} მიმოწერა დღეს
+          {t("description", { count: messageCount })}
         </p>
       </div>
 
@@ -79,14 +121,14 @@ export function AIConnectionDemo() {
             </motion.div>
             <div className="text-center">
               <span className="text-xs text-slate-400 font-['Inter','Noto_Sans_Georgian',sans-serif] block">
-                მომხმარებელი
+                {t("user.label")}
               </span>
               <motion.div
                 className="flex items-center gap-1 mt-1"
                 animate={{ opacity: activeConnection === 0 ? 1 : 0.5 }}
               >
                 <FaComments className="text-blue-400 text-xs" />
-                <span className="text-xs text-blue-400">კითხვა</span>
+                <span className="text-xs text-blue-400">{t("user.action")}</span>
               </motion.div>
             </div>
           </div>
@@ -109,14 +151,14 @@ export function AIConnectionDemo() {
             </motion.div>
             <div className="text-center">
               <span className="text-xs text-slate-400 font-['Inter','Noto_Sans_Georgian',sans-serif] block">
-                AI ჩატბოტი
+                {t("ai.label")}
               </span>
               <motion.div
                 className="flex items-center gap-1 mt-1"
                 animate={{ opacity: activeConnection === 1 ? 1 : 0.5 }}
               >
                 <FaLightbulb className="text-blue-400 text-xs" />
-                <span className="text-xs text-blue-400">პასუხი</span>
+                <span className="text-xs text-blue-400">{t("ai.action")}</span>
               </motion.div>
             </div>
           </div>
@@ -163,7 +205,7 @@ export function AIConnectionDemo() {
             }}
           ></motion.div>
           <span className="text-slate-300 font-['Inter','Noto_Sans_Georgian',sans-serif]">
-            მომხმარებლის შეკითხვა • {Math.floor(messageCount / 2)} გამოგზავნილი
+            {t("stats.user", { count: Math.floor(messageCount / 2) })}
           </span>
         </motion.div>
         <motion.div
@@ -181,7 +223,7 @@ export function AIConnectionDemo() {
             }}
           ></motion.div>
           <span className="text-slate-300 font-['Inter','Noto_Sans_Georgian',sans-serif]">
-            AI ინტელექტუალური პასუხი • {Math.ceil(messageCount / 2)} გენერირებული
+            {t("stats.ai", { count: Math.ceil(messageCount / 2) })}
           </span>
         </motion.div>
 
@@ -193,14 +235,14 @@ export function AIConnectionDemo() {
         >
           <div className="flex items-center gap-2 mb-2">
             <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-            <span className="text-blue-400 text-xs font-semibold">ლაივ სტატისტიკა</span>
+            <span className="text-blue-400 text-xs font-semibold">{t("stats.title")}</span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-2 text-xs">
             <div className="text-slate-300">
-              <span className="text-blue-400 font-semibold">{messageCount * 1}</span> მიმოწერა დღეს
+              <span className="text-blue-400 font-semibold">{messageCount * 1}</span> {t("stats.conversations")}
             </div>
             <div className="text-slate-300">
-              <span className="text-blue-400 font-semibold">95%</span> სიზუსტე
+              <span className="text-blue-400 font-semibold">95%</span> {t("stats.accuracy")}
             </div>
           </div>
         </motion.div>

@@ -16,8 +16,75 @@ import SEO from "../components/SEO";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 
+// AboutPage Translations
+const aboutPageTranslations = {
+  ka: {
+    "seo.about.title": "ჩვენ შესახებ - Vifa Digital გუნდი | vifadigital.com",
+    "seo.about.description": "Vifa Digital გუნდის შესახებ. ჩვენი გამოცდილება, მიზნები და ღირებულებები ციფრული მარკეტინგის სფეროში საქართველოში. vifadigital.com",
+    "seo.about.keywords": "Vifa Digital გუნდი, vifadigital.com, ციფრული მარკეტინგის კომპანია, ვებ განვითარება, მარკეტინგის სააგენტო საქართველო",
+    "about.services.webdev.title": "ვებ განვითარება",
+    "about.services.webdev.description": "თანამედროვე, სწრაფი და მობილურზე ოპტიმიზირებული ვებსაიტები",
+    "about.services.content.title": "კონტენტ პროდუქცია",
+    "about.services.content.description": "პროფესიონალური ფოტო და ვიდეო მასალების შექმნა",
+    "about.services.social.title": "სოციალური მედია",
+    "about.services.social.description": "Instagram და Facebook გვერდების მართვა და ზრდა",
+    "about.services.ads.title": "ციფრული რეკლამა",
+    "about.services.ads.description": "Google Ads და სოციალური მედიის რეკლამები",
+    "about.values.innovation.title": "ინოვაცია",
+    "about.values.innovation.description": "ყოველთვის ვეძებთ ახალ და ეფექტურ გზებს",
+    "about.values.partnership.title": "პარტნიორობა",
+    "about.values.partnership.description": "ჩვენ არ ვართ მხოლოდ მომსახურების მწარმოებლები, არამედ თქვენი პარტნიორები",
+    "about.values.quality.title": "ხარისხი",
+    "about.values.quality.description": "ყოველი პროექტი შესრულებულია უმაღლესი ხარისხის სტანდარტებით",
+    "about.values.growth.title": "ზრდა",
+    "about.values.growth.description": "ჩვენი მიზანია თქვენი ბიზნესის მდგრადი ზრდა",
+    "about.values.title": "ჩვენი",
+    "about.values.titleHighlight": "ღირებულებები",
+    "about.cta.title": "მზად ხარ დაიწყო თანამშრომლობა?",
+    "about.cta.startProject": "დაიწყე პროექტი",
+  },
+  en: {
+    "seo.about.title": "About Us - Vifa Digital Team | vifadigital.com",
+    "seo.about.description": "About Vifa Digital team. Our experience, goals and values in digital marketing in Georgia. vifadigital.com",
+    "seo.about.keywords": "Vifa Digital team, vifadigital.com, digital marketing company, web development, marketing agency Georgia",
+    "about.services.webdev.title": "Web Development",
+    "about.services.webdev.description": "Modern, fast and mobile optimized websites",
+    "about.services.content.title": "Content Production",
+    "about.services.content.description": "Professional photography and video production",
+    "about.services.social.title": "Social Media",
+    "about.services.social.description": "Instagram and Facebook page management and growth",
+    "about.services.ads.title": "Digital Ads",
+    "about.services.ads.description": "Google Ads and social media advertising",
+    "about.values.innovation.title": "Innovation",
+    "about.values.innovation.description": "Always looking for new and effective ways",
+    "about.values.partnership.title": "Partnership",
+    "about.values.partnership.description": "We are not just service providers, we are your partners",
+    "about.values.quality.title": "Quality",
+    "about.values.quality.description": "Every project is executed to the highest quality standards",
+    "about.values.growth.title": "Growth",
+    "about.values.growth.description": "Our goal is sustainable growth of your business",
+    "about.values.title": "Our",
+    "about.values.titleHighlight": "Values",
+    "about.cta.title": "Ready to start collaborating?",
+    "about.cta.startProject": "Start Project",
+    "about.story.heading": "We are Vifa Digital",
+    "about.story.paragraph1": "VIFA was created in 2020, when our team decided to create a digital agency that would help Georgian businesses function successfully in the digital space. Today we are a leading digital agency in Georgia, serving both small businesses and large corporations. Our goal is to create unique and effective digital solutions for every client.",
+    "about.story.paragraph2": "We deeply analyze the specifics of the local market and know what your business needs to succeed. Our goal is to increase the competitiveness of our clients in the digital world. Every project, whether it's a small business or a large corporation, is created with an individual strategy. We ensure that you get a real strategic advantage and digital solutions that directly impact your results.",
+    "about.services.heading": "Services",
+    "about.portfolio.heading": "Our",
+    "about.portfolio.subheading": "Successful projects",
+    "about.portfolio.swipeHint": "Scroll to see videos",
+    "about.story.title": "About Vifa Digital",
+  },
+};
+
 const AboutPage = () => {
-  const { t } = useLanguage();
+  const { currentLanguage } = useLanguage();
+
+  const t = (key: string): string => {
+    const translations = aboutPageTranslations[currentLanguage as keyof typeof aboutPageTranslations] as Record<string, string>;
+    return translations[key] || key;
+  };
   const { getTransitionClasses } = useLanguageTransition();
 
   // Scroll to top when component mounts
@@ -110,7 +177,7 @@ const AboutPage = () => {
 
           {/* Our Story Section */}
           <motion.div
-            className="max-w-3xl mx-auto mb-24 mt-28"
+            className={`max-w-3xl mx-auto mb-24 mt-28 ${getTransitionClasses()}`}
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -122,7 +189,8 @@ const AboutPage = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               <h2 className="text-3xl font-light text-white mb-6">
-                ჩვენ ვართ <span className="text-blue-400">Vifa Digital</span>
+                {currentLanguage === "ka" ? "ჩვენ ვართ" : "We are"}{" "}
+                <span className="text-blue-400">Vifa Digital</span>
               </h2>
             </motion.div>
 
@@ -137,34 +205,25 @@ const AboutPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.8 }}
               >
-                VIFA შეიქმნა 2020 წელს, ჩვენმა გუნდმა გადაწყვიტა შეექმნა ციფრული
-                სააგენტო, რომელიც ციფრულ სივრცეში ქართულ ბიზნესებს წარმატებულად
-                ფუნქციონირებაში დაეხმარებოდა. დღეს ჩვენ ვართ წამყვანი ციფრული
-                სააგენტო საქართველოში, რომელიც მომსახურებას უწევს როგორც მცირე
-                ბიზნესებს, ასევე დიდ კორპორაციებს. ჩვენი მიზანია ყოველი
-                მომხმარებლებისთვის შევქმნათ უნიკალური და ეფექტური ციფრული
-                გადაწყვეტილება.
+                {currentLanguage === "ka"
+                  ? "VIFA შეიქმნა 2020 წელს, ჩვენმა გუნდმა გადაწყვიტა შეექმნა ციფრული სააგენტო, რომელიც ციფრულ სივრცეში ქართულ ბიზნესებს წარმატებულად ფუნქციონირებაში დაეხმარებოდა. დღეს ჩვენ ვართ წამყვანი ციფრული სააგენტო საქართველოში, რომელიც მომსახურებას უწევს როგორც მცირე ბიზნესებს, ასევე დიდ კორპორაციებს. ჩვენი მიზანია ყოველი მომხმარებლებისთვის შევქმნათ უნიკალური და ეფექტური ციფრული გადაწყვეტილება."
+                  : "VIFA was created in 2020, when our team decided to create a digital agency that would help Georgian businesses function successfully in the digital space. Today we are a leading digital agency in Georgia, serving both small businesses and large corporations. Our goal is to create unique and effective digital solutions for every client."}
               </motion.p>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1.0 }}
               >
-                ჩვენ სიღრმისეულად ვაანალიზებთ ადგილობრივი ბაზრის სპეციფიკას და
-                ვიცით, რა სჭირდება თქვენს ბიზნესს წარმატების მისაღწევად. ჩვენი
-                მიზანია, გავზარდოთ ჩვენი კლიენტების კონკურენტუნარიანობა ციფრულ
-                სამყაროში. თითოეული პროექტი, იქნება ეს მცირე ბიზნესი თუ მსხვილი
-                კორპორაცია, იქმნება ინდივიდუალური სტრატეგიით. ჩვენ
-                ვუზრუნველყოფთ, რომ თქვენ მიიღოთ რეალური სტრატეგიული უპირატესობა
-                და ციფრული გადაწყვეტილებები, რომლებიც პირდაპირ აისახება
-                შედეგებზე.
+                {currentLanguage === "ka"
+                  ? "ჩვენ სიღრმისეულად ვაანალიზებთ ადგილობრივი ბაზრის სპეციფიკას და ვიცით, რა სჭირდება თქვენს ბიზნესს წარმატების მისაღწევად. ჩვენი მიზანია, გავზარდოთ ჩვენი კლიენტების კონკურენტუნარიანობა ციფრულ სამყაროში. თითოეული პროექტი, იქნება ეს მცირე ბიზნესი თუ მსხვილი კორპორაცია, იქმნება ინდივიდუალური სტრატეგიით. ჩვენ ვუზრუნველყოფთ, რომ თქვენ მიიღოთ რეალური სტრატეგიული უპირატესობა და ციფრული გადაწყვეტილებები, რომლებიც პირდაპირ აისახება შედეგებზე."
+                  : "We deeply analyze the specifics of the local market and know what your business needs to succeed. Our goal is to increase the competitiveness of our clients in the digital world. Every project, whether it's a small business or a large corporation, is created with an individual strategy. We ensure that you get a real strategic advantage and digital solutions that directly impact your results."}
               </motion.p>
             </motion.div>
           </motion.div>
 
           {/* What We Do Section */}
           <motion.div
-            className="max-w-6xl mx-auto mb-24"
+            className={`max-w-6xl mx-auto mb-24 ${getTransitionClasses()}`}
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.8 }}
@@ -176,7 +235,9 @@ const AboutPage = () => {
               transition={{ duration: 0.8, delay: 2.0 }}
             >
               <h2 className="text-3xl font-light text-white mb-6">
-                <span className="text-blue-400">სერვისები</span>
+                <span className="text-blue-400">
+                  {currentLanguage === "ka" ? "სერვისები" : t("about.services.heading")}
+                </span>
               </h2>
             </motion.div>
 
@@ -202,7 +263,7 @@ const AboutPage = () => {
           </motion.div>
 
           {/* Values Section */}
-          <div className="max-w-6xl mx-auto mb-24">
+          <div className={`max-w-6xl mx-auto mb-24 ${getTransitionClasses()}`}>
             <div className="text-center mb-16">
               <h2 className="text-3xl font-light text-white mb-6">
                 {t("about.values.title")}{" "}
@@ -234,13 +295,18 @@ const AboutPage = () => {
           </div>
 
           {/* Portfolio Section - Shorts Style */}
-          <div className="max-w-7xl mx-auto mb-24">
+          <div className={`max-w-7xl mx-auto mb-24 ${getTransitionClasses()}`}>
             <div className="text-center mb-16">
               <h2 className="text-3xl font-light text-white mb-6">
-                ჩვენი <span className="text-blue-400">პორტფოლიო</span>
+                {currentLanguage === "ka" ? "ჩვენი" : t("about.portfolio.heading")}{" "}
+                <span className="text-blue-400">
+                  {currentLanguage === "ka" ? "პორტფოლიო" : "Portfolio"}
+                </span>
               </h2>
               <p className="text-lg text-slate-400 max-w-3xl mx-auto">
-                წარმატებული პროექტები 
+                {currentLanguage === "ka"
+                  ? "წარმატებული პროექტები"
+                  : t("about.portfolio.subheading")}
               </p>
             </div>
 
@@ -432,13 +498,15 @@ const AboutPage = () => {
             {/* Mobile Swipe Hint */}
             <div className="text-center mt-6 md:hidden">
               <p className="text-slate-400 text-sm">
-                გასქროლე ვიდეოების სანახავად
+                {currentLanguage === "ka"
+                  ? "გასქროლე ვიდეოების სანახავად"
+                  : t("about.portfolio.swipeHint")}
               </p>
             </div>
           </div>
 
           {/* CTA Section */}
-          <div className="max-w-3xl mx-auto text-center">
+          <div className={`max-w-3xl mx-auto text-center ${getTransitionClasses()}`}>
             <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-lg border border-blue-400/30 rounded-2xl p-12">
               <h2 className="text-3xl font-light text-white mb-6">
                 {t("about.cta.title")}

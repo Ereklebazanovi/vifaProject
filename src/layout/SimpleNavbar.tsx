@@ -6,11 +6,36 @@ import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import { useNavigation } from "../contexts/NavigationContext";
 import { FaRobot } from "react-icons/fa";
 
+// SimpleNavbar Translations
+const navbarTranslations = {
+  ka: {
+    "services.webdev.title": "ვებ განვითარება",
+    "services.advertising.title": "ციფრული რეკლამა",
+    "nav.about": "ჩვენ შესახებ",
+    "nav.blog": "ბლოგი",
+    "nav.startProject": "პროექტის დაწყება",
+    "nav.aiService": "AI სერვისი",
+  },
+  en: {
+    "services.webdev.title": "Web Development",
+    "services.advertising.title": "Digital Ads",
+    "nav.about": "About Us",
+    "nav.blog": "Blog",
+    "nav.startProject": "Start Project",
+    "nav.aiService": "AI Service",
+  },
+};
+
 const SimpleNavbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
-  const { t } = useLanguage();
+  const { currentLanguage } = useLanguage();
+
+  const t = (key: string): string => {
+    const translations = navbarTranslations[currentLanguage as keyof typeof navbarTranslations] as Record<string, string>;
+    return translations[key] || key;
+  };
   const { getTransitionClasses } = useLanguageTransition();
   const location = useLocation();
   const navigate = useNavigate();
@@ -63,10 +88,10 @@ const SimpleNavbar: React.FC = () => {
     { path: "/start-project", label: t("nav.startProject") },
   ];
 
-  // Special highlighted link for AI Chatbott
+  // Special highlighted link for AI Chatbot
   const aiChatbotLink = {
     path: "/services/ai-chatbot",
-    label: "AI სერვისი",
+    label: t("nav.aiService"),
   };
 
   return (

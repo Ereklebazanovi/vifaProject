@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import { useNavigation } from "../contexts/NavigationContext";
+import { useLanguage } from "../contexts/LanguageContext";
 import {
   FaBrain,
   FaFacebook,
@@ -21,10 +22,267 @@ import SEO from "../components/SEO";
 import { ChatbotDemoTerminal } from "../components/Terminal";
 import { AIConnectionDemo } from "../components/AIConnectionDemo";
 
+// AI Chatbot Translations
+const aiChatbotTranslations = {
+  ka: {
+    "seo.title": "AI ჩატბოტები - თქვენი ბიზნესის ციფრული რევოლუცია - VIFA",
+    "seo.description": "AI ჩატბოტები Facebook, WhatsApp და Instagram-ისთვის. 24/7 მომხმარებელთა მხარდაჭერა, გაყიდვების ზრდა და ხარჯების ოპტიმიზაცია. Google Gemini AI ტექნოლოგია.",
+
+    "hero.title": "თქვენი ბიზნესის",
+    "hero.titleHighlight": "ციფრული რევოლუცია",
+    "hero.feature1.title": "24/7 ავტომატური მომსახურება",
+    "hero.feature1.description": "- თქვენი კლიენტები პასუხს მიიღებენ ნებისმიერ დროს",
+    "hero.feature2.title": "სპეციალიზებული ტრენინგი",
+    "hero.feature2.description": "- AI სწავლობს თქვენი ბიზნესის სპეციფიკას",
+    "hero.feature3.title": "გაზრდილი მოგება",
+    "hero.feature3.description": "- დაზოგეთ თანხა და მიიღეთ გამოტოვებული შემოსავალი",
+    "hero.demoLabel": "იხილეთ როგორ მუშაობს ჩვენი AI ასისტენტი →",
+    "hero.demoDescription": "რეალური საუბარი სალონის მფლობელთან",
+
+    "platforms.title": "ინტეგრაცია ყველა მთავარ პლატფორმაზე",
+    "platform.facebook.name": "Facebook Messenger",
+    "platform.facebook.stats": "2.3 მილიონზე მეტი აქტიური მომხმარებელი საქართველოში",
+    "platform.facebook.feature1": "მყისიერი პასუხი და კომუნიკაცია 24/7 რეჟიმში.",
+    "platform.facebook.feature2": "3-ჯერ მაღალი კონვერსიის (გაყიდვის) მაჩვენებელი.",
+    "platform.facebook.feature3": "მყისიერი კომუნიკაცია 24/7 რეჟიმში",
+
+    "platform.whatsapp.name": "WhatsApp Business",
+    "platform.whatsapp.stats": "2.3 მილიონზე მეტი აქტიური მომხმარებელი საქართველოში",
+    "platform.whatsapp.feature1": "მყისიერი პასუხი და კომუნიკაცია 24/7 რეჟიმში.",
+    "platform.whatsapp.feature2": "3-ჯერ მაღალი კონვერსიის (გაყიდვის) მაჩვენებელი.",
+    "platform.whatsapp.feature3": "მყისიერი კომუნიკაცია 24/7 რეჟიმში",
+
+    "platform.instagram.name": "Instagram Direct",
+    "platform.instagram.stats": "2.3 მილიონზე მეტი აქტიური მომხმარებელი საქართველოში",
+    "platform.instagram.feature1": "მყისიერი პასუხი და კომუნიკაცია 24/7 რეჟიმში.",
+    "platform.instagram.feature2": "3-ჯერ მაღალი კონვერსიის (გაყიდვის) მაჩვენებელი.",
+    "platform.instagram.feature3": "მყისიერი კომუნიკაცია 24/7 რეჟიმში",
+
+    "pricing.title": "ფინანსური სტრუქტურა და API ხარჯები",
+    "pricing.description": "ჩვენი ფასები მორგებულია კონკრეტული პროექტის სირთულესა და საჭიროებებზე. გთავაზობთ გამჭირვალე და მარტივად გასაგებ საფასო მოდელს:",
+    "pricing.investment.title": "საწყისი ინვესტიცია",
+    "pricing.investment.price": "300₾-დან",
+    "pricing.investment.priceNote": "ფასი დამოკიდებულია მოთხოვნებზე",
+    "pricing.investment.includes": "მოიცავს:",
+    "pricing.investment.feature1": "AI მოდელის დატრენინგება თქვენი ბიზნეს ლოგიკისთვის",
+    "pricing.investment.feature2": "WhatsApp, Messenger და სხვა პლატფორმებთან ინტეგრაცია",
+    "pricing.investment.feature3": "სრულად ფუნქციონალური ადმინ პანელი",
+    "pricing.investment.feature4": "ანალიტიკა და სტატისტიკა",
+    "pricing.investment.feature5": "საწყისი ტექნიკური მხარდაჭერა – უფასოდ",
+
+    "pricing.monthly.title": "ყოველთვიური ხარჯები",
+    "pricing.monthly.subtitle": "კომპანიის მართვისა და უსაფრთხოების ქვეშ",
+    "pricing.monthly.api": "თქვენი გამოყენების დანახარჯები",
+    "pricing.monthly.price": "0.20₾ – 0.40₾ / 1,000 ტოკენზე",
+    "pricing.monthly.billing.title": "ბილინგი:",
+    "pricing.monthly.billing.description": "Gemini AI-ს ხარჯები მორგებულია მხოლოდ თქვენს ჩატბოტზე. ყოველთვიურად მიიღებთ დეტალურ ანგარიშს გამოყენების შესახებ.",
+    "pricing.monthly.monitoring.title": "მონიტორინგი: ხარჯების დინამიური ნახვა რეალურ დროში.",
+    "pricing.monthly.monitoring.description": "არანაირი დამალული გადასახადი.",
+    "pricing.monthly.transparency.title": "სრული უსაფრთხოება:",
+    "pricing.monthly.transparency.description": "Google Cloud-ის უმაღლესი დონის უსაფრთხოება + ჩვენი დამატებითი ზედამხედველობა. თქვენი მონაცემები 100% -ით დაცულია.",
+
+    "pricing.examples.title": "სავარაუდო API ხარჯები (ტოკენების გამოყენების მიხედვით)",
+    "pricing.examples.note": "შენიშვნა: ხარჯი დამოკიდებულია ტოკენების რაოდენობაზე, ანუ დამუშავებული ინფორმაციის მოცულობაზე.",
+    "pricing.examples.small": "მცირე ბიზნესი",
+    "pricing.examples.smallQueries": "500 დიალოგი/კომუნიკაცია",
+    "pricing.examples.smallCost": "5₾ - 10₾",
+    "pricing.examples.medium": "საშუალო ბიზნესი",
+    "pricing.examples.mediumQueries": "2,000 დიალოგი/კომუნიკაცია",
+    "pricing.examples.mediumCost": "20₾ - 35₾",
+    "pricing.examples.large": "დიდი ბიზნესი",
+    "pricing.examples.largeQueries": "10,000 დიალოგი/კომუნიკაცია",
+    "pricing.examples.largeCost": "100₾ - 160₾",
+
+    "admin.title": "ადმინ პანელი - სრული კონტროლი",
+    "admin.canDo": "რას შეძლებთ:",
+    "admin.canDo.feature1": "რეალურ დროში რედაქტირება",
+    "admin.canDo.feature2": "ახალი კითხვა-პასუხების დამატება",
+    "admin.canDo.feature3": "პროდუქტების მენეჯმენტი",
+    "admin.canDo.feature4": "საუბრების ისტორია",
+    "admin.canDo.feature5": "დეტალური ანალიტიკა",
+    "admin.howWorks": "როგორ მუშაობს:",
+    "admin.howWorks.step1": "შედით ბრაუზერიდან კომპანიის მოცემულ ბმულზე",
+    "admin.howWorks.step2": "აირჩიეთ სექცია (პროდუქტები, კითხვები)",
+    "admin.howWorks.step3": "შეცვალეთ ტექსტი ედიტორში",
+    "admin.howWorks.step4": "დააჭირეთ 'შენახვა' - მაშინვე ძალაში შედის!",
+
+    "technical.title": "ტექნიკური უპირატესობები",
+    "technical.subtitle": "მოწინავე ტექნოლოგიები საუკეთესო შედეგისთვის",
+    "technical.feature1.title": "ინტელექტუალური ბირთვი: Google Gemini",
+    "technical.feature1.point1": "ქართული ენის სრული მხარდაჭერა - ზუსტი და ბუნებრივი კომუნიკაცია.",
+    "technical.feature1.point2": "კონტექსტური მეხსიერება - სისტემას ახსოვს საუბრის ისტორია და არ იმეორებს შეცდომებს.",
+    "technical.feature1.point3": "მულტი-ტასკინგი - რთული ამოცანების ერთდროულად და ეფექტურად შესრულება.",
+
+    "technical.feature2.title": "ოპერაციული საიმედოობა და სისწრაფე",
+    "technical.feature2.point1": "99.9% Uptime - თქვენი სერვისი ხელმისაწვდომია თითქმის 24/7 შეფერხების გარეშე.",
+    "technical.feature2.point2": "0.5 წამი საშუალო პასუხის დრო - მყისიერი რეაგირება მომხმარებლის მოთხოვნებზე.",
+    "technical.feature2.point3": "ათასობით ერთდროული მომხმარებელი - მარტივი მასშტაბირება, ნებისმიერი დატვირთვისთვის მზადყოფნა.",
+
+    "technical.feature3.title": "უსაფრთხოება და კონფიდენციალურობა",
+    "technical.feature3.point1": "ბანკის დონის უსაფრთხოება - თქვენი მონაცემების დაცვა უმაღლესი სტანდარტით.",
+    "technical.feature3.point2": "GDPR დაცვა - მონაცემთა დაცვის საერთაშორისო მოთხოვნებთან სრული შესაბამისობა.",
+    "technical.feature3.point3": "ყველა მონაცემი დაშიფრულია - ინფორმაციის სრული კონფიდენციალურობა გადაცემისა და შენახვისას.",
+
+    "faq.title": "ხშირად დასმული შეკითხვები",
+    "faq.q1.question": "რამდენ დროს მოითხოვს ჩატბოტის გაშვება?",
+    "faq.q1.answer": "7-14 სამუშაო დღე.",
+    "faq.q1.details": "მზა AI ასისტენტს მიიღებთ 7-14 სამუშაო დღეში. ზუსტი ვადები დამოკიდებულია თქვენი ბიზნესის სირთულესა და საჭირო ინტეგრაციების რაოდენობაზე.",
+
+    "faq.q2.question": "შესაძლებელია თუ არა კონტენტის შეცვლა გაშვების შემდეგ?",
+    "faq.q2.answer": "დიახ, ნებისმიერ დროს, რეალურ დროში.",
+    "faq.q2.details": "თქვენ შეგიძლიათ თავად დაარედაქტიროთ AI-ს ცოდნის ბაზა და პასუხები თქვენი ადმინ პანელიდან. ცვლილებები ძალაში შედის მომენტალურად.",
+
+    "faq.q3.question": "რა მოხდება Google API-ის გადახდის შეფერხების შემთხვევაში?",
+    "faq.q3.answer": "თქვენი მონაცემები სრულად შენარჩუნდება.",
+    "faq.q3.details": "Google-ის წესების მიხედვით, ჩატბოტი დროებით შეწყვეტს მუშაობას, თუმცა თქვენი ყველა მონაცემი და სისტემის გამართვა სრულად და უსაფრთხოდ შეინახება.",
+
+    "faq.q4.question": "არის თუ არა შესაძლებელი ვებსაიტზე ინტეგრაცია?",
+    "faq.q4.answer": "რა თქმა უნდა",
+    "faq.q4.details": "ვებსაიტის Live Chat Widget-ის ინტეგრაცია ხელმისაწვდომია, ზუსტად იმავე პრინციპით როგორც facebook messenger-ში.",
+
+    "faq.q5.question": "რამდენ ენაზე შეუძლია AI-ს საუბარი?",
+    "faq.q5.answer": "ძირითადად, ქართულად და ინგლისურად.",
+    "faq.q5.details": "AI-ს აქვს მრავალენოვანი შესაძლებლობები. ჩვენ ტრენინგს ვატარებთ ძირითადად ქართულ და ინგლისურ ენებზე, მაგრამ საჭიროების შემთხვევაში, დამატებითი ენების სწავლება შესაძლებელია.",
+
+    "cta.question": "მზად ხარ გამოსცადო?",
+    "cta.button": "უფასო კონსულტაცია",
+  },
+    en: {
+    "seo.title": "AI Chatbots - The Digital Revolution for Your Business - VIFA",
+    "seo.description": "AI Chatbots for Facebook, WhatsApp, and Instagram. 24/7 customer support, sales growth, and cost optimization. Powered by Google Gemini AI technology.",
+
+    "hero.title": "Your Business's",
+    "hero.titleHighlight": "Digital Revolution",
+    "hero.feature1.title": "24/7 Automatic Service",
+    "hero.feature1.description": "- Your clients will receive answers anytime",
+    "hero.feature2.title": "Specialized Training",
+    "hero.feature2.description": "- AI learns your business specifics",
+    "hero.feature3.title": "Increased Profit",
+    "hero.feature3.description": "- Save money and recover missed revenue",
+    "hero.demoLabel": "See how our AI assistant works →",
+    "hero.demoDescription": "A real conversation with a barber shop owner",
+
+    "platforms.title": "Integration on All Major Platforms",
+    "platform.facebook.name": "Facebook Messenger",
+    "platform.facebook.stats": "Over 2.3 million active users in Georgia",
+    "platform.facebook.feature1": "Instant response and 24/7 communication.",
+    "platform.facebook.feature2": "3 times higher conversion (sales) rate.",
+    "platform.facebook.feature3": "Instant 24/7 communication.",
+
+    "platform.whatsapp.name": "WhatsApp Business",
+    "platform.whatsapp.stats": "Over 2.3 million active users in Georgia",
+    "platform.whatsapp.feature1": "Instant response and 24/7 communication.",
+    "platform.whatsapp.feature2": "3 times higher conversion (sales) rate.",
+    "platform.whatsapp.feature3": "Instant 24/7 communication.",
+
+    "platform.instagram.name": "Instagram Direct",
+    "platform.instagram.stats": "Over 2.3 million active users in Georgia",
+    "platform.instagram.feature1": "Instant response and 24/7 communication.",
+    "platform.instagram.feature2": "3 times higher conversion (sales) rate.",
+    "platform.instagram.feature3": "Instant 24/7 communication.",
+
+    "pricing.title": "Financial Structure and API Costs",
+    "pricing.description": "Our pricing is tailored to the complexity and needs of a specific project. We offer a transparent and easy-to-understand pricing model:",
+    "pricing.investment.title": "Initial Investment",
+    "pricing.investment.price": "Starting from 300₾",
+    "pricing.investment.priceNote": "Price depends on requirements",
+    "pricing.investment.includes": "Includes:",
+    "pricing.investment.feature1": "Training the AI model for your business logic",
+    "pricing.investment.feature2": "Integration with WhatsApp, Messenger, and other platforms",
+    "pricing.investment.feature3": "Fully functional Admin Panel",
+    "pricing.investment.feature4": "Analytics and Statistics",
+    "pricing.investment.feature5": "Initial technical support – free of charge",
+
+    "pricing.monthly.title": "Monthly Costs",
+    "pricing.monthly.subtitle": "Under company management and security",
+    "pricing.monthly.api": "Your usage costs",
+    "pricing.monthly.price": "0.20₾ – 0.40₾ / per 1,000 tokens",
+    "pricing.monthly.billing.title": "Billing:",
+    "pricing.monthly.billing.description": "Gemini AI costs are allocated solely to your chatbot. You will receive a detailed monthly usage report.",
+    "pricing.monthly.monitoring.title": "Monitoring: Dynamic, real-time viewing of costs.",
+    "pricing.monthly.monitoring.description": "No hidden fees.",
+    "pricing.monthly.transparency.title": "Full Security:",
+    "pricing.monthly.transparency.description": "Top-level Google Cloud security + our additional oversight. Your data is 100% protected.",
+
+    "pricing.examples.title": "Estimated API Costs (Based on Token Usage)",
+    "pricing.examples.note": "Note: Cost depends on the number of tokens, i.e., the volume of information processed.",
+    "pricing.examples.small": "Small Business",
+    "pricing.examples.smallQueries": "500 Dialogues/Communications",
+    "pricing.examples.smallCost": "5₾ - 10₾",
+    "pricing.examples.medium": "Medium Business",
+    "pricing.examples.mediumQueries": "2,000 Dialogues/Communications",
+    "pricing.examples.mediumCost": "20₾ - 35₾",
+    "pricing.examples.large": "Large Business",
+    "pricing.examples.largeQueries": "10,000 Dialogues/Communications",
+    "pricing.examples.largeCost": "100₾ - 160₾",
+
+    "admin.title": "Admin Panel - Full Control",
+    "admin.canDo": "What you can do:",
+    "admin.canDo.feature1": "Real-time Editing",
+    "admin.canDo.feature2": "Adding New Q&A",
+    "admin.canDo.feature3": "Product Management",
+    "admin.canDo.feature4": "Conversation History",
+    "admin.canDo.feature5": "Detailed Analytics",
+    "admin.howWorks": "How it Works:",
+    "admin.howWorks.step1": "Access the company-provided link via your browser",
+    "admin.howWorks.step2": "Select a section (Products, Questions)",
+    "admin.howWorks.step3": "Edit the text in the editor",
+    "admin.howWorks.step4": "Click 'Save' - the change takes effect immediately!",
+
+    "technical.title": "Technical Advantages",
+    "technical.subtitle": "Advanced Technologies for the Best Results",
+    "technical.feature1.title": "Intellectual Core: Google Gemini",
+    "technical.feature1.point1": "Full Georgian language support - accurate and natural communication.",
+    "technical.feature1.point2": "Contextual memory - the system remembers the conversation history and avoids repeating errors.",
+    "technical.feature1.point3": "Multi-tasking - simultaneous and efficient execution of complex tasks.",
+
+    "technical.feature2.title": "Operational Reliability and Speed",
+    "technical.feature2.point1": "99.9% Uptime - your service is available almost 24/7 without interruption.",
+    "technical.feature2.point2": "0.5 second average response time - instant reaction to customer requests.",
+    "technical.feature2.point3": "Thousands of simultaneous users - easy scalability, ready for any load.",
+
+    "technical.feature3.title": "Security and Confidentiality",
+    "technical.feature3.point1": "Bank-level security - protecting your data with the highest standards.",
+    "technical.feature3.point2": "GDPR Compliance - full adherence to international data protection requirements.",
+    "technical.feature3.point3": "All data is encrypted - complete information confidentiality during transmission and storage.",
+
+    "faq.title": "Frequently Asked Questions",
+    "faq.q1.question": "How long does it take to launch the chatbot?",
+    "faq.q1.answer": "7-14 business days.",
+    "faq.q1.details": "You will receive the ready AI assistant within 7-14 business days. The exact timeline depends on the complexity of your business and the number of required integrations.",
+
+    "faq.q2.question": "Is it possible to change the content after launch?",
+    "faq.q2.answer": "Yes, anytime, in real-time.",
+    "faq.q2.details": "You can edit the AI's knowledge base and responses yourself from your admin panel. Changes take effect instantly.",
+
+    "faq.q3.question": "What happens if there is a delay in Google API payment?",
+    "faq.q3.answer": "Your data will be fully preserved.",
+    "faq.q3.details": "According to Google's policies, the chatbot will temporarily stop working, but all your data and system configuration will be fully and securely saved.",
+
+    "faq.q4.question": "Is it possible to integrate on a website?",
+    "faq.q4.answer": "Of course",
+    "faq.q4.details": "Website Live Chat Widget integration is available, operating on the exact same principle as in Facebook Messenger.",
+
+    "faq.q5.question": "How many languages can the AI speak?",
+    "faq.q5.answer": "Primarily, Georgian and English.",
+    "faq.q5.details": "The AI has multilingual capabilities. We primarily conduct training in Georgian and English, but training for additional languages is possible if needed.",
+
+    "cta.question": "Ready to Test it Out?",
+    "cta.button": "Free Consultation",
+  },
+};
+
+
 const AIChatbot: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
   const { stopNavigation } = useNavigation();
+  const { currentLanguage } = useLanguage();
   // const [activePackage, setActivePackage] = useState<number>(1);
+
+  const t = (key: string): string => {
+    const translations = aiChatbotTranslations[currentLanguage as keyof typeof aiChatbotTranslations] as Record<string, string>;
+    return translations[key] || key;
+  };
 
   // Scroll to top and stop navigation when component mounts
   useEffect(() => {
@@ -34,124 +292,29 @@ const AIChatbot: React.FC = () => {
   }, [stopNavigation]);
 
   const platforms = [
-    {
-      icon: <FaFacebook />,
-      name: "Facebook Messenger",
-      color: "blue",
-      stats: "2.3 მილიონზე მეტი აქტიური მომხმარებელი საქართველოში",
-      features: [
-        "მყისიერი პასუხი და კომუნიკაცია 24/7 რეჟიმში.",
-
-        "3-ჯერ მაღალი კონვერსიის (გაყიდვის) მაჩვენებელი.",
-        "მყისიერი კომუნიკაცია 24/7 რეჟიმში",
-      ],
-    },
-    {
-      icon: <FaWhatsapp />,
-      name: "WhatsApp Business",
-      color: "green",
-      stats: "2.3 მილიონზე მეტი აქტიური მომხმარებელი საქართველოში",
-      features: [
-        "მყისიერი პასუხი და კომუნიკაცია 24/7 რეჟიმში.",
-        "3-ჯერ მაღალი კონვერსიის (გაყიდვის) მაჩვენებელი.",
-        "მყისიერი კომუნიკაცია 24/7 რეჟიმში",
-      ],
-    },
-    {
-      icon: <FaInstagram />,
-      name: "Instagram Direct",
-      color: "pink",
-      stats: "2.3 მილიონზე მეტი აქტიური მომხმარებელი საქართველოში",
-      features: [
-        "მყისიერი პასუხი და კომუნიკაცია 24/7 რეჟიმში.",
-        "3-ჯერ მაღალი კონვერსიის (გაყიდვის) მაჩვენებელი.",
-        "მყისიერი კომუნიკაცია 24/7 რეჟიმში",
-      ],
-    },
+    { icon: <FaFacebook />, key: "facebook", color: "blue" },
+    { icon: <FaWhatsapp />, key: "whatsapp", color: "green" },
+    { icon: <FaInstagram />, key: "instagram", color: "pink" },
   ];
 
   const technicalFeatures = [
-    {
-      icon: <FaBrain />,
-      title: "ინტელექტუალური ბირთვი: Google Gemini",
-      subtitle: "",
-      features: [
-        "ქართული ენის სრული მხარდაჭერა - ზუსტი და ბუნებრივი კომუნიკაცია.",
-        "კონტექსტური მეხსიერება - სისტემას ახსოვს საუბრის ისტორია და არ იმეორებს შეცდომებს.",
-        "მულტი-ტასკინგი - რთული ამოცანების ერთდროულად და ეფექტურად შესრულება.",
-      ],
-    },
-    {
-      icon: <FaCloud />,
-      title: "ოპერაციული საიმედოობა და სისწრაფე",
-      subtitle: "",
-      features: [
-        "99.9% Uptime - თქვენი სერვისი ხელმისაწვდომია თითქმის 24/7 შეფერხების გარეშე.",
-        "0.5 წამი საშუალო პასუხის დრო - მყისიერი რეაგირება მომხმარებლის მოთხოვნებზე.",
-        "ათასობით ერთდროული მომხმარებელი - მარტივი მასშტაბირება, ნებისმიერი დატვირთვისთვის მზადყოფნა.",
-      ],
-    },
-    {
-      icon: <FaShieldAlt />,
-      title: "უსაფრთხოება და კონფიდენციალურობა",
-      subtitle: "",
-      features: [
-        "ბანკის დონის უსაფრთხოება - თქვენი მონაცემების დაცვა უმაღლესი სტანდარტით.",
-        "GDPR დაცვა - მონაცემთა დაცვის საერთაშორისო მოთხოვნებთან სრული შესაბამისობა.",
-        "ყველა მონაცემი დაშიფრულია - ინფორმაციის სრული კონფიდენციალურობა გადაცემისა და შენახვისას.",
-      ],
-    },
+    { key: "feature1", icon: <FaBrain /> },
+    { key: "feature2", icon: <FaCloud /> },
+    { key: "feature3", icon: <FaShieldAlt /> },
   ];
 
   const apiCosts = [
-    {
-      business: "მცირე ბიზნესი",
-      queries: "500 დიალოგი/კომუნიკაცია",
-      cost: "5₾ - 10₾",
-    },
-    {
-      business: "საშუალო ბიზნესი",
-      queries: "2,000 დიალოგი/კომუნიკაცია",
-      cost: "20₾ - 35₾",
-    },
-    {
-      business: "დიდი ბიზნესი",
-      queries: "10,000 დიალოგი/კომუნიკაცია",
-      cost: "100₾ - 160₾",
-    },
+    { key: "small" },
+    { key: "medium" },
+    { key: "large" },
   ];
 
   const faq = [
-    {
-      question: "რამდენ დროს მოითხოვს ჩატბოტის გაშვება?",
-      answer: "7-14 სამუშაო დღე.",
-      details:
-        "მზა AI ასისტენტს მიიღებთ 7-14 სამუშაო დღეში. ზუსტი ვადები დამოკიდებულია თქვენი ბიზნესის სირთულესა და საჭირო ინტეგრაციების რაოდენობაზე.",
-    },
-    {
-      question: "შესაძლებელია თუ არა კონტენტის შეცვლა გაშვების შემდეგ?",
-      answer: "დიახ, ნებისმიერ დროს, რეალურ დროში.",
-      details:
-        "თქვენ შეგიძლიათ თავად დაარედაქტიროთ AI-ს ცოდნის ბაზა და პასუხები თქვენი ადმინ პანელიდან. ცვლილებები ძალაში შედის მომენტალურად.",
-    },
-    {
-      question: "რა მოხდება Google API-ის გადახდის შეფერხების შემთხვევაში?",
-      answer: "თქვენი მონაცემები სრულად შენარჩუნდება.",
-      details:
-        "Google-ის წესების მიხედვით, ჩატბოტი დროებით შეწყვეტს მუშაობას, თუმცა თქვენი ყველა მონაცემი და სისტემის გამართვა სრულად და უსაფრთხოდ შეინახება.",
-    },
-    {
-      question: "არის თუ არა შესაძლებელი ვებსაიტზე ინტეგრაცია?",
-      answer: "რა თქმა უნდა",
-      details:
-        "ვებსაიტის Live Chat Widget-ის ინტეგრაცია ხელმისაწვდომია, ზუსტად იმავე პრინციპით როგორც facebook messenger-ში.",
-    },
-    {
-      question: "რამდენ ენაზე შეუძლია AI-ს საუბარი?",
-      answer: "ძირითადად, ქართულად და ინგლისურად.",
-      details:
-        "AI-ს აქვს მრავალენოვანი შესაძლებლობები. ჩვენ ტრენინგს ვატარებთ ძირითადად ქართულ და ინგლისურ ენებზე, მაგრამ საჭიროების შემთხვევაში, დამატებითი ენების სწავლება შესაძლებელია.",
-    },
+    { key: "q1" },
+    { key: "q2" },
+    { key: "q3" },
+    { key: "q4" },
+    { key: "q5" },
   ];
 
   const getColorClass = () => {
@@ -167,8 +330,8 @@ const AIChatbot: React.FC = () => {
   return (
     <>
       <SEO
-        title="AI ჩატბოტები - თქვენი ბიზნესის ციფრული რევოლუცია - VIFA"
-        description="AI ჩატბოტები Facebook, WhatsApp და Instagram-ისთვის. 24/7 მომხმარებელთა მხარდაჭერა, გაყიდვების ზრდა და ხარჯების ოპტიმიზაცია. Google Gemini AI ტექნოლოგია."
+        title={t("seo.title")}
+        description={t("seo.description")}
         url="https://vifadigital.ge/services/ai-chatbot"
       />
 
@@ -200,9 +363,9 @@ const AIChatbot: React.FC = () => {
                 className="space-y-8 max-w-lg flex flex-col justify-center h-full"
               >
                 <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight tracking-tight font-['Inter','Noto_Sans_Georgian',sans-serif] text-center lg:text-left">
-                  თქვენი ბიზნესის{" "}
+                  {t("hero.title")}{" "}
                   <span className="text-transparent bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text">
-                    ციფრული რევოლუცია
+                    {t("hero.titleHighlight")}
                   </span>
                 </h1>
                 {/* AI Connection Demo */}
@@ -212,37 +375,37 @@ const AIChatbot: React.FC = () => {
                     <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
                     <p className="text-slate-300 leading-relaxed font-['Inter','Noto_Sans_Georgian',sans-serif]">
                       <span className="text-blue-400 font-bold">
-                        24/7 ავტომატური მომსახურება
+                        {t("hero.feature1.title")}
                       </span>{" "}
-                      - თქვენი კლიენტები პასუხს მიიღებენ ნებისმიერ დროს
+                      {t("hero.feature1.description")}
                     </p>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
                     <p className="text-slate-300 leading-relaxed font-['Inter','Noto_Sans_Georgian',sans-serif]">
                       <span className="text-blue-400 font-bold">
-                        სპეციალიზებული ტრენინგი
+                        {t("hero.feature2.title")}
                       </span>{" "}
-                      - AI სწავლობს თქვენი ბიზნესის სპეციფიკას
+                      {t("hero.feature2.description")}
                     </p>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
                     <p className="text-slate-300 leading-relaxed font-['Inter','Noto_Sans_Georgian',sans-serif]">
                       <span className="text-blue-400 font-bold">
-                        გაზრდილი მოგება
+                        {t("hero.feature3.title")}
                       </span>{" "}
-                      - დაზოგეთ თანხა და მიიღეთ გამოტოვებული შემოსავალი
+                      {t("hero.feature3.description")}
                     </p>
                   </div>
                 </div>
 
                 <div className="text-center lg:text-left">
                   <p className="text-base sm:text-lg text-blue-400 font-bold mb-2 font-['Inter','Noto_Sans_Georgian',sans-serif]">
-                    იხილეთ როგორ მუშაობს ჩვენი AI ასისტენტი →
+                    {t("hero.demoLabel")}
                   </p>
                   <p className="text-xs sm:text-sm text-slate-400 font-['Inter','Noto_Sans_Georgian',sans-serif]">
-                    რეალური საუბარი სალონის მფლობელთან
+                    {t("hero.demoDescription")}
                   </p>
                 </div>
               </motion.div>
@@ -263,32 +426,32 @@ const AIChatbot: React.FC = () => {
           <div className="max-w-6xl mx-auto mb-32">
             <div className="text-center mb-12 sm:mb-16">
               <h2 className="text-xl sm:text-2xl text-slate-300">
-                ინტეგრაცია ყველა მთავარ პლატფორმაზე
+                {t("platforms.title")}
               </h2>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {platforms.map((platform, index) => (
+              {platforms.map((platform) => (
                 <motion.div
-                  key={platform.name}
+                  key={platform.key}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  transition={{ duration: 0.6, delay: platforms.indexOf(platform) * 0.2 }}
                   className={`p-4 sm:p-6 lg:p-8 rounded-2xl border-2 ${getColorClass()} border-opacity-30 hover:border-opacity-100 transition-all duration-300 hover:scale-105`}
                 >
                   <div className={`text-4xl ${getTextColorClass()} mb-4`}>
                     {platform.icon}
                   </div>
                   <h3 className="text-lg sm:text-xl font-bold text-white mb-2">
-                    {platform.name}
+                    {t(`platform.${platform.key}.name`)}
                   </h3>
                   <p
                     className={`text-sm ${getTextColorClass()} mb-4 font-medium`}
                   >
-                    {platform.stats}
+                    {t(`platform.${platform.key}.stats`)}
                   </p>
                   <ul className="space-y-2">
-                    {platform.features.map((feature, idx) => (
+                    {[1, 2, 3].map((idx) => (
                       <li
                         key={idx}
                         className="flex items-start gap-2 text-slate-300"
@@ -296,7 +459,7 @@ const AIChatbot: React.FC = () => {
                         <FaCheck
                           className={`${getTextColorClass()} mt-1 flex-shrink-0`}
                         />
-                        <span className="text-sm">{feature}</span>
+                        <span className="text-sm">{t(`platform.${platform.key}.feature${idx}`)}</span>
                       </li>
                     ))}
                   </ul>
@@ -309,12 +472,10 @@ const AIChatbot: React.FC = () => {
           <div className="!max-w-6xl mx-auto mb-32">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold text-white mb-4">
-                ფინანსური სტრუქტურა და API ხარჯები
+                {t("pricing.title")}
               </h2>
               <p className="text-xl text-slate-300">
-                ჩვენი ფასები მორგებულია კონკრეტული პროექტის სირთულესა და
-                საჭიროებებზე. გთავაზობთ გამჭირვალე და მარტივად გასაგებ საფასო
-                მოდელს:
+                {t("pricing.description")}
               </p>
             </div>
 
@@ -328,30 +489,24 @@ const AIChatbot: React.FC = () => {
               >
                 <h3 className="text-2xl font-bold text-white mb-6">
                   <FaRocket className="text-blue-400 mr-3 inline" />
-                  საწყისი ინვესტიცია
+                  {t("pricing.investment.title")}
                 </h3>
                 <div className="space-y-4">
                   <div className="text-center mb-4">
                     <div className="text-3xl font-bold text-blue-400 mb-2">
-                      300₾-დან
+                      {t("pricing.investment.price")}
                     </div>
                     <div className="text-sm text-slate-400">
-                      ფასი დამოკიდებულია მოთხოვნებზე
+                      {t("pricing.investment.priceNote")}
                     </div>
                   </div>
-                  <div className="text-sm text-slate-400 mb-4">მოიცავს:</div>
+                  <div className="text-sm text-slate-400 mb-4">{t("pricing.investment.includes")}</div>
                   <div className="space-y-3">
-                    {[
-                      "AI მოდელის დატრენინგება თქვენი ბიზნეს ლოგიკისთვის",
-                      "WhatsApp, Messenger და სხვა პლატფორმებთან ინტეგრაცია",
-                      "სრულად ფუნქციონალური ადმინ პანელი",
-                      "ანალიტიკა და სტატისტიკა",
-                      "საწყისი ტექნიკური მხარდაჭერა – უფასოდ",
-                    ].map((feature, idx) => (
-                      <div key={idx} className="flex items-start gap-3">
+                    {[1, 2, 3, 4, 5].map((num) => (
+                      <div key={num} className="flex items-start gap-3">
                         <FaCheck className="text-blue-400 text-sm mt-1 flex-shrink-0" />
                         <span className="text-slate-300 text-sm">
-                          {feature}
+                          {t(`pricing.investment.feature${num}`)}
                         </span>
                       </div>
                     ))}
@@ -368,15 +523,15 @@ const AIChatbot: React.FC = () => {
               >
                 <h3 className="text-2xl font-bold text-white mb-6">
                   <FaCloud className="text-blue-400 mr-3 inline" />
-                  ყოველთვიური ხარჯები
+                  {t("pricing.monthly.title")}
                 </h3>
                 <div className="space-y-4">
                   <div className="text-center mb-4">
                     <div className="text-3xl font-bold text-blue-400 mb-2">
-                      Google Gemini API
+                      {t("pricing.monthly.api")}
                     </div>
                     <div className="text-sm text-slate-400">
-                      0.20₾ – 0.40₾ / 1,000 ტოკენზე
+                      {t("pricing.monthly.price")}
                     </div>
                   </div>
                   <div className="space-y-3">
@@ -384,11 +539,10 @@ const AIChatbot: React.FC = () => {
                       <FaCheck className="text-blue-400 text-sm mt-1 flex-shrink-0" />
                       <div>
                         <span className="text-slate-300 text-sm font-medium">
-                          ბილინგი:{" "}
+                          {t("pricing.monthly.billing.title")}{" "}
                         </span>
                         <span className="text-slate-300 text-sm">
-                          ხარჯი გენერირდება უშუალოდ თქვენს Google Cloud
-                          ანგარიშზე
+                          {t("pricing.monthly.billing.description")}
                         </span>
                       </div>
                     </div>
@@ -396,10 +550,10 @@ const AIChatbot: React.FC = () => {
                       <FaCheck className="text-blue-400 text-sm mt-1 flex-shrink-0" />
                       <div>
                         <span className="text-slate-300 text-sm font-medium">
-                          მონიტორინგი:{" "}
+                          {t("pricing.monthly.monitoring.title")}{" "}
                         </span>
                         <span className="text-slate-300 text-sm">
-                          რეალურ დროში ხარჯების ნახვა
+                          {t("pricing.monthly.monitoring.description")}
                         </span>
                       </div>
                     </div>
@@ -407,10 +561,10 @@ const AIChatbot: React.FC = () => {
                       <FaCheck className="text-blue-400 text-sm mt-1 flex-shrink-0" />
                       <div>
                         <span className="text-slate-300 text-sm font-medium">
-                          გამჭვირვალობა:{" "}
+                          {t("pricing.monthly.transparency.title")}{" "}
                         </span>
                         <span className="text-slate-300 text-sm">
-                          არანაირი დამალული გადასახადი
+                          {t("pricing.monthly.transparency.description")}
                         </span>
                       </div>
                     </div>
@@ -422,23 +576,22 @@ const AIChatbot: React.FC = () => {
             {/* API Cost Examples */}
             <div className="bg-slate-800/50 rounded-2xl p-8 border border-slate-700/30 mb-8">
               <h4 className="text-xl font-bold text-white mb-4 text-center">
-                სავარაუდო API ხარჯები (ტოკენების გამოყენების მიხედვით)
+                {t("pricing.examples.title")}
               </h4>
               <p className="text-sm text-slate-400 mb-6 text-center">
-                შენიშვნა: ხარჯი დამოკიდებულია ტოკენების რაოდენობაზე, ანუ
-                დამუშავებული ინფორმაციის მოცულობაზე.
+                {t("pricing.examples.note")}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
                 {apiCosts.map((cost) => (
-                  <div key={cost.business} className="text-center">
+                  <div key={cost.key} className="text-center">
                     <div className="text-white font-medium mb-2">
-                      {cost.business}
+                      {t(`pricing.examples.${cost.key}`)}
                     </div>
                     <div className="text-slate-400 text-sm mb-2">
-                      {cost.queries}
+                      {t(`pricing.examples.${cost.key}Queries`)}
                     </div>
                     <div className="text-2xl font-bold text-blue-400">
-                      {cost.cost}
+                      {t(`pricing.examples.${cost.key}Cost`)}
                     </div>
                   </div>
                 ))}
@@ -450,7 +603,7 @@ const AIChatbot: React.FC = () => {
               <div className="text-center mb-16">
                 <h2 className="text-3xl font-bold text-white mb-4">
                   <FaCog className="text-blue-400 mr-3 inline" />
-                  ადმინ პანელი - სრული კონტროლი
+                  {t("admin.title")}
                 </h2>
               </div>
 
@@ -465,23 +618,17 @@ const AIChatbot: React.FC = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <div>
                       <h4 className="text-lg font-bold text-white mb-4">
-                        რას შეძლებთ:
+                        {t("admin.canDo")}
                       </h4>
                       <div className="space-y-3">
-                        {[
-                          "რეალურ დროში რედაქტირება",
-                          "ახალი კითხვა-პასუხების დამატება",
-                          "პროდუქტების მენეჯმენტი",
-                          "საუბრების ისტორია",
-                          "დეტალური ანალიტიკა",
-                        ].map((feature) => (
+                        {[1, 2, 3, 4, 5].map((num) => (
                           <div
-                            key={feature}
+                            key={num}
                             className="flex items-center gap-2"
                           >
                             <FaCheck className="text-blue-400 text-sm" />
                             <span className="text-slate-300 text-sm">
-                              {feature}
+                              {t(`admin.canDo.feature${num}`)}
                             </span>
                           </div>
                         ))}
@@ -489,21 +636,16 @@ const AIChatbot: React.FC = () => {
                     </div>
                     <div>
                       <h4 className="text-lg font-bold text-white mb-4">
-                        როგორ მუშაობს:
+                        {t("admin.howWorks")}
                       </h4>
                       <div className="space-y-3">
-                        {[
-                          "შედით ბრაუზერიდან კომპანიის მოცემულ ბმულზე",
-                          "აირჩიეთ სექცია (პროდუქტები, კითხვები)",
-                          "შეცვალეთ ტექსტი ედიტორში",
-                          "დააჭირეთ 'შენახვა' - მაშინვე ძალაში შედის!",
-                        ].map((step, index) => (
+                        {[1, 2, 3, 4].map((step, index) => (
                           <div key={step} className="flex items-start gap-2">
                             <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold mt-0.5 flex-shrink-0">
                               {index + 1}
                             </div>
                             <span className="text-slate-300 text-sm">
-                              {step}
+                              {t(`admin.howWorks.step${step}`)}
                             </span>
                           </div>
                         ))}
@@ -519,17 +661,17 @@ const AIChatbot: React.FC = () => {
           <div className="!max-w-6xl mx-auto mb-24">
             <div className="text-center mb-8 sm:mb-12">
               <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-                ტექნიკური უპირატესობები
+                {t("technical.title")}
               </h2>
               <p className="text-lg sm:text-xl text-slate-300 px-4">
-                მოწინავე ტექნოლოგიები საუკეთესო შედეგისთვის
+                {t("technical.subtitle")}
               </p>
             </div>
 
             <div className="space-y-6 sm:space-y-8">
               {technicalFeatures.map((feature, index) => (
                 <motion.div
-                  key={feature.title}
+                  key={feature.key}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.2 }}
@@ -541,14 +683,17 @@ const AIChatbot: React.FC = () => {
                     </div>
                     <div className="flex-1">
                       <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
-                        {feature.title}
+                        {t(`technical.${feature.key}.title`)}
                       </h3>
                       <div className="space-y-3 sm:space-y-4">
-                        {feature.features.map((item, idx) => (
-                          <div key={idx} className="flex items-start gap-2 sm:gap-3">
+                        {[1, 2, 3].map((pointNum) => (
+                          <div
+                            key={pointNum}
+                            className="flex items-start gap-2 sm:gap-3"
+                          >
                             <FaCheck className="text-blue-400 text-xs sm:text-sm mt-1 flex-shrink-0" />
                             <span className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-                              {item}
+                              {t(`technical.${feature.key}.point${pointNum}`)}
                             </span>
                           </div>
                         ))}
@@ -565,14 +710,14 @@ const AIChatbot: React.FC = () => {
         <div className="w-full !max-w-5xl mx-auto mb-24">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-white mb-4">
-              ხშირად დასმული შეკითხვები
+              {t("faq.title")}
             </h2>
           </div>
 
           <div className="max-w-2xl mx-auto space-y-6">
             {faq.map((item, index) => (
               <motion.div
-                key={item.question}
+                key={item.key}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -580,14 +725,14 @@ const AIChatbot: React.FC = () => {
               >
                 <h3 className="text-lg font-semibold text-white mb-3 flex items-start gap-2">
                   <span className="text-blue-400 mt-1">•</span>
-                  {item.question}
+                  {t(`faq.${item.key}.question`)}
                 </h3>
                 <div className="ml-4">
                   <p className="text-blue-300 font-medium mb-2">
-                    {item.answer}
+                    {t(`faq.${item.key}.answer`)}
                   </p>
                   <p className="text-slate-400 text-sm leading-relaxed">
-                    {item.details}
+                    {t(`faq.${item.key}.details`)}
                   </p>
                 </div>
               </motion.div>
@@ -613,7 +758,7 @@ const AIChatbot: React.FC = () => {
                 className="bg-gradient-to-r from-blue-500/10 to-blue-600/10 rounded-2xl p-8 border border-blue-400/20"
               >
                 <h3 className="text-3xl font-bold text-white mb-6">
-                  მზად ხარ გამოსცადო?
+                  {t("cta.question")}
                 </h3>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -622,7 +767,7 @@ const AIChatbot: React.FC = () => {
                     className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105"
                   >
                     <FaRocket />
-                    უფასო კონსულტაცია
+                    {t("cta.button")}
                   </Link>
                 </div>
               </motion.div>

@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
+import { useLanguage } from "../contexts/LanguageContext";
 import TrueFocus from "../components/TrueFocus";
 import {
   FaVideo,
@@ -27,9 +28,209 @@ import {
 } from "react-icons/fa";
 import SEO from "../components/SEO";
 
+// Marketing Translations
+const marketingTranslations = {
+  ka: {
+    "seo.marketing.title": "ციფრული მარკეტინგი - VIFA | vifadigital.ge",
+    "seo.marketing.description": "ციფრული მარკეტინგის სერვისები: ვიდეო გადაღება, ფოტოგრაფია, სოციალური მედია მართვა, კონტენტის შექმნა. სრული მარკეტინგ ხსნარი თქვენი ბიზნესისთვის.",
+    "seo.marketing.keywords": "დიჯიტალური მარკეტინგი, სოციალური მედია მართვა, ვიდეო გადაღება, ფოტოგრაფია, კონტენტის შექმნა, ბრენდინგი, მარკეტინგის სააგენტო",
+    "page.title": "Digital Marketing",
+    "section.strategy": "სტრატეგია",
+    "section.content": "კონტენტი",
+    "section.distribution": "გავრცელება",
+    "section.results": "შედეგები",
+    "section.description": "ჩვენი მიდგომა: სტრატეგიული დაგეგმვა → კრეატიური კონტენტი → მიზნობრივი გავრცელება → მონიტორინგი და ოპტიმიზაცია",
+    "section.whatWe": "რას გთავაზობთ",
+    "section.socialPlatforms": "სოციალური მედია პლატფორმები",
+    "section.socialDesc": "ყველა მთავარ პლატფორმაზე შენი ბრენდის წარმატებული წარდგენა",
+    "section.pricing": "ინდივიდუალური ფასები",
+    "section.pricingDesc": "ყველა პროექტი უნიკალურია. ჩვენი მიზანია მაქსიმალური ღირებულების მიწოდება კლიენტის ბიუჯეტისა და მოთხოვნების მიხედვით.",
+    "package.basic": "საწყისი პაკეტი",
+    "package.standard": "სტანდარტული პაკეტი",
+    "package.premium": "პრემიუმ პაკეტი",
+    "price.estimate": "საორიენტაციო",
+    "price.note": "ფასები ცვალებადია და დამოკიდებულია მომხმარებლის მოთხოვნებსა და მიზნებზე.",
+    "pricing.needs": "თქვენი მოთხოვნების მიხედვით",
+    "pricing.needsDesc": "ბაზისური ბრენდინგიდან სრულ მარკეტინგ სტრატეგიამდე - ყველა პროექტს განსხვავებული მიდგომა სჭირდება.",
+    "pricing.estimate": "სწრაფი შეფასება",
+    "pricing.estimateDesc": "უფასო კონსულტაციის მაქსიმუმ 12 საათში მიიღებთ ზუსტ ფასს და პროექტის გეგმას.",
+    "pricing.transparent": "გამჭირვალე პროცესი",
+    "pricing.transparentDesc": "ჩვენი მიზანია, ყველა ეტაპი იყოს მაქსიმალურად ღია და გასაგები. ნდობაზე დაფუძნებული თანამშრომლობა ყოველთვის მომგებიანია.",
+    "cta.title": "მზად ხარ ბიზნესის ციფრული ტრანსფორმაციისთვის?",
+    "cta.button": "პროექტის დაწყება",
+    "service.videoProd": "ვიდეო გადაღება",
+    "service.videoDesc": "პროფესიონალური ვიდეო კონტენტის შექმნა",
+    "service.video1": "4K ვიდეო ხარისხი",
+    "service.video2": "დრონით გადაღება",
+    "service.video3": "პოსტ-პროდუქცია",
+    "service.video4": "მონტაჟი",
+    "service.photo": "ფოტო გადაღება",
+    "service.photoDesc": "სპეციალური ფოტო სესიები ბრენდებისთვის",
+    "service.photo1": "სტუდიური გადაღება",
+    "service.photo2": "ლოკაციური სესიები",
+    "service.photo3": "პროდუქტის ფოტოები",
+    "service.photo4": "რეტუშირება",
+    "service.social": "სოციალური მედია",
+    "service.socialDesc": "სრული სოციალური მედიის მართვა",
+    "service.social1": "კონტენტ დაგეგმვა",
+    "service.social2": "Community Management",
+    "service.social3": "Analytics",
+    "service.social4": "Engagement",
+    "service.content": "კონტენტის შექმნა",
+    "service.contentDesc": "ორიგინალური და ეფექტური კონტენტი",
+    "service.content1": "კოპირაიტინგი",
+    "service.content2": "სცენარების წერა",
+    "service.content3": "Blog პოსტები",
+    "service.content4": "Caption-ები",
+    "service.strategy": "მარკეტინგ სტრატეგია",
+    "service.strategyDesc": "ინდივიდუალური მარკეტინგ გეგმები",
+    "service.strategy1": "ბაზრის ანალიზი",
+    "service.strategy2": "კონკურენტების შესწავლა",
+    "service.strategy3": "ROI გაანგარიშება",
+    "service.strategy4": "KPI განსაზღვრა",
+    "service.brand": "საკომუნიკაციო მიზნები",
+    "service.brandDesc": "ბრენდის პოზიციონირება და მესიჯინგი",
+    "service.brand1": "Brand Voice",
+    "service.brand2": "Target Audience",
+    "service.brand3": "Messaging Framework",
+    "service.brand4": "Brand Guidelines",
+    "service.design": "გრაფიკული დიზაინი",
+    "service.designDesc": "ვიზუალური იდენტობის შექმნა",
+    "service.design1": "Banner დიზაინი",
+    "service.design2": "Post Templates",
+    "service.design3": "Infographics",
+    "service.design4": "Brand Materials",
+    "service.logo": "ლოგოს შექმნა",
+    "service.logoDesc": "უნიკალური ლოგო დიზაინი და ბრენდ იდენტიტი",
+    "service.logo1": "კონცეპტუალური დიზაინი",
+    "service.logo2": "ვექტორული ფაილები",
+    "service.logo3": "Brand Identity",
+    "service.logo4": "Usage Guidelines",
+    "pkg.basic1": "საკომუნიკაციო მიზნების ჩამოყალიბება",
+    "pkg.basic2": "საკომუნიკაციო მიზნების მიხედვით ვიდეო რილები",
+    "pkg.basic3": "სპეციალური ფოტო სესიები ბრენდებისთვის",
+    "pkg.basic4": "ბრენდის იდენტობის განვითარება",
+    "pkg.basic5": "თვეში 10+ პოსტი სოციალურ მედიაში",
+    "pkg.std1": "საკომუნიკაციო მიზნების ჩამოყალიბება",
+    "pkg.std2": "კონტენტის შექმნა",
+    "pkg.std3": "ვიდეო გადაღება",
+    "pkg.std4": "ფოტო გადაღება",
+    "pkg.std5": "სოციალური მედიის მენეჯმენტი",
+    "pkg.std6": "სოციალური მედიის პოსტერების შექმნა",
+    "pkg.prem1": "საკომუნიკაციო მიზნების ჩამოყალიბება",
+    "pkg.prem2": "კონტენტის შექმნა",
+    "pkg.prem3": "ვიდეო გადაღება",
+    "pkg.prem4": "ფოტო გადაღება",
+    "pkg.prem5": "სოციალური მედიის მენეჯმენტი",
+    "pkg.prem6": "სოციალური მედიის პოსტერების შექმნა",
+    "pkg.prem7": "ლოგოს შექმნა",
+  },
+  en: {
+    "seo.marketing.title": "Digital Marketing - VIFA | vifadigital.ge",
+    "seo.marketing.description": "Digital marketing services: video production, photography, social media management, content creation. Complete marketing solution for your business.",
+    "seo.marketing.keywords": "digital marketing, social media management, video production, photography, content creation, branding, marketing agency",
+    "page.title": "Digital Marketing",
+    "section.strategy": "Strategy",
+    "section.content": "Content",
+    "section.distribution": "Distribution",
+    "section.results": "Results",
+    "section.description": "Our Approach: Strategic Planning → Creative Content → Targeted Distribution → Monitoring & Optimization",
+    "section.whatWe": "What We Offer",
+    "section.socialPlatforms": "Social Media Platforms",
+    "section.socialDesc": "Successful brand representation on all major platforms",
+    "section.pricing": "Individual Pricing",
+    "section.pricingDesc": "Every project is unique. Our goal is to deliver maximum value according to your budget and requirements.",
+    "package.basic": "Basic Package",
+    "package.standard": "Standard Package",
+    "package.premium": "Premium Package",
+    "price.estimate": "Estimated",
+    "price.note": "Prices vary and depend on client requirements and goals.",
+    "pricing.needs": "According to Your Needs",
+    "pricing.needsDesc": "From basic branding to full marketing strategy - every project needs a different approach.",
+    "pricing.estimate": "Fast Estimate",
+    "pricing.estimateDesc": "Get an exact price and project plan in maximum 12 hours with our free consultation.",
+    "pricing.transparent": "Transparent Process",
+    "pricing.transparentDesc": "Our goal is to make every stage as clear and understandable as possible. Trust-based collaboration is always beneficial.",
+    "cta.title": "Ready for Your Business Digital Transformation?",
+    "cta.button": "Start Project",
+    "service.videoProd": "Video Production",
+    "service.videoDesc": "Professional video content creation",
+    "service.video1": "4K Video Quality",
+    "service.video2": "Drone Footage",
+    "service.video3": "Post-Production",
+    "service.video4": "Editing",
+    "service.photo": "Photo Shooting",
+    "service.photoDesc": "Special photo sessions for brands",
+    "service.photo1": "Studio Shooting",
+    "service.photo2": "Location Sessions",
+    "service.photo3": "Product Photography",
+    "service.photo4": "Retouching",
+    "service.social": "Social Media",
+    "service.socialDesc": "Full social media management",
+    "service.social1": "Content Planning",
+    "service.social2": "Community Management",
+    "service.social3": "Analytics",
+    "service.social4": "Engagement",
+    "service.content": "Content Creation",
+    "service.contentDesc": "Original and effective content",
+    "service.content1": "Copywriting",
+    "service.content2": "Script Writing",
+    "service.content3": "Blog Posts",
+    "service.content4": "Captions",
+    "service.strategy": "Marketing Strategy",
+    "service.strategyDesc": "Individual marketing plans",
+    "service.strategy1": "Market Analysis",
+    "service.strategy2": "Competitor Research",
+    "service.strategy3": "ROI Calculation",
+    "service.strategy4": "KPI Definition",
+    "service.brand": "Communication Goals",
+    "service.brandDesc": "Brand positioning and messaging",
+    "service.brand1": "Brand Voice",
+    "service.brand2": "Target Audience",
+    "service.brand3": "Messaging Framework",
+    "service.brand4": "Brand Guidelines",
+    "service.design": "Graphic Design",
+    "service.designDesc": "Visual identity creation",
+    "service.design1": "Banner Design",
+    "service.design2": "Post Templates",
+    "service.design3": "Infographics",
+    "service.design4": "Brand Materials",
+    "service.logo": "Logo Design",
+    "service.logoDesc": "Unique logo design and brand identity",
+    "service.logo1": "Conceptual Design",
+    "service.logo2": "Vector Files",
+    "service.logo3": "Brand Identity",
+    "service.logo4": "Usage Guidelines",
+    "pkg.basic1": "Communication Goals Definition",
+    "pkg.basic2": "Video Reels According to Goals",
+    "pkg.basic3": "Special Photo Sessions for Brands",
+    "pkg.basic4": "Brand Identity Development",
+    "pkg.basic5": "10+ Social Media Posts per Month",
+    "pkg.std1": "Communication Goals Definition",
+    "pkg.std2": "Content Creation",
+    "pkg.std3": "Video Production",
+    "pkg.std4": "Photo Shooting",
+    "pkg.std5": "Social Media Management",
+    "pkg.std6": "Social Media Poster Creation",
+    "pkg.prem1": "Communication Goals Definition",
+    "pkg.prem2": "Content Creation",
+    "pkg.prem3": "Video Production",
+    "pkg.prem4": "Photo Shooting",
+    "pkg.prem5": "Social Media Management",
+    "pkg.prem6": "Social Media Poster Creation",
+    "pkg.prem7": "Logo Design",
+  },
+};
+
 const Marketing: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
+  const { currentLanguage } = useLanguage();
   const [activeService, setActiveService] = useState<number>(0);
+
+  const t = (key: string): string => {
+    const translations = marketingTranslations[currentLanguage as keyof typeof marketingTranslations] as Record<string, string>;
+    return translations[key] || key;
+  };
 
   // Scroll to top when component mounts
   useEffect(() => {
@@ -37,112 +238,165 @@ const Marketing: React.FC = () => {
   }, []);
 
   // Main advertising services
-  const services = [
+  const getServices = () => [
     {
       id: "video-production",
       icon: <FaVideo />,
-      title: "ვიდეო გადაღება",
-      description: "პროფესიონალური ვიდეო კონტენტის შექმნა",
+      title: t("service.videoProd"),
+      description: t("service.videoDesc"),
       color: "red",
       features: [
-        "4K ვიდეო ხარისხი",
-        "დრონით გადაღება",
-        "პოსტ-პროდუქცია",
-        "მონტაჟი",
+        t("service.video1"),
+        t("service.video2"),
+        t("service.video3"),
+        t("service.video4"),
       ],
     },
     {
       id: "photo-shooting",
       icon: <FaCamera />,
-      title: "ფოტო გადაღება",
-      description: "სპეციალური ფოტო სესიები ბრენდებისთვის",
+      title: t("service.photo"),
+      description: t("service.photoDesc"),
       color: "blue",
       features: [
-        "სტუდიური გადაღება",
-        "ლოკაციური სესიები",
-        "პროდუქტის ფოტოები",
-        "რეტუშირება",
+        t("service.photo1"),
+        t("service.photo2"),
+        t("service.photo3"),
+        t("service.photo4"),
       ],
     },
     {
       id: "social-media",
       icon: <FaShare />,
-      title: "სოციალური მედია",
-      description: "სრული სოციალური მედიის მართვა",
+      title: t("service.social"),
+      description: t("service.socialDesc"),
       color: "green",
       features: [
-        "კონტენტ დაგეგმვა",
-        "Community Management",
-        "Analytics",
-        "Engagement",
+        t("service.social1"),
+        t("service.social2"),
+        t("service.social3"),
+        t("service.social4"),
       ],
     },
     {
       id: "content-creation",
       icon: <FaEdit />,
-      title: "კონტენტის შექმნა",
-      description: "ორიგინალური და ეფექტური კონტენტი",
+      title: t("service.content"),
+      description: t("service.contentDesc"),
       color: "purple",
       features: [
-        "კოპირაიტინგი",
-        "სცენარების წერა",
-        "Blog პოსტები",
-        "Caption-ები",
+        t("service.content1"),
+        t("service.content2"),
+        t("service.content3"),
+        t("service.content4"),
       ],
     },
     {
       id: "marketing-strategy",
       icon: <FaChartLine />,
-      title: "მარკეტინგ სტრატეგია",
-      description: "ინდივიდუალური მარკეტინგ გეგმები",
+      title: t("service.strategy"),
+      description: t("service.strategyDesc"),
       color: "orange",
       features: [
-        "ბაზრის ანალიზი",
-        "კონკურენტების შესწავლა",
-        "ROI გაანგარიშება",
-        "KPI განსაზღვრა",
+        t("service.strategy1"),
+        t("service.strategy2"),
+        t("service.strategy3"),
+        t("service.strategy4"),
       ],
     },
     {
       id: "brand-positioning",
       icon: <FaBullseye />,
-      title: "საკომუნიკაციო მიზნები",
-      description: "ბრენდის პოზიციონირება და მესიჯინგი",
+      title: t("service.brand"),
+      description: t("service.brandDesc"),
       color: "pink",
       features: [
-        "Brand Voice",
-        "Target Audience",
-        "Messaging Framework",
-        "Brand Guidelines",
+        t("service.brand1"),
+        t("service.brand2"),
+        t("service.brand3"),
+        t("service.brand4"),
       ],
     },
     {
       id: "graphic-design",
       icon: <FaPaintBrush />,
-      title: "გრაფიკული დიზაინი",
-      description: "ვიზუალური იდენტობის შექმნა",
+      title: t("service.design"),
+      description: t("service.designDesc"),
       color: "indigo",
       features: [
-        "Banner დიზაინი",
-        "Post Templates",
-        "Infographics",
-        "Brand Materials",
+        t("service.design1"),
+        t("service.design2"),
+        t("service.design3"),
+        t("service.design4"),
       ],
     },
     {
       id: "logo-design",
       icon: <FaStar />,
-      title: "ლოგოს შექმნა",
-      description: "უნიკალური ლოგო დიზაინი და ბრენდ იდენტიტი",
+      title: t("service.logo"),
+      description: t("service.logoDesc"),
       color: "yellow",
       features: [
-        "კონცეპტუალური დიზაინი",
-        "ვექტორული ფაილები",
-        "Brand Identity",
-        "Usage Guidelines",
+        t("service.logo1"),
+        t("service.logo2"),
+        t("service.logo3"),
+        t("service.logo4"),
       ],
     },
   ];
+
+  const services = getServices();
+
+  // Marketing Packages
+  const getPackages = () => [
+    {
+      id: "basic",
+      name: t("package.basic"),
+      icon: <FaVideo />,
+      price: "1000₾",
+      color: "red",
+      features: [
+        t("pkg.basic1"),
+        t("pkg.basic2"),
+        t("pkg.basic3"),
+        t("pkg.basic4"),
+        t("pkg.basic5"),
+      ],
+    },
+    {
+      id: "standard",
+      name: t("package.standard"),
+      icon: <FaShare />,
+      price: "1500₾",
+      color: "green",
+      features: [
+        t("pkg.std1"),
+        t("pkg.std2"),
+        t("pkg.std3"),
+        t("pkg.std4"),
+        t("pkg.std5"),
+        t("pkg.std6"),
+      ],
+    },
+    {
+      id: "premium",
+      name: t("package.premium"),
+      icon: <FaStar />,
+      price: "2000₾",
+      color: "purple",
+      features: [
+        t("pkg.prem1"),
+        t("pkg.prem2"),
+        t("pkg.prem3"),
+        t("pkg.prem4"),
+        t("pkg.prem5"),
+        t("pkg.prem6"),
+        t("pkg.prem7"),
+      ],
+    },
+  ];
+
+  const packages = getPackages();
 
   // Social media platforms
   const platforms = [
@@ -185,8 +439,9 @@ const Marketing: React.FC = () => {
   return (
     <>
       <SEO
-        title="Digital Advertising Services - VIFA"
-        description="Professional digital advertising services including video production, photography, social media management, and creative content."
+        title={t("seo.marketing.title")}
+        description={t("seo.marketing.description")}
+        keywords={t("seo.marketing.keywords")}
         url="https://vifadigital.ge/services/digital-advertising"
       />
 
@@ -282,7 +537,7 @@ const Marketing: React.FC = () => {
               <div className="mb-8 flex justify-center">
                 <div className="w-64 sm:w-72 md:w-80 lg:w-96">
                   <TrueFocus
-                    sentence="Digital Marketing"
+                    sentence={t("page.title")}
                     blurAmount={4}
                     borderColor="#ef4444"
                     glowColor="rgba(239, 68, 68, 0.6)"
@@ -302,7 +557,7 @@ const Marketing: React.FC = () => {
                     <div className="text-center">
                       <FaChartLine className="text-blue-400 text-3xl mb-2 mx-auto" />
                       <div className="text-blue-400 text-xs font-medium">
-                        სტრატეგია
+                        {t("section.strategy")}
                       </div>
                     </div>
                   </div>
@@ -316,7 +571,7 @@ const Marketing: React.FC = () => {
                     <div className="text-center">
                       <FaVideo className="text-red-400 text-3xl mb-2 mx-auto" />
                       <div className="text-red-400 text-xs font-medium">
-                        კონტენტი
+                        {t("section.content")}
                       </div>
                     </div>
                   </div>
@@ -330,7 +585,7 @@ const Marketing: React.FC = () => {
                     <div className="text-center">
                       <FaShare className="text-green-400 text-3xl mb-2 mx-auto" />
                       <div className="text-green-400 text-xs font-medium">
-                        გავრცელება
+                        {t("section.distribution")}
                       </div>
                     </div>
                   </div>
@@ -344,7 +599,7 @@ const Marketing: React.FC = () => {
                     <div className="text-center">
                       <FaBullseye className="text-purple-400 text-3xl mb-2 mx-auto" />
                       <div className="text-purple-400 text-xs font-medium">
-                        შედეგები
+                        {t("section.results")}
                       </div>
                     </div>
                   </div>
@@ -362,149 +617,61 @@ const Marketing: React.FC = () => {
 
           {/* Marketing Packages */}
           <div className="grid md:grid-cols-3 gap-8">
-            {/* Basic Package */}
-            <div className="bg-gradient-to-br from-red-500/10 to-orange-500/10 p-6 rounded-xl border border-red-500/20 flex flex-col h-full">
-              <div className="text-4xl mb-4 text-red-400">
-                <FaVideo />
-              </div>
-              <h4 className="text-xl font-medium text-white mb-3">
-                საწყისი პაკეტი
-              </h4>
-              <div className="text-slate-300 text-sm mb-4 leading-relaxed space-y-2 flex-grow">
-                <div className="flex items-center gap-2">
-                  <FaCheckCircle className="text-red-400 text-xs" />
-                  <span>საკომუნიკაციო მიზნების ჩამოყალიბება</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaCheckCircle className="text-red-400 text-xs" />
-                  <span>საკომუნიკაციო მიზნების მიხედვით ვიდეო რილები</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaCheckCircle className="text-red-400 text-xs" />
-                  <span>სპეციალური ფოტო სესიები ბრენდებისთვის</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaCheckCircle className="text-red-400 text-xs" />
-                  <span>ბრენდის იდენტობის განვითარება</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaCheckCircle className="text-red-400 text-xs" />
-                  <span>თვეში 10+ პოსტი სოციალურ მედიაში</span>
-                </div>
-              </div>
-              <div className="mt-auto">
-                <div className="text-2xl font-bold text-red-400 mt-6">
-                  1000₾
-                  <span className="text-sm text-slate-400"> საორიენტაციო</span>
-                </div>
-                <div className="text-xs text-slate-500 mt-2">
-                  ფასები ცვალებადია და დამოკიდებულია მომხმარებლის მოთხოვნებსა და
-                  მიზნებზე.
-                </div>
-              </div>
-            </div>
+            {packages.map((pkg) => {
+              const colorMap: Record<string, { bg: string; border: string; text: string; icon: string }> = {
+                red: {
+                  bg: "from-red-500/10 to-orange-500/10",
+                  border: "border-red-500/20",
+                  text: "text-red-400",
+                  icon: "text-red-400",
+                },
+                green: {
+                  bg: "from-green-500/10 to-emerald-500/10",
+                  border: "border-green-500/20",
+                  text: "text-green-400",
+                  icon: "text-green-400",
+                },
+                purple: {
+                  bg: "from-purple-500/10 to-pink-500/10",
+                  border: "border-purple-500/20",
+                  text: "text-purple-400",
+                  icon: "text-purple-400",
+                },
+              };
 
-            {/* Standard Package */}
-            <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 p-6 rounded-xl border border-green-500/20 flex flex-col h-full">
-              <div className="text-4xl mb-4 text-green-400">
-                <FaShare />
-              </div>
-              <h4 className="text-xl font-medium text-white mb-3">
-                სტანდარტული პაკეტი
-              </h4>
-              <div className="text-slate-300 text-sm mb-4 leading-relaxed space-y-2 flex-grow">
-                <div className="flex items-center gap-2">
-                  <FaCheckCircle className="text-green-400 text-xs" />
-                  <span>საკომუნიკაციო მიზნების ჩამოყალიბება</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaCheckCircle className="text-green-400 text-xs" />
-                  <span>კონტენტის შექმნა</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaCheckCircle className="text-green-400 text-xs" />
-                  <span>ვიდეო გადაღება</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaCheckCircle className="text-green-400 text-xs" />
-                  <span>ფოტო გადაღება</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaCheckCircle className="text-green-400 text-xs" />
-                  <span>სოციალური მედიის მენეჯმენტი</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaCheckCircle className="text-green-400 text-xs" />
-                  <span>სოციალური მედიის პოსტერების შექმნა</span>
-                </div>
-              </div>
-              <div className="mt-auto">
-                <div className="text-2xl font-bold text-green-400 mt-6">
-                  1500₾
-                  <span className="text-sm text-slate-400"> საორიენტაციო</span>
-                </div>
-                <div className="text-xs text-slate-500 mt-2">
-                  ფასები ცვალებადია და დამოკიდებულია მომხმარებლის მოთხოვნებსა და
-                  მიზნებზე.
-                </div>
-              </div>
-            </div>
+              const colors = colorMap[pkg.color] || colorMap.red;
 
-            {/* Premium Package */}
-            <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-6 rounded-xl border border-purple-500/20 flex flex-col h-full">
-              <div className="text-4xl mb-4 text-purple-400">
-                <FaStar />
-              </div>
-              <h4 className="text-xl font-medium text-white mb-3">
-                პრემიუმ პაკეტი
-              </h4>
-              <div className="text-slate-300 text-sm mb-4 leading-relaxed space-y-2 flex-grow">
-                <div className="flex items-center gap-2">
-                  <FaCheckCircle className="text-purple-400 text-xs" />
-                  <span>საკომუნიკაციო მიზნების ჩამოყალიბება</span>
+              return (
+                <div
+                  key={pkg.id}
+                  className={`bg-gradient-to-br ${colors.bg} p-6 rounded-xl ${colors.border} border flex flex-col h-full`}
+                >
+                  <div className={`text-4xl mb-4 ${colors.icon}`}>{pkg.icon}</div>
+                  <h4 className="text-xl font-medium text-white mb-3">{pkg.name}</h4>
+                  <div className="text-slate-300 text-sm mb-4 leading-relaxed space-y-2 flex-grow">
+                    {pkg.features.map((feature, idx) => (
+                      <div key={idx} className="flex items-center gap-2">
+                        <FaCheckCircle className={`${colors.icon} text-xs`} />
+                        <span>{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-auto">
+                    <div className={`text-2xl font-bold ${colors.text} mt-6`}>
+                      {pkg.price}
+                      <span className="text-sm text-slate-400"> {t("price.estimate")}</span>
+                    </div>
+                    <div className="text-xs text-slate-500 mt-2">{t("price.note")}</div>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <FaCheckCircle className="text-purple-400 text-xs" />
-                  <span>კონტენტის შექმნა</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaCheckCircle className="text-purple-400 text-xs" />
-                  <span>ვიდეო გადაღება</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaCheckCircle className="text-purple-400 text-xs" />
-                  <span>ფოტო გადაღება</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaCheckCircle className="text-purple-400 text-xs" />
-                  <span>სოციალური მედიის მენეჯმენტი</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaCheckCircle className="text-purple-400 text-xs" />
-                  <span>სოციალური მედიის პოსტერების შექმნა</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaCheckCircle className="text-purple-400 text-xs" />
-                  <span>ლოგოს შექმნა</span>
-                </div>
-              </div>
-              <div className="mt-auto">
-                <div className="text-2xl font-bold text-purple-400 mt-6">
-                  2000₾
-                  <span className="text-sm text-slate-400"> საორიენტაციო</span>
-                </div>
-                <div className="text-xs text-slate-500 mt-2">
-                  ფასები ცვალებადია და დამოკიდებულია მომხმარებლის მოთხოვნებსა და
-                  მიზნებზე.
-                </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
           {/* Services Grid */}
           <div className="max-w-6xl mx-auto mb-32 mt-18">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-light text-white mb-4">
-                რას გთავაზობთ
+                {t("section.whatWe")}
               </h2>
             </div>
 
@@ -516,7 +683,7 @@ const Marketing: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className={`group cursor-pointer transition-all duration-300 hover:scale-105`}
+                  className={`group transition-all duration-300 hover:scale-105`}
                   onClick={() => setActiveService(index)}
                 >
                   <div
@@ -555,10 +722,10 @@ const Marketing: React.FC = () => {
           <div className="max-w-6xl mx-auto mb-32">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-light text-white mb-4">
-                სოციალური მედია პლატფორმები
+                {t("section.socialPlatforms")}
               </h2>
               <p className="text-slate-400">
-                ყველა მთავარ პლატფორმაზე შენი ბრენდის წარმატებული წარდგენა
+                {t("section.socialDesc")}
               </p>
             </div>
 
@@ -595,11 +762,10 @@ const Marketing: React.FC = () => {
           <div className="mb-20">
             <div className="text-center mb-12">
               <h3 className="text-3xl font-light text-white mb-4">
-                ინდივიდუალური ფასები
+                {t("section.pricing")}
               </h3>
               <p className="text-lg text-slate-300 max-w-3xl mx-auto">
-                ყველა პროექტი უნიკალურია. ჩვენი მიზანია მაქსიმალური ღირებულების
-                მიწოდება კლიენტის ბიუჯეტისა და მოთხოვნების მიხედვით.
+                {t("section.pricingDesc")}
               </p>
             </div>
 
@@ -611,11 +777,10 @@ const Marketing: React.FC = () => {
                     <FaBullseye />
                   </div>
                   <h4 className="text-xl font-medium text-white mb-3">
-                    თქვენი მოთხოვნების მიხედვით
+                    {t("pricing.needs")}
                   </h4>
                   <p className="text-slate-300 text-sm leading-relaxed">
-                    ბაზისური ბრენდინგიდან სრულ მარკეტინგ სტრატეგიამდე - ყველა
-                    პროექტს განსხვავებული მიდგომა სჭირდება.
+                    {t("pricing.needsDesc")}
                   </p>
                 </div>
                 <div>
@@ -623,11 +788,10 @@ const Marketing: React.FC = () => {
                     <FaBolt />
                   </div>
                   <h4 className="text-xl font-medium text-white mb-3">
-                    სწრაფი შეფასება
+                    {t("pricing.estimate")}
                   </h4>
                   <p className="text-slate-300 text-sm leading-relaxed">
-                    უფასო კონსულტაციის მაქსიმუმ 12 საათში მიიღებთ ზუსტ ფასს და
-                    პროექტის გეგმას.
+                    {t("pricing.estimateDesc")}
                   </p>
                 </div>
                 <div>
@@ -635,12 +799,10 @@ const Marketing: React.FC = () => {
                     <FaCog />
                   </div>
                   <h4 className="text-xl font-medium text-white mb-3">
-                    გამჭირვალე პროცესი
+                    {t("pricing.transparent")}
                   </h4>
                   <p className="text-slate-300 text-sm leading-relaxed">
-                    ჩვენი მიზანია, ყველა ეტაპი იყოს მაქსიმალურად ღია და
-                    გასაგები. ნდობაზე დაფუძნებული თანამშრომლობა ყოველთვის
-                    მომგებიანია.
+                    {t("pricing.transparentDesc")}
                   </p>
                 </div>
               </div>
@@ -655,7 +817,7 @@ const Marketing: React.FC = () => {
           <div className="text-center">
             <div className="max-w-3xl mx-auto">
               <h3 className="text-3xl font-light mb-6">
-                მზად ხარ ბიზნესის ციფრული ტრანსფორმაციისთვის?
+                {t("cta.title")}
               </h3>
 
               <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-12">
@@ -664,7 +826,7 @@ const Marketing: React.FC = () => {
                   className="inline-flex items-center gap-2 bg-gradient-to-r from-red-500 to-orange-500 text-white px-6 sm:px-8 lg:px-10 py-4 text-lg font-medium hover:from-red-600 hover:to-orange-600 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105"
                 >
                   <FaRocket />
-                  პროექტის დაწყება
+                  {t("cta.button")}
                 </Link>
               </div>
             </div>

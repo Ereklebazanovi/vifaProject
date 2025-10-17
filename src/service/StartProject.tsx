@@ -22,9 +22,63 @@ import {
 
 import { submitLead, type LeadData } from "../leadService";
 
+const startProjectTranslations = {
+  ka: {
+    "seo.startProject.title": "პროექტის დაწყება - Vifa Digital | vifadigital.com",
+    "seo.startProject.description": "დაიწყე თქვენი ციფრული პროექტი Vifa Digital-ის სთანამშრომლობით. ფასიანი კონსულტაცია და სრული დამხმარე სერვისი.",
+    "seo.startProject.keywords": "პროექტის დაწყება, ვებ გვერდი, ციფრული მარკეტინგი, AI ჩატბოტი, vifadigital.com",
+    "startProject.hero.title": "მზად ხარ",
+    "startProject.hero.titleHighlight": "ციფრული ტრანსფორმაციისთვის",
+    "startProject.hero.titleSuffix": "?",
+    "startProject.progress.step": "ეტაპი",
+    "startProject.step2.title": "უძღვებენ თქვენი კონტაქტი",
+    "startProject.step2.subtitle": "ჩვენ გვჭირდება ზოგიერთი დეტალი, რომ უკეთესად გაცნოთ თქვენი პროექტი",
+    "startProject.form.name": "სახელი",
+    "startProject.form.namePlaceholder": "მაგ. გიორგი ლომინაძე",
+    "startProject.form.businessName": "ბიზნესის სახელი",
+    "startProject.form.businessNamePlaceholder": "მაგ. VIFA Digital",
+    "startProject.form.email": "ელ-ფოსტა",
+    "startProject.form.phone": "ტელეფონი",
+    "startProject.buttons.back": "უკან",
+    "startProject.buttons.next": "შემდეგი",
+    "startProject.buttons.submit": "გაგზავნა",
+    "startProject.buttons.submitting": "იგზავნება...",
+    "startProject.footer.trustIndicators": "✓ 24 საათის გარანტია • ✓ უფასო კონსულტაცია • ✓ პროფესიონალური გუნდი",
+    "startProject.errors.submitError": "შეცდომა წარმოიშვა. გთხოვთ ცადეთ სამ საათში.",
+  },
+  en: {
+    "seo.startProject.title": "Start Your Project - Vifa Digital | vifadigital.com",
+    "seo.startProject.description": "Start your digital project with Vifa Digital. Free consultation and comprehensive support services.",
+    "seo.startProject.keywords": "start project, website, digital marketing, AI chatbot, vifadigital.com",
+    "startProject.hero.title": "Ready for",
+    "startProject.hero.titleHighlight": "Digital Transformation",
+    "startProject.hero.titleSuffix": "?",
+    "startProject.progress.step": "Step",
+    "startProject.step2.title": "Tell Us Your Details",
+    "startProject.step2.subtitle": "We need some information to better understand your project",
+    "startProject.form.name": "Name",
+    "startProject.form.namePlaceholder": "e.g. John Smith",
+    "startProject.form.businessName": "Business Name",
+    "startProject.form.businessNamePlaceholder": "e.g. VIFA Digital",
+    "startProject.form.email": "Email",
+    "startProject.form.phone": "Phone",
+    "startProject.buttons.back": "Back",
+    "startProject.buttons.next": "Next",
+    "startProject.buttons.submit": "Submit",
+    "startProject.buttons.submitting": "Submitting...",
+    "startProject.footer.trustIndicators": "✓ 24 Hour Guarantee • ✓ Free Consultation • ✓ Professional Team",
+    "startProject.errors.submitError": "An error occurred. Please try again in a few minutes.",
+  },
+};
+
 const StartProject: React.FC = () => {
-  const { t } = useLanguage();
+  const { currentLanguage } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
+
+  const t = (key: string): string => {
+    const translations = startProjectTranslations[currentLanguage as keyof typeof startProjectTranslations] as Record<string, string>;
+    return translations[key] || key;
+  };
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -54,30 +108,30 @@ const StartProject: React.FC = () => {
     {
       id: "website",
       icon: <FaGlobe />,
-      title: "ვებსაიტის შექმნა",
-      description: "თანამედროვე და SEO-ოპტიმიზირებული ვებსაიტები",
-      price: "ფასი: ინდივიდუალური",
+      title: currentLanguage === "ka" ? "ვებსაიტის შექმნა" : "Website Creation",
+      description: currentLanguage === "ka" ? "თანამედროვე და SEO-ოპტიმიზირებული ვებსაიტები" : "Modern and SEO-optimized websites",
+      price: currentLanguage === "ka" ? "ფასი: ინდივიდუალური" : "Price: Custom",
     },
     {
       id: "ai-chatbot",
       icon: <FaRobot />,
-      title: "AI ჩატბოტი",
-      description: "24/7 ავტომატური მომხმარებელთა მხარდაჭერა",
-      price: "ფასი: ინდივიდუალური",
+      title: currentLanguage === "ka" ? "AI ჩატბოტი" : "AI Chatbot",
+      description: currentLanguage === "ka" ? "24/7 ავტომატური მომხმარებელთა მხარდაჭერა" : "24/7 Automatic customer support",
+      price: currentLanguage === "ka" ? "ფასი: ინდივიდუალური" : "Price: Custom",
     },
     {
       id: "marketing",
       icon: <FaCamera />,
-      title: "ვიდეო და ფოტო კონტენტი",
-      description: "პროფესიონალური ვიდეო/ფოტო სესიები ბრენდისთვის",
-      price: "ფასი: ინდივიდუალური",
+      title: currentLanguage === "ka" ? "ვიდეო და ფოტო კონტენტი" : "Video and Photo Content",
+      description: currentLanguage === "ka" ? "პროფესიონალური ვიდეო/ფოტო სესიები ბრენდისთვის" : "Professional video/photo sessions for your brand",
+      price: currentLanguage === "ka" ? "ფასი: ინდივიდუალური" : "Price: Custom",
     },
     {
       id: "social-media",
       icon: <FaBullhorn />,
-      title: "სოციალური მედია მართვა",
-      description: "სრული სოციალური მედიის მენეჯმენტი და კონტენტი",
-      price: "ფასი: ინდივიდუალური",
+      title: currentLanguage === "ka" ? "სოციალური მედია მართვა" : "Social Media Management",
+      description: currentLanguage === "ka" ? "სრული სოციალური მედიის მენეჯმენტი და კონტენტი" : "Full social media management and content",
+      price: currentLanguage === "ka" ? "ფასი: ინდივიდუალური" : "Price: Custom",
     },
   ];
 
@@ -266,7 +320,7 @@ const StartProject: React.FC = () => {
                   >
                     <div className="text-center mb-4">
                       <h3 className="text-lg sm:text-xl font-bold text-white mb-1">
-                        უფასო კონსულტაცია{" "}
+                        {currentLanguage === "ka" ? "უფასო კონსულტაცია" : "Free Consultation"}{" "}
                       </h3>
                     </div>
 
@@ -275,11 +329,11 @@ const StartProject: React.FC = () => {
                         <div className="flex items-center gap-2 mb-1">
                           <div className="w-2 h-2 bg-green-400 rounded-full"></div>
                           <span className="text-white font-semibold text-xs sm:text-sm">
-                            პროექტის განხილვა
+                            {currentLanguage === "ka" ? "პროექტის განხილვა" : "Project Review"}
                           </span>
                         </div>
                         <p className="text-slate-400 text-xs">
-                          დეტალური ანალიზი და რეკომენდაციები
+                          {currentLanguage === "ka" ? "დეტალური ანალიზი და რეკომენდაციები" : "Detailed analysis and recommendations"}
                         </p>
                       </div>
 
@@ -287,11 +341,11 @@ const StartProject: React.FC = () => {
                         <div className="flex items-center gap-2 mb-1">
                           <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
                           <span className="text-white font-semibold text-xs sm:text-sm">
-                            ტექნიკური კონსულტაცია
+                            {currentLanguage === "ka" ? "ტექნიკური კონსულტაცია" : "Technical Consultation"}
                           </span>
                         </div>
                         <p className="text-slate-400 text-xs">
-                          საუკეთესო გადაწყვეტილებების არჩევა
+                          {currentLanguage === "ka" ? "საუკეთესო გადაწყვეტილებების არჩევა" : "Best solution selection"}
                         </p>
                       </div>
 
@@ -299,11 +353,11 @@ const StartProject: React.FC = () => {
                         <div className="flex items-center gap-2 mb-1">
                           <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
                           <span className="text-white font-semibold text-xs sm:text-sm">
-                            საწყისი შეფასება
+                            {currentLanguage === "ka" ? "საწყისი შეფასება" : "Initial Estimate"}
                           </span>
                         </div>
                         <p className="text-slate-400 text-xs">
-                          ღირებულება და ვადების განსაზღვრა
+                          {currentLanguage === "ka" ? "ღირებულება და ვადების განსაზღვრა" : "Price and timeline determination"}
                         </p>
                       </div>
                     </div>
@@ -363,22 +417,24 @@ const StartProject: React.FC = () => {
                         >
                           <div className="text-6xl mb-6">🚀</div>
                           <h2 className="text-3xl font-bold mb-4 text-green-400">
-                            Project Submitted Successfully!
+                            {currentLanguage === "ka" ? "პროექტი წარმატებით გაიგზავნა!" : "Project Submitted Successfully!"}
                           </h2>
                           <p className="text-lg mb-8 max-w-2xl mx-auto text-slate-300">
-                            Thank you for choosing Vifa Digital! Your project
-                            request has been received.
+                            {currentLanguage === "ka"
+                              ? "თუმცა, რომ აირჩიეთ Vifa Digital! თქვენი პროექტის მოთხოვნა მიიღო."
+                              : "Thank you for choosing Vifa Digital! Your project request has been received."}
                           </p>
 
                           {/* 24-hour promise box */}
                           <div className="bg-gradient-to-r from-blue-500/10 to-green-500/10 border border-blue-400/30 rounded-2xl p-6 mb-8 max-w-xl mx-auto">
                             <div className="text-3xl mb-3">⏰</div>
                             <h3 className="text-xl font-semibold text-blue-400 mb-2">
-                              We'll Contact You Within 24 Hours
+                              {currentLanguage === "ka" ? "ჩვენ დაგიკავშირდებით 24 საათში" : "We'll Contact You Within 24 Hours"}
                             </h3>
                             <p className="text-slate-300 text-sm">
-                              Our team will reach out to discuss your project
-                              details and provide a personalized quote.
+                              {currentLanguage === "ka"
+                                ? "ჩვენი გუნდი დაგიკავშირდებათ თქვენი პროექტის დეტალების განსახილველად და ინდივიდუალური კოტირების მოსახლეობის."
+                                : "Our team will reach out to discuss your project details and provide a personalized quote."}
                             </p>
                           </div>
 
@@ -388,19 +444,19 @@ const StartProject: React.FC = () => {
                                 <FaEnvelope />
                               </div>
                               <div className="text-sm text-slate-400">
-                                Check your email
+                                {currentLanguage === "ka" ? "შეამოწმეთ თქვენი ელ-ფოსტა" : "Check your email"}
                               </div>
                               <div className="font-semibold text-white">
-                                Confirmation sent
+                                {currentLanguage === "ka" ? "დასტური გაიგზავნა" : "Confirmation sent"}
                               </div>
                             </div>
                             <div className="text-center p-4 bg-slate-800/40 rounded-xl">
                               <div className="text-2xl text-green-400 mb-2"></div>
                               <div className="text-sm text-slate-400">
-                                Personal consultation
+                                {currentLanguage === "ka" ? "პირადი კონსულტაცია" : "Personal consultation"}
                               </div>
                               <div className="font-semibold text-white">
-                                Free consultation
+                                {currentLanguage === "ka" ? "უფასო კონსულტაცია" : "Free consultation"}
                               </div>
                             </div>
                           </div>
@@ -412,7 +468,7 @@ const StartProject: React.FC = () => {
                               onClick={resetForm}
                               className="px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-xl font-semibold transition-all duration-300"
                             >
-                              Start New Project
+                              {currentLanguage === "ka" ? "ახალი პროექტის დაწყება" : "Start New Project"}
                             </motion.button>
                             <motion.a
                               href="/"
@@ -420,7 +476,7 @@ const StartProject: React.FC = () => {
                               whileTap={{ scale: 0.95 }}
                               className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-xl font-semibold transition-all duration-300 text-center"
                             >
-                              Back to Home
+                              {currentLanguage === "ka" ? "მთავარ გვერდზე დაბრუნება" : "Back to Home"}
                             </motion.a>
                           </div>
                         </motion.div>
@@ -438,11 +494,12 @@ const StartProject: React.FC = () => {
                             >
                               <div className="text-center mb-8 sm:mb-12">
                                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-white mb-4 px-2">
-                                  რომელი სერვისები გაინტერესებთ?
+                                  {currentLanguage === "ka" ? "რომელი სერვისები გაინტერესებთ?" : "Which services interest you?"}
                                 </h2>
                                 <p className="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto px-4">
-                                  აირჩიეთ სერვისები, რომლებიც ყველაზე მეტად
-                                  შეესაბამება თქვენი ბიზნესის მოთხოვნებს
+                                  {currentLanguage === "ka"
+                                    ? "აირჩიეთ სერვისები, რომლებიც ყველაზე მეტად შეესაბამება თქვენი ბიზნესის მოთხოვნებს"
+                                    : "Select services that best match your business needs"}
                                 </p>
                               </div>
 
@@ -515,8 +572,9 @@ const StartProject: React.FC = () => {
                                 </p>
                                 <div className="bg-blue-500/10 border border-blue-400/30 rounded-lg sm:rounded-xl p-3 sm:p-4 max-w-2xl mx-auto mx-4">
                                   <p className="text-blue-300 text-xs sm:text-sm">
-                                    გთხოვთ შეავსოთ ყველა ველი, რათა ვიცოდეთ სად
-                                    და როგორ დაგიკავშირდეთ
+                                    {currentLanguage === "ka"
+                                      ? "გთხოვთ შეავსოთ ყველა ველი, რათა ვიცოდეთ სად და როგორ დაგიკავშირდეთ"
+                                      : "Please fill in all fields so we know where and how to contact you"}
                                   </p>
                                 </div>
                               </div>
@@ -603,11 +661,12 @@ const StartProject: React.FC = () => {
 
                                   <div className="bg-slate-700/30 border border-slate-600/50 rounded-xl p-6">
                                     <h4 className="text-white font-semibold mb-3 flex items-center gap-2">
-                                      ალტერნატიული საკომუნიკაციო გზები
+                                      {currentLanguage === "ka" ? "ალტერნატიული საკომუნიკაციო გზები" : "Alternative Communication Methods"}
                                     </h4>
                                     <p className="text-slate-300 text-sm mb-4">
-                                      ტელეფონის გარდა, შეგიძლიათ ასევე
-                                      დაგვიკავშირდეთ:
+                                      {currentLanguage === "ka"
+                                        ? "ტელეფონის გარდა, შეგიძლიათ ასევე დაგვიკავშირდეთ:"
+                                        : "Besides phone, you can also contact us via:"}
                                     </p>
                                     <div className="grid md:grid-cols-2 gap-4">
                                       <div className="bg-blue-600/20 border border-blue-500/30 rounded-lg p-4">
@@ -620,7 +679,7 @@ const StartProject: React.FC = () => {
                                           </div>
                                         </div>
                                         <div className="text-slate-400 text-sm mb-2">
-                                          მოგვწერეთ პირდაპირ Facebook-ზე:
+                                          {currentLanguage === "ka" ? "მოგვწერეთ პირდაპირ Facebook-ზე:" : "Message us directly on Facebook:"}
                                         </div>
                                         <a
                                           href="https://facebook.com/vifaweb"
@@ -641,8 +700,9 @@ const StartProject: React.FC = () => {
                                           </div>
                                         </div>
                                         <div className="text-slate-400 text-sm mb-2">
-                                          თქვენი ტელეფონის ნომრით WhatsApp-ზე
-                                          დაგიკავშირდებით
+                                          {currentLanguage === "ka"
+                                            ? "თქვენი ტელეფონის ნომრით WhatsApp-ზე დაგიკავშირდებით"
+                                            : "We'll reach out via WhatsApp with your phone number"}
                                         </div>
                                         <div className="text-green-300 font-mono text-sm bg-green-900/30 px-2 py-1 rounded">
                                           +995 557 62 42 43
