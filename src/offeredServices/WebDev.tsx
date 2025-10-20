@@ -75,7 +75,7 @@ const webDevTranslations = {
     "webdev.service.ai.subtitle": "ავტომატური კომუნიკაცია მომხმარებლებთან",
     "webdev.service.ai.description":
       "ინტელექტუალური ჩატბოტი, რომელიც 24/7 პასუხობს მომხმარებელთა კითხვებს და უზრუნველყოფს სწრაფ მხარდაჭერას.",
-    "webdev.service.ai.feature1": "დაფუძნებული ბიზნეს ლოგიკაზე",
+    "webdev.service.ai.feature1": "მორგებული თქვენს ბიზნეს ლოგიკაზე",
     "webdev.service.ai.feature2": "ინტელექტუალური პასუხები",
     "webdev.service.ai.feature3": "კლიენტების მოზიდვა",
     "webdev.service.ai.feature4": "Social Media ინტეგრაცია",
@@ -111,7 +111,7 @@ const webDevTranslations = {
 
     "webdev.pricing.ecommerce.title": "ელ-კომერცია",
     "webdev.pricing.ecommerce.description":
-      "სრულფასოვანი ონლაინ მაღაზია გადახდის სისტემით, პროდუქტის მართვით და ორდერის თვალყურით.",
+      "სრულფასოვანი ონლაინ მაღაზია — გადახდის სისტემა, პროდუქტის მართვა და შეკვეთების კონტროლი.",
     "webdev.pricing.ecommerce.price": "2000₾-დან",
 
     "webdev.pricing.consultation": "კონსულტაცია უფასოა",
@@ -188,7 +188,7 @@ const webDevTranslations = {
     "webdev.service.ai.subtitle": "Automatic Customer Communication",
     "webdev.service.ai.description":
       "Intelligent chatbot that responds 24/7 to customer questions and provides fast support.",
-    "webdev.service.ai.feature1": "Based on Business Logic",
+    "webdev.service.ai.feature1": "Based on Your Business Logic",
     "webdev.service.ai.feature2": "Intelligent Responses",
     "webdev.service.ai.feature3": "Customer Acquisition",
     "webdev.service.ai.feature4": "Social Media Integration",
@@ -224,7 +224,7 @@ const webDevTranslations = {
 
     "webdev.pricing.ecommerce.title": "E-commerce Store",
     "webdev.pricing.ecommerce.description":
-      "Full-featured online store with payment system, product management and order tracking.",
+      "A full-fledged online store — payment system, product management, and order control.",
     "webdev.pricing.ecommerce.price": "From 2000₾",
 
     "webdev.pricing.consultation": "Consultation is Free",
