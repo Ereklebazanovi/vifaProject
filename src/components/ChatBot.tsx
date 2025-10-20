@@ -100,6 +100,25 @@ VIFA Digital Agency - ვიფა ციფრული სააგენტ�
 ფასები ინდივიდუალურია და დამოკიდებულია პროექტის სირთულესა და მოთხოვნებზე.
 `;
 
+  // Helper function to detect simple greetings
+  const isSimpleGreeting = (message: string): boolean => {
+    const cleanMessage = message.toLowerCase().trim();
+    const simpleGreetings = [
+      'გამარჯობა', 'hello', 'hi', 'hey', 'hola', 'მომბარე', 'გამარჯვებული',
+      'როგორ ხარ', 'how are you', 'როგორ ყოფენ', 'კარგად ხარ',
+      'გაუმარჯოს', 'მშვიდობა', 'peace', 'კარგი', 'good',
+      'გამოძახილი', 'მაშინ', 'წარმატებები', 'good morning', 'good evening',
+      'კეთილა', 'კარგა', 'რამდენიმე', 'hi there', 'hey there'
+    ];
+
+    return simpleGreetings.some(greeting =>
+      cleanMessage === greeting ||
+      cleanMessage.startsWith(greeting + ' ') ||
+      cleanMessage.endsWith(' ' + greeting) ||
+      cleanMessage.includes(greeting)
+    ) && cleanMessage.length < 50;
+  };
+
   const generateResponse = async (userMessage: string): Promise<string> => {
     try {
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
@@ -109,6 +128,9 @@ VIFA Digital Agency - ვიფა ციფრული სააგენტ�
       }
 
       const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+
+      // Detect if this is a simple greeting
+      const isGreeting = isSimpleGreeting(userMessage);
 
       const response = await fetch(apiUrl, {
           method: "POST",
@@ -145,11 +167,26 @@ ${companyInfo}
 
 💬 მომხმარებლის შეკითხვა: "${userMessage}"
 
+📏 ᲞᲐᲡᲣᲮᲘᲡ ᲡᲘᲒᲠᲫᲔ (ᲫᲐᲚᲘᲐᲜ ᲛᲜᲘᲨᲕᲜᲔᲚᲝᲕᲐᲜᲘ):
+${isGreeting ? `
+🔥 ეს არის მარტივი გამოძახება/სალამი!
+- ᲛᲝᲙᲚᲔ პასუხი (5-15 სიტყვა მაქსიმუმ)
+- 1-2 ემოჯი მაქსიმუმ
+- არ გაიგრძელო ზედმეტად
+- მხოლოდ გამარჯობა + რაში შემიძლია დაგეხმარო
+- მაგალითი: "გამარჯობა! 👋 რაში შემიძლია დაგეხმარო? 😊"
+` : `
+💼 ეს არის რთული კითხვა ან ბიზნეს საკითხი!
+- დეტალური და სასარგებლო პასუხი
+- ყველა საჭირო ინფორმაცია
+- ცოტა მეტი ემოჯი შეიძლება
+- პროფესიონალური მაგრამ მეგობრული
+`}
+
 📝 პასუხის მითითებები:
 - იყავი სასარგებლო და გასართობი
 - ბიზნეს საკითხებზე → მიაწოდე ზუსტი ინფორმაცია პიროვნებით
 - ყოველდღიურ საუბარში → იყავი სახალისო
-- ემოჯების გონივრული გამოყენება
 - ქართულად რომ ლაპარაკობ, იყავი როგორც ძალიან კარგი ქართველი მეგობარი რომელიც კარგად ერკვევა ტექნოლოგიებში
 
 გახსოვდეს: შენ წარმოადგენ VIFA Digital-ს, ასე რომ იყავი პროფესიონალური მაგრამ დასამახსოვრებელი! 😊`,
