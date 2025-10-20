@@ -39,6 +39,7 @@ const SEO: React.FC<SEOProps> = ({
   const fullTitle = title ? `${title} | ${siteName}` : siteTitle;
   const metaDescription = description || defaultDescription;
   const currentUrl = url || (typeof window !== 'undefined' ? window.location.href : siteConfig.url);
+  const canonicalUrl = currentUrl.split('?')[0];
   const fullImageUrl = image.startsWith('http') ? image : `${siteConfig.url}${image}`;
 
   // Generate comprehensive structured data
@@ -233,7 +234,7 @@ const SEO: React.FC<SEOProps> = ({
       <meta itemProp="image" content={fullImageUrl} />
 
       {/* Canonical URL */}
-      <link rel="canonical" href={currentUrl} />
+      <link rel="canonical" href={canonicalUrl} />
 
       {/* Alternative languages */}
       <link rel="alternate" hrefLang="ka" href={currentUrl} />
