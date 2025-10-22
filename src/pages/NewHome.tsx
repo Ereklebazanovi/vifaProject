@@ -12,9 +12,9 @@ import SEO from "../components/SEO";
 const newHomeTranslations = {
   ka: {
     "seo.home.title":
-      "Vifa Digital - ციფრული მარკეტინგის სააგენტო საქართველოში | vifadigital.com",
+      "Vifa Digital - ვებ განვითარება და ტექნოლოგიური სოლუშენები საქართველოში | vifadigital.com",
     "seo.home.description":
-      "Vifa Digital - წამყვანი ციფრული მარკეტინგის სააგენტო საქართველოში. ვებ განვითარება, სოციალური მედიის მართვა, ციფრული რეკლამა, SEO ოპტიმიზაცია. vifadigital.com",
+      "Vifa Digital - წამყვანი ვებ განვითარების კომპანია საქართველოში. მოწინავე ვებ ტექნოლოგიები, AI სისტემები და ციფრული პლატფორმები. vifadigital.com",
 
     "newHome.badge": "გააციფრულე შენი ბიზნესი",
     "newHome.hero.title": "შექმენი კომუნიკაციის ხიდი",
@@ -33,14 +33,14 @@ const newHomeTranslations = {
 
     "newHome.services.strategy.title": "სტრატეგია & დაგეგმვა",
     "newHome.services.strategy.description":
-      "პერსონალიზირებული ციფრული მარკეტინგის სტრატეგია, რომელიც მორგებულია თქვენს მიზნებზე და ბიუჯეტზე",
+      "პერსონალიზირებული ტექნოლოგიური სოლუშენების სტრატეგია, რომელიც მორგებულია თქვენს ბიზნეს მიზნებზე და ბიუჯეტზე",
 
     "newHome.services.execution.title": "განხორციელება",
     "newHome.services.execution.description":
       "პროფესიონალური პროდუქტის შექმნა, მუდმივი ოპტიმიზაცია და გამჭირვალე რეპორტინგი შედეგების მისაღწევად",
 
     "newHome.interactive.processTitle": "როგორ მუშაობს",
-    "newHome.interactive.processTitleHighlight": "ციფრული მარკეტინგი?",
+    "newHome.interactive.processTitleHighlight": "ვებ განვითარება?",
 
     "newHome.interactive.step1.title": "1. კვლევა",
     "newHome.interactive.step1.subtitle": "აუდიტორიის გაცნობა",
@@ -145,9 +145,9 @@ const newHomeTranslations = {
   },
   en: {
     "seo.home.title":
-      "Vifa Digital - Digital Marketing Agency in Georgia | vifadigital.com",
+      "Vifa Digital - Web Development & Technology Solutions in Georgia | vifadigital.com",
     "seo.home.description":
-      "Vifa Digital - Leading Digital Marketing Agency in Georgia. Web Development, Social Media Management, Digital Advertising, SEO Optimization. vifadigital.com",
+      "Vifa Digital - Leading Web Development Company in Georgia. Advanced Web Technologies, AI Systems and Digital Platforms. vifadigital.com",
 
     "newHome.badge": "Digitize Your Business",
     "newHome.hero.title": "Build a Communication Bridge",
@@ -166,14 +166,14 @@ const newHomeTranslations = {
 
     "newHome.services.strategy.title": "Strategy & Planning",
     "newHome.services.strategy.description":
-      "Personalized digital marketing strategy tailored to your goals and budget.",
+      "Personalized technology solutions strategy tailored to your business goals and budget."
 
     "newHome.services.execution.title": "Execution",
     "newHome.services.execution.description":
       "Professional product creation, continuous optimization, and transparent reporting to achieve results.",
 
-    "newHome.interactive.processTitle": "How Digital Marketing",
-    "newHome.interactive.processTitleHighlight": "Works?",
+    "newHome.interactive.processTitle": "How Web Development",
+    "newHome.interactive.processTitleHighlight": "Works?"
 
     "newHome.interactive.step1.title": "1. Research",
     "newHome.interactive.step1.subtitle": "Audience Discovery",
@@ -772,7 +772,7 @@ const NewHome: React.FC = () => {
 
               {/* Two-Column Layout */}
               <div className="grid lg:grid-cols-2 gap-12 items-start">
-                {/* Left Side - Process Animation */}
+               
                 <div className="space-y-8">
                   <div className="text-center lg:text-left mb-12">
                     <h3 className="text-2xl md:text-3xl font-light text-white mb-4">

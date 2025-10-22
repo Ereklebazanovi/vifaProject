@@ -318,12 +318,10 @@ const AIChatbot: React.FC = () => {
   ];
 
   const getColorClass = () => {
-    // Simplified to use only subtle blue tones
-    return "border-slate-600 bg-slate-800/30";
+    return "border-slate-600 bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800/70 hover:to-slate-900/70";
   };
 
   const getTextColorClass = () => {
-    // Simplified to use only blue tones
     return "text-blue-400";
   };
 
@@ -437,7 +435,8 @@ const AIChatbot: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: platforms.indexOf(platform) * 0.2 }}
-                  className={`p-4 sm:p-6 lg:p-8 rounded-2xl border-2 ${getColorClass()} border-opacity-30 hover:border-opacity-100 transition-all duration-300 hover:scale-105`}
+                  whileHover={{ y: -10 }}
+                  className={`p-4 sm:p-6 lg:p-8 rounded-3xl border-2 ${getColorClass()} border-opacity-30 hover:border-opacity-100 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20 backdrop-blur-sm`}
                 >
                   <div className={`text-4xl ${getTextColorClass()} mb-4`}>
                     {platform.icon}
@@ -485,7 +484,8 @@ const AIChatbot: React.FC = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
-                className="bg-slate-800/30 rounded-2xl p-4 sm:p-6 lg:p-8 border border-slate-600 h-full"
+                whileHover={{ scale: 1.02 }}
+                className="bg-gradient-to-br from-blue-900/20 to-slate-800/30 rounded-3xl p-4 sm:p-6 lg:p-8 border border-blue-500/30 h-full hover:border-blue-400/60 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10 backdrop-blur-sm"
               >
                 <h3 className="text-2xl font-bold text-white mb-6">
                   <FaRocket className="text-blue-400 mr-3 inline" />
@@ -519,7 +519,8 @@ const AIChatbot: React.FC = () => {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="bg-slate-800/30 rounded-2xl p-4 sm:p-6 lg:p-8 border border-slate-600 h-full"
+                whileHover={{ scale: 1.02 }}
+                className="bg-gradient-to-br from-cyan-900/20 to-slate-800/30 rounded-3xl p-4 sm:p-6 lg:p-8 border border-cyan-500/30 h-full hover:border-cyan-400/60 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/10 backdrop-blur-sm"
               >
                 <h3 className="text-2xl font-bold text-white mb-6">
                   <FaCloud className="text-blue-400 mr-3 inline" />
@@ -574,7 +575,11 @@ const AIChatbot: React.FC = () => {
             </div>
 
             {/* API Cost Examples */}
-            <div className="bg-slate-800/50 rounded-2xl p-8 border border-slate-700/30 mb-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="bg-gradient-to-br from-purple-900/20 via-slate-800/40 to-slate-900/30 rounded-3xl p-8 border border-purple-500/30 mb-8 backdrop-blur-sm hover:border-purple-400/60 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/10">
               <h4 className="text-xl font-bold text-white mb-4 text-center">
                 {t("pricing.examples.title")}
               </h4>
@@ -596,7 +601,7 @@ const AIChatbot: React.FC = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
             {/* Admin Panel Section */}
             <div className="!max-w-6xl mx-auto mb-32">
@@ -612,7 +617,8 @@ const AIChatbot: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8 }}
-                  className="bg-gradient-to-br from-slate-800/50 to-blue-900/20 rounded-2xl p-6 border border-slate-700/30"
+                  whileHover={{ scale: 1.01 }}
+                  className="bg-gradient-to-br from-emerald-900/20 via-slate-800/40 to-blue-900/20 rounded-3xl p-6 border border-emerald-500/30 backdrop-blur-sm hover:border-emerald-400/60 transition-all duration-300 hover:shadow-2xl hover:shadow-emerald-500/10"
                 >
                   {/* cool s */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
@@ -675,7 +681,8 @@ const AIChatbot: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.2 }}
-                  className="bg-slate-800/50 rounded-2xl p-4 sm:p-6 lg:p-8 border border-slate-700/30"
+                  whileHover={{ scale: 1.01, y: -5 }}
+                  className="bg-gradient-to-br from-indigo-900/20 via-slate-800/40 to-slate-900/30 rounded-3xl p-4 sm:p-6 lg:p-8 border border-indigo-500/30 backdrop-blur-sm hover:border-indigo-400/60 transition-all duration-300 hover:shadow-2xl hover:shadow-indigo-500/10"
                 >
                   <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
                     <div className="text-3xl sm:text-4xl lg:text-5xl text-blue-400 flex-shrink-0 mt-1 sm:mt-2">
@@ -721,7 +728,8 @@ const AIChatbot: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-gradient-to-r from-slate-800/50 to-slate-700/30 rounded-xl p-6 border border-slate-600/30 hover:border-blue-400/50 transition-all duration-300"
+                whileHover={{ x: 10, scale: 1.01 }}
+                className="bg-gradient-to-r from-slate-800/50 via-slate-700/40 to-slate-800/30 rounded-2xl p-6 border border-slate-600/30 hover:border-blue-400/60 transition-all duration-300 backdrop-blur-sm hover:shadow-xl hover:shadow-blue-500/10"
               >
                 <h3 className="text-lg font-semibold text-white mb-3 flex items-start gap-2">
                   <span className="text-blue-400 mt-1">•</span>
@@ -755,7 +763,8 @@ const AIChatbot: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="bg-gradient-to-r from-blue-500/10 to-blue-600/10 rounded-2xl p-8 border border-blue-400/20"
+                whileHover={{ scale: 1.02, y: -5 }}
+                className="bg-gradient-to-r from-blue-500/20 via-blue-600/15 to-blue-700/20 rounded-3xl p-8 border border-blue-400/40 backdrop-blur-sm hover:border-blue-300/80 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/20"
               >
                 <h3 className="text-3xl font-bold text-white mb-6">
                   {t("cta.question")}
