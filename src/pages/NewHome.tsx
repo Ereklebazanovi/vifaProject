@@ -166,14 +166,14 @@ const newHomeTranslations = {
 
     "newHome.services.strategy.title": "Strategy & Planning",
     "newHome.services.strategy.description":
-      "Personalized technology solutions strategy tailored to your business goals and budget."
+      "Personalized technology solutions strategy tailored to your business goals and budget.",
 
     "newHome.services.execution.title": "Execution",
     "newHome.services.execution.description":
       "Professional product creation, continuous optimization, and transparent reporting to achieve results.",
 
     "newHome.interactive.processTitle": "How Web Development",
-    "newHome.interactive.processTitleHighlight": "Works?"
+    "newHome.interactive.processTitleHighlight": "Works?",
 
     "newHome.interactive.step1.title": "1. Research",
     "newHome.interactive.step1.subtitle": "Audience Discovery",
