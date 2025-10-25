@@ -22,7 +22,6 @@ import {
   FaServer,
   FaBrain,
   FaBullseye,
-  FaFacebook,
   FaShoppingCart,
 } from "react-icons/fa";
 import {
@@ -337,12 +336,6 @@ const WebDev: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const handleNavigation = (path: string) => {
-    startNavigation();
-    navigate(path);
-    // Very short timeout for fast UX
-    setTimeout(() => stopNavigation(), 300);
-  };
 
   // Main web development services
   const services = [
