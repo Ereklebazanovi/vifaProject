@@ -2,10 +2,9 @@
 
 import type React from "react";
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
-import { useNavigation } from "../contexts/NavigationContext";
 import TrueFocus from "../components/TrueFocus";
 import {
   FaReact,
@@ -320,8 +319,7 @@ const webDevTranslations = {
 const WebDev: React.FC = () => {
   const { currentLanguage } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
-  const { startNavigation, stopNavigation } = useNavigation();
-  const navigate = useNavigate();
+
   const [activeService, setActiveService] = useState<number>(0);
 
   const t = (key: string): string => {
@@ -336,13 +334,7 @@ const WebDev: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleNavigation = (path: string) => {
-    startNavigation();
-    navigate(path);
-    // Very short timeout for fast UX
-    setTimeout(() => stopNavigation(), 300);
-  };
+  
 
   // Main web development services
   const services = [
