@@ -12,7 +12,7 @@ import SEO from "../components/SEO";
 const newHomeTranslations = {
   ka: {
     "seo.home.title":
-      "Vifa Digital - ვებ განვითარება და ტექნოლოგიური სოლუშენები საქართველოში | vifadigital.com",
+      "Vifa Digital - ვებ განვითარება და ტექნოლოგიური მომსახურებები საქართველოში | vifadigital.com",
     "seo.home.description":
       "Vifa Digital - წამყვანი ვებ განვითარების კომპანია საქართველოში. მოწინავე ვებ ტექნოლოგიები, AI სისტემები და ციფრული პლატფორმები. vifadigital.com",
 
@@ -33,7 +33,7 @@ const newHomeTranslations = {
 
     "newHome.services.strategy.title": "სტრატეგია & დაგეგმვა",
     "newHome.services.strategy.description":
-      "პერსონალიზირებული ტექნოლოგიური სოლუშენების სტრატეგია, რომელიც მორგებულია თქვენს ბიზნეს მიზნებზე და ბიუჯეტზე",
+      "პერსონალიზირებული ტექნოლოგიური განვითარების სტრატეგიები, რომელიც მორგებულია თქვენს ბიზნეს მიზნებზე და ბიუჯეტზე",
 
     "newHome.services.execution.title": "განხორციელება",
     "newHome.services.execution.description":
