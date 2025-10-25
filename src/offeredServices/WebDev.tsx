@@ -336,6 +336,13 @@ const WebDev: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleNavigation = (path: string) => {
+    startNavigation();
+    navigate(path);
+    // Very short timeout for fast UX
+    setTimeout(() => stopNavigation(), 300);
+  };
 
   // Main web development services
   const services = [
