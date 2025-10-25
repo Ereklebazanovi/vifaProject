@@ -23,6 +23,7 @@ import {
   FaBrain,
   FaBullseye,
   FaFacebook,
+  FaShoppingCart,
 } from "react-icons/fa";
 import {
   SiFirebase,
@@ -98,23 +99,50 @@ const webDevTranslations = {
     "webdev.pricing.landing.description":
       "კომპაქტური და ეფექტური ვებგვერდი 2-4 გვერდით. იდეალური მცირე ბიზნესისა და პირადი ბრენდის ონლაინ ხილვადობისთვის.",
     "webdev.pricing.landing.price": "500₾-დან",
+    "webdev.pricing.landing.timeline": "3-5 დღე",
+    "webdev.pricing.landing.feature1": "იდეალური ყველა მოწყობილობაზე",
+    "webdev.pricing.landing.feature2": "SEO ოპტიმიზაცია",
+    "webdev.pricing.landing.feature3": "კონტაქტის ფორმა",
+    "webdev.pricing.landing.feature4": "Google ანალიტიკა",
+    "webdev.pricing.landing.feature5": "SSL სერთიფიკატი (დაცული კავშირი)",
+
 
     "webdev.pricing.corporate.title": "პრემიუმ ვებსაიტი",
     "webdev.pricing.corporate.description":
       "სრულფასოვანი ვებგვერდი CMS, SEO ოპტიმიზაცია და ადმინისტრაციული პანელით. კომპანიების ონლაინ ხილვადობის ზრდისთვის.",
     "webdev.pricing.corporate.price": "800₾-დან",
+    "webdev.pricing.corporate.timeline": "7-14 დღე",
+    "webdev.pricing.corporate.feature1": "სრულფასოვანი მართვის სისტემა (CMS)",
+    "webdev.pricing.corporate.feature2": "ადმინ პანელი / მართვის პანელი",
+    "webdev.pricing.corporate.feature3": "მრავალენოვანი მხარდაჭერა",
+    "webdev.pricing.corporate.feature4": "ანალიტიკის / სტატისტიკის დაფა",
+    "webdev.pricing.corporate.feature5": "ავტომატური მონაცემთა დაცვა",
 
     "webdev.pricing.ai.title": "AI ჩატბოტი",
     "webdev.pricing.ai.description":
       "ინტელექტუალური ასისტენტი სოციალურ ქსელებში. 24/7 ავტომატური პასუხები, კლიენტების კმაყოფილება და გაყიდვების ზრდა.",
     "webdev.pricing.ai.price": "300₾-დან",
+    "webdev.pricing.ai.timeline": "7-10 დღე",
+    "webdev.pricing.ai.feature1": "Google Gemini AI",
+    "webdev.pricing.ai.feature2": "3 პლატფორმაზე ინტეგრაცია",
+    "webdev.pricing.ai.feature3": "ქართული ენის მხარდაჭერა",
+    "webdev.pricing.ai.feature4": "რეალურ დროში რედაქტირება",
+    "webdev.pricing.ai.feature5": "დეტალური ანალიტიკა",
 
-    "webdev.pricing.ecommerce.title": "ელ-კომერცია",
+    "webdev.pricing.ecommerce.title": "ონლაინ მაღაზია",
     "webdev.pricing.ecommerce.description":
-      "სრულფასოვანი ონლაინ მაღაზია — გადახდის სისტემა, პროდუქტის მართვა და შეკვეთების კონტროლი.",
+      "სრული ონლაინ მაღაზია — ქართული ბანკებით გადახდა, პროდუქტების მართვა და შეკვეთების კონტროლი.",
     "webdev.pricing.ecommerce.price": "2000₾-დან",
+    "webdev.pricing.ecommerce.timeline": "14-21 დღე",
+    "webdev.pricing.ecommerce.feature1": "ინტეგრირებული ქართული საბანკო გადახდები",
+    "webdev.pricing.ecommerce.feature2": "პროდუქტის სწრაფი დამატება და მართვა",
+    "webdev.pricing.ecommerce.feature3": "შეკვეთების მარტივი კონტროლი / მონიტორინგი",
+    "webdev.pricing.ecommerce.feature4": "მომხმარებელთა რეგისტრაციის მართვა",
+    "webdev.pricing.ecommerce.feature5": "სრულფასოვანი მობილური მხარდაჭერა / Responsive დიზაინი",
 
     "webdev.pricing.consultation": "კონსულტაცია უფასოა",
+    "webdev.pricing.cta": "დაიწყე პროექტი",
+    "webdev.pricing.learn_more": "იხილეთ მეტი",
 
     "webdev.services.label": "რას გთავაზობთ",
 
@@ -211,23 +239,49 @@ const webDevTranslations = {
     "webdev.pricing.landing.description":
       "Compact and effective webpage with 2-4 pages. Perfect for small businesses and personal branding.",
     "webdev.pricing.landing.price": "From 500₾",
+    "webdev.pricing.landing.timeline": "3-5 days",
+    "webdev.pricing.landing.feature1": "Mobile-Responsive Design",
+    "webdev.pricing.landing.feature2": "SEO Optimization",
+    "webdev.pricing.landing.feature3": "Contact Form",
+    "webdev.pricing.landing.feature4": "Google Analytics",
+    "webdev.pricing.landing.feature5": "SSL Certificate",
 
     "webdev.pricing.corporate.title": "Premium Website",
     "webdev.pricing.corporate.description":
       "Full-featured website with CMS, SEO optimization and admin panel. For growing company online presence.",
     "webdev.pricing.corporate.price": "From 800₾",
+    "webdev.pricing.corporate.timeline": "7-14 days",
+    "webdev.pricing.corporate.feature1": "Full CMS System",
+    "webdev.pricing.corporate.feature2": "Admin Panel",
+    "webdev.pricing.corporate.feature3": "Multi-language Support",
+    "webdev.pricing.corporate.feature4": "Analytics Dashboard",
+    "webdev.pricing.corporate.feature5": "Automatic Backups",
 
     "webdev.pricing.ai.title": "AI Chatbot",
     "webdev.pricing.ai.description":
       "Intelligent assistant on social media. 24/7 automatic responses, customer satisfaction and sales growth.",
     "webdev.pricing.ai.price": "From 300₾",
+    "webdev.pricing.ai.timeline": "7-10 days",
+    "webdev.pricing.ai.feature1": "Google Gemini AI",
+    "webdev.pricing.ai.feature2": "3 Platform Integration",
+    "webdev.pricing.ai.feature3": "Georgian Language Support",
+    "webdev.pricing.ai.feature4": "Real-time Editing",
+    "webdev.pricing.ai.feature5": "Detailed Analytics",
 
-    "webdev.pricing.ecommerce.title": "E-commerce Store",
+    "webdev.pricing.ecommerce.title": "Online Store",
     "webdev.pricing.ecommerce.description":
-      "A full-fledged online store — payment system, product management, and order control.",
+      "Complete online store — Georgian bank payments, product management, and order tracking.",
     "webdev.pricing.ecommerce.price": "From 2000₾",
+    "webdev.pricing.ecommerce.timeline": "14-21 days",
+    "webdev.pricing.ecommerce.feature1": "Georgian Bank Support",
+    "webdev.pricing.ecommerce.feature2": "Easy Product Management",
+    "webdev.pricing.ecommerce.feature3": "Order Monitoring",
+    "webdev.pricing.ecommerce.feature4": "Customer Registration",
+    "webdev.pricing.ecommerce.feature5": "Mobile Version",
 
     "webdev.pricing.consultation": "Consultation is Free",
+    "webdev.pricing.cta": "Start Project",
+    "webdev.pricing.learn_more": "Learn More",
 
     "webdev.services.label": "What We Offer",
 
@@ -508,7 +562,7 @@ const WebDev: React.FC = () => {
           className={`container mx-auto px-4 sm:px-6 lg:px-8 language-transition language-fade-in ${getTransitionClasses()}`}
         >
           {/* Hero Section */}
-          <div className="max-w-6xl mx-auto mb-32">
+          <div className="max-w-6xl mx-auto mb-20">
             <div className="text-center mb-16">
               <div className="mb-8 flex justify-center">
                 <div className="w-64 sm:w-72 md:w-80 lg:w-96">
@@ -631,184 +685,6 @@ const WebDev: React.FC = () => {
             </div>
           </div>
 
-          {/* Main Services Highlight */}
-          <div className="mb-32">
-            <div className="text-center mb-16">
-              <h3
-                className="text-4xl font-bold text-white mb-6 tracking-tight"
-                style={{ fontFamily: "Inter, system-ui, sans-serif" }}
-              >
-                {t("webdev.services.title")}
-              </h3>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-6xl mx-auto">
-              {/* Website Development */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="group relative overflow-hidden rounded-2xl backdrop-blur-xl"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-blue-500/10 to-slate-900/30 rounded-2xl" />
-                <div className="absolute inset-0 border border-blue-400/30 group-hover:border-blue-400/60 rounded-2xl transition-colors duration-300" />
-
-                <div className="relative p-8 sm:p-10 flex flex-col h-full">
-                  {/* Icon and Header */}
-                  <div className="mb-8">
-                    <div className="flex items-start justify-between gap-4 mb-6">
-                      <div>
-                        <h4 className="text-2xl sm:text-3xl font-bold text-white mb-2 leading-tight">
-                          {t("webdev.service.website.title")}
-                        </h4>
-                        <div className="text-blue-300 font-medium text-sm sm:text-base">
-                          {t("webdev.service.website.subtitle")}
-                        </div>
-                      </div>
-                      <div className="w-20 h-20 bg-gradient-to-br from-blue-500/30 to-blue-400/10 rounded-2xl flex items-center justify-center group-hover:from-blue-500/40 group-hover:to-blue-400/20 transition-all duration-300 flex-shrink-0 shadow-lg">
-                        <FaCode className="text-blue-300 text-3xl" />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-slate-300 mb-8 leading-relaxed text-sm sm:text-base">
-                    {t("webdev.service.website.description")}
-                  </p>
-
-                  {/* Features */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10 flex-grow">
-                    <div className="flex items-start gap-3 p-3 rounded-lg bg-blue-500/5 border border-blue-400/10 group-hover:bg-blue-500/10 transition-colors">
-                      <FaMobile className="text-blue-300 flex-shrink-0 text-lg mt-1" />
-                      <span className="text-slate-200 text-sm font-medium">
-                        {t("webdev.service.website.feature1")}
-                      </span>
-                    </div>
-                    <div className="flex items-start gap-3 p-3 rounded-lg bg-blue-500/5 border border-blue-400/10 group-hover:bg-blue-500/10 transition-colors">
-                      <FaChartLine className="text-blue-300 flex-shrink-0 text-lg mt-1" />
-                      <span className="text-slate-200 text-sm font-medium">
-                        {t("webdev.service.website.feature2")}
-                      </span>
-                    </div>
-                    <div className="flex items-start gap-3 p-3 rounded-lg bg-blue-500/5 border border-blue-400/10 group-hover:bg-blue-500/10 transition-colors">
-                      <FaBolt className="text-blue-300 flex-shrink-0 text-lg mt-1" />
-                      <span className="text-slate-200 text-sm font-medium">
-                        {t("webdev.service.website.feature3")}
-                      </span>
-                    </div>
-                    <div className="flex items-start gap-3 p-3 rounded-lg bg-blue-500/5 border border-blue-400/10 group-hover:bg-blue-500/10 transition-colors">
-                      <FaCog className="text-blue-300 flex-shrink-0 text-lg mt-1" />
-                      <span className="text-slate-200 text-sm font-medium">
-                        {t("webdev.service.website.feature4")}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Footer */}
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-6 border-t border-slate-700/50">
-                    <div className="text-center sm:text-left">
-                      <span className="text-xs sm:text-sm text-slate-400">
-                        {t("webdev.service.website.price")}
-                      </span>
-                      <div className="text-lg sm:text-xl font-bold text-blue-300">
-                        {t("webdev.pricing.landing.price")}
-                      </div>
-                    </div>
-                    <Link
-                      to="/start-project"
-                      className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-3 rounded-lg transition-all duration-300 font-semibold text-sm sm:text-base group/btn shadow-lg hover:shadow-xl transform hover:scale-105 w-full sm:w-auto"
-                    >
-                      <span>{t("webdev.service.website.cta")}</span>
-                      <FaArrowRight className="text-xs group-hover/btn:translate-x-1 transition-transform" />
-                    </Link>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* AI Chatbot */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="group relative overflow-hidden rounded-2xl backdrop-blur-xl"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-600/20 via-cyan-500/10 to-slate-900/30 rounded-2xl" />
-                <div className="absolute inset-0 border border-cyan-400/30 group-hover:border-cyan-400/60 rounded-2xl transition-colors duration-300" />
-
-                <div className="relative p-8 sm:p-10 flex flex-col h-full">
-                  {/* Icon and Header */}
-                  <div className="mb-8">
-                    <div className="flex items-start justify-between gap-4 mb-6">
-                      <div>
-                        <h4 className="text-2xl sm:text-3xl font-bold text-white mb-2 leading-tight">
-                          {t("webdev.service.ai.title")}
-                        </h4>
-                        <div className="text-cyan-300 font-medium text-sm sm:text-base">
-                          {t("webdev.service.ai.subtitle")}
-                        </div>
-                      </div>
-                      <div className="w-20 h-20 bg-gradient-to-br from-cyan-500/30 to-cyan-400/10 rounded-2xl flex items-center justify-center group-hover:from-cyan-500/40 group-hover:to-cyan-400/20 transition-all duration-300 flex-shrink-0 shadow-lg">
-                        <FaBrain className="text-cyan-300 text-3xl" />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-slate-300 mb-8 leading-relaxed text-sm sm:text-base">
-                    {t("webdev.service.ai.description")}
-                  </p>
-
-                  {/* Features */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10 flex-grow">
-                    <div className="flex items-start gap-3 p-3 rounded-lg bg-cyan-500/5 border border-cyan-400/10 group-hover:bg-cyan-500/10 transition-colors">
-                      <FaRocket className="text-cyan-300 flex-shrink-0 text-lg mt-1" />
-                      <span className="text-slate-200 text-sm font-medium">
-                        {t("webdev.service.ai.feature1")}
-                      </span>
-                    </div>
-                    <div className="flex items-start gap-3 p-3 rounded-lg bg-cyan-500/5 border border-cyan-400/10 group-hover:bg-cyan-500/10 transition-colors">
-                      <FaBullseye className="text-cyan-300 flex-shrink-0 text-lg mt-1" />
-                      <span className="text-slate-200 text-sm font-medium">
-                        {t("webdev.service.ai.feature2")}
-                      </span>
-                    </div>
-                    <div className="flex items-start gap-3 p-3 rounded-lg bg-cyan-500/5 border border-cyan-400/10 group-hover:bg-cyan-500/10 transition-colors">
-                      <FaDatabase className="text-cyan-300 flex-shrink-0 text-lg mt-1" />
-                      <span className="text-slate-200 text-sm font-medium">
-                        {t("webdev.service.ai.feature3")}
-                      </span>
-                    </div>
-                    <div className="flex items-start gap-3 p-3 rounded-lg bg-cyan-500/5 border border-cyan-400/10 group-hover:bg-cyan-500/10 transition-colors">
-                      <FaFacebook className="text-cyan-300 flex-shrink-0 text-lg mt-1" />
-                      <span className="text-slate-200 text-sm font-medium">
-                        {t("webdev.service.ai.feature4")}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Footer */}
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-6 border-t border-slate-700/50">
-                    <div className="text-center sm:text-left">
-                      <span className="text-xs sm:text-sm text-slate-400">
-                        {t("webdev.service.ai.price")}
-                      </span>
-                      <div className="text-lg sm:text-xl font-bold text-cyan-300">
-                        {t("webdev.service.ai.priceValue")}
-                      </div>
-                    </div>
-                    <button
-                      onClick={() => handleNavigation("/services/ai-chatbot")}
-                      className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 text-white px-6 py-3 rounded-lg transition-all duration-300 font-semibold text-sm sm:text-base group/btn shadow-lg hover:shadow-xl transform hover:scale-105 w-full sm:w-auto"
-                    >
-                      <span>{t("webdev.service.ai.cta")}</span>
-                      <FaArrowRight className="text-xs group-hover/btn:translate-x-1 transition-transform" />
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-
           {/* Pricing Approach Section */}
           <div className="mb-20">
             <div className="text-center mb-12">
@@ -865,99 +741,255 @@ const WebDev: React.FC = () => {
               </div>
             </div>
 
-            {/* Price Ranges */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 !max-w-7xl mx-auto">
-              {/* Landing Pages */}
-              <div className="group relative overflow-hidden rounded-xl backdrop-blur-sm hover:shadow-xl transition-all duration-300">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/15 via-blue-500/5 to-slate-900/10 rounded-xl" />
-                <div className="absolute inset-0 border border-blue-400/30 group-hover:border-blue-400/50 rounded-xl transition-colors duration-300" />
+            {/* Enhanced Price Ranges */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 !max-w-7xl mx-auto">
+              {/* Landing Pages - Enhanced */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="group relative overflow-hidden rounded-2xl backdrop-blur-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02]"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-blue-500/10 to-slate-900/20 rounded-2xl" />
+                <div className="absolute inset-0 border border-blue-400/40 group-hover:border-blue-400/70 rounded-2xl transition-colors duration-300" />
+                <div className="absolute -top-2 -right-2 w-24 h-24 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 <div className="relative p-6 flex flex-col h-full">
-                  <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-500/30 transition-colors">
-                    <FaRocket className="text-blue-300 text-xl" />
+                  {/* Enhanced Header */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500/30 to-blue-600/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                      <FaRocket className="text-blue-300 text-2xl" />
+                    </div>
+                    <div className="text-right">
+                      <div className="text-2xl font-black text-blue-300 font-['Inter','system-ui',sans-serif]">
+                        {t("webdev.pricing.landing.price")}
+                      </div>
+                    </div>
                   </div>
-                  <h4 className="text-lg font-semibold text-white mb-2">
+
+                  <h4 className="text-2xl font-bold text-white mb-3 font-['Inter','Noto_Sans_Georgian',sans-serif]">
                     {t("webdev.pricing.landing.title")}
                   </h4>
-                  <p className="text-slate-400 text-sm mb-6 leading-relaxed flex-grow">
+
+                  <p className="text-slate-300 text-sm mb-6 leading-relaxed font-['Inter','Noto_Sans_Georgian',sans-serif]">
                     {t("webdev.pricing.landing.description")}
                   </p>
-                  <div className="pt-4 border-t border-slate-700/40">
-                    <div className="text-2xl font-bold text-blue-300">
-                      {t("webdev.pricing.landing.price")}
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-              {/* Corporate Websites */}
-              <div className="group relative overflow-hidden rounded-xl backdrop-blur-sm hover:shadow-xl transition-all duration-300">
-                <div className="absolute inset-0 bg-gradient-to-br from-green-600/15 via-emerald-500/5 to-slate-900/10 rounded-xl" />
-                <div className="absolute inset-0 border border-green-400/30 group-hover:border-green-400/50 rounded-xl transition-colors duration-300" />
+                  {/* Feature List */}
+                  <div className="space-y-3 mb-6 flex-grow">
+                    {[1, 2, 3, 4, 5].map((num) => (
+                      <div
+                        key={num}
+                        className="flex items-center gap-3 group/item"
+                      >
+                        <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full group-hover/item:scale-150 transition-transform duration-200" />
+                        <span className="text-slate-300 text-sm font-['Inter','Noto_Sans_Georgian',sans-serif] group-hover/item:text-blue-200 transition-colors">
+                          {t(`webdev.pricing.landing.feature${num}`)}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Enhanced CTA */}
+                  <Link to="/start-project" className="block mt-auto">
+                    <div className="relative group/btn">
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 to-cyan-500/30 rounded-xl blur opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
+                      <div className="relative flex items-center justify-center p-4 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-xl border border-blue-400/30 group-hover/btn:border-blue-300/60 group-hover/btn:from-blue-500/30 group-hover/btn:to-cyan-500/30 transition-all duration-300 cursor-pointer">
+                        <span className="text-blue-300 font-bold text-sm group-hover/btn:text-white transition-colors font-['Inter',sans-serif]">
+                          {t("webdev.pricing.cta")}
+                        </span>
+                        <FaArrowRight className="text-blue-300 text-sm ml-2 group-hover/btn:text-white group-hover/btn:translate-x-1 transition-all duration-300" />
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              </motion.div>
+
+              {/* Corporate Websites - Enhanced */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="group relative overflow-hidden rounded-2xl backdrop-blur-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02]"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-green-600/20 via-emerald-500/10 to-slate-900/20 rounded-2xl" />
+                <div className="absolute inset-0 border border-green-400/40 group-hover:border-green-400/70 rounded-2xl transition-colors duration-300" />
+                <div className="absolute -top-2 -right-2 w-24 h-24 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 <div className="relative p-6 flex flex-col h-full">
-                  <div className="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-green-500/30 transition-colors">
-                    <FaCode className="text-green-300 text-xl" />
+                  {/* Enhanced Header */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-green-500/30 to-emerald-600/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                      <FaCode className="text-green-300 text-2xl" />
+                    </div>
+                    <div className="text-right">
+                      <div className="text-2xl font-black text-green-300 font-['Inter','system-ui',sans-serif]">
+                        {t("webdev.pricing.corporate.price")}
+                      </div>
+                    </div>
                   </div>
-                  <h4 className="text-lg font-semibold text-white mb-2">
+
+                  <h4 className="text-2xl font-bold text-white mb-3 font-['Inter','Noto_Sans_Georgian',sans-serif]">
                     {t("webdev.pricing.corporate.title")}
                   </h4>
-                  <p className="text-slate-400 text-sm mb-6 leading-relaxed flex-grow">
+
+                  <p className="text-slate-300 text-sm mb-6 leading-relaxed font-['Inter','Noto_Sans_Georgian',sans-serif]">
                     {t("webdev.pricing.corporate.description")}
                   </p>
-                  <div className="pt-4 border-t border-slate-700/40">
-                    <div className="text-2xl font-bold text-green-300">
-                      {t("webdev.pricing.corporate.price")}
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-              {/* AI Chatbots */}
-              <div className="group relative overflow-hidden rounded-xl backdrop-blur-sm hover:shadow-xl transition-all duration-300">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/15 via-pink-500/5 to-slate-900/10 rounded-xl" />
-                <div className="absolute inset-0 border border-purple-400/30 group-hover:border-purple-400/50 rounded-xl transition-colors duration-300" />
+                  {/* Feature List */}
+                  <div className="space-y-3 mb-6 flex-grow">
+                    {[1, 2, 3, 4, 5].map((num) => (
+                      <div
+                        key={num}
+                        className="flex items-center gap-3 group/item"
+                      >
+                        <div className="w-2 h-2 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full group-hover/item:scale-150 transition-transform duration-200" />
+                        <span className="text-slate-300 text-sm font-['Inter','Noto_Sans_Georgian',sans-serif] group-hover/item:text-green-200 transition-colors">
+                          {t(`webdev.pricing.corporate.feature${num}`)}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Enhanced CTA */}
+                  <Link to="/start-project" className="block mt-auto">
+                    <div className="relative group/btn">
+                      <div className="absolute inset-0 bg-gradient-to-r from-green-500/30 to-emerald-500/30 rounded-xl blur opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
+                      <div className="relative flex items-center justify-center p-4 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-xl border border-green-400/30 group-hover/btn:border-green-300/60 group-hover/btn:from-green-500/30 group-hover/btn:to-emerald-500/30 transition-all duration-300 cursor-pointer">
+                        <span className="text-green-300 font-bold text-sm group-hover/btn:text-white transition-colors font-['Inter',sans-serif]">
+                          {t("webdev.pricing.cta")}
+                        </span>
+                        <FaArrowRight className="text-green-300 text-sm ml-2 group-hover/btn:text-white group-hover/btn:translate-x-1 transition-all duration-300" />
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              </motion.div>
+
+              {/* AI Chatbots - Enhanced */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="group relative overflow-hidden rounded-2xl backdrop-blur-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02]"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-pink-500/10 to-slate-900/20 rounded-2xl" />
+                <div className="absolute inset-0 border border-purple-400/40 group-hover:border-purple-400/70 rounded-2xl transition-colors duration-300" />
+                <div className="absolute -top-2 -right-2 w-24 h-24 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 <div className="relative p-6 flex flex-col h-full">
-                  <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-purple-500/30 transition-colors">
-                    <FaBrain className="text-purple-300 text-xl" />
+                  {/* Enhanced Header */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-purple-500/30 to-pink-600/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                      <FaBrain className="text-purple-300 text-2xl" />
+                    </div>
+                    <div className="text-right">
+                      <div className="text-2xl font-black text-purple-300 font-['Inter','system-ui',sans-serif]">
+                        {t("webdev.pricing.ai.price")}
+                      </div>
+                    </div>
                   </div>
-                  <h4 className="text-lg font-semibold text-white mb-2">
+
+                  <h4 className="text-2xl font-bold text-white mb-3 font-['Inter','Noto_Sans_Georgian',sans-serif]">
                     {t("webdev.pricing.ai.title")}
                   </h4>
-                  <p className="text-slate-400 text-sm mb-6 leading-relaxed flex-grow">
+
+                  <p className="text-slate-300 text-sm mb-6 leading-relaxed font-['Inter','Noto_Sans_Georgian',sans-serif]">
                     {t("webdev.pricing.ai.description")}
                   </p>
-                  <div className="pt-4 border-t border-slate-700/40">
-                    <div className="text-2xl font-bold text-purple-300">
-                      {t("webdev.pricing.ai.price")}
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-              {/* E-commerce Store */}
-              <div className="group relative overflow-hidden rounded-xl backdrop-blur-sm hover:shadow-xl transition-all duration-300">
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-600/15 via-amber-500/5 to-slate-900/10 rounded-xl" />
-                <div className="absolute inset-0 border border-orange-400/30 group-hover:border-orange-400/50 rounded-xl transition-colors duration-300" />
+                  {/* Feature List */}
+                  <div className="space-y-3 mb-6 flex-grow">
+                    {[1, 2, 3, 4, 5].map((num) => (
+                      <div
+                        key={num}
+                        className="flex items-center gap-3 group/item"
+                      >
+                        <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full group-hover/item:scale-150 transition-transform duration-200" />
+                        <span className="text-slate-300 text-sm font-['Inter','Noto_Sans_Georgian',sans-serif] group-hover/item:text-purple-200 transition-colors">
+                          {t(`webdev.pricing.ai.feature${num}`)}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Enhanced CTA */}
+                  <Link to="/services/ai-chatbot" className="block mt-auto">
+                    <div className="relative group/btn">
+                      <div className="absolute inset-0 bg-gradient-to-r from-purple-500/30 to-pink-500/30 rounded-xl blur opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
+                      <div className="relative flex items-center justify-center p-4 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-xl border border-purple-400/30 group-hover/btn:border-purple-300/60 group-hover/btn:from-purple-500/30 group-hover/btn:to-pink-500/30 transition-all duration-300 cursor-pointer">
+                        <span className="text-purple-300 font-bold text-sm group-hover/btn:text-white transition-colors font-['Inter',sans-serif]">
+                          {t("webdev.pricing.learn_more")}
+                        </span>
+                        <FaArrowRight className="text-purple-300 text-sm ml-2 group-hover/btn:text-white group-hover/btn:translate-x-1 transition-all duration-300" />
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              </motion.div>
+
+              {/* E-commerce Store - Enhanced */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="group relative overflow-hidden rounded-2xl backdrop-blur-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02]"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-600/20 via-amber-500/10 to-slate-900/20 rounded-2xl" />
+                <div className="absolute inset-0 border border-orange-400/40 group-hover:border-orange-400/70 rounded-2xl transition-colors duration-300" />
+                <div className="absolute -top-2 -right-2 w-24 h-24 bg-gradient-to-br from-orange-500/20 to-amber-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 <div className="relative p-6 flex flex-col h-full">
-                  <div className="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-orange-500/30 transition-colors">
-                    <FaRocket className="text-orange-300 text-xl" />
-                  </div>
-                  <h4 className="text-lg font-semibold text-white mb-2">
-                    {t("webdev.pricing.ecommerce.title")}
-                  </h4>
-                  <p className="text-slate-400 text-sm mb-6 leading-relaxed flex-grow">
-                    {t("webdev.pricing.ecommerce.description")}
-                  </p>
-                  <div className="pt-4 border-t border-slate-700/40">
-                    <div className="text-2xl font-bold text-orange-300">
-                      {t("webdev.pricing.ecommerce.price")}
+                  {/* Enhanced Header */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-orange-500/30 to-amber-600/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                      <FaShoppingCart className="text-orange-300 text-2xl" />
+                    </div>
+                    <div className="text-right">
+                      <div className="text-2xl font-black text-orange-300 font-['Inter','system-ui',sans-serif]">
+                        {t("webdev.pricing.ecommerce.price")}
+                      </div>
                     </div>
                   </div>
+
+                  <h4 className="text-2xl font-bold text-white mb-3 font-['Inter','Noto_Sans_Georgian',sans-serif]">
+                    {t("webdev.pricing.ecommerce.title")}
+                  </h4>
+
+                  <p className="text-slate-300 text-sm mb-6 leading-relaxed font-['Inter','Noto_Sans_Georgian',sans-serif]">
+                    {t("webdev.pricing.ecommerce.description")}
+                  </p>
+
+                  {/* Feature List */}
+                  <div className="space-y-3 mb-6 flex-grow">
+                    {[1, 2, 3, 4, 5].map((num) => (
+                      <div
+                        key={num}
+                        className="flex items-center gap-3 group/item"
+                      >
+                        <div className="w-2 h-2 bg-gradient-to-r from-orange-400 to-amber-400 rounded-full group-hover/item:scale-150 transition-transform duration-200" />
+                        <span className="text-slate-300 text-sm font-['Inter','Noto_Sans_Georgian',sans-serif] group-hover/item:text-orange-200 transition-colors">
+                          {t(`webdev.pricing.ecommerce.feature${num}`)}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Enhanced CTA */}
+                  <Link to="/start-project" className="block mt-auto">
+                    <div className="relative group/btn">
+                      <div className="absolute inset-0 bg-gradient-to-r from-orange-500/30 to-amber-500/30 rounded-xl blur opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
+                      <div className="relative flex items-center justify-center p-4 bg-gradient-to-r from-orange-500/20 to-amber-500/20 rounded-xl border border-orange-400/30 group-hover/btn:border-orange-300/60 group-hover/btn:from-orange-500/30 group-hover/btn:to-amber-500/30 transition-all duration-300 cursor-pointer">
+                        <span className="text-orange-300 font-bold text-sm group-hover/btn:text-white transition-colors font-['Inter',sans-serif]">
+                          {t("webdev.pricing.cta")}
+                        </span>
+                        <FaArrowRight className="text-orange-300 text-sm ml-2 group-hover/btn:text-white group-hover/btn:translate-x-1 transition-all duration-300" />
+                      </div>
+                    </div>
+                  </Link>
                 </div>
-              </div>
+              </motion.div>
             </div>
 
             <div className="text-center mt-15">
