@@ -20,7 +20,7 @@ const StartProject = lazy(() => import("./service/StartProject"));
 const AdminDashboard = lazy(() => import("./admin/AdminDashboard"));
 const Marketing = lazy(() => import("./offeredServices/Marketing"));
 const WebDev = lazy(() => import("./offeredServices/WebDev"));
-const AiChatbot = lazy(() => import("./pages/AiChatbot"));
+const AIChatbot = lazy(() => import("./pages/AiChatbot"));
 const BlogPage = lazy(() => import("./pages/BlogPage"));
 const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
@@ -157,7 +157,7 @@ const AppWithRouter: React.FC = () => {
               <Route index element={<Home />} />
               <Route path="services/digital-advertising" element={<Marketing />} />
               <Route path="services/web-development" element={<WebDev />} />
-              <Route path="services/ai-chatbot" element={<AiChatbot />} />
+              <Route path="services/ai-chatbot" element={<AIChatbot />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="contact" element={<Contact />} />
               <Route path="blog" element={<BlogPage />} />
