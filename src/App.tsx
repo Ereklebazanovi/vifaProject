@@ -84,7 +84,7 @@ const LoadingSpinner = () => (
         <div className="relative">
           {/* Outer glow ring */}
           <div className="w-20 h-20 border border-gray-800/20 rounded-full shadow-2xl"></div>
-
+{/*  */}
           {/* Secondary ring with subtle glow */}
           <div className="absolute top-1 left-1 w-18 h-18 border border-gray-700/30 rounded-full"></div>
 
