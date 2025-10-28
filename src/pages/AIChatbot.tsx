@@ -273,7 +273,7 @@ const aiChatbotTranslations = {
 };
 
 
-const AiChatbot: React.FC = () => {
+const AIChatbot: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
   const { stopNavigation } = useNavigation();
   const { currentLanguage } = useLanguage();
@@ -788,4 +788,4 @@ const AiChatbot: React.FC = () => {
   );
 };
 
-export default AiChatbot;
+export default AIChatbot;
