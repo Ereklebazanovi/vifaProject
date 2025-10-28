@@ -101,12 +101,12 @@ const BlogPostPage: React.FC = () => {
         <meta property="og:type" content="article" />
         <meta property="og:title" content={post.seo?.title || post.title} />
         <meta property="og:description" content={post.seo?.description || excerpt} />
-        <meta property="og:image" content={`https://vifadigital.com${post.seo?.ogImage || post.thumbnail || '/images/blog/default-og.jpg'}`} />
-        <meta property="og:image:secure_url" content={`https://vifadigital.com${post.seo?.ogImage || post.thumbnail || '/images/blog/default-og.jpg'}`} />
+        <meta property="og:image" content={`https://www.vifadigital.ge${post.seo?.ogImage || post.thumbnail || '/images/blog/default-og.jpg'}`} />
+        <meta property="og:image:secure_url" content={`https://www.vifadigital.ge${post.seo?.ogImage || post.thumbnail || '/images/blog/default-og.jpg'}`} />
         <meta property="og:image:type" content="image/jpeg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:url" content={`https://vifadigital.com/blog/${post.slug}`} />
+        <meta property="og:url" content={`https://www.vifadigital.ge/blog/${post.slug}`} />
         <meta property="article:published_time" content={post.publishedAt} />
         {post.updatedAt && <meta property="article:modified_time" content={post.updatedAt} />}
         <meta property="article:author" content={post.author.name} />
@@ -118,10 +118,10 @@ const BlogPostPage: React.FC = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={post.seo?.title || post.title} />
         <meta name="twitter:description" content={post.seo?.description || excerpt} />
-        <meta name="twitter:image" content={`https://vifadigital.com${post.seo?.ogImage || post.thumbnail || '/images/blog/default-og.jpg'}`} />
+        <meta name="twitter:image" content={`https://www.vifadigital.ge${post.seo?.ogImage || post.thumbnail || '/images/blog/default-og.jpg'}`} />
 
         {/* Additional SEO */}
-        <link rel="canonical" href={`https://vifadigital.com/blog/${post.slug}`} />
+        <link rel="canonical" href={`https://www.vifadigital.ge/blog/${post.slug}`} />
         <meta name="robots" content="index, follow" />
       </Helmet>
 

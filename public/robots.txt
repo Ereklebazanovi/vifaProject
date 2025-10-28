@@ -12,4 +12,4 @@ Allow: /*.css$
 Allow: /*.js$
 
 # Sitemap location
-Sitemap: https://vifadigital.ge/sitemap.xml
+Sitemap: https://www.vifadigital.ge/sitemap.xml

@@ -39,7 +39,15 @@ const SEO: React.FC<SEOProps> = ({
   const fullTitle = title ? `${title} | ${siteName}` : siteTitle;
   const metaDescription = description || defaultDescription;
   const currentUrl = url || (typeof window !== 'undefined' ? window.location.href : siteConfig.url);
-  const canonicalUrl = currentUrl.split('?')[0];
+
+  // Clean canonical URL: remove query parameters and ensure proper domain
+  let canonicalUrl = currentUrl.split('?')[0].split('#')[0];
+
+  // Ensure canonical URL uses www.vifadigital.ge consistently
+  if (canonicalUrl.includes('vifadigital.ge')) {
+    canonicalUrl = canonicalUrl.replace(/https?:\/\/(www\.)?vifadigital\.ge/, 'https://www.vifadigital.ge');
+  }
+
   const fullImageUrl = image.startsWith('http') ? image : `${siteConfig.url}${image}`;
 
   // Generate comprehensive structured data
@@ -237,9 +245,9 @@ const SEO: React.FC<SEOProps> = ({
       <link rel="canonical" href={canonicalUrl} />
 
       {/* Alternative languages */}
-      <link rel="alternate" hrefLang="ka" href={currentUrl} />
-      <link rel="alternate" hrefLang="en" href={`${currentUrl}${currentUrl.includes('?') ? '&' : '?'}lang=en`} />
-      <link rel="alternate" hrefLang="x-default" href={currentUrl} />
+      <link rel="alternate" hrefLang="ka" href={canonicalUrl} />
+      <link rel="alternate" hrefLang="en" href={`${canonicalUrl}?lang=en`} />
+      <link rel="alternate" hrefLang="x-default" href={canonicalUrl} />
 
       {/* Preconnect for performance */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
