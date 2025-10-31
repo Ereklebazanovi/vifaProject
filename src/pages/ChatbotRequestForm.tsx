@@ -11,8 +11,6 @@ import {
   FaArrowRight,
   FaArrowLeft,
   FaSpinner,
-  FaPlus,
-  FaTimes,
 } from "react-icons/fa";
 import { submitChatbotRequest } from "../service/chatbotRequestService";
 import type { ChatbotRequestFormData } from "../types/chatbotRequest";
@@ -66,6 +64,8 @@ const ChatbotRequestForm: React.FC = () => {
       customPrompts: "",
     },
     faqs: [{ question: "", answer: "" }],
+    popularTopics: [],
+    additionalInfo: "",
   });
 
   // Validation for each step
@@ -145,32 +145,6 @@ const ChatbotRequestForm: React.FC = () => {
   };
 
   // FAQ Management
-  const addFAQ = () => {
-    setFormData((prev) => ({
-      ...prev,
-      faqs: [...prev.faqs, { question: "", answer: "" }],
-    }));
-  };
-
-  const removeFAQ = (index: number) => {
-    setFormData((prev) => ({
-      ...prev,
-      faqs: prev.faqs.filter((_, i) => i !== index),
-    }));
-  };
-
-  const updateFAQ = (
-    index: number,
-    field: "question" | "answer",
-    value: string
-  ) => {
-    setFormData((prev) => ({
-      ...prev,
-      faqs: prev.faqs.map((faq, i) =>
-        i === index ? { ...faq, [field]: value } : faq
-      ),
-    }));
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 pt-20 pb-16">
@@ -964,74 +938,115 @@ const ChatbotRequestForm: React.FC = () => {
 
           {/* Step 4: FAQ */}
           {currentStep === 4 && (
-            <div className="space-y-6">
+            <div className="space-y-8">
               <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold text-gray-900 mb-2">
-                  ხშირად დასმული კითხვები
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                  🤝 დაგვეხმარე ჩატბოტის გაუმჯობესებაში
                 </h2>
-                <p className="text-gray-600">
-                  ჩატბოტისთვის მიუთითეთ დაახლოებით 5–10 ყველაზე ხშირად დასმული კითხვა და მათი სავარაუდო პასუხები
-                </p>
-                <br />
-                <p className="text-gray-600">
-                  FAQ-ის დამატება და სრული მართვა შესაძლებელი იქნება ჩატბოტის
-                  დამზადების შემდეგაც.
+                <p className="text-gray-600 text-lg leading-relaxed">
+                  ეს ნაბიჯი სრულიად არაა სავალდებულო. შენი დახმარებით ჩატბოტი უკეთ გაიგებს მომხმარებლების საჭიროებებს.
                 </p>
               </div>
 
-              <div className="space-y-4">
-                {formData.faqs.map((faq, index) => (
-                  <div
-                    key={index}
-                    className="p-6 border-2 border-gray-200 rounded-xl"
-                  >
-                    <div className="flex justify-between items-center mb-4">
-                      <span className="text-sm font-semibold text-gray-700">
-                        FAQ #{index + 1}
-                      </span>
-                      {formData.faqs.length > 1 && (
-                        <button
-                          type="button"
-                          onClick={() => removeFAQ(index)}
-                          className="text-red-500 hover:text-red-700 p-1 rounded-full hover:bg-red-50 transition-all"
+              {/* Popular Question Tags */}
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-2xl border border-blue-100">
+                <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                  🏷️ ყველაზე ხშირი კითხვები
+                </h3>
+                <p className="text-gray-600 mb-4 text-sm">
+                  აირჩიე შენი ბიზნესისთვის რელევანტური თემები:
+                </p>
+
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                  {[
+                    'სამუშაო საათები', 'მიწოდების ვადები', 'ფასები და ღირებულება', 'მომსახურების ვარიანტები',
+                    'ადგილმდებარეობა', 'კონტაქტი', 'ონლაინ შეკვეთა', 'გარანტია',
+                    'დაბრუნების პოლიტიკა', 'საფუძველი', 'ღია დღეები', 'ვებსაიტი'
+                  ].map((tag) => {
+                    const isSelected = formData.popularTopics?.includes(tag) || false;
+                    return (
+                      <button
+                        key={tag}
+                        type="button"
+                        onClick={() => {
+                          const currentTopics = formData.popularTopics || [];
+                          const newTopics = isSelected
+                            ? currentTopics.filter(t => t !== tag)
+                            : [...currentTopics, tag];
+
+                          setFormData(prev => ({ ...prev, popularTopics: newTopics }));
+                        }}
+                        className={`p-3 rounded-lg text-sm font-medium transition-all duration-200 border-2 ${
+                          isSelected
+                            ? 'bg-blue-500 text-white border-blue-500 shadow-md transform scale-105'
+                            : 'bg-white text-gray-700 border-gray-200 hover:border-blue-300 hover:shadow-sm'
+                        }`}
+                      >
+                        {tag}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Selected topics display */}
+                {(formData.popularTopics?.length || 0) > 0 && (
+                  <div className="mt-4 p-3 bg-white rounded-lg border border-blue-200">
+                    <p className="text-sm text-gray-600 mb-2">არჩეული თემები:</p>
+                    <div className="flex flex-wrap gap-2">
+                      {formData.popularTopics?.map(topic => (
+                        <span
+                          key={topic}
+                          className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full"
                         >
-                          <FaTimes />
-                        </button>
-                      )}
-                    </div>
-
-                    <div className="space-y-4">
-                      <input
-                        type="text"
-                        value={faq.question}
-                        onChange={(e) =>
-                          updateFAQ(index, "question", e.target.value)
-                        }
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:outline-none transition-all"
-                        placeholder="კითხვა: მაგ. რა არის მიწოდების დრო?"
-                      />
-
-                      <textarea
-                        value={faq.answer}
-                        onChange={(e) =>
-                          updateFAQ(index, "answer", e.target.value)
-                        }
-                        rows={3}
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:outline-none transition-all resize-none"
-                        placeholder="პასუხი: მაგ. მიწოდების დრო არის 2-3 სამუშაო დღე თბილისში."
-                      />
+                          {topic}
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const newTopics = formData.popularTopics?.filter(t => t !== topic) || [];
+                              setFormData(prev => ({ ...prev, popularTopics: newTopics }));
+                            }}
+                            className="ml-1 hover:bg-blue-200 rounded-full p-0.5"
+                          >
+                            <svg className="w-2 h-2" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                            </svg>
+                          </button>
+                        </span>
+                      ))}
                     </div>
                   </div>
-                ))}
+                )}
+              </div>
 
-                <button
-                  type="button"
-                  onClick={addFAQ}
-                  className="w-full py-4 border-2 border-dashed border-gray-300 hover:border-blue-400 rounded-xl text-gray-600 hover:text-blue-600 transition-all flex items-center justify-center gap-2 group"
-                >
-                  <FaPlus className="group-hover:scale-110 transition-transform" />
-                  <span>დაამატე FAQ</span>
-                </button>
+              {/* Optional Custom Text Field */}
+              <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-2xl border border-green-100">
+                <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                  💬 რამე სხვა?
+                </h3>
+                <p className="text-gray-600 mb-4 text-sm">
+                  თუ გაქვს სპეციალური კითხვები ან თემები, ჩაწერე აქ:
+                </p>
+
+                <textarea
+                  value={formData.additionalInfo || ''}
+                  onChange={(e) => setFormData(prev => ({ ...prev, additionalInfo: e.target.value }))}
+                  rows={4}
+                  className="w-full px-4 py-3 border-2 border-green-200 rounded-xl text-gray-900 placeholder-gray-500 focus:border-green-500 focus:ring-4 focus:ring-green-500/10 focus:outline-none transition-all resize-none bg-white"
+                  placeholder="მაგ: როგორ შეგვიძლია ონლაინ შეკვეთის განთავსება? რა არის ჩვენი ახალი პროდუქტების შესახებ ინფორმაცია?"
+                />
+              </div>
+
+              {/* Skip Notice */}
+              <div className="text-center bg-gray-50 p-6 rounded-2xl border border-gray-200">
+                <div className="flex items-center justify-center gap-2 mb-3">
+                  <span className="text-2xl">⏭️</span>
+                  <h3 className="text-lg font-semibold text-gray-700">მსურს გამოვტოვო</h3>
+                </div>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  არაა პრობლემა! ჩატბოტის დამზადების შემდეგ ყველაფერს ადვილად შეძლებ დამატებას და რედაქტირებას.
+                  <br />
+                  <span className="font-medium text-gray-700">შემდეგზე ღილაკზე დაჭერით ფორმის გაგზავნა შეძლებ.</span>
+                </p>
               </div>
             </div>
           )}

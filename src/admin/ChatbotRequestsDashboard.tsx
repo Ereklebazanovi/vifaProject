@@ -557,6 +557,43 @@ const ChatbotRequestsDashboard: React.FC = () => {
 
                 {/* Right Column */}
                 <div className="space-y-6">
+                  {/* Popular Topics */}
+                  {selectedRequest.popularTopics && selectedRequest.popularTopics.length > 0 && (
+                    <div>
+                      <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                        <FaFileAlt className="text-blue-400" />
+                        🏷️ არჩეული თემები
+                      </h3>
+                      <div className="bg-slate-800/50 p-4 rounded-lg">
+                        <div className="flex flex-wrap gap-2">
+                          {selectedRequest.popularTopics.map((topic, index) => (
+                            <span
+                              key={index}
+                              className="inline-block px-3 py-1 bg-blue-500/20 text-blue-300 text-sm rounded-full border border-blue-500/30"
+                            >
+                              {topic}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Additional Info */}
+                  {selectedRequest.additionalInfo && selectedRequest.additionalInfo.trim() && (
+                    <div>
+                      <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                        <FaFileAlt className="text-blue-400" />
+                        💬 დამატებითი ინფორმაცია
+                      </h3>
+                      <div className="bg-slate-800/50 p-4 rounded-lg">
+                        <p className="text-slate-300 text-sm leading-relaxed whitespace-pre-wrap">
+                          {selectedRequest.additionalInfo}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
                   {/* FAQs */}
                   <div>
                     <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">

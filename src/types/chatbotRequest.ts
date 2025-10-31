@@ -85,6 +85,10 @@ export interface ChatbotRequest {
     question: string;
     answer: string;
   }>;
+
+  // New simplified FAQ fields
+  popularTopics?: string[]; // Selected popular question topics
+  additionalInfo?: string; // Custom questions/info text field
 }
 
 // Form data interface (what we collect from the form)
