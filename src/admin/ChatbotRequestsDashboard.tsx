@@ -10,7 +10,6 @@ import {
   FaUser,
   FaBuilding,
   FaGlobe,
-  FaBullseye,
   FaCheckCircle,
   FaExclamationTriangle,
   FaTimes,
