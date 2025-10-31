@@ -4,29 +4,29 @@ import { Timestamp } from 'firebase/firestore';
 // Business Types
 export const BUSINESS_TYPES = [
   { value: 'retail', label: 'საცალო ვაჭრობა' },
-  { value: 'restaurant', label: 'რესტორანი / კაფე' },
-  { value: 'hotel', label: 'სასტუმრო / სტუმარმასპინძლობა' },
-  { value: 'healthcare', label: 'ჯანმრთელობის დაცვა / კლინიკა' },
-  { value: 'beauty', label: 'სილამაზე / კოსმეტიკა' },
-  { value: 'fitness', label: 'სპორტი / ფიზიკური აქტივობა' },
-  { value: 'education', label: 'განათლება / კურსები' },
-  { value: 'real-estate', label: 'უძრავი ქონება' },
-  { value: 'automotive', label: 'საავტომობილო მომსახურება' },
+  { value: 'restaurant', label: 'კვების ობიექტები (რესტორანი/კაფე)' },
+  { value: 'hotel', label: 'სასტუმრო ბიზნესი' },
+  { value: 'healthcare', label: 'ჯანდაცვის სექტორი / კლინიკა' },
+  { value: 'beauty', label: 'სილამაზის ინდუსტრია / კოსმეტოლოგია' },
+  { value: 'fitness', label: 'ფიტნესი და სპორტული სერვისები' },
+  { value: 'education', label: 'საგანმანათლებლო დაწესებულება / ტრენინგი' },
+  { value: 'real-estate', label: 'უძრავი ქონების მართვა' },
+  { value: 'automotive', label: 'საავტომობილო სფერო' },
   { value: 'finance', label: 'ფინანსური მომსახურება' },
   { value: 'legal', label: 'იურიდიული მომსახურება' },
-  { value: 'technology', label: 'ტექნოლოგიები / IT' },
-  { value: 'consulting', label: 'საკონსულტაციო მომსახურება' },
-  { value: 'e-commerce', label: 'ელექტრონული კომერცია (ონლაინ მაღაზია)' },
-  { value: 'services', label: 'სხვა მომსახურება' },
+  { value: 'technology', label: 'ტექნოლოგიები და ინფორმაციული სერვისები (IT)' },
+  { value: 'consulting', label: 'საკონსულტაციო საქმიანობა' },
+  { value: 'e-commerce', label: 'ელექტრონული კომერცია' },
+  { value: 'services', label: 'მომსახურების სფერო' },
   { value: 'other', label: 'სხვა' },
 ] as const;
 
 // Communication Tones
 export const COMMUNICATION_TONES = [
-  { value: 'professional', label: 'პროფესიული', desc: 'ოფიციალური და სერიოზული' },
-  { value: 'friendly', label: 'მეგობრული', desc: 'თბილი და მისასალმებელი' },
-  { value: 'energetic', label: 'ენერგიული', desc: 'მხიარული და მოტივაციის მომცემი' },
-  { value: 'casual', label: 'არაფორმალური', desc: 'თავისუფალი და ყოველდღიური' },
+  { value: 'professional', label: 'პროფესიული', desc: 'შინაარსის მკაცრი სტრუქტურა, ტერმინოლოგიური სიზუსტის დაცვა' },
+  { value: 'friendly', label: 'მეგობრული', desc: 'დადებითი კეთილგანწყობის გამოხატვა, ინტერაქციის გამარტივება' },
+  { value: 'energetic', label: 'ენერგიული', desc: 'მაღალი ინტენსივობა, ადრესატის სამოქმედოდ მოტივირება' },
+  { value: 'casual', label: 'არაფორმალური', desc: 'უშუალო მიმართვის ფორმა, ყოველდღიური ლექსიკის გამოყენება' },
 ] as const;
 
 // Primary Languages
@@ -41,7 +41,6 @@ export const PRIMARY_GOALS = [
   { value: 'customer-support', label: 'მომხმარებელთა მხარდაჭერა', desc: 'კითხვებზე პასუხგაცემა და დახმარება' },
   { value: 'increase-sales', label: 'გაყიდვების ზრდა', desc: 'პროდუქტების პრომოცია და კლიენტების კონვერტაცია' },
   { value: 'information', label: 'ინფორმაციის მიწოდება', desc: 'ბიზნესის შესახებ ინფორმაციის გაზიარება' },
-  { value: 'reservations', label: 'ჯავშნები / რეზერვაციები', desc: 'მომსახურების ჯავშნა და დაგეგმვა' },
   { value: 'general-assistance', label: 'ზოგადი დახმარება', desc: 'სხვადასხვა საკითხებში ასისტირება' },
 ] as const;
 

@@ -100,6 +100,13 @@ const ChatbotRequestForm: React.FC = () => {
   const handleNext = () => {
     if (validateStep(currentStep)) {
       setCurrentStep((prev) => Math.min(prev + 1, 4));
+      // Scroll to form container (not page top)
+      setTimeout(() => {
+        const formContainer = document.querySelector('.form-container');
+        if (formContainer) {
+          formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
     } else {
       alert("გთხოვთ შეავსოთ ყველა სავალდებულო ველი");
     }
@@ -107,6 +114,13 @@ const ChatbotRequestForm: React.FC = () => {
 
   const handleBack = () => {
     setCurrentStep((prev) => Math.max(prev - 1, 1));
+    // Scroll to form container (not page top)
+    setTimeout(() => {
+      const formContainer = document.querySelector('.form-container');
+      if (formContainer) {
+        formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
   };
 
   const handleSubmit = async () => {
@@ -193,7 +207,7 @@ const ChatbotRequestForm: React.FC = () => {
         )}
       </AnimatePresence>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-28">
+      <div className="!max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-28">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -337,7 +351,7 @@ const ChatbotRequestForm: React.FC = () => {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
           transition={{ duration: 0.3 }}
-          className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-slate-200"
+          className="form-container bg-white/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-slate-200"
         >
           {/* Step 1: User Information */}
           {currentStep === 1 && (
