@@ -98,9 +98,9 @@ const ChatbotRequestsDashboard: React.FC = () => {
       req.userInfo.companyName,
       req.userInfo.email,
       req.userInfo.contactNumber,
-      BUSINESS_TYPES.find(t => t.value === req.businessInfo.businessType)?.label || req.businessInfo.businessType,
-      PRIMARY_GOALS.find(g => g.value === req.chatbotParams.primaryGoal)?.label || req.chatbotParams.primaryGoal,
-      LANGUAGES.find(l => l.value === req.chatbotParams.language)?.label || req.chatbotParams.language,
+      req.businessInfo.businessType.map(type => BUSINESS_TYPES.find(t => t.value === type)?.label).join(', '),
+      req.chatbotParams.primaryGoal.map(goal => PRIMARY_GOALS.find(g => g.value === goal)?.label).join(', '),
+      req.chatbotParams.language.map(lang => LANGUAGES.find(l => l.value === lang)?.label).join(', '),
       COMMUNICATION_TONES.find(t => t.value === req.chatbotParams.tone)?.label || req.chatbotParams.tone,
       getStatusText(req.status),
       formatTimestamp(req.submittedAt)
@@ -277,9 +277,13 @@ const ChatbotRequestsDashboard: React.FC = () => {
                     </td>
                     <td className="px-6 py-4">
                       <div>
-                        <span className="text-sm font-medium">
-                          {BUSINESS_TYPES.find(t => t.value === request.businessInfo.businessType)?.label}
-                        </span>
+                        <div className="flex flex-wrap gap-1 mb-1">
+                          {request.businessInfo.businessType.map(type => (
+                            <span key={type} className="text-xs px-2 py-1 bg-slate-700 text-slate-300 rounded-full">
+                              {BUSINESS_TYPES.find(t => t.value === type)?.label}
+                            </span>
+                          ))}
+                        </div>
                         <div className="text-xs text-slate-400 mt-1 max-w-xs truncate">
                           {request.businessInfo.description}
                         </div>
@@ -288,14 +292,18 @@ const ChatbotRequestsDashboard: React.FC = () => {
                     <td className="px-6 py-4">
                       <div className="space-y-1">
                         <div className="text-sm">
-                          <span className="text-slate-400">მიზანი:</span>{' '}
-                          <span className="text-white">
-                            {PRIMARY_GOALS.find(g => g.value === request.chatbotParams.primaryGoal)?.label}
-                          </span>
+                          <span className="text-slate-400">მიზნები:</span>{' '}
+                          <div className="flex flex-wrap gap-1 mt-1">
+                            {request.chatbotParams.primaryGoal.map(goal => (
+                              <span key={goal} className="text-xs px-2 py-0.5 bg-purple-500/20 text-purple-400 rounded">
+                                {PRIMARY_GOALS.find(g => g.value === goal)?.label}
+                              </span>
+                            ))}
+                          </div>
                         </div>
-                        <div className="text-xs text-slate-400">
+                        <div className="text-xs text-slate-400 mt-1">
                           {COMMUNICATION_TONES.find(t => t.value === request.chatbotParams.tone)?.label} • {' '}
-                          {LANGUAGES.find(l => l.value === request.chatbotParams.language)?.label}
+                          {request.chatbotParams.language.map(lang => LANGUAGES.find(l => l.value === lang)?.label).join(', ')}
                         </div>
                       </div>
                     </td>
@@ -351,9 +359,13 @@ const ChatbotRequestsDashboard: React.FC = () => {
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h2 className="text-2xl font-bold mb-2">{selectedRequest.userInfo.companyName}</h2>
-                  <p className="text-slate-400">
-                    {BUSINESS_TYPES.find(t => t.value === selectedRequest.businessInfo.businessType)?.label}
-                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedRequest.businessInfo.businessType.map(type => (
+                      <span key={type} className="px-2 py-1 bg-slate-700 text-slate-300 text-sm rounded">
+                        {BUSINESS_TYPES.find(t => t.value === type)?.label}
+                      </span>
+                    ))}
+                  </div>
                 </div>
                 <button
                   onClick={() => setSelectedRequest(null)}
@@ -434,9 +446,13 @@ const ChatbotRequestsDashboard: React.FC = () => {
                     </h3>
                     <div className="bg-slate-800/50 p-4 rounded-lg space-y-4">
                       <div>
-                        <span className="text-slate-400 text-sm">ბიზნესის ტიპი:</span>
-                        <div className="text-white font-medium">
-                          {BUSINESS_TYPES.find(t => t.value === selectedRequest.businessInfo.businessType)?.label}
+                        <span className="text-slate-400 text-sm">ბიზნესის ტიპები:</span>
+                        <div className="flex flex-wrap gap-2 mt-1">
+                          {selectedRequest.businessInfo.businessType.map(type => (
+                            <span key={type} className="px-3 py-1 bg-blue-500/20 text-blue-400 text-sm rounded-full">
+                              {BUSINESS_TYPES.find(t => t.value === type)?.label}
+                            </span>
+                          ))}
                         </div>
                       </div>
                       <div>
@@ -479,17 +495,25 @@ const ChatbotRequestsDashboard: React.FC = () => {
                           {COMMUNICATION_TONES.find(t => t.value === selectedRequest.chatbotParams.tone)?.label}
                         </span>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">ენა:</span>
-                        <span className="text-white">
-                          {LANGUAGES.find(l => l.value === selectedRequest.chatbotParams.language)?.label}
-                        </span>
+                      <div>
+                        <span className="text-slate-400">ენები:</span>
+                        <div className="flex flex-wrap gap-2 mt-1">
+                          {selectedRequest.chatbotParams.language.map(lang => (
+                            <span key={lang} className="px-2 py-1 bg-green-500/20 text-green-400 text-sm rounded-full">
+                              {LANGUAGES.find(l => l.value === lang)?.label}
+                            </span>
+                          ))}
+                        </div>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">მიზანი:</span>
-                        <span className="text-white">
-                          {PRIMARY_GOALS.find(g => g.value === selectedRequest.chatbotParams.primaryGoal)?.label}
-                        </span>
+                      <div>
+                        <span className="text-slate-400">მიზნები:</span>
+                        <div className="flex flex-wrap gap-2 mt-1">
+                          {selectedRequest.chatbotParams.primaryGoal.map(goal => (
+                            <span key={goal} className="px-2 py-1 bg-purple-500/20 text-purple-400 text-sm rounded-full">
+                              {PRIMARY_GOALS.find(g => g.value === goal)?.label}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
                     {selectedRequest.chatbotParams.customPrompts && (
@@ -574,13 +598,13 @@ Chatbot Request - ${req.userInfo.companyName}
 📧 Email: ${req.userInfo.email}
 📞 ტელეფონი: ${req.userInfo.contactNumber}
 
-🏪 ბიზნესის ტიპი: ${BUSINESS_TYPES.find(t => t.value === req.businessInfo.businessType)?.label}
+🏪 ბიზნესის ტიპები: ${req.businessInfo.businessType.map(type => BUSINESS_TYPES.find(t => t.value === type)?.label).join(', ')}
 📝 აღწერა: ${req.businessInfo.description}
 
 🤖 ჩატბოტი:
-- მიზანი: ${PRIMARY_GOALS.find(g => g.value === req.chatbotParams.primaryGoal)?.label}
+- მიზნები: ${req.chatbotParams.primaryGoal.map(goal => PRIMARY_GOALS.find(g => g.value === goal)?.label).join(', ')}
 - ტონი: ${COMMUNICATION_TONES.find(t => t.value === req.chatbotParams.tone)?.label}
-- ენა: ${LANGUAGES.find(l => l.value === req.chatbotParams.language)?.label}
+- ენები: ${req.chatbotParams.language.map(lang => LANGUAGES.find(l => l.value === lang)?.label).join(', ')}
 
 📋 FAQ-ები: ${req.faqs.filter(f => f.question && f.answer).length} ცალი
                       `.trim();

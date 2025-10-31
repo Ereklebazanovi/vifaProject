@@ -66,7 +66,7 @@ export interface ChatbotRequest {
 
   // Business Information
   businessInfo: {
-    businessType: string; // from BUSINESS_TYPES
+    businessType: string[]; // from BUSINESS_TYPES - multiple selection
     description: string;
     servicesProducts: string;
     workingHours?: string; // optional
@@ -76,8 +76,8 @@ export interface ChatbotRequest {
   // Chatbot Parameters
   chatbotParams: {
     tone: 'professional' | 'friendly' | 'energetic' | 'casual';
-    language: 'georgian' | 'english' | 'both';
-    primaryGoal: string; // from PRIMARY_GOALS
+    language: string[]; // from LANGUAGES - multiple selection
+    primaryGoal: string[]; // from PRIMARY_GOALS - multiple selection
     customPrompts?: string; // optional
   };
 

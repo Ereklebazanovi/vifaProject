@@ -1,7 +1,7 @@
 // src/pages/ChatbotRequestForm.tsx
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import {
   FaUser,
   FaBuilding,
@@ -12,23 +12,23 @@ import {
   FaArrowLeft,
   FaSpinner,
   FaPlus,
-  FaTimes
-} from 'react-icons/fa';
-import { submitChatbotRequest } from '../service/chatbotRequestService';
-import type { ChatbotRequestFormData } from '../types/chatbotRequest';
+  FaTimes,
+} from "react-icons/fa";
+import { submitChatbotRequest } from "../service/chatbotRequestService";
+import type { ChatbotRequestFormData } from "../types/chatbotRequest";
 import {
   BUSINESS_TYPES,
   COMMUNICATION_TONES,
   LANGUAGES,
-  PRIMARY_GOALS
-} from '../types/chatbotRequest';
+  PRIMARY_GOALS,
+} from "../types/chatbotRequest";
 
 // Step Configuration - SIMPLIFIED
 const STEPS = [
-  { id: 1, title: 'მომხმარებელი', icon: FaUser },
-  { id: 2, title: 'ბიზნესი', icon: FaBuilding },
-  { id: 3, title: 'ჩატბოტი', icon: FaRobot },
-  { id: 4, title: 'FAQ', icon: FaQuestionCircle },
+  { id: 1, title: "მომხმარებელი", icon: FaUser },
+  { id: 2, title: "ბიზნესი", icon: FaBuilding },
+  { id: 3, title: "ჩატბოტი", icon: FaRobot },
+  { id: 4, title: "FAQ", icon: FaQuestionCircle },
 ];
 
 const ChatbotRequestForm: React.FC = () => {
@@ -39,33 +39,33 @@ const ChatbotRequestForm: React.FC = () => {
 
   // Scroll to top when component mounts
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   // Form State - SIMPLIFIED
   const [formData, setFormData] = useState<ChatbotRequestFormData>({
-    status: 'pending',
+    status: "pending",
     userInfo: {
-      fullName: '',
-      companyName: '',
-      contactNumber: '',
-      email: '',
-      socialMediaLink: '',
+      fullName: "",
+      companyName: "",
+      contactNumber: "",
+      email: "",
+      socialMediaLink: "",
     },
     businessInfo: {
-      businessType: '',
-      description: '',
-      servicesProducts: '',
-      workingHours: '',
-      location: '',
+      businessType: [],
+      description: "",
+      servicesProducts: "",
+      workingHours: "",
+      location: "",
     },
     chatbotParams: {
-      tone: 'professional',
-      language: 'georgian',
-      primaryGoal: '',
-      customPrompts: '',
+      tone: "professional",
+      language: [],
+      primaryGoal: [],
+      customPrompts: "",
     },
-    faqs: [{ question: '', answer: '' }],
+    faqs: [{ question: "", answer: "" }],
   });
 
   // Validation for each step
@@ -80,15 +80,15 @@ const ChatbotRequestForm: React.FC = () => {
         );
       case 2:
         return !!(
-          formData.businessInfo.businessType &&
+          formData.businessInfo.businessType.length > 0 &&
           formData.businessInfo.description &&
           formData.businessInfo.servicesProducts
         );
       case 3:
         return !!(
           formData.chatbotParams.tone &&
-          formData.chatbotParams.language &&
-          formData.chatbotParams.primaryGoal
+          formData.chatbotParams.language.length > 0 &&
+          formData.chatbotParams.primaryGoal.length > 0
         );
       case 4:
         return true; // FAQ is optional
@@ -99,14 +99,14 @@ const ChatbotRequestForm: React.FC = () => {
 
   const handleNext = () => {
     if (validateStep(currentStep)) {
-      setCurrentStep(prev => Math.min(prev + 1, 4));
+      setCurrentStep((prev) => Math.min(prev + 1, 4));
     } else {
-      alert('გთხოვთ შეავსოთ ყველა სავალდებულო ველი');
+      alert("გთხოვთ შეავსოთ ყველა სავალდებულო ველი");
     }
   };
 
   const handleBack = () => {
-    setCurrentStep(prev => Math.max(prev - 1, 1));
+    setCurrentStep((prev) => Math.max(prev - 1, 1));
   };
 
   const handleSubmit = async () => {
@@ -118,13 +118,13 @@ const ChatbotRequestForm: React.FC = () => {
       if (result.success) {
         setSubmitSuccess(true);
         setTimeout(() => {
-          navigate('/services/ai-chatbot');
+          navigate("/services/ai-chatbot");
         }, 3000);
       } else {
         alert(result.message);
       }
     } catch (error) {
-      alert('შეცდომა მოხდა. გთხოვთ სცადოთ თავიდან.');
+      alert("შეცდომა მოხდა. გთხოვთ სცადოთ თავიდან.");
     } finally {
       setIsSubmitting(false);
     }
@@ -132,25 +132,29 @@ const ChatbotRequestForm: React.FC = () => {
 
   // FAQ Management
   const addFAQ = () => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      faqs: [...prev.faqs, { question: '', answer: '' }]
+      faqs: [...prev.faqs, { question: "", answer: "" }],
     }));
   };
 
   const removeFAQ = (index: number) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      faqs: prev.faqs.filter((_, i) => i !== index)
+      faqs: prev.faqs.filter((_, i) => i !== index),
     }));
   };
 
-  const updateFAQ = (index: number, field: 'question' | 'answer', value: string) => {
-    setFormData(prev => ({
+  const updateFAQ = (
+    index: number,
+    field: "question" | "answer",
+    value: string
+  ) => {
+    setFormData((prev) => ({
       ...prev,
       faqs: prev.faqs.map((faq, i) =>
         i === index ? { ...faq, [field]: value } : faq
-      )
+      ),
     }));
   };
 
@@ -177,7 +181,8 @@ const ChatbotRequestForm: React.FC = () => {
                 წარმატებით გაიგზავნა!
               </h3>
               <p className="text-gray-600 mb-6">
-                თქვენი მოთხოვნა წარმატებით გაიგზავნა. ჩვენი გუნდი მალე დაგიკავშირდებათ.
+                თქვენი მოთხოვნა წარმატებით გაიგზავნა. ჩვენი გუნდი მალე
+                დაგიკავშირდებათ.
               </p>
               <div className="flex items-center justify-center gap-2 text-sm text-gray-500">
                 <FaSpinner className="animate-spin" />
@@ -195,7 +200,6 @@ const ChatbotRequestForm: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-       
           <p className="text-xl text-white max-w-2xl mx-auto">
             შეავსე მარტივი ფორმა და მიიღე პერსონალიზებული ჩატბოტი
           </p>
@@ -218,22 +222,30 @@ const ChatbotRequestForm: React.FC = () => {
                         animate={{
                           scale: isCurrent ? 1.1 : 1,
                           backgroundColor: isCompleted
-                            ? '#10b981'
+                            ? "#10b981"
                             : isCurrent
-                            ? '#3b82f6'
-                            : '#374151'
+                            ? "#3b82f6"
+                            : "#374151",
                         }}
                         className={`w-8 h-8 rounded-full flex items-center justify-center mb-2 transition-all duration-300 ${
-                          isCurrent ? 'ring-2 ring-blue-500/40' : ''
+                          isCurrent ? "ring-2 ring-blue-500/40" : ""
                         }`}
                       >
-                        <span className="text-white text-xs font-bold">{step.id}</span>
+                        <span className="text-white text-xs font-bold">
+                          {step.id}
+                        </span>
                       </motion.div>
 
                       {/* Step Title */}
-                      <span className={`text-xs font-medium text-center leading-tight ${
-                        isCurrent ? 'text-blue-400' : isCompleted ? 'text-green-400' : 'text-slate-500'
-                      }`}>
+                      <span
+                        className={`text-xs font-medium text-center leading-tight ${
+                          isCurrent
+                            ? "text-blue-400"
+                            : isCompleted
+                            ? "text-green-400"
+                            : "text-slate-500"
+                        }`}
+                      >
                         {step.title}
                       </span>
                     </div>
@@ -242,7 +254,7 @@ const ChatbotRequestForm: React.FC = () => {
                       <div className="w-4 h-0.5 bg-slate-700 rounded-full overflow-hidden mx-1 mt-4">
                         <motion.div
                           initial={{ width: 0 }}
-                          animate={{ width: isCompleted ? '100%' : '0%' }}
+                          animate={{ width: isCompleted ? "100%" : "0%" }}
                           className="h-full bg-gradient-to-r from-blue-500 to-green-500 rounded-full"
                           transition={{ duration: 0.5 }}
                         />
@@ -269,20 +281,28 @@ const ChatbotRequestForm: React.FC = () => {
                         animate={{
                           scale: isCurrent ? 1.1 : 1,
                           backgroundColor: isCompleted
-                            ? '#10b981'
+                            ? "#10b981"
                             : isCurrent
-                            ? '#3b82f6'
-                            : '#374151'
+                            ? "#3b82f6"
+                            : "#374151",
                         }}
                         className={`w-16 h-16 rounded-full flex items-center justify-center mb-3 transition-all duration-300 ${
-                          isCurrent ? 'ring-4 ring-blue-500/30 shadow-lg shadow-blue-500/25' : ''
+                          isCurrent
+                            ? "ring-4 ring-blue-500/30 shadow-lg shadow-blue-500/25"
+                            : ""
                         }`}
                       >
                         <Icon className="text-white text-2xl" />
                       </motion.div>
-                      <span className={`text-sm font-medium text-center ${
-                        isCurrent ? 'text-blue-400' : isCompleted ? 'text-green-400' : 'text-slate-500'
-                      }`}>
+                      <span
+                        className={`text-sm font-medium text-center ${
+                          isCurrent
+                            ? "text-blue-400"
+                            : isCompleted
+                            ? "text-green-400"
+                            : "text-slate-500"
+                        }`}
+                      >
                         {step.title}
                       </span>
                     </div>
@@ -291,7 +311,7 @@ const ChatbotRequestForm: React.FC = () => {
                       <div className="flex-1 h-2 mx-4 bg-slate-700 rounded-full overflow-hidden">
                         <motion.div
                           initial={{ width: 0 }}
-                          animate={{ width: isCompleted ? '100%' : '0%' }}
+                          animate={{ width: isCompleted ? "100%" : "0%" }}
                           className="h-full bg-gradient-to-r from-blue-500 to-green-500 rounded-full"
                           transition={{ duration: 0.5 }}
                         />
@@ -323,8 +343,12 @@ const ChatbotRequestForm: React.FC = () => {
           {currentStep === 1 && (
             <div className="space-y-6">
               <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold text-gray-900 mb-2">მომხმარებლის ინფორმაცია</h2>
-                <p className="text-gray-600">გთხოვთ შეავსოთ თქვენი საკონტაქტო ინფორმაცია</p>
+                <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                  მომხმარებლის ინფორმაცია
+                </h2>
+                <p className="text-gray-600">
+                  გთხოვთ შეავსოთ თქვენი საკონტაქტო ინფორმაცია
+                </p>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
@@ -335,10 +359,15 @@ const ChatbotRequestForm: React.FC = () => {
                   <input
                     type="text"
                     value={formData.userInfo.fullName}
-                    onChange={(e) => setFormData(prev => ({
-                      ...prev,
-                      userInfo: { ...prev.userInfo, fullName: e.target.value }
-                    }))}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        userInfo: {
+                          ...prev.userInfo,
+                          fullName: e.target.value,
+                        },
+                      }))
+                    }
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:outline-none transition-all"
                     placeholder="მაგ: ნინო გელაშვილი"
                   />
@@ -351,10 +380,15 @@ const ChatbotRequestForm: React.FC = () => {
                   <input
                     type="text"
                     value={formData.userInfo.companyName}
-                    onChange={(e) => setFormData(prev => ({
-                      ...prev,
-                      userInfo: { ...prev.userInfo, companyName: e.target.value }
-                    }))}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        userInfo: {
+                          ...prev.userInfo,
+                          companyName: e.target.value,
+                        },
+                      }))
+                    }
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:outline-none transition-all"
                     placeholder="მაგ: VIFA Digital"
                   />
@@ -367,10 +401,15 @@ const ChatbotRequestForm: React.FC = () => {
                   <input
                     type="tel"
                     value={formData.userInfo.contactNumber}
-                    onChange={(e) => setFormData(prev => ({
-                      ...prev,
-                      userInfo: { ...prev.userInfo, contactNumber: e.target.value }
-                    }))}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        userInfo: {
+                          ...prev.userInfo,
+                          contactNumber: e.target.value,
+                        },
+                      }))
+                    }
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:outline-none transition-all"
                     placeholder="+995 XXX XX XX XX"
                   />
@@ -383,10 +422,12 @@ const ChatbotRequestForm: React.FC = () => {
                   <input
                     type="email"
                     value={formData.userInfo.email}
-                    onChange={(e) => setFormData(prev => ({
-                      ...prev,
-                      userInfo: { ...prev.userInfo, email: e.target.value }
-                    }))}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        userInfo: { ...prev.userInfo, email: e.target.value },
+                      }))
+                    }
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:outline-none transition-all"
                     placeholder="info@company.ge"
                   />
@@ -400,10 +441,15 @@ const ChatbotRequestForm: React.FC = () => {
                 <input
                   type="url"
                   value={formData.userInfo.socialMediaLink}
-                  onChange={(e) => setFormData(prev => ({
-                    ...prev,
-                    userInfo: { ...prev.userInfo, socialMediaLink: e.target.value }
-                  }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      userInfo: {
+                        ...prev.userInfo,
+                        socialMediaLink: e.target.value,
+                      },
+                    }))
+                  }
                   className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:outline-none transition-all"
                   placeholder="https://facebook.com/yourpage ან https://instagram.com/yourpage"
                 />
@@ -415,29 +461,140 @@ const ChatbotRequestForm: React.FC = () => {
           {currentStep === 2 && (
             <div className="space-y-6">
               <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold text-gray-900 mb-2">ბიზნესის ინფორმაცია</h2>
-                <p className="text-gray-600">მოგვიყევით თქვენი ბიზნესის შესახებ</p>
+                <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                  ბიზნესის ინფორმაცია
+                </h2>
+                <p className="text-gray-600">
+                  მოგვიყევით თქვენი ბიზნესის შესახებ
+                </p>
               </div>
 
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
                   ბიზნესის ტიპი <span className="text-red-500">*</span>
                 </label>
-                <select
-                  value={formData.businessInfo.businessType}
-                  onChange={(e) => setFormData(prev => ({
-                    ...prev,
-                    businessInfo: { ...prev.businessInfo, businessType: e.target.value }
-                  }))}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-gray-900 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:outline-none transition-all"
-                >
-                  <option value="">აირჩიეთ ბიზნესის ტიპი</option>
-                  {BUSINESS_TYPES.map(type => (
-                    <option key={type.value} value={type.value}>
-                      {type.label}
-                    </option>
+                <p className="text-sm text-gray-600 mb-4">
+                  📝 შეგიძლიათ რამდენიმე ვარიანტის არჩევა
+                </p>
+
+                <div className="space-y-3 max-h-48 overflow-y-auto border border-gray-200 rounded-xl p-4 bg-gray-50">
+                  {BUSINESS_TYPES.map((type) => (
+                    <label
+                      key={type.value}
+                      className={`flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-white border ${
+                        formData.businessInfo.businessType.includes(type.value)
+                          ? "bg-blue-50 border-blue-200 shadow-sm"
+                          : "bg-white border-gray-100 hover:border-gray-200"
+                      }`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={formData.businessInfo.businessType.includes(
+                          type.value
+                        )}
+                        onChange={(e) => {
+                          const currentTypes =
+                            formData.businessInfo.businessType;
+                          const newTypes = e.target.checked
+                            ? [...currentTypes, type.value]
+                            : currentTypes.filter((t) => t !== type.value);
+
+                          setFormData((prev) => ({
+                            ...prev,
+                            businessInfo: {
+                              ...prev.businessInfo,
+                              businessType: newTypes,
+                            },
+                          }));
+                        }}
+                        className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 mr-3"
+                      />
+                      <span
+                        className={`text-sm font-medium flex-1 ${
+                          formData.businessInfo.businessType.includes(
+                            type.value
+                          )
+                            ? "text-blue-700"
+                            : "text-gray-700"
+                        }`}
+                      >
+                        {type.label}
+                      </span>
+                      {formData.businessInfo.businessType.includes(
+                        type.value
+                      ) && (
+                        <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center ml-2">
+                          <svg
+                            className="w-3 h-3 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                      )}
+                    </label>
                   ))}
-                </select>
+                </div>
+
+                {/* Selected types display */}
+                {formData.businessInfo.businessType.length > 0 && (
+                  <div className="mt-4">
+                    <p className="text-sm text-gray-600 mb-2">
+                      არჩეული ბიზნესის ტიპები:
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {formData.businessInfo.businessType.map(
+                        (selectedType) => {
+                          const type = BUSINESS_TYPES.find(
+                            (t) => t.value === selectedType
+                          );
+                          return (
+                            <span
+                              key={selectedType}
+                              className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full"
+                            >
+                              {type?.label}
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  const newTypes =
+                                    formData.businessInfo.businessType.filter(
+                                      (t) => t !== selectedType
+                                    );
+                                  setFormData((prev) => ({
+                                    ...prev,
+                                    businessInfo: {
+                                      ...prev.businessInfo,
+                                      businessType: newTypes,
+                                    },
+                                  }));
+                                }}
+                                className="ml-1 hover:bg-blue-200 rounded-full p-0.5"
+                              >
+                                <svg
+                                  className="w-3 h-3"
+                                  fill="currentColor"
+                                  viewBox="0 0 20 20"
+                                >
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                    clipRule="evenodd"
+                                  />
+                                </svg>
+                              </button>
+                            </span>
+                          );
+                        }
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div>
@@ -446,26 +603,37 @@ const ChatbotRequestForm: React.FC = () => {
                 </label>
                 <textarea
                   value={formData.businessInfo.description}
-                  onChange={(e) => setFormData(prev => ({
-                    ...prev,
-                    businessInfo: { ...prev.businessInfo, description: e.target.value }
-                  }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      businessInfo: {
+                        ...prev.businessInfo,
+                        description: e.target.value,
+                      },
+                    }))
+                  }
                   rows={4}
                   className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:outline-none transition-all resize-none"
-                  placeholder="მოკლედ აღწერეთ თქვენი ბიზნესი - რას საქმიანობთ, ვინ არიან/იქნებიან თქვენი მომხმარებლები..."
+                  placeholder="მოკლედ აღწერეთ თქვენი ბიზნესი"
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  მთავარი სერვისები / პროდუქტები <span className="text-red-500">*</span>
+                  მთავარი სერვისები / პროდუქტები{" "}
+                  <span className="text-red-500">*</span>
                 </label>
                 <textarea
                   value={formData.businessInfo.servicesProducts}
-                  onChange={(e) => setFormData(prev => ({
-                    ...prev,
-                    businessInfo: { ...prev.businessInfo, servicesProducts: e.target.value }
-                  }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      businessInfo: {
+                        ...prev.businessInfo,
+                        servicesProducts: e.target.value,
+                      },
+                    }))
+                  }
                   rows={4}
                   className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:outline-none transition-all resize-none"
                   placeholder="ჩამოთვალეთ თქვენი მთავარი სერვისები ან პროდუქტები..."
@@ -480,10 +648,15 @@ const ChatbotRequestForm: React.FC = () => {
                   <input
                     type="text"
                     value={formData.businessInfo.workingHours}
-                    onChange={(e) => setFormData(prev => ({
-                      ...prev,
-                      businessInfo: { ...prev.businessInfo, workingHours: e.target.value }
-                    }))}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        businessInfo: {
+                          ...prev.businessInfo,
+                          workingHours: e.target.value,
+                        },
+                      }))
+                    }
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:outline-none transition-all"
                     placeholder="მაგ: ორშ-პარ 9:00-18:00"
                   />
@@ -496,10 +669,15 @@ const ChatbotRequestForm: React.FC = () => {
                   <input
                     type="text"
                     value={formData.businessInfo.location}
-                    onChange={(e) => setFormData(prev => ({
-                      ...prev,
-                      businessInfo: { ...prev.businessInfo, location: e.target.value }
-                    }))}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        businessInfo: {
+                          ...prev.businessInfo,
+                          location: e.target.value,
+                        },
+                      }))
+                    }
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:outline-none transition-all"
                     placeholder="თბილისი, საქართველო"
                   />
@@ -512,8 +690,12 @@ const ChatbotRequestForm: React.FC = () => {
           {currentStep === 3 && (
             <div className="space-y-8">
               <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold text-gray-900 mb-2">ჩატბოტის პარამეტრები</h2>
-                <p className="text-gray-600">განსაზღვრეთ თქვენი ჩატბოტის ქცევა და სტილი</p>
+                <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                  ჩატბოტის პარამეტრები
+                </h2>
+                <p className="text-gray-600">
+                  განსაზღვრეთ თქვენი ჩატბოტის ქცევა და სტილი
+                </p>
               </div>
 
               {/* Tone */}
@@ -522,26 +704,33 @@ const ChatbotRequestForm: React.FC = () => {
                   კომუნიკაციის ტონი <span className="text-red-500">*</span>
                 </label>
                 <div className="grid md:grid-cols-2 gap-4">
-                  {COMMUNICATION_TONES.map(tone => (
+                  {COMMUNICATION_TONES.map((tone) => (
                     <label
                       key={tone.value}
                       className={`p-4 border-2 rounded-xl cursor-pointer transition-all ${
                         formData.chatbotParams.tone === tone.value
-                          ? 'border-blue-500 bg-blue-50'
-                          : 'border-gray-200 hover:border-gray-300'
+                          ? "border-blue-500 bg-blue-50"
+                          : "border-gray-200 hover:border-gray-300"
                       }`}
                     >
                       <input
                         type="radio"
                         name="tone"
                         checked={formData.chatbotParams.tone === tone.value}
-                        onChange={() => setFormData(prev => ({
-                          ...prev,
-                          chatbotParams: { ...prev.chatbotParams, tone: tone.value as any }
-                        }))}
+                        onChange={() =>
+                          setFormData((prev) => ({
+                            ...prev,
+                            chatbotParams: {
+                              ...prev.chatbotParams,
+                              tone: tone.value as any,
+                            },
+                          }))
+                        }
                         className="sr-only"
                       />
-                      <div className="font-semibold text-gray-900 mb-1">{tone.label}</div>
+                      <div className="font-semibold text-gray-900 mb-1">
+                        {tone.label}
+                      </div>
                       <div className="text-sm text-gray-600">{tone.desc}</div>
                     </label>
                   ))}
@@ -550,67 +739,189 @@ const ChatbotRequestForm: React.FC = () => {
 
               {/* Language */}
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-4">
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
                   ძირითადი ენა <span className="text-red-500">*</span>
                 </label>
-                <div className="grid grid-cols-3 gap-4">
-                  {LANGUAGES.map(lang => (
+                <p className="text-sm text-gray-600 mb-4">
+                  📝 შეგიძლიათ რამდენიმე ენის მხარდაჭერა
+                </p>
+
+                <div className="space-y-3">
+                  {LANGUAGES.map((lang) => (
                     <label
                       key={lang.value}
-                      className={`p-4 text-center border-2 rounded-xl cursor-pointer transition-all ${
-                        formData.chatbotParams.language === lang.value
-                          ? 'border-blue-500 bg-blue-50'
-                          : 'border-gray-200 hover:border-gray-300'
+                      className={`flex items-center p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 hover:shadow-sm ${
+                        formData.chatbotParams.language.includes(lang.value)
+                          ? "border-blue-500 bg-blue-50 shadow-sm"
+                          : "border-gray-200 hover:border-gray-300 bg-white"
                       }`}
                     >
                       <input
-                        type="radio"
-                        name="language"
-                        checked={formData.chatbotParams.language === lang.value}
-                        onChange={() => setFormData(prev => ({
-                          ...prev,
-                          chatbotParams: { ...prev.chatbotParams, language: lang.value as any }
-                        }))}
-                        className="sr-only"
+                        type="checkbox"
+                        checked={formData.chatbotParams.language.includes(lang.value)}
+                        onChange={(e) => {
+                          const currentLanguages = formData.chatbotParams.language;
+                          const newLanguages = e.target.checked
+                            ? [...currentLanguages, lang.value]
+                            : currentLanguages.filter(l => l !== lang.value);
+
+                          setFormData((prev) => ({
+                            ...prev,
+                            chatbotParams: {
+                              ...prev.chatbotParams,
+                              language: newLanguages,
+                            },
+                          }));
+                        }}
+                        className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 mr-4"
                       />
-                      <div className="font-semibold text-gray-900">{lang.label}</div>
+                      <span className={`text-lg font-semibold flex-1 ${
+                        formData.chatbotParams.language.includes(lang.value)
+                          ? "text-blue-700"
+                          : "text-gray-700"
+                      }`}>
+                        {lang.label}
+                      </span>
+                      {formData.chatbotParams.language.includes(lang.value) && (
+                        <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center ml-2">
+                          <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                      )}
                     </label>
                   ))}
                 </div>
+
+                {/* Selected languages display */}
+                {formData.chatbotParams.language.length > 0 && (
+                  <div className="mt-4">
+                    <p className="text-sm text-gray-600 mb-2">არჩეული ენები:</p>
+                    <div className="flex flex-wrap gap-2">
+                      {formData.chatbotParams.language.map(selectedLang => {
+                        const lang = LANGUAGES.find(l => l.value === selectedLang);
+                        return (
+                          <span
+                            key={selectedLang}
+                            className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full"
+                          >
+                            {lang?.label}
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const newLanguages = formData.chatbotParams.language.filter(l => l !== selectedLang);
+                                setFormData(prev => ({
+                                  ...prev,
+                                  chatbotParams: { ...prev.chatbotParams, language: newLanguages }
+                                }));
+                              }}
+                              className="ml-1 hover:bg-blue-200 rounded-full p-0.5"
+                            >
+                              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                              </svg>
+                            </button>
+                          </span>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Primary Goal */}
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-4">
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
                   ძირითადი მიზანი <span className="text-red-500">*</span>
                 </label>
-                <div className="space-y-3">
-                  {PRIMARY_GOALS.map(goal => (
+                <p className="text-sm text-gray-600 mb-4">
+                  📝 შეგიძლიათ რამდენიმე მიზნის არჩევა
+                </p>
+
+                <div className="space-y-3 max-h-64 overflow-y-auto">
+                  {PRIMARY_GOALS.map((goal) => (
                     <label
                       key={goal.value}
-                      className={`flex items-start p-4 border-2 rounded-xl cursor-pointer transition-all ${
-                        formData.chatbotParams.primaryGoal === goal.value
-                          ? 'border-blue-500 bg-blue-50'
-                          : 'border-gray-200 hover:border-gray-300'
+                      className={`flex items-start p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 hover:shadow-sm ${
+                        formData.chatbotParams.primaryGoal.includes(goal.value)
+                          ? "border-blue-500 bg-blue-50 shadow-sm"
+                          : "border-gray-200 hover:border-gray-300 bg-white"
                       }`}
                     >
                       <input
-                        type="radio"
-                        name="primaryGoal"
-                        checked={formData.chatbotParams.primaryGoal === goal.value}
-                        onChange={() => setFormData(prev => ({
-                          ...prev,
-                          chatbotParams: { ...prev.chatbotParams, primaryGoal: goal.value }
-                        }))}
-                        className="sr-only"
+                        type="checkbox"
+                        checked={formData.chatbotParams.primaryGoal.includes(goal.value)}
+                        onChange={(e) => {
+                          const currentGoals = formData.chatbotParams.primaryGoal;
+                          const newGoals = e.target.checked
+                            ? [...currentGoals, goal.value]
+                            : currentGoals.filter(g => g !== goal.value);
+
+                          setFormData((prev) => ({
+                            ...prev,
+                            chatbotParams: {
+                              ...prev.chatbotParams,
+                              primaryGoal: newGoals,
+                            },
+                          }));
+                        }}
+                        className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 mr-4 mt-1 flex-shrink-0"
                       />
-                      <div>
-                        <div className="font-semibold text-gray-900 mb-1">{goal.label}</div>
+                      <div className="flex-1">
+                        <div className={`font-semibold mb-1 ${
+                          formData.chatbotParams.primaryGoal.includes(goal.value)
+                            ? "text-blue-700"
+                            : "text-gray-900"
+                        }`}>
+                          {goal.label}
+                        </div>
                         <div className="text-sm text-gray-600">{goal.desc}</div>
                       </div>
+                      {formData.chatbotParams.primaryGoal.includes(goal.value) && (
+                        <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center ml-2 mt-1 flex-shrink-0">
+                          <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                      )}
                     </label>
                   ))}
                 </div>
+
+                {/* Selected goals display */}
+                {formData.chatbotParams.primaryGoal.length > 0 && (
+                  <div className="mt-4">
+                    <p className="text-sm text-gray-600 mb-2">არჩეული მიზნები:</p>
+                    <div className="flex flex-wrap gap-2">
+                      {formData.chatbotParams.primaryGoal.map(selectedGoal => {
+                        const goal = PRIMARY_GOALS.find(g => g.value === selectedGoal);
+                        return (
+                          <span
+                            key={selectedGoal}
+                            className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full"
+                          >
+                            {goal?.label}
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const newGoals = formData.chatbotParams.primaryGoal.filter(g => g !== selectedGoal);
+                                setFormData(prev => ({
+                                  ...prev,
+                                  chatbotParams: { ...prev.chatbotParams, primaryGoal: newGoals }
+                                }));
+                              }}
+                              className="ml-1 hover:bg-blue-200 rounded-full p-0.5"
+                            >
+                              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                              </svg>
+                            </button>
+                          </span>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Custom Prompts */}
@@ -620,10 +931,15 @@ const ChatbotRequestForm: React.FC = () => {
                 </label>
                 <textarea
                   value={formData.chatbotParams.customPrompts}
-                  onChange={(e) => setFormData(prev => ({
-                    ...prev,
-                    chatbotParams: { ...prev.chatbotParams, customPrompts: e.target.value }
-                  }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      chatbotParams: {
+                        ...prev.chatbotParams,
+                        customPrompts: e.target.value,
+                      },
+                    }))
+                  }
                   rows={3}
                   className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:outline-none transition-all resize-none"
                   placeholder="თუ გაქვთ სპეციალური მოთხოვნები ან ინსტრუქციები ჩატბოტისთვის..."
@@ -636,16 +952,29 @@ const ChatbotRequestForm: React.FC = () => {
           {currentStep === 4 && (
             <div className="space-y-6">
               <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold text-gray-900 mb-2">ხშირად დასმული კითხვები</h2>
-                <p className="text-gray-600">დაამატეთ 5-10 ყველაზე ხშირი კითხვა პასუხებით (არასავალდებულო)</p><br />
-                <p className="text-gray-600">FAQ-ის დამატება და სრული მართვა შესაძლებელი იქნება ჩატბოტის დამზადების შემდეგაც.</p>
+                <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                  ხშირად დასმული კითხვები
+                </h2>
+                <p className="text-gray-600">
+                  დაამატეთ 5-10 ყველაზე ხშირი კითხვა პასუხებით (არასავალდებულო)
+                </p>
+                <br />
+                <p className="text-gray-600">
+                  FAQ-ის დამატება და სრული მართვა შესაძლებელი იქნება ჩატბოტის
+                  დამზადების შემდეგაც.
+                </p>
               </div>
 
               <div className="space-y-4">
                 {formData.faqs.map((faq, index) => (
-                  <div key={index} className="p-6 border-2 border-gray-200 rounded-xl">
+                  <div
+                    key={index}
+                    className="p-6 border-2 border-gray-200 rounded-xl"
+                  >
                     <div className="flex justify-between items-center mb-4">
-                      <span className="text-sm font-semibold text-gray-700">FAQ #{index + 1}</span>
+                      <span className="text-sm font-semibold text-gray-700">
+                        FAQ #{index + 1}
+                      </span>
                       {formData.faqs.length > 1 && (
                         <button
                           type="button"
@@ -661,14 +990,18 @@ const ChatbotRequestForm: React.FC = () => {
                       <input
                         type="text"
                         value={faq.question}
-                        onChange={(e) => updateFAQ(index, 'question', e.target.value)}
+                        onChange={(e) =>
+                          updateFAQ(index, "question", e.target.value)
+                        }
                         className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:outline-none transition-all"
                         placeholder="კითხვა: მაგ. რა არის მიწოდების დრო?"
                       />
 
                       <textarea
                         value={faq.answer}
-                        onChange={(e) => updateFAQ(index, 'answer', e.target.value)}
+                        onChange={(e) =>
+                          updateFAQ(index, "answer", e.target.value)
+                        }
                         rows={3}
                         className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:outline-none transition-all resize-none"
                         placeholder="პასუხი: მაგ. მიწოდების დრო არის 2-3 სამუშაო დღე თბილისში."
