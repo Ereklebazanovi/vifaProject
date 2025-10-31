@@ -1,124 +1,94 @@
 // src/types/chatbotRequest.ts
 import { Timestamp } from 'firebase/firestore';
 
+// Business Types
+export const BUSINESS_TYPES = [
+  { value: 'retail', label: 'საცალო ვაჭრობა' },
+  { value: 'restaurant', label: 'რესტორანი / კაფე' },
+  { value: 'hotel', label: 'სასტუმრო / სტუმარმასპინძლობა' },
+  { value: 'healthcare', label: 'ჯანმრთელობის დაცვა / კლინიკა' },
+  { value: 'beauty', label: 'სილამაზე / კოსმეტიკა' },
+  { value: 'fitness', label: 'სპორტი / ფიზიკური აქტივობა' },
+  { value: 'education', label: 'განათლება / კურსები' },
+  { value: 'real-estate', label: 'უძრავი ქონება' },
+  { value: 'automotive', label: 'საავტომობილო მომსახურება' },
+  { value: 'finance', label: 'ფინანსური მომსახურება' },
+  { value: 'legal', label: 'იურიდიული მომსახურება' },
+  { value: 'technology', label: 'ტექნოლოგიები / IT' },
+  { value: 'consulting', label: 'საკონსულტაციო მომსახურება' },
+  { value: 'e-commerce', label: 'ელექტრონული კომერცია (ონლაინ მაღაზია)' },
+  { value: 'services', label: 'სხვა მომსახურება' },
+  { value: 'other', label: 'სხვა' },
+] as const;
+
+// Communication Tones
+export const COMMUNICATION_TONES = [
+  { value: 'professional', label: 'პროფესიული', desc: 'ოფიციალური და სერიოზული' },
+  { value: 'friendly', label: 'მეგობრული', desc: 'თბილი და მისასალმებელი' },
+  { value: 'energetic', label: 'ენერგიული', desc: 'მხიარული და მოტივაციის მომცემი' },
+  { value: 'casual', label: 'არაფორმალური', desc: 'თავისუფალი და ყოველდღიური' },
+] as const;
+
+// Primary Languages
+export const LANGUAGES = [
+  { value: 'georgian', label: 'ქართული' },
+  { value: 'english', label: 'English' },
+  { value: 'both', label: 'ორივე ენა' },
+] as const;
+
+// Primary Goals
+export const PRIMARY_GOALS = [
+  { value: 'customer-support', label: 'მომხმარებელთა მხარდაჭერა', desc: 'კითხვებზე პასუხგაცემა და დახმარება' },
+  { value: 'increase-sales', label: 'გაყიდვების ზრდა', desc: 'პროდუქტების პრომოცია და კლიენტების კონვერტაცია' },
+  { value: 'information', label: 'ინფორმაციის მიწოდება', desc: 'ბიზნესის შესახებ ინფორმაციის გაზიარება' },
+  { value: 'reservations', label: 'ჯავშნები / რეზერვაციები', desc: 'მომსახურების ჯავშნა და დაგეგმვა' },
+  { value: 'general-assistance', label: 'ზოგადი დახმარება', desc: 'სხვადასხვა საკითხებში ასისტირება' },
+] as const;
+
+// Status types
+export type ChatbotRequestStatus = 'pending' | 'approved' | 'in-progress' | 'completed' | 'rejected';
+
+// Main ChatbotRequest interface - SIMPLIFIED
 export interface ChatbotRequest {
   id: string;
-  status: 'pending' | 'approved' | 'in-progress' | 'completed' | 'rejected';
+  status: ChatbotRequestStatus;
   submittedAt: Timestamp;
   updatedAt?: Timestamp;
-  
-  // 1. Company Information
-  companyInfo: {
-    name: string;                    // კომპანიის სახელი
-    website?: string;                // ვებსაიტი (optional)
-    socialMedia: {
-      facebook?: string;
-      instagram?: string;
-      linkedin?: string;
-      twitter?: string;
-    };
-    email: string;                   // ელ. ფოსტა (required)
-    phone: string;                   // ტელეფონი (required)
-    industry: string;                // ინდუსტრია
+
+  // User Information
+  userInfo: {
+    fullName: string;
+    companyName: string;
+    contactNumber: string;
+    email: string;
+    socialMediaLink?: string; // optional
   };
-  
-  // 2. Target Audience & Goals
-  audience: {
-    targetCustomer: string;          // სამიზნე მომხმარებელი (textarea)
-    mainGoals: string[];             // მთავარი მიზნები (checkboxes)
-    primaryLanguage: 'georgian' | 'english' | 'both'; // ენა
+
+  // Business Information
+  businessInfo: {
+    businessType: string; // from BUSINESS_TYPES
+    description: string;
+    servicesProducts: string;
+    workingHours?: string; // optional
+    location?: string; // optional
   };
-  
-  // 3. Chatbot Personality & Style
-  personality: {
-    tone: 'friendly' | 'professional' | 'humorous' | 'serious'; // ტონი
-    responseLength: 'short' | 'medium' | 'detailed';            // პასუხის სიგრძე
-    greetingBehavior: string;        // როდის უნდა მიესალმოს (textarea)
-    useEmojis: boolean;              // emoji-ების გამოყენება
-    stylisticPreferences?: string;   // დამატებითი სტილისტიკა (optional)
+
+  // Chatbot Parameters
+  chatbotParams: {
+    tone: 'professional' | 'friendly' | 'energetic' | 'casual';
+    language: 'georgian' | 'english' | 'both';
+    primaryGoal: string; // from PRIMARY_GOALS
+    customPrompts?: string; // optional
   };
-  
-  // 4. Chatbot Content (ყველაზე მნიშვნელოვანი!)
-  content: {
-    productsServices: string;        // პროდუქტები/სერვისები (textarea - დიდი)
-    faqs: Array<{                    // FAQ-ები (dynamic array)
-      question: string;
-      answer: string;
-    }>;
-    importantLinks: Array<{          // მნიშვნელოვანი ლინკები (dynamic array)
-      label: string;
-      url: string;
-    }>;
-    exampleQuestions: string[];      // მაგალითი კითხვები (array of strings)
-  };
-  
-  // 5. Technical Information
-  technical: {
-    platforms: string[];             // პლატფორმები (messenger, whatsapp, website, instagram)
-    integrations: string[];          // ინტეგრაციები (crm, email, sheets, other)
-    apiWebhooks?: string;            // API/Webhooks info (optional)
-  };
-  
-  // 6. Design and Branding (optional section)
-  branding?: {
-    logoUrl?: string;                // ლოგოს URL (Firebase Storage-ში upload)
-    colors?: {
-      primary?: string;              // ძირითადი ფერი
-      secondary?: string;            // მეორადი ფერი
-    };
-    visualPreferences?: string;      // ვიზუალური პრეფერენსები (textarea)
-  };
-  
-  // 7. Additional Notes
-  additionalNotes?: string;          // დამატებითი შენიშვნები (textarea)
+
+  // FAQ (Optional)
+  faqs: Array<{
+    question: string;
+    answer: string;
+  }>;
 }
 
-// Form Data Type (without id, submittedAt - for submission)
-export type ChatbotRequestFormData = Omit<ChatbotRequest, 'id' | 'submittedAt' | 'updatedAt'>;
-
-// Goal Options (for checkboxes in Step 2)
-export const CHATBOT_GOALS = [
-  { value: 'sales', label: 'გაყიდვების გაზრდა' },
-  { value: 'support', label: 'მომხმარებელთა მხარდაჭერა' },
-  { value: 'lead_generation', label: 'ლიდების გენერირება' },
-  { value: 'faq_automation', label: 'FAQ ავტომატიზაცია' },
-  { value: 'appointment_booking', label: 'ვიზიტების დაჯავშნა' },
-  { value: 'order_tracking', label: 'შეკვეთის თვალთვალი' },
-  { value: 'feedback_collection', label: 'გამოხმაურების შეგროვება' },
-];
-
-// Platform Options (for checkboxes in Step 5)
-export const CHATBOT_PLATFORMS = [
-  { value: 'messenger', label: 'Facebook Messenger', icon: '💬' },
-  { value: 'whatsapp', label: 'WhatsApp', icon: '📱' },
-  { value: 'website', label: 'ვებსაიტი (Widget)', icon: '🌐' },
-  { value: 'instagram', label: 'Instagram DM', icon: '📷' },
-  { value: 'telegram', label: 'Telegram', icon: '✈️' },
-];
-
-// Integration Options (for checkboxes in Step 5)
-export const CHATBOT_INTEGRATIONS = [
-  { value: 'crm', label: 'CRM სისტემა' },
-  { value: 'email', label: 'ელ. ფოსტა (Email Marketing)' },
-  { value: 'google_sheets', label: 'Google Sheets' },
-  { value: 'calendar', label: 'კალენდარი (Google Calendar)' },
-  { value: 'payment', label: 'გადახდის სისტემა' },
-  { value: 'analytics', label: 'ანალიტიკა' },
-  { value: 'other', label: 'სხვა' },
-];
-
-// Industry Options (for Step 1)
-export const INDUSTRIES = [
-  { value: 'ecommerce', label: 'ელექტრონული კომერცია' },
-  { value: 'restaurant', label: 'რესტორანი/კაფე' },
-  { value: 'healthcare', label: 'ჯანდაცვა' },
-  { value: 'education', label: 'განათლება' },
-  { value: 'real_estate', label: 'უძრავი ქონება' },
-  { value: 'finance', label: 'ფინანსები' },
-  { value: 'travel', label: 'მოგზაურობა' },
-  { value: 'fitness', label: 'ფიტნესი/სპორტი' },
-  { value: 'beauty', label: 'სილამაზე' },
-  { value: 'technology', label: 'ტექნოლოგია' },
-  { value: 'consulting', label: 'კონსულტაცია' },
-  { value: 'other', label: 'სხვა' },
-];
+// Form data interface (what we collect from the form)
+export interface ChatbotRequestFormData extends Omit<ChatbotRequest, 'id' | 'submittedAt' | 'updatedAt'> {
+  // The form data matches the ChatbotRequest structure minus the auto-generated fields
+}

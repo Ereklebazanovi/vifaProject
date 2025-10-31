@@ -15,24 +15,21 @@ import {
   FaExclamationTriangle,
   FaTimes,
   FaRobot,
-  FaPalette,
-  FaCog,
-  FaUsers,
   FaFileAlt
 } from 'react-icons/fa';
-import { 
-  subscribeToChatbotRequests, 
+import {
+  subscribeToChatbotRequests,
   updateChatbotRequestStatus,
   getStatusText,
   getStatusColor,
   formatTimestamp
 } from '../service/chatbotRequestService';
 import type { ChatbotRequest } from '../types/chatbotRequest';
-import { 
-  CHATBOT_GOALS, 
-  CHATBOT_PLATFORMS, 
-  CHATBOT_INTEGRATIONS,
-  INDUSTRIES 
+import {
+  BUSINESS_TYPES,
+  COMMUNICATION_TONES,
+  LANGUAGES,
+  PRIMARY_GOALS
 } from '../types/chatbotRequest';
 
 const ChatbotRequestsDashboard: React.FC = () => {
@@ -65,8 +62,9 @@ const ChatbotRequestsDashboard: React.FC = () => {
     // Search filter
     if (searchTerm) {
       filtered = filtered.filter(req =>
-        req.companyInfo.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        req.companyInfo.email.toLowerCase().includes(searchTerm.toLowerCase())
+        req.userInfo.companyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        req.userInfo.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        req.userInfo.fullName.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
@@ -84,23 +82,27 @@ const ChatbotRequestsDashboard: React.FC = () => {
 
   const exportToCSV = () => {
     const headers = [
+      'სრული სახელი',
       'კომპანია',
       'ელ. ფოსტა',
       'ტელეფონი',
-      'ინდუსტრია',
-      'მიზნები',
-      'პლატფორმები',
+      'ბიზნესის ტიპი',
+      'მიზანი',
+      'ენა',
+      'ტონი',
       'სტატუსი',
       'თარიღი'
     ];
-    
+
     const csvData = filteredRequests.map(req => [
-      req.companyInfo.name,
-      req.companyInfo.email,
-      req.companyInfo.phone,
-      req.companyInfo.industry,
-      req.audience.mainGoals.join(', '),
-      req.technical.platforms.join(', '),
+      req.userInfo.fullName,
+      req.userInfo.companyName,
+      req.userInfo.email,
+      req.userInfo.contactNumber,
+      BUSINESS_TYPES.find(t => t.value === req.businessInfo.businessType)?.label || req.businessInfo.businessType,
+      PRIMARY_GOALS.find(g => g.value === req.chatbotParams.primaryGoal)?.label || req.chatbotParams.primaryGoal,
+      LANGUAGES.find(l => l.value === req.chatbotParams.language)?.label || req.chatbotParams.language,
+      COMMUNICATION_TONES.find(t => t.value === req.chatbotParams.tone)?.label || req.chatbotParams.tone,
       getStatusText(req.status),
       formatTimestamp(req.submittedAt)
     ]);
@@ -134,7 +136,7 @@ const ChatbotRequestsDashboard: React.FC = () => {
               <FaRobot className="text-blue-400" />
               Chatbot Requests Management
             </h1>
-            <p className="text-slate-400">მართეთ ჩატბოტების მოთხოვნები</p>
+            <p className="text-slate-400">მართეთ ჩატბოტების მოთხოვნები (გამარტივებული)</p>
           </div>
           <div className="flex gap-4">
             <button
@@ -144,7 +146,7 @@ const ChatbotRequestsDashboard: React.FC = () => {
               <FaDownload />
               Export CSV
             </button>
-            
+
             <a
               href="/admin/leads"
               className="flex items-center gap-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors"
@@ -157,26 +159,26 @@ const ChatbotRequestsDashboard: React.FC = () => {
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           {[
-            { 
-              title: 'ახალი მოთხოვნები', 
+            {
+              title: 'ახალი მოთხოვნები',
               value: requests.filter(r => r.status === 'pending').length,
               icon: <FaExclamationTriangle />,
               color: 'bg-yellow-500'
             },
-            { 
-              title: 'დამტკიცებული', 
+            {
+              title: 'დამტკიცებული',
               value: requests.filter(r => r.status === 'approved').length,
               icon: <FaCheckCircle />,
               color: 'bg-blue-500'
             },
-            { 
-              title: 'მუშაობაში', 
+            {
+              title: 'მუშაობაში',
               value: requests.filter(r => r.status === 'in-progress').length,
-              icon: <FaCog />,
+              icon: <FaRobot />,
               color: 'bg-purple-500'
             },
-            { 
-              title: 'დასრულებული', 
+            {
+              title: 'დასრულებული',
               value: requests.filter(r => r.status === 'completed').length,
               icon: <FaCheckCircle />,
               color: 'bg-green-500'
@@ -209,7 +211,7 @@ const ChatbotRequestsDashboard: React.FC = () => {
               <label className="block text-sm font-medium mb-2">ძებნა</label>
               <input
                 type="text"
-                placeholder="კომპანია, ემაილი..."
+                placeholder="კომპანია, სახელი, ემაილი..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:border-blue-500 focus:outline-none"
@@ -250,10 +252,9 @@ const ChatbotRequestsDashboard: React.FC = () => {
             <table className="w-full">
               <thead className="bg-slate-800">
                 <tr>
-                  <th className="px-6 py-4 text-left text-sm font-medium text-slate-300">კომპანია</th>
-                  <th className="px-6 py-4 text-left text-sm font-medium text-slate-300">ინდუსტრია</th>
-                  <th className="px-6 py-4 text-left text-sm font-medium text-slate-300">მიზნები</th>
-                  <th className="px-6 py-4 text-left text-sm font-medium text-slate-300">პლატფორმები</th>
+                  <th className="px-6 py-4 text-left text-sm font-medium text-slate-300">კლიენტი</th>
+                  <th className="px-6 py-4 text-left text-sm font-medium text-slate-300">ბიზნესი</th>
+                  <th className="px-6 py-4 text-left text-sm font-medium text-slate-300">ჩატბოტი</th>
                   <th className="px-6 py-4 text-left text-sm font-medium text-slate-300">სტატუსი</th>
                   <th className="px-6 py-4 text-left text-sm font-medium text-slate-300">თარიღი</th>
                   <th className="px-6 py-4 text-left text-sm font-medium text-slate-300">მოქმედება</th>
@@ -269,43 +270,34 @@ const ChatbotRequestsDashboard: React.FC = () => {
                   >
                     <td className="px-6 py-4">
                       <div>
-                        <div className="font-medium">{request.companyInfo.name}</div>
-                        <div className="text-sm text-blue-400">{request.companyInfo.email}</div>
-                        <div className="text-sm text-green-400">{request.companyInfo.phone}</div>
+                        <div className="font-medium">{request.userInfo.fullName}</div>
+                        <div className="text-sm text-slate-400">{request.userInfo.companyName}</div>
+                        <div className="text-sm text-blue-400">{request.userInfo.email}</div>
+                        <div className="text-sm text-green-400">{request.userInfo.contactNumber}</div>
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <span className="text-sm">
-                        {INDUSTRIES.find(i => i.value === request.companyInfo.industry)?.label}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="flex flex-wrap gap-1">
-                        {request.audience.mainGoals.slice(0, 2).map((goal) => (
-                          <span
-                            key={goal}
-                            className="px-2 py-1 bg-blue-500/20 text-blue-400 text-xs rounded-full"
-                          >
-                            {CHATBOT_GOALS.find(g => g.value === goal)?.label.split(' ')[0]}
-                          </span>
-                        ))}
-                        {request.audience.mainGoals.length > 2 && (
-                          <span className="px-2 py-1 bg-slate-700 text-slate-300 text-xs rounded-full">
-                            +{request.audience.mainGoals.length - 2}
-                          </span>
-                        )}
+                      <div>
+                        <span className="text-sm font-medium">
+                          {BUSINESS_TYPES.find(t => t.value === request.businessInfo.businessType)?.label}
+                        </span>
+                        <div className="text-xs text-slate-400 mt-1 max-w-xs truncate">
+                          {request.businessInfo.description}
+                        </div>
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="flex flex-wrap gap-1">
-                        {request.technical.platforms.map((platform) => (
-                          <span
-                            key={platform}
-                            className="text-lg"
-                          >
-                            {CHATBOT_PLATFORMS.find(p => p.value === platform)?.icon}
+                      <div className="space-y-1">
+                        <div className="text-sm">
+                          <span className="text-slate-400">მიზანი:</span>{' '}
+                          <span className="text-white">
+                            {PRIMARY_GOALS.find(g => g.value === request.chatbotParams.primaryGoal)?.label}
                           </span>
-                        ))}
+                        </div>
+                        <div className="text-xs text-slate-400">
+                          {COMMUNICATION_TONES.find(t => t.value === request.chatbotParams.tone)?.label} • {' '}
+                          {LANGUAGES.find(l => l.value === request.chatbotParams.language)?.label}
+                        </div>
                       </div>
                     </td>
                     <td className="px-6 py-4">
@@ -356,13 +348,12 @@ const ChatbotRequestsDashboard: React.FC = () => {
               exit={{ opacity: 0, scale: 0.9 }}
               className="bg-slate-900 rounded-2xl p-8 max-w-6xl w-full max-h-[90vh] overflow-y-auto border border-slate-700"
             >
-              {/* Modal content continues in next message... */}
               {/* Modal Header */}
               <div className="flex justify-between items-start mb-6">
                 <div>
-                  <h2 className="text-2xl font-bold mb-2">{selectedRequest.companyInfo.name}</h2>
+                  <h2 className="text-2xl font-bold mb-2">{selectedRequest.userInfo.companyName}</h2>
                   <p className="text-slate-400">
-                    {INDUSTRIES.find(i => i.value === selectedRequest.companyInfo.industry)?.label}
+                    {BUSINESS_TYPES.find(t => t.value === selectedRequest.businessInfo.businessType)?.label}
                   </p>
                 </div>
                 <button
@@ -393,137 +384,119 @@ const ChatbotRequestsDashboard: React.FC = () => {
               <div className="grid md:grid-cols-2 gap-8">
                 {/* Left Column */}
                 <div className="space-y-6">
-                  {/* Contact Info */}
+                  {/* User Information */}
                   <div>
                     <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                       <FaUser className="text-blue-400" />
-                      საკონტაქტო ინფორმაცია
+                      მომხმარებლის ინფორმაცია
                     </h3>
                     <div className="space-y-3 bg-slate-800/50 p-4 rounded-lg">
                       <div className="flex items-center gap-3">
+                        <FaUser className="text-slate-400" />
+                        <span>{selectedRequest.userInfo.fullName}</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <FaBuilding className="text-slate-400" />
+                        <span>{selectedRequest.userInfo.companyName}</span>
+                      </div>
+                      <div className="flex items-center gap-3">
                         <FaEnvelope className="text-slate-400" />
-                        <a href={`mailto:${selectedRequest.companyInfo.email}`} className="text-blue-400 hover:underline">
-                          {selectedRequest.companyInfo.email}
+                        <a href={`mailto:${selectedRequest.userInfo.email}`} className="text-blue-400 hover:underline">
+                          {selectedRequest.userInfo.email}
                         </a>
                       </div>
                       <div className="flex items-center gap-3">
                         <FaPhone className="text-slate-400" />
-                        <a href={`tel:${selectedRequest.companyInfo.phone}`} className="text-blue-400 hover:underline">
-                          {selectedRequest.companyInfo.phone}
+                        <a href={`tel:${selectedRequest.userInfo.contactNumber}`} className="text-blue-400 hover:underline">
+                          {selectedRequest.userInfo.contactNumber}
                         </a>
                       </div>
-                      <div className="flex items-center gap-3">
-                        <FaBuilding className="text-slate-400" />
-                        <span>{selectedRequest.companyInfo.name}</span>
-                      </div>
-                      {selectedRequest.companyInfo.website && (
+                      {selectedRequest.userInfo.socialMediaLink && (
                         <div className="flex items-center gap-3">
                           <FaGlobe className="text-slate-400" />
-                          <a 
-                            href={selectedRequest.companyInfo.website} 
-                            target="_blank" 
+                          <a
+                            href={selectedRequest.userInfo.socialMediaLink}
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="text-blue-400 hover:underline"
                           >
-                            {selectedRequest.companyInfo.website}
+                            სოციალური მედია
                           </a>
                         </div>
                       )}
                     </div>
                   </div>
 
-                  {/* Social Media */}
-                  {(selectedRequest.companyInfo.socialMedia.facebook || 
-                    selectedRequest.companyInfo.socialMedia.instagram) && (
-                    <div>
-                      <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                        <FaGlobe className="text-blue-400" />
-                        სოციალური მედია
-                      </h3>
-                      <div className="space-y-2 bg-slate-800/50 p-4 rounded-lg">
-                        {selectedRequest.companyInfo.socialMedia.facebook && (
-                          <a 
-                            href={selectedRequest.companyInfo.socialMedia.facebook}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="block text-blue-400 hover:underline text-sm"
-                          >
-                            📘 Facebook
-                          </a>
-                        )}
-                        {selectedRequest.companyInfo.socialMedia.instagram && (
-                          <a 
-                            href={selectedRequest.companyInfo.socialMedia.instagram}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="block text-blue-400 hover:underline text-sm"
-                          >
-                            📷 Instagram
-                          </a>
-                        )}
+                  {/* Business Information */}
+                  <div>
+                    <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                      <FaBriefcase className="text-blue-400" />
+                      ბიზნესის ინფორმაცია
+                    </h3>
+                    <div className="bg-slate-800/50 p-4 rounded-lg space-y-4">
+                      <div>
+                        <span className="text-slate-400 text-sm">ბიზნესის ტიპი:</span>
+                        <div className="text-white font-medium">
+                          {BUSINESS_TYPES.find(t => t.value === selectedRequest.businessInfo.businessType)?.label}
+                        </div>
                       </div>
-                    </div>
-                  )}
-
-                  {/* Goals */}
-                  <div>
-                    <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                      <FaBullseye className="text-blue-400" />
-                      ჩატბოტის მიზნები
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedRequest.audience.mainGoals.map(goal => (
-                        <span
-                          key={goal}
-                          className="px-3 py-1.5 bg-blue-500/20 text-blue-400 text-sm rounded-full"
-                        >
-                          {CHATBOT_GOALS.find(g => g.value === goal)?.label}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Target Audience */}
-                  <div>
-                    <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                      <FaUsers className="text-blue-400" />
-                      სამიზნე აუდიტორია
-                    </h3>
-                    <div className="bg-slate-800/50 p-4 rounded-lg">
-                      <p className="text-slate-300 text-sm whitespace-pre-wrap">
-                        {selectedRequest.audience.targetCustomer}
-                      </p>
+                      <div>
+                        <span className="text-slate-400 text-sm">აღწერა:</span>
+                        <p className="text-slate-300 text-sm mt-1">
+                          {selectedRequest.businessInfo.description}
+                        </p>
+                      </div>
+                      <div>
+                        <span className="text-slate-400 text-sm">სერვისები/პროდუქტები:</span>
+                        <p className="text-slate-300 text-sm mt-1">
+                          {selectedRequest.businessInfo.servicesProducts}
+                        </p>
+                      </div>
+                      {selectedRequest.businessInfo.workingHours && (
+                        <div>
+                          <span className="text-slate-400 text-sm">სამუშაო საათები:</span>
+                          <div className="text-white">{selectedRequest.businessInfo.workingHours}</div>
+                        </div>
+                      )}
+                      {selectedRequest.businessInfo.location && (
+                        <div>
+                          <span className="text-slate-400 text-sm">მისამართი:</span>
+                          <div className="text-white">{selectedRequest.businessInfo.location}</div>
+                        </div>
+                      )}
                     </div>
                   </div>
 
-                  {/* Personality */}
+                  {/* Chatbot Parameters */}
                   <div>
                     <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                       <FaRobot className="text-blue-400" />
-                      პერსონალობა
+                      ჩატბოტის პარამეტრები
                     </h3>
-                    <div className="bg-slate-800/50 p-4 rounded-lg space-y-2 text-sm">
+                    <div className="bg-slate-800/50 p-4 rounded-lg space-y-3 text-sm">
                       <div className="flex justify-between">
                         <span className="text-slate-400">ტონი:</span>
-                        <span className="text-white capitalize">{selectedRequest.personality.tone}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">პასუხის სიგრძე:</span>
-                        <span className="text-white capitalize">{selectedRequest.personality.responseLength}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">ემოჯი:</span>
-                        <span className="text-white">{selectedRequest.personality.useEmojis ? '✅ დიახ' : '❌ არა'}</span>
+                        <span className="text-white">
+                          {COMMUNICATION_TONES.find(t => t.value === selectedRequest.chatbotParams.tone)?.label}
+                        </span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-slate-400">ენა:</span>
-                        <span className="text-white capitalize">{selectedRequest.audience.primaryLanguage}</span>
+                        <span className="text-white">
+                          {LANGUAGES.find(l => l.value === selectedRequest.chatbotParams.language)?.label}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-400">მიზანი:</span>
+                        <span className="text-white">
+                          {PRIMARY_GOALS.find(g => g.value === selectedRequest.chatbotParams.primaryGoal)?.label}
+                        </span>
                       </div>
                     </div>
-                    {selectedRequest.personality.greetingBehavior && (
+                    {selectedRequest.chatbotParams.customPrompts && (
                       <div className="bg-slate-800/50 p-4 rounded-lg mt-3">
-                        <p className="text-slate-400 text-xs mb-1">საგამარჯობო ქცევა:</p>
-                        <p className="text-slate-300 text-sm">{selectedRequest.personality.greetingBehavior}</p>
+                        <p className="text-slate-400 text-xs mb-1">სპეციალური ინსტრუქციები:</p>
+                        <p className="text-slate-300 text-sm">{selectedRequest.chatbotParams.customPrompts}</p>
                       </div>
                     )}
                   </div>
@@ -531,27 +504,14 @@ const ChatbotRequestsDashboard: React.FC = () => {
 
                 {/* Right Column */}
                 <div className="space-y-6">
-                  {/* Products/Services */}
-                  <div>
-                    <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                      <FaBriefcase className="text-blue-400" />
-                      პროდუქტები / სერვისები
-                    </h3>
-                    <div className="bg-slate-800/50 p-4 rounded-lg max-h-60 overflow-y-auto">
-                      <p className="text-slate-300 text-sm whitespace-pre-wrap">
-                        {selectedRequest.content.productsServices}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* FAQs - ყველაზე მნიშვნელოვანი! */}
+                  {/* FAQs */}
                   <div>
                     <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                       <FaFileAlt className="text-blue-400" />
-                      FAQ-ები ({selectedRequest.content.faqs.filter(f => f.question && f.answer).length})
+                      FAQ-ები ({selectedRequest.faqs.filter(f => f.question && f.answer).length})
                     </h3>
                     <div className="space-y-3 max-h-80 overflow-y-auto">
-                      {selectedRequest.content.faqs
+                      {selectedRequest.faqs
                         .filter(faq => faq.question && faq.answer)
                         .map((faq, index) => (
                           <div key={index} className="bg-slate-800/50 p-4 rounded-lg">
@@ -565,156 +525,15 @@ const ChatbotRequestsDashboard: React.FC = () => {
                             </div>
                           </div>
                         ))}
+                      {selectedRequest.faqs.filter(f => f.question && f.answer).length === 0 && (
+                        <div className="bg-slate-800/50 p-4 rounded-lg text-center text-slate-400">
+                          FAQ-ები არ არის დამატებული
+                        </div>
+                      )}
                     </div>
                   </div>
 
-                  {/* Important Links */}
-                      {selectedRequest.content.importantLinks.some(l => l.label && l.url) && (
-                    <div>
-                      <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                        <FaGlobe className="text-blue-400" />
-                        მნიშვნელოვანი ლინკები
-                      </h3>
-                      <div className="space-y-2 bg-slate-800/50 p-4 rounded-lg">
-                        {selectedRequest.content.importantLinks
-                          .filter(link => link.label && link.url)
-                          .map((link, index) => (
-                            <a
-                              key={index}
-                              href={link.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="block text-blue-400 hover:underline text-sm"
-                            >
-                              🔗 {link.label}
-                            </a>
-                          ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Example Questions */}
-                  {selectedRequest.content.exampleQuestions.some(q => q) && (
-                    <div>
-                      <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                        <FaBullseye className="text-blue-400" />
-                        მაგალითი კითხვები
-                      </h3>
-                      <div className="bg-slate-800/50 p-4 rounded-lg space-y-2">
-                        {selectedRequest.content.exampleQuestions
-                          .filter(q => q)
-                          .map((question, index) => (
-                            <div key={index} className="text-slate-300 text-sm">
-                              • {question}
-                            </div>
-                          ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Platforms */}
-                  <div>
-                    <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                      <FaCog className="text-blue-400" />
-                      პლატფორმები
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedRequest.technical.platforms.map(platform => (
-                        <span
-                          key={platform}
-                          className="px-3 py-2 bg-purple-500/20 text-purple-400 text-sm rounded-lg flex items-center gap-2"
-                        >
-                          <span className="text-lg">
-                            {CHATBOT_PLATFORMS.find(p => p.value === platform)?.icon}
-                          </span>
-                          {CHATBOT_PLATFORMS.find(p => p.value === platform)?.label}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Integrations */}
-                  {selectedRequest.technical.integrations.length > 0 && (
-                    <div>
-                      <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                        <FaCog className="text-blue-400" />
-                        ინტეგრაციები
-                      </h3>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedRequest.technical.integrations.map(integration => (
-                          <span
-                            key={integration}
-                            className="px-3 py-1.5 bg-slate-700 text-slate-300 text-sm rounded-full"
-                          >
-                            {CHATBOT_INTEGRATIONS.find(i => i.value === integration)?.label}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Branding */}
-                  {selectedRequest.branding && (
-                    <div>
-                      <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                        <FaPalette className="text-blue-400" />
-                        ბრენდინგი
-                      </h3>
-                      <div className="bg-slate-800/50 p-4 rounded-lg space-y-3">
-                        {selectedRequest.branding.colors && (
-                          <div className="flex gap-4">
-                            <div>
-                              <p className="text-xs text-slate-400 mb-1">ძირითადი ფერი</p>
-                              <div className="flex items-center gap-2">
-                                <div 
-                                  className="w-10 h-10 rounded border-2 border-slate-600"
-                                  style={{ backgroundColor: selectedRequest.branding.colors.primary }}
-                                />
-                                <span className="text-sm text-slate-300">
-                                  {selectedRequest.branding.colors.primary}
-                                </span>
-                              </div>
-                            </div>
-                            <div>
-                              <p className="text-xs text-slate-400 mb-1">მეორადი ფერი</p>
-                              <div className="flex items-center gap-2">
-                                <div 
-                                  className="w-10 h-10 rounded border-2 border-slate-600"
-                                  style={{ backgroundColor: selectedRequest.branding.colors.secondary }}
-                                />
-                                <span className="text-sm text-slate-300">
-                                  {selectedRequest.branding.colors.secondary}
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                        {selectedRequest.branding.visualPreferences && (
-                          <div>
-                            <p className="text-xs text-slate-400 mb-1">ვიზუალური პრეფერენსები</p>
-                            <p className="text-sm text-slate-300">{selectedRequest.branding.visualPreferences}</p>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Additional Notes */}
-                  {selectedRequest.additionalNotes && (
-                    <div>
-                      <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                        <FaFileAlt className="text-blue-400" />
-                        დამატებითი შენიშვნები
-                      </h3>
-                      <div className="bg-slate-800/50 p-4 rounded-lg">
-                        <p className="text-slate-300 text-sm whitespace-pre-wrap">
-                          {selectedRequest.additionalNotes}
-                        </p>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Submission Date */}
+                  {/* Timestamps */}
                   <div>
                     <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                       <FaCalendarAlt className="text-blue-400" />
@@ -748,25 +567,25 @@ const ChatbotRequestsDashboard: React.FC = () => {
                       if (!selectedRequest) return;
                       const req = selectedRequest;
                       const info = `
-Chatbot Request - ${req.companyInfo.name}
+Chatbot Request - ${req.userInfo.companyName}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-📧 Contact: ${req.companyInfo.email}
-📞 Phone: ${req.companyInfo.phone}
-🏢 Industry: ${INDUSTRIES.find(i => i.value === req.companyInfo.industry)?.label}
+👤 კლიენტი: ${req.userInfo.fullName}
+🏢 კომპანია: ${req.userInfo.companyName}
+📧 Email: ${req.userInfo.email}
+📞 ტელეფონი: ${req.userInfo.contactNumber}
 
-🎯 Goals: ${req.audience.mainGoals.map(g => CHATBOT_GOALS.find(goal => goal.value === g)?.label).join(', ')}
+🏪 ბიზნესის ტიპი: ${BUSINESS_TYPES.find(t => t.value === req.businessInfo.businessType)?.label}
+📝 აღწერა: ${req.businessInfo.description}
 
-🤖 Personality:
-- Tone: ${req.personality.tone}
-- Length: ${req.personality.responseLength}
-- Emojis: ${req.personality.useEmojis ? 'Yes' : 'No'}
+🤖 ჩატბოტი:
+- მიზანი: ${PRIMARY_GOALS.find(g => g.value === req.chatbotParams.primaryGoal)?.label}
+- ტონი: ${COMMUNICATION_TONES.find(t => t.value === req.chatbotParams.tone)?.label}
+- ენა: ${LANGUAGES.find(l => l.value === req.chatbotParams.language)?.label}
 
-📱 Platforms: ${req.technical.platforms.join(', ')}
-
-📋 FAQs: ${req.content.faqs.length} total
+📋 FAQ-ები: ${req.faqs.filter(f => f.question && f.answer).length} ცალი
                       `.trim();
-                      
+
                       navigator.clipboard.writeText(info);
                       alert('ინფორმაცია დაკოპირდა clipboardში');
                     }}
