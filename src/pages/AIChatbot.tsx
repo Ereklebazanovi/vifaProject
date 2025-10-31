@@ -771,14 +771,24 @@ const AIChatbot: React.FC = () => {
                 </h3>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Link
-                    to="/start-project"
-                    className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105"
-                  >
-                    <FaRocket />
-                    {t("cta.button")}
-                  </Link>
-                </div>
+  {/* არსებული "უფასო კონსულტაცია" ღილაკი */}
+  <Link
+    to="/start-project"
+    className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105"
+  >
+    <FaRocket />
+    {t("cta.button")}
+  </Link>
+
+  {/* ახალი "მოითხოვე AI ჩატბოტი" ღილაკი */}
+  <Link
+    to="/services/ai-chatbot/request"
+    className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-medium hover:from-purple-600 hover:to-purple-700 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 border border-purple-400/50"
+  >
+    <FaBrain />
+    {currentLanguage === 'ka' ? 'მოითხოვე AI ჩატბოტი' : 'Request AI Chatbot'}
+  </Link>
+</div>
               </motion.div>
             </div>
           </div>
