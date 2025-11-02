@@ -557,67 +557,78 @@ const ChatbotRequestsDashboard: React.FC = () => {
 
                 {/* Right Column */}
                 <div className="space-y-6">
-                  {/* Popular Topics */}
-                  {selectedRequest.popularTopics && selectedRequest.popularTopics.length > 0 && (
-                    <div>
-                      <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                        <FaFileAlt className="text-blue-400" />
-                        🏷️ არჩეული თემები
-                      </h3>
-                      <div className="bg-slate-800/50 p-4 rounded-lg">
-                        <div className="flex flex-wrap gap-2">
-                          {selectedRequest.popularTopics.map((topic, index) => (
-                            <span
-                              key={index}
-                              className="inline-block px-3 py-1 bg-blue-500/20 text-blue-300 text-sm rounded-full border border-blue-500/30"
-                            >
-                              {topic}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )}
 
-                  {/* Additional Info */}
-                  {selectedRequest.additionalInfo && selectedRequest.additionalInfo.trim() && (
-                    <div>
-                      <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                        <FaFileAlt className="text-blue-400" />
-                        💬 დამატებითი ინფორმაცია
-                      </h3>
-                      <div className="bg-slate-800/50 p-4 rounded-lg">
-                        <p className="text-slate-300 text-sm leading-relaxed whitespace-pre-wrap">
-                          {selectedRequest.additionalInfo}
-                        </p>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* FAQs */}
+                  {/* FAQ Information Summary */}
                   <div>
                     <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                       <FaFileAlt className="text-blue-400" />
-                      FAQ-ები ({selectedRequest.faqs.filter(f => f.question && f.answer).length})
+                      FAQ ინფორმაცია
                     </h3>
-                    <div className="space-y-3 max-h-80 overflow-y-auto">
-                      {selectedRequest.faqs
-                        .filter(faq => faq.question && faq.answer)
-                        .map((faq, index) => (
-                          <div key={index} className="bg-slate-800/50 p-4 rounded-lg">
-                            <div className="flex items-start gap-2 mb-2">
-                              <span className="text-blue-400 font-bold text-sm">Q{index + 1}:</span>
-                              <p className="text-white text-sm font-medium">{faq.question}</p>
-                            </div>
-                            <div className="flex items-start gap-2 ml-6">
-                              <span className="text-green-400 font-bold text-sm">A:</span>
-                              <p className="text-slate-300 text-sm">{faq.answer}</p>
-                            </div>
+                    <div className="space-y-4">
+
+                      {/* Popular Topics */}
+                      {selectedRequest.popularTopics && selectedRequest.popularTopics.length > 0 && (
+                        <div className="bg-slate-800/50 p-4 rounded-lg">
+                          <h4 className="text-white font-medium mb-3 flex items-center gap-2">
+                            🏷️ არჩეული თემები ({selectedRequest.popularTopics.length})
+                          </h4>
+                          <div className="flex flex-wrap gap-2">
+                            {selectedRequest.popularTopics.map((topic, index) => (
+                              <span
+                                key={index}
+                                className="inline-block px-3 py-1 bg-blue-500/20 text-blue-300 text-sm rounded-full border border-blue-500/30"
+                              >
+                                {topic}
+                              </span>
+                            ))}
                           </div>
-                        ))}
-                      {selectedRequest.faqs.filter(f => f.question && f.answer).length === 0 && (
+                        </div>
+                      )}
+
+                      {/* Additional Info */}
+                      {selectedRequest.additionalInfo && selectedRequest.additionalInfo.trim() && (
+                        <div className="bg-slate-800/50 p-4 rounded-lg">
+                          <h4 className="text-white font-medium mb-3 flex items-center gap-2">
+                            💬 დამატებითი ინფორმაცია
+                          </h4>
+                          <p className="text-slate-300 text-sm leading-relaxed whitespace-pre-wrap">
+                            {selectedRequest.additionalInfo}
+                          </p>
+                        </div>
+                      )}
+
+                      {/* Traditional FAQs (if any) */}
+                      {selectedRequest.faqs && selectedRequest.faqs.filter(f => f.question && f.answer).length > 0 && (
+                        <div className="bg-slate-800/50 p-4 rounded-lg">
+                          <h4 className="text-white font-medium mb-3 flex items-center gap-2">
+                            ❓ ხელით დამატებული FAQ-ები ({selectedRequest.faqs.filter(f => f.question && f.answer).length})
+                          </h4>
+                          <div className="space-y-3">
+                            {selectedRequest.faqs
+                              .filter(faq => faq.question && faq.answer)
+                              .map((faq, index) => (
+                                <div key={index} className="border-l-2 border-blue-400 pl-3">
+                                  <div className="flex items-start gap-2 mb-1">
+                                    <span className="text-blue-400 font-bold text-sm">Q:</span>
+                                    <p className="text-white text-sm font-medium">{faq.question}</p>
+                                  </div>
+                                  <div className="flex items-start gap-2 ml-4">
+                                    <span className="text-green-400 font-bold text-sm">A:</span>
+                                    <p className="text-slate-300 text-sm">{faq.answer}</p>
+                                  </div>
+                                </div>
+                              ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* No FAQ Info Message */}
+                      {(!selectedRequest.popularTopics || selectedRequest.popularTopics.length === 0) &&
+                       (!selectedRequest.additionalInfo || !selectedRequest.additionalInfo.trim()) &&
+                       (!selectedRequest.faqs || selectedRequest.faqs.filter(f => f.question && f.answer).length === 0) && (
                         <div className="bg-slate-800/50 p-4 rounded-lg text-center text-slate-400">
-                          FAQ-ები არ არის დამატებული
+                          <p>FAQ ინფორმაცია არ არის მითითებული</p>
+                          <p className="text-xs mt-1">მომხმარებელმა გამოტოვა ამ სექცია</p>
                         </div>
                       )}
                     </div>

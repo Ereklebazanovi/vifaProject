@@ -63,7 +63,7 @@ const ChatbotRequestForm: React.FC = () => {
       primaryGoal: [],
       customPrompts: "",
     },
-    faqs: [{ question: "", answer: "" }],
+    faqs: [],
     popularTopics: [],
     additionalInfo: "",
   });
