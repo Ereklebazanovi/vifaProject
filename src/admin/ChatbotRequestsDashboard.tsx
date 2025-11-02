@@ -447,7 +447,15 @@ const ChatbotRequestsDashboard: React.FC = () => {
                         <div className="flex items-center gap-3">
                           <FaGlobe className="text-slate-400" />
                           <a
-                            href={selectedRequest.userInfo.socialMediaLink}
+                            href={(() => {
+                              const link = selectedRequest.userInfo.socialMediaLink;
+                              // Check if link already has protocol
+                              if (link.startsWith('http://') || link.startsWith('https://')) {
+                                return link;
+                              }
+                              // Add https:// if missing
+                              return `https://${link}`;
+                            })()}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-blue-400 hover:underline"
