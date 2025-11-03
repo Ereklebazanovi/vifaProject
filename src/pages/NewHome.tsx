@@ -40,7 +40,7 @@ const newHomeTranslations = {
       "პროფესიონალური პროდუქტის შექმნა, მუდმივი ოპტიმიზაცია და გამჭირვალე რეპორტინგი შედეგების მისაღწევად",
 
     "newHome.interactive.processTitle": "როგორ მუშაობს",
-    "newHome.interactive.processTitleHighlight": "ვებ განვითარება?",
+    "newHome.interactive.processTitleHighlight": "VIFA-ს გუნდი?",
 
     "newHome.interactive.step1.title": "1. კვლევა",
     "newHome.interactive.step1.subtitle": "აუდიტორიის გაცნობა",
@@ -172,8 +172,8 @@ const newHomeTranslations = {
     "newHome.services.execution.description":
       "Professional product creation, continuous optimization, and transparent reporting to achieve results.",
 
-    "newHome.interactive.processTitle": "How Web Development",
-    "newHome.interactive.processTitleHighlight": "Works?",
+    "newHome.interactive.processTitle": "How does the",
+    "newHome.interactive.processTitleHighlight": " VIFA team work?",
 
     "newHome.interactive.step1.title": "1. Research",
     "newHome.interactive.step1.subtitle": "Audience Discovery",
@@ -772,7 +772,6 @@ const NewHome: React.FC = () => {
 
               {/* Two-Column Layout */}
               <div className="grid lg:grid-cols-2 gap-12 items-start">
-               
                 <div className="space-y-8">
                   <div className="text-center lg:text-left mb-12">
                     <h3 className="text-2xl md:text-3xl font-light text-white mb-4">
