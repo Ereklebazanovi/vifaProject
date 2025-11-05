@@ -41,12 +41,20 @@ const SEO: React.FC<SEOProps> = ({
   const currentUrl = url || (typeof window !== 'undefined' ? window.location.href : siteConfig.url);
 
   // Clean canonical URL: remove query parameters and ensure proper domain
-  let canonicalUrl = currentUrl.split('?')[0].split('#')[0];
+  let canonicalUrl = currentUrl.split('#')[0]; // Keep query params for language handling
 
   // Ensure canonical URL uses www.vifadigital.ge consistently
   if (canonicalUrl.includes('vifadigital.ge')) {
     canonicalUrl = canonicalUrl.replace(/https?:\/\/(www\.)?vifadigital\.ge/, 'https://www.vifadigital.ge');
   }
+
+  // Generate language-specific URLs
+  const baseUrl = canonicalUrl.split('?')[0];
+  const georgianUrl = baseUrl;
+  const englishUrl = `${baseUrl}?lang=en`;
+
+  // Set canonical based on current language
+  const finalCanonicalUrl = currentLanguage === 'en' ? englishUrl : georgianUrl;
 
   const fullImageUrl = image.startsWith('http') ? image : `${siteConfig.url}${image}`;
 
@@ -56,7 +64,7 @@ const SEO: React.FC<SEOProps> = ({
     "@type": type === "article" ? "Article" : "Organization",
     name: type === "article" ? fullTitle : "VIFA Digital",
     description: metaDescription,
-    url: currentUrl,
+    url: finalCanonicalUrl,
     logo: `${siteConfig.url}/logo.png`,
     image: fullImageUrl,
     telephone: import.meta.env.VITE_BUSINESS_PHONE || "+995555123456",
@@ -173,8 +181,8 @@ const SEO: React.FC<SEOProps> = ({
       <meta name="classification" content="Business" />
       <meta name="designer" content="VIFA Digital" />
       <meta name="owner" content="VIFA Digital" />
-      <meta name="url" content={currentUrl} />
-      <meta name="identifier-URL" content={currentUrl} />
+      <meta name="url" content={finalCanonicalUrl} />
+      <meta name="identifier-URL" content={finalCanonicalUrl} />
       <meta name="directory" content="submission" />
       <meta name="category" content="Digital Marketing, Web Development, Technology, Business" />
       <meta name="coverage" content="Worldwide" />
@@ -190,7 +198,7 @@ const SEO: React.FC<SEOProps> = ({
       <meta property="og:image:alt" content={`${title || siteName} - VIFA Digital`} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:url" content={currentUrl} />
+      <meta property="og:url" content={finalCanonicalUrl} />
       <meta property="og:site_name" content={siteName} />
       <meta property="og:locale" content={currentLanguage === 'ka' ? 'ka_GE' : 'en_US'} />
       <meta property="og:locale:alternate" content={currentLanguage === 'ka' ? 'en_US' : 'ka_GE'} />
@@ -242,12 +250,12 @@ const SEO: React.FC<SEOProps> = ({
       <meta itemProp="image" content={fullImageUrl} />
 
       {/* Canonical URL */}
-      <link rel="canonical" href={canonicalUrl} />
+      <link rel="canonical" href={finalCanonicalUrl} />
 
       {/* Alternative languages */}
-      <link rel="alternate" hrefLang="ka" href={canonicalUrl} />
-      <link rel="alternate" hrefLang="en" href={`${canonicalUrl}?lang=en`} />
-      <link rel="alternate" hrefLang="x-default" href={canonicalUrl} />
+      <link rel="alternate" hrefLang="ka" href={georgianUrl} />
+      <link rel="alternate" hrefLang="en" href={englishUrl} />
+      <link rel="alternate" hrefLang="x-default" href={georgianUrl} />
 
       {/* Preconnect for performance */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
