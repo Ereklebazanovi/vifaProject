@@ -21,6 +21,7 @@ const BlogPage = lazy(() => import("./pages/BlogPage"));
 const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
+const ContactPage = lazy(() => import("./pages/ContactPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 // ჩატბოტის დეტალების შესავვსები ველების პეიჯი კომპანიებისთვის
 const ChatbotRequestForm = lazy(() => import("./pages/ChatbotRequestForm")); // ახალი ➕
@@ -145,14 +146,6 @@ const LoadingSpinner = () => (
   </div>
 );
 
-const Contact = () => (
-  <div className="pt-24 pb-20">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 className="text-4xl font-bold text-center mb-8">Contact Us</h1>
-      <p className="text-gray-400 text-center">Contact page coming soon...</p>
-    </div>
-  </div>
-);
 
 // Optimized route transition with immediate rendering
 const RouteTransition: React.FC<{ children: React.ReactNode }> = React.memo(
@@ -193,8 +186,7 @@ const AppWithRouter: React.FC = () => {
               />{" "}
               {/* ახალი ➕ */}
               <Route path="about" element={<AboutPage />} />
-              <Route path="about" element={<AboutPage />} />
-              <Route path="contact" element={<Contact />} />
+              <Route path="contact" element={<ContactPage />} />
               <Route path="blog" element={<BlogPage />} />
               <Route path="blog/:slug" element={<BlogPostPage />} />
               <Route path="start-project" element={<StartProject />} />
