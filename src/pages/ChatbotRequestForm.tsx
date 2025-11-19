@@ -102,9 +102,9 @@ const ChatbotRequestForm: React.FC = () => {
       setCurrentStep((prev) => Math.min(prev + 1, 4));
       // Scroll to form container (not page top)
       setTimeout(() => {
-        const formContainer = document.querySelector('.form-container');
+        const formContainer = document.querySelector(".form-container");
         if (formContainer) {
-          formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          formContainer.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       }, 100);
     } else {
@@ -116,9 +116,9 @@ const ChatbotRequestForm: React.FC = () => {
     setCurrentStep((prev) => Math.max(prev - 1, 1));
     // Scroll to form container (not page top)
     setTimeout(() => {
-      const formContainer = document.querySelector('.form-container');
+      const formContainer = document.querySelector(".form-container");
       if (formContainer) {
-        formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        formContainer.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }, 100);
   };
@@ -746,12 +746,15 @@ const ChatbotRequestForm: React.FC = () => {
                     >
                       <input
                         type="checkbox"
-                        checked={formData.chatbotParams.language.includes(lang.value)}
+                        checked={formData.chatbotParams.language.includes(
+                          lang.value
+                        )}
                         onChange={(e) => {
-                          const currentLanguages = formData.chatbotParams.language;
+                          const currentLanguages =
+                            formData.chatbotParams.language;
                           const newLanguages = e.target.checked
                             ? [...currentLanguages, lang.value]
-                            : currentLanguages.filter(l => l !== lang.value);
+                            : currentLanguages.filter((l) => l !== lang.value);
 
                           setFormData((prev) => ({
                             ...prev,
@@ -763,17 +766,27 @@ const ChatbotRequestForm: React.FC = () => {
                         }}
                         className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 mr-4"
                       />
-                      <span className={`text-lg font-semibold flex-1 ${
-                        formData.chatbotParams.language.includes(lang.value)
-                          ? "text-blue-700"
-                          : "text-gray-700"
-                      }`}>
+                      <span
+                        className={`text-lg font-semibold flex-1 ${
+                          formData.chatbotParams.language.includes(lang.value)
+                            ? "text-blue-700"
+                            : "text-gray-700"
+                        }`}
+                      >
                         {lang.label}
                       </span>
                       {formData.chatbotParams.language.includes(lang.value) && (
                         <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center ml-2">
-                          <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          <svg
+                            className="w-3 h-3 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
                           </svg>
                         </div>
                       )}
@@ -786,8 +799,10 @@ const ChatbotRequestForm: React.FC = () => {
                   <div className="mt-4">
                     <p className="text-sm text-gray-600 mb-2">არჩეული ენები:</p>
                     <div className="flex flex-wrap gap-2">
-                      {formData.chatbotParams.language.map(selectedLang => {
-                        const lang = LANGUAGES.find(l => l.value === selectedLang);
+                      {formData.chatbotParams.language.map((selectedLang) => {
+                        const lang = LANGUAGES.find(
+                          (l) => l.value === selectedLang
+                        );
                         return (
                           <span
                             key={selectedLang}
@@ -797,16 +812,30 @@ const ChatbotRequestForm: React.FC = () => {
                             <button
                               type="button"
                               onClick={() => {
-                                const newLanguages = formData.chatbotParams.language.filter(l => l !== selectedLang);
-                                setFormData(prev => ({
+                                const newLanguages =
+                                  formData.chatbotParams.language.filter(
+                                    (l) => l !== selectedLang
+                                  );
+                                setFormData((prev) => ({
                                   ...prev,
-                                  chatbotParams: { ...prev.chatbotParams, language: newLanguages }
+                                  chatbotParams: {
+                                    ...prev.chatbotParams,
+                                    language: newLanguages,
+                                  },
                                 }));
                               }}
                               className="ml-1 hover:bg-blue-200 rounded-full p-0.5"
                             >
-                              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                              <svg
+                                className="w-3 h-3"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                  clipRule="evenodd"
+                                />
                               </svg>
                             </button>
                           </span>
@@ -838,12 +867,15 @@ const ChatbotRequestForm: React.FC = () => {
                     >
                       <input
                         type="checkbox"
-                        checked={formData.chatbotParams.primaryGoal.includes(goal.value)}
+                        checked={formData.chatbotParams.primaryGoal.includes(
+                          goal.value
+                        )}
                         onChange={(e) => {
-                          const currentGoals = formData.chatbotParams.primaryGoal;
+                          const currentGoals =
+                            formData.chatbotParams.primaryGoal;
                           const newGoals = e.target.checked
                             ? [...currentGoals, goal.value]
-                            : currentGoals.filter(g => g !== goal.value);
+                            : currentGoals.filter((g) => g !== goal.value);
 
                           setFormData((prev) => ({
                             ...prev,
@@ -856,19 +888,33 @@ const ChatbotRequestForm: React.FC = () => {
                         className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 mr-4 mt-1 flex-shrink-0"
                       />
                       <div className="flex-1">
-                        <div className={`font-semibold mb-1 ${
-                          formData.chatbotParams.primaryGoal.includes(goal.value)
-                            ? "text-blue-700"
-                            : "text-gray-900"
-                        }`}>
+                        <div
+                          className={`font-semibold mb-1 ${
+                            formData.chatbotParams.primaryGoal.includes(
+                              goal.value
+                            )
+                              ? "text-blue-700"
+                              : "text-gray-900"
+                          }`}
+                        >
                           {goal.label}
                         </div>
                         <div className="text-sm text-gray-600">{goal.desc}</div>
                       </div>
-                      {formData.chatbotParams.primaryGoal.includes(goal.value) && (
+                      {formData.chatbotParams.primaryGoal.includes(
+                        goal.value
+                      ) && (
                         <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center ml-2 mt-1 flex-shrink-0">
-                          <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          <svg
+                            className="w-3 h-3 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
                           </svg>
                         </div>
                       )}
@@ -879,34 +925,54 @@ const ChatbotRequestForm: React.FC = () => {
                 {/* Selected goals display */}
                 {formData.chatbotParams.primaryGoal.length > 0 && (
                   <div className="mt-4">
-                    <p className="text-sm text-gray-600 mb-2">არჩეული მიზნები:</p>
+                    <p className="text-sm text-gray-600 mb-2">
+                      არჩეული მიზნები:
+                    </p>
                     <div className="flex flex-wrap gap-2">
-                      {formData.chatbotParams.primaryGoal.map(selectedGoal => {
-                        const goal = PRIMARY_GOALS.find(g => g.value === selectedGoal);
-                        return (
-                          <span
-                            key={selectedGoal}
-                            className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full"
-                          >
-                            {goal?.label}
-                            <button
-                              type="button"
-                              onClick={() => {
-                                const newGoals = formData.chatbotParams.primaryGoal.filter(g => g !== selectedGoal);
-                                setFormData(prev => ({
-                                  ...prev,
-                                  chatbotParams: { ...prev.chatbotParams, primaryGoal: newGoals }
-                                }));
-                              }}
-                              className="ml-1 hover:bg-blue-200 rounded-full p-0.5"
+                      {formData.chatbotParams.primaryGoal.map(
+                        (selectedGoal) => {
+                          const goal = PRIMARY_GOALS.find(
+                            (g) => g.value === selectedGoal
+                          );
+                          return (
+                            <span
+                              key={selectedGoal}
+                              className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full"
                             >
-                              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                              </svg>
-                            </button>
-                          </span>
-                        );
-                      })}
+                              {goal?.label}
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  const newGoals =
+                                    formData.chatbotParams.primaryGoal.filter(
+                                      (g) => g !== selectedGoal
+                                    );
+                                  setFormData((prev) => ({
+                                    ...prev,
+                                    chatbotParams: {
+                                      ...prev.chatbotParams,
+                                      primaryGoal: newGoals,
+                                    },
+                                  }));
+                                }}
+                                className="ml-1 hover:bg-blue-200 rounded-full p-0.5"
+                              >
+                                <svg
+                                  className="w-3 h-3"
+                                  fill="currentColor"
+                                  viewBox="0 0 20 20"
+                                >
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                    clipRule="evenodd"
+                                  />
+                                </svg>
+                              </button>
+                            </span>
+                          );
+                        }
+                      )}
                     </div>
                   </div>
                 )}
@@ -944,7 +1010,8 @@ const ChatbotRequestForm: React.FC = () => {
                   🤝 დაგვეხმარე ჩატბოტის გაუმჯობესებაში
                 </h2>
                 <p className="text-gray-600 text-lg leading-relaxed">
-                  ეს ნაბიჯი სრულიად არაა სავალდებულო. შენი დახმარებით ჩატბოტი უკეთ გაიგებს მომხმარებლების საჭიროებებს.
+                  ეს ნაბიჯი სრულიად არაა სავალდებულო. შენი დახმარებით ჩატბოტი
+                  უკეთ გაიგებს მომხმარებლების საჭიროებებს.
                 </p>
               </div>
 
@@ -959,11 +1026,21 @@ const ChatbotRequestForm: React.FC = () => {
 
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                   {[
-                    'სამუშაო საათები', 'მიწოდების ვადები', 'ფასები და ღირებულება', 'მომსახურების ვარიანტები',
-                    'ადგილმდებარეობა', 'კონტაქტი', 'ონლაინ შეკვეთა', 'გარანტია',
-                    'დაბრუნების პოლიტიკა', 'საფუძველი', 'ღია დღეები', 'ვებსაიტი'
+                    "სამუშაო საათები",
+                    "მიწოდების ვადები",
+                    "ფასები და ღირებულება",
+                    "მომსახურების ვარიანტები",
+                    "ადგილმდებარეობა",
+                    "კონტაქტი",
+                    "ონლაინ შეკვეთა",
+                    "გარანტია",
+                    "დაბრუნების პოლიტიკა",
+                    "საფუძველი",
+                    "ღია დღეები",
+                    "ვებსაიტი",
                   ].map((tag) => {
-                    const isSelected = formData.popularTopics?.includes(tag) || false;
+                    const isSelected =
+                      formData.popularTopics?.includes(tag) || false;
                     return (
                       <button
                         key={tag}
@@ -971,15 +1048,18 @@ const ChatbotRequestForm: React.FC = () => {
                         onClick={() => {
                           const currentTopics = formData.popularTopics || [];
                           const newTopics = isSelected
-                            ? currentTopics.filter(t => t !== tag)
+                            ? currentTopics.filter((t) => t !== tag)
                             : [...currentTopics, tag];
 
-                          setFormData(prev => ({ ...prev, popularTopics: newTopics }));
+                          setFormData((prev) => ({
+                            ...prev,
+                            popularTopics: newTopics,
+                          }));
                         }}
                         className={`p-3 rounded-lg text-sm font-medium transition-all duration-200 border-2 ${
                           isSelected
-                            ? 'bg-blue-500 text-white border-blue-500 shadow-md transform scale-105'
-                            : 'bg-white text-gray-700 border-gray-200 hover:border-blue-300 hover:shadow-sm'
+                            ? "bg-blue-500 text-white border-blue-500 shadow-md transform scale-105"
+                            : "bg-white text-gray-700 border-gray-200 hover:border-blue-300 hover:shadow-sm"
                         }`}
                       >
                         {tag}
@@ -991,9 +1071,11 @@ const ChatbotRequestForm: React.FC = () => {
                 {/* Selected topics display */}
                 {(formData.popularTopics?.length || 0) > 0 && (
                   <div className="mt-4 p-3 bg-white rounded-lg border border-blue-200">
-                    <p className="text-sm text-gray-600 mb-2">არჩეული თემები:</p>
+                    <p className="text-sm text-gray-600 mb-2">
+                      არჩეული თემები:
+                    </p>
                     <div className="flex flex-wrap gap-2">
-                      {formData.popularTopics?.map(topic => (
+                      {formData.popularTopics?.map((topic) => (
                         <span
                           key={topic}
                           className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full"
@@ -1002,13 +1084,27 @@ const ChatbotRequestForm: React.FC = () => {
                           <button
                             type="button"
                             onClick={() => {
-                              const newTopics = formData.popularTopics?.filter(t => t !== topic) || [];
-                              setFormData(prev => ({ ...prev, popularTopics: newTopics }));
+                              const newTopics =
+                                formData.popularTopics?.filter(
+                                  (t) => t !== topic
+                                ) || [];
+                              setFormData((prev) => ({
+                                ...prev,
+                                popularTopics: newTopics,
+                              }));
                             }}
                             className="ml-1 hover:bg-blue-200 rounded-full p-0.5"
                           >
-                            <svg className="w-2 h-2" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                            <svg
+                              className="w-2 h-2"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clipRule="evenodd"
+                              />
                             </svg>
                           </button>
                         </span>
@@ -1028,8 +1124,13 @@ const ChatbotRequestForm: React.FC = () => {
                 </p>
 
                 <textarea
-                  value={formData.additionalInfo || ''}
-                  onChange={(e) => setFormData(prev => ({ ...prev, additionalInfo: e.target.value }))}
+                  value={formData.additionalInfo || ""}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      additionalInfo: e.target.value,
+                    }))
+                  }
                   rows={4}
                   className="w-full px-4 py-3 border-2 border-green-200 rounded-xl text-gray-900 placeholder-gray-500 focus:border-green-500 focus:ring-4 focus:ring-green-500/10 focus:outline-none transition-all resize-none bg-white"
                   placeholder="მაგ: როგორ შეგვიძლია ონლაინ შეკვეთის განთავსება? რა არის ჩვენი ახალი პროდუქტების შესახებ ინფორმაცია?"
@@ -1040,12 +1141,17 @@ const ChatbotRequestForm: React.FC = () => {
               <div className="text-center bg-gray-50 p-6 rounded-2xl border border-gray-200">
                 <div className="flex items-center justify-center gap-2 mb-3">
                   <span className="text-2xl">⏭️</span>
-                  <h3 className="text-lg font-semibold text-gray-700">მსურს გამოვტოვო</h3>
+                  <h3 className="text-lg font-semibold text-gray-700">
+                    მსურს გამოვტოვო
+                  </h3>
                 </div>
                 <p className="text-gray-600 text-sm leading-relaxed">
-                  არაა პრობლემა! ჩატბოტის დამზადების შემდეგ ყველაფერს ადვილად შეძლებ დამატებას და რედაქტირებას.
+                  არაა პრობლემა! ჩატბოტის დამზადების შემდეგ ინფორმაციის
+                  დამატებას და შეცვლას მარტივად შეძლებ
                   <br />
-                  <span className="font-medium text-gray-700">შემდეგზე ღილაკზე დაჭერით ფორმის გაგზავნა შეძლებ.</span>
+                  <span className="font-medium text-gray-700">
+                    შემდეგზე ღილაკზე დაჭერით ფორმის გაგზავნა შეძლებ.
+                  </span>
                 </p>
               </div>
             </div>

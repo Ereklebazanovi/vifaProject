@@ -38,7 +38,7 @@ export const LANGUAGES = [
 
 // Primary Goals
 export const PRIMARY_GOALS = [
-  { value: 'customer-support', label: 'მომხმარებელთა მხარდაჭერა', desc: 'კითხვებზე პასუხგაცემა და დახმარება' },
+  { value: 'customer-support', label: 'მომხმარებელთა მხარდაჭერა', desc: 'კითხვებზე პასუხის გაცემა და დახმარება' },
   { value: 'increase-sales', label: 'გაყიდვების ზრდა', desc: 'პროდუქტების პრომოცია და კლიენტების კონვერტაცია' },
   { value: 'information', label: 'ინფორმაციის მიწოდება', desc: 'ბიზნესის შესახებ ინფორმაციის გაზიარება' },
   { value: 'general-assistance', label: 'ზოგადი დახმარება', desc: 'სხვადასხვა საკითხებში ასისტირება' },
