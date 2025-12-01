@@ -20,6 +20,16 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
   children,
 }) => {
   const [currentLanguage, setCurrentLanguage] = useState<Language>(() => {
+    // Check URL parameter first
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const langParam = urlParams.get('lang') as Language;
+      if (langParam === 'en' || langParam === 'ka') {
+        return langParam;
+      }
+    }
+
+    // Fall back to localStorage
     const savedLanguage = localStorage.getItem("language") as Language;
     return savedLanguage && (savedLanguage === "ka" || savedLanguage === "en")
       ? savedLanguage
@@ -32,6 +42,26 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
     localStorage.setItem("language", currentLanguage);
     document.documentElement.lang =
       currentLanguage === "ka" ? "ka-GE" : "en-US";
+  }, [currentLanguage]);
+
+  // Listen for URL changes to update language
+  useEffect(() => {
+    const handleLocationChange = () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const langParam = urlParams.get('lang') as Language;
+      if (langParam === 'en' || langParam === 'ka') {
+        if (langParam !== currentLanguage) {
+          setCurrentLanguage(langParam);
+        }
+      }
+    };
+
+    // Listen for popstate events (back/forward navigation)
+    window.addEventListener('popstate', handleLocationChange);
+
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+    };
   }, [currentLanguage]);
 
   const toggleLanguage = () => {

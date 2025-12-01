@@ -8,7 +8,7 @@
   <!-- Home Page - Georgian (Default) -->
   <url>
     <loc>https://www.vifadigital.ge/</loc>
-    <lastmod>2025-11-18</lastmod>
+    <lastmod>2025-12-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.vifadigital.ge/" />
@@ -19,7 +19,7 @@
   <!-- Home Page - English -->
   <url>
     <loc>https://www.vifadigital.ge/?lang=en</loc>
-    <lastmod>2025-11-18</lastmod>
+    <lastmod>2025-12-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.vifadigital.ge/" />
@@ -30,7 +30,7 @@
   <!-- About Page - Georgian -->
   <url>
     <loc>https://www.vifadigital.ge/about</loc>
-    <lastmod>2025-11-18</lastmod>
+    <lastmod>2025-12-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.vifadigital.ge/about" />
@@ -41,7 +41,7 @@
   <!-- About Page - English -->
   <url>
     <loc>https://www.vifadigital.ge/about?lang=en</loc>
-    <lastmod>2025-11-18</lastmod>
+    <lastmod>2025-12-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.vifadigital.ge/about" />
@@ -52,7 +52,7 @@
   <!-- Start Project Page - Georgian -->
   <url>
     <loc>https://www.vifadigital.ge/start-project</loc>
-    <lastmod>2025-11-18</lastmod>
+    <lastmod>2025-12-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.vifadigital.ge/start-project" />
@@ -63,7 +63,7 @@
   <!-- Start Project Page - English -->
   <url>
     <loc>https://www.vifadigital.ge/start-project?lang=en</loc>
-    <lastmod>2025-11-18</lastmod>
+    <lastmod>2025-12-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.vifadigital.ge/start-project" />
@@ -74,7 +74,7 @@
   <!-- Contact Page - Georgian -->
   <url>
     <loc>https://www.vifadigital.ge/contact</loc>
-    <lastmod>2025-11-18</lastmod>
+    <lastmod>2025-12-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.vifadigital.ge/contact" />
@@ -85,7 +85,7 @@
   <!-- Contact Page - English -->
   <url>
     <loc>https://www.vifadigital.ge/contact?lang=en</loc>
-    <lastmod>2025-11-18</lastmod>
+    <lastmod>2025-12-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.vifadigital.ge/contact" />
@@ -96,7 +96,7 @@
   <!-- Digital Marketing Service - Georgian -->
   <url>
     <loc>https://www.vifadigital.ge/services/digital-advertising</loc>
-    <lastmod>2025-11-18</lastmod>
+    <lastmod>2025-12-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.vifadigital.ge/services/digital-advertising" />
@@ -107,7 +107,7 @@
   <!-- Digital Marketing Service - English -->
   <url>
     <loc>https://www.vifadigital.ge/services/digital-advertising?lang=en</loc>
-    <lastmod>2025-11-18</lastmod>
+    <lastmod>2025-12-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.vifadigital.ge/services/digital-advertising" />
@@ -118,7 +118,7 @@
   <!-- Web Development Service - Georgian -->
   <url>
     <loc>https://www.vifadigital.ge/services/web-development</loc>
-    <lastmod>2025-11-18</lastmod>
+    <lastmod>2025-12-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.vifadigital.ge/services/web-development" />
@@ -129,7 +129,7 @@
   <!-- Web Development Service - English (This was the FAILED URL) -->
   <url>
     <loc>https://www.vifadigital.ge/services/web-development?lang=en</loc>
-    <lastmod>2025-11-18</lastmod>
+    <lastmod>2025-12-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.vifadigital.ge/services/web-development" />
@@ -140,7 +140,7 @@
   <!-- AI Chatbot Service - Georgian -->
   <url>
     <loc>https://www.vifadigital.ge/services/ai-chatbot</loc>
-    <lastmod>2025-11-18</lastmod>
+    <lastmod>2025-12-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.vifadigital.ge/services/ai-chatbot" />
@@ -151,7 +151,7 @@
   <!-- AI Chatbot Service - English -->
   <url>
     <loc>https://www.vifadigital.ge/services/ai-chatbot?lang=en</loc>
-    <lastmod>2025-11-18</lastmod>
+    <lastmod>2025-12-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.vifadigital.ge/services/ai-chatbot" />
@@ -162,7 +162,7 @@
   <!-- Blog Page - Georgian -->
   <url>
     <loc>https://www.vifadigital.ge/blog</loc>
-    <lastmod>2025-11-18</lastmod>
+    <lastmod>2025-12-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.vifadigital.ge/blog" />
@@ -173,7 +173,7 @@
   <!-- Blog Page - English -->
   <url>
     <loc>https://www.vifadigital.ge/blog?lang=en</loc>
-    <lastmod>2025-11-18</lastmod>
+    <lastmod>2025-12-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.vifadigital.ge/blog" />
@@ -184,7 +184,7 @@
   <!-- Privacy Policy - Georgian -->
   <url>
     <loc>https://www.vifadigital.ge/privacy</loc>
-    <lastmod>2025-11-18</lastmod>
+    <lastmod>2025-12-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.vifadigital.ge/privacy" />
@@ -195,7 +195,7 @@
   <!-- Privacy Policy - English -->
   <url>
     <loc>https://www.vifadigital.ge/privacy?lang=en</loc>
-    <lastmod>2025-11-18</lastmod>
+    <lastmod>2025-12-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.vifadigital.ge/privacy" />
@@ -206,7 +206,7 @@
   <!-- Terms of Service - Georgian -->
   <url>
     <loc>https://www.vifadigital.ge/terms</loc>
-    <lastmod>2025-11-18</lastmod>
+    <lastmod>2025-12-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.vifadigital.ge/terms" />
@@ -217,7 +217,7 @@
   <!-- Terms of Service - English -->
   <url>
     <loc>https://www.vifadigital.ge/terms?lang=en</loc>
-    <lastmod>2025-11-18</lastmod>
+    <lastmod>2025-12-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.vifadigital.ge/terms" />
