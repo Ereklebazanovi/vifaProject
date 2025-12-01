@@ -124,10 +124,13 @@ VIFA Digital Agency - ვიფა ციფრული სააგენტ�
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
       if (!apiKey) {
+        console.error('❌ Gemini API Key არ არის კონფიგურირებული!');
         return "ბოდიშს ვიხდი, API Key არ არის კონფიგურირებული. გთხოვთ, დაუკავშირდეთ ჩვენს ტექნიკურ ჯგუფს.";
       }
 
-      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+      console.log('🔥 Gemini API Request Started with key:', apiKey.substring(0, 10) + '...');
+
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
       // Detect if this is a simple greeting
       const isGreeting = isSimpleGreeting(userMessage);
@@ -200,6 +203,8 @@ ${isGreeting ? `
 
 
       if (!response.ok) {
+        const errorText = await response.text();
+        console.error(`❌ Gemini API Error (${response.status}):`, errorText);
 
         if (response.status === 400) {
           return "ბოდიშს ვიხდი, API მოთხოვნაში შეცდომაა 🔧";
@@ -221,6 +226,7 @@ ${isGreeting ? `
         return "ბოდიშს ვიხდი, რაღაც შეცდომაა 😅 შეგიძლიათ თავიდან სცადოთ ან დაუკავშირდეთ ჩვენს გუნდს!";
       }
     } catch (error) {
+      console.error('❌ Gemini API Network Error:', error);
       return "ბოდიშს ვიხდი, ტექნიკური პრობლემაა. მალე აღვდგები! 😊 დაუკავშირდი ჩვენს გუნდს.";
     }
   };
