@@ -130,7 +130,7 @@ VIFA Digital Agency - ვიფა ციფრული სააგენტ�
 
       console.log('🔥 Gemini API Request Started with key:', apiKey.substring(0, 10) + '...');
 
-      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
       // Detect if this is a simple greeting
       const isGreeting = isSimpleGreeting(userMessage);

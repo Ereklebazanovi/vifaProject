@@ -130,7 +130,7 @@ const webDevTranslations = {
     "webdev.pricing.ecommerce.title": "ონლაინ მაღაზია",
     "webdev.pricing.ecommerce.description":
       "სრული ონლაინ მაღაზია — ქართული ბანკებით გადახდა, პროდუქტების მართვა და შეკვეთების კონტროლი.",
-    "webdev.pricing.ecommerce.price": "2000₾-დან",
+    "webdev.pricing.ecommerce.price": "1500₾-დან",
     "webdev.pricing.ecommerce.timeline": "14-21 დღე",
     "webdev.pricing.ecommerce.feature1": "ინტეგრირებული ქართული საბანკო გადახდები",
     "webdev.pricing.ecommerce.feature2": "პროდუქტის სწრაფი დამატება და მართვა",
@@ -269,7 +269,7 @@ const webDevTranslations = {
     "webdev.pricing.ecommerce.title": "Online Store",
     "webdev.pricing.ecommerce.description":
       "Complete online store — Georgian bank payments, product management, and order tracking.",
-    "webdev.pricing.ecommerce.price": "From 2000₾",
+    "webdev.pricing.ecommerce.price": "From 1500₾",
     "webdev.pricing.ecommerce.timeline": "14-21 days",
     "webdev.pricing.ecommerce.feature1": "Georgian Bank Support",
     "webdev.pricing.ecommerce.feature2": "Easy Product Management",
