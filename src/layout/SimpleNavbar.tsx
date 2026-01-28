@@ -11,9 +11,10 @@ const navbarTranslations = {
   ka: {
     "services.webdev.title": "ვებ განვითარება",
     "services.advertising.title": "ციფრული რეკლამა",
+     "nav.businessSolutions": "ბიზნეს სისტემები",
     "nav.about": "ჩვენ შესახებ",
     "nav.blog": "ბლოგი",
-    "nav.businessSolutions": "ბიზნეს სისტემები",
+   
     "nav.aiService": "AI სერვისი",
   },
   en: {
@@ -83,9 +84,10 @@ const SimpleNavbar: React.FC = () => {
       path: "/services/digital-advertising",
       label: t("services.advertising.title"),
     },
+    { path: "/business-solutions", label: t("nav.businessSolutions") },
     { path: "/about", label: t("nav.about") },
     { path: "/blog", label: t("nav.blog") },
-    { path: "/business-solutions", label: t("nav.businessSolutions") },
+    
   ];
 
   // Special highlighted link for AI Chatbot

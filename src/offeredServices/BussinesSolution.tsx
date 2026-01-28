@@ -16,7 +16,8 @@ import {
   FaInstagram,
   FaPrint,
   FaBoxes,
-  FaChartLine
+  FaChartLine,
+  FaFileExcel // [NEW] დავამატეთ ექსელის აიქონი
 } from "react-icons/fa";
 import SEO from "../components/SEO";
 import { useLanguage } from "../contexts/LanguageContext";
@@ -26,7 +27,7 @@ const businessSolutionTranslations = {
   ka: {
     "seo.business.title": "ბიზნეს ავტომატიზაცია - VIFA | vifadigital.ge",
     "seo.business.description":
-      "საწყობის, გაყიდვების და ბუღალტერიის მართვის სისტემები. ერთჯერადი გადახდა, ყოველთვიური გადასახადების გარეშე.",
+      "საწყობის, გაყიდვების და ბუღალტერიის მართვის სისტემები. ექსელის რეპორტები და ერთჯერადი გადახდა.",
 
     "business.hero.title": "BUSINESS AUTOMATION",
     "business.hero.subtitle": "მართე საწყობი, გაყიდვები და ბუღალტერია ერთი პლატფორმიდან. ყოველთვიური გადასახადების გარეშე.",
@@ -45,19 +46,19 @@ const businessSolutionTranslations = {
     "steps.title": "სულ 3 მარტივი ნაბიჯი",
     "steps.subtitle": "სისტემის დანერგვა უფრო მარტივია, ვიდრე გგონიათ",
     "step.1.title": "1. შეკვეთა",
-    "step.1.desc": "იღებთ შეკვეთას სოციალურ ქსელში და შეგყავთ სისტემაში 10 წამში.",
+    "step.1.desc": "იღებთ შეკვეთას სოციალურ ქსელში და შეგყავთ სისტემაში რამდენიმე წამში.",
     "step.2.title": "2. ბეჭდვა",
     "step.2.desc": "ერთი კლიკით ბეჭდავთ საკურიერო ლეიბლს და აკრავთ ამანათს.",
-    "step.3.title": "3. ანალიტიკა",
-    "step.3.desc": "სისტემა ავტომატურად ითვლის ნაშთს და დღიურ მოგებას.",
+    "step.3.title": "3. რეპორტები",
+    "step.3.desc": "სისტემა აგენერირებს ექსელს (Excel) დღიური გაყიდვებით და ნაშთებით.", // [UPDATED]
 
     // Solution Highlights
     "business.solution.labels": "Smart Labels",
     "business.solution.labelsDesc": "საკურიერო ლეიბლების ბეჭდვა 1 კლიკში",
     "business.solution.inventory": "Live Inventory",
     "business.solution.inventoryDesc": "ზუსტი ნაშთები და ვარიანტები",
-    "business.solution.accounting": "Auto Accounting",
-    "business.solution.accountingDesc": "ბუღალტერია ავტომატურ რეჟიმში",
+    "business.solution.accounting": "Accounting & Excel", // [UPDATED]
+    "business.solution.accountingDesc": "ფინანსური რეპორტები და ექსპორტი 1 კლიკით", // [UPDATED]
 
     // Pricing Titles
     "business.pricing.title": "სერვისის პაკეტები",
@@ -73,7 +74,7 @@ const businessSolutionTranslations = {
     "pkg.start.f2": "საკურიერო ლეიბლების ბეჭდვა (1 კლიკში)",
     "pkg.start.f3": "მომხმარებელთა ბაზა (CRM)",
     "pkg.start.f4": "მექანიკური შეკვეთების გატარება",
-    "pkg.start.f5": "დღიური გაყიდვების რეპორტი",
+    "pkg.start.f5": "გაყიდვების რეპორტი (Excel Export)", // [UPDATED]
 
     // Package 2: Smart Warehouse
     "pkg.warehouse.title": "Smart Warehouse",
@@ -83,7 +84,7 @@ const businessSolutionTranslations = {
     "pkg.warehouse.f1": "ყველაფერი Start Manager-დან",
     "pkg.warehouse.f2": "ვარიანტების კონტროლი (ფერი/ზომა)",
     "pkg.warehouse.f3": "მარაგების ისტორია (ვინ, რა, როდის გაყიდა)",
-    "pkg.warehouse.f4": "ბუღალტრული ექსელის გენერაცია",
+    "pkg.warehouse.f4": "სრული ბუღალტრული Excel რეპორტები", // [UPDATED]
     "pkg.warehouse.f5": "პერსონალის ტრენინგი",
 
     // Package 3: E-commerce
@@ -115,8 +116,8 @@ const businessSolutionTranslations = {
     "business.why.simple": "სიმარტივე",
     "business.why.simpleDesc": "სისტემა მორგებულია ქართულ რეალობას.",
 
-    "business.cta.title": "დავიწყოთ დანერგვა?",
-    "business.cta.subtitle": "დაგვიკავშირდით დემო ვერსიის სანახავად",
+    "business.cta.title": "გსურთ დაწყება?",
+    "business.cta.subtitle": "დაგვიკავშირდით დეტალების უკეთ გასაცნობისათვის (კონსულტაცია უფასოა)",
     "btn.call": "დაგვირეკეთ",
     "btn.whatsapp": "WhatsApp",
     "btn.messenger": "Messenger",
@@ -124,7 +125,7 @@ const businessSolutionTranslations = {
   en: {
     "seo.business.title": "Business Automation - VIFA | vifadigital.com",
     "seo.business.description":
-      "Warehouse, sales, and accounting management systems. One-time payment, no monthly fees.",
+      "Warehouse, sales, and accounting management systems. Excel reports included. One-time payment.",
 
     "business.hero.title": "BUSINESS AUTOMATION",
     "business.hero.subtitle": "Manage warehouse, sales, and accounting from one platform. No monthly fees.",
@@ -147,15 +148,15 @@ const businessSolutionTranslations = {
     "step.2.title": "2. Print",
     "step.2.desc": "Print courier label in 1 click and attach to package.",
     "step.3.title": "3. Analytics",
-    "step.3.desc": "System automatically calculates stock and daily profit.",
+    "step.3.desc": "System automatically generates Excel reports with sales and stock.",
 
     // Solution Highlights
     "business.solution.labels": "Smart Labels",
     "business.solution.labelsDesc": "Print courier labels in 1 click",
     "business.solution.inventory": "Live Inventory",
     "business.solution.inventoryDesc": "Exact stock & variants",
-    "business.solution.accounting": "Auto Accounting",
-    "business.solution.accountingDesc": "Automated accounting",
+    "business.solution.accounting": "Accounting & Excel",
+    "business.solution.accountingDesc": "Financial reports & Excel export",
 
     // Pricing Titles
     "business.pricing.title": "Service Packages",
@@ -171,7 +172,7 @@ const businessSolutionTranslations = {
     "pkg.start.f2": "Courier label printing (1 click)",
     "pkg.start.f3": "Customer database (CRM)",
     "pkg.start.f4": "Manual order entry",
-    "pkg.start.f5": "Daily sales reports",
+    "pkg.start.f5": "Sales Report (Excel Export)",
 
     // Package 2
     "pkg.warehouse.title": "Smart Warehouse",
@@ -181,7 +182,7 @@ const businessSolutionTranslations = {
     "pkg.warehouse.f1": "Everything in Start Manager",
     "pkg.warehouse.f2": "Variant control (Color/Size)",
     "pkg.warehouse.f3": "Stock history (Who sold what & when)",
-    "pkg.warehouse.f4": "Accounting Excel generation",
+    "pkg.warehouse.f4": "Full Accounting Excel Reports",
     "pkg.warehouse.f5": "Staff training",
 
     // Package 3
@@ -448,7 +449,7 @@ const BusinessSolutions: React.FC = () => {
                 {[
                     { icon: <FaPrint />, title: t("business.solution.labels"), desc: t("business.solution.labelsDesc"), color: "blue" },
                     { icon: <FaBoxes />, title: t("business.solution.inventory"), desc: t("business.solution.inventoryDesc"), color: "purple" },
-                    { icon: <FaFileInvoiceDollar />, title: t("business.solution.accounting"), desc: t("business.solution.accountingDesc"), color: "green" },
+                    { icon: <FaFileExcel />, title: t("business.solution.accounting"), desc: t("business.solution.accountingDesc"), color: "green" }, // Updated Icon
                 ].map((item, i) => (
                     <React.Fragment key={i}>
                         <div className="group cursor-pointer">
