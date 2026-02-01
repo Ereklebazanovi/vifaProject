@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import TrueFocus from "../components/TrueFocus";
 import {
-  FaArrowRight,
   FaCheckCircle,
   FaServer,
   FaFileInvoiceDollar,
@@ -16,7 +14,6 @@ import {
   FaInstagram,
   FaPrint,
   FaBoxes,
-  FaChartLine,
   FaFileExcel // [NEW] დავამატეთ ექსელის აიქონი
 } from "react-icons/fa";
 import SEO from "../components/SEO";
