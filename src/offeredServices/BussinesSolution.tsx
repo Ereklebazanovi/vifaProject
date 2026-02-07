@@ -177,7 +177,7 @@ const InventoLandingPage: React.FC = () => {
 
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % images.length);
-    }, 4000); // Increased to 4 seconds for better UX
+    }, 4600); // Optimal timing
     return () => clearInterval(interval);
   }, [images.length, isPaused]);
 
@@ -264,14 +264,14 @@ const InventoLandingPage: React.FC = () => {
                   className="relative"
                 >
                   <div
-                    className="relative w-full h-[400px] rounded-xl overflow-hidden border border-gray-700/50 shadow-xl shadow-blue-500/10 group cursor-pointer"
+                    className="relative w-full h-[400px] rounded-xl overflow-hidden border border-gray-700/50 shadow-xl shadow-blue-500/10 group"
                     onMouseEnter={() => setIsPaused(true)}
                     onMouseLeave={() => setIsPaused(false)}
                   >
                     {/* Loading indicator */}
                     {!imagesLoaded[images[currentImageIndex]] && (
                       <div className="absolute inset-0 flex items-center justify-center bg-gray-800/50">
-                        <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                        <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
                       </div>
                     )}
 
@@ -283,26 +283,17 @@ const InventoLandingPage: React.FC = () => {
                         alt={`Invento Preview ${currentImageIndex + 1}`}
                         className="w-full h-full object-contain bg-white/5 transition-transform duration-300 group-hover:scale-[1.02]"
                         initial={{
-                          opacity: 0,
-                          scale: 1.05,
-                          filter: "blur(4px)"
+                          opacity: 0
                         }}
                         animate={{
-                          opacity: imagesLoaded[images[currentImageIndex]] ? 1 : 0,
-                          scale: 1,
-                          filter: "blur(0px)"
+                          opacity: imagesLoaded[images[currentImageIndex]] ? 1 : 0
                         }}
                         exit={{
-                          opacity: 0,
-                          scale: 0.95,
-                          filter: "blur(2px)"
+                          opacity: 0
                         }}
                         transition={{
-                          duration: 0.6,
-                          ease: "easeInOut",
-                          opacity: { duration: 0.4 },
-                          scale: { duration: 0.6 },
-                          filter: { duration: 0.4 }
+                          duration: 0.3,
+                          ease: "easeInOut"
                         }}
                         onLoad={() => {
                           setImagesLoaded(prev => ({
@@ -319,7 +310,7 @@ const InventoLandingPage: React.FC = () => {
                         <motion.button
                           key={index}
                           onClick={() => setCurrentImageIndex(index)}
-                          className={`relative w-3 h-3 rounded-full transition-all duration-300 ${
+                          className={`relative w-2 h-2 rounded-full transition-all duration-300 ${
                             index === currentImageIndex
                               ? 'bg-blue-500 scale-125 shadow-lg shadow-blue-500/50'
                               : 'bg-gray-500/60 hover:bg-gray-400/80 hover:scale-110'
