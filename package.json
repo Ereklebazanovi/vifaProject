@@ -4,29 +4,29 @@
   "version": "0.0.0",
   "type": "module",
   "overrides": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "react-helmet-async": {
-      "react": "^18.3.1",
-      "react-dom": "^18.3.1"
+      "react": "18.3.1",
+      "react-dom": "18.3.1"
     },
     "@react-three/fiber": {
-      "react": "^18.3.1",
-      "react-dom": "^18.3.1"
+      "react": "18.3.1",
+      "react-dom": "18.3.1"
     },
     "antd": {
-      "react": "^18.3.1",
-      "react-dom": "^18.3.1"
+      "react": "18.3.1",
+      "react-dom": "18.3.1"
     },
     "framer-motion": {
-      "react": "^18.3.1",
-      "react-dom": "^18.3.1"
+      "react": "18.3.1",
+      "react-dom": "18.3.1"
     }
   },
   "scripts": {
-    "preinstall-check": "npm ls react || true",
+    "preinstall-check": "npm ls react || echo 'React version check finished with warnings'",
     "dev": "vite",
-    "build": "npm run preinstall-check && tsc -b && vite build && node scripts/generate-blog-pages.js",
+    "build": "npm run preinstall-check && tsc -b &&HVITE_SKIP_TYPECHECK=true vite build && node scripts/generate-blog-pages.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "start": "node server.js"
@@ -47,13 +47,13 @@
     "marked": "^16.4.0",
     "next": "^15.5.7",
     "postprocessing": "^6.37.8",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "react-helmet-async": "^2.0.5",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.8.0",
     "tailwindcss": "^4.1.12",
-    "three": "^0.180.0"
+    "three": "^0.160.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
@@ -63,7 +63,7 @@
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@types/react-router-dom": "^5.3.3",
-    "@types/three": "^0.180.0",
+    "@types/three": "^0.160.0",
     "@vitejs/plugin-react": "^5.0.0",
     "eslint": "^9.33.0",
     "eslint-plugin-react-hooks": "^5.2.0",
