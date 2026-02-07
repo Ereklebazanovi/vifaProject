@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import SEO from "../components/SEO";
 
-// Invento Translations
+// Invento Translations - UPDATED WITH SMART FEATURES
 const inventoTranslations = {
   ka: {
     "seo.invento.title": "Invento - Instagram და Facebook გაყიდვების მართვა | vifadigital.ge",
@@ -55,23 +55,29 @@ const inventoTranslations = {
     "feature6.title": "E-commerce სინქრონიზაცია",
     "feature6.desc": "მუშაობს იდეალურად ჩვენს მიერ დამზადებულ E-commerce საიტებთან.",
 
-    // Pricing
-    "pricing.title": "აირჩიე შენი პლანი",
+    // Pricing - UPDATED TEXTS
+    "pricing.title": "აირჩიე შენი გეგმა",
+    
+    // Plan 1 (Lifetime)
     "plan1.title": "Invento License (ერთჯერადი)",
     "plan1.price": "890₾",
     "plan1.f1": "Invento-ს მუდმივი ლიცენზია",
-    "plan1.f2": "ულიმიტო პროდუქტები",
-    "plan1.f3": "სისტემის ინსტალაცია",
-    "plan1.f4": "1 თვე უფასო ტექნ. მხარდაჭერა (შემდეგ 40₾/თვეში)",
+    "plan1.f2": "მრავალმხრივი წვდომა (Manager / Admin)", // New
+    "plan1.f3": "პერსონალის ტრენინგი და სისტემის ჩაბარება", // New
+    "plan1.f4": "მონაცემების უსაფრთხოება და Back-up", // New
+    "plan1.f5": "1 თვე უფასო ტექნ. მხარდაჭერა (შემდეგ 40₾/თვეში)",
     "plan1.btn": "შეიძინე ეტაპობრივად",
+
+    // Plan 2 (Bundle)
     "plan2.title": "E-commerce Bundle (სრული პაკეტი)",
     "plan2.price": "1999₾",
-    "plan2.f1": "თქვენი პირადი .ge ვებსაიტი",
-    "plan2.f2": "Invento-ს მუდმივი ლიცენზია",
-    "plan2.f3": "სრული სინქრონიზაცია",
-    "plan2.f4": "1 წელი დომენი/ჰოსტინგი",
+    "plan2.f1": "სრულად გამართული ონლაინ მაღაზია", // New
+    "plan2.f2": "Invento-ს მუდმივი ლიცენზია + სინქრონიზაცია",
+    "plan2.f3": "SEO ოპტიმიზაცია და Pixel-ის გამართვა", // New
+    "plan2.f4": "1 წელი დომენი (.ge) და ჰოსტინგი",
     "plan2.f5": "1 თვე უფასო ტექნ. მხარდაჭერა (შემდეგ 40₾/თვეში)",
     "plan2.btn": "შეკვეთა",
+    
     "payment.terms": "მოქნილი გადახდა: 50% პროექტის დაწყებისას — 50% ჩაბარებისას",
 
     // Footer CTA
@@ -113,21 +119,27 @@ const inventoTranslations = {
 
     // Pricing
     "pricing.title": "Choose Your Plan",
+    
+    // Plan 1
     "plan1.title": "Invento License (Lifetime)",
     "plan1.price": "890₾",
     "plan1.f1": "Lifetime License",
-    "plan1.f2": "Unlimited Products",
-    "plan1.f3": "System Installation",
-    "plan1.f4": "1 Month Free Support (then 40₾/mo)",
+    "plan1.f2": "Multi-User Access (Manager / Admin)",
+    "plan1.f3": "Staff Training & Onboarding",
+    "plan1.f4": "Cloud Security & Daily Backups",
+    "plan1.f5": "1 Month Free Support (then 40₾/mo)",
     "plan1.btn": "Buy in Installments",
+
+    // Plan 2
     "plan2.title": "E-commerce Bundle",
     "plan2.price": "1999₾",
-    "plan2.f1": "Custom .ge Website",
-    "plan2.f2": "Invento Lifetime License",
-    "plan2.f3": "Full Sync",
-    "plan2.f4": "1 Year Domain/Hosting",
+    "plan2.f1": "Turnkey E-commerce Website",
+    "plan2.f2": "Lifetime License + Full Sync",
+    "plan2.f3": "SEO Optimization & Pixel Setup",
+    "plan2.f4": "1 Year Domain (.ge) & Hosting",
     "plan2.f5": "1 Month Free Support (then 40₾/mo)",
     "plan2.btn": "Order Now",
+    
     "payment.terms": "Flexible Payment: 50% Upfront — 50% Upon Completion",
 
     // Footer CTA
@@ -203,7 +215,7 @@ const InventoLandingPage: React.FC = () => {
         {/* Content */}
         <div className="relative z-10">
 
-          {/* 1. HERO SECTION - Fixed Layout with Proper Spacing */}
+          {/* 1. HERO SECTION */}
           <section className="min-h-[85vh] flex items-center pt-32 pb-8">
             <div className="container mx-auto px-6 mt-14">
               <div className="grid lg:grid-cols-2 gap-8 items-center">
@@ -225,7 +237,7 @@ const InventoLandingPage: React.FC = () => {
                     {t("hero.subtitle")}
                   </p>
 
-                  {/* CTA Section - Updated Layout */}
+                  {/* CTA Section */}
                   <div className="space-y-4">
                     <a
                       href={whatsappUrl}
@@ -237,7 +249,7 @@ const InventoLandingPage: React.FC = () => {
                       {t("btn.consultation")}
                     </a>
 
-                    {/* Phone Number - Desktop: next to button, Mobile: below */}
+                    {/* Phone Number */}
                     <div className="lg:inline-block lg:ml-4">
                       <a
                         href={phoneNumber}
@@ -250,7 +262,7 @@ const InventoLandingPage: React.FC = () => {
                   </div>
                 </motion.div>
 
-                {/* Right Side - Image Slider - Fixed Height Container */}
+                {/* Right Side - Image Slider */}
                 <motion.div
                   initial={{ opacity: 0, x: 50 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -291,7 +303,7 @@ const InventoLandingPage: React.FC = () => {
             </div>
           </section>
 
-          {/* 2. PROBLEM vs SOLUTION - Compact & Professional */}
+          {/* 2. PROBLEM vs SOLUTION */}
           <section className="py-12 bg-gradient-to-r from-gray-900/30 to-transparent">
             <div className="container mx-auto px-6">
               <motion.div
@@ -336,7 +348,7 @@ const InventoLandingPage: React.FC = () => {
             </div>
           </section>
 
-          {/* 3. FEATURES GRID - Compact */}
+          {/* 3. FEATURES GRID */}
           <section className="py-12">
             <div className="container mx-auto px-6">
               <motion.div
@@ -352,101 +364,37 @@ const InventoLandingPage: React.FC = () => {
               </motion.div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-                {/* Feature 1: Warehouse */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.1 }}
-                  viewport={{ once: true }}
-                  className="group p-6 rounded-lg border border-gray-700/50 bg-gray-900/30 hover:border-blue-500/50 transition-all duration-300"
-                >
-                  <Box className="w-8 h-8 text-blue-400 mb-4 group-hover:scale-110 transition-transform" />
-                  <h3 className={`text-lg text-blue-400 mb-3 ${currentLanguage === 'ka' ? 'font-semibold' : 'font-semibold'}`}>{t("feature1.title")}</h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">
-                    {t("feature1.desc")}
-                  </p>
-                </motion.div>
-
-                {/* Feature 2: Logistics */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  viewport={{ once: true }}
-                  className="group p-6 rounded-lg border border-gray-700/50 bg-gray-900/30 hover:border-purple-500/50 transition-all duration-300"
-                >
-                  <Printer className="w-8 h-8 text-purple-400 mb-4 group-hover:scale-110 transition-transform" />
-                  <h3 className={`text-lg text-purple-400 mb-3 ${currentLanguage === 'ka' ? 'font-semibold' : 'font-semibold'}`}>{t("feature2.title")}</h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">
-                    {t("feature2.desc")}
-                  </p>
-                </motion.div>
-
-                {/* Feature 3: Finance */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.3 }}
-                  viewport={{ once: true }}
-                  className="group p-6 rounded-lg border border-gray-700/50 bg-gray-900/30 hover:border-green-500/50 transition-all duration-300"
-                >
-                  <FileSpreadsheet className="w-8 h-8 text-green-400 mb-4 group-hover:scale-110 transition-transform" />
-                  <h3 className={`text-lg text-green-400 mb-3 ${currentLanguage === 'ka' ? 'font-semibold' : 'font-semibold'}`}>{t("feature3.title")}</h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">
-                    {t("feature3.desc")}
-                  </p>
-                </motion.div>
-
-                {/* Feature 4: Team Management */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                  viewport={{ once: true }}
-                  className="group p-6 rounded-lg border border-gray-700/50 bg-gray-900/30 hover:border-orange-500/50 transition-all duration-300"
-                >
-                  <Users className="w-8 h-8 text-orange-400 mb-4 group-hover:scale-110 transition-transform" />
-                  <h3 className={`text-lg text-orange-400 mb-3 ${currentLanguage === 'ka' ? 'font-semibold' : 'font-semibold'}`}>{t("feature4.title")}</h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">
-                    {t("feature4.desc")}
-                  </p>
-                </motion.div>
-
-                {/* Feature 5: PWA Technology */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.5 }}
-                  viewport={{ once: true }}
-                  className="group p-6 rounded-lg border border-gray-700/50 bg-gray-900/30 hover:border-cyan-500/50 transition-all duration-300"
-                >
-                  <Smartphone className="w-8 h-8 text-cyan-400 mb-4 group-hover:scale-110 transition-transform" />
-                  <h3 className={`text-lg text-cyan-400 mb-3 ${currentLanguage === 'ka' ? 'font-semibold' : 'font-semibold'}`}>{t("feature5.title")}</h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">
-                    {t("feature5.desc")}
-                  </p>
-                </motion.div>
-
-                {/* Feature 6: E-commerce Sync - Updated Text */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.6 }}
-                  viewport={{ once: true }}
-                  className="group p-6 rounded-lg border border-gray-700/50 bg-gray-900/30 hover:border-pink-500/50 transition-all duration-300"
-                >
-                  <RefreshCcw className="w-8 h-8 text-pink-400 mb-4 group-hover:scale-110 transition-transform" />
-                  <h3 className={`text-lg text-pink-400 mb-3 ${currentLanguage === 'ka' ? 'font-semibold' : 'font-semibold'}`}>{t("feature6.title")}</h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">
-                    {t("feature6.desc")}
-                  </p>
-                </motion.div>
+                {/* Feature Cards Loop */}
+                {[
+                  { icon: Box, color: "blue", key: "feature1" },
+                  { icon: Printer, color: "purple", key: "feature2" },
+                  { icon: FileSpreadsheet, color: "green", key: "feature3" },
+                  { icon: Users, color: "orange", key: "feature4" },
+                  { icon: Smartphone, color: "cyan", key: "feature5" },
+                  { icon: RefreshCcw, color: "pink", key: "feature6" }
+                ].map((item, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: idx * 0.1 }}
+                    viewport={{ once: true }}
+                    className={`group p-6 rounded-lg border border-gray-700/50 bg-gray-900/30 hover:border-${item.color}-500/50 transition-all duration-300`}
+                  >
+                    <item.icon className={`w-8 h-8 text-${item.color}-400 mb-4 group-hover:scale-110 transition-transform`} />
+                    <h3 className={`text-lg text-${item.color}-400 mb-3 ${currentLanguage === 'ka' ? 'font-semibold' : 'font-semibold'}`}>
+                      {t(`${item.key}.title`)}
+                    </h3>
+                    <p className="text-sm text-gray-400 leading-relaxed">
+                      {t(`${item.key}.desc`)}
+                    </p>
+                  </motion.div>
+                ))}
               </div>
             </div>
           </section>
 
-          {/* 4. PRICING - Redesigned with 2 Cards Only */}
+          {/* 4. PRICING - FIXED GRID LAYOUT */}
           <section className="py-12 bg-gradient-to-b from-transparent to-gray-900/50">
             <div className="container mx-auto px-6">
               <motion.div
@@ -461,8 +409,8 @@ const InventoLandingPage: React.FC = () => {
                 </h2>
               </motion.div>
 
-              {/* Centered 2-Card Layout */}
-              <div className="flex justify-center gap-8 max-w-4xl mx-auto flex-wrap">
+              {/* GRID CONTAINER - THIS IS THE FIX */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
 
                 {/* Plan 1: Invento License (Lifetime) */}
                 <motion.div
@@ -470,7 +418,7 @@ const InventoLandingPage: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.1 }}
                   viewport={{ once: true }}
-                  className="relative p-6 rounded-lg border-2 border-purple-500/80 bg-gradient-to-br from-purple-900/20 to-blue-900/20 w-full max-w-sm"
+                  className="relative p-6 rounded-lg border-2 border-purple-500/80 bg-gradient-to-br from-purple-900/20 to-blue-900/20"
                 >
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                     <span className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
@@ -485,22 +433,13 @@ const InventoLandingPage: React.FC = () => {
                   </div>
 
                   <div className="space-y-3 mb-6">
-                    <div className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-green-400" />
-                      <span className="text-xs text-gray-300">{t("plan1.f1")}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-green-400" />
-                      <span className="text-xs text-gray-300">{t("plan1.f2")}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-green-400" />
-                      <span className="text-xs text-gray-300">{t("plan1.f3")}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-green-400" />
-                      <span className="text-xs text-gray-300">{t("plan1.f4")}</span>
-                    </div>
+                    {/* Feature List */}
+                    {["f1", "f2", "f3", "f4", "f5"].map((f, i) => (
+                      <div key={i} className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-green-400 mt-0.5 shrink-0" />
+                        <span className="text-xs text-gray-300">{t(`plan1.${f}`)}</span>
+                      </div>
+                    ))}
                   </div>
 
                   <a
@@ -519,7 +458,7 @@ const InventoLandingPage: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
                   viewport={{ once: true }}
-                  className="p-6 rounded-lg border border-gray-700/50 bg-gray-900/30 hover:border-orange-500/50 transition-all duration-300 w-full max-w-sm"
+                  className="p-6 rounded-lg border border-gray-700/50 bg-gray-900/30 hover:border-orange-500/50 transition-all duration-300"
                 >
                   <h3 className={`text-xl text-orange-400 mb-3 ${currentLanguage === 'ka' ? 'font-bold' : 'font-bold'}`}>{t("plan2.title")}</h3>
                   <div className="mb-4">
@@ -527,26 +466,13 @@ const InventoLandingPage: React.FC = () => {
                   </div>
 
                   <div className="space-y-3 mb-6">
-                    <div className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-green-400" />
-                      <span className="text-xs text-gray-300">{t("plan2.f1")}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-green-400" />
-                      <span className="text-xs text-gray-300">{t("plan2.f2")}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-green-400" />
-                      <span className="text-xs text-gray-300">{t("plan2.f3")}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-green-400" />
-                      <span className="text-xs text-gray-300">{t("plan2.f4")}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-green-400" />
-                      <span className="text-xs text-gray-300">{t("plan2.f5")}</span>
-                    </div>
+                    {/* Feature List */}
+                    {["f1", "f2", "f3", "f4", "f5"].map((f, i) => (
+                      <div key={i} className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-green-400 mt-0.5 shrink-0" />
+                        <span className="text-xs text-gray-300">{t(`plan2.${f}`)}</span>
+                      </div>
+                    ))}
                   </div>
 
                   <a
@@ -578,7 +504,7 @@ const InventoLandingPage: React.FC = () => {
             </div>
           </section>
 
-          {/* 5. FOOTER CTA - Compact */}
+          {/* 5. FOOTER CTA */}
           <section className="py-12 bg-gradient-to-r from-blue-900/30 to-purple-900/30">
             <div className="container mx-auto px-6 text-center">
               <motion.div
