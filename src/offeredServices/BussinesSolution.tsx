@@ -140,6 +140,8 @@ const InventoLandingPage: React.FC = () => {
   const { currentLanguage } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState<Record<string, boolean>>({});
+  const [isPaused, setIsPaused] = useState(false);
 
   const t = (key: string): string => {
     const translations = inventoTranslations[currentLanguage as keyof typeof inventoTranslations] as Record<string, string>;
@@ -158,12 +160,26 @@ const InventoLandingPage: React.FC = () => {
   const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა,%20მაინტერესებს%20Invento";
   const phoneNumber = "tel:+995557624243";
 
+  // Preload all images
   useEffect(() => {
+    images.forEach((src) => {
+      const img = new Image();
+      img.onload = () => {
+        setImagesLoaded(prev => ({ ...prev, [src]: true }));
+      };
+      img.src = src;
+    });
+  }, []);
+
+  // Auto-advance slider with pause on hover
+  useEffect(() => {
+    if (isPaused) return;
+
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % images.length);
-    }, 3000);
+    }, 4000); // Increased to 4 seconds for better UX
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, [images.length, isPaused]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -247,33 +263,88 @@ const InventoLandingPage: React.FC = () => {
                   transition={{ duration: 0.8, delay: 0.2 }}
                   className="relative"
                 >
-                  <div className="relative w-full h-[400px] rounded-xl overflow-hidden border border-gray-700/50 shadow-xl shadow-blue-500/10">
+                  <div
+                    className="relative w-full h-[400px] rounded-xl overflow-hidden border border-gray-700/50 shadow-xl shadow-blue-500/10 group cursor-pointer"
+                    onMouseEnter={() => setIsPaused(true)}
+                    onMouseLeave={() => setIsPaused(false)}
+                  >
+                    {/* Loading indicator */}
+                    {!imagesLoaded[images[currentImageIndex]] && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-gray-800/50">
+                        <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                      </div>
+                    )}
+
+                    {/* Image with improved animations */}
                     <AnimatePresence mode="wait">
                       <motion.img
                         key={currentImageIndex}
                         src={images[currentImageIndex]}
                         alt={`Invento Preview ${currentImageIndex + 1}`}
-                        className="w-full h-full object-contain bg-white/5"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.5 }}
+                        className="w-full h-full object-contain bg-white/5 transition-transform duration-300 group-hover:scale-[1.02]"
+                        initial={{
+                          opacity: 0,
+                          scale: 1.05,
+                          filter: "blur(4px)"
+                        }}
+                        animate={{
+                          opacity: imagesLoaded[images[currentImageIndex]] ? 1 : 0,
+                          scale: 1,
+                          filter: "blur(0px)"
+                        }}
+                        exit={{
+                          opacity: 0,
+                          scale: 0.95,
+                          filter: "blur(2px)"
+                        }}
+                        transition={{
+                          duration: 0.6,
+                          ease: "easeInOut",
+                          opacity: { duration: 0.4 },
+                          scale: { duration: 0.6 },
+                          filter: { duration: 0.4 }
+                        }}
+                        onLoad={() => {
+                          setImagesLoaded(prev => ({
+                            ...prev,
+                            [images[currentImageIndex]]: true
+                          }));
+                        }}
                       />
                     </AnimatePresence>
 
-                    <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-1">
+                    {/* Enhanced progress indicators */}
+                    <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-2">
                       {images.map((_, index) => (
-                        <button
+                        <motion.button
                           key={index}
                           onClick={() => setCurrentImageIndex(index)}
-                          className={`w-2 h-2 rounded-full transition-colors ${
+                          className={`relative w-3 h-3 rounded-full transition-all duration-300 ${
                             index === currentImageIndex
-                              ? 'bg-blue-500'
-                              : 'bg-gray-400 hover:bg-gray-300'
+                              ? 'bg-blue-500 scale-125 shadow-lg shadow-blue-500/50'
+                              : 'bg-gray-500/60 hover:bg-gray-400/80 hover:scale-110'
                           }`}
-                        />
+                          whileHover={{ scale: 1.2 }}
+                          whileTap={{ scale: 0.9 }}
+                        >
+                          {/* Active indicator with progress ring */}
+                          {index === currentImageIndex && (
+                            <motion.div
+                              className="absolute inset-0 rounded-full border-2 border-blue-300"
+                              initial={{ scale: 0, opacity: 0 }}
+                              animate={{ scale: 1, opacity: 1 }}
+                              transition={{ duration: 0.3 }}
+                            />
+                          )}
+                        </motion.button>
                       ))}
                     </div>
+
+                    {/* Hover overlay with navigation hints */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/5 to-transparent opacity-0 group-hover:opacity-100"
+                      transition={{ duration: 0.3 }}
+                    />
                   </div>
                 </motion.div>
               </div>
