@@ -31,7 +31,7 @@ const inventoTranslations = {
     "hero.title": "მართე Instagram და Facebook გაყიდვები ერთ სივრცეში",
     "hero.subtitle": "Invento — თქვენი პირადი საწყობი, ბუღალტერია და გაყიდვების მენეჯერი",
     "btn.consultation": "უფასო კონსულტაცია",
-    "phone.number": "557 62 42 42",
+    "phone.number": "557 62 42 43",
 
     // Problem Section
     "problem.title": "იღებთ შეკვეთებს პირად მიმოწერაში (DM)?",
@@ -93,7 +93,7 @@ const inventoTranslations = {
     "hero.title": "Manage Social Sales & Inventory in One Place",
     "hero.subtitle": "Invento — Your personal warehouse, accountant, and sales manager",
     "btn.consultation": "Free Consultation",
-    "phone.number": "557 62 42 42",
+    "phone.number": "557 62 42 43",
 
     // Problem Section
     "problem.title": "Struggling with DM Orders?",
@@ -167,8 +167,8 @@ const InventoLandingPage: React.FC = () => {
     "/invento7.png"
   ];
 
-  const whatsappUrl = "https://wa.me/995557624242?text=გამარჯობა,%20მაინტერესებს%20Invento";
-  const phoneNumber = "tel:+995557624242";
+  const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა,%20მაინტერესებს%20Invento";
+  const phoneNumber = "tel:+995557624243";
 
   // Auto-advance image slider
   useEffect(() => {
@@ -437,7 +437,7 @@ const InventoLandingPage: React.FC = () => {
                     {["f1", "f2", "f3", "f4", "f5"].map((f, i) => (
                       <div key={i} className="flex items-start gap-2">
                         <Check className="w-4 h-4 text-green-400 mt-0.5 shrink-0" />
-                        <span className="text-xs text-gray-300">{t(`plan1.${f}`)}</span>
+                        <span className="text-sm text-gray-200 font-medium">{t(`plan1.${f}`)}</span>
                       </div>
                     ))}
                   </div>
@@ -470,7 +470,7 @@ const InventoLandingPage: React.FC = () => {
                     {["f1", "f2", "f3", "f4", "f5"].map((f, i) => (
                       <div key={i} className="flex items-start gap-2">
                         <Check className="w-4 h-4 text-green-400 mt-0.5 shrink-0" />
-                        <span className="text-xs text-gray-300">{t(`plan2.${f}`)}</span>
+                        <span className="text-sm text-gray-200 font-medium">{t(`plan2.${f}`)}</span>
                       </div>
                     ))}
                   </div>

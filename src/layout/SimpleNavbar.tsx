@@ -11,7 +11,7 @@ const navbarTranslations = {
   ka: {
     "services.webdev.title": "ვებ განვითარება",
     "services.advertising.title": "ციფრული რეკლამა",
-     "nav.businessSolutions": "ბიზნეს სისტემები",
+     "nav.businessSolutions": "ინვენტო",
     "nav.about": "ჩვენ შესახებ",
     "nav.blog": "ბლოგი",
    
