@@ -26,7 +26,7 @@
   "scripts": {
     "preinstall-check": "npm ls react || echo 'React version check finished with warnings'",
     "dev": "vite",
-    "build": "npm run preinstall-check && tsc -b &&HVITE_SKIP_TYPECHECK=true vite build && node scripts/generate-blog-pages.js",
+    "build": "tsc -b && vite build && node scripts/generate-blog-pages.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "start": "node server.js"
