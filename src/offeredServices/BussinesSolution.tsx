@@ -26,11 +26,11 @@ import SEO from "../components/SEO";
 const inventoTranslations = {
   ka: {
     "seo.invento.title": "Invento - Instagram და Facebook გაყიდვების მართვა | vifadigital.ge",
-    "seo.invento.description": "მართე Instagram და Facebook გაყიდვები ერთ სივრცეში. საწყობი, ბუღალტერია და გაყიდვების მენეჯერი ჯიბეში.",
+    "seo.invento.description": "მართე   Facebook და Instagram გაყიდვები ერთ სივრცეში. საწყობი, ბუღალტერია და გაყიდვების მენეჯერი ჯიბეში.",
     "seo.invento.keywords": "instagram გაყიდვები, facebook კომერცია, საწყობის მართვა, ონლაინ ბიზნესი, ციფრული ინვოისი",
 
-    "hero.title": "მართე Instagram და Facebook გაყიდვები ერთ სივრცეში",
-    "hero.subtitle": "Invento — თქვენი პირადი საწყობი, ბუღალტერია და გაყიდვების მენეჯერი",
+    "hero.title": "მართე  Facebook და Instagram  გაყიდვები ერთ სივრცეში",
+    "hero.subtitle": "Invento — თქვენი პირადი საწყობი და მენეჯერი Instagram, Facebook, TikTok და სხვა არხებისთვის",
     "btn.consultation": "უფასო კონსულტაცია",
     "phone.number": "557 62 42 43",
 
@@ -80,7 +80,7 @@ const inventoTranslations = {
     "cta.btn": "მოგვწერეთ WhatsApp-ში"
   },
   en: {
-    "seo.invento.title": "Invento - Manage Instagram & Facebook Sales | vifadigital.ge",
+    "seo.invento.title": "Invento - Manage Facebook & Instagram   Sales | vifadigital.ge",
     "seo.invento.description": "Manage Instagram & Facebook sales in one place. Your personal warehouse, accountant, and sales manager in your pocket.",
     "seo.invento.keywords": "instagram sales, facebook commerce, inventory management, online business, digital invoicing",
 
@@ -251,7 +251,7 @@ const InventoLandingPage: React.FC = () => {
                         className="inline-flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
                       >
                         <FaPhone size={16} />
-                        <span className="text-sm font-medium">{t("phone.number")}</span>
+                        <span className="text-base font-medium">{t("phone.number")}</span>
                       </a>
                     </div>
                   </div>
