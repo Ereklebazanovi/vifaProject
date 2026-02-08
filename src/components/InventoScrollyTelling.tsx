@@ -147,132 +147,143 @@ const InventoScrollyTelling: React.FC<InventoScrollyTellingProps> = ({ currentLa
         </div>
 
         {/* Main Mobile Container - Compact Design */}
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col items-center space-y-6 min-h-[90vh] max-w-xs mx-auto">
+       {/* Main Mobile Container - Compact & Full Screen Design */}
+      <div className="container mx-auto px-4 pb-12">
+        <div className="flex flex-col items-center space-y-6 min-h-[auto] max-w-xs mx-auto">
 
-            {/* Text Content Above Phone - Changes in Place */}
-            <div className="text-center space-y-4 w-full flex-shrink-0">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentStep}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                  className="space-y-3"
+          {/* 1. TEXT CONTENT ABOVE PHONE */}
+          <div className="text-center space-y-4 w-full flex-shrink-0 z-10">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentStep}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="space-y-3"
+              >
+                {/* Step Number & Icon */}
+                <div className="flex items-center justify-center gap-2">
+                  <div className={`w-8 h-8 rounded-full bg-gradient-to-r from-${t.steps[currentStep].color}-500 to-${t.steps[currentStep].color}-600 flex items-center justify-center shadow-lg shadow-${t.steps[currentStep].color}-500/20`}>
+                    {React.createElement(t.steps[currentStep].icon, { className: "w-4 h-4 text-white" })}
+                  </div>
+                  <span className={`text-lg font-bold text-${t.steps[currentStep].color}-400`}>
+                    {String(t.steps[currentStep].id).padStart(2, '0')}
+                  </span>
+                </div>
+
+                {/* Title */}
+                <h3 className={`text-xl text-white ${currentLanguage === 'ka' ? 'font-bold' : 'font-bold'} leading-tight`}>
+                  {t.steps[currentStep].title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-gray-400 leading-snug text-sm mx-auto max-w-[280px]">
+                  {t.steps[currentStep].description}
+                </p>
+
+                {/* Progress Lines */}
+                <div className="flex items-center justify-center gap-1 mt-3">
+                  {t.steps.map((_, i) => (
+                    <div
+                      key={i}
+                      className={`h-1 rounded-full transition-all duration-500 ${
+                        i === currentStep ? `w-8 bg-${t.steps[currentStep].color}-500` : 'w-2 bg-gray-800'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Navigation Buttons */}
+            <div className="flex items-center justify-center gap-3 mt-4">
+              {t.steps.map((step, index) => (
+                <button
+                  key={step.id}
+                  onClick={() => setCurrentStep(index)}
+                  className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-white/5 ${
+                    index === currentStep
+                      ? `bg-${step.color}-500 text-white shadow-lg shadow-${step.color}-500/30 scale-110`
+                      : 'bg-gray-800/50 text-gray-500 hover:bg-gray-800'
+                  }`}
                 >
-                  <div className="flex items-center justify-center gap-2">
-                    <div className={`w-8 h-8 rounded-full bg-gradient-to-r from-${t.steps[currentStep].color}-500 to-${t.steps[currentStep].color}-600 flex items-center justify-center`}>
-                      {React.createElement(t.steps[currentStep].icon, { className: "w-4 h-4 text-white" })}
-                    </div>
-                    <span className={`text-lg font-bold text-${t.steps[currentStep].color}-400`}>
-                      {String(t.steps[currentStep].id).padStart(2, '0')}
-                    </span>
-                  </div>
-
-                  <h3 className={`text-lg text-white ${currentLanguage === 'ka' ? 'font-bold' : 'font-bold'} leading-tight`}>
-                    {t.steps[currentStep].title}
-                  </h3>
-
-                  <p className="text-gray-400 leading-snug text-sm">
-                    {t.steps[currentStep].description}
-                  </p>
-
-                  {/* Progress indicator */}
-                  <div className="flex items-center justify-center gap-1 mt-3">
-                    {t.steps.map((_, i) => (
-                      <div
-                        key={i}
-                        className={`h-1 rounded-full transition-all duration-500 ${
-                          i === currentStep ? `w-6 bg-${t.steps[currentStep].color}-500` : 'w-3 bg-gray-700'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Step Navigation Buttons */}
-              <div className="flex items-center justify-center gap-2 mt-4">
-                {t.steps.map((step, index) => (
-                  <button
-                    key={step.id}
-                    onClick={() => setCurrentStep(index)}
-                    className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
-                      index === currentStep
-                        ? `bg-${step.color}-500 text-white shadow-lg shadow-${step.color}-500/25`
-                        : 'bg-gray-700 text-gray-400 hover:bg-gray-600'
-                    }`}
-                  >
-                    {React.createElement(step.icon, { className: "w-3 h-3" })}
-                  </button>
-                ))}
-              </div>
+                  {React.createElement(step.icon, { className: "w-4 h-4" })}
+                </button>
+              ))}
             </div>
+          </div>
 
-            {/* iPhone Container - Compact */}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="relative flex-1 flex items-center justify-center"
-            >
-              {/* Sleek iPhone Frame */}
-              <div className="relative w-[260px] h-[520px]">
-                {/* iPhone Frame - Premium & Realistic */}
-                <div className="absolute inset-0 bg-gradient-to-b from-gray-800 to-gray-900 rounded-[3rem] p-3 shadow-2xl">
-                  <div className="w-full h-full bg-black rounded-[2.5rem] overflow-hidden relative">
-                   
+          {/* 2. IPHONE CONTAINER (Titanium Frame, No Notch) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="relative flex-1 flex items-center justify-center w-full"
+          >
+            {/* Phone Frame Wrapper */}
+            <div className="relative w-[260px] h-[520px]">
+              
+              {/* Physical Buttons (Side) */}
+              <div className="absolute top-20 -left-[2px] w-[2px] h-6 bg-gray-600 rounded-l-md" /> 
+              <div className="absolute top-32 -left-[2px] w-[2px] h-10 bg-gray-600 rounded-l-md" /> 
+              <div className="absolute top-44 -left-[2px] w-[2px] h-10 bg-gray-600 rounded-l-md" />
+              <div className="absolute top-36 -right-[2px] w-[2px] h-14 bg-gray-600 rounded-r-md" />
 
-                    {/* Screen Content - Force Fill Frame */}
-                    <div className="relative w-full h-full overflow-hidden">
-                      {/* Loading indicator */}
-                      {!imagesLoaded[t.steps[currentStep]?.image] && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-gray-800">
-                          <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-                        </div>
-                      )}
+              {/* Main Frame (Titanium) */}
+              <div className="relative w-full h-full bg-[#1a1a1a] rounded-[35px] p-[3px] shadow-[0_0_2px_2px_rgba(255,255,255,0.1)_inset,0_20px_40px_-10px_rgba(0,0,0,0.5)] border border-gray-800 ring-1 ring-white/10">
+                
+                {/* Inner Screen Container - Clean, No Notch */}
+                <div className="w-full h-full bg-black rounded-[32px] overflow-hidden relative">
+                  
+                  {/* Screen Content */}
+                  <div className="relative w-full h-full overflow-hidden bg-gray-900">
+                    
+                    {/* Loader */}
+                    {!imagesLoaded[t.steps[currentStep]?.image] && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-gray-900 z-10">
+                        <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                      </div>
+                    )}
 
-                      {/* Image - Changes based on currentStep */}
-                      <AnimatePresence mode="wait">
-                        <motion.img
-                          key={currentStep}
-                          src={t.steps[currentStep]?.image}
-                          alt={`${t.steps[currentStep]?.title} Screenshot`}
-                          className="absolute inset-0 w-full h-full object-cover object-top"
-                          initial={{
-                            opacity: 0
-                          }}
-                          animate={{
-                            opacity: imagesLoaded[t.steps[currentStep]?.image] ? 1 : 0
-                          }}
-                          exit={{
-                            opacity: 0
-                          }}
-                          transition={{
-                            duration: 0.3,
-                            ease: "easeOut"
-                          }}
-                          onLoad={() => {
-                            if (t.steps[currentStep]?.image) {
-                              setImagesLoaded(prev => ({
-                                ...prev,
-                                [t.steps[currentStep].image]: true
-                              }));
-                            }
-                          }}
-                        />
-                      </AnimatePresence>
+                    {/* Image - Full Screen Visibility */}
+                    <AnimatePresence mode="wait">
+                      <motion.img
+                        key={currentStep}
+                        src={t.steps[currentStep]?.image}
+                        alt="App Screen"
+                        className="w-full h-full object-cover object-top"
+                        initial={{ opacity: 0, scale: 1.05 }}
+                        animate={{ 
+                          opacity: imagesLoaded[t.steps[currentStep]?.image] ? 1 : 0,
+                          scale: 1 
+                        }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        onLoad={() => {
+                          if (t.steps[currentStep]?.image) {
+                            setImagesLoaded(prev => ({
+                              ...prev,
+                              [t.steps[currentStep].image]: true
+                            }));
+                          }
+                        }}
+                      />
+                    </AnimatePresence>
 
-                      {/* Step indicator */}
-                      
-                    </div>
+                    {/* Glass Reflection (Subtle) */}
+                    <div className="absolute inset-0 pointer-events-none z-20 bg-gradient-to-tr from-white/5 via-transparent to-transparent rounded-[32px]" />
+                    
+                    {/* Home Indicator - Kept at bottom */}
+                    <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-[80px] h-[4px] bg-white/20 rounded-full z-30 backdrop-blur-md shadow-sm" />
+                  
                   </div>
                 </div>
               </div>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </div>
+      </div>
       </section>
     );
   }
@@ -359,70 +370,87 @@ const InventoScrollyTelling: React.FC<InventoScrollyTellingProps> = ({ currentLa
             </div>
           </div>
 
-          {/* Right: Static iPhone with changing images */}
-          <div className="flex items-center justify-center lg:justify-center lg:pl-4">
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              className="relative"
-            >
-              {/* iPhone Container - Original Size */}
-              <div className="relative w-[320px] h-[640px]">
-                {/* iPhone Frame */}
-                <div className="absolute inset-0 bg-gradient-to-b from-gray-800 to-gray-900 rounded-[3rem] p-3 shadow-2xl">
-                  <div className="w-full h-full bg-black rounded-[2.5rem] overflow-hidden relative">
-                    {/* Notch */}
-                    
+        {/* Right: Realistic iPhone 15 Pro Titanium */}
+<div className="flex items-center justify-center lg:justify-center lg:pl-4">
+  <motion.div
+    initial={{ opacity: 0, x: 50 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.8 }}
+    className="relative"
+  >
+    {/* iPhone Container */}
+    <div className="relative w-[300px] h-[600px] sm:w-[320px] sm:h-[640px]">
+      
+      {/* 1. PHYSICAL BUTTONS (Absolute to the frame) */}
+      {/* Left Side: Action & Volume */}
+      <div className="absolute top-24 -left-[2px] w-[3px] h-7 bg-gray-700 rounded-l-lg shadow-sm" /> {/* Action */}
+      <div className="absolute top-36 -left-[2px] w-[3px] h-12 bg-gray-700 rounded-l-lg shadow-sm" /> {/* Vol Up */}
+      <div className="absolute top-52 -left-[2px] w-[3px] h-12 bg-gray-700 rounded-l-lg shadow-sm" /> {/* Vol Down */}
+      {/* Right Side: Power */}
+      <div className="absolute top-40 -right-[2px] w-[3px] h-16 bg-gray-700 rounded-r-lg shadow-sm" /> {/* Power */}
 
-                    {/* Screen Content - Force Fill Frame */}
-                    <div className="relative w-full h-full overflow-hidden">
-                      {/* Loading indicator */}
-                      {!imagesLoaded[t.steps[currentStep]?.image] && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-gray-800">
-                          <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-                        </div>
-                      )}
-
-                      {/* Image - FORCE FILL with object-cover */}
-                      <AnimatePresence mode="wait">
-                        <motion.img
-                          key={currentStep}
-                          src={t.steps[currentStep]?.image}
-                          alt={`${t.steps[currentStep]?.title} Screenshot`}
-                          className="absolute inset-0 w-full h-full object-cover object-top"
-                          initial={{
-                            opacity: 0
-                          }}
-                          animate={{
-                            opacity: imagesLoaded[t.steps[currentStep]?.image] ? 1 : 0
-                          }}
-                          exit={{
-                            opacity: 0
-                          }}
-                          transition={{
-                            duration: 0.3,
-                            ease: "easeOut"
-                          }}
-                          onLoad={() => {
-                            if (t.steps[currentStep]?.image) {
-                              setImagesLoaded(prev => ({
-                                ...prev,
-                                [t.steps[currentStep].image]: true
-                              }));
-                            }
-                          }}
-                        />
-                      </AnimatePresence>
-
-                      {/* Step indicator */}
-                   
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+      {/* 2. MAIN FRAME (Titanium Look) */}
+      <div className="relative w-full h-full bg-[#1a1a1a] rounded-[55px] p-[6px] shadow-[0_0_2px_2px_rgba(255,255,255,0.1)_inset,0_20px_40px_-10px_rgba(0,0,0,0.5)] border border-gray-800 ring-1 ring-white/10">
+        
+        {/* Inner Bezel (Black border around screen) */}
+        <div className="w-full h-full bg-black rounded-[48px] overflow-hidden relative border-[4px] border-black">
+          
+          {/* 3. DYNAMIC ISLAND (The new Notch) */}
+       {/* 3. DYNAMIC ISLAND (Small & Sleek) */}
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[70px] h-[20px] bg-black rounded-b-[12px] z-30 flex items-center justify-center">
+            {/* Camera lens reflection detail */}
+            <div className="w-full h-full relative overflow-hidden rounded-b-[12px]">
+               <div className="absolute top-[3px] right-[6px] w-1 h-1 rounded-full bg-[#1c1c1c] shadow-[inset_0_0_1px_rgba(255,255,255,0.3)]"></div>
+            </div>
           </div>
+
+          {/* 4. SCREEN CONTENT */}
+          <div className="relative w-full h-full overflow-hidden bg-gray-900">
+            {/* Loading indicator */}
+            {!imagesLoaded[t.steps[currentStep]?.image] && (
+              <div className="absolute inset-0 flex items-center justify-center bg-gray-900 z-0">
+                <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            )}
+
+            {/* Image */}
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={currentStep}
+                src={t.steps[currentStep]?.image}
+                alt="App Interface"
+                className="absolute inset-0 w-full h-full object-cover object-top"
+                initial={{ opacity: 0, scale: 1.05 }}
+                animate={{ 
+                  opacity: imagesLoaded[t.steps[currentStep]?.image] ? 1 : 0,
+                  scale: 1 
+                }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                onLoad={() => {
+                  if (t.steps[currentStep]?.image) {
+                    setImagesLoaded(prev => ({
+                      ...prev,
+                      [t.steps[currentStep].image]: true
+                    }));
+                  }
+                }}
+              />
+            </AnimatePresence>
+
+            {/* 5. GLASS REFLECTION (Glassmorphism) */}
+            {/* ეს აძლევს ეკრანს "შუშის" ეფექტს */}
+            <div className="absolute inset-0 pointer-events-none z-10 bg-gradient-to-tr from-white/5 via-transparent to-transparent rounded-[48px]" />
+            
+            {/* 6. HOME INDICATOR */}
+            <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-[120px] h-[5px] bg-white/20 rounded-full z-20 backdrop-blur-md" />
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </motion.div>
+</div>
         </div>
       </div>
     </section>
