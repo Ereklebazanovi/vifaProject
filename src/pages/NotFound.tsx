@@ -86,7 +86,7 @@ const NotFound: React.FC = () => {
                 რას ეძებდით?
               </h3>
               <p className="text-slate-400 mb-4">
-                შესაძლოა დაინტერესებდეთ ჩვენი სერვისები:
+                შესაძლოა დაინტერესებდეთ ჩვენი სერვისებით:
               </p>
               <div className="flex flex-wrap justify-center gap-3">
                 <Link
