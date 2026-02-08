@@ -27,111 +27,111 @@ import InventoScrollyTelling from "../components/InventoScrollyTelling";
 // Invento Translations
 const inventoTranslations = {
   ka: {
-    "seo.invento.title": "Invento - Instagram და Facebook გაყიდვების მართვა | vifadigital.ge",
-    "seo.invento.description": "მართე   Facebook და Instagram გაყიდვები ერთ სივრცეში. საწყობი, ბუღალტერია და გაყიდვების მენეჯერი ჯიბეში.",
-    "seo.invento.keywords": "instagram გაყიდვები, facebook კომერცია, საწყობის მართვა, ონლაინ ბიზნესი, ციფრული ინვოისი",
+    "seo.invento.title": "Invento - სოციალური კომერციის და მარაგების მართვის სისტემა",
+    "seo.invento.description": "მართეთ გაყიდვები, საწყობი და ფინანსები ერთ სივრცეში. ავტომატური ინვოისინგი და საკურიერო სერვისების ინტეგრაცია.",
+    "seo.invento.keywords": "instagram გაყიდვები, facebook კომერცია, საწყობის მართვა, ონლაინ ბიზნესი, ციფრული ინვოისი, CRM",
 
-    "hero.title": "მართე  Facebook და Instagram  გაყიდვები ერთ სივრცეში",
-    "hero.subtitle": "Invento — თქვენი პირადი საწყობი და მენეჯერი Instagram, Facebook, TikTok და სხვა არხებისთვის",
+    "hero.title": "მართე Facebook და Instagram გაყიდვები ერთ სივრცეში",
+    "hero.subtitle": "Invento — გაყიდვების, მარაგების და ფინანსების მართვის ცენტრალიზებული სისტემა ონლაინ ბიზნესისთვის.",
     "btn.consultation": "უფასო კონსულტაცია",
     "phone.number": "557 62 42 43",
 
     "problem.title": "იღებთ შეკვეთებს პირად მიმოწერაში (DM)?",
-    "problem.label": "მიმდინარე სიტუაცია",
-    "problem.text": "დაიღალეთ Excel-ში და რვეულებში წერით? კლიენტი გწერთ, თქვენ კი ნაშთებს ეძებთ?",
-    "solution.label": "Invento გადაწყვეტა",
-    "solution.text": "Social Commerce Hub — გაატარეთ შეკვეთა 10 წამში. მენეჯერი ირჩევს პროდუქტს ბაზიდან, სისტემა კი კლიენტს უგზავნის ოფიციალურ ციფრულ ინვოისს.",
+    "problem.label": "გამოწვევა",
+    "problem.text": "ქაოსი შეკვეთებში, დაკარგული მესიჯები და ნაშთების მუდმივი გადამოწმება Excel-ში ან რვეულში.",
+    "solution.label": "Invento-ს გადაწყვეტა",
+    "solution.text": "Social Commerce Hub — გაატარეთ შეკვეთა 10 წამში. სისტემა ავტომატურად აკლებს ნაშთს და აგენერირებს ოფიციალურ დოკუმენტაციას.",
 
-    "features.title": "ფუნქციონალი რომელიც გჭირდებათ",
+    "features.title": "ფუნქციონალი ზრდისთვის",
     "feature1.title": "საწყობი და მარაგები",
-    "feature1.desc": "ვარიაციული პროდუქტები (ფერი/ზომა), ნაშთების ისტორია, Low Stock შეტყობინებები.",
+    "feature1.desc": "პროდუქციის ზუსტი აღრიცხვა ვარიაციების (ფერი/ზომა) მიხედვით. კრიტიკული ნაშთის შეტყობინებები.",
     "feature2.title": "ლოგისტიკა",
-    "feature2.desc": "საკურიერო სტიკერების ბეჭდვა (76x92მმ) ერთი ღილაკით. სტატუსების ავტომატიზაცია.",
-    "feature3.title": "ფინანსები",
-    "feature3.desc": "ავტომატური ბრუნვის უწყისი და გაყიდვების დეტალური ისტორია Excel-ში.",
-    "feature4.title": "გუნდის მართვა",
-    "feature4.desc": "როლების გადანაწილება (მენეჯერი vs ადმინი). აკონტროლეთ ვის რისი უფლება აქვს.",
+    "feature2.desc": "საკურიერო სტიკერების ბეჭდვა (76x92მმ) ერთი ღილაკით. სტატუსების ავტომატური განახლება.",
+    "feature3.title": "ფინანსური რეპორტინგი",
+    "feature3.desc": "ავტომატური ბრუნვის უწყისი, მოგება-ზარალი და დეტალური ექსპორტი Excel-ში.",
+    "feature4.title": "როლების მართვა",
+    "feature4.desc": "წვდომის დონეების განსაზღვრა (მენეჯერი / ადმინი / ოპერატორი). აკონტროლეთ თანამშრომლების აქტივობა.",
     "feature5.title": "PWA ტექნოლოგია",
-    "feature5.desc": "მუშაობს როგორც აპლიკაცია ნებისმიერ მოწყობილობაზე (iOS, Android, Desktop).",
-    "feature6.title": "E-commerce სინქრონიზაცია",
-    "feature6.desc": "მუშაობს იდეალურად ჩვენს მიერ დამზადებულ E-commerce საიტებთან.",
+    "feature5.desc": "ადაპტირებული ინტერფეისი ნებისმიერი მოწყობილობისთვის (iOS, Android, Desktop, Tablet).",
+    "feature6.title": "E-commerce ინტეგრაცია",
+    "feature6.desc": "სრული სინქრონიზაცია Vifa Digital-ის მიერ დამზადებულ ონლაინ მაღაზიებთან.",
 
-    "pricing.title": "აირჩიე შენი გეგმა",
+    "pricing.title": "საინვესტიციო გეგმები",
 
-    "plan1.title": "Invento License (ერთჯერადი)",
+    "plan1.title": "Invento License",
     "plan1.price": "890₾",
-    "plan1.f1": "Invento-ს მუდმივი ლიცენზია",
-    "plan1.f2": "მრავალმხრივი წვდომა (Manager / Admin)",
-    "plan1.f3": "პერსონალის ტრენინგი და სისტემის ჩაბარება",
-    "plan1.f4": "მონაცემების უსაფრთხოება და Back-up",
-    "plan1.f5": "1 თვე უფასო ტექნ. მხარდაჭერა (შემდეგ 40₾/თვეში)",
-    "plan1.btn": "შეიძინე ეტაპობრივად",
+    "plan1.f1": "Invento-ს მუდმივი ლიცენზია (Lifetime)",
+    "plan1.f2": "სისტემის სრული იმპლემენტაცია და დანერგვა",
+    "plan1.f3": "სისტემის მოხმარების დეტალური სახელმძღვანელო",
+    "plan1.f4": "მონაცემთა ბაზის უსაფრთხოება (Cloud Security)",
+    "plan1.f5": "1 თვე უფასო ტექნიკური მხარდაჭერა (შემდგომ 40₾/თვე)",
+    "plan1.btn": "უფასო კონსულტაცია",
 
-    "plan2.title": "E-commerce Bundle (სრული პაკეტი)",
+    "plan2.title": "E-commerce Bundle",
     "plan2.price": "1999₾",
-    "plan2.f1": "სრულად გამართული ონლაინ მაღაზია",
-    "plan2.f2": "Invento-ს მუდმივი ლიცენზია + სინქრონიზაცია",
-    "plan2.f3": "SEO ოპტიმიზაცია და Pixel-ის გამართვა",
-    "plan2.f4": "1 წელი დომენი (.ge) და ჰოსტინგი",
-    "plan2.f5": "1 თვე უფასო ტექნ. მხარდაჭერა (შემდეგ 40₾/თვეში)",
-    "plan2.btn": "შეკვეთა",
+    "plan2.f1": "თანამედროვე ონლაინ მაღაზიის დამზადება",
+    "plan2.f2": "Invento-ს ლიცენზია + სრული სინქრონიზაცია",
+    "plan2.f3": "გადახდის სისტემები (TBC, BOG, Apple Pay)",
+    "plan2.f4": "სერვერული გამართვა და დომენის დაკავშირება",
+    "plan2.f5": "SEO ოპტიმიზაცია და Google Analytics",
+    "plan2.btn": "უფასო კონსულტაცია",
 
-    "payment.terms": "მოქნილი გადახდა: 50% პროექტის დაწყებისას — 50% ჩაბარებისას",
+    "payment.terms": "გადახდის პირობები: 50% პროექტის დაწყებისას — 50% ჩაბარებისას",
 
-    "cta.title": "ინვენტო — სრული კონტროლი თქვენს ონლაინ გაყიდვებზე",
+    "cta.title": "Invento — სრული კონტროლი თქვენს ონლაინ გაყიდვებზე",
     "cta.btn": "მოგვწერეთ WhatsApp-ში"
   },
   en: {
-    "seo.invento.title": "Invento - Manage Facebook & Instagram   Sales | vifadigital.ge",
-    "seo.invento.description": "Manage Instagram & Facebook sales in one place. Your personal warehouse, accountant, and sales manager in your pocket.",
-    "seo.invento.keywords": "instagram sales, facebook commerce, inventory management, online business, digital invoicing",
+    "seo.invento.title": "Invento - Social Commerce & Inventory Management System",
+    "seo.invento.description": "Manage sales, inventory, and finance in one place. Automated invoicing and courier integration.",
+    "seo.invento.keywords": "instagram sales, facebook commerce, inventory management, online business, digital invoicing, CRM",
 
     "hero.title": "Manage Social Sales & Inventory in One Place",
-    "hero.subtitle": "Invento — Your personal warehouse, accountant, and sales manager",
+    "hero.subtitle": "Invento — A centralized system for sales, inventory, and financial management for online businesses.",
     "btn.consultation": "Free Consultation",
     "phone.number": "557 62 42 43",
 
     "problem.title": "Struggling with DM Orders?",
-    "problem.label": "Current Situation",
-    "problem.text": "Tired of manual Excel sheets and DM chaos?",
-    "solution.label": "Invento Solution",
-    "solution.text": "Social Commerce Hub — Process orders in 10 seconds. Send official digital invoices instantly.",
+    "problem.label": "The Challenge",
+    "problem.text": "Chaos in orders, lost messages, and constant manual stock checking in Excel or notebooks.",
+    "solution.label": "The Solution",
+    "solution.text": "Social Commerce Hub — Process orders in 10 seconds. The system automatically deducts stock and generates official documentation.",
 
-    "features.title": "Features You Need",
+    "features.title": "Features for Growth",
     "feature1.title": "Warehouse & Inventory",
-    "feature1.desc": "Product Variants (Size/Color), Stock History, Low Stock Alerts.",
+    "feature1.desc": "Precise stock tracking by product variants (Size/Color). Low stock alerts.",
     "feature2.title": "Logistics",
-    "feature2.desc": "Print Courier Labels (76x92mm) in one click. Automated Statuses.",
-    "feature3.title": "Finance",
-    "feature3.desc": "Automated Turnover Statements & Excel Reports.",
+    "feature2.desc": "One-click courier label printing (76x92mm). Automated status updates.",
+    "feature3.title": "Financial Reporting",
+    "feature3.desc": "Automated turnover statements, P&L reports, and detailed Excel exports.",
     "feature4.title": "Team Management",
-    "feature4.desc": "Role Management (Manager vs Admin).",
+    "feature4.desc": "Role-based access control (Manager vs Admin). Monitor employee activity.",
     "feature5.title": "PWA Technology",
-    "feature5.desc": "Works like a Native App on iOS, Android, & Desktop.",
-    "feature6.title": "E-commerce Sync",
-    "feature6.desc": "Seamlessly integrates with websites built by Vifa Digital.",
+    "feature5.desc": "Fully adapted interface for any device (iOS, Android, Desktop, Tablet).",
+    "feature6.title": "E-commerce Integration",
+    "feature6.desc": "Full synchronization with custom e-commerce websites built by Vifa Digital.",
 
-    "pricing.title": "Choose Your Plan",
+    "pricing.title": "Investment Plans",
 
-    "plan1.title": "Invento License (Lifetime)",
+    "plan1.title": "Invento License",
     "plan1.price": "890₾",
-    "plan1.f1": "Lifetime License",
-    "plan1.f2": "Multi-User Access (Manager / Admin)",
-    "plan1.f3": "Staff Training & Onboarding",
-    "plan1.f4": "Cloud Security & Daily Backups",
-    "plan1.f5": "1 Month Free Support (then 40₾/mo)",
-    "plan1.btn": "Buy in Installments",
+    "plan1.f1": "Invento Lifetime License",
+    "plan1.f2": "Full System Implementation & Setup",
+    "plan1.f3": "Staff Onboarding & Training",
+    "plan1.f4": "Data Security & Daily Backups",
+    "plan1.f5": "1 Month Free Priority Support",
+    "plan1.btn": "Request Invoice",
 
     "plan2.title": "E-commerce Bundle",
     "plan2.price": "1999₾",
-    "plan2.f1": "Turnkey E-commerce Website",
-    "plan2.f2": "Lifetime License + Full Sync",
-    "plan2.f3": "SEO Optimization & Pixel Setup",
-    "plan2.f4": "1 Year Domain (.ge) & Hosting",
-    "plan2.f5": "1 Month Free Support (then 40₾/mo)",
-    "plan2.btn": "Order Now",
+    "plan2.f1": "Custom E-commerce Website Development",
+    "plan2.f2": "Invento License + Real-time Sync",
+    "plan2.f3": "Payment Gateway Integration (Cards/Apple Pay)",
+    "plan2.f4": "Server Configuration & Domain Setup",
+    "plan2.f5": "SEO Optimization & Analytics",
+    "plan2.btn": "Free Consultation",
 
-    "payment.terms": "Flexible Payment: 50% Upfront — 50% Upon Completion",
+    "payment.terms": "Payment Terms: 50% Upfront — 50% Upon Completion",
 
     "cta.title": "Invento — Complete Control Over Your Online Sales",
     "cta.btn": "Message us on WhatsApp"
@@ -272,7 +272,7 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
                   >
                     {/* Loading indicator */}
                     {!imagesLoaded[images[currentImageIndex]] && (
-                      <div className="absolute inset-0 flex items-center justify-center bg-gray-800/50">
+                      <div className="absolute inset-0 flex items-center justify-center bg-[#0a0a0a]/80">
                         <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
                       </div>
                     )}
@@ -345,7 +345,7 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
           </section>
 
           {/* PROBLEM vs SOLUTION */}
-          <section className="py-12 bg-gradient-to-r from-gray-900/30 to-transparent">
+          <section className="py-12 bg-[#0a0a0a]">
             <div className="container mx-auto px-6">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -359,7 +359,7 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
                 </h2>
 
                 <div className="grid md:grid-cols-2 gap-6">
-                  <div className="border border-red-500/20 rounded-lg p-6 bg-red-900/5">
+                  <div className="border border-red-500/20 rounded-lg p-6 bg-[#0a0a0a]/80">
                     <div className="flex items-center gap-3 mb-4">
                       <FaTimesCircle className="w-5 h-5 text-red-400" />
                       <h3 className={`text-lg text-red-400 ${currentLanguage === 'ka' ? 'font-semibold' : 'font-semibold'}`}>
@@ -371,7 +371,7 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
                     </p>
                   </div>
 
-                  <div className="border border-green-500/20 rounded-lg p-6 bg-green-900/5">
+                  <div className="border border-green-500/20 rounded-lg p-6 bg-[#0a0a0a]/80">
                     <div className="flex items-center gap-3 mb-4">
                       <FaCheckCircle className="w-5 h-5 text-green-400" />
                       <h3 className={`text-lg text-green-400 ${currentLanguage === 'ka' ? 'font-semibold' : 'font-semibold'}`}>
@@ -417,7 +417,7 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: idx * 0.1 }}
                     viewport={{ once: true }}
-                    className={`group p-6 rounded-lg border border-gray-700/50 bg-gray-900/30 hover:border-${item.color}-500/50 transition-all duration-300`}
+                    className={`group p-6 rounded-lg border border-gray-700/50 bg-[#0a0a0a]/80 hover:border-${item.color}-500/50 transition-all duration-300`}
                   >
                     <item.icon className={`w-8 h-8 text-${item.color}-400 mb-4 group-hover:scale-110 transition-transform`} />
                     <h3 className={`text-lg text-${item.color}-400 mb-3 ${currentLanguage === 'ka' ? 'font-semibold' : 'font-semibold'}`}>
@@ -436,7 +436,7 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
           <InventoScrollyTelling currentLanguage={currentLanguage} />
 
           {/* PRICING */}
-          <section className="py-12 bg-gradient-to-b from-transparent to-gray-900/50">
+          <section className="py-12 bg-[#050505]">
             <div className="container mx-auto px-6">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -494,7 +494,7 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
                   viewport={{ once: true }}
-                  className="p-6 rounded-lg border border-gray-700/50 bg-gray-900/30 hover:border-orange-500/50 transition-all duration-300"
+                  className="p-6 rounded-lg border border-gray-700/50 bg-[#0a0a0a]/80 hover:border-orange-500/50 transition-all duration-300"
                 >
                   <h3 className={`text-xl text-orange-400 mb-3 ${currentLanguage === 'ka' ? 'font-bold' : 'font-bold'}`}>{t("plan2.title")}</h3>
                   <div className="mb-4">
@@ -528,7 +528,7 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
                 viewport={{ once: true }}
                 className="text-center mt-8"
               >
-                <div className="inline-flex items-center gap-2 bg-green-900/20 border border-green-500/30 rounded-lg px-6 py-3">
+                <div className="inline-flex items-center gap-2 bg-[#0a0a0a]/80 border border-green-500/30 rounded-lg px-6 py-3">
                   <FaShieldAlt className="w-5 h-5 text-green-400" />
                   <span className={`text-green-400 ${currentLanguage === 'ka' ? 'font-semibold' : 'font-semibold'}`}>
                     {t("payment.terms")}
@@ -539,7 +539,7 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
           </section>
 
           {/* FOOTER CTA */}
-          <section className="py-12 bg-gradient-to-r from-blue-900/30 to-purple-900/30">
+          <section className="py-12 bg-[#0a0a0a]">
             <div className="container mx-auto px-6 text-center">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
