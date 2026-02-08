@@ -9,38 +9,40 @@ interface InventoScrollyTellingProps {
 }
 
 // Step content data
+// Step content data
+// Step content data
 const stepContent = {
   ka: {
-    title: "როგორ მუშაობს Invento",
+    title: "სისტემის მუშაობის პრინციპი",
     steps: [
       {
         id: 1,
-        title: "სრული კონტროლი",
-        description: "მართეთ პროდუქტები, ნაშთები და გაყიდვები ერთ სივრცეში. რეალურ დროში ნახეთ ყველაფერი რაც მოხდება თქვენს ბიზნესში.",
+        title: "ცენტრალიზებული მართვა",
+        description: "გაყიდვების არხების, პროდუქციის და ფინანსური მაჩვენებლების სრული კონტროლი ერთ დეშბორდზე.",
         image: "/step1-dashboard.png",
         icon: FaShieldAlt,
         color: "blue"
       },
       {
         id: 2,
-        title: "ნაშთების შემოწმება",
-        description: "ინსტანტალურად ნახეთ რამდენი პროდუქტი გაქვთ, რომელი ვარიანტები მთავრდება და რამდენი გაყიდვა იყო.",
+        title: "მარაგების კონტროლი",
+        description: "ნაშთების ზუსტი აღრიცხვა ფერისა და ზომის (SKU) მიხედვით. სისტემა გამორიცხავს ნაშთის ცდომილებას.",
         image: "/step2-stock.png",
         icon: FaBarcode,
         color: "purple"
       },
       {
         id: 3,
-        title: "ლოგისტიკა",
-        description: "შეკვეთის დადასტურების შემდეგ ავტომატურად შეიქმნება საკურიერო სტიკერი და გაიგზავნება კლიენტისთვის.",
+        title: "ლოგისტიკის ავტომატიზაცია",
+        description: "საკურიერო სტიკერების მომენტალური ბეჭდვა და შეკვეთების ავტომატური ექსპორტი Excel-ში.",
         image: "/step3-order.png",
         icon: FaTruck,
         color: "green"
       },
       {
         id: 4,
-        title: "ავტო ინვოისი",
-        description: "სისტემა ავტომატურად ქმნის და გზავნის ოფიციალურ ციფრულ ინვოისს კლიენტისთვის. ყველაფერი ლეგალურია.",
+        title: "ავტომატური ინვოისინგი",
+        description: "შეკვეთის გაფორმებისას სისტემა აგენერირებს ოფიციალურ PDF ინვოისს და უგზავნის მომხმარებელს.",
         image: "/step4-invoice.png",
         icon: FaFileInvoiceDollar,
         color: "orange"
@@ -48,36 +50,36 @@ const stepContent = {
     ]
   },
   en: {
-    title: "How Invento Works",
+    title: "System Workflow",
     steps: [
       {
         id: 1,
-        title: "Total Control",
-        description: "Manage products, inventory, and sales in one place. See everything happening in your business in real-time.",
+        title: "Centralized Management",
+        description: "Complete control of sales channels, inventory, and financial metrics from a single dashboard.",
         image: "/step1-dashboard.png",
         icon: FaShieldAlt,
         color: "blue"
       },
       {
         id: 2,
-        title: "Stock Check",
-        description: "Instantly see how many products you have, which variants are running low, and sales data.",
+        title: "Inventory Control",
+        description: "Precise stock tracking by variant (SKU). Real-time synchronization eliminates overselling risks.",
         image: "/step2-stock.png",
         icon: FaBarcode,
         color: "purple"
       },
       {
         id: 3,
-        title: "Logistics",
-        description: "After order confirmation, courier stickers are automatically created and sent to customers.",
+        title: "Logistics Automation",
+        description: "One-click courier label printing and bulk order export to Excel for seamless shipping operations.",
         image: "/step3-order.png",
         icon: FaTruck,
         color: "green"
       },
       {
         id: 4,
-        title: "Auto Invoice",
-        description: "System automatically creates and sends official digital invoices to customers. Everything is legal.",
+        title: "Automated Invoicing",
+        description: "The system automatically generates and sends professional PDF invoices upon order confirmation.",
         image: "/step4-invoice.png",
         icon: FaFileInvoiceDollar,
         color: "orange"
@@ -85,7 +87,6 @@ const stepContent = {
     ]
   }
 };
-
 const InventoScrollyTelling: React.FC<InventoScrollyTellingProps> = ({ currentLanguage }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -116,18 +117,19 @@ const InventoScrollyTelling: React.FC<InventoScrollyTellingProps> = ({ currentLa
     });
   }, [t.steps]);
 
-  // Auto-advance steps (optional - can be removed if you want manual control)
+  // Auto-advance steps with smoother timing
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentStep((prev) => (prev + 1) % t.steps.length);
-    }, 4000); // 4 seconds per step
+    }, 4500); // 4.5 seconds per step for smoother experience
     return () => clearInterval(interval);
   }, [t.steps.length]);
 
-  // Mobile rendering (stacked)
+  // Mobile rendering - Sticky Scrollytelling (Same as Desktop)
   if (isMobile) {
     return (
-      <section className="py-16 bg-[#050505]">
+      <section className="py-16 bg-[#050505] lg:hidden">
+        {/* Title */}
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -142,66 +144,133 @@ const InventoScrollyTelling: React.FC<InventoScrollyTellingProps> = ({ currentLa
               </span>
             </h2>
           </motion.div>
+        </div>
 
-          <div className="space-y-16">
-            {t.steps.map((step, index) => (
-              <motion.div
-                key={step.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="space-y-8"
-              >
-                {/* Mobile iPhone */}
-                <div className="relative w-full max-w-xs mx-auto">
-                  <div className="relative w-[300px] h-[520px] mx-auto">
-                    {/* iPhone Frame */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-gray-800 to-gray-900 rounded-[3rem] p-2 shadow-2xl">
-                      <div className="w-full h-full bg-black rounded-[2.5rem] overflow-hidden relative">
-                        {/* Notch */}
-                        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-36 h-6 bg-black rounded-b-2xl z-10"></div>
+        {/* Main Mobile Container - Compact Design */}
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col items-center space-y-6 min-h-[90vh] max-w-xs mx-auto">
 
-                        {/* Screen - Perfect Edge-to-Edge Fit */}
-                        <div className="w-full h-full bg-white relative overflow-hidden">
-                          {!imagesLoaded[step.image] && (
-                            <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
-                              <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-                            </div>
-                          )}
-                          <img
-                            src={step.image}
-                            alt={`${step.title} Screenshot`}
-                            className="absolute inset-0 w-full h-full object-contain"
-                            onLoad={() => setImagesLoaded(prev => ({ ...prev, [step.image]: true }))}
-                          />
-                        </div>
-                      </div>
+            {/* Text Content Above Phone - Changes in Place */}
+            <div className="text-center space-y-4 w-full flex-shrink-0">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentStep}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  className="space-y-3"
+                >
+                  <div className="flex items-center justify-center gap-2">
+                    <div className={`w-8 h-8 rounded-full bg-gradient-to-r from-${t.steps[currentStep].color}-500 to-${t.steps[currentStep].color}-600 flex items-center justify-center`}>
+                      {React.createElement(t.steps[currentStep].icon, { className: "w-4 h-4 text-white" })}
                     </div>
-                  </div>
-                </div>
-
-                {/* Mobile Text */}
-                <div className="text-center space-y-6 px-4">
-                  <div className="flex items-center justify-center gap-3">
-                    <div className={`w-12 h-12 rounded-full bg-gradient-to-r from-${step.color}-500 to-${step.color}-600 flex items-center justify-center`}>
-                      {React.createElement(step.icon, { className: "w-6 h-6 text-white" })}
-                    </div>
-                    <span className={`text-2xl font-bold text-${step.color}-400`}>
-                      {String(step.id).padStart(2, '0')}
+                    <span className={`text-lg font-bold text-${t.steps[currentStep].color}-400`}>
+                      {String(t.steps[currentStep].id).padStart(2, '0')}
                     </span>
                   </div>
 
-                  <h3 className={`text-2xl text-white ${currentLanguage === 'ka' ? 'font-bold' : 'font-bold'}`}>
-                    {step.title}
+                  <h3 className={`text-lg text-white ${currentLanguage === 'ka' ? 'font-bold' : 'font-bold'} leading-tight`}>
+                    {t.steps[currentStep].title}
                   </h3>
 
-                  <p className="text-gray-400 leading-relaxed max-w-sm mx-auto">
-                    {step.description}
+                  <p className="text-gray-400 leading-snug text-sm">
+                    {t.steps[currentStep].description}
                   </p>
+
+                  {/* Progress indicator */}
+                  <div className="flex items-center justify-center gap-1 mt-3">
+                    {t.steps.map((_, i) => (
+                      <div
+                        key={i}
+                        className={`h-1 rounded-full transition-all duration-500 ${
+                          i === currentStep ? `w-6 bg-${t.steps[currentStep].color}-500` : 'w-3 bg-gray-700'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Step Navigation Buttons */}
+              <div className="flex items-center justify-center gap-2 mt-4">
+                {t.steps.map((step, index) => (
+                  <button
+                    key={step.id}
+                    onClick={() => setCurrentStep(index)}
+                    className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
+                      index === currentStep
+                        ? `bg-${step.color}-500 text-white shadow-lg shadow-${step.color}-500/25`
+                        : 'bg-gray-700 text-gray-400 hover:bg-gray-600'
+                    }`}
+                  >
+                    {React.createElement(step.icon, { className: "w-3 h-3" })}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* iPhone Container - Compact */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="relative flex-1 flex items-center justify-center"
+            >
+              {/* Sleek iPhone Frame */}
+              <div className="relative w-[260px] h-[520px]">
+                {/* iPhone Frame - Premium & Realistic */}
+                <div className="absolute inset-0 bg-gradient-to-b from-gray-800 to-gray-900 rounded-[3rem] p-3 shadow-2xl">
+                  <div className="w-full h-full bg-black rounded-[2.5rem] overflow-hidden relative">
+                   
+
+                    {/* Screen Content - Force Fill Frame */}
+                    <div className="relative w-full h-full overflow-hidden">
+                      {/* Loading indicator */}
+                      {!imagesLoaded[t.steps[currentStep]?.image] && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-gray-800">
+                          <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                        </div>
+                      )}
+
+                      {/* Image - Changes based on currentStep */}
+                      <AnimatePresence mode="wait">
+                        <motion.img
+                          key={currentStep}
+                          src={t.steps[currentStep]?.image}
+                          alt={`${t.steps[currentStep]?.title} Screenshot`}
+                          className="absolute inset-0 w-full h-full object-cover object-top"
+                          initial={{
+                            opacity: 0
+                          }}
+                          animate={{
+                            opacity: imagesLoaded[t.steps[currentStep]?.image] ? 1 : 0
+                          }}
+                          exit={{
+                            opacity: 0
+                          }}
+                          transition={{
+                            duration: 0.3,
+                            ease: "easeOut"
+                          }}
+                          onLoad={() => {
+                            if (t.steps[currentStep]?.image) {
+                              setImagesLoaded(prev => ({
+                                ...prev,
+                                [t.steps[currentStep].image]: true
+                              }));
+                            }
+                          }}
+                        />
+                      </AnimatePresence>
+
+                      {/* Step indicator */}
+                      
+                    </div>
+                  </div>
                 </div>
-              </motion.div>
-            ))}
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -235,10 +304,10 @@ const InventoScrollyTelling: React.FC<InventoScrollyTellingProps> = ({ currentLa
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentStep}
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 50 }}
-                transition={{ duration: 0.6, ease: "easeInOut" }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
                 className="space-y-6"
               >
                 <div className="flex items-center gap-4 justify-end lg:justify-start">
@@ -304,39 +373,36 @@ const InventoScrollyTelling: React.FC<InventoScrollyTellingProps> = ({ currentLa
                 <div className="absolute inset-0 bg-gradient-to-b from-gray-800 to-gray-900 rounded-[3rem] p-3 shadow-2xl">
                   <div className="w-full h-full bg-black rounded-[2.5rem] overflow-hidden relative">
                     {/* Notch */}
-                    <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-36 h-7 bg-black rounded-b-2xl z-10"></div>
+                    
 
-                    {/* Screen Content - Perfect Edge-to-Edge Fit */}
-                    <div className="w-full h-full bg-white relative overflow-hidden">
+                    {/* Screen Content - Force Fill Frame */}
+                    <div className="relative w-full h-full overflow-hidden">
                       {/* Loading indicator */}
                       {!imagesLoaded[t.steps[currentStep]?.image] && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+                        <div className="absolute inset-0 flex items-center justify-center bg-gray-800">
                           <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
                         </div>
                       )}
 
-                      {/* Image with smooth transitions - Perfect Fit */}
+                      {/* Image - FORCE FILL with object-cover */}
                       <AnimatePresence mode="wait">
                         <motion.img
                           key={currentStep}
                           src={t.steps[currentStep]?.image}
                           alt={`${t.steps[currentStep]?.title} Screenshot`}
-                          className="absolute inset-0 w-full h-full object-contain"
+                          className="absolute inset-0 w-full h-full object-cover object-top"
                           initial={{
-                            opacity: 0,
-                            scale: 1.05
+                            opacity: 0
                           }}
                           animate={{
-                            opacity: imagesLoaded[t.steps[currentStep]?.image] ? 1 : 0,
-                            scale: 1
+                            opacity: imagesLoaded[t.steps[currentStep]?.image] ? 1 : 0
                           }}
                           exit={{
-                            opacity: 0,
-                            scale: 0.95
+                            opacity: 0
                           }}
                           transition={{
-                            duration: 0.5,
-                            ease: "easeInOut"
+                            duration: 0.3,
+                            ease: "easeOut"
                           }}
                           onLoad={() => {
                             if (t.steps[currentStep]?.image) {
@@ -350,13 +416,7 @@ const InventoScrollyTelling: React.FC<InventoScrollyTellingProps> = ({ currentLa
                       </AnimatePresence>
 
                       {/* Step indicator */}
-                      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-                        <div className={`px-3 py-1 rounded-full bg-${t.steps[currentStep]?.color}-500/90 backdrop-blur-sm`}>
-                          <span className="text-white font-medium text-sm">
-                            {String(currentStep + 1).padStart(2, '0')} / {String(t.steps.length).padStart(2, '0')}
-                          </span>
-                        </div>
-                      </div>
+                   
                     </div>
                   </div>
                 </div>

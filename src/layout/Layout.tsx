@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from './SimpleNavbar';
 import Footer from './ImprovedFooter';
 import { useNavigation } from '../contexts/NavigationContext';
-import ChatBot, { ChatBotButton } from '../components/ChatBot';
+// import ChatBot, { ChatBotButton } from '../components/ChatBot';
 
 // Elegant black loading component
 const NavigationSpinner = () => (
@@ -61,7 +61,7 @@ const NavigationSpinner = () => (
 const Layout: React.FC = () => {
   const { isNavigating, stopNavigation } = useNavigation();
   const location = useLocation();
-  const [isChatBotOpen, setIsChatBotOpen] = useState(false);
+  // const [isChatBotOpen, setIsChatBotOpen] = useState(false);
 
   // Stop navigation when location changes
   useEffect(() => {
@@ -83,9 +83,9 @@ const Layout: React.FC = () => {
     return <NavigationSpinner />;
   }
 
-  const toggleChatBot = () => {
-    setIsChatBotOpen(!isChatBotOpen);
-  };
+  // const toggleChatBot = () => {
+  //   setIsChatBotOpen(!isChatBotOpen);
+  // };
 
   return (
     <div className="min-h-screen bg-transparent text-white">
@@ -96,8 +96,8 @@ const Layout: React.FC = () => {
       <Footer />
 
       {/* ChatBot Components */}
-      <ChatBot isOpen={isChatBotOpen} onToggle={toggleChatBot} />
-      {!isChatBotOpen && <ChatBotButton onClick={toggleChatBot} />}
+      {/* <ChatBot isOpen={isChatBotOpen} onToggle={toggleChatBot} />
+      {!isChatBotOpen && <ChatBotButton onClick={toggleChatBot} />} */}
     </div>
   );
 };
