@@ -1,3 +1,4 @@
+//InventoLandingPage.tsx
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -21,6 +22,7 @@ import {
   FaShieldAlt
 } from "react-icons/fa";
 import SEO from "../components/SEO";
+import InventoScrollyTelling from "../components/InventoScrollyTelling";
 
 // Invento Translations
 const inventoTranslations = {
@@ -429,6 +431,9 @@ const InventoLandingPage: React.FC = () => {
               </div>
             </div>
           </section>
+
+          {/* HOW IT WORKS - SCROLLYTELLING */}
+          <InventoScrollyTelling currentLanguage={currentLanguage} />
 
           {/* PRICING */}
           <section className="py-12 bg-gradient-to-b from-transparent to-gray-900/50">
