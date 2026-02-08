@@ -266,7 +266,7 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
                   className="relative"
                 >
                   <div
-                    className="relative w-full h-[400px] rounded-xl overflow-hidden border border-gray-700/50 shadow-xl shadow-blue-500/10 group"
+                    className="relative w-full h-[250px] sm:h-[320px] lg:h-[400px] rounded-xl overflow-hidden border border-gray-700/50 shadow-xl shadow-blue-500/10 group"
                     onMouseEnter={() => setIsPaused(true)}
                     onMouseLeave={() => setIsPaused(false)}
                   >
@@ -283,7 +283,7 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
                         key={currentImageIndex}
                         src={images[currentImageIndex]}
                         alt={`Invento Preview ${currentImageIndex + 1}`}
-                        className="w-full h-full object-contain bg-white/5 transition-transform duration-300 group-hover:scale-[1.02]"
+                        className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"
                         initial={{
                           opacity: 0
                         }}
