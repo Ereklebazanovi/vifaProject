@@ -23,6 +23,9 @@ import {
   FaBrain,
   FaBullseye,
   FaShoppingCart,
+  FaBox,
+  FaShieldAlt,
+  FaCommentDots,
 } from "react-icons/fa";
 import {
   SiFirebase,
@@ -131,13 +134,13 @@ const webDevTranslations = {
     "webdev.pricing.ecommerce.title": "ონლაინ მაღაზია",
     "webdev.pricing.ecommerce.description":
       "სრული ონლაინ მაღაზია — ქართული ბანკებით გადახდა, პროდუქტების მართვა და შეკვეთების კონტროლი.",
-    "webdev.pricing.ecommerce.price": "1500₾-დან",
+    "webdev.pricing.ecommerce.price": "1999₾-დან",
     "webdev.pricing.ecommerce.timeline": "14-21 დღე",
-    "webdev.pricing.ecommerce.feature1": "ინტეგრირებული ქართული საბანკო გადახდები",
-    "webdev.pricing.ecommerce.feature2": "პროდუქტის სწრაფი დამატება და მართვა",
-    "webdev.pricing.ecommerce.feature3": "შეკვეთების მარტივი კონტროლი / მონიტორინგი",
-    "webdev.pricing.ecommerce.feature4": "მომხმარებელთა რეგისტრაციის მართვა",
-    "webdev.pricing.ecommerce.feature5": "სრულფასოვანი მობილური მხარდაჭერა / Responsive დიზაინი",
+    "webdev.pricing.ecommerce.feature1": "ონლაინ მაღაზია + Invento სისტემა",
+    "webdev.pricing.ecommerce.feature2": "ავტომატური მარაგების სინქრონიზაცია",
+    "webdev.pricing.ecommerce.feature3": "საკურიერო სტიკერები და ინვოისინგი",
+    "webdev.pricing.ecommerce.feature4": "Real-time შეკვეთების კონტროლი",
+    "webdev.pricing.ecommerce.feature5": "Excel რეპორტები და ანალიტიკა",
 
     "webdev.pricing.consultation": "კონსულტაცია უფასოა",
     "webdev.pricing.cta": "დაიწყე პროექტი",
@@ -173,8 +176,31 @@ const webDevTranslations = {
     "webdev.technologies.desc": "მოდერნული და სანდო ტექნოლოგიები",
 
     "webdev.cta.question": "მზად ხარ ბიზნესის ციფრული ტრანსფორმაციისთვის?",
-    "webdev.cta.button": "პროექტის დაწყება",
+    "webdev.cta.button": "დაგვიკავშირდი WhatsApp-ზე",
     "webdev.pricing.perProject": "პროექტზე",
+
+    "webdev.whyus.title": "რატომ VIFA Digital?",
+    "webdev.whyus.subtitle": "ჩვენ არ ვაწყობთ უბრალოდ საიტებს - ვქმნით ციფრულ ბიზნეს სისტემებს",
+    "webdev.whyus.featured": "★ მთავარი უპირატესობა",
+    "webdev.whyus.learnmore": "გაიგე მეტი Invento-ს შესახებ",
+    "webdev.whyus.card1.title": "თანამედროვე Stack",
+    "webdev.whyus.card1.desc": "React, TypeScript, Firebase - ტექნოლოგიები, რომლებზეც აგებულია ყველაზე წარმატებული SaaS პროდუქტები მსოფლიოში.",
+    "webdev.whyus.card2.title": "Invento სისტემა",
+    "webdev.whyus.card2.desc": "თქვენს ონლაინ მაღაზიას თან მოყვება Invento - პროფესიონალური საწყობისა და გაყიდვების მართვის სისტემა. არა WordPress, არამედ ქართულ ბაზარზე მორგებული SaaS პლატფორმა.",
+    "webdev.whyus.card3.title": "სრული მხარდაჭერა",
+    "webdev.whyus.card3.desc": "პროექტის ჩაბარების შემდეგაც ჩვენ გვერდში ვართ - ტექნიკური მხარდაჭერა, განახლებები, გუნდის ტრენინგი.",
+
+    "webdev.invento.strip_subtitle": "სისტემური არქიტექტურა",
+    "webdev.invento.strip_title_prefix": "E-commerce +",
+    "webdev.invento.strip_title_suffix": "Invento OS",
+    "webdev.invento.strip_desc": "ჩვენი ონლაინ მაღაზიები მუშაობს არა Wordpress-ზე, არამედ მძლავრ SaaS ძრავზე. თქვენ იღებთ სრულ საოპერაციო სისტემას.",
+    "webdev.invento.strip_label": "სტანდარტული პაკეტი",
+    "webdev.invento.strip_value_label": "ღირებულება",
+    "webdev.invento.strip_status": "შედის ფასში",
+    "webdev.invento.strip_core": "Invento™ Core",
+    "webdev.invento.strip_btn": "სისტემის ნახვა",
+    "webdev.pricing.badge": "INCLUDED: INVENTO (890₾)",
+
   },
   en: {
     "seo.webdev.title": "Web Development Services - VIFA | vifadigital.com",
@@ -270,13 +296,13 @@ const webDevTranslations = {
     "webdev.pricing.ecommerce.title": "Online Store",
     "webdev.pricing.ecommerce.description":
       "Complete online store — Georgian bank payments, product management, and order tracking.",
-    "webdev.pricing.ecommerce.price": "From 1500₾",
+    "webdev.pricing.ecommerce.price": "From 1999₾",
     "webdev.pricing.ecommerce.timeline": "14-21 days",
-    "webdev.pricing.ecommerce.feature1": "Georgian Bank Support",
-    "webdev.pricing.ecommerce.feature2": "Easy Product Management",
-    "webdev.pricing.ecommerce.feature3": "Order Monitoring",
-    "webdev.pricing.ecommerce.feature4": "Customer Registration",
-    "webdev.pricing.ecommerce.feature5": "Mobile Version",
+    "webdev.pricing.ecommerce.feature1": "Online Store + Invento System",
+    "webdev.pricing.ecommerce.feature2": "Automatic Inventory Sync",
+    "webdev.pricing.ecommerce.feature3": "Courier Labels & Invoicing",
+    "webdev.pricing.ecommerce.feature4": "Real-time Order Control",
+    "webdev.pricing.ecommerce.feature5": "Excel Reports & Analytics",
 
     "webdev.pricing.consultation": "Consultation is Free",
     "webdev.pricing.cta": "Start Project",
@@ -312,8 +338,30 @@ const webDevTranslations = {
     "webdev.technologies.desc": "Modern and reliable technologies",
 
     "webdev.cta.question": "Ready for Digital Transformation?",
-    "webdev.cta.button": "Start Project",
+    "webdev.cta.button": "Contact us on WhatsApp",
     "webdev.pricing.perProject": "Per Project",
+
+    "webdev.whyus.title": "Why VIFA Digital?",
+    "webdev.whyus.subtitle": "We don't just build websites - we create digital business systems",
+    "webdev.whyus.featured": "★ Key Advantage",
+    "webdev.whyus.learnmore": "Learn more about Invento",
+    "webdev.whyus.card1.title": "Modern Stack",
+    "webdev.whyus.card1.desc": "React, TypeScript, Firebase - technologies powering the world's most successful SaaS products.",
+    "webdev.whyus.card2.title": "Invento System",
+    "webdev.whyus.card2.desc": "Your online store comes with Invento - a professional inventory and sales management system. Not WordPress, but a SaaS platform tailored for the Georgian market.",
+    "webdev.whyus.card3.title": "Full Support",
+    "webdev.whyus.card3.desc": "We stay with you after launch - technical support, updates, team training.",
+
+    "webdev.invento.strip_subtitle": "SYSTEM ARCHITECTURE",
+    "webdev.invento.strip_title_prefix": "E-commerce +",
+    "webdev.invento.strip_title_suffix": "Invento OS",
+    "webdev.invento.strip_desc": "Our online stores run on a powerful SaaS engine, not Wordpress. You get a full operating system.",
+    "webdev.invento.strip_label": "STANDARD BUNDLE",
+    "webdev.invento.strip_value_label": "Standalone Value",
+    "webdev.invento.strip_status": "INCLUDED",
+    "webdev.invento.strip_core": "Invento™ Core",
+    "webdev.invento.strip_btn": "View System",
+    "webdev.pricing.badge": "INCLUDED: INVENTO (890₾)",
   },
 };
 
@@ -322,6 +370,9 @@ const WebDev: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
 
   const [activeService, setActiveService] = useState<number>(0);
+
+  // WhatsApp URL for web development consultation
+  const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20ვებ%20განვითარების%20სერვისით.%20მსურს%20უფასო%20კონსულტაცია.";
 
   const t = (key: string): string => {
     const translations = webDevTranslations[
@@ -678,6 +729,99 @@ const WebDev: React.FC = () => {
             </div>
           </div>
 
+          {/* Why Choose Us Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="mb-24 mt-32"
+          >
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-white mb-4">
+                {t("webdev.whyus.title")}
+              </h2>
+              <p className="text-slate-300 text-lg max-w-3xl mx-auto">
+                {t("webdev.whyus.subtitle")}
+              </p>
+            </div>
+
+           
+          </motion.div>
+
+          {/* The Invento Core Integration - Titanium V2 (Ultra Pro) */}
+          <div className="!max-w-6xl mx-auto mb-24 px-4 sm:px-6 mt-24">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="relative rounded-2xl overflow-hidden bg-[#030303] border border-white/5 shadow-2xl"
+            >
+              {/* Abstract Data Flow Background */}
+              <div className="absolute inset-0 opacity-10"
+                   style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #444 1px, transparent 0)', backgroundSize: '24px 24px' }}>
+              </div>
+              <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-blue-900/10 to-transparent blur-3xl" />
+
+              <div className="relative flex flex-col md:flex-row items-center justify-between p-1">
+
+                {/* Left: System Architecture Info */}
+                <div className="flex-1 p-6 md:p-8 flex items-start gap-6 border-b md:border-b-0 md:border-r border-white/5 w-full">
+                  {/* Animated Icon */}
+                  <div className="relative w-14 h-14 shrink-0 rounded-xl bg-gradient-to-br from-gray-900 to-black border border-white/10 flex items-center justify-center shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+                    <div className="absolute inset-0 bg-blue-500/10 blur-md rounded-xl animate-pulse"></div>
+                    <FaServer className="text-blue-400 text-2xl relative z-10" />
+                  </div>
+
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span>
+                      <span className="text-[10px] font-mono text-gray-500 tracking-widest uppercase">System Architecture</span>
+                    </div>
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
+                      E-commerce <span className="text-gray-600 font-thin px-1">+</span> Invento OS
+                    </h3>
+                    <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
+                      {t("webdev.invento.strip_desc")}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Right: The Deal Logic (Pro UI) */}
+                <div className="p-6 md:p-8 flex flex-col sm:flex-row items-center gap-8 w-full md:w-auto bg-white/[0.01]">
+
+                  {/* Value Stack */}
+                  <div className="flex flex-col items-end gap-1">
+                    <div className="text-[10px] text-gray-500 font-mono uppercase tracking-wide">
+                      {t("webdev.invento.strip_value_label")}
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="text-lg font-medium text-gray-400 line-through decoration-red-500/40">890₾</span>
+                      <FaArrowRight className="text-gray-700 text-xs" />
+                      <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">
+                        {t("webdev.invento.strip_status")}
+                      </span>
+                    </div>
+                    <div className="text-[10px] text-blue-400/80 font-mono bg-blue-900/10 px-2 py-0.5 rounded border border-blue-500/10">
+                      LIFETIME LICENSE
+                    </div>
+                  </div>
+
+                  {/* Action */}
+                  <Link
+                    to="/services/invento"
+                    className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-lg bg-white px-8 font-medium text-black transition-all duration-300 hover:bg-gray-200 hover:w-full sm:hover:w-auto"
+                  >
+                    <span className="mr-2">{t("webdev.invento.strip_btn")}</span>
+                    <FaArrowRight className="transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </div>
+
+              </div>
+            </motion.div>
+          </div>
+
           {/* Pricing Approach Section */}
           <div className="mb-20">
             <div className="text-center mb-12">
@@ -929,6 +1073,13 @@ const WebDev: React.FC = () => {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="group relative overflow-hidden rounded-2xl backdrop-blur-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02]"
               >
+                {/* Invento System Badge */}
+                <div className="absolute top-0 right-0 z-20">
+                  <div className="bg-gradient-to-bl from-orange-500 to-red-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl shadow-lg">
+                    {t("webdev.pricing.badge")}
+                  </div>
+                </div>
+
                 <div className="absolute inset-0 bg-gradient-to-br from-orange-600/20 via-amber-500/10 to-slate-900/20 rounded-2xl" />
                 <div className="absolute inset-0 border border-orange-400/40 group-hover:border-orange-400/70 rounded-2xl transition-colors duration-300" />
                 <div className="absolute -top-2 -right-2 w-24 h-24 bg-gradient-to-br from-orange-500/20 to-amber-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -1132,13 +1283,15 @@ const WebDev: React.FC = () => {
               </h3>
 
               <div className="flex justify-center gap-4 mt-11 mb-7">
-                <Link
-                  to="/start-project"
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-green-500 text-white px-6 sm:px-8 lg:px-10 py-4 text-lg font-medium hover:from-blue-600 hover:to-green-600 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105"
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-blue-500 text-white px-6 sm:px-8 lg:px-10 py-4 text-lg font-medium hover:from-green-600 hover:to-blue-600 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105"
                 >
-                  <FaRocket />
+                  <FaCommentDots />
                   {t("webdev.cta.button")}
-                </Link>
+                </a>
               </div>
             </div>
           </div>

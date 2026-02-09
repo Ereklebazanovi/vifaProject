@@ -159,7 +159,7 @@ const InventoLandingPage: React.FC = () => {
     "/invento7.png"
   ];
 
-const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20Invento-ს%20სისტემით.%20მინდა%20უფასო%20კონსულტაცია.";
+const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20Invento-ს%20სისტემით.%20მსურს%20უფასო%20კონსულტაცია.";
   const phoneNumber = "tel:+995557624243";
 
   // Preload all images

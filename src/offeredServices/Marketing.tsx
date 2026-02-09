@@ -25,6 +25,7 @@ import {
   FaBullseye,
   FaBolt,
   FaCog,
+  FaCommentDots,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
 
@@ -57,7 +58,7 @@ const marketingTranslations = {
     "pricing.transparent": "გამჭირვალე პროცესი",
     "pricing.transparentDesc": "ჩვენი მიზანია, ყველა ეტაპი იყოს მაქსიმალურად ღია და გასაგები. ნდობაზე დაფუძნებული თანამშრომლობა ყოველთვის მომგებიანია.",
     "cta.title": "მზად ხარ ბიზნესის ციფრული ტრანსფორმაციისთვის?",
-    "cta.button": "პროექტის დაწყება",
+    "cta.button": "დაგვიკავშირდი WhatsApp-ზე",
     "service.videoProd": "ვიდეო გადაღება",
     "service.videoDesc": "პროფესიონალური ვიდეო კონტენტის შექმნა",
     "service.video1": "4K ვიდეო ხარისხი",
@@ -152,7 +153,7 @@ const marketingTranslations = {
     "pricing.transparent": "Transparent Process",
     "pricing.transparentDesc": "Our goal is to make every stage as clear and understandable as possible. Trust-based collaboration is always beneficial.",
     "cta.title": "Ready for Your Business Digital Transformation?",
-    "cta.button": "Start Project",
+    "cta.button": "Contact us on WhatsApp",
     "service.videoProd": "Video Production",
     "service.videoDesc": "Professional video content creation",
     "service.video1": "4K Video Quality",
@@ -226,6 +227,9 @@ const Marketing: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
   const { currentLanguage } = useLanguage();
   const [activeService, setActiveService] = useState<number>(0);
+
+  // WhatsApp URL for marketing consultation
+  const whatsappUrl = "https://wa.me/995577175132?text=გამარჯობა,%20დავინტერესდი%20ციფრული%20მარკეტინგის%20სერვისით.%20მინდა%20უფასო%20კონსულტაცია.";
 
   const t = (key: string): string => {
     const translations = marketingTranslations[currentLanguage as keyof typeof marketingTranslations] as Record<string, string>;
@@ -820,13 +824,15 @@ const Marketing: React.FC = () => {
               </h3>
 
               <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-12">
-                <Link
-                  to="/start-project"
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-red-500 to-orange-500 text-white px-6 sm:px-8 lg:px-10 py-4 text-lg font-medium hover:from-red-600 hover:to-orange-600 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105"
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-blue-500 text-white px-6 sm:px-8 lg:px-10 py-4 text-lg font-medium hover:from-green-600 hover:to-blue-600 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105"
                 >
-                  <FaRocket />
+                  <FaCommentDots />
                   {t("cta.button")}
-                </Link>
+                </a>
               </div>
             </div>
           </div>
