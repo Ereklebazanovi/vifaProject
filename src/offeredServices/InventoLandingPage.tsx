@@ -450,7 +450,7 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
                 </h2>
               </motion.div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 !max-w-7xl mx-auto">
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
