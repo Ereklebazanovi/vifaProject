@@ -26,6 +26,7 @@ import {
   FaBox,
   FaShieldAlt,
   FaCommentDots,
+  FaWhatsapp,
 } from "react-icons/fa";
 import {
   SiFirebase,
@@ -880,36 +881,43 @@ const WebDev: React.FC = () => {
 
             {/* Enhanced Price Ranges */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 !max-w-7xl mx-auto">
-              {/* Landing Pages - Enhanced */}
+              {/* E-commerce Store - Enhanced (Priority Package) */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
                 className="group relative overflow-hidden rounded-2xl backdrop-blur-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02]"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-blue-500/10 to-slate-900/20 rounded-2xl" />
-                <div className="absolute inset-0 border border-blue-400/40 group-hover:border-blue-400/70 rounded-2xl transition-colors duration-300" />
-                <div className="absolute -top-2 -right-2 w-24 h-24 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Invento System Badge */}
+                <div className="absolute top-0 right-0 z-20">
+                  <div className="bg-gradient-to-bl from-orange-500 to-red-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl shadow-lg">
+                    {t("webdev.pricing.badge")}
+                  </div>
+                </div>
+
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-600/20 via-amber-500/10 to-slate-900/20 rounded-2xl" />
+                <div className="absolute inset-0 border border-orange-400/40 group-hover:border-orange-400/70 rounded-2xl transition-colors duration-300" />
+                <div className="absolute -top-2 -right-2 w-24 h-24 bg-gradient-to-br from-orange-500/20 to-amber-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 <div className="relative p-6 flex flex-col h-full">
                   {/* Enhanced Header */}
                   <div className="flex items-center justify-between mb-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500/30 to-blue-600/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                      <FaRocket className="text-blue-300 text-2xl" />
+                    <div className="w-12 h-12 bg-gradient-to-br from-orange-500/30 to-amber-600/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                      <FaShoppingCart className="text-orange-300 text-2xl" />
                     </div>
                     <div className="text-right">
-                      <div className="text-2xl font-black text-blue-300 font-['Inter','system-ui',sans-serif]">
-                        {t("webdev.pricing.landing.price")}
+                      <div className="text-2xl font-black text-orange-300 font-['Inter','system-ui',sans-serif]">
+                        {t("webdev.pricing.ecommerce.price")}
                       </div>
                     </div>
                   </div>
 
                   <h4 className="text-2xl font-bold text-white mb-3 font-['Inter','Noto_Sans_Georgian',sans-serif]">
-                    {t("webdev.pricing.landing.title")}
+                    {t("webdev.pricing.ecommerce.title")}
                   </h4>
 
                   <p className="text-slate-300 text-sm mb-6 leading-relaxed font-['Inter','Noto_Sans_Georgian',sans-serif]">
-                    {t("webdev.pricing.landing.description")}
+                    {t("webdev.pricing.ecommerce.description")}
                   </p>
 
                   {/* Feature List */}
@@ -919,26 +927,27 @@ const WebDev: React.FC = () => {
                         key={num}
                         className="flex items-center gap-3 group/item"
                       >
-                        <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full group-hover/item:scale-150 transition-transform duration-200" />
-                        <span className="text-slate-300 text-sm font-['Inter','Noto_Sans_Georgian',sans-serif] group-hover/item:text-blue-200 transition-colors">
-                          {t(`webdev.pricing.landing.feature${num}`)}
+                        <div className="w-2 h-2 bg-gradient-to-r from-orange-400 to-amber-400 rounded-full group-hover/item:scale-150 transition-transform duration-200" />
+                        <span className="text-slate-300 text-sm font-['Inter','Noto_Sans_Georgian',sans-serif] group-hover/item:text-orange-200 transition-colors">
+                          {t(`webdev.pricing.ecommerce.feature${num}`)}
                         </span>
                       </div>
                     ))}
                   </div>
 
                   {/* Enhanced CTA */}
-                  <Link to="/start-project" className="block mt-auto">
+                  <a href="https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20ონლაინ%20მაღაზიისა%20და%20Invento%20სისტემის%20შექმნით.%20მსურს%20უფასო%20კონსულტაცია." target="_blank" rel="noopener noreferrer" className="block mt-auto">
                     <div className="relative group/btn">
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 to-cyan-500/30 rounded-xl blur opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
-                      <div className="relative flex items-center justify-center p-4 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-xl border border-blue-400/30 group-hover/btn:border-blue-300/60 group-hover/btn:from-blue-500/30 group-hover/btn:to-cyan-500/30 transition-all duration-300 cursor-pointer">
-                        <span className="text-blue-300 font-bold text-sm group-hover/btn:text-white transition-colors font-['Inter',sans-serif]">
-                          {t("webdev.pricing.cta")}
+                      <div className="absolute inset-0 bg-gradient-to-r from-orange-500/30 to-amber-500/30 rounded-xl blur opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
+                      <div className="relative flex items-center justify-center p-4 bg-gradient-to-r from-orange-500/20 to-amber-500/20 rounded-xl border border-orange-400/30 group-hover/btn:border-orange-300/60 group-hover/btn:from-orange-500/30 group-hover/btn:to-amber-500/30 transition-all duration-300 cursor-pointer">
+                        <FaWhatsapp className="text-orange-300 text-sm mr-2 group-hover/btn:text-white transition-colors" />
+                        <span className="text-orange-300 font-bold text-sm group-hover/btn:text-white transition-colors font-['Inter',sans-serif]">
+                          კონსულტაცია WhatsApp-ზე
                         </span>
-                        <FaArrowRight className="text-blue-300 text-sm ml-2 group-hover/btn:text-white group-hover/btn:translate-x-1 transition-all duration-300" />
+                        <FaArrowRight className="text-orange-300 text-sm ml-2 group-hover/btn:text-white group-hover/btn:translate-x-1 transition-all duration-300" />
                       </div>
                     </div>
-                  </Link>
+                  </a>
                 </div>
               </motion.div>
 
@@ -990,17 +999,18 @@ const WebDev: React.FC = () => {
                   </div>
 
                   {/* Enhanced CTA */}
-                  <Link to="/start-project" className="block mt-auto">
+                  <a href="https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20კორპორატიული%20ვებსაიტის%20შექმნით.%20მსურს%20უფასო%20კონსულტაცია." target="_blank" rel="noopener noreferrer" className="block mt-auto">
                     <div className="relative group/btn">
                       <div className="absolute inset-0 bg-gradient-to-r from-green-500/30 to-emerald-500/30 rounded-xl blur opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
                       <div className="relative flex items-center justify-center p-4 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-xl border border-green-400/30 group-hover/btn:border-green-300/60 group-hover/btn:from-green-500/30 group-hover/btn:to-emerald-500/30 transition-all duration-300 cursor-pointer">
+                        <FaWhatsapp className="text-green-300 text-sm mr-2 group-hover/btn:text-white transition-colors" />
                         <span className="text-green-300 font-bold text-sm group-hover/btn:text-white transition-colors font-['Inter',sans-serif]">
-                          {t("webdev.pricing.cta")}
+                          კონსულტაცია WhatsApp-ზე
                         </span>
                         <FaArrowRight className="text-green-300 text-sm ml-2 group-hover/btn:text-white group-hover/btn:translate-x-1 transition-all duration-300" />
                       </div>
                     </div>
-                  </Link>
+                  </a>
                 </div>
               </motion.div>
 
@@ -1066,43 +1076,36 @@ const WebDev: React.FC = () => {
                 </div>
               </motion.div>
 
-              {/* E-commerce Store - Enhanced */}
+              {/* Landing Pages - Enhanced */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="group relative overflow-hidden rounded-2xl backdrop-blur-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02]"
               >
-                {/* Invento System Badge */}
-                <div className="absolute top-0 right-0 z-20">
-                  <div className="bg-gradient-to-bl from-orange-500 to-red-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl shadow-lg">
-                    {t("webdev.pricing.badge")}
-                  </div>
-                </div>
-
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-600/20 via-amber-500/10 to-slate-900/20 rounded-2xl" />
-                <div className="absolute inset-0 border border-orange-400/40 group-hover:border-orange-400/70 rounded-2xl transition-colors duration-300" />
-                <div className="absolute -top-2 -right-2 w-24 h-24 bg-gradient-to-br from-orange-500/20 to-amber-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-blue-500/10 to-slate-900/20 rounded-2xl" />
+                <div className="absolute inset-0 border border-blue-400/40 group-hover:border-blue-400/70 rounded-2xl transition-colors duration-300" />
+                <div className="absolute -top-2 -right-2 w-24 h-24 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 <div className="relative p-6 flex flex-col h-full">
                   {/* Enhanced Header */}
                   <div className="flex items-center justify-between mb-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-orange-500/30 to-amber-600/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                      <FaShoppingCart className="text-orange-300 text-2xl" />
+                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500/30 to-blue-600/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                      <FaRocket className="text-blue-300 text-2xl" />
                     </div>
                     <div className="text-right">
-                      <div className="text-2xl font-black text-orange-300 font-['Inter','system-ui',sans-serif]">
-                        {t("webdev.pricing.ecommerce.price")}
+                      <div className="text-2xl font-black text-blue-300 font-['Inter','system-ui',sans-serif]">
+                        {t("webdev.pricing.landing.price")}
                       </div>
                     </div>
                   </div>
 
                   <h4 className="text-2xl font-bold text-white mb-3 font-['Inter','Noto_Sans_Georgian',sans-serif]">
-                    {t("webdev.pricing.ecommerce.title")}
+                    {t("webdev.pricing.landing.title")}
                   </h4>
 
                   <p className="text-slate-300 text-sm mb-6 leading-relaxed font-['Inter','Noto_Sans_Georgian',sans-serif]">
-                    {t("webdev.pricing.ecommerce.description")}
+                    {t("webdev.pricing.landing.description")}
                   </p>
 
                   {/* Feature List */}
@@ -1112,26 +1115,27 @@ const WebDev: React.FC = () => {
                         key={num}
                         className="flex items-center gap-3 group/item"
                       >
-                        <div className="w-2 h-2 bg-gradient-to-r from-orange-400 to-amber-400 rounded-full group-hover/item:scale-150 transition-transform duration-200" />
-                        <span className="text-slate-300 text-sm font-['Inter','Noto_Sans_Georgian',sans-serif] group-hover/item:text-orange-200 transition-colors">
-                          {t(`webdev.pricing.ecommerce.feature${num}`)}
+                        <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full group-hover/item:scale-150 transition-transform duration-200" />
+                        <span className="text-slate-300 text-sm font-['Inter','Noto_Sans_Georgian',sans-serif] group-hover/item:text-blue-200 transition-colors">
+                          {t(`webdev.pricing.landing.feature${num}`)}
                         </span>
                       </div>
                     ))}
                   </div>
 
                   {/* Enhanced CTA */}
-                  <Link to="/start-project" className="block mt-auto">
+                  <a href="https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20სავიზიტო%20ვებსაიტის%20შექმნით.%20მსურს%20უფასო%20კონსულტაცია." target="_blank" rel="noopener noreferrer" className="block mt-auto">
                     <div className="relative group/btn">
-                      <div className="absolute inset-0 bg-gradient-to-r from-orange-500/30 to-amber-500/30 rounded-xl blur opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
-                      <div className="relative flex items-center justify-center p-4 bg-gradient-to-r from-orange-500/20 to-amber-500/20 rounded-xl border border-orange-400/30 group-hover/btn:border-orange-300/60 group-hover/btn:from-orange-500/30 group-hover/btn:to-amber-500/30 transition-all duration-300 cursor-pointer">
-                        <span className="text-orange-300 font-bold text-sm group-hover/btn:text-white transition-colors font-['Inter',sans-serif]">
-                          {t("webdev.pricing.cta")}
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 to-cyan-500/30 rounded-xl blur opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
+                      <div className="relative flex items-center justify-center p-4 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-xl border border-blue-400/30 group-hover/btn:border-blue-300/60 group-hover/btn:from-blue-500/30 group-hover/btn:to-cyan-500/30 transition-all duration-300 cursor-pointer">
+                        <FaWhatsapp className="text-blue-300 text-sm mr-2 group-hover/btn:text-white transition-colors" />
+                        <span className="text-blue-300 font-bold text-sm group-hover/btn:text-white transition-colors font-['Inter',sans-serif]">
+                          კონსულტაცია WhatsApp-ზე
                         </span>
-                        <FaArrowRight className="text-orange-300 text-sm ml-2 group-hover/btn:text-white group-hover/btn:translate-x-1 transition-all duration-300" />
+                        <FaArrowRight className="text-blue-300 text-sm ml-2 group-hover/btn:text-white group-hover/btn:translate-x-1 transition-all duration-300" />
                       </div>
                     </div>
-                  </Link>
+                  </a>
                 </div>
               </motion.div>
             </div>

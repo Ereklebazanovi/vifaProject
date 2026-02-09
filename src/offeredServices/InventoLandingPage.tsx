@@ -42,7 +42,7 @@ const inventoTranslations = {
     "solution.label": "Invento-ს გადაწყვეტა",
     "solution.text": "Social Commerce Hub — გაატარეთ შეკვეთა 10 წამში. სისტემა ავტომატურად აკლებს ნაშთს და აგენერირებს ოფიციალურ დოკუმენტაციას.",
 
-    "features.title": "ფუნქციონალი ზრდისთვის",
+    "features.title": "რას გთავაზობთ Invento",
     "feature1.title": "საწყობი და მარაგები",
     "feature1.desc": "პროდუქციის ზუსტი აღრიცხვა ვარიაციების (ფერი/ზომა) მიხედვით. კრიტიკული ნაშთის შეტყობინებები.",
     "feature2.title": "ლოგისტიკა",
@@ -352,7 +352,7 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
-                className="max-w-5xl mx-auto"
+                className="!max-w-7xl mx-auto"
               >
                 <h2 className={`text-2xl md:text-3xl text-center mb-8 ${currentLanguage === 'ka' ? 'font-semibold' : 'font-semibold'}`}>
                   <span className="text-blue-400">{t("problem.title")}</span>
@@ -389,7 +389,7 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
 
           {/* FEATURES GRID */}
           <section className="py-12">
-            <div className="container mx-auto px-6">
+            <div className="container mx-auto px-2 !max-w-7xl">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}

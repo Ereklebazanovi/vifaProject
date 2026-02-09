@@ -229,7 +229,7 @@ const Marketing: React.FC = () => {
   const [activeService, setActiveService] = useState<number>(0);
 
   // WhatsApp URL for marketing consultation
-  const whatsappUrl = "https://wa.me/995577175132?text=გამარჯობა,%20დავინტერესდი%20ციფრული%20მარკეტინგის%20სერვისით.%20მინდა%20უფასო%20კონსულტაცია.";
+  const whatsappUrl = "https://wa.me/995577175132?text=გამარჯობა,%20დავინტერესდი%20ციფრული%20მარკეტინგის%20სერვისით.%20მსურს%20უფასო%20კონსულტაცია.";
 
   const t = (key: string): string => {
     const translations = marketingTranslations[currentLanguage as keyof typeof marketingTranslations] as Record<string, string>;
