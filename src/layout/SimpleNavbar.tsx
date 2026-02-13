@@ -85,7 +85,7 @@ const SimpleNavbar: React.FC = () => {
       path: "/services/digital-advertising",
       label: t("services.advertising.title"),
     },
-    { path: "/business-solutions", label: t("nav.businessSolutions") },
+    { path: "/invento", label: t("nav.businessSolutions") },
     { path: "/about", label: t("nav.about") },
     { path: "/blog", label: t("nav.blog") },
     

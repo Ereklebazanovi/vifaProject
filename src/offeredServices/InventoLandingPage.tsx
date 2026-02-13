@@ -173,15 +173,35 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
     });
   }, []);
 
-  // Auto-advance slider with pause on hover
+  // Auto-advance slider with pause on hover and page visibility handling
   useEffect(() => {
     if (isPaused) return;
 
+    // Check if page is visible
+    if (document.hidden) return;
+
     const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % images.length);
+      // Double check visibility before updating
+      if (!document.hidden && !isPaused) {
+        setCurrentImageIndex((prev) => (prev + 1) % images.length);
+      }
     }, 4600); // Optimal timing
+
     return () => clearInterval(interval);
   }, [images.length, isPaused]);
+
+  // Handle page visibility changes to restart slider when tab becomes active again
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (!document.hidden && !isPaused) {
+        // Force a re-render to restart the slider
+        setCurrentImageIndex((prev) => prev);
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [isPaused]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });

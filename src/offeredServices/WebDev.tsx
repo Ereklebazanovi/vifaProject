@@ -809,7 +809,7 @@ const WebDev: React.FC = () => {
 
                   {/* Action */}
                   <Link
-                    to="/business-solutions"
+                    to="/invento"
                     className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-lg bg-white px-8 font-medium text-black transition-all duration-300 hover:bg-gray-200 hover:w-full sm:hover:w-auto"
                   >
                     <span className="mr-2">{t("webdev.invento.strip_btn")}</span>

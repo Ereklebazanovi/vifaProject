@@ -387,7 +387,7 @@ const NewHome: React.FC = () => {
                     {t("newHome.hero.button1")}
                   </Link>
                   <Link
-                    to="/business-solutions"
+                    to="/invento"
                     className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium rounded-md shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center"
                   >
                     {t("newHome.hero.button4")}
@@ -591,7 +591,7 @@ const NewHome: React.FC = () => {
                   </div>
 
                   {/* Elegant CTA Button */}
-                  <Link to="/business-solutions" className="block">
+                  <Link to="/invento" className="block">
                     <div className="relative group/btn">
                       <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-red-500/20 rounded-xl blur opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
                       <div className="relative flex items-center justify-between p-3 bg-gradient-to-r from-orange-500/10 to-red-500/10 rounded-xl border border-orange-500/20 group-hover/btn:border-orange-400/50 group-hover/btn:bg-gradient-to-r group-hover/btn:from-orange-500/20 group-hover/btn:to-red-500/20 transition-all duration-300 cursor-pointer">

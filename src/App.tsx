@@ -181,7 +181,7 @@ const AppWithRouter: React.FC = () => {
                 element={<Marketing />}
               />
               <Route path="services/web-development" element={<WebDev />} />
-              <Route path="business-solutions" element={<InventoLandingPage />} />
+              <Route path="invento" element={<InventoLandingPage />} />
               <Route path="services/ai-chatbot" element={<AIChatbot />} />
               <Route
                 path="services/ai-chatbot/request"
