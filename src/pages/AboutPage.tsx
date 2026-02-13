@@ -16,7 +16,7 @@ import SEO from "../components/SEO";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 
-// AboutPage Translations
+// AboutPage Translations///
 const aboutPageTranslations = {
   ka: {
     "seo.about.title": "ჩვენ შესახებ - Vifa Digital გუნდი | vifadigital.com",
