@@ -23,8 +23,6 @@ import {
   FaBrain,
   FaBullseye,
   FaShoppingCart,
-  FaBox,
-  FaShieldAlt,
   FaCommentDots,
   FaWhatsapp,
 } from "react-icons/fa";

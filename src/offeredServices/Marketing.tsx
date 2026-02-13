@@ -2,7 +2,6 @@
 
 import type React from "react";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import { useLanguage } from "../contexts/LanguageContext";
@@ -19,7 +18,6 @@ import {
   FaFacebook,
   FaYoutube,
   FaTiktok,
-  FaRocket,
   FaArrowRight,
   FaCheckCircle,
   FaBullseye,
