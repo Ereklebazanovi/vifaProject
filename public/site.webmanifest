@@ -1,7 +1,7 @@
 {
-  "name": "VIFA Digital - ვებ განვითარება და ტექნოლოგიური მომსახურება",
-  "short_name": "VIFA Digital",
-  "description": "საქართველოში ვებ განვითარების და ტექნოლოგიური მომსახურების ლიდერი კომპანია. შექმენით თქვენი ბიზნესისთვის ინოვაციური ტექნოლოგიური პლატფორმა.",
+  "name": "Invento Technologies - AI, WMS და ვებ ტექნოლოგიები საქართველოში",
+  "short_name": "Invento Technologies",
+  "description": "Invento Technologies - ხელოვნური ინტელექტის, მონაცემთა ბაზების მართვისა და ვებ ტექნოლოგიების წამყვანი კომპანია საქართველოში. Invento WMS, Invento AI, Invento Web.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0f172a",
@@ -10,18 +10,18 @@
   "scope": "/",
   "lang": "ka",
   "dir": "ltr",
-  "categories": ["business", "marketing", "technology"],
+  "categories": ["business", "technology", "productivity"],
   "icons": [
     {
-      "src": "/vifa.jpg",
+      "src": "/invento.png",
       "sizes": "192x192",
-      "type": "image/jpeg",
+      "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/vifa.jpg",
+      "src": "/invento.png",
       "sizes": "512x512",
-      "type": "image/jpeg",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ],
@@ -41,37 +41,37 @@
   ],
   "shortcuts": [
     {
-      "name": "პროექტის დაწყება",
-      "short_name": "პროექტი",
-      "description": "დაიწყეთ ახალი პროექტი ჩვენთან ერთად",
-      "url": "/start-project",
+      "name": "Invento WMS",
+      "short_name": "WMS",
+      "description": "მონაცემთა ბაზების მართვისა და საწარმოო სისტემები",
+      "url": "/inventowms",
       "icons": [
         {
-          "src": "/vifa.jpg",
+          "src": "/invento.png",
           "sizes": "96x96"
         }
       ]
     },
     {
-      "name": "ვებ განვითარება",
+      "name": "Invento Web",
       "short_name": "ვებ",
       "description": "ვებსაიტის შექმნისა და განვითარების სერვისები",
       "url": "/services/web-development",
       "icons": [
         {
-          "src": "/vifa.jpg",
+          "src": "/invento.png",
           "sizes": "96x96"
         }
       ]
     },
     {
-      "name": "AI ტექნოლოგიები",
+      "name": "Invento AI",
       "short_name": "AI",
-      "description": "AI სისტემების და ტექნოლოგიური მომსახურების სერვისები",
+      "description": "AI ჩატბოტები და ხელოვნური ინტელექტის სისტემები",
       "url": "/services/ai-chatbot",
       "icons": [
         {
-          "src": "/vifa.jpg",
+          "src": "/invento.png",
           "sizes": "96x96"
         }
       ]

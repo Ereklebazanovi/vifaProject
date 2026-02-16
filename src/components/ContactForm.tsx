@@ -86,7 +86,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ className = '' }) => {
           phone: formData.phone,
           service: formData.service,
           message: formData.message,
-          to_email: 'info@vifadigital.ge',
+          to_email: 'team.inventogeo@gmail.com',
         },
         publicKey
       );

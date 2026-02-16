@@ -1,4 +1,4 @@
-# robots.txt for VIFA Digital
+# robots.txt for Invento Technologies - Georgian Tech Solutions
 
 User-agent: *
 Allow: /
@@ -11,5 +11,8 @@ Disallow: /api/
 Allow: /*.css$
 Allow: /*.js$
 
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
 # Sitemap location
-Sitemap: https://www.vifadigital.ge/sitemap.xml
+Sitemap: https://www.inventogeo.com/sitemap.xml

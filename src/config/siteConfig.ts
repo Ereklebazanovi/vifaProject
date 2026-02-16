@@ -2,29 +2,29 @@
 
 export const siteConfig = {
   // Basic Site Info
-  siteName: "Vifa Digital",
-  siteTitle: "Vifa Digital - ციფრული მარკეტინგის სააგენტო საქართველოში",
+  siteName: "Invento Technologies",
+  siteTitle: "Invento Technologies - ტექნოლოგიური გადაწყვეტები საქართველოში",
 
   // Domain
-  domain: "www.vifadigital.ge",
-  url: "https://www.vifadigital.ge",
+  domain: "www.inventogeo.com",
+  url: "https://www.inventogeo.com",
 
   // Contact Info
-  email: "vifa.official2020@gmail.com",
+  email: "team.inventogeo@gmail.com",
 
-  phone: "+995 557 62 42 43", // UPDATE with real phone number
+  phone: "+995 557 62 42 43", // IT Department
 
   // Social Media
   social: {
-    facebook: "https://www.facebook.com/vifadigital.official",
-    instagram: "https://www.instagram.com/vifadigital.official",
-    linkedin: "https://www.linkedin.com/company/vifadigital",
-    twitter: "https://twitter.com/vifadigital",
+    facebook: "https://www.facebook.com/inventogeo",
+    instagram: "https://www.instagram.com/inventogeo",
+    linkedin: "https://www.linkedin.com/company/inventogeo",
+    twitter: "https://twitter.com/inventogeo",
   },
 
   // SEO
-  defaultImage: "/vifa.jpg",
-  twitterHandle: "@vifadigital", // UPDATE when Twitter is created
+  defaultImage: "/invento.png",
+  twitterHandle: "@inventogeo",
 
   // Business Info
   location: {

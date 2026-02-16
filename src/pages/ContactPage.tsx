@@ -117,10 +117,10 @@ const ContactPage: React.FC = () => {
                       <div>
                         <h4 className="text-white font-medium mb-1">{t.contactInfo.email}</h4>
                         <a
-                          href="mailto:info@vifadigital.ge"
+                          href="mailto:team.inventogeo@gmail.com"
                           className="text-slate-400 hover:text-blue-400 transition-colors"
                         >
-                          info@vifadigital.ge
+                          team.inventogeo@gmail.com
                         </a>
                       </div>
                     </div>
@@ -176,7 +176,7 @@ const ContactPage: React.FC = () => {
                   <div className="mt-8 pt-8 border-t border-slate-700">
                     <div className="flex gap-4">
                       <a
-                        href="https://www.facebook.com/vifadigital"
+                        href="https://www.facebook.com/inventogeo"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center hover:bg-blue-500/30 transition-colors"
@@ -186,7 +186,7 @@ const ContactPage: React.FC = () => {
                         </svg>
                       </a>
                       <a
-                        href="https://www.instagram.com/vifadigital"
+                        href="https://www.instagram.com/inventogeo"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-10 h-10 bg-pink-500/20 rounded-lg flex items-center justify-center hover:bg-pink-500/30 transition-colors"
@@ -196,7 +196,7 @@ const ContactPage: React.FC = () => {
                         </svg>
                       </a>
                       <a
-                        href="https://www.linkedin.com/company/vifadigital"
+                        href="https://www.linkedin.com/company/inventogeo"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-10 h-10 bg-blue-600/20 rounded-lg flex items-center justify-center hover:bg-blue-600/30 transition-colors"
