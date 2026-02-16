@@ -3,7 +3,7 @@ const blogPosts = {
   'biznesis-cifruli-transformacia': {
     title: 'ბიზნესის ციფრული ტრანსფორმაცია – თანამედროვე სამყაროში აუცილებლობა',
     description: 'ციფრული ტრანსფორმაცია აღარ არის არჩევანი, არამედ აუცილებლობა. შეიტყვეთ როგორ შეცვალოთ თქვენი ბიზნეს AI ტექნოლოგიებისა და ციფრული სტრატეგიების საშუალებით.',
-    image: 'https://www.vifadigital.ge/statia-1.jpg'
+    image: 'https://www.inventogeo.com/statia-1.jpg'
   }
 };
 
@@ -33,7 +33,7 @@ export async function onRequest(context) {
       <meta property="og:image:type" content="image/jpeg" />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:url" content="https://www.vifadigital.ge/blog/${slug}" />
+      <meta property="og:url" content="https://www.inventogeo.com/blog/${slug}" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content="${escapeHTML(post.title)}" />
       <meta name="twitter:description" content="${escapeHTML(post.description)}" />
@@ -49,7 +49,7 @@ export async function onRequest(context) {
       // Update title
       html = html.replace(
         /<title>.*?<\/title>/,
-        `<title>${escapeHTML(post.title)} - Vifa Digital</title>`
+        `<title>${escapeHTML(post.title)} - Invento Technologies</title>`
       );
 
       return new Response(html, {

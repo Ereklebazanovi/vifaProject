@@ -8,17 +8,17 @@ const blogPosts = {
   'biznesis-cifruli-transformacia': {
     title: 'ბიზნესის ციფრული ტრანსფორმაცია – თანამედროვე სამყაროში აუცილებლობა',
     description: 'ციფრული ტრანსფორმაცია აღარ არის არჩევანი, არამედ აუცილებლობა. შეიტყვეთ როგორ შეცვალოთ თქვენი ბიზნეს AI ტექნოლოგიებისა და ციფრული სტრატეგიების საშუალებით.',
-    image: 'https://www.vifadigital.ge/statia-1.jpg'
+    image: 'https://www.inventogeo.com/statia-1.jpg'
   },
   'ai-biznesshi-strategiuli-innovaciebi': {
     title: 'ხელოვნური ინტელექტი ბიზნესში: თანამედროვე სტრატეგიული ინოვაციები',
     description: 'AI აღარ არის მხოლოდ ფუტურისტული კონცეფცია, არამედ პრაქტიკული ინსტრუმენტი, რომელიც ფუნდამენტურად ცვლის კომპანიების ოპერაციულ მოდელებს.',
-    image: 'https://www.vifadigital.ge/statia-2.jpg'
+    image: 'https://www.inventogeo.com/statia-2.jpg'
   },
   'ratom-stsirdeba-bizness-vebsaiti-2025': {
     title: 'რატომ სჭირდება ბიზნესს ვებსაიტი 2025 წელს?',
     description: 'პროფესიონალური ვებსაიტი არა მხოლოდ ხილვადობას უზრუნველყოფს, არამედ ზრდის შესაძლებლობებს და ეფექტურობას. 2025 წელს ეს აუცილებელია.',
-    image: 'https://www.vifadigital.ge/statia-3.jpg'
+    image: 'https://www.inventogeo.com/statia-3.jpg'
   }
 };
 
@@ -50,8 +50,8 @@ Object.entries(blogPosts).forEach(([slug, post]) => {
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:url" content="https://www.vifadigital.ge/blog/${slug}" />
-    <meta property="og:site_name" content="VIFA Digital" />
+    <meta property="og:url" content="https://www.inventogeo.com/blog/${slug}" />
+    <meta property="og:site_name" content="Invento Technologies" />
     <meta property="og:locale" content="ka_GE" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeHTML(post.title)}" />
@@ -69,14 +69,14 @@ Object.entries(blogPosts).forEach(([slug, post]) => {
 
   // Insert new meta tags after the author meta tag
   html = html.replace(
-    /(<meta\s+name="author"\s+content="VIFA Digital"\s*\/?>)/i,
+    /(<meta\s+name="author"\s+content="Invento Technologies"\s*\/?>)/i,
     `$1\n    ${metaTags}`
   );
 
   // Update page title with blog post title
   html = html.replace(
     /<title>[^<]*<\/title>/i,
-    `<title>${escapeHTML(post.title)} - Vifa Digital</title>`
+    `<title>${escapeHTML(post.title)} - Invento Technologies</title>`
   );
 
   // Write the file
