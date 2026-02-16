@@ -10,21 +10,21 @@ import { FaRobot } from "react-icons/fa";
 // SimpleNavbar Translations
 const navbarTranslations = {
   ka: {
-    "services.webdev.title": "ვებ განვითარება",
+    "services.webdev.title": "Invento Web",
     "services.advertising.title": "ციფრული რეკლამა",
-     "nav.businessSolutions": "ინვენტო",
+     "nav.businessSolutions": "Invento WMS",
     "nav.about": "ჩვენ შესახებ",
     "nav.blog": "ბლოგი",
-   
-    "nav.aiService": "AI სერვისი",
+
+    "nav.aiService": "Invento AI",
   },
   en: {
-    "services.webdev.title": "Web Development",
+    "services.webdev.title": "Invento Web",
     "services.advertising.title": "Digital Ads",
     "nav.about": "About Us",
     "nav.blog": "Blog",
-    "nav.businessSolutions": "Business Solutions",
-    "nav.aiService": "AI Service",
+    "nav.businessSolutions": "Invento WMS",
+    "nav.aiService": "Invento AI",
   },
 };
 
@@ -42,6 +42,21 @@ const SimpleNavbar: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { startNavigation, stopNavigation } = useNavigation();
+
+  // Determine if current route should show Invento branding
+  const isInventoRoute = () => {
+    const path = location.pathname;
+    return path.includes('/services/web-development') ||
+           path.includes('/services/ai-chatbot') ||
+           path.includes('/inventowms') ||
+           path === '/';
+  };
+
+  const isVifaRoute = () => {
+    const path = location.pathname;
+    return path.includes('/services/digital-advertising') ||
+           path.includes('/about');
+  };
 
   const handleNavigation = (path: string) => {
     if (location.pathname !== path) {
@@ -80,15 +95,15 @@ const SimpleNavbar: React.FC = () => {
   }, [lastScrollY]);
 
   const navLinks = [
+    { path: "/inventowms", label: t("nav.businessSolutions") },
     { path: "/services/web-development", label: t("services.webdev.title") },
     {
       path: "/services/digital-advertising",
       label: t("services.advertising.title"),
     },
-    { path: "/inventowms", label: t("nav.businessSolutions") },
     { path: "/about", label: t("nav.about") },
     { path: "/blog", label: t("nav.blog") },
-    
+
   ];
 
   // Special highlighted link for AI Chatbot
@@ -110,25 +125,47 @@ const SimpleNavbar: React.FC = () => {
             isScrolled ? "py-1 sm:py-2" : "py-2 sm:py-4"
           }`}
         >
-          {/* Brand Title - Responsive sizing and spacing */}
+          {/* Brand Title - Responsive sizing and spacing with conditional branding */}
           <div
             className={`text-center transition-all duration-300 ${
               isScrolled ? "mb-1 sm:mb-2" : "mb-2 sm:mb-3"
             }`}
           >
-            <Link to="/" className="inline-block">
-              <h1
-                className={`font-light tracking-wider sm:tracking-[0.2em] transition-all duration-300 text-white break-words hyphens-auto leading-tight ${
-                  isScrolled
-                    ? "text-lg xs:text-xl sm:text-xl md:text-2xl"
-                    : "text-xl xs:text-2xl sm:text-3xl md:text-4xl"
-                }`}
-              >
-                <span className="inline font-bold">VIFA </span>
-                <span className="font-bold text-blue-400 inline">
-                  DIGITAL
-                </span>
-              </h1>
+            <Link to="/" className="inline-flex items-center">
+              {/* Conditional logo display */}
+              {isInventoRoute() && !isVifaRoute() ? (
+                <div className="flex items-center gap-2 sm:gap-3">
+                  
+                  <h1
+                    className={`font-light tracking-wider sm:tracking-[0.2em] transition-all duration-300 text-white break-words hyphens-auto leading-tight ${
+                      isScrolled
+                        ? "text-lg xs:text-xl sm:text-xl md:text-2xl"
+                        : "text-xl xs:text-2xl sm:text-3xl md:text-4xl"
+                    }`}
+                  >
+                    <span className="inline ">INVENTO </span>
+                    <span className="text-blue-400 inline">
+                      TECH
+                    </span>
+                  </h1>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2 sm:gap-3">
+                  
+                  <h1
+                    className={`font-light tracking-wider sm:tracking-[0.2em] transition-all duration-300 text-white break-words hyphens-auto leading-tight ${
+                      isScrolled
+                        ? "text-lg xs:text-xl sm:text-xl md:text-2xl"
+                        : "text-xl xs:text-2xl sm:text-3xl md:text-4xl"
+                    }`}
+                  >
+                    <span className="inline">VIFA </span>
+                    <span className="text-blue-400 inline">
+                      DIGITAL
+                    </span>
+                  </h1>
+                </div>
+              )}
             </Link>
           </div>
 

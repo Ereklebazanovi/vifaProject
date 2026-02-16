@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 
@@ -85,6 +85,22 @@ const Footer: React.FC = () => {
   const [showBackToTop] = useState(true);
   const { currentLanguage } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
+  const location = useLocation();
+
+  // Determine if current route should show Invento branding
+  const isInventoRoute = () => {
+    const path = location.pathname;
+    return path.includes('/services/web-development') ||
+           path.includes('/services/ai-chatbot') ||
+           path.includes('/inventowms') ||
+           path === '/';
+  };
+
+  const isVifaRoute = () => {
+    const path = location.pathname;
+    return path.includes('/services/digital-advertising') ||
+           path.includes('/about');
+  };
 
   const t = (key: string): string => {
     const translations = footerTranslations[currentLanguage as keyof typeof footerTranslations] as Record<string, string>;
@@ -94,8 +110,8 @@ const Footer: React.FC = () => {
   const socialLinks = [
     {
       icon: <FaFacebookF />,
-      href: "https://facebook.com/vifaweb",
-      label: "VIFA WEB • ვიფა ვებ",
+      href: isInventoRoute() && !isVifaRoute() ? "https://www.facebook.com/inventogeo" : "https://facebook.com/vifaweb",
+      label: isInventoRoute() && !isVifaRoute() ? "Invento Technologies" : "VIFA WEB • ვიფა ვებ",
       color:
         "hover:text-blue-400 hover:bg-blue-500/10 hover:border-blue-400/50",
     },
@@ -103,7 +119,7 @@ const Footer: React.FC = () => {
 
   const services = [
     {
-      name: t("footer.services.webdev"),
+      name: currentLanguage === "ka" ? "Invento Web" : "Invento Web",
       href: "/services/web-development",
       icon: <FaCode className="w-4 h-4" />,
     },
@@ -113,7 +129,7 @@ const Footer: React.FC = () => {
       icon: <FaChartLine className="w-4 h-4" />,
     },
     {
-      name: currentLanguage === "ka" ? "AI ჩატბოტები" : "AI Chatbots",
+      name: currentLanguage === "ka" ? "Invento AI" : "Invento AI",
       href: "/services/ai-chatbot",
       icon: <FaRobot className="w-4 h-4" />,
     },
@@ -154,8 +170,8 @@ const Footer: React.FC = () => {
     },
     {
       icon: <FaEnvelope className="w-4 h-4" />,
-      text: "vifa.official2020@gmail.com",
-      // href: "vifadigital.com",
+      text: isInventoRoute() && !isVifaRoute() ? "team.inventogeo@gmail.com" : "vifa.official2020@gmail.com",
+      href: isInventoRoute() && !isVifaRoute() ? "mailto:team.inventogeo@gmail.com" : "mailto:vifa.official2020@gmail.com",
       color: "text-blue-400",
     },
     {
@@ -215,7 +231,7 @@ const Footer: React.FC = () => {
           viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12"
         >
-          {/* Brand Section */}
+          {/* Brand Section - Conditional Branding */}
           <motion.div variants={itemVariants} className="lg:col-span-1">
             <Link to="/" className="flex items-center space-x-3 mb-6 group">
               <motion.div
@@ -223,23 +239,35 @@ const Footer: React.FC = () => {
                 transition={{ duration: 0.3 }}
                 className="w-12 h-12 bg-slate-800/50 border border-slate-600/30 rounded-xl flex items-center justify-center hover:bg-blue-500/10 hover:border-blue-400/40 transition-all duration-300 overflow-hidden"
               >
-                <img
-                  src="/vifa.jpg"
-                  alt="VIFA Digital - ციფრული მარკეტინგი და ვებ განვითარება საქართველოში"
-                  className="w-10 h-10 rounded-lg object-cover"
-                  loading="lazy"
-                  decoding="async"
-                />
+                {isInventoRoute() && !isVifaRoute() ? (
+                  <img
+                    src="/invento.png"
+                    alt="Invento Technologies - ვებ განვითარება და AI ჩატბოტები"
+                    className="w-10 h-10 rounded-lg object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <img
+                    src="/viffa.png"
+                    alt="VIFA Digital - ციფრული მარკეტინგი და ვებ განვითარება საქართველოში"
+                    className="w-10 h-10 rounded-lg object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
               </motion.div>
               <div>
                 <div className="text-2xl font-light tracking-wider">
                   <span className="text-blue-600 font-normal group-hover:text-blue-300 transition-colors duration-300">
-                    VIFA DIGITAL
+                    {isInventoRoute() && !isVifaRoute() ? "INVENTO TECHNOLOGIES" : "VIFA DIGITAL"}
                   </span>
                   <span className="text-blue-400 font-normal"> </span>
                 </div>
                 <div className="text-xs font-light tracking-wide -mt-1 text-slate-500 group-hover:text-slate-400 transition-colors duration-300">
-                  {t("footer.brand.tagline")}
+                  {isInventoRoute() && !isVifaRoute() ?
+                    (currentLanguage === "ka" ? "ტექნოლოგიური პარტნიორი" : "Technology Partner") :
+                    t("footer.brand.tagline")}
                 </div>
               </div>
             </Link>
@@ -446,7 +474,7 @@ const Footer: React.FC = () => {
                 true ? "text-slate-500" : "text-slate-600"
               }`}
             >
-              © {currentYear} Vifa Digital. {t("footer.copyright")}
+              © {currentYear} {isInventoRoute() && !isVifaRoute() ? "Invento Technologies" : "VIFA Digital"}. {t("footer.copyright")}
               <span className="mx-2">•</span>
               <Link
                 to="/privacy"
@@ -471,7 +499,7 @@ const Footer: React.FC = () => {
               >
                 {t("footer.createdBy")}{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 font-semibold">
-                  VIFA DIGITAL
+                  {isInventoRoute() && !isVifaRoute() ? "INVENTO TECHNOLOGIES" : "VIFA DIGITAL"}
                 </span>{" "}
                 {t("footer.createdByTeam")}
               </p>

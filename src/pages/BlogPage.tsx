@@ -39,10 +39,10 @@ const BlogPage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>ბლოგი - Vifa Digital | ციფრული მარკეტინგის სტატიები</title>
+        <title>ბლოგი - Invento Technologies | ციფრული მარკეტინგის სტატიები</title>
         <meta
           name="description"
-          content="ციფრული მარკეტინგის, ვებ განვითარების და სოციალური მედიის შესახებ სტატიები Vifa Digital-ისგან. ისწავლეთ უახლესი ტრენდები და მიიღეთ ექსპერტული რჩევები."
+          content="ციფრული მარკეტინგის, ვებ განვითარების და სოციალური მედიის შესახებ სტატიები Invento Technologies-ისგან. ისწავლეთ უახლესი ტრენდები და მიიღეთ ექსპერტული რჩევები."
         />
         <meta
           name="keywords"
@@ -53,21 +53,21 @@ const BlogPage: React.FC = () => {
         <meta property="og:type" content="website" />
         <meta
           property="og:title"
-          content="ბლოგი - Vifa Digital | ციფრული მარკეტინგის სტატიები"
+          content="ბლოგი - Invento Technologies | ციფრული მარკეტინგის სტატიები"
         />
         <meta
           property="og:description"
-          content="ციფრული მარკეტინგის, ვებ განვითარების და სოციალური მედიის შესახებ სტატიები Vifa Digital-ისგან."
+          content="ციფრული მარკეტინგის, ვებ განვითარების და სოციალური მედიის შესახებ სტატიები Invento Technologies-ისგან."
         />
         <meta property="og:image" content="/images/blog/blog-cover.jpg" />
         <meta property="og:url" content="https://vifadigital.com/blog" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="ბლოგი - Vifa Digital" />
+        <meta name="twitter:title" content="ბლოგი - Invento Technologies" />
         <meta
           name="twitter:description"
-          content="ციფრული მარკეტინგის, ვებ განვითარების და სოციალური მედიის შესახებ სტატიები Vifa Digital-ისგან."
+          content="ციფრული მარკეტინგის, ვებ განვითარების და სოციალური მედიის შესახებ სტატიები Invento Technologies-ისგან."
         />
         <meta name="twitter:image" content="/images/blog/blog-cover.jpg" />
       </Helmet>

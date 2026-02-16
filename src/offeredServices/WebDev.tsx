@@ -39,11 +39,11 @@ import { useLanguage } from "../contexts/LanguageContext";
 
 const webDevTranslations = {
   ka: {
-    "seo.webdev.title": "ვებ განვითარება - VIFA | vifadigital.ge",
+    "seo.webdev.title": "Invento Web - ვებ განვითარება | Invento Technologies",
     "seo.webdev.description":
       "პროფესიონალური ვებ განვითარების სერვისები React, Node.js, მობილურზე მორგებული დიზაინი და თანამედროვე ვებ აპლიკაციები.",
 
-    "webdev.hero.title": "WEB DEVELOPMENT",
+    "webdev.hero.title": "INVENTO WEB",
     "webdev.stats.individual": "Individual",
     "webdev.stats.individualDesc": "პირადი მიდგომა",
     "webdev.stats.quality": "Quality",
@@ -135,7 +135,7 @@ const webDevTranslations = {
       "სრული ონლაინ მაღაზია — ქართული ბანკებით გადახდა, პროდუქტების მართვა და შეკვეთების კონტროლი.",
     "webdev.pricing.ecommerce.price": "1999₾-დან",
     "webdev.pricing.ecommerce.timeline": "14-21 დღე",
-    "webdev.pricing.ecommerce.feature1": "ონლაინ მაღაზია + Invento სისტემა",
+    "webdev.pricing.ecommerce.feature1": "ონლაინ მაღაზია + Invento WMS სისტემა",
     "webdev.pricing.ecommerce.feature2": "ავტომატური მარაგების სინქრონიზაცია",
     "webdev.pricing.ecommerce.feature3": "საკურიერო სტიკერები და ინვოისინგი",
     "webdev.pricing.ecommerce.feature4": "Real-time შეკვეთების კონტროლი",
@@ -178,14 +178,14 @@ const webDevTranslations = {
     "webdev.cta.button": "დაგვიკავშირდი WhatsApp-ზე",
     "webdev.pricing.perProject": "პროექტზე",
 
-    "webdev.whyus.title": "რატომ VIFA Digital?",
+    "webdev.whyus.title": "რატომ Invento Web?",
     "webdev.whyus.subtitle": "ჩვენ არ ვაწყობთ უბრალოდ საიტებს - ვქმნით ციფრულ ბიზნეს სისტემებს",
     "webdev.whyus.featured": "★ მთავარი უპირატესობა",
-    "webdev.whyus.learnmore": "გაიგე მეტი Invento-ს შესახებ",
+    "webdev.whyus.learnmore": "გაიგე მეტი Invento WMS-ის შესახებ",
     "webdev.whyus.card1.title": "თანამედროვე Stack",
     "webdev.whyus.card1.desc": "React, TypeScript, Firebase - ტექნოლოგიები, რომლებზეც აგებულია ყველაზე წარმატებული SaaS პროდუქტები მსოფლიოში.",
-    "webdev.whyus.card2.title": "Invento სისტემა",
-    "webdev.whyus.card2.desc": "თქვენს ონლაინ მაღაზიას თან მოყვება Invento - პროფესიონალური საწყობისა და გაყიდვების მართვის სისტემა. არა WordPress, არამედ ქართულ ბაზარზე მორგებული SaaS პლატფორმა.",
+    "webdev.whyus.card2.title": "Invento WMS სისტემა",
+    "webdev.whyus.card2.desc": "თქვენს ონლაინ მაღაზიას თან მოყვება Invento WMS - პროფესიონალური საწყობისა და გაყიდვების მართვის სისტემა. არა WordPress, არამედ ქართულ ბაზარზე მორგებული SaaS პლატფორმა.",
     "webdev.whyus.card3.title": "სრული მხარდაჭერა",
     "webdev.whyus.card3.desc": "პროექტის ჩაბარების შემდეგაც ჩვენ გვერდში ვართ - ტექნიკური მხარდაჭერა, განახლებები, გუნდის ტრენინგი.",
 
@@ -198,15 +198,15 @@ const webDevTranslations = {
     "webdev.invento.strip_status": "შედის ფასში",
     "webdev.invento.strip_core": "Invento™ Core",
     "webdev.invento.strip_btn": "სისტემის ნახვა",
-    "webdev.pricing.badge": "INCLUDED: INVENTO (890₾)",
+    "webdev.pricing.badge": "INCLUDED: INVENTO WMS (890₾)",
 
   },
   en: {
-    "seo.webdev.title": "Web Development Services - VIFA | vifadigital.com",
+    "seo.webdev.title": "Invento Web - Web Development Services | Invento Technologies",
     "seo.webdev.description":
       "Professional web development services including React, Node.js, mobile responsive design, and modern web applications.",
 
-    "webdev.hero.title": "WEB DEVELOPMENT",
+    "webdev.hero.title": "INVENTO WEB",
     "webdev.stats.individual": "Individual",
     "webdev.stats.individualDesc": "Personal Approach",
     "webdev.stats.quality": "Quality",
@@ -340,14 +340,14 @@ const webDevTranslations = {
     "webdev.cta.button": "Contact us on WhatsApp",
     "webdev.pricing.perProject": "Per Project",
 
-    "webdev.whyus.title": "Why VIFA Digital?",
+    "webdev.whyus.title": "Why Invento Web?",
     "webdev.whyus.subtitle": "We don't just build websites - we create digital business systems",
     "webdev.whyus.featured": "★ Key Advantage",
-    "webdev.whyus.learnmore": "Learn more about Invento",
+    "webdev.whyus.learnmore": "Learn more about Invento WMS",
     "webdev.whyus.card1.title": "Modern Stack",
     "webdev.whyus.card1.desc": "React, TypeScript, Firebase - technologies powering the world's most successful SaaS products.",
-    "webdev.whyus.card2.title": "Invento System",
-    "webdev.whyus.card2.desc": "Your online store comes with Invento - a professional inventory and sales management system. Not WordPress, but a SaaS platform tailored for the Georgian market.",
+    "webdev.whyus.card2.title": "Invento WMS System",
+    "webdev.whyus.card2.desc": "Your online store comes with Invento WMS - a professional inventory and sales management system. Not WordPress, but a SaaS platform tailored for the Georgian market.",
     "webdev.whyus.card3.title": "Full Support",
     "webdev.whyus.card3.desc": "We stay with you after launch - technical support, updates, team training.",
 
@@ -360,7 +360,7 @@ const webDevTranslations = {
     "webdev.invento.strip_status": "INCLUDED",
     "webdev.invento.strip_core": "Invento™ Core",
     "webdev.invento.strip_btn": "View System",
-    "webdev.pricing.badge": "INCLUDED: INVENTO (890₾)",
+    "webdev.pricing.badge": "INCLUDED: INVENTO WMS (890₾)",
   },
 };
 
@@ -610,7 +610,7 @@ const WebDev: React.FC = () => {
               <div className="mb-8 flex justify-center">
                 <div className="w-64 sm:w-72 md:w-80 lg:w-96">
                   <TrueFocus
-                    sentence="WEB DEVELOPMENT"
+                    sentence={t("webdev.hero.title")}
                     blurAmount={4}
                     borderColor="#8b5cf6"
                     glowColor="rgba(139, 92, 246, 0.6)"
@@ -779,7 +779,7 @@ const WebDev: React.FC = () => {
                       <span className="text-[10px] font-mono text-gray-500 tracking-widest uppercase">System Architecture</span>
                     </div>
                     <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
-                      E-commerce <span className="text-gray-600 font-thin px-1">+</span> Invento OS
+                      E-commerce <span className="text-gray-600 font-thin px-1">+</span> Invento WMS
                     </h3>
                     <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
                       {t("webdev.invento.strip_desc")}

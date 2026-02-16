@@ -94,19 +94,19 @@ const BlogPostPage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>{post.seo?.title || post.title} - Vifa Digital</title>
+        <title>{post.seo?.title || post.title} - Invento Technologies</title>
         <meta name="description" content={post.seo?.description || post.description} />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="article" />
         <meta property="og:title" content={post.seo?.title || post.title} />
         <meta property="og:description" content={post.seo?.description || excerpt} />
-        <meta property="og:image" content={`https://www.vifadigital.ge${post.seo?.ogImage || post.thumbnail || '/images/blog/default-og.jpg'}`} />
-        <meta property="og:image:secure_url" content={`https://www.vifadigital.ge${post.seo?.ogImage || post.thumbnail || '/images/blog/default-og.jpg'}`} />
+        <meta property="og:image" content={`https://www.inventogeo.com${post.seo?.ogImage || post.thumbnail || '/images/blog/default-og.jpg'}`} />
+        <meta property="og:image:secure_url" content={`https://www.inventogeo.com${post.seo?.ogImage || post.thumbnail || '/images/blog/default-og.jpg'}`} />
         <meta property="og:image:type" content="image/jpeg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:url" content={`https://www.vifadigital.ge/blog/${post.slug}`} />
+        <meta property="og:url" content={`https://www.inventogeo.com/blog/${post.slug}`} />
         <meta property="article:published_time" content={post.publishedAt} />
         {post.updatedAt && <meta property="article:modified_time" content={post.updatedAt} />}
         <meta property="article:author" content={post.author.name} />
@@ -118,10 +118,10 @@ const BlogPostPage: React.FC = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={post.seo?.title || post.title} />
         <meta name="twitter:description" content={post.seo?.description || excerpt} />
-        <meta name="twitter:image" content={`https://www.vifadigital.ge${post.seo?.ogImage || post.thumbnail || '/images/blog/default-og.jpg'}`} />
+        <meta name="twitter:image" content={`https://www.inventogeo.com${post.seo?.ogImage || post.thumbnail || '/images/blog/default-og.jpg'}`} />
 
         {/* Additional SEO */}
-        <link rel="canonical" href={`https://www.vifadigital.ge/blog/${post.slug}`} />
+        <link rel="canonical" href={`https://www.inventogeo.com/blog/${post.slug}`} />
         <meta name="robots" content="index, follow" />
       </Helmet>
 
@@ -180,11 +180,11 @@ const BlogPostPage: React.FC = () => {
               <div className="px-8 py-8 bg-gradient-to-r from-gray-900/60 to-blue-900/30 border-t border-gray-800/50 flex flex-col sm:flex-row items-center justify-between gap-6">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg overflow-hidden">
-                    <img src="/vifa.jpg" alt="Vifa Digital Team" className="w-full h-full object-cover" />
+                    <img src="/invento.png" alt="Invento Technologies Team" className="w-full h-full object-cover" />
                   </div>
                   <div>
                     <div className="font-semibold text-white">{post.author.name}</div>
-                    <div className="text-sm text-slate-400">Vifa Digital</div>
+                    <div className="text-sm text-slate-400">Invento Technologies</div>
                   </div>
                 </div>
                 <Link

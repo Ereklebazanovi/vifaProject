@@ -27,12 +27,12 @@ import InventoScrollyTelling from "../components/InventoScrollyTelling";
 // Invento Translations
 const inventoTranslations = {
   ka: {
-    "seo.invento.title": "Invento - სოციალური კომერციის და მარაგების მართვის სისტემა",
+    "seo.invento.title": "Invento WMS - სოციალური კომერციის და მარაგების მართვის სისტემა | Invento Technologies",
     "seo.invento.description": "მართეთ გაყიდვები, საწყობი და ფინანსები ერთ სივრცეში. ავტომატური ინვოისინგი და საკურიერო სერვისების ინტეგრაცია.",
     "seo.invento.keywords": "instagram გაყიდვები, facebook კომერცია, საწყობის მართვა, ონლაინ ბიზნესი, ციფრული ინვოისი, CRM",
 
     "hero.title": "მართე Facebook და Instagram გაყიდვები ერთ სივრცეში",
-    "hero.subtitle": "Invento — გაყიდვების, მარაგების და ფინანსების მართვის ცენტრალიზებული სისტემა ონლაინ ბიზნესისთვის.",
+    "hero.subtitle": "Invento WMS — გაყიდვების, მარაგების და ფინანსების მართვის ცენტრალიზებული სისტემა ონლაინ ბიზნესისთვის.",
     "btn.consultation": "უფასო კონსულტაცია",
     "phone.number": "557 62 42 43",
 
@@ -42,7 +42,7 @@ const inventoTranslations = {
     "solution.label": "Invento-ს გადაწყვეტა",
     "solution.text": "Social Commerce Hub — გაატარეთ შეკვეთა 10 წამში. სისტემა ავტომატურად აკლებს ნაშთს და აგენერირებს ოფიციალურ დოკუმენტაციას.",
 
-    "features.title": "რას გთავაზობთ Invento",
+    "features.title": "რას გთავაზობთ Invento WMS",
     "feature1.title": "საწყობი და მარაგები",
     "feature1.desc": "პროდუქციის ზუსტი აღრიცხვა ვარიაციების (ფერი/ზომა) მიხედვით. კრიტიკული ნაშთის შეტყობინებები.",
     "feature2.title": "ლოგისტიკა",
@@ -58,9 +58,9 @@ const inventoTranslations = {
 
     "pricing.title": "საინვესტიციო გეგმები",
 
-    "plan1.title": "Invento License",
+    "plan1.title": "Invento WMS License",
     "plan1.price": "890₾",
-    "plan1.f1": "Invento-ს მუდმივი ლიცენზია (Lifetime)",
+    "plan1.f1": "Invento WMS-ის მუდმივი ლიცენზია (Lifetime)",
     "plan1.f2": "სისტემის სრული იმპლემენტაცია და დანერგვა",
     "plan1.f3": "სისტემის მოხმარების დეტალური სახელმძღვანელო",
     "plan1.f4": "მონაცემთა ბაზის უსაფრთხოება (Cloud Security)",
@@ -70,7 +70,7 @@ const inventoTranslations = {
     "plan2.title": "E-commerce Bundle",
     "plan2.price": "1999₾",
     "plan2.f1": "თანამედროვე ონლაინ მაღაზიის დამზადება",
-    "plan2.f2": "Invento-ს ლიცენზია + სრული სინქრონიზაცია",
+    "plan2.f2": "Invento WMS-ის ლიცენზია + სრული სინქრონიზაცია",
     "plan2.f3": "გადახდის სისტემები (TBC, BOG, Apple Pay)",
     "plan2.f4": "სერვერული გამართვა და დომენის დაკავშირება",
     "plan2.f5": "SEO ოპტიმიზაცია და Google Analytics",
@@ -78,16 +78,16 @@ const inventoTranslations = {
 
     "payment.terms": "გადახდის პირობები: 50% პროექტის დაწყებისას — 50% ჩაბარებისას",
 
-    "cta.title": "Invento — სრული კონტროლი თქვენს ონლაინ გაყიდვებზე",
+    "cta.title": "Invento WMS — სრული კონტროლი თქვენს ონლაინ გაყიდვებზე",
     "cta.btn": "მოგვწერეთ WhatsApp-ში"
   },
   en: {
-    "seo.invento.title": "Invento - Social Commerce & Inventory Management System",
+    "seo.invento.title": "Invento WMS - Social Commerce & Inventory Management System | Invento Technologies",
     "seo.invento.description": "Manage sales, inventory, and finance in one place. Automated invoicing and courier integration.",
     "seo.invento.keywords": "instagram sales, facebook commerce, inventory management, online business, digital invoicing, CRM",
 
     "hero.title": "Manage Social Sales & Inventory in One Place",
-    "hero.subtitle": "Invento — A centralized system for sales, inventory, and financial management for online businesses.",
+    "hero.subtitle": "Invento WMS — A centralized system for sales, inventory, and financial management for online businesses.",
     "btn.consultation": "Free Consultation",
     "phone.number": "557 62 42 43",
 
@@ -97,7 +97,7 @@ const inventoTranslations = {
     "solution.label": "The Solution",
     "solution.text": "Social Commerce Hub — Process orders in 10 seconds. The system automatically deducts stock and generates official documentation.",
 
-    "features.title": "Features for Growth",
+    "features.title": "Invento WMS Features for Growth",
     "feature1.title": "Warehouse & Inventory",
     "feature1.desc": "Precise stock tracking by product variants (Size/Color). Low stock alerts.",
     "feature2.title": "Logistics",
@@ -113,9 +113,9 @@ const inventoTranslations = {
 
     "pricing.title": "Investment Plans",
 
-    "plan1.title": "Invento License",
+    "plan1.title": "Invento WMS License",
     "plan1.price": "890₾",
-    "plan1.f1": "Invento Lifetime License",
+    "plan1.f1": "Invento WMS Lifetime License",
     "plan1.f2": "Full System Implementation & Setup",
     "plan1.f3": "Staff Onboarding & Training",
     "plan1.f4": "Data Security & Daily Backups",
@@ -125,7 +125,7 @@ const inventoTranslations = {
     "plan2.title": "E-commerce Bundle",
     "plan2.price": "1999₾",
     "plan2.f1": "Custom E-commerce Website Development",
-    "plan2.f2": "Invento License + Real-time Sync",
+    "plan2.f2": "Invento WMS License + Real-time Sync",
     "plan2.f3": "Payment Gateway Integration (Cards/Apple Pay)",
     "plan2.f4": "Server Configuration & Domain Setup",
     "plan2.f5": "SEO Optimization & Analytics",
@@ -133,7 +133,7 @@ const inventoTranslations = {
 
     "payment.terms": "Payment Terms: 50% Upfront — 50% Upon Completion",
 
-    "cta.title": "Invento — Complete Control Over Your Online Sales",
+    "cta.title": "Invento WMS — Complete Control Over Your Online Sales",
     "cta.btn": "Message us on WhatsApp"
   }
 };
@@ -159,7 +159,7 @@ const InventoLandingPage: React.FC = () => {
     "/invento7.png"
   ];
 
-const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20Invento-ს%20სისტემით.%20მსურს%20უფასო%20კონსულტაცია.";
+const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20Invento%20WMS-ის%20სისტემით.%20მსურს%20უფასო%20კონსულტაცია.";
   const phoneNumber = "tel:+995557624243";
 
   // Preload all images

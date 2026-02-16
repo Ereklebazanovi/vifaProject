@@ -63,6 +63,36 @@ const Layout: React.FC = () => {
   const location = useLocation();
   // const [isChatBotOpen, setIsChatBotOpen] = useState(false);
 
+  // Determine if current route should show Invento branding
+  const isInventoRoute = () => {
+    const path = location.pathname;
+    return path.includes('/services/web-development') ||
+           path.includes('/services/ai-chatbot') ||
+           path.includes('/inventowms') ||
+           path === '/';
+  };
+
+  const isVifaRoute = () => {
+    const path = location.pathname;
+    return path.includes('/services/digital-advertising') ||
+           path.includes('/about');
+  };
+
+  // Update favicon based on current route
+  useEffect(() => {
+    const favicon = document.querySelector('link[rel="icon"]') as HTMLLinkElement;
+    const appleTouchIcon = document.querySelector('link[rel="apple-touch-icon"]') as HTMLLinkElement;
+
+    const iconPath = isInventoRoute() && !isVifaRoute() ? '/invento.png' : '/viffa.png';
+
+    if (favicon) {
+      favicon.href = iconPath;
+    }
+    if (appleTouchIcon) {
+      appleTouchIcon.href = iconPath;
+    }
+  }, [location.pathname]);
+
   // Stop navigation when location changes
   useEffect(() => {
     if (isNavigating) {

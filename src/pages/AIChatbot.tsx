@@ -25,18 +25,18 @@ import { AIConnectionDemo } from "../components/AIConnectionDemo";
 // AI Chatbot Translations
 const aiChatbotTranslations = {
   ka: {
-    "seo.title": "AI ჩატბოტები - თქვენი ბიზნესის ციფრული რევოლუცია - VIFA",
-    "seo.description": "AI ჩატბოტები Facebook, WhatsApp და Instagram-ისთვის. 24/7 მომხმარებელთა მხარდაჭერა, გაყიდვების ზრდა და ხარჯების ოპტიმიზაცია. Google Gemini AI ტექნოლოგია.",
+    "seo.title": "Invento AI - ჩატბოტები თქვენი ბიზნესისთვის | Invento Technologies",
+    "seo.description": "Invento AI ჩატბოტები Facebook, WhatsApp და Instagram-ისთვის. 24/7 მომხმარებელთა მხარდაჭერა, გაყიდვების ზრდა და ხარჯების ოპტიმიზაცია. Google Gemini AI ტექნოლოგია.",
 
-    "hero.title": "თქვენი ბიზნესის",
-    "hero.titleHighlight": "ციფრული რევოლუცია",
+    "hero.title": "Invento AI -",
+    "hero.titleHighlight": "თქვენი ბიზნესის ციფრული რევოლუცია",
     "hero.feature1.title": "24/7 ავტომატური მომსახურება",
     "hero.feature1.description": "- თქვენი კლიენტები პასუხს მიიღებენ ნებისმიერ დროს",
     "hero.feature2.title": "სპეციალიზებული ტრენინგი",
     "hero.feature2.description": "- AI სწავლობს თქვენი ბიზნესის სპეციფიკას",
     "hero.feature3.title": "გაზრდილი მოგება",
     "hero.feature3.description": "- დაზოგეთ თანხა და მიიღეთ გამოტოვებული შემოსავალი",
-    "hero.demoLabel": "იხილეთ როგორ მუშაობს ჩვენი AI ასისტენტი →",
+    "hero.demoLabel": "იხილეთ როგორ მუშაობს Invento AI ასისტენტი →",
     "hero.demoDescription": "რეალური საუბარი სალონის მფლობელთან",
 
     "platforms.title": "ინტეგრაცია ყველა მთავარ პლატფორმაზე",
@@ -148,18 +148,18 @@ const aiChatbotTranslations = {
     "cta.button": "უფასო კონსულტაცია",
   },
     en: {
-    "seo.title": "AI Chatbots - The Digital Revolution for Your Business - VIFA",
-    "seo.description": "AI Chatbots for Facebook, WhatsApp, and Instagram. 24/7 customer support, sales growth, and cost optimization. Powered by Google Gemini AI technology.",
+    "seo.title": "Invento AI - Chatbots for Your Business | Invento Technologies",
+    "seo.description": "Invento AI Chatbots for Facebook, WhatsApp, and Instagram. 24/7 customer support, sales growth, and cost optimization. Powered by Google Gemini AI technology.",
 
-    "hero.title": "Your Business's",
-    "hero.titleHighlight": "Digital Revolution",
+    "hero.title": "Invento AI -",
+    "hero.titleHighlight": "Your Business's Digital Revolution",
     "hero.feature1.title": "24/7 Automatic Service",
     "hero.feature1.description": "- Your clients will receive answers anytime",
     "hero.feature2.title": "Specialized Training",
     "hero.feature2.description": "- AI learns your business specifics",
     "hero.feature3.title": "Increased Profit",
     "hero.feature3.description": "- Save money and recover missed revenue",
-    "hero.demoLabel": "See how our AI assistant works →",
+    "hero.demoLabel": "See how Invento AI assistant works →",
     "hero.demoDescription": "A real conversation with a barber shop owner",
 
     "platforms.title": "Integration on All Major Platforms",

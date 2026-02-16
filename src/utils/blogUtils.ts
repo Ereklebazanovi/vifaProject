@@ -30,7 +30,7 @@ export function parseMarkdownPost(
     updatedAt: frontmatter.updatedAt,
     thumbnail: frontmatter.thumbnail,
     author: {
-      name: frontmatter.author?.name || "Vifa Digital",
+      name: frontmatter.author?.name || "Invento Technologies",
       avatar: frontmatter.author?.avatar,
     },
     tags: frontmatter.tags || [],
@@ -107,8 +107,8 @@ export const blogPosts: BlogPost[] = [
     publishedAt: "2025-01-16T10:00:00Z",
     thumbnail: "/statia-1.jpg",
     author: {
-      name: "Vifa Digital Team",
-      avatar: "/images/team/vifa-team.jpg",
+      name: "Invento Technologies Team",
+      avatar: "/images/team/invento-team.jpg",
     },
     tags: [
       "ციფრული ტრანსფორმაცია",
@@ -181,8 +181,8 @@ export const blogPosts: BlogPost[] = [
     publishedAt: "2025-10-17T12:00:00Z",
     thumbnail: "/statia-2.jpg",
     author: {
-      name: "Vifa Digital Team",
-      avatar: "/images/team/vifa-team.jpg",
+      name: "Invento Technologies Team",
+      avatar: "/images/team/invento-team.jpg",
     },
     tags: [
       "ხელოვნური ინტელექტი",
@@ -265,13 +265,13 @@ McKinsey-ის კვლევის მიხედვით, კომპა�
 
       <h2>დასკვნა: დროა გადადგათ ნაბიჯი წინ</h2>
 
-      <p>ვებსაიტი 2025 წელს არის ბიზნესის საფუძველი: იგი აერთიანებს მუდმივ ხილვადობას, ეფექტურობას, სანდოობასა და მუდმივ ზრდას. უგულებელყოფა ნიშნავს შესაძლებლობების დაკარგვას. VIFA Digital გთავაზობთ თანამედროვე მომსახურებებს საქართველოს ბაზრისთვის: სავიზიტო ვებსაიტებიდან AI-ინტეგრირებულ პლატფორმებამდე. დაგვიკავშირდით vifadigital.ge-ზე კონსულტაციისთვის და გააციფრულეთ ბიზნესი</p>
+      <p>ვებსაიტი 2025 წელს არის ბიზნესის საფუძველი: იგი აერთიანებს მუდმივ ხილვადობას, ეფექტურობას, სანდოობასა და მუდმივ ზრდას. უგულებელყოფა ნიშნავს შესაძლებლობების დაკარგვას. Invento Technologies გთავაზობთ თანამედროვე მომსახურებებს საქართველოს ბაზრისთვის: სავიზიტო ვებსაიტებიდან AI-ინტეგრირებულ პლატფორმებამდე. დაგვიკავშირდით inventogeo.com-ზე კონსულტაციისთვის და გააციფრულეთ ბიზნესი</p>
     `,
     publishedAt: "2025-10-17T14:00:00Z",
     thumbnail: "/statia-3.jpg",
     author: {
-      name: "Vifa Digital Team",
-      avatar: "/images/team/vifa-team.jpg",
+      name: "Invento Technologies Team",
+      avatar: "/images/team/invento-team.jpg",
     },
     tags: [
       "ვებსაიტი",
@@ -282,7 +282,7 @@ McKinsey-ის კვლევის მიხედვით, კომპა�
     ],
     readingTime: 6,
     seo: {
-      title: "რატომ სჭირდება ბიზნესს ვებსაიტი 2025 წელს? - Vifa Digital",
+      title: "რატომ სჭირდება ბიზნესს ვებსაიტი 2025 წელს? - Invento Technologies",
       description:
         "პროფესიონალური ვებსაიტი 2025 წელს აუცილებელია. SEO, AI, ონლაინ გაყიდვები - ყველაფერი რაც უნდა იცოდეთ.",
       ogImage: "/statia-3.jpg",
