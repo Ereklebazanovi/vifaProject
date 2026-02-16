@@ -19,9 +19,9 @@ import { useLanguageTransition } from "../hooks/useLanguageTransition";
 // AboutPage Translations///
 const aboutPageTranslations = {
   ka: {
-    "seo.about.title": "ჩვენ შესახებ - Vifa Digital გუნდი | vifadigital.com",
-    "seo.about.description": "Vifa Digital გუნდის შესახებ. ჩვენი გამოცდილება, მიზნები და ღირებულებები ციფრული მარკეტინგის სფეროში საქართველოში. vifadigital.com",
-    "seo.about.keywords": "Vifa Digital გუნდი, vifadigital.com, ციფრული მარკეტინგის კომპანია, ვებ განვითარება, მარკეტინგის სააგენტო საქართველო",
+    "seo.about.title": "ჩვენ შესახებ - Invento Technologies & VIFA Digital კოლაბორაცია | inventogeo.com",
+    "seo.about.description": "Invento Technologies და VIFA Digital კოლაბორაცია. ტექნოლოგიური გადაწყვეტილებები და მარკეტინგის სერვისები საქართველოში. inventogeo.com",
+    "seo.about.keywords": "Invento Technologies, VIFA Digital, კოლაბორაცია, ტექნოლოგიები, ციფრული მარკეტინგი, inventogeo.com",
     "about.services.webdev.title": "ვებ განვითარება",
     "about.services.webdev.description": "თანამედროვე, სწრაფი და მობილურზე ოპტიმიზირებული ვებსაიტები",
     "about.services.content.title": "კონტენტ პროდუქცია",
@@ -44,9 +44,9 @@ const aboutPageTranslations = {
     "about.cta.startProject": "დაიწყე პროექტი",
   },
   en: {
-    "seo.about.title": "About Us - Vifa Digital Team | vifadigital.com",
-    "seo.about.description": "About Vifa Digital team. Our experience, goals and values in digital marketing in Georgia. vifadigital.com",
-    "seo.about.keywords": "Vifa Digital team, vifadigital.com, digital marketing company, web development, marketing agency Georgia",
+    "seo.about.title": "About Us - Invento Technologies & VIFA Digital Collaboration | inventogeo.com",
+    "seo.about.description": "Invento Technologies and VIFA Digital collaboration. Technology solutions and marketing services in Georgia. inventogeo.com",
+    "seo.about.keywords": "Invento Technologies, VIFA Digital, collaboration, technology solutions, digital marketing, inventogeo.com",
     "about.services.webdev.title": "Web Development",
     "about.services.webdev.description": "Modern, fast and mobile optimized websites",
     "about.services.content.title": "Content Production",
@@ -99,9 +99,9 @@ const AboutPage = () => {
     description: t("seo.about.description"),
     mainEntity: {
       "@type": "Organization",
-      name: "Vifa Digital",
+      name: "Invento Technologies & VIFA Digital",
       description: t("seo.about.description"),
-      url: "https://vifadigital.ge/about",
+      url: "https://inventogeo.com/about",
     },
   };
 
@@ -160,7 +160,7 @@ const AboutPage = () => {
         title={t("seo.about.title")}
         description={t("seo.about.description")}
         keywords={t("seo.about.keywords")}
-        url="https://vifadigital.ge/about"
+        url="https://inventogeo.com/about"
         type="website"
         structuredData={aboutStructuredData}
       />

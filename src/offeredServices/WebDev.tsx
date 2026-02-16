@@ -524,7 +524,7 @@ const WebDev: React.FC = () => {
       <SEO
         title={t("seo.webdev.title")}
         description={t("seo.webdev.description")}
-        url="https://vifadigital.ge/services/web-development"
+        url="https://inventogeo.com/services/web-development"
       />
 
       {/* Professional Tech Background - Ultra Dark */}

@@ -330,7 +330,7 @@ const AIChatbot: React.FC = () => {
       <SEO
         title={t("seo.title")}
         description={t("seo.description")}
-        url="https://vifadigital.ge/services/ai-chatbot"
+        url="https://inventogeo.com/services/ai-chatbot"
       />
 
       {/* Background Image */}

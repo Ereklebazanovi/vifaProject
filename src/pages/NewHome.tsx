@@ -12,9 +12,9 @@ import SEO from "../components/SEO";
 const newHomeTranslations = {
   ka: {
     "seo.home.title":
-      "Vifa Digital - ვებ განვითარება და ტექნოლოგიური მომსახურებები საქართველოში | vifadigital.com",
+      "Invento Technologies - AI, WMS და ვებ ტექნოლოგიები საქართველოში | inventogeo.com",
     "seo.home.description":
-      "Vifa Digital - წამყვანი ვებ განვითარების კომპანია საქართველოში. მოწინავე ვებ ტექნოლოგიები, AI სისტემები და ციფრული პლატფორმები. vifadigital.com",
+      "Invento Technologies - AI ჩატბოტები, WMS სისტემები და მოწინავე ვებ განვითარება საქართველოში. Invento WMS, Invento AI, მონაცემთა ბაზების მართვა. inventogeo.com",
 
     "newHome.badge": "გააციფრულე შენი ბიზნესი",
     "newHome.hero.title": "შექმენი კომუნიკაციის ხიდი",
@@ -153,9 +153,9 @@ const newHomeTranslations = {
   },
   en: {
     "seo.home.title":
-      "Vifa Digital - Web Development & Technology Solutions in Georgia | vifadigital.com",
+      "Invento Technologies - AI, WMS & Web Technologies in Georgia | inventogeo.com",
     "seo.home.description":
-      "Vifa Digital - Leading Web Development Company in Georgia. Advanced Web Technologies, AI Systems and Digital Platforms. vifadigital.com",
+      "Invento Technologies - Leading AI Chatbots, WMS Systems and Web Development in Georgia. Invento WMS, Invento AI, Database Management Solutions. inventogeo.com",
 
     "newHome.badge": "Digitize Your Business",
     "newHome.hero.title": "Build a Communication Bridge",
@@ -344,7 +344,7 @@ const NewHome: React.FC = () => {
       <SEO
         title={t("seo.home.title")}
         description={t("seo.home.description")}
-        url="https://vifadigital.ge"
+        url="https://inventogeo.com"
       />
 
       {/* Canvas 2D Highway Background - Full Page Coverage */}

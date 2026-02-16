@@ -217,7 +217,7 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
         title={t("seo.invento.title")}
         description={t("seo.invento.description")}
         keywords={t("seo.invento.keywords")}
-        url="https://vifadigital.ge/services/inventowms"
+        url="https://inventogeo.com/inventowms"
       />
 
       <style>{`

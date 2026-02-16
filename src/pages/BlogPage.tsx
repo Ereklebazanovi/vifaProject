@@ -60,7 +60,7 @@ const BlogPage: React.FC = () => {
           content="ციფრული მარკეტინგის, ვებ განვითარების და სოციალური მედიის შესახებ სტატიები Invento Technologies-ისგან."
         />
         <meta property="og:image" content="/images/blog/blog-cover.jpg" />
-        <meta property="og:url" content="https://vifadigital.com/blog" />
+        <meta property="og:url" content="https://inventogeo.com/blog" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
