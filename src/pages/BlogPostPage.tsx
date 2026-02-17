@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import SEO from '../components/SEO';
-import { getBlogPostBySlug, formatDate, generateExcerpt } from '../utils/blogUtils';
+import { getBlogPostBySlug, formatDate } from '../utils/blogUtils';
 import type { BlogPost } from '../types/blog';
 import { FiClock, FiUser, FiArrowLeft, FiShare2 } from 'react-icons/fi';
 
@@ -89,7 +89,6 @@ const BlogPostPage: React.FC = () => {
     );
   }
 
-  const excerpt = generateExcerpt(post.content, 160);
 
   return (
     <>
