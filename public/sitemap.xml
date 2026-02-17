@@ -8,7 +8,7 @@
   <!-- Home Page - Georgian (Default) -->
   <url>
     <loc>https://www.inventogeo.com/</loc>
-    <lastmod>2025-02-16</lastmod>
+    <lastmod>2026-02-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.inventogeo.com/" />
@@ -19,7 +19,7 @@
   <!-- Home Page - English -->
   <url>
     <loc>https://www.inventogeo.com/?lang=en</loc>
-    <lastmod>2025-02-16</lastmod>
+    <lastmod>2026-02-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.inventogeo.com/" />
@@ -30,7 +30,7 @@
   <!-- About Page - Georgian -->
   <url>
     <loc>https://www.inventogeo.com/about</loc>
-    <lastmod>2025-02-16</lastmod>
+    <lastmod>2026-02-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.inventogeo.com/about" />
@@ -41,7 +41,7 @@
   <!-- About Page - English -->
   <url>
     <loc>https://www.inventogeo.com/about?lang=en</loc>
-    <lastmod>2025-02-16</lastmod>
+    <lastmod>2026-02-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.inventogeo.com/about" />
@@ -52,7 +52,7 @@
   <!-- Start Project Page - Georgian -->
   <url>
     <loc>https://www.inventogeo.com/start-project</loc>
-    <lastmod>2025-02-16</lastmod>
+    <lastmod>2026-02-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.inventogeo.com/start-project" />
@@ -63,7 +63,7 @@
   <!-- Start Project Page - English -->
   <url>
     <loc>https://www.inventogeo.com/start-project?lang=en</loc>
-    <lastmod>2025-02-16</lastmod>
+    <lastmod>2026-02-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.inventogeo.com/start-project" />
@@ -74,7 +74,7 @@
   <!-- Contact Page - Georgian -->
   <url>
     <loc>https://www.inventogeo.com/contact</loc>
-    <lastmod>2025-02-16</lastmod>
+    <lastmod>2026-02-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.inventogeo.com/contact" />
@@ -85,7 +85,7 @@
   <!-- Contact Page - English -->
   <url>
     <loc>https://www.inventogeo.com/contact?lang=en</loc>
-    <lastmod>2025-02-16</lastmod>
+    <lastmod>2026-02-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.inventogeo.com/contact" />
@@ -96,7 +96,7 @@
   <!-- Digital Marketing Service - Georgian (VIFA Digital Sub-brand) -->
   <url>
     <loc>https://www.inventogeo.com/services/digital-advertising</loc>
-    <lastmod>2025-02-16</lastmod>
+    <lastmod>2026-02-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.inventogeo.com/services/digital-advertising" />
@@ -107,7 +107,7 @@
   <!-- Digital Marketing Service - English (VIFA Digital Sub-brand) -->
   <url>
     <loc>https://www.inventogeo.com/services/digital-advertising?lang=en</loc>
-    <lastmod>2025-02-16</lastmod>
+    <lastmod>2026-02-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.inventogeo.com/services/digital-advertising" />
@@ -118,7 +118,7 @@
   <!-- Web Development Service - Georgian -->
   <url>
     <loc>https://www.inventogeo.com/services/web-development</loc>
-    <lastmod>2025-02-16</lastmod>
+    <lastmod>2026-02-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.inventogeo.com/services/web-development" />
@@ -129,7 +129,7 @@
   <!-- Web Development Service - English (This was the FAILED URL) -->
   <url>
     <loc>https://www.inventogeo.com/services/web-development?lang=en</loc>
-    <lastmod>2025-02-16</lastmod>
+    <lastmod>2026-02-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.inventogeo.com/services/web-development" />
@@ -140,7 +140,7 @@
   <!-- AI Chatbot Service - Georgian -->
   <url>
     <loc>https://www.inventogeo.com/services/ai-chatbot</loc>
-    <lastmod>2025-02-16</lastmod>
+    <lastmod>2026-02-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.inventogeo.com/services/ai-chatbot" />
@@ -151,7 +151,7 @@
   <!-- AI Chatbot Service - English -->
   <url>
     <loc>https://www.inventogeo.com/services/ai-chatbot?lang=en</loc>
-    <lastmod>2025-02-16</lastmod>
+    <lastmod>2026-02-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.inventogeo.com/services/ai-chatbot" />
@@ -162,7 +162,7 @@
   <!-- Invento WMS - Georgian -->
   <url>
     <loc>https://www.inventogeo.com/inventowms</loc>
-    <lastmod>2025-02-16</lastmod>
+    <lastmod>2026-02-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.inventogeo.com/inventowms" />
@@ -173,7 +173,7 @@
   <!-- Invento WMS - English -->
   <url>
     <loc>https://www.inventogeo.com/inventowms?lang=en</loc>
-    <lastmod>2025-02-16</lastmod>
+    <lastmod>2026-02-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.inventogeo.com/inventowms" />
@@ -184,7 +184,7 @@
   <!-- Blog Page - Georgian -->
   <url>
     <loc>https://www.inventogeo.com/blog</loc>
-    <lastmod>2025-02-16</lastmod>
+    <lastmod>2026-02-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.inventogeo.com/blog" />
@@ -195,7 +195,7 @@
   <!-- Blog Page - English -->
   <url>
     <loc>https://www.inventogeo.com/blog?lang=en</loc>
-    <lastmod>2025-02-16</lastmod>
+    <lastmod>2026-02-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.inventogeo.com/blog" />
@@ -206,7 +206,7 @@
   <!-- Privacy Policy - Georgian -->
   <url>
     <loc>https://www.inventogeo.com/privacy</loc>
-    <lastmod>2025-02-16</lastmod>
+    <lastmod>2026-02-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.inventogeo.com/privacy" />
@@ -217,7 +217,7 @@
   <!-- Privacy Policy - English -->
   <url>
     <loc>https://www.inventogeo.com/privacy?lang=en</loc>
-    <lastmod>2025-02-16</lastmod>
+    <lastmod>2026-02-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.inventogeo.com/privacy" />
@@ -228,7 +228,7 @@
   <!-- Terms of Service - Georgian -->
   <url>
     <loc>https://www.inventogeo.com/terms</loc>
-    <lastmod>2025-02-16</lastmod>
+    <lastmod>2026-02-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.inventogeo.com/terms" />
@@ -239,7 +239,7 @@
   <!-- Terms of Service - English -->
   <url>
     <loc>https://www.inventogeo.com/terms?lang=en</loc>
-    <lastmod>2025-02-16</lastmod>
+    <lastmod>2026-02-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="ka" href="https://www.inventogeo.com/terms" />
