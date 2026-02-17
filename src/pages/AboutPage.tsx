@@ -11,6 +11,8 @@ import {
   FaCamera,
   FaShare,
   FaBullhorn,
+  FaDatabase,
+  FaRobot,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
 import { useLanguage } from "../contexts/LanguageContext";
@@ -30,6 +32,10 @@ const aboutPageTranslations = {
     "about.services.social.description": "Instagram და Facebook გვერდების მართვა და ზრდა",
     "about.services.ads.title": "ციფრული რეკლამა",
     "about.services.ads.description": "Google Ads და სოციალური მედიის რეკლამები",
+    "about.services.wms.title": "Invento WMS",
+    "about.services.wms.description": "მონაცემთა ბაზების მართვის სისტემა და საწყობის მართვა",
+    "about.services.ai.title": "AI ჩატბოტები",
+    "about.services.ai.description": "ხელოვნური ინტელექტის ჩატბოტები ბიზნესისთვის",
     "about.values.innovation.title": "ინოვაცია",
     "about.values.innovation.description": "ყოველთვის ვეძებთ ახალ და ეფექტურ გზებს",
     "about.values.partnership.title": "პარტნიორობა",
@@ -55,6 +61,10 @@ const aboutPageTranslations = {
     "about.services.social.description": "Instagram and Facebook page management and growth",
     "about.services.ads.title": "Digital Ads",
     "about.services.ads.description": "Google Ads and social media advertising",
+    "about.services.wms.title": "Invento WMS",
+    "about.services.wms.description": "Warehouse Management System and inventory control",
+    "about.services.ai.title": "AI Chatbots",
+    "about.services.ai.description": "Artificial Intelligence chatbots for business",
     "about.values.innovation.title": "Innovation",
     "about.values.innovation.description": "Always looking for new and effective ways",
     "about.values.partnership.title": "Partnership",
@@ -126,6 +136,16 @@ const AboutPage = () => {
       icon: <FaBullhorn className="text-4xl text-orange-400" />,
       title: t("about.services.ads.title"),
       description: t("about.services.ads.description"),
+    },
+    {
+      icon: <FaDatabase className="text-4xl text-cyan-400" />,
+      title: t("about.services.wms.title"),
+      description: t("about.services.wms.description"),
+    },
+    {
+      icon: <FaRobot className="text-4xl text-pink-400" />,
+      title: t("about.services.ai.title"),
+      description: t("about.services.ai.description"),
     },
   ];
 
@@ -269,7 +289,7 @@ const AboutPage = () => {
               </h2>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {services.map((service, index) => (
                 <motion.div
                   key={index}
