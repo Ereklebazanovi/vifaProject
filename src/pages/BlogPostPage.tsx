@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import SEO from '../components/SEO';
 import { getBlogPostBySlug, formatDate, generateExcerpt } from '../utils/blogUtils';
 import type { BlogPost } from '../types/blog';
 import { FiClock, FiUser, FiArrowLeft, FiShare2 } from 'react-icons/fi';
@@ -93,37 +93,19 @@ const BlogPostPage: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{post.seo?.title || post.title} - Invento Technologies</title>
-        <meta name="description" content={post.seo?.description || post.description} />
-
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="article" />
-        <meta property="og:title" content={post.seo?.title || post.title} />
-        <meta property="og:description" content={post.seo?.description || excerpt} />
-        <meta property="og:image" content={`https://www.inventogeo.com${post.seo?.ogImage || post.thumbnail || '/images/blog/default-og.jpg'}`} />
-        <meta property="og:image:secure_url" content={`https://www.inventogeo.com${post.seo?.ogImage || post.thumbnail || '/images/blog/default-og.jpg'}`} />
-        <meta property="og:image:type" content="image/jpeg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:url" content={`https://www.inventogeo.com/blog/${post.slug}`} />
-        <meta property="article:published_time" content={post.publishedAt} />
-        {post.updatedAt && <meta property="article:modified_time" content={post.updatedAt} />}
-        <meta property="article:author" content={post.author.name} />
-        {post.tags?.map((tag) => (
-          <meta key={tag} property="article:tag" content={tag} />
-        ))}
-
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={post.seo?.title || post.title} />
-        <meta name="twitter:description" content={post.seo?.description || excerpt} />
-        <meta name="twitter:image" content={`https://www.inventogeo.com${post.seo?.ogImage || post.thumbnail || '/images/blog/default-og.jpg'}`} />
-
-        {/* Additional SEO */}
-        <link rel="canonical" href={`https://www.inventogeo.com/blog/${post.slug}`} />
-        <meta name="robots" content="index, follow" />
-      </Helmet>
+      <SEO
+        title={`${post.seo?.title || post.title} - Invento Technologies`}
+        description={post.seo?.description || post.description}
+        image={post.seo?.ogImage || post.thumbnail || '/images/blog/default-og.jpg'}
+        url={`https://www.inventogeo.com/blog/${post.slug}`}
+        type="article"
+        articleMeta={{
+          publishedTime: post.publishedAt,
+          modifiedTime: post.updatedAt,
+          author: post.author.name,
+          tags: post.tags
+        }}
+      />
 
       <div className="min-h-screen bg-black mt-16">
         <div className="pt-32 pb-20">

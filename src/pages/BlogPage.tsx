@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getAllBlogPosts, formatDate } from "../utils/blogUtils";
 import type { BlogPostMetadata } from "../types/blog";
-import { Helmet } from "react-helmet-async";
+import SEO from "../components/SEO";
 import { FiClock, FiUser, FiArrowRight } from "react-icons/fi";
 
 const BlogPage: React.FC = () => {
@@ -38,39 +38,14 @@ const BlogPage: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>ბლოგი - Invento Technologies | ციფრული მარკეტინგის სტატიები</title>
-        <meta
-          name="description"
-          content="ციფრული მარკეტინგის, ვებ განვითარების და სოციალური მედიის შესახებ სტატიები Invento Technologies-ისგან. ისწავლეთ უახლესი ტრენდები და მიიღეთ ექსპერტული რჩევები."
-        />
-        <meta
-          name="keywords"
-          content="ბლოგი, ციფრული მარკეტინგი, ვებ განვითარება, სოციალური მედია, SEO, Google Ads"
-        />
-
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content="ბლოგი - Invento Technologies | ციფრული მარკეტინგის სტატიები"
-        />
-        <meta
-          property="og:description"
-          content="ციფრული მარკეტინგის, ვებ განვითარების და სოციალური მედიის შესახებ სტატიები Invento Technologies-ისგან."
-        />
-        <meta property="og:image" content="/images/blog/blog-cover.jpg" />
-        <meta property="og:url" content="https://inventogeo.com/blog" />
-
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="ბლოგი - Invento Technologies" />
-        <meta
-          name="twitter:description"
-          content="ციფრული მარკეტინგის, ვებ განვითარების და სოციალური მედიის შესახებ სტატიები Invento Technologies-ისგან."
-        />
-        <meta name="twitter:image" content="/images/blog/blog-cover.jpg" />
-      </Helmet>
+      <SEO
+        title="ბლოგი - Invento Technologies | ციფრული მარკეტინგის სტატიები"
+        description="ციფრული მარკეტინგის, ვებ განვითარების და სოციალური მედიის შესახებ სტატიები Invento Technologies-ისგან. ისწავლეთ უახლესი ტრენდები და მიიღეთ ექსპერტული რჩევები."
+        keywords="ბლოგი, ციფრული მარკეტინგი, ვებ განვითარება, სოციალური მედია, SEO, Google Ads"
+        image="/images/blog/blog-cover.jpg"
+        url="https://inventogeo.com/blog"
+        type="website"
+      />
 
       <div className="min-h-screen bg-black mt-15">
         <div className="pt-32 pb-20">
