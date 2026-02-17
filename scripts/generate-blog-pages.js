@@ -6,7 +6,7 @@ import path from 'path';
 // In a production setup, you'd use a build-time data source
 const blogPosts = {
   'biznesis-cifruli-transformacia': {
-    title: 'ბიზნესის ციფრული ტრანსფორმაცია – თანამედროვე სამყაროში აუცილებლობა',
+    title: 'ბიზნესის ციფრული ტრანსფორმაცია – ბიზნესის ციფრული ტრანსფორმაცია – თანამედროვე სტრატეგიები და AI ტექნოლოგიები',
     description: 'ციფრული ტრანსფორმაცია აღარ არის არჩევანი, არამედ აუცილებლობა. შეიტყვეთ როგორ შეცვალოთ თქვენი ბიზნეს AI ტექნოლოგიებისა და ციფრული სტრატეგიების საშუალებით.',
     image: 'https://www.inventogeo.com/statia-1.jpg'
   },
