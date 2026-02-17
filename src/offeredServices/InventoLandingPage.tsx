@@ -54,7 +54,7 @@ const inventoTranslations = {
     "feature5.title": "PWA ტექნოლოგია",
     "feature5.desc": "ადაპტირებული ინტერფეისი ნებისმიერი მოწყობილობისთვის (iOS, Android, Desktop, Tablet).",
     "feature6.title": "E-commerce ინტეგრაცია",
-    "feature6.desc": "სრული სინქრონიზაცია Vifa Digital-ის მიერ დამზადებულ ონლაინ მაღაზიებთან.",
+    "feature6.desc": "სრული სინქრონიზაცია Invento Technologies-ის მიერ დამზადებულ ონლაინ მაღაზიებთან.",
 
     "pricing.title": "საინვესტიციო გეგმები",
 

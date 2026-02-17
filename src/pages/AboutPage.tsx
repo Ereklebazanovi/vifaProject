@@ -16,12 +16,12 @@ import SEO from "../components/SEO";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 
-// AboutPage Translations///
+// AboutPage Translations
 const aboutPageTranslations = {
   ka: {
-    "seo.about.title": "ჩვენ შესახებ - Invento Technologies & VIFA Digital კოლაბორაცია | inventogeo.com",
-    "seo.about.description": "Invento Technologies და VIFA Digital კოლაბორაცია. ტექნოლოგიური გადაწყვეტილებები და მარკეტინგის სერვისები საქართველოში. inventogeo.com",
-    "seo.about.keywords": "Invento Technologies, VIFA Digital, კოლაბორაცია, ტექნოლოგიები, ციფრული მარკეტინგი, inventogeo.com",
+    "seo.about.title": "ჩვენ შესახებ - Invento Technologies & VIFA კოლაბორაცია | inventogeo.com",
+    "seo.about.description": "Invento Technologies და VIFA კოლაბორაცია. ტექნოლოგიური გადაწყვეტილებები და მარკეტინგის სერვისები საქართველოში. inventogeo.com",
+    "seo.about.keywords": "Invento Technologies, VIFA, კოლაბორაცია, ტექნოლოგიები, ციფრული მარკეტინგი, inventogeo.com",
     "about.services.webdev.title": "ვებ განვითარება",
     "about.services.webdev.description": "თანამედროვე, სწრაფი და მობილურზე ოპტიმიზირებული ვებსაიტები",
     "about.services.content.title": "კონტენტ პროდუქცია",
@@ -44,9 +44,9 @@ const aboutPageTranslations = {
     "about.cta.startProject": "დაიწყე პროექტი",
   },
   en: {
-    "seo.about.title": "About Us - Invento Technologies & VIFA Digital Collaboration | inventogeo.com",
-    "seo.about.description": "Invento Technologies and VIFA Digital collaboration. Technology solutions and marketing services in Georgia. inventogeo.com",
-    "seo.about.keywords": "Invento Technologies, VIFA Digital, collaboration, technology solutions, digital marketing, inventogeo.com",
+    "seo.about.title": "About Us - Invento Technologies & VIFA Collaboration | inventogeo.com",
+    "seo.about.description": "Invento Technologies and VIFA collaboration. Technology solutions and marketing services in Georgia. inventogeo.com",
+    "seo.about.keywords": "Invento Technologies, VIFA, collaboration, technology solutions, digital marketing, inventogeo.com",
     "about.services.webdev.title": "Web Development",
     "about.services.webdev.description": "Modern, fast and mobile optimized websites",
     "about.services.content.title": "Content Production",
@@ -67,14 +67,14 @@ const aboutPageTranslations = {
     "about.values.titleHighlight": "Values",
     "about.cta.title": "Ready to start collaborating?",
     "about.cta.startProject": "Start Project",
-    "about.story.heading": "We are Vifa Digital",
+    "about.story.heading": "We are VIFA",
     "about.story.paragraph1": "VIFA was created in 2020, when our team decided to create a digital agency that would help Georgian businesses function successfully in the digital space. Today we are a leading digital agency in Georgia, serving both small businesses and large corporations. Our goal is to create unique and effective digital solutions for every client.",
     "about.story.paragraph2": "We deeply analyze the specifics of the local market and know what your business needs to succeed. Our goal is to increase the competitiveness of our clients in the digital world. Every project, whether it's a small business or a large corporation, is created with an individual strategy. We ensure that you get a real strategic advantage and digital solutions that directly impact your results.",
     "about.services.heading": "Services",
     "about.portfolio.heading": "Our",
     "about.portfolio.subheading": "Successful projects",
     "about.portfolio.swipeHint": "Scroll to see videos",
-    "about.story.title": "About Vifa Digital",
+    "about.story.title": "About VIFA",
   },
 };
 
@@ -99,7 +99,7 @@ const AboutPage = () => {
     description: t("seo.about.description"),
     mainEntity: {
       "@type": "Organization",
-      name: "Invento Technologies & VIFA Digital",
+      name: "Invento Technologies & VIFA",
       description: t("seo.about.description"),
       url: "https://inventogeo.com/about",
     },
@@ -189,8 +189,8 @@ const AboutPage = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               <h2 className="text-3xl font-light text-white mb-6">
-                {currentLanguage === "ka" ? "ჩვენ ვართ" : "We are"}{" "}
-                <span className="text-blue-400">Vifa Digital</span>
+                {currentLanguage === "ka" ? "Invento Technologies & VIFA:" : "Invento Technologies & VIFA:"}{" "}
+                <span className="text-blue-400">{currentLanguage === "ka" ? "ტექნოლოგიისა და მარკეტინგის სინერგია" : "Technology and Marketing Synergy"}</span>
               </h2>
             </motion.div>
 
@@ -206,17 +206,45 @@ const AboutPage = () => {
                 transition={{ duration: 0.6, delay: 0.8 }}
               >
                 {currentLanguage === "ka"
-                  ? "VIFA შეიქმნა 2020 წელს, ჩვენმა გუნდმა გადაწყვიტა შეექმნა ციფრული სააგენტო, რომელიც ციფრულ სივრცეში ქართულ ბიზნესებს წარმატებულად ფუნქციონირებაში დაეხმარებოდა. დღეს ჩვენ ვართ წამყვანი ციფრული სააგენტო საქართველოში, რომელიც მომსახურებას უწევს როგორც მცირე ბიზნესებს, ასევე დიდ კორპორაციებს. ჩვენი მიზანია ყოველი მომხმარებლებისთვის შევქმნათ უნიკალური და ეფექტური ციფრული გადაწყვეტილება."
-                  : "VIFA was created in 2020, when our team decided to create a digital agency that would help Georgian businesses function successfully in the digital space. Today we are a leading digital agency in Georgia, serving both small businesses and large corporations. Our goal is to create unique and effective digital solutions for every client."}
+                  ? "2020 წელს დაწყებული გზა, რომელიც VIFA-მ ციფრული მარკეტინგის მიმართულებით დაიწყო, დღეს ახალ ეტაპზე გადავიდა. ჩვენ გავერთიანდით Invento Technologies-თან, რათა ქართულ ბიზნესს შევთავაზოთ არა მხოლოდ რეკლამა, არამედ სრული ტექნოლოგიური ეკოსისტემა."
+                  : "The journey that began in 2020, when VIFA started in the digital marketing direction, has now moved to a new stage. We have partnered with Invento Technologies to offer Georgian businesses not just advertising, but a complete technological ecosystem."}
               </motion.p>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1.0 }}
               >
+                <strong>{currentLanguage === "ka" ? "რას ნიშნავს ეს თქვენთვის?" : "What does this mean for you?"}</strong><br />
                 {currentLanguage === "ka"
-                  ? "ჩვენ სიღრმისეულად ვაანალიზებთ ადგილობრივი ბაზრის სპეციფიკას და ვიცით, რა სჭირდება თქვენს ბიზნესს წარმატების მისაღწევად. ჩვენი მიზანია, გავზარდოთ ჩვენი კლიენტების კონკურენტუნარიანობა ციფრულ სამყაროში. თითოეული პროექტი, იქნება ეს მცირე ბიზნესი თუ მსხვილი კორპორაცია, იქმნება ინდივიდუალური სტრატეგიით. ჩვენ ვუზრუნველყოფთ, რომ თქვენ მიიღოთ რეალური სტრატეგიული უპირატესობა და ციფრული გადაწყვეტილებები, რომლებიც პირდაპირ აისახება შედეგებზე."
-                  : "We deeply analyze the specifics of the local market and know what your business needs to succeed. Our goal is to increase the competitiveness of our clients in the digital world. Every project, whether it's a small business or a large corporation, is created with an individual strategy. We ensure that you get a real strategic advantage and digital solutions that directly impact your results."}
+                  ? "როდესაც ირჩევთ ჩვენს სერვისებს, თქვენ იღებთ ორმხრივ კომპეტენციას:"
+                  : "When you choose our services, you get dual competency:"}
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 1.2 }}
+              >
+                {currentLanguage === "ka"
+                  ? "Invento Technologies უზრუნველყოფს უძლიერეს ტექნიკურ ბაზას: Next.js ვებსაიტებს, რთულ SaaS სისტემებსა და AI ჩატბოტებს."
+                  : "Invento Technologies provides the strongest technical foundation: Next.js websites, complex SaaS systems, and AI chatbots."}
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 1.4 }}
+              >
+                {currentLanguage === "ka"
+                  ? "VIFA კი ამ ყველაფერს აძლევს სტრატეგიულ მარკეტინგულ შეფუთვას, რაც თქვენს ციფრულ პროდუქტს რეალურ გაყიდვებად აქცევს."
+                  : "VIFA gives all of this strategic marketing packaging, turning your digital product into real sales."}
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 1.6 }}
+              >
+                {currentLanguage === "ka"
+                  ? "ჩვენი მიზანი უცვლელია — მცირე ბიზნესი იქნება ეს თუ მსხვილი კორპორაცია, ჩვენ ვქმნით გადაწყვეტილებებს, სადაც დახვეწილი კოდი და ეფექტური მარკეტინგული სტრატეგია ერთმანეთს ავსებს. ჩვენ არ ვქმნით უბრალოდ ვებსაიტებს, ჩვენ ვაშენებთ თქვენი ბიზნესის ციფრულ მომავალს."
+                  : "Our goal remains unchanged — whether it's a small business or a large corporation, we create solutions where refined code and effective marketing strategy complement each other. We don't just create websites, we build your business's digital future."}
               </motion.p>
             </motion.div>
           </motion.div>

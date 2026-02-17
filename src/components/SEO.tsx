@@ -34,26 +34,26 @@ const SEO: React.FC<SEOProps> = ({
   const { currentLanguage } = useLanguage();
   const location = useLocation();
 
-  // Determine if current route should show VIFA Digital branding (Marketing only)
+  // Determine if current route should show VIFA branding (Marketing only)
   const isVifaRoute = () => {
     const path = location.pathname;
-    return path.includes('/services/digital-advertising') || path.includes('/about');
+    return path.includes('/services/digital-advertising');
   };
 
   const isVifa = isVifaRoute();
 
   // Conditional branding configuration
   const brandConfig = isVifa ? {
-    siteName: "VIFA Digital",
+    siteName: "VIFA",
     siteTitle: currentLanguage === 'ka'
-      ? "VIFA Digital - ციფრული მარკეტინგის სააგენტო საქართველოში"
-      : "VIFA Digital - Digital Marketing Agency in Georgia",
+      ? "VIFA - ციფრული მარკეტინგის სააგენტო საქართველოში"
+      : "VIFA - Digital Marketing Agency in Georgia",
     defaultDescription: currentLanguage === 'ka'
-      ? "VIFA Digital - ციფრული მარკეტინგის სააგენტო საქართველოში. Facebook რეკლამა, Google Ads, სოციალური მედია მენეჯმენტი, SEO ოპტიმიზაცია. პროფესიონალური დიჯიტალური მარკეტინგი თბილისში."
-      : "VIFA Digital - Professional digital marketing agency in Georgia. Facebook ads, Google Ads, social media management, SEO optimization. Expert digital marketing services in Tbilisi.",
+      ? "VIFA - ციფრული მარკეტინგის სააგენტო საქართველოში. Facebook რეკლამა, Google Ads, სოციალური მედია მენეჯმენტი, SEO ოპტიმიზაცია. პროფესიონალური დიჯიტალური მარკეტინგი თბილისში."
+      : "VIFA - Professional digital marketing agency in Georgia. Facebook ads, Google Ads, social media management, SEO optimization. Expert digital marketing services in Tbilisi.",
     defaultKeywords: currentLanguage === 'ka'
-      ? "ციფრული მარკეტინგი, Facebook რეკლამა, Google Ads, სოციალური მედია, SEO, VIFA Digital, მარკეტინგი საქართველო, თბილისი, ციფრული რეკლამა, სოციალური მედია მენეჯმენტი, მარკეტინგის სააგენტო"
-      : "digital marketing, Facebook ads, Google Ads, social media, SEO, VIFA Digital, marketing Georgia, Tbilisi, digital advertising, social media management, marketing agency",
+      ? "ციფრული მარკეტინგი, Facebook რეკლამა, Google Ads, სოციალური მედია, SEO, VIFA, მარკეტინგი საქართველო, თბილისი, ციფრული რეკლამა, სოციალური მედია მენეჯმენტი, მარკეტინგის სააგენტო"
+      : "digital marketing, Facebook ads, Google Ads, social media, SEO, VIFA, marketing Georgia, Tbilisi, digital advertising, social media management, marketing agency",
     defaultImage: "/viffa.png",
     email: "vifa.official2020@gmail.com",
     socialLinks: [
