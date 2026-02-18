@@ -109,9 +109,16 @@ const SimpleNavbar: React.FC = () => {
   };
 
   // Conditional navigation based on route
-  const navLinks = isInventoRoute() && !isVifaRoute()
-    ? baseNavLinks
-    : [...baseNavLinks.slice(0, 2), digitalAdsLink, ...baseNavLinks.slice(2)];
+  // Show Digital Advertising everywhere EXCEPT pure Invento routes
+  const shouldHideDigitalAds = (
+    location.pathname.includes('/services/web-development') ||
+    location.pathname.includes('/services/ai-chatbot') ||
+    location.pathname.includes('/inventowms')
+  );
+
+  const navLinks = shouldHideDigitalAds
+    ? baseNavLinks // No Digital Advertising for Invento-specific routes
+    : [...baseNavLinks.slice(0, 2), digitalAdsLink, ...baseNavLinks.slice(2)]; // Show Digital Advertising everywhere else
 
   // Special highlighted link for AI Chatbot
   const aiChatbotLink = {
