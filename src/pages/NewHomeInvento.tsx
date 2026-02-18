@@ -308,7 +308,7 @@ const NewHomeInvento: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   // WhatsApp URL for consultation
-  const whatsappUrl = "https://wa.me/995597729979";
+  const whatsappUrl = "https://wa.me/995557624243";
 
   const t = (key: string): string => {
     const translations = newHomeInventoTranslations[

@@ -94,24 +94,17 @@ const SimpleNavbar: React.FC = () => {
     };
   }, [lastScrollY]);
 
-  // Base navigation links
-  const baseNavLinks = [
+  const navLinks = [
     { path: "/inventowms", label: t("nav.businessSolutions") },
     { path: "/services/web-development", label: t("services.webdev.title") },
+    {
+      path: "/services/digital-advertising",
+      label: t("services.advertising.title"),
+    },
     { path: "/about", label: t("nav.about") },
     { path: "/blog", label: t("nav.blog") },
+
   ];
-
-  // Digital Advertising link (only for VIFA routes)
-  const digitalAdsLink = {
-    path: "/services/digital-advertising",
-    label: t("services.advertising.title"),
-  };
-
-  // Conditional navigation based on route
-  const navLinks = isInventoRoute() && !isVifaRoute()
-    ? baseNavLinks // No Digital Advertising for pure Invento routes
-    : [...baseNavLinks.slice(0, 2), digitalAdsLink, ...baseNavLinks.slice(2)]; // Show Digital Advertising for VIFA or mixed routes
 
   // Special highlighted link for AI Chatbot
   const aiChatbotLink = {
