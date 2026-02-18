@@ -16,7 +16,7 @@ const newHomeTranslations = {
     "seo.home.description":
       "Invento Technologies - AI ჩატბოტები, WMS სისტემები და მოწინავე ვებ განვითარება საქართველოში. Invento WMS, Invento AI, მონაცემთა ბაზების მართვა. inventogeo.com",
 
-    "newHome.badge": "გააციფრულე შენი ბიზნესი",
+    "ome.badge": "გააციფრულე შენი ბიზნესი",
     "newHome.hero.title": "შექმენი კომუნიკაციის ხიდი",
     "newHome.hero.brand": "ბრენდსა და მომხმარებელს ",
     "newHome.hero.connection": "შორის",
@@ -322,7 +322,7 @@ import {
 } from "react-icons/si";
 import { motion } from "framer-motion";
 
-const NewHome: React.FC = () => {
+const NewHomeVifa: React.FC = () => {
   const { currentLanguage } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
   const { startNavigation } = useNavigation();
@@ -1280,4 +1280,4 @@ const NewHome: React.FC = () => {
   );
 };
 
-export default NewHome;
+export default NewHomeVifa;

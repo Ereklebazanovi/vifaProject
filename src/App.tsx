@@ -10,8 +10,8 @@ import GoogleAnalytics from "./components/GoogleAnalytics";
 import "./index.css";
 
 
-// Simple lazy loading - no artificial delays
-const Home = lazy(() => import("./pages/NewHome"));
+// Domain-based home component
+const Home = lazy(() => import("./components/DomainBasedHome"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const StartProject = lazy(() => import("./service/StartProject"));
 const AdminDashboard = lazy(() => import("./admin/AdminDashboard"));
