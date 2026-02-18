@@ -39,7 +39,7 @@ const BlogPage: React.FC = () => {
   return (
     <>
       <SEO
-        title="ბლოგი - Invento Technologies | ციფრული მარკეტინგის სტატიები"
+        title="ბლოგი - Invento Technologies | ტექნოლოგიური სიახლეები და რჩევები"
         description="ციფრული მარკეტინგის, ვებ განვითარების და სოციალური მედიის შესახებ სტატიები Invento Technologies-ისგან. ისწავლეთ უახლესი ტრენდები და მიიღეთ ექსპერტული რჩევები."
         keywords="ბლოგი, ციფრული მარკეტინგი, ვებ განვითარება, სოციალური მედია, SEO, Google Ads"
         image="/images/blog/blog-cover.jpg"

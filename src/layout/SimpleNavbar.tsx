@@ -135,19 +135,17 @@ const SimpleNavbar: React.FC = () => {
               {/* Conditional logo display */}
               {isInventoRoute() && !isVifaRoute() ? (
                 <div className="flex items-center gap-2 sm:gap-3">
-                  
-                  <h1
-                    className={`font-light tracking-wider sm:tracking-[0.2em] transition-all duration-300 text-white break-words hyphens-auto leading-tight ${
+                  <img
+                    src="/invento.png"
+                    alt="Invento Technologies"
+                    className={`transition-all duration-300 ${
                       isScrolled
-                        ? "text-lg xs:text-xl sm:text-xl md:text-2xl"
-                        : "text-xl xs:text-2xl sm:text-3xl md:text-4xl"
+                        ? "h-8 w-auto sm:h-10"
+                        : "h-10 w-auto sm:h-12 md:h-14"
                     }`}
-                  >
-                    <span className="inline ">INVENTO </span>
-                    <span className="text-blue-400 inline">
-                      TECH
-                    </span>
-                  </h1>
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
               ) : (
                 <div className="flex items-center gap-2 sm:gap-3">
