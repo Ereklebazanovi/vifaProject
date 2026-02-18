@@ -94,17 +94,24 @@ const SimpleNavbar: React.FC = () => {
     };
   }, [lastScrollY]);
 
-  const navLinks = [
+  // Base navigation links
+  const baseNavLinks = [
     { path: "/inventowms", label: t("nav.businessSolutions") },
     { path: "/services/web-development", label: t("services.webdev.title") },
-    {
-      path: "/services/digital-advertising",
-      label: t("services.advertising.title"),
-    },
     { path: "/about", label: t("nav.about") },
     { path: "/blog", label: t("nav.blog") },
-
   ];
+
+  // Digital Advertising link (only for VIFA routes)
+  const digitalAdsLink = {
+    path: "/services/digital-advertising",
+    label: t("services.advertising.title"),
+  };
+
+  // Conditional navigation based on route
+  const navLinks = isInventoRoute() && !isVifaRoute()
+    ? baseNavLinks
+    : [...baseNavLinks.slice(0, 2), digitalAdsLink, ...baseNavLinks.slice(2)];
 
   // Special highlighted link for AI Chatbot
   const aiChatbotLink = {
@@ -135,17 +142,18 @@ const SimpleNavbar: React.FC = () => {
               {/* Conditional logo display */}
               {isInventoRoute() && !isVifaRoute() ? (
                 <div className="flex items-center gap-2 sm:gap-3">
-                  <img
-                    src="/invento.png"
-                    alt="Invento Technologies"
-                    className={`transition-all duration-300 ${
+                  
+                  <h1
+                    className={`font-mono font-light tracking-[0.15em] transition-all duration-500 ease-in-out ${
                       isScrolled
-                        ? "h-8 w-auto sm:h-10"
-                        : "h-10 w-auto sm:h-12 md:h-14"
+                        ? "text-lg xs:text-xl sm:text-xl md:text-2xl"
+                        : "text-xl xs:text-2xl sm:text-3xl md:text-3xl"
                     }`}
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  >
+                    <span className="text-blue-400 opacity-90 drop-shadow-sm animate-pulse">&gt;</span>
+                    <span className="inline ml-2 text-slate-100 font-extralight tracking-[0.2em] drop-shadow-md hover:text-white transition-colors duration-300">invento</span>
+                    <span className="text-blue-400 opacity-90 drop-shadow-sm animate-ping animation-delay-1000">.</span>
+                  </h1>
                 </div>
               ) : (
                 <div className="flex items-center gap-2 sm:gap-3">
@@ -173,30 +181,15 @@ const SimpleNavbar: React.FC = () => {
           >
             <button
               onClick={() => handleNavigation(aiChatbotLink.path)}
-              className={`group relative px-4 py-2 text-sm font-medium tracking-wide rounded-lg transition-all duration-500 transform hover:scale-110 border ${
+              className={`px-4 py-2 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 transform hover:scale-105 border ${
                 location.pathname === aiChatbotLink.path
-                  ? "text-cyan-300 bg-gradient-to-r from-slate-800/90 to-slate-700/90 border-cyan-400 shadow-lg shadow-cyan-400/50"
-                  : "text-cyan-400 bg-gradient-to-r from-slate-800/30 to-slate-700/30 border-cyan-500/30 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-400/30"
+                  ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-lg"
+                  : "text-slate-300 hover:text-white hover:bg-white/5 hover:shadow-md border-blue-500/30 hover:border-blue-400"
               }`}
             >
               <div className="flex items-center gap-2">
-                <FaRobot
-                  className={`transition-all duration-300 ${
-                    location.pathname === aiChatbotLink.path
-                      ? "text-cyan-300 animate-pulse"
-                      : "text-cyan-400 group-hover:animate-spin"
-                  }`}
-                />
-                <span className="relative">
-                  {aiChatbotLink.label}
-                  <span
-                    className={`absolute -top-1 -right-2 w-2 h-2 rounded-full transition-all duration-300 ${
-                      location.pathname === aiChatbotLink.path
-                        ? "bg-cyan-300 animate-ping"
-                        : "bg-cyan-400 opacity-70 group-hover:animate-pulse"
-                    }`}
-                  ></span>
-                </span>
+                <FaRobot className="text-blue-400" />
+                <span>{aiChatbotLink.label}</span>
               </div>
             </button>
             {navLinks.map((link, index) => (
@@ -232,23 +225,17 @@ const SimpleNavbar: React.FC = () => {
               </button>
             ))}
 
-            {/* Special AI Chatbot Button for Tablet - Futuristic */}
+            {/* AI Chatbot Button for Tablet */}
             <button
               onClick={() => handleNavigation(aiChatbotLink.path)}
-              className={`group relative px-3 py-2 text-xs font-medium rounded-md transition-all duration-500 transform hover:scale-110 text-center border ${
+              className={`px-3 py-2 text-xs font-medium rounded-md transition-all duration-300 transform hover:scale-105 text-center border ${
                 location.pathname === aiChatbotLink.path
-                  ? "text-cyan-300 bg-gradient-to-r from-slate-800/90 to-slate-700/90 border-cyan-400 shadow-sm shadow-cyan-400/50"
-                  : "text-cyan-400 bg-gradient-to-r from-slate-800/30 to-slate-700/30 border-cyan-500/30 hover:border-cyan-400 hover:shadow-sm hover:shadow-cyan-400/30"
+                  ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-sm"
+                  : "text-slate-300 hover:text-white hover:bg-white/5 hover:shadow-sm border-blue-500/30 hover:border-blue-400"
               }`}
             >
               <div className="flex items-center justify-center gap-1">
-                <FaRobot
-                  className={`text-xs transition-all duration-300 ${
-                    location.pathname === aiChatbotLink.path
-                      ? "text-cyan-300 animate-pulse"
-                      : "text-cyan-400 group-hover:animate-spin"
-                  }`}
-                />
+                <FaRobot className="text-xs text-blue-400" />
                 <span className="block leading-tight">
                   {aiChatbotLink.label}
                 </span>
@@ -300,20 +287,14 @@ const SimpleNavbar: React.FC = () => {
               {/* AI Chatbot Button - integrated into the grid */}
               <button
                 onClick={() => handleNavigation(aiChatbotLink.path)}
-                className={`group relative px-2 py-2 text-xs font-medium rounded-md transition-all duration-500 transform active:scale-95 text-center flex-1 max-w-[110px] h-12 flex flex-col items-center justify-center border ${
+                className={`px-2 py-2 text-xs font-medium rounded-md transition-all duration-300 transform active:scale-95 text-center flex-1 max-w-[110px] h-12 flex flex-col items-center justify-center border ${
                   location.pathname === aiChatbotLink.path
-                    ? "text-cyan-300 bg-gradient-to-r from-slate-800/90 to-slate-700/90 border-cyan-400 shadow-sm shadow-cyan-400/50"
-                    : "text-cyan-400 bg-gradient-to-r from-slate-800/40 to-slate-700/40 border-cyan-500/40 hover:border-cyan-400 hover:shadow-sm hover:shadow-cyan-400/40"
+                    ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-sm"
+                    : "text-slate-300 hover:text-white hover:bg-white/5 hover:shadow-sm border-blue-500/30 hover:border-blue-400"
                 }`}
               >
                 <div className="flex flex-col items-center justify-center gap-0.5">
-                  <FaRobot
-                    className={`text-xs transition-all duration-300 ${
-                      location.pathname === aiChatbotLink.path
-                        ? "text-cyan-300 animate-pulse"
-                        : "text-cyan-400 group-hover:animate-spin"
-                    }`}
-                  />
+                  <FaRobot className="text-xs text-blue-400" />
                   <span className="block leading-tight text-[11px] font-semibold text-center">
                     {aiChatbotLink.label}
                   </span>
