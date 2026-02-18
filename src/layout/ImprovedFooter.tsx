@@ -173,7 +173,7 @@ const Footer: React.FC = () => {
       text: isInventoRoute() && !isVifaRoute() ? "team.inventogeo@gmail.com" : "vifa.official2020@gmail.com",
       href: isInventoRoute() && !isVifaRoute() ? "mailto:team.inventogeo@gmail.com" : "mailto:vifa.official2020@gmail.com",
       color: "text-blue-400",
-    },
+    },                                                       
     {
       icon: <FaMapMarkerAlt className="w-4 h-4" />,
       text: t("footer.contact.location"),
