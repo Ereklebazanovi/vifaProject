@@ -1,6 +1,19 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "inventogeo.com"
+        }
+      ],
+      "destination": "https://www.inventogeo.com/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/blog/:slug/index.html",
