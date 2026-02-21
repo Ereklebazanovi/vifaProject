@@ -7,6 +7,7 @@ import { LanguageProvider } from "./contexts/LanguageContext";
 import { NavigationProvider } from "./contexts/NavigationContext";
 // Lazy load performance utilities
 import GoogleAnalytics from "./components/GoogleAnalytics";
+import FacebookPixel from "./components/FacebookPixel";
 import "./index.css";
 
 
@@ -239,6 +240,12 @@ const App: React.FC = () => {
               {import.meta.env.VITE_GA_MEASUREMENT_ID && (
                 <GoogleAnalytics
                   measurementId={import.meta.env.VITE_GA_MEASUREMENT_ID}
+                />
+              )}
+              {/* Facebook Pixel */}
+              {import.meta.env.VITE_FACEBOOK_PIXEL_ID && (
+                <FacebookPixel
+                  pixelId={import.meta.env.VITE_FACEBOOK_PIXEL_ID}
                 />
               )}
               <AppWithRouter />

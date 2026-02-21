@@ -7,6 +7,7 @@ import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import { useNavigation } from "../contexts/NavigationContext";
 import SEO from "../components/SEO";
+import { trackConsultationRequest, trackContactEvent } from "../utils/facebookPixel";
 
 // NewHomeInvento Translations
 const newHomeInventoTranslations = {
@@ -20,8 +21,10 @@ const newHomeInventoTranslations = {
     "newHome.hero.title": "ბიზნესის ოპერაციული",
     "newHome.hero.brand": "სისტემა",
     "newHome.hero.connection": "",
-    "newHome.hero.description":
-      "ჩვენ არ ვქმნით უბრალოდ საიტებს. ჩვენ ვაშენებთ ციფრულ ინფრასტრუქტურას: Invento WMS, AI ჩატბოტები და მობაილ აპლიკაციები.",
+    
+
+
+"newHome.hero.description":"ჩვენ ვქმნით კომპლექსურ ციფრულ ინფრასტრუქტურას. სტანდარტულ ვებსაიტებთან ერთად, ვავითარებთ Invento WMS სისტემებს, AI ჩატბოტებსა და მობილურ აპლიკაციებს.",
 
     "newHome.visual.description": "ტექნოლოგიური ინფრასტრუქტურა",
     "newHome.visual.brand": "სისტემა",
@@ -121,6 +124,7 @@ const newHomeInventoTranslations = {
     "newHome.hero.button2": "AI სერვისი",
     "newHome.hero.button3": "Web Development",
     "newHome.hero.button4": "უფასო კონსულტაცია",
+    "newHome.hero.button5": "ჩვენი სერვისები",
 
     "newHome.consequence1.title": "მანუალური შეცდომები",
     "newHome.consequence1.description":
@@ -253,6 +257,7 @@ const newHomeInventoTranslations = {
     "newHome.hero.button2": "AI Service",
     "newHome.hero.button3": "Web Development",
     "newHome.hero.button4": "Free Consultation",
+    "newHome.hero.button5": "Our Services",
 
     "newHome.consequence1.title": "Manual Errors",
     "newHome.consequence1.description":
@@ -356,34 +361,29 @@ const NewHomeInvento: React.FC = () => {
                   {t("newHome.hero.description")}
                 </p>
 
-                <div className="flex flex-wrap justify-center gap-2 sm:gap-3 max-w-lg mx-auto">
-                  <Link
-                    to="/inventowms"
-                    className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium rounded-md shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center"
-                  >
-                    {t("newHome.hero.button1")}
-                  </Link>
-                  <Link
-                    to="/services/ai-chatbot"
-                    className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium rounded-md shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center"
-                  >
-                    {t("newHome.hero.button2")}
-                  </Link>
-                  <Link
-                    to="/services/web-development"
-                    className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium rounded-md shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center"
-                  >
-                    {t("newHome.hero.button3")}
-                  </Link>
+                <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-lg mx-auto">
                   <a
                     href={whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium rounded-md shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center inline-flex items-center justify-center gap-1.5"
+                    onClick={() => {
+                      trackConsultationRequest('hero_section');
+                      trackContactEvent('whatsapp');
+                    }}
+                    className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-8 py-4 text-lg font-bold rounded-xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 inline-flex items-center justify-center gap-3 animate-pulse hover:animate-none"
                   >
-                    <FaWhatsapp className="text-xs" />
+                    <FaWhatsapp className="text-xl" />
                     {t("newHome.hero.button4")}
                   </a>
+                  <button
+                    onClick={() => {
+                      const servicesSection = document.querySelector('.mt-20.mb-20');
+                      servicesSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }}
+                    className="border-2 border-blue-400/50 text-blue-400 px-8 py-4 text-lg font-medium rounded-xl hover:bg-blue-400/10 hover:border-blue-400 transition-all duration-300 transform hover:scale-105"
+                  >
+                    {t("newHome.hero.button5")}
+                  </button>
                 </div>
               </div>
 
@@ -1049,6 +1049,10 @@ const NewHomeInvento: React.FC = () => {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => {
+                  trackConsultationRequest('final_cta');
+                  trackContactEvent('whatsapp');
+                }}
                 className="inline-flex items-center gap-3 bg-gradient-to-r from-green-500 to-blue-500 text-white px-10 py-4 text-lg font-medium hover:from-green-600 hover:to-blue-600 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105"
               >
                 <FaWhatsapp className="text-xl" />
