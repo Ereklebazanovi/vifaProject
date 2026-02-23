@@ -10,13 +10,14 @@ import { useLanguage } from "../contexts/LanguageContext";
 import {
   FaBrain,
   FaFacebook,
-  FaInstagram,
   FaWhatsapp,
   FaRocket,
   FaCheck,
   FaShieldAlt,
   FaCog,
   FaCloud,
+  FaCommentDots,
+  FaPhone,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
 import { ChatbotDemoTerminal } from "../components/Terminal";
@@ -146,6 +147,8 @@ const aiChatbotTranslations = {
 
     "cta.question": "მზად ხარ გამოსცადო?",
     "cta.button": "უფასო კონსულტაცია",
+    "consultation.whatsapp": "უფასო კონსულტაცია",
+    "phone.number": "557 62 42 43",
   },
     en: {
     "seo.title": "Invento AI - Chatbots for Your Business | Invento Technologies",
@@ -269,6 +272,8 @@ const aiChatbotTranslations = {
 
     "cta.question": "Ready to Test it Out?",
     "cta.button": "Free Consultation",
+    "consultation.whatsapp": "Free Consultation",
+    "phone.number": "557 62 42 43",
   },
 };
 
@@ -284,6 +289,9 @@ const AIChatbot: React.FC = () => {
     return translations[key] || key;
   };
 
+  const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20AI%20ჩატბოტის%20სერვისით.%20მსურს%20უფასო%20კონსულტაცია.";
+  const phoneNumber = "tel:+995557624243";
+
   // Scroll to top and stop navigation when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -293,8 +301,6 @@ const AIChatbot: React.FC = () => {
 
   const platforms = [
     { icon: <FaFacebook />, key: "facebook", color: "blue" },
-    { icon: <FaWhatsapp />, key: "whatsapp", color: "green" },
-    { icon: <FaInstagram />, key: "instagram", color: "pink" },
   ];
 
   const technicalFeatures = [
@@ -368,6 +374,29 @@ const AIChatbot: React.FC = () => {
                 </h1>
                 {/* AI Connection Demo */}
                 <AIConnectionDemo />
+
+                {/* WhatsApp Consultation Button */}
+                <div className="bg-gradient-to-r from-green-600/20 to-green-700/20 rounded-xl p-4 border border-green-500/30 backdrop-blur-sm">
+                  <div className="flex flex-col sm:flex-row items-center gap-4">
+                    <div className="flex-1 text-center sm:text-left">
+                      <p className="text-green-400 font-semibold mb-1">{t("consultation.whatsapp")}</p>
+                      <div className="flex items-center justify-center sm:justify-start gap-2">
+                        <FaPhone className="text-green-400 text-sm" />
+                        <span className="text-green-300 text-sm">{t("phone.number")}</span>
+                      </div>
+                    </div>
+                    <a
+                      href={whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg font-medium text-white transition-all duration-300 hover:scale-105 shadow-lg shadow-green-600/25"
+                    >
+                      <FaCommentDots size={16} />
+                      WhatsApp
+                    </a>
+                  </div>
+                </div>
+
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
