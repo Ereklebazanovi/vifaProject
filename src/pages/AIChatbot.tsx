@@ -10,7 +10,6 @@ import { useLanguage } from "../contexts/LanguageContext";
 import {
   FaBrain,
   FaFacebook,
-  FaWhatsapp,
   FaRocket,
   FaCheck,
   FaShieldAlt,
@@ -290,7 +289,6 @@ const AIChatbot: React.FC = () => {
   };
 
   const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20AI%20ჩატბოტის%20სერვისით.%20მსურს%20უფასო%20კონსულტაცია.";
-  const phoneNumber = "tel:+995557624243";
 
   // Scroll to top and stop navigation when component mounts
   useEffect(() => {
