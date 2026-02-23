@@ -376,7 +376,7 @@ const NewHomeInvento: React.FC = () => {
                     {t("newHome.hero.button4")}
                   </a>
                   <a
-                    href="https://demo.inventogeo.com/admin"
+                    href="https://demo.inventogeo.com/admin?direct=admin"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 text-base font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 inline-flex items-center justify-center gap-2 border border-blue-500/30"

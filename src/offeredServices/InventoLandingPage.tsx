@@ -271,7 +271,7 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
                       </a>
 
                       <a
-                        href="https://demo.inventogeo.com/admin"
+                        href="https://demo.inventogeo.com/admin?direct=admin"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 px-6 py-3 border-2 border-purple-400/60 text-purple-400 rounded-lg font-semibold hover:bg-purple-400/10 hover:border-purple-400 hover:scale-105 transition-all duration-300 backdrop-blur-sm"
