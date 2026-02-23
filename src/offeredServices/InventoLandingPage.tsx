@@ -34,6 +34,7 @@ const inventoTranslations = {
     "hero.title": "მართე Facebook და Instagram გაყიდვები ერთ სივრცეში",
     "hero.subtitle": "Invento WMS — გაყიდვების, მარაგების და ფინანსების მართვის ცენტრალიზებული სისტემა ონლაინ ბიზნესისთვის.",
     "btn.consultation": "უფასო კონსულტაცია",
+    "btn.demo": "სისტემის გატესტვა",
     "phone.number": "557 62 42 43",
 
     "problem.title": "იღებთ შეკვეთებს პირად მიმოწერაში (DM)?",
@@ -89,6 +90,7 @@ const inventoTranslations = {
     "hero.title": "Manage Social Sales & Inventory in One Place",
     "hero.subtitle": "Invento WMS — A centralized system for sales, inventory, and financial management for online businesses.",
     "btn.consultation": "Free Consultation",
+    "btn.demo": "Test the System",
     "phone.number": "557 62 42 43",
 
     "problem.title": "Struggling with DM Orders?",
@@ -257,24 +259,36 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
                   </p>
 
                   <div className="space-y-4">
-                    <a
-                      href={whatsappUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg font-semibold text-white hover:scale-105 transition-transform duration-300 shadow-lg shadow-blue-500/25"
-                    >
-                      <FaCommentDots size={18} />
-                      {t("btn.consultation")}
-                    </a>
-
-                    <div className="lg:inline-block lg:ml-4">
+                    <div className="flex flex-wrap gap-4 items-center">
                       <a
-                        href={phoneNumber}
-                        className="inline-flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
+                        href={whatsappUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg font-semibold text-white hover:scale-105 transition-transform duration-300 shadow-lg shadow-blue-500/25"
                       >
-                        <FaPhone size={16} />
-                        <span className="text-base font-medium">{t("phone.number")}</span>
+                        <FaCommentDots size={18} />
+                        {t("btn.consultation")}
                       </a>
+
+                      <a
+                        href="https://demo.inventogeo.com/admin"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-6 py-3 border-2 border-purple-400/60 text-purple-400 rounded-lg font-semibold hover:bg-purple-400/10 hover:border-purple-400 hover:scale-105 transition-all duration-300 backdrop-blur-sm"
+                      >
+                        <FaBox size={16} />
+                        {t("btn.demo")}
+                      </a>
+
+                      <div className="flex items-center">
+                        <a
+                          href={phoneNumber}
+                          className="inline-flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
+                        >
+                          <FaPhone size={16} />
+                          <span className="text-base font-medium">{t("phone.number")}</span>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </motion.div>

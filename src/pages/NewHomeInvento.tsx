@@ -361,7 +361,7 @@ const NewHomeInvento: React.FC = () => {
                   {t("newHome.hero.description")}
                 </p>
 
-                <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-lg mx-auto">
+                <div className="flex flex-col sm:flex-row justify-center gap-3 max-w-2xl mx-auto">
                   <a
                     href={whatsappUrl}
                     target="_blank"
@@ -370,17 +370,26 @@ const NewHomeInvento: React.FC = () => {
                       trackConsultationRequest('hero_section');
                       trackContactEvent('whatsapp');
                     }}
-                    className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-8 py-4 text-lg font-bold rounded-xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 inline-flex items-center justify-center gap-3 animate-pulse hover:animate-none"
+                    className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 text-base font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 inline-flex items-center justify-center gap-2"
                   >
-                    <FaWhatsapp className="text-xl" />
+                    <FaWhatsapp className="text-lg" />
                     {t("newHome.hero.button4")}
+                  </a>
+                  <a
+                    href="https://demo.inventogeo.com/admin"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 text-base font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 inline-flex items-center justify-center gap-2 border border-blue-500/30"
+                  >
+                    <FaWarehouse className="text-lg" />
+                    WMS დემო
                   </a>
                   <button
                     onClick={() => {
                       const servicesSection = document.querySelector('.mt-20.mb-20');
                       servicesSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }}
-                    className="border-2 border-blue-400/50 text-blue-400 px-8 py-4 text-lg font-medium rounded-xl hover:bg-blue-400/10 hover:border-blue-400 transition-all duration-300 transform hover:scale-105"
+                    className="border-2 border-blue-400/50 text-blue-400 px-6 py-3 text-base font-medium rounded-lg hover:bg-blue-400/10 hover:border-blue-400 transition-all duration-300 transform hover:scale-105"
                   >
                     {t("newHome.hero.button5")}
                   </button>
