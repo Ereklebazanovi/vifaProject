@@ -9,49 +9,49 @@ import {
   FaHandshake,
 } from "react-icons/fa";
 
-// Terms of Service Translations
+// Terms of Service Translations for Invento Technologies
 const termsTranslations = {
   ka: {
     "terms.title": "მომსახურების პირობები",
-    "terms.description": "ჩვენი სერვისების გამოყენების წესები და პირობები",
+    "terms.description": "Invento Technologies-ის სერვისების გამოყენების წესები და პირობები",
     "terms.lastUpdated": "ბოლო განახლება",
 
     "terms.services.title": "ჩვენი სერვისები",
     "terms.services.content":
-      "Vifa Digital გთავაზობთ შემდეგ მომსახურებას:\n\n• ვებგვერდების შექმნა და განვითარება\n• ციფრული მარკეტინგის მომსახურება\n• სოციალური მედიის მართვა\n• კონტენტის შექმნა და წარმოება\n• SEO (საძიებო სისტემის) ოპტიმიზაცია\n• ბრენდინგის მომსახურება\n\nყველა სერვისს გთავაზობთ პროფესიონალური სტანდარტებით, შეთანხმებული ვადების და ბიუჯეტის ფარგლებში.",
+      "Invento Technologies გთავაზობთ შემდეგ მომსახურებას:\n\n• ვებგვერდების შექმნა და ტექნიკური მხარდაჭერა\n• პერსონალიზებული ციფრული სისტემების შემუშავება\n• ვებ-აპლიკაციების განვითარება\n• UI/UX დიზაინის წარმოება\n• ციფრული კონსულტაცია და სტრატეგია\n\nყველა სერვისს გთავაზობთ მაღალი ტექნოლოგიური სტანდარტებით, წინასწარ შეთანხმებული ვადებისა და ბიუჯეტის ფარგლებში.",
 
     "terms.userResponsibilities.title": "კლიენტის ვალდებულებები",
     "terms.userResponsibilities.content":
-      "ჩვენი სერვისების გამოყენებისას თქვენ ვალდებული ხართ:\n\n• მოგვაწოდოთ ზუსტი და სრულყოფილი ინფორმაცია\n• დროულად განახორციელოთ შეთანხმებული გადახდები\n• ითანამშრომლოთ ჩვენს გუნდთან\n• არ გამოიყენოთ ჩვენი სერვისები არაკანონიერი მიზნებისთვის\n• არ დაარღვიოთ ინტელექტუალური საკუთრების უფლებები\n• წინასწარ შეგვატყობინოთ ნებისმიერი ცვლილების შესახებ\n\nაღნიშნული პირობების დარღვევის შემთხვევაში, შესაძლებელია ხელშეკრულების შეწყვეტა.",
+      "ჩვენი სერვისების გამოყენებისას თქვენ ვალდებული ხართ:\n\n• მოგვაწოდოთ ზუსტი ბიზნეს-ინფორმაცია პროექტისთვის\n• დროულად განახორციელოთ ხელშეკრულებით გათვალისწინებული გადახდები\n• აქტიურად ითანამშრომლოთ ჩვენს დეველოპერულ გუნდთან\n• არ გამოიყენოთ ჩვენი ტექნოლოგიები არაკანონიერი მიზნებისთვის\n• დაიცვათ ინტელექტუალური საკუთრების შეთანხმებული პირობები\n\nაღნიშნული პირობების დარღვევის შემთხვევაში, კომპანია იტოვებს უფლებას შეაჩეროს მომსახურება.",
 
     "terms.limitations.title": "პასუხისმგებლობის შეზღუდვა",
     "terms.limitations.content":
-      "Vifa Digital-ის პასუხისმგებლობა შემოიფარგლება შემდეგით:\n\n• ჩვენი პასუხისმგებლობა არ აღემატება პროექტის ღირებულებას\n• არ ვართ პასუხისმგებლები არაპირდაპირი ზარალისთვის\n• ვერ მოგცემთ ზუსტ გარანტიას კონკრეტული ბიზნესის შედეგების მიღწევაში\n• არ ვართ პასუხისმგებლები მესამე მხარის პლატფორმების ფუნქციონირებაზე\n\nყველა გარანტია შემოიფარგლება ხელშეკრულების პირობებით.",
+      "Invento Technologies-ის პასუხისმგებლობა შემოიფარგლება შემდეგით:\n\n• ჩვენი პასუხისმგებლობა არ აღემატება კონკრეტული პროექტის ჯამურ ღირებულებას\n• არ ვართ პასუხისმგებლები მესამე მხარის სერვისების (მაგ: ჰოსტინგი, API) დროებით შეფერხებებზე\n• ციფრული პროდუქტის ეფექტურობა დამოკიდებულია კლიენტის მიერ მოწოდებული ინფორმაციის სისწორეზე\n\nყველა ტექნიკური გარანტია განისაზღვრება ინდივიდუალური ხელშეკრულების საფუძველზე.",
 
     "terms.termination.title": "ხელშეკრულების შეწყვეტა",
     "terms.termination.content":
-      "ხელშეკრულების შეწყვეტა შესაძლებელია:\n\n• ორმხრივი შეთანხმებით\n• ერთ-ერთი მხარის მიერ 30-დღიან ვადაში წინასწარი შეტყობინებით\n• პირობების დარღვევის შემთხვევაში\n• გადახდის ვალდებულებების დარღვევისას\n\nხელშეკრულების შეწყვეტის შემდეგ:\n\n• ყველა სამუშაო წყდება\n• შესრულებული სამუშაოს ანაზღაურება ხდება\n• კონფიდენციალურობის ვალდებულებები ძალაში რჩება",
+      "თანამშრომლობის შეწყვეტა შესაძლებელია:\n\n• მხარეთა ორმხრივი წერილობითი შეთანხმებით\n• პირობების ან გადახდის ვალდებულებების უხეში დარღვევის შემთხვევაში\n• ფორსმაჟორული გარემოებების დადგომისას\n\nმომსახურების შეწყვეტის შემდეგ:\n\n• ყველა მიმდინარე ტექნიკური სამუშაო წყდება\n• ხდება შესრულებული ეტაპების საბოლოო ანაზღაურება\n• კონფიდენციალურობის პირობები რჩება უვადო ძალაში",
   },
   en: {
     "terms.title": "Terms of Service",
-    "terms.description": "Rules and conditions for using our services",
+    "terms.description": "Rules and conditions for using Invento Technologies services",
     "terms.lastUpdated": "Last updated",
 
     "terms.services.title": "Our Services",
     "terms.services.content":
-      "Vifa Digital offers the following services:\n\n• Website creation and development\n• Digital marketing services\n• Social media management\n• Content creation and production\n• SEO (Search Engine Optimization)\n• Branding services\n\nAll services are provided according to professional standards, within agreed timelines and budgets.",
+      "Invento Technologies offers the following services:\n\n• Website creation and technical support\n• Development of personalized digital systems\n• Web application development\n• UI/UX design production\n• Digital consulting and strategy\n\nAll services are provided according to high technological standards, within agreed timelines and budgets.",
 
     "terms.userResponsibilities.title": "Client Responsibilities",
     "terms.userResponsibilities.content":
-      "When using our services, you are obligated to:\n\n• Provide accurate and complete information\n• Make timely agreed payments\n• Cooperate with our team\n• Not use our services for illegal purposes\n• Not infringe intellectual property rights\n• Notify us in advance of any changes\n\nIn case of violation of these terms, the contract may be terminated.",
+      "When using our services, you are obligated to:\n\n• Provide accurate business information for the project\n• Make timely payments as specified in the contract\n• Actively cooperate with our development team\n• Not use our technologies for illegal purposes\n• Respect the agreed intellectual property terms\n\nIn case of violation, the company reserves the right to suspend services.",
 
     "terms.limitations.title": "Limitation of Liability",
     "terms.limitations.content":
-      "Vifa Digital's liability is limited to:\n\n• Our liability does not exceed the project value\n• We are not responsible for indirect damages\n• We cannot provide exact guarantees for achieving specific business results\n• We are not responsible for third-party platform functionality\n\nAll warranties are limited to the terms of the contract.",
+      "Invento Technologies' liability is limited to:\n\n• Our liability does not exceed the total value of the specific project\n• We are not responsible for temporary failures of third-party services (e.g., hosting, API)\n• The effectiveness of the digital product depends on the accuracy of client-provided information\n\nAll technical warranties are defined based on individual contracts.",
 
     "terms.termination.title": "Contract Termination",
     "terms.termination.content":
-      "Contract termination is possible:\n\n• By mutual agreement\n• By either party with 30-day advance notice\n• In case of breach of conditions\n• In case of failure to meet payment obligations\n\nAfter contract termination:\n\n• All work ceases\n• Completed work is compensated\n• Confidentiality obligations remain in effect",
+      "Collaboration can be terminated:\n\n• By mutual written agreement of the parties\n• In case of gross breach of terms or payment obligations\n• Upon occurrence of force majeure circumstances\n\nAfter termination of service:\n\n• All ongoing technical work ceases\n• Final compensation for completed stages is processed\n• Confidentiality terms remain in effect indefinitely",
   },
 };
 
@@ -64,7 +64,6 @@ const TermsOfService: React.FC = () => {
   };
   const { getTransitionClasses } = useLanguageTransition();
 
-  // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
