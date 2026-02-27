@@ -79,6 +79,12 @@ Object.entries(blogPosts).forEach(([slug, post]) => {
     `<title>${escapeHTML(post.title)} - Invento Technologies</title>`
   );
 
+  // Update canonical URL to the specific blog post URL
+  html = html.replace(
+    /<link\s+rel="canonical"\s+href="[^"]*"\s*\/?>/i,
+    `<link rel="canonical" href="https://www.inventogeo.com/blog/${slug}" />`
+  );
+
   // Write the file
   const filePath = path.join(blogDir, 'index.html');
   fs.writeFileSync(filePath, html, 'utf-8');

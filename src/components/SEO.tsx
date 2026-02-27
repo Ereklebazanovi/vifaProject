@@ -93,11 +93,23 @@ const SEO: React.FC<SEOProps> = ({
   // and appropriate domains for VIFA routes
   if (!isVifa) {
     // For Invento routes, use inventogeo.com
-    canonicalUrl = canonicalUrl.replace(/https?:\/\/(www\.)?(vifadigital\.ge|inventogeo\.com|localhost:3000)/, 'https://www.inventogeo.com');
+    if (canonicalUrl.includes('localhost') || canonicalUrl.includes('vifadigital.ge')) {
+      // Replace localhost/dev domains with production URL, preserving the path
+      const urlPath = new URL(canonicalUrl).pathname;
+      canonicalUrl = `https://www.inventogeo.com${urlPath}`;
+    } else if (!canonicalUrl.includes('inventogeo.com')) {
+      // Fallback to adding domain if none present
+      canonicalUrl = `https://www.inventogeo.com${canonicalUrl.startsWith('/') ? canonicalUrl : `/${canonicalUrl}`}`;
+    }
   } else {
     // For VIFA routes, keep on a subdomain or separate handling if needed
     // For now, we'll use inventogeo.com but with VIFA branding in metadata
-    canonicalUrl = canonicalUrl.replace(/https?:\/\/(www\.)?(vifadigital\.ge|inventogeo\.com|localhost:3000)/, 'https://www.inventogeo.com');
+    if (canonicalUrl.includes('localhost') || canonicalUrl.includes('vifadigital.ge')) {
+      const urlPath = new URL(canonicalUrl).pathname;
+      canonicalUrl = `https://www.inventogeo.com${urlPath}`;
+    } else if (!canonicalUrl.includes('inventogeo.com')) {
+      canonicalUrl = `https://www.inventogeo.com${canonicalUrl.startsWith('/') ? canonicalUrl : `/${canonicalUrl}`}`;
+    }
   }
 
   // Generate language-specific URLs
