@@ -34,10 +34,13 @@ const SEO: React.FC<SEOProps> = ({
   const { currentLanguage } = useLanguage();
   const location = useLocation();
 
-  // Determine if current route should show VIFA branding (Marketing only)
+  // Determine if current route should show VIFA branding (Marketing only) or if we're on vifadigital.ge domain
   const isVifaRoute = () => {
     const path = location.pathname;
-    return path.includes('/services/digital-advertising');
+    const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+
+    // Check if we're on vifadigital.ge domain or on marketing routes
+    return hostname.includes('vifadigital.ge') || path.includes('/services/digital-advertising');
   };
 
   const isVifa = isVifaRoute();
@@ -89,8 +92,7 @@ const SEO: React.FC<SEOProps> = ({
   // Clean canonical URL and ensure proper domain
   let canonicalUrl = currentUrl.split('#')[0]; // Keep query params for language handling
 
-  // Ensure canonical URL uses inventogeo.com consistently for Invento routes
-  // and appropriate domains for VIFA routes
+  // Ensure canonical URL uses correct domain for each brand
   if (!isVifa) {
     // For Invento routes, use inventogeo.com
     if (canonicalUrl.includes('localhost') || canonicalUrl.includes('vifadigital.ge')) {
@@ -102,13 +104,12 @@ const SEO: React.FC<SEOProps> = ({
       canonicalUrl = `https://www.inventogeo.com${canonicalUrl.startsWith('/') ? canonicalUrl : `/${canonicalUrl}`}`;
     }
   } else {
-    // For VIFA routes, keep on a subdomain or separate handling if needed
-    // For now, we'll use inventogeo.com but with VIFA branding in metadata
-    if (canonicalUrl.includes('localhost') || canonicalUrl.includes('vifadigital.ge')) {
+    // For VIFA routes, use vifadigital.ge
+    if (canonicalUrl.includes('localhost') || canonicalUrl.includes('inventogeo.com')) {
       const urlPath = new URL(canonicalUrl).pathname;
-      canonicalUrl = `https://www.inventogeo.com${urlPath}`;
-    } else if (!canonicalUrl.includes('inventogeo.com')) {
-      canonicalUrl = `https://www.inventogeo.com${canonicalUrl.startsWith('/') ? canonicalUrl : `/${canonicalUrl}`}`;
+      canonicalUrl = `https://vifadigital.ge${urlPath}`;
+    } else if (!canonicalUrl.includes('vifadigital.ge')) {
+      canonicalUrl = `https://vifadigital.ge${canonicalUrl.startsWith('/') ? canonicalUrl : `/${canonicalUrl}`}`;
     }
   }
 
@@ -368,7 +369,7 @@ const SEO: React.FC<SEOProps> = ({
           <link rel="apple-touch-icon" href="/invento.png" />
         </>
       )}
-      <link rel="manifest" href="/site.webmanifest" />
+      <link rel="manifest" href={isVifa ? "/site-vifa.webmanifest" : "/site.webmanifest"} />
 
       {/* Structured Data */}
       <script type="application/ld+json">

@@ -66,6 +66,12 @@ const Layout: React.FC = () => {
   // Determine if current route should show Invento branding
   const isInventoRoute = () => {
     const path = location.pathname;
+    const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+
+    // If we're on inventogeo.com domain, show Invento branding
+    if (hostname.includes('inventogeo.com')) return true;
+
+    // For specific routes, show Invento branding
     return path.includes('/services/web-development') ||
            path.includes('/services/ai-chatbot') ||
            path.includes('/inventowms') ||
@@ -74,6 +80,12 @@ const Layout: React.FC = () => {
 
   const isVifaRoute = () => {
     const path = location.pathname;
+    const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+
+    // If we're on vifadigital.ge domain, show VIFA branding
+    if (hostname.includes('vifadigital.ge')) return true;
+
+    // For specific routes, show VIFA branding
     return path.includes('/services/digital-advertising') ||
            path.includes('/about');
   };
