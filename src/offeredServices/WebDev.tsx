@@ -749,77 +749,7 @@ const WebDev: React.FC = () => {
           </motion.div>
 
           {/* The Invento Core Integration - Titanium V2 (Ultra Pro) */}
-          <div className="!max-w-6xl mx-auto mb-24 px-4 sm:px-6 mt-24">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="relative rounded-2xl overflow-hidden bg-[#030303] border border-white/5 shadow-2xl"
-            >
-              {/* Abstract Data Flow Background */}
-              <div className="absolute inset-0 opacity-10"
-                   style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #444 1px, transparent 0)', backgroundSize: '24px 24px' }}>
-              </div>
-              <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-blue-900/10 to-transparent blur-3xl" />
-
-              <div className="relative flex flex-col md:flex-row items-center justify-between p-1">
-
-                {/* Left: System Architecture Info */}
-                <div className="flex-1 p-6 md:p-8 flex items-start gap-6 border-b md:border-b-0 md:border-r border-white/5 w-full">
-                  {/* Animated Icon */}
-                  <div className="relative w-14 h-14 shrink-0 rounded-xl bg-gradient-to-br from-gray-900 to-black border border-white/10 flex items-center justify-center shadow-[0_0_15px_rgba(0,0,0,0.5)]">
-                    <div className="absolute inset-0 bg-blue-500/10 blur-md rounded-xl animate-pulse"></div>
-                    <FaServer className="text-blue-400 text-2xl relative z-10" />
-                  </div>
-
-                  <div>
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span>
-                      <span className="text-[10px] font-mono text-gray-500 tracking-widest uppercase">System Architecture</span>
-                    </div>
-                    <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
-                      E-commerce <span className="text-gray-600 font-thin px-1">+</span> Invento WMS
-                    </h3>
-                    <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
-                      {t("webdev.invento.strip_desc")}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Right: The Deal Logic (Pro UI) */}
-                <div className="p-6 md:p-8 flex flex-col sm:flex-row items-center gap-8 w-full md:w-auto bg-white/[0.01]">
-
-                  {/* Value Stack */}
-                  <div className="flex flex-col items-end gap-1">
-                    <div className="text-[10px] text-gray-500 font-mono uppercase tracking-wide">
-                      {t("webdev.invento.strip_value_label")}
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <span className="text-lg font-medium text-gray-400 line-through decoration-red-500/40">890₾</span>
-                      <FaArrowRight className="text-gray-700 text-xs" />
-                      <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">
-                        {t("webdev.invento.strip_status")}
-                      </span>
-                    </div>
-                    <div className="text-[10px] text-blue-400/80 font-mono bg-blue-900/10 px-2 py-0.5 rounded border border-blue-500/10">
-                      LIFETIME LICENSE
-                    </div>
-                  </div>
-
-                  {/* Action */}
-                  <Link
-                    to="/inventowms"
-                    className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-lg bg-white px-8 font-medium text-black transition-all duration-300 hover:bg-gray-200 hover:w-full sm:hover:w-auto"
-                  >
-                    <span className="mr-2">{t("webdev.invento.strip_btn")}</span>
-                    <FaArrowRight className="transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </div>
-
-              </div>
-            </motion.div>
-          </div>
+         
 
           {/* Pricing Approach Section */}
           <div className="mb-20">
