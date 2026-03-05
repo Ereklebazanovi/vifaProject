@@ -2,24 +2,24 @@
 "use client";
 
 import type React from "react";
-import { useState, useEffect } from "react";
+import {  useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import TrueFocus from "../components/TrueFocus";
 import {
-  FaReact,
-  FaMobile,
+  // FaReact,
+  // FaMobile,
   FaRocket,
   FaCode,
-  FaDatabase,
+  // FaDatabase,
   FaPaintBrush,
   FaCog,
-  FaCheckCircle,
+  
   FaArrowRight,
   FaChartLine,
   FaBolt,
-  FaServer,
+  // FaServer,
   FaBrain,
   FaBullseye,
   FaShoppingCart,
@@ -368,7 +368,7 @@ const WebDev: React.FC = () => {
   const { currentLanguage } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
 
-  const [activeService, setActiveService] = useState<number>(0);
+  // const [activeService, setActiveService] = useState<number>(0);
 
   // WhatsApp URL for web development consultation
   const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20ვებ%20განვითარების%20სერვისით.%20მსურს%20უფასო%20კონსულტაცია.";
@@ -388,92 +388,92 @@ const WebDev: React.FC = () => {
   
 
   // Main web development services
-  const services = [
-    {
-      id: "frontend-development",
-      icon: <FaReact />,
-      title: t("webdev.frontend.title"),
-      description: t("webdev.frontend.description"),
-      color: "blue",
-      features: ["React/Next.js", "TypeScript", "Responsive Design", "PWA"],
-    },
-    {
-      id: "backend-development",
-      icon: <FaServer />,
-      title: t("webdev.backend.title"),
-      description: t("webdev.backend.description"),
-      color: "green",
-      features: [
-        "Node.js",
-        "API Development",
-        "Database Design",
-        "Cloud Services",
-      ],
-    },
-    {
-      id: "mobile-responsive",
-      icon: <FaMobile />,
-      title: t("webdev.mobile.title"),
-      description: t("webdev.mobile.description"),
-      color: "purple",
-      features: [
-        "Mobile First",
-        "Touch Optimized",
-        "Fast Loading",
-        "Cross-Platform",
-      ],
-    },
-    {
-      id: "ai-integrations",
-      icon: <FaBrain />,
-      title: t("webdev.ai.title"),
-      description: t("webdev.ai.description"),
-      color: "cyan",
-      features: [
-        "Chatbot APIs",
-        "AI Analysis",
-        "Smart Automation",
-        "Custom AI",
-      ],
-    },
-    {
-      id: "cms-development",
-      icon: <FaCog />,
-      title: t("webdev.cms.title"),
-      description: t("webdev.cms.description"),
-      color: "indigo",
-      features: [
-        "Admin Panel",
-        "Content Editor",
-        "User Management",
-        "SEO Tools",
-      ],
-    },
-    {
-      id: "database-design",
-      icon: <FaDatabase />,
-      title: t("webdev.database.title"),
-      description: t("webdev.database.description"),
-      color: "red",
-      features: ["SQL/NoSQL", "Data Modeling", "Performance", "Security"],
-    },
-    {
-      id: "ui-ux-design",
-      icon: <FaPaintBrush />,
-      title: t("webdev.ui.title"),
-      description: t("webdev.ui.description"),
-      color: "pink",
-      features: ["User Research", "Wireframes", "Prototypes", "Design Systems"],
-    },
-    {
-      id: "performance-optimization",
-      icon: <FaBolt />,
-      title: t("webdev.performance.title"),
-      description: t("webdev.performance.description"),
-      color: "yellow",
-      features: ["Speed Optimization", "SEO", "Core Web Vitals", "CDN"],
-    },
-  ];
+  // const services = [
+  //   {
+  //     id: "frontend-development",
+  //     icon: <FaReact />,
+  //     title: t("webdev.frontend.title"),
+  //     description: t("webdev.frontend.description"),
+  //     color: "blue",
+  //     features: ["React/Next.js", "TypeScript", "Responsive Design", "PWA"],
+  //   },
+  //   {
+  //     id: "backend-development",
+  //     icon: <FaServer />,
+  //     title: t("webdev.backend.title"),
+  //     description: t("webdev.backend.description"),
+  //     color: "green",
+  //     features: [
+  //       "Node.js",
+  //       "API Development",
+  //       "Database Design",
+  //       "Cloud Services",
+  //     ],
+  //   },
+  //   {
+  //     id: "mobile-responsive",
+  //     icon: <FaMobile />,
+  //     title: t("webdev.mobile.title"),
+  //     description: t("webdev.mobile.description"),
+  //     color: "purple",
+  //     features: [
+  //       "Mobile First",
+  //       "Touch Optimized",
+  //       "Fast Loading",
+  //       "Cross-Platform",
+  //     ],
+  //   },
+  //   {
+  //     id: "ai-integrations",
+  //     icon: <FaBrain />,
+  //     title: t("webdev.ai.title"),
+  //     description: t("webdev.ai.description"),
+  //     color: "cyan",
+  //     features: [
+  //       "Chatbot APIs",
+  //       "AI Analysis",
+  //       "Smart Automation",
+  //       "Custom AI",
+  //     ],
+  //   },
+  //   {
+  //     id: "cms-development",
+  //     icon: <FaCog />,
+  //     title: t("webdev.cms.title"),
+  //     description: t("webdev.cms.description"),
+  //     color: "indigo",
+  //     features: [
+  //       "Admin Panel",
+  //       "Content Editor",
+  //       "User Management",
+  //       "SEO Tools",
+  //     ],
+  //   },
+  //   {
+  //     id: "database-design",
+  //     icon: <FaDatabase />,
+  //     title: t("webdev.database.title"),
+  //     description: t("webdev.database.description"),
+  //     color: "red",
+  //     features: ["SQL/NoSQL", "Data Modeling", "Performance", "Security"],
+  //   },
+  //   {
+  //     id: "ui-ux-design",
+  //     icon: <FaPaintBrush />,
+  //     title: t("webdev.ui.title"),
+  //     description: t("webdev.ui.description"),
+  //     color: "pink",
+  //     features: ["User Research", "Wireframes", "Prototypes", "Design Systems"],
+  //   },
+  //   {
+  //     id: "performance-optimization",
+  //     icon: <FaBolt />,
+  //     title: t("webdev.performance.title"),
+  //     description: t("webdev.performance.description"),
+  //     color: "yellow",
+  //     features: ["Speed Optimization", "SEO", "Core Web Vitals", "CDN"],
+  //   },
+  // ];
 
   // Technology stack
   const technologies = [
