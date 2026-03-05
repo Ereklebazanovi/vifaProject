@@ -2,24 +2,24 @@
 "use client";
 
 import type React from "react";
-import {  useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import TrueFocus from "../components/TrueFocus";
 import {
-  // FaReact,
-  // FaMobile,
+  FaReact,
+  FaMobile,
   FaRocket,
   FaCode,
-  // FaDatabase,
+  FaDatabase,
   FaPaintBrush,
   FaCog,
-  
+  FaCheckCircle,
   FaArrowRight,
   FaChartLine,
   FaBolt,
-  // FaServer,
+  FaServer,
   FaBrain,
   FaBullseye,
   FaShoppingCart,
@@ -368,7 +368,7 @@ const WebDev: React.FC = () => {
   const { currentLanguage } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
 
-  // const [activeService, setActiveService] = useState<number>(0);
+  const [activeService, setActiveService] = useState<number>(0);
 
   // WhatsApp URL for web development consultation
   const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20ვებ%20განვითარების%20სერვისით.%20მსურს%20უფასო%20კონსულტაცია.";
@@ -388,92 +388,92 @@ const WebDev: React.FC = () => {
   
 
   // Main web development services
-  // const services = [
-  //   {
-  //     id: "frontend-development",
-  //     icon: <FaReact />,
-  //     title: t("webdev.frontend.title"),
-  //     description: t("webdev.frontend.description"),
-  //     color: "blue",
-  //     features: ["React/Next.js", "TypeScript", "Responsive Design", "PWA"],
-  //   },
-  //   {
-  //     id: "backend-development",
-  //     icon: <FaServer />,
-  //     title: t("webdev.backend.title"),
-  //     description: t("webdev.backend.description"),
-  //     color: "green",
-  //     features: [
-  //       "Node.js",
-  //       "API Development",
-  //       "Database Design",
-  //       "Cloud Services",
-  //     ],
-  //   },
-  //   {
-  //     id: "mobile-responsive",
-  //     icon: <FaMobile />,
-  //     title: t("webdev.mobile.title"),
-  //     description: t("webdev.mobile.description"),
-  //     color: "purple",
-  //     features: [
-  //       "Mobile First",
-  //       "Touch Optimized",
-  //       "Fast Loading",
-  //       "Cross-Platform",
-  //     ],
-  //   },
-  //   {
-  //     id: "ai-integrations",
-  //     icon: <FaBrain />,
-  //     title: t("webdev.ai.title"),
-  //     description: t("webdev.ai.description"),
-  //     color: "cyan",
-  //     features: [
-  //       "Chatbot APIs",
-  //       "AI Analysis",
-  //       "Smart Automation",
-  //       "Custom AI",
-  //     ],
-  //   },
-  //   {
-  //     id: "cms-development",
-  //     icon: <FaCog />,
-  //     title: t("webdev.cms.title"),
-  //     description: t("webdev.cms.description"),
-  //     color: "indigo",
-  //     features: [
-  //       "Admin Panel",
-  //       "Content Editor",
-  //       "User Management",
-  //       "SEO Tools",
-  //     ],
-  //   },
-  //   {
-  //     id: "database-design",
-  //     icon: <FaDatabase />,
-  //     title: t("webdev.database.title"),
-  //     description: t("webdev.database.description"),
-  //     color: "red",
-  //     features: ["SQL/NoSQL", "Data Modeling", "Performance", "Security"],
-  //   },
-  //   {
-  //     id: "ui-ux-design",
-  //     icon: <FaPaintBrush />,
-  //     title: t("webdev.ui.title"),
-  //     description: t("webdev.ui.description"),
-  //     color: "pink",
-  //     features: ["User Research", "Wireframes", "Prototypes", "Design Systems"],
-  //   },
-  //   {
-  //     id: "performance-optimization",
-  //     icon: <FaBolt />,
-  //     title: t("webdev.performance.title"),
-  //     description: t("webdev.performance.description"),
-  //     color: "yellow",
-  //     features: ["Speed Optimization", "SEO", "Core Web Vitals", "CDN"],
-  //   },
-  // ];
+  const services = [
+    {
+      id: "frontend-development",
+      icon: <FaReact />,
+      title: t("webdev.frontend.title"),
+      description: t("webdev.frontend.description"),
+      color: "blue",
+      features: ["React/Next.js", "TypeScript", "Responsive Design", "PWA"],
+    },
+    {
+      id: "backend-development",
+      icon: <FaServer />,
+      title: t("webdev.backend.title"),
+      description: t("webdev.backend.description"),
+      color: "green",
+      features: [
+        "Node.js",
+        "API Development",
+        "Database Design",
+        "Cloud Services",
+      ],
+    },
+    {
+      id: "mobile-responsive",
+      icon: <FaMobile />,
+      title: t("webdev.mobile.title"),
+      description: t("webdev.mobile.description"),
+      color: "purple",
+      features: [
+        "Mobile First",
+        "Touch Optimized",
+        "Fast Loading",
+        "Cross-Platform",
+      ],
+    },
+    {
+      id: "ai-integrations",
+      icon: <FaBrain />,
+      title: t("webdev.ai.title"),
+      description: t("webdev.ai.description"),
+      color: "cyan",
+      features: [
+        "Chatbot APIs",
+        "AI Analysis",
+        "Smart Automation",
+        "Custom AI",
+      ],
+    },
+    {
+      id: "cms-development",
+      icon: <FaCog />,
+      title: t("webdev.cms.title"),
+      description: t("webdev.cms.description"),
+      color: "indigo",
+      features: [
+        "Admin Panel",
+        "Content Editor",
+        "User Management",
+        "SEO Tools",
+      ],
+    },
+    {
+      id: "database-design",
+      icon: <FaDatabase />,
+      title: t("webdev.database.title"),
+      description: t("webdev.database.description"),
+      color: "red",
+      features: ["SQL/NoSQL", "Data Modeling", "Performance", "Security"],
+    },
+    {
+      id: "ui-ux-design",
+      icon: <FaPaintBrush />,
+      title: t("webdev.ui.title"),
+      description: t("webdev.ui.description"),
+      color: "pink",
+      features: ["User Research", "Wireframes", "Prototypes", "Design Systems"],
+    },
+    {
+      id: "performance-optimization",
+      icon: <FaBolt />,
+      title: t("webdev.performance.title"),
+      description: t("webdev.performance.description"),
+      color: "yellow",
+      features: ["Speed Optimization", "SEO", "Core Web Vitals", "CDN"],
+    },
+  ];
 
   // Technology stack
   const technologies = [
@@ -729,24 +729,7 @@ const WebDev: React.FC = () => {
           </div>
 
           {/* Why Choose Us Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="mb-24 mt-32"
-          >
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-white mb-4">
-                {t("webdev.whyus.title")}
-              </h2>
-              <p className="text-slate-300 text-lg max-w-3xl mx-auto">
-                {t("webdev.whyus.subtitle")}
-              </p>
-            </div>
-
-           
-          </motion.div>
+        
 
           {/* The Invento Core Integration - Titanium V2 (Ultra Pro) */}
          
@@ -1075,7 +1058,97 @@ const WebDev: React.FC = () => {
             </div>
           </div>
 
-       
+          {/* Services Grid */}
+          <div id="services" className="!max-w-7xl mx-auto mb-32">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-light text-white mb-4">
+                {t("webdev.services.label")}
+              </h2>
+            </div>
+
+            {/* Services Grid - Fixed height for all cards */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+              {services.map((service, index) => (
+                <motion.div
+                  key={service.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className={`group cursor-pointer transition-all duration-300 hover:scale-105`}
+                  onClick={() => setActiveService(index)}
+                >
+                  <div
+                    className={`p-6 rounded-xl border-2 h-44 flex flex-col justify-between ${getColorClass(
+                      service.color
+                    )}
+                    ${
+                      activeService === index
+                        ? "border-opacity-100 scale-105"
+                        : "border-opacity-30"
+                    }
+                    transition-all duration-300 group-hover:border-opacity-100`}
+                  >
+                    <div>
+                      <div
+                        className={`text-3xl mb-4 ${getTextColorClass(
+                          service.color
+                        )}`}
+                      >
+                        {service.icon}
+                      </div>
+                      <h3 className="text-white font-medium text-lg mb-2 leading-tight">
+                        {service.title}
+                      </h3>
+                    </div>
+                    <p className="text-slate-300 text-sm leading-loose">
+                      {service.description}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Active Service Display */}
+            <div className="border border-slate-700/30 bg-black/50 p-8 rounded-2xl backdrop-blur-md">
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h3 className="text-2xl font-medium text-white">
+                    {services[activeService].title}
+                  </h3>
+                  <p
+                    className={`${getTextColorClass(
+                      services[activeService].color
+                    )}`}
+                  >
+                    {services[activeService].description}
+                  </p>
+                </div>
+                <div
+                  className={`w-20 h-20 border-2 rounded-xl ${getColorClass(
+                    services[activeService].color
+                  )}
+                  flex items-center justify-center animate-pulse`}
+                >
+                  <span
+                    className={`text-2xl ${getTextColorClass(
+                      services[activeService].color
+                    )}`}
+                  >
+                    {services[activeService].icon}
+                  </span>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {services[activeService].features.map((feature, idx) => (
+                  <div key={idx} className="flex items-center gap-2">
+                    <FaCheckCircle className="text-green-400 text-sm" />
+                    <span className="text-slate-300 text-sm">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
 
           {/* Technology Stack */}
           <div className="!max-w-7xl mx-auto mb-24">
