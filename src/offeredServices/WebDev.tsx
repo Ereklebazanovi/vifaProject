@@ -133,7 +133,7 @@ const webDevTranslations = {
     "webdev.pricing.ecommerce.title": "ონლაინ მაღაზია",
     "webdev.pricing.ecommerce.description":
       "სრული ონლაინ მაღაზია — ქართული ბანკებით გადახდა, პროდუქტების მართვა და შეკვეთების კონტროლი.",
-    "webdev.pricing.ecommerce.price": "1999₾-დან",
+    "webdev.pricing.ecommerce.price": "1400₾-დან",
     "webdev.pricing.ecommerce.timeline": "14-21 დღე",
     "webdev.pricing.ecommerce.feature1": "ონლაინ მაღაზია + Invento WMS სისტემა",
     "webdev.pricing.ecommerce.feature2": "ავტომატური მარაგების სინქრონიზაცია",
@@ -727,14 +727,8 @@ const WebDev: React.FC = () => {
               </div>
             </div>
           </div>
-
-          {/* Why Choose Us Section */}
-        
-
-          {/* The Invento Core Integration - Titanium V2 (Ultra Pro) */}
          
-
-          {/* Pricing Approach Section */}
+        {/* Pricing Approach Section */}
           <div className="mb-20">
             <div className="text-center mb-12">
               <h3
