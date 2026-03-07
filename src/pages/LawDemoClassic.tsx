@@ -187,7 +187,7 @@ const LawDemoClassic: React.FC = () => {
               <a
                 href="tel:+995322110506"
                 className="flex items-center justify-center w-9 h-9 rounded-sm transition-colors duration-150 focus:outline-none"
-                style={{ color: DARK_GOLD }}
+                style={{ color: "#e2e8f0" }}
                 aria-label="Call +995 32 211 05 06"
               >
                 <svg
@@ -216,7 +216,7 @@ const LawDemoClassic: React.FC = () => {
                 </div>
                 <span
                   className="text-[10px] font-bold tracking-[0.2em] uppercase"
-                  style={{ color: "#94a3b8" }}
+                  style={{ color: "#e2e8f0" }}
                 >
                   MENU
                 </span>
