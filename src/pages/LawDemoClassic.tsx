@@ -266,11 +266,11 @@ const LawDemoClassic: React.FC = () => {
         </div>
       </header>
 
-      {/* ── HERO ── */}
+     {/* ── HERO ── */}
       <section
         id="hero"
-        className="relative overflow-hidden flex items-center py-7 md:py-0 lg:py-2"
-        style={{ minHeight: "85vh", display: "flex", alignItems: "center" }}
+        className="relative overflow-hidden flex items-center pt-6 pb-10 md:pt-14 md:pb-20"
+        style={{ minHeight: "auto" }}
       >
         {/* Background image — prestigious dark law library hallway */}
         <div
@@ -280,7 +280,7 @@ const LawDemoClassic: React.FC = () => {
               "url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?q=80&w=2000')",
           }}
         />
-        {/* Heavy dark overlay — bg-black/80 equivalent, ensures Georgian text is 100% readable */}
+        {/* Heavy dark overlay — ensures Georgian text is 100% readable */}
         <div
           className="absolute inset-0"
           style={{
@@ -289,81 +289,69 @@ const LawDemoClassic: React.FC = () => {
           }}
         />
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-10 md:pt-14 pb-20 w-full">
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 w-full">
           <div className="max-w-3xl mx-auto md:mx-0 text-center md:text-left">
-            {/* Gold rule + eyebrow */}
-            <div className="flex items-center justify-center md:justify-start gap-4 mb-10">
+            {/* Gold rule + eyebrow - Compact mb-4 */}
+            <div className="flex items-center justify-center md:justify-start gap-4 mb-4">
               <div
-                className="h-px w-16"
+                className="h-px w-12 hidden md:block"
                 style={{ backgroundColor: GOLD, opacity: 0.8 }}
               />
               <span
-                className="text-xs tracking-[0.4em] uppercase font-medium"
+                className="text-[10px] md:text-xs tracking-[0.3em] uppercase font-medium"
                 style={{ color: GOLD }}
               >
                 2015 წლიდან თქვენს გვერდით
               </span>
               <div
-                className="h-px w-16 md:hidden"
+                className="h-px w-12 md:hidden"
                 style={{ backgroundColor: GOLD, opacity: 0.8 }}
               />
             </div>
 
+            {/* Title - Scaled down for mobile (text-3xl) to save vertical space */}
             <h1
-              className="text-4xl md:text-6xl lg:text-[4.5rem] font-bold leading-tight text-white mb-8"
+              className="text-3xl md:text-6xl lg:text-[4.5rem] font-bold leading-tight text-white mb-4"
             >
               საადვოკატო ბიურო
               <br />
               <span style={{ color: GOLD }}>„დარჩია</span>
               <span className="text-white"> და</span>
-              <br />
+              <br className="hidden md:block" />
               <span className="text-white">პარტნიორები“</span>
             </h1>
 
+            {/* Subtitle - Reduced margin and text size on mobile */}
             <p
-              className="text-lg md:text-xl leading-relaxed mb-10 max-w-2xl mx-auto md:mx-0"
+              className="text-base md:text-xl leading-relaxed mb-8 max-w-2xl mx-auto md:mx-0"
               style={{ color: "rgba(226,232,240,0.9)" }}
             >
               თქვენი უფლებების საიმედო დაცვა ყველა ინსტანციაში.
               მრავალწლიანი გამოცდილება და პროფესიონალიზმი.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 items-center md:items-start justify-center md:justify-start">
+            {/* Buttons - Stacked for mobile, more compact padding */}
+            <div className="flex flex-col sm:flex-row gap-3 items-center md:items-start justify-center md:justify-start">
               <button
                 onClick={() => scrollTo("contact")}
-                className="w-full sm:w-auto px-10 py-4 text-sm tracking-wide font-semibold text-white text-center transition-all duration-200 focus:outline-none"
+                className="w-full sm:w-auto px-8 py-3.5 text-sm tracking-wide font-semibold text-white text-center transition-all duration-200 focus:outline-none"
                 style={{ backgroundColor: DARK_GOLD }}
-                onMouseEnter={(e) =>
-                  ((e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD)
-                }
-                onMouseLeave={(e) =>
-                  ((e.currentTarget as HTMLButtonElement).style.backgroundColor = DARK_GOLD)
-                }
               >
                 უფასო კონსულტაცია
               </button>
               <button
                 onClick={() => scrollTo("services")}
-                className="w-full sm:w-auto px-10 py-4 text-sm tracking-wide font-semibold text-center transition-all duration-200 focus:outline-none"
+                className="w-full sm:w-auto px-8 py-3.5 text-sm tracking-wide font-semibold text-center transition-all duration-200 focus:outline-none"
                 style={{
                   color: GOLD,
                   border: `1px solid ${GOLD}80`,
                   backgroundColor: "transparent",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.borderColor = GOLD;
-                  (e.currentTarget as HTMLButtonElement).style.color = "#fff";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.borderColor = `${GOLD}80`;
-                  (e.currentTarget as HTMLButtonElement).style.color = GOLD;
                 }}
               >
                 ჩვენი სერვისები →
               </button>
             </div>
           </div>
-
         </div>
       </section>
 
