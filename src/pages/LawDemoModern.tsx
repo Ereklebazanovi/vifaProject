@@ -1,206 +1,286 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+
+const NAV_LINKS = [
+  { label: "სერვისები", href: "services" },
+  { label: "ჩვენს შესახებ", href: "about" },
+  { label: "ჩვენი გუნდი", href: "team" },
+  { label: "პროცესი", href: "process" },
+  { label: "კონტაქტი", href: "contact" },
+];
 
 const SERVICES = [
   {
     num: "01",
-    title: "Corporate Advisory",
-    desc: "End-to-end counsel for complex transactions, governance frameworks, and regulatory compliance at the enterprise level.",
-    tags: ["M&A", "Governance", "Compliance"],
+    title: "სისხლის სამართალი",
+    desc: "დაცვა და წარმომადგენლობა ყველა ეტაპზე — გამოძიებიდან სასამართლო განხილვამდე. გარანტირებული პროფესიონალიზმი.",
   },
   {
     num: "02",
-    title: "Dispute Resolution",
-    desc: "Strategic litigation and alternative dispute resolution, delivering decisive outcomes in high-stakes commercial matters.",
-    tags: ["Litigation", "Arbitration", "Mediation"],
+    title: "სამოქალაქო სამართალი",
+    desc: "ქონებრივი, საოჯახო და სახელშეკრულებო დავები. თქვენი ინტერესების სრულყოფილი დაცვა სასამართლოში.",
   },
   {
     num: "03",
-    title: "Real Estate & Finance",
-    desc: "Sophisticated counsel for complex real estate transactions, project finance, and capital markets across all asset classes.",
-    tags: ["Commercial", "Financing", "Development"],
+    title: "ადმინისტრაციული სამართალი",
+    desc: "დავები სახელმწიფო ორგანოებთან — ლიცენზიები, ნებართვები, ადმინისტრაციული სანქციები და სხვა.",
   },
   {
     num: "04",
-    title: "Technology & IP",
-    desc: "Protecting innovation through comprehensive IP strategy, licensing, and enforcement in a rapidly evolving landscape.",
-    tags: ["Patents", "Licensing", "Data Privacy"],
-  },
-  {
-    num: "05",
-    title: "Employment & People",
-    desc: "Forward-thinking employment counsel that balances organizational objectives with workforce rights and regulatory demands.",
-    tags: ["Workplace", "EEOC", "Benefits"],
-  },
-  {
-    num: "06",
-    title: "Private Wealth",
-    desc: "Integrated estate planning, trust structuring, and succession advisory for high-net-worth individuals and families.",
-    tags: ["Trusts", "Estates", "Family Office"],
+    title: "კორპორატიული მომსახურება",
+    desc: "კომპანიის რეგისტრაცია, კონტრაქტები და კორპორატიული მართვა — ყოვლისმომცველი სამართლებრივი მხარდაჭერა.",
   },
 ];
 
 const PROCESS_STEPS = [
   {
     step: "01",
-    title: "Initial Consultation",
-    desc: "A confidential conversation to understand your matter, assess the landscape, and determine the optimal path forward.",
+    title: "კონსულტაცია",
+    desc: "კონფიდენციალური შეხვედრა, სიტუაციის სრული გაანალიზება და ოპტიმალური სამართლებრივი გზის განსაზღვრა.",
   },
   {
     step: "02",
-    title: "Strategic Assessment",
-    desc: "Our team conducts a thorough analysis of your position, identifying risks, opportunities, and the full range of outcomes.",
+    title: "სტრატეგია",
+    desc: "საქმის ღრმა შეფასება, რისკების გამოვლენა და პოზიციის ჩამოყალიბება — ფაქტებსა და კანონზე დაყრდნობით.",
   },
   {
     step: "03",
-    title: "Tailored Engagement",
-    desc: "We build a dedicated team with the precise expertise your matter requires, aligned around clear objectives and milestones.",
+    title: "განხორციელება",
+    desc: "სასამართლო ან/და სახელმწიფო ორგანოებში პროფესიონალური წარმომადგენლობა — ოპერატიული და ეფექტური.",
   },
   {
     step: "04",
-    title: "Decisive Execution",
-    desc: "Rigorous execution with continuous communication, adapting to developments while keeping your interests central.",
+    title: "შედეგი",
+    desc: "გამჭვირვალე კომუნიკაცია, დროული ანგარიშგება და კლიენტის ინტერესების სრული, კომპლექსური დაცვა.",
   },
 ];
 
-const STATS = [
-  { num: "37", suffix: "+", label: "Years of Practice" },
-  { num: "2.4", suffix: "k+", label: "Matters Resolved" },
-  { num: "98", suffix: "%", label: "Client Retention" },
-  { num: "45", suffix: "", label: "Expert Attorneys" },
+const TEAM = [
+  { initials: "გ·დ", name: "გიორგი დარჩია", role: "მენეჯინგ პარტნიორი", exp: "22 წელი" },
+  { initials: "ნ·კ", name: "ნინო კვარაცხელია", role: "უფროსი პარტნიორი", exp: "17 წელი" },
+  { initials: "დ·მ", name: "დავით მამულაშვილი", role: "პარტნიორი", exp: "11 წელი" },
 ];
 
+const TEAM_PHOTOS = [
+  { src: "public/photo1.jpg", title: "პარტნიორი", desc: "მრავალწლიანი გამოცდილება საერთო სპეციალიზაციით." },
+  { src: "public/photo2.jpg", title: "პარტნიორი", desc: "სამოქალაქო და სისხლის სამართლის სფეროში." },
+  { src: "public/photo3.jpg", title: "პარტნიორი", desc: "ადმინისტრაციული და კორპორატიული სამართალი." },
+  { src: "public/photo4.jpg", title: "პარტნიორი", desc: "მრავალწლიანი გამოცდილება საერთო სპეციალიზაციით." },
+  
+  { src: "public/photo6.jpg", title: "პარტნიორი", desc: "მრავალწლიანი გამოცდილება საერთო სპეციალიზაციით." },
+];
+const scrollTo = (id: string) => {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+};
+
+const INDIGO = "#4f46e5";
+const DARK = "#0f172a";
+
+const inputCls =
+  "w-full px-4 py-3 text-sm border border-slate-200 outline-none bg-white text-slate-900 placeholder-slate-300 transition-colors duration-150";
+
 const LawDemoModern: React.FC = () => {
-  const [formState, setFormState] = useState({
-    name: "",
-    email: "",
-    company: "",
-    service: "",
-    message: "",
-  });
-  const [scrolled, setScrolled] = useState(false);
+  const [form, setForm] = useState({ name: "", phone: "", email: "", message: "" });
   const [menuOpen, setMenuOpen] = useState(false);
-  const heroRef = useRef<HTMLDivElement>(null);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href =
+      "https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@300;400;500;600;700;800;900&display=swap";
+    link.id = "law-demo-modern-fonts";
+    document.head.appendChild(link);
+
+    const style = document.createElement("style");
+    style.id = "law-demo-modern-styles";
+    style.textContent = `
+      .law-demo-modern,
+      .law-demo-modern p,
+      .law-demo-modern a,
+      .law-demo-modern button,
+      .law-demo-modern input,
+      .law-demo-modern textarea,
+      .law-demo-modern select,
+      .law-demo-modern label,
+      .law-demo-modern span,
+      .law-demo-modern h1,
+      .law-demo-modern h2,
+      .law-demo-modern h3,
+      .law-demo-modern h4,
+      .law-demo-modern li {
+        font-family: 'Noto Sans Georgian', 'Inter', sans-serif;
+      }
+    `;
+    document.head.appendChild(style);
+
+    return () => {
+      document.getElementById("law-demo-modern-fonts")?.remove();
+      document.getElementById("law-demo-modern-styles")?.remove();
+    };
+  }, []);
+
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-  ) => setFormState({ ...formState, [e.target.name]: e.target.value });
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => setForm({ ...form, [e.target.name]: e.target.value });
+
+  const focusIndigo = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    e.currentTarget.style.borderColor = INDIGO;
+    e.currentTarget.style.boxShadow = "0 0 0 3px rgba(79,70,229,0.07)";
+  };
+  const blurSlate = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    e.currentTarget.style.borderColor = "#e2e8f0";
+    e.currentTarget.style.boxShadow = "none";
+  };
 
   return (
     <div
-      className="bg-white min-h-screen"
-      style={{ fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif" }}
+      className="law-demo-modern bg-white min-h-screen"
+      style={{ fontFamily: "'Noto Sans Georgian', sans-serif" }}
     >
-
-      {/* ── NAVBAR ── */}
+      {/* ── FIXED NAVBAR ── */}
       <header
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
-          backgroundColor: scrolled ? "rgba(255,255,255,0.95)" : "transparent",
-          backdropFilter: scrolled ? "blur(12px)" : "none",
-          borderBottom: scrolled ? "1px solid #f1f5f9" : "1px solid transparent",
+          backgroundColor: "rgba(255,255,255,0.94)",
+          backdropFilter: "blur(16px)",
+          WebkitBackdropFilter: "blur(16px)",
+          borderBottom: scrolled ? "1px solid #e2e8f0" : "1px solid #f1f5f9",
+          boxShadow: scrolled ? "0 1px 20px rgba(0,0,0,0.06)" : "none",
         }}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-between h-18 py-5">
+          <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <div className="flex items-center gap-3">
-              <div
-                className="w-8 h-8 flex items-center justify-center text-white text-xs font-bold"
-                style={{ backgroundColor: "#0f172a" }}
-              >
-                V&amp;C
-              </div>
-              <div>
-                <div
-                  className="text-sm font-semibold tracking-tight"
-                  style={{ color: "#0f172a" }}
-                >
-                  Vance &amp; Cole
+            <button
+              onClick={() => scrollTo("hero")}
+              className="focus:outline-none flex items-center gap-3"
+            >
+              <img
+                src="/darchialogo.png"
+                alt="დარჩია და პარტნიორები"
+                className="h-10 w-auto object-contain"
+                style={{ maxWidth: "160px", mixBlendMode: "multiply" }}
+              />
+              <div className="hidden sm:block border-l border-slate-200 pl-3">
+                <div className="text-xs font-semibold tracking-tight text-slate-700">
+                  საადვოკატო ბიურო
                 </div>
-                <div className="text-xs text-slate-400 tracking-wide">Legal</div>
+                <div className="text-[10px] text-slate-400 tracking-wide">
+                  დაარსებულია 2015 წელს
+                </div>
               </div>
-            </div>
+            </button>
 
             {/* Desktop Nav */}
             <nav className="hidden lg:flex items-center gap-8">
-              {["Services", "About", "Process", "Contact"].map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors duration-150"
+              {NAV_LINKS.map(({ label, href }) => (
+                <button
+                  key={href}
+                  onClick={() => scrollTo(href)}
+                  className="text-sm font-medium transition-colors duration-150 focus:outline-none"
+                  style={{ color: "#64748b", background: "none", border: "none", cursor: "pointer" }}
+                  onMouseEnter={(e) =>
+                    ((e.currentTarget as HTMLButtonElement).style.color = DARK)
+                  }
+                  onMouseLeave={(e) =>
+                    ((e.currentTarget as HTMLButtonElement).style.color = "#64748b")
+                  }
                 >
-                  {item}
-                </a>
+                  {label}
+                </button>
               ))}
-            </nav>
-
-            <div className="hidden lg:flex items-center gap-4">
-              <a
-                href="tel:+12125550100"
-                className="text-sm text-slate-500 hover:text-slate-900 transition-colors"
-              >
-                +1 (212) 555-0100
-              </a>
-              <a
-                href="#contact"
-                className="px-5 py-2.5 text-sm font-semibold text-white rounded-sm transition-all duration-200"
-                style={{ backgroundColor: "#0f172a" }}
+              <button
+                onClick={() => scrollTo("contact")}
+                className="ml-2 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 focus:outline-none"
+                style={{ backgroundColor: DARK }}
                 onMouseEnter={(e) =>
-                  ((e.currentTarget as HTMLAnchorElement).style.backgroundColor = "#4f46e5")
+                  ((e.currentTarget as HTMLButtonElement).style.backgroundColor = INDIGO)
                 }
                 onMouseLeave={(e) =>
-                  ((e.currentTarget as HTMLAnchorElement).style.backgroundColor = "#0f172a")
+                  ((e.currentTarget as HTMLButtonElement).style.backgroundColor = DARK)
                 }
               >
-                Get in Touch
-              </a>
-            </div>
+                კონსულტაცია
+              </button>
+            </nav>
 
-            {/* Mobile menu toggle */}
-            <button
-              className="lg:hidden p-2 text-slate-600"
-              onClick={() => setMenuOpen(!menuOpen)}
-            >
-              {menuOpen ? (
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+            {/* Mobile right-side actions */}
+            <div className="lg:hidden flex items-center gap-3">
+              {/* Phone CTA */}
+              <a
+                href="tel:+995322110506"
+                className="flex items-center justify-center w-9 h-9 transition-colors duration-150 focus:outline-none"
+                style={{ color: "#475569" }}
+                aria-label="Call +995 32 211 05 06"
+              >
+                <svg
+                  width="18" height="18" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor"
+                  strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                >
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z" />
                 </svg>
-              ) : (
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
-                </svg>
-              )}
-            </button>
+              </a>
+
+              {/* Divider */}
+              <div className="w-px h-5 bg-slate-200" />
+
+              {/* Hamburger + MENU */}
+              <button
+                className="flex items-center gap-2 focus:outline-none"
+                style={{ color: "#334155" }}
+                onClick={() => setMenuOpen(!menuOpen)}
+                aria-label="Menu"
+              >
+                <div className="flex flex-col justify-center gap-1">
+                  <div className="w-5 h-px bg-current" />
+                  <div className="w-5 h-px bg-current" />
+                  <div className="w-5 h-px bg-current" />
+                </div>
+                <span
+                  className="text-[10px] font-bold tracking-[0.2em] uppercase"
+                  style={{ color: "#64748b" }}
+                >
+                  MENU
+                </span>
+              </button>
+            </div>
           </div>
 
-          {/* Mobile menu */}
+          {/* Mobile dropdown */}
           {menuOpen && (
-            <div className="lg:hidden border-t border-slate-100 py-4 space-y-2 bg-white">
-              {["Services", "About", "Process", "Contact"].map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className="block px-2 py-2 text-sm text-slate-700 hover:text-slate-900"
-                  onClick={() => setMenuOpen(false)}
+            <div className="lg:hidden border-t border-slate-100 py-4 space-y-1 bg-white">
+              {NAV_LINKS.map(({ label, href }) => (
+                <button
+                  key={href}
+                  onClick={() => { scrollTo(href); setMenuOpen(false); }}
+                  className="block w-full text-left px-2 py-3 text-sm font-medium focus:outline-none transition-colors duration-150"
+                  style={{ color: "#475569", background: "none", border: "none", cursor: "pointer" }}
+                  onMouseEnter={(e) =>
+                    ((e.currentTarget as HTMLButtonElement).style.color = DARK)
+                  }
+                  onMouseLeave={(e) =>
+                    ((e.currentTarget as HTMLButtonElement).style.color = "#475569")
+                  }
                 >
-                  {item}
-                </a>
+                  {label}
+                </button>
               ))}
-              <div className="pt-3 border-t border-slate-100">
-                <a
-                  href="#contact"
-                  className="block px-4 py-2.5 text-sm font-semibold text-white text-center rounded-sm"
-                  style={{ backgroundColor: "#0f172a" }}
-                  onClick={() => setMenuOpen(false)}
+              <div className="pt-2">
+                <button
+                  onClick={() => { scrollTo("contact"); setMenuOpen(false); }}
+                  className="w-full py-3 text-sm font-semibold text-white focus:outline-none"
+                  style={{ backgroundColor: DARK }}
                 >
-                  Get in Touch
-                </a>
+                  კონსულტაცია
+                </button>
               </div>
             </div>
           )}
@@ -209,190 +289,176 @@ const LawDemoModern: React.FC = () => {
 
       {/* ── HERO ── */}
       <section
-        ref={heroRef}
-        className="relative min-h-screen flex items-center"
-        style={{ backgroundColor: "#fafafa", paddingTop: "80px" }}
+        id="hero"
+        className="relative min-h-screen flex items-start overflow-hidden"
       >
-        {/* Subtle grid */}
+        {/* Background — dramatic dark glass skyscraper */}
         <div
-          className="absolute inset-0 opacity-40"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage:
-              "linear-gradient(#e2e8f0 1px, transparent 1px), linear-gradient(90deg, #e2e8f0 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
+              "url('https://images.unsplash.com/photo-1479142506502-19b3a3b7ff33?q=80&w=2000')",
           }}
         />
+        {/* Dark overlay — ensures white text is 100% legible */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to bottom, transparent 60%, #fafafa 100%)",
+              "linear-gradient(115deg, rgba(9,14,31,0.94) 0%, rgba(9,14,31,0.88) 50%, rgba(9,14,31,0.70) 100%)",
           }}
         />
+        {/* Subtle indigo vignette bottom */}
+        <div
+          className="absolute inset-x-0 bottom-0 h-40"
+          style={{ background: "linear-gradient(to top, rgba(79,70,229,0.08), transparent)" }}
+        />
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-24 w-full">
-          <div className="grid lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-7">
-              {/* Tag */}
-              <div className="inline-flex items-center gap-2 mb-8">
-                <div className="w-1.5 h-1.5 rounded-full bg-indigo-600"></div>
-                <span className="text-xs font-medium text-slate-500 tracking-widest uppercase">
-                  Strategic Legal Advisory
-                </span>
-              </div>
-
-              <h1
-                className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight mb-8"
-                style={{ color: "#0f172a" }}
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-36 pb-32 w-full">
+          <div className="max-w-2xl">
+            {/* Eyebrow */}
+            <div className="inline-flex items-center gap-2.5 mb-8">
+              <div className="w-5 h-px" style={{ backgroundColor: INDIGO }} />
+              <span
+                className="text-xs font-medium tracking-[0.35em] uppercase"
+                style={{ color: "#a5b4fc" }}
               >
-                Law, Reimagined
-                <br />
-                for the
-                <br />
-                <span className="text-indigo-600">Modern World.</span>
-              </h1>
-
-              <p className="text-xl text-slate-500 leading-relaxed mb-10 max-w-xl">
-                Vance &amp; Cole is a new generation legal practice built for the demands of modern
-                business. Precise. Fast. Unconflicted.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-3">
-                <a
-                  href="#contact"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-semibold text-white rounded-sm transition-all duration-200"
-                  style={{ backgroundColor: "#0f172a" }}
-                  onMouseEnter={(e) =>
-                    ((e.currentTarget as HTMLAnchorElement).style.backgroundColor = "#4f46e5")
-                  }
-                  onMouseLeave={(e) =>
-                    ((e.currentTarget as HTMLAnchorElement).style.backgroundColor = "#0f172a")
-                  }
-                >
-                  Start a Conversation
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                    <path fillRule="evenodd" d="M4 8a.5.5 0 01.5-.5h5.793L8.146 5.354a.5.5 0 11.708-.708l3 3a.5.5 0 010 .708l-3 3a.5.5 0 01-.708-.708L10.293 8.5H4.5A.5.5 0 014 8z" clipRule="evenodd"/>
-                  </svg>
-                </a>
-                <a
-                  href="#services"
-                  className="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold rounded-sm transition-all duration-200 text-slate-700 border border-slate-200 hover:border-slate-400 hover:text-slate-900"
-                >
-                  View Services
-                </a>
-              </div>
+                2015 წლიდან თქვენს გვერდით
+              </span>
             </div>
 
-            {/* Stats panel */}
-            <div className="lg:col-span-5">
-              <div className="grid grid-cols-2 gap-4">
-                {STATS.map(({ num, suffix, label }) => (
-                  <div
-                    key={label}
-                    className="p-6 border border-slate-100 bg-white hover:border-indigo-200 transition-colors duration-200"
-                    style={{ boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
-                  >
-                    <div
-                      className="text-4xl font-bold tracking-tight mb-1"
-                      style={{ color: "#0f172a" }}
-                    >
-                      {num}
-                      <span className="text-indigo-600">{suffix}</span>
-                    </div>
-                    <div className="text-xs text-slate-400 uppercase tracking-widest font-medium">
-                      {label}
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <h1
+              className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight mb-8 text-white"
+            >
+              სამართლებრივი
+              <br />
+              <span style={{ color: "#818cf8" }}>სიზუსტე</span>
+              <br />
+              ყოველ ნაბიჯზე.
+            </h1>
 
-              {/* Trust badge */}
-              <div
-                className="mt-4 p-4 border border-slate-100 bg-white flex items-center gap-3"
-                style={{ boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
+            <p
+              className="text-lg md:text-xl leading-relaxed mb-10 max-w-xl"
+              style={{ color: "rgba(226,232,240,0.80)" }}
+            >
+              შპს „დარჩია და პარტნიორები" — პროფესიონალური სამართლებრივი
+              მომსახურება ფიზიკური და იურიდიული პირებისთვის.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-3">
+              <button
+                onClick={() => scrollTo("contact")}
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-semibold text-white transition-all duration-200 focus:outline-none"
+                style={{ backgroundColor: INDIGO }}
+                onMouseEnter={(e) =>
+                  ((e.currentTarget as HTMLButtonElement).style.backgroundColor = "#4338ca")
+                }
+                onMouseLeave={(e) =>
+                  ((e.currentTarget as HTMLButtonElement).style.backgroundColor = INDIGO)
+                }
               >
-                <div className="text-indigo-600 text-xl">✓</div>
-                <div>
-                  <div className="text-sm font-semibold text-slate-800">
-                    Chambers USA Ranked
-                  </div>
-                  <div className="text-xs text-slate-400">
-                    Band 1 · Corporate / M&amp;A · 2024
-                  </div>
-                </div>
-              </div>
+                უფასო კონსულტაცია
+                <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor">
+                  <path fillRule="evenodd" d="M4 8a.5.5 0 01.5-.5h5.793L8.146 5.354a.5.5 0 11.708-.708l3 3a.5.5 0 010 .708l-3 3a.5.5 0 01-.708-.708L10.293 8.5H4.5A.5.5 0 014 8z" clipRule="evenodd" />
+                </svg>
+              </button>
+              <button
+                onClick={() => scrollTo("services")}
+                className="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold transition-all duration-200 focus:outline-none border"
+                style={{ color: "#e2e8f0", borderColor: "rgba(255,255,255,0.25)", backgroundColor: "transparent" }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.55)";
+                  (e.currentTarget as HTMLButtonElement).style.color = "#fff";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.25)";
+                  (e.currentTarget as HTMLButtonElement).style.color = "#e2e8f0";
+                }}
+              >
+                სერვისები →
+              </button>
             </div>
           </div>
         </div>
       </section>
 
       {/* ── SERVICES ── */}
-      <section id="services" className="py-24" style={{ backgroundColor: "#f8fafc" }}>
+      <section id="services" className="py-20" style={{ backgroundColor: "#f1f5f9" }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          {/* Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
             <div>
               <div className="inline-flex items-center gap-2 mb-4">
-                <div className="w-1.5 h-1.5 rounded-full bg-indigo-600"></div>
-                <span className="text-xs font-medium text-slate-400 tracking-widest uppercase">
-                  What We Do
+                <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: INDIGO }} />
+                <span className="text-xs font-medium text-slate-400 tracking-[0.3em] uppercase">
+                  სამართლებრივი დახმარება
                 </span>
               </div>
               <h2
                 className="text-4xl md:text-5xl font-bold tracking-tight"
-                style={{ color: "#0f172a" }}
+                style={{ color: DARK }}
               >
-                Practice Areas
+                ჩვენი სერვისები
               </h2>
             </div>
             <p className="text-slate-500 max-w-sm leading-relaxed">
-              Deep expertise across the legal disciplines that matter most to ambitious organizations.
+              კვალიფიციური სამართლებრივი მომსახურება სისხლის, სამოქალაქო,
+              ადმინისტრაციულ და კორპორატიულ სფეროში.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {SERVICES.map(({ num, title, desc, tags }) => (
+          {/* Cards */}
+          <div className="grid md:grid-cols-2 gap-4">
+            {SERVICES.map(({ num, title, desc }) => (
               <div
                 key={num}
-                className="group p-7 bg-white border border-slate-100 transition-all duration-200 cursor-pointer"
-                style={{ boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
+                className="p-8 bg-white border border-slate-200 transition-all duration-200 cursor-default"
+                style={{
+                  borderTopWidth: "3px",
+                  borderTopColor: INDIGO,
+                  boxShadow: "0 1px 4px rgba(0,0,0,0.05)",
+                }}
                 onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.borderColor = "#c7d2fe";
-                  (e.currentTarget as HTMLDivElement).style.boxShadow = "0 8px 30px rgba(79,70,229,0.08)";
-                  (e.currentTarget as HTMLDivElement).style.transform = "translateY(-2px)";
+                  (e.currentTarget as HTMLDivElement).style.borderColor = "#a5b4fc";
+                  (e.currentTarget as HTMLDivElement).style.borderTopColor = INDIGO;
+                  (e.currentTarget as HTMLDivElement).style.boxShadow =
+                    "0 10px 36px rgba(79,70,229,0.10)";
+                  (e.currentTarget as HTMLDivElement).style.transform = "translateY(-3px)";
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.borderColor = "#f1f5f9";
-                  (e.currentTarget as HTMLDivElement).style.boxShadow = "0 1px 3px rgba(0,0,0,0.04)";
+                  (e.currentTarget as HTMLDivElement).style.borderColor = "#e2e8f0";
+                  (e.currentTarget as HTMLDivElement).style.borderTopColor = INDIGO;
+                  (e.currentTarget as HTMLDivElement).style.boxShadow =
+                    "0 1px 4px rgba(0,0,0,0.05)";
                   (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
                 }}
               >
                 <div
-                  className="text-xs font-bold tracking-widest mb-4"
+                  className="text-xs font-bold tracking-widest mb-5"
                   style={{ color: "#c7d2fe" }}
                 >
                   {num}
                 </div>
                 <h3
-                  className="text-lg font-bold mb-3 tracking-tight"
-                  style={{ color: "#0f172a" }}
+                  className="text-xl font-bold mb-3 tracking-tight"
+                  style={{ color: DARK }}
                 >
                   {title}
                 </h3>
                 <p className="text-slate-500 text-sm leading-relaxed mb-5">{desc}</p>
-                <div className="flex flex-wrap gap-2">
-                  {tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs font-medium px-2.5 py-1 rounded-full"
-                      style={{
-                        backgroundColor: "#eef2ff",
-                        color: "#4f46e5",
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+                <button
+                  onClick={() => scrollTo("contact")}
+                  className="text-xs font-semibold tracking-widest uppercase transition-colors duration-150 focus:outline-none"
+                  style={{ color: INDIGO, background: "none", border: "none", cursor: "pointer" }}
+                  onMouseEnter={(e) =>
+                    ((e.currentTarget as HTMLButtonElement).style.color = DARK)
+                  }
+                  onMouseLeave={(e) =>
+                    ((e.currentTarget as HTMLButtonElement).style.color = INDIGO)
+                  }
+                >
+                  დეტალურად →
+                </button>
               </div>
             ))}
           </div>
@@ -400,45 +466,53 @@ const LawDemoModern: React.FC = () => {
       </section>
 
       {/* ── ABOUT ── */}
-      <section id="about" className="bg-white py-24">
+      <section id="about" className="py-20" style={{ backgroundColor: "#f8fafc" }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
+            {/* Left — text */}
             <div>
               <div className="inline-flex items-center gap-2 mb-6">
-                <div className="w-1.5 h-1.5 rounded-full bg-indigo-600"></div>
-                <span className="text-xs font-medium text-slate-400 tracking-widest uppercase">
-                  About the Firm
+                <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: INDIGO }} />
+                <span className="text-xs font-medium text-slate-400 tracking-[0.3em] uppercase">
+                  ჩვენს შესახებ
                 </span>
               </div>
               <h2
                 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-8"
-                style={{ color: "#0f172a" }}
+                style={{ color: DARK }}
               >
-                A Different Kind
+                სამართლებრივი
                 <br />
-                of Law Firm.
+                პარტნიორობა.
               </h2>
-              <p className="text-slate-500 leading-relaxed mb-6 text-lg">
-                Vance &amp; Cole was founded on a simple premise: that the best legal advice comes
-                from attorneys who are deeply invested in their clients' success, not just in
-                billing hours.
+              <p className="text-slate-500 leading-relaxed mb-5 text-lg">
+                შპს „დარჩია და პარტნიორები" დაარსდა 2015 წელს და ამ პერიოდიდან
+                ახორციელებს ფიზიკური და იურიდიული პირების სამართლებრივი
+                ინტერესების დაცვას სასამართლოსა თუ სხვა სახელმწიფო
+                დაწესებულებებში.
               </p>
-              <p className="text-slate-500 leading-relaxed mb-10">
-                We are selective about the clients we serve. This allows our attorneys to develop
-                genuine expertise in your industry, anticipate issues before they arise, and
-                deliver the kind of proactive counsel that creates real competitive advantage.
+              <p className="text-slate-500 leading-relaxed mb-5">
+                კომპანია იურიდიული მომსახურებას უწევს არაერთ სამეწარმეო
+                სუბიექტს, რომლებიც ოპერირებენ წიაღის, სამშენებლო, საკვები
+                პროდუქტების და საკრედიტო სფეროში.
+              </p>
+              <p className="text-slate-500 leading-relaxed mb-8">
+                ჩვენს გუნდს გააჩნია საერთო სპეციალიზაცია სისხლის, სამოქალაქო
+                და ადმინისტრაციულ-სამართლებრივი მიმართულებით. საადვოკატო
+                მომსახურება ხელმისაწვდომია ქართულ, რუსულ და ინგლისურ ენებზე.
               </p>
 
-              <div className="grid grid-cols-3 gap-6">
+              {/* Key stats */}
+              <div className="grid grid-cols-3 gap-6 mb-8">
                 {[
-                  { num: "2012", label: "Founded" },
-                  { num: "8", label: "Offices" },
-                  { num: "#1", label: "in Client NPS" },
+                  { num: "2015", label: "დაარსებულია" },
+                  { num: "3", label: "სამართლის სფერო" },
+                  { num: "3", label: "სამუშაო ენა" },
                 ].map(({ num, label }) => (
-                  <div key={label} className="border-l-2 border-indigo-600 pl-4">
+                  <div key={label} className="border-l-2 pl-4" style={{ borderColor: INDIGO }}>
                     <div
                       className="text-2xl font-bold tracking-tight"
-                      style={{ color: "#0f172a" }}
+                      style={{ color: DARK }}
                     >
                       {num}
                     </div>
@@ -450,91 +524,182 @@ const LawDemoModern: React.FC = () => {
               </div>
             </div>
 
-            {/* Visual panel */}
-            <div className="space-y-4">
-              {/* Featured attorney card */}
-              <div
-                className="p-8 border border-slate-100"
-                style={{ boxShadow: "0 4px 20px rgba(0,0,0,0.04)" }}
-              >
-                <div className="flex items-start gap-4 mb-6">
+            {/* Right — team cards */}
+            <div className="space-y-3">
+              {TEAM.map(({ initials, name, role, exp }) => (
+                <div
+                  key={name}
+                  className="flex items-center gap-4 p-5 border border-slate-100 bg-white transition-all duration-200"
+                  style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLDivElement).style.borderColor = "#c7d2fe";
+                    (e.currentTarget as HTMLDivElement).style.boxShadow =
+                      "0 4px 16px rgba(79,70,229,0.07)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLDivElement).style.borderColor = "#f1f5f9";
+                    (e.currentTarget as HTMLDivElement).style.boxShadow =
+                      "0 1px 4px rgba(0,0,0,0.04)";
+                  }}
+                >
+                  {/* Avatar */}
                   <div
-                    className="w-12 h-12 rounded-sm flex items-center justify-center text-white text-sm font-bold flex-shrink-0"
-                    style={{ backgroundColor: "#0f172a" }}
+                    className="w-12 h-12 flex items-center justify-center text-white text-xs font-bold shrink-0"
+                    style={{ backgroundColor: DARK }}
                   >
-                    AV
+                    {initials}
                   </div>
-                  <div>
+                  <div className="flex-1 min-w-0">
                     <div
-                      className="font-semibold tracking-tight"
-                      style={{ color: "#0f172a" }}
+                      className="font-semibold tracking-tight text-sm"
+                      style={{ color: DARK }}
                     >
-                      Alexis Vance
+                      {name}
                     </div>
-                    <div className="text-sm text-slate-400">Founding Partner · Corporate</div>
+                    <div className="text-xs text-slate-400 mt-0.5">{role}</div>
+                  </div>
+                  {/* Experience badge */}
+                  <div
+                    className="text-xs font-medium px-3 py-1.5 shrink-0"
+                    style={{
+                      backgroundColor: "#eef2ff",
+                      color: INDIGO,
+                    }}
+                  >
+                    {exp}
                   </div>
                 </div>
-                <p className="text-slate-600 text-sm leading-relaxed italic">
-                  "We measure our success by a single metric: whether our clients are better
-                  positioned after working with us than before. Everything else follows from that."
-                </p>
-              </div>
+              ))}
 
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { label: "Legal 500 Recognized", sub: "Corporate · 2023–24" },
-                  { label: "Pro Bono Commitment", sub: "500+ hours annually" },
-                ].map(({ label, sub }) => (
-                  <div
-                    key={label}
-                    className="p-5 border border-slate-100 bg-slate-50"
-                  >
-                    <div
-                      className="text-sm font-semibold mb-1"
-                      style={{ color: "#0f172a" }}
+              {/* Languages badge */}
+              <div
+                className="p-5 border border-slate-100 bg-slate-50"
+                style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.03)" }}
+              >
+                <div
+                  className="text-xs font-semibold uppercase tracking-widest mb-2"
+                  style={{ color: INDIGO }}
+                >
+                  სამუშაო ენები
+                </div>
+                <div className="flex gap-2">
+                  {["ქართული", "რუსული", "ინგლისური"].map((lang) => (
+                    <span
+                      key={lang}
+                      className="text-xs font-medium px-3 py-1.5"
+                      style={{ backgroundColor: "#fff", border: "1px solid #e2e8f0", color: "#475569" }}
                     >
-                      {label}
-                    </div>
-                    <div className="text-xs text-slate-400">{sub}</div>
-                  </div>
-                ))}
+                      {lang}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── PROCESS ── */}
-      <section id="process" style={{ backgroundColor: "#0f172a" }} className="py-24">
+      {/* ── TEAM ── */}
+      <section id="team" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="text-center mb-16">
+          {/* Header */}
+          <div className="mb-14">
             <div className="inline-flex items-center gap-2 mb-4">
-              <div className="w-1.5 h-1.5 rounded-full bg-indigo-400"></div>
-              <span className="text-xs font-medium text-slate-500 tracking-widest uppercase">
-                How We Work
+              <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: INDIGO }} />
+              <span className="text-xs font-medium text-slate-400 tracking-[0.3em] uppercase">
+                საადვოკატო გუნდი
               </span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white">
-              Our Process
+            <h2
+              className="text-4xl md:text-5xl font-bold tracking-tight"
+              style={{ color: DARK }}
+            >
+              ჩვენი გუნდი
             </h2>
           </div>
 
+          {/* Photo Grid — 3×2, modern airy cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {TEAM_PHOTOS.map(({ src, title, desc }) => (
+              <div
+                key={src}
+                className="group rounded-lg overflow-hidden border border-slate-100 transition-all duration-200"
+                style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLDivElement).style.boxShadow =
+                    "0 8px 28px rgba(79,70,229,0.10)";
+                  (e.currentTarget as HTMLDivElement).style.borderColor = "#c7d2fe";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLDivElement).style.boxShadow =
+                    "0 2px 8px rgba(0,0,0,0.06)";
+                  (e.currentTarget as HTMLDivElement).style.borderColor = "#f1f5f9";
+                }}
+              >
+                {/* Photo */}
+                <div className="overflow-hidden">
+                  <img
+                    src={src}
+                    alt={title}
+                    className="w-full object-cover object-top block transition-transform duration-300 group-hover:scale-105"
+                    style={{ aspectRatio: "4/3" }}
+                  />
+                </div>
+                {/* Caption */}
+                <div className="p-4 bg-white">
+                  <div
+                    className="font-semibold text-sm"
+                    style={{ color: DARK }}
+                  >
+                    {title}
+                  </div>
+                  <div className="text-xs text-slate-400 mt-1">{desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── PROCESS ── */}
+      <section id="process" style={{ backgroundColor: DARK }} className="py-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          {/* Header */}
+          <div className="text-center mb-14">
+            <div className="inline-flex items-center gap-2 mb-4">
+              <div className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
+              <span className="text-xs font-medium text-slate-500 tracking-[0.3em] uppercase">
+                როგორ ვმუშაობთ
+              </span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white">
+              ჩვენი პროცესი
+            </h2>
+          </div>
+
+          {/* Steps */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-slate-800">
             {PROCESS_STEPS.map(({ step, title, desc }, idx) => (
               <div
                 key={step}
                 className="p-8 transition-colors duration-200 group"
-                style={{ backgroundColor: "#0f172a" }}
+                style={{ backgroundColor: DARK }}
                 onMouseEnter={(e) =>
                   ((e.currentTarget as HTMLDivElement).style.backgroundColor = "#1e293b")
                 }
                 onMouseLeave={(e) =>
-                  ((e.currentTarget as HTMLDivElement).style.backgroundColor = "#0f172a")
+                  ((e.currentTarget as HTMLDivElement).style.backgroundColor = DARK)
                 }
               >
                 <div
-                  className="text-4xl font-bold tracking-tight mb-6 opacity-20 group-hover:opacity-100 transition-opacity duration-200"
-                  style={{ color: "#6366f1" }}
+                  className="text-4xl font-bold tracking-tight mb-6 transition-opacity duration-200"
+                  style={{ color: INDIGO, opacity: 0.25 }}
+                  onMouseEnter={(e) =>
+                    ((e.currentTarget as HTMLDivElement).style.opacity = "1")
+                  }
+                  onMouseLeave={(e) =>
+                    ((e.currentTarget as HTMLDivElement).style.opacity = "0.25")
+                  }
                 >
                   {step}
                 </div>
@@ -552,54 +717,61 @@ const LawDemoModern: React.FC = () => {
       </section>
 
       {/* ── CONTACT ── */}
-      <section id="contact" className="bg-white py-24">
+      <section id="contact" className="bg-white py-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-20">
-            {/* Left */}
-            <div>
+          <div className="grid lg:grid-cols-5 gap-16">
+            {/* Info */}
+            <div className="lg:col-span-2">
               <div className="inline-flex items-center gap-2 mb-6">
-                <div className="w-1.5 h-1.5 rounded-full bg-indigo-600"></div>
-                <span className="text-xs font-medium text-slate-400 tracking-widest uppercase">
-                  Contact
+                <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: INDIGO }} />
+                <span className="text-xs font-medium text-slate-400 tracking-[0.3em] uppercase">
+                  დაგვიკავშირდით
                 </span>
               </div>
               <h2
-                className="text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-6"
-                style={{ color: "#0f172a" }}
+                className="text-4xl font-bold tracking-tight leading-tight mb-5"
+                style={{ color: DARK }}
               >
-                Let's Start
+                კონსულტაციის
                 <br />
-                a Conversation.
+                მოთხოვნა.
               </h2>
-              <p className="text-slate-500 leading-relaxed mb-12 text-lg">
-                Whether you have a specific matter in mind or simply want to explore what a modern
-                legal partnership looks like, we'd like to hear from you.
+              <p className="text-slate-500 leading-relaxed mb-10">
+                ჩვენი ადვოკატები მზად არიან განიხილონ თქვენი სიტუაცია
+                კონფიდენციალურ გარემოში.
               </p>
 
-              <div className="space-y-6">
+              <div className="space-y-5">
                 {[
                   {
-                    icon: "📍",
-                    title: "New York",
-                    detail: "One World Trade Center, Suite 8500",
+                    label: "მისამართი",
+                    value: "დ. აღმაშენებლის ხეივანი 66ბ\nთბილისი 0131, საქართველო",
                   },
-                  { icon: "📞", title: "Call", detail: "+1 (212) 555-0100" },
-                  { icon: "✉️", title: "Email", detail: "hello@vancecole.com" },
-                ].map(({ icon, title, detail }) => (
-                  <div key={title} className="flex items-center gap-4">
+                  { label: "ტელეფონი", value: "+995 32 211 05 06" },
+                  { label: "ელ-ფოსტა", value: "giadarchia@gmail.com" },
+                  { label: "სამუშაო საათები", value: "ორშ – პარ: 10:00 – 18:00" },
+                ].map(({ label, value }) => (
+                  <div
+                    key={label}
+                    className="flex items-start gap-4"
+                  >
                     <div
-                      className="w-10 h-10 flex items-center justify-center text-sm flex-shrink-0"
+                      className="w-9 h-9 flex items-center justify-center shrink-0 mt-0.5"
                       style={{ backgroundColor: "#f1f5f9" }}
                     >
-                      {icon}
+                      <div
+                        className="w-1.5 h-1.5 rounded-full"
+                        style={{ backgroundColor: INDIGO }}
+                      />
                     </div>
                     <div>
                       <div
-                        className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-0.5"
+                        className="text-xs font-semibold uppercase tracking-widest mb-0.5"
+                        style={{ color: INDIGO }}
                       >
-                        {title}
+                        {label}
                       </div>
-                      <div className="text-sm text-slate-700">{detail}</div>
+                      <div className="text-sm text-slate-600 whitespace-pre-line">{value}</div>
                     </div>
                   </div>
                 ))}
@@ -607,131 +779,95 @@ const LawDemoModern: React.FC = () => {
             </div>
 
             {/* Form */}
-            <div>
+            <div className="lg:col-span-3">
               <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
                 <div className="grid sm:grid-cols-2 gap-5">
-                  {[
-                    { name: "name", label: "Full Name", placeholder: "Jane Smith", type: "text" },
-                    { name: "email", label: "Email Address", placeholder: "jane@company.com", type: "email" },
-                  ].map(({ name, label, placeholder, type }) => (
-                    <div key={name}>
-                      <label className="block text-xs font-semibold text-slate-500 uppercase tracking-widest mb-2">
-                        {label}
-                      </label>
-                      <input
-                        type={type}
-                        name={name}
-                        value={formState[name as keyof typeof formState]}
-                        onChange={handleChange}
-                        placeholder={placeholder}
-                        className="w-full px-4 py-3 text-sm border border-slate-200 outline-none rounded-sm transition-colors duration-150 bg-white text-slate-900 placeholder-slate-300"
-                        onFocus={(e) => {
-                          e.currentTarget.style.borderColor = "#6366f1";
-                          e.currentTarget.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.08)";
-                        }}
-                        onBlur={(e) => {
-                          e.currentTarget.style.borderColor = "#e2e8f0";
-                          e.currentTarget.style.boxShadow = "none";
-                        }}
-                        required
-                      />
-                    </div>
-                  ))}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-500 uppercase tracking-widest mb-2">
+                      სახელი და გვარი *
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={form.name}
+                      onChange={handleChange}
+                      onFocus={focusIndigo}
+                      onBlur={blurSlate}
+                      placeholder="გიორგი ბერიძე"
+                      className={inputCls}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-500 uppercase tracking-widest mb-2">
+                      ტელეფონი *
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={form.phone}
+                      onChange={handleChange}
+                      onFocus={focusIndigo}
+                      onBlur={blurSlate}
+                      placeholder="+995 5XX XX XX XX"
+                      className={inputCls}
+                      required
+                    />
+                  </div>
                 </div>
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-500 uppercase tracking-widest mb-2">
-                    Company / Organization
+                    ელ-ფოსტა
                   </label>
                   <input
-                    type="text"
-                    name="company"
-                    value={formState.company}
+                    type="email"
+                    name="email"
+                    value={form.email}
                     onChange={handleChange}
-                    placeholder="Acme Corp"
-                    className="w-full px-4 py-3 text-sm border border-slate-200 outline-none rounded-sm transition-colors duration-150 bg-white text-slate-900 placeholder-slate-300"
-                    onFocus={(e) => {
-                      e.currentTarget.style.borderColor = "#6366f1";
-                      e.currentTarget.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.08)";
-                    }}
-                    onBlur={(e) => {
-                      e.currentTarget.style.borderColor = "#e2e8f0";
-                      e.currentTarget.style.boxShadow = "none";
-                    }}
+                    onFocus={focusIndigo}
+                    onBlur={blurSlate}
+                    placeholder="giorgi@example.ge"
+                    className={inputCls}
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-500 uppercase tracking-widest mb-2">
-                    Area of Interest
-                  </label>
-                  <select
-                    name="service"
-                    value={formState.service}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 text-sm border border-slate-200 outline-none rounded-sm transition-colors duration-150 bg-white text-slate-900"
-                    style={{ color: formState.service ? "#0f172a" : "#cbd5e1" }}
-                    onFocus={(e) => {
-                      e.currentTarget.style.borderColor = "#6366f1";
-                      e.currentTarget.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.08)";
-                    }}
-                    onBlur={(e) => {
-                      e.currentTarget.style.borderColor = "#e2e8f0";
-                      e.currentTarget.style.boxShadow = "none";
-                    }}
-                  >
-                    <option value="" disabled>Select a service area</option>
-                    {SERVICES.map(({ title }) => (
-                      <option key={title} value={title} style={{ color: "#0f172a" }}>
-                        {title}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-widest mb-2">
-                    Tell us about your matter
+                    თქვენი შეტყობინება *
                   </label>
                   <textarea
                     name="message"
-                    value={formState.message}
+                    value={form.message}
                     onChange={handleChange}
+                    onFocus={focusIndigo}
+                    onBlur={blurSlate}
                     rows={5}
-                    placeholder="Give us a brief overview of what you're looking to accomplish..."
-                    className="w-full px-4 py-3 text-sm border border-slate-200 outline-none rounded-sm transition-colors duration-150 bg-white text-slate-900 placeholder-slate-300 resize-none"
-                    onFocus={(e) => {
-                      e.currentTarget.style.borderColor = "#6366f1";
-                      e.currentTarget.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.08)";
-                    }}
-                    onBlur={(e) => {
-                      e.currentTarget.style.borderColor = "#e2e8f0";
-                      e.currentTarget.style.boxShadow = "none";
-                    }}
+                    placeholder="მოკლედ აღწერეთ თქვენი სიტუაცია..."
+                    className={inputCls}
+                    style={{ resize: "none" }}
                     required
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-4 text-sm font-semibold text-white rounded-sm transition-all duration-200 flex items-center justify-center gap-2"
-                  style={{ backgroundColor: "#0f172a" }}
+                  className="w-full py-4 text-sm font-semibold text-white transition-all duration-200 focus:outline-none inline-flex items-center justify-center gap-2"
+                  style={{ backgroundColor: DARK }}
                   onMouseEnter={(e) =>
-                    ((e.currentTarget as HTMLButtonElement).style.backgroundColor = "#4f46e5")
+                    ((e.currentTarget as HTMLButtonElement).style.backgroundColor = INDIGO)
                   }
                   onMouseLeave={(e) =>
-                    ((e.currentTarget as HTMLButtonElement).style.backgroundColor = "#0f172a")
+                    ((e.currentTarget as HTMLButtonElement).style.backgroundColor = DARK)
                   }
                 >
-                  Send Message
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                    <path fillRule="evenodd" d="M4 8a.5.5 0 01.5-.5h5.793L8.146 5.354a.5.5 0 11.708-.708l3 3a.5.5 0 010 .708l-3 3a.5.5 0 01-.708-.708L10.293 8.5H4.5A.5.5 0 014 8z" clipRule="evenodd"/>
+                  კონსულტაციის მოთხოვნა
+                  <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor">
+                    <path fillRule="evenodd" d="M4 8a.5.5 0 01.5-.5h5.793L8.146 5.354a.5.5 0 11.708-.708l3 3a.5.5 0 010 .708l-3 3a.5.5 0 01-.708-.708L10.293 8.5H4.5A.5.5 0 014 8z" clipRule="evenodd" />
                   </svg>
                 </button>
-
-                <p className="text-xs text-slate-400 text-center leading-relaxed">
-                  All communications are subject to attorney-client privilege.
-                  We respond within one business day.
+                <p className="text-xs text-slate-400 text-center">
+                  ყველა განაცხადი დაცულია ადვოკატ-კლიენტის კონფიდენციალობის პრინციპით.
                 </p>
               </form>
             </div>
@@ -743,31 +879,37 @@ const LawDemoModern: React.FC = () => {
       <footer className="border-t border-slate-100 py-10 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            {/* Logo */}
             <div className="flex items-center gap-3">
-              <div
-                className="w-6 h-6 flex items-center justify-center text-white text-xs font-bold"
-                style={{ backgroundColor: "#0f172a" }}
-              >
-                V
-              </div>
-              <span className="text-sm font-semibold text-slate-800">
-                Vance &amp; Cole Legal
-              </span>
+              <img
+                src="/darchialogo.png"
+                alt="დარჩია და პარტნიორები"
+                className="h-7 w-auto object-contain"
+                style={{ maxWidth: "120px", mixBlendMode: "multiply", opacity: 0.85 }}
+              />
+              <span className="text-xs font-medium text-slate-500">საადვოკატო ბიურო</span>
             </div>
 
             <p className="text-xs text-slate-400 text-center">
-              © 2024 Vance &amp; Cole LLP · All Rights Reserved · Attorney Advertising
+              © 2024 შპს „დარჩია და პარტნიორები" · +995 32 211 05 06 · giadarchia@gmail.com
             </p>
 
             <div className="flex items-center gap-6">
-              {["Privacy", "Terms", "Accessibility"].map((item) => (
-                <a
+              {["კონფიდენციალობა", "დაგვიკავშირდით"].map((item) => (
+                <button
                   key={item}
-                  href="#"
-                  className="text-xs text-slate-400 hover:text-slate-700 transition-colors"
+                  onClick={() => scrollTo("contact")}
+                  className="text-xs text-slate-400 transition-colors focus:outline-none"
+                  style={{ background: "none", border: "none", cursor: "pointer" }}
+                  onMouseEnter={(e) =>
+                    ((e.currentTarget as HTMLButtonElement).style.color = "#475569")
+                  }
+                  onMouseLeave={(e) =>
+                    ((e.currentTarget as HTMLButtonElement).style.color = "#94a3b8")
+                  }
                 >
                   {item}
-                </a>
+                </button>
               ))}
             </div>
           </div>

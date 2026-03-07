@@ -4,6 +4,7 @@ const NAV_LINKS = [
   { label: "მთავარი", href: "hero" },
   { label: "სერვისები", href: "services" },
   { label: "ჩვენს შესახებ", href: "about" },
+  { label: "ჩვენი გუნდი", href: "team" },
   { label: "კონტაქტი", href: "contact" },
 ];
 
@@ -34,6 +35,15 @@ const TEAM = [
   { name: "გიორგი დარჩია", role: "მენეჯინგ პარტნიორი", exp: "22 წელი" },
   { name: "ნინო კვარაცხელია", role: "უფროსი პარტნიორი", exp: "17 წელი" },
   { name: "დავით მამულაშვილი", role: "პარტნიორი", exp: "11 წელი" },
+];
+
+const TEAM_PHOTOS = [
+  { src: "public/photo1.jpg", title: "პარტნიორი", desc: "მრავალწლიანი გამოცდილება საერთო სპეციალიზაციით." },
+  { src: "public/photo2.jpg", title: "პარტნიორი", desc: "სამოქალაქო და სისხლის სამართლის სფეროში." },
+  { src: "public/photo3.jpg", title: "პარტნიორი", desc: "ადმინისტრაციული და კორპორატიული სამართალი." },
+  { src: "public/photo4.jpg", title: "პარტნიორი", desc: "მრავალწლიანი გამოცდილება საერთო სპეციალიზაციით." },
+  
+  { src: "public/photo6.jpg", title: "პარტნიორი", desc: "მრავალწლიანი გამოცდილება საერთო სპეციალიზაციით." },
 ];
 
 const scrollTo = (id: string) => {
@@ -127,7 +137,7 @@ const LawDemoClassic: React.FC = () => {
               className="focus:outline-none flex items-center gap-3"
             >
               <img
-                src="/darchialogo.png"
+                src="public/darchialogo.png"
                 alt="დარჩია და პარტნიორები"
                 className="h-12 w-auto object-contain"
                 style={{ maxWidth: "200px", mixBlendMode: "lighten" }}
@@ -260,7 +270,7 @@ const LawDemoClassic: React.FC = () => {
       <section
         id="hero"
         className="relative overflow-hidden flex items-start"
-        style={{ minHeight: "95vh" }}
+        style={{ maxHeight: "76vh" }}
       >
         {/* Background image — prestigious dark law library hallway */}
         <div
@@ -279,10 +289,10 @@ const LawDemoClassic: React.FC = () => {
           }}
         />
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-20 pb-28 w-full">
-          <div className="max-w-3xl">
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-10 md:pt-14 pb-20 w-full">
+          <div className="max-w-3xl mx-auto md:mx-0 text-center md:text-left">
             {/* Gold rule + eyebrow */}
-            <div className="flex items-center gap-4 mb-10">
+            <div className="flex items-center justify-center md:justify-start gap-4 mb-10">
               <div
                 className="h-px w-16"
                 style={{ backgroundColor: GOLD, opacity: 0.8 }}
@@ -293,31 +303,35 @@ const LawDemoClassic: React.FC = () => {
               >
                 2015 წლიდან თქვენს გვერდით
               </span>
+              <div
+                className="h-px w-16 md:hidden"
+                style={{ backgroundColor: GOLD, opacity: 0.8 }}
+              />
             </div>
 
             <h1
-              className="text-5xl md:text-6xl lg:text-[4.5rem] font-bold leading-[1.1] text-white mb-8"
+              className="text-4xl md:text-6xl lg:text-[4.5rem] font-bold leading-tight text-white mb-8"
             >
               საადვოკატო ბიურო
               <br />
-              <span style={{ color: GOLD }}>დარჩია</span>
+              <span style={{ color: GOLD }}>„დარჩია</span>
               <span className="text-white"> და</span>
               <br />
-              <span className="text-white">პარტნიორები</span>
+              <span className="text-white">პარტნიორები"</span>
             </h1>
 
             <p
-              className="text-lg md:text-xl leading-relaxed mb-12 max-w-2xl"
+              className="text-lg md:text-xl leading-relaxed mb-10 max-w-2xl mx-auto md:mx-0"
               style={{ color: "rgba(226,232,240,0.9)" }}
             >
               თქვენი უფლებების საიმედო დაცვა ყველა ინსტანციაში.
               მრავალწლიანი გამოცდილება და პროფესიონალიზმი.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 items-center md:items-start justify-center md:justify-start">
               <button
                 onClick={() => scrollTo("contact")}
-                className="px-10 py-4 text-sm tracking-wide font-semibold text-white text-center transition-all duration-200 focus:outline-none"
+                className="w-full sm:w-auto px-10 py-4 text-sm tracking-wide font-semibold text-white text-center transition-all duration-200 focus:outline-none"
                 style={{ backgroundColor: DARK_GOLD }}
                 onMouseEnter={(e) =>
                   ((e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD)
@@ -330,7 +344,7 @@ const LawDemoClassic: React.FC = () => {
               </button>
               <button
                 onClick={() => scrollTo("services")}
-                className="px-10 py-4 text-sm tracking-wide font-semibold text-center transition-all duration-200 focus:outline-none"
+                className="w-full sm:w-auto px-10 py-4 text-sm tracking-wide font-semibold text-center transition-all duration-200 focus:outline-none"
                 style={{
                   color: GOLD,
                   border: `1px solid ${GOLD}80`,
@@ -466,7 +480,7 @@ const LawDemoClassic: React.FC = () => {
                   className="text-[10px] tracking-[0.3em] uppercase font-semibold"
                   style={{ color: GOLD }}
                 >
-                  თბილისი, საქართველო
+                 
                 </span>
               </div>
             </div>
@@ -547,37 +561,70 @@ const LawDemoClassic: React.FC = () => {
         </div>
       </section>
 
-      {/* ── WHY US BANNER ── */}
-      <section style={{ backgroundColor: NAVY }} className="py-16">
+      {/* ── TEAM ── */}
+      <section id="team" className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { icon: "🛡️", title: "სანდოობა", desc: "2015 წლიდან — ასობით კმაყოფილი კლიენტი და წარმატებული საქმე" },
-              { icon: "⚡", title: "სისწრაფე", desc: "სწრაფი რეაქცია და ოპერატიული იურიდიული დახმარება" },
-              { icon: "🔐", title: "კონფიდენციალობა", desc: "ადვოკატ-კლიენტის საიდუმლოება სრულად გარანტირებულია" },
-              { icon: "🏆", title: "შედეგი", desc: "ჩვენი მიზანია თქვენი საქმის წარმატებული გადაწყვეტა" },
-            ].map(({ icon, title, desc }) => (
-              <div key={title} className="flex items-start gap-4">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="h-px w-12" style={{ backgroundColor: DARK_GOLD }} />
+              <span
+                className="text-xs tracking-[0.4em] uppercase font-medium"
+                style={{ color: DARK_GOLD }}
+              >
+                საადვოკატო გუნდი
+              </span>
+              <div className="h-px w-12" style={{ backgroundColor: DARK_GOLD }} />
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold" style={{ color: NAVY }}>
+              ჩვენი გუნდი
+            </h2>
+          </div>
+
+          {/* Photo Grid — 3×2, classic bordered style */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {TEAM_PHOTOS.map(({ src, title, desc }) => (
+              <div key={src} className="group">
                 <div
-                  className="w-11 h-11 flex items-center justify-center text-lg flex-shrink-0 rounded-sm mt-0.5"
-                  style={{ backgroundColor: `${GOLD}20`, border: `1px solid ${GOLD}40` }}
+                  className="relative overflow-hidden"
+                  style={{ border: `2px solid ${GOLD}55` }}
                 >
-                  {icon}
-                </div>
-                <div>
+                  <img
+                    src={src}
+                    alt={title}
+                    className="w-full object-cover object-top block"
+                    style={{
+                      aspectRatio: "4/3",
+                      filter: "brightness(0.88) saturate(0.72)",
+                    }}
+                  />
+                  {/* Dark gradient overlay */}
                   <div
-                    className="font-bold mb-1 text-sm"
-                    style={{ color: GOLD }}
-                  >
-                    {title}
+                    className="absolute inset-0"
+                    style={{
+                      background:
+                        "linear-gradient(to top, rgba(8,21,39,0.80) 0%, rgba(8,21,39,0.10) 55%, transparent 100%)",
+                    }}
+                  />
+                  {/* Text badge */}
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <div className="font-bold text-white text-sm mb-1">{title}</div>
+                    <div className="text-xs" style={{ color: `${GOLD}dd` }}>{desc}</div>
                   </div>
-                  <div className="text-xs text-slate-400 leading-relaxed">{desc}</div>
+                  {/* Gold top accent line */}
+                  <div
+                    className="absolute top-0 left-0 right-0 h-0.5"
+                    style={{ backgroundColor: GOLD, opacity: 0.7 }}
+                  />
                 </div>
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* ── WHY US BANNER ── */}
+      
 
       {/* ── CONTACT ── */}
       <section id="contact" className="bg-white py-24">
@@ -743,7 +790,7 @@ const LawDemoClassic: React.FC = () => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <img
-                src="/darchialogo.png"
+                src="public/darchialogo.png"
                 alt="დარჩია და პარტნიორები"
                 className="h-8 w-auto object-contain"
                 style={{ maxWidth: "140px", opacity: 0.9, filter: "brightness(0) invert(1)" }}
