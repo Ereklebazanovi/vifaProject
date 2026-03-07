@@ -290,7 +290,8 @@ const LawDemoModern: React.FC = () => {
       {/* ── HERO ── */}
       <section
         id="hero"
-        className="relative min-h-screen flex items-start overflow-hidden"
+        className="relative flex items-start overflow-hidden"
+        style={{ maxHeight: "80vh" }}
       >
         {/* Background — dramatic dark glass skyscraper */}
         <div
@@ -314,10 +315,10 @@ const LawDemoModern: React.FC = () => {
           style={{ background: "linear-gradient(to top, rgba(79,70,229,0.08), transparent)" }}
         />
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-36 pb-32 w-full">
-          <div className="max-w-2xl">
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-26 md:pt-20 pb-16 md:pb-24 w-full">
+          <div className="max-w-2xl mx-auto md:mx-0 text-center md:text-left">
             {/* Eyebrow */}
-            <div className="inline-flex items-center gap-2.5 mb-8">
+            <div className="flex items-center justify-center md:justify-start gap-2.5 mb-8">
               <div className="w-5 h-px" style={{ backgroundColor: INDIGO }} />
               <span
                 className="text-xs font-medium tracking-[0.35em] uppercase"
@@ -325,30 +326,33 @@ const LawDemoModern: React.FC = () => {
               >
                 2015 წლიდან თქვენს გვერდით
               </span>
+              <div className="w-5 h-px md:hidden" style={{ backgroundColor: INDIGO }} />
             </div>
 
             <h1
-              className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight mb-8 text-white"
+              className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-8 text-white"
             >
-              სამართლებრივი
+              საადვოკატო ბიურო
+
+
+"დარჩია და
+            
               <br />
-              <span style={{ color: "#818cf8" }}>სიზუსტე</span>
-              <br />
-              ყოველ ნაბიჯზე.
+              პარტნიორები"
             </h1>
 
             <p
-              className="text-lg md:text-xl leading-relaxed mb-10 max-w-xl"
+              className="text-lg md:text-xl leading-relaxed mb-10 max-w-xl mx-auto md:mx-0"
               style={{ color: "rgba(226,232,240,0.80)" }}
             >
               შპს „დარჩია და პარტნიორები" — პროფესიონალური სამართლებრივი
               მომსახურება ფიზიკური და იურიდიული პირებისთვის.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col sm:flex-row gap-3 items-center md:items-start justify-center md:justify-start">
               <button
                 onClick={() => scrollTo("contact")}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-semibold text-white transition-all duration-200 focus:outline-none"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-semibold text-white transition-all duration-200 focus:outline-none"
                 style={{ backgroundColor: INDIGO }}
                 onMouseEnter={(e) =>
                   ((e.currentTarget as HTMLButtonElement).style.backgroundColor = "#4338ca")
@@ -364,7 +368,7 @@ const LawDemoModern: React.FC = () => {
               </button>
               <button
                 onClick={() => scrollTo("services")}
-                className="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold transition-all duration-200 focus:outline-none border"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-sm font-semibold transition-all duration-200 focus:outline-none border"
                 style={{ color: "#e2e8f0", borderColor: "rgba(255,255,255,0.25)", backgroundColor: "transparent" }}
                 onMouseEnter={(e) => {
                   (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.55)";
