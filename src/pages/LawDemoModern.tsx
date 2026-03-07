@@ -294,7 +294,7 @@ const LawDemoModern: React.FC = () => {
           style={{ background: "linear-gradient(to top, rgba(79,70,229,0.08), transparent)" }}
         />
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-28 md:pt-20 pb-16 md:pb-24 w-full">
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-32 md:pt-20 pb-16 md:pb-24 w-full mt-5">
           <div className="max-w-2xl mx-auto md:mx-0 text-center md:text-left">
             {/* Eyebrow */}
             <div className="flex items-center justify-center md:justify-start gap-2.5 mb-8">
