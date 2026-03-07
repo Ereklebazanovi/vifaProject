@@ -130,34 +130,34 @@ const LawDemoClassic: React.FC = () => {
         style={{ backgroundColor: "#0a0f1a", borderBottom: "1px solid rgba(201,168,76,0.18)" }}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-[88px]">
             {/* Logo */}
             <button
               onClick={() => scrollTo("hero")}
-              className="focus:outline-none flex items-center gap-3"
+              className="focus:outline-none flex items-center gap-4"
             >
               <img
                 src="/darchialogo.png"
                 alt="დარჩია და პარტნიორები"
-                className="h-12 w-auto object-contain"
-                style={{ maxWidth: "200px", mixBlendMode: "lighten" }}
+                className="h-14 w-auto object-contain"
+                style={{ maxWidth: "220px", mixBlendMode: "lighten" }}
               />
               <div
-                className="hidden sm:block text-xs tracking-[0.2em] uppercase leading-tight border-l pl-3"
-                style={{ color: DARK_GOLD, borderColor: `${GOLD}40` }}
+                className="hidden sm:block text-sm tracking-[0.15em] uppercase leading-tight border-l pl-4"
+                style={{ color: DARK_GOLD, borderColor: `${GOLD}50` }}
               >
-                <div>საადვოკატო ბიურო</div>
-                <div style={{ color: "#64748b", fontSize: "10px" }}>დაარსებულია 2015 წელს</div>
+                <div className="font-medium">საადვოკატო ბიურო</div>
+                <div style={{ color: "#64748b", fontSize: "11px", letterSpacing: "0.08em" }}>დაარსებულია 2015 წელს</div>
               </div>
             </button>
 
             {/* Desktop Nav */}
-            <nav className="hidden lg:flex items-center gap-8">
+            <nav className="hidden lg:flex items-center gap-10">
               {NAV_LINKS.map(({ label, href }) => (
                 <button
                   key={href}
                   onClick={() => scrollTo(href)}
-                  className="text-sm font-medium transition-colors duration-200 pb-1 focus:outline-none"
+                  className="text-[15px] font-medium transition-colors duration-200 pb-1 focus:outline-none tracking-wide"
                   style={{
                     color: "#cbd5e1",
                     borderBottom: "2px solid transparent",
@@ -178,7 +178,7 @@ const LawDemoClassic: React.FC = () => {
               ))}
               <button
                 onClick={() => scrollTo("contact")}
-                className="ml-2 px-6 py-2.5 text-sm font-semibold text-white transition-all duration-200 focus:outline-none"
+                className="ml-3 px-8 py-3 text-[15px] font-semibold text-white transition-all duration-200 focus:outline-none tracking-wide"
                 style={{ backgroundColor: DARK_GOLD }}
                 onMouseEnter={(e) =>
                   ((e.currentTarget as HTMLButtonElement).style.backgroundColor = GOLD)
@@ -244,7 +244,7 @@ const LawDemoClassic: React.FC = () => {
                 <button
                   key={href}
                   onClick={() => { scrollTo(href); setMenuOpen(false); }}
-                  className="block w-full text-left px-2 py-3 text-sm font-medium focus:outline-none transition-colors duration-150"
+                  className="block w-full text-left px-2 py-3.5 text-[15px] font-medium focus:outline-none transition-colors duration-150"
                   style={{ color: "#cbd5e1" }}
                   onMouseEnter={(e) => ((e.currentTarget as HTMLButtonElement).style.color = "#fff")}
                   onMouseLeave={(e) => ((e.currentTarget as HTMLButtonElement).style.color = "#cbd5e1")}
@@ -255,7 +255,7 @@ const LawDemoClassic: React.FC = () => {
               <div className="pt-2">
                 <button
                   onClick={() => { scrollTo("contact"); setMenuOpen(false); }}
-                  className="w-full py-3 text-sm font-semibold text-white focus:outline-none"
+                  className="w-full py-4 text-[15px] font-semibold text-white focus:outline-none tracking-wide"
                   style={{ backgroundColor: DARK_GOLD }}
                 >
                   კონსულტაცია

@@ -135,41 +135,41 @@ const LawDemoModern: React.FC = () => {
         }}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <button
               onClick={() => scrollTo("hero")}
-              className="focus:outline-none flex items-center gap-3"
+              className="focus:outline-none flex items-center gap-4"
             >
               <img
                 src="/darchialogo.png"
                 alt="დარჩია და პარტნიორები"
-                className="h-10 w-auto object-contain"
-                style={{ maxWidth: "160px", mixBlendMode: "multiply" }}
+                className="h-12 w-auto object-contain"
+                style={{ maxWidth: "180px", mixBlendMode: "multiply" }}
               />
-              <div className="hidden sm:block border-l border-slate-200 pl-3">
-                <div className="text-xs font-semibold tracking-tight text-slate-700">
+              <div className="hidden sm:block border-l border-slate-200 pl-4">
+                <div className="text-sm font-semibold tracking-tight text-slate-800">
                   საადვოკატო ბიურო
                 </div>
-                <div className="text-[10px] text-slate-400 tracking-wide">
+                <div className="text-[11px] text-slate-400 tracking-wide">
                   დაარსებულია 2015 წელს
                 </div>
               </div>
             </button>
 
             {/* Desktop Nav */}
-            <nav className="hidden lg:flex items-center gap-8">
+            <nav className="hidden lg:flex items-center gap-10">
               {NAV_LINKS.map(({ label, href }) => (
                 <button
                   key={href}
                   onClick={() => scrollTo(href)}
-                  className="text-sm font-medium transition-colors duration-150 focus:outline-none"
-                  style={{ color: "#64748b", background: "none", border: "none", cursor: "pointer" }}
+                  className="text-[15px] font-medium transition-colors duration-150 focus:outline-none"
+                  style={{ color: "#374151", background: "none", border: "none", cursor: "pointer" }}
                   onMouseEnter={(e) =>
                     ((e.currentTarget as HTMLButtonElement).style.color = DARK)
                   }
                   onMouseLeave={(e) =>
-                    ((e.currentTarget as HTMLButtonElement).style.color = "#64748b")
+                    ((e.currentTarget as HTMLButtonElement).style.color = "#374151")
                   }
                 >
                   {label}
@@ -177,7 +177,7 @@ const LawDemoModern: React.FC = () => {
               ))}
               <button
                 onClick={() => scrollTo("contact")}
-                className="ml-2 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 focus:outline-none"
+                className="ml-3 px-7 py-3 text-[15px] font-semibold text-white transition-all duration-200 focus:outline-none"
                 style={{ backgroundColor: DARK }}
                 onMouseEnter={(e) =>
                   ((e.currentTarget as HTMLButtonElement).style.backgroundColor = INDIGO)
@@ -240,7 +240,7 @@ const LawDemoModern: React.FC = () => {
                 <button
                   key={href}
                   onClick={() => { scrollTo(href); setMenuOpen(false); }}
-                  className="block w-full text-left px-2 py-3 text-sm font-medium focus:outline-none transition-colors duration-150"
+                  className="block w-full text-left px-2 py-3.5 text-[15px] font-medium focus:outline-none transition-colors duration-150"
                   style={{ color: "#475569", background: "none", border: "none", cursor: "pointer" }}
                   onMouseEnter={(e) =>
                     ((e.currentTarget as HTMLButtonElement).style.color = DARK)
@@ -255,7 +255,7 @@ const LawDemoModern: React.FC = () => {
               <div className="pt-2">
                 <button
                   onClick={() => { scrollTo("contact"); setMenuOpen(false); }}
-                  className="w-full py-3 text-sm font-semibold text-white focus:outline-none"
+                  className="w-full py-4 text-[15px] font-semibold text-white focus:outline-none"
                   style={{ backgroundColor: DARK }}
                 >
                   კონსულტაცია
