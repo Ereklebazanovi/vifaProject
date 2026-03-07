@@ -259,7 +259,7 @@ const LawDemoClassic: React.FC = () => {
       {/* ── HERO ── */}
       <section
         id="hero"
-        className="relative overflow-hidden flex items-center"
+        className="relative overflow-hidden flex items-start"
         style={{ minHeight: "95vh" }}
       >
         {/* Background image — prestigious dark law library hallway */}
@@ -279,7 +279,7 @@ const LawDemoClassic: React.FC = () => {
           }}
         />
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-18 w-full">
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-20 pb-28 w-full">
           <div className="max-w-3xl">
             {/* Gold rule + eyebrow */}
             <div className="flex items-center gap-4 mb-10">
