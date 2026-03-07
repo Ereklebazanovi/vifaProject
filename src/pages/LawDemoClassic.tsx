@@ -317,7 +317,7 @@ const LawDemoClassic: React.FC = () => {
               <span style={{ color: GOLD }}>„დარჩია</span>
               <span className="text-white"> და</span>
               <br />
-              <span className="text-white">პარტნიორები"</span>
+              <span className="text-white">პარტნიორები“</span>
             </h1>
 
             <p
@@ -506,7 +506,7 @@ const LawDemoClassic: React.FC = () => {
               </h2>
 
               <p className="text-slate-700 leading-relaxed mb-6 text-lg">
-                შპს „დარჩია და პარტნიორები" დაარსდა 2015 წელს და ამ
+                შპს „დარჩია და პარტნიორები“ დაარსდა 2015 წელს და ამ
                 პერიოდიდან ახორციელებს ფიზიკური და იურიდიული პირების
                 სამართლებრივი ინტერესების დაცვას სასამართლოსა თუ სხვა
                 სახელმწიფო დაწესებულებებში.
@@ -803,7 +803,7 @@ const LawDemoClassic: React.FC = () => {
               </span>
             </div>
             <p className="text-xs text-slate-500 text-center">
-              © 2015 შპს „დარჩია და პარტნიორები" · +995 32 211 05 06 · giadarchia@gmail.com
+              © 2015 შპს „დარჩია და პარტნიორები“ · +995 32 211 05 06 · giadarchia@gmail.com
             </p>
             <div className="flex gap-6">
               {["კონფიდენციალობა", "დაგვიკავშირდით"].map((item) => (

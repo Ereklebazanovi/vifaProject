@@ -506,26 +506,7 @@ const LawDemoModern: React.FC = () => {
                 მომსახურება ხელმისაწვდომია ქართულ, რუსულ და ინგლისურ ენებზე.
               </p>
 
-              {/* Key stats */}
-              <div className="grid grid-cols-3 gap-6 mb-8">
-                {[
-                  { num: "2015", label: "დაარსებულია" },
-                  { num: "3", label: "სამართლის სფერო" },
-                  { num: "3", label: "სამუშაო ენა" },
-                ].map(({ num, label }) => (
-                  <div key={label} className="border-l-2 pl-4" style={{ borderColor: INDIGO }}>
-                    <div
-                      className="text-2xl font-bold tracking-tight"
-                      style={{ color: DARK }}
-                    >
-                      {num}
-                    </div>
-                    <div className="text-xs text-slate-400 uppercase tracking-widest mt-1">
-                      {label}
-                    </div>
-                  </div>
-                ))}
-              </div>
+             
             </div>
 
             {/* Right — team cards */}
@@ -665,60 +646,7 @@ const LawDemoModern: React.FC = () => {
         </div>
       </section>
 
-      {/* ── PROCESS ── */}
-      <section id="process" style={{ backgroundColor: DARK }} className="py-20">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          {/* Header */}
-          <div className="text-center mb-14">
-            <div className="inline-flex items-center gap-2 mb-4">
-              <div className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
-              <span className="text-xs font-medium text-slate-500 tracking-[0.3em] uppercase">
-                როგორ ვმუშაობთ
-              </span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white">
-              ჩვენი პროცესი
-            </h2>
-          </div>
-
-          {/* Steps */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-slate-800">
-            {PROCESS_STEPS.map(({ step, title, desc }, idx) => (
-              <div
-                key={step}
-                className="p-8 transition-colors duration-200 group"
-                style={{ backgroundColor: DARK }}
-                onMouseEnter={(e) =>
-                  ((e.currentTarget as HTMLDivElement).style.backgroundColor = "#1e293b")
-                }
-                onMouseLeave={(e) =>
-                  ((e.currentTarget as HTMLDivElement).style.backgroundColor = DARK)
-                }
-              >
-                <div
-                  className="text-4xl font-bold tracking-tight mb-6 transition-opacity duration-200"
-                  style={{ color: INDIGO, opacity: 0.25 }}
-                  onMouseEnter={(e) =>
-                    ((e.currentTarget as HTMLDivElement).style.opacity = "1")
-                  }
-                  onMouseLeave={(e) =>
-                    ((e.currentTarget as HTMLDivElement).style.opacity = "0.25")
-                  }
-                >
-                  {step}
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-3 tracking-tight">
-                  {title}
-                </h3>
-                <p className="text-slate-400 text-sm leading-relaxed">{desc}</p>
-                {idx < PROCESS_STEPS.length - 1 && (
-                  <div className="mt-6 text-slate-600 text-xs">→</div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+     
 
       {/* ── CONTACT ── */}
       <section id="contact" className="bg-white py-20">
