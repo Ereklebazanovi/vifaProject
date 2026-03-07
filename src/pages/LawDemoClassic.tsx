@@ -269,8 +269,8 @@ const LawDemoClassic: React.FC = () => {
       {/* ── HERO ── */}
       <section
         id="hero"
-        className="relative overflow-hidden flex items-start"
-        style={{ maxHeight: "76vh" }}
+        className="relative overflow-hidden flex items-center py-13 md:py-0"
+        style={{ minHeight: "85vh", display: "flex", alignItems: "center" }}
       >
         {/* Background image — prestigious dark law library hallway */}
         <div
