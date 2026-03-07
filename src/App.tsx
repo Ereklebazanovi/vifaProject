@@ -31,6 +31,8 @@ const ChatbotRequestForm = lazy(() => import("./pages/ChatbotRequestForm")); // 
 const ChatbotRequestsDashboard = lazy(
   () => import("./admin/ChatbotRequestsDashboard")
 ); // ახალი ➕
+const LawDemoClassic = lazy(() => import("./pages/LawDemoClassic"));
+const LawDemoModern = lazy(() => import("./pages/LawDemoModern"));
 
 // Error Boundary Component
 class ErrorBoundary extends React.Component<
@@ -206,6 +208,9 @@ const AppWithRouter: React.FC = () => {
               element={<ChatbotRequestsDashboard />}
             />{" "}
             {/* ახალი ➕ */}
+            {/* Hidden law firm demo pages — isolated layout, no navbar/footer */}
+            <Route path="/law-demo-classic" element={<LawDemoClassic />} />
+            <Route path="/law-demo-modern" element={<LawDemoModern />} />
           </Routes>
         </Suspense>
       </RouteTransition>

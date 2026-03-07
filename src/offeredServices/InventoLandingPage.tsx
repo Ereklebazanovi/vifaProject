@@ -14,7 +14,6 @@ import {
   FaRedo,
   FaArrowRight,
   FaCheck,
-  FaStar,
   FaCommentDots,
   FaPhone,
   FaTimesCircle,
@@ -59,25 +58,36 @@ const inventoTranslations = {
 
     "pricing.title": "საინვესტიციო გეგმები",
 
-    "plan1.title": "Invento WMS License",
-    "plan1.price": "890₾",
-    "plan1.f1": "Invento WMS-ის მუდმივი ლიცენზია (Lifetime)",
-    "plan1.f2": "სისტემის სრული იმპლემენტაცია და დანერგვა",
-    "plan1.f3": "სისტემის მოხმარების დეტალური სახელმძღვანელო",
-    "plan1.f4": "მონაცემთა ბაზის უსაფრთხოება (Cloud Security)",
-    "plan1.f5": "1 თვე უფასო ტექნიკური მხარდაჭერა (შემდგომ 30₾/თვე)",
-    "plan1.btn": "უფასო კონსულტაცია",
+    "plan1.title": "Invento WMS (ყოველთვიური)",
+    "plan1.price": "79₾",
+    "plan1.sub": "თვეში",
+    "plan1.f1": "სისტემის სრული წვდომა და მარაგების მართვა",
+    "plan1.f2": "შეუზღუდავი შეკვეთების გატარება",
+    "plan1.f3": "ტექნიკური მხარდაჭერა სამუშაო საათებში",
+    "plan1.f4": "გააუქმეთ ნებისმიერ დროს",
+    "plan1.btn": "სცადე უფასოდ",
 
-    "plan2.title": "E-commerce Bundle",
-    "plan2.price": "1999₾",
-    "plan2.f1": "თანამედროვე ონლაინ მაღაზიის დამზადება",
-    "plan2.f2": "Invento WMS-ის ლიცენზია + სრული სინქრონიზაცია",
-    "plan2.f3": "გადახდის სისტემები (TBC, BOG, Apple Pay)",
-    "plan2.f4": "სერვერული გამართვა და დომენის დაკავშირება",
-    "plan2.f5": "SEO ოპტიმიზაცია და Google Analytics",
-    "plan2.btn": "უფასო კონსულტაცია",
+    "plan2.badge": "★ ყველაზე მოთხოვნადი",
+    "plan2.title": "Invento WMS (წლიური)",
+    "plan2.price": "750₾",
+    "plan2.sub": "წელიწადში",
+    "plan2.f1": "ზოგავთ 20%-ს (თითქმის 2 თვე უფასოდ)",
+    "plan2.f2": "პროგრამის ათვისებაში სრული პერსონალური დახმარება",
+    "plan2.f3": "ტექნიკური მხარდაჭერა სამუშაო საათებში",
+    "plan2.f4": "თქვენი არსებული პროდუქციის სისტემაში სრულად ატვირთვა",
+    "plan2.btn": "სცადე უფასოდ",
 
-    "payment.terms": "გადახდის პირობები: 50% პროექტის დაწყებისას — 50% ჩაბარებისას",
+    "plan3.title": "E-commerce Bundle",
+    "plan3.price": "1999₾",
+    "plan3.sub": "ერთჯერადად",
+    "plan3.f1": "თანამედროვე ონლაინ მაღაზიის დამზადება",
+    "plan3.f2": "Invento WMS-ის ლიცენზია + სრული სინქრონიზაცია",
+    "plan3.f3": "გადახდის სისტემები (TBC, BOG, Apple Pay)",
+    "plan3.f4": "სერვერული გამართვა და დომენის დაკავშირება",
+    "plan3.f5": "SEO ოპტიმიზაცია და Google Analytics",
+    "plan3.btn": "უფასო კონსულტაცია",
+
+    "payment.terms": "🎁 7 - დღიანი სრულიად უფასო საცდელი პერიოდი — გამოსცადეთ სისტემა თქვენს რეალურ ბიზნესში!",
 
     "cta.title": "Invento WMS — სრული კონტროლი თქვენს ონლაინ გაყიდვებზე",
     "cta.btn": "მოგვწერეთ WhatsApp-ში"
@@ -113,25 +123,36 @@ const inventoTranslations = {
     "feature6.title": "E-commerce Integration",
     "feature6.desc": "Full synchronization with custom e-commerce websites built by Vifa Digital.",
 
-    "pricing.title": "Investment Plans",
+    "pricing.title": "Pricing Plans",
 
-    "plan1.title": "Invento WMS License",
-    "plan1.price": "890₾",
-    "plan1.f1": "Invento WMS Lifetime License",
-    "plan1.f2": "Full System Implementation & Setup",
-    "plan1.f3": "Staff Onboarding & Training",
-    "plan1.f4": "Data Security & Daily Backups",
-    "plan1.f5": "1 Month Free Priority Support",
-    "plan1.btn": "Request Invoice",
+    "plan1.title": "Invento WMS (Monthly)",
+    "plan1.price": "79₾",
+    "plan1.sub": "per month",
+    "plan1.f1": "Full system access & inventory management",
+    "plan1.f2": "Unlimited order processing",
+    "plan1.f3": "Technical support during business hours",
+    "plan1.f4": "Cancel anytime",
+    "plan1.btn": "Try for Free",
 
-    "plan2.title": "E-commerce Bundle",
-    "plan2.price": "1999₾",
-    "plan2.f1": "Custom E-commerce Website Development",
-    "plan2.f2": "Invento WMS License + Real-time Sync",
-    "plan2.f3": "Payment Gateway Integration (Cards/Apple Pay)",
-    "plan2.f4": "Server Configuration & Domain Setup",
-    "plan2.f5": "SEO Optimization & Analytics",
-    "plan2.btn": "Free Consultation",
+    "plan2.badge": "★ Most Popular",
+    "plan2.title": "Invento WMS (Annual)",
+    "plan2.price": "750₾",
+    "plan2.sub": "per year (only 62.5₾/month)",
+    "plan2.f1": "Save 20% (almost 2 months free)",
+    "plan2.f2": "Full system access & inventory management",
+    "plan2.f3": "Priority 24/7 technical support",
+    "plan2.f4": "Free initial system installation",
+    "plan2.btn": "Try for Free",
+
+    "plan3.title": "E-commerce Bundle",
+    "plan3.price": "1999₾",
+    "plan3.sub": "one-time",
+    "plan3.f1": "Custom E-commerce Website Development",
+    "plan3.f2": "Invento WMS License + Real-time Sync",
+    "plan3.f3": "Payment Gateway Integration (TBC, BOG, Apple Pay)",
+    "plan3.f4": "Server Configuration & Domain Setup",
+    "plan3.f5": "SEO Optimization & Google Analytics",
+    "plan3.btn": "Free Consultation",
 
     "payment.terms": "Payment Terms: 50% Upfront — 50% Upon Completion",
 
@@ -469,6 +490,21 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
           {/* HOW IT WORKS - SCROLLYTELLING */}
           <InventoScrollyTelling currentLanguage={currentLanguage} />
 
+<motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                viewport={{ once: true }}
+                className="text-center "
+              >
+                <div className="inline-flex items-center gap-2 bg-[#0a0a0a]/80 border border-green-500/30 rounded-lg px-6 py-3">
+                  <FaShieldAlt className="w-5 h-5 text-green-400" />
+                  <span className={`text-green-400 ${currentLanguage === 'ka' ? 'font-semibold' : 'font-semibold'}`}>
+                    {t("payment.terms")}
+                  </span>
+                </div>
+              </motion.div>
+
           {/* PRICING */}
           <section className="py-12 bg-[#050505]">
             <div className="container mx-auto px-6">
@@ -484,31 +520,26 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
                 </h2>
               </motion.div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 !max-w-7xl mx-auto">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-center">
+                {/* Card 1: Basic - Monthly */}
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.1 }}
                   viewport={{ once: true }}
-                  className="relative p-6 rounded-lg border-2 border-purple-500/80 bg-gradient-to-br from-purple-900/20 to-blue-900/20"
+                  className="p-6 rounded-xl border border-gray-700/60 bg-[#0a0a0a]/80 hover:border-gray-500/60 transition-all duration-300 flex flex-col"
                 >
-                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
-                      <FaStar size={12} />
-                      Lifetime
-                    </span>
+                  <h3 className="text-lg text-gray-300 mb-3 font-bold">{t("plan1.title")}</h3>
+                  <div className="mb-1">
+                    <span className="text-4xl text-white font-bold">{t("plan1.price")}</span>
                   </div>
+                  <p className="text-sm text-gray-400 mb-6">{t("plan1.sub")}</p>
 
-                  <h3 className={`text-xl text-purple-400 mb-3 mt-2 ${currentLanguage === 'ka' ? 'font-bold' : 'font-bold'}`}>{t("plan1.title")}</h3>
-                  <div className="mb-4">
-                    <span className={`text-3xl text-white ${currentLanguage === 'ka' ? 'font-bold' : 'font-bold'}`}>{t("plan1.price")}</span>
-                  </div>
-
-                  <div className="space-y-3 mb-6">
-                    {["f1", "f2", "f3", "f4", "f5"].map((f, i) => (
+                  <div className="space-y-3 mb-6 flex-1">
+                    {["f1", "f2", "f3", "f4"].map((f, i) => (
                       <div key={i} className="flex items-start gap-2">
                         <FaCheck className="w-4 h-4 text-green-400 mt-0.5 shrink-0" />
-                        <span className="text-sm text-gray-200 font-medium">{t(`plan1.${f}`)}</span>
+                        <span className="text-sm text-gray-300">{t(`plan1.${f}`)}</span>
                       </div>
                     ))}
                   </div>
@@ -517,29 +548,42 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
                     href={whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full block text-center py-3 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 rounded-lg font-semibold transition-all"
+                    className="w-full block text-center py-3 border border-gray-600 hover:border-gray-400 rounded-lg font-semibold text-gray-200 hover:text-white transition-all"
                   >
                     {t("plan1.btn")}
                   </a>
                 </motion.div>
 
+                {/* Card 2: Popular - Annual (highlighted) */}
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
                   viewport={{ once: true }}
-                  className="p-6 rounded-lg border border-gray-700/50 bg-[#0a0a0a]/80 hover:border-orange-500/50 transition-all duration-300"
+                  className="relative p-6 rounded-xl bg-gradient-to-br from-blue-950/60 to-purple-950/60 flex flex-col lg:scale-105 shadow-2xl"
+                  style={{ boxShadow: "0 0 0 2px transparent, 0 0 30px rgba(139,92,246,0.25)" }}
                 >
-                  <h3 className={`text-xl text-orange-400 mb-3 ${currentLanguage === 'ka' ? 'font-bold' : 'font-bold'}`}>{t("plan2.title")}</h3>
-                  <div className="mb-4">
-                    <span className={`text-3xl text-white ${currentLanguage === 'ka' ? 'font-bold' : 'font-bold'}`}>{t("plan2.price")}</span>
+                  {/* Glowing gradient border */}
+                  <div className="absolute inset-0 rounded-xl p-[2px] bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 -z-10" />
+                  <div className="absolute inset-[2px] rounded-[10px] bg-gradient-to-br from-blue-950/90 to-purple-950/90 -z-10" />
+
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                    <span className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shadow-lg">
+                      {t("plan2.badge")}
+                    </span>
                   </div>
 
-                  <div className="space-y-3 mb-6">
-                    {["f1", "f2", "f3", "f4", "f5"].map((f, i) => (
+                  <h3 className="text-lg text-purple-300 mb-3 mt-2 font-bold">{t("plan2.title")}</h3>
+                  <div className="mb-1">
+                    <span className="text-4xl text-white font-bold">{t("plan2.price")}</span>
+                  </div>
+                  <p className="text-sm text-purple-300/80 mb-6">{t("plan2.sub")}</p>
+
+                  <div className="space-y-3 mb-6 flex-1">
+                    {["f1", "f2", "f3", "f4"].map((f, i) => (
                       <div key={i} className="flex items-start gap-2">
-                        <FaCheck className="w-4 h-4 text-green-400 mt-0.5 shrink-0" />
-                        <span className="text-sm text-gray-200 font-medium">{t(`plan2.${f}`)}</span>
+                        <FaCheck className={`w-4 h-4 mt-0.5 shrink-0 ${i === 0 ? 'text-yellow-400' : 'text-green-400'}`} />
+                        <span className={`text-sm font-medium ${i === 0 ? 'text-yellow-300' : 'text-gray-200'}`}>{t(`plan2.${f}`)}</span>
                       </div>
                     ))}
                   </div>
@@ -548,27 +592,47 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
                     href={whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full block text-center py-3 bg-orange-600 hover:bg-orange-700 rounded-lg font-semibold transition-colors"
+                    className="w-full block text-center py-3 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 rounded-lg font-bold text-white transition-all shadow-lg shadow-purple-900/40"
                   >
                     {t("plan2.btn")}
                   </a>
                 </motion.div>
+
+                {/* Card 3: Premium Bundle */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                  viewport={{ once: true }}
+                  className="p-6 rounded-xl border border-gray-700/60 bg-[#0a0a0a]/80 hover:border-gray-500/60 transition-all duration-300 flex flex-col"
+                >
+                  <h3 className="text-lg text-orange-400 mb-3 font-bold">{t("plan3.title")}</h3>
+                  <div className="mb-1">
+                    <span className="text-4xl text-white font-bold">{t("plan3.price")}</span>
+                  </div>
+                  <p className="text-sm text-gray-400 mb-6">{t("plan3.sub")}</p>
+
+                  <div className="space-y-3 mb-6 flex-1">
+                    {["f1", "f2", "f3", "f4", "f5"].map((f, i) => (
+                      <div key={i} className="flex items-start gap-2">
+                        <FaCheck className="w-4 h-4 text-green-400 mt-0.5 shrink-0" />
+                        <span className="text-sm text-gray-300">{t(`plan3.${f}`)}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full block text-center py-3 bg-orange-600 hover:bg-orange-700 rounded-lg font-semibold text-white transition-colors"
+                  >
+                    {t("plan3.btn")}
+                  </a>
+                </motion.div>
               </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                viewport={{ once: true }}
-                className="text-center mt-8"
-              >
-                <div className="inline-flex items-center gap-2 bg-[#0a0a0a]/80 border border-green-500/30 rounded-lg px-6 py-3">
-                  <FaShieldAlt className="w-5 h-5 text-green-400" />
-                  <span className={`text-green-400 ${currentLanguage === 'ka' ? 'font-semibold' : 'font-semibold'}`}>
-                    {t("payment.terms")}
-                  </span>
-                </div>
-              </motion.div>
+              
             </div>
           </section>
 
