@@ -323,8 +323,9 @@ const LawDemoModern: React.FC = () => {
               className="text-base md:text-xl leading-relaxed mb-8 max-w-xl mx-auto md:mx-0"
               style={{ color: "rgba(226,232,240,0.80)" }}
             >
-              შპს „დარჩია და პარტნიორები“ — პროფესიონალური სამართლებრივი
-              მომსახურება ფიზიკური და იურიდიული პირებისთვის.
+              თქვენი უფლებების საიმედო დაცვა ყველა ინსტანციაში. მრავალწლიანი გამოცდილება და პროფესიონალიზმი.
+
+
             </p>
 
             {/* Buttons - Symmetrical stacking for mobile */}
