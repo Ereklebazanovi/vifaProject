@@ -293,7 +293,7 @@ const LawDemoModern: React.FC = () => {
           style={{ background: "linear-gradient(to top, rgba(79,70,229,0.08), transparent)" }}
         />
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 w-full mt-5">
           <div className="max-w-2xl mx-auto md:mx-0 text-center md:text-left">
             {/* Eyebrow - Compact mb-4 */}
             <div className="flex items-center justify-center md:justify-start gap-2.5 mb-6">
