@@ -137,7 +137,7 @@ const LawDemoClassic: React.FC = () => {
               className="focus:outline-none flex items-center gap-3"
             >
               <img
-                src="public/darchialogo.png"
+                src="/darchialogo.png"
                 alt="დარჩია და პარტნიორები"
                 className="h-12 w-auto object-contain"
                 style={{ maxWidth: "200px", mixBlendMode: "lighten" }}
@@ -790,14 +790,14 @@ const LawDemoClassic: React.FC = () => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <img
-                src="public/darchialogo.png"
+                src="/darchialogo.png"
                 alt="დარჩია და პარტნიორები"
                 className="h-8 w-auto object-contain"
                 style={{ maxWidth: "140px", opacity: 0.85, mixBlendMode: "lighten" }}
               />
               <span
                 className="text-xs font-medium"
-                style={{ color: `${GOLD}99` }}
+                style={{ color: GOLD }}
               >
                 საადვოკატო ბიურო
               </span>
