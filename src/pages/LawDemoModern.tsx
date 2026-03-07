@@ -269,14 +269,14 @@ const LawDemoModern: React.FC = () => {
       {/* ── HERO ── */}
       <section
         id="hero"
-        className="relative flex items-start overflow-hidden"
-        style={{ maxHeight: "90vh" }}
+        className="relative flex items-center overflow-hidden pt-16 pb-10 md:pt-20 md:pb-24"
+        style={{ minHeight: "auto" }}
       >
         {/* Background — dramatic dark glass skyscraper */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: "url(/dimarco2.jpg)",
+            backgroundImage: "url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000')",
           }}
         />
         {/* Dark overlay — ensures white text is 100% legible */}
@@ -293,13 +293,13 @@ const LawDemoModern: React.FC = () => {
           style={{ background: "linear-gradient(to top, rgba(79,70,229,0.08), transparent)" }}
         />
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-28 md:pt-20 pb-16 md:pb-24 w-full">
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 w-full">
           <div className="max-w-2xl mx-auto md:mx-0 text-center md:text-left">
-            {/* Eyebrow */}
-            <div className="flex items-center justify-center md:justify-start gap-2.5 mb-8">
+            {/* Eyebrow - Compact mb-4 */}
+            <div className="flex items-center justify-center md:justify-start gap-2.5 mb-6">
               <div className="w-5 h-px" style={{ backgroundColor: INDIGO }} />
               <span
-                className="text-xs font-medium tracking-[0.35em] uppercase"
+                className="text-[10px] font-medium tracking-[0.35em] uppercase"
                 style={{ color: "#a5b4fc" }}
               >
                 2015 წლიდან თქვენს გვერდით
@@ -307,38 +307,32 @@ const LawDemoModern: React.FC = () => {
               <div className="w-5 h-px md:hidden" style={{ backgroundColor: INDIGO }} />
             </div>
 
+            {/* Title - Scaled for mobile (text-3xl) */}
             <h1
-              className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-8 text-white"
+              className="text-3xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6 text-white"
             >
               საადვოკატო ბიურო
               <br />
-
-
-"<span className="text-indigo-600">დარჩია</span> და
-            
-              <br />
-              პარტნიორები"
+              „<span className="text-indigo-500">დარჩია</span> და
+              <br className="hidden md:block" />
+              პარტნიორები“
             </h1>
 
+            {/* Subtitle - Reduced margin */}
             <p
-              className="text-lg md:text-xl leading-relaxed mb-10 max-w-xl mx-auto md:mx-0"
+              className="text-base md:text-xl leading-relaxed mb-8 max-w-xl mx-auto md:mx-0"
               style={{ color: "rgba(226,232,240,0.80)" }}
             >
-              შპს „დარჩია და პარტნიორები" — პროფესიონალური სამართლებრივი
+              შპს „დარჩია და პარტნიორები“ — პროფესიონალური სამართლებრივი
               მომსახურება ფიზიკური და იურიდიული პირებისთვის.
             </p>
 
+            {/* Buttons - Symmetrical stacking for mobile */}
             <div className="flex flex-col sm:flex-row gap-3 items-center md:items-start justify-center md:justify-start">
               <button
                 onClick={() => scrollTo("contact")}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-semibold text-white transition-all duration-200 focus:outline-none"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-semibold text-white transition-all duration-200 focus:outline-none"
                 style={{ backgroundColor: INDIGO }}
-                onMouseEnter={(e) =>
-                  ((e.currentTarget as HTMLButtonElement).style.backgroundColor = "#4338ca")
-                }
-                onMouseLeave={(e) =>
-                  ((e.currentTarget as HTMLButtonElement).style.backgroundColor = INDIGO)
-                }
               >
                 უფასო კონსულტაცია
                 <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor">
@@ -347,16 +341,8 @@ const LawDemoModern: React.FC = () => {
               </button>
               <button
                 onClick={() => scrollTo("services")}
-                className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 text-sm font-semibold transition-all duration-200 focus:outline-none border"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold transition-all duration-200 focus:outline-none border"
                 style={{ color: "#e2e8f0", borderColor: "rgba(255,255,255,0.25)", backgroundColor: "transparent" }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.55)";
-                  (e.currentTarget as HTMLButtonElement).style.color = "#fff";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.25)";
-                  (e.currentTarget as HTMLButtonElement).style.color = "#e2e8f0";
-                }}
               >
                 სერვისები →
               </button>
