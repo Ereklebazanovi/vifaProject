@@ -5,7 +5,7 @@ const NAV_LINKS = [
   { label: "სერვისები", href: "services" },
   { label: "ჩვენს შესახებ", href: "about" },
   { label: "ჩვენი გუნდი", href: "team" },
-  { label: "კონტაქტი", href: "contact" },
+  // { label: "კონტაქტი", href: "contact" },
 ];
 
 const SERVICES = [
@@ -793,7 +793,7 @@ const LawDemoClassic: React.FC = () => {
                 src="public/darchialogo.png"
                 alt="დარჩია და პარტნიორები"
                 className="h-8 w-auto object-contain"
-                style={{ maxWidth: "140px", opacity: 0.9, filter: "brightness(0) invert(1)" }}
+                style={{ maxWidth: "140px", opacity: 0.85, mixBlendMode: "lighten" }}
               />
               <span
                 className="text-xs font-medium"
@@ -803,7 +803,7 @@ const LawDemoClassic: React.FC = () => {
               </span>
             </div>
             <p className="text-xs text-slate-500 text-center">
-              © 2024 შპს „დარჩია და პარტნიორები" · +995 32 211 05 06 · giadarchia@gmail.com
+              © 2015 შპს „დარჩია და პარტნიორები" · +995 32 211 05 06 · giadarchia@gmail.com
             </p>
             <div className="flex gap-6">
               {["კონფიდენციალობა", "დაგვიკავშირდით"].map((item) => (

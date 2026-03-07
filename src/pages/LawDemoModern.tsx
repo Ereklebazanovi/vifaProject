@@ -5,7 +5,7 @@ const NAV_LINKS = [
   { label: "ჩვენს შესახებ", href: "about" },
   { label: "ჩვენი გუნდი", href: "team" },
   { label: "პროცესი", href: "process" },
-  { label: "კონტაქტი", href: "contact" },
+  // { label: "კონტაქტი", href: "contact" },
 ];
 
 const SERVICES = [
@@ -291,7 +291,7 @@ const LawDemoModern: React.FC = () => {
       <section
         id="hero"
         className="relative flex items-start overflow-hidden"
-        style={{ maxHeight: "80vh" }}
+        style={{ maxHeight: "85vh" }}
       >
         {/* Background — dramatic dark glass skyscraper */}
         <div
@@ -315,7 +315,7 @@ const LawDemoModern: React.FC = () => {
           style={{ background: "linear-gradient(to top, rgba(79,70,229,0.08), transparent)" }}
         />
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-26 md:pt-20 pb-16 md:pb-24 w-full">
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-28 md:pt-20 pb-16 md:pb-24 w-full">
           <div className="max-w-2xl mx-auto md:mx-0 text-center md:text-left">
             {/* Eyebrow */}
             <div className="flex items-center justify-center md:justify-start gap-2.5 mb-8">
@@ -895,7 +895,7 @@ const LawDemoModern: React.FC = () => {
             </div>
 
             <p className="text-xs text-slate-400 text-center">
-              © 2024 შპს „დარჩია და პარტნიორები" · +995 32 211 05 06 · giadarchia@gmail.com
+              © 2015 შპს „დარჩია და პარტნიორები" · +995 32 211 05 06 · giadarchia@gmail.com
             </p>
 
             <div className="flex items-center gap-6">
