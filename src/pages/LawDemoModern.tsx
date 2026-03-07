@@ -269,14 +269,14 @@ const LawDemoModern: React.FC = () => {
       {/* ── HERO ── */}
       <section
         id="hero"
-        className="relative flex items-center overflow-hidden pt-16 pb-10 md:pt-20 md:pb-24"
+        className="relative flex items-center overflow-hidden pt-24 pb-10 md:pt-20 md:pb-24"
         style={{ minHeight: "auto" }}
       >
         {/* Background — dramatic dark glass skyscraper */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000')",
+            backgroundImage: "url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
           }}
         />
         {/* Dark overlay — ensures white text is 100% legible */}
