@@ -270,14 +270,16 @@ const LawDemoModern: React.FC = () => {
       <section
         id="hero"
         className="relative flex items-start overflow-hidden"
-        style={{ maxHeight: "85vh" }}
+        style={{ maxHeight: "90vh" }}
       >
         {/* Background — dramatic dark glass skyscraper */}
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-no-repeat"
           style={{
-            backgroundImage:
-             Image ? "url(/herophoto.jpg)" : "none",
+            backgroundImage: "url(/herophoto.jpg)",
+            backgroundSize: "contain",
+            backgroundPosition: "center center",
+            backgroundColor: "#090e1f",
           }}
         />
         {/* Dark overlay — ensures white text is 100% legible */}
@@ -312,9 +314,10 @@ const LawDemoModern: React.FC = () => {
               className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-8 text-white"
             >
               საადვოკატო ბიურო
+              <br />
 
 
-"დარჩია და
+"<span className="text-indigo-600">დარჩია</span> და
             
               <br />
               პარტნიორები"

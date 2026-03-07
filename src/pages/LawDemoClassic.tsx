@@ -121,7 +121,7 @@ const LawDemoClassic: React.FC = () => {
 
   return (
     <div
-      className="law-demo-classic bg-white min-h-screen"
+      className="law-demo-classic bg-white min-h-screen overflow-x-hidden"
       style={{ fontFamily: "'Noto Sans Georgian', sans-serif" }}
     >
       {/* ── STICKY NAVBAR ── */}
@@ -382,7 +382,7 @@ const LawDemoClassic: React.FC = () => {
               <div className="h-px w-12" style={{ backgroundColor: DARK_GOLD }} />
             </div>
             <h2
-              className="text-4xl md:text-5xl font-bold mb-4"
+              className="text-3xl md:text-5xl font-bold mb-4"
               style={{ color: NAVY }}
             >
               ჩვენი სერვისები
@@ -497,7 +497,7 @@ const LawDemoClassic: React.FC = () => {
                 </span>
               </div>
               <h2
-                className="text-4xl md:text-5xl font-bold leading-tight mb-6"
+                className="text-3xl md:text-5xl font-bold leading-tight mb-6"
                 style={{ color: NAVY }}
               >
                 სამართლებრივი
