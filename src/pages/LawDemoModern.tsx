@@ -40,12 +40,12 @@ const TEAM = [
 ];
 
 const TEAM_PHOTOS = [
-  { src: "/photo1.jpg", title: "პარტნიორი", desc: "მრავალწლიანი გამოცდილება საერთო სპეციალიზაციით." },
-  { src: "/photo2.jpg", title: "პარტნიორი", desc: "სამოქალაქო და სისხლის სამართლის სფეროში." },
-  { src: "/photo3.jpg", title: "პარტნიორი", desc: "ადმინისტრაციული და კორპორატიული სამართალი." },
-  { src: "/photo4.jpg", title: "პარტნიორი", desc: "მრავალწლიანი გამოცდილება საერთო სპეციალიზაციით." },
-
-  { src: "/photo6.jpg", title: "პარტნიორი", desc: "მრავალწლიანი გამოცდილება საერთო სპეციალიზაციით." },
+  { src: "public/photo1.jpg", title: "პარტნიორი", desc: "მრავალწლიანი გამოცდილება საერთო სპეციალიზაციით." },
+  { src: "public/photo2.jpg", title: "პარტნიორი", desc: "სამოქალაქო და სისხლის სამართლის სფეროში." },
+  { src: "public/photo3.jpg", title: "პარტნიორი", desc: "ადმინისტრაციული და კორპორატიული სამართალი." },
+  { src: "public/photo4.jpg", title: "პარტნიორი", desc: "მრავალწლიანი გამოცდილება საერთო სპეციალიზაციით." },
+  
+  { src: "public/photo6.jpg", title: "პარტნიორი", desc: "მრავალწლიანი გამოცდილება საერთო სპეციალიზაციით." },
 ];
 const scrollTo = (id: string) => {
   const el = document.getElementById(id);
@@ -277,7 +277,7 @@ const LawDemoModern: React.FC = () => {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage:
-             "url(/herophoto.jpg)",
+             Image ? "url(/herophoto.jpg)" : "none",
           }}
         />
         {/* Dark overlay — ensures white text is 100% legible */}
@@ -294,7 +294,7 @@ const LawDemoModern: React.FC = () => {
           style={{ background: "linear-gradient(to top, rgba(79,70,229,0.08), transparent)" }}
         />
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-32 md:pt-20 pb-16 md:pb-24 w-full mt-5">
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-28 md:pt-20 pb-16 md:pb-24 w-full">
           <div className="max-w-2xl mx-auto md:mx-0 text-center md:text-left">
             {/* Eyebrow */}
             <div className="flex items-center justify-center md:justify-start gap-2.5 mb-8">
