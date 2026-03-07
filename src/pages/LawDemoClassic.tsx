@@ -458,7 +458,7 @@ const LawDemoClassic: React.FC = () => {
             {/* Office image — no overflow bleed */}
             <div className="w-full aspect-4/3 overflow-hidden relative">
               <img
-                src="/public/herophoto.jpg"
+                src="/herophoto.jpg"
                 alt="საადვოკატო ბიუროს ოფისი — კლასიკური ინტერიერი"
                 className="w-full h-full object-cover object-center"
                 style={{ filter: "brightness(0.82) saturate(0.72)" }}

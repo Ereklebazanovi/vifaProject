@@ -277,7 +277,7 @@ const LawDemoModern: React.FC = () => {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage:
-             Image ? "url(/public/dimarco2.jpg)" : "none",
+             "url(/herophoto.jpg)",
           }}
         />
         {/* Dark overlay — ensures white text is 100% legible */}
