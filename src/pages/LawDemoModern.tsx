@@ -274,12 +274,9 @@ const LawDemoModern: React.FC = () => {
       >
         {/* Background — dramatic dark glass skyscraper */}
         <div
-          className="absolute inset-0 bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: "url(/herophoto.jpg)",
-            backgroundSize: "contain",
-            backgroundPosition: "center center",
-            backgroundColor: "#090e1f",
+            backgroundImage: "url(/dimarco2.jpg)",
           }}
         />
         {/* Dark overlay — ensures white text is 100% legible */}
