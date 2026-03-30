@@ -177,7 +177,7 @@ const SimpleNavbar: React.FC = () => {
               className={`px-4 py-2 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 transform hover:scale-105 border ${
                 location.pathname === aiChatbotLink.path
                   ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-lg"
-                  : "text-slate-300 hover:text-white hover:bg-white/5 hover:shadow-md border-blue-500/30 hover:border-blue-400"
+                  : "text-slate-200 bg-slate-800/40 hover:text-white hover:bg-slate-700/60 hover:shadow-md border-blue-500/50 hover:border-blue-400"
               }`}
             >
               <div className="flex items-center gap-2">
@@ -192,7 +192,7 @@ const SimpleNavbar: React.FC = () => {
                 className={`px-4 py-2 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 transform hover:scale-105 border ${
                   location.pathname === link.path
                     ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-lg"
-                    : "text-slate-300 hover:text-white hover:bg-white/5 hover:shadow-md border-blue-500/30 hover:border-blue-400"
+                    : "text-slate-200 bg-slate-800/40 hover:text-white hover:bg-slate-700/60 hover:shadow-md border-blue-500/50 hover:border-blue-400"
                 }`}
               >
                 {link.label}
@@ -211,7 +211,7 @@ const SimpleNavbar: React.FC = () => {
                 className={`px-3 py-2 text-xs font-medium rounded-md transition-all duration-300 transform hover:scale-105 text-center border ${
                   location.pathname === link.path
                     ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-sm"
-                    : "text-slate-300 hover:text-white hover:bg-white/5 hover:shadow-sm border-blue-500/30 hover:border-blue-400"
+                    : "text-slate-200 bg-slate-800/40 hover:text-white hover:bg-slate-700/60 hover:shadow-sm border-blue-500/50 hover:border-blue-400"
                 }`}
               >
                 <span className="block leading-tight">{link.label}</span>
@@ -224,92 +224,92 @@ const SimpleNavbar: React.FC = () => {
               className={`px-3 py-2 text-xs font-medium rounded-md transition-all duration-300 transform hover:scale-105 text-center border ${
                 location.pathname === aiChatbotLink.path
                   ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-sm"
-                  : "text-slate-300 hover:text-white hover:bg-white/5 hover:shadow-sm border-blue-500/30 hover:border-blue-400"
+                  : "text-slate-200 bg-slate-800/40 hover:text-white hover:bg-slate-700/60 hover:shadow-sm border-blue-500/50 hover:border-blue-400"
               }`}
             >
               <div className="flex items-center justify-center gap-1">
                 <FaRobot className="text-xs text-blue-400" />
                 <span className="block leading-tight">
-                  {aiChatbotLink.label}
-                </span>
-              </div>
-            </button>
-          </div>
-
-          {/* Mobile Navigation - 3x3 symmetric layout */}
-          <div
-            className={`mt-7 md:hidden flex flex-col space-y-2 ${getTransitionClasses()}`}
-          >
-            {/* First row - 3 buttons */}
-            <div className="flex justify-center items-center space-x-2">
-              {navLinks.slice(0, 3).map((link, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleNavigation(link.path)}
-                  className={`px-2 py-2 text-xs font-medium rounded-md transition-all duration-300 transform active:scale-95 text-center flex-1 max-w-[110px] h-12 flex items-center justify-center border ${
-                    location.pathname === link.path
-                      ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-sm"
-                      : "text-slate-300 hover:text-white hover:bg-white/5 hover:shadow-sm border-blue-500/30 hover:border-blue-400"
-                  }`}
-                >
-                  <span className="block leading-tight text-[11px] text-center">
-                    {link.label}
-                  </span>
-                </button>
-              ))}
-            </div>
-
-            {/* Second row - 3 buttons (2 regular + 1 AI) */}
-            <div className="flex justify-center items-center space-x-2">
-              {navLinks.slice(3).map((link, index) => (
-                <button
-                  key={index + 3}
-                  onClick={() => handleNavigation(link.path)}
-                  className={`px-2 py-2 text-xs font-medium rounded-md transition-all duration-300 transform active:scale-95 text-center flex-1 max-w-[110px] h-12 flex items-center justify-center border ${
-                    location.pathname === link.path
-                      ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-sm"
-                      : "text-slate-300 hover:text-white hover:bg-white/5 hover:shadow-sm border-blue-500/30 hover:border-blue-400"
-                  }`}
-                >
-                  <span className="block leading-tight text-[11px] text-center">
-                    {link.label}
-                  </span>
-                </button>
-              ))}
-
-              {/* AI Chatbot Button - integrated into the grid */}
-              <button
-                onClick={() => handleNavigation(aiChatbotLink.path)}
-                className={`px-2 py-2 text-xs font-medium rounded-md transition-all duration-300 transform active:scale-95 text-center flex-1 max-w-[110px] h-12 flex flex-col items-center justify-center border ${
-                  location.pathname === aiChatbotLink.path
-                    ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-sm"
-                    : "text-slate-300 hover:text-white hover:bg-white/5 hover:shadow-sm border-blue-500/30 hover:border-blue-400"
-                }`}
-              >
-                <div className="flex flex-col items-center justify-center gap-0.5">
-                  <FaRobot className="text-xs text-blue-400" />
-                  <span className="block leading-tight text-[11px] font-semibold text-center">
                     {aiChatbotLink.label}
                   </span>
                 </div>
               </button>
             </div>
-          </div>
 
-          {/* Language Toggle - Responsive positioning */}
-          <div
-            className={`absolute transition-all duration-300 ${
-              isScrolled
-                ? "top-1 right-2 sm:top-2 sm:right-3"
-                : "top-2 right-2 sm:top-4 sm:right-4"
-            }`}
-          >
-            <LanguageToggle />
-          </div>
-        </div>
-      </nav>
-    </>
-  );
-};
+            {/* Mobile Navigation - 3x3 symmetric layout */}
+            <div
+              className={`mt-7 md:hidden flex flex-col space-y-2 ${getTransitionClasses()}`}
+            >
+              {/* First row - 3 buttons */}
+              <div className="flex justify-center items-center space-x-2">
+                {navLinks.slice(0, 3).map((link, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleNavigation(link.path)}
+                    className={`px-2 py-2 text-xs font-medium rounded-md transition-all duration-300 transform active:scale-95 text-center flex-1 max-w-[110px] h-12 flex items-center justify-center border ${
+                      location.pathname === link.path
+                        ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-sm"
+                        : "text-slate-200 bg-slate-800/40 hover:text-white hover:bg-slate-700/60 hover:shadow-sm border-blue-500/50 hover:border-blue-400"
+                    }`}
+                  >
+                    <span className="block leading-tight text-[11px] text-center">
+                      {link.label}
+                    </span>
+                  </button>
+                ))}
+              </div>
 
-export default React.memo(SimpleNavbar);
+              {/* Second row - 3 buttons (2 regular + 1 AI) */}
+              <div className="flex justify-center items-center space-x-2">
+                {navLinks.slice(3).map((link, index) => (
+                  <button
+                    key={index + 3}
+                    onClick={() => handleNavigation(link.path)}
+                    className={`px-2 py-2 text-xs font-medium rounded-md transition-all duration-300 transform active:scale-95 text-center flex-1 max-w-[110px] h-12 flex items-center justify-center border ${
+                      location.pathname === link.path
+                        ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-sm"
+                        : "text-slate-200 bg-slate-800/40 hover:text-white hover:bg-slate-700/60 hover:shadow-sm border-blue-500/50 hover:border-blue-400"
+                    }`}
+                  >
+                    <span className="block leading-tight text-[11px] text-center">
+                      {link.label}
+                    </span>
+                  </button>
+                ))}
+
+                {/* AI Chatbot Button - integrated into the grid */}
+                <button
+                  onClick={() => handleNavigation(aiChatbotLink.path)}
+                  className={`px-2 py-2 text-xs font-medium rounded-md transition-all duration-300 transform active:scale-95 text-center flex-1 max-w-[110px] h-12 flex flex-col items-center justify-center border ${
+                    location.pathname === aiChatbotLink.path
+                      ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-sm"
+                      : "text-slate-200 bg-slate-800/40 hover:text-white hover:bg-slate-700/60 hover:shadow-sm border-blue-500/50 hover:border-blue-400"
+                  }`}
+                >
+                  <div className="flex flex-col items-center justify-center gap-0.5">
+                    <FaRobot className="text-xs text-blue-400" />
+                    <span className="block leading-tight text-[11px] font-semibold text-center">
+                      {aiChatbotLink.label}
+                    </span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            {/* Language Toggle - Responsive positioning */}
+            <div
+              className={`absolute transition-all duration-300 ${
+                isScrolled
+                  ? "top-1 right-2 sm:top-2 sm:right-3"
+                  : "top-2 right-2 sm:top-4 sm:right-4"
+              }`}
+            >
+              <LanguageToggle />
+            </div>
+          </div>
+        </nav>
+      </>
+    );
+  };
+  
+  export default React.memo(SimpleNavbar);
