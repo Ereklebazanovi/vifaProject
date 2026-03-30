@@ -281,7 +281,6 @@ const newHomeInventoTranslations = {
   },
 };
 
-import Canvas2DHighway from "../components/Canvas2DHighway";
 
 import {
   FaCogs,
@@ -330,11 +329,22 @@ const NewHomeInvento: React.FC = () => {
         url="https://inventogeo.com"
       />
 
-      {/* Canvas 2D Highway Background - Full Page Coverage */}
-      <Canvas2DHighway className="fixed inset-0 z-0" />
-
-      {/* Light overlay for text readability - limited to main content area */}
-      <div className="fixed inset-0 z-5 bg-black/15 pointer-events-none"></div>
+      {/* Video Background */}
+      <div className="fixed inset-0 z-0 overflow-hidden">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ willChange: "transform" }}
+        >
+          <source src="/web.mp4" type="video/mp4" />
+        </video>
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-black/55 pointer-events-none"></div>
+      </div>
 
       <div className="relative z-10 min-h-screen mt-15">
         <div
