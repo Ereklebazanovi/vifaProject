@@ -28,6 +28,7 @@ const navbarTranslations = {
   },
 };
 
+
 const SimpleNavbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
