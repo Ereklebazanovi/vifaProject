@@ -12,9 +12,9 @@ import SEO from "../components/SEO";
 const newHomeTranslations = {
   ka: {
     "seo.home.title":
-      "Invento Technologies - AI, WMS და ვებ ტექნოლოგიები საქართველოში | inventogeo.com",
+      "VIFA Digital - ციფრული მარკეტინგი საქართველოში | vifadigital.ge",
     "seo.home.description":
-      "Invento Technologies - AI ჩატბოტები, WMS სისტემები და მოწინავე ვებ განვითარება საქართველოში. Invento WMS, Invento AI, მონაცემთა ბაზების მართვა. inventogeo.com",
+      "VIFA Digital - ციფრული მარკეტინგის სერვისები: ვიდეო გადაღება, ფოტოგრაფია, სოციალური მედია მართვა, კონტენტის შექმნა. სრული მარკეტინგ პაკეტი თქვენი ბიზნესისთვის.",
 
     "ome.badge": "გააციფრულე შენი ბიზნესი",
     "newHome.hero.title": "შექმენი კომუნიკაციის ხიდი",
@@ -153,9 +153,9 @@ const newHomeTranslations = {
   },
   en: {
     "seo.home.title":
-      "Invento Technologies - AI, WMS & Web Technologies in Georgia | inventogeo.com",
+      "VIFA Digital - Digital Marketing in Georgia | vifadigital.ge",
     "seo.home.description":
-      "Invento Technologies - Leading AI Chatbots, WMS Systems and Web Development in Georgia. Invento WMS, Invento AI, Database Management Solutions. inventogeo.com",
+      "VIFA Digital - Digital marketing services: video production, photography, social media management, content creation. Full marketing package for your business.",
 
     "newHome.badge": "Digitize Your Business",
     "newHome.hero.title": "Build a Communication Bridge",

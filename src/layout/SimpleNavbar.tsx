@@ -44,8 +44,12 @@ const SimpleNavbar: React.FC = () => {
   const navigate = useNavigate();
   const { startNavigation, stopNavigation } = useNavigation();
 
+  // Check if on VIFA domain
+  const isVifaDomain = typeof window !== 'undefined' && window.location.hostname.includes('vifadigital');
+
   // Determine if current route should show Invento branding
   const isInventoRoute = () => {
+    if (isVifaDomain) return false;
     const path = location.pathname;
     return path.includes('/services/web-development') ||
            path.includes('/services/ai-chatbot') ||
@@ -54,6 +58,7 @@ const SimpleNavbar: React.FC = () => {
   };
 
   const isVifaRoute = () => {
+    if (isVifaDomain) return true;
     const path = location.pathname;
     return path.includes('/services/digital-advertising') ||
            path.includes('/about');
