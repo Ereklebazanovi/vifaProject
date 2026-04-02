@@ -16,6 +16,26 @@
   ],
   "rewrites": [
     {
+      "source": "/((?!assets/|.*\\.[a-z]+$).*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "vifadigital.ge"
+        }
+      ],
+      "destination": "/index-vifa.html"
+    },
+    {
+      "source": "/((?!assets/|.*\\.[a-z]+$).*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.vifadigital.ge"
+        }
+      ],
+      "destination": "/index-vifa.html"
+    },
+    {
       "source": "/blog/:slug/index.html",
       "destination": "/blog/:slug/index.html"
     },

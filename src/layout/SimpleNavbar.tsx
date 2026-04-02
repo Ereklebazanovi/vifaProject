@@ -1,4 +1,4 @@
-
+//SimpleNavbar.tsx - A sleek, responsive navbar with dynamic branding and AI service highlight. Adapts to scroll and route context for optimal UX.
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import LanguageToggle from "../components/LanguageToggle";
