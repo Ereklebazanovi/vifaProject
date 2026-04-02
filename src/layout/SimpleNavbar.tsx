@@ -111,7 +111,7 @@ const SimpleNavbar: React.FC = () => {
     path: "/services/ai-chatbot",
     label: t("nav.aiService"),
   };
-
+////////
   return (
     <>
       {/* Main Navbar */}
