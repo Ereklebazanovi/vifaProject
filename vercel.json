@@ -1,27 +1,51 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "functions": {
-    "api/index.js": {
-      "includeFiles": "dist/*.html"
-    }
-  },
   "redirects": [
     {
       "source": "/:path*",
-      "has": [{"type": "host", "value": "inventogeo.com"}],
+      "has": [
+        {
+          "type": "host",
+          "value": "inventogeo.com"
+        }
+      ],
       "destination": "https://www.inventogeo.com/:path*",
       "permanent": true
     }
   ],
   "rewrites": [
     {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "vifadigital.ge"
+        }
+      ],
+      "destination": "/index-vifa.html"
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.vifadigital.ge"
+        }
+      ],
+      "destination": "/index-vifa.html"
+    },
+    {
+      "source": "/blog/:slug/index.html",
+      "destination": "/blog/:slug/index.html"
+    },
+    {
       "source": "/blog/:slug",
       "destination": "/blog/:slug/index.html"
     },
     {
-      "source": "/((?!assets/|blog/).*)",
-      "destination": "/api/index"
+      "source": "/:path*",
+      "destination": "/index.html"
     }
   ]
 }
