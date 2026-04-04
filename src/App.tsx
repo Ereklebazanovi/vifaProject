@@ -33,6 +33,7 @@ const ChatbotRequestsDashboard = lazy(
 ); // ახალი ➕
 const LawDemoClassic = lazy(() => import("./pages/LawDemoClassic"));
 const LawDemoModern = lazy(() => import("./pages/LawDemoModern"));
+const TourismLandingPage = lazy(() => import("./pages/TourismLandingPage"));
 
 // Error Boundary Component
 class ErrorBoundary extends React.Component<
@@ -211,6 +212,8 @@ const AppWithRouter: React.FC = () => {
             {/* Hidden law firm demo pages — isolated layout, no navbar/footer */}
             <Route path="/law-demo-classic" element={<LawDemoClassic />} />
             <Route path="/law-demo-modern" element={<LawDemoModern />} />
+            {/* Tourism landing page — isolated layout, inventogeo.com/tourism */}
+            <Route path="/tourism" element={<TourismLandingPage />} />
           </Routes>
         </Suspense>
       </RouteTransition>
