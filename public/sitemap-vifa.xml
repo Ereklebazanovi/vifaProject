@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- VIFA Digital Home Page - Georgian (Default) -->
+  <url>
+    <loc>https://vifadigital.ge/</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://vifadigital.ge/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vifadigital.ge/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vifadigital.ge/" />
+  </url>
+
+  <!-- VIFA Digital Home Page - English -->
+  <url>
+    <loc>https://vifadigital.ge/?lang=en</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://vifadigital.ge/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vifadigital.ge/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vifadigital.ge/" />
+  </url>
+
+  <!-- Digital Marketing Service - Georgian -->
+  <url>
+    <loc>https://vifadigital.ge/services/digital-advertising</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://vifadigital.ge/services/digital-advertising" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vifadigital.ge/services/digital-advertising?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vifadigital.ge/services/digital-advertising" />
+  </url>
+
+  <!-- Digital Marketing Service - English -->
+  <url>
+    <loc>https://vifadigital.ge/services/digital-advertising?lang=en</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://vifadigital.ge/services/digital-advertising" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vifadigital.ge/services/digital-advertising?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vifadigital.ge/services/digital-advertising" />
+  </url>
+
+  <!-- About Page - Georgian -->
+  <url>
+    <loc>https://vifadigital.ge/about</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://vifadigital.ge/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vifadigital.ge/about?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vifadigital.ge/about" />
+  </url>
+
+  <!-- About Page - English -->
+  <url>
+    <loc>https://vifadigital.ge/about?lang=en</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://vifadigital.ge/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vifadigital.ge/about?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vifadigital.ge/about" />
+  </url>
+
+  <!-- Contact Page - Georgian -->
+  <url>
+    <loc>https://vifadigital.ge/contact</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://vifadigital.ge/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vifadigital.ge/contact?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vifadigital.ge/contact" />
+  </url>
+
+  <!-- Contact Page - English -->
+  <url>
+    <loc>https://vifadigital.ge/contact?lang=en</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://vifadigital.ge/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vifadigital.ge/contact?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vifadigital.ge/contact" />
+  </url>
+
+  <!-- Start Project Page - Georgian -->
+  <url>
+    <loc>https://vifadigital.ge/start-project</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://vifadigital.ge/start-project" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vifadigital.ge/start-project?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vifadigital.ge/start-project" />
+  </url>
+
+  <!-- Start Project Page - English -->
+  <url>
+    <loc>https://vifadigital.ge/start-project?lang=en</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://vifadigital.ge/start-project" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vifadigital.ge/start-project?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vifadigital.ge/start-project" />
+  </url>
+
+  <!-- Privacy Policy - Georgian -->
+  <url>
+    <loc>https://vifadigital.ge/privacy</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://vifadigital.ge/privacy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vifadigital.ge/privacy?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vifadigital.ge/privacy" />
+  </url>
+
+  <!-- Privacy Policy - English -->
+  <url>
+    <loc>https://vifadigital.ge/privacy?lang=en</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://vifadigital.ge/privacy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vifadigital.ge/privacy?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vifadigital.ge/privacy" />
+  </url>
+
+  <!-- Terms of Service - Georgian -->
+  <url>
+    <loc>https://vifadigital.ge/terms</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://vifadigital.ge/terms" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vifadigital.ge/terms?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vifadigital.ge/terms" />
+  </url>
+
+  <!-- Terms of Service - English -->
+  <url>
+    <loc>https://vifadigital.ge/terms?lang=en</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://vifadigital.ge/terms" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vifadigital.ge/terms?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vifadigital.ge/terms" />
+  </url>
+
+</urlset>

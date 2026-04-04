@@ -1,0 +1,86 @@
+{
+  "name": "Invento Technologies - AI, WMS და ვებ ტექნოლოგიები საქართველოში",
+  "short_name": "Invento Technologies",
+  "description": "Invento Technologies - ხელოვნური ინტელექტის, მონაცემთა ბაზების მართვისა და ვებ ტექნოლოგიების წამყვანი კომპანია საქართველოში. Invento WMS, Invento AI, Invento Web.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "ka",
+  "dir": "ltr",
+  "categories": ["business", "technology", "productivity"],
+  "icons": [
+    {
+      "src": "/invento.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/invento.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-mobile.jpg",
+      "sizes": "640x1136",
+      "type": "image/jpeg",
+      "platform": "narrow"
+    },
+    {
+      "src": "/screenshot-desktop.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "platform": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Invento WMS",
+      "short_name": "WMS",
+      "description": "მონაცემთა ბაზების მართვისა და საწარმოო სისტემები",
+      "url": "/inventowms",
+      "icons": [
+        {
+          "src": "/invento.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Invento Web",
+      "short_name": "ვებ",
+      "description": "ვებსაიტის შექმნისა და განვითარების სერვისები",
+      "url": "/services/web-development",
+      "icons": [
+        {
+          "src": "/invento.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Invento AI",
+      "short_name": "AI",
+      "description": "AI ჩატბოტები და ხელოვნური ინტელექტის სისტემები",
+      "url": "/services/ai-chatbot",
+      "icons": [
+        {
+          "src": "/invento.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "display_override": ["window-controls-overlay", "standalone"],
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
+}
