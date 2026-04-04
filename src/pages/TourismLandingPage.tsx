@@ -10,21 +10,22 @@ const T = {
     nav_booking: "ჯავშანი",
     nav_gallery: "გალერეა",
     nav_contact: "კონტაქტი",
-    nav_book_now: "ახლავე დაჯავშნე",
+    nav_book_now: "დაჯავშნე ახლავე",
 
     // Hero
-    hero_tagline: "საქართველო გელოდება",
-    hero_h1_line1: "გაგეხსნება",
-    hero_h1_line2: "ოცნების შვებულება",
-    hero_sub: "შავი ზღვის სანაპიროზე, სადაც სიმშვიდე, ფუფუნება და ქართული სტუმართმოყვარეობა ერთ სახლში ხვდება.",
-    hero_cta: "ოთახის არჩევა",
-    hero_cta2: "გაიგე მეტი",
+    hero_tagline: "შენი იდეალური დასვენება",
+    hero_h1_line1: "სიმშვიდე და",
+    hero_h1_line2: "კომფორტი",
+    hero_h1_line3: "ზღვის სანაპიროზე",
+    hero_sub: "გაექეცით ქალაქის ხმაურს. აღმოაჩინეთ პრემიუმ კლასის კოტეჯები, სადაც ყოველი დეტალი თქვენი დასვენებისთვისაა შექმნილი.",
+    hero_cta: "დაჯავშნე ეხლავე",
+    hero_cta2: "დაათვალიერე ოთახები",
 
     // About
-    about_sub: "ჩვენს შესახებ",
-    about_h2: "ფუფუნებული გამოცდილება,\nრომელსაც არ დაივიწყებ",
-    about_p: "მოგესალმებით ჩვენს ელეგანტურ სასტუმროში, სადაც სრულყოფილება, განსაკუთრებული სერვისი და შეუდარებელი კომფორტი გელოდებათ. ჩვენი სასტუმრო გთავაზობთ შავი ზღვის ულამაზეს ხედს, ქართულ სამზარეულოს და სპა-ცენტრს. თქვენი ყოველი ვიზიტი — განსაკუთრებული მოგონება.",
-    about_cta: "ოთახების ნახვა",
+    about_sub: "მოწყდი რუტინას",
+    about_h2: "ესთეტიკა და კომფორტი ყოველ დეტალში",
+    about_p: "დატოვეთ ქალაქის ხმაური და აღმოაჩინეთ ადგილი, სადაც თანამედროვე დიზაინი ბუნების სიმშვიდეს ერწყმის. ჩვენი სივრცე შექმნილია მათთვის, ვინც აფასებს პრივატულობას, მინიმალისტურ ინტერიერსა და პრემიუმ ხარისხს. აქ ყოველი წამი თქვენს სრულყოფილ განტვირთვას ემსახურება",
+    about_cta: "იხილეთ მეტი",
 
     // Facilities
     facilities_h2: "სასტუმროს სერვისები",
@@ -52,7 +53,7 @@ const T = {
     rooms_h2: "აირჩიე შენი ოთახი",
     room_left: "დარჩა",
     room_guests: "სტუმარი",
-    room_book: "ახლავე დაჯავშნე",
+    room_book: "დაჯავშნე ახლავე",
     room_from: "ღამიდან",
     rooms: [
       { name: "სტანდარტული ოთახი", size: "30 მ²", guests: 2, price: "$29", label: "2 ოთახი დარჩა", img: "1" },
@@ -97,12 +98,13 @@ const T = {
     nav_contact: "Contact",
     nav_book_now: "Book Now",
 
-    hero_tagline: "Georgia Is Waiting For You",
-    hero_h1_line1: "Experience Your",
-    hero_h1_line2: "Dream Vacation",
-    hero_sub: "On the Black Sea coast, where tranquility, luxury, and Georgian hospitality meet under one roof.",
-    hero_cta: "Choose Room",
-    hero_cta2: "Learn More",
+    hero_tagline: "Your Perfect Escape",
+    hero_h1_line1: "Serenity &",
+    hero_h1_line2: "Comfort",
+    hero_h1_line3: "By The Sea",
+    hero_sub: "Escape the noise of the city. Discover premium cottages where every detail is crafted for your relaxation.",
+    hero_cta: "Book Now",
+    hero_cta2: "Explore Rooms",
 
     about_sub: "About Us",
     about_h2: "The Luxury Experience\nYou'll Remember",
@@ -190,6 +192,7 @@ const RoomCard: React.FC<{
 }> = ({ room, t, lang, hovered, onHover }) => (
   <div
     style={styles.roomCard}
+    className="room-card-wrap"
     onMouseEnter={() => onHover(true)}
     onMouseLeave={() => onHover(false)}
   >
@@ -199,10 +202,24 @@ const RoomCard: React.FC<{
         <span style={styles.roomMetaItem}>👤 {room.guests} {t.room_guests}</span>
         <span style={styles.roomMetaItem}>📐 {room.size}</span>
       </div>
+      {/* Base image — always visible */}
       <img
-        src={hovered ? `/tourism/images/room/${room.img}-alt.jpg` : `/tourism/images/room/${room.img}.jpg`}
+        src={`/tourism/images/room/${room.img}.jpg`}
         alt={room.name}
         style={styles.roomImg}
+      />
+      {/* Alt image — fades in on hover via CSS opacity transition */}
+      <img
+        src={`/tourism/images/room/${room.img}-alt.jpg`}
+        alt=""
+        aria-hidden="true"
+        style={{
+          ...styles.roomImg,
+          position: "absolute",
+          inset: 0,
+          opacity: hovered ? 1 : 0,
+          transition: "opacity 0.9s ease",
+        }}
       />
     </div>
     <div style={styles.roomText}>
@@ -215,6 +232,7 @@ const RoomCard: React.FC<{
       <button
         onClick={() => scrollTo("booking")}
         style={styles.btnLine}
+        className="room-btn-line"
       >
         {t.room_book} {room.price}
       </button>
@@ -223,13 +241,11 @@ const RoomCard: React.FC<{
 );
 
 // ─── Facility card ─────────────────────────────────────────────────────────
-const FacIcon: React.FC<{ emoji: string; title: string; desc: string }> = ({ emoji, title, desc }) => (
+const FacIcon: React.FC<{ icon: string; title: string; desc: string }> = ({ icon, title, desc }) => (
   <div style={styles.facBox}>
-    <div style={styles.facIcon}>{emoji}</div>
-    <div>
-      <h3 style={styles.facTitle}>{title}</h3>
-      <p style={styles.facDesc}>{desc}</p>
-    </div>
+    <i className={`fa ${icon}`} style={styles.facIcon} />
+    <h3 style={styles.facTitle}>{title}</h3>
+    <p style={styles.facDesc}>{desc}</p>
   </div>
 );
 
@@ -257,37 +273,22 @@ const TourismLandingPage: React.FC = () => {
   const t = T[lang];
 
   // Inject Seaside CSS into <head> once
+  // Inject fonts + Font Awesome — all other styles are inline
   useEffect(() => {
-    const links = [
-      "/tourism/css/bootstrap.min.css",
-      "/tourism/css/plugins.css",
-      "/tourism/css/style.css",
-      "/tourism/css/color.css",
-      "/tourism/css/colors/brown.css",
+    const toInject = [
+      "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Sans+Georgian:wght@300;400;700&display=swap",
+      "/tourism/fonts/font-awesome/css/font-awesome.min.css",
     ];
     const injected: HTMLLinkElement[] = [];
-    links.forEach((href) => {
-      const existing = document.querySelector(`link[href="${href}"]`);
-      if (!existing) {
-        const el = document.createElement("link");
-        el.rel = "stylesheet";
-        el.href = href;
-        document.head.appendChild(el);
-        injected.push(el);
-      }
-    });
-    // Inject Font Awesome
-    const fa = document.querySelector('link[href*="font-awesome"]');
-    if (!fa) {
+    toInject.forEach((href) => {
+      if (document.querySelector(`link[href="${href}"]`)) return;
       const el = document.createElement("link");
       el.rel = "stylesheet";
-      el.href = "/tourism/fonts/font-awesome/css/font-awesome.min.css";
+      el.href = href;
       document.head.appendChild(el);
       injected.push(el);
-    }
-    return () => {
-      injected.forEach((el) => el.parentNode?.removeChild(el));
-    };
+    });
+    return () => { injected.forEach((el) => el.parentNode?.removeChild(el)); };
   }, []);
 
   // Scroll listener for navbar
@@ -319,6 +320,9 @@ const TourismLandingPage: React.FC = () => {
 
   return (
     <div style={styles.root} className="tourism-page">
+      {/* ── NAVBAR TOP GRADIENT (legibility on transparent state) ──────── */}
+      {!scrolled && <div style={styles.navTopGradient} />}
+
       {/* ── NAVBAR ─────────────────────────────────────────────────────── */}
       <nav style={{ ...styles.navbar, ...(scrolled ? styles.navbarScrolled : {}) }}>
         <div style={styles.navInner}>
@@ -339,7 +343,7 @@ const TourismLandingPage: React.FC = () => {
                 <a
                   href={`#${id}`}
                   onClick={(e) => { e.preventDefault(); scrollTo(id); }}
-                  style={styles.navLink}
+                  style={{ ...styles.navLink, ...(!scrolled ? styles.navLinkShadow : {}) }}
                 >
                   {t[key]}
                 </a>
@@ -444,18 +448,20 @@ const TourismLandingPage: React.FC = () => {
         ))}
         <div style={styles.heroOverlay} />
         <div style={styles.heroContent}>
-          <p style={styles.heroTagline}>{t.hero_tagline}</p>
+          <span style={styles.heroEyebrow}>{t.hero_tagline}</span>
           <h1 style={styles.heroH1}>
             {t.hero_h1_line1}
             <br />
-            <span style={styles.heroH1Gold}>{t.hero_h1_line2}</span>
+            {t.hero_h1_line2}
+            <br />
+            <em style={styles.heroH1Italic}>{t.hero_h1_line3}</em>
           </h1>
           <p style={styles.heroSub}>{t.hero_sub}</p>
           <div style={styles.heroBtns}>
-            <button style={styles.btnMain} onClick={() => scrollTo("rooms")}>
+            <button style={styles.btnMain} onClick={() => scrollTo("booking")}>
               {t.hero_cta}
             </button>
-            <button style={styles.btnGhost} onClick={() => scrollTo("about")}>
+            <button style={styles.btnGhost} onClick={() => scrollTo("rooms")}>
               {t.hero_cta2}
             </button>
           </div>
@@ -524,31 +530,26 @@ const TourismLandingPage: React.FC = () => {
       </section>
 
       {/* ── FACILITIES ─────────────────────────────────────────────────── */}
-      <section id="facilities" style={{ ...styles.section, ...styles.sectionDark }}>
-        <div
-          style={{
-            ...styles.sectionBg,
-            backgroundImage: "url(/tourism/images/background/3.jpg)",
-          }}
-        />
+      <section id="facilities" style={{ ...styles.section, background: "#fafafa" }}>
         <div style={styles.container}>
           <div style={styles.sectionHeader}>
-            <h2 style={{ ...styles.sectionH2, color: "#fff" }}>
-              {t.facilities_h2}
-              <span style={{ ...styles.smallBorder, background: "#c9a96e" }} />
+            <p style={styles.sectionSub}>{t.facilities_h2}</p>
+            <h2 style={{ ...styles.sectionH2, color: "#222222" }}>
+              {lang === "ka" ? "სასტუმროს სერვისები" : "What We Offer"}
+              <span style={styles.smallBorder} />
             </h2>
           </div>
           <div style={styles.facGrid}>
             {[
-              { emoji: "🍽️", title: t.fac_restaurant, desc: t.fac_restaurant_p },
-              { emoji: "🏊", title: t.fac_pool, desc: t.fac_pool_p },
-              { emoji: "💪", title: t.fac_fitness, desc: t.fac_fitness_p },
-              { emoji: "🍸", title: t.fac_bar, desc: t.fac_bar_p },
-              { emoji: "🖥️", title: t.fac_meeting, desc: t.fac_meeting_p },
-              { emoji: "👕", title: t.fac_laundry, desc: t.fac_laundry_p },
-              { emoji: "📺", title: t.fac_tv, desc: t.fac_tv_p },
-              { emoji: "🔒", title: t.fac_safe, desc: t.fac_safe_p },
-              { emoji: "🚗", title: t.fac_parking, desc: t.fac_parking_p },
+              { icon: "fa-cutlery",   title: t.fac_restaurant, desc: t.fac_restaurant_p },
+              { icon: "fa-tint",      title: t.fac_pool,       desc: t.fac_pool_p       },
+              { icon: "fa-heartbeat", title: t.fac_fitness,    desc: t.fac_fitness_p    },
+              { icon: "fa-glass",     title: t.fac_bar,        desc: t.fac_bar_p        },
+              { icon: "fa-users",     title: t.fac_meeting,    desc: t.fac_meeting_p    },
+              { icon: "fa-cog",       title: t.fac_laundry,    desc: t.fac_laundry_p    },
+              { icon: "fa-television",title: t.fac_tv,         desc: t.fac_tv_p         },
+              { icon: "fa-lock",      title: t.fac_safe,       desc: t.fac_safe_p       },
+              { icon: "fa-car",       title: t.fac_parking,    desc: t.fac_parking_p    },
             ].map((fac) => (
               <FacIcon key={fac.title} {...fac} />
             ))}
@@ -557,13 +558,13 @@ const TourismLandingPage: React.FC = () => {
       </section>
 
       {/* ── ROOMS ──────────────────────────────────────────────────────── */}
-      <section id="rooms" style={styles.section}>
+      <section id="rooms" style={{ ...styles.section, background: ROOMS_BG }}>
         <div style={styles.container}>
           <div style={styles.sectionHeader}>
-            <p style={styles.sectionSub}>{t.rooms_sub}</p>
-            <h2 style={styles.sectionH2}>
+            <p style={{ ...styles.sectionSub, color: RICH_GOLD }}>{t.rooms_sub}</p>
+            <h2 style={{ ...styles.sectionH2, color: "#222222" }}>
               {t.rooms_h2}
-              <span style={styles.smallBorder} />
+              <span style={{ ...styles.smallBorder, background: RICH_GOLD }} />
             </h2>
           </div>
           <div style={styles.roomGrid}>
@@ -733,17 +734,32 @@ const CounterField: React.FC<{ label: string; initial: number }> = ({ label, ini
 };
 
 // ─── Styles ────────────────────────────────────────────────────────────────
-const GOLD = "#c9a96e";
+const GOLD = "#6BA4C4";       // soft sky blue
+const RICH_GOLD = "#4E8BAD"; // deeper coastal blue
 const DARK = "#0d0d0d";
 const DARK2 = "#141414";
+const ROOMS_BG = "#fafafa";
+const CARD_BG = "#ffffff";
 const WHITE = "#ffffff";
 
 const styles: Record<string, React.CSSProperties> = {
   root: {
-    fontFamily: "'Crimson Text', 'Cormorant Garamond', 'Noto Sans Georgian', Georgia, serif",
+    fontFamily: "'BPG Nateli', 'Noto Sans Georgian', 'Inter', sans-serif",
     background: WHITE,
     color: DARK,
     overflowX: "hidden",
+  },
+
+  // Navbar top gradient — improves legibility when navbar is transparent
+  navTopGradient: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    height: "140px",
+    background: "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 100%)",
+    zIndex: 999,
+    pointerEvents: "none",
   },
 
   // Navbar
@@ -791,14 +807,17 @@ const styles: Record<string, React.CSSProperties> = {
     padding: 0,
   },
   navLink: {
-    color: "rgba(255,255,255,0.85)",
+    color: "rgba(255,255,255,0.9)",
     textDecoration: "none",
-    fontSize: "0.85rem",
-    letterSpacing: "0.12em",
+    fontSize: "0.78rem",
+    letterSpacing: "0.14em",
     textTransform: "uppercase",
-    transition: "color 0.3s",
-    fontFamily: "'Inter', sans-serif",
+    transition: "color 0.3s, text-shadow 0.3s",
+    fontFamily: "'Noto Sans Georgian', 'Inter', sans-serif",
     fontWeight: 500,
+  },
+  navLinkShadow: {
+    textShadow: "0 1px 8px rgba(0,0,0,0.9), 0 0 2px rgba(0,0,0,0.6)",
   },
   navRight: {
     display: "flex",
@@ -831,13 +850,13 @@ const styles: Record<string, React.CSSProperties> = {
     color: DARK,
     border: "none",
     padding: "0.6rem 1.4rem",
-    fontSize: "0.8rem",
+    fontSize: "0.78rem",
     fontWeight: 700,
     letterSpacing: "0.1em",
     textTransform: "uppercase",
     cursor: "pointer",
     transition: "all 0.3s",
-    fontFamily: "'Inter', sans-serif",
+    fontFamily: "'Noto Sans Georgian', 'Inter', sans-serif",
   },
   hamburger: {
     display: "none",
@@ -962,41 +981,52 @@ const styles: Record<string, React.CSSProperties> = {
   heroOverlay: {
     position: "absolute",
     inset: 0,
-    background: "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.75) 100%)",
+    background: "linear-gradient(160deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.72) 100%)",
   },
   heroContent: {
     position: "relative",
     zIndex: 2,
     textAlign: "center",
     padding: "0 1.5rem",
-    maxWidth: "800px",
+    maxWidth: "860px",
   },
-  heroTagline: {
+  heroEyebrow: {
+    display: "inline-block",
     color: GOLD,
-    fontSize: "0.85rem",
-    letterSpacing: "0.35em",
+    fontSize: "0.78rem",
+    letterSpacing: "0.45em",
     textTransform: "uppercase",
-    marginBottom: "1rem",
-    fontFamily: "'Inter', sans-serif",
-    fontWeight: 500,
+    marginBottom: "1.4rem",
+    fontFamily: "'Noto Sans Georgian', 'Inter', sans-serif",
+    fontWeight: 400,
+    textShadow: "0 1px 8px rgba(0,0,0,0.6)",
+    borderBottom: `1px solid ${GOLD}`,
+    paddingBottom: "0.5rem",
   },
   heroH1: {
     color: WHITE,
-    fontSize: "clamp(2.4rem, 6vw, 5rem)",
-    fontWeight: 400,
-    lineHeight: 1.15,
-    margin: "0 0 1.5rem",
-    letterSpacing: "0.02em",
+    fontSize: "clamp(2rem, 3.2vw, 2.8rem)",
+    fontWeight: 700,
+    lineHeight: 1.25,
+    margin: "0 0 1.8rem",
+    letterSpacing: "0.01em",
+    fontFamily: "'Playfair Display', Georgia, serif",
+    textShadow: "0 2px 20px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.8)",
   },
-  heroH1Gold: { color: GOLD },
+  heroH1Italic: {
+    fontStyle: "italic",
+    fontWeight: 400,
+    color: "rgba(255,255,255,0.92)",
+  },
   heroSub: {
-    color: "rgba(255,255,255,0.8)",
-    fontSize: "clamp(0.95rem, 1.8vw, 1.15rem)",
-    lineHeight: 1.7,
-    maxWidth: "560px",
-    margin: "0 auto 2.5rem",
-    fontFamily: "'Inter', sans-serif",
+    color: "rgba(255,255,255,0.88)",
+    fontSize: "clamp(0.95rem, 1.8vw, 1.12rem)",
+    lineHeight: 1.8,
+    maxWidth: "580px",
+    margin: "0 auto 2.8rem",
+    fontFamily: "'Noto Sans Georgian', 'Inter', sans-serif",
     fontWeight: 300,
+    textShadow: "0 1px 6px rgba(0,0,0,0.5)",
   },
   heroBtns: { display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" },
   heroIndicators: {
@@ -1172,35 +1202,35 @@ const styles: Record<string, React.CSSProperties> = {
   facGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(3, 1fr)",
-    gap: "1.5rem",
+    gap: "3rem 4rem",
   },
   facBox: {
     display: "flex",
-    gap: "1rem",
-    alignItems: "flex-start",
-    padding: "1.5rem",
-    background: "rgba(255,255,255,0.05)",
-    border: "1px solid rgba(255,255,255,0.08)",
-    transition: "border-color 0.3s",
+    flexDirection: "column",
+    alignItems: "center",
+    textAlign: "center",
+    padding: "0",
   },
   facIcon: {
     fontSize: "1.8rem",
-    flexShrink: 0,
-    marginTop: "0.1rem",
-  },
+    color: "#B89D7A",
+    marginBottom: "1rem",
+    display: "block",
+  } as React.CSSProperties,
   facTitle: {
-    color: WHITE,
-    fontSize: "1rem",
-    fontWeight: 600,
-    margin: "0 0 0.4rem",
-    fontFamily: "'Inter', sans-serif",
+    color: "#222222",
+    fontSize: "0.95rem",
+    fontWeight: 400,
+    margin: "0 0 0.6rem",
+    fontFamily: "'Playfair Display', Georgia, serif",
+    letterSpacing: "0.02em",
   },
   facDesc: {
-    color: "rgba(255,255,255,0.55)",
-    fontSize: "0.85rem",
-    lineHeight: 1.7,
+    color: "#666666",
+    fontSize: "0.84rem",
+    lineHeight: 1.8,
     margin: 0,
-    fontFamily: "'Inter', sans-serif",
+    fontFamily: "'Noto Sans Georgian', 'Inter', sans-serif",
     fontWeight: 300,
   },
 
@@ -1211,67 +1241,71 @@ const styles: Record<string, React.CSSProperties> = {
     gap: "2rem",
   },
   roomCard: {
-    background: WHITE,
-    boxShadow: "0 4px 30px rgba(0,0,0,0.1)",
-    transition: "transform 0.3s, box-shadow 0.3s",
+    background: CARD_BG,
+    boxShadow: "0 15px 40px rgba(0,0,0,0.04)",
+    transition: "box-shadow 0.4s ease, transform 0.4s ease",
     cursor: "pointer",
   },
   roomImageWrap: {
     position: "relative",
     overflow: "hidden",
-    height: "220px",
+    height: "230px",
   },
   roomLabel: {
     position: "absolute",
     top: "1rem",
     left: "1rem",
-    background: GOLD,
-    color: DARK,
-    fontSize: "0.72rem",
-    fontWeight: 700,
-    letterSpacing: "0.08em",
-    padding: "0.3rem 0.7rem",
+    background: RICH_GOLD,
+    color: WHITE,
+    fontSize: "0.65rem",
+    fontWeight: 600,
+    letterSpacing: "0.12em",
+    padding: "0.28rem 0.7rem",
     textTransform: "uppercase",
     zIndex: 2,
-    fontFamily: "'Inter', sans-serif",
+    fontFamily: "'Noto Sans Georgian', 'Inter', sans-serif",
   },
   roomMeta: {
     position: "absolute",
     bottom: "1rem",
     left: "1rem",
     display: "flex",
-    gap: "1rem",
+    gap: "0.5rem",
     zIndex: 2,
   },
   roomMetaItem: {
-    background: "rgba(0,0,0,0.6)",
-    color: WHITE,
-    fontSize: "0.75rem",
-    padding: "0.25rem 0.6rem",
-    backdropFilter: "blur(4px)",
-    fontFamily: "'Inter', sans-serif",
+    background: "rgba(0,0,0,0.42)",
+    color: "rgba(255,255,255,0.92)",
+    fontSize: "0.7rem",
+    padding: "0.28rem 0.65rem",
+    backdropFilter: "blur(8px)",
+    WebkitBackdropFilter: "blur(8px)",
+    fontFamily: "'Noto Sans Georgian', 'Inter', sans-serif",
+    letterSpacing: "0.03em",
   },
   roomImg: {
     width: "100%",
     height: "100%",
     objectFit: "cover",
-    transition: "transform 0.5s ease",
+    transition: "transform 0.65s ease",
   },
   roomText: {
-    padding: "1.5rem",
+    padding: "1.5rem 1.6rem 1.8rem",
   },
   roomName: {
-    fontSize: "1.15rem",
-    fontWeight: 600,
-    margin: "0 0 0.6rem",
-    color: DARK,
+    fontSize: "1.05rem",
+    fontWeight: 400,
+    margin: "0 0 0.55rem",
+    color: "#222222",
+    fontFamily: "'Playfair Display', Georgia, serif",
+    letterSpacing: "0.02em",
   },
   roomDesc: {
-    color: "#777",
-    fontSize: "0.88rem",
-    lineHeight: 1.7,
-    margin: "0 0 1.2rem",
-    fontFamily: "'Inter', sans-serif",
+    color: "#a0a0a0",
+    fontSize: "0.84rem",
+    lineHeight: 1.8,
+    margin: "0 0 1.4rem",
+    fontFamily: "'Noto Sans Georgian', 'Inter', sans-serif",
     fontWeight: 300,
   },
 
@@ -1304,11 +1338,12 @@ const styles: Record<string, React.CSSProperties> = {
   },
   btnLine: {
     background: "transparent",
-    color: GOLD,
-    border: `1px solid ${GOLD}`,
-    padding: "0.7rem 1.8rem",
-    fontSize: "0.8rem",
-    fontWeight: 600,
+    color: RICH_GOLD,
+    border: "none",
+    borderBottom: `1px solid ${RICH_GOLD}`,
+    padding: "0.3rem 0",
+    fontSize: "0.78rem",
+    fontWeight: 500,
     letterSpacing: "0.1em",
     textTransform: "uppercase",
     cursor: "pointer",
@@ -1482,12 +1517,50 @@ const styles: Record<string, React.CSSProperties> = {
 
 // ─── Responsive CSS injection ──────────────────────────────────────────────
 const responsiveCSS = `
+  @font-face {
+    font-family: 'BPG Nateli';
+    src: url('/bpg_nateli_mtavruli-22682544617.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  /* Apply BPG Nateli to all Georgian text on the tourism page */
+  .tourism-page,
+  .tourism-page h1,
+  .tourism-page h2,
+  .tourism-page h3,
+  .tourism-page h4,
+  .tourism-page p,
+  .tourism-page a,
+  .tourism-page button,
+  .tourism-page span,
+  .tourism-page label,
+  .tourism-page input,
+  .tourism-page select,
+  .tourism-page textarea {
+    font-family: 'BPG Nateli', 'Noto Sans Georgian', 'Inter', sans-serif;
+  }
+
+  /* Keep Playfair Display only for headings that explicitly set it */
+  .tourism-page h1[style*="Playfair"],
+  .tourism-page h2[style*="Playfair"],
+  .tourism-page h3[style*="Playfair"] {
+    font-family: 'Playfair Display', 'BPG Nateli', Georgia, serif;
+  }
+
   @keyframes scroll-dot {
     0% { transform: translateY(0); opacity: 1; }
     100% { transform: translateY(14px); opacity: 0; }
   }
-  .tourism-page a:hover { color: #c9a96e !important; }
-  .tourism-page .float-icon:hover { background: rgba(201,169,110,0.3) !important; }
+  .tourism-page a:hover { color: #6BA4C4 !important; }
+  .tourism-page .float-icon:hover { background: rgba(107,164,196,0.3) !important; }
+  /* Room button hover — fade underline */
+  .room-btn-line:hover { color: #3a7a9e !important; border-bottom-color: #3a7a9e !important; }
+  /* Room image zoom on card hover */
+  .room-card-wrap:hover img { transform: scale(1.06); }
+  /* Room card floating shadow on hover */
+  .room-card-wrap:hover { transform: translateY(-6px); box-shadow: 0 30px 70px rgba(0,0,0,0.09) !important; }
   @media (max-width: 900px) {
     .tourism-page nav ul { display: none !important; }
     .tourism-page .nav-cta-desktop { display: none !important; }
