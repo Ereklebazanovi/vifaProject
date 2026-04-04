@@ -260,14 +260,18 @@ const STATS = [
 // ─── Main Component ────────────────────────────────────────────────────────
 const TourismLandingPage: React.FC = () => {
   const [lang, setLang] = useState<Lang>("ka");
+  const [activeLangBtn, setActiveLangBtn] = useState<"ka" | "en" | "ru">("ka");
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [hoveredRoom, setHoveredRoom] = useState<number | null>(null);
   const [heroSlide, setHeroSlide] = useState(0);
   const heroImages = [
     "/tourism/images/slider/1.jpg",
+    "/tourism/images/slider/4.jpg",
     "/tourism/images/slider/2.jpg",
     "/tourism/images/slider/3.jpg",
+        
+
   ];
 
   const t = T[lang];
@@ -356,16 +360,22 @@ const TourismLandingPage: React.FC = () => {
             {/* Language switcher */}
             <div style={styles.langSwitch}>
               <button
-                style={{ ...styles.langBtn, ...(lang === "ka" ? styles.langBtnActive : {}) }}
-                onClick={() => setLang("ka")}
+                style={{ ...styles.langBtn, ...(activeLangBtn === "ka" ? styles.langBtnActive : {}) }}
+                onClick={() => { setLang("ka"); setActiveLangBtn("ka"); }}
               >
                 🇬🇪 ქარ
               </button>
               <button
-                style={{ ...styles.langBtn, ...(lang === "en" ? styles.langBtnActive : {}) }}
-                onClick={() => setLang("en")}
+                style={{ ...styles.langBtn, ...(activeLangBtn === "en" ? styles.langBtnActive : {}) }}
+                onClick={() => { setLang("en"); setActiveLangBtn("en"); }}
               >
                 🇬🇧 Eng
+              </button>
+              <button
+                style={{ ...styles.langBtn, ...(activeLangBtn === "ru" ? styles.langBtnActive : {}) }}
+                onClick={() => setActiveLangBtn("ru")}
+              >
+                🇷🇺 Рус
               </button>
             </div>
 
@@ -407,8 +417,9 @@ const TourismLandingPage: React.FC = () => {
               </a>
             ))}
             <div style={{ marginTop: "2rem", display: "flex", gap: "0.5rem", justifyContent: "center" }}>
-              <button style={{ ...styles.langBtn, ...(lang === "ka" ? styles.langBtnActive : {}) }} onClick={() => setLang("ka")}>🇬🇪 ქარ</button>
-              <button style={{ ...styles.langBtn, ...(lang === "en" ? styles.langBtnActive : {}) }} onClick={() => setLang("en")}>🇬🇧 Eng</button>
+              <button style={{ ...styles.langBtn, ...(activeLangBtn === "ka" ? styles.langBtnActive : {}) }} onClick={() => { setLang("ka"); setActiveLangBtn("ka"); }}>🇬🇪 ქარ</button>
+              <button style={{ ...styles.langBtn, ...(activeLangBtn === "en" ? styles.langBtnActive : {}) }} onClick={() => { setLang("en"); setActiveLangBtn("en"); }}>🇬🇧 Eng</button>
+              <button style={{ ...styles.langBtn, ...(activeLangBtn === "ru" ? styles.langBtnActive : {}) }} onClick={() => setActiveLangBtn("ru")}>🇷🇺 Рус</button>
             </div>
             <button style={{ ...styles.navCta, marginTop: "1.5rem", width: "100%" }} onClick={() => { setMenuOpen(false); scrollTo("booking"); }}>
               {t.nav_book_now}
@@ -530,6 +541,32 @@ const TourismLandingPage: React.FC = () => {
       </section>
 
       {/* ── FACILITIES ─────────────────────────────────────────────────── */}
+      {/* ── ROOMS ──────────────────────────────────────────────────────── */}
+      <section id="rooms" style={{ ...styles.section, background: ROOMS_BG }}>
+        <div style={styles.container}>
+          <div style={styles.sectionHeader}>
+            <p style={{ ...styles.sectionSub, color: RICH_GOLD }}>{t.rooms_sub}</p>
+            <h2 style={{ ...styles.sectionH2, color: "#222222" }}>
+              {t.rooms_h2}
+              <span style={{ ...styles.smallBorder, background: RICH_GOLD }} />
+            </h2>
+          </div>
+          <div style={styles.roomGrid}>
+            {(t.rooms as unknown as AnyRoom[]).map((room, i) => (
+              <RoomCard
+                key={room.name}
+                room={room}
+                t={t as AnyT}
+                lang={lang}
+                hovered={hoveredRoom === i}
+                onHover={(v) => setHoveredRoom(v ? i : null)}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FACILITIES ─────────────────────────────────────────────────── */}
       <section id="facilities" style={{ ...styles.section, background: "#fafafa" }}>
         <div style={styles.container}>
           <div style={styles.sectionHeader}>
@@ -552,31 +589,6 @@ const TourismLandingPage: React.FC = () => {
               { icon: "fa-car",       title: t.fac_parking,    desc: t.fac_parking_p    },
             ].map((fac) => (
               <FacIcon key={fac.title} {...fac} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── ROOMS ──────────────────────────────────────────────────────── */}
-      <section id="rooms" style={{ ...styles.section, background: ROOMS_BG }}>
-        <div style={styles.container}>
-          <div style={styles.sectionHeader}>
-            <p style={{ ...styles.sectionSub, color: RICH_GOLD }}>{t.rooms_sub}</p>
-            <h2 style={{ ...styles.sectionH2, color: "#222222" }}>
-              {t.rooms_h2}
-              <span style={{ ...styles.smallBorder, background: RICH_GOLD }} />
-            </h2>
-          </div>
-          <div style={styles.roomGrid}>
-            {(t.rooms as unknown as AnyRoom[]).map((room, i) => (
-              <RoomCard
-                key={room.name}
-                room={room}
-                t={t as AnyT}
-                lang={lang}
-                hovered={hoveredRoom === i}
-                onHover={(v) => setHoveredRoom(v ? i : null)}
-              />
             ))}
           </div>
         </div>
