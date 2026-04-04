@@ -567,7 +567,7 @@ const TourismLandingPage: React.FC = () => {
             </h2>
           </div>
           <div style={styles.roomGrid}>
-            {(t.rooms as AnyRoom[]).map((room, i) => (
+            {(t.rooms as unknown as AnyRoom[]).map((room, i) => (
               <RoomCard
                 key={room.name}
                 room={room}
