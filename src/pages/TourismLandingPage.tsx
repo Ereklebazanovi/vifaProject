@@ -336,8 +336,7 @@ const TourismLandingPage: React.FC = () => {
             onClick={(e) => { e.preventDefault(); scrollTo("hero"); }}
             style={styles.navLogo}
           >
-            <span style={styles.navLogoIcon}>🌊</span>
-            <span style={styles.navLogoText}>Seaside</span>
+            <img src="/sealogo.jpg" alt="Seaside" style={styles.navLogoImg} />
           </a>
 
           {/* Desktop links */}
@@ -403,8 +402,7 @@ const TourismLandingPage: React.FC = () => {
         <div style={styles.mobileOverlay} onClick={() => setMenuOpen(false)}>
           <div style={styles.mobileMenu} onClick={(e) => e.stopPropagation()}>
             <div style={styles.mobileLogoRow}>
-              <span style={{ ...styles.navLogoIcon, fontSize: "2rem" }}>🌊</span>
-              <span style={{ ...styles.navLogoText, fontSize: "1.6rem", color: "#c9a96e" }}>Seaside</span>
+              <img src="/sealogo.jpg" alt="Seaside" style={styles.mobileLogoImg} />
             </div>
             {navLinks.map(({ key, id }) => (
               <a
@@ -675,9 +673,8 @@ const TourismLandingPage: React.FC = () => {
           <div style={styles.footerGrid}>
             {/* Brand */}
             <div>
-              <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "1rem" }}>
-                <span style={{ fontSize: "2rem" }}>🌊</span>
-                <span style={{ fontSize: "1.6rem", fontWeight: 700, color: "#c9a96e", fontFamily: "serif" }}>Seaside</span>
+              <div style={{ marginBottom: "1rem" }}>
+                <img src="/sealogo.jpg" alt="Seaside" style={styles.footerLogoImg} />
               </div>
               <p style={{ color: "#aaa", fontSize: "0.9rem", lineHeight: 1.8, maxWidth: "220px" }}>
                 {t.footer_tagline}
@@ -800,16 +797,28 @@ const styles: Record<string, React.CSSProperties> = {
   navLogo: {
     display: "flex",
     alignItems: "center",
-    gap: "0.5rem",
     textDecoration: "none",
+    flexShrink: 0,
   },
-  navLogoIcon: { fontSize: "1.5rem" },
-  navLogoText: {
-    fontSize: "1.4rem",
-    fontWeight: 700,
-    color: GOLD,
-    letterSpacing: "0.05em",
-    fontFamily: "serif",
+  navLogoImg: {
+    height: "44px",
+    width: "auto",
+    objectFit: "contain",
+    display: "block",
+    filter: "brightness(1.05)",
+  },
+  mobileLogoImg: {
+    height: "56px",
+    width: "auto",
+    objectFit: "contain",
+    display: "block",
+  },
+  footerLogoImg: {
+    height: "52px",
+    width: "auto",
+    objectFit: "contain",
+    display: "block",
+    filter: "brightness(1.1)",
   },
   navLinks: {
     display: "flex",
