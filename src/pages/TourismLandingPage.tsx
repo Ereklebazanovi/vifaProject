@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 
 // ─── Bilingual content ───────────────────────────────────────────────────────
 const T = {
@@ -177,10 +177,13 @@ const scrollTo = (id: string) => {
   if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
 };
 
+type AnyRoom = typeof T.ka.rooms[number] | typeof T.en.rooms[number];
+type AnyT = typeof T.ka | typeof T.en;
+
 // ─── Room card ─────────────────────────────────────────────────────────────
 const RoomCard: React.FC<{
-  room: (typeof T.ka.rooms)[0];
-  t: typeof T.ka;
+  room: AnyRoom;
+  t: AnyT;
   lang: Lang;
   hovered: boolean;
   onHover: (v: boolean) => void;
@@ -564,11 +567,11 @@ const TourismLandingPage: React.FC = () => {
             </h2>
           </div>
           <div style={styles.roomGrid}>
-            {t.rooms.map((room, i) => (
+            {(t.rooms as AnyRoom[]).map((room, i) => (
               <RoomCard
                 key={room.name}
                 room={room}
-                t={t}
+                t={t as AnyT}
                 lang={lang}
                 hovered={hoveredRoom === i}
                 onHover={(v) => setHoveredRoom(v ? i : null)}
@@ -926,7 +929,7 @@ const styles: Record<string, React.CSSProperties> = {
   floatBookNow: {
     writingMode: "vertical-rl",
     textOrientation: "mixed",
-    color: WHITE,
+    color: DARK,
     textDecoration: "none",
     fontSize: "0.7rem",
     letterSpacing: "0.18em",
@@ -936,7 +939,6 @@ const styles: Record<string, React.CSSProperties> = {
     padding: "0.8rem 0.4rem",
     marginTop: "0.5rem",
     fontWeight: 700,
-    color: DARK,
   },
 
   // Hero
