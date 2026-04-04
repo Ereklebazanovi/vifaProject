@@ -717,6 +717,21 @@ const TourismLandingPage: React.FC = () => {
         </div>
       </footer>
 
+      {/* ── WHATSAPP CTA ───────────────────────────────────────────────── */}
+      <a
+        href="https://wa.me/995422230000"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={styles.whatsappBtn}
+        className="whatsapp-cta"
+        aria-label="WhatsApp"
+      >
+        <i className="fa fa-whatsapp" style={styles.whatsappIcon} />
+        <span style={styles.whatsappText}>
+          {lang === "ka" ? "დაგვიკავშირდით" : lang === "en" ? "Contact Us" : "Связаться"}
+        </span>
+      </a>
+
       {/* ── BACK TO TOP ────────────────────────────────────────────────── */}
       {scrolled && (
         <button style={styles.backToTop} onClick={() => scrollTo("hero")} aria-label="back to top">
@@ -1534,6 +1549,37 @@ const styles: Record<string, React.CSSProperties> = {
     justifyContent: "center",
     transition: "all 0.3s",
   },
+
+  // WhatsApp CTA
+  whatsappBtn: {
+    position: "fixed",
+    bottom: "2rem",
+    right: "2rem",
+    zIndex: 900,
+    display: "flex",
+    alignItems: "center",
+    gap: "0.6rem",
+    background: "#25D366",
+    color: WHITE,
+    textDecoration: "none",
+    padding: "0.7rem 1.2rem 0.7rem 0.9rem",
+    borderRadius: "50px",
+    boxShadow: "0 6px 24px rgba(37,211,102,0.35)",
+    transition: "all 0.3s ease",
+    fontFamily: "'BPG Nateli', 'Noto Sans Georgian', sans-serif",
+  },
+  whatsappIcon: {
+    fontSize: "1.4rem",
+    lineHeight: 1,
+    color: WHITE,
+    flexShrink: 0,
+  } as React.CSSProperties,
+  whatsappText: {
+    fontSize: "0.78rem",
+    fontWeight: 600,
+    letterSpacing: "0.04em",
+    whiteSpace: "nowrap" as const,
+  },
 };
 
 // ─── Responsive CSS injection ──────────────────────────────────────────────
@@ -1575,6 +1621,9 @@ const responsiveCSS = `
     100% { transform: translateY(14px); opacity: 0; }
   }
   .tourism-page a:hover { color: #6BA4C4 !important; }
+  /* WhatsApp CTA hover */
+  .whatsapp-cta:hover { background: #1da851 !important; color: #fff !important; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(37,211,102,0.45) !important; }
+  .whatsapp-cta:hover * { color: #fff !important; }
   .tourism-page .float-icon:hover { background: rgba(107,164,196,0.3) !important; }
   /* Room button hover — fade underline */
   .room-btn-line:hover { color: #3a7a9e !important; border-bottom-color: #3a7a9e !important; }
