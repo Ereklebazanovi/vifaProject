@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
@@ -327,7 +327,29 @@ const NewHomeVifa: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
   const { startNavigation } = useNavigation();
   const [showDigitalConsequences, setShowDigitalConsequences] = useState(false);
+  const [videoFading, setVideoFading] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.playbackRate = 1.5;
+    const handleTimeUpdate = () => {
+      if (video.duration && video.duration - video.currentTime < 0.6) {
+        setVideoFading(true);
+      }
+    };
+    const handleSeeked = () => {
+      if (video.currentTime < 0.3) setVideoFading(false);
+    };
+    video.addEventListener("timeupdate", handleTimeUpdate);
+    video.addEventListener("seeked", handleSeeked);
+    return () => {
+      video.removeEventListener("timeupdate", handleTimeUpdate);
+      video.removeEventListener("seeked", handleSeeked);
+    };
+  }, []);
 
   // WhatsApp URL for consultation
   const whatsappUrl = "https://wa.me/995557624243";
@@ -361,11 +383,7 @@ const NewHomeVifa: React.FC = () => {
           <div className="max-w-5xl mx-auto mb-35 mt-30">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
-                <div className="mb-6">
-                  <span className="text-blue-400 text-sm font-medium tracking-wider uppercase border border-blue-400/30 px-3 py-1 rounded">
-                    {t("newHome.badge")}
-                  </span>
-                </div>
+                
 
                 <h1 className="text-4xl md:text-5xl font-light text-white mb-6 leading-tight">
                   {t("newHome.hero.title")}{" "}
@@ -416,38 +434,27 @@ const NewHomeVifa: React.FC = () => {
                 </div>
               </div>
 
-              <div className="text-center">
-                <div className="relative inline-block">
-                  <div className="w-48 h-48 border border-blue-400/30 rounded-full flex items-center justify-center mx-auto mb-6 bg-blue-500/5">
-                    <div className="text-center">
-                      <div className="w-16 h-16 border-2 border-blue-400 rounded mx-auto mb-3 flex items-center justify-center">
-                        <div className="w-6 h-6 bg-blue-400 rounded"></div>
-                      </div>
-                      <div className="text-blue-400 text-sm font-medium">
-                        {t("newHome.visual.brand")}
-                      </div>
-                    </div>
-
-                    {/* Connection Line */}
-                    <div className="absolute top-1/2 left-full w-16 h-px bg-gradient-to-r from-blue-400 to-green-400 transform -translate-y-1/2"></div>
-                  </div>
-
-                  {/* Target Audience Circle */}
-                  <div className="absolute top-1/2 -right-8 w-32 h-32 border border-green-400/30 rounded-full flex items-center justify-center bg-green-500/5 transform -translate-y-1/2">
-                    <div className="text-center">
-                      <div className="w-8 h-8 border-2 border-green-400 rounded-full mx-auto mb-1 flex items-center justify-center">
-                        <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                      </div>
-                      <div className="text-green-400 text-xs font-medium">
-                        {t("newHome.visual.audience")}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-8 text-slate-400 text-sm">
-                  {t("newHome.visual.description")}
-                </div>
+              <div className="relative overflow-hidden" style={{ maxHeight: "420px" }}>
+                <video
+                  ref={videoRef}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  className={`w-full object-cover transition-opacity duration-700 ${videoFading ? "opacity-0" : "opacity-100"}`}
+                >
+                  <source src="/videoHero.mp4" type="video/mp4" />
+                </video>
+                {/* კიდეებიდან ფონში ჩაბნელება */}
+                <div className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: `
+                      linear-gradient(to right,  black 0%, transparent 25%, transparent 75%, black 100%),
+                      linear-gradient(to bottom, black 0%, transparent 20%, transparent 80%, black 100%)
+                    `
+                  }}
+                />
               </div>
             </div>
           </div>

@@ -1,22 +1,18 @@
 import React from 'react';
 import NewHomeVifa from '../pages/NewHomeVifa';
-import NewHomeInvento from '../pages/NewHomeInvento';
+// import NewHomeInvento from '../pages/NewHomeInvento';
 
 const DomainBasedHome: React.FC = () => {
-  // Get current hostname
-  const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+  // // Get current hostname
+  // const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
 
-  // Check if it's VIFA domain
-  const isVifaDomain = hostname.includes('vifadigital.ge') || hostname.includes('vifadigital');
+  // // Invento domain logic — disabled, site is now vifadigital.ge only
+  // const isInventoDomain = hostname.includes('inventogeo.com') || hostname.includes('inventogeo');
+  // if (isInventoDomain) {
+  //   return <NewHomeInvento />;
+  // }
 
-
-  // Return appropriate component based on domain
-  if (isVifaDomain) {
-    return <NewHomeVifa />;
-  }
-
-  // Default to Invento (for inventogeo.com and localhost)
-  return <NewHomeInvento />;
+  return <NewHomeVifa />;
 };
 
 export default DomainBasedHome;
