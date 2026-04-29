@@ -18,6 +18,8 @@ const newHomeTranslations = {
 
     "ome.badge": "გააციფრულე შენი ბიზნესი",
     "newHome.hero.title": "შექმენი კომუნიკაციის ხიდი",
+    "newHome.hero.titleStart": "შექმენი",
+    "newHome.hero.titleGradient": "კომუნიკაციის ხიდი",
     "newHome.hero.brand": "ბრენდსა და მომხმარებელს ",
     "newHome.hero.connection": "შორის",
     "newHome.hero.description":
@@ -159,6 +161,8 @@ const newHomeTranslations = {
 
     "newHome.badge": "Digitize Your Business",
     "newHome.hero.title": "Build a Communication Bridge",
+    "newHome.hero.titleStart": "Build a",
+    "newHome.hero.titleGradient": "Communication Bridge",
     "newHome.hero.brand": "Between the Brand",
     "newHome.hero.connection": "and the Customer",
     "newHome.hero.description":
@@ -294,8 +298,6 @@ const newHomeTranslations = {
   },
 };
 
-import Canvas2DHighway from "../components/Canvas2DHighway";
-
 import {
   FaCogs,
   FaBriefcase,
@@ -369,96 +371,77 @@ const NewHomeVifa: React.FC = () => {
         url="https://inventogeo.com"
       />
 
-      {/* Canvas 2D Highway Background - Full Page Coverage */}
-      <Canvas2DHighway className="fixed inset-0 z-0" />
+      {/* ─── Cinematic Hero — Full Screen ─── */}
+      <div className={`relative min-h-screen overflow-hidden ${getTransitionClasses()}`}>
 
-      {/* Light overlay for text readability - limited to main content area */}
-      <div className="fixed inset-0 z-5 bg-black/15 pointer-events-none"></div>
-
-      <div className="relative z-10 min-h-screen mt-15">
-        <div
-          className={`container mx-auto px-4 sm:px-6 lg:px-8 py-10 ${getTransitionClasses()}`}
+        {/* Full-screen video background */}
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          className={`absolute inset-0 -z-10 w-full h-full object-cover transition-opacity duration-700 ${videoFading ? "opacity-0" : "opacity-100"}`}
         >
-          {/* Hero Section */}
-          <div className="max-w-5xl mx-auto mb-35 mt-30">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div>
-                
+          <source src="/videoHero.mp4" type="video/mp4" />
+        </video>
 
-                <h1 className="text-4xl md:text-5xl font-light text-white mb-6 leading-tight">
-                  {t("newHome.hero.title")}{" "}
-                  <span className="text-blue-400">
-                    {t("newHome.hero.brand")}
-                  </span>{" "}
-                  {t("newHome.hero.connection")}
-                </h1>
+        {/* Dark overlay — stronger center fade, navbar area darkened */}
+        <div className="absolute inset-0 -z-10 bg-black/60" />
+        {/* Top gradient — navbar readable */}
+        <div className="absolute inset-x-0 top-0 h-32 -z-10 bg-linear-to-b from-black/80 to-transparent" />
+        {/* Bottom gradient — bottom content readable */}
+        <div className="absolute inset-x-0 bottom-0 h-64 -z-10 bg-linear-to-t from-black/80 to-transparent" />
 
-                <p className="text-lg text-slate-300 mb-8 leading-relaxed">
-                  {t("newHome.hero.description")}
-                </p>
+        {/* Content layer */}
+        <div className="relative z-10 w-full min-h-screen flex flex-col px-8 lg:px-16">
 
-                <div className="flex flex-wrap justify-center gap-2 sm:gap-3 max-w-lg mx-auto">
-                  <Link
-                    to="/services/web-development"
-                    className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium rounded-md shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center"
-                  >
-                    {t("newHome.hero.button1")}
-                  </Link>
-                  <Link
-                    to="/inventowms"
-                    className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium rounded-md shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center"
-                  >
-                    {t("newHome.hero.button4")}
-                  </Link>
-                  <Link
-                    to="/services/ai-chatbot"
-                    className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium rounded-md shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center"
-                  >
-                    {t("newHome.hero.button3")}
-                  </Link>
-                  <Link
-                    to="/services/digital-advertising"
-                    className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium rounded-md shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center"
-                  >
-                    {t("newHome.hero.button2")}
-                  </Link>
-                  <a
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium rounded-md shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center inline-flex items-center justify-center gap-1.5"
-                  >
-                    <FaWhatsapp className="text-xs" />
-                    {t("newHome.hero.button5")}
-                  </a>
-                </div>
-              </div>
-
-              <div className="relative overflow-hidden" style={{ maxHeight: "420px" }}>
-                <video
-                  ref={videoRef}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
-                  className={`w-full object-cover transition-opacity duration-700 ${videoFading ? "opacity-0" : "opacity-100"}`}
-                >
-                  <source src="/videoHero.mp4" type="video/mp4" />
-                </video>
-                {/* კიდეებიდან ფონში ჩაბნელება */}
-                <div className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background: `
-                      linear-gradient(to right,  black 0%, transparent 25%, transparent 75%, black 100%),
-                      linear-gradient(to bottom, black 0%, transparent 20%, transparent 80%, black 100%)
-                    `
-                  }}
-                />
-              </div>
+          {/* Middle — service labels left only */}
+          <div className="flex flex-1 items-center pt-24">
+            <div className="flex flex-col gap-2">
+              {(currentLanguage === "ka"
+                ? ["ვებ-დეველოპმენტი", "WMS სისტემები", "AI ჩატბოტები", "პროდაქშენი"]
+                : ["Web Development", "WMS Systems", "AI Chatbots", "Production"]
+              ).map((label) => (
+                <span key={label} className="text-white/75 text-sm tracking-[0.15em] uppercase">
+                  {label}
+                </span>
+              ))}
             </div>
           </div>
 
+          {/* Bottom — title left, description+CTA right */}
+          <div className="flex items-end justify-between pb-12">
+
+            {/* Brutalist title — balanced size */}
+            <h1 className="text-[clamp(3rem,7vw,6.5rem)] font-extrabold uppercase text-white leading-none tracking-tight">
+              VIFA_
+            </h1>
+
+            {/* Description + CTA — bottom right, fixed width */}
+            <div className="w-80 shrink-0 text-right pb-2">
+              <p className="text-slate-300 text-sm leading-snug mb-5">
+                {currentLanguage === "ka"
+                  ? "ვქმნით ბრენდებს და თანამედროვე ვებ-საიტებს. ყველა დეტალი შედეგზეა ორიენტირებული."
+                  : "We craft bold brands and modern websites. Every detail built for results."}
+              </p>
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block border border-white/60 text-white text-xs font-semibold px-5 py-2.5 tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-200"
+              >
+                {currentLanguage === "ka" ? "დაჯავშნე კონსულტაცია" : "Start a Project"}
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      {/* ─── Rest of page ─── */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
           {/* Futuristic Services Showcase */}
           <div className="mt-20 mb-20">
             <div className="text-center mb-16">
@@ -1160,7 +1143,6 @@ const NewHomeVifa: React.FC = () => {
               </a>
             </div>
           </div>
-        </div>
       </div>
 
       {/* Compact Animations */}

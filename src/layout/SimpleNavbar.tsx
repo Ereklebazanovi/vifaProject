@@ -1,321 +1,96 @@
-//SimpleNavbar.tsx - A sleek, responsive navbar with dynamic branding and AI service highlight. Adapts to scroll and route context for optimal UX.
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import LanguageToggle from "../components/LanguageToggle";
 import { useLanguage } from "../contexts/LanguageContext";
-import { useLanguageTransition } from "../hooks/useLanguageTransition";
-import { useNavigation } from "../contexts/NavigationContext";
-import { FaRobot } from "react-icons/fa";
-
-// SimpleNavbar Translations
-const navbarTranslations = {
-  ka: {
-    "services.webdev.title": "Invento Web",
-    "services.advertising.title": "ციფრული რეკლამა",
-     "nav.businessSolutions": "Invento WMS",
-    "nav.about": "ჩვენ შესახებ",
-    "nav.blog": "ბლოგი",
-
-    "nav.aiService": "Invento AI",
-  },
-  en: {
-    "services.webdev.title": "Invento Web",
-    "services.advertising.title": "Digital Ads",
-    "nav.about": "About Us",
-    "nav.blog": "Blog",
-    "nav.businessSolutions": "Invento WMS",
-    "nav.aiService": "Invento AI",
-  },
-};
-
 
 const SimpleNavbar: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [isVisible, setIsVisible] = useState(true);
+  const [visible, setVisible] = useState(true);
+  const [lastY, setLastY] = useState(0);
   const { currentLanguage } = useLanguage();
-
-  const t = (key: string): string => {
-    const translations = navbarTranslations[currentLanguage as keyof typeof navbarTranslations] as Record<string, string>;
-    return translations[key] || key;
-  };
-  const { getTransitionClasses } = useLanguageTransition();
   const location = useLocation();
   const navigate = useNavigate();
-  const { startNavigation, stopNavigation } = useNavigation();
-
-  // Check if on VIFA domain
-  const isVifaDomain = typeof window !== 'undefined' && window.location.hostname.includes('vifadigital');
-
-  // Determine if current route should show Invento branding
-  const isInventoRoute = () => {
-    if (isVifaDomain) return false;
-    const path = location.pathname;
-    return path.includes('/services/web-development') ||
-           path.includes('/services/ai-chatbot') ||
-           path.includes('/inventowms') ||
-           path === '/';
-  };
-
-  const isVifaRoute = () => {
-    if (isVifaDomain) return true;
-    const path = location.pathname;
-    return path.includes('/services/digital-advertising') ||
-           path.includes('/about');
-  };
-
-  const handleNavigation = (path: string) => {
-    if (location.pathname !== path) {
-      startNavigation();
-      navigate(path);
-      // Very short timeout for fast UX
-      setTimeout(() => stopNavigation(), 300);
-    }
-  };
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      // Check if scrolled past 50px
-      setIsScrolled(currentScrollY > 50);
-
-      // Show/hide navbar based on scroll direction - much faster response
-      if (currentScrollY > lastScrollY && currentScrollY > 80) {
-        // Scrolling down & past just 80px - hide navbar immediately
-        setIsVisible(false);
-      } else if (currentScrollY < lastScrollY && currentScrollY < 100) {
-        // Show navbar when scrolling up and near top
-        setIsVisible(true);
-      }
-      // Much more responsive hiding for better reading experience
-
-      setLastScrollY(currentScrollY);
+      const y = window.scrollY;
+      setVisible(y < lastY || y < 60);
+      setLastY(y);
     };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastY]);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [lastScrollY]);
+  const ka = currentLanguage === "ka";
 
-  const navLinks = [
-    { path: "/inventowms", label: t("nav.businessSolutions") },
-    { path: "/services/web-development", label: t("services.webdev.title") },
-    {
-      path: "/services/digital-advertising",
-      label: t("services.advertising.title"),
-    },
-    { path: "/about", label: t("nav.about") },
-    { path: "/blog", label: t("nav.blog") },
-
+  const links = [
+    { num: "01/", label: ka ? "მთავარი"      : "HOME",     path: "/" },
+    { num: "02/", label: ka ? "სერვისები"    : "SERVICES", path: "/services/web-development" },
+    { num: "03/", label: ka ? "AI ჩატბოტი"  : "AI",       path: "/services/ai-chatbot" },
+    { num: "04/", label: ka ? "ჩვენ შესახებ" : "ABOUT",    path: "/about" },
+    { num: "05/", label: ka ? "ბლოგი"        : "BLOG",     path: "/blog" },
+    { num: "06/", label: ka ? "კონტაქტი"     : "CONTACT",  path: "/contact" },
   ];
 
-  // Special highlighted link for AI Chatbot
-  const aiChatbotLink = {
-    path: "/services/ai-chatbot",
-    label: t("nav.aiService"),
-  };
-////////
   return (
-    <>
-      {/* Main Navbar */}
-      <nav
-        className={`fixed w-full top-0 z-[100] transition-transform duration-300 ease-in-out bg-transparent border-b border-slate-800/50 ${
-          isVisible ? "translate-y-0" : "-translate-y-full"
-        }`}
-      >
-        <div
-          className={`max-w-4xl mx-auto px-3 sm:px-6 transition-all duration-300 ${
-            isScrolled ? "py-1 sm:py-2" : "py-2 sm:py-4"
-          }`}
-        >
-          {/* Brand Title - Responsive sizing and spacing with conditional branding */}
-          <div
-            className={`text-center transition-all duration-300 ${
-              isScrolled ? "mb-1 sm:mb-2" : "mb-2 sm:mb-3"
-            }`}
-          >
-            <Link to="/" className="inline-flex items-center">
-              {/* Conditional logo display */}
-              {isInventoRoute() && !isVifaRoute() ? (
-                <div className="flex items-center gap-2 sm:gap-3">
-                  
-                  <h1
-                    className={`font-mono font-light tracking-[0.15em] transition-all duration-500 ease-in-out ${
-                      isScrolled
-                        ? "text-lg xs:text-xl sm:text-xl md:text-2xl"
-                        : "text-xl xs:text-2xl sm:text-3xl md:text-3xl"
-                    }`}
-                  >
-                    <span className="text-blue-400 opacity-90 drop-shadow-sm animate-pulse">&gt;</span>
-                    <span className="inline ml-2 text-slate-100 font-extralight tracking-[0.2em] drop-shadow-md hover:text-white transition-colors duration-300">invento</span>
-                    <span className="text-blue-400 opacity-90 drop-shadow-sm animate-ping animation-delay-1000">.</span>
-                  </h1>
-                </div>
-              ) : (
-                <div className="flex items-center gap-2 sm:gap-3">
-                  
-                  <h1
-                    className={`font-light tracking-wider sm:tracking-[0.2em] transition-all duration-300 text-white break-words hyphens-auto leading-tight ${
-                      isScrolled
-                        ? "text-lg xs:text-xl sm:text-xl md:text-2xl"
-                        : "text-xl xs:text-2xl sm:text-3xl md:text-4xl"
-                    }`}
-                  >
-                    <span className="inline">VIFA </span>
-                    <span className="text-blue-400 inline">
-                      DIGITAL
-                    </span>
-                  </h1>
-                </div>
-              )}
-            </Link>
-          </div>
+    <nav
+      className={`fixed w-full top-0 z-100 transition-transform duration-300 ${
+        visible ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
+      <div className="w-full px-8 lg:px-16 py-5 flex items-center justify-between">
 
-          {/* Desktop Navigation Links - Hidden on small screens */}
-          <div
-            className={`mt-4 hidden lg:flex justify-center items-center space-x-6 ${getTransitionClasses()}`}
-          >
+        {/* Left: Logo */}
+        <Link
+          to="/"
+          className="text-white text-xs font-semibold tracking-[0.4em] uppercase hover:text-slate-300 transition-colors shrink-0"
+        >
+          VIFA
+        </Link>
+
+        {/* Center-left: numbered links */}
+        <div className="hidden lg:flex items-center gap-10 ml-16">
+          {links.map((link) => (
             <button
-              onClick={() => handleNavigation(aiChatbotLink.path)}
-              className={`px-4 py-2 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 transform hover:scale-105 border ${
-                location.pathname === aiChatbotLink.path
-                  ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-lg"
-                  : "text-slate-200 bg-slate-800/40 hover:text-white hover:bg-slate-700/60 hover:shadow-md border-blue-500/50 hover:border-blue-400"
-              }`}
+              key={link.path}
+              onClick={() => navigate(link.path)}
+              className="flex items-center gap-1.5 group"
             >
-              <div className="flex items-center gap-2">
-                <FaRobot className="text-blue-400" />
-                <span>{aiChatbotLink.label}</span>
-              </div>
-            </button>
-            {navLinks.map((link, index) => (
-              <button
-                key={index}
-                onClick={() => handleNavigation(link.path)}
-                className={`px-4 py-2 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 transform hover:scale-105 border ${
+              <span className="text-slate-500 text-[10px] font-mono">{link.num}</span>
+              <span
+                className={`text-sm tracking-widest uppercase font-medium transition-colors duration-200 ${
                   location.pathname === link.path
-                    ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-lg"
-                    : "text-slate-200 bg-slate-800/40 hover:text-white hover:bg-slate-700/60 hover:shadow-md border-blue-500/50 hover:border-blue-400"
+                    ? "text-white"
+                    : "text-slate-200 group-hover:text-white"
                 }`}
               >
                 {link.label}
-              </button>
-            ))}
+              </span>
+            </button>
+          ))}
+        </div>
+
+        {/* Right: contact info + language toggle */}
+        <div className="hidden lg:flex items-center gap-6">
+          <div className="text-right">
+            <p className="text-slate-300 text-xs tracking-wider">vifadigital.ge</p>
+            <Link
+              to="/contact"
+              className="text-slate-500 text-[10px] tracking-widest uppercase hover:text-slate-300 transition-colors"
+            >
+              {ka ? "კონტაქტი" : "GET IN TOUCH"}
+            </Link>
           </div>
+          <LanguageToggle />
+        </div>
 
-          {/* Tablet Navigation - Optimized for medium screens */}
-          <div
-            className={`hidden md:flex lg:hidden justify-center items-center space-x-3 ${getTransitionClasses()}`}
-          >
-            {navLinks.map((link, index) => (
-              <button
-                key={index}
-                onClick={() => handleNavigation(link.path)}
-                className={`px-3 py-2 text-xs font-medium rounded-md transition-all duration-300 transform hover:scale-105 text-center border ${
-                  location.pathname === link.path
-                    ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-sm"
-                    : "text-slate-200 bg-slate-800/40 hover:text-white hover:bg-slate-700/60 hover:shadow-sm border-blue-500/50 hover:border-blue-400"
-                }`}
-              >
-                <span className="block leading-tight">{link.label}</span>
-              </button>
-            ))}
+        {/* Mobile: just language toggle */}
+        <div className="lg:hidden">
+          <LanguageToggle />
+        </div>
 
-            {/* AI Chatbot Button for Tablet */}
-            <button
-              onClick={() => handleNavigation(aiChatbotLink.path)}
-              className={`px-3 py-2 text-xs font-medium rounded-md transition-all duration-300 transform hover:scale-105 text-center border ${
-                location.pathname === aiChatbotLink.path
-                  ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-sm"
-                  : "text-slate-200 bg-slate-800/40 hover:text-white hover:bg-slate-700/60 hover:shadow-sm border-blue-500/50 hover:border-blue-400"
-              }`}
-            >
-              <div className="flex items-center justify-center gap-1">
-                <FaRobot className="text-xs text-blue-400" />
-                <span className="block leading-tight">
-                    {aiChatbotLink.label}
-                  </span>
-                </div>
-              </button>
-            </div>
+      </div>
+    </nav>
+  );
+};
 
-            {/* Mobile Navigation - 3x3 symmetric layout */}
-            <div
-              className={`mt-7 md:hidden flex flex-col space-y-2 ${getTransitionClasses()}`}
-            >
-              {/* First row - 3 buttons */}
-              <div className="flex justify-center items-center space-x-2">
-                {navLinks.slice(0, 3).map((link, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handleNavigation(link.path)}
-                    className={`px-2 py-2 text-xs font-medium rounded-md transition-all duration-300 transform active:scale-95 text-center flex-1 max-w-[110px] h-12 flex items-center justify-center border ${
-                      location.pathname === link.path
-                        ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-sm"
-                        : "text-slate-200 bg-slate-800/40 hover:text-white hover:bg-slate-700/60 hover:shadow-sm border-blue-500/50 hover:border-blue-400"
-                    }`}
-                  >
-                    <span className="block leading-tight text-[11px] text-center">
-                      {link.label}
-                    </span>
-                  </button>
-                ))}
-              </div>
-
-              {/* Second row - 3 buttons (2 regular + 1 AI) */}
-              <div className="flex justify-center items-center space-x-2">
-                {navLinks.slice(3).map((link, index) => (
-                  <button
-                    key={index + 3}
-                    onClick={() => handleNavigation(link.path)}
-                    className={`px-2 py-2 text-xs font-medium rounded-md transition-all duration-300 transform active:scale-95 text-center flex-1 max-w-[110px] h-12 flex items-center justify-center border ${
-                      location.pathname === link.path
-                        ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-sm"
-                        : "text-slate-200 bg-slate-800/40 hover:text-white hover:bg-slate-700/60 hover:shadow-sm border-blue-500/50 hover:border-blue-400"
-                    }`}
-                  >
-                    <span className="block leading-tight text-[11px] text-center">
-                      {link.label}
-                    </span>
-                  </button>
-                ))}
-
-                {/* AI Chatbot Button - integrated into the grid */}
-                <button
-                  onClick={() => handleNavigation(aiChatbotLink.path)}
-                  className={`px-2 py-2 text-xs font-medium rounded-md transition-all duration-300 transform active:scale-95 text-center flex-1 max-w-[110px] h-12 flex flex-col items-center justify-center border ${
-                    location.pathname === aiChatbotLink.path
-                      ? "text-blue-300 bg-blue-500/10 border-blue-400 shadow-sm"
-                      : "text-slate-200 bg-slate-800/40 hover:text-white hover:bg-slate-700/60 hover:shadow-sm border-blue-500/50 hover:border-blue-400"
-                  }`}
-                >
-                  <div className="flex flex-col items-center justify-center gap-0.5">
-                    <FaRobot className="text-xs text-blue-400" />
-                    <span className="block leading-tight text-[11px] font-semibold text-center">
-                      {aiChatbotLink.label}
-                    </span>
-                  </div>
-                </button>
-              </div>
-            </div>
-
-            {/* Language Toggle - Responsive positioning */}
-            <div
-              className={`absolute transition-all duration-300 ${
-                isScrolled
-                  ? "top-1 right-2 sm:top-2 sm:right-3"
-                  : "top-2 right-2 sm:top-4 sm:right-4"
-              }`}
-            >
-              <LanguageToggle />
-            </div>
-          </div>
-        </nav>
-      </>
-    );
-  };
-  
-  export default React.memo(SimpleNavbar);
+export default React.memo(SimpleNavbar);
