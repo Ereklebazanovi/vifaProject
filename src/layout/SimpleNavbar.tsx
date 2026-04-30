@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+﻿import React, { useState, useEffect, useRef } from "react";
 import {
   Layers,
   Map,
@@ -20,31 +20,31 @@ interface IndustryItem {
 
 const industries: IndustryItem[] = [
   {
-    nameKa: "áƒ˜áƒ£áƒ áƒ˜áƒ“áƒ˜áƒ£áƒšáƒ˜ áƒ“áƒ áƒ¡áƒáƒ¤áƒ˜áƒœáƒáƒœáƒ¡áƒ áƒ¡áƒ”áƒ¥áƒ¢áƒáƒ áƒ˜",
+    nameKa: "იურიდიული და საფინანსო სექტორი",
     nameEn: "Legal & Finance",
     slug: "legal-finance",
     icon: Scale,
   },
   {
-    nameKa: "áƒ¡áƒáƒ¡áƒ¢áƒ£áƒ›áƒ áƒáƒ”áƒ‘áƒ˜, áƒ™áƒáƒ¢áƒ”áƒ¯áƒ”áƒ‘áƒ˜ áƒ“áƒ áƒ¢áƒ£áƒ áƒ˜áƒ–áƒ›áƒ˜",
+    nameKa: "სასტუმროები, კოტეჯები და ტურიზმი",
     nameEn: "Hotels, Cottages & Tourism",
     slug: "tourism",
     icon: Map,
   },
   {
-    nameKa: "áƒ”áƒ¡áƒ—áƒ”áƒ¢áƒ˜áƒ™áƒ áƒ“áƒ áƒ¡áƒ˜áƒšáƒáƒ›áƒáƒ–áƒ”",
+    nameKa: "ესთეტიკა და სილამაზე",
     nameEn: "Beauty & Aesthetics",
     slug: "beauty",
     icon: Sparkles,
   },
   {
-    nameKa: "E-commerce & áƒ¡áƒáƒªáƒáƒšáƒ áƒ•áƒáƒ­áƒ áƒáƒ‘áƒ",
+    nameKa: "E-commerce & საცალო ვაჭრობა",
     nameEn: "E-commerce & Retail",
     slug: "retail",
     icon: ShoppingCart,
   },
   {
-    nameKa: "áƒ áƒ”áƒ¡áƒ¢áƒáƒ áƒœáƒ”áƒ‘áƒ˜ áƒ“áƒ áƒ™áƒ•áƒ”áƒ‘áƒ˜áƒ¡ áƒ˜áƒœáƒ“áƒ£áƒ¡áƒ¢áƒ áƒ˜áƒ",
+    nameKa: "რესტორნები და კვების ინდუსტრია",
     nameEn: "Restaurants & Food Service",
     slug: "food",
     icon: Utensils,
@@ -107,24 +107,24 @@ const SimpleNavbar: React.FC = () => {
   const ka = currentLanguage === "ka";
 
   const links: NavLinkItem[] = [
-    { num: "01/", label: ka ? "áƒ›áƒ—áƒáƒ•áƒáƒ áƒ˜" : "HOME", path: "/" },
+    { num: "01/", label: ka ? "მთავარი" : "HOME", path: "/" },
     {
       num: "02/",
-      label: ka ? "áƒ•áƒ”áƒ‘ áƒ“áƒ”áƒ•áƒ”áƒšáƒáƒžáƒ›áƒ”áƒœáƒ¢áƒ˜" : "WEB DEV",
+      label: ka ? "ვებ დეველოპმენტი" : "WEB DEV",
       path: "/services/web-development",
       hasIndustryDropdown: true,
       generalHref: "/services/web",
     },
     {
       num: "03/",
-      label: ka ? "áƒ›áƒáƒ áƒ™áƒ”áƒ¢áƒ˜áƒœáƒ’áƒ˜" : "MARKETING",
+      label: ka ? "მარკეტინგი" : "MARKETING",
       path: "/services/digital-advertising",
       hasIndustryDropdown: true,
       generalHref: "/services/marketing",
     },
-    { num: "04/", label: ka ? "áƒ©áƒ•áƒ”áƒœ áƒ¨áƒ”áƒ¡áƒáƒ®áƒ”áƒ‘" : "ABOUT", path: "/about" },
-    { num: "05/", label: ka ? "áƒ‘áƒšáƒáƒ’áƒ˜" : "BLOG", path: "/blog" },
-    { num: "06/", label: ka ? "áƒ™áƒáƒœáƒ¢áƒáƒ¥áƒ¢áƒ˜" : "CONTACT", path: "/contact" },
+    { num: "04/", label: ka ? "ჩვენ შესახებ" : "ABOUT", path: "/about" },
+    { num: "05/", label: ka ? "ბლოგი" : "BLOG", path: "/blog" },
+    { num: "06/", label: ka ? "კონტაქტი" : "CONTACT", path: "/contact" },
   ];
 
   return (
@@ -192,7 +192,7 @@ const SimpleNavbar: React.FC = () => {
                         className="group flex w-full items-center rounded-xl px-4 py-3 min-h-[50px] text-base text-white hover:text-blue-300 hover:bg-white/5 transition-all duration-300"
                       >
                         <Layers className="w-4 h-4 mr-3 text-white/60 group-hover:text-blue-300 transition-all duration-300 shrink-0" />
-                        <span>{ka ? "áƒ§áƒ•áƒ”áƒšáƒ áƒ¡áƒ”áƒ áƒ•áƒ˜áƒ¡áƒ˜" : "All Services"}</span>
+                        <span>{ka ? "ყველა სერვისი" : "All Services"}</span>
                       </Link>
 
                       <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent my-2" />
@@ -227,7 +227,7 @@ const SimpleNavbar: React.FC = () => {
               to="/contact"
               className="text-slate-500 text-[10px] tracking-widest uppercase hover:text-slate-300 transition-colors"
             >
-              {ka ? "áƒ™áƒáƒœáƒ¢áƒáƒ¥áƒ¢áƒ˜" : "GET IN TOUCH"}
+              {ka ? "კონტაქტი" : "GET IN TOUCH"}
             </Link>
           </div>
           <LanguageToggle />
