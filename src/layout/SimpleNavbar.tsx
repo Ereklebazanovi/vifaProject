@@ -42,7 +42,7 @@ const SimpleNavbar: React.FC = () => {
         {/* Left: Logo */}
         <Link
           to="/"
-          className="text-white text-xs font-semibold tracking-[0.4em] uppercase hover:text-slate-300 transition-colors shrink-0"
+          className="text-white text-sm font-semibold tracking-[0.4em] uppercase hover:text-slate-300 transition-colors shrink-0 ml-4"
         >
           VIFA
         </Link>

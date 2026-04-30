@@ -1,3 +1,4 @@
+
 "use client";
 
 import type React from "react";
@@ -7,6 +8,7 @@ import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import { useNavigation } from "../contexts/NavigationContext";
 import SEO from "../components/SEO";
+import ServicesSection from "../components/ServicesSection";
 
 // NewHome Translations
 const newHomeTranslations = {
@@ -408,7 +410,7 @@ const NewHomeVifa: React.FC = () => {
             {/* Stats Block — bottom left, desktop only */}
             <div className="hidden lg:flex items-end gap-10 pb-2">
               {[
-                { num: "100+", label: currentLanguage === "ka" ? "ჩაბარებული პროექტი" : "Submitted project" },
+                { num: "500+", label: currentLanguage === "ka" ? "ჩაბარებული პროექტი" : "Submitted project" },
                 { num: "4", label: currentLanguage === "ka" ? "მთავარი მიმართულება" : "Main direction" },
                 { num: "7+", label: currentLanguage === "ka" ? "წელი ინდუსტრიაში" : "Years in industry" },
               ].map((stat, i) => (
@@ -448,303 +450,12 @@ const NewHomeVifa: React.FC = () => {
         </div>
       </div>
 
+      {/* Services Showcase — full width, outside container */}
+      <ServicesSection t={t} />
+
       {/* ─── Rest of page ─── */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
-          {/* Futuristic Services Showcase */}
-          <div className="mt-20 mb-20">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                {t("newHome.services.sectionTitle")}
-              </h2>
-              <p className="text-lg text-slate-300 max-w-2xl mx-auto">
-                {t("newHome.services.sectionSubtitle")}
-              </p>
-            </div>
 
-            {/* Elegant Compact Service Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
-              {/* Web Development - Compact Elegant Card */}
-              <div className="group relative bg-gradient-to-br from-black/80 via-slate-900/90 to-black/80 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-6 overflow-hidden hover:border-cyan-500/60 transition-all duration-500 hover:transform hover:scale-[1.02] hover:shadow-xl hover:shadow-cyan-500/25">
-                {/* Sophisticated Dark Background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute -top-10 -right-10 w-20 h-20 bg-gradient-to-br from-cyan-400/10 to-blue-500/10 rounded-full blur-2xl opacity-0 group-hover:opacity-80 transition-opacity duration-500"></div>
-
-                <div className="relative z-10">
-                  {/* Compact Header */}
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="relative">
-                      <div className="w-12 h-12 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-500/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-all duration-300 backdrop-blur-sm">
-                        <FaLaptopCode className="text-cyan-400 text-xl" />
-                      </div>
-                      <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-blue-500/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors duration-300">
-                        {t("newHome.services.webdev.title")}
-                      </h3>
-                      <div className="flex space-x-2 mt-1">
-                        <div className="w-6 h-6 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex items-center justify-center group-hover:bg-cyan-500/20 transition-all duration-300">
-                          <SiReact className="text-cyan-400 text-xs" />
-                        </div>
-                        <div className="w-6 h-6 bg-green-500/10 border border-green-500/30 rounded-lg flex items-center justify-center group-hover:bg-green-500/20 transition-all duration-300">
-                          <SiNodedotjs className="text-green-400 text-xs" />
-                        </div>
-                        <div className="w-6 h-6 bg-blue-500/10 border border-blue-500/30 rounded-lg flex items-center justify-center group-hover:bg-blue-500/20 transition-all duration-300">
-                          <SiTypescript className="text-blue-400 text-xs" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <p className="text-slate-400 mb-4 text-sm leading-relaxed">
-                    {t("newHome.services.webdev.description")}
-                  </p>
-
-                  {/* Compact Feature List */}
-                  <div className="space-y-2 mb-5">
-                    <div className="flex items-center text-sm text-slate-300 group-hover:text-cyan-200 transition-colors">
-                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mr-3"></div>
-                      {t("newHome.services.webdev.feature1")}
-                    </div>
-                    <div className="flex items-center text-sm text-slate-300 group-hover:text-cyan-200 transition-colors">
-                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mr-3"></div>
-                      {t("newHome.services.webdev.feature2")}
-                    </div>
-                    <div className="flex items-center text-sm text-slate-300 group-hover:text-cyan-200 transition-colors">
-                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mr-3"></div>
-                      {t("newHome.services.webdev.feature3")}
-                    </div>
-                  </div>
-
-                  {/* Elegant CTA Button */}
-                  <Link
-                    to="/services/web-development"
-                    className="block"
-                    onClick={startNavigation}
-                  >
-                    <div className="relative group/btn">
-                      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-xl blur opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                      <div className="relative flex items-center justify-between p-3 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-xl border border-cyan-500/20 group-hover/btn:border-cyan-400/50 group-hover/btn:bg-gradient-to-r group-hover/btn:from-cyan-500/20 group-hover/btn:to-blue-500/20 transition-all duration-300 cursor-pointer">
-                        <span className="text-cyan-400 font-semibold text-sm group-hover/btn:text-cyan-300 transition-colors">
-                          {t("newHome.services.webdev.cta")}
-                        </span>
-                        <FaArrowRight className="text-cyan-400 text-sm group-hover/btn:text-cyan-300 group-hover/btn:translate-x-1 transition-all duration-300" />
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              </div>
-
-              {/* Invento System - Compact Elegant Card */}
-              <div className="group relative bg-gradient-to-br from-black/80 via-slate-900/90 to-black/80 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-6 overflow-hidden hover:border-orange-500/60 transition-all duration-500 hover:transform hover:scale-[1.02] hover:shadow-xl hover:shadow-orange-500/25">
-                {/* Sophisticated Dark Background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 via-transparent to-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute -top-10 -right-10 w-20 h-20 bg-gradient-to-br from-orange-400/10 to-red-500/10 rounded-full blur-2xl opacity-0 group-hover:opacity-80 transition-opacity duration-500"></div>
-
-                <div className="relative z-10">
-                  {/* Compact Header */}
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="relative">
-                      <div className="w-12 h-12 bg-gradient-to-br from-orange-500/20 to-red-600/20 border border-orange-500/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-all duration-300 backdrop-blur-sm">
-                        <FaWarehouse className="text-orange-400 text-xl" />
-                      </div>
-                      <div className="absolute inset-0 bg-gradient-to-br from-orange-400/20 to-red-500/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-white group-hover:text-orange-300 transition-colors duration-300">
-                        {t("newHome.services.invento.title")}
-                      </h3>
-                      <div className="flex space-x-2 mt-1">
-                        <div className="w-6 h-6 bg-orange-500/10 border border-orange-500/30 rounded-lg flex items-center justify-center group-hover:bg-orange-500/20 transition-all duration-300">
-                          <span className="text-orange-400 text-xs font-bold">₾</span>
-                        </div>
-                        <div className="w-6 h-6 bg-red-500/10 border border-red-500/30 rounded-lg flex items-center justify-center group-hover:bg-red-500/20 transition-all duration-300">
-                          <span className="text-red-400 text-xs font-bold">📊</span>
-                        </div>
-                        <div className="w-6 h-6 bg-yellow-500/10 border border-yellow-500/30 rounded-lg flex items-center justify-center group-hover:bg-yellow-500/20 transition-all duration-300">
-                          <span className="text-yellow-400 text-xs font-bold">📦</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <p className="text-slate-400 mb-4 text-sm leading-relaxed">
-                    {t("newHome.services.invento.description")}
-                  </p>
-
-                  {/* Compact Feature List */}
-                  <div className="space-y-2 mb-5">
-                    <div className="flex items-center text-sm text-slate-300 group-hover:text-orange-200 transition-colors">
-                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-orange-400 to-red-500 rounded-full mr-3"></div>
-                      {t("newHome.services.invento.feature1")}
-                    </div>
-                    <div className="flex items-center text-sm text-slate-300 group-hover:text-orange-200 transition-colors">
-                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-orange-400 to-red-500 rounded-full mr-3"></div>
-                      {t("newHome.services.invento.feature2")}
-                    </div>
-                    <div className="flex items-center text-sm text-slate-300 group-hover:text-orange-200 transition-colors">
-                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-orange-400 to-red-500 rounded-full mr-3"></div>
-                      {t("newHome.services.invento.feature3")}
-                    </div>
-                  </div>
-
-                  {/* Elegant CTA Button */}
-                  <Link to="/inventowms" className="block">
-                    <div className="relative group/btn">
-                      <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-red-500/20 rounded-xl blur opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                      <div className="relative flex items-center justify-between p-3 bg-gradient-to-r from-orange-500/10 to-red-500/10 rounded-xl border border-orange-500/20 group-hover/btn:border-orange-400/50 group-hover/btn:bg-gradient-to-r group-hover/btn:from-orange-500/20 group-hover/btn:to-red-500/20 transition-all duration-300 cursor-pointer">
-                        <span className="text-orange-400 font-semibold text-sm group-hover/btn:text-orange-300 transition-colors">
-                          {t("newHome.services.invento.cta")}
-                        </span>
-                        <FaArrowRight className="text-orange-400 text-sm group-hover/btn:text-orange-300 group-hover/btn:translate-x-1 transition-all duration-300" />
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              </div>
-
-              {/* AI Chatbot - Compact Elegant Card */}
-              <div className="group relative bg-gradient-to-br from-black/80 via-slate-900/90 to-black/80 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-6 overflow-hidden hover:border-purple-500/60 transition-all duration-500 hover:transform hover:scale-[1.02] hover:shadow-xl hover:shadow-purple-500/25">
-                {/* Sophisticated Dark Background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute -top-10 -right-10 w-20 h-20 bg-gradient-to-br from-purple-400/10 to-pink-500/10 rounded-full blur-2xl opacity-0 group-hover:opacity-80 transition-opacity duration-500"></div>
-
-                <div className="relative z-10">
-                  {/* Compact Header */}
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="relative">
-                      <div className="w-12 h-12 bg-gradient-to-br from-purple-500/20 to-pink-600/20 border border-purple-500/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-all duration-300 backdrop-blur-sm">
-                        <FaBrain className="text-purple-400 text-xl animate-pulse" />
-                      </div>
-                      <div className="absolute inset-0 bg-gradient-to-br from-purple-400/20 to-pink-500/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-white group-hover:text-purple-300 transition-colors duration-300">
-                        {t("newHome.services.ai.title")}
-                      </h3>
-                      {/* Compact Chat Interface */}
-                      <div className="relative bg-gradient-to-br from-black/30 to-purple-900/20 backdrop-blur-sm rounded-lg p-2 mt-2 border border-purple-500/30 group-hover:border-purple-400/50 transition-all duration-300">
-                        <div className="space-y-1">
-                          <div className="flex justify-end">
-                            <div className="bg-gradient-to-r from-blue-500/30 to-cyan-500/30 text-white text-xs px-2 py-1 rounded border border-blue-400/30">
-                              {t("newHome.services.ai.greeting")}
-                            </div>
-                          </div>
-                          <div className="flex justify-start">
-                            <div className="bg-gradient-to-r from-purple-500/30 to-pink-500/30 text-white text-xs px-2 py-1 rounded border border-purple-400/30">
-                              {t("newHome.services.ai.thinking")}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <p className="text-slate-400 mb-4 text-sm leading-relaxed">
-                    {t("newHome.services.ai.description")}
-                  </p>
-
-                  {/* Compact Feature List */}
-                  <div className="space-y-2 mb-5">
-                    <div className="flex items-center text-sm text-slate-300 group-hover:text-purple-200 transition-colors">
-                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full mr-3"></div>
-                      {t("newHome.services.ai.feature1")}
-                    </div>
-                    <div className="flex items-center text-sm text-slate-300 group-hover:text-purple-200 transition-colors">
-                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full mr-3"></div>
-                      {t("newHome.services.ai.feature2")}
-                    </div>
-                    <div className="flex items-center text-sm text-slate-300 group-hover:text-purple-200 transition-colors">
-                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full mr-3"></div>
-                      {t("newHome.services.ai.feature3")}
-                    </div>
-                  </div>
-
-                  {/* Elegant CTA Button */}
-                  <Link to="/services/ai-chatbot" className="block">
-                    <div className="relative group/btn">
-                      <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-xl blur opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                      <div className="relative flex items-center justify-between p-3 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-xl border border-purple-500/20 group-hover/btn:border-purple-400/50 group-hover/btn:bg-gradient-to-r group-hover/btn:from-purple-500/20 group-hover/btn:to-pink-500/20 transition-all duration-300 cursor-pointer">
-                        <span className="text-purple-400 font-semibold text-sm group-hover/btn:text-purple-300 transition-colors">
-                          {t("newHome.services.ai.cta")}
-                        </span>
-                        <FaArrowRight className="text-purple-400 text-sm group-hover/btn:text-purple-300 group-hover/btn:translate-x-1 transition-all duration-300" />
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              </div>
-
-              {/* Digital Marketing - Compact Elegant Card */}
-              <div className="group relative bg-gradient-to-br from-black/80 via-slate-900/90 to-black/80 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-6 overflow-hidden hover:border-green-500/60 transition-all duration-500 hover:transform hover:scale-[1.02] hover:shadow-xl hover:shadow-green-500/25">
-                {/* Sophisticated Dark Background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 via-transparent to-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute -top-10 -right-10 w-20 h-20 bg-gradient-to-br from-green-400/10 to-emerald-500/10 rounded-full blur-2xl opacity-0 group-hover:opacity-80 transition-opacity duration-500"></div>
-
-                <div className="relative z-10">
-                  {/* Compact Header */}
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="relative">
-                      <div className="w-12 h-12 bg-gradient-to-br from-green-500/20 to-emerald-600/20 border border-green-500/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-all duration-300 backdrop-blur-sm">
-                        <FaChartPie className="text-green-400 text-xl" />
-                      </div>
-                      <div className="absolute inset-0 bg-gradient-to-br from-green-400/20 to-emerald-500/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-white group-hover:text-green-300 transition-colors duration-300">
-                        {t("newHome.services.marketing.title")}
-                      </h3>
-                      <div className="flex space-x-2 mt-1">
-                        <div className="w-6 h-6 bg-blue-500/10 border border-blue-500/30 rounded-lg flex items-center justify-center group-hover:bg-blue-500/20 transition-all duration-300">
-                          <SiFacebook className="text-blue-400 text-xs" />
-                        </div>
-                        <div className="w-6 h-6 bg-red-500/10 border border-red-500/30 rounded-lg flex items-center justify-center group-hover:bg-red-500/20 transition-all duration-300">
-                          <SiGoogle className="text-red-400 text-xs" />
-                        </div>
-                        <div className="w-6 h-6 bg-pink-500/10 border border-pink-500/30 rounded-lg flex items-center justify-center group-hover:bg-pink-500/20 transition-all duration-300">
-                          <SiInstagram className="text-pink-400 text-xs" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <p className="text-slate-400 mb-4 text-sm leading-relaxed">
-                    {t("newHome.services.marketing.description")}
-                  </p>
-
-                  {/* Compact Feature List */}
-                  <div className="space-y-2 mb-5">
-                    <div className="flex items-center text-sm text-slate-300 group-hover:text-green-200 transition-colors">
-                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full mr-3"></div>
-                      {t("newHome.services.marketing.feature1")}
-                    </div>
-                    <div className="flex items-center text-sm text-slate-300 group-hover:text-green-200 transition-colors">
-                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full mr-3"></div>
-                      {t("newHome.services.marketing.feature2")}
-                    </div>
-                    <div className="flex items-center text-sm text-slate-300 group-hover:text-green-200 transition-colors">
-                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full mr-3"></div>
-                      {t("newHome.services.marketing.feature3")}
-                    </div>
-                  </div>
-
-                  {/* Elegant CTA Button */}
-                  <Link to="/services/digital-advertising" className="block">
-                    <div className="relative group/btn">
-                      <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-xl blur opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                      <div className="relative flex items-center justify-between p-3 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-xl border border-green-500/20 group-hover/btn:border-green-400/50 group-hover/btn:bg-gradient-to-r group-hover/btn:from-green-500/20 group-hover/btn:to-emerald-500/20 transition-all duration-300 cursor-pointer">
-                        <span className="text-green-400 font-semibold text-sm group-hover/btn:text-green-300 transition-colors">
-                          {t("newHome.services.marketing.cta")}
-                        </span>
-                        <FaArrowRight className="text-green-400 text-sm group-hover/btn:text-green-300 group-hover/btn:translate-x-1 transition-all duration-300" />
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              </div>
-
-            </div>
-          </div>
 
           <div className="grid md:grid-cols-3 gap-8 mb-32">
             {/* Research Card */}
