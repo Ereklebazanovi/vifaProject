@@ -3,10 +3,8 @@
 
 import type React from "react";
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
-import { useNavigation } from "../contexts/NavigationContext";
 import SEO from "../components/SEO";
 import ServicesSection from "../components/ServicesSection";
 
@@ -305,31 +303,17 @@ import {
   FaBriefcase,
   FaChartLine,
   FaBullseye,
-  FaBrain,
-  FaLaptopCode,
-  FaChartPie,
-  FaArrowRight,
   FaLightbulb,
   FaSearch,
   FaRocket,
-  FaWarehouse,
   FaWhatsapp,
 } from "react-icons/fa";
-
-import {
-  SiReact,
-  SiNodedotjs,
-  SiTypescript,
-  SiFacebook,
-  SiGoogle,
-  SiInstagram,
-} from "react-icons/si";
 import { motion } from "framer-motion";
 
 const NewHomeVifa: React.FC = () => {
   const { currentLanguage } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
-  const { startNavigation } = useNavigation();
+
   const [showDigitalConsequences, setShowDigitalConsequences] = useState(false);
   const [videoFading, setVideoFading] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
