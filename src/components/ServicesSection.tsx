@@ -1,5 +1,13 @@
-
 import React, { useState } from "react";
+import {
+  ArrowUpRight,
+  Layers,
+  Map,
+  Scale,
+  ShoppingCart,
+  Sparkles,
+  Utensils,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useNavigation } from "../contexts/NavigationContext";
@@ -7,6 +15,46 @@ import { useNavigation } from "../contexts/NavigationContext";
 interface ServicesSectionProps {
   t: (key: string) => string;
 }
+
+interface IndustryItem {
+  nameKa: string;
+  nameEn: string;
+  slug: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+const industries: IndustryItem[] = [
+  {
+    nameKa: "áƒ˜áƒ£áƒ áƒ˜áƒ“áƒ˜áƒ£áƒšáƒ˜ áƒ“áƒ áƒ¡áƒáƒ¤áƒ˜áƒœáƒáƒœáƒ¡áƒ áƒ¡áƒ”áƒ¥áƒ¢áƒáƒ áƒ˜",
+    nameEn: "Legal & Finance",
+    slug: "legal-finance",
+    icon: Scale,
+  },
+  {
+    nameKa: "áƒ¡áƒáƒ¡áƒ¢áƒ£áƒ›áƒ áƒáƒ”áƒ‘áƒ˜, áƒ™áƒáƒ¢áƒ”áƒ¯áƒ”áƒ‘áƒ˜ áƒ“áƒ áƒ¢áƒ£áƒ áƒ˜áƒ–áƒ›áƒ˜",
+    nameEn: "Hotels, Cottages & Tourism",
+    slug: "tourism",
+    icon: Map,
+  },
+  {
+    nameKa: "áƒ”áƒ¡áƒ—áƒ”áƒ¢áƒ˜áƒ™áƒ áƒ“áƒ áƒ¡áƒ˜áƒšáƒáƒ›áƒáƒ–áƒ”",
+    nameEn: "Beauty & Aesthetics",
+    slug: "beauty",
+    icon: Sparkles,
+  },
+  {
+    nameKa: "E-commerce & áƒ¡áƒáƒªáƒáƒšáƒ áƒ•áƒáƒ­áƒ áƒáƒ‘áƒ",
+    nameEn: "E-commerce & Retail",
+    slug: "retail",
+    icon: ShoppingCart,
+  },
+  {
+    nameKa: "áƒ áƒ”áƒ¡áƒ¢áƒáƒ áƒœáƒ”áƒ‘áƒ˜ áƒ“áƒ áƒ™áƒ•áƒ”áƒ‘áƒ˜áƒ¡ áƒ˜áƒœáƒ“áƒ£áƒ¡áƒ¢áƒ áƒ˜áƒ",
+    nameEn: "Restaurants & Food Service",
+    slug: "food",
+    icon: Utensils,
+  },
+];
 
 const ArrowDiagonalSVG: React.FC = () => (
   <svg
@@ -35,50 +83,62 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
   const { currentLanguage } = useLanguage();
   const { startNavigation } = useNavigation();
   const [btnHovered, setBtnHovered] = useState(false);
+  const [expandedServiceId, setExpandedServiceId] = useState<string | null>(null);
 
   const services = [
     {
+      id: "web-development",
       title: t("newHome.services.webdev.title"),
       description: t("newHome.services.webdev.description"),
       href: "/services/web-development",
+      generalHref: "/services/web",
       onClick: startNavigation,
+      hasIndustryLinks: true,
     },
     {
+      id: "digital-marketing",
       title: t("newHome.services.marketing.title"),
       description: t("newHome.services.marketing.description"),
       href: "/services/digital-advertising",
+      generalHref: "/services/marketing",
       onClick: undefined,
+      hasIndustryLinks: true,
     },
     {
+      id: "invento",
       title: t("newHome.services.invento.title"),
       description: t("newHome.services.invento.description"),
       href: "/inventowms",
       onClick: undefined,
+      hasIndustryLinks: false,
     },
     {
+      id: "ai-chatbot",
       title: t("newHome.services.ai.title"),
       description: t("newHome.services.ai.description"),
       href: "/services/ai-chatbot",
       onClick: undefined,
+      hasIndustryLinks: false,
     },
-    
   ];
 
   const scrollToCards = () => {
-    document.getElementById("services-cards")?.scrollIntoView({ behavior: "smooth" });
+    document
+      .getElementById("services-cards")
+      ?.scrollIntoView({ behavior: "smooth" });
   };
 
-  return (
-    <section
-      className="w-full py-20 md:py-28"
-      // style={{ backgroundColor: "#080e17" }}
-    >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
+  const toggleIndustryLinks = (serviceId: string) => {
+    setExpandedServiceId((prev) => (prev === serviceId ? null : serviceId));
+  };
 
-        {/* ── Section Header ── */}
+  const ka = currentLanguage === "ka";
+
+  return (
+    <section className="w-full py-20 md:py-28">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-8 mb-10 md:mb-16">
           <div>
-            {/* Subtitle pill */}
             <div className="inline-flex items-center gap-2 mb-5">
               <span className="w-2 h-2 rounded-full bg-blue-500 block" />
               <span className="text-blue-400 text-sm font-medium tracking-widest uppercase">
@@ -90,14 +150,12 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
             </h2>
           </div>
 
-          {/* Animated button */}
           <button
             onClick={scrollToCards}
             className="group relative inline-flex items-center gap-4 self-start md:self-auto h-14"
             onMouseEnter={() => setBtnHovered(true)}
             onMouseLeave={() => setBtnHovered(false)}
           >
-            {/* circle accent */}
             <span
               className="absolute top-1/2 -translate-y-1/2 rounded-full bg-blue-600 transition-all duration-500 ease-in-out"
               style={{
@@ -106,10 +164,8 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
                 left: btnHovered ? "calc(100% - 56px)" : "0",
               }}
             />
-            <span
-              className="relative z-10 text-white font-semibold text-sm tracking-wide whitespace-nowrap pl-18"
-            >
-              {currentLanguage === "ka" ? "სერვისების ნახვა" : "View Services"}
+            <span className="relative z-10 text-white font-semibold text-sm tracking-wide whitespace-nowrap pl-18">
+              {ka ? "áƒ¡áƒ”áƒ áƒ•áƒ˜áƒ¡áƒ”áƒ‘áƒ˜áƒ¡ áƒœáƒáƒ®áƒ•áƒ" : "View Services"}
             </span>
             <svg
               className="relative z-10 shrink-0 text-white"
@@ -127,67 +183,145 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
           </button>
         </div>
 
-        {/* ── Divider ── */}
         <div className="border-t border-white/10 mb-0" />
 
-        {/* ── Service Cards ── */}
         <div id="services-cards">
-        {services.map((service, i) => (
-          <div
-            key={i}
-            className="group relative flex items-center gap-4 sm:gap-6 md:gap-12 py-6 md:py-10 border-b border-white/10 cursor-pointer transition-all duration-300 hover:bg-white/3 -mx-4 sm:-mx-6 lg:-mx-12 px-4 sm:px-6 lg:px-12"
-          >
-            {/* Number */}
-            <span
-              className="hidden md:block flex-none text-[80px] lg:text-[96px] font-black leading-none select-none w-32 lg:w-40 text-right shrink-0"
-              style={{
-                backgroundImage: "url('/herophoto.jpg')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                WebkitTextStroke: "1px rgba(255,255,255,0.15)",
-              }}
-            >
-              0{i + 1}
-            </span>
+          {services.map((service, i) => {
+            const isExpandable = service.hasIndustryLinks;
+            const isExpanded = expandedServiceId === service.id;
 
-            {/* Vertical accent line */}
-            <span className="hidden md:block w-px h-16 bg-white/10 shrink-0 group-hover:bg-blue-500/50 transition-colors duration-300" />
+            return (
+              <div key={service.id}>
+                <div
+                  className="group relative flex items-center gap-4 sm:gap-6 md:gap-12 py-6 md:py-10 border-b border-white/10 cursor-pointer transition-all duration-300 hover:bg-white/3 -mx-4 sm:-mx-6 lg:-mx-12 px-4 sm:px-6 lg:px-12"
+                  onClick={isExpandable ? () => toggleIndustryLinks(service.id) : undefined}
+                  role={isExpandable ? "button" : undefined}
+                  tabIndex={isExpandable ? 0 : undefined}
+                  onKeyDown={
+                    isExpandable
+                      ? (event) => {
+                          if (event.key === "Enter" || event.key === " ") {
+                            event.preventDefault();
+                            toggleIndustryLinks(service.id);
+                          }
+                        }
+                      : undefined
+                  }
+                  aria-expanded={isExpandable ? isExpanded : undefined}
+                >
+                  <span
+                    className="hidden md:block flex-none text-[80px] lg:text-[96px] font-black leading-none select-none w-32 lg:w-40 text-right shrink-0"
+                    style={{
+                      backgroundImage: "url('/herophoto.jpg')",
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      WebkitBackgroundClip: "text",
+                      backgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      WebkitTextStroke: "1px rgba(255,255,255,0.15)",
+                    }}
+                  >
+                    0{i + 1}
+                  </span>
 
-            {/* Content */}
-            <div className="flex-1 min-w-0">
-              {/* Mobile number */}
-              <span className="md:hidden text-xs font-mono text-blue-500/70 mb-1 block tracking-widest">
-                0{i + 1}
-              </span>
-              <h3 className="text-xl md:text-2xl font-bold text-white mb-2 group-hover:text-blue-300 transition-colors duration-300">
-                <Link to={service.href} onClick={service.onClick}>
-                  {service.title}
-                </Link>
-              </h3>
-              <p className="text-sm md:text-base text-white/50 leading-relaxed max-w-lg">
-                {service.description}
-              </p>
-            </div>
+                  <span className="hidden md:block w-px h-16 bg-white/10 shrink-0 group-hover:bg-blue-500/50 transition-colors duration-300" />
 
-            {/* Arrow icon */}
-            <Link
-              to={service.href}
-              onClick={service.onClick}
-              aria-label={service.title}
-              className="shrink-0 relative overflow-hidden w-6 h-6 text-white/30 group-hover:text-white transition-colors duration-300"
-            >
-              <span className="absolute inset-0 flex items-center justify-center transition-all duration-400 group-hover:translate-x-8 group-hover:-translate-y-8">
-                <ArrowDiagonalSVG />
-              </span>
-              <span className="absolute inset-0 flex items-center justify-center -translate-x-8 translate-y-8 transition-all duration-400 group-hover:translate-x-0 group-hover:translate-y-0">
-                <ArrowDiagonalSVG />
-              </span>
-            </Link>
-          </div>
-        ))}
+                  <div className="flex-1 min-w-0">
+                    <span className="md:hidden text-xs font-mono text-blue-500/70 mb-1 block tracking-widest">
+                      0{i + 1}
+                    </span>
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-2 group-hover:text-blue-300 transition-colors duration-300">
+                      {isExpandable ? (
+                        <span>{service.title}</span>
+                      ) : (
+                        <Link to={service.href} onClick={service.onClick}>
+                          {service.title}
+                        </Link>
+                      )}
+                    </h3>
+                    <p className="text-sm md:text-base text-white/50 leading-relaxed max-w-lg">
+                      {service.description}
+                    </p>
+                  </div>
+
+                  {isExpandable ? (
+                    <span
+                      aria-label={service.title}
+                      className="shrink-0 relative overflow-hidden w-6 h-6 text-white/30 group-hover:text-white transition-colors duration-300"
+                    >
+                      <span className="absolute inset-0 flex items-center justify-center transition-all duration-400 group-hover:translate-x-8 group-hover:-translate-y-8">
+                        <ArrowDiagonalSVG />
+                      </span>
+                      <span className="absolute inset-0 flex items-center justify-center -translate-x-8 translate-y-8 transition-all duration-400 group-hover:translate-x-0 group-hover:translate-y-0">
+                        <ArrowDiagonalSVG />
+                      </span>
+                    </span>
+                  ) : (
+                    <Link
+                      to={service.href}
+                      onClick={service.onClick}
+                      aria-label={service.title}
+                      className="shrink-0 relative overflow-hidden w-6 h-6 text-white/30 group-hover:text-white transition-colors duration-300"
+                    >
+                      <span className="absolute inset-0 flex items-center justify-center transition-all duration-400 group-hover:translate-x-8 group-hover:-translate-y-8">
+                        <ArrowDiagonalSVG />
+                      </span>
+                      <span className="absolute inset-0 flex items-center justify-center -translate-x-8 translate-y-8 transition-all duration-400 group-hover:translate-x-0 group-hover:translate-y-0">
+                        <ArrowDiagonalSVG />
+                      </span>
+                    </Link>
+                  )}
+                </div>
+
+                {isExpandable && (
+                  <div
+                    className={`-mx-4 sm:-mx-6 lg:-mx-12 px-4 sm:px-6 lg:px-12 overflow-hidden transition-all duration-500 ease-out border-b border-white/10 ${
+                      isExpanded ? "max-h-96 opacity-100 py-4 md:py-6" : "max-h-0 opacity-0 py-0"
+                    }`}
+                  >
+                    <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-3 md:p-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        <Link
+                          to={service.generalHref!}
+                          onClick={startNavigation}
+                          className="group relative flex items-center justify-between p-4 rounded-2xl border border-white/5 bg-white/[0.02] overflow-hidden transition-all duration-300 hover:bg-white/[0.06] hover:border-white/15 hover:-translate-y-0.5"
+                        >
+                          <div className="flex items-center gap-3">
+                            <Layers className="w-4 h-4 text-white/50 group-hover:text-white/90 transition-colors" />
+                            <span className="text-sm text-white">
+                              {ka ? "áƒ§áƒ•áƒ”áƒšáƒ áƒ¡áƒ”áƒ áƒ•áƒ˜áƒ¡áƒ˜" : "All Services"}
+                            </span>
+                          </div>
+                          <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-white group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-300" />
+                        </Link>
+
+                        {industries.map((industry) => {
+                          const IndustryIcon = industry.icon;
+
+                          return (
+                            <Link
+                              key={`${service.id}-${industry.slug}`}
+                              to={`/industry/${industry.slug}`}
+                              onClick={startNavigation}
+                              className="group relative flex items-center justify-between p-4 rounded-2xl border border-white/5 bg-white/[0.02] overflow-hidden transition-all duration-300 hover:bg-white/[0.06] hover:border-white/15 hover:-translate-y-0.5"
+                            >
+                              <div className="flex items-center gap-3">
+                                <IndustryIcon className="w-4 h-4 text-white/50 group-hover:text-white/90 transition-colors" />
+                                <span className="text-sm text-white/85">
+                                  {ka ? industry.nameKa : industry.nameEn}
+                                </span>
+                              </div>
+                              <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-white group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-300" />
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

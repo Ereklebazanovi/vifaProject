@@ -291,7 +291,7 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
                         {t("btn.consultation")}
                       </a>
 
-                      <a
+                      {/* <a
                         href="https://demo.inventogeo.com/admin?direct=admin"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -299,7 +299,7 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
                       >
                         <FaBox size={16} />
                         {t("btn.demo")}
-                      </a>
+                      </a> */}
 
                       <div className="flex items-center">
                         <a

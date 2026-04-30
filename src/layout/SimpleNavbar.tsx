@@ -1,11 +1,69 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import {
+  Layers,
+  Map,
+  Scale,
+  ShoppingCart,
+  Sparkles,
+  Utensils,
+} from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import LanguageToggle from "../components/LanguageToggle";
 import { useLanguage } from "../contexts/LanguageContext";
 
+interface IndustryItem {
+  nameKa: string;
+  nameEn: string;
+  slug: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+const industries: IndustryItem[] = [
+  {
+    nameKa: "áƒ˜áƒ£áƒ áƒ˜áƒ“áƒ˜áƒ£áƒšáƒ˜ áƒ“áƒ áƒ¡áƒáƒ¤áƒ˜áƒœáƒáƒœáƒ¡áƒ áƒ¡áƒ”áƒ¥áƒ¢áƒáƒ áƒ˜",
+    nameEn: "Legal & Finance",
+    slug: "legal-finance",
+    icon: Scale,
+  },
+  {
+    nameKa: "áƒ¡áƒáƒ¡áƒ¢áƒ£áƒ›áƒ áƒáƒ”áƒ‘áƒ˜, áƒ™áƒáƒ¢áƒ”áƒ¯áƒ”áƒ‘áƒ˜ áƒ“áƒ áƒ¢áƒ£áƒ áƒ˜áƒ–áƒ›áƒ˜",
+    nameEn: "Hotels, Cottages & Tourism",
+    slug: "tourism",
+    icon: Map,
+  },
+  {
+    nameKa: "áƒ”áƒ¡áƒ—áƒ”áƒ¢áƒ˜áƒ™áƒ áƒ“áƒ áƒ¡áƒ˜áƒšáƒáƒ›áƒáƒ–áƒ”",
+    nameEn: "Beauty & Aesthetics",
+    slug: "beauty",
+    icon: Sparkles,
+  },
+  {
+    nameKa: "E-commerce & áƒ¡áƒáƒªáƒáƒšáƒ áƒ•áƒáƒ­áƒ áƒáƒ‘áƒ",
+    nameEn: "E-commerce & Retail",
+    slug: "retail",
+    icon: ShoppingCart,
+  },
+  {
+    nameKa: "áƒ áƒ”áƒ¡áƒ¢áƒáƒ áƒœáƒ”áƒ‘áƒ˜ áƒ“áƒ áƒ™áƒ•áƒ”áƒ‘áƒ˜áƒ¡ áƒ˜áƒœáƒ“áƒ£áƒ¡áƒ¢áƒ áƒ˜áƒ",
+    nameEn: "Restaurants & Food Service",
+    slug: "food",
+    icon: Utensils,
+  },
+];
+
+interface NavLinkItem {
+  num: string;
+  label: string;
+  path: string;
+  hasIndustryDropdown?: boolean;
+  generalHref?: string;
+}
+
 const SimpleNavbar: React.FC = () => {
   const [visible, setVisible] = useState(true);
   const [lastY, setLastY] = useState(0);
+  const [openDropdownFor, setOpenDropdownFor] = useState<string | null>(null);
+  const navLinksRef = useRef<HTMLDivElement | null>(null);
   const { currentLanguage } = useLanguage();
   const location = useLocation();
   const navigate = useNavigate();
@@ -20,15 +78,53 @@ const SimpleNavbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastY]);
 
+  useEffect(() => {
+    setOpenDropdownFor(null);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Node;
+      if (navLinksRef.current && !navLinksRef.current.contains(target)) {
+        setOpenDropdownFor(null);
+      }
+    };
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpenDropdownFor(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
   const ka = currentLanguage === "ka";
 
-  const links = [
-    { num: "01/", label: ka ? "მთავარი"      : "HOME",     path: "/" },
-    { num: "02/", label: ka ? "ვებ დეველოპმენტი" : "WEB DEV",    path: "/services/web-development" },
-    { num: "03/", label: ka ? "მარკეტინგი"     : "MARKETING", path: "/services/digital-advertising" },
-    { num: "04/", label: ka ? "ჩვენ შესახებ" : "ABOUT",    path: "/about" },
-    { num: "05/", label: ka ? "ბლოგი"        : "BLOG",     path: "/blog" },
-    { num: "06/", label: ka ? "კონტაქტი"     : "CONTACT",  path: "/contact" },
+  const links: NavLinkItem[] = [
+    { num: "01/", label: ka ? "áƒ›áƒ—áƒáƒ•áƒáƒ áƒ˜" : "HOME", path: "/" },
+    {
+      num: "02/",
+      label: ka ? "áƒ•áƒ”áƒ‘ áƒ“áƒ”áƒ•áƒ”áƒšáƒáƒžáƒ›áƒ”áƒœáƒ¢áƒ˜" : "WEB DEV",
+      path: "/services/web-development",
+      hasIndustryDropdown: true,
+      generalHref: "/services/web",
+    },
+    {
+      num: "03/",
+      label: ka ? "áƒ›áƒáƒ áƒ™áƒ”áƒ¢áƒ˜áƒœáƒ’áƒ˜" : "MARKETING",
+      path: "/services/digital-advertising",
+      hasIndustryDropdown: true,
+      generalHref: "/services/marketing",
+    },
+    { num: "04/", label: ka ? "áƒ©áƒ•áƒ”áƒœ áƒ¨áƒ”áƒ¡áƒáƒ®áƒ”áƒ‘" : "ABOUT", path: "/about" },
+    { num: "05/", label: ka ? "áƒ‘áƒšáƒáƒ’áƒ˜" : "BLOG", path: "/blog" },
+    { num: "06/", label: ka ? "áƒ™áƒáƒœáƒ¢áƒáƒ¥áƒ¢áƒ˜" : "CONTACT", path: "/contact" },
   ];
 
   return (
@@ -38,8 +134,6 @@ const SimpleNavbar: React.FC = () => {
       }`}
     >
       <div className="w-full px-8 lg:px-16 py-5 flex items-center justify-between">
-
-        {/* Left: Logo */}
         <Link
           to="/"
           className="text-white text-sm font-semibold tracking-[0.4em] uppercase hover:text-slate-300 transition-colors shrink-0 ml-4"
@@ -47,29 +141,85 @@ const SimpleNavbar: React.FC = () => {
           VIFA
         </Link>
 
-        {/* Center-left: numbered links */}
-        <div className="hidden lg:flex items-center gap-10 ml-16">
-          {links.map((link) => (
-            <button
-              key={link.path}
-              onClick={() => navigate(link.path)}
-              className="flex items-center gap-1.5 group"
-            >
-              <span className="text-slate-500 text-[10px] font-mono">{link.num}</span>
-              <span
-                className={`text-sm tracking-widest uppercase font-medium transition-colors duration-200 ${
-                  location.pathname === link.path
-                    ? "text-white"
-                    : "text-slate-200 group-hover:text-white"
-                }`}
-              >
-                {link.label}
-              </span>
-            </button>
-          ))}
+        <div ref={navLinksRef} className="hidden lg:flex items-center gap-10 ml-16">
+          {links.map((link) => {
+            const isDropdownItem = !!link.hasIndustryDropdown;
+            const isOpen = openDropdownFor === link.path;
+
+            return (
+              <div key={link.path} className="relative px-1 -mx-1">
+                <button
+                  onClick={() => {
+                    if (isDropdownItem) {
+                      setOpenDropdownFor((prev) =>
+                        prev === link.path ? null : link.path,
+                      );
+                      return;
+                    }
+
+                    navigate(link.path);
+                  }}
+                  className="flex items-center gap-1.5 group"
+                  aria-expanded={isDropdownItem ? isOpen : undefined}
+                  aria-haspopup={isDropdownItem ? "menu" : undefined}
+                >
+                  <span className="text-slate-500 text-[10px] font-mono">
+                    {link.num}
+                  </span>
+                  <span
+                    className={`text-[15px] tracking-widest uppercase font-medium transition-colors duration-200 ${
+                      location.pathname === link.path
+                        ? "text-white"
+                        : "text-slate-200 group-hover:text-white"
+                    }`}
+                  >
+                    {link.label}
+                  </span>
+                </button>
+
+                {isDropdownItem && (
+                  <div
+                    className={`absolute top-full left-0 pt-2 z-[140] transition-all duration-200 ${
+                      isOpen
+                        ? "opacity-100 translate-y-0 pointer-events-auto"
+                        : "opacity-0 -translate-y-2 pointer-events-none"
+                    }`}
+                  >
+                    <div className="min-w-[380px] bg-black/70 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl p-3">
+                      <Link
+                        to={link.generalHref!}
+                        onClick={() => setOpenDropdownFor(null)}
+                        className="group flex w-full items-center rounded-xl px-4 py-3 min-h-[50px] text-base text-white hover:text-blue-300 hover:bg-white/5 transition-all duration-300"
+                      >
+                        <Layers className="w-4 h-4 mr-3 text-white/60 group-hover:text-blue-300 transition-all duration-300 shrink-0" />
+                        <span>{ka ? "áƒ§áƒ•áƒ”áƒšáƒ áƒ¡áƒ”áƒ áƒ•áƒ˜áƒ¡áƒ˜" : "All Services"}</span>
+                      </Link>
+
+                      <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent my-2" />
+
+                      {industries.map((industry) => {
+                        const IndustryIcon = industry.icon;
+
+                        return (
+                          <Link
+                            key={`${link.path}-${industry.slug}`}
+                            to={`/industry/${industry.slug}`}
+                            onClick={() => setOpenDropdownFor(null)}
+                            className="group flex w-full items-center rounded-xl px-4 py-3 min-h-[50px] text-base text-slate-200 hover:text-blue-300 hover:bg-white/5 transition-all duration-300"
+                          >
+                            <IndustryIcon className="w-4 h-4 mr-3 text-white/60 group-hover:text-blue-300 transition-all duration-300 shrink-0" />
+                            <span>{ka ? industry.nameKa : industry.nameEn}</span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
 
-        {/* Right: contact info + language toggle */}
         <div className="hidden lg:flex items-center gap-6">
           <div className="text-right">
             <p className="text-slate-300 text-xs tracking-wider">vifadigital.ge</p>
@@ -77,17 +227,15 @@ const SimpleNavbar: React.FC = () => {
               to="/contact"
               className="text-slate-500 text-[10px] tracking-widest uppercase hover:text-slate-300 transition-colors"
             >
-              {ka ? "კონტაქტი" : "GET IN TOUCH"}
+              {ka ? "áƒ™áƒáƒœáƒ¢áƒáƒ¥áƒ¢áƒ˜" : "GET IN TOUCH"}
             </Link>
           </div>
           <LanguageToggle />
         </div>
 
-        {/* Mobile: just language toggle */}
         <div className="lg:hidden">
           <LanguageToggle />
         </div>
-
       </div>
     </nav>
   );
