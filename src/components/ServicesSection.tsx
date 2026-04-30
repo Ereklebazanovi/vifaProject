@@ -43,6 +43,12 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
       onClick: startNavigation,
     },
     {
+      title: t("newHome.services.marketing.title"),
+      description: t("newHome.services.marketing.description"),
+      href: "/services/digital-advertising",
+      onClick: undefined,
+    },
+    {
       title: t("newHome.services.invento.title"),
       description: t("newHome.services.invento.description"),
       href: "/inventowms",
@@ -54,12 +60,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
       href: "/services/ai-chatbot",
       onClick: undefined,
     },
-    {
-      title: t("newHome.services.marketing.title"),
-      description: t("newHome.services.marketing.description"),
-      href: "/services/digital-advertising",
-      onClick: undefined,
-    },
+    
   ];
 
   return (
