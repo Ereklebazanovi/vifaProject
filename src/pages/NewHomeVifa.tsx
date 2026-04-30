@@ -399,32 +399,40 @@ const NewHomeVifa: React.FC = () => {
 
           {/* Middle — service labels left only */}
           <div className="flex flex-1 items-center pt-24">
-            <div className="flex flex-col gap-2">
-              {(currentLanguage === "ka"
-                ? ["ვებ-დეველოპმენტი", "WMS სისტემები", "AI ჩატბოტები", "პროდაქშენი"]
-                : ["Web Development", "WMS Systems", "AI Chatbots", "Production"]
-              ).map((label) => (
-                <span key={label} className="text-white/75 text-sm tracking-[0.15em] uppercase">
-                  {label}
-                </span>
-              ))}
-            </div>
+            
           </div>
 
-          {/* Bottom — title left, description+CTA right */}
+          {/* Bottom — stats left, description+CTA right */}
           <div className="flex items-end justify-between pb-12">
 
-            {/* Brutalist title — balanced size */}
-            <h1 className="text-[clamp(3rem,7vw,6.5rem)] font-extrabold uppercase text-white leading-none tracking-tight">
-              VIFA_
-            </h1>
+            {/* Stats Block — bottom left, desktop only */}
+            <div className="hidden lg:flex items-end gap-10 pb-2">
+              {[
+                { num: "100+", label: currentLanguage === "ka" ? "ჩაბარებული პროექტი" : "Submitted project" },
+                { num: "4", label: currentLanguage === "ka" ? "მთავარი მიმართულება" : "Main direction" },
+                { num: "7+", label: currentLanguage === "ka" ? "წელი ინდუსტრიაში" : "Years in industry" },
+              ].map((stat, i) => (
+                <div key={i} className="flex items-end gap-10">
+                  <div>
+                    <div className="w-6 h-px bg-white/30 mb-3" />
+                    <div className="text-4xl font-extralight text-white leading-none tracking-tight">
+                      {stat.num}
+                    </div>
+                    <div className="text-[10px] text-white/40 uppercase tracking-[0.2em] mt-2 font-normal">
+                      {stat.label}
+                    </div>
+                  </div>
+                  {i < 2 && <div className="w-px h-8 bg-white/10 mb-4" />}
+                </div>
+              ))}
+            </div>
 
             {/* Description + CTA — bottom right, fixed width */}
-            <div className="w-80 shrink-0 text-right pb-2">
-              <p className="text-slate-300 text-sm leading-snug mb-5">
+            <div className="w-[420px] shrink-0 text-right pb-2">
+              <p className="text-slate-300 text-base leading-relaxed mb-5">
                 {currentLanguage === "ka"
-                  ? "ვქმნით ბრენდებს და თანამედროვე ვებ-საიტებს. ყველა დეტალი შედეგზეა ორიენტირებული."
-                  : "We craft bold brands and modern websites. Every detail built for results."}
+                  ? "Vifa აშენებს გამართულ ციფრულ ინფრასტრუქტურას და გაყიდვების ავტომატიზებულ სისტემებს, რომლებიც თქვენი ბიზნესის ზრდაზე მუშაობს"
+                  : "Vifa builds robust digital infrastructure and automated sales systems that work to grow your business."}
               </p>
               <a
                 href={whatsappUrl}

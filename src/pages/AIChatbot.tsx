@@ -25,10 +25,10 @@ import { AIConnectionDemo } from "../components/AIConnectionDemo";
 // AI Chatbot Translations
 const aiChatbotTranslations = {
   ka: {
-    "seo.title": "Invento AI - ჩატბოტები თქვენი ბიზნესისთვის | Invento Technologies",
+    "seo.title": "ჩატბოტები თქვენი ბიზნესისთვის | Invento Technologies",
     "seo.description": "Invento AI ჩატბოტები Facebook, WhatsApp და Instagram-ისთვის. 24/7 მომხმარებელთა მხარდაჭერა, გაყიდვების ზრდა და ხარჯების ოპტიმიზაცია. Google Gemini AI ტექნოლოგია.",
 
-    "hero.title": "Invento AI -",
+    // "hero.title": "Invento AI -",
     "hero.titleHighlight": "თქვენი ბიზნესის ციფრული რევოლუცია",
     "hero.feature1.title": "24/7 ავტომატური მომსახურება",
     "hero.feature1.description": "- თქვენი კლიენტები პასუხს მიიღებენ ნებისმიერ დროს",
@@ -153,7 +153,7 @@ const aiChatbotTranslations = {
     "seo.title": "Invento AI - Chatbots for Your Business | Invento Technologies",
     "seo.description": "Invento AI Chatbots for Facebook, WhatsApp, and Instagram. 24/7 customer support, sales growth, and cost optimization. Powered by Google Gemini AI technology.",
 
-    "hero.title": "Invento AI -",
+    // "hero.title": "Invento AI -",
     "hero.titleHighlight": "Your Business's Digital Revolution",
     "hero.feature1.title": "24/7 Automatic Service",
     "hero.feature1.description": "- Your clients will receive answers anytime",
@@ -365,7 +365,7 @@ const AIChatbot: React.FC = () => {
                 className="space-y-8 max-w-lg flex flex-col justify-center h-full"
               >
                 <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight tracking-tight font-['Inter','Noto_Sans_Georgian',sans-serif] text-center lg:text-left">
-                  {t("hero.title")}{" "}
+                  
                   <span className="text-transparent bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text">
                     {t("hero.titleHighlight")}
                   </span>

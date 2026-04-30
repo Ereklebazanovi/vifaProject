@@ -24,8 +24,8 @@ const SimpleNavbar: React.FC = () => {
 
   const links = [
     { num: "01/", label: ka ? "მთავარი"      : "HOME",     path: "/" },
-    { num: "02/", label: ka ? "სერვისები"    : "SERVICES", path: "/services/web-development" },
-    { num: "03/", label: ka ? "AI ჩატბოტი"  : "AI",       path: "/services/ai-chatbot" },
+    { num: "02/", label: ka ? "ვებ დეველოპმენტი" : "WEB DEV",    path: "/services/web-development" },
+    { num: "03/", label: ka ? "მარკეტინგი"     : "MARKETING", path: "/services/digital-advertising" },
     { num: "04/", label: ka ? "ჩვენ შესახებ" : "ABOUT",    path: "/about" },
     { num: "05/", label: ka ? "ბლოგი"        : "BLOG",     path: "/blog" },
     { num: "06/", label: ka ? "კონტაქტი"     : "CONTACT",  path: "/contact" },
