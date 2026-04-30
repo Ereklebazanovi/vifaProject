@@ -28,10 +28,8 @@ console.log(
 
 // Defer non-critical optimizations to avoid blocking
 setTimeout(() => {
-  import('./utils/mobileOptimizations').then(({ injectCriticalCSS, preloadCriticalResources, getDeviceInfo }) => {
+  import('./utils/mobileOptimizations').then(({ injectCriticalCSS }) => {
     injectCriticalCSS();
-    const deviceInfo = getDeviceInfo();
-    preloadCriticalResources(deviceInfo);
   });
 }, 100);
 

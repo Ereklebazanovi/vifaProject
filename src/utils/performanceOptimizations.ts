@@ -2,22 +2,6 @@
 
 // Preload critical resources
 export const preloadCriticalResources = () => {
-  // Preload critical fonts
-  const fontPreloads = [
-    { href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap', as: 'style' },
-    { href: 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2', as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' }
-  ];
-
-  fontPreloads.forEach(({ href, as, type, crossOrigin }) => {
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.href = href;
-    link.as = as;
-    if (type) link.type = type;
-    if (crossOrigin) link.crossOrigin = crossOrigin;
-    document.head.appendChild(link);
-  });
-
   // Preload critical images
   const criticalImages = ['/vifa.jpg'];
   criticalImages.forEach(src => {
@@ -55,22 +39,7 @@ export const createIntersectionObserver = (callback: IntersectionObserverCallbac
 
 // Optimize CSS delivery
 export const optimizeCSSDelivery = () => {
-  // Add critical CSS inline and load non-critical CSS asynchronously
-  const nonCriticalCSS = [
-    'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'
-  ];
-
-  nonCriticalCSS.forEach(href => {
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.href = href;
-    link.as = 'style';
-    link.onload = function() {
-      (this as any).onload = null;
-      (this as any).rel = 'stylesheet';
-    };
-    document.head.appendChild(link);
-  });
+  // CSS is already handled by Vite, so there is nothing extra to inject here.
 };
 
 // Reduce JavaScript execution time
@@ -114,10 +83,9 @@ export const measureWebVitals = () => {
 
 // Resource hints for better performance
 export const addResourceHints = () => {
-  const hints = [
-    { rel: 'dns-prefetch', href: '//fonts.googleapis.com' },
+  const hints: Array<{ rel: string; href: string; crossOrigin?: string }> = [
     { rel: 'dns-prefetch', href: '//www.googletagmanager.com' },
-    { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' }
+    { rel: 'preconnect', href: 'https://www.googletagmanager.com' }
   ];
 
   hints.forEach(({ rel, href, crossOrigin }) => {

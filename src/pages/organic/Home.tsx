@@ -1,9 +1,7 @@
+import DomainBasedHome from "../../components/DomainBasedHome";
+
 const Home = () => {
-  return (
-    <main>
-      <h1>Home</h1>
-    </main>
-  );
+  return <DomainBasedHome />;
 };
 
 export default Home;

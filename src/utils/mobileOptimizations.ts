@@ -158,21 +158,14 @@ export const preloadCriticalResources = (deviceInfo: DeviceInfo) => {
 
   const settings = getOptimizationSettings(deviceInfo);
 
-  // Preload critical fonts
-  const fontLink = document.createElement('link');
-  fontLink.rel = 'preload';
-  fontLink.href = 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2';
-  fontLink.as = 'font';
-  fontLink.type = 'font/woff2';
-  fontLink.crossOrigin = 'anonymous';
-  document.head.appendChild(fontLink);
-
-  // Preload critical CSS only if not slow connection
+  // The app already loads local CSS and self-hosted fonts through Vite imports.
+  // Avoid manual CSS/font preloads here because they trigger false-positive
+  // "preloaded but not used" warnings in development.
   if (!settings.reduceMotion) {
-    const cssLink = document.createElement('link');
-    cssLink.rel = 'preload';
-    cssLink.href = '/src/index.css';
-    cssLink.as = 'style';
-    document.head.appendChild(cssLink);
+    const imageLink = document.createElement('link');
+    imageLink.rel = 'preload';
+    imageLink.href = '/vifa.jpg';
+    imageLink.as = 'image';
+    document.head.appendChild(imageLink);
   }
 };

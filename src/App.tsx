@@ -1,24 +1,68 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
+import FacebookPixel from "./components/FacebookPixel";
+import GoogleAnalytics from "./components/GoogleAnalytics";
+import { LanguageProvider } from "./contexts/LanguageContext";
+import { NavigationProvider } from "./contexts/NavigationContext";
+import Layout from "./layout/Layout";
+import Marketing from "./offeredServices/Marketing";
+import WebDev from "./offeredServices/WebDev";
 import Home from "./pages/organic/Home";
-import MarketingServices from "./pages/organic/MarketingServices";
-import WebServices from "./pages/organic/WebServices";
+import AIChatbot from "./pages/AIChatbot";
+import ChatbotRequestForm from "./pages/ChatbotRequestForm";
+import NotFound from "./pages/NotFound";
 import IndustryLanding from "./pages/landing/IndustryLanding";
+import InventoLandingPage from "./offeredServices/InventoLandingPage";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Organic Traffic Flow */}
-        <Route path="/" element={<Home />} />
-        <Route path="/services/web" element={<WebServices />} />
-        <Route path="/services/marketing" element={<MarketingServices />} />
+    <HelmetProvider>
+      <LanguageProvider>
+        <NavigationProvider>
+          <BrowserRouter>
+            {import.meta.env.VITE_GA_MEASUREMENT_ID && (
+              <GoogleAnalytics
+                measurementId={import.meta.env.VITE_GA_MEASUREMENT_ID}
+              />
+            )}
 
-        {/* Dynamic Ad-Landing Flow */}
-        <Route path="/industry/:slug" element={<IndustryLanding />} />
+            {import.meta.env.VITE_FACEBOOK_PIXEL_ID && (
+              <FacebookPixel pixelId={import.meta.env.VITE_FACEBOOK_PIXEL_ID} />
+            )}
 
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<Home />} />
+
+                {/* Organic Traffic Flow */}
+                <Route path="services/web" element={<WebDev />} />
+                <Route path="services/marketing" element={<Marketing />} />
+
+                {/* Existing route aliases used inside the current homepage */}
+                <Route path="services/web-development" element={<WebDev />} />
+                <Route
+                  path="services/digital-advertising"
+                  element={<Marketing />}
+                />
+                <Route path="services/ai-chatbot" element={<AIChatbot />} />
+                <Route
+                  path="services/ai-chatbot/request"
+                  element={<ChatbotRequestForm />}
+                />
+                <Route path="inventowms" element={<InventoLandingPage />} />
+
+                {/* Dynamic Ad-Landing Flow */}
+                <Route path="industry/:slug" element={<IndustryLanding />} />
+
+                <Route path="*" element={<NotFound />} />
+              </Route>
+
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </BrowserRouter>
+        </NavigationProvider>
+      </LanguageProvider>
+    </HelmetProvider>
   );
 };
 
