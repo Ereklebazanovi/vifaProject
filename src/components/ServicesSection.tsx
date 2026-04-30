@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
@@ -63,15 +64,19 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
     
   ];
 
+  const scrollToCards = () => {
+    document.getElementById("services-cards")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <section
       className="w-full py-20 md:py-28"
       // style={{ backgroundColor: "#080e17" }}
     >
-      <div className="max-w-6xl mx-auto px-6 lg:px-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
 
         {/* ── Section Header ── */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-8 mb-10 md:mb-16">
           <div>
             {/* Subtitle pill */}
             <div className="inline-flex items-center gap-2 mb-5">
@@ -80,15 +85,15 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
                 {t("newHome.services.sectionTitle")}
               </span>
             </div>
-            <h2 className="text-3xl md:text-[42px] font-bold leading-snug text-white max-w-xl">
+            <h2 className="text-2xl md:text-[42px] font-bold leading-snug text-white max-w-xl">
               {t("newHome.services.sectionSubtitle")}
             </h2>
           </div>
 
           {/* Animated button */}
-          <Link
-            to="/services"
-            className="group relative inline-flex items-center gap-4 self-start md:self-auto"
+          <button
+            onClick={scrollToCards}
+            className="group relative inline-flex items-center gap-4 self-start md:self-auto h-14"
             onMouseEnter={() => setBtnHovered(true)}
             onMouseLeave={() => setBtnHovered(false)}
           >
@@ -102,8 +107,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
               }}
             />
             <span
-              className="relative z-10 text-white font-semibold text-sm tracking-wide whitespace-nowrap"
-              style={{ paddingLeft: "72px" }}
+              className="relative z-10 text-white font-semibold text-sm tracking-wide whitespace-nowrap pl-18"
             >
               {currentLanguage === "ka" ? "სერვისების ნახვა" : "View Services"}
             </span>
@@ -120,17 +124,18 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
                 fill="currentColor"
               />
             </svg>
-          </Link>
+          </button>
         </div>
 
         {/* ── Divider ── */}
         <div className="border-t border-white/10 mb-0" />
 
         {/* ── Service Cards ── */}
+        <div id="services-cards">
         {services.map((service, i) => (
           <div
             key={i}
-            className="group relative flex items-center gap-6 md:gap-12 py-8 md:py-10 border-b border-white/10 cursor-pointer transition-all duration-300 hover:bg-white/3 -mx-6 lg:-mx-12 px-6 lg:px-12"
+            className="group relative flex items-center gap-4 sm:gap-6 md:gap-12 py-6 md:py-10 border-b border-white/10 cursor-pointer transition-all duration-300 hover:bg-white/3 -mx-4 sm:-mx-6 lg:-mx-12 px-4 sm:px-6 lg:px-12"
           >
             {/* Number */}
             <span
@@ -183,6 +188,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
             </Link>
           </div>
         ))}
+        </div>
       </div>
     </section>
   );

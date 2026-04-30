@@ -381,20 +381,18 @@ const NewHomeVifa: React.FC = () => {
         <div className="absolute inset-x-0 bottom-0 h-64 -z-10 bg-linear-to-t from-black/80 to-transparent" />
 
         {/* Content layer */}
-        <div className="relative z-10 w-full min-h-screen flex flex-col px-8 lg:px-16">
+        <div className="relative z-10 w-full min-h-screen flex flex-col px-5 sm:px-8 lg:px-16">
 
-          {/* Middle — service labels left only */}
-          <div className="flex flex-1 items-center pt-24">
-            
-          </div>
+          {/* Middle — empty space */}
+          <div className="flex flex-1 items-center pt-24" />
 
-          {/* Bottom — stats left, description+CTA right */}
-          <div className="flex items-end justify-between pb-12">
+          {/* Bottom — stats left (desktop), description+CTA right / centered on mobile */}
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between pb-8 md:pb-12 gap-5 md:gap-0">
 
             {/* Stats Block — bottom left, desktop only */}
             <div className="hidden lg:flex items-end gap-10 pb-2">
               {[
-                { num: "500+", label: currentLanguage === "ka" ? "ჩაბარებული პროექტი" : "Submitted project" },
+                { num: "100+", label: currentLanguage === "ka" ? "ჩაბარებული პროექტი" : "Submitted project" },
                 { num: "4", label: currentLanguage === "ka" ? "მთავარი მიმართულება" : "Main direction" },
                 { num: "7+", label: currentLanguage === "ka" ? "წელი ინდუსტრიაში" : "Years in industry" },
               ].map((stat, i) => (
@@ -413,9 +411,9 @@ const NewHomeVifa: React.FC = () => {
               ))}
             </div>
 
-            {/* Description + CTA — bottom right, fixed width */}
-            <div className="w-[420px] shrink-0 text-right pb-2">
-              <p className="text-slate-300 text-base leading-relaxed mb-5">
+            {/* Description + CTA — full width on mobile, fixed on desktop */}
+            <div className="w-full md:w-105 shrink-0 text-center md:text-right pb-2">
+              <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-4 md:mb-5">
                 {currentLanguage === "ka"
                   ? "Vifa აშენებს გამართულ ციფრულ ინფრასტრუქტურას და გაყიდვების ავტომატიზებულ სისტემებს, რომლებიც თქვენი ბიზნესის ზრდაზე მუშაობს"
                   : "Vifa builds robust digital infrastructure and automated sales systems that work to grow your business."}
@@ -441,7 +439,7 @@ const NewHomeVifa: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
 
-          <div className="grid md:grid-cols-3 gap-8 mb-32">
+          <div className="grid md:grid-cols-3 gap-8 mb-12 lg:mb-32">
             {/* Research Card */}
             <motion.div
               className="text-center group cursor-pointer relative"
@@ -554,7 +552,7 @@ const NewHomeVifa: React.FC = () => {
           {/* Interactive Information Section */}
           <div
             ref={sectionRef}
-            className="max-w-6xl mx-auto mt-24 mb-20"
+            className="max-w-6xl mx-auto mt-10 md:mt-24 mb-10 md:mb-20"
             style={{ position: "relative" }}
           >
             {/* მთავარი კონტენტი */}
@@ -830,7 +828,7 @@ const NewHomeVifa: React.FC = () => {
           </div>
 
           {/* CTA Section */}
-          <div className="text-center mt-32">
+          <div className="text-center mt-16 md:mt-32">
             <div className="max-w-2xl mx-auto">
               <h3 className="text-2xl font-light text-white mb-6">
                 {t("newHome.final.question")}
