@@ -88,6 +88,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
   const services = [
     {
       id: "web-development",
+      industryService: "web" as const,
       title: t("newHome.services.webdev.title"),
       description: t("newHome.services.webdev.description"),
       href: "/services/web-development",
@@ -97,6 +98,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
     },
     {
       id: "digital-marketing",
+      industryService: "marketing" as const,
       title: t("newHome.services.marketing.title"),
       description: t("newHome.services.marketing.description"),
       href: "/services/digital-advertising",
@@ -301,7 +303,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
                           return (
                             <Link
                               key={`${service.id}-${industry.slug}`}
-                              to={`/industry/${industry.slug}`}
+                              to={`/industry/${service.industryService}/${industry.slug}`}
                               onClick={startNavigation}
                               className="group relative flex items-center justify-between p-4 rounded-2xl border border-white/5 bg-white/[0.02] overflow-hidden transition-all duration-300 hover:bg-white/[0.06] hover:border-white/15 hover:-translate-y-0.5"
                             >

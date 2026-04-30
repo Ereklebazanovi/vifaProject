@@ -57,6 +57,7 @@ interface NavLinkItem {
   path: string;
   hasIndustryDropdown?: boolean;
   generalHref?: string;
+  industryService?: "web" | "marketing";
 }
 
 const SimpleNavbar: React.FC = () => {
@@ -114,6 +115,7 @@ const SimpleNavbar: React.FC = () => {
       path: "/services/web-development",
       hasIndustryDropdown: true,
       generalHref: "/services/web",
+      industryService: "web",
     },
     {
       num: "03/",
@@ -121,6 +123,7 @@ const SimpleNavbar: React.FC = () => {
       path: "/services/digital-advertising",
       hasIndustryDropdown: true,
       generalHref: "/services/marketing",
+      industryService: "marketing",
     },
     { num: "04/", label: ka ? "ჩვენ შესახებ" : "ABOUT", path: "/about" },
     { num: "05/", label: ka ? "ბლოგი" : "BLOG", path: "/blog" },
@@ -203,7 +206,7 @@ const SimpleNavbar: React.FC = () => {
                         return (
                           <Link
                             key={`${link.path}-${industry.slug}`}
-                            to={`/industry/${industry.slug}`}
+                            to={`/industry/${link.industryService}/${industry.slug}`}
                             onClick={() => setOpenDropdownFor(null)}
                             className="group flex w-full items-center rounded-xl px-4 py-3 min-h-[50px] text-base text-slate-200 hover:text-blue-300 hover:bg-white/5 transition-all duration-300"
                           >

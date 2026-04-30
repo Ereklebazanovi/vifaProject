@@ -52,7 +52,7 @@ const App = () => {
                 <Route path="inventowms" element={<InventoLandingPage />} />
 
                 {/* Dynamic Ad-Landing Flow */}
-                <Route path="industry/:slug" element={<IndustryLanding />} />
+                <Route path="industry/:service/:slug" element={<IndustryLanding />} />
 
                 <Route path="*" element={<NotFound />} />
               </Route>

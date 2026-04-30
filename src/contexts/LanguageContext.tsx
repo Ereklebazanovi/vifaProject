@@ -42,6 +42,8 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
     localStorage.setItem("language", currentLanguage);
     document.documentElement.lang =
       currentLanguage === "ka" ? "ka-GE" : "en-US";
+    // Class-based font trigger: robust against Helmet resetting the lang attribute
+    document.documentElement.classList.toggle("ka", currentLanguage === "ka");
   }, [currentLanguage]);
 
   // Listen for URL changes to update language
