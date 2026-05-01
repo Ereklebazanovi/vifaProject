@@ -167,11 +167,13 @@ function PricingSection({ packages, ka }: PricingProps) {
           
         
 
-          {/* ახალი, პრემიუმ Badge გადახდის პირობებით */}
-          <div className="mt-8 flex justify-center">
-            <div className="inline-flex items-center gap-3 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-5 py-2.5 backdrop-blur-sm">
-              <CreditCard className="h-4 w-4 text-indigo-400" />
-              <span className="text-[13px] font-medium tracking-wide text-indigo-200">
+         {/* ახალი, პრემიუმ მინიმალისტური ინდიკატორი */}
+          <div className="mt-10 flex justify-center">
+            <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.02] px-5 py-2 backdrop-blur-md transition-colors hover:bg-white/[0.04]">
+              <div className="flex h-6 w-6 items-center justify-center rounded-full">
+                <CreditCard className="h-3.5 w-3.5 text-gray-300" />
+              </div>
+              <span className="text-[13px] font-medium tracking-wide text-gray-300">
                 {ka ? badgeTextKa : badgeTextEn}
               </span>
             </div>
