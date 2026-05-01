@@ -62,7 +62,7 @@ function HeroSection({ config, ka }: HeroProps) {
   const ctaSecondary = ka ? "კონსულტაცია" : "Consultation";
 
   return (
-    <section className="relative flex min-h-[75vh] flex-col justify-center overflow-hidden px-6 pt-24 pb-20 md:min-h-[80vh] md:px-12 xl:px-24">
+   <section className="relative flex min-h-[60vh] flex-col justify-center overflow-hidden px-6 pt-28 pb-8 md:min-h-[80vh] md:pb-24 md:px-12 xl:px-24">
       {/* Background Layer */}
       <div className="absolute inset-0 bg-[#060608]" />
       
@@ -159,29 +159,30 @@ function PricingSection({ packages, ka }: PricingProps) {
   const badgeTextEn = "Prices are estimates • 50/50 payment split available";
 
   return (
-    <section id="pricing" className="relative bg-[#060608] pb-24 md:pb-32">
+<section id="pricing" className="relative bg-[#060608] pt-2 pb-24 md:pt-20 md:pb-32">
       <div className="relative mx-auto max-w-7xl px-5 lg:px-12 p-4">
         
         <motion.div
-          className="mb-14 text-center"
+          className="mb-8 text-center md:mb-16" // mb-10 შევამცირეთ mb-8-მდე
           variants={sectionReveal}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
         >
-          <span className="mb-4 inline-block text-[14px] font-semibold uppercase tracking-[0.25em] text-indigo-400">
+          <span className="mb-3 inline-block text-[14px] font-semibold uppercase tracking-[0.25em] text-indigo-400">
             {pricingLabel}
           </span>
           
-        
+          {/* აღწერა მობაილზე ოდნავ პატარა margin-ით */}
+          <p className="mx-auto mt-3 max-w-xl text-lg text-gray-400">{pricingDesc}</p>
 
-         {/* ახალი, პრემიუმ მინიმალისტური ინდიკატორი */}
-          <div className="mt-10 flex justify-center">
-            <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.02] px-5 py-2 backdrop-blur-md transition-colors hover:bg-white/[0.04]">
-              <div className="flex h-6 w-6 items-center justify-center rounded-full">
+          {/* აქ mt-10 იყო და გავხადეთ mt-6 მობაილისთვის */}
+          <div className="mt-6 flex justify-center md:mt-10">
+            <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.02] px-4 py-2 backdrop-blur-md transition-colors hover:bg-white/[0.04] md:px-5">
+              <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/10">
                 <CreditCard className="h-3.5 w-3.5 text-gray-300" />
               </div>
-              <span className="text-[13px] font-medium tracking-wide text-gray-300">
+              <span className="text-[12px] font-medium tracking-wide text-gray-300 md:text-[13px]">
                 {ka ? badgeTextKa : badgeTextEn}
               </span>
             </div>
