@@ -141,10 +141,7 @@ interface PricingProps {
 function PricingSection({ packages, ka }: PricingProps) {
   const pricingLabel = ka ? "ფასები" : "Pricing";
   
-  const pricingDesc = ka
-    ? "აირჩიეთ პაკეტი, რომელიც შეესაბამება თქვენს ბიზნეს მიზნებს."
-    : "Choose the tier that matches your business goals.";
-  const mostPopularLabel = ka ? "რეკომენდებული" : "Recommended";
+    
 
   // ახალი ტექსტი Badge-სთვის
   const badgeTextKa = "ფასები საორიენტაციოა • მოქმედებს 50/50 გადახდის სისტემა";
@@ -188,11 +185,11 @@ function PricingSection({ packages, ka }: PricingProps) {
           viewport={{ once: true, margin: "-60px" }}
         >
           {packages.map((tier) => (
-            <PricingCard key={tier.nameEn} tier={tier} ka={ka} mostPopularLabel={mostPopularLabel} />
+            <PricingCard key={tier.nameEn} tier={tier} ka={ka} />
           ))}
         </motion.div>
         
-        {/* ქვედა Disclaimer ამოვიღეთ საერთოდ */}
+        {/* ქვედა Disclaimer ამოვიღეთ მთლიანად */}
       </div>
     </section>
   );
@@ -201,10 +198,9 @@ function PricingSection({ packages, ka }: PricingProps) {
 interface PricingCardProps {
   tier: BilingualPricingTier;
   ka: boolean;
-  mostPopularLabel: string;
 }
 
-function PricingCard({ tier, ka, mostPopularLabel }: PricingCardProps) {
+function PricingCard({ tier, ka }: PricingCardProps) {
   // ავტომატური ტექსტი WhatsApp-ისთვის
   const whatsappMessage = ka
     ? `გამარჯობა, მაინტერესებს ვებ-ინფრასტრუქტურის პაკეტი: "${tier.nameKa}"`
