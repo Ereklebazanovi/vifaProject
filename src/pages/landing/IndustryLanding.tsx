@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, CreditCard } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "../../contexts/LanguageContext";
 import {
@@ -7,6 +7,14 @@ import {
   type BilingualPricingTier,
   type IndustryConfig,
 } from "../../data/industryData";
+
+// ─── Custom Icons ─────────────────────────────────────────────────────────────
+
+const WhatsAppIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.878-.788-1.47-1.761-1.643-2.06-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+  </svg>
+);
 
 // ─── Animation variants ───────────────────────────────────────────────────────
 
@@ -54,59 +62,67 @@ function HeroSection({ config, ka }: HeroProps) {
   const ctaSecondary = ka ? "კონსულტაცია" : "Consultation";
 
   return (
-    <section className="relative flex min-h-[85vh] flex-col justify-center overflow-hidden px-5 md:px-12 xl:px-24">
+    <section className="relative flex min-h-[75vh] flex-col justify-center overflow-hidden px-6 pt-24 pb-16 md:min-h-[70vh] md:px-12 xl:px-24">
       {/* Background Layer */}
       <div className="absolute inset-0 bg-[#060608]" />
       
-      {/* Natural, visible background image */}
+      {/* Background image - ოდნავ მეტად გამოვაჩინოთ მობაილზეც */}
       {config.heroBgImage && (
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 md:opacity-60"
           style={{ backgroundImage: `url(${config.heroBgImage})` }}
         />
       )}
 
-      {/* 1. Gradient for text readability (Left to Right) */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#060608] via-[#060608]/70 to-transparent" />
+      {/* Gradient for text readability - ახლა მობაილზეც მარცხნიდან მარჯვნივ მიდის */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#060608] via-[#060608]/80 to-transparent" />
 
-      {/* 2. Gradient for smooth section transition (Bottom to Top) */}
-      {/* ეს კონკრეტულად ფოტოს ქვედა კიდეს აქრობს და არბილებს გადასვლას */}
-      <div className="absolute inset-x-0 bottom-0 z-0 h-48 bg-gradient-to-t from-[#060608] via-[#060608]/80 to-transparent" />
+      {/* Bottom to Top Gradient for smooth scroll */}
+      <div className="absolute inset-x-0 bottom-0 z-0 h-32 bg-gradient-to-t from-[#060608] via-[#060608]/90 to-transparent" />
 
-      {/* Content - Left Aligned */}
+      {/* Content - მუდმივად მარცხენა სწორებით (Premium Editorial Look) */}
       <motion.div
-        className="relative z-10 w-full max-w-3xl text-left"
+        className="relative z-10 w-full max-w-3xl text-left mt-8"
         variants={heroContainer}
         initial="hidden"
         animate="visible"
       >
+        {/* Editorial Eyebrow ნაცვლად შაბლონური Badge-სა */}
+        <motion.div variants={heroItem} className="mb-6 flex items-center gap-4">
+          <div className="h-[1px] w-8 bg-indigo-500" />
+          <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-indigo-400">
+            {ka ? config.nameKa : config.nameEn}
+          </span>
+        </motion.div>
+
         <motion.h1
           variants={heroItem}
-          className="mb-6 text-4xl font-bold leading-tight text-white md:text-5xl lg:text-[3.75rem] lg:leading-[1.15]"
+          className="mb-6 text-4xl font-bold leading-[1.15] tracking-tight text-white md:text-5xl lg:text-[3.75rem]"
         >
           {headlineText}
         </motion.h1>
 
         <motion.p
           variants={heroItem}
-          className="mb-10 max-w-xl text-lg leading-relaxed text-gray-200 md:text-xl"
+          className="mb-10 max-w-xl text-[17px] leading-relaxed text-gray-300 md:text-xl"
         >
           {subline}
         </motion.p>
 
+        {/* Buttons - მარცხნივ გასწორებული მობაილზეც */}
         <motion.div
           variants={heroItem}
           className="flex flex-col items-start gap-4 sm:flex-row"
         >
           <a
             href="#pricing"
-            className="inline-flex w-full items-center justify-center rounded-lg bg-white px-8 py-3.5 font-semibold text-black transition-all hover:bg-gray-200 sm:w-auto"
+            className="inline-flex w-full items-center justify-center rounded-xl bg-white px-8 py-4 text-[15px] font-bold text-black transition-all hover:bg-gray-200 sm:w-auto"
           >
             {ctaPrimary}
           </a>
           <a
             href="/contact"
-            className="inline-flex w-full items-center justify-center rounded-lg border border-white/20 bg-black/20 px-8 py-3.5 font-medium text-white backdrop-blur-md transition-colors hover:bg-white/10 sm:w-auto"
+            className="inline-flex w-full items-center justify-center rounded-xl border border-white/15 bg-white/5 px-8 py-4 text-[15px] font-bold text-white backdrop-blur-md transition-colors hover:bg-white/10 sm:w-auto"
           >
             {ctaSecondary}
           </a>
@@ -115,14 +131,8 @@ function HeroSection({ config, ka }: HeroProps) {
     </section>
   );
 }
+// ─── Pricing Section ──────────────────────────────────────────────────────────
 
-
-
-
-// ... (PricingSection and NotFound remain identical to your previous version, 
-// just ensure they use the clean typography standard)
-
-// PricingSection code included for completeness
 interface PricingProps {
   packages: BilingualPricingTier[];
   ka: boolean;
@@ -130,29 +140,42 @@ interface PricingProps {
 
 function PricingSection({ packages, ka }: PricingProps) {
   const pricingLabel = ka ? "ფასები" : "Pricing";
-  const pricingHeading = ka ? "გამჭვირვალე ინვესტიცია" : "Transparent Investment";
+  
   const pricingDesc = ka
     ? "აირჩიეთ პაკეტი, რომელიც შეესაბამება თქვენს ბიზნეს მიზნებს."
     : "Choose the tier that matches your business goals.";
   const mostPopularLabel = ka ? "რეკომენდებული" : "Recommended";
 
+  // ახალი ტექსტი Badge-სთვის
+  const badgeTextKa = "ფასები საორიენტაციოა • მოქმედებს 50/50 გადახდის სისტემა";
+  const badgeTextEn = "Prices are estimates • 50/50 payment split available";
+
   return (
-    <section id="pricing" className="relative bg-[#060608]">
+    <section id="pricing" className="relative bg-[#060608] pb-24 md:pb-32">
       <div className="relative mx-auto max-w-7xl px-5 lg:px-12 p-4">
+        
         <motion.div
-          className="mb-16 text-center"
+          className="mb-14 text-center"
           variants={sectionReveal}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
         >
-          <span className="mb-4 inline-block text-[11px] font-semibold uppercase tracking-[0.25em] text-indigo-400">
+          <span className="mb-4 inline-block text-[14px] font-semibold uppercase tracking-[0.25em] text-indigo-400">
             {pricingLabel}
           </span>
-          <h2 className="text-[clamp(2rem,4vw,3.5rem)] font-bold leading-tight tracking-tight text-white">
-            {pricingHeading}
-          </h2>
-          <p className="mx-auto mt-6 max-w-xl text-lg text-gray-400">{pricingDesc}</p>
+          
+        
+
+          {/* ახალი, პრემიუმ Badge გადახდის პირობებით */}
+          <div className="mt-8 flex justify-center">
+            <div className="inline-flex items-center gap-3 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-5 py-2.5 backdrop-blur-sm">
+              <CreditCard className="h-4 w-4 text-indigo-400" />
+              <span className="text-[13px] font-medium tracking-wide text-indigo-200">
+                {ka ? badgeTextKa : badgeTextEn}
+              </span>
+            </div>
+          </div>
         </motion.div>
 
         <motion.div
@@ -166,6 +189,8 @@ function PricingSection({ packages, ka }: PricingProps) {
             <PricingCard key={tier.nameEn} tier={tier} ka={ka} mostPopularLabel={mostPopularLabel} />
           ))}
         </motion.div>
+        
+        {/* ქვედა Disclaimer ამოვიღეთ საერთოდ */}
       </div>
     </section>
   );
@@ -178,61 +203,75 @@ interface PricingCardProps {
 }
 
 function PricingCard({ tier, ka, mostPopularLabel }: PricingCardProps) {
+  // ავტომატური ტექსტი WhatsApp-ისთვის
+  const whatsappMessage = ka
+    ? `გამარჯობა, მაინტერესებს ვებ-ინფრასტრუქტურის პაკეტი: "${tier.nameKa}"`
+    : `Hello, I am interested in the Web Infrastructure package: "${tier.nameEn}"`;
+
   return (
     <motion.div
       variants={cardItem}
       className={`group relative flex flex-col overflow-hidden rounded-3xl border p-8 transition-all duration-400 ${
         tier.highlighted
           ? "border-indigo-500/40 bg-indigo-950/20 shadow-[0_0_40px_-15px_rgba(99,102,241,0.2)]"
-          : "border-white/10 bg-white/[0.03] hover:border-white/20 hover:bg-white/[0.05]"
+          : "border-white/10 bg-white/[0.03] hover:border-white/20"
       }`}
     >
-      {tier.highlighted && (
-        <div className="absolute right-6 top-6">
-          <span className="rounded-full bg-indigo-500/20 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-indigo-400 ring-1 ring-inset ring-indigo-500/30">
-            {mostPopularLabel}
-          </span>
-        </div>
-      )}
-
-      <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.2em] text-gray-500">
+      {/* 1. პაკეტის სახელი */}
+      <h3 className="mb-2 text-xl font-bold tracking-tight text-white md:text-2xl">
         {ka ? tier.nameKa : tier.nameEn}
-      </p>
-
-      <div className="mb-2 flex items-baseline gap-2">
-        <span className="text-4xl font-bold tracking-tight text-white md:text-5xl">{tier.price}</span>
-        <span className="text-sm font-medium text-gray-500">{ka ? tier.periodKa : tier.periodEn}</span>
+      </h3>
+      
+      {/* 2. ფასი და პერიოდი */}
+      <div className="mb-6 flex items-baseline gap-2">
+        <span className="text-3xl font-black tracking-tight text-indigo-400">
+          {tier.price}
+        </span>
+        <span className="text-xs font-medium uppercase tracking-wider text-gray-500">
+          / {ka ? tier.periodKa : tier.periodEn}
+        </span>
       </div>
 
-      <p className="mb-8 mt-4 text-[15px] leading-relaxed text-gray-300 antialiased">
+      <div className="mb-6 h-px w-full bg-gradient-to-r from-white/10 to-transparent" />
+
+      {/* 3. აღწერა */}
+      <p className="mb-8 min-h-[3rem] text-[15px] leading-relaxed text-gray-300">
         {ka ? tier.descKa : tier.descEn}
       </p>
 
-      <div className="mb-8 h-px w-full bg-white/10" />
-
+      {/* 4. ფუნქციები */}
       <ul className="mb-10 flex-1 space-y-4">
-        {(ka ? tier.featuresKa : tier.featuresEn).map((feat) => (
-          <li key={feat} className="flex items-start gap-4">
-            <CheckCircle2
-              className={`mt-1 h-5 w-5 shrink-0 ${
-                tier.highlighted ? "text-indigo-400" : "text-indigo-500/60"
-              }`}
-            />
-            <span className="text-[14px] leading-snug tracking-wide text-gray-200">
-              {feat}
-            </span>
-          </li>
-        ))}
+        {(ka ? tier.featuresKa : tier.featuresEn).map((feat) => {
+          const isInherited = feat.startsWith('+');
+          return (
+            <li key={feat} className="flex items-start gap-4">
+              <CheckCircle2
+                className={`mt-1 h-5 w-5 shrink-0 ${
+                  isInherited ? "text-white/10" : "text-indigo-500"
+                }`}
+              />
+              <span className={`text-[14px] leading-snug tracking-wide ${
+                isInherited ? "text-gray-500 italic" : "text-gray-200"
+              }`}>
+                {feat}
+              </span>
+            </li>
+          );
+        })}
       </ul>
 
+      {/* Button (WhatsApp Link with Custom Icon) */}
       <a
-        href="/contact"
-        className={`inline-flex w-full items-center justify-center rounded-xl px-6 py-4 text-[15px] font-bold transition-all active:scale-[0.98] ${
+        href={`https://wa.me/995557624243?text=${encodeURIComponent(whatsappMessage)}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`inline-flex w-full items-center justify-center gap-2.5 rounded-xl px-6 py-4 text-[15px] font-bold transition-all active:scale-[0.98] ${
           tier.highlighted
             ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/20 hover:bg-indigo-500"
             : "bg-white/10 text-white hover:bg-white/15"
         }`}
       >
+        <WhatsAppIcon className="h-5 w-5" />
         <span>{ka ? tier.ctaKa : tier.ctaEn}</span>
       </a>
     </motion.div>

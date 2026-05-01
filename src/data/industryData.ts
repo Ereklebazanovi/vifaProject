@@ -195,7 +195,7 @@ export const beautyWebPackages: BilingualPricingTier[] = [
     descKa: "კლიენტების დამოუკიდებელი ჩაწერის სისტემა, რომელიც განტვირთავს ადმინისტრაციას.",
     descEn: "Independent client booking system that unburdens your administration.",
     featuresKa: [
-      "+ 'ციფრული კატალოგი'-ს ყველა ფუნქცია",
+      "+ 'ციფრული კატალოგი'-ს ყველა კომპონენტი",
       "ონლაინ ჯავშნის სისტემა (0% საკომისიო ჯავშანზე)",
       "SMS შეტყობინებების მიბმა (პროვაიდერის ტარიფით)",
       "ჯავშნების სამართავი ადმინ პანელი",
@@ -216,13 +216,13 @@ export const beautyWebPackages: BilingualPricingTier[] = [
   {
     nameKa: "სრული ეკოსისტემა",
     nameEn: "Full Ecosystem",
-    price: "₾ 1500+",
+    price: "₾ 1500 +",
     periodKa: "პროექტი",
     periodEn: "project",
     descKa: "ჯავშნების სისტემა და ონლაინ მაღაზია პროდუქციის (მოვლის საშუალებების) გასაყიდად.",
     descEn: "Booking system and online store to sell your physical care products.",
     featuresKa: [
-      "+ 'ავტომატური ჯავშნები'-ს ყველა ფუნქცია",
+      "+ 'ავტომატური ჯავშნები'-ს ყველა კომპონენტი",
       "პროდუქციის ონლაინ მაღაზია (E-commerce)",
       "ონლაინ გადახდები (TBC, BOG, ნებისმიერი ბარათით)",
       "მარაგების კონტროლის მარტივი მოდული",
@@ -259,11 +259,11 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
       heroBgImage: "/saloni.jpg", // შეგიძლია ამოიღო და სუფთა მუქი ფონი დატოვო უფრო ტექნიკური ლუქისთვის
       eyebrowKa: "ვებ ინფრასტრუქტურა",
       eyebrowEn: "Web Infrastructure",
-      heroSublineKa: "პრემიუმ კატალოგი, ჯავშნების ავტომატური სისტემა და სრული კონტროლი თქვენს ბიზნესზე.",
+      heroSublineKa: "პრემიუმ კატალოგი და ჯავშნების 24/7 ავტომატიზაცია.",
       heroSublineEn: "Premium catalog, automated booking systems, and full control over your business.",
       headline: {
         type: "simple",
-        textKa: "ციფრული სისტემები ესთეტიკის ცენტრებისთვის",
+        textKa: "თქვენი ესთეტიკის ცენტრის პრემიუმ ციფრული სივრცე",
         textEn: "Digital Systems for Aesthetics Centers",
       },
       approach: {
