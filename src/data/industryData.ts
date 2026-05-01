@@ -187,8 +187,8 @@ export const beautyWebPackages: BilingualPricingTier[] = [
     glowColor: "rgba(99,102,241,0)",
   },
   {
-    nameKa: "ავტომატური ჯავშნები",
-    nameEn: "Automated Bookings",
+    nameKa: "ციფრული ადმინისტრატორი",
+    nameEn: "Digital Administrator",
     price: "₾ 1000 - 1400",
     periodKa: "პროექტი",
     periodEn: "project",
@@ -222,14 +222,14 @@ export const beautyWebPackages: BilingualPricingTier[] = [
     descKa: "ჯავშნების სისტემა და ონლაინ მაღაზია პროდუქციის (მოვლის საშუალებების) გასაყიდად.",
     descEn: "Booking system and online store to sell your physical care products.",
     featuresKa: [
-      "+ 'ავტომატური ჯავშნები'-ს ყველა კომპონენტი",
+      "+ 'ციფრული ადმინისტრატორი'-ს ყველა კომპონენტი",
       "პროდუქციის ონლაინ მაღაზია (E-commerce)",
       "ონლაინ გადახდები (TBC, BOG, ნებისმიერი ბარათით)",
       "მარაგების კონტროლის მარტივი მოდული",
       "ტექნიკური მხარდაჭერა და პერსონალის ტრენინგი",
     ],
     featuresEn: [
-      "+ All features in Automated Bookings",
+      "+ All features in Digital Administrator",
       "Online product store (E-commerce)",
       "Online payments (Local banks or Stripe)",
       "Simple inventory control module",

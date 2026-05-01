@@ -62,54 +62,57 @@ function HeroSection({ config, ka }: HeroProps) {
   const ctaSecondary = ka ? "კონსულტაცია" : "Consultation";
 
   return (
-    <section className="relative flex min-h-[75vh] flex-col justify-center overflow-hidden px-6 pt-24 pb-16 md:min-h-[70vh] md:px-12 xl:px-24">
+    <section className="relative flex min-h-[75vh] flex-col justify-center overflow-hidden px-6 pt-24 pb-20 md:min-h-[80vh] md:px-12 xl:px-24">
       {/* Background Layer */}
       <div className="absolute inset-0 bg-[#060608]" />
       
-      {/* Background image - ოდნავ მეტად გამოვაჩინოთ მობაილზეც */}
+      {/* Background image - უფრო ნათელი და ხილვადი დესკტოპზე */}
       {config.heroBgImage && (
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 md:opacity-60"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50 md:opacity-80"
           style={{ backgroundImage: `url(${config.heroBgImage})` }}
         />
       )}
 
-      {/* Gradient for text readability - ახლა მობაილზეც მარცხნიდან მარჯვნივ მიდის */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#060608] via-[#060608]/80 to-transparent" />
+      {/* 1. Horizontal Gradient - მარცხენა მხარეს აშავებს ტექსტისთვის */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#060608] via-[#060608]/70 to-transparent" />
 
-      {/* Bottom to Top Gradient for smooth scroll */}
-      <div className="absolute inset-x-0 bottom-0 z-0 h-32 bg-gradient-to-t from-[#060608] via-[#060608]/90 to-transparent" />
+      {/* 2. Bottom Gradient - *აქ იყო პრობლემა*. ახლა ის იკავებს h-[50%]-ს 
+          რაც უზრუნველყოფს იდეალურად რბილ და უხილავ გადასვლას შემდეგ სექციაში */}
+      <div className="absolute inset-x-0 bottom-0 z-0 h-[50%] bg-gradient-to-t from-[#060608] via-[#060608]/50 to-transparent" />
 
-      {/* Content - მუდმივად მარცხენა სწორებით (Premium Editorial Look) */}
+      {/* Content */}
       <motion.div
-        className="relative z-10 w-full max-w-3xl text-left mt-8"
+        className="relative z-10 w-full text-left mt-8 md:mt-0"
         variants={heroContainer}
         initial="hidden"
         animate="visible"
       >
-        {/* Editorial Eyebrow ნაცვლად შაბლონური Badge-სა */}
-        <motion.div variants={heroItem} className="mb-6 flex items-center gap-4">
-          <div className="h-[1px] w-8 bg-indigo-500" />
+        {/* Editorial Eyebrow */}
+        <motion.div variants={heroItem} className="mb-5 flex items-center gap-3 md:mb-6">
+          <div className="h-px w-8 bg-indigo-500" />
           <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-indigo-400">
             {ka ? config.nameKa : config.nameEn}
           </span>
         </motion.div>
 
+        {/* სათაური - იდეალური სიგანე, რომ არ გაიწელოს და ლამაზად ჩამოტყდეს */}
         <motion.h1
           variants={heroItem}
-          className="mb-6 text-4xl font-bold leading-[1.15] tracking-tight text-white md:text-5xl lg:text-[3.75rem]"
+          className="mb-6 max-w-[95%] text-3xl font-extrabold leading-[1.2] tracking-tight text-white sm:text-4xl md:max-w-2xl md:text-5xl lg:max-w-[850px] lg:text-[3.5rem] lg:leading-[1.15]"
         >
           {headlineText}
         </motion.h1>
 
+        {/* ქვესათაური */}
         <motion.p
           variants={heroItem}
-          className="mb-10 max-w-xl text-[17px] leading-relaxed text-gray-300 md:text-xl"
+          className="mb-10 max-w-xl text-base leading-relaxed text-gray-300 md:text-lg"
         >
           {subline}
         </motion.p>
 
-        {/* Buttons - მარცხნივ გასწორებული მობაილზეც */}
+        {/* Buttons */}
         <motion.div
           variants={heroItem}
           className="flex flex-col items-start gap-4 sm:flex-row"
@@ -128,6 +131,14 @@ function HeroSection({ config, ka }: HeroProps) {
           </a>
         </motion.div>
       </motion.div>
+
+      {/* ვიზუალური ხიდი (Scroll Line) - ეს აკავშირებს ჰიროუს და ქვედა სექციას */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.8, duration: 1 }}
+        className="absolute bottom-0 left-6 hidden h-24 w-px bg-gradient-to-b from-white/20 to-transparent md:block md:left-12 xl:left-24" 
+      />
     </section>
   );
 }
