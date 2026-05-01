@@ -4,40 +4,26 @@ import { useLanguage } from '../contexts/LanguageContext';
 
 const LanguageToggle: React.FC = () => {
   const { currentLanguage, toggleLanguage } = useLanguage();
+  const ka = currentLanguage === 'ka';
 
   return (
-    <motion.button
+    <button
       onClick={toggleLanguage}
-      whileHover={{ scale: 1.08, y: -2 }}
-      whileTap={{ scale: 0.95 }}
-      className="relative w-8 h-8 rounded-full bg-gradient-to-br from-slate-700/60 to-slate-800/80 hover:from-slate-600/80 hover:to-slate-700/90 border border-slate-500/40 hover:border-blue-400/60 text-white text-xs font-semibold transition-all duration-300 backdrop-blur-md flex items-center justify-center shadow-md hover:shadow-lg hover:shadow-blue-500/20"
-      title={currentLanguage === 'ka' ? 'Switch to English' : 'Switch to Georgian'}
+      title={ka ? 'Switch to English' : 'Switch to Georgian'}
+      className="relative flex items-center gap-0.5 rounded-full border border-white/10 bg-white/3 p-0.5 hover:border-white/20 transition-colors duration-200"
     >
-      <motion.span
-        key={currentLanguage}
-        initial={{ opacity: 0, scale: 0.5, y: -4 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.5, y: 4 }}
-        transition={{ duration: 0.25, type: 'spring', stiffness: 300 }}
-        className={`${
-          currentLanguage === 'ka'
-            ? 'bg-gradient-to-r from-blue-400 to-blue-500 bg-clip-text text-transparent'
-            : 'bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent'
-        }`}
-      >
-        {currentLanguage === 'ka' ? 'ქა' : 'EN'}
-      </motion.span>
-
-      {/* Subtle glow effect */}
+      <span className={`relative z-10 px-2.5 py-1 text-[11px] font-semibold tracking-widest uppercase transition-colors duration-200 ${ka ? 'text-white' : 'text-white/30'}`}>
+        ქა
+      </span>
+      <span className={`relative z-10 px-2.5 py-1 text-[11px] font-semibold tracking-widest uppercase transition-colors duration-200 ${!ka ? 'text-white' : 'text-white/30'}`}>
+        EN
+      </span>
       <motion.div
-        animate={{
-          boxShadow: currentLanguage === 'ka'
-            ? 'inset 0 0 8px rgba(96, 165, 250, 0.3)'
-            : 'inset 0 0 8px rgba(74, 222, 128, 0.3)'
-        }}
-        className="absolute inset-0 rounded-full pointer-events-none"
+        className="absolute top-0.5 bottom-0.5 rounded-full bg-white/10"
+        animate={{ left: ka ? '2px' : 'calc(50% + 2px)', width: 'calc(50% - 4px)' }}
+        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
       />
-    </motion.button>
+    </button>
   );
 };
 

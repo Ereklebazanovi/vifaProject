@@ -162,7 +162,7 @@ export const defaultPackages: BilingualPricingTier[] = [
 // ─── Industry Data Store ──────────────────────────────────────────────────────
 export const beautyWebPackages: BilingualPricingTier[] = [
   {
-    nameKa: "კატაა",
+    nameKa: "ციფრული კატალოგი",
     nameEn: "Digital Catalog",
     price: "₾ 700 - 1000",
     periodKa: "პროექტი",

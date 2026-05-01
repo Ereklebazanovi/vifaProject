@@ -83,7 +83,7 @@ function HeroSection({ config, ka }: HeroProps) {
 
       {/* Content */}
       <motion.div
-        className="relative z-10 w-full text-left mt-8 md:mt-0"
+        className="relative z-10 w-full text-left mt-2 md:mt-0"
         variants={heroContainer}
         initial="hidden"
         animate="visible"
