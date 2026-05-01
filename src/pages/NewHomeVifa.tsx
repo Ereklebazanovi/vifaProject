@@ -316,13 +316,34 @@ const NewHomeVifa: React.FC = () => {
 
   const [showDigitalConsequences, setShowDigitalConsequences] = useState(false);
   const [videoFading, setVideoFading] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  // Decide whether to load the video at all based on device/network conditions
+  useEffect(() => {
+    // Respect reduced-motion OS preference — no video
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    // Skip video on 2G or slower connections
+    const conn = (navigator as unknown as { connection?: { effectiveType?: string } }).connection;
+    if (conn && (conn.effectiveType === "slow-2g" || conn.effectiveType === "2g")) return;
+
+    // Defer adding the <video> element by 250 ms so critical resources
+    // (fonts, CSS, first paint) get priority in the network queue first
+    const timer = setTimeout(() => setShowVideo(true), 250);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Set up playback rate and fade listeners once the video is in the DOM
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !showVideo) return;
+
     video.playbackRate = 1.5;
+
+    const handleCanPlay = () => setVideoReady(true);
     const handleTimeUpdate = () => {
       if (video.duration && video.duration - video.currentTime < 0.6) {
         setVideoFading(true);
@@ -331,13 +352,16 @@ const NewHomeVifa: React.FC = () => {
     const handleSeeked = () => {
       if (video.currentTime < 0.3) setVideoFading(false);
     };
+
+    video.addEventListener("canplay", handleCanPlay);
     video.addEventListener("timeupdate", handleTimeUpdate);
     video.addEventListener("seeked", handleSeeked);
     return () => {
+      video.removeEventListener("canplay", handleCanPlay);
       video.removeEventListener("timeupdate", handleTimeUpdate);
       video.removeEventListener("seeked", handleSeeked);
     };
-  }, []);
+  }, [showVideo]);
 
   // WhatsApp URL for consultation
   const whatsappUrl = "https://wa.me/995557624243";
@@ -360,18 +384,22 @@ const NewHomeVifa: React.FC = () => {
       {/* ─── Cinematic Hero — Full Screen ─── */}
       <div className={`relative min-h-screen overflow-hidden ${getTransitionClasses()}`}>
 
-        {/* Full-screen video background */}
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          className={`absolute inset-0 -z-10 w-full h-full object-cover transition-opacity duration-700 ${videoFading ? "opacity-0" : "opacity-100"}`}
-        >
-          <source src="/videoHero.mp4" type="video/mp4" />
-        </video>
+        {/* Full-screen video background — only rendered for good connections */}
+        {showVideo && (
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="none"
+            className={`absolute inset-0 -z-10 w-full h-full object-cover object-center transition-opacity duration-1000 ${
+              videoReady && !videoFading ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <source src="/videoHero.mp4" type="video/mp4" />
+          </video>
+        )}
 
         {/* Dark overlay — stronger center fade, navbar area darkened */}
         <div className="absolute inset-0 -z-10 bg-black/60" />

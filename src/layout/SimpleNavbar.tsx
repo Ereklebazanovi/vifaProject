@@ -64,6 +64,8 @@ const SimpleNavbar: React.FC = () => {
   const [visible, setVisible] = useState(true);
   const [lastY, setLastY] = useState(0);
   const [openDropdownFor, setOpenDropdownFor] = useState<string | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileAccordion, setMobileAccordion] = useState<string | null>(null);
   const navLinksRef = useRef<HTMLDivElement | null>(null);
   const { currentLanguage } = useLanguage();
   const location = useLocation();
@@ -80,7 +82,14 @@ const SimpleNavbar: React.FC = () => {
   }, [lastY]);
 
   useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
     setOpenDropdownFor(null);
+    setMobileMenuOpen(false);
+    setMobileAccordion(null);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -131,6 +140,7 @@ const SimpleNavbar: React.FC = () => {
   ];
 
   return (
+    <>
     <nav
       className={`fixed w-full top-0 z-100 transition-transform duration-300 ${
         visible ? "translate-y-0" : "-translate-y-full"
@@ -236,11 +246,126 @@ const SimpleNavbar: React.FC = () => {
           <LanguageToggle />
         </div>
 
-        <div className="lg:hidden">
+        {/* Mobile: lang toggle + animated burger */}
+        <div className="lg:hidden flex items-center gap-5">
           <LanguageToggle />
+          <button
+            onClick={() => setMobileMenuOpen((p) => !p)}
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            className="relative w-6 h-5 flex-shrink-0"
+          >
+            <span
+              className={`absolute left-0 top-0 w-full h-px bg-white rounded-full transition-all duration-300 ease-in-out ${
+                mobileMenuOpen ? "top-[10px] rotate-45" : ""
+              }`}
+            />
+            <span
+              className={`absolute left-0 top-[10px] -translate-y-1/2 w-full h-px bg-white rounded-full transition-all duration-300 ease-in-out ${
+                mobileMenuOpen ? "opacity-0 scale-x-0" : ""
+              }`}
+            />
+            <span
+              className={`absolute left-0 bottom-0 w-full h-px bg-white rounded-full transition-all duration-300 ease-in-out ${
+                mobileMenuOpen ? "bottom-[10px] -rotate-45" : ""
+              }`}
+            />
+          </button>
         </div>
       </div>
     </nav>
+
+    {/* ── Mobile Full-Screen Overlay ── */}
+    <div
+      className={`fixed inset-0 z-[60] bg-black/85 backdrop-blur-2xl flex flex-col lg:hidden transition-opacity duration-300 ${
+        mobileMenuOpen
+          ? "opacity-100 pointer-events-auto"
+          : "opacity-0 pointer-events-none"
+      }`}
+    >
+      {/* Spacer for navbar — matches navbar height so links start below it */}
+      <div className="h-[72px] shrink-0 border-b border-white/[0.06]" />
+
+      {/* Scrollable area — NO justify-center so accordion scroll works */}
+      <div className="flex-1 overflow-y-auto overscroll-contain">
+        <nav className="px-6 py-4">
+          {links.map((link) => {
+            const isDropdown = !!link.hasIndustryDropdown;
+            const isAccordionOpen = mobileAccordion === link.path;
+
+            return (
+              <div key={link.path} className="border-b border-white/[0.07] last:border-0">
+                <button
+                  onClick={() => {
+                    if (isDropdown) {
+                      setMobileAccordion(isAccordionOpen ? null : link.path);
+                    } else {
+                      navigate(link.path);
+                      setMobileMenuOpen(false);
+                    }
+                  }}
+                  className="w-full flex items-center justify-between py-4 text-left group"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="text-white/20 text-[9px] font-mono tabular-nums">{link.num}</span>
+                    <span className="text-white text-2xl font-light tracking-[0.12em] uppercase group-hover:text-white/40 transition-colors duration-200">
+                      {link.label}
+                    </span>
+                  </div>
+                  {isDropdown && (
+                    <span
+                      className={`w-6 h-6 flex items-center justify-center text-white/30 text-base leading-none transition-transform duration-300 ${
+                        isAccordionOpen ? "rotate-45" : ""
+                      }`}
+                    >
+                      +
+                    </span>
+                  )}
+                </button>
+
+                {/* Accordion */}
+                {isDropdown && (
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      isAccordionOpen ? "max-h-[22rem]" : "max-h-0"
+                    }`}
+                  >
+                    <div className="pb-4 pl-8 space-y-0.5">
+                      <Link
+                        to={link.generalHref!}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="flex items-center gap-2.5 text-white/60 text-xs tracking-widest uppercase py-2.5 hover:text-white transition-colors"
+                      >
+                        <span className="w-1 h-1 rounded-full bg-white/30 shrink-0" />
+                        {ka ? "ყველა სერვისი" : "All Services"}
+                      </Link>
+                      <div className="h-px bg-white/[0.06] my-1.5" />
+                      {industries.map((industry) => (
+                        <Link
+                          key={`mob-${link.path}-${industry.slug}`}
+                          to={`/industry/${link.industryService}/${industry.slug}`}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="flex items-center gap-2.5 text-white/35 text-sm py-2 hover:text-white/70 transition-colors"
+                        >
+                          <span className="w-1 h-1 rounded-full bg-white/15 shrink-0" />
+                          {ka ? industry.nameKa : industry.nameEn}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </nav>
+      </div>
+
+      {/* Bottom bar */}
+      <div className="shrink-0 px-6 py-5 border-t border-white/[0.07] flex items-center justify-between">
+        <LanguageToggle />
+        <span className="text-white/15 text-[10px] tracking-widest font-mono">vifadigital.ge</span>
+      </div>
+    </div>
+    </>
   );
 };
 
