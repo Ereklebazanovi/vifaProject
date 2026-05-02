@@ -236,7 +236,7 @@ export const beautyWebPackages: BilingualPricingTier[] = [
       "Technical support and staff training",
     ],
     ctaKa: "უფასო კონსულტაცია",
-    ctaEn: "Get an Estimate",
+    ctaEn: "Book Consultation",
     highlighted: false,
     glowColor: "rgba(99,102,241,0)",
   },
@@ -293,8 +293,8 @@ export const legalFinanceWebPackages: BilingualPricingTier[] = [
       "Live Chat Integration",
       "Meta / Google Pixel Integration",
     ],
-    ctaKa: "დეტალების განხილვა",
-    ctaEn: "Discuss Details",
+    ctaKa: "უფასო კონსულტაცია",
+    ctaEn: "Book Consultation",
     highlighted: true,
     glowColor: "rgba(99,102,241,0.18)",
   },
@@ -408,19 +408,17 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
     "legal-finance": {
       nameKa: "იურიდიული და საფინანსო",
       nameEn: "Legal & Finance",
-      heroBgImage: "/legal-bg.jpg", // აქ ჩასვამ შესაბამის ფოტოს
+      heroBgImage: "/practice-hero.webp", // აქ ჩასვამ შესაბამის ფოტოს
       eyebrowKa: "ვებ დეველოპმენტი",
       eyebrowEn: "Web Development",
-      heroSublineKa:
-        "აკადემიური იმიჯი, უსაფრთხო დოკუმენტბრუნვა და სანდო ციფრული ინფრასტრუქტურა.",
-      heroSublineEn:
-        "Academic image, secure document exchange, and reliable digital infrastructure.",
+heroSublineKa: "თანამედროვე პლატფორმები, რომლებიც ამარტივებს კლიენტებთან კომუნიკაციას და ზრდის თქვენს სანდოობას.",
+      heroSublineEn: "Modern platforms that simplify client communication and increase your credibility.",
       headline: {
         type: "simple",
-        textKa: "ციფრული სტაბილურობა იურიდიული და საფინანსო სექტორისთვის",
-        textEn: "Digital Stability for Legal & Finance Sector",
+        textKa: "თქვენი სფეროს სანდო ციფრული ინფრასტრუქტურა",
+        textEn: "Premium Web Systems for Professionals.",
       },
-      approach: {
+            approach: {
         headingKa: "ორიენტირებული ნდობასა და უსაფრთხოებაზე",
         headingEn: "Focused on Trust and Security",
         descKa:

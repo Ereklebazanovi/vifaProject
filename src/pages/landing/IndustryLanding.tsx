@@ -63,7 +63,7 @@ function HeroSection({ config, ka }: HeroProps) {
   const ctaSecondary = ka ? "კონსულტაცია" : "Consultation";
 
   return (
-   <section className="relative flex min-h-[60vh] flex-col justify-center overflow-hidden px-6 pt-28 pb-8 md:min-h-[80vh] md:pb-24 md:px-12 xl:px-24">
+   <section className="relative flex min-h-[75vh] flex-col justify-center overflow-hidden px-6 pt-28 pb-8 md:min-h-[92vh] md:pb-24 md:px-12 xl:px-24">
       {/* Background Layer */}
       <div className="absolute inset-0 bg-[#060608]" />
       
@@ -78,13 +78,12 @@ function HeroSection({ config, ka }: HeroProps) {
       {/* 1. Horizontal Gradient - მარცხენა მხარეს აშავებს ტექსტისთვის */}
       <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#060608] via-[#060608]/70 to-transparent" />
 
-      {/* 2. Bottom Gradient - *აქ იყო პრობლემა*. ახლა ის იკავებს h-[50%]-ს 
-          რაც უზრუნველყოფს იდეალურად რბილ და უხილავ გადასვლას შემდეგ სექციაში */}
-      <div className="absolute inset-x-0 bottom-0 z-0 h-[50%] bg-gradient-to-t from-[#060608] via-[#060608]/50 to-transparent" />
+      {/* 2. Bottom Gradient - smooth cinematic fade into the next section */}
+      <div className="absolute inset-x-0 bottom-0 z-0 h-[90%] bg-gradient-to-t from-[#060608] via-[#060608]/55 via-35% to-transparent" />
 
       {/* Content */}
       <motion.div
-        className="relative z-10 w-full text-left mt-2 md:mt-0"
+        className="relative z-10 w-full text-left mt-4 md:mt-12"
         variants={heroContainer}
         initial="hidden"
         animate="visible"
@@ -161,7 +160,7 @@ function PricingSection({ packages, ka }: PricingProps) {
   const badgeTextEn = "Prices are estimates • 50/50 payment split available";
 
   return (
-<section id="pricing" className="relative bg-[#060608] pt-2 pb-24 md:pt-20 md:pb-32">
+<section id="pricing" className="relative bg-[#060608] pt-4 pb-24 md:pt-2 md:pb-32">
       <div className="relative mx-auto max-w-7xl px-5 lg:px-12 p-4">
         
         <motion.div
@@ -192,7 +191,11 @@ function PricingSection({ packages, ka }: PricingProps) {
         </motion.div>
 
         <motion.div
-          className="grid gap-6 md:grid-cols-3 md:items-start"
+          className={`grid gap-6 md:items-start ${
+            packages.length === 2
+              ? "md:grid-cols-2 md:w-[1000px] md:mx-auto"
+              : "md:grid-cols-3"
+          }`}
           variants={cardStagger}
           initial="hidden"
           whileInView="visible"
