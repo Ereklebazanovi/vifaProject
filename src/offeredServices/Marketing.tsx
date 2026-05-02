@@ -256,7 +256,7 @@ const Marketing: React.FC = () => {
         <div className="absolute inset-0 z-0 overflow-hidden">
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-image-scale opacity-60"
-            style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop")' }}
+            style={{ backgroundImage: 'url("/marketphoto.png")' }}
           />
         </div>
 

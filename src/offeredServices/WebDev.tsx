@@ -479,48 +479,40 @@ const WebDev: React.FC = () => {
     },
   ];
 
-  const pricingCards = [
+ const pricingCards = [
     {
-      key: "ecommerce",
-      icon: <FaShoppingCart />,
-      iconColor: "text-amber-400/80",
-      badge: t("webdev.pricing.badge"),
-      featured: true,
-      waLink:
-        "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20ონლაინ%20მაღაზიისა%20და%20Invento%20სისტემის%20შექმნით.%20მსურს%20უფასო%20კონსულტაცია.",
+      key: "landing",
+      icon: <FaRocket />,
+      iconColor: "text-emerald-400",
       isLink: false,
+      waLink: "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20სავიზიტო%20ვებსაიტის%20შექმნით.%20მსურს%20უფასო%20კონსულტაცია.",
+      featured: false,
     },
     {
       key: "corporate",
       icon: <FaCode />,
-      iconColor: "text-sky-400/80",
-      badge: null,
-      featured: false,
-      waLink:
-        "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20კორპორატიული%20ვებსაიტის%20შექმნით.%20მსურს%20უფასო%20კონსულტაცია.",
+      iconColor: "text-blue-400",
       isLink: false,
+      waLink: "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20პრემიუმ%20ვებსაიტის%20შექმნით.%20მსურს%20უფასო%20კონსულტაცია.",
+      featured: true, // პოპულარული სტატუსი ახლა ამაზე გადმოვიდა
+    },
+    {
+      key: "ecommerce",
+      icon: <FaShoppingCart />,
+      iconColor: "text-amber-400",
+      isLink: false,
+      waLink: "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20ონლაინ%20მაღაზიისა%20და%20WMS%20სისტემის%20შექმნით.%20მსურს%20უფასო%20კონსულტაცია.",
+      featured: false,
     },
     {
       key: "ai",
       icon: <FaBrain />,
-      iconColor: "text-violet-400/80",
-      badge: null,
-      featured: false,
-      waLink: "/services/ai-chatbot",
+      iconColor: "text-purple-400",
       isLink: true,
-    },
-    {
-      key: "landing",
-      icon: <FaRocket />,
-      iconColor: "text-emerald-400/80",
-      badge: null,
+      waLink: "/services/ai-chatbot",
       featured: false,
-      waLink:
-        "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20სავიზიტო%20ვებსაიტის%20შექმნით.%20მსურს%20უფასო%20კონსულტაცია.",
-      isLink: false,
     },
   ];
-
   return (
     <>
       <SEO
@@ -696,57 +688,70 @@ const WebDev: React.FC = () => {
               ))}
             </div>
 
-            {/* Pricing cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {pricingCards.map((card, idx) => (
-                <motion.div
-                  key={card.key}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: idx * 0.08 }}
-                  className={`group relative flex flex-col rounded-xl border transition-all duration-300 ${
-                    card.featured
-                      ? "border-white/30 bg-white/4 hover:border-white/50"
-                      : "border-white/10 bg-white/[0.02] hover:border-white/25"
-                  }`}
-                >
-                
-
-                  <div className="p-8 flex flex-col flex-1 mt-10">
-                    {/* Header */}
-                    <div className="flex items-start justify-between mb-6">
-                      <div className={`w-10 h-10 rounded-lg border border-white/10 bg-white/4 flex items-center justify-center transition-colors ${card.iconColor}`}>
-                        {card.icon}
-                      </div>
-                      <span className="text-2xl font-bold text-white">
-                        {t(`webdev.pricing.${card.key}.price`)}
-                      </span>
+           {/* Pricing cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            {pricingCards.map((card, idx) => (
+              <motion.div
+                key={card.key}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: idx * 0.08 }}
+                className={`group relative flex flex-col rounded-2xl border transition-all duration-300 ${
+                  card.featured
+                    ? "border-white/20 bg-white/[0.03] shadow-lg shadow-white/5 scale-[1.02]"
+                    : "border-white/[0.06] bg-[#0A0A0C] hover:bg-white/[0.02] hover:border-white/15"
+                }`}
+              >
+                <div className="p-6 sm:p-8 flex flex-col flex-1">
+                  {/* Header */}
+                  <div className="flex items-center justify-between mb-6">
+                    <div className={`w-12 h-12 rounded-xl border border-white/10 bg-white/[0.02] flex items-center justify-center transition-colors text-xl ${card.iconColor}`}>
+                      {card.icon}
                     </div>
+                    {/* Featured/Popular Badge */}
+                    {card.featured && (
+                      <span className="px-3 py-1 text-[10px] uppercase tracking-widest text-white bg-white/10 rounded-full border border-white/10">
+                        პოპულარული
+                      </span>
+                    )}
+                  </div>
 
-                    <h4 className="text-lg font-semibold text-white mb-2">
-                      {t(`webdev.pricing.${card.key}.title`)}
-                    </h4>
-                    <p className="text-gray-500 text-sm leading-relaxed mb-6 flex-1">
-                      {t(`webdev.pricing.${card.key}.description`)}
-                    </p>
+                  <h4 className="text-xl font-medium text-white mb-2">
+                    {t(`webdev.pricing.${card.key}.title`)}
+                  </h4>
+                  
+                  <div className="text-3xl font-bold text-white mb-4">
+                    {t(`webdev.pricing.${card.key}.price`)}
+                  </div>
+                  
+                  <p className="text-gray-400 text-sm leading-relaxed mb-8">
+                    {t(`webdev.pricing.${card.key}.description`)}
+                  </p>
 
-                    {/* Features */}
-                    <ul className="space-y-2.5 mb-8">
-                      {[1, 2, 3, 4, 5].map((num) => (
-                        <li key={num} className="flex items-center gap-3">
-                          <div className="w-1 h-1 rounded-full bg-gray-600 shrink-0" />
-                          <span className="text-gray-400 text-sm">
-                            {t(`webdev.pricing.${card.key}.feature${num}`)}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
+                  <div className="h-px w-full bg-white/[0.05] mb-8" /> {/* Subtle Divider */}
 
-                    {/* CTA */}
+                  {/* Features */}
+                  <ul className="space-y-4 mb-8 flex-1">
+                    {[1, 2, 3, 4, 5].map((num) => (
+                      <li key={num} className="flex items-start gap-3">
+                        <FaCheckCircle className={`text-xs mt-1 transition-colors ${card.featured ? "text-gray-300" : "text-gray-600 group-hover:text-gray-400"}`} />
+                        <span className="text-gray-300 text-sm leading-tight">
+                          {t(`webdev.pricing.${card.key}.feature${num}`)}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* CTA Area */}
+                  <div className="mt-auto">
                     {card.isLink ? (
                       <Link
                         to={card.waLink}
-                        className="flex items-center justify-center gap-2 py-3 px-5 rounded-full border border-white/15 text-white text-sm font-medium hover:bg-white hover:text-black transition-all duration-200"
+                        className={`flex items-center justify-center gap-2 w-full py-3.5 px-5 rounded-xl border text-sm font-medium transition-all duration-300 ${
+                          card.featured
+                            ? "bg-white border-white text-black hover:bg-gray-200"
+                            : "border-white/15 text-white hover:bg-white hover:text-black"
+                        }`}
                       >
                         {t("webdev.pricing.learn_more")}
                         <FaArrowRight className="text-xs" />
@@ -756,20 +761,21 @@ const WebDev: React.FC = () => {
                         href={card.waLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={`flex items-center justify-center gap-2 py-3 px-5 rounded-full text-sm font-medium transition-all duration-200 ${
+                        className={`flex items-center justify-center gap-2 w-full py-3.5 px-5 rounded-xl border text-sm font-medium transition-all duration-300 ${
                           card.featured
-                            ? "bg-white text-black hover:bg-gray-100"
-                            : "border border-white/15 text-white hover:bg-white hover:text-black"
+                            ? "bg-white border-white text-black hover:bg-gray-200"
+                            : "border-white/15 text-white hover:bg-white hover:text-black"
                         }`}
                       >
-                        <FaWhatsapp />
+                        <FaWhatsapp className="text-lg" />
                         {t("webdev.whatsapp.consult")}
                       </a>
                     )}
                   </div>
-                </motion.div>
-              ))}
-            </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
 
             <p className="text-center text-gray-400 text-sm mt-8">
               {consultationLabel}
