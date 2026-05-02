@@ -304,7 +304,7 @@ export const tourismWebPackages: BilingualPricingTier[] = [
   {
     nameKa: "პრემიუმ ვებ-კატალოგი", // უფრო სოლიდურია, ვიდრე "სტანდარტული საიტი"
     nameEn: "Premium Web Catalog",
-    price: "₾ 800 - 1000",
+    price: "₾ 700 - 1000",
     periodKa: "პროექტი",
     periodEn: "project",
     descKa: "ციფრული სავიზიტო ბარათი, რომელიც წარმოაჩენს თქვენს სასტუმროს საუკეთესო კუთხით.",
@@ -333,7 +333,7 @@ export const tourismWebPackages: BilingualPricingTier[] = [
   {
     nameKa: "ჯავშნების პლატფორმა",
     nameEn: "Booking Web Platform",
-    price: "₾ 1400 - 1800",
+    price: "₾ 1000 - 1300",
     periodKa: "პროექტი",
     periodEn: "project",
     descKa: "სრულყოფილი პლატფორმა ავტომატიზებული მოთხოვნებით, რომელიც გიზოგავთ საკომისიოს.",

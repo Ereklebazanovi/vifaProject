@@ -179,8 +179,6 @@ function PricingSection({ packages, ka }: PricingProps) {
             {pricingLabel}
           </span>
 
-          <p className="mx-auto mt-3 max-w-xl text-lg text-gray-400">{pricingDesc}</p>
-
           <div className="mt-6 flex justify-center md:mt-10">
             <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.02] px-4 py-2 backdrop-blur-md transition-colors hover:bg-white/[0.04] md:px-5">
               <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/10">
