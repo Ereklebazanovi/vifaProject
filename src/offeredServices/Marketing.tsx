@@ -259,7 +259,7 @@ const Marketing: React.FC = () => {
             style={{ backgroundImage: 'url("/marketphoto.png")' }}
           />
         </div>
-
+{/* sadasd */}
         <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#060608] via-[#060608]/90 to-transparent" />
         <div className="absolute inset-0 z-0 bg-black/40" />
         <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#060608] to-transparent z-0" />
