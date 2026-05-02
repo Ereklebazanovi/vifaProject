@@ -117,10 +117,10 @@ const ContactPage: React.FC = () => {
                       <div>
                         <h4 className="text-white font-medium mb-1">{t.contactInfo.email}</h4>
                         <a
-                          href="mailto:team.inventogeo@gmail.com"
+                          href="mailto:vifa.official2020@gmail.com"
                           className="text-slate-400 hover:text-blue-400 transition-colors"
                         >
-                          team.inventogeo@gmail.com
+                          vifa.official2020@gmail.com
                         </a>
                       </div>
                     </div>

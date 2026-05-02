@@ -1,4 +1,3 @@
-//WebDev.tsx
 "use client";
 
 import type React from "react";
@@ -16,7 +15,6 @@ import {
   FaCog,
   FaCheckCircle,
   FaArrowRight,
-  FaChartLine,
   FaBolt,
   FaServer,
   FaBrain,
@@ -60,10 +58,9 @@ const webDevTranslations = {
     "webdev.process.description":
       "სტრატეგიული დაგეგმვა → UI/UX დიზაინი → ტექნიკური განხორციელება → ტესტირება და გაშვება",
 
-// ქართულ ნაწილში (ka: { ... }) დაამატე:
-"webdev.hero.overline": "ვებ დეველოპმენტი",
-"webdev.hero.main_title": "ციფრული ფუნდამენტი თქვენი ბიზნესისთვის.",
-"webdev.hero.description": "ვქმნით პრემიუმ კლასის ვებგვერდებს და E-commerce პლატფორმებს, რომლებიც ზრდის თქვენს გაყიდვებს.",
+    "webdev.hero.overline": "ვებ დეველოპმენტი",
+    "webdev.hero.main_title": "ციფრული ფუნდამენტი თქვენი ბიზნესისთვის.",
+    "webdev.hero.description": "ვქმნით პრემიუმ კლასის ვებგვერდებს და E-commerce პლატფორმებს, რომლებიც ზრდის თქვენს გაყიდვებს.",
 
     "webdev.services.title": "ჩვენი ძირითადი სერვისები",
     "webdev.service.website.title": "ვებსაიტის შექმნა",
@@ -146,7 +143,7 @@ const webDevTranslations = {
     "webdev.pricing.ecommerce.feature5": "Excel რეპორტები და ანალიტიკა",
 
     "webdev.pricing.consultation": "კონსულტაცია უფასოა",
-    "webdev.pricing.cta": "დაიწყე პროექტი",
+    "webdev.pricing.cta": "უფასო კონსულტაცია",
     "webdev.pricing.learn_more": "იხილეთ მეტი",
 
     "webdev.services.label": "რას გთავაზობთ",
@@ -222,9 +219,9 @@ const webDevTranslations = {
     "webdev.stats.flexible": "Flexible",
     "webdev.stats.flexibleDesc": "Flexible Timeline",
 
-"webdev.hero.overline": "Web Development",
-"webdev.hero.main_title": "The Digital Foundation for Your Business.",
-"webdev.hero.description": "We build premium websites and E-commerce platforms that drive your sales and growth.",
+    "webdev.hero.overline": "Web Development",
+    "webdev.hero.main_title": "The Digital Foundation for Your Business.",
+    "webdev.hero.description": "We build premium websites and E-commerce platforms that drive your sales and growth.",
 
     "webdev.process.planning": "Planning",
     "webdev.process.design": "Design",
@@ -375,13 +372,6 @@ const webDevTranslations = {
   },
 };
 
-const processSteps = [
-  { num: "01", icon: FaChartLine, key: "webdev.process.planning",   iconColor: "text-sky-400/70" },
-  { num: "02", icon: FaPaintBrush, key: "webdev.process.design",     iconColor: "text-violet-400/70" },
-  { num: "03", icon: FaCode,       key: "webdev.process.development", iconColor: "text-emerald-400/70" },
-  { num: "04", icon: FaRocket,     key: "webdev.process.launch",     iconColor: "text-orange-400/70" },
-];
-
 const technologies = [
   { icon: <SiReact />,      name: "React",      color: "text-sky-400/75 group-hover:text-sky-300" },
   { icon: <SiTypescript />, name: "TypeScript",  color: "text-blue-400/75 group-hover:text-blue-300" },
@@ -494,7 +484,7 @@ const WebDev: React.FC = () => {
       iconColor: "text-blue-400",
       isLink: false,
       waLink: "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20პრემიუმ%20ვებსაიტის%20შექმნით.%20მსურს%20უფასო%20კონსულტაცია.",
-      featured: true, // პოპულარული სტატუსი ახლა ამაზე გადმოვიდა
+      featured: true, 
     },
     {
       key: "ecommerce",
@@ -513,6 +503,7 @@ const WebDev: React.FC = () => {
       featured: false,
     },
   ];
+
   return (
     <>
       <SEO
@@ -524,13 +515,9 @@ const WebDev: React.FC = () => {
       {/* Layered background */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-[#060608]" />
-        {/* Radial depth glow behind hero — top-right quadrant */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_65%_-5%,rgba(148,163,184,0.045)_0%,transparent_65%)]" />
-        {/* Secondary soft glow bottom-left for depth balance */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_5%_100%,rgba(100,116,139,0.025)_0%,transparent_60%)]" />
-        {/* Microscopic dot grid */}
         <div className="absolute inset-0 webdev-dot-grid" />
-        {/* Film grain */}
         <div className="absolute inset-0 webdev-grain" />
       </div>
 
@@ -558,14 +545,13 @@ const WebDev: React.FC = () => {
         }
       `}</style>
 
-    {/* ── Hero — compact, starts at y=0 under the transparent navbar ── */}
-      <section className="relative z-10 h-[80vh] w-full overflow-hidden flex flex-col justify-center">
-
+      {/* ── Hero — compact, relies on padding instead of fixed height ── */}
+      <section className="relative z-10 w-full overflow-hidden flex flex-col justify-center pt-36 pb-16 lg:pt-48 lg:pb-24">
         {/* Photographic background with Ken Burns effect */}
-        <div className="absolute inset-0 w-full h-full">
+        <div className="absolute inset-0 w-full h-full z-0">
           <div className="hero-ken-burns absolute inset-0">
             <img
-              src="/vebisphoto.jpg"
+              src="/vebisphoto.webp"
               alt=""
               className="w-full h-full object-cover"
               loading="eager"
@@ -573,217 +559,45 @@ const WebDev: React.FC = () => {
             />
           </div>
           <div className="absolute inset-0 bg-black/40" />
-          <div className="absolute inset-0 bg-linear-to-r from-[#060608] via-[#060608]/90 to-transparent" />
-          <div className="absolute bottom-0 inset-x-0 h-56 bg-linear-to-t from-[#060608] to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#060608] via-[#060608]/90 to-transparent" />
+          <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-[#060608] to-transparent" />
         </div>
 
-      {/* Hero content */}
-<div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 md:pt-20 lg:pt-0 pb-16 md:pb-0">
-  <div className="max-w-xl">
-    <span className="text-sm uppercase tracking-widest text-gray-400 mb-4 block">
-      {t("webdev.hero.overline")}
-    </span>
+        {/* Hero content */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-xl">
+            <span className="text-sm uppercase tracking-widest text-gray-400 mb-4 block">
+              {t("webdev.hero.overline")}
+            </span>
 
-    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.2] mb-6 max-w-2xl">
-      {t("webdev.hero.main_title")}
-    </h1>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.2] mb-6 max-w-2xl">
+              {t("webdev.hero.main_title")}
+            </h1>
 
-    <p className="text-lg text-gray-300 leading-relaxed mb-8 max-w-xl">
-      {t("webdev.hero.description")}
-    </p>
+            <p className="text-lg text-gray-300 leading-relaxed mb-8 max-w-xl">
+              {t("webdev.hero.description")}
+            </p>
 
-    {/* Primary CTA */}
-    <a
-      href={whatsappUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="inline-flex items-center gap-2.5 bg-white text-black px-8 py-3.5 rounded-full text-sm font-bold tracking-wide hover:bg-gray-100 transition-colors duration-200"
-    >
-      {t("webdev.pricing.cta")}
-      <FaArrowRight className="text-xs" />
-    </a>
-  </div>
-</div>
+            {/* Primary CTA */}
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 bg-white text-black px-8 py-3.5 rounded-full text-sm font-bold tracking-wide hover:bg-gray-100 transition-colors duration-200"
+            >
+              {t("webdev.pricing.cta")}
+              <FaArrowRight className="text-xs" />
+            </a>
+          </div>
+        </div>
       </section>
 
       {/* ── Rest of page content ── */}
-      <div
-        className={`relative z-10 language-transition language-fade-in ${getTransitionClasses()}`}
-      >
+      <div className={`relative z-10 language-transition language-fade-in ${getTransitionClasses()}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* ── Process ── */}
-<section className="pb-18">
-  {/* კონტეინერი gap-px კლასით, რომელიც ქმნის იდეალურ 1px ბადეს */}
-  <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/[0.08] border border-white/[0.08] rounded-2xl overflow-hidden shadow-2xl">
-    {processSteps.map((step) => {
-      const Icon = step.icon;
-      return (
-        <div
-          key={step.num}
-          className="relative p-5 sm:p-6 bg-[#060608] hover:bg-white/[0.02] transition-colors duration-500 group flex flex-col justify-between min-h-[120px] sm:min-h-[140px]"
-        >
-          {/* Hover-ზე ზედა ნაზი განათება (Highlight) */}
-          <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-          <div className="flex justify-between items-start mb-4">
-            {/* აიქონის კონტეინერი */}
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white/[0.02] border border-white/[0.05] flex items-center justify-center group-hover:scale-110 group-hover:bg-white/[0.05] transition-all duration-300">
-              <Icon 
-                className={`text-base sm:text-lg text-gray-500 transition-colors duration-300 group-hover:${step.iconColor || "text-white"}`} 
-              />
-            </div>
-            
-            {/* ნაბიჯის ნომერი */}
-            <span className="text-[10px] sm:text-xs font-mono text-gray-600 group-hover:text-gray-400 transition-colors">
-              {step.num}
-            </span>
-          </div>
-
-          {/* სათაური */}
-          <span className="block text-sm sm:text-base font-medium text-gray-300 group-hover:text-white transition-colors">
-            {t(step.key)}
-          </span>
-        </div>
-      );
-    })}
-  </div>
-
-  {/* ქვედა ახსნა (პულსირებადი წერტილით) */}
-  <div className="mt-6 flex items-center justify-center lg:justify-start gap-3">
-    <div className="w-1.5 h-1.5 rounded-full bg-gray-500 animate-pulse" />
-    <p className="text-gray-500 text-xs sm:text-sm tracking-wide">
-      {t("webdev.process.description")}
-    </p>
-  </div>
-</section>
-
-          {/* ── Pricing ── */}
-          <section className="pb-16">
-            {/* Section header */}
-            <div className="mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-3">
-                {t("webdev.pricing.title")}
-              </h2>
-            </div>
-
-            {/* Why individual pricing — 3 pillars */}
-            <div className="grid md:grid-cols-3 gap-px bg-white/10 rounded-xl overflow-hidden mb-8">
-              {(
-                [
-                  { key: "reason1", icon: FaBullseye, iconColor: "text-sky-400/70"    },
-                  { key: "reason2", icon: FaBolt,     iconColor: "text-amber-400/70"  },
-                  { key: "reason3", icon: FaCog,      iconColor: "text-violet-400/70" },
-                ] as const
-              ).map(({ key, icon: Icon, iconColor }) => (
-                <div key={key} className="bg-[#060608] p-8">
-                  <Icon className={`text-lg mb-4 ${iconColor}`} />
-                  <h4 className="text-sm font-semibold text-white mb-2">
-                    {t(`webdev.pricing.${key}.title`)}
-                  </h4>
-                  <p className="text-gray-500 text-sm leading-relaxed">
-                    {t(`webdev.pricing.${key}.description`)}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-           {/* Pricing cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
-            {pricingCards.map((card, idx) => (
-              <motion.div
-                key={card.key}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: idx * 0.08 }}
-                className={`group relative flex flex-col rounded-2xl border transition-all duration-300 ${
-                  card.featured
-                    ? "border-white/20 bg-white/[0.03] shadow-lg shadow-white/5 scale-[1.02]"
-                    : "border-white/[0.06] bg-[#0A0A0C] hover:bg-white/[0.02] hover:border-white/15"
-                }`}
-              >
-                <div className="p-6 sm:p-8 flex flex-col flex-1">
-                  {/* Header */}
-                  <div className="flex items-center justify-between mb-6">
-                    <div className={`w-12 h-12 rounded-xl border border-white/10 bg-white/[0.02] flex items-center justify-center transition-colors text-xl ${card.iconColor}`}>
-                      {card.icon}
-                    </div>
-                    {/* Featured/Popular Badge */}
-                    {card.featured && (
-                      <span className="px-3 py-1 text-[10px] uppercase tracking-widest text-white bg-white/10 rounded-full border border-white/10">
-                        პოპულარული
-                      </span>
-                    )}
-                  </div>
-
-                  <h4 className="text-xl font-medium text-white mb-2">
-                    {t(`webdev.pricing.${card.key}.title`)}
-                  </h4>
-                  
-                  <div className="text-3xl font-bold text-white mb-4">
-                    {t(`webdev.pricing.${card.key}.price`)}
-                  </div>
-                  
-                  <p className="text-gray-400 text-sm leading-relaxed mb-8">
-                    {t(`webdev.pricing.${card.key}.description`)}
-                  </p>
-
-                  <div className="h-px w-full bg-white/[0.05] mb-8" /> {/* Subtle Divider */}
-
-                  {/* Features */}
-                  <ul className="space-y-4 mb-8 flex-1">
-                    {[1, 2, 3, 4, 5].map((num) => (
-                      <li key={num} className="flex items-start gap-3">
-                        <FaCheckCircle className={`text-xs mt-1 transition-colors ${card.featured ? "text-gray-300" : "text-gray-600 group-hover:text-gray-400"}`} />
-                        <span className="text-gray-300 text-sm leading-tight">
-                          {t(`webdev.pricing.${card.key}.feature${num}`)}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* CTA Area */}
-                  <div className="mt-auto">
-                    {card.isLink ? (
-                      <Link
-                        to={card.waLink}
-                        className={`flex items-center justify-center gap-2 w-full py-3.5 px-5 rounded-xl border text-sm font-medium transition-all duration-300 ${
-                          card.featured
-                            ? "bg-white border-white text-black hover:bg-gray-200"
-                            : "border-white/15 text-white hover:bg-white hover:text-black"
-                        }`}
-                      >
-                        {t("webdev.pricing.learn_more")}
-                        <FaArrowRight className="text-xs" />
-                      </Link>
-                    ) : (
-                      <a
-                        href={card.waLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`flex items-center justify-center gap-2 w-full py-3.5 px-5 rounded-xl border text-sm font-medium transition-all duration-300 ${
-                          card.featured
-                            ? "bg-white border-white text-black hover:bg-gray-200"
-                            : "border-white/15 text-white hover:bg-white hover:text-black"
-                        }`}
-                      >
-                        <FaWhatsapp className="text-lg" />
-                        {t("webdev.whatsapp.consult")}
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-            <p className="text-center text-gray-400 text-sm mt-8">
-              {consultationLabel}
-            </p>
-          </section>
-
-          {/* ── Services ── */}
-          <section id="services" className="pb-24">
+          {/* ── 1. Services (Moved UP) ── */}
+          <section id="services" className="pt-16 pb-24">
             <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-12">
               {t("webdev.services.label")}
             </h2>
@@ -848,7 +662,7 @@ const WebDev: React.FC = () => {
             </div>
           </section>
 
-          {/* ── Tech Stack ── */}
+          {/* ── 2. Tech Stack (Moved UP) ── */}
           <section className="pb-24">
             <div className="mb-10">
               <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-2">
@@ -877,7 +691,131 @@ const WebDev: React.FC = () => {
             </div>
           </section>
 
-          {/* ── CTA ── */}
+          {/* ── 3. Pricing (Moved DOWN & separated by subtle border) ── */}
+          <section className="pt-20 pb-16 border-t border-white/[0.05]">
+            {/* Section header */}
+            <div className="mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-3">
+                {t("webdev.pricing.title")}
+              </h2>
+            </div>
+
+            {/* Why individual pricing — 3 pillars */}
+            <div className="grid md:grid-cols-3 gap-px bg-white/10 rounded-xl overflow-hidden mb-8">
+              {(
+                [
+                  { key: "reason1", icon: FaBullseye, iconColor: "text-sky-400/70"    },
+                  { key: "reason2", icon: FaBolt,     iconColor: "text-amber-400/70"  },
+                  { key: "reason3", icon: FaCog,      iconColor: "text-violet-400/70" },
+                ] as const
+              ).map(({ key, icon: Icon, iconColor }) => (
+                <div key={key} className="bg-[#060608] p-8">
+                  <Icon className={`text-lg mb-4 ${iconColor}`} />
+                  <h4 className="text-sm font-semibold text-white mb-2">
+                    {t(`webdev.pricing.${key}.title`)}
+                  </h4>
+                  <p className="text-gray-500 text-sm leading-relaxed">
+                    {t(`webdev.pricing.${key}.description`)}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Pricing cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
+              {pricingCards.map((card, idx) => (
+                <motion.div
+                  key={card.key}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: idx * 0.08 }}
+                  className={`group relative flex flex-col rounded-2xl border transition-all duration-300 ${
+                    card.featured
+                      ? "border-white/20 bg-white/[0.03] shadow-lg shadow-white/5 scale-[1.02]"
+                      : "border-white/[0.06] bg-[#0A0A0C] hover:bg-white/[0.02] hover:border-white/15"
+                  }`}
+                >
+                  <div className="p-6 sm:p-8 flex flex-col flex-1">
+                    {/* Header */}
+                    <div className="flex items-center justify-between mb-6">
+                      <div className={`w-12 h-12 rounded-xl border border-white/10 bg-white/[0.02] flex items-center justify-center transition-colors text-xl ${card.iconColor}`}>
+                        {card.icon}
+                      </div>
+                      {/* Featured/Popular Badge */}
+                      {card.featured && (
+                        <span className="px-3 py-1 text-[10px] uppercase tracking-widest text-white bg-white/10 rounded-full border border-white/10">
+                          პოპულარული
+                        </span>
+                      )}
+                    </div>
+
+                    <h4 className="text-xl font-medium text-white mb-2">
+                      {t(`webdev.pricing.${card.key}.title`)}
+                    </h4>
+                    
+                    <div className="text-3xl font-bold text-white mb-4">
+                      {t(`webdev.pricing.${card.key}.price`)}
+                    </div>
+                    
+                    <p className="text-gray-400 text-sm leading-relaxed mb-8">
+                      {t(`webdev.pricing.${card.key}.description`)}
+                    </p>
+
+                    <div className="h-px w-full bg-white/[0.05] mb-8" /> {/* Subtle Divider */}
+
+                    {/* Features */}
+                    <ul className="space-y-4 mb-8 flex-1">
+                      {[1, 2, 3, 4, 5].map((num) => (
+                        <li key={num} className="flex items-start gap-3">
+                          <FaCheckCircle className={`text-xs mt-1 transition-colors ${card.featured ? "text-gray-300" : "text-gray-600 group-hover:text-gray-400"}`} />
+                          <span className="text-gray-300 text-sm leading-tight">
+                            {t(`webdev.pricing.${card.key}.feature${num}`)}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* CTA Area */}
+                    <div className="mt-auto">
+                      {card.isLink ? (
+                        <Link
+                          to={card.waLink}
+                          className={`flex items-center justify-center gap-2 w-full py-3.5 px-5 rounded-xl border text-sm font-medium transition-all duration-300 ${
+                            card.featured
+                              ? "bg-white border-white text-black hover:bg-gray-200"
+                              : "border-white/15 text-white hover:bg-white hover:text-black"
+                          }`}
+                        >
+                          {t("webdev.pricing.learn_more")}
+                          <FaArrowRight className="text-xs" />
+                        </Link>
+                      ) : (
+                        <a
+                          href={card.waLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`flex items-center justify-center gap-2 w-full py-3.5 px-5 rounded-xl border text-sm font-medium transition-all duration-300 ${
+                            card.featured
+                              ? "bg-white border-white text-black hover:bg-gray-200"
+                              : "border-white/15 text-white hover:bg-white hover:text-black"
+                          }`}
+                        >
+                          <FaWhatsapp className="text-lg" />
+                          {t("webdev.whatsapp.consult")}
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <p className="text-center text-gray-400 text-sm mt-8">
+              {consultationLabel}
+            </p>
+          </section>
+
+          {/* ── 4. CTA ── */}
           <section className="pb-24 border-t border-white/10 pt-16">
             <div className="max-w-2xl">
               <h3 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-4 leading-tight">

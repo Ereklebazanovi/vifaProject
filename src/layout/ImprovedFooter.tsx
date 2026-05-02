@@ -170,8 +170,8 @@ const Footer: React.FC = () => {
     },
     {
       icon: <FaEnvelope className="w-4 h-4" />,
-      text: isInventoRoute() && !isVifaRoute() ? "team.inventogeo@gmail.com" : "vifa.official2020@gmail.com",
-      href: isInventoRoute() && !isVifaRoute() ? "mailto:team.inventogeo@gmail.com" : "mailto:vifa.official2020@gmail.com",
+      text: isInventoRoute() && !isVifaRoute() ? "vifa.official2020@gmail.com" : "vifa.official2020@gmail.com",
+      href: isInventoRoute() && !isVifaRoute() ? "mailto:vifa.official2020@gmail.com" : "mailto:vifa.official2020@gmail.com",
       color: "text-blue-400",
     },                                                       
     {

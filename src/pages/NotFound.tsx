@@ -122,10 +122,11 @@ const NotFound: React.FC = () => {
               <p className="text-sm">
                 თუ მაინც გჭირდებათ დახმარება, დაგვიკავშირდით:{" "}
                 <a
-                  href="mailto:team.inventogeo@gmail.com"
+                  href="mailto:vifa.official2020@gmail.com
+"
                   className="text-blue-400 hover:text-blue-300 hover:underline transition-colors"
                 >
-                  team.inventogeo@gmail.com
+                  vifa.official2020@gmail.com
                 </a>
               </p>
             </motion.div>
