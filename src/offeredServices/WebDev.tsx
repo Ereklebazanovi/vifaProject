@@ -558,7 +558,7 @@ const WebDev: React.FC = () => {
         }
       `}</style>
 
-      {/* ── Hero — compact, starts at y=0 under the transparent navbar ── */}
+    {/* ── Hero — compact, starts at y=0 under the transparent navbar ── */}
       <section className="relative z-10 h-[80vh] w-full overflow-hidden flex flex-col justify-center">
 
         {/* Photographic background with Ken Burns effect */}
