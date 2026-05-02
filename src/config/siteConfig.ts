@@ -1,30 +1,30 @@
-// Site Configuration - Update these values when domain and social media are ready
+// Site Configuration for Vifa Digital
 
 export const siteConfig = {
   // Basic Site Info
-  siteName: "Invento Technologies",
-  siteTitle: "Invento Technologies - ტექნოლოგიური გადაწყვეტები საქართველოში",
+  siteName: "Vifa Digital",
+  siteTitle: "Vifa Digital - Premium Web Development, Digital Marketing & IT Solutions",
 
   // Domain
-  domain: "www.inventogeo.com",
-  url: "https://www.inventogeo.com",
+  domain: "vifadigital.ge",
+  url: "https://vifadigital.ge",
 
   // Contact Info
-  email: "team.inventogeo@gmail.com",
+  email: "vifa.official2020@gmail.com",
 
   phone: "+995 557 62 42 43", // IT Department
 
   // Social Media
   social: {
-    facebook: "https://www.facebook.com/inventogeo",
-    instagram: "https://www.instagram.com/inventogeo",
-    linkedin: "https://www.linkedin.com/company/inventogeo",
-    twitter: "https://twitter.com/inventogeo",
+    facebook: "https://www.facebook.com/vifaweb",
+    instagram: "https://www.instagram.com/vifadigital",
+    linkedin: "https://www.linkedin.com/company/vifadigital",
+    twitter: "https://twitter.com/vifadigital",
   },
 
   // SEO
-  defaultImage: "/invento.png",
-  twitterHandle: "@inventogeo",
+  defaultImage: "/viffa.png",
+  twitterHandle: "@vifadigital",
 
   // Business Info
   location: {
@@ -33,18 +33,5 @@ export const siteConfig = {
     countryCode: "GE"
   }
 };
-
-// What needs to be updated when domain is purchased:
-/*
-1. Update 'domain' and 'url' above
-2. Update 'email' address
-3. Update social media URLs when pages are created
-4. Update phone number if needed
-5. Purchase SSL certificate for new domain
-6. Set up email hosting for new domain
-7. Update Vercel deployment settings to new domain
-8. Set up Google Analytics and Search Console for new domain
-9. Update any hardcoded URLs in components
-*/
 
 export default siteConfig;

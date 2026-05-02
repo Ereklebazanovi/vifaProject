@@ -1,25 +1,25 @@
 {
-  "name": "Invento Technologies - AI, WMS და ვებ ტექნოლოგიები საქართველოში",
-  "short_name": "Invento Technologies",
-  "description": "Invento Technologies - ხელოვნური ინტელექტის, მონაცემთა ბაზების მართვისა და ვებ ტექნოლოგიების წამყვანი კომპანია საქართველოში. Invento WMS, Invento AI, Invento Web.",
+  "name": "Vifa Digital - Premium Web Development, Digital Marketing & IT Solutions",
+  "short_name": "Vifa Digital",
+  "description": "Vifa Digital is a premium full-service digital agency in Georgia, delivering web development, digital marketing, IT solutions, Vifa WMS, and AI-powered systems.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0f172a",
   "theme_color": "#0f172a",
   "orientation": "portrait-primary",
   "scope": "/",
-  "lang": "ka",
+  "lang": "en",
   "dir": "ltr",
-  "categories": ["business", "technology", "productivity"],
+  "categories": ["business", "technology", "marketing", "productivity"],
   "icons": [
     {
-      "src": "/invento.png",
+      "src": "/viffa.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/invento.png",
+      "src": "/viffa.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -41,37 +41,37 @@
   ],
   "shortcuts": [
     {
-      "name": "Invento WMS",
+      "name": "Vifa WMS",
       "short_name": "WMS",
-      "description": "მონაცემთა ბაზების მართვისა და საწარმოო სისტემები",
-      "url": "/inventowms",
+      "description": "Inventory and sales management for online businesses.",
+      "url": "/vifawms",
       "icons": [
         {
-          "src": "/invento.png",
+          "src": "/viffa.png",
           "sizes": "96x96"
         }
       ]
     },
     {
-      "name": "Invento Web",
-      "short_name": "ვებ",
-      "description": "ვებსაიტის შექმნისა და განვითარების სერვისები",
+      "name": "Vifa Web",
+      "short_name": "Web",
+      "description": "Premium website design and development services.",
       "url": "/services/web-development",
       "icons": [
         {
-          "src": "/invento.png",
+          "src": "/viffa.png",
           "sizes": "96x96"
         }
       ]
     },
     {
-      "name": "Invento AI",
+      "name": "Vifa AI",
       "short_name": "AI",
-      "description": "AI ჩატბოტები და ხელოვნური ინტელექტის სისტემები",
+      "description": "AI assistants, chatbots, and automation systems.",
       "url": "/services/ai-chatbot",
       "icons": [
         {
-          "src": "/invento.png",
+          "src": "/viffa.png",
           "sizes": "96x96"
         }
       ]

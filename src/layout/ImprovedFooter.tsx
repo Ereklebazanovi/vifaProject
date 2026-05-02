@@ -119,7 +119,7 @@ const Footer: React.FC = () => {
 
   const services = [
     {
-      name: currentLanguage === "ka" ? "Invento Web" : "Invento Web",
+      name: currentLanguage === "ka" ? "Vifa Web" : "Vifa Web",
       href: "/services/web-development",
       icon: <FaCode className="w-4 h-4" />,
     },
@@ -129,7 +129,7 @@ const Footer: React.FC = () => {
       icon: <FaChartLine className="w-4 h-4" />,
     },
     {
-      name: currentLanguage === "ka" ? "Invento AI" : "Invento AI",
+      name: currentLanguage === "ka" ? "Vifa AI" : "Vifa AI",
       href: "/services/ai-chatbot",
       icon: <FaRobot className="w-4 h-4" />,
     },

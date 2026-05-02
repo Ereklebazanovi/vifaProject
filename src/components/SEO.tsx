@@ -1,7 +1,5 @@
-
 import { Helmet } from 'react-helmet-async';
 import { useLanguage } from '../contexts/LanguageContext';
-import { useLocation } from 'react-router-dom';
 import { siteConfig } from '../config/siteConfig';
 
 interface SEOProps {
@@ -32,51 +30,26 @@ const SEO: React.FC<SEOProps> = ({
   articleMeta
 }) => {
   const { currentLanguage } = useLanguage();
-  const location = useLocation();
+  const isKa = currentLanguage === 'ka';
+  const brandBaseUrl = 'https://vifadigital.ge';
 
-  // Determine if current route should show VIFA branding (Marketing only) or if we're on vifadigital.ge domain
-  const isVifaRoute = () => {
-    const path = location.pathname;
-    const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
-
-    // Check if we're on vifadigital.ge domain or on marketing routes
-    return hostname.includes('vifadigital.ge') || path.includes('/services/digital-advertising');
-  };
-
-  const isVifa = isVifaRoute();
-
-  // Conditional branding configuration
-  const brandConfig = isVifa ? {
-    siteName: "VIFA",
-    siteTitle: currentLanguage === 'ka'
-      ? "VIFA - ციფრული მარკეტინგის სააგენტო საქართველოში"
-      : "VIFA - Digital Marketing Agency in Georgia",
-    defaultDescription: currentLanguage === 'ka'
-      ? "VIFA - ციფრული მარკეტინგის სააგენტო საქართველოში. Facebook რეკლამა, Google Ads, სოციალური მედია მენეჯმენტი, SEO ოპტიმიზაცია. პროფესიონალური დიჯიტალური მარკეტინგი თბილისში."
-      : "VIFA - Professional digital marketing agency in Georgia. Facebook ads, Google Ads, social media management, SEO optimization. Expert digital marketing services in Tbilisi.",
-    defaultKeywords: currentLanguage === 'ka'
-      ? "ციფრული მარკეტინგი, Facebook რეკლამა, Google Ads, სოციალური მედია, SEO, VIFA, მარკეტინგი საქართველო, თბილისი, ციფრული რეკლამა, სოციალური მედია მენეჯმენტი, მარკეტინგის სააგენტო"
-      : "digital marketing, Facebook ads, Google Ads, social media, SEO, VIFA, marketing Georgia, Tbilisi, digital advertising, social media management, marketing agency",
-    defaultImage: "/viffa.png",
-    email: "vifa.official2020@gmail.com",
+  const brandConfig = {
+    siteName: 'Vifa Digital',
+    siteTitle: isKa
+      ? 'Vifa Digital - პრემიუმ ვებ დეველოპმენტი, ციფრული მარკეტინგი და IT გადაწყვეტილებები'
+      : 'Vifa Digital - Premium Web Development, Digital Marketing & IT Solutions',
+    defaultDescription: isKa
+      ? 'Vifa Digital არის პრემიუმ სრულ-სერვისიანი სააგენტო საქართველოში, რომელიც აერთიანებს ვებ დეველოპმენტს, ციფრულ მარკეტინგს და IT გადაწყვეტილებებს ბიზნესის ზრდისთვის.'
+      : 'Vifa Digital is a premium full-service agency in Georgia, delivering web development, digital marketing, and IT solutions for business growth.',
+    defaultKeywords: isKa
+      ? 'Vifa Digital, ვებ დეველოპმენტი, ვებსაიტის შექმნა, ციფრული მარკეტინგი, SEO, Google Ads, Facebook რეკლამა, IT სერვისები, ბიზნეს ავტომატიზაცია, AI გადაწყვეტილებები, WMS, ტექნოლოგიური სააგენტო, თბილისი, საქართველო'
+      : 'Vifa Digital, web development, website development, digital marketing, SEO, Google Ads, Facebook ads, IT solutions, business automation, AI solutions, WMS, technology agency, Tbilisi, Georgia',
+    defaultImage: '/viffa.png',
+    email: 'vifa.official2020@gmail.com',
     socialLinks: [
-      "https://facebook.com/vifaweb",
-      "https://www.instagram.com/vifadigital"
+      'https://facebook.com/vifaweb',
+      'https://www.instagram.com/vifadigital'
     ]
-  } : {
-    siteName: siteConfig.siteName,
-    siteTitle: currentLanguage === 'ka'
-      ? "Invento Technologies - ხელოვნური ინტელექტი და ვებ ტექნოლოგიები საქართველოში"
-      : "Invento Technologies - AI and Web Technologies in Georgia",
-    defaultDescription: currentLanguage === 'ka'
-      ? "Invento Technologies - ვებ განვითარება, AI ჩატბოტები, და მონაცემთა ბაზების მართვის სისტემები (WMS) საქართველოში. Invento WMS, Invento AI, Invento Web - ინოვაციური ტექნოლოგიური გადაწყვეტები თბილისში."
-      : "Invento Technologies - Web development, AI chatbots, and Warehouse Management Systems (WMS) in Georgia. Invento WMS, Invento AI, Invento Web - innovative tech solutions in Tbilisi.",
-    defaultKeywords: currentLanguage === 'ka'
-      ? "ვებ განვითარება, AI ჩატბოტები, მონაცემთა ბაზების მართვა, WMS, საწყობის მართვა, ხელოვნური ინტელექტი, Invento Technologies, Invento WMS, Invento AI, Invento Web, ვებსაიტის შექმნა, ტექნოლოგიები საქართველო, თბილისი, ვებ დეველოპმენტი, ციფრული გადაწყვეტები, ბიზნეს ტექნოლოგიები"
-      : "web development, AI chatbots, warehouse management, WMS, inventory management, artificial intelligence, Invento Technologies, Invento WMS, Invento AI, Invento Web, website development, technology Georgia, Tbilisi, web development, digital solutions, business technology",
-    defaultImage: siteConfig.defaultImage,
-    email: siteConfig.email,
-    socialLinks: Object.values(siteConfig.social)
   };
 
   const siteTitle = brandConfig.siteTitle;
@@ -87,31 +60,19 @@ const SEO: React.FC<SEOProps> = ({
   const metaDescription = description || defaultDescription;
   const metaKeywords = keywords || brandConfig.defaultKeywords;
   const metaImage = image || brandConfig.defaultImage;
-  const currentUrl = url || (typeof window !== 'undefined' ? window.location.href : siteConfig.url);
+  const currentUrl = url || (typeof window !== 'undefined' ? window.location.href : brandBaseUrl);
 
-  // Clean canonical URL and ensure proper domain
-  let canonicalUrl = currentUrl.split('#')[0]; // Keep query params for language handling
+  const normalizeCanonicalUrl = (input: string) => {
+    try {
+      const parsed = new URL(input, brandBaseUrl);
+      return `${brandBaseUrl}${parsed.pathname}${parsed.search}`;
+    } catch {
+      const safePath = input.startsWith('/') ? input : `/${input}`;
+      return `${brandBaseUrl}${safePath}`;
+    }
+  };
 
-  // Ensure canonical URL uses correct domain for each brand
-  if (!isVifa) {
-    // For Invento routes, use inventogeo.com
-    if (canonicalUrl.includes('localhost') || canonicalUrl.includes('vifadigital.ge')) {
-      // Replace localhost/dev domains with production URL, preserving the path
-      const urlPath = new URL(canonicalUrl).pathname;
-      canonicalUrl = `https://www.inventogeo.com${urlPath}`;
-    } else if (!canonicalUrl.includes('inventogeo.com')) {
-      // Fallback to adding domain if none present
-      canonicalUrl = `https://www.inventogeo.com${canonicalUrl.startsWith('/') ? canonicalUrl : `/${canonicalUrl}`}`;
-    }
-  } else {
-    // For VIFA routes, use vifadigital.ge
-    if (canonicalUrl.includes('localhost') || canonicalUrl.includes('inventogeo.com')) {
-      const urlPath = new URL(canonicalUrl).pathname;
-      canonicalUrl = `https://vifadigital.ge${urlPath}`;
-    } else if (!canonicalUrl.includes('vifadigital.ge')) {
-      canonicalUrl = `https://vifadigital.ge${canonicalUrl.startsWith('/') ? canonicalUrl : `/${canonicalUrl}`}`;
-    }
-  }
+  const canonicalUrl = normalizeCanonicalUrl(currentUrl.split('#')[0]);
 
   // Generate language-specific URLs
   const baseUrl = canonicalUrl.split('?')[0];
@@ -119,134 +80,128 @@ const SEO: React.FC<SEOProps> = ({
   const englishUrl = `${baseUrl}?lang=en`;
 
   // Set canonical based on current language
-  const finalCanonicalUrl = currentLanguage === 'en' ? englishUrl : georgianUrl;
+  const finalCanonicalUrl = isKa ? georgianUrl : englishUrl;
 
-  const fullImageUrl = metaImage.startsWith('http') ? metaImage : `${siteConfig.url}${metaImage}`;
+  const fullImageUrl = metaImage.startsWith('http')
+    ? metaImage
+    : `${brandBaseUrl}${metaImage.startsWith('/') ? '' : '/'}${metaImage}`;
 
-  // Generate comprehensive structured data with conditional branding
+  const knowsAbout = isKa
+    ? [
+      'ვებ დეველოპმენტი',
+      'ვებსაიტის შექმნა',
+      'ციფრული მარკეტინგი',
+      'SEO ოპტიმიზაცია',
+      'Google Ads',
+      'Facebook რეკლამა',
+      'სოციალური მედია მენეჯმენტი',
+      'IT გადაწყვეტილებები',
+      'ბიზნეს ავტომატიზაცია',
+      'AI ინტეგრაცია',
+      'WMS სისტემები'
+    ]
+    : [
+      'Web Development',
+      'Website Design and Development',
+      'Digital Marketing',
+      'SEO Optimization',
+      'Google Ads',
+      'Facebook Advertising',
+      'Social Media Management',
+      'IT Solutions',
+      'Business Automation',
+      'AI Integration',
+      'WMS Systems'
+    ];
+
+  const offerCatalog = {
+    '@type': 'OfferCatalog',
+    name: isKa ? 'Vifa Digital-ის სერვისები' : 'Vifa Digital Services',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: isKa ? 'ვებ დეველოპმენტი' : 'Web Development',
+          description: isKa
+            ? 'კორპორატიული ვებსაიტები, eCommerce პლატფორმები და კონვერსიაზე ორიენტირებული ვებ პროდუქტები.'
+            : 'Corporate websites, eCommerce platforms, and conversion-focused web products.'
+        }
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: isKa ? 'ციფრული მარკეტინგი' : 'Digital Marketing',
+          description: isKa
+            ? 'SEO, Google Ads, Facebook/Instagram რეკლამა და სოციალური მედია მენეჯმენტი.'
+            : 'SEO, Google Ads, Facebook/Instagram advertising, and social media management.'
+        }
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: isKa ? 'IT და AI გადაწყვეტილებები' : 'IT & AI Solutions',
+          description: isKa
+            ? 'ბიზნეს პროცესების ავტომატიზაცია, AI ინტეგრაცია და ინდივიდუალური ტექნოლოგიური გადაწყვეტები.'
+            : 'Business process automation, AI integration, and custom technology solutions.'
+        }
+      }
+    ]
+  };
+
+  // Generate comprehensive structured data
   const defaultStructuredData = {
-    "@context": "https://schema.org",
-    "@type": type === "article" ? "Article" : "Organization",
-    name: type === "article" ? fullTitle : siteName,
+    '@context': 'https://schema.org',
+    '@type': type === 'article' ? 'Article' : 'Organization',
+    name: type === 'article' ? fullTitle : siteName,
     description: metaDescription,
     url: finalCanonicalUrl,
-    logo: `${siteConfig.url}${metaImage}`,
+    logo: `${brandBaseUrl}${brandConfig.defaultImage}`,
     image: fullImageUrl,
     telephone: siteConfig.phone,
     email: brandConfig.email,
     address: {
-      "@type": "PostalAddress",
-      addressLocality: "Tbilisi",
-      addressCountry: "GE",
-      addressRegion: "Tbilisi"
+      '@type': 'PostalAddress',
+      addressLocality: 'Tbilisi',
+      addressCountry: 'GE',
+      addressRegion: 'Tbilisi'
     },
     contactPoint: {
-      "@type": "ContactPoint",
+      '@type': 'ContactPoint',
       telephone: siteConfig.phone,
-      contactType: "customer service",
+      contactType: 'customer service',
       email: brandConfig.email,
-      availableLanguage: ["Georgian", "English"],
-      areaServed: "GE"
+      availableLanguage: ['Georgian', 'English'],
+      areaServed: 'GE'
     },
     sameAs: brandConfig.socialLinks,
-    foundingDate: isVifa ? "2020" : "2023",
-    knowsAbout: isVifa ? [
-      "ციფრული მარკეტინგი",
-      "Facebook რეკლამა",
-      "Google Ads",
-      "SEO ოპტიმიზაცია",
-      "Social Media Marketing",
-      "Instagram რეკლამა",
-      "მარკეტინგის სტრატეგია",
-      "ციფრული რეკლამა",
-      "სოციალური მედია მენეჯმენტი",
-      "ონლაინ მარკეტინგი"
-    ] : [
-      "ვებ განვითარება",
-      "AI ჩატბოტები",
-      "მონაცემთა ბაზების მართვა",
-      "WMS სისტემები",
-      "საწყობის მართვა",
-      "ხელოვნური ინტელექტი",
-      "ვებსაიტის შექმნა",
-      "Invento WMS",
-      "Invento AI",
-      "Invento Web",
-      "ბიზნეს ტექნოლოგიები",
-      "ციფრული გადაწყვეტები",
-      "ვებ დეველოპმენტი",
-      "ტექნოლოგიური კონსულტინგი",
-      "შედეგებზე ორიენტირებული ვებსაიტები"
-    ],
+    foundingDate: '2020',
+    knowsAbout,
     serviceArea: {
-      "@type": "Country",
-      name: "Georgia"
+      '@type': 'Country',
+      name: 'Georgia'
     },
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: isVifa ? "Digital Marketing Services" : "Technology Solutions",
-      itemListElement: isVifa ? [
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "ციფრული მარკეტინგი",
-            description: "Facebook რეკლამა, Google Ads, SEO, სოციალური მედია მენეჯმენტი"
-          }
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "სოციალური მედიის მართვა",
-            description: "Facebook, Instagram, LinkedIn მარკეტინგი და რეკლამა"
-          }
-        }
-      ] : [
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Invento WMS",
-            description: "მონაცემთა ბაზების მართვის სისტემა და საწყობის მართვა"
-          }
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Invento AI",
-            description: "AI ჩატბოტები და ხელოვნური ინტელექტის ინტეგრაცია"
-          }
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Invento Web",
-            description: "პროფესიონალური ვებ განვითარება და ციფრული გადაწყვეტები"
-          }
-        }
-      ]
-    },
-    ...(type === "article" && articleMeta && {
+    hasOfferCatalog: offerCatalog,
+    ...(type === 'article' && articleMeta && {
       headline: fullTitle,
       author: {
-        "@type": "Person",
+        '@type': 'Person',
         name: articleMeta.author || `${siteName} Team`
       },
       publisher: {
-        "@type": "Organization",
+        '@type': 'Organization',
         name: siteName,
         logo: {
-          "@type": "ImageObject",
-          url: `${siteConfig.url}${metaImage}`
+          '@type': 'ImageObject',
+          url: `${brandBaseUrl}${brandConfig.defaultImage}`
         }
       },
       datePublished: articleMeta.publishedTime,
       dateModified: articleMeta.modifiedTime || articleMeta.publishedTime,
       articleSection: articleMeta.section,
-      keywords: articleMeta.tags?.join(", ")
+      keywords: articleMeta.tags?.join(', ')
     })
   };
 
@@ -264,13 +219,13 @@ const SEO: React.FC<SEOProps> = ({
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
       {/* SEO Enhancement Meta Tags */}
-      <meta name="language" content={currentLanguage === 'ka' ? 'Georgian' : 'English'} />
+      <meta name="language" content={isKa ? 'Georgian' : 'English'} />
       <meta name="revisit-after" content="7 days" />
       <meta name="rating" content="General" />
       <meta name="distribution" content="Global" />
-      <meta name="copyright" content={`© 2024 ${siteName}. All rights reserved.`} />
-      <meta name="subject" content={isVifa ? "Digital Marketing Services" : "Technology Solutions and Web Development"} />
-      <meta name="topic" content={isVifa ? "Digital Marketing, Social Media, SEO" : "Technology, AI, WMS, Web Development"} />
+      <meta name="copyright" content={`© 2026 ${siteName}. All rights reserved.`} />
+      <meta name="subject" content="Premium Web Development, Digital Marketing and IT Solutions" />
+      <meta name="topic" content="Web Development, Digital Marketing, SEO, AI and IT Solutions" />
       <meta name="summary" content={metaDescription} />
       <meta name="classification" content="Business" />
       <meta name="designer" content={siteName} />
@@ -278,7 +233,7 @@ const SEO: React.FC<SEOProps> = ({
       <meta name="url" content={finalCanonicalUrl} />
       <meta name="identifier-URL" content={finalCanonicalUrl} />
       <meta name="directory" content="submission" />
-      <meta name="category" content={isVifa ? "Digital Marketing, Social Media, SEO, Business" : "Technology, AI, WMS, Web Development, Business"} />
+      <meta name="category" content="Web Development, Digital Marketing, IT Solutions, Business" />
       <meta name="coverage" content="Georgia, Worldwide" />
       <meta name="target" content="all" />
       <meta name="HandheldFriendly" content="True" />
@@ -294,8 +249,8 @@ const SEO: React.FC<SEOProps> = ({
       <meta property="og:image:height" content="630" />
       <meta property="og:url" content={finalCanonicalUrl} />
       <meta property="og:site_name" content={siteName} />
-      <meta property="og:locale" content={currentLanguage === 'ka' ? 'ka_GE' : 'en_US'} />
-      <meta property="og:locale:alternate" content={currentLanguage === 'ka' ? 'en_US' : 'ka_GE'} />
+      <meta property="og:locale" content={isKa ? 'ka_GE' : 'en_US'} />
+      <meta property="og:locale:alternate" content={isKa ? 'en_US' : 'ka_GE'} />
 
       {/* Article specific Open Graph tags */}
       {type === 'article' && articleMeta && (
@@ -358,18 +313,9 @@ const SEO: React.FC<SEOProps> = ({
       <link rel="dns-prefetch" href="//www.google-analytics.com" />
 
       {/* Favicon and Icons */}
-      {isVifa ? (
-        <>
-          <link rel="icon" type="image/png" href="/viffa.png" />
-          <link rel="apple-touch-icon" href="/viffa.png" />
-        </>
-      ) : (
-        <>
-          <link rel="icon" type="image/png" href="/invento.png" />
-          <link rel="apple-touch-icon" href="/invento.png" />
-        </>
-      )}
-      <link rel="manifest" href={isVifa ? "/site-vifa.webmanifest" : "/site.webmanifest"} />
+      <link rel="icon" type="image/png" href="/viffa.png" />
+      <link rel="apple-touch-icon" href="/viffa.png" />
+      <link rel="manifest" href="/site.webmanifest" />
 
       {/* Structured Data */}
       <script type="application/ld+json">

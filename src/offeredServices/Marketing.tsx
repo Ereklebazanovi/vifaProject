@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import { useLanguage } from "../contexts/LanguageContext";
 
-import TrueFocus from "../components/TrueFocus";
 import {
   FaVideo,
   FaCamera,
@@ -24,16 +23,21 @@ import {
   FaBullseye,
   FaBolt,
   FaCog,
-  FaCommentDots,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
 
 // Marketing Translations
 const marketingTranslations = {
   ka: {
-    "seo.marketing.title": "ციფრული მარკეტინგი - VIFA | vifadigital.ge",
-    "seo.marketing.description": "ციფრული მარკეტინგის სერვისები: ვიდეო გადაღება, ფოტოგრაფია, სოციალური მედია მართვა, კონტენტის შექმნა. სრული მარკეტინგ ხსნარი თქვენი ბიზნესისთვის.",
-    "seo.marketing.keywords": "დიჯიტალური მარკეტინგი, სოციალური მედია მართვა, ვიდეო გადაღება, ფოტოგრაფია, კონტენტის შექმნა, ბრენდინგი, მარკეტინგის სააგენტო",
+    "seo.marketing.title": "ციფრული მარკეტინგი - VIFA DIGITAL",
+    "seo.marketing.description": "VIFA Digital გთავაზობთ პრემიუმ ციფრული მარკეტინგის სერვისებს: ვიდეო/ფოტო პროდუქცია, სოციალური მედიის მართვა და სტრატეგიული კონტენტის შექმნა.",
+    "seo.marketing.keywords": "ციფრული მარკეტინგი, სოციალური მედია მართვა, ვიდეო გადაღება, ფოტოგრაფია, კონტენტის შექმნა, ბრენდინგი, მარკეტინგის სააგენტო vifa digital",
+    
+    // New Hero Text
+    "marketing.hero.overline": "ციფრული მარკეტინგი",
+    "marketing.hero.main_title": "ბრენდის სტრატეგიული ზრდა და გაყიდვები.",
+    "marketing.hero.description": "ვქმნით მონაცემებზე დაფუძნებულ მარკეტინგულ კამპანიებს, პროფესიონალურ ვიდეო კონტენტს და ვმართავთ სოციალურ მედიას თქვენი ბიზნესის სრული მასშტაბირებისთვის.",
+
     "page.title": "Digital Marketing",
     "section.strategy": "სტრატეგია",
     "section.content": "კონტენტი",
@@ -43,28 +47,28 @@ const marketingTranslations = {
     "section.whatWe": "რას გთავაზობთ",
     "section.socialPlatforms": "სოციალური მედია პლატფორმები",
     "section.socialDesc": "ყველა მთავარ პლატფორმაზე შენი ბრენდის წარმატებული წარდგენა",
-    "section.pricing": "ინდივიდუალური ფასები",
-    "section.pricingDesc": "ყველა პროექტი უნიკალურია. ჩვენი მიზანია მაქსიმალური ღირებულების მიწოდება კლიენტის ბიუჯეტისა და მოთხოვნების მიხედვით.",
-    "package.basic": "საწყისი პაკეტი",
-    "package.standard": "სტანდარტული პაკეტი",
-    "package.premium": "პრემიუმ პაკეტი",
+    "section.pricing": "პრემიუმ პაკეტები",
+    "section.pricingDesc": "ყველა პროექტი უნიკალურია. ჩვენი მიზანია მაქსიმალური ღირებულების მიწოდება კლიენტის მიზნების მიხედვით.",
+    "package.basic": "Core",
+    "package.standard": "Growth",
+    "package.premium": "Scale",
     "price.estimate": "საორიენტაციო",
     "price.note": "ფასები ცვალებადია და დამოკიდებულია მომხმარებლის მოთხოვნებსა და მიზნებზე.",
     "pricing.needs": "თქვენი მოთხოვნების მიხედვით",
     "pricing.needsDesc": "ბაზისური ბრენდინგიდან სრულ მარკეტინგ სტრატეგიამდე - ყველა პროექტს განსხვავებული მიდგომა სჭირდება.",
     "pricing.estimate": "სწრაფი შეფასება",
     "pricing.estimateDesc": "უფასო კონსულტაციის მაქსიმუმ 12 საათში მიიღებთ ზუსტ ფასს და პროექტის გეგმას.",
-    "pricing.transparent": "გამჭირვალე პროცესი",
+    "pricing.transparent": "გამჭვირვალე პროცესი",
     "pricing.transparentDesc": "ჩვენი მიზანია, ყველა ეტაპი იყოს მაქსიმალურად ღია და გასაგები. ნდობაზე დაფუძნებული თანამშრომლობა ყოველთვის მომგებიანია.",
     "cta.title": "მზად ხარ ბიზნესის ციფრული ტრანსფორმაციისთვის?",
-    "cta.button": "დაგვიკავშირდი WhatsApp-ზე",
-    "service.videoProd": "ვიდეო გადაღება",
+    "cta.button": "დაიწყე პროექტი",
+    "service.videoProd": "ვიდეო პროდუქცია",
     "service.videoDesc": "პროფესიონალური ვიდეო კონტენტის შექმნა",
     "service.video1": "4K ვიდეო ხარისხი",
     "service.video2": "დრონით გადაღება",
     "service.video3": "პოსტ-პროდუქცია",
     "service.video4": "მონტაჟი",
-    "service.photo": "ფოტო გადაღება",
+    "service.photo": "ფოტოგრაფია",
     "service.photoDesc": "სპეციალური ფოტო სესიები ბრენდებისთვის",
     "service.photo1": "სტუდიური გადაღება",
     "service.photo2": "ლოკაციური სესიები",
@@ -88,7 +92,7 @@ const marketingTranslations = {
     "service.strategy2": "კონკურენტების შესწავლა",
     "service.strategy3": "ROI გაანგარიშება",
     "service.strategy4": "KPI განსაზღვრა",
-    "service.brand": "საკომუნიკაციო მიზნები",
+    "service.brand": "ბრენდ პოზიციონირება",
     "service.brandDesc": "ბრენდის პოზიციონირება და მესიჯინგი",
     "service.brand1": "Brand Voice",
     "service.brand2": "Target Audience",
@@ -107,28 +111,34 @@ const marketingTranslations = {
     "service.logo3": "Brand Identity",
     "service.logo4": "Usage Guidelines",
     "pkg.basic1": "საკომუნიკაციო მიზნების ჩამოყალიბება",
-    "pkg.basic2": "საკომუნიკაციო მიზნების მიხედვით ვიდეო რილები",
-    "pkg.basic3": "სპეციალური ფოტო სესიები ბრენდებისთვის",
+    "pkg.basic2": "მიზნების მიხედვით ვიდეო რილები",
+    "pkg.basic3": "ფოტო სესიები ბრენდებისთვის",
     "pkg.basic4": "ბრენდის იდენტობის განვითარება",
     "pkg.basic5": "თვეში 10+ პოსტი სოციალურ მედიაში",
-    "pkg.std1": "საკომუნიკაციო მიზნების ჩამოყალიბება",
-    "pkg.std2": "კონტენტის შექმნა",
-    "pkg.std3": "ვიდეო გადაღება",
-    "pkg.std4": "ფოტო გადაღება",
-    "pkg.std5": "სოციალური მედიის მენეჯმენტი",
-    "pkg.std6": "სოციალური მედიის პოსტერების შექმნა",
-    "pkg.prem1": "საკომუნიკაციო მიზნების ჩამოყალიბება",
-    "pkg.prem2": "კონტენტის შექმნა",
-    "pkg.prem3": "ვიდეო გადაღება",
-    "pkg.prem4": "ფოტო გადაღება",
-    "pkg.prem5": "სოციალური მედიის მენეჯმენტი",
-    "pkg.prem6": "სოციალური მედიის პოსტერების შექმნა",
-    "pkg.prem7": "ლოგოს შექმნა",
+    "pkg.std1": "ყველაფერი Core პაკეტიდან",
+    "pkg.std2": "გაფართოებული კონტენტის შექმნა",
+    "pkg.std3": "პროფესიონალური ვიდეო გადაღება",
+    "pkg.std4": "სოციალური მედიის სრული მენეჯმენტი",
+    "pkg.std5": "ყოველკვირეული ანალიტიკა",
+    "pkg.std6": "სარეკლამო კამპანიების მართვა",
+    "pkg.prem1": "ყველაფერი Growth პაკეტიდან",
+    "pkg.prem2": "ყოველდღიური კონტენტ მენეჯმენტი",
+    "pkg.prem3": "დრონით და სტუდიური გადაღებები",
+    "pkg.prem4": "კომპლექსური სარეკლამო სტრატეგია",
+    "pkg.prem5": "ბრენდის სრული რებრენდინგი (საჭიროებისას)",
+    "pkg.prem6": "24/7 Community მენეჯმენტი",
+    "pkg.prem7": "პრიორიტეტული მხარდაჭერა",
   },
   en: {
-    "seo.marketing.title": "Digital Marketing - VIFA | vifadigital.ge",
-    "seo.marketing.description": "Digital marketing services: video production, photography, social media management, content creation. Complete marketing solution for your business.",
-    "seo.marketing.keywords": "digital marketing, social media management, video production, photography, content creation, branding, marketing agency",
+    "seo.marketing.title": "Digital Marketing - VIFA DIGITAL",
+    "seo.marketing.description": "VIFA Digital offers premium digital marketing services: video/photo production, social media management, and strategic content creation.",
+    "seo.marketing.keywords": "digital marketing, social media management, video production, photography, content creation, branding, marketing agency vifa digital",
+    
+    // New Hero Text
+    "marketing.hero.overline": "Digital Marketing",
+    "marketing.hero.main_title": "Strategic Brand Growth & Sales.",
+    "marketing.hero.description": "We create data-driven marketing campaigns, professional video content, and manage social media to fully scale your business operations.",
+
     "page.title": "Digital Marketing",
     "section.strategy": "Strategy",
     "section.content": "Content",
@@ -138,11 +148,11 @@ const marketingTranslations = {
     "section.whatWe": "What We Offer",
     "section.socialPlatforms": "Social Media Platforms",
     "section.socialDesc": "Successful brand representation on all major platforms",
-    "section.pricing": "Individual Pricing",
-    "section.pricingDesc": "Every project is unique. Our goal is to deliver maximum value according to your budget and requirements.",
-    "package.basic": "Basic Package",
-    "package.standard": "Standard Package",
-    "package.premium": "Premium Package",
+    "section.pricing": "Premium Packages",
+    "section.pricingDesc": "Every project is unique. Our goal is to deliver maximum value according to your business goals.",
+    "package.basic": "Core",
+    "package.standard": "Growth",
+    "package.premium": "Scale",
     "price.estimate": "Estimated",
     "price.note": "Prices vary and depend on client requirements and goals.",
     "pricing.needs": "According to Your Needs",
@@ -152,14 +162,14 @@ const marketingTranslations = {
     "pricing.transparent": "Transparent Process",
     "pricing.transparentDesc": "Our goal is to make every stage as clear and understandable as possible. Trust-based collaboration is always beneficial.",
     "cta.title": "Ready for Your Business Digital Transformation?",
-    "cta.button": "Contact us on WhatsApp",
+    "cta.button": "Start Project",
     "service.videoProd": "Video Production",
     "service.videoDesc": "Professional video content creation",
     "service.video1": "4K Video Quality",
     "service.video2": "Drone Footage",
     "service.video3": "Post-Production",
     "service.video4": "Editing",
-    "service.photo": "Photo Shooting",
+    "service.photo": "Photography",
     "service.photoDesc": "Special photo sessions for brands",
     "service.photo1": "Studio Shooting",
     "service.photo2": "Location Sessions",
@@ -183,7 +193,7 @@ const marketingTranslations = {
     "service.strategy2": "Competitor Research",
     "service.strategy3": "ROI Calculation",
     "service.strategy4": "KPI Definition",
-    "service.brand": "Communication Goals",
+    "service.brand": "Brand Positioning",
     "service.brandDesc": "Brand positioning and messaging",
     "service.brand1": "Brand Voice",
     "service.brand2": "Target Audience",
@@ -203,22 +213,22 @@ const marketingTranslations = {
     "service.logo4": "Usage Guidelines",
     "pkg.basic1": "Communication Goals Definition",
     "pkg.basic2": "Video Reels According to Goals",
-    "pkg.basic3": "Special Photo Sessions for Brands",
+    "pkg.basic3": "Photo Sessions for Brands",
     "pkg.basic4": "Brand Identity Development",
     "pkg.basic5": "10+ Social Media Posts per Month",
-    "pkg.std1": "Communication Goals Definition",
-    "pkg.std2": "Content Creation",
-    "pkg.std3": "Video Production",
-    "pkg.std4": "Photo Shooting",
-    "pkg.std5": "Social Media Management",
-    "pkg.std6": "Social Media Poster Creation",
-    "pkg.prem1": "Communication Goals Definition",
-    "pkg.prem2": "Content Creation",
-    "pkg.prem3": "Video Production",
-    "pkg.prem4": "Photo Shooting",
-    "pkg.prem5": "Social Media Management",
-    "pkg.prem6": "Social Media Poster Creation",
-    "pkg.prem7": "Logo Design",
+    "pkg.std1": "Everything in Core Package",
+    "pkg.std2": "Advanced Content Creation",
+    "pkg.std3": "Professional Video Production",
+    "pkg.std4": "Full Social Media Management",
+    "pkg.std5": "Weekly Analytics",
+    "pkg.std6": "Ad Campaign Management",
+    "pkg.prem1": "Everything in Growth Package",
+    "pkg.prem2": "Daily Content Management",
+    "pkg.prem3": "Drone & Studio Shoots",
+    "pkg.prem4": "Complex Advertising Strategy",
+    "pkg.prem5": "Full Brand Identity Refresh",
+    "pkg.prem6": "24/7 Community Management",
+    "pkg.prem7": "Priority Support",
   },
 };
 
@@ -227,7 +237,7 @@ const Marketing: React.FC = () => {
   const { currentLanguage } = useLanguage();
   const [activeService, setActiveService] = useState<number>(0);
 
-  // WhatsApp URL for marketing consultation
+  // WhatsApp URL
   const whatsappUrl = "https://wa.me/995577175132?text=გამარჯობა,%20დავინტერესდი%20ციფრული%20მარკეტინგის%20სერვისით.%20მსურს%20უფასო%20კონსულტაცია.";
 
   const t = (key: string): string => {
@@ -235,10 +245,17 @@ const Marketing: React.FC = () => {
     return translations[key] || key;
   };
 
-  // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Process Steps Data (For Bento Box)
+  const processSteps = [
+    { num: "01", key: "section.strategy", icon: FaChartLine },
+    { num: "02", key: "section.content", icon: FaVideo },
+    { num: "03", key: "section.distribution", icon: FaShare },
+    { num: "04", key: "section.results", icon: FaBullseye },
+  ];
 
   // Main advertising services
   const getServices = () => [
@@ -247,104 +264,56 @@ const Marketing: React.FC = () => {
       icon: <FaVideo />,
       title: t("service.videoProd"),
       description: t("service.videoDesc"),
-      color: "red",
-      features: [
-        t("service.video1"),
-        t("service.video2"),
-        t("service.video3"),
-        t("service.video4"),
-      ],
+      features: [t("service.video1"), t("service.video2"), t("service.video3"), t("service.video4")],
     },
     {
       id: "photo-shooting",
       icon: <FaCamera />,
       title: t("service.photo"),
       description: t("service.photoDesc"),
-      color: "blue",
-      features: [
-        t("service.photo1"),
-        t("service.photo2"),
-        t("service.photo3"),
-        t("service.photo4"),
-      ],
+      features: [t("service.photo1"), t("service.photo2"), t("service.photo3"), t("service.photo4")],
     },
     {
       id: "social-media",
       icon: <FaShare />,
       title: t("service.social"),
       description: t("service.socialDesc"),
-      color: "green",
-      features: [
-        t("service.social1"),
-        t("service.social2"),
-        t("service.social3"),
-        t("service.social4"),
-      ],
+      features: [t("service.social1"), t("service.social2"), t("service.social3"), t("service.social4")],
     },
     {
       id: "content-creation",
       icon: <FaEdit />,
       title: t("service.content"),
       description: t("service.contentDesc"),
-      color: "purple",
-      features: [
-        t("service.content1"),
-        t("service.content2"),
-        t("service.content3"),
-        t("service.content4"),
-      ],
+      features: [t("service.content1"), t("service.content2"), t("service.content3"), t("service.content4")],
     },
     {
       id: "marketing-strategy",
       icon: <FaChartLine />,
       title: t("service.strategy"),
       description: t("service.strategyDesc"),
-      color: "orange",
-      features: [
-        t("service.strategy1"),
-        t("service.strategy2"),
-        t("service.strategy3"),
-        t("service.strategy4"),
-      ],
+      features: [t("service.strategy1"), t("service.strategy2"), t("service.strategy3"), t("service.strategy4")],
     },
     {
       id: "brand-positioning",
       icon: <FaBullseye />,
       title: t("service.brand"),
       description: t("service.brandDesc"),
-      color: "pink",
-      features: [
-        t("service.brand1"),
-        t("service.brand2"),
-        t("service.brand3"),
-        t("service.brand4"),
-      ],
+      features: [t("service.brand1"), t("service.brand2"), t("service.brand3"), t("service.brand4")],
     },
     {
       id: "graphic-design",
       icon: <FaPaintBrush />,
       title: t("service.design"),
       description: t("service.designDesc"),
-      color: "indigo",
-      features: [
-        t("service.design1"),
-        t("service.design2"),
-        t("service.design3"),
-        t("service.design4"),
-      ],
+      features: [t("service.design1"), t("service.design2"), t("service.design3"), t("service.design4")],
     },
     {
       id: "logo-design",
       icon: <FaStar />,
       title: t("service.logo"),
       description: t("service.logoDesc"),
-      color: "yellow",
-      features: [
-        t("service.logo1"),
-        t("service.logo2"),
-        t("service.logo3"),
-        t("service.logo4"),
-      ],
+      features: [t("service.logo1"), t("service.logo2"), t("service.logo3"), t("service.logo4")],
     },
   ];
 
@@ -357,45 +326,21 @@ const Marketing: React.FC = () => {
       name: t("package.basic"),
       icon: <FaVideo />,
       price: "1000₾",
-      color: "red",
-      features: [
-        t("pkg.basic1"),
-        t("pkg.basic2"),
-        t("pkg.basic3"),
-        t("pkg.basic4"),
-        t("pkg.basic5"),
-      ],
+      features: [t("pkg.basic1"), t("pkg.basic2"), t("pkg.basic3"), t("pkg.basic4"), t("pkg.basic5")],
     },
     {
       id: "standard",
       name: t("package.standard"),
       icon: <FaShare />,
       price: "1500₾",
-      color: "green",
-      features: [
-        t("pkg.std1"),
-        t("pkg.std2"),
-        t("pkg.std3"),
-        t("pkg.std4"),
-        t("pkg.std5"),
-        t("pkg.std6"),
-      ],
+      features: [t("pkg.std1"), t("pkg.std2"), t("pkg.std3"), t("pkg.std4"), t("pkg.std5"), t("pkg.std6")],
     },
     {
       id: "premium",
       name: t("package.premium"),
       icon: <FaStar />,
       price: "2000₾",
-      color: "purple",
-      features: [
-        t("pkg.prem1"),
-        t("pkg.prem2"),
-        t("pkg.prem3"),
-        t("pkg.prem4"),
-        t("pkg.prem5"),
-        t("pkg.prem6"),
-        t("pkg.prem7"),
-      ],
+      features: [t("pkg.prem1"), t("pkg.prem2"), t("pkg.prem3"), t("pkg.prem4"), t("pkg.prem5"), t("pkg.prem6"), t("pkg.prem7")],
     },
   ];
 
@@ -403,441 +348,214 @@ const Marketing: React.FC = () => {
 
   // Social media platforms
   const platforms = [
-    { icon: <FaInstagram />, name: "Instagram", color: "pink" },
-    { icon: <FaFacebook />, name: "Facebook", color: "blue" },
-    { icon: <FaYoutube />, name: "YouTube", color: "red" },
-    { icon: <FaTiktok />, name: "TikTok", color: "black" },
+    { icon: <FaInstagram />, name: "Instagram" },
+    { icon: <FaFacebook />, name: "Facebook" },
+    { icon: <FaYoutube />, name: "YouTube" },
+    { icon: <FaTiktok />, name: "TikTok" },
   ];
 
-  const getColorClass = (color: string) => {
-    const colors = {
-      red: "border-red-400 bg-red-500/10",
-      blue: "border-blue-400 bg-blue-500/10",
-      green: "border-green-400 bg-green-500/10",
-      purple: "border-purple-400 bg-purple-500/10",
-      orange: "border-orange-400 bg-orange-500/10",
-      pink: "border-pink-400 bg-pink-500/10",
-      indigo: "border-indigo-400 bg-indigo-500/10",
-      yellow: "border-yellow-400 bg-yellow-500/10",
-      black: "border-gray-400 bg-gray-500/10",
-    };
-    return colors[color as keyof typeof colors] || colors.blue;
-  };
-
-  const getTextColorClass = (color: string) => {
-    const colors = {
-      red: "text-red-400",
-      blue: "text-blue-400",
-      green: "text-green-400",
-      purple: "text-purple-400",
-      orange: "text-orange-400",
-      pink: "text-pink-400",
-      indigo: "text-indigo-400",
-      yellow: "text-yellow-400",
-      black: "text-gray-400",
-    };
-    return colors[color as keyof typeof colors] || colors.blue;
-  };
-
   return (
-    <>
+    <div className={`bg-[#060608] min-h-screen ${getTransitionClasses()}`}>
       <SEO
         title={t("seo.marketing.title")}
         description={t("seo.marketing.description")}
         keywords={t("seo.marketing.keywords")}
-        url="https://vifadigital.ge/services/digital-advertising"
+        url="https://vifadigital.ge/services/marketing"
       />
 
-      {/* Professional Marketing Background - Ultra Dark */}
-      <div className="fixed inset-0 z-0">
-        {/* Ultra dark base */}
-        <div className="absolute inset-0 bg-black"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-black to-gray-950"></div>
+      {/* Hero Section with Cinematic Background Image */}
+      <section className="relative min-h-[75vh] w-full flex items-center justify-start overflow-hidden pt-32 lg:pt-0">
+        {/* Background Image (Placeholder) with Ken Burns Effect */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-image-scale opacity-60"
+            style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop")' }}
+          />
+        </div>
 
-        {/* Very subtle marketing elements */}
-        <div className="absolute inset-0 marketing-pattern opacity-4"></div>
+        {/* Heavy Gradient Overlays for readability */}
+        <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#060608] via-[#060608]/90 to-transparent" />
+        <div className="absolute inset-0 z-0 bg-black/40" />
+        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#060608] to-transparent z-0" />
 
-        {/* Minimal animated overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-red-950/15 via-transparent to-orange-950/15 animate-marketing-glow"></div>
+        {/* Hero Content */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 lg:pb-0">
+          <div className="max-w-2xl">
+            <span className="text-sm uppercase tracking-[0.2em] text-gray-400 font-semibold mb-4 block">
+              {t("marketing.hero.overline")}
+            </span>
 
-        {/* Darker depth layers */}
-        <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-gray-950/25 to-transparent"></div>
-        <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-gray-950/25 to-transparent"></div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-snug lg:leading-[1.15] mb-6">
+              {t("marketing.hero.main_title")}
+            </h1>
 
-        {/* Very subtle branding accent */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-red-950/5 via-transparent to-amber-950/5"></div>
+            <p className="text-base sm:text-lg text-gray-300 leading-relaxed mb-10 max-w-xl">
+              {t("marketing.hero.description")}
+            </p>
 
-        {/* Reduced texture overlay */}
-        <div className="absolute inset-0 bg-marketing-texture opacity-2"></div>
-      </div>
-
-      <style>{`
-        /* Professional marketing pattern */
-        .marketing-pattern {
-          background-image:
-            radial-gradient(circle at 25% 25%, rgba(239, 68, 68, 0.05) 0%, transparent 50%),
-            radial-gradient(circle at 75% 75%, rgba(245, 158, 11, 0.05) 0%, transparent 50%),
-            linear-gradient(45deg, rgba(239, 68, 68, 0.02) 25%, transparent 25%),
-            linear-gradient(-45deg, rgba(245, 158, 11, 0.02) 25%, transparent 25%);
-          background-size: 200px 200px, 200px 200px, 60px 60px, 60px 60px;
-          animation: marketing-drift 25s linear infinite;
-        }
-
-        @keyframes marketing-drift {
-          0% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
-          100% { background-position: 200px 200px, -200px -200px, 60px 60px, -60px -60px; }
-        }
-
-        /* Marketing glow animation - darker */
-        @keyframes marketing-glow {
-          0%, 100% { opacity: 0.1; transform: translateX(-50px); }
-          50% { opacity: 0.2; transform: translateX(50px); }
-        }
-
-        .animate-marketing-glow {
-          animation: marketing-glow 8s ease-in-out infinite;
-        }
-
-        /* Sophisticated marketing texture */
-        .bg-marketing-texture {
-          background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ef4444' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3Ccircle cx='10' cy='10' r='1'/%3E%3Ccircle cx='50' cy='50' r='1'/%3E%3Ccircle cx='10' cy='50' r='1'/%3E%3Ccircle cx='50' cy='10' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-
-        /* Performance optimizations */
-        @media (max-width: 768px), (prefers-reduced-motion: reduce) {
-          .marketing-pattern,
-          .animate-marketing-glow {
-            animation: none;
-          }
-          .bg-marketing-texture {
-            display: none;
-          }
-        }
-
-        /* Professional accent elements */
-        .marketing-accent {
-          background: linear-gradient(135deg,
-            rgba(239, 68, 68, 0.1) 0%,
-            rgba(245, 158, 11, 0.1) 100%);
-        }
-
-        /* Subtle brand consistent elements */
-        .brand-consistent {
-          background: radial-gradient(ellipse at center,
-            rgba(239, 68, 68, 0.05) 0%,
-            rgba(245, 158, 11, 0.03) 50%,
-            transparent 100%);
-        }
-      `}</style>
-
-      <div className="relative z-10 min-h-screen mt-17">
-        <div
-          className={`container mx-auto px-4 sm:px-6 lg:px-8 py-10 ${getTransitionClasses()}`}
-        >
-          {/* Hero Section */}
-          <div className="max-w-6xl mx-auto mb-32 mt-24">
-            <div className="text-center mb-16">
-              <div className="mb-8 flex justify-center">
-                <div className="w-64 sm:w-72 md:w-80 lg:w-96">
-                  <TrueFocus
-                    sentence={t("page.title")}
-                    blurAmount={4}
-                    borderColor="#ef4444"
-                    glowColor="rgba(239, 68, 68, 0.6)"
-                    animationDuration={0.8}
-                    pauseBetweenAnimations={2}
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Digital Marketing Process Visualization */}
-            <div className="relative">
-              <div className="flex justify-center items-center gap-3 sm:gap-6 lg:gap-8 flex-wrap">
-                {/* Step 1: Strategy */}
-                <div className="group cursor-pointer">
-                  <div className="w-32 h-32 border-2 border-blue-400/30 rounded-2xl flex items-center justify-center bg-blue-500/5 group-hover:border-blue-400 transition-all duration-300 group-hover:scale-110">
-                    <div className="text-center">
-                      <FaChartLine className="text-blue-400 text-3xl mb-2 mx-auto" />
-                      <div className="text-blue-400 text-xs font-medium">
-                        {t("section.strategy")}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <FaArrowRight className="text-slate-500 text-xl hidden md:block" />
-
-                {/* Step 2: Content */}
-                <div className="group cursor-pointer">
-                  <div className="w-32 h-32 border-2 border-red-400/30 rounded-2xl flex items-center justify-center bg-red-500/5 group-hover:border-red-400 transition-all duration-300 group-hover:scale-110">
-                    <div className="text-center">
-                      <FaVideo className="text-red-400 text-3xl mb-2 mx-auto" />
-                      <div className="text-red-400 text-xs font-medium">
-                        {t("section.content")}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <FaArrowRight className="text-slate-500 text-xl hidden md:block" />
-
-                {/* Step 3: Distribution */}
-                <div className="group cursor-pointer">
-                  <div className="w-32 h-32 border-2 border-green-400/30 rounded-2xl flex items-center justify-center bg-green-500/5 group-hover:border-green-400 transition-all duration-300 group-hover:scale-110">
-                    <div className="text-center">
-                      <FaShare className="text-green-400 text-3xl mb-2 mx-auto" />
-                      <div className="text-green-400 text-xs font-medium">
-                        {t("section.distribution")}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <FaArrowRight className="text-slate-500 text-xl hidden md:block" />
-
-                {/* Step 4: Results */}
-                <div className="group cursor-pointer">
-                  <div className="w-32 h-32 border-2 border-purple-400/30 rounded-2xl flex items-center justify-center bg-purple-500/5 group-hover:border-purple-400 transition-all duration-300 group-hover:scale-110">
-                    <div className="text-center">
-                      <FaBullseye className="text-purple-400 text-3xl mb-2 mx-auto" />
-                      <div className="text-purple-400 text-xs font-medium">
-                        {t("section.results")}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="text-center mt-8">
-                <p className="text-slate-400 text-sm max-w-2xl mx-auto">
-                  {t("section.description")}
-                </p>
-              </div>
-            </div>
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 bg-white text-black px-8 py-3.5 rounded-full text-sm font-bold tracking-wide hover:bg-gray-200 transition-colors duration-300"
+            >
+              {t("cta.button")}
+              <FaArrowRight className="text-xs" />
+            </a>
           </div>
+        </div>
 
-          {/* Marketing Packages */}
-          <div className="grid md:grid-cols-3 gap-8">
-            {packages.map((pkg) => {
-              const colorMap: Record<string, { bg: string; border: string; text: string; icon: string }> = {
-                red: {
-                  bg: "from-red-500/10 to-orange-500/10",
-                  border: "border-red-500/20",
-                  text: "text-red-400",
-                  icon: "text-red-400",
-                },
-                green: {
-                  bg: "from-green-500/10 to-emerald-500/10",
-                  border: "border-green-500/20",
-                  text: "text-green-400",
-                  icon: "text-green-400",
-                },
-                purple: {
-                  bg: "from-purple-500/10 to-pink-500/10",
-                  border: "border-purple-500/20",
-                  text: "text-purple-400",
-                  icon: "text-purple-400",
-                },
-              };
+        <style>{`
+          @keyframes image-scale {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+          }
+          .animate-image-scale {
+            animation: image-scale 30s ease-in-out infinite alternate;
+          }
+        `}</style>
+      </section>
 
-              const colors = colorMap[pkg.color] || colorMap.red;
-
+      {/* Main Container for rest of content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-32">
+        
+        {/* ── Process Bento Box ── */}
+        <section className="mb-32">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/[0.08] border border-white/[0.08] rounded-2xl overflow-hidden shadow-2xl">
+            {processSteps.map((step) => {
+              const Icon = step.icon;
               return (
                 <div
-                  key={pkg.id}
-                  className={`bg-gradient-to-br ${colors.bg} p-6 rounded-xl ${colors.border} border flex flex-col h-full`}
+                  key={step.num}
+                  className="relative p-5 sm:p-6 bg-[#060608] hover:bg-white/[0.02] transition-colors duration-500 group flex flex-col justify-between min-h-[120px] sm:min-h-[140px]"
                 >
-                  <div className={`text-4xl mb-4 ${colors.icon}`}>{pkg.icon}</div>
-                  <h4 className="text-xl font-medium text-white mb-3">{pkg.name}</h4>
-                  <div className="text-slate-300 text-sm mb-4 leading-relaxed space-y-2 flex-grow">
-                    {pkg.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-center gap-2">
-                        <FaCheckCircle className={`${colors.icon} text-xs`} />
-                        <span>{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-auto">
-                    <div className={`text-2xl font-bold ${colors.text} mt-6`}>
-                      {pkg.price}
-                      <span className="text-sm text-slate-400"> {t("price.estimate")}</span>
+                  <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white/[0.02] border border-white/[0.05] flex items-center justify-center group-hover:scale-110 group-hover:bg-white/[0.05] transition-all duration-300">
+                      <Icon className="text-base sm:text-lg text-gray-500 transition-colors duration-300 group-hover:text-white" />
                     </div>
-                    <div className="text-xs text-slate-500 mt-2">{t("price.note")}</div>
+                    <span className="text-[10px] sm:text-xs font-mono text-gray-600 group-hover:text-gray-400 transition-colors">
+                      {step.num}
+                    </span>
                   </div>
+                  <span className="block text-sm sm:text-base font-medium text-gray-300 group-hover:text-white transition-colors">
+                    {t(step.key)}
+                  </span>
                 </div>
               );
             })}
           </div>
-          {/* Services Grid */}
-          <div className="max-w-6xl mx-auto mb-32 mt-18">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-light text-white mb-4">
-                {t("section.whatWe")}
-              </h2>
-            </div>
+          <div className="mt-6 flex items-center justify-center lg:justify-start gap-3">
+            <div className="w-1.5 h-1.5 rounded-full bg-gray-500 animate-pulse" />
+            <p className="text-gray-500 text-xs sm:text-sm tracking-wide">
+              {t("section.description")}
+            </p>
+          </div>
+        </section>
 
-            {/* Services Grid - Fixed height for all cards */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-              {services.map((service, index) => (
-                <motion.div
-                  key={service.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className={`group transition-all duration-300 hover:scale-105`}
-                  onClick={() => setActiveService(index)}
-                >
-                  <div
-                    className={`p-6 rounded-xl border-2 h-44 flex flex-col justify-between bg-black/60 backdrop-blur-lg ${getColorClass(
-                      service.color
-                    ).replace("bg-", "border-")}
-                    ${
-                      activeService === index
-                        ? "border-opacity-100 scale-105"
-                        : "border-opacity-40"
-                    }
-                    transition-all duration-300 group-hover:border-opacity-100`}
-                  >
-                    <div>
-                      <div
-                        className={`text-3xl mb-4 ${getTextColorClass(
-                          service.color
-                        )}`}
-                      >
-                        {service.icon}
-                      </div>
-                      <h3 className="text-white font-medium text-lg mb-2 leading-tight">
-                        {service.title}
-                      </h3>
-                    </div>
-                    <p className="text-slate-300 text-sm leading-relaxed">
-                      {service.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+        {/* ── Services Grid ── */}
+        <section className="mb-32">
+          <div className="mb-12">
+            <h2 className="text-3xl font-light text-white mb-4">
+              {t("section.whatWe")}
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.map((service, index) => (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className={`group p-6 rounded-2xl bg-[#0A0A0C] border ${
+                  activeService === index ? "border-white/20" : "border-white/[0.05]"
+                } hover:border-white/20 transition-all duration-300 cursor-pointer flex flex-col h-full`}
+                onClick={() => setActiveService(index)}
+              >
+                <div className="text-2xl text-gray-400 group-hover:text-white mb-4 transition-colors">
+                  {service.icon}
+                </div>
+                <h3 className="text-white font-medium text-lg mb-2">
+                  {service.title}
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-grow">
+                  {service.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── Marketing Packages (SaaS Style) ── */}
+        <section className="mb-32">
+          <div className="mb-12 max-w-2xl">
+            <h3 className="text-3xl font-light text-white mb-4">
+              {t("section.pricing")}
+            </h3>
+            <p className="text-gray-400">
+              {t("section.pricingDesc")}
+            </p>
           </div>
 
-          {/* Social Media Platforms */}
-          <div className="max-w-6xl mx-auto mb-32">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-light text-white mb-4">
-                {t("section.socialPlatforms")}
-              </h2>
-              <p className="text-slate-400">
-                {t("section.socialDesc")}
-              </p>
-            </div>
-
-            <div className="flex justify-center items-center gap-3 sm:gap-6 lg:gap-8 flex-wrap">
-              {platforms.map((platform, index) => (
-                <motion.div
-                  key={platform.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className={`group cursor-pointer p-6 rounded-xl border-2 bg-black/60 backdrop-blur-lg ${getColorClass(
-                    platform.color
-                  ).replace("bg-", "border-")}
-                  border-opacity-40 hover:border-opacity-100 transition-all duration-300 hover:scale-110`}
-                >
-                  <div className="text-center">
-                    <div
-                      className={`text-4xl mb-3 ${getTextColorClass(
-                        platform.color
-                      )} group-hover:scale-110 transition-transform duration-300`}
-                    >
-                      {platform.icon}
+          <div className="grid md:grid-cols-3 gap-6">
+            {packages.map((pkg) => (
+              <div
+                key={pkg.id}
+                className="bg-[#0A0A0C] p-8 rounded-2xl border border-white/[0.08] hover:border-white/20 transition-all duration-300 flex flex-col h-full group"
+              >
+                <div className="text-2xl text-gray-500 group-hover:text-white mb-6 transition-colors">
+                  {pkg.icon}
+                </div>
+                <h4 className="text-xl font-medium text-white mb-2">{pkg.name}</h4>
+                <div className="text-3xl font-bold text-white mb-1 mt-4">
+                  {pkg.price}
+                </div>
+                <div className="text-xs text-gray-500 mb-8">{t("price.note")}</div>
+                
+                <div className="space-y-3 mb-8 flex-grow">
+                  {pkg.features.map((feature, idx) => (
+                    <div key={idx} className="flex items-start gap-3">
+                      <FaCheckCircle className="text-gray-600 group-hover:text-white text-xs mt-1 transition-colors" />
+                      <span className="text-gray-400 text-sm">{feature}</span>
                     </div>
-                    <div className="text-white font-medium">
-                      {platform.name}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Marketing Packages Section */}
-          <div className="mb-20">
-            <div className="text-center mb-12">
-              <h3 className="text-3xl font-light text-white mb-4">
-                {t("section.pricing")}
-              </h3>
-              <p className="text-lg text-slate-300 max-w-3xl mx-auto">
-                {t("section.pricingDesc")}
-              </p>
-            </div>
-
-            {/* Why Individual Pricing */}
-            <div className="bg-gradient-to-r from-slate-800/50 to-slate-700/50 rounded-2xl p-8 border border-slate-600/30 mb-12">
-              <div className="grid md:grid-cols-3 gap-8 text-center">
-                <div>
-                  <div className="text-4xl mb-4 text-blue-400">
-                    <FaBullseye />
-                  </div>
-                  <h4 className="text-xl font-medium text-white mb-3">
-                    {t("pricing.needs")}
-                  </h4>
-                  <p className="text-slate-300 text-sm leading-relaxed">
-                    {t("pricing.needsDesc")}
-                  </p>
+                  ))}
                 </div>
-                <div>
-                  <div className="text-4xl mb-4 text-green-400">
-                    <FaBolt />
-                  </div>
-                  <h4 className="text-xl font-medium text-white mb-3">
-                    {t("pricing.estimate")}
-                  </h4>
-                  <p className="text-slate-300 text-sm leading-relaxed">
-                    {t("pricing.estimateDesc")}
-                  </p>
-                </div>
-                <div>
-                  <div className="text-4xl mb-4 text-purple-400">
-                    <FaCog />
-                  </div>
-                  <h4 className="text-xl font-medium text-white mb-3">
-                    {t("pricing.transparent")}
-                  </h4>
-                  <p className="text-slate-300 text-sm leading-relaxed">
-                    {t("pricing.transparentDesc")}
-                  </p>
-                </div>
-              </div>
-            </div>
 
-            <div className="text-center mt-12">
-            
-            </div>
-          </div>
-
-          {/* CTA Section */}
-          <div className="text-center">
-            <div className="max-w-3xl mx-auto">
-              <h3 className="text-3xl font-light mb-6">
-                {t("cta.title")}
-              </h3>
-
-              <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-12">
                 <a
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-blue-500 text-white px-6 sm:px-8 lg:px-10 py-4 text-lg font-medium hover:from-green-600 hover:to-blue-600 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105"
+                  className="w-full text-center py-3 px-4 rounded-xl border border-white/10 text-white text-sm font-medium hover:bg-white hover:text-black transition-all duration-300 mt-auto"
                 >
-                  <FaCommentDots />
-                  {t("cta.button")}
+                  შეუკვეთე პაკეტი
                 </a>
               </div>
-            </div>
+            ))}
           </div>
-        </div>
+        </section>
+
+        {/* ── Social Platforms Minimal ── */}
+        <section className="mb-32">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl font-light text-white mb-2">
+              {t("section.socialPlatforms")}
+            </h2>
+          </div>
+          <div className="flex justify-center items-center gap-4 flex-wrap">
+            {platforms.map((platform) => (
+              <div
+                key={platform.name}
+                className="px-6 py-4 rounded-full border border-white/[0.05] bg-white/[0.02] flex items-center gap-3 hover:bg-white/[0.05] hover:border-white/20 transition-all cursor-pointer"
+              >
+                <span className="text-gray-400">{platform.icon}</span>
+                <span className="text-gray-300 text-sm font-medium">{platform.name}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
       </div>
-    </>
+    </div>
   );
 };
 

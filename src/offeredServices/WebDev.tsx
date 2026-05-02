@@ -37,7 +37,7 @@ import { useLanguage } from "../contexts/LanguageContext";
 
 const webDevTranslations = {
   ka: {
-    "seo.webdev.title": "Invento Web - ვებ განვითარება | Invento Technologies",
+    "seo.webdev.title": "ვებ განვითარება | Web Development Services",
     "seo.webdev.description":
       "პროფესიონალური ვებ განვითარების სერვისები React, Node.js, მობილურზე მორგებული დიზაინი და თანამედროვე ვებ აპლიკაციები.",
 
@@ -59,6 +59,11 @@ const webDevTranslations = {
     "webdev.process.launch": "გაშვება",
     "webdev.process.description":
       "სტრატეგიული დაგეგმვა → UI/UX დიზაინი → ტექნიკური განხორციელება → ტესტირება და გაშვება",
+
+// ქართულ ნაწილში (ka: { ... }) დაამატე:
+"webdev.hero.overline": "ვებ დეველოპმენტი",
+"webdev.hero.main_title": "ციფრული ფუნდამენტი თქვენი ბიზნესისთვის.",
+"webdev.hero.description": "ვქმნით პრემიუმ კლასის ვებგვერდებს და E-commerce პლატფორმებს, რომლებიც ზრდის თქვენს გაყიდვებს.",
 
     "webdev.services.title": "ჩვენი ძირითადი სერვისები",
     "webdev.service.website.title": "ვებსაიტის შექმნა",
@@ -110,7 +115,7 @@ const webDevTranslations = {
     "webdev.pricing.corporate.title": "პრემიუმ ვებსაიტი",
     "webdev.pricing.corporate.description":
       "სრულფასოვანი ვებგვერდი CMS, SEO ოპტიმიზაცია და ადმინისტრაციული პანელით. კომპანიების ონლაინ ხილვადობის ზრდისთვის.",
-    "webdev.pricing.corporate.price": "800₾-დან",
+    "webdev.pricing.corporate.price": "₾ 700 - 1000",
     "webdev.pricing.corporate.timeline": "7-14 დღე",
     "webdev.pricing.corporate.feature1": "სრულფასოვანი მართვის სისტემა (CMS)",
     "webdev.pricing.corporate.feature2": "ადმინ პანელი / მართვის პანელი",
@@ -131,7 +136,7 @@ const webDevTranslations = {
 
     "webdev.pricing.ecommerce.title": "ონლაინ მაღაზია",
     "webdev.pricing.ecommerce.description":
-      "სრული ონლაინ მაღაზია — ქართული ბანკებით გადახდა, პროდუქტების მართვა და შეკვეთების კონტროლი.",
+      "სრული ონლაინ მაღაზია - ქართული ბანკებით გადახდა, პროდუქტების მართვა და შეკვეთების კონტროლი.",
     "webdev.pricing.ecommerce.price": "1400₾-დან",
     "webdev.pricing.ecommerce.timeline": "14-21 დღე",
     "webdev.pricing.ecommerce.feature1": "ონლაინ მაღაზია + Invento WMS სისტემა",
@@ -177,7 +182,7 @@ const webDevTranslations = {
     "webdev.cta.button": "დაგვიკავშირდი WhatsApp-ზე",
     "webdev.pricing.perProject": "პროექტზე",
 
-    "webdev.whyus.title": "რატომ Invento Web?",
+    "webdev.whyus.title": "რატომ Vifa?",
     "webdev.whyus.subtitle": "ჩვენ არ ვაწყობთ უბრალოდ საიტებს - ვქმნით ციფრულ ბიზნეს სისტემებს",
     "webdev.whyus.featured": "★ მთავარი უპირატესობა",
     "webdev.whyus.learnmore": "გაიგე მეტი Invento WMS-ის შესახებ",
@@ -201,12 +206,12 @@ const webDevTranslations = {
     "webdev.whatsapp.consult": "კონსულტაცია WhatsApp-ზე",
   },
   en: {
-    "seo.webdev.title": "Invento Web - Web Development Services | Invento Technologies",
+    "seo.webdev.title": "Vifa Web - Web Development Services | Vifa Technologies",
     "seo.webdev.description":
       "Professional web development services including React, Node.js, mobile responsive design, and modern web applications.",
 
     "webdev.hero.label": "Web Development",
-    "webdev.hero.title": "INVENTO WEB",
+    "webdev.hero.title": "VIFA WEB",
     "webdev.hero.subtitle": "We build digital products that work.",
     "webdev.stats.individual": "Individual",
     "webdev.stats.individualDesc": "Personal Approach",
@@ -216,6 +221,10 @@ const webDevTranslations = {
     "webdev.stats.freshDesc": "Modern Technologies",
     "webdev.stats.flexible": "Flexible",
     "webdev.stats.flexibleDesc": "Flexible Timeline",
+
+"webdev.hero.overline": "Web Development",
+"webdev.hero.main_title": "The Digital Foundation for Your Business.",
+"webdev.hero.description": "We build premium websites and E-commerce platforms that drive your sales and growth.",
 
     "webdev.process.planning": "Planning",
     "webdev.process.design": "Design",
@@ -295,7 +304,7 @@ const webDevTranslations = {
 
     "webdev.pricing.ecommerce.title": "Online Store",
     "webdev.pricing.ecommerce.description":
-      "Complete online store — Georgian bank payments, product management, and order tracking.",
+      "Complete online store - Georgian bank payments, product management, and order tracking.",
     "webdev.pricing.ecommerce.price": "From 1999₾",
     "webdev.pricing.ecommerce.timeline": "14-21 days",
     "webdev.pricing.ecommerce.feature1": "Online Store + Invento System",
@@ -341,27 +350,27 @@ const webDevTranslations = {
     "webdev.cta.button": "Contact us on WhatsApp",
     "webdev.pricing.perProject": "Per Project",
 
-    "webdev.whyus.title": "Why Invento Web?",
+    "webdev.whyus.title": "Why Vifa Web?",
     "webdev.whyus.subtitle": "We don't just build websites - we create digital business systems",
     "webdev.whyus.featured": "★ Key Advantage",
-    "webdev.whyus.learnmore": "Learn more about Invento WMS",
+    "webdev.whyus.learnmore": "Learn more about Vifa WMS",
     "webdev.whyus.card1.title": "Modern Stack",
     "webdev.whyus.card1.desc": "React, TypeScript, Firebase - technologies powering the world's most successful SaaS products.",
-    "webdev.whyus.card2.title": "Invento WMS System",
-    "webdev.whyus.card2.desc": "Your online store comes with Invento WMS - a professional inventory and sales management system. Not WordPress, but a SaaS platform tailored for the Georgian market.",
+    "webdev.whyus.card2.title": "Vifa WMS System",
+    "webdev.whyus.card2.desc": "Your online store comes with Vifa WMS - a professional inventory and sales management system. Not WordPress, but a SaaS platform tailored for the Georgian market.",
     "webdev.whyus.card3.title": "Full Support",
     "webdev.whyus.card3.desc": "We stay with you after launch - technical support, updates, team training.",
 
     "webdev.invento.strip_subtitle": "SYSTEM ARCHITECTURE",
     "webdev.invento.strip_title_prefix": "E-commerce +",
-    "webdev.invento.strip_title_suffix": "Invento OS",
+    "webdev.invento.strip_title_suffix": "Vifa OS",
     "webdev.invento.strip_desc": "Our online stores run on a powerful SaaS engine, not Wordpress. You get a full operating system.",
     "webdev.invento.strip_label": "STANDARD BUNDLE",
     "webdev.invento.strip_value_label": "Standalone Value",
     "webdev.invento.strip_status": "INCLUDED",
-    "webdev.invento.strip_core": "Invento™ Core",
+    "webdev.invento.strip_core": "Vifa™ Core",
     "webdev.invento.strip_btn": "View System",
-    "webdev.pricing.badge": "INVENTO WMS INCLUDED",
+    "webdev.pricing.badge": "VIFA WMS INCLUDED",
     "webdev.whatsapp.consult": "Consult on WhatsApp",
   },
 };
@@ -576,33 +585,33 @@ const WebDev: React.FC = () => {
           <div className="absolute bottom-0 inset-x-0 h-56 bg-linear-to-t from-[#060608] to-transparent" />
         </div>
 
-        {/* Hero content */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 md:pt-20 lg:pt-0 pb-16 md:pb-0">
-          <div className="max-w-xl">
-            <span className="text-sm uppercase tracking-widest text-gray-400 mb-4 block">
-              ვებ დეველოპმენტი
-            </span>
+      {/* Hero content */}
+<div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 md:pt-20 lg:pt-0 pb-16 md:pb-0">
+  <div className="max-w-xl">
+    <span className="text-sm uppercase tracking-widest text-gray-400 mb-4 block">
+      {t("webdev.hero.overline")}
+    </span>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.2] mb-6 max-w-2xl">
-              ციფრული ფუნდამენტი თქვენი ბიზნესისთვის.
-            </h1>
+    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.2] mb-6 max-w-2xl">
+      {t("webdev.hero.main_title")}
+    </h1>
 
-            <p className="text-lg text-gray-300 leading-relaxed mb-8 max-w-xl">
-              ვქმნით პრემიუმ კლასის ვებგვერდებს და E-commerce პლატფორმებს, რომლებიც ზრდის თქვენს გაყიდვებს.
-            </p>
+    <p className="text-lg text-gray-300 leading-relaxed mb-8 max-w-xl">
+      {t("webdev.hero.description")}
+    </p>
 
-            {/* Primary CTA */}
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 bg-white text-black px-8 py-3.5 rounded-full text-sm font-bold tracking-wide hover:bg-gray-100 transition-colors duration-200"
-            >
-              {t("webdev.pricing.cta")}
-              <FaArrowRight className="text-xs" />
-            </a>
-          </div>
-        </div>
+    {/* Primary CTA */}
+    <a
+      href={whatsappUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-2.5 bg-white text-black px-8 py-3.5 rounded-full text-sm font-bold tracking-wide hover:bg-gray-100 transition-colors duration-200"
+    >
+      {t("webdev.pricing.cta")}
+      <FaArrowRight className="text-xs" />
+    </a>
+  </div>
+</div>
       </section>
 
       {/* ── Rest of page content ── */}
@@ -612,7 +621,7 @@ const WebDev: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ── Process ── */}
-<section className="pb-24">
+<section className="pb-18">
   {/* კონტეინერი gap-px კლასით, რომელიც ქმნის იდეალურ 1px ბადეს */}
   <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/[0.08] border border-white/[0.08] rounded-2xl overflow-hidden shadow-2xl">
     {processSteps.map((step) => {
@@ -667,7 +676,7 @@ const WebDev: React.FC = () => {
             </div>
 
             {/* Why individual pricing — 3 pillars */}
-            <div className="grid md:grid-cols-3 gap-px bg-white/10 rounded-xl overflow-hidden mb-10">
+            <div className="grid md:grid-cols-3 gap-px bg-white/10 rounded-xl overflow-hidden mb-8">
               {(
                 [
                   { key: "reason1", icon: FaBullseye, iconColor: "text-sky-400/70"    },
@@ -701,14 +710,9 @@ const WebDev: React.FC = () => {
                       : "border-white/10 bg-white/[0.02] hover:border-white/25"
                   }`}
                 >
-                  {/* Badge */}
-                  {card.badge && (
-                    <div className="absolute top-0 right-0 px-3 py-1 bg-white text-black text-[10px] font-bold tracking-wide rounded-bl-lg rounded-tr-xl">
-                      {card.badge}
-                    </div>
-                  )}
+                
 
-                  <div className="p-8 flex flex-col flex-1">
+                  <div className="p-8 flex flex-col flex-1 mt-10">
                     {/* Header */}
                     <div className="flex items-start justify-between mb-6">
                       <div className={`w-10 h-10 rounded-lg border border-white/10 bg-white/4 flex items-center justify-center transition-colors ${card.iconColor}`}>
@@ -767,7 +771,7 @@ const WebDev: React.FC = () => {
               ))}
             </div>
 
-            <p className="text-center text-gray-600 text-sm mt-8">
+            <p className="text-center text-gray-400 text-sm mt-8">
               {consultationLabel}
             </p>
           </section>
