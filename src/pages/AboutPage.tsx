@@ -1,18 +1,15 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import type React from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import BeautifulBackground from "../components/BeautifulBackground";
 import {
-  FaLightbulb,
-  FaHandshake,
-  FaAward,
-  FaArrowUp,
-  FaCode,
-  FaCamera,
-  FaShare,
-  FaBullhorn,
-  FaDatabase,
-  FaRobot,
+  FaBullseye,
+  FaChartLine,
+  FaQuoteLeft,
+  FaArrowRight,
+  FaLayerGroup,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
 import { useLanguage } from "../contexts/LanguageContext";
@@ -21,555 +18,292 @@ import { useLanguageTransition } from "../hooks/useLanguageTransition";
 // AboutPage Translations
 const aboutPageTranslations = {
   ka: {
-    "seo.about.title": "ჩვენ შესახებ - Invento Technologies & VIFA კოლაბორაცია | inventogeo.com",
-    "seo.about.description": "Invento Technologies და VIFA კოლაბორაცია. ტექნოლოგიური გადაწყვეტილებები და მარკეტინგის სერვისები საქართველოში. inventogeo.com",
-    "seo.about.keywords": "Invento Technologies, VIFA, კოლაბორაცია, ტექნოლოგიები, ციფრული მარკეტინგი, inventogeo.com",
-    "about.services.webdev.title": "ვებ განვითარება",
-    "about.services.webdev.description": "თანამედროვე, სწრაფი და მობილურზე ოპტიმიზირებული ვებსაიტები",
-    "about.services.content.title": "კონტენტ პროდუქცია",
-    "about.services.content.description": "პროფესიონალური ფოტო და ვიდეო მასალების შექმნა",
-    "about.services.social.title": "სოციალური მედია",
-    "about.services.social.description": "Instagram და Facebook გვერდების მართვა და ზრდა",
-    "about.services.ads.title": "ციფრული რეკლამა",
-    "about.services.ads.description": "Google Ads და სოციალური მედიის რეკლამები",
-    "about.services.wms.title": "Invento WMS",
-    "about.services.wms.description": "მონაცემთა ბაზების მართვის სისტემა და საწყობის მართვა",
-    "about.services.ai.title": "AI ჩატბოტები",
-    "about.services.ai.description": "ხელოვნური ინტელექტის ჩატბოტები ბიზნესისთვის",
-    "about.values.innovation.title": "ინოვაცია",
-    "about.values.innovation.description": "ყოველთვის ვეძებთ ახალ და ეფექტურ გზებს",
-    "about.values.partnership.title": "პარტნიორობა",
-    "about.values.partnership.description": "ჩვენ არ ვართ მხოლოდ მომსახურების მწარმოებლები, არამედ თქვენი პარტნიორები",
-    "about.values.quality.title": "ხარისხი",
-    "about.values.quality.description": "ყოველი პროექტი შესრულებულია უმაღლესი ხარისხის სტანდარტებით",
-    "about.values.growth.title": "ზრდა",
-    "about.values.growth.description": "ჩვენი მიზანია თქვენი ბიზნესის მდგრადი ზრდა",
-    "about.values.title": "ჩვენი",
-    "about.values.titleHighlight": "ღირებულებები",
-    "about.cta.title": "მზად ხარ დაიწყო თანამშრომლობა?",
-    "about.cta.startProject": "დაიწყე პროექტი",
+    "seo.about.title": "ჩვენ შესახებ | VIFA DIGITAL",
+    "seo.about.description": "VIFA - ტექნოლოგიური და კრეატიული სააგენტო. ციფრული ტრანსფორმაცია, ვებ დეველოპმენტი, მარკეტინგი და ქონთენთ პროდუქცია.",
+    "seo.about.keywords": "VIFA, სააგენტო, ციფრული მარკეტინგი, ვებ დეველოპმენტი, ფოტო ვიდეო გადაღება, საქართველო",
+    
+    "about.hero.title": "ჩვენს შესახებ",
+    "about.hero.subtitle": "ციფრული ტრანსფორმაციის სააგენტო",
+    
+    "about.intro.p1": "VIFA წარმოადგენს ტექნოლოგიურ და კრეატიულ სააგენტოს, რომელიც 2020 წლიდან აქტიურად პოზიციონირებს ქართულ ბაზარზე. ჩვენი საქმიანობის მთავარი პრიორიტეტია ადგილობრივი ბიზნესების ციფრული ტრანსფორმაცია და მათი პოტენციალის რეალურ წარმატებად გარდაქმნა.",
+    "about.intro.p2": "დაარსების დღიდან, VIFA-მ წარმატებით განახორციელა მრავალი კომპლექსური პროექტი სხვადასხვა ინდუსტრიაში - მათ შორის ტურიზმის, სილამაზისა და ჯანმრთელობის, რითეილისა და B2B სექტორებში. ჩვენი გუნდი აერთიანებს მაღალი კვალიფიკაციის მქონე ექსპერტებს, რომლებიც ორიენტირებულნი არიან არა მხოლოდ პროექტის ვიზუალურ ან ტექნიკურ სრულყოფაზე, არამედ პარტნიორი კომპანიების გრძელვადიან ეკონომიკურ პროგრესზე.",
+    
+    "about.philosophy.title": "ჩვენი მიდგომა",
+    "about.philosophy.quote": "ვქმნით სისტემებს, რომლებიც მუშაობს.",
+    "about.philosophy.desc": "ჩვენი სამუშაო პროცესი პრაგმატულია. იქნება ეს ტექნიკური არქიტექტურის შექმნა, ბრენდინგი თუ მარკეტინგული კამპანია, ყველაფერი ემსახურება ერთ მიზანს: მომხმარებლის იდეალურ გამოცდილებას და ბიზნესის ზრდას. ვმუშაობთ ზედმეტი ბიუროკრატიისა და შაბლონების გარეშე.",
+    
+    "about.why.title": "რატომ VIFA?",
+    "about.why.exp.title": "პრაქტიკული გამოცდილება",
+    "about.why.exp.desc": "2020 წლიდან ვმუშაობთ რეალურ პროექტებზე. ჩვენ არ ვიყენებთ შაბლონურ მეთოდებს - ვაანალიზებთ თქვენს სპეციფიკას და ვქმნით იმას, რაც ზუსტად ახლა სჭირდება თქვენს ბიზნესს.",
+    "about.why.fullservice.title": "360° ციფრული მხარდაჭერა",
+    "about.why.fullservice.desc": "ვებ-დეველოპმენტი, სოციალური მედიის მართვა, ციფრული რეკლამა და პროფესიონალური ფოტო/ვიდეო პროდუქცია - ყველაფერი ერთ სივრცეში, ბრენდის ერთიანი და ეფექტური კომუნიკაციისთვის.",
+    "about.why.results.title": "გაზომვადი შედეგები",
+    "about.why.results.desc": "არ ვქმნით პროდუქტს მხოლოდ ვიზუალისთვის. ჩვენი მიზანია კონვერსიის ზრდა, ოპერაციების გამარტივება და რეალური ბიზნეს-ღირებულების შექმნა.",
+    
+    "about.portfolio.title": "პორტფოლიო",
+    "about.portfolio.subtitle": "ჩვენი წარმატებული პროექტები",
+    "about.portfolio.swipe": "გასქროლეთ ვიდეოების სანახავად",
+
+    "about.outro": "დღეს VIFA არის თქვენი სტრატეგიული პარტნიორი ციფრული განვითარების გზაზე, რომელიც გეხმარებათ იდეების რეალურ ბიზნეს შედეგებად გარდაქმნაში.",
+    "about.cta.button": "დაიწყე პროექტი",
   },
   en: {
-    "seo.about.title": "About Us - Invento Technologies & VIFA Collaboration | inventogeo.com",
-    "seo.about.description": "Invento Technologies and VIFA collaboration. Technology solutions and marketing services in Georgia. inventogeo.com",
-    "seo.about.keywords": "Invento Technologies, VIFA, collaboration, technology solutions, digital marketing, inventogeo.com",
-    "about.services.webdev.title": "Web Development",
-    "about.services.webdev.description": "Modern, fast and mobile optimized websites",
-    "about.services.content.title": "Content Production",
-    "about.services.content.description": "Professional photography and video production",
-    "about.services.social.title": "Social Media",
-    "about.services.social.description": "Instagram and Facebook page management and growth",
-    "about.services.ads.title": "Digital Ads",
-    "about.services.ads.description": "Google Ads and social media advertising",
-    "about.services.wms.title": "Invento WMS",
-    "about.services.wms.description": "Warehouse Management System and inventory control",
-    "about.services.ai.title": "AI Chatbots",
-    "about.services.ai.description": "Artificial Intelligence chatbots for business",
-    "about.values.innovation.title": "Innovation",
-    "about.values.innovation.description": "Always looking for new and effective ways",
-    "about.values.partnership.title": "Partnership",
-    "about.values.partnership.description": "We are not just service providers, we are your partners",
-    "about.values.quality.title": "Quality",
-    "about.values.quality.description": "Every project is executed to the highest quality standards",
-    "about.values.growth.title": "Growth",
-    "about.values.growth.description": "Our goal is sustainable growth of your business",
-    "about.values.title": "Our",
-    "about.values.titleHighlight": "Values",
-    "about.cta.title": "Ready to start collaborating?",
-    "about.cta.startProject": "Start Project",
-    "about.story.heading": "We are VIFA",
-    "about.story.paragraph1": "VIFA was created in 2020, when our team decided to create a digital agency that would help Georgian businesses function successfully in the digital space. Today we are a leading digital agency in Georgia, serving both small businesses and large corporations. Our goal is to create unique and effective digital solutions for every client.",
-    "about.story.paragraph2": "We deeply analyze the specifics of the local market and know what your business needs to succeed. Our goal is to increase the competitiveness of our clients in the digital world. Every project, whether it's a small business or a large corporation, is created with an individual strategy. We ensure that you get a real strategic advantage and digital solutions that directly impact your results.",
-    "about.services.heading": "Services",
-    "about.portfolio.heading": "Our",
-    "about.portfolio.subheading": "Successful projects",
-    "about.portfolio.swipeHint": "Scroll to see videos",
-    "about.story.title": "About VIFA",
+    "seo.about.title": "About Us | VIFA DIGITAL",
+    "seo.about.description": "VIFA - Technology and Creative Agency. Digital transformation, web development, marketing, and content production.",
+    "seo.about.keywords": "VIFA, creative agency, digital marketing, web development, photo video production, Georgia",
+    
+    "about.hero.title": "About Us",
+    "about.hero.subtitle": "Digital Transformation Agency",
+    
+    "about.intro.p1": "VIFA is a technological and creative agency that has been actively positioning itself in the Georgian market since 2020. Our main priority is the digital transformation of local businesses and converting their potential into real success.",
+    "about.intro.p2": "Since its inception, VIFA has successfully executed numerous complex projects across various industries - including tourism, health and beauty, retail, and B2B sectors. Our team brings together highly qualified experts who focus not only on the visual or technical perfection of the project but also on the long-term economic progress of our partner companies.",
+    
+    "about.philosophy.title": "Our Approach",
+    "about.philosophy.quote": "We build systems that work.",
+    "about.philosophy.desc": "Our workflow is pragmatic. Whether it's building technical architecture, branding, or a marketing campaign, everything serves one goal: an ideal user experience and continuous business growth. We work without unnecessary bureaucracy or templates.",
+    
+    "about.why.title": "Why VIFA?",
+    "about.why.exp.title": "Practical Experience",
+    "about.why.exp.desc": "Working on real projects since 2020. We don't use template methods - we analyze your specifics and build exactly what your business needs right now.",
+    "about.why.fullservice.title": "360° Digital Support",
+    "about.why.fullservice.desc": "Web development, social media management, digital advertising, and professional photo/video production - everything in one place for your brand's unified and effective communication.",
+    "about.why.results.title": "Measurable Results",
+    "about.why.results.desc": "We don't create products just for aesthetics. Our goal is to increase conversion, streamline operations, and create real business value.",
+    
+    "about.portfolio.title": "Portfolio",
+    "about.portfolio.subtitle": "Our Successful Projects",
+    "about.portfolio.swipe": "Swipe to see videos",
+
+    "about.outro": "Today, VIFA is your strategic partner on the path to digital development, helping you transform ideas into real business results.",
+    "about.cta.button": "Start Project",
   },
 };
 
-const AboutPage = () => {
+const AboutPage: React.FC = () => {
   const { currentLanguage } = useLanguage();
+  const { getTransitionClasses } = useLanguageTransition();
 
   const t = (key: string): string => {
     const translations = aboutPageTranslations[currentLanguage as keyof typeof aboutPageTranslations] as Record<string, string>;
     return translations[key] || key;
   };
-  const { getTransitionClasses } = useLanguageTransition();
 
-  // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const aboutStructuredData = {
-    "@context": "https://schema.org",
-    "@type": "AboutPage",
-    name: t("seo.about.title"),
-    description: t("seo.about.description"),
-    mainEntity: {
-      "@type": "Organization",
-      name: "Invento Technologies & VIFA",
-      description: t("seo.about.description"),
-      url: "https://inventogeo.com/about",
-    },
-  };
-
-  // Services data
-  const services = [
+  const whyVifaFeatures = [
     {
-      icon: <FaCode className="text-4xl text-blue-400" />,
-      title: t("about.services.webdev.title"),
-      description: t("about.services.webdev.description"),
+      icon: <FaChartLine />,
+      color: "text-blue-400",
+      titleKey: "about.why.exp.title",
+      descKey: "about.why.exp.desc",
     },
     {
-      icon: <FaCamera className="text-4xl text-green-400" />,
-      title: t("about.services.content.title"),
-      description: t("about.services.content.description"),
+      icon: <FaLayerGroup />,
+      color: "text-purple-400",
+      titleKey: "about.why.fullservice.title",
+      descKey: "about.why.fullservice.desc",
     },
     {
-      icon: <FaShare className="text-4xl text-purple-400" />,
-      title: t("about.services.social.title"),
-      description: t("about.services.social.description"),
-    },
-    {
-      icon: <FaBullhorn className="text-4xl text-orange-400" />,
-      title: t("about.services.ads.title"),
-      description: t("about.services.ads.description"),
-    },
-    {
-      icon: <FaDatabase className="text-4xl text-cyan-400" />,
-      title: t("about.services.wms.title"),
-      description: t("about.services.wms.description"),
-    },
-    {
-      icon: <FaRobot className="text-4xl text-pink-400" />,
-      title: t("about.services.ai.title"),
-      description: t("about.services.ai.description"),
+      icon: <FaBullseye />,
+      color: "text-emerald-400",
+      titleKey: "about.why.results.title",
+      descKey: "about.why.results.desc",
     },
   ];
 
-  // Team values
-  const values = [
-    {
-      icon: <FaLightbulb className="text-4xl text-yellow-400" />,
-      title: t("about.values.innovation.title"),
-      description: t("about.values.innovation.description"),
-    },
-    {
-      icon: <FaHandshake className="text-4xl text-blue-400" />,
-      title: t("about.values.partnership.title"),
-      description: t("about.values.partnership.description"),
-    },
-    {
-      icon: <FaAward className="text-4xl text-green-400" />,
-      title: t("about.values.quality.title"),
-      description: t("about.values.quality.description"),
-    },
-    {
-      icon: <FaArrowUp className="text-4xl text-purple-400" />,
-      title: t("about.values.growth.title"),
-      description: t("about.values.growth.description"),
-    },
-  ];
-
-  // Team members
   return (
     <>
       <SEO
         title={t("seo.about.title")}
         description={t("seo.about.description")}
-        keywords={t("seo.about.keywords")}
-        url="https://inventogeo.com/about"
-        type="website"
-        structuredData={aboutStructuredData}
+        url="https://vifadigital.ge/about"
       />
 
-      {/* Beautiful Animated Background - Full Page Coverage */}
-      <BeautifulBackground className="fixed inset-0 z-0" variant="blue" />
+      {/* Modern Dark Background Layer */}
+      <div className="fixed inset-0 z-0 bg-[#060608]">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(59,130,246,0.05)_0%,transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(147,51,234,0.03)_0%,transparent_50%)]" />
+      </div>
 
-      <div className="relative z-10 min-h-screen mt-16">
-        <div
-          className={`container mx-auto px-4 sm:px-6 !max-w-7xl lg:px-8 py-10 ${getTransitionClasses()}`}
-        >
-          {/* Hero Section */}
-          <motion.div></motion.div>
+      <div className={`relative z-10 w-full min-h-screen pt-32 pb-24 ${getTransitionClasses()}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* ── 1. Hero & Intro ── */}
+          <div className="max-w-3xl mx-auto text-center mb-20">
+            <span className="text-sm uppercase tracking-widest text-gray-500 font-semibold mb-4 block">
+              {t("about.hero.subtitle")}
+            </span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-10">
+              {t("about.hero.title")}
+            </h1>
+            
+            <div className="space-y-6 text-base sm:text-lg text-gray-400 leading-relaxed text-justify sm:text-center">
+              <p>{t("about.intro.p1")}</p>
+              <p>{t("about.intro.p2")}</p>
+            </div>
+          </div>
 
-          {/* Our Story Section */}
+          {/* ── 2. Philosophy (Glassmorphism Quote Banner) ── */}
           <motion.div
-            className={`max-w-3xl mx-auto mb-24 mt-28 ${getTransitionClasses()}`}
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-5xl mx-auto mb-32"
           >
-            <motion.div
-              className="text-center mb-12"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              <h2 className="text-3xl font-light text-white mb-6">
-                {currentLanguage === "ka" ? "Invento Technologies & VIFA:" : "Invento Technologies & VIFA:"}{" "}
-                <span className="text-blue-400">{currentLanguage === "ka" ? "ტექნოლოგიისა და მარკეტინგის სინერგია" : "Technology and Marketing Synergy"}</span>
-              </h2>
-            </motion.div>
-
-            <motion.div
-              className="mx-auto max-w-2xl px-4 space-y-8 text-slate-200 text-lg leading-8 font-light"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-            >
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-              >
-                {currentLanguage === "ka"
-                  ? "2020 წელს დაწყებული გზა, რომელიც VIFA-მ ციფრული მარკეტინგის მიმართულებით დაიწყო, დღეს ახალ ეტაპზე გადავიდა. ჩვენ გავერთიანდით Invento Technologies-თან, რათა ქართულ ბიზნესს შევთავაზოთ არა მხოლოდ რეკლამა, არამედ სრული ტექნოლოგიური ეკოსისტემა."
-                  : "The journey that began in 2020, when VIFA started in the digital marketing direction, has now moved to a new stage. We have partnered with Invento Technologies to offer Georgian businesses not just advertising, but a complete technological ecosystem."}
-              </motion.p>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 1.0 }}
-              >
-                <strong>{currentLanguage === "ka" ? "რას ნიშნავს ეს თქვენთვის?" : "What does this mean for you?"}</strong><br />
-                {currentLanguage === "ka"
-                  ? "როდესაც ირჩევთ ჩვენს სერვისებს, თქვენ იღებთ ორმხრივ კომპეტენციას:"
-                  : "When you choose our services, you get dual competency:"}
-              </motion.p>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 1.2 }}
-              >
-                {currentLanguage === "ka"
-                  ? "Invento Technologies უზრუნველყოფს უძლიერეს ტექნიკურ ბაზას: Next.js ვებსაიტებს, რთულ SaaS სისტემებსა და AI ჩატბოტებს."
-                  : "Invento Technologies provides the strongest technical foundation: Next.js websites, complex SaaS systems, and AI chatbots."}
-              </motion.p>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 1.4 }}
-              >
-                {currentLanguage === "ka"
-                  ? "VIFA კი ამ ყველაფერს აძლევს სტრატეგიულ მარკეტინგულ შეფუთვას, რაც თქვენს ციფრულ პროდუქტს რეალურ გაყიდვებად აქცევს."
-                  : "VIFA gives all of this strategic marketing packaging, turning your digital product into real sales."}
-              </motion.p>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 1.6 }}
-              >
-                {currentLanguage === "ka"
-                  ? "ჩვენი მიზანი უცვლელია — მცირე ბიზნესი იქნება ეს თუ მსხვილი კორპორაცია, ჩვენ ვქმნით გადაწყვეტილებებს, სადაც დახვეწილი კოდი და ეფექტური მარკეტინგული სტრატეგია ერთმანეთს ავსებს. ჩვენ არ ვქმნით უბრალოდ ვებსაიტებს, ჩვენ ვაშენებთ თქვენი ბიზნესის ციფრულ მომავალს."
-                  : "Our goal remains unchanged — whether it's a small business or a large corporation, we create solutions where refined code and effective marketing strategy complement each other. We don't just create websites, we build your business's digital future."}
-              </motion.p>
-            </motion.div>
-          </motion.div>
-
-          {/* What We Do Section */}
-          <motion.div
-            className={`max-w-6xl mx-auto mb-24 ${getTransitionClasses()}`}
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.8 }}
-          >
-            <motion.div
-              className="text-center mb-16"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 2.0 }}
-            >
-              <h2 className="text-3xl font-light text-white mb-6">
-                <span className="text-blue-400">
-                  {currentLanguage === "ka" ? "სერვისები" : t("about.services.heading")}
-                </span>
-              </h2>
-            </motion.div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {services.map((service, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-blue-400/50 rounded-xl p-6 text-center hover:bg-black/70 transition-all duration-300"
-                >
-                  <div className="mb-4">{service.icon}</div>
-                  <h3 className="text-lg font-medium text-white mb-3">
-                    {service.title}
+            <div className="relative p-8 sm:p-12 rounded-3xl bg-white/[0.02] border border-white/[0.05] overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              
+              <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center md:items-start text-center md:text-left">
+                <div className="text-4xl sm:text-5xl text-white/10 shrink-0">
+                  <FaQuoteLeft />
+                </div>
+                <div>
+                  <h3 className="text-sm font-mono text-gray-500 uppercase tracking-widest mb-4">
+                    {t("about.philosophy.title")}
                   </h3>
-                  <p className="text-sm text-slate-400 leading-relaxed">
-                    {service.description}
+                  <p className="text-2xl sm:text-3xl font-medium text-white leading-tight mb-4 italic">
+                    "{t("about.philosophy.quote")}"
                   </p>
-                </motion.div>
-              ))}
+                  <p className="text-gray-400 leading-relaxed max-w-2xl">
+                    {t("about.philosophy.desc")}
+                  </p>
+                </div>
+              </div>
             </div>
           </motion.div>
 
-          {/* Values Section */}
-          <div className={`max-w-6xl mx-auto mb-24 ${getTransitionClasses()}`}>
+          {/* ── 3. Why VIFA? (Bento Grid) ── */}
+          <div className="max-w-6xl mx-auto mb-32">
             <div className="text-center mb-16">
-              <h2 className="text-3xl font-light text-white mb-6">
-                {t("about.values.title")}{" "}
-                <span className="text-blue-400">
-                  {t("about.values.titleHighlight")}
-                </span>
+              <h2 className="text-3xl font-bold text-white">
+                {t("about.why.title")}
               </h2>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {values.map((value, index) => (
+            <div className="grid md:grid-cols-3 gap-6">
+              {whyVifaFeatures.map((feature, idx) => (
                 <motion.div
-                  key={index}
+                  key={idx}
                   initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-purple-400/50 rounded-xl p-6 text-center hover:bg-black/70 transition-all duration-300"
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  className="p-8 rounded-2xl bg-[#0A0A0C] border border-white/[0.04] hover:border-white/10 hover:bg-white/[0.02] transition-all duration-300"
                 >
-                  <div className="mb-4">{value.icon}</div>
-                  <h3 className="text-lg font-medium text-white mb-3">
-                    {value.title}
+                  <div className={`text-2xl mb-6 ${feature.color}`}>
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-xl font-medium text-white mb-3">
+                    {t(feature.titleKey)}
                   </h3>
-                  <p className="text-sm text-slate-400 leading-relaxed">
-                    {value.description}
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    {t(feature.descKey)}
                   </p>
                 </motion.div>
               ))}
             </div>
           </div>
 
-          {/* Portfolio Section - Shorts Style */}
-          <div className={`max-w-7xl mx-auto mb-24 ${getTransitionClasses()}`}>
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-light text-white mb-6">
-                {currentLanguage === "ka" ? "ჩვენი" : t("about.portfolio.heading")}{" "}
-                <span className="text-blue-400">
-                  {currentLanguage === "ka" ? "პორტფოლიო" : "Portfolio"}
-                </span>
+          {/* ── 4. Portfolio Shorts (Design Matched to Vifa) ── */}
+          <div className="max-w-7xl mx-auto mb-32">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-white mb-3">
+                {t("about.portfolio.title")}
               </h2>
-              <p className="text-lg text-slate-400 max-w-3xl mx-auto">
-                {currentLanguage === "ka"
-                  ? "წარმატებული პროექტები"
-                  : t("about.portfolio.subheading")}
+              <p className="text-gray-500">
+                {t("about.portfolio.subtitle")}
               </p>
             </div>
 
             {/* Horizontal Scrollable Container */}
             <div className="relative">
               <div
-                className="flex gap-4 overflow-x-auto pb-6 scroll-smooth scrollbar-hide"
+                className="flex gap-6 overflow-x-auto pb-8 scroll-smooth scrollbar-hide snap-x px-4 sm:px-0"
                 style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
               >
-                <style
-                  dangerouslySetInnerHTML={{
-                    __html: `
-                    .scrollbar-hide::-webkit-scrollbar {
-                      display: none;
-                    }
-                  `,
-                  }}
-                />
+                <style dangerouslySetInnerHTML={{ __html: `.scrollbar-hide::-webkit-scrollbar { display: none; }` }} />
 
-                {/* Shorts Video 1 */}
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                  className="flex-shrink-0 w-[280px] h-[500px] bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-blue-400/50 rounded-2xl overflow-hidden hover:bg-black/70 transition-all duration-300 relative group"
-                >
-                  <div className="relative w-full h-full">
-                    <iframe
-                      src="https://www.youtube-nocookie.com/embed/Mg9yzpeICo4"
-                      title="Portfolio Shorts 1"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowFullScreen
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      className="w-full h-full rounded-2xl"
-                      loading="lazy"
-                    />
-
-                    {/* Overlay Info - positioned to not block iframe */}
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 pointer-events-none"></div>
-                  </div>
-                </motion.div>
-
-                {/* Shorts Video 2 */}
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  className="flex-shrink-0 w-[280px] h-[500px] bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-blue-400/50 rounded-2xl overflow-hidden hover:bg-black/70 transition-all duration-300 relative group"
-                >
-                  <div className="relative w-full h-full">
-                    <iframe
-                      src="https://www.youtube-nocookie.com/embed/QCL5rC97NHU"
-                      title="Portfolio Shorts 2"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowFullScreen
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      className="w-full h-full rounded-2xl"
-                      loading="lazy"
-                    />
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.5 }}
-                  className="flex-shrink-0 w-[280px] h-[500px] bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-blue-400/50 rounded-2xl overflow-hidden hover:bg-black/70 transition-all duration-300 relative group"
-                >
-                  <div className="relative w-full h-full">
-                    <iframe
-                      src="https://www.youtube.com/embed/8UQypoxIP9c"
-                      title="Portfolio Shorts 5"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full rounded-2xl"
-                    />
-                  </div>
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
-                  className="flex-shrink-0 w-[280px] h-[500px] bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-blue-400/50 rounded-2xl overflow-hidden hover:bg-black/70 transition-all duration-300 relative group"
-                >
-                  <div className="relative w-full h-full">
-                    <iframe
-                      src="https://www.youtube.com/embed/TazE0o2dLUI"
-                      title="Portfolio Shorts 6"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full rounded-2xl"
-                    />
-                  </div>
-                </motion.div>
-                {/* Shorts Video 3 */}
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  className="flex-shrink-0 w-[280px] h-[500px] bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-blue-400/50 rounded-2xl overflow-hidden hover:bg-black/70 transition-all duration-300 relative group"
-                >
-                  <div className="relative w-full h-full">
-                    <iframe
-                      src="https://www.youtube.com/embed/ILLhmaWTzjE"
-                      title="Portfolio Shorts 3"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full rounded-2xl"
-                    />
-                  </div>
-                </motion.div>
-
-                {/* Shorts Video 4 */}
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  className="flex-shrink-0 w-[280px] h-[500px] bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-blue-400/50 rounded-2xl overflow-hidden hover:bg-black/70 transition-all duration-300 relative group"
-                >
-                  <div className="relative w-full h-full">
-                    <iframe
-                      src="https://www.youtube.com/embed/PRkEkx5KHc0"
-                      title="Portfolio Shorts 4"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full rounded-2xl"
-                    />
-                  </div>
-                </motion.div>
-
-                {/* Shorts Video 5 */}
-
-                {/* Shorts Video 6 */}
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
-                  className="flex-shrink-0 w-[280px] h-[500px] bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-blue-400/50 rounded-2xl overflow-hidden hover:bg-black/70 transition-all duration-300 relative group"
-                >
-                  <div className="relative w-full h-full">
-                    <iframe
-                      src="https://www.youtube.com/embed/uXTAkbFCsQo"
-                      title="Portfolio Shorts 6"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full rounded-2xl"
-                    />
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
-                  className="flex-shrink-0 w-[280px] h-[500px] bg-black/50 backdrop-blur-md border border-slate-800/30 hover:border-blue-400/50 rounded-2xl overflow-hidden hover:bg-black/70 transition-all duration-300 relative group"
-                >
-                  <div className="relative w-full h-full">
-                    <iframe
-                      src="https://www.youtube.com/embed/Qpq3OY2BbMc"
-                      title="Portfolio Shorts 6"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full rounded-2xl"
-                    />
-                  </div>
-                </motion.div>
-              </div>
-
-              {/* Scroll Indicator */}
-              <div className="absolute top-1/2 right-4 transform -translate-y-1/2 text-blue-400 animate-pulse">
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
+                {/* Video 1 */}
+                <div className="snap-center flex-shrink-0 w-[280px] h-[500px] bg-[#0A0A0C] border border-white/[0.05] rounded-2xl overflow-hidden relative">
+                  <iframe
+                    src="https://www.youtube-nocookie.com/embed/Mg9yzpeICo4"
+                    title="Portfolio 1"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                    loading="lazy"
                   />
-                </svg>
+                </div>
+                {/* Video 2 */}
+                <div className="snap-center flex-shrink-0 w-[280px] h-[500px] bg-[#0A0A0C] border border-white/[0.05] rounded-2xl overflow-hidden relative">
+                  <iframe
+                    src="https://www.youtube-nocookie.com/embed/QCL5rC97NHU"
+                    title="Portfolio 2"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                    loading="lazy"
+                  />
+                </div>
+                {/* Video 3 */}
+                <div className="snap-center flex-shrink-0 w-[280px] h-[500px] bg-[#0A0A0C] border border-white/[0.05] rounded-2xl overflow-hidden relative">
+                  <iframe
+                    src="https://www.youtube.com/embed/ILLhmaWTzjE"
+                    title="Portfolio 3"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                    loading="lazy"
+                  />
+                </div>
+                {/* Video 4 */}
+                <div className="snap-center flex-shrink-0 w-[280px] h-[500px] bg-[#0A0A0C] border border-white/[0.05] rounded-2xl overflow-hidden relative">
+                  <iframe
+                    src="https://www.youtube.com/embed/PRkEkx5KHc0"
+                    title="Portfolio 4"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                    loading="lazy"
+                  />
+                </div>
+                {/* Video 5 */}
+                <div className="snap-center flex-shrink-0 w-[280px] h-[500px] bg-[#0A0A0C] border border-white/[0.05] rounded-2xl overflow-hidden relative">
+                  <iframe
+                    src="https://www.youtube.com/embed/8UQypoxIP9c"
+                    title="Portfolio 5"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                    loading="lazy"
+                  />
+                </div>
               </div>
             </div>
 
-            {/* Mobile Swipe Hint */}
-            <div className="text-center mt-6 md:hidden">
-              <p className="text-slate-400 text-sm">
-                {currentLanguage === "ka"
-                  ? "გასქროლე ვიდეოების სანახავად"
-                  : t("about.portfolio.swipeHint")}
+            <div className="text-center mt-2 md:hidden">
+              <p className="text-gray-500 text-xs">
+                {t("about.portfolio.swipe")}
               </p>
             </div>
           </div>
 
-          {/* CTA Section */}
-          <div className={`max-w-3xl mx-auto text-center ${getTransitionClasses()}`}>
-            <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-lg border border-blue-400/30 rounded-2xl p-12">
-              <h2 className="text-3xl font-light text-white mb-6">
-                {t("about.cta.title")}
-              </h2>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  to="/start-project"
-                  className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-8 py-4 font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-                >
-                  {t("about.cta.startProject")}
-                </Link>
-              </div>
-            </div>
+          {/* ── 5. Outro & CTA ── */}
+          <div className="max-w-3xl mx-auto text-center border-t border-white/[0.05] pt-20">
+            <p className="text-lg sm:text-xl text-gray-300 leading-relaxed mb-10">
+              {t("about.outro")}
+            </p>
+           
           </div>
+
         </div>
       </div>
     </>

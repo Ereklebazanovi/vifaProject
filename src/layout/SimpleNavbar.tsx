@@ -217,7 +217,7 @@ const SimpleNavbar: React.FC = () => {
                         className="group flex w-full items-center rounded-xl px-4 py-3 min-h-[50px] text-base text-white/70 hover:text-white hover:bg-white/5 transition-all duration-300"
                       >
                         <Layers className="w-4 h-4 mr-3 text-white/40 group-hover:text-white/80 transition-all duration-300 shrink-0" />
-                        <span>{ka ? "ყველა სერვისი" : "All Services"}</span>
+                        <span>{ka ? "ზოგადი სერვისები" : "All Services"}</span>
                       </Link>
 
                       <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent my-2" />
@@ -285,7 +285,7 @@ const SimpleNavbar: React.FC = () => {
               />
             </div>
             {/* Label */}
-            <span className={`text-[8px] font-light tracking-[0.2em] uppercase transition-all duration-300 leading-none ${
+            <span className={`text-[9px] font-light tracking-[0.2em] uppercase transition-all duration-300 leading-none ${
               mobileMenuOpen ? "text-white/40" : "text-white/60"
             }`}>
               {mobileMenuOpen ? (ka ? "დახურვა" : "close") : (ka ? "მენიუ" : "menu")}
@@ -357,7 +357,7 @@ const SimpleNavbar: React.FC = () => {
                         className="group flex items-center gap-2.5 text-white/60 text-xs tracking-widest uppercase py-2.5 hover:text-white transition-colors"
                       >
                         <Layers className="w-3.5 h-3.5 text-white/35 group-hover:text-white/70 shrink-0 transition-colors" />
-                        {ka ? "ყველა სერვისი" : "All Services"}
+                        {ka ? "ზოგადი სერვისები" : "All Services"}
                       </Link>
                       <div className="h-px bg-white/[0.06] my-1.5" />
                       {industries.map((industry) => {

@@ -94,7 +94,6 @@ const ArrowDiagonalSVG: React.FC = () => (
 const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
   const { currentLanguage } = useLanguage();
   const { startNavigation } = useNavigation();
-  const [btnHovered, setBtnHovered] = useState(false);
   const [expandedServiceId, setExpandedServiceId] = useState<string | null>(null);
 
   const services = [
@@ -136,11 +135,6 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
     },
   ];
 
-  const scrollToCards = () => {
-    document
-      .getElementById("services-cards")
-      ?.scrollIntoView({ behavior: "smooth" });
-  };
 
   const toggleIndustryLinks = (serviceId: string) => {
     setExpandedServiceId((prev) => (prev === serviceId ? null : serviceId));
@@ -149,52 +143,18 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
   const ka = currentLanguage === "ka";
 
   return (
-    <section className="w-full pt-4 md:pt-20 pb-16">
+    <section className="w-full pt-10 md:pt-16 pb-16 bg-[#050404]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-8 mb-10 md:mb-16">
-          <div>
-            <div className="inline-flex items-center gap-2 mb-5">
-              <span className="w-2 h-2 rounded-full bg-blue-500 block" />
-              <span className="text-blue-400 text-sm font-medium tracking-widest uppercase">
-                {t("newHome.services.sectionTitle")}
-              </span>
-            </div>
-            <h2 className="text-2xl md:text-[42px] font-bold leading-snug text-white max-w-xl">
-              {t("newHome.services.sectionSubtitle")}
-            </h2>
-          </div>
-
-          <button
-            onClick={scrollToCards}
-            className="group relative inline-flex items-center gap-4 self-start md:self-auto h-14"
-            onMouseEnter={() => setBtnHovered(true)}
-            onMouseLeave={() => setBtnHovered(false)}
-          >
-            <span
-              className="absolute top-1/2 -translate-y-1/2 rounded-full bg-blue-600 transition-all duration-500 ease-in-out"
-              style={{
-                width: btnHovered ? "40px" : "56px",
-                height: btnHovered ? "40px" : "56px",
-                left: btnHovered ? "calc(100% - 56px)" : "0",
-              }}
-            />
-            <span className="relative z-10 text-white font-semibold text-sm tracking-wide whitespace-nowrap pl-18">
-              {ka ? "სერვისების ნახვა" : "View Services"}
+        <div id="services-header" className="mb-5 md:mb-16">
+          <div className="inline-flex items-center gap-2 mb-5">
+            <span className="w-2 h-2 rounded-full bg-blue-500 block" />
+            <span className="text-blue-400 text-sm font-medium tracking-widest uppercase">
+              {t("newHome.services.sectionTitle")}
             </span>
-            <svg
-              className="relative z-10 shrink-0 text-white"
-              width="16"
-              height="12"
-              viewBox="0 0 19 13"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M18.5303 7.03033C18.8232 6.73744 18.8232 6.26256 18.5303 5.96967L13.7574 1.1967C13.4645 0.903806 12.9896 0.903806 12.6967 1.1967C12.4038 1.48959 12.4038 1.96447 12.6967 2.25736L16.9393 6.5L12.6967 10.7426C12.4038 11.0355 12.4038 11.5104 12.6967 11.8033C12.9896 12.0962 13.4645 12.0962 13.7574 11.8033L18.5303 7.03033ZM0 7.25H18V5.75H0V7.25Z"
-                fill="currentColor"
-              />
-            </svg>
-          </button>
+          </div>
+          <h2 className="text-2xl md:text-[42px] font-bold leading-snug text-white max-w-xl">
+            {t("newHome.services.sectionSubtitle")}
+          </h2>
         </div>
 
         <div className="border-t border-white/10 mb-0" />
@@ -306,7 +266,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
                     >
                       <Layers className="w-3.5 h-3.5 text-white/50 group-hover:text-white/90 transition-colors" />
                       <span className="text-xs text-white/70 font-medium tracking-wide group-hover:text-white transition-colors">
-                        {ka ? "ყველა სერვისი" : "All Services"}
+                        {ka ? "ზოგადი სერვისები" : "All Services"}
                       </span>
                       <ArrowUpRight className="w-3 h-3 text-white/30 group-hover:text-white/70 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all duration-200" />
                     </Link>

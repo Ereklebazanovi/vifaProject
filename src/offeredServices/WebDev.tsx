@@ -71,7 +71,7 @@ const webDevTranslations = {
     "webdev.pricing.ecommerce.feature4": "Real-time შეკვეთების კონტროლი",
     "webdev.pricing.ecommerce.feature5": "Excel რეპორტები და ანალიტიკა",
     "webdev.pricing.consultation": "კონსულტაცია უფასოა",
-    "webdev.pricing.cta": "დაიწყე პროექტი",
+    "webdev.pricing.cta": "პაკეტების ნახვა",
     "webdev.pricing.learn_more": "იხილეთ მეტი",
     "webdev.cta.question": "მზად ხარ ბიზნესის ციფრული ტრანსფორმაციისთვის?",
     "webdev.cta.button": "დაგვიკავშირდი WhatsApp-ზე",

@@ -87,7 +87,7 @@ const newHomeTranslations = {
 
     "newHome.services.sectionTitle": "ჩვენი სერვისები",
     "newHome.services.sectionSubtitle":
-      "მომავლის ტექნოლოგიები თქვენი ბიზნესის წარმატებისთვის",
+      "მიმართულებები",
 
     "newHome.services.webdev.title": "Web Development",
     "newHome.services.webdev.description":
@@ -307,6 +307,7 @@ import {
   FaSearch,
   FaRocket,
   FaWhatsapp,
+  FaArrowDown,
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 
@@ -316,6 +317,10 @@ const NewHomeVifa: React.FC = () => {
 
   const [showDigitalConsequences, setShowDigitalConsequences] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  const scrollToServices = () => {
+    document.getElementById("services-header")?.scrollIntoView({ behavior: "smooth" });
+  };
 
   // WhatsApp URL for consultation
   const whatsappUrl = "https://wa.me/995557624243";
@@ -351,8 +356,8 @@ const NewHomeVifa: React.FC = () => {
         <div className="absolute inset-x-0 top-0 h-32 -z-10 bg-linear-to-b from-black/80 to-transparent" />
         {/* Bottom gradient — bottom content readable */}
         <div className="absolute inset-x-0 bottom-0 h-64 -z-10 bg-linear-to-t from-black/80 to-transparent" />
-        {/* Bottom section blend — smooth fade into page background */}
-        <div className="absolute inset-x-0 bottom-0 h-32 md:h-48 bg-linear-to-t from-[#060608] to-transparent z-10" />
+        {/* Bottom section blend — strong fade into page background */}
+        <div className="absolute inset-x-0 bottom-0 h-48 md:h-64 bg-linear-to-t from-[#060608] via-[#060608]/80 to-transparent z-10" />
 
         {/* Content layer */}
         <div className="relative z-10 w-full min-h-[75vh] md:min-h-screen flex flex-col justify-center md:justify-end px-5 sm:px-8 lg:px-16 pt-20">
@@ -364,23 +369,29 @@ const NewHomeVifa: React.FC = () => {
             <div className="w-full max-w-full md:max-w-2xl lg:max-w-3xl text-left pb-2">
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-[1.35] tracking-tight mb-6 md:mb-4 md:max-w-xl lg:max-w-2xl">
                 {currentLanguage === "ka"
-                  ? "ციფრული ინფრასტრუქტურა, რომელიც ზრდაზე მუშაობს"
+                  ? "VIFA - თქვენი ციფრული პარტნიორი"   
+
+
+
                   : "Digital Infrastructure Built to Grow"}
               </h1>
               <p className="text-slate-400 text-sm md:text-base font-light leading-relaxed mb-8 md:mb-6 md:max-w-sm lg:max-w-md">
                 {currentLanguage === "ka"
-                  ? "ჩვენი გუნდი უზრუნველყოფს თქვენი ბიზნესის სრულ ციფრულ მხარდაჭერას: ვებ-დეველოპმენტიდან - სტრატეგიულ სოციალურ მედია მარკეტინგამდე"
+                  ? "თქვენი ბიზნესის სრული ციფრული მხარდაჭერა."
 
                   : "Vifa builds robust digital systems and automated sales pipelines for your business."}
               </p>
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block bg-white text-black text-xs font-semibold px-6 py-3 rounded-xl tracking-widest uppercase hover:bg-white/90 transition-all duration-200"
+              <button
+                onClick={scrollToServices}
+                className="group mt-10 inline-flex items-center gap-4 self-start"
               >
-                {currentLanguage === "ka" ? "დაჯავშნე კონსულტაცია" : "Start a Project"}
-              </a>
+                <span className="w-11 h-11 rounded-full bg-blue-600 flex items-center justify-center shrink-0 group-hover:bg-blue-500 transition-colors duration-200">
+                  <FaArrowDown className="text-white text-sm" />
+                </span>
+                <span className="text-sm tracking-widest uppercase font-medium text-white group-hover:text-blue-400 transition-colors duration-200">
+                  {currentLanguage === "ka" ? "სერვისების ნახვა" : "View Services"}
+                </span>
+              </button>
             </div>
 
             {/* Stats Block — bottom right, desktop only */}

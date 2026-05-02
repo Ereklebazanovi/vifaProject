@@ -13,6 +13,7 @@ import ChatbotRequestForm from "./pages/ChatbotRequestForm";
 import NotFound from "./pages/NotFound";
 import IndustryLanding from "./pages/landing/IndustryLanding";
 import InventoLandingPage from "./offeredServices/InventoLandingPage";
+import AboutPage from "./pages/AboutPage";
 
 const App = () => {
   return (
@@ -49,6 +50,7 @@ const App = () => {
                   path="services/ai-chatbot/request"
                   element={<ChatbotRequestForm />}
                 />
+                <Route path="about" element={<AboutPage />} />
                 <Route path="inventowms" element={<InventoLandingPage />} />
 
                 {/* Dynamic Ad-Landing Flow */}
