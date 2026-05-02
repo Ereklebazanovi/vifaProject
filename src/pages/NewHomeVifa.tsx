@@ -369,7 +369,8 @@ const NewHomeVifa: React.FC = () => {
               </h1>
               <p className="text-slate-400 text-sm md:text-base font-light leading-relaxed mb-8 md:mb-6 md:max-w-sm lg:max-w-md">
                 {currentLanguage === "ka"
-                  ? "Vifa აშენებს გამართულ ციფრულ სისტემებს და გაყიდვების ავტომატიზაციას თქვენი ბიზნესისთვის"
+                  ? "ჩვენი გუნდი უზრუნველყოფს თქვენი ბიზნესის სრულ ციფრულ მხარდაჭერას: ვებ-დეველოპმენტიდან - სტრატეგიულ სოციალურ მედია მარკეტინგამდე"
+
                   : "Vifa builds robust digital systems and automated sales pipelines for your business."}
               </p>
               <a

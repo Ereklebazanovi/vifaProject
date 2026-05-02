@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import {  useEffect } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
