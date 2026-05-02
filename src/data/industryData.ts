@@ -245,22 +245,22 @@ export const beautyWebPackages: BilingualPricingTier[] = [
 
 export const legalFinanceWebPackages: BilingualPricingTier[] = [
   {
-    nameKa: "კორპორატიული იმიჯი",
-    nameEn: "Corporate Image",
-    price: "₾ 800 - 1000",
+    nameKa: "კორპორატიული ვებსაიტი", // შევცვალეთ "იმიჯი"-დან "საიტი"-ზე
+    nameEn: "Corporate Website",
+    price: "₾ 700 - 900",
     periodKa: "პროექტი",
     periodEn: "project",
-    descKa: "სოლიდური ციფრული წარმომადგენლობა და ნდობის მოპოვება კლიენტებში.",
-    descEn: "Solid digital representation and building trust with your clients.",
+    descKa: "პრემიუმ კლასის ვებსაიტი, რომელიც ხაზს უსვამს თქვენს სტატუსს და ზრდის კლიენტების ნდობას.",
+    descEn: "A premium class website that highlights your status and builds client trust.",
     featuresKa: [
-      "პრემიუმ და აკადემიური UI/UX დიზაინი",
+      "მრავალგვერდიანი კორპორატიული ვებსაიტი", // პირდაპირ ვეუბნებით რას ვაკეთებთ
       "სრული მართვის პანელი (CMS)",
       "მრავალენოვანი სისტემა (Geo, Eng, Rus)",
       "დინამიური ბლოგი და სიახლეები",
       "ჭკვიანი საკონტაქტო ფორმა შეტყობინებებით",
     ],
     featuresEn: [
-      "Premium & Academic UI/UX Design",
+      "Multi-page Corporate Website",
       "Full Content Management System (CMS)",
       "Multilingual System (Geo, Eng, Rus)",
       "Dynamic Blog & News Section",
@@ -272,34 +272,94 @@ export const legalFinanceWebPackages: BilingualPricingTier[] = [
     glowColor: "rgba(99,102,241,0)",
   },
   {
-    nameKa: "ციფრული ოფისი",
-    nameEn: "Digital Office",
-    price: "₾ 1300 - 1800+",
+    nameKa: "ვებ-პორტალი", // შევცვალეთ "ციფრული ოფისი"-დან
+    nameEn: "Web Portal",
+    price: "₾ 1000 - 1400",
     periodKa: "პროექტი",
     periodEn: "project",
-    descKa: "უსაფრთხო დოკუმენტბრუნვა და კლიენტებთან ციფრული კომუნიკაციის სრული ინფრასტრუქტურა.",
-    descEn: "Secure document exchange and full digital communication infrastructure for clients.",
+    descKa: "მრავალფუნქციური ვებ-პლატფორმა დახურული კლიენტების კაბინეტით და უსაფრთხო დოკუმენტბრუნვით.",
+    descEn: "Multifunctional web platform with a private client dashboard and secure document exchange.",
     featuresKa: [
-      "+ 'კორპორატიული იმიჯი'-ს ყველა კომპონენტი",
+      "+ 'კორპორატიული ვებსაიტი'-ს ყველა კომპონენტი",
       "კლიენტების დახურული პორტალი (Login)",
       "უსაფრთხო დოკუმენტბრუნვა",
       "Live Chat ინტეგრაცია საიტზე",
       "Meta / Google Pixel-ის ინტეგრაცია",
     ],
     featuresEn: [
-      "+ All features in Corporate Image",
+      "+ All features in Corporate Website",
       "Private Client Portal (Login)",
       "Secure Document Exchange",
       "Live Chat Integration",
       "Meta / Google Pixel Integration",
     ],
-    ctaKa: "უფასო კონსულტაცია",
-    ctaEn: "Book Consultation",
+    ctaKa: "დეტალების განხილვა",
+    ctaEn: "Discuss Details",
     highlighted: true,
     glowColor: "rgba(99,102,241,0.18)",
   },
 ];
 
+export const tourismWebPackages: BilingualPricingTier[] = [
+  {
+    nameKa: "პრემიუმ ვებ-კატალოგი", // უფრო სოლიდურია, ვიდრე "სტანდარტული საიტი"
+    nameEn: "Premium Web Catalog",
+    price: "₾ 800 - 1000",
+    periodKa: "პროექტი",
+    periodEn: "project",
+    descKa: "ციფრული სავიზიტო ბარათი, რომელიც წარმოაჩენს თქვენს სასტუმროს საუკეთესო კუთხით.",
+    descEn: "A digital business card that showcases your hotel from the best possible angle.",
+    featuresKa: [
+      "პრემიუმ UI/UX დიზაინი (ფოტო/ვიდეო ორიენტირებული)",
+      "სრული მართვის პანელი (CMS კონტენტისთვის)",
+      "მრავალენოვანი სისტემა (უცხოელ სტუმრებზე მორგებული)",
+      "Google-ის საძიებო სისტემაზე ოპტიმიზაცია (SEO)", // "ძიებადობა" ამოვარდა
+      "სწრაფი კომუნიკაციის მოდული (WhatsApp / Viber / Email)", // "ღილაკი" ამოვარდა
+      "ინტერაქტიული ლოკაცია (Google Maps) და გზამკვლევი", // დამატებული პუნქტი
+    ],
+    featuresEn: [
+      "Premium UI/UX Design (Photo/Video Focused)",
+      "Full Content Management System (CMS)",
+      "Multilingual System (Tailored to foreign guests)",
+      "Google Search Engine Optimization (SEO)",
+      "Quick Communication Module (WhatsApp / Viber / Email)",
+      "Interactive Location (Google Maps) & Guide",
+    ],
+    ctaKa: "უფასო კონსულტაცია",
+    ctaEn: "Free Consultation",
+    highlighted: false,
+    glowColor: "rgba(99,102,241,0)",
+  },
+  {
+    nameKa: "ჯავშნების პლატფორმა",
+    nameEn: "Booking Web Platform",
+    price: "₾ 1400 - 1800",
+    periodKa: "პროექტი",
+    periodEn: "project",
+    descKa: "სრულყოფილი პლატფორმა ავტომატიზებული მოთხოვნებით, რომელიც გიზოგავთ საკომისიოს.",
+    descEn: "A complete platform with automated inquiries that saves you on commissions.",
+    featuresKa: [
+      "+ 'პრემიუმ ვებ-კატალოგი'-ს ყველა კომპონენტი",
+      "კალენდარული ჯავშნის ფორმა (თარიღების არჩევით)",
+      "ავტომატური მეილ-ნოტიფიკაციები (სტუმრისა და ადმინისტრაციისთვის)", // შენი Firebase იდეა
+      "დინამიური სეზონური ფასების მართვა",
+      "სამართავი შეფასებების ბლოკი (Testimonials/Reviews)", // დავაზუსტეთ რომ სამართავია
+      "Meta / Google Pixel ინტეგრაცია და ანალიტიკა",
+    ],
+    featuresEn: [
+      "+ All features in Premium Web Catalog",
+      "Calendar Booking Form (Date selection)",
+      "Automated Email Notifications (For guest & admin)",
+      "Dynamic Seasonal Price Management",
+      "Manageable Testimonials/Reviews Block",
+      "Meta / Google Pixel Integration & Analytics",
+    ],
+    ctaKa: "დეტალების განხილვა",
+    ctaEn: "Discuss Details",
+    highlighted: true,
+    glowColor: "rgba(99,102,241,0.18)",
+  },
+];
 export const industryData: Record<string, Record<string, IndustryConfig>> = {
   // ──────────────────────────────────────────────────────────────────────────
   web: {
@@ -349,59 +409,61 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
       packages: beautyWebPackages,
     },
     // ── Tourism ────────────────────────────────────────────────────────────
+   // ── Tourism ────────────────────────────────────────────────────────────
+   // ── Tourism ────────────────────────────────────────────────────────────
+    // ── Tourism ────────────────────────────────────────────────────────────
     tourism: {
       nameKa: "სასტუმროები და ტურიზმი",
       nameEn: "Hotels & Tourism",
+      heroBgImage: "/hotelphoto.jpg", 
       eyebrowKa: "ვებ დეველოპმენტი",
       eyebrowEn: "Web Development",
-      heroSublineKa:
-        "პირდაპირი დაჯავშნის არხები, ნულოვანი საკომისიო, სრული სისტემური კონტროლი.",
-      heroSublineEn: "Direct booking channels, zero commissions, full system control.",
+      heroSublineKa: "წარმოაჩინეთ თქვენი სივრცე საუკეთესო კუთხით და მიიღეთ ჯავშნები პირდაპირ, ზედმეტი საკომისიოების გარეშე.",
+      heroSublineEn: "Showcase your space from the best angle and receive bookings directly, without extra commissions.",
       headline: {
         type: "simple",
-        textKa: "ვებ ინფრასტრუქტურა სასტუმროები და ტურიზმი-სთვის",
-        textEn: "Web Infrastructure for Hotels & Tourism",
+        textKa: "პრემიუმ ვებსაიტი თქვენი სასტუმროსთვის",
+        textEn: "Premium Website for Your Hotel",
       },
       approach: {
-        headingKa: "შექმნილი ბიზნეს ავტომატიზაციისთვის",
-        headingEn: "Built for Business Automation",
+        headingKa: "შექმნილი პირდაპირი ჯავშნებისთვის",
+        headingEn: "Built for Direct Bookings",
         descKa:
-          "ჩვენ ვქმნით დაჯავშნის, ოპერაციულ და კონვერსიის ინფრასტრუქტურას სასტუმროები და ტურიზმი სექტორისთვის.",
+          "ჩვენ ვქმნით ულამაზეს, თანამედროვე ვებსაიტებს, რომლებიც სტუმრებს უმარტივებს თქვენთან დაკავშირებას და ჯავშნის მოთხოვნის გამოგზავნას.",
         descEn:
-          "We build booking, operations, and conversion infrastructure for the Hotels & Tourism sector.",
+          "We create beautiful, modern websites that make it easy for guests to connect with you and send booking requests.",
       },
       features: [
         {
-          icon: Calendar,
-          titleKa: "ავტომატური დაჯავშნის სისტემები",
-          titleEn: "Automated Booking Systems",
+          icon: Smartphone, 
+          titleKa: "პრემიუმ ვიზუალი და კატალოგი",
+          titleEn: "Premium Visuals & Catalog",
           descKa:
-            "ნულოვანი მანუალური კოორდინაცია. ვიზიტები და დაჯავშნები მუშაობს ავტონომიურად, სინქრონიზებული კალენდრებთან რეალურ დროში.",
+            "მაღალი ხარისხის ფოტო/ვიდეო პრეზენტაცია და ესთეტიკური კატალოგი, რომელიც ნომრებს საუკეთესო კუთხით წარმოაჩენს.",
           descEn:
-            "Zero manual coordination. Appointments and reservations run autonomously, synced across staff calendars in real time.",
+            "High-quality photo/video presentation and an aesthetic catalog that showcases your rooms from the best angle.",
         },
         {
-          icon: Shield,
-          titleKa: "0% მესამე მხარის საკომისიო",
-          titleEn: "0% Third-party Commissions",
+          icon: CalendarCheck, 
+          titleKa: "მოთხოვნების სისტემა",
+          titleEn: "Inquiry System",
           descKa:
-            "სრულად ფლობდეთ თქვენს დაჯავშნის არხს. გამორიცხეთ მარკეტპლეისების კომისია და დაიბრუნეთ მარჟა ყოველ ტრანზაქციაზე.",
+            "მარტივი ფორმა თარიღების არჩევით, რომელიც პირდაპირ მეილზე გაწვდით ჯავშნის მოთხოვნას.",
           descEn:
-            "Own your booking channel end-to-end. Eliminate marketplace cuts and recover margin on every transaction.",
+            "A simple form with date selection that sends booking requests directly to your email.",
         },
         {
-          icon: BarChart3,
-          titleKa: "iCal და პლატფორმის ინტეგრაციები",
-          titleEn: "iCal & Platform Integrations",
+          icon: BarChart3, 
+          titleKa: "სრული მართვის პანელი (CMS)",
+          titleEn: "Full Content Management (CMS)",
           descKa:
-            "Native სინქრონიზაცია Google Calendar-თან, Outlook-თან და ინდუსტრიის სპეციფიკურ ხელსაწყოებთან.",
+            "მართეთ ფასები, ფოტოები და მრავალენოვანი ტექსტები დამოუკიდებლად, პროგრამისტის დახმარების გარეშე.",
           descEn:
-            "Native sync with Google Calendar, Outlook, and industry-specific tools.",
+            "Manage prices, photos, and multilingual texts independently, without developer assistance.",
         },
       ],
-      packages: defaultPackages,
+      packages: tourismWebPackages,
     },
-
     // ── Legal & Finance ────────────────────────────────────────────────────
     // EXAMPLE: copy this block and fill it in to add a new niche.
    // ── Legal & Finance ────────────────────────────────────────────────────

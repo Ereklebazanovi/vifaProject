@@ -1,7 +1,8 @@
 //IndudsryLanding.tsx
 import { useParams } from "react-router-dom";
 import { CheckCircle2, CreditCard } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import { useLanguage } from "../../contexts/LanguageContext";
 import {
   industryData,
@@ -155,29 +156,31 @@ function PricingSection({ packages, ka }: PricingProps) {
     ? "აირჩიეთ თქვენთვის შესაფერისი პაკეტი"
     : "Choose the package that fits your needs";
 
-  // ახალი ტექსტი Badge-სთვის
   const badgeTextKa = "ფასები საორიენტაციოა • მოქმედებს 50/50 გადახდის სისტემა";
   const badgeTextEn = "Prices are estimates • 50/50 payment split available";
+
+  const headerRef = useRef(null);
+  const cardsRef = useRef(null);
+  const headerInView = useInView(headerRef, { once: true, amount: 0 });
+  const cardsInView = useInView(cardsRef, { once: true, amount: 0 });
 
   return (
 <section id="pricing" className="relative bg-[#060608] pt-4 pb-24 md:pt-2 md:pb-32">
       <div className="relative mx-auto max-w-7xl px-5 lg:px-12 p-4">
-        
+
         <motion.div
-          className="mb-8 text-center md:mb-16" // mb-10 შევამცირეთ mb-8-მდე
+          ref={headerRef}
+          className="mb-8 text-center md:mb-16"
           variants={sectionReveal}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
+          animate={headerInView ? "visible" : "hidden"}
         >
           <span className="mb-3 inline-block text-[14px] font-semibold uppercase tracking-[0.25em] text-indigo-400">
             {pricingLabel}
           </span>
-          
-          {/* აღწერა მობაილზე ოდნავ პატარა margin-ით */}
+
           <p className="mx-auto mt-3 max-w-xl text-lg text-gray-400">{pricingDesc}</p>
 
-          {/* აქ mt-10 იყო და გავხადეთ mt-6 მობაილისთვის */}
           <div className="mt-6 flex justify-center md:mt-10">
             <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.02] px-4 py-2 backdrop-blur-md transition-colors hover:bg-white/[0.04] md:px-5">
               <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/10">
@@ -191,6 +194,7 @@ function PricingSection({ packages, ka }: PricingProps) {
         </motion.div>
 
         <motion.div
+          ref={cardsRef}
           className={`grid gap-6 md:items-start ${
             packages.length === 2
               ? "md:grid-cols-2 md:w-[1000px] md:mx-auto"
@@ -198,8 +202,7 @@ function PricingSection({ packages, ka }: PricingProps) {
           }`}
           variants={cardStagger}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
+          animate={cardsInView ? "visible" : "hidden"}
         >
           {packages.map((tier) => (
             <PricingCard key={tier.nameEn} tier={tier} ka={ka} />
