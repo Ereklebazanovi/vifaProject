@@ -21,8 +21,6 @@ import {
   FaArrowRight,
   FaCheckCircle,
   FaBullseye,
-  FaBolt,
-  FaCog,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
 
@@ -33,7 +31,6 @@ const marketingTranslations = {
     "seo.marketing.description": "VIFA Digital გთავაზობთ პრემიუმ ციფრული მარკეტინგის სერვისებს: ვიდეო/ფოტო პროდუქცია, სოციალური მედიის მართვა და სტრატეგიული კონტენტის შექმნა.",
     "seo.marketing.keywords": "ციფრული მარკეტინგი, სოციალური მედია მართვა, ვიდეო გადაღება, ფოტოგრაფია, კონტენტის შექმნა, ბრენდინგი, მარკეტინგის სააგენტო vifa digital",
     
-    // New Hero Text
     "marketing.hero.overline": "ციფრული მარკეტინგი",
     "marketing.hero.main_title": "ბრენდის სტრატეგიული ზრდა და გაყიდვები.",
     "marketing.hero.description": "ვქმნით მონაცემებზე დაფუძნებულ მარკეტინგულ კამპანიებს, პროფესიონალურ ვიდეო კონტენტს და ვმართავთ სოციალურ მედიას თქვენი ბიზნესის სრული მასშტაბირებისთვის.",
@@ -54,62 +51,24 @@ const marketingTranslations = {
     "package.premium": "Scale",
     "price.estimate": "საორიენტაციო",
     "price.note": "ფასები ცვალებადია და დამოკიდებულია მომხმარებლის მოთხოვნებსა და მიზნებზე.",
-    "pricing.needs": "თქვენი მოთხოვნების მიხედვით",
-    "pricing.needsDesc": "ბაზისური ბრენდინგიდან სრულ მარკეტინგ სტრატეგიამდე - ყველა პროექტს განსხვავებული მიდგომა სჭირდება.",
-    "pricing.estimate": "სწრაფი შეფასება",
-    "pricing.estimateDesc": "უფასო კონსულტაციის მაქსიმუმ 12 საათში მიიღებთ ზუსტ ფასს და პროექტის გეგმას.",
-    "pricing.transparent": "გამჭვირვალე პროცესი",
-    "pricing.transparentDesc": "ჩვენი მიზანია, ყველა ეტაპი იყოს მაქსიმალურად ღია და გასაგები. ნდობაზე დაფუძნებული თანამშრომლობა ყოველთვის მომგებიანია.",
     "cta.title": "მზად ხარ ბიზნესის ციფრული ტრანსფორმაციისთვის?",
     "cta.button": "დაიწყე პროექტი",
     "service.videoProd": "ვიდეო პროდუქცია",
     "service.videoDesc": "პროფესიონალური ვიდეო კონტენტის შექმნა",
-    "service.video1": "4K ვიდეო ხარისხი",
-    "service.video2": "დრონით გადაღება",
-    "service.video3": "პოსტ-პროდუქცია",
-    "service.video4": "მონტაჟი",
     "service.photo": "ფოტოგრაფია",
     "service.photoDesc": "სპეციალური ფოტო სესიები ბრენდებისთვის",
-    "service.photo1": "სტუდიური გადაღება",
-    "service.photo2": "ლოკაციური სესიები",
-    "service.photo3": "პროდუქტის ფოტოები",
-    "service.photo4": "რეტუშირება",
     "service.social": "სოციალური მედია",
     "service.socialDesc": "სრული სოციალური მედიის მართვა",
-    "service.social1": "კონტენტ დაგეგმვა",
-    "service.social2": "Community Management",
-    "service.social3": "Analytics",
-    "service.social4": "Engagement",
     "service.content": "კონტენტის შექმნა",
     "service.contentDesc": "ორიგინალური და ეფექტური კონტენტი",
-    "service.content1": "კოპირაიტინგი",
-    "service.content2": "სცენარების წერა",
-    "service.content3": "Blog პოსტები",
-    "service.content4": "Caption-ები",
     "service.strategy": "მარკეტინგ სტრატეგია",
     "service.strategyDesc": "ინდივიდუალური მარკეტინგ გეგმები",
-    "service.strategy1": "ბაზრის ანალიზი",
-    "service.strategy2": "კონკურენტების შესწავლა",
-    "service.strategy3": "ROI გაანგარიშება",
-    "service.strategy4": "KPI განსაზღვრა",
     "service.brand": "ბრენდ პოზიციონირება",
     "service.brandDesc": "ბრენდის პოზიციონირება და მესიჯინგი",
-    "service.brand1": "Brand Voice",
-    "service.brand2": "Target Audience",
-    "service.brand3": "Messaging Framework",
-    "service.brand4": "Brand Guidelines",
     "service.design": "გრაფიკული დიზაინი",
     "service.designDesc": "ვიზუალური იდენტობის შექმნა",
-    "service.design1": "Banner დიზაინი",
-    "service.design2": "Post Templates",
-    "service.design3": "Infographics",
-    "service.design4": "Brand Materials",
     "service.logo": "ლოგოს შექმნა",
     "service.logoDesc": "უნიკალური ლოგო დიზაინი და ბრენდ იდენტიტი",
-    "service.logo1": "კონცეპტუალური დიზაინი",
-    "service.logo2": "ვექტორული ფაილები",
-    "service.logo3": "Brand Identity",
-    "service.logo4": "Usage Guidelines",
     "pkg.basic1": "საკომუნიკაციო მიზნების ჩამოყალიბება",
     "pkg.basic2": "მიზნების მიხედვით ვიდეო რილები",
     "pkg.basic3": "ფოტო სესიები ბრენდებისთვის",
@@ -134,7 +93,6 @@ const marketingTranslations = {
     "seo.marketing.description": "VIFA Digital offers premium digital marketing services: video/photo production, social media management, and strategic content creation.",
     "seo.marketing.keywords": "digital marketing, social media management, video production, photography, content creation, branding, marketing agency vifa digital",
     
-    // New Hero Text
     "marketing.hero.overline": "Digital Marketing",
     "marketing.hero.main_title": "Strategic Brand Growth & Sales.",
     "marketing.hero.description": "We create data-driven marketing campaigns, professional video content, and manage social media to fully scale your business operations.",
@@ -155,62 +113,24 @@ const marketingTranslations = {
     "package.premium": "Scale",
     "price.estimate": "Estimated",
     "price.note": "Prices vary and depend on client requirements and goals.",
-    "pricing.needs": "According to Your Needs",
-    "pricing.needsDesc": "From basic branding to full marketing strategy - every project needs a different approach.",
-    "pricing.estimate": "Fast Estimate",
-    "pricing.estimateDesc": "Get an exact price and project plan in maximum 12 hours with our free consultation.",
-    "pricing.transparent": "Transparent Process",
-    "pricing.transparentDesc": "Our goal is to make every stage as clear and understandable as possible. Trust-based collaboration is always beneficial.",
     "cta.title": "Ready for Your Business Digital Transformation?",
     "cta.button": "Start Project",
     "service.videoProd": "Video Production",
     "service.videoDesc": "Professional video content creation",
-    "service.video1": "4K Video Quality",
-    "service.video2": "Drone Footage",
-    "service.video3": "Post-Production",
-    "service.video4": "Editing",
     "service.photo": "Photography",
     "service.photoDesc": "Special photo sessions for brands",
-    "service.photo1": "Studio Shooting",
-    "service.photo2": "Location Sessions",
-    "service.photo3": "Product Photography",
-    "service.photo4": "Retouching",
     "service.social": "Social Media",
     "service.socialDesc": "Full social media management",
-    "service.social1": "Content Planning",
-    "service.social2": "Community Management",
-    "service.social3": "Analytics",
-    "service.social4": "Engagement",
     "service.content": "Content Creation",
     "service.contentDesc": "Original and effective content",
-    "service.content1": "Copywriting",
-    "service.content2": "Script Writing",
-    "service.content3": "Blog Posts",
-    "service.content4": "Captions",
     "service.strategy": "Marketing Strategy",
     "service.strategyDesc": "Individual marketing plans",
-    "service.strategy1": "Market Analysis",
-    "service.strategy2": "Competitor Research",
-    "service.strategy3": "ROI Calculation",
-    "service.strategy4": "KPI Definition",
     "service.brand": "Brand Positioning",
     "service.brandDesc": "Brand positioning and messaging",
-    "service.brand1": "Brand Voice",
-    "service.brand2": "Target Audience",
-    "service.brand3": "Messaging Framework",
-    "service.brand4": "Brand Guidelines",
     "service.design": "Graphic Design",
     "service.designDesc": "Visual identity creation",
-    "service.design1": "Banner Design",
-    "service.design2": "Post Templates",
-    "service.design3": "Infographics",
-    "service.design4": "Brand Materials",
     "service.logo": "Logo Design",
     "service.logoDesc": "Unique logo design and brand identity",
-    "service.logo1": "Conceptual Design",
-    "service.logo2": "Vector Files",
-    "service.logo3": "Brand Identity",
-    "service.logo4": "Usage Guidelines",
     "pkg.basic1": "Communication Goals Definition",
     "pkg.basic2": "Video Reels According to Goals",
     "pkg.basic3": "Photo Sessions for Brands",
@@ -249,74 +169,40 @@ const Marketing: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  // Premium Muted Color Classes Helper
+  const getIconColor = (color: string) => {
+    const colors: Record<string, string> = {
+      rose: "text-rose-400/80 group-hover:text-rose-400",
+      sky: "text-sky-400/80 group-hover:text-sky-400",
+      emerald: "text-emerald-400/80 group-hover:text-emerald-400",
+      purple: "text-purple-400/80 group-hover:text-purple-400",
+      amber: "text-amber-400/80 group-hover:text-amber-400",
+      pink: "text-pink-400/80 group-hover:text-pink-400",
+      indigo: "text-indigo-400/80 group-hover:text-indigo-400",
+      yellow: "text-yellow-400/80 group-hover:text-yellow-400",
+    };
+    return colors[color] || "text-gray-400 group-hover:text-white";
+  };
+
   // Process Steps Data (For Bento Box)
   const processSteps = [
-    { num: "01", key: "section.strategy", icon: FaChartLine },
-    { num: "02", key: "section.content", icon: FaVideo },
-    { num: "03", key: "section.distribution", icon: FaShare },
-    { num: "04", key: "section.results", icon: FaBullseye },
+    { num: "01", key: "section.strategy", icon: FaChartLine, color: "amber" },
+    { num: "02", key: "section.content", icon: FaVideo, color: "rose" },
+    { num: "03", key: "section.distribution", icon: FaShare, color: "emerald" },
+    { num: "04", key: "section.results", icon: FaBullseye, color: "indigo" },
   ];
 
   // Main advertising services
   const getServices = () => [
-    {
-      id: "video-production",
-      icon: <FaVideo />,
-      title: t("service.videoProd"),
-      description: t("service.videoDesc"),
-      features: [t("service.video1"), t("service.video2"), t("service.video3"), t("service.video4")],
-    },
-    {
-      id: "photo-shooting",
-      icon: <FaCamera />,
-      title: t("service.photo"),
-      description: t("service.photoDesc"),
-      features: [t("service.photo1"), t("service.photo2"), t("service.photo3"), t("service.photo4")],
-    },
-    {
-      id: "social-media",
-      icon: <FaShare />,
-      title: t("service.social"),
-      description: t("service.socialDesc"),
-      features: [t("service.social1"), t("service.social2"), t("service.social3"), t("service.social4")],
-    },
-    {
-      id: "content-creation",
-      icon: <FaEdit />,
-      title: t("service.content"),
-      description: t("service.contentDesc"),
-      features: [t("service.content1"), t("service.content2"), t("service.content3"), t("service.content4")],
-    },
-    {
-      id: "marketing-strategy",
-      icon: <FaChartLine />,
-      title: t("service.strategy"),
-      description: t("service.strategyDesc"),
-      features: [t("service.strategy1"), t("service.strategy2"), t("service.strategy3"), t("service.strategy4")],
-    },
-    {
-      id: "brand-positioning",
-      icon: <FaBullseye />,
-      title: t("service.brand"),
-      description: t("service.brandDesc"),
-      features: [t("service.brand1"), t("service.brand2"), t("service.brand3"), t("service.brand4")],
-    },
-    {
-      id: "graphic-design",
-      icon: <FaPaintBrush />,
-      title: t("service.design"),
-      description: t("service.designDesc"),
-      features: [t("service.design1"), t("service.design2"), t("service.design3"), t("service.design4")],
-    },
-    {
-      id: "logo-design",
-      icon: <FaStar />,
-      title: t("service.logo"),
-      description: t("service.logoDesc"),
-      features: [t("service.logo1"), t("service.logo2"), t("service.logo3"), t("service.logo4")],
-    },
+    { id: "video-production", icon: <FaVideo />, title: t("service.videoProd"), description: t("service.videoDesc"), color: "rose" },
+    { id: "photo-shooting", icon: <FaCamera />, title: t("service.photo"), description: t("service.photoDesc"), color: "sky" },
+    { id: "social-media", icon: <FaShare />, title: t("service.social"), description: t("service.socialDesc"), color: "emerald" },
+    { id: "content-creation", icon: <FaEdit />, title: t("service.content"), description: t("service.contentDesc"), color: "purple" },
+    { id: "marketing-strategy", icon: <FaChartLine />, title: t("service.strategy"), description: t("service.strategyDesc"), color: "amber" },
+    { id: "brand-positioning", icon: <FaBullseye />, title: t("service.brand"), description: t("service.brandDesc"), color: "pink" },
+    { id: "graphic-design", icon: <FaPaintBrush />, title: t("service.design"), description: t("service.designDesc"), color: "indigo" },
+    { id: "logo-design", icon: <FaStar />, title: t("service.logo"), description: t("service.logoDesc"), color: "yellow" },
   ];
-
   const services = getServices();
 
   // Marketing Packages
@@ -326,6 +212,7 @@ const Marketing: React.FC = () => {
       name: t("package.basic"),
       icon: <FaVideo />,
       price: "1000₾",
+      color: "rose",
       features: [t("pkg.basic1"), t("pkg.basic2"), t("pkg.basic3"), t("pkg.basic4"), t("pkg.basic5")],
     },
     {
@@ -333,6 +220,7 @@ const Marketing: React.FC = () => {
       name: t("package.standard"),
       icon: <FaShare />,
       price: "1500₾",
+      color: "emerald",
       features: [t("pkg.std1"), t("pkg.std2"), t("pkg.std3"), t("pkg.std4"), t("pkg.std5"), t("pkg.std6")],
     },
     {
@@ -340,18 +228,18 @@ const Marketing: React.FC = () => {
       name: t("package.premium"),
       icon: <FaStar />,
       price: "2000₾",
+      color: "amber",
       features: [t("pkg.prem1"), t("pkg.prem2"), t("pkg.prem3"), t("pkg.prem4"), t("pkg.prem5"), t("pkg.prem6"), t("pkg.prem7")],
     },
   ];
-
   const packages = getPackages();
 
   // Social media platforms
   const platforms = [
-    { icon: <FaInstagram />, name: "Instagram" },
-    { icon: <FaFacebook />, name: "Facebook" },
-    { icon: <FaYoutube />, name: "YouTube" },
-    { icon: <FaTiktok />, name: "TikTok" },
+    { icon: <FaInstagram />, name: "Instagram", color: "pink" },
+    { icon: <FaFacebook />, name: "Facebook", color: "sky" },
+    { icon: <FaYoutube />, name: "YouTube", color: "rose" },
+    { icon: <FaTiktok />, name: "TikTok", color: "purple" },
   ];
 
   return (
@@ -363,9 +251,8 @@ const Marketing: React.FC = () => {
         url="https://vifadigital.ge/services/marketing"
       />
 
-      {/* Hero Section with Cinematic Background Image */}
+      {/* Hero Section */}
       <section className="relative min-h-[75vh] w-full flex items-center justify-start overflow-hidden pt-32 lg:pt-0">
-        {/* Background Image (Placeholder) with Ken Burns Effect */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-image-scale opacity-60"
@@ -373,12 +260,10 @@ const Marketing: React.FC = () => {
           />
         </div>
 
-        {/* Heavy Gradient Overlays for readability */}
         <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#060608] via-[#060608]/90 to-transparent" />
         <div className="absolute inset-0 z-0 bg-black/40" />
         <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#060608] to-transparent z-0" />
 
-        {/* Hero Content */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 lg:pb-0">
           <div className="max-w-2xl">
             <span className="text-sm uppercase tracking-[0.2em] text-gray-400 font-semibold mb-4 block">
@@ -416,11 +301,11 @@ const Marketing: React.FC = () => {
         `}</style>
       </section>
 
-      {/* Main Container for rest of content */}
+      {/* Main Container */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-32">
         
         {/* ── Process Bento Box ── */}
-        <section className="mb-32">
+        <section className="mb-32 mt-[-2rem] sm:mt-[-4rem] relative z-20">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/[0.08] border border-white/[0.08] rounded-2xl overflow-hidden shadow-2xl">
             {processSteps.map((step) => {
               const Icon = step.icon;
@@ -432,7 +317,7 @@ const Marketing: React.FC = () => {
                   <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div className="flex justify-between items-start mb-4">
                     <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white/[0.02] border border-white/[0.05] flex items-center justify-center group-hover:scale-110 group-hover:bg-white/[0.05] transition-all duration-300">
-                      <Icon className="text-base sm:text-lg text-gray-500 transition-colors duration-300 group-hover:text-white" />
+                      <Icon className={`text-base sm:text-lg transition-colors duration-300 ${getIconColor(step.color)}`} />
                     </div>
                     <span className="text-[10px] sm:text-xs font-mono text-gray-600 group-hover:text-gray-400 transition-colors">
                       {step.num}
@@ -472,7 +357,7 @@ const Marketing: React.FC = () => {
                 } hover:border-white/20 transition-all duration-300 cursor-pointer flex flex-col h-full`}
                 onClick={() => setActiveService(index)}
               >
-                <div className="text-2xl text-gray-400 group-hover:text-white mb-4 transition-colors">
+                <div className={`text-2xl mb-4 transition-colors ${getIconColor(service.color)}`}>
                   {service.icon}
                 </div>
                 <h3 className="text-white font-medium text-lg mb-2">
@@ -503,7 +388,7 @@ const Marketing: React.FC = () => {
                 key={pkg.id}
                 className="bg-[#0A0A0C] p-8 rounded-2xl border border-white/[0.08] hover:border-white/20 transition-all duration-300 flex flex-col h-full group"
               >
-                <div className="text-2xl text-gray-500 group-hover:text-white mb-6 transition-colors">
+                <div className={`text-2xl mb-6 transition-colors ${getIconColor(pkg.color)}`}>
                   {pkg.icon}
                 </div>
                 <h4 className="text-xl font-medium text-white mb-2">{pkg.name}</h4>
@@ -515,7 +400,7 @@ const Marketing: React.FC = () => {
                 <div className="space-y-3 mb-8 flex-grow">
                   {pkg.features.map((feature, idx) => (
                     <div key={idx} className="flex items-start gap-3">
-                      <FaCheckCircle className="text-gray-600 group-hover:text-white text-xs mt-1 transition-colors" />
+                      <FaCheckCircle className={`text-xs mt-1 transition-colors ${getIconColor(pkg.color).split(' ')[0]}`} />
                       <span className="text-gray-400 text-sm">{feature}</span>
                     </div>
                   ))}
@@ -545,10 +430,10 @@ const Marketing: React.FC = () => {
             {platforms.map((platform) => (
               <div
                 key={platform.name}
-                className="px-6 py-4 rounded-full border border-white/[0.05] bg-white/[0.02] flex items-center gap-3 hover:bg-white/[0.05] hover:border-white/20 transition-all cursor-pointer"
+                className="group px-6 py-4 rounded-full border border-white/[0.05] bg-white/[0.02] flex items-center gap-3 hover:bg-white/[0.05] hover:border-white/20 transition-all cursor-pointer"
               >
-                <span className="text-gray-400">{platform.icon}</span>
-                <span className="text-gray-300 text-sm font-medium">{platform.name}</span>
+                <span className={`transition-colors ${getIconColor(platform.color)}`}>{platform.icon}</span>
+                <span className="text-gray-300 text-sm font-medium group-hover:text-white transition-colors">{platform.name}</span>
               </div>
             ))}
           </div>
