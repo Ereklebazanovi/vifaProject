@@ -235,13 +235,13 @@ const Marketing: React.FC = () => {
   const packages = getPackages();
 
   // Social media platforms
+  // Social media platforms
   const platforms = [
-    { icon: <FaInstagram />, name: "Instagram", color: "pink" },
-    { icon: <FaFacebook />, name: "Facebook", color: "sky" },
-    { icon: <FaYoutube />, name: "YouTube", color: "rose" },
-    { icon: <FaTiktok />, name: "TikTok", color: "purple" },
+    { icon: <FaInstagram />, name: "Instagram", color: "pink", link: "https://www.instagram.com/vifaproduction/" },
+    { icon: <FaFacebook />, name: "Facebook", color: "sky", link: "https://www.facebook.com/vifageo" },
+    { icon: <FaYoutube />, name: "YouTube", color: "rose", link: "https://www.youtube.com/@vifaprodaction3750" },
+    { icon: <FaTiktok />, name: "TikTok", color: "purple", link: "https://www.tiktok.com/@vifadigital" },
   ];
-
   return (
     <div className={`bg-[#060608] min-h-screen ${getTransitionClasses()}`}>
       <SEO
@@ -419,7 +419,7 @@ const Marketing: React.FC = () => {
           </div>
         </section>
 
-        {/* ── Social Platforms Minimal ── */}
+     {/* ── Social Platforms Minimal ── */}
         <section className="mb-32">
           <div className="text-center mb-12">
             <h2 className="text-2xl font-light text-white mb-2">
@@ -428,13 +428,16 @@ const Marketing: React.FC = () => {
           </div>
           <div className="flex justify-center items-center gap-4 flex-wrap">
             {platforms.map((platform) => (
-              <div
+              <a // <-- აქ div შეიცვალა a ტეგით
                 key={platform.name}
+                href={platform.link} // <-- აქ დაემატა ლინკი
+                target="_blank" // <-- ხსნის ახალ ტაბში
+                rel="noopener noreferrer" // <-- უსაფრთხოებისთვის
                 className="group px-6 py-4 rounded-full border border-white/[0.05] bg-white/[0.02] flex items-center gap-3 hover:bg-white/[0.05] hover:border-white/20 transition-all cursor-pointer"
               >
                 <span className={`transition-colors ${getIconColor(platform.color)}`}>{platform.icon}</span>
                 <span className="text-gray-300 text-sm font-medium group-hover:text-white transition-colors">{platform.name}</span>
-              </div>
+              </a>
             ))}
           </div>
         </section>
