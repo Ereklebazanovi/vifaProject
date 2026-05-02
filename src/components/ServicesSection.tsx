@@ -27,7 +27,7 @@ interface IndustryItem {
 
 const industries: IndustryItem[] = [
   {
-    nameKa: "იურიდიული და საფინანსო სექტორი",
+    nameKa: "იურიდიული და ბუღალტერიის სექტორი",
     nameEn: "Legal & Finance",
     slug: "legal-finance",
     icon: Scale,

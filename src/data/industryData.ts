@@ -241,13 +241,64 @@ export const beautyWebPackages: BilingualPricingTier[] = [
     glowColor: "rgba(99,102,241,0)",
   },
 ];
-// Structure: industryData[service][slug]
-//
-// To add a new niche (e.g. Legal & Finance):
-//   1. Add a "legal-finance" key under each service below.
-//   2. Fill in the IndustryConfig fields.
-//   3. Add "legal-finance" to the validSlugs set in IndustryLanding.tsx.
-//   Done - no UI components need touching.
+
+
+export const legalFinanceWebPackages: BilingualPricingTier[] = [
+  {
+    nameKa: "კორპორატიული იმიჯი",
+    nameEn: "Corporate Image",
+    price: "₾ 800 - 1000",
+    periodKa: "პროექტი",
+    periodEn: "project",
+    descKa: "სოლიდური ციფრული წარმომადგენლობა და ნდობის მოპოვება კლიენტებში.",
+    descEn: "Solid digital representation and building trust with your clients.",
+    featuresKa: [
+      "პრემიუმ და აკადემიური UI/UX დიზაინი",
+      "სრული მართვის პანელი (CMS)",
+      "მრავალენოვანი სისტემა (Geo, Eng, Rus)",
+      "დინამიური ბლოგი და სიახლეები",
+      "ჭკვიანი საკონტაქტო ფორმა შეტყობინებებით",
+    ],
+    featuresEn: [
+      "Premium & Academic UI/UX Design",
+      "Full Content Management System (CMS)",
+      "Multilingual System (Geo, Eng, Rus)",
+      "Dynamic Blog & News Section",
+      "Smart Contact Form with Notifications",
+    ],
+    ctaKa: "უფასო კონსულტაცია",
+    ctaEn: "Free Consultation",
+    highlighted: false,
+    glowColor: "rgba(99,102,241,0)",
+  },
+  {
+    nameKa: "ციფრული ოფისი",
+    nameEn: "Digital Office",
+    price: "₾ 1300 - 1800+",
+    periodKa: "პროექტი",
+    periodEn: "project",
+    descKa: "უსაფრთხო დოკუმენტბრუნვა და კლიენტებთან ციფრული კომუნიკაციის სრული ინფრასტრუქტურა.",
+    descEn: "Secure document exchange and full digital communication infrastructure for clients.",
+    featuresKa: [
+      "+ 'კორპორატიული იმიჯი'-ს ყველა კომპონენტი",
+      "კლიენტების დახურული პორტალი (Login)",
+      "უსაფრთხო დოკუმენტბრუნვა",
+      "Live Chat ინტეგრაცია საიტზე",
+      "Meta / Google Pixel-ის ინტეგრაცია",
+    ],
+    featuresEn: [
+      "+ All features in Corporate Image",
+      "Private Client Portal (Login)",
+      "Secure Document Exchange",
+      "Live Chat Integration",
+      "Meta / Google Pixel Integration",
+    ],
+    ctaKa: "დეტალების განხილვა",
+    ctaEn: "Discuss Details",
+    highlighted: true,
+    glowColor: "rgba(99,102,241,0.18)",
+  },
+];
 
 export const industryData: Record<string, Record<string, IndustryConfig>> = {
   // ──────────────────────────────────────────────────────────────────────────
@@ -353,58 +404,60 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
 
     // ── Legal & Finance ────────────────────────────────────────────────────
     // EXAMPLE: copy this block and fill it in to add a new niche.
+   // ── Legal & Finance ────────────────────────────────────────────────────
     "legal-finance": {
       nameKa: "იურიდიული და საფინანსო",
       nameEn: "Legal & Finance",
+      heroBgImage: "/legal-bg.jpg", // აქ ჩასვამ შესაბამის ფოტოს
       eyebrowKa: "ვებ დეველოპმენტი",
       eyebrowEn: "Web Development",
       heroSublineKa:
-        "კლიენტთა მოძიების ავტომატიზაცია, კონფიდენციალობის სტანდარტები და სრული კონვერსიის ინფრასტრუქტურა.",
+        "აკადემიური იმიჯი, უსაფრთხო დოკუმენტბრუნვა და სანდო ციფრული ინფრასტრუქტურა.",
       heroSublineEn:
-        "Automated client intake, compliance-grade privacy, and full conversion infrastructure.",
+        "Academic image, secure document exchange, and reliable digital infrastructure.",
       headline: {
         type: "simple",
-        textKa: "ვებ ინფრასტრუქტურა იურიდიული და საფინანსო-სთვის",
-        textEn: "Web Infrastructure for Legal & Finance",
+        textKa: "ციფრული სტაბილურობა იურიდიული და საფინანსო სექტორისთვის",
+        textEn: "Digital Stability for Legal & Finance Sector",
       },
       approach: {
-        headingKa: "შექმნილი ბიზნეს ავტომატიზაციისთვის",
-        headingEn: "Built for Business Automation",
+        headingKa: "ორიენტირებული ნდობასა და უსაფრთხოებაზე",
+        headingEn: "Focused on Trust and Security",
         descKa:
-          "ჩვენ ვქმნით კლიენტთა მოძიების, ოპერაციულ და კონვერსიის ინფრასტრუქტურას იურიდიული და საფინანსო სექტორისთვის.",
+          "საფინანსო და იურიდიულ სექტორში მთავარი ვალუტა ნდობაა. ჩვენ ვქმნით პრემიუმ ვებსაიტებს და კლიენტთა პორტალებს, რომლებიც ხაზს უსვამს თქვენს პროფესიონალიზმს.",
         descEn:
-          "We build client intake, operations, and conversion infrastructure for the Legal & Finance sector.",
+          "In the finance and legal sector, trust is the main currency. We build premium websites and client portals that highlight your professionalism.",
       },
       features: [
         {
-          icon: Calendar,
-          titleKa: "ავტომატური კლიენტთა შეყვანა",
-          titleEn: "Automated Client Intake",
+          icon: Shield,
+          titleKa: "უსაფრთხო კლიენტთა პორტალი",
+          titleEn: "Secure Client Portal",
           descKa:
-            "კლიენტთა ფორმები, კალენდარული ჯავშნები და დოკუმენტების მიღება, ნულოვანი ადმინისტრაციული სამუშაოთი.",
+            "დახურული სივრცე (Login), სადაც თქვენ და თქვენს კლიენტებს შეგიძლიათ უსაფრთხოდ გაცვალოთ სენსიტიური დოკუმენტები.",
           descEn:
-            "Client intake forms, calendar scheduling, and document collection, zero admin overhead.",
+            "A private space (Login) where you and your clients can securely exchange sensitive documents.",
         },
         {
-          icon: Shield,
-          titleKa: "კონფიდენციალობა და შესაბამისობა",
-          titleEn: "Privacy & Compliance",
+          icon: Smartphone, // ან თუ გაქვს დაიმპორტებული FileText გამოიყენე ის
+          titleKa: "პრემიუმ კორპორატიული იმიჯი",
+          titleEn: "Premium Corporate Image",
           descKa:
-            "GDPR-ის შესაბამისი ინფრასტრუქტურა, დაშიფრული მონაცემთა ნაკადები და აუდიტის ჟურნალები.",
+            "მინიმალისტური, სოლიდური დიზაინი, რომელიც მორგებულია ნებისმიერ მოწყობილობაზე და ქმნის ექსპერტულ პოზიციონირებას.",
           descEn:
-            "GDPR-compliant infrastructure, encrypted data flows, and audit trails built in.",
+            "Minimalist, solid design optimized for any device, establishing an expert positioning.",
         },
         {
           icon: BarChart3,
-          titleKa: "ლიდ-კვალიფიკაცია და CRM",
-          titleEn: "Lead Qualification & CRM",
+          titleKa: "სრული მართვის პანელი (CMS)",
+          titleEn: "Full Content Management (CMS)",
           descKa:
-            "ავტომატური ლიდ-სკორინგი, კლიენტთა სეგმენტაცია და შემდეგი ნაბიჯის შეხსენებები.",
+            "მართეთ ბლოგი, გუნდის წევრები და მრავალენოვანი კონტენტი დამოუკიდებლად, პროგრამისტის გარეშე.",
           descEn:
-            "Automatic lead scoring, client segmentation, and next-step reminders.",
+            "Manage your blog, team members, and multilingual content independently, without a developer.",
         },
       ],
-      packages: defaultPackages,
+      packages: legalFinanceWebPackages, // <-- აქ ვუკავშირებთ ჩვენს ახალ 2-პაკეტიან მასივს
     },
 
     // ── E-commerce & Retail ────────────────────────────────────────────────

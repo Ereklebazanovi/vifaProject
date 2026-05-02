@@ -299,13 +299,8 @@ const newHomeTranslations = {
 };
 
 import {
-  FaCogs,
-  FaBriefcase,
-  FaChartLine,
+  
   FaBullseye,
-  FaLightbulb,
-  FaSearch,
-  FaRocket,
   FaWhatsapp,
   FaArrowDown,
 } from "react-icons/fa";

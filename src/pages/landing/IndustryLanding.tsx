@@ -1,3 +1,4 @@
+//IndudsryLanding.tsx
 import { useParams } from "react-router-dom";
 import { CheckCircle2, CreditCard } from "lucide-react";
 import { motion } from "framer-motion";
