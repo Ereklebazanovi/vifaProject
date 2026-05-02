@@ -159,13 +159,13 @@ const SimpleNavbar: React.FC = () => {
       }`}
     >
       <div className="w-full px-8 lg:px-16 py-5 flex items-center justify-between">
-        <Link
-          to="/"
-          className="text-white text-sm font-semibold tracking-[0.4em] uppercase hover:text-slate-300 transition-colors shrink-0 ml-4"
+<Link 
+          to="/" 
+          className="flex items-center gap-1.5 text-xl font-bold tracking-widest shrink-0 group"
         >
-          VIFA
+          <span className="text-white/50 group-hover:text-white transition-colors duration-300 italic">/</span>
+          <span className="text-white group-hover:text-gray-300 transition-colors">VIFA</span>
         </Link>
-
         <div ref={navLinksRef} className="hidden lg:flex items-center gap-10 ml-16">
           {links.map((link) => {
             const isDropdownItem = !!link.hasIndustryDropdown;

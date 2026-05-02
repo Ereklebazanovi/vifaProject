@@ -2,13 +2,11 @@
 
 import type React from "react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   FaBullseye,
   FaChartLine,
   FaQuoteLeft,
-  FaArrowRight,
   FaLayerGroup,
 } from "react-icons/fa";
 import SEO from "../components/SEO";

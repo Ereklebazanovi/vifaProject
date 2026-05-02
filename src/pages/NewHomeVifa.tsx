@@ -41,7 +41,7 @@ const newHomeTranslations = {
     "newHome.services.execution.description":
       "პროფესიონალური პროდუქტის შექმნა, მუდმივი ოპტიმიზაცია და გამჭირვალე რეპორტინგი შედეგების მისაღწევად",
 
-    "newHome.interactive.processTitle": "როგორ მუშაობს",
+    "newHome.interactive.processTitle": "როგორ ვმუშაობთ",
     "newHome.interactive.processTitleHighlight": "VIFA-ს გუნდი?",
 
     "newHome.interactive.step1.title": "1. კვლევა",
@@ -355,9 +355,9 @@ const NewHomeVifa: React.FC = () => {
         {/* Top gradient — navbar readable */}
         <div className="absolute inset-x-0 top-0 h-32 -z-10 bg-linear-to-b from-black/80 to-transparent" />
         {/* Bottom gradient — bottom content readable */}
-        <div className="absolute inset-x-0 bottom-0 h-64 -z-10 bg-linear-to-t from-black/80 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-64 -z-10 bg-linear-to-t from-black/60 to-transparent" />
         {/* Bottom section blend — strong fade into page background */}
-        <div className="absolute inset-x-0 bottom-0 h-48 md:h-64 bg-linear-to-t from-[#060608] via-[#060608]/80 to-transparent z-10" />
+        <div className="absolute inset-x-0 bottom-0 h-[55%] md:h-[65%] bg-linear-to-t from-[#050404] via-[#050404]/85 via-30% to-transparent z-10" />
 
         {/* Content layer */}
         <div className="relative z-10 w-full min-h-[75vh] md:min-h-screen flex flex-col justify-center md:justify-end px-5 sm:px-8 lg:px-16 pt-20">
@@ -423,537 +423,144 @@ const NewHomeVifa: React.FC = () => {
       {/* Services Showcase — full width, outside container */}
       <ServicesSection t={t} />
 
-      {/* ─── Rest of page ─── */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+{/* ─── Rest of page ─── */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32" id="services">
+        
+    
 
+        {/* Interactive Information Section (Simplified & Premium) */}
+        <div ref={sectionRef} className="mb-20">
 
-          <div className="grid md:grid-cols-3 gap-8 mb-12 lg:mb-32">
-            {/* Research Card */}
-            <motion.div
-              className="text-center group cursor-pointer relative"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -10, scale: 1.02 }}
-            >
-              <div className="w-20 h-20 bg-blue-500/10 border border-blue-400/20 rounded-xl mx-auto mb-6 flex items-center justify-center relative overflow-hidden group-hover:border-blue-400/40 transition-all duration-300">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent rounded-xl -z-10 group-hover:opacity-100 transition-opacity" />
-                <motion.div
-                  className="text-2xl text-blue-400 relative z-10"
-                  whileHover={{ scale: 1.2, rotate: 5 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <FaSearch />
-                </motion.div>
-              </div>
-              <motion.h3 className="text-xl font-semibold text-white mb-3 transition-all duration-300 group-hover:font-bold">
-                {t("newHome.services.research.title")}
-              </motion.h3>
-              <motion.p className="text-slate-400 leading-relaxed max-w-xs mx-auto transition-all duration-300 group-hover:text-slate-300">
-                {t("newHome.services.research.description")}
-              </motion.p>
-              <motion.div
-                className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                initial={{ x: 10 }}
-                whileHover={{ x: 5 }}
-              >
-                <span className="text-slate-500 text-sm font-mono">
-                  → Learn more
-                </span>
-              </motion.div>
-            </motion.div>
+          {/* Section Heading */}
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-16 tracking-tight">
+            როგორ{" "}
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-fuchsia-400">
+              ვმუშაობთ
+            </span>
+          </h2>
 
-            {/* Strategy Card */}
-            <motion.div
-              className="text-center group cursor-pointer relative"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -10, scale: 1.02 }}
-            >
-              <div className="w-20 h-20 bg-purple-500/10 border border-purple-400/20 rounded-xl mx-auto mb-6 flex items-center justify-center relative overflow-hidden group-hover:border-purple-400/40 transition-all duration-300">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent rounded-xl -z-10 group-hover:opacity-100 transition-opacity" />
-                <motion.div
-                  className="text-2xl text-purple-400 relative z-10"
-                  whileHover={{ scale: 1.2, rotate: 5 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <FaLightbulb />
-                </motion.div>
-              </div>
-              <motion.h3 className="text-xl font-semibold text-white mb-3 transition-all duration-300 group-hover:font-bold">
-                {t("newHome.services.strategy.title")}
-              </motion.h3>
-              <motion.p className="text-slate-400 leading-relaxed max-w-xs mx-auto transition-all duration-300 group-hover:text-slate-300">
-                {t("newHome.services.strategy.description")}
-              </motion.p>
-              <motion.div
-                className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                initial={{ x: 10 }}
-                whileHover={{ x: 5 }}
-              >
-                <span className="text-slate-500 text-sm font-mono">
-                  → Learn more
-                </span>
-              </motion.div>
-            </motion.div>
-
-            {/* Execution Card */}
-            <motion.div
-              className="text-center group cursor-pointer relative"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -10, scale: 1.02 }}
-            >
-              <div className="w-20 h-20 bg-green-500/10 border border-green-400/20 rounded-xl mx-auto mb-6 flex items-center justify-center relative overflow-hidden group-hover:border-green-400/40 transition-all duration-300">
-                <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent rounded-xl -z-10 group-hover:opacity-100 transition-opacity" />
-                <motion.div
-                  className="text-2xl text-green-400 relative z-10"
-                  whileHover={{ scale: 1.2, rotate: 5 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <FaRocket />
-                </motion.div>
-              </div>
-              <motion.h3 className="text-xl font-semibold text-white mb-3 transition-all duration-300 group-hover:font-bold">
-                {t("newHome.services.execution.title")}
-              </motion.h3>
-              <motion.p className="text-slate-400 leading-relaxed max-w-xs mx-auto transition-all duration-300 group-hover:text-slate-300">
-                {t("newHome.services.execution.description")}
-              </motion.p>
-              <motion.div
-                className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                initial={{ x: 10 }}
-                whileHover={{ x: 5 }}
-              >
-                <span className="text-slate-500 text-sm font-mono">
-                  → Learn more
-                </span>
-              </motion.div>
-            </motion.div>
-          </div>
-
-          {/* Interactive Information Section */}
-          <div
-            ref={sectionRef}
-            className="max-w-6xl mx-auto mt-10 md:mt-24 mb-10 md:mb-20"
-            style={{ position: "relative" }}
-          >
-            {/* მთავარი კონტენტი */}
-            <div className={showDigitalConsequences ? "hidden" : "block"}>
-              {/* Section Header */}
-              <div className="text-center mb-12"></div>
-
-              {/* Two-Column Layout */}
-              <div className="grid lg:grid-cols-2 gap-12 items-start">
-                <div className="space-y-8">
-                  <div className="text-center lg:text-left mb-12">
-                    <h3 className="text-2xl md:text-3xl font-light text-white mb-4">
-                      {t("newHome.interactive.processTitle")}{" "}
-                      <span className="text-green-400">
-                        {t("newHome.interactive.processTitleHighlight")}
-                      </span>
-                    </h3>
-                  </div>
-
-                  {/* Process Steps */}
-                  <div className="space-y-6">
-                    {[1, 2, 3, 4].map((stepNum) => (
-                      <div
-                        key={stepNum}
-                        className="flex items-start gap-6 group"
-                      >
-                        {/* Step Circle with Animation */}
-                        <div className="flex-shrink-0">
-                          <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500/20 to-green-500/20 border border-blue-400/30 flex items-center justify-center group-hover:border-blue-400/60 transition-all duration-300 group-hover:scale-110">
-                            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-400 to-green-400 flex items-center justify-center text-white font-bold text-sm">
-                              {stepNum}
-                            </div>
-                          </div>
-                          {/* Connection Line */}
-                          {stepNum < 4 && (
-                            <div className="w-px h-12 bg-gradient-to-b from-blue-400/30 to-green-400/30 mx-auto mt-2"></div>
-                          )}
-                        </div>
-
-                        {/* Step Content */}
-                        <div className="flex-1 pb-8">
-                          <h4 className="text-lg font-medium text-white mb-1 group-hover:text-blue-300 transition-colors">
-                            {t(`newHome.interactive.step${stepNum}.title`)}
-                          </h4>
-                          <p className="text-blue-400 text-sm font-medium mb-2">
-                            {t(`newHome.interactive.step${stepNum}.subtitle`)}
-                          </p>
-                          <p className="text-slate-300 text-sm leading-relaxed">
-                            {t(
-                              `newHome.interactive.step${stepNum}.description`
-                            )}
-                          </p>
-                        </div>
+          {/* Default View */}
+          <div className={`transition-all duration-700 ${showDigitalConsequences ? "hidden opacity-0" : "block opacity-100"}`}>
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              
+              {/* Left Column - The Process */}
+              <div>
+            
+                
+                <div className="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-white/10 before:to-transparent">
+                  {[1, 2, 3, 4].map((stepNum) => (
+                    <div key={stepNum} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                      {/* Timeline Dot */}
+                      <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white/20 bg-[#0A0A0C] text-gray-400 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 transition-all duration-300 group-hover:border-blue-500/50 group-hover:text-white z-10">
+                        {stepNum}
                       </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Right Side - 21st Century Challenges */}
-                <div className="space-y-8">
-                  <div className="text-center lg:text-left mb-12">
-                    <h3 className="text-2xl md:text-3xl font-light text-white mb-8">
-                      {t("newHome.interactive.challengesTitle")}
-                    </h3>
-                  </div>
-
-                  {/* Challenge Cards */}
-                  <div className="grid gap-6">
-                    {[1, 2, 3, 4].map((challengeNum) => (
-                      <div key={challengeNum} className="group">
-                        <div className="bg-black/30 backdrop-blur-sm border border-slate-700/30 rounded-xl p-6 hover:bg-black/50 hover:border-slate-600/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-500/10">
-                          <div className="flex items-start gap-4">
-                            {/* Icon */}
-                            <div className="flex-shrink-0">
-                              <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-400/20 flex items-center justify-center text-xl text-blue-400 group-hover:scale-110 transition-transform duration-300">
-                                {challengeNum === 1 && <FaCogs />}
-                                {challengeNum === 2 && <FaBriefcase />}
-                                {challengeNum === 3 && <FaChartLine />}
-                                {challengeNum === 4 && <FaBullseye />}
-                              </div>
-                            </div>
-
-                            {/* Content */}
-                            <div className="flex-1">
-                              <h4 className="text-lg font-medium text-white mb-2 group-hover:text-blue-300 transition-colors">
-                                {t(
-                                  `newHome.interactive.challenge${challengeNum}.title`
-                                )}
-                              </h4>
-                              <p className="text-slate-400 text-sm leading-relaxed">
-                                {t(
-                                  `newHome.interactive.challenge${challengeNum}.description`
-                                )}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
+                      
+                      {/* Content */}
+                      <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl bg-white/[0.02] border border-white/5 group-hover:bg-white/[0.04] transition-colors">
+                        <h4 className="font-semibold text-white mb-1">{t(`newHome.interactive.step${stepNum}.title`)}</h4>
+                        <p className="text-sm text-gray-400 leading-relaxed">{t(`newHome.interactive.step${stepNum}.description`)}</p>
                       </div>
-                    ))}
-                  </div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              {/* Digital Consequences Trigger */}
-              <div className="text-center mt-16">
+              {/* Right Column - Challenges & Trigger */}
+              <div className="lg:pl-10">
+                <h3 className="text-3xl font-bold text-white mb-8 tracking-tight">
+                  {t("newHome.interactive.challengesTitle")}
+                </h3>
+                
+                <div className="space-y-4 mb-12">
+                  {[1, 2, 3].map((challengeNum) => (
+                    <div key={challengeNum} className="p-5 rounded-2xl bg-[#0A0A0C] border border-white/5 flex gap-4 items-start">
+                      <div className="mt-1 text-red-400/50"><FaBullseye /></div>
+                      <div>
+                        <h4 className="text-white font-medium mb-1">{t(`newHome.interactive.challenge${challengeNum}.title`)}</h4>
+                        <p className="text-sm text-gray-400">{t(`newHome.interactive.challenge${challengeNum}.description`)}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
                 <button
                   onClick={() => {
                     setShowDigitalConsequences(true);
-                    // Scroll to section top with smooth animation
                     setTimeout(() => {
-                      sectionRef.current?.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start",
-                      });
+                      sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
                     }, 100);
                   }}
-                  className="bg-gradient-to-r from-blue-500 to-blue-500 text-white px-8 py-4 text-lg font-medium rounded-xl hover:from-red-600 hover:to-orange-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black text-sm font-bold tracking-wide rounded-full hover:bg-gray-200 transition-colors duration-300"
                 >
                   {t("newHome.consequences.button")}
                 </button>
               </div>
+
             </div>
+          </div>
 
-            {/* რა მოსდის ბიზნესს ციფრული არსებობის გარეშე */}
-            {showDigitalConsequences && (
-              <div className="animate-fade-in">
-                <div className="text-center mb-12">
-                  <h2 className="text-3xl md:text-4xl font-light text-white mb-4">
-                    {t("newHome.consequences.title")}{" "}
-                    <span className="text-red-400">
-                      {t("newHome.consequences.highlight")}
-                    </span>
-                  </h2>
-                </div>
-
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {/* პრობლემა 1 */}
-                  <div className="bg-red-900/20 border border-red-500/30 rounded-xl p-6">
-                    <div className="w-12 h-12 mb-4 bg-red-500/20 rounded-lg flex items-center justify-center">
-                      <svg
-                        className="w-6 h-6 text-red-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"
-                        />
-                      </svg>
-                    </div>
-                    <h3 className="text-xl font-medium text-white mb-3">
-                      {t("newHome.consequence1.title")}
-                    </h3>
-                    <p className="text-slate-300 text-sm leading-relaxed">
-                      {t("newHome.consequence1.description")}
-                    </p>
-                  </div>
-
-                  {/* პრობლემა 2 */}
-                  <div className="bg-orange-900/20 border border-orange-500/30 rounded-xl p-6">
-                    <div className="w-12 h-12 mb-4 bg-orange-500/20 rounded-lg flex items-center justify-center">
-                      <svg
-                        className="w-6 h-6 text-orange-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                    </div>
-                    <h3 className="text-xl font-medium text-white mb-3">
-                      {t("newHome.consequence2.title")}
-                    </h3>
-                    <p className="text-slate-300 text-sm leading-relaxed">
-                      {t("newHome.consequence2.description")}
-                    </p>
-                  </div>
-
-                  {/* პრობლემა 3 */}
-                  <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-xl p-6">
-                    <div className="w-12 h-12 mb-4 bg-yellow-500/20 rounded-lg flex items-center justify-center">
-                      <svg
-                        className="w-6 h-6 text-yellow-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                        />
-                      </svg>
-                    </div>
-                    <h3 className="text-xl font-medium text-white mb-3">
-                      {t("newHome.consequence3.title")}
-                    </h3>
-                    <p className="text-slate-300 text-sm leading-relaxed">
-                      {t("newHome.consequence3.description")}
-                    </p>
-                  </div>
-
-                  {/* პრობლემა 5 */}
-                  <div className="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6">
-                    <div className="w-12 h-12 mb-4 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                      <svg
-                        className="w-6 h-6 text-blue-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                    </div>
-                    <h3 className="text-xl font-medium text-white mb-3">
-                      {t("newHome.consequence4.title")}
-                    </h3>
-                    <p className="text-slate-300 text-sm leading-relaxed">
-                      {t("newHome.consequence4.description")}
-                    </p>
-                  </div>
-
-                  {/* პრობლემა 6 */}
-                  <div className="bg-green-900/20 border border-green-500/30 rounded-xl p-6">
-                    <div className="w-12 h-12 mb-4 bg-green-500/20 rounded-lg flex items-center justify-center">
-                      <svg
-                        className="w-6 h-6 text-green-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                        />
-                      </svg>
-                    </div>
-                    <h3 className="text-xl font-medium text-white mb-3">
-                      {t("newHome.consequence5.title")}
-                    </h3>
-                    <p className="text-slate-300 text-sm leading-relaxed">
-                      {t("newHome.consequence5.description")}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="text-center mt-12">
-                  <button
-                    onClick={() => setShowDigitalConsequences(false)}
-                    className="bg-gradient-to-r from-green-500 to-blue-500 text-white px-8 py-4 text-lg font-medium rounded-xl hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                  >
-                    {t("newHome.consequences.backButton")}
-                  </button>
-                </div>
+          {/* Consequences View (When Button Clicked) */}
+          {showDigitalConsequences && (
+            <motion.div 
+              className="animate-fade-in"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="text-center mb-16">
+                <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+                  {t("newHome.consequences.title")}{" "}
+                  <span className="text-red-500">
+                    {t("newHome.consequences.highlight")}
+                  </span>
+                </h2>
               </div>
-            )}
-          </div>
 
-          {/* CTA Section */}
-          <div className="text-center mt-16 md:mt-32">
-            <div className="max-w-2xl mx-auto">
-              <h3 className="text-2xl font-light text-white mb-6">
-                {t("newHome.final.question")}
-              </h3>
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-gradient-to-r from-green-500 to-blue-500 text-white px-10 py-4 text-lg font-medium hover:from-green-600 hover:to-blue-600 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105"
-              >
-                <FaWhatsapp className="text-xl" />
-                {t("newHome.final.button")}
-              </a>
-            </div>
-          </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+                {/* 3 Main Consequences Cards (Simplified and darkened) */}
+                {[1, 2, 3].map((num) => (
+                  <div key={num} className="bg-[#0A0A0C] border border-red-500/20 rounded-3xl p-8 relative overflow-hidden group">
+                    <div className="absolute inset-0 bg-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <h3 className="text-xl font-medium text-white mb-3 relative z-10">
+                      {t(`newHome.consequence${num}.title`)}
+                    </h3>
+                    <p className="text-sm text-gray-400 leading-relaxed relative z-10">
+                      {t(`newHome.consequence${num}.description`)}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="text-center">
+                <button
+                  onClick={() => setShowDigitalConsequences(false)}
+                  className="inline-flex items-center justify-center px-8 py-4 bg-white/10 text-white text-sm font-medium tracking-wide rounded-full border border-white/20 hover:bg-white/20 transition-colors duration-300"
+                >
+                  {t("newHome.consequences.backButton")}
+                </button>
+              </div>
+            </motion.div>
+          )}
+
+        </div>
+
+        {/* Final CTA Section */}
+        <div className="mt-32 pt-20 border-t border-white/5 text-center">
+          <h3 className="text-3xl font-bold text-white mb-8 tracking-tight">
+            {t("newHome.final.question")}
+          </h3>
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 bg-white text-black px-10 py-4 text-sm font-bold tracking-wide rounded-full hover:bg-gray-200 transition-colors duration-300"
+          >
+            <FaWhatsapp className="text-lg" />
+            {t("newHome.final.button")}
+          </a>
+        </div>
+
       </div>
-
-      {/* Compact Animations */}
-      <style>{`
-        .perspective-1000 {
-          perspective: 1000px;
-        }
-
-        .transform-style-3d {
-          transform-style: preserve-3d;
-        }
-
-        .rotate-y-6 {
-          transform: rotateY(6deg);
-        }
-
-        @keyframes float-slow {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-6px); }
-        }
-
-        @keyframes float-medium {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-4px); }
-        }
-
-        @keyframes float-fast {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-3px); }
-        }
-
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-
-        @keyframes bounce-slow {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-4px); }
-        }
-
-        @keyframes typing-dots-mini {
-          0%, 20% { opacity: 0.3; }
-          50% { opacity: 1; }
-          100% { opacity: 0.3; }
-        }
-
-        .animate-float-slow {
-          animation: float-slow 3s ease-in-out infinite;
-        }
-
-        .animate-float-medium {
-          animation: float-medium 2.5s ease-in-out infinite;
-        }
-
-        .animate-float-fast {
-          animation: float-fast 2s ease-in-out infinite;
-        }
-
-        .animate-spin-slow {
-          animation: spin-slow 8s linear infinite;
-        }
-
-        .animate-bounce-slow {
-          animation: bounce-slow 2.5s ease-in-out infinite;
-        }
-
-        .typing-dots-mini span {
-          display: inline-block;
-          width: 2px;
-          height: 2px;
-          border-radius: 50%;
-          background-color: #a855f7;
-          margin: 0 0.5px;
-          animation: typing-dots-mini 1.2s ease-in-out infinite;
-        }
-
-        .typing-dots-mini span:nth-child(1) { animation-delay: 0s; }
-        .typing-dots-mini span:nth-child(2) { animation-delay: 0.15s; }
-        .typing-dots-mini span:nth-child(3) { animation-delay: 0.3s; }
-
-        /* Futuristic AI Chat Animation */
-        @keyframes glow {
-          0%, 100% { box-shadow: 0 0 8px rgba(59, 130, 246, 0.3); }
-          50% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.6), 0 0 30px rgba(59, 130, 246, 0.4); }
-        }
-
-        .animate-glow {
-          animation: glow 2s ease-in-out infinite;
-        }
-
-        @keyframes typing-dots-ai {
-          0%, 20% { opacity: 0.3; transform: scale(0.8); }
-          50% { opacity: 1; transform: scale(1.1); }
-          100% { opacity: 0.3; transform: scale(0.8); }
-        }
-
-        .typing-dots-ai span {
-          display: inline-block;
-          width: 3px;
-          height: 3px;
-          border-radius: 50%;
-          background: linear-gradient(45deg, #a855f7, #ec4899);
-          margin: 0 1px;
-          animation: typing-dots-ai 1.4s ease-in-out infinite;
-        }
-
-        .typing-dots-ai span:nth-child(1) { animation-delay: 0s; }
-        .typing-dots-ai span:nth-child(2) { animation-delay: 0.2s; }
-        .typing-dots-ai span:nth-child(3) { animation-delay: 0.4s; }
-
-        /* Futuristic Hover Effects */
-        @keyframes rotate-glow {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-
-        @keyframes cyber-pulse {
-          0%, 100% { opacity: 0.5; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.05); }
-        }
-      `}</style>
     </>
   );
 };

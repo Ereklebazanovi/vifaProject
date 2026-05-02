@@ -1,218 +1,203 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import ContactForm from '../components/ContactForm';
-import SEO from '../components/SEO';
-import { useLanguage } from '../contexts/LanguageContext';
+"use client";
+
+import type React from "react";
+import { useEffect } from "react";
+import { motion } from "framer-motion";
+import {
+  FaWhatsapp,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaCode,
+  FaBullhorn,
+} from "react-icons/fa";
+import SEO from "../components/SEO";
+import { useLanguage } from "../contexts/LanguageContext";
+import { useLanguageTransition } from "../hooks/useLanguageTransition";
+
+const contactTranslations = {
+  ka: {
+    "seo.title": "კონტაქტი | VIFA DIGITAL",
+    "seo.description": "დაგვიკავშირდით პროექტის დასაწყებად. აირჩიეთ თქვენთვის სასურველი მიმართულება.",
+    
+    "contact.hero.subtitle": "სწრაფი კომუნიკაცია",
+    "contact.hero.title": "დაგვიკავშირდით",
+    "contact.hero.desc": "აირჩიეთ თქვენთვის სასურველი მიმართულება და მოგვწერეთ პირდაპირ WhatsApp-ში.",
+    
+    "contact.dept.web.title": "ვებ-დეველოპმენტი & IT",
+    "contact.dept.web.desc": "ვებსაიტები, პლატფორმები და ტექნიკური მხარდაჭერა.",
+    "contact.dept.marketing.title": "მარკეტინგი & კრეატივი",
+    "contact.dept.marketing.desc": "სოციალური მედია, რეკლამა და კონტენტ პროდუქცია.",
+    
+    "contact.btn.whatsapp": "მოგვწერეთ WhatsApp-ში",
+    "contact.info.email": "ზოგადი შეკითხვებისთვის",
+    "contact.info.location": "თბილისი, საქართველო",
+  },
+  en: {
+    "seo.title": "Contact Us | VIFA DIGITAL",
+    "seo.description": "Contact us to start your project. Choose the department you need.",
+    
+    "contact.hero.subtitle": "Fast Communication",
+    "contact.hero.title": "Get in Touch",
+    "contact.hero.desc": "Choose the department you need and message us directly on WhatsApp. Our experts are ready to help.",
+    
+    "contact.dept.web.title": "Web Development & IT",
+    "contact.dept.web.desc": "Websites, platforms, and technical support.",
+    "contact.dept.marketing.title": "Marketing & Creative",
+    "contact.dept.marketing.desc": "Social media, advertising, and content production.",
+    
+    "contact.btn.whatsapp": "Message on WhatsApp",
+    "contact.info.email": "For general inquiries",
+    "contact.info.location": "Tbilisi, Georgia",
+  },
+};
 
 const ContactPage: React.FC = () => {
   const { currentLanguage } = useLanguage();
+  const { getTransitionClasses } = useLanguageTransition();
 
-  const content = {
-    ka: {
-      title: 'კონტაქტი',
-      subtitle: 'დაუკავშირდით ჩვენ',
-      description: 'მზად ვართ განვიხილოთ თქვენი პროექტი და დაგეხმაროთ ბიზნესის ზრდაში',
-      contactInfo: {
-        title: 'საკონტაქტო ინფორმაცია',
-        email: 'ელ. ფოსტა',
-        phone: 'ტელეფონი',
-        address: 'მისამართი',
-        workingHours: 'სამუშაო საათები'
-      },
-      workingHoursText: 'ორშაბათი - პარასკევი: 10:00 - 19:00',
-      addressText: 'თბილისი, საქართველო'
-    },
-    en: {
-      title: 'Contact',
-      subtitle: 'Get in Touch',
-      description: 'Ready to discuss your project and help grow your business',
-      contactInfo: {
-        title: 'Contact Information',
-        email: 'Email',
-        phone: 'Phone',
-        address: 'Address',
-        workingHours: 'Working Hours'
-      },
-      workingHoursText: 'Monday - Friday: 10:00 - 19:00',
-      addressText: 'Tbilisi, Georgia'
-    }
+  const t = (key: string): string => {
+    const translations = contactTranslations[currentLanguage as keyof typeof contactTranslations] as Record<string, string>;
+    return translations[key] || key;
   };
 
-  const t = content[currentLanguage];
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  // WhatsApp Links pre-filled with messages
+  const webWhatsappUrl = "https://wa.me/995557624243?text=გამარჯობა,%20ვებ-დეველოპმენტის%20და%20IT%20სერვისებით%20დავინტერესდი.";
+  const marketingWhatsappUrl = "https://wa.me/995577175132?text=გამარჯობა,%20ციფრული%20მარკეტინგის%20და%20კრეატიული%20სერვისებით%20დავინტერესდი.";
 
   return (
     <>
       <SEO
-        title={t.title}
-        description={t.description}
-        type="website"
+        title={t("seo.title")}
+        description={t("seo.description")}
+        url="https://vifadigital.ge/contact"
       />
 
-      <div className="min-h-screen bg-black">
-        {/* Background with elegant gradient */}
-        <div className="fixed inset-0 z-0">
-          <div className="absolute inset-0 bg-black" />
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-950/50 via-black to-gray-900/30" />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(circle at center, rgba(17, 24, 39, 0.2), transparent, transparent)",
-            }}
-          />
-        </div>
+      {/* Modern Dark Background Layer */}
+      <div className="fixed inset-0 z-0 bg-[#060608]">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(59,130,246,0.05)_0%,transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(217,70,239,0.03)_0%,transparent_50%)]" />
+      </div>
 
-        {/* Content */}
-        <div className="relative z-10 pt-24 pb-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className={`relative z-10 w-full min-h-screen pt-32 pb-24 flex flex-col justify-center ${getTransitionClasses()}`}>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          
+          {/* ── Header ── */}
+          <div className="text-center mb-16">
+            <span className="text-sm uppercase tracking-widest text-fuchsia-400 font-semibold mb-4 block">
+              {t("contact.hero.subtitle")}
+            </span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6">
+              {t("contact.hero.title")}
+            </h1>
+            <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+              {t("contact.hero.desc")}
+            </p>
+          </div>
 
-            {/* Header */}
+          {/* ── Departments Grid ── */}
+          <div className="grid md:grid-cols-2 gap-6 mb-16">
+            
+            {/* IT / Web Dept Card */}
             <motion.div
-              className="text-center mb-16"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.5 }}
+              className="group bg-[#0A0A0C] border border-white/10 rounded-3xl p-8 hover:bg-white/[0.02] hover:border-blue-500/30 transition-all duration-300 shadow-xl relative overflow-hidden flex flex-col h-full"
             >
-              <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-                {t.title}
-              </h1>
-              <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-                {t.description}
+              <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-20 transition-opacity text-6xl text-blue-500">
+                <FaCode />
+              </div>
+              <div className="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-400 text-2xl mb-6">
+                <FaCode />
+              </div>
+              <h3 className="text-2xl font-semibold text-white mb-3">
+                {t("contact.dept.web.title")}
+              </h3>
+              <p className="text-gray-400 mb-8 flex-grow">
+                {t("contact.dept.web.desc")}
               </p>
+              
+              <a
+                href={webWhatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-3 w-full bg-white/[0.03] border border-white/10 hover:bg-green-500 hover:border-green-400 hover:text-white text-gray-300 py-4 rounded-xl font-medium transition-all duration-300"
+              >
+                <FaWhatsapp className="text-xl" />
+                <span>+995 557 62 42 43</span>
+              </a>
             </motion.div>
 
-            <div className="grid lg:grid-cols-3 gap-12">
-
-              {/* Contact Form */}
-              <motion.div
-                className="lg:col-span-2"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
+            {/* Marketing Dept Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="group bg-[#0A0A0C] border border-white/10 rounded-3xl p-8 hover:bg-white/[0.02] hover:border-fuchsia-500/30 transition-all duration-300 shadow-xl relative overflow-hidden flex flex-col h-full"
+            >
+              <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-20 transition-opacity text-6xl text-fuchsia-500">
+                <FaBullhorn />
+              </div>
+              <div className="w-14 h-14 rounded-2xl bg-fuchsia-500/10 flex items-center justify-center text-fuchsia-400 text-2xl mb-6">
+                <FaBullhorn />
+              </div>
+              <h3 className="text-2xl font-semibold text-white mb-3">
+                {t("contact.dept.marketing.title")}
+              </h3>
+              <p className="text-gray-400 mb-8 flex-grow">
+                {t("contact.dept.marketing.desc")}
+              </p>
+              
+              <a
+                href={marketingWhatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-3 w-full bg-white/[0.03] border border-white/10 hover:bg-green-500 hover:border-green-400 hover:text-white text-gray-300 py-4 rounded-xl font-medium transition-all duration-300"
               >
-                <ContactForm />
-              </motion.div>
+                <FaWhatsapp className="text-xl" />
+                <span>+995 577 17 51 32</span>
+              </a>
+            </motion.div>
 
-              {/* Contact Information */}
-              <motion.div
-                className="lg:col-span-1"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-              >
-                <div className="bg-slate-900/50 backdrop-blur-lg border border-slate-700/30 rounded-2xl p-8 h-fit">
-                  <h3 className="text-2xl font-bold text-white mb-8">
-                    {t.contactInfo.title}
-                  </h3>
-
-                  <div className="space-y-6">
-
-                    {/* Email */}
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                      </div>
-                      <div>
-                        <h4 className="text-white font-medium mb-1">{t.contactInfo.email}</h4>
-                        <a
-                          href="mailto:vifa.official2020@gmail.com"
-                          className="text-slate-400 hover:text-blue-400 transition-colors"
-                        >
-                          vifa.official2020@gmail.com
-                        </a>
-                      </div>
-                    </div>
-
-                    {/* Phone */}
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                        </svg>
-                      </div>
-                      <div>
-                        <h4 className="text-white font-medium mb-1">{t.contactInfo.phone}</h4>
-                        <a
-                          href="tel:+995555123456"
-                          className="text-slate-400 hover:text-green-400 transition-colors"
-                        >
-                          +995 555 123 456
-                        </a>
-                      </div>
-                    </div>
-
-                    {/* Address */}
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                      </div>
-                      <div>
-                        <h4 className="text-white font-medium mb-1">{t.contactInfo.address}</h4>
-                        <p className="text-slate-400">{t.addressText}</p>
-                      </div>
-                    </div>
-
-                    {/* Working Hours */}
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <svg className="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                      </div>
-                      <div>
-                        <h4 className="text-white font-medium mb-1">{t.contactInfo.workingHours}</h4>
-                        <p className="text-slate-400">{t.workingHoursText}</p>
-                      </div>
-                    </div>
-
-                  </div>
-
-                  {/* Social Media */}
-                  <div className="mt-8 pt-8 border-t border-slate-700">
-                    <div className="flex gap-4">
-                      <a
-                        href="https://www.facebook.com/inventogeo"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center hover:bg-blue-500/30 transition-colors"
-                      >
-                        <svg className="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                        </svg>
-                      </a>
-                      <a
-                        href="https://www.instagram.com/inventogeo"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-10 h-10 bg-pink-500/20 rounded-lg flex items-center justify-center hover:bg-pink-500/30 transition-colors"
-                      >
-                        <svg className="w-5 h-5 text-pink-400" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.337-1.297-.89-.808-1.297-1.953-1.297-3.337s.408-2.529 1.297-3.337c.89-.808 2.04-1.297 3.337-1.297s2.448.49 3.337 1.297c.89.808 1.297 1.953 1.297 3.337s-.408 2.529-1.297 3.337c-.89.808-2.04 1.297-3.337 1.297zm7.072 0c-1.297 0-2.448-.49-3.337-1.297-.89-.808-1.297-1.953-1.297-3.337s.408-2.529 1.297-3.337c.89-.808 2.04-1.297 3.337-1.297s2.448.49 3.337 1.297c.89.808 1.297 1.953 1.297 3.337s-.408 2.529-1.297 3.337c-.89.808-2.04 1.297-3.337 1.297z"/>
-                        </svg>
-                      </a>
-                      <a
-                        href="https://www.linkedin.com/company/inventogeo"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-10 h-10 bg-blue-600/20 rounded-lg flex items-center justify-center hover:bg-blue-600/30 transition-colors"
-                      >
-                        <svg className="w-5 h-5 text-blue-300" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-
-                </div>
-              </motion.div>
-
-            </div>
           </div>
+
+          {/* ── General Info Bottom Bar ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex flex-col sm:flex-row justify-center items-center gap-8 pt-8 border-t border-white/5"
+          >
+            <div className="flex items-center gap-3 text-gray-400">
+              <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-300">
+                <FaEnvelope />
+              </div>
+              <div>
+                <div className="text-xs uppercase tracking-wider text-gray-500">{t("contact.info.email")}</div>
+                <a href="mailto:vifa.official2020@gmail.com
+" className="text-white hover:text-blue-400 transition-colors">
+                  vifa.official2020@gmail.com
+                </a>
+              </div>
+            </div>
+
+            <div className="hidden sm:block w-px h-10 bg-white/10"></div>
+
+            <div className="flex items-center gap-3 text-gray-400">
+              <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-300">
+                <FaMapMarkerAlt />
+              </div>
+              <div>
+                <div className="text-xs uppercase tracking-wider text-gray-500">ლოკაცია</div>
+                <div className="text-white">{t("contact.info.location")}</div>
+              </div>
+            </div>
+          </motion.div>
+
         </div>
       </div>
     </>

@@ -143,7 +143,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
   const ka = currentLanguage === "ka";
 
   return (
-    <section className="w-full pt-10 md:pt-16 pb-16 bg-[#050404]">
+    <section className="w-full pt-6 md:pt-10 pb-16 bg-[#050404]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
         <div id="services-header" className="mb-5 md:mb-16">
           <div className="inline-flex items-center gap-2 mb-5">
