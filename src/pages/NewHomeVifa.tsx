@@ -2,7 +2,7 @@
 "use client";
 
 import type React from "react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import SEO from "../components/SEO";
@@ -315,53 +315,7 @@ const NewHomeVifa: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
 
   const [showDigitalConsequences, setShowDigitalConsequences] = useState(false);
-  const [videoFading, setVideoFading] = useState(false);
-  const [showVideo, setShowVideo] = useState(false);
-  const [videoReady, setVideoReady] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  // Decide whether to load the video at all based on device/network conditions
-  useEffect(() => {
-    // Respect reduced-motion OS preference — no video
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    // Skip video on 2G or slower connections
-    const conn = (navigator as unknown as { connection?: { effectiveType?: string } }).connection;
-    if (conn && (conn.effectiveType === "slow-2g" || conn.effectiveType === "2g")) return;
-
-    // Defer adding the <video> element by 250 ms so critical resources
-    // (fonts, CSS, first paint) get priority in the network queue first
-    const timer = setTimeout(() => setShowVideo(true), 250);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Set up playback rate and fade listeners once the video is in the DOM
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video || !showVideo) return;
-
-    video.playbackRate = 1.5;
-
-    const handleCanPlay = () => setVideoReady(true);
-    const handleTimeUpdate = () => {
-      if (video.duration && video.duration - video.currentTime < 0.6) {
-        setVideoFading(true);
-      }
-    };
-    const handleSeeked = () => {
-      if (video.currentTime < 0.3) setVideoFading(false);
-    };
-
-    video.addEventListener("canplay", handleCanPlay);
-    video.addEventListener("timeupdate", handleTimeUpdate);
-    video.addEventListener("seeked", handleSeeked);
-    return () => {
-      video.removeEventListener("canplay", handleCanPlay);
-      video.removeEventListener("timeupdate", handleTimeUpdate);
-      video.removeEventListener("seeked", handleSeeked);
-    };
-  }, [showVideo]);
 
   // WhatsApp URL for consultation
   const whatsappUrl = "https://wa.me/995557624243";
@@ -382,24 +336,14 @@ const NewHomeVifa: React.FC = () => {
       />
 
       {/* ─── Cinematic Hero — Full Screen ─── */}
-      <div className={`relative min-h-screen overflow-hidden ${getTransitionClasses()}`}>
+      <div className={`relative min-h-[75vh] md:min-h-screen overflow-hidden ${getTransitionClasses()}`}>
 
-        {/* Full-screen video background — only rendered for good connections */}
-        {showVideo && (
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="none"
-            className={`absolute inset-0 -z-10 w-full h-full object-cover object-center transition-opacity duration-1000 ${
-              videoReady && !videoFading ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <source src="/videoHero.mp4" type="video/mp4" />
-          </video>
-        )}
+        {/* Full-screen hero image background */}
+        <img
+          src="/herophoto1.webp"
+          alt=""
+          className="absolute inset-0 -z-10 w-full h-full object-cover object-center md:object-[65%_center]"
+        />
 
         {/* Dark overlay — stronger center fade, navbar area darkened */}
         <div className="absolute inset-0 -z-10 bg-black/60" />
@@ -407,26 +351,47 @@ const NewHomeVifa: React.FC = () => {
         <div className="absolute inset-x-0 top-0 h-32 -z-10 bg-linear-to-b from-black/80 to-transparent" />
         {/* Bottom gradient — bottom content readable */}
         <div className="absolute inset-x-0 bottom-0 h-64 -z-10 bg-linear-to-t from-black/80 to-transparent" />
+        {/* Bottom section blend — smooth fade into page background */}
+        <div className="absolute inset-x-0 bottom-0 h-32 md:h-48 bg-linear-to-t from-[#060608] to-transparent z-10" />
 
         {/* Content layer */}
-        <div className="relative z-10 w-full min-h-screen flex flex-col px-5 sm:px-8 lg:px-16">
+        <div className="relative z-10 w-full min-h-[75vh] md:min-h-screen flex flex-col justify-center md:justify-end px-5 sm:px-8 lg:px-16 pt-20">
 
-          {/* Middle — empty space */}
-          <div className="flex flex-1 items-center pt-24" />
-
-          {/* Bottom — stats left (desktop), description+CTA right / centered on mobile */}
+          {/* Bottom — headline left, stats right on desktop */}
           <div className="flex flex-col md:flex-row md:items-end md:justify-between pb-8 md:pb-12 gap-5 md:gap-0">
 
-            {/* Stats Block — bottom left, desktop only */}
-            <div className="hidden lg:flex items-end gap-10 pb-2">
+            {/* Headline + Description + CTA — left on both mobile and desktop */}
+            <div className="w-full max-w-full md:max-w-2xl lg:max-w-3xl text-left pb-2">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-[1.35] tracking-tight mb-6 md:mb-4 md:max-w-xl lg:max-w-2xl">
+                {currentLanguage === "ka"
+                  ? "ციფრული ინფრასტრუქტურა, რომელიც ზრდაზე მუშაობს"
+                  : "Digital Infrastructure Built to Grow"}
+              </h1>
+              <p className="text-slate-400 text-sm md:text-base font-light leading-relaxed mb-8 md:mb-6 md:max-w-sm lg:max-w-md">
+                {currentLanguage === "ka"
+                  ? "Vifa აშენებს გამართულ ციფრულ სისტემებს და გაყიდვების ავტომატიზაციას თქვენი ბიზნესისთვის"
+                  : "Vifa builds robust digital systems and automated sales pipelines for your business."}
+              </p>
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-white text-black text-xs font-semibold px-6 py-3 rounded-xl tracking-widest uppercase hover:bg-white/90 transition-all duration-200"
+              >
+                {currentLanguage === "ka" ? "დაჯავშნე კონსულტაცია" : "Start a Project"}
+              </a>
+            </div>
+
+            {/* Stats Block — bottom right, desktop only */}
+            <div className="hidden lg:flex items-end gap-10 pb-2 shrink-0">
               {[
                 { num: "100+", label: currentLanguage === "ka" ? "ჩაბარებული პროექტი" : "Submitted project" },
                 { num: "4", label: currentLanguage === "ka" ? "მთავარი მიმართულება" : "Main direction" },
                 { num: "7+", label: currentLanguage === "ka" ? "წელი ინდუსტრიაში" : "Years in industry" },
               ].map((stat, i) => (
                 <div key={i} className="flex items-end gap-10">
-                  <div>
-                    <div className="w-6 h-px bg-white/30 mb-3" />
+                  <div className="text-right">
+                    <div className="w-6 h-px bg-white/30 mb-3 ml-auto" />
                     <div className="text-4xl font-extralight text-white leading-none tracking-tight">
                       {stat.num}
                     </div>
@@ -437,23 +402,6 @@ const NewHomeVifa: React.FC = () => {
                   {i < 2 && <div className="w-px h-8 bg-white/10 mb-4" />}
                 </div>
               ))}
-            </div>
-
-            {/* Description + CTA — full width on mobile, fixed on desktop */}
-            <div className="w-full md:w-105 shrink-0 text-center md:text-right pb-2">
-              <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-4 md:mb-5">
-                {currentLanguage === "ka"
-                  ? "Vifa აშენებს გამართულ ციფრულ ინფრასტრუქტურას და გაყიდვების ავტომატიზებულ სისტემებს, რომლებიც თქვენი ბიზნესის ზრდაზე მუშაობს"
-                  : "Vifa builds robust digital infrastructure and automated sales systems that work to grow your business."}
-              </p>
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block border border-white/60 text-white text-xs font-semibold px-5 py-2.5 tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-200"
-              >
-                {currentLanguage === "ka" ? "დაჯავშნე კონსულტაცია" : "Start a Project"}
-              </a>
             </div>
 
           </div>

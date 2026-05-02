@@ -25,31 +25,31 @@ interface IndustryItem {
 
 const industries: IndustryItem[] = [
   {
-    nameKa: "áƒ˜áƒ£áƒ áƒ˜áƒ“áƒ˜áƒ£áƒšáƒ˜ áƒ“áƒ áƒ¡áƒáƒ¤áƒ˜áƒœáƒáƒœáƒ¡áƒ áƒ¡áƒ”áƒ¥áƒ¢áƒáƒ áƒ˜",
+    nameKa: "იურიდიული და საფინანსო სექტორი",
     nameEn: "Legal & Finance",
     slug: "legal-finance",
     icon: Scale,
   },
   {
-    nameKa: "áƒ¡áƒáƒ¡áƒ¢áƒ£áƒ›áƒ áƒáƒ”áƒ‘áƒ˜, áƒ™áƒáƒ¢áƒ”áƒ¯áƒ”áƒ‘áƒ˜ áƒ“áƒ áƒ¢áƒ£áƒ áƒ˜áƒ–áƒ›áƒ˜",
+    nameKa: "სასტუმროები, კოტეჯები და ტურიზმი",
     nameEn: "Hotels, Cottages & Tourism",
     slug: "tourism",
     icon: Map,
   },
   {
-    nameKa: "áƒ”áƒ¡áƒ—áƒ”áƒ¢áƒ˜áƒ™áƒ áƒ“áƒ áƒ¡áƒ˜áƒšáƒáƒ›áƒáƒ–áƒ”",
+    nameKa: "ესთეტიკა და სილამაზე",
     nameEn: "Beauty & Aesthetics",
     slug: "beauty",
     icon: Sparkles,
   },
   {
-    nameKa: "E-commerce & áƒ¡áƒáƒªáƒáƒšáƒ áƒ•áƒáƒ­áƒ áƒáƒ‘áƒ",
+    nameKa: "E-commerce & საცალო ვაჭრობა",
     nameEn: "E-commerce & Retail",
     slug: "retail",
     icon: ShoppingCart,
   },
   {
-    nameKa: "áƒ áƒ”áƒ¡áƒ¢áƒáƒ áƒœáƒ”áƒ‘áƒ˜ áƒ“áƒ áƒ™áƒ•áƒ”áƒ‘áƒ˜áƒ¡ áƒ˜áƒœáƒ“áƒ£áƒ¡áƒ¢áƒ áƒ˜áƒ",
+    nameKa: "რესტორნები და კვების ინდუსტრია",
     nameEn: "Restaurants & Food Service",
     slug: "food",
     icon: Utensils,
@@ -137,7 +137,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
   const ka = currentLanguage === "ka";
 
   return (
-    <section className="w-full py-20 md:py-28">
+    <section className="w-full pt-10 pb-16 md:py-28">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-8 mb-10 md:mb-16">
           <div>
@@ -167,7 +167,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
               }}
             />
             <span className="relative z-10 text-white font-semibold text-sm tracking-wide whitespace-nowrap pl-18">
-              {ka ? "áƒ¡áƒ”áƒ áƒ•áƒ˜áƒ¡áƒ”áƒ‘áƒ˜áƒ¡ áƒœáƒáƒ®áƒ•áƒ" : "View Services"}
+              {ka ? "სერვისების ნახვა" : "View Services"}
             </span>
             <svg
               className="relative z-10 shrink-0 text-white"
@@ -291,7 +291,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
                           <div className="flex items-center gap-3">
                             <Layers className="w-4 h-4 text-white/50 group-hover:text-white/90 transition-colors" />
                             <span className="text-sm text-white">
-                              {ka ? "áƒ§áƒ•áƒ”áƒšáƒ áƒ¡áƒ”áƒ áƒ•áƒ˜áƒ¡áƒ˜" : "All Services"}
+                              {ka ? "ყველა სერვისი" : "All Services"}
                             </span>
                           </div>
                           <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-white group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-300" />

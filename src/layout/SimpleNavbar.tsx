@@ -246,27 +246,27 @@ const SimpleNavbar: React.FC = () => {
           <LanguageToggle />
         </div>
 
-        {/* Mobile: lang toggle + animated burger */}
+        {/* Mobile: lang toggle + hamburger */}
         <div className="lg:hidden flex items-center gap-5">
           <LanguageToggle />
           <button
             onClick={() => setMobileMenuOpen((p) => !p)}
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-            className="relative w-6 h-5 flex-shrink-0"
+            className="relative w-5 h-4 flex-shrink-0"
           >
             <span
-              className={`absolute left-0 top-0 w-full h-px bg-white rounded-full transition-all duration-300 ease-in-out ${
-                mobileMenuOpen ? "top-[10px] rotate-45" : ""
+              className={`absolute left-0 w-full h-px bg-white transition-all duration-300 origin-center ${
+                mobileMenuOpen ? "top-1/2 -translate-y-1/2 rotate-45" : "top-0"
               }`}
             />
             <span
-              className={`absolute left-0 top-[10px] -translate-y-1/2 w-full h-px bg-white rounded-full transition-all duration-300 ease-in-out ${
-                mobileMenuOpen ? "opacity-0 scale-x-0" : ""
+              className={`absolute left-0 top-1/2 -translate-y-1/2 w-3/4 h-px bg-white transition-all duration-300 ${
+                mobileMenuOpen ? "opacity-0 scale-x-0" : "opacity-100"
               }`}
             />
             <span
-              className={`absolute left-0 bottom-0 w-full h-px bg-white rounded-full transition-all duration-300 ease-in-out ${
-                mobileMenuOpen ? "bottom-[10px] -rotate-45" : ""
+              className={`absolute left-0 w-full h-px bg-white transition-all duration-300 origin-center ${
+                mobileMenuOpen ? "top-1/2 -translate-y-1/2 -rotate-45" : "bottom-0"
               }`}
             />
           </button>
