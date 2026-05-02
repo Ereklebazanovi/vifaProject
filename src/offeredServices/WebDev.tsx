@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
-import TrueFocus from "../components/TrueFocus";
 import {
   FaReact,
   FaMobile,
@@ -23,7 +22,6 @@ import {
   FaBrain,
   FaBullseye,
   FaShoppingCart,
-  FaCommentDots,
   FaWhatsapp,
 } from "react-icons/fa";
 import {
@@ -43,7 +41,9 @@ const webDevTranslations = {
     "seo.webdev.description":
       "პროფესიონალური ვებ განვითარების სერვისები React, Node.js, მობილურზე მორგებული დიზაინი და თანამედროვე ვებ აპლიკაციები.",
 
-    "webdev.hero.title": "INVENTO WEB",
+    "webdev.hero.label": "ვებ განვითარება",
+    "webdev.hero.title": "ვებ მომსახურება",
+    "webdev.hero.subtitle": "ჩვენ ვაშენებთ ციფრულ პროდუქტებს, რომლებიც მუშაობს.",
     "webdev.stats.individual": "Individual",
     "webdev.stats.individualDesc": "პირადი მიდგომა",
     "webdev.stats.quality": "Quality",
@@ -58,7 +58,7 @@ const webDevTranslations = {
     "webdev.process.development": "დეველოპმენტი",
     "webdev.process.launch": "გაშვება",
     "webdev.process.description":
-      "ჩვენი მიდგომა: სტრატეგიული დაგეგმვა → UI/UX დიზაინი → ტექნიკური განხორციელება → ტესტირება და გაშვება",
+      "სტრატეგიული დაგეგმვა → UI/UX დიზაინი → ტექნიკური განხორციელება → ტესტირება და გაშვება",
 
     "webdev.services.title": "ჩვენი ძირითადი სერვისები",
     "webdev.service.website.title": "ვებსაიტის შექმნა",
@@ -106,7 +106,6 @@ const webDevTranslations = {
     "webdev.pricing.landing.feature3": "კონტაქტის ფორმა",
     "webdev.pricing.landing.feature4": "Google ანალიტიკა",
     "webdev.pricing.landing.feature5": "SSL სერთიფიკატი (დაცული კავშირი)",
-
 
     "webdev.pricing.corporate.title": "პრემიუმ ვებსაიტი",
     "webdev.pricing.corporate.description":
@@ -198,15 +197,17 @@ const webDevTranslations = {
     "webdev.invento.strip_status": "შედის ფასში",
     "webdev.invento.strip_core": "Invento™ Core",
     "webdev.invento.strip_btn": "სისტემის ნახვა",
-    "webdev.pricing.badge": "INCLUDED: INVENTO WMS (890₾)",
-
+    "webdev.pricing.badge": "INVENTO WMS შედის",
+    "webdev.whatsapp.consult": "კონსულტაცია WhatsApp-ზე",
   },
   en: {
     "seo.webdev.title": "Invento Web - Web Development Services | Invento Technologies",
     "seo.webdev.description":
       "Professional web development services including React, Node.js, mobile responsive design, and modern web applications.",
 
+    "webdev.hero.label": "Web Development",
     "webdev.hero.title": "INVENTO WEB",
+    "webdev.hero.subtitle": "We build digital products that work.",
     "webdev.stats.individual": "Individual",
     "webdev.stats.individualDesc": "Personal Approach",
     "webdev.stats.quality": "Quality",
@@ -221,7 +222,7 @@ const webDevTranslations = {
     "webdev.process.development": "Development",
     "webdev.process.launch": "Launch",
     "webdev.process.description":
-      "Our Approach: Strategic Planning → UI/UX Design → Technical Implementation → Testing and Launch",
+      "Strategic Planning → UI/UX Design → Technical Implementation → Testing & Launch",
 
     "webdev.services.title": "Our Main Services",
     "webdev.service.website.title": "Website Creation",
@@ -360,18 +361,34 @@ const webDevTranslations = {
     "webdev.invento.strip_status": "INCLUDED",
     "webdev.invento.strip_core": "Invento™ Core",
     "webdev.invento.strip_btn": "View System",
-    "webdev.pricing.badge": "INCLUDED: INVENTO WMS (890₾)",
+    "webdev.pricing.badge": "INVENTO WMS INCLUDED",
+    "webdev.whatsapp.consult": "Consult on WhatsApp",
   },
 };
+
+const processSteps = [
+  { num: "01", icon: FaChartLine, key: "webdev.process.planning",   iconColor: "text-sky-400/70" },
+  { num: "02", icon: FaPaintBrush, key: "webdev.process.design",     iconColor: "text-violet-400/70" },
+  { num: "03", icon: FaCode,       key: "webdev.process.development", iconColor: "text-emerald-400/70" },
+  { num: "04", icon: FaRocket,     key: "webdev.process.launch",     iconColor: "text-orange-400/70" },
+];
+
+const technologies = [
+  { icon: <SiReact />,      name: "React",      color: "text-sky-400/75 group-hover:text-sky-300" },
+  { icon: <SiTypescript />, name: "TypeScript",  color: "text-blue-400/75 group-hover:text-blue-300" },
+  { icon: <SiNodedotjs />,  name: "Node.js",     color: "text-green-400/75 group-hover:text-green-300" },
+  { icon: <SiTailwindcss />,name: "Tailwind",    color: "text-cyan-400/75 group-hover:text-cyan-300" },
+  { icon: <SiFirebase />,   name: "Firebase",    color: "text-amber-400/75 group-hover:text-amber-300" },
+  { icon: <SiVercel />,     name: "Vercel",      color: "text-gray-300/80 group-hover:text-white" },
+];
 
 const WebDev: React.FC = () => {
   const { currentLanguage } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
-
   const [activeService, setActiveService] = useState<number>(0);
 
-  // WhatsApp URL for web development consultation
-  const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20ვებ%20განვითარების%20სერვისით.%20მსურს%20უფასო%20კონსულტაცია.";
+  const whatsappUrl =
+    "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20ვებ%20განვითარების%20სერვისით.%20მსურს%20უფასო%20კონსულტაცია.";
 
   const t = (key: string): string => {
     const translations = webDevTranslations[
@@ -380,830 +397,497 @@ const WebDev: React.FC = () => {
     return translations[key] || key;
   };
 
-  // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  
+  const consultationLabel = t("webdev.pricing.consultation");
 
-  // Main web development services
   const services = [
     {
       id: "frontend-development",
       icon: <FaReact />,
+      iconColor: "text-sky-400/70",
       title: t("webdev.frontend.title"),
       description: t("webdev.frontend.description"),
-      color: "blue",
       features: ["React/Next.js", "TypeScript", "Responsive Design", "PWA"],
     },
     {
       id: "backend-development",
       icon: <FaServer />,
+      iconColor: "text-emerald-400/70",
       title: t("webdev.backend.title"),
       description: t("webdev.backend.description"),
-      color: "green",
-      features: [
-        "Node.js",
-        "API Development",
-        "Database Design",
-        "Cloud Services",
-      ],
+      features: ["Node.js", "API Development", "Database Design", "Cloud Services"],
     },
     {
       id: "mobile-responsive",
       icon: <FaMobile />,
+      iconColor: "text-violet-400/70",
       title: t("webdev.mobile.title"),
       description: t("webdev.mobile.description"),
-      color: "purple",
-      features: [
-        "Mobile First",
-        "Touch Optimized",
-        "Fast Loading",
-        "Cross-Platform",
-      ],
+      features: ["Mobile First", "Touch Optimized", "Fast Loading", "Cross-Platform"],
     },
     {
       id: "ai-integrations",
       icon: <FaBrain />,
+      iconColor: "text-pink-400/70",
       title: t("webdev.ai.title"),
       description: t("webdev.ai.description"),
-      color: "cyan",
-      features: [
-        "Chatbot APIs",
-        "AI Analysis",
-        "Smart Automation",
-        "Custom AI",
-      ],
+      features: ["Chatbot APIs", "AI Analysis", "Smart Automation", "Custom AI"],
     },
     {
       id: "cms-development",
       icon: <FaCog />,
+      iconColor: "text-indigo-400/70",
       title: t("webdev.cms.title"),
       description: t("webdev.cms.description"),
-      color: "indigo",
-      features: [
-        "Admin Panel",
-        "Content Editor",
-        "User Management",
-        "SEO Tools",
-      ],
+      features: ["Admin Panel", "Content Editor", "User Management", "SEO Tools"],
     },
     {
       id: "database-design",
       icon: <FaDatabase />,
+      iconColor: "text-teal-400/70",
       title: t("webdev.database.title"),
       description: t("webdev.database.description"),
-      color: "red",
       features: ["SQL/NoSQL", "Data Modeling", "Performance", "Security"],
     },
     {
       id: "ui-ux-design",
       icon: <FaPaintBrush />,
+      iconColor: "text-rose-400/70",
       title: t("webdev.ui.title"),
       description: t("webdev.ui.description"),
-      color: "pink",
       features: ["User Research", "Wireframes", "Prototypes", "Design Systems"],
     },
     {
       id: "performance-optimization",
       icon: <FaBolt />,
+      iconColor: "text-amber-400/70",
       title: t("webdev.performance.title"),
       description: t("webdev.performance.description"),
-      color: "yellow",
       features: ["Speed Optimization", "SEO", "Core Web Vitals", "CDN"],
     },
   ];
 
-  // Technology stack
-  const technologies = [
-    { icon: <SiReact />, name: "React", color: "blue" },
-    { icon: <SiTypescript />, name: "TypeScript", color: "blue" },
-    { icon: <SiNodedotjs />, name: "Node.js", color: "green" },
-    { icon: <SiTailwindcss />, name: "Tailwind", color: "cyan" },
-    { icon: <SiFirebase />, name: "Firebase", color: "emerald" },
-    { icon: <SiVercel />, name: "Vercel", color: "black" },
+  const pricingCards = [
+    {
+      key: "ecommerce",
+      icon: <FaShoppingCart />,
+      iconColor: "text-amber-400/80",
+      badge: t("webdev.pricing.badge"),
+      featured: true,
+      waLink:
+        "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20ონლაინ%20მაღაზიისა%20და%20Invento%20სისტემის%20შექმნით.%20მსურს%20უფასო%20კონსულტაცია.",
+      isLink: false,
+    },
+    {
+      key: "corporate",
+      icon: <FaCode />,
+      iconColor: "text-sky-400/80",
+      badge: null,
+      featured: false,
+      waLink:
+        "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20კორპორატიული%20ვებსაიტის%20შექმნით.%20მსურს%20უფასო%20კონსულტაცია.",
+      isLink: false,
+    },
+    {
+      key: "ai",
+      icon: <FaBrain />,
+      iconColor: "text-violet-400/80",
+      badge: null,
+      featured: false,
+      waLink: "/services/ai-chatbot",
+      isLink: true,
+    },
+    {
+      key: "landing",
+      icon: <FaRocket />,
+      iconColor: "text-emerald-400/80",
+      badge: null,
+      featured: false,
+      waLink:
+        "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20სავიზიტო%20ვებსაიტის%20შექმნით.%20მსურს%20უფასო%20კონსულტაცია.",
+      isLink: false,
+    },
   ];
-
-  const getColorClass = (color: string) => {
-    const colors = {
-      blue: "border-blue-400 bg-blue-500/10",
-      green: "border-green-400 bg-green-500/10",
-      purple: "border-purple-400 bg-purple-500/10",
-      emerald: "border-emerald-400 bg-emerald-500/10",
-      violet: "border-violet-400 bg-violet-500/10",
-      indigo: "border-indigo-400 bg-indigo-500/10",
-      red: "border-red-400 bg-red-500/10",
-      pink: "border-pink-400 bg-pink-500/10",
-      yellow: "border-yellow-400 bg-yellow-500/10",
-      cyan: "border-cyan-400 bg-cyan-500/10",
-      black: "border-gray-400 bg-gray-500/10",
-    };
-    return colors[color as keyof typeof colors] || colors.blue;
-  };
-
-  const getTextColorClass = (color: string) => {
-    const colors = {
-      blue: "text-blue-400",
-      green: "text-green-400",
-      purple: "text-purple-400",
-      emerald: "text-emerald-400",
-      violet: "text-violet-400",
-      indigo: "text-indigo-400",
-      red: "text-red-400",
-      pink: "text-pink-400",
-      yellow: "text-yellow-400",
-      cyan: "text-cyan-400",
-      black: "text-gray-400",
-    };
-    return colors[color as keyof typeof colors] || colors.blue;
-  };
 
   return (
     <>
       <SEO
         title={t("seo.webdev.title")}
         description={t("seo.webdev.description")}
-        url="https://inventogeo.com/services/web-development"
+        url="https://vifadigital.ge/services/web-development"
       />
 
-      {/* Professional Tech Background - Ultra Dark */}
+      {/* Layered background */}
       <div className="fixed inset-0 z-0">
-        {/* Ultra dark base */}
-        <div className="absolute inset-0 bg-black"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-black to-gray-950"></div>
-
-        {/* Very subtle tech grid overlay */}
-        <div className="absolute inset-0 tech-grid opacity-5"></div>
-
-        {/* Minimal animated gradients */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-950/15 via-transparent to-purple-950/15 animate-pulse-slow"></div>
-
-        {/* Darker accent overlays */}
-        <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-gray-950/20 to-transparent"></div>
-        <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-gray-950/20 to-transparent"></div>
-
-        {/* Very subtle noise texture */}
-        <div className="absolute inset-0 bg-noise opacity-2"></div>
+        <div className="absolute inset-0 bg-[#060608]" />
+        {/* Radial depth glow behind hero — top-right quadrant */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_65%_-5%,rgba(148,163,184,0.045)_0%,transparent_65%)]" />
+        {/* Secondary soft glow bottom-left for depth balance */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_5%_100%,rgba(100,116,139,0.025)_0%,transparent_60%)]" />
+        {/* Microscopic dot grid */}
+        <div className="absolute inset-0 webdev-dot-grid" />
+        {/* Film grain */}
+        <div className="absolute inset-0 webdev-grain" />
       </div>
 
       <style>{`
-        /* Professional tech grid pattern */
-        .tech-grid {
-          background-image:
-            linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px),
-            linear-gradient(rgba(139, 92, 246, 0.05) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(139, 92, 246, 0.05) 1px, transparent 1px);
-          background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
-          animation: grid-move 20s linear infinite;
+        .webdev-dot-grid {
+          background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+          background-size: 28px 28px;
+          opacity: 0.18;
         }
-
-        @keyframes grid-move {
-          0% { background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px; }
-          100% { background-position: 100px 100px, 100px 100px, 20px 20px, 20px 20px; }
+        .webdev-grain {
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+          opacity: 0.025;
         }
-
-        /* Subtle noise texture */
-        .bg-noise {
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        @keyframes kenBurns {
+          0%   { transform: scale(1);    }
+          100% { transform: scale(1.10); }
         }
-
-        /* Slow pulse animation - darker */
-        @keyframes pulse-slow {
-          0%, 100% { opacity: 0.1; }
-          50% { opacity: 0.2; }
+        .hero-ken-burns {
+          animation: kenBurns 25s ease-out infinite alternate;
+          will-change: transform;
         }
-
-        .animate-pulse-slow {
-          animation: pulse-slow 4s ease-in-out infinite;
-        }
-
-        /* Performance optimizations */
-        @media (max-width: 768px), (prefers-reduced-motion: reduce) {
-          .tech-grid,
-          .animate-pulse-slow {
-            animation: none;
-          }
-          .bg-noise {
-            display: none;
-          }
-        }
-
-        /* Additional professional elements */
-        .tech-accent {
-          background: linear-gradient(135deg,
-            rgba(59, 130, 246, 0.1) 0%,
-            rgba(139, 92, 246, 0.1) 50%,
-            rgba(59, 130, 246, 0.1) 100%);
+        @media (prefers-reduced-motion: reduce) {
+          .webdev-dot-grid { display: none; }
+          .hero-ken-burns  { animation: none; }
         }
       `}</style>
 
-      <div className="relative z-10 min-h-screen mt-50">
-        {/* Main container with top padding to account for fixed navbar */}
+      {/* ── Hero — compact, starts at y=0 under the transparent navbar ── */}
+      <section className="relative z-10 h-[80vh] w-full overflow-hidden flex flex-col justify-center">
+
+        {/* Photographic background with Ken Burns effect */}
+        <div className="absolute inset-0 w-full h-full">
+          <div className="hero-ken-burns absolute inset-0">
+            <img
+              src="/vebisphoto.jpg"
+              alt=""
+              className="w-full h-full object-cover"
+              loading="eager"
+              draggable={false}
+            />
+          </div>
+          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 bg-linear-to-r from-[#060608] via-[#060608]/90 to-transparent" />
+          <div className="absolute bottom-0 inset-x-0 h-56 bg-linear-to-t from-[#060608] to-transparent" />
+        </div>
+
+        {/* Hero content */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 md:pt-20 lg:pt-0 pb-16 md:pb-0">
+          <div className="max-w-xl">
+            <span className="text-sm uppercase tracking-widest text-gray-400 mb-4 block">
+              ვებ დეველოპმენტი
+            </span>
+
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.2] mb-6 max-w-2xl">
+              ციფრული ფუნდამენტი თქვენი ბიზნესისთვის.
+            </h1>
+
+            <p className="text-lg text-gray-300 leading-relaxed mb-8 max-w-xl">
+              ვქმნით პრემიუმ კლასის ვებგვერდებს და E-commerce პლატფორმებს, რომლებიც ზრდის თქვენს გაყიდვებს.
+            </p>
+
+            {/* Primary CTA */}
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 bg-white text-black px-8 py-3.5 rounded-full text-sm font-bold tracking-wide hover:bg-gray-100 transition-colors duration-200"
+            >
+              {t("webdev.pricing.cta")}
+              <FaArrowRight className="text-xs" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Rest of page content ── */}
+      <div
+        className={`relative z-10 language-transition language-fade-in ${getTransitionClasses()}`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* ── Process ── */}
+<section className="pb-24">
+  {/* კონტეინერი gap-px კლასით, რომელიც ქმნის იდეალურ 1px ბადეს */}
+  <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/[0.08] border border-white/[0.08] rounded-2xl overflow-hidden shadow-2xl">
+    {processSteps.map((step) => {
+      const Icon = step.icon;
+      return (
         <div
-          className={`container mx-auto px-4 sm:px-6 lg:px-8 language-transition language-fade-in ${getTransitionClasses()}`}
+          key={step.num}
+          className="relative p-5 sm:p-6 bg-[#060608] hover:bg-white/[0.02] transition-colors duration-500 group flex flex-col justify-between min-h-[120px] sm:min-h-[140px]"
         >
-          {/* Hero Section */}
-          <div className="max-w-6xl mx-auto mb-20">
-            <div className="text-center mb-16">
-              <div className="mb-8 flex justify-center">
-                <div className="w-64 sm:w-72 md:w-80 lg:w-96">
-                  <TrueFocus
-                    sentence={t("webdev.hero.title")}
-                    blurAmount={4}
-                    borderColor="#8b5cf6"
-                    glowColor="rgba(139, 92, 246, 0.6)"
-                    animationDuration={0.8}
-                    pauseBetweenAnimations={2}
-                  />
-                </div>
-              </div>
+          {/* Hover-ზე ზედა ნაზი განათება (Highlight) */}
+          <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              {/* Stats Row */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16 mt-14"
-              >
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-400 mb-2">
-                    {t("webdev.stats.individual")}
-                  </div>
-                  <div className="text-sm text-slate-400">
-                    {t("webdev.stats.individualDesc")}
-                  </div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-green-400 mb-2">
-                    {t("webdev.stats.quality")}
-                  </div>
-                  <div className="text-sm text-slate-400">
-                    {t("webdev.stats.qualityDesc")}
-                  </div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-400 mb-2">
-                    {t("webdev.stats.fresh")}
-                  </div>
-                  <div className="text-sm text-slate-400">
-                    {t("webdev.stats.freshDesc")}
-                  </div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-orange-400 mb-2">
-                    {t("webdev.stats.flexible")}
-                  </div>
-                  <div className="text-sm text-slate-400">
-                    {t("webdev.stats.flexibleDesc")}
-                  </div>
-                </div>
-              </motion.div>
+          <div className="flex justify-between items-start mb-4">
+            {/* აიქონის კონტეინერი */}
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white/[0.02] border border-white/[0.05] flex items-center justify-center group-hover:scale-110 group-hover:bg-white/[0.05] transition-all duration-300">
+              <Icon 
+                className={`text-base sm:text-lg text-gray-500 transition-colors duration-300 group-hover:${step.iconColor || "text-white"}`} 
+              />
             </div>
-
-            {/* Development Process Visualization */}
-            <div className="relative">
-              <div className="flex justify-center items-center gap-8 flex-wrap">
-                {/* Step 1: Planning */}
-                <div className="group cursor-pointer">
-                  <div className="w-32 h-32 border-2 border-blue-400/30 rounded-2xl flex items-center justify-center bg-blue-500/5 group-hover:border-blue-400 transition-all duration-300 group-hover:scale-110">
-                    <div className="text-center">
-                      <FaChartLine className="text-blue-400 text-3xl mb-2 mx-auto" />
-                      <div className="text-blue-400 text-xs font-medium">
-                        {t("webdev.process.planning")}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <FaArrowRight className="text-slate-500 text-xl hidden md:block" />
-
-                {/* Step 2: Design */}
-                <div className="group cursor-pointer">
-                  <div className="w-32 h-32 border-2 border-purple-400/30 rounded-2xl flex items-center justify-center bg-purple-500/5 group-hover:border-purple-400 transition-all duration-300 group-hover:scale-110">
-                    <div className="text-center">
-                      <FaPaintBrush className="text-purple-400 text-3xl mb-2 mx-auto" />
-                      <div className="text-purple-400 text-xs font-medium">
-                        {t("webdev.process.design")}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <FaArrowRight className="text-slate-500 text-xl hidden md:block" />
-
-                {/* Step 3: Development */}
-                <div className="group cursor-pointer">
-                  <div className="w-32 h-32 border-2 border-green-400/30 rounded-2xl flex items-center justify-center bg-green-500/5 group-hover:border-green-400 transition-all duration-300 group-hover:scale-110">
-                    <div className="text-center">
-                      <FaCode className="text-green-400 text-3xl mb-2 mx-auto" />
-                      <div className="text-green-400 text-xs font-medium">
-                        {t("webdev.process.development")}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <FaArrowRight className="text-slate-500 text-xl hidden md:block" />
-
-                {/* Step 4: Launch */}
-                <div className="group cursor-pointer">
-                  <div className="w-32 h-32 border-2 border-violet-400/30 rounded-2xl flex items-center justify-center bg-violet-500/5 group-hover:border-violet-400 transition-all duration-300 group-hover:scale-110">
-                    <div className="text-center">
-                      <FaRocket className="text-violet-400 text-3xl mb-2 mx-auto" />
-                      <div className="text-violet-400 text-xs font-medium">
-                        {t("webdev.process.launch")}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="text-center mt-8">
-                <p className="text-slate-400 text-sm max-w-2xl mx-auto">
-                  {t("webdev.process.description")}
-                </p>
-              </div>
-            </div>
+            
+            {/* ნაბიჯის ნომერი */}
+            <span className="text-[10px] sm:text-xs font-mono text-gray-600 group-hover:text-gray-400 transition-colors">
+              {step.num}
+            </span>
           </div>
-         
-        {/* Pricing Approach Section */}
-          <div className="mb-20">
-            <div className="text-center mb-12">
-              <h3
-                className="text-3xl font-semibold text-white mb-4 tracking-tight"
-                style={{ fontFamily: "Inter, system-ui, sans-serif" }}
-              >
+
+          {/* სათაური */}
+          <span className="block text-sm sm:text-base font-medium text-gray-300 group-hover:text-white transition-colors">
+            {t(step.key)}
+          </span>
+        </div>
+      );
+    })}
+  </div>
+
+  {/* ქვედა ახსნა (პულსირებადი წერტილით) */}
+  <div className="mt-6 flex items-center justify-center lg:justify-start gap-3">
+    <div className="w-1.5 h-1.5 rounded-full bg-gray-500 animate-pulse" />
+    <p className="text-gray-500 text-xs sm:text-sm tracking-wide">
+      {t("webdev.process.description")}
+    </p>
+  </div>
+</section>
+
+          {/* ── Pricing ── */}
+          <section className="pb-16">
+            {/* Section header */}
+            <div className="mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-3">
                 {t("webdev.pricing.title")}
-              </h3>
-            </div>
-            {/* Why Individual Pricing */}
-            <div className="relative overflow-hidden rounded-2xl backdrop-blur-xl mb-10 !max-w-7xl mx-auto">
-              <div className="absolute inset-0 bg-gradient-to-br from-slate-700/20 via-slate-800/10 to-slate-900/20 rounded-2xl" />
-              <div className="absolute inset-0 border border-slate-600/30 rounded-2xl" />
-
-              <div className="relative p-6 sm:p-8">
-                <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-14 h-14 bg-blue-500/15 rounded-xl flex items-center justify-center mb-4 border border-blue-400/20 group-hover:bg-blue-500/25 transition-all">
-                      <FaBullseye className="text-blue-300 text-2xl" />
-                    </div>
-                    <h4 className="text-lg font-semibold text-white mb-2">
-                      {t("webdev.pricing.reason1.title")}
-                    </h4>
-                    <p className="text-slate-400 text-sm leading-relaxed">
-                      {t("webdev.pricing.reason1.description")}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-14 h-14 bg-green-500/15 rounded-xl flex items-center justify-center mb-4 border border-green-400/20 group-hover:bg-green-500/25 transition-all">
-                      <FaBolt className="text-green-300 text-2xl" />
-                    </div>
-                    <h4 className="text-lg font-semibold text-white mb-2">
-                      {t("webdev.pricing.reason2.title")}
-                    </h4>
-                    <p className="text-slate-400 text-sm leading-relaxed">
-                      {t("webdev.pricing.reason2.description")}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-14 h-14 bg-purple-500/15 rounded-xl flex items-center justify-center mb-4 border border-purple-400/20 group-hover:bg-purple-500/25 transition-all">
-                      <FaCog className="text-purple-300 text-2xl" />
-                    </div>
-                    <h4 className="text-lg font-semibold text-white mb-2">
-                      {t("webdev.pricing.reason3.title")}
-                    </h4>
-                    <p className="text-slate-400 text-sm leading-relaxed">
-                      {t("webdev.pricing.reason3.description")}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Enhanced Price Ranges */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 !max-w-7xl mx-auto">
-              {/* E-commerce Store - Enhanced (Priority Package) */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="group relative overflow-hidden rounded-2xl backdrop-blur-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02]"
-              >
-                {/* Invento System Badge */}
-                <div className="absolute top-0 right-0 z-20">
-                  <div className="bg-gradient-to-bl from-orange-500 to-red-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl shadow-lg">
-                    {t("webdev.pricing.badge")}
-                  </div>
-                </div>
-
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-600/20 via-amber-500/10 to-slate-900/20 rounded-2xl" />
-                <div className="absolute inset-0 border border-orange-400/40 group-hover:border-orange-400/70 rounded-2xl transition-colors duration-300" />
-                <div className="absolute -top-2 -right-2 w-24 h-24 bg-gradient-to-br from-orange-500/20 to-amber-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                <div className="relative p-6 flex flex-col h-full">
-                  {/* Enhanced Header */}
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-orange-500/30 to-amber-600/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                      <FaShoppingCart className="text-orange-300 text-2xl" />
-                    </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-black text-orange-300 font-['Inter','system-ui',sans-serif]">
-                        {t("webdev.pricing.ecommerce.price")}
-                      </div>
-                    </div>
-                  </div>
-
-                  <h4 className="text-2xl font-bold text-white mb-3 font-['Inter','Noto_Sans_Georgian',sans-serif]">
-                    {t("webdev.pricing.ecommerce.title")}
-                  </h4>
-
-                  <p className="text-slate-300 text-sm mb-6 leading-relaxed font-['Inter','Noto_Sans_Georgian',sans-serif]">
-                    {t("webdev.pricing.ecommerce.description")}
-                  </p>
-
-                  {/* Feature List */}
-                  <div className="space-y-3 mb-6 flex-grow">
-                    {[1, 2, 3, 4, 5].map((num) => (
-                      <div
-                        key={num}
-                        className="flex items-center gap-3 group/item"
-                      >
-                        <div className="w-2 h-2 bg-gradient-to-r from-orange-400 to-amber-400 rounded-full group-hover/item:scale-150 transition-transform duration-200" />
-                        <span className="text-slate-300 text-sm font-['Inter','Noto_Sans_Georgian',sans-serif] group-hover/item:text-orange-200 transition-colors">
-                          {t(`webdev.pricing.ecommerce.feature${num}`)}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Enhanced CTA */}
-                  <a href="https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20ონლაინ%20მაღაზიისა%20და%20Invento%20სისტემის%20შექმნით.%20მსურს%20უფასო%20კონსულტაცია." target="_blank" rel="noopener noreferrer" className="block mt-auto">
-                    <div className="relative group/btn">
-                      <div className="absolute inset-0 bg-gradient-to-r from-orange-500/30 to-amber-500/30 rounded-xl blur opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
-                      <div className="relative flex items-center justify-center p-4 bg-gradient-to-r from-orange-500/20 to-amber-500/20 rounded-xl border border-orange-400/30 group-hover/btn:border-orange-300/60 group-hover/btn:from-orange-500/30 group-hover/btn:to-amber-500/30 transition-all duration-300 cursor-pointer">
-                        <FaWhatsapp className="text-orange-300 text-sm mr-2 group-hover/btn:text-white transition-colors" />
-                        <span className="text-orange-300 font-bold text-sm group-hover/btn:text-white transition-colors font-['Inter',sans-serif]">
-                          კონსულტაცია WhatsApp-ზე
-                        </span>
-                        <FaArrowRight className="text-orange-300 text-sm ml-2 group-hover/btn:text-white group-hover/btn:translate-x-1 transition-all duration-300" />
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </motion.div>
-
-              {/* Corporate Websites - Enhanced */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="group relative overflow-hidden rounded-2xl backdrop-blur-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02]"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-green-600/20 via-emerald-500/10 to-slate-900/20 rounded-2xl" />
-                <div className="absolute inset-0 border border-green-400/40 group-hover:border-green-400/70 rounded-2xl transition-colors duration-300" />
-                <div className="absolute -top-2 -right-2 w-24 h-24 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                <div className="relative p-6 flex flex-col h-full">
-                  {/* Enhanced Header */}
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-green-500/30 to-emerald-600/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                      <FaCode className="text-green-300 text-2xl" />
-                    </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-black text-green-300 font-['Inter','system-ui',sans-serif]">
-                        {t("webdev.pricing.corporate.price")}
-                      </div>
-                    </div>
-                  </div>
-
-                  <h4 className="text-2xl font-bold text-white mb-3 font-['Inter','Noto_Sans_Georgian',sans-serif]">
-                    {t("webdev.pricing.corporate.title")}
-                  </h4>
-
-                  <p className="text-slate-300 text-sm mb-6 leading-relaxed font-['Inter','Noto_Sans_Georgian',sans-serif]">
-                    {t("webdev.pricing.corporate.description")}
-                  </p>
-
-                  {/* Feature List */}
-                  <div className="space-y-3 mb-6 flex-grow">
-                    {[1, 2, 3, 4, 5].map((num) => (
-                      <div
-                        key={num}
-                        className="flex items-center gap-3 group/item"
-                      >
-                        <div className="w-2 h-2 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full group-hover/item:scale-150 transition-transform duration-200" />
-                        <span className="text-slate-300 text-sm font-['Inter','Noto_Sans_Georgian',sans-serif] group-hover/item:text-green-200 transition-colors">
-                          {t(`webdev.pricing.corporate.feature${num}`)}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Enhanced CTA */}
-                  <a href="https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20კორპორატიული%20ვებსაიტის%20შექმნით.%20მსურს%20უფასო%20კონსულტაცია." target="_blank" rel="noopener noreferrer" className="block mt-auto">
-                    <div className="relative group/btn">
-                      <div className="absolute inset-0 bg-gradient-to-r from-green-500/30 to-emerald-500/30 rounded-xl blur opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
-                      <div className="relative flex items-center justify-center p-4 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-xl border border-green-400/30 group-hover/btn:border-green-300/60 group-hover/btn:from-green-500/30 group-hover/btn:to-emerald-500/30 transition-all duration-300 cursor-pointer">
-                        <FaWhatsapp className="text-green-300 text-sm mr-2 group-hover/btn:text-white transition-colors" />
-                        <span className="text-green-300 font-bold text-sm group-hover/btn:text-white transition-colors font-['Inter',sans-serif]">
-                          კონსულტაცია WhatsApp-ზე
-                        </span>
-                        <FaArrowRight className="text-green-300 text-sm ml-2 group-hover/btn:text-white group-hover/btn:translate-x-1 transition-all duration-300" />
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </motion.div>
-
-              {/* AI Chatbots - Enhanced */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="group relative overflow-hidden rounded-2xl backdrop-blur-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02]"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-pink-500/10 to-slate-900/20 rounded-2xl" />
-                <div className="absolute inset-0 border border-purple-400/40 group-hover:border-purple-400/70 rounded-2xl transition-colors duration-300" />
-                <div className="absolute -top-2 -right-2 w-24 h-24 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                <div className="relative p-6 flex flex-col h-full">
-                  {/* Enhanced Header */}
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-purple-500/30 to-pink-600/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                      <FaBrain className="text-purple-300 text-2xl" />
-                    </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-black text-purple-300 font-['Inter','system-ui',sans-serif]">
-                        {t("webdev.pricing.ai.price")}
-                      </div>
-                    </div>
-                  </div>
-
-                  <h4 className="text-2xl font-bold text-white mb-3 font-['Inter','Noto_Sans_Georgian',sans-serif]">
-                    {t("webdev.pricing.ai.title")}
-                  </h4>
-
-                  <p className="text-slate-300 text-sm mb-6 leading-relaxed font-['Inter','Noto_Sans_Georgian',sans-serif]">
-                    {t("webdev.pricing.ai.description")}
-                  </p>
-
-                  {/* Feature List */}
-                  <div className="space-y-3 mb-6 flex-grow">
-                    {[1, 2, 3, 4, 5].map((num) => (
-                      <div
-                        key={num}
-                        className="flex items-center gap-3 group/item"
-                      >
-                        <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full group-hover/item:scale-150 transition-transform duration-200" />
-                        <span className="text-slate-300 text-sm font-['Inter','Noto_Sans_Georgian',sans-serif] group-hover/item:text-purple-200 transition-colors">
-                          {t(`webdev.pricing.ai.feature${num}`)}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Enhanced CTA */}
-                  <Link to="/services/ai-chatbot" className="block mt-auto">
-                    <div className="relative group/btn">
-                      <div className="absolute inset-0 bg-gradient-to-r from-purple-500/30 to-pink-500/30 rounded-xl blur opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
-                      <div className="relative flex items-center justify-center p-4 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-xl border border-purple-400/30 group-hover/btn:border-purple-300/60 group-hover/btn:from-purple-500/30 group-hover/btn:to-pink-500/30 transition-all duration-300 cursor-pointer">
-                        <span className="text-purple-300 font-bold text-sm group-hover/btn:text-white transition-colors font-['Inter',sans-serif]">
-                          {t("webdev.pricing.learn_more")}
-                        </span>
-                        <FaArrowRight className="text-purple-300 text-sm ml-2 group-hover/btn:text-white group-hover/btn:translate-x-1 transition-all duration-300" />
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              </motion.div>
-
-              {/* Landing Pages - Enhanced */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="group relative overflow-hidden rounded-2xl backdrop-blur-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02]"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-blue-500/10 to-slate-900/20 rounded-2xl" />
-                <div className="absolute inset-0 border border-blue-400/40 group-hover:border-blue-400/70 rounded-2xl transition-colors duration-300" />
-                <div className="absolute -top-2 -right-2 w-24 h-24 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                <div className="relative p-6 flex flex-col h-full">
-                  {/* Enhanced Header */}
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500/30 to-blue-600/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                      <FaRocket className="text-blue-300 text-2xl" />
-                    </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-black text-blue-300 font-['Inter','system-ui',sans-serif]">
-                        {t("webdev.pricing.landing.price")}
-                      </div>
-                    </div>
-                  </div>
-
-                  <h4 className="text-2xl font-bold text-white mb-3 font-['Inter','Noto_Sans_Georgian',sans-serif]">
-                    {t("webdev.pricing.landing.title")}
-                  </h4>
-
-                  <p className="text-slate-300 text-sm mb-6 leading-relaxed font-['Inter','Noto_Sans_Georgian',sans-serif]">
-                    {t("webdev.pricing.landing.description")}
-                  </p>
-
-                  {/* Feature List */}
-                  <div className="space-y-3 mb-6 flex-grow">
-                    {[1, 2, 3, 4, 5].map((num) => (
-                      <div
-                        key={num}
-                        className="flex items-center gap-3 group/item"
-                      >
-                        <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full group-hover/item:scale-150 transition-transform duration-200" />
-                        <span className="text-slate-300 text-sm font-['Inter','Noto_Sans_Georgian',sans-serif] group-hover/item:text-blue-200 transition-colors">
-                          {t(`webdev.pricing.landing.feature${num}`)}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Enhanced CTA */}
-                  <a href="https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20სავიზიტო%20ვებსაიტის%20შექმნით.%20მსურს%20უფასო%20კონსულტაცია." target="_blank" rel="noopener noreferrer" className="block mt-auto">
-                    <div className="relative group/btn">
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 to-cyan-500/30 rounded-xl blur opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
-                      <div className="relative flex items-center justify-center p-4 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-xl border border-blue-400/30 group-hover/btn:border-blue-300/60 group-hover/btn:from-blue-500/30 group-hover/btn:to-cyan-500/30 transition-all duration-300 cursor-pointer">
-                        <FaWhatsapp className="text-blue-300 text-sm mr-2 group-hover/btn:text-white transition-colors" />
-                        <span className="text-blue-300 font-bold text-sm group-hover/btn:text-white transition-colors font-['Inter',sans-serif]">
-                          კონსულტაცია WhatsApp-ზე
-                        </span>
-                        <FaArrowRight className="text-blue-300 text-sm ml-2 group-hover/btn:text-white group-hover/btn:translate-x-1 transition-all duration-300" />
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </motion.div>
-            </div>
-
-            <div className="text-center mt-15">
-              <h3 className="text-3xl font-light text-white">
-                {t("webdev.pricing.consultation")}
-              </h3>
-            </div>
-          </div>
-
-          {/* Services Grid */}
-          <div id="services" className="!max-w-7xl mx-auto mb-32">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-light text-white mb-4">
-                {t("webdev.services.label")}
               </h2>
             </div>
 
-            {/* Services Grid - Fixed height for all cards */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-              {services.map((service, index) => (
+            {/* Why individual pricing — 3 pillars */}
+            <div className="grid md:grid-cols-3 gap-px bg-white/10 rounded-xl overflow-hidden mb-10">
+              {(
+                [
+                  { key: "reason1", icon: FaBullseye, iconColor: "text-sky-400/70"    },
+                  { key: "reason2", icon: FaBolt,     iconColor: "text-amber-400/70"  },
+                  { key: "reason3", icon: FaCog,      iconColor: "text-violet-400/70" },
+                ] as const
+              ).map(({ key, icon: Icon, iconColor }) => (
+                <div key={key} className="bg-[#060608] p-8">
+                  <Icon className={`text-lg mb-4 ${iconColor}`} />
+                  <h4 className="text-sm font-semibold text-white mb-2">
+                    {t(`webdev.pricing.${key}.title`)}
+                  </h4>
+                  <p className="text-gray-500 text-sm leading-relaxed">
+                    {t(`webdev.pricing.${key}.description`)}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Pricing cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {pricingCards.map((card, idx) => (
                 <motion.div
-                  key={service.id}
-                  initial={{ opacity: 0, y: 20 }}
+                  key={card.key}
+                  initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className={`group cursor-pointer transition-all duration-300 hover:scale-105`}
-                  onClick={() => setActiveService(index)}
+                  transition={{ duration: 0.5, delay: idx * 0.08 }}
+                  className={`group relative flex flex-col rounded-xl border transition-all duration-300 ${
+                    card.featured
+                      ? "border-white/30 bg-white/4 hover:border-white/50"
+                      : "border-white/10 bg-white/[0.02] hover:border-white/25"
+                  }`}
                 >
-                  <div
-                    className={`p-6 rounded-xl border-2 h-44 flex flex-col justify-between ${getColorClass(
-                      service.color
-                    )}
-                    ${
-                      activeService === index
-                        ? "border-opacity-100 scale-105"
-                        : "border-opacity-30"
-                    }
-                    transition-all duration-300 group-hover:border-opacity-100`}
-                  >
-                    <div>
-                      <div
-                        className={`text-3xl mb-4 ${getTextColorClass(
-                          service.color
-                        )}`}
-                      >
-                        {service.icon}
-                      </div>
-                      <h3 className="text-white font-medium text-lg mb-2 leading-tight">
-                        {service.title}
-                      </h3>
+                  {/* Badge */}
+                  {card.badge && (
+                    <div className="absolute top-0 right-0 px-3 py-1 bg-white text-black text-[10px] font-bold tracking-wide rounded-bl-lg rounded-tr-xl">
+                      {card.badge}
                     </div>
-                    <p className="text-slate-300 text-sm leading-loose">
-                      {service.description}
+                  )}
+
+                  <div className="p-8 flex flex-col flex-1">
+                    {/* Header */}
+                    <div className="flex items-start justify-between mb-6">
+                      <div className={`w-10 h-10 rounded-lg border border-white/10 bg-white/4 flex items-center justify-center transition-colors ${card.iconColor}`}>
+                        {card.icon}
+                      </div>
+                      <span className="text-2xl font-bold text-white">
+                        {t(`webdev.pricing.${card.key}.price`)}
+                      </span>
+                    </div>
+
+                    <h4 className="text-lg font-semibold text-white mb-2">
+                      {t(`webdev.pricing.${card.key}.title`)}
+                    </h4>
+                    <p className="text-gray-500 text-sm leading-relaxed mb-6 flex-1">
+                      {t(`webdev.pricing.${card.key}.description`)}
                     </p>
+
+                    {/* Features */}
+                    <ul className="space-y-2.5 mb-8">
+                      {[1, 2, 3, 4, 5].map((num) => (
+                        <li key={num} className="flex items-center gap-3">
+                          <div className="w-1 h-1 rounded-full bg-gray-600 shrink-0" />
+                          <span className="text-gray-400 text-sm">
+                            {t(`webdev.pricing.${card.key}.feature${num}`)}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* CTA */}
+                    {card.isLink ? (
+                      <Link
+                        to={card.waLink}
+                        className="flex items-center justify-center gap-2 py-3 px-5 rounded-full border border-white/15 text-white text-sm font-medium hover:bg-white hover:text-black transition-all duration-200"
+                      >
+                        {t("webdev.pricing.learn_more")}
+                        <FaArrowRight className="text-xs" />
+                      </Link>
+                    ) : (
+                      <a
+                        href={card.waLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`flex items-center justify-center gap-2 py-3 px-5 rounded-full text-sm font-medium transition-all duration-200 ${
+                          card.featured
+                            ? "bg-white text-black hover:bg-gray-100"
+                            : "border border-white/15 text-white hover:bg-white hover:text-black"
+                        }`}
+                      >
+                        <FaWhatsapp />
+                        {t("webdev.whatsapp.consult")}
+                      </a>
+                    )}
                   </div>
                 </motion.div>
               ))}
             </div>
 
-            {/* Active Service Display */}
-            <div className="border border-slate-700/30 bg-black/50 p-8 rounded-2xl backdrop-blur-md">
-              <div className="flex items-center justify-between mb-6">
+            <p className="text-center text-gray-600 text-sm mt-8">
+              {consultationLabel}
+            </p>
+          </section>
+
+          {/* ── Services ── */}
+          <section id="services" className="pb-24">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-12">
+              {t("webdev.services.label")}
+            </h2>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+              {services.map((service, index) => (
+                <motion.button
+                  key={service.id}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  onClick={() => setActiveService(index)}
+                  className={`text-left p-6 rounded-xl border transition-all duration-200 ${
+                    activeService === index
+                      ? "border-white/30 bg-white/[0.06]"
+                      : "border-white/10 bg-white/[0.02] hover:border-white/20"
+                  }`}
+                >
+                  <div
+                    className={`text-xl mb-4 transition-all duration-200 ${
+                      activeService === index ? service.iconColor.replace("/70", "") : service.iconColor
+                    }`}
+                  >
+                    {service.icon}
+                  </div>
+                  <h3 className="text-white font-medium text-sm mb-1 leading-tight">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-600 text-xs leading-relaxed">
+                    {service.description}
+                  </p>
+                </motion.button>
+              ))}
+            </div>
+
+            {/* Active service detail */}
+            <div className="border border-white/10 bg-white/[0.02] rounded-xl p-8">
+              <div className="flex items-start justify-between mb-6">
                 <div>
-                  <h3 className="text-2xl font-medium text-white">
+                  <h3 className="text-xl font-semibold text-white mb-1">
                     {services[activeService].title}
                   </h3>
-                  <p
-                    className={`${getTextColorClass(
-                      services[activeService].color
-                    )}`}
-                  >
+                  <p className="text-gray-500 text-sm">
                     {services[activeService].description}
                   </p>
                 </div>
-                <div
-                  className={`w-20 h-20 border-2 rounded-xl ${getColorClass(
-                    services[activeService].color
-                  )}
-                  flex items-center justify-center animate-pulse`}
-                >
-                  <span
-                    className={`text-2xl ${getTextColorClass(
-                      services[activeService].color
-                    )}`}
-                  >
-                    {services[activeService].icon}
-                  </span>
+                <div className={`w-12 h-12 rounded-lg border border-white/10 bg-white/4 flex items-center justify-center text-lg shrink-0 ml-4 ${services[activeService].iconColor.replace("/70", "")}`}>
+                  {services[activeService].icon}
                 </div>
               </div>
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 {services[activeService].features.map((feature, idx) => (
-                  <div key={idx} className="flex items-center gap-2">
-                    <FaCheckCircle className="text-green-400 text-sm" />
-                    <span className="text-slate-300 text-sm">{feature}</span>
+                  <div
+                    key={idx}
+                    className="flex items-center gap-2.5 px-4 py-2.5 rounded-lg border border-white/10 bg-white/[0.02]"
+                  >
+                    <FaCheckCircle className="text-gray-500 text-xs shrink-0" />
+                    <span className="text-gray-300 text-xs">{feature}</span>
                   </div>
                 ))}
               </div>
             </div>
-          </div>
+          </section>
 
-          {/* Technology Stack */}
-          <div className="!max-w-7xl mx-auto mb-24">
-            <div className="text-center mb-10">
-              <h2 className="text-3xl font-semibold text-white mb-3">
+          {/* ── Tech Stack ── */}
+          <section className="pb-24">
+            <div className="mb-10">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-2">
                 {t("webdev.technologies")}
               </h2>
-              <p className="text-slate-400 text-sm">
-                {t("webdev.technologies.desc")}
-              </p>
+              <p className="text-gray-500 text-sm">{t("webdev.technologies.desc")}</p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
               {technologies.map((tech, index) => (
                 <motion.div
                   key={tech.name}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className={`group cursor-pointer p-4 sm:p-5 rounded-lg border-2 backdrop-blur-sm ${getColorClass(
-                    tech.color
-                  )}
-                  border-opacity-20 hover:border-opacity-100 transition-all duration-300 hover:scale-110 hover:shadow-lg`}
+                  transition={{ duration: 0.4, delay: index * 0.06 }}
+                  className="group flex flex-col items-center gap-3 p-5 rounded-xl border border-white/10 bg-white/[0.02] hover:border-white/25 hover:bg-white/[0.05] transition-all duration-200 cursor-default"
                 >
-                  <div className="text-center">
-                    <div
-                      className={`text-3xl mb-2 ${getTextColorClass(
-                        tech.color
-                      )} group-hover:scale-125 transition-transform duration-300`}
-                    >
-                      {tech.icon}
-                    </div>
-                    <div className="text-white font-semibold text-sm">
-                      {tech.name}
-                    </div>
+                  <div className={`text-2xl transition-colors duration-200 ${tech.color}`}>
+                    {tech.icon}
                   </div>
+                  <span className="text-xs font-medium text-gray-500 group-hover:text-gray-200 transition-colors">
+                    {tech.name}
+                  </span>
                 </motion.div>
               ))}
             </div>
-          </div>
+          </section>
 
-          {/* CTA Section */}
-          <div className="text-center">
-            <div className="max-w-3xl mx-auto">
-              <h3 className="text-3xl font-light mb-6">
+          {/* ── CTA ── */}
+          <section className="pb-24 border-t border-white/10 pt-16">
+            <div className="max-w-2xl">
+              <h3 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-4 leading-tight">
                 {t("webdev.cta.question")}
               </h3>
-
-              <div className="flex justify-center gap-4 mt-11 mb-7">
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-blue-500 text-white px-6 sm:px-8 lg:px-10 py-4 text-lg font-medium hover:from-green-600 hover:to-blue-600 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105"
-                >
-                  <FaCommentDots />
-                  {t("webdev.cta.button")}
-                </a>
-              </div>
+              <p className="text-gray-500 text-sm mb-8">
+                {consultationLabel}
+              </p>
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 bg-white text-black px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-gray-100 transition-colors duration-200"
+              >
+                <FaWhatsapp />
+                {t("webdev.cta.button")}
+              </a>
             </div>
-          </div>
+          </section>
+
         </div>
       </div>
     </>

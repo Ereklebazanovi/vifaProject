@@ -21,6 +21,8 @@ interface IndustryItem {
   nameEn: string;
   slug: string;
   icon: React.ComponentType<{ className?: string }>;
+  iconColor: string;
+  iconHoverColor: string;
 }
 
 const industries: IndustryItem[] = [
@@ -29,30 +31,40 @@ const industries: IndustryItem[] = [
     nameEn: "Legal & Finance",
     slug: "legal-finance",
     icon: Scale,
+    iconColor: "text-amber-700/60",
+    iconHoverColor: "group-hover:text-amber-500/80",
   },
   {
     nameKa: "სასტუმროები, კოტეჯები და ტურიზმი",
     nameEn: "Hotels, Cottages & Tourism",
     slug: "tourism",
     icon: Map,
+    iconColor: "text-emerald-700/60",
+    iconHoverColor: "group-hover:text-emerald-500/80",
   },
   {
     nameKa: "ესთეტიკა და სილამაზე",
     nameEn: "Beauty & Aesthetics",
     slug: "beauty",
     icon: Sparkles,
+    iconColor: "text-rose-700/60",
+    iconHoverColor: "group-hover:text-rose-400/80",
   },
   {
     nameKa: "E-commerce & საცალო ვაჭრობა",
     nameEn: "E-commerce & Retail",
     slug: "retail",
     icon: ShoppingCart,
+    iconColor: "text-indigo-600/60",
+    iconHoverColor: "group-hover:text-indigo-400/80",
   },
   {
     nameKa: "რესტორნები და კვების ინდუსტრია",
     nameEn: "Restaurants & Food Service",
     slug: "food",
     icon: Utensils,
+    iconColor: "text-orange-700/60",
+    iconHoverColor: "group-hover:text-orange-500/80",
   },
 ];
 
@@ -137,7 +149,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
   const ka = currentLanguage === "ka";
 
   return (
-    <section className="w-full pt-10 pb-16 md:py-28">
+    <section className="w-full pt-4 md:pt-20 pb-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-8 mb-10 md:mb-16">
           <div>
@@ -278,46 +290,48 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
                 {isExpandable && (
                   <div
                     className={`-mx-4 sm:-mx-6 lg:-mx-12 px-4 sm:px-6 lg:px-12 overflow-hidden transition-all duration-500 ease-out border-b border-white/10 ${
-                      isExpanded ? "max-h-96 opacity-100 py-4 md:py-6" : "max-h-0 opacity-0 py-0"
+                      isExpanded ? "max-h-160 opacity-100 py-4 md:py-5" : "max-h-0 opacity-0 py-0"
                     }`}
                   >
-                    <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-3 md:p-4">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                        <Link
-                          to={service.generalHref!}
-                          onClick={startNavigation}
-                          className="group relative flex items-center justify-between p-4 rounded-2xl border border-white/5 bg-white/[0.02] overflow-hidden transition-all duration-300 hover:bg-white/[0.06] hover:border-white/15 hover:-translate-y-0.5"
-                        >
-                          <div className="flex items-center gap-3">
-                            <Layers className="w-4 h-4 text-white/50 group-hover:text-white/90 transition-colors" />
-                            <span className="text-sm text-white">
-                              {ka ? "ყველა სერვისი" : "All Services"}
-                            </span>
-                          </div>
-                          <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-white group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-300" />
-                        </Link>
+                    {/* Header row */}
+                    <p className="text-[10px] text-white/25 uppercase tracking-[0.2em] font-mono mb-3">
+                      {ka ? "აირჩიე სფერო" : "Choose a sector"}
+                    </p>
 
-                        {industries.map((industry) => {
-                          const IndustryIcon = industry.icon;
+                    {/* All Services pill */}
+                    <Link
+                      to={service.generalHref!}
+                      onClick={startNavigation}
+                      className="group inline-flex items-center gap-2 mb-4 px-3.5 py-1.5 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/40 transition-all duration-200"
+                    >
+                      <Layers className="w-3.5 h-3.5 text-white/50 group-hover:text-white/90 transition-colors" />
+                      <span className="text-xs text-white/70 font-medium tracking-wide group-hover:text-white transition-colors">
+                        {ka ? "ყველა სერვისი" : "All Services"}
+                      </span>
+                      <ArrowUpRight className="w-3 h-3 text-white/30 group-hover:text-white/70 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all duration-200" />
+                    </Link>
 
-                          return (
-                            <Link
-                              key={`${service.id}-${industry.slug}`}
-                              to={`/industry/${service.industryService}/${industry.slug}`}
-                              onClick={startNavigation}
-                              className="group relative flex items-center justify-between p-4 rounded-2xl border border-white/5 bg-white/[0.02] overflow-hidden transition-all duration-300 hover:bg-white/[0.06] hover:border-white/15 hover:-translate-y-0.5"
-                            >
-                              <div className="flex items-center gap-3">
-                                <IndustryIcon className="w-4 h-4 text-white/50 group-hover:text-white/90 transition-colors" />
-                                <span className="text-sm text-white/85">
-                                  {ka ? industry.nameKa : industry.nameEn}
-                                </span>
-                              </div>
-                              <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-white group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-300" />
-                            </Link>
-                          );
-                        })}
-                      </div>
+                    {/* Industry grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1.5">
+                      {industries.map((industry) => {
+                        const IndustryIcon = industry.icon;
+                        return (
+                          <Link
+                            key={`${service.id}-${industry.slug}`}
+                            to={`/industry/${service.industryService}/${industry.slug}`}
+                            onClick={startNavigation}
+                            className="group flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-white/6 bg-white/3 hover:bg-white/7 hover:border-white/20 transition-all duration-200"
+                          >
+                            <div className="flex items-center gap-2.5">
+                              <IndustryIcon className={`w-3.5 h-3.5 shrink-0 transition-colors ${industry.iconColor} ${industry.iconHoverColor}`} />
+                              <span className="text-xs text-white/55 group-hover:text-white/90 transition-colors leading-snug">
+                                {ka ? industry.nameKa : industry.nameEn}
+                              </span>
+                            </div>
+                            <ArrowUpRight className="w-3 h-3 text-white/20 group-hover:text-white/60 shrink-0 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all duration-200" />
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
                 )}

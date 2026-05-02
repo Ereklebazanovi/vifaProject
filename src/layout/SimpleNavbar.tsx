@@ -16,6 +16,8 @@ interface IndustryItem {
   nameEn: string;
   slug: string;
   icon: React.ComponentType<{ className?: string }>;
+  iconColor: string;
+  iconHoverColor: string;
 }
 
 const industries: IndustryItem[] = [
@@ -24,30 +26,40 @@ const industries: IndustryItem[] = [
     nameEn: "Legal & Finance",
     slug: "legal-finance",
     icon: Scale,
+    iconColor: "text-amber-700/60",
+    iconHoverColor: "group-hover:text-amber-500/80",
   },
   {
     nameKa: "სასტუმროები, კოტეჯები და ტურიზმი",
     nameEn: "Hotels, Cottages & Tourism",
     slug: "tourism",
     icon: Map,
+    iconColor: "text-emerald-700/60",
+    iconHoverColor: "group-hover:text-emerald-500/80",
   },
   {
     nameKa: "ესთეტიკა და სილამაზე",
     nameEn: "Beauty & Aesthetics",
     slug: "beauty",
     icon: Sparkles,
+    iconColor: "text-rose-700/60",
+    iconHoverColor: "group-hover:text-rose-400/80",
   },
   {
     nameKa: "E-commerce & საცალო ვაჭრობა",
     nameEn: "E-commerce & Retail",
     slug: "retail",
     icon: ShoppingCart,
+    iconColor: "text-indigo-600/60",
+    iconHoverColor: "group-hover:text-indigo-400/80",
   },
   {
     nameKa: "რესტორნები და კვების ინდუსტრია",
     nameEn: "Restaurants & Food Service",
     slug: "food",
     icon: Utensils,
+    iconColor: "text-orange-700/60",
+    iconHoverColor: "group-hover:text-orange-500/80",
   },
 ];
 
@@ -202,9 +214,9 @@ const SimpleNavbar: React.FC = () => {
                       <Link
                         to={link.generalHref!}
                         onClick={() => setOpenDropdownFor(null)}
-                        className="group flex w-full items-center rounded-xl px-4 py-3 min-h-[50px] text-base text-white hover:text-blue-300 hover:bg-white/5 transition-all duration-300"
+                        className="group flex w-full items-center rounded-xl px-4 py-3 min-h-[50px] text-base text-white/70 hover:text-white hover:bg-white/5 transition-all duration-300"
                       >
-                        <Layers className="w-4 h-4 mr-3 text-white/60 group-hover:text-blue-300 transition-all duration-300 shrink-0" />
+                        <Layers className="w-4 h-4 mr-3 text-white/40 group-hover:text-white/80 transition-all duration-300 shrink-0" />
                         <span>{ka ? "ყველა სერვისი" : "All Services"}</span>
                       </Link>
 
@@ -218,9 +230,9 @@ const SimpleNavbar: React.FC = () => {
                             key={`${link.path}-${industry.slug}`}
                             to={`/industry/${link.industryService}/${industry.slug}`}
                             onClick={() => setOpenDropdownFor(null)}
-                            className="group flex w-full items-center rounded-xl px-4 py-3 min-h-[50px] text-base text-slate-200 hover:text-blue-300 hover:bg-white/5 transition-all duration-300"
+                            className="group flex w-full items-center rounded-xl px-4 py-3 min-h-[50px] text-base text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-300"
                           >
-                            <IndustryIcon className="w-4 h-4 mr-3 text-white/60 group-hover:text-blue-300 transition-all duration-300 shrink-0" />
+                            <IndustryIcon className={`w-4 h-4 mr-3 shrink-0 transition-all duration-300 ${industry.iconColor} ${industry.iconHoverColor}`} />
                             <span>{ka ? industry.nameKa : industry.nameEn}</span>
                           </Link>
                         );
@@ -252,23 +264,32 @@ const SimpleNavbar: React.FC = () => {
           <button
             onClick={() => setMobileMenuOpen((p) => !p)}
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-            className="relative w-5 h-4 flex-shrink-0"
+            className="flex flex-col items-center gap-1.5"
           >
-            <span
-              className={`absolute left-0 w-full h-px bg-white transition-all duration-300 origin-center ${
-                mobileMenuOpen ? "top-1/2 -translate-y-1/2 rotate-45" : "top-0"
-              }`}
-            />
-            <span
-              className={`absolute left-0 top-1/2 -translate-y-1/2 w-3/4 h-px bg-white transition-all duration-300 ${
-                mobileMenuOpen ? "opacity-0 scale-x-0" : "opacity-100"
-              }`}
-            />
-            <span
-              className={`absolute left-0 w-full h-px bg-white transition-all duration-300 origin-center ${
-                mobileMenuOpen ? "top-1/2 -translate-y-1/2 -rotate-45" : "bottom-0"
-              }`}
-            />
+            {/* Three lines */}
+            <div className="relative w-5 h-4 shrink-0">
+              <span
+                className={`absolute left-0 w-full h-px bg-white transition-all duration-300 origin-center ${
+                  mobileMenuOpen ? "top-1/2 -translate-y-1/2 rotate-45" : "top-0"
+                }`}
+              />
+              <span
+                className={`absolute left-0 top-1/2 -translate-y-1/2 w-3/4 h-px bg-white transition-all duration-300 ${
+                  mobileMenuOpen ? "opacity-0 scale-x-0" : "opacity-100"
+                }`}
+              />
+              <span
+                className={`absolute left-0 w-full h-px bg-white transition-all duration-300 origin-center ${
+                  mobileMenuOpen ? "top-1/2 -translate-y-1/2 -rotate-45" : "bottom-0"
+                }`}
+              />
+            </div>
+            {/* Label */}
+            <span className={`text-[8px] font-light tracking-[0.2em] uppercase transition-all duration-300 leading-none ${
+              mobileMenuOpen ? "text-white/40" : "text-white/60"
+            }`}>
+              {mobileMenuOpen ? (ka ? "დახურვა" : "close") : (ka ? "მენიუ" : "menu")}
+            </span>
           </button>
         </div>
       </div>
@@ -333,23 +354,26 @@ const SimpleNavbar: React.FC = () => {
                       <Link
                         to={link.generalHref!}
                         onClick={() => setMobileMenuOpen(false)}
-                        className="flex items-center gap-2.5 text-white/60 text-xs tracking-widest uppercase py-2.5 hover:text-white transition-colors"
+                        className="group flex items-center gap-2.5 text-white/60 text-xs tracking-widest uppercase py-2.5 hover:text-white transition-colors"
                       >
-                        <span className="w-1 h-1 rounded-full bg-white/30 shrink-0" />
+                        <Layers className="w-3.5 h-3.5 text-white/35 group-hover:text-white/70 shrink-0 transition-colors" />
                         {ka ? "ყველა სერვისი" : "All Services"}
                       </Link>
                       <div className="h-px bg-white/[0.06] my-1.5" />
-                      {industries.map((industry) => (
+                      {industries.map((industry) => {
+                        const IndustryIcon = industry.icon;
+                        return (
                         <Link
                           key={`mob-${link.path}-${industry.slug}`}
                           to={`/industry/${link.industryService}/${industry.slug}`}
                           onClick={() => setMobileMenuOpen(false)}
-                          className="flex items-center gap-2.5 text-white/35 text-sm py-2 hover:text-white/70 transition-colors"
+                          className="group flex items-center gap-2.5 text-white/35 text-sm py-2 hover:text-white/70 transition-colors"
                         >
-                          <span className="w-1 h-1 rounded-full bg-white/15 shrink-0" />
+                          <IndustryIcon className={`w-3.5 h-3.5 shrink-0 transition-colors ${industry.iconColor} ${industry.iconHoverColor}`} />
                           {ka ? industry.nameKa : industry.nameEn}
                         </Link>
-                      ))}
+                        );
+                      })}
                     </div>
                   </div>
                 )}
