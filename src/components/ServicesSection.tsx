@@ -243,7 +243,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
                       isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
                     }`}
                   >
-                  <div className="overflow-hidden">
+                  <div className="overflow-hidden min-h-0">
                   <div className={`py-4 md:py-5`}>
                     {/* Header row */}
                     <p className="text-[10px] text-white/25 uppercase tracking-[0.2em] font-mono mb-3">
