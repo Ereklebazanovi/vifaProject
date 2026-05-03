@@ -152,10 +152,6 @@ interface PricingProps {
 
 function PricingSection({ packages, ka }: PricingProps) {
   const pricingLabel = ka ? "ფასები" : "Pricing";
-  const pricingDesc = ka
-    ? "აირჩიეთ თქვენთვის შესაფერისი პაკეტი"
-    : "Choose the package that fits your needs";
-
   const badgeTextKa = "ფასები საორიენტაციოა • მოქმედებს 50/50 გადახდის სისტემა";
   const badgeTextEn = "Prices are estimates • 50/50 payment split available";
 
