@@ -167,7 +167,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
             return (
               <div key={service.id}>
                 <div
-                  className="group relative flex items-center gap-4 sm:gap-6 md:gap-12 py-6 md:py-10 border-b border-white/10 cursor-pointer -mx-4 sm:-mx-6 lg:-mx-12 px-4 sm:px-6 lg:px-12"
+                  className="relative flex items-center gap-4 sm:gap-6 md:gap-12 py-6 md:py-10 border-b border-white/10 cursor-pointer -mx-4 sm:-mx-6 lg:-mx-12 px-4 sm:px-6 lg:px-12"
                   onClick={isExpandable ? () => toggleIndustryLinks(service.id) : undefined}
                   role={isExpandable ? "button" : undefined}
                   tabIndex={isExpandable ? 0 : undefined}
@@ -198,13 +198,13 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
                     0{i + 1}
                   </span>
 
-                  <span className="hidden md:block w-px h-16 bg-white/10 shrink-0 group-hover:bg-blue-500/50 transition-colors duration-300" />
+                  <span className="hidden md:block w-px h-16 bg-white/10 shrink-0" />
 
                   <div className="flex-1 min-w-0">
                     <span className="md:hidden text-xs font-mono text-blue-500/70 mb-1 block tracking-widest">
                       0{i + 1}
                     </span>
-                    <h3 className="text-xl md:text-2xl font-bold text-white mb-2 group-hover:text-blue-300 transition-colors duration-300">
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
                       {isExpandable ? (
                         <span>{service.title}</span>
                       ) : (
@@ -219,10 +219,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
                   </div>
 
                   {isExpandable ? (
-                    <span
-                      aria-label={service.title}
-                      className="shrink-0 w-6 h-6 text-white/30 group-hover:text-white transition-colors duration-300"
-                    >
+                    <span aria-label={service.title} className="shrink-0 w-6 h-6 text-white/30">
                       <ArrowDiagonalSVG />
                     </span>
                   ) : (
@@ -230,40 +227,31 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
                       to={service.href}
                       onClick={service.onClick}
                       aria-label={service.title}
-                      className="shrink-0 w-6 h-6 text-white/30 group-hover:text-white transition-colors duration-300"
+                      className="shrink-0 w-6 h-6 text-white/30"
                     >
                       <ArrowDiagonalSVG />
                     </Link>
                   )}
                 </div>
 
-                {isExpandable && (
-                  <div
-                    className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out border-b border-white/10 ${
-                      isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                    }`}
-                  >
-                  <div className="overflow-hidden min-h-0">
-                  <div className={`py-4 md:py-5`}>
-                    {/* Header row */}
+                {isExpandable && isExpanded && (
+                  <div className="border-b border-white/10 py-4 md:py-5">
                     <p className="text-[10px] text-white/25 uppercase tracking-[0.2em] font-mono mb-3">
                       {ka ? "აირჩიე სფერო" : "Choose a sector"}
                     </p>
 
-                    {/* All Services pill */}
                     <Link
                       to={service.generalHref!}
                       onClick={startNavigation}
-                      className="group inline-flex items-center gap-2 mb-4 px-3.5 py-1.5 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/40 transition-all duration-200"
+                      className="inline-flex items-center gap-2 mb-4 px-3.5 py-1.5 rounded-full border border-white/20 bg-white/5"
                     >
-                      <Layers className="w-3.5 h-3.5 text-white/50 group-hover:text-white/90 transition-colors" />
-                      <span className="text-xs text-white/70 font-medium tracking-wide group-hover:text-white transition-colors">
+                      <Layers className="w-3.5 h-3.5 text-white/50" />
+                      <span className="text-xs text-white/70 font-medium tracking-wide">
                         {ka ? "ზოგადი სერვისები" : "All Services"}
                       </span>
-                      <ArrowUpRight className="w-3 h-3 text-white/30 group-hover:text-white/70 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all duration-200" />
+                      <ArrowUpRight className="w-3 h-3 text-white/30" />
                     </Link>
 
-                    {/* Industry grid */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1.5">
                       {industries.map((industry) => {
                         const IndustryIcon = industry.icon;
@@ -272,21 +260,19 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
                             key={`${service.id}-${industry.slug}`}
                             to={`/industry/${service.industryService}/${industry.slug}`}
                             onClick={startNavigation}
-                            className="group flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-white/6 bg-white/3 hover:bg-white/7 hover:border-white/20 transition-all duration-200"
+                            className="flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-white/10 bg-white/3"
                           >
                             <div className="flex items-center gap-2.5">
-                              <IndustryIcon className={`w-3.5 h-3.5 shrink-0 transition-colors ${industry.iconColor} ${industry.iconHoverColor}`} />
-                              <span className="text-xs text-white/55 group-hover:text-white/90 transition-colors leading-snug">
+                              <IndustryIcon className={`w-3.5 h-3.5 shrink-0 ${industry.iconColor}`} />
+                              <span className="text-xs text-white/55 leading-snug">
                                 {ka ? industry.nameKa : industry.nameEn}
                               </span>
                             </div>
-                            <ArrowUpRight className="w-3 h-3 text-white/20 group-hover:text-white/60 shrink-0 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all duration-200" />
+                            <ArrowUpRight className="w-3 h-3 text-white/20 shrink-0" />
                           </Link>
                         );
                       })}
                     </div>
-                  </div>
-                  </div>
                   </div>
                 )}
               </div>
