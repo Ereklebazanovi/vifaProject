@@ -167,7 +167,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
             return (
               <div key={service.id}>
                 <div
-                  className="group relative flex items-center gap-4 sm:gap-6 md:gap-12 py-6 md:py-10 border-b border-white/10 cursor-pointer transition-all duration-300 hover:bg-white/3 -mx-4 sm:-mx-6 lg:-mx-12 px-4 sm:px-6 lg:px-12"
+                  className="group relative flex items-center gap-4 sm:gap-6 md:gap-12 py-6 md:py-10 border-b border-white/10 cursor-pointer -mx-4 sm:-mx-6 lg:-mx-12 px-4 sm:px-6 lg:px-12"
                   onClick={isExpandable ? () => toggleIndustryLinks(service.id) : undefined}
                   role={isExpandable ? "button" : undefined}
                   tabIndex={isExpandable ? 0 : undefined}
@@ -221,35 +221,25 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
                   {isExpandable ? (
                     <span
                       aria-label={service.title}
-                      className="shrink-0 relative overflow-hidden w-6 h-6 text-white/30 group-hover:text-white transition-colors duration-300"
+                      className="shrink-0 w-6 h-6 text-white/30 group-hover:text-white transition-colors duration-300"
                     >
-                      <span className="absolute inset-0 flex items-center justify-center transition-all duration-400 group-hover:translate-x-8 group-hover:-translate-y-8">
-                        <ArrowDiagonalSVG />
-                      </span>
-                      <span className="absolute inset-0 flex items-center justify-center -translate-x-8 translate-y-8 transition-all duration-400 group-hover:translate-x-0 group-hover:translate-y-0">
-                        <ArrowDiagonalSVG />
-                      </span>
+                      <ArrowDiagonalSVG />
                     </span>
                   ) : (
                     <Link
                       to={service.href}
                       onClick={service.onClick}
                       aria-label={service.title}
-                      className="shrink-0 relative overflow-hidden w-6 h-6 text-white/30 group-hover:text-white transition-colors duration-300"
+                      className="shrink-0 w-6 h-6 text-white/30 group-hover:text-white transition-colors duration-300"
                     >
-                      <span className="absolute inset-0 flex items-center justify-center transition-all duration-400 group-hover:translate-x-8 group-hover:-translate-y-8">
-                        <ArrowDiagonalSVG />
-                      </span>
-                      <span className="absolute inset-0 flex items-center justify-center -translate-x-8 translate-y-8 transition-all duration-400 group-hover:translate-x-0 group-hover:translate-y-0">
-                        <ArrowDiagonalSVG />
-                      </span>
+                      <ArrowDiagonalSVG />
                     </Link>
                   )}
                 </div>
 
                 {isExpandable && (
                   <div
-                    className={`grid transition-all duration-500 ease-out border-b border-white/10 ${
+                    className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out border-b border-white/10 ${
                       isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
                     }`}
                   >
