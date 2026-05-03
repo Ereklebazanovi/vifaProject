@@ -311,6 +311,7 @@ const NewHomeVifa: React.FC = () => {
   const { getTransitionClasses } = useLanguageTransition();
 
   const [showDigitalConsequences, setShowDigitalConsequences] = useState(false);
+  const [heroLoaded, setHeroLoaded] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const scrollToServices = () => {
@@ -339,11 +340,18 @@ const NewHomeVifa: React.FC = () => {
       <div className={`relative min-h-[75vh] md:min-h-screen overflow-hidden ${getTransitionClasses()}`}>
 
         {/* Full-screen hero image background */}
-        <img
-          src="/herophoto1.webp"
-          alt=""
-          className="absolute inset-0 -z-10 w-full h-full object-cover object-center md:object-[65%_center]"
-        />
+        <picture>
+          <source media="(max-width: 768px)" srcSet="/hero-mobile.webp" />
+          <source media="(min-width: 769px)" srcSet="/hero-desktop.webp" />
+          <img
+            src="/hero-desktop.webp"
+            alt=""
+            fetchPriority="high"
+            loading="eager"
+            onLoad={() => setHeroLoaded(true)}
+            className={`absolute inset-0 -z-10 w-full h-full object-cover object-center md:object-[65%_center] transition-opacity duration-700 ${heroLoaded ? "opacity-100" : "opacity-0"}`}
+          />
+        </picture>
 
         {/* Dark overlay — stronger center fade, navbar area darkened */}
         <div className="absolute inset-0 -z-10 bg-black/60" />
