@@ -1,0 +1,86 @@
+{
+  "name": "Vifa Digital - Premium Web Development, Digital Marketing & IT Solutions",
+  "short_name": "Vifa Digital",
+  "description": "Vifa Digital is a premium full-service digital agency in Georgia, delivering web development, digital marketing, IT solutions, Vifa WMS, and AI-powered systems.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["business", "technology", "marketing", "productivity"],
+  "icons": [
+    {
+      "src": "/viffa.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/viffa.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-mobile.jpg",
+      "sizes": "640x1136",
+      "type": "image/jpeg",
+      "platform": "narrow"
+    },
+    {
+      "src": "/screenshot-desktop.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "platform": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Vifa WMS",
+      "short_name": "WMS",
+      "description": "Inventory and sales management for online businesses.",
+      "url": "/vifawms",
+      "icons": [
+        {
+          "src": "/viffa.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Vifa Web",
+      "short_name": "Web",
+      "description": "Premium website design and development services.",
+      "url": "/services/web-development",
+      "icons": [
+        {
+          "src": "/viffa.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Vifa AI",
+      "short_name": "AI",
+      "description": "AI assistants, chatbots, and automation systems.",
+      "url": "/services/ai-chatbot",
+      "icons": [
+        {
+          "src": "/viffa.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "display_override": ["window-controls-overlay", "standalone"],
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
+}
