@@ -249,10 +249,12 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
 
                 {isExpandable && (
                   <div
-                    className={`-mx-4 sm:-mx-6 lg:-mx-12 px-4 sm:px-6 lg:px-12 overflow-hidden transition-all duration-500 ease-out border-b border-white/10 ${
-                      isExpanded ? "max-h-160 opacity-100 py-4 md:py-5" : "max-h-0 opacity-0 py-0"
+                    className={`grid transition-all duration-500 ease-out border-b border-white/10 ${
+                      isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
                     }`}
                   >
+                  <div className="overflow-hidden">
+                  <div className={`py-4 md:py-5`}>
                     {/* Header row */}
                     <p className="text-[10px] text-white/25 uppercase tracking-[0.2em] font-mono mb-3">
                       {ka ? "აირჩიე სფერო" : "Choose a sector"}
@@ -293,6 +295,8 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
                         );
                       })}
                     </div>
+                  </div>
+                  </div>
                   </div>
                 )}
               </div>
