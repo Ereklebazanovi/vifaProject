@@ -1,48 +1,39 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from './SimpleNavbar';
 import Footer from './ImprovedFooter';
 import { useNavigation } from '../contexts/NavigationContext';
 // import ChatBot, { ChatBotButton } from '../components/ChatBot';
 
-// Top progress bar — non-intrusive, matches site's indigo accent
-const NavigationProgressBar = ({ isNavigating }: { isNavigating: boolean }) => (
-  <div
-    className="fixed top-0 left-0 right-0 z-9999 h-0.5 pointer-events-none"
-    style={{ opacity: isNavigating ? 1 : 0, transition: 'opacity 0.3s ease' }}
-  >
-    {/* Glow layer */}
+// Top progress bar — triggers on any route change automatically
+const NavigationProgressBar = ({ active }: { active: boolean }) => (
+  <div className="fixed top-0 left-0 right-0 z-9999 h-0.75 pointer-events-none overflow-hidden">
+    {/* Glow */}
     <div
-      className="absolute inset-0 bg-indigo-500 blur-sm opacity-60"
+      className="absolute inset-0 bg-indigo-400 blur-[3px]"
       style={{
-        transform: isNavigating ? 'scaleX(0.85)' : 'scaleX(0)',
-        transformOrigin: 'left',
-        transition: isNavigating
-          ? 'transform 2.5s cubic-bezier(0.1, 0.4, 0.2, 1)'
-          : 'transform 0.2s ease-out',
+        transform: active ? 'translateX(0)' : 'translateX(-100%)',
+        transition: active ? 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)' : 'transform 0.3s ease-in',
+        opacity: 0.7,
       }}
     />
     {/* Main bar */}
     <div
-      className="absolute inset-0 bg-linear-to-r from-indigo-500 via-violet-400 to-indigo-500"
+      className="absolute inset-0"
       style={{
-        transform: isNavigating ? 'scaleX(0.85)' : 'scaleX(0)',
-        transformOrigin: 'left',
-        transition: isNavigating
-          ? 'transform 2.5s cubic-bezier(0.1, 0.4, 0.2, 1)'
-          : 'transform 0.2s ease-out',
+        background: 'linear-gradient(90deg, #6366f1, #a78bfa, #818cf8)',
+        transform: active ? 'translateX(0)' : 'translateX(-100%)',
+        transition: active ? 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)' : 'transform 0.3s ease-in',
       }}
     />
-    {/* Leading shine dot */}
-    {isNavigating && (
-      <div className="absolute right-[15%] top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-white/80 blur-sm" />
-    )}
   </div>
 );
 
 const Layout: React.FC = () => {
   const { isNavigating, stopNavigation } = useNavigation();
   const location = useLocation();
+  const [barActive, setBarActive] = useState(false);
+  const prevPath = useRef(location.pathname);
   // const [isChatBotOpen, setIsChatBotOpen] = useState(false);
 
   // Determine if current route should show Invento branding
@@ -87,18 +78,17 @@ const Layout: React.FC = () => {
     }
   }, [location.pathname]);
 
-  // Stop navigation when location changes
+  // Show progress bar on any route change
   useEffect(() => {
-    if (isNavigating) {
-      const timer = setTimeout(() => {
-        stopNavigation();
-      }, 500); // Small delay for smooth transition
-
-      return () => clearTimeout(timer);
+    if (prevPath.current !== location.pathname) {
+      prevPath.current = location.pathname;
+      setBarActive(true);
+      const t = setTimeout(() => setBarActive(false), 700);
+      return () => clearTimeout(t);
     }
-  }, [location, isNavigating, stopNavigation]);
+  }, [location.pathname]);
 
-  // Also stop navigation immediately on path change
+  // Also stop manual navigation state
   useEffect(() => {
     stopNavigation();
   }, [location.pathname, stopNavigation]);
@@ -109,7 +99,7 @@ const Layout: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-transparent text-white">
-      <NavigationProgressBar isNavigating={isNavigating} />
+      <NavigationProgressBar active={barActive} />
       <Navbar />
       <main>
         <Outlet />
