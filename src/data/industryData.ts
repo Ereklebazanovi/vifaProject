@@ -360,6 +360,91 @@ export const tourismWebPackages: BilingualPricingTier[] = [
     glowColor: "rgba(99,102,241,0.18)",
   },
 ];
+
+export const ecommerceWebPackages: BilingualPricingTier[] = [
+  {
+    nameKa: "ციფრული შოურუმი",
+    nameEn: "Digital Showroom",
+    price: "₾ 1200 - 1500",
+    periodKa: "პროექტი",
+    periodEn: "project",
+    descKa: "იდეალური სტარტი ინსტაგრამ მაღაზიებისთვის. ულამაზესი კატალოგი მარტივი შეკვეთის სისტემით.",
+    descEn: "Ideal start for Instagram stores. A beautiful catalog with a simple ordering system.",
+    featuresKa: [
+      "პრემიუმ დიზაინი და პროდუქტების კატალოგი",
+      "სრული მართვის პანელი (პროდუქტების დასამატებლად)",
+      "მომხმარებლის კალათა (Shopping Cart)",
+      "შეკვეთის გაგზავნა WhatsApp-ში ან მეილზე",
+      "საბაზისო SEO და Meta/Google Pixel",
+    ],
+    featuresEn: [
+      "Premium Design & Product Catalog",
+      "Full Content Management System (CMS)",
+      "Shopping Cart Functionality",
+      "Order Redirection to WhatsApp/Email",
+      "Basic SEO & Meta/Google Pixel",
+    ],
+    ctaKa: "უფასო კონსულტაცია",
+    ctaEn: "Free Consultation",
+    highlighted: false,
+    glowColor: "rgba(99,102,241,0)",
+  },
+  {
+    nameKa: "ავტომატიზებული E-commerce",
+    nameEn: "Automated E-commerce",
+    price: "₾ 2200 - 2800",
+    periodKa: "პროექტი",
+    periodEn: "project",
+    descKa: "სრულფასოვანი ონლაინ მაღაზია საბანკო გადახდებითა და შეკვეთების მართვით.",
+    descEn: "A full-fledged online store with bank payments and order management.",
+    featuresKa: [
+      "+ 'ციფრული შოურუმი'-ს ყველა კომპონენტი",
+      "ონლაინ გადახდების ინტეგრაცია (TBC, BOG)",
+      "მომხმარებლის რეგისტრაცია / ავტორიზაცია",
+      "შეკვეთების სტატუსების მართვის პანელი",
+      "ფასდაკლებების და პრომო კოდების სისტემა",
+    ],
+    featuresEn: [
+      "+ All features in Digital Showroom",
+      "Online Payments Integration (Local Banks)",
+      "User Registration & Authentication",
+      "Order Status Management Panel",
+      "Discounts & Promo Codes System",
+    ],
+    ctaKa: "დეტალების განხილვა",
+    ctaEn: "Discuss Details",
+    highlighted: true,
+    glowColor: "rgba(99,102,241,0.18)",
+  },
+  {
+    nameKa: "სრული Retail ეკოსისტემა",
+    nameEn: "Full Retail Ecosystem",
+    price: "₾ 4000+",
+    periodKa: "პროექტი",
+    periodEn: "project",
+    descKa: "საიტი + CRM და საწყობის მართვა (WMS). შექმნილია ბიზნესის მასშტაბირებისთვის.",
+    descEn: "Website + CRM and Warehouse Management (WMS). Built for business scaling.",
+    featuresKa: [
+      "+ 'ავტომატიზებული E-commerce'-ს ყველა კომპონენტი",
+      "საწყობის მართვის სისტემა (WMS / მარაგები)",
+      "კურიერის ინვოისების და PDF ლეიბლების გენერაცია",
+      "დეტალური Excel რეპორტები თარიღების მიხედვით",
+      "B2B საბითუმო ფასების და კლიენტების მართვა",
+    ],
+    featuresEn: [
+      "+ All features in Automated E-commerce",
+      "Warehouse Management System (WMS / Inventory)",
+      "Courier Invoices & PDF Labels Generation",
+      "Detailed Excel Reports by Date",
+      "B2B Wholesale Pricing & Client Management",
+    ],
+    ctaKa: "მოითხოვეთ დემო",
+    ctaEn: "Request a Demo",
+    highlighted: false,
+    glowColor: "rgba(99,102,241,0)",
+  },
+];
+
 export const industryData: Record<string, Record<string, IndustryConfig>> = {
   // ──────────────────────────────────────────────────────────────────────────
   web: {
@@ -521,59 +606,59 @@ heroSublineKa: "თანამედროვე პლატფორმებ
     },
 
     // ── E-commerce & Retail ────────────────────────────────────────────────
+   // ── E-commerce & Retail ────────────────────────────────────────────────
     retail: {
-      nameKa: "E-commerce და საცალო",
+      nameKa: "ონლაინ მაღაზიები და Retail",
       nameEn: "E-commerce & Retail",
+      heroBgImage: "/ecommerce-bg.jpg", 
       eyebrowKa: "ვებ დეველოპმენტი",
       eyebrowEn: "Web Development",
-      heroSublineKa:
-        "პირდაპირი დაჯავშნის არხები, ნულოვანი საკომისიო, სრული სისტემური კონტროლი.",
-      heroSublineEn: "Direct booking channels, zero commissions, full system control.",
+      heroSublineKa: "სწრაფი ვებსაიტი, ონლაინ გადახდები და საწყობის მართვის ინტეგრირებული სისტემა ერთ სივრცეში.",
+      heroSublineEn: "Fast website, online payments, and an integrated warehouse management system in one place.",
       headline: {
         type: "simple",
-        textKa: "ვებ ინფრასტრუქტურა E-commerce და საცალო-სთვის",
-        textEn: "Web Infrastructure for E-commerce & Retail",
+        textKa: "ყველაფერი თქვენი ონლაინ გაყიდვებისთვის",
+        textEn: "Everything for Your Online Sales",
       },
       approach: {
-        headingKa: "შექმნილი ბიზნეს ავტომატიზაციისთვის",
-        headingEn: "Built for Business Automation",
+        headingKa: "შექმნილია ბიზნესის ზრდისთვის",
+        headingEn: "Built for Business Growth",
         descKa:
-          "ჩვენ ვქმნით დაჯავშნის, ოპერაციულ და კონვერსიის ინფრასტრუქტურას E-commerce და საცალო სექტორისთვის.",
+          "ჩვენ არ ვქმნით უბრალოდ ვებსაიტებს. ჩვენ გაძლევთ სრულ ეკოსისტემას, რომელიც აერთიანებს პრემიუმ ვიზუალს, ონლაინ გადახდებს და ლოგისტიკის (კურიერების, მარაგების) ავტომატიზაციას.",
         descEn:
-          "We build booking, operations, and conversion infrastructure for the E-commerce & Retail sector.",
+          "We don't just build websites. We provide a full ecosystem combining premium visuals, online payments, and logistics (couriers, inventory) automation.",
       },
       features: [
         {
-          icon: Calendar,
-          titleKa: "ავტომატური დაჯავშნის სისტემები",
-          titleEn: "Automated Booking Systems",
+          icon: ShoppingBag, 
+          titleKa: "სრულფასოვანი E-commerce",
+          titleEn: "Full E-commerce Platform",
           descKa:
-            "ნულოვანი მანუალური კოორდინაცია. ვიზიტები და დაჯავშნები მუშაობს ავტონომიურად.",
+            "პროდუქტების ჭკვიანი კატალოგი, ფილტრაცია და უსაფრთხო ონლაინ გადახდები ნებისმიერი საბანკო ბარათით.",
           descEn:
-            "Zero manual coordination. Appointments and reservations run autonomously.",
-        },
-        {
-          icon: Shield,
-          titleKa: "0% მესამე მხარის საკომისიო",
-          titleEn: "0% Third-party Commissions",
-          descKa:
-            "სრულად ფლობდეთ თქვენს გაყიდვების არხს. გამორიცხეთ მარკეტპლეისების კომისია.",
-          descEn:
-            "Own your sales channel end-to-end. Eliminate marketplace cuts.",
+            "Smart product catalog, filtering, and secure online payments with any bank card.",
         },
         {
           icon: BarChart3,
-          titleKa: "iCal და პლატფორმის ინტეგრაციები",
-          titleEn: "iCal & Platform Integrations",
+          titleKa: "CRM & საწყობის მართვა (WMS)",
+          titleEn: "CRM & Warehouse Management",
           descKa:
-            "Native სინქრონიზაცია Google Calendar-თან, Outlook-თან და ინდუსტრიის სპეციფიკურ ხელსაწყოებთან.",
+            "აკონტროლეთ მარაგები, დააგენერირეთ კურიერის PDF ლეიბლები და ამოიღეთ დეტალური Excel რეპორტები პირდაპირ ადმინ-პანელიდან.",
           descEn:
-            "Native sync with Google Calendar, Outlook, and industry-specific tools.",
+            "Control inventory, generate courier PDF labels, and extract detailed Excel reports directly from the admin panel.",
+        },
+        {
+          icon: Smartphone,
+          titleKa: "ულტრა-სწრაფი მობილური ვერსია",
+          titleEn: "Ultra-fast Mobile Version",
+          descKa:
+            "მყიდველების უმეტესობა ტელეფონს იყენებს. ჩვენი საიტები მობილურზე აპლიკაციასავით სწრაფად მუშაობს, რაც ზრდის გაყიდვებს.",
+          descEn:
+            "Most buyers use phones. Our sites load as fast as native apps on mobile, increasing conversion rates.",
         },
       ],
-      packages: defaultPackages,
+      packages: ecommerceWebPackages, // <--- აქ დავაკავშირეთ ახალი მასივი
     },
-
     // ── Restaurants & Food ─────────────────────────────────────────────────
     food: {
       nameKa: "რესტორნები და კვება",
