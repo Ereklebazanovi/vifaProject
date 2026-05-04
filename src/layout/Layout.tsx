@@ -30,7 +30,7 @@ const NavigationProgressBar = ({ active }: { active: boolean }) => (
 );
 
 const Layout: React.FC = () => {
-  const { isNavigating, stopNavigation } = useNavigation();
+  const { stopNavigation } = useNavigation();
   const location = useLocation();
   const [barActive, setBarActive] = useState(false);
   const prevPath = useRef(location.pathname);
