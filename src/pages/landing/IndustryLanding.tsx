@@ -162,7 +162,7 @@ function PricingSection({ packages, ka }: PricingProps) {
 
   return (
 <section id="pricing" className="relative bg-[#060608] pt-4 pb-24 md:pt-2 md:pb-32">
-      <div className="relative mx-auto max-w-7xl px-5 lg:px-12 p-4">
+      <div className="relative mx-auto max-w-5xl px-5 lg:px-8 p-4">
 
         <motion.div
           ref={headerRef}
@@ -223,46 +223,46 @@ function PricingCard({ tier, ka }: PricingCardProps) {
   return (
     <motion.div
       variants={cardItem}
-      className={`group relative flex flex-col overflow-hidden rounded-3xl border p-8 transition-all duration-400 ${
+      className={`group relative flex flex-col overflow-hidden rounded-3xl border p-6 transition-all duration-400 ${
         tier.highlighted
           ? "border-indigo-500/40 bg-indigo-950/20 shadow-[0_0_40px_-15px_rgba(99,102,241,0.2)]"
-          : "border-white/10 bg-white/[0.03] hover:border-white/20"
+          : "border-white/15 bg-white/6 hover:border-white/25"
       }`}
     >
       {/* 1. პაკეტის სახელი */}
-      <h3 className="mb-2 text-xl font-bold tracking-tight text-white md:text-2xl">
+      <h3 className="mb-2 text-2xl font-bold tracking-tight text-white md:text-3xl">
         {ka ? tier.nameKa : tier.nameEn}
       </h3>
-      
+
       {/* 2. ფასი და პერიოდი */}
-      <div className="mb-6 flex items-baseline gap-2">
-        <span className="text-3xl font-black tracking-tight text-indigo-400">
+      <div className="mb-4 flex items-baseline gap-2">
+        <span className="text-4xl font-black tracking-normal text-indigo-400">
           {tier.price}
         </span>
-        <span className="text-xs font-medium uppercase tracking-wider text-gray-500">
+        <span className="text-sm font-medium uppercase tracking-wider text-gray-400">
           / {ka ? tier.periodKa : tier.periodEn}
         </span>
       </div>
 
-      <div className="mb-6 h-px w-full bg-gradient-to-r from-white/10 to-transparent" />
+      <div className="mb-4 h-px w-full bg-gradient-to-r from-white/10 to-transparent" />
 
       {/* 3. აღწერა */}
-      <p className="mb-8 min-h-[3rem] text-[15px] leading-relaxed text-gray-300">
+      <p className="mb-4 text-sm leading-relaxed text-gray-300">
         {ka ? tier.descKa : tier.descEn}
       </p>
 
       {/* 4. ფუნქციები */}
-      <ul className="mb-10 flex-1 space-y-4">
+      <ul className="mb-6 flex-1 space-y-2">
         {(ka ? tier.featuresKa : tier.featuresEn).map((feat) => {
           const isInherited = feat.startsWith('+');
           return (
-            <li key={feat} className="flex items-start gap-4">
+            <li key={feat} className="flex items-start gap-2.5 rounded-lg px-2 py-1.5 bg-white/3">
               <CheckCircle2
-                className={`mt-1 h-5 w-5 shrink-0 ${
-                  isInherited ? "text-white/10" : "text-indigo-500"
+                className={`mt-0.5 h-4 w-4 shrink-0 ${
+                  isInherited ? "text-white/20" : "text-indigo-400"
                 }`}
               />
-              <span className={`text-[14px] leading-snug tracking-wide ${
+              <span className={`text-[15px] leading-snug ${
                 isInherited ? "text-gray-500 italic" : "text-gray-200"
               }`}>
                 {feat}

@@ -12,9 +12,9 @@ import ServicesSection from "../components/ServicesSection";
 const newHomeTranslations = {
   ka: {
     "seo.home.title":
-      "VIFA Digital - ციფრული მარკეტინგი საქართველოში | vifadigital.ge",
+      "VIFA Digital - ციფრული სააგენტო | vifadigital.ge",
     "seo.home.description":
-      "VIFA Digital - ციფრული მარკეტინგის სერვისები: ვიდეო გადაღება, ფოტოგრაფია, სოციალური მედია მართვა, კონტენტის შექმნა. სრული მარკეტინგ პაკეტი თქვენი ბიზნესისთვის.",
+      "VIFA Digital - ციფრული სააგენტო  : ვიდეო გადაღება, ფოტოგრაფია, ვებ დეველოპენტი, ავტომატიზაცია, სოციალური მედია მართვა, კონტენტის შექმნა. სრული მარკეტინგ პაკეტი თქვენი ბიზნესისთვის. ",
 
     "ome.badge": "გააციფრულე შენი ბიზნესი",
     "newHome.hero.title": "შექმენი კომუნიკაციის ხიდი",

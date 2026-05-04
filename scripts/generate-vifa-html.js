@@ -16,7 +16,7 @@ if (!existsSync(srcFile)) {
 
 let html = readFileSync(srcFile, 'utf-8');
 
-const vifaTitle       = 'VIFA Digital - ციფრული მარკეტინგი საქართველოში';
+const vifaTitle       = 'VIFA Digital - ციფრული სააგენტო';
 const vifaDescription = 'ციფრული მარკეტინგის სერვისები: ვიდეო გადაღება, ფოტოგრაფია, სოციალური მედია მართვა, კონტენტის შექმნა. სრული მარკეტინგ პაკეტი თქვენი ბიზნესისთვის.';
 const vifaImage       = 'https://www.vifadigital.ge/viffa.png';
 const vifaUrl         = 'https://www.vifadigital.ge/';
@@ -46,7 +46,7 @@ const jsonLd = {
   "name": "VIFA Digital",
   "url": "https://www.vifadigital.ge",
   "logo": vifaImage,
-  "description": "ციფრული მარკეტინგის სერვისები საქართველოში",
+  "description": "ციფრული სააგენტო",
   "contactPoint": { "@type": "ContactPoint", "contactType": "customer service", "availableLanguage": ["Georgian", "English"] },
   "sameAs": ["https://www.facebook.com/vifadigital", "https://www.instagram.com/vifadigital"],
   "areaServed": "Georgia",
