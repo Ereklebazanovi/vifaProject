@@ -522,14 +522,14 @@ export const marketingBeautyPackages: BilingualPricingTier[] = [
     periodKa: "/ თვე",
     periodEn: "/ mo",
     descKa:
-      "სრული სოციალური მედიის მართვა — კონტენტის შექმნიდან სარეკლამო კამპანიების ოპტიმიზაციამდე — შედეგზე ორიენტირებული მიდგომით.",
+      "სრული სოციალური მედიის მართვა - კონტენტის შექმნიდან სარეკლამო კამპანიების ოპტიმიზაციამდე - შედეგზე ორიენტირებული მიდგომით.",
     descEn:
-      "End-to-end social media management — from content creation to ad campaign optimization — with a results-driven approach.",
+      "End-to-end social media management - from content creation to ad campaign optimization - with a results-driven approach.",
     featuresKa: [
       "სოციალური მედიის არხების შექმნა და მართვა",
-      "1-თვის კონტენტ-გეგმის შემუშავება",
+      
       "ქოფირაითინგი",
-      "ინტერაქტიული კონტენტის შექმნა (გამოკითხვები და ვიქტორინები)",
+      "ინტერაქტიული კონტენტის შექმნა (ვიდეო რილების საშუალებით)",
       "ფოტო გადაღება",
       "რილსების გადაღება და მონტაჟი",
       "მიზნობრივი რეკლამის გაშვება და მართვა",
@@ -560,9 +560,9 @@ export const marketingTourismPackages: BilingualPricingTier[] = [
     periodKa: "/ თვე",
     periodEn: "/ mo",
     descKa:
-      "სრული მარკეტინგული პაკეტი სასტუმროებისა და ტურისტული ობიექტებისთვის — სტრატეგიიდან პანორამულ ვიდეო-კონტენტამდე.",
+      "სრული მარკეტინგული პაკეტი სასტუმროებისა და ტურისტული ობიექტებისთვის - სტრატეგიიდან პანორამულ ვიდეო-კონტენტამდე.",
     descEn:
-      "A complete marketing package for hotels and tourism venues — from strategy to panoramic video content.",
+      "A complete marketing package for hotels and tourism venues - from strategy to panoramic video content.",
     featuresKa: [
       "მარკეტინგული სტრატეგიის შემუშავება",
       "სოციალური მედიის არხების შექმნა და სრული მართვა",
@@ -600,9 +600,9 @@ export const marketingFoodPackages: BilingualPricingTier[] = [
     periodKa: "/ თვე",
     periodEn: "/ mo",
     descKa:
-      "სრული ვიზუალური მარკეტინგი რესტორნებისთვის — მენიუს დიზაინიდან კინემატოგრაფიულ ვიდეო-კონტენტამდე.",
+      "სრული ვიზუალური მარკეტინგი რესტორნებისთვის - მენიუს დიზაინიდან კინემატოგრაფიულ ვიდეო-კონტენტამდე.",
     descEn:
-      "Full visual marketing for restaurants — from menu design to cinematic video content.",
+      "Full visual marketing for restaurants - from menu design to cinematic video content.",
     featuresKa: [
       "მენიუს არქიტექტურისა და პოლიგრაფიული/ციფრული დიზაინის შემუშავება",
       "მომხმარებელთა ქცევაზე მორგებული აქციებისა და სარეკლამო ბანერების დიზაინი",
@@ -632,9 +632,9 @@ export const marketingRetailPackages: BilingualPricingTier[] = [
     periodKa: "/ თვე",
     periodEn: "/ mo",
     descKa:
-      "სრული მარკეტინგული გამოსავალი Retail და E-commerce ბიზნესებისთვის — პროდუქტის ვიზუალიდან გაყიდვებზე ორიენტირებულ სარეკლამო კამპანიებამდე.",
+      "სრული მარკეტინგული გამოსავალი Retail და E-commerce ბიზნესებისთვის - პროდუქტის ვიზუალიდან გაყიდვებზე ორიენტირებულ სარეკლამო კამპანიებამდე.",
     descEn:
-      "A complete marketing solution for retail and e-commerce businesses — from product visuals to sales-driven ad campaigns.",
+      "A complete marketing solution for retail and e-commerce businesses - from product visuals to sales-driven ad campaigns.",
     featuresKa: [
       "სოციალური არხების შექმნა და მენეჯმენტი",
       "ინტერაქტიული პროდუქტ-პრეზენტაციები",
@@ -664,16 +664,16 @@ export const marketingLegalFinancePackages: BilingualPricingTier[] = [
     periodKa: "/ თვე",
     periodEn: "/ mo",
     descKa:
-      "კორპორატიული ბრენდის მშენებლობა და B2B მარკეტინგი — ინსტიტუციური იმიჯიდან კომპანიის ფილოსოფიის ამსახველ საიმიჯო კონტენტამდე.",
+      "კორპორატიული ბრენდის მშენებლობა და B2B მარკეტინგი - ინსტიტუციური იმიჯიდან კომპანიის ფილოსოფიის ამსახველ საიმიჯო კონტენტამდე.",
     descEn:
-      "Corporate brand building and B2B marketing — from institutional image to a documentary spot that embodies your company's philosophy.",
+      "Corporate brand building and B2B marketing - from institutional image to a documentary spot that embodies your company's philosophy.",
     featuresKa: [
       "ინსტიტუციური იმიჯისა და კორპორატიული ბრენდბუქის დეველოპმენტი",
       "სოციალური მედიის მართვა",
       "წარმომადგენლობითი ბეჭდური მასალების (სავიზიტო ბარათები, კორპორატიული ბროშურები) დიზაინი",
       "გუნდისა და საოფისე გარემოს პროფესიონალური ფოტოსესია (10-დან 20-მდე ფოტო)",
       "კომპანიის ფილოსოფიისა და სერვისების ამსახველი საიმიჯო დოკუმენტური რგოლი (1 ერთეული)",
-      "ინტერაქტიული კონტენტის შექმნა (გამოკითხვები და ვიქტორინები)",
+      "ინტერაქტიული კონტენტის შექმნა (ვიდეო რილების საშუალებით)",
     ],
     featuresEn: [
       "Institutional image and corporate brand book development",
