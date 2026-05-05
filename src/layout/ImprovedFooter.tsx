@@ -241,7 +241,7 @@ const Footer: React.FC = () => {
               >
                 {isInventoRoute() && !isVifaRoute() ? (
                   <img
-                    src="/invento.png"
+                    src="/viffa.png"
                     alt="Invento Technologies - ვებ განვითარება და AI ჩატბოტები"
                     className="w-10 h-10 rounded-lg object-cover"
                     loading="lazy"
