@@ -327,21 +327,21 @@ function MarketingServiceSection({ data, ka, heroBgImage }: { data: BilingualPri
           <div className="flex flex-col gap-5">
             <div className="flex items-center gap-3">
               <div className="h-px w-6 bg-indigo-500" />
-              <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-indigo-400">
+              <span className="text-[11px] md:text-[13px] font-bold uppercase tracking-[0.25em] text-indigo-400">
                 {ka ? data.nameKa : data.nameEn}
               </span>
             </div>
 
             <div className="flex items-baseline gap-2">
-              <span className="text-4xl font-black tracking-tight text-white">
+              <span className="text-4xl md:text-5xl font-black tracking-tight text-white">
                 {data.price}
               </span>
-              <span className="text-sm font-medium text-gray-500">
+              <span className="text-sm md:text-base font-medium text-gray-500">
                 {ka ? data.periodKa : data.periodEn}
               </span>
             </div>
 
-            <p className="text-[14px] leading-relaxed text-gray-400">
+            <p className="text-[14px] md:text-[16px] leading-relaxed text-gray-400">
               {ka ? data.descKa : data.descEn}
             </p>
 
@@ -349,7 +349,7 @@ function MarketingServiceSection({ data, ka, heroBgImage }: { data: BilingualPri
               href={`https://wa.me/995557624243?text=${encodeURIComponent(whatsappMessage)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-1 inline-flex w-full items-center justify-center gap-2.5 rounded-xl bg-indigo-600 px-6 py-3.5 text-[14px] font-bold text-white shadow-lg shadow-indigo-600/20 transition-all hover:bg-indigo-500 active:scale-[0.98] md:w-auto"
+              className="mt-1 inline-flex w-full items-center justify-center gap-2.5 rounded-xl bg-indigo-600 px-6 py-3.5 text-[14px] md:text-[15px] font-bold text-white shadow-lg shadow-indigo-600/20 transition-all hover:bg-indigo-500 active:scale-[0.98] md:w-auto"
             >
               <WhatsAppIcon className="h-4 w-4" />
               <span>{ka ? data.ctaKa : data.ctaEn}</span>
@@ -362,7 +362,7 @@ function MarketingServiceSection({ data, ka, heroBgImage }: { data: BilingualPri
               {features.map((feat, i) => (
                 <li key={i} className="flex items-start gap-3.5 py-3.5 first:pt-0 last:pb-0">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-indigo-500" />
-                  <span className="text-[14px] leading-relaxed text-gray-300">{feat}</span>
+                  <span className="text-[14px] md:text-[16px] leading-relaxed text-gray-300">{feat}</span>
                 </li>
               ))}
             </ul>
