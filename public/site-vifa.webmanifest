@@ -1,0 +1,86 @@
+{
+  "name": "VIFA Digital - ციფრული მარკეტინგის სააგენტო საქართველოში",
+  "short_name": "VIFA Digital",
+  "description": "VIFA - ციფრული მარკეტინგის სააგენტო საქართველოში. Facebook რეკლამა, Google Ads, სოციალური მედია მენეჯმენტი, SEO ოპტიმიზაცია.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#ef4444",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "ka",
+  "dir": "ltr",
+  "categories": ["business", "marketing", "advertising"],
+  "icons": [
+    {
+      "src": "/viffa.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/viffa.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-mobile.jpg",
+      "sizes": "640x1136",
+      "type": "image/jpeg",
+      "platform": "narrow"
+    },
+    {
+      "src": "/screenshot-desktop.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "platform": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "ციფრული მარკეტინგი",
+      "short_name": "მარკეტინგი",
+      "description": "სოციალური მედია მართვა და ციფრული რეკლამა",
+      "url": "/services/digital-advertising",
+      "icons": [
+        {
+          "src": "/viffa.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "ვიდეო გადაღება",
+      "short_name": "ვიდეო",
+      "description": "პროფესიონალური ვიდეო კონტენტის შექმნა",
+      "url": "/services/digital-advertising#video-production",
+      "icons": [
+        {
+          "src": "/viffa.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "ფოტო სესიები",
+      "short_name": "ფოტო",
+      "description": "სპეციალური ფოტო სესიები ბრენდებისთვის",
+      "url": "/services/digital-advertising#photo-shooting",
+      "icons": [
+        {
+          "src": "/viffa.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "display_override": ["window-controls-overlay", "standalone"],
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
+}

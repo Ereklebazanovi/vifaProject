@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -I https://www.inventogeo.com)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

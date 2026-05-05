@@ -1,0 +1,11 @@
+# Cache static assets for 1 year (they have hashes)
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache HTML for 5 minutes only
+/*.html
+  Cache-Control: public, max-age=300
+
+# Never cache service worker
+/sw.js
+  Cache-Control: no-cache
