@@ -303,7 +303,7 @@ function MarketingServiceSection({ data, ka }: { data: BilingualPricingTier; ka:
   const features = ka ? data.featuresKa : data.featuresEn;
 
   return (
-    <section id="pricing" className="relative bg-[#060608] py-16 md:py-24">
+    <section id="pricing" className="relative bg-[#060608] py-8 md:py-10">
       <div className="mx-auto max-w-5xl px-5 lg:px-8">
         <motion.div
           ref={ref}

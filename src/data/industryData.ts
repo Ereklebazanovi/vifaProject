@@ -968,6 +968,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
     beauty: {
       nameKa: "ესთეტიკა და სილამაზე",
       nameEn: "Beauty & Aesthetics",
+      heroBgImage: "/saloni.jpg",
       eyebrowKa: "ზრდის მარკეტინგი",
       eyebrowEn: "Growth Marketing",
       heroSublineKa:
@@ -1023,6 +1024,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
     tourism: {
       nameKa: "სასტუმროები და ტურიზმი",
       nameEn: "Hotels & Tourism",
+      heroBgImage: "/hotelphoto.jpg",
       eyebrowKa: "ზრდის მარკეტინგი",
       eyebrowEn: "Growth Marketing",
       heroSublineKa:
@@ -1078,6 +1080,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
     "legal-finance": {
       nameKa: "იურიდიული და საფინანსო",
       nameEn: "Legal & Finance",
+      heroBgImage: "/practice-hero.webp",
       eyebrowKa: "ზრდის მარკეტინგი",
       eyebrowEn: "Growth Marketing",
       heroSublineKa:
@@ -1133,6 +1136,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
     retail: {
       nameKa: "E-commerce და საცალო",
       nameEn: "E-commerce & Retail",
+      heroBgImage: "/eccomerce.jpg",
       eyebrowKa: "ზრდის მარკეტინგი",
       eyebrowEn: "Growth Marketing",
       heroSublineKa:
@@ -1184,6 +1188,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
     food: {
       nameKa: "რესტორნები და კვება",
       nameEn: "Restaurants & Food",
+      heroBgImage: "/restorani.jpg",
       eyebrowKa: "ზრდის მარკეტინგი",
       eyebrowEn: "Growth Marketing",
       heroSublineKa:
