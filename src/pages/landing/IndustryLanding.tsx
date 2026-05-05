@@ -290,6 +290,78 @@ function PricingCard({ tier, ka }: PricingCardProps) {
   );
 }
 
+// ─── Marketing Service Section ────────────────────────────────────────────────
+
+function MarketingServiceSection({ data, ka }: { data: BilingualPricingTier; ka: boolean }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0 });
+
+  const whatsappMessage = ka
+    ? `გამარჯობა, მაინტერესებს მარკეტინგული სერვისი: "${data.nameKa}"`
+    : `Hello, I am interested in the marketing service: "${data.nameEn}"`;
+
+  const features = ka ? data.featuresKa : data.featuresEn;
+
+  return (
+    <section id="pricing" className="relative bg-[#060608] py-16 md:py-24">
+      <div className="mx-auto max-w-5xl px-5 lg:px-8">
+        <motion.div
+          ref={ref}
+          variants={sectionReveal}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="grid gap-10 md:grid-cols-[5fr_6fr] md:gap-16 lg:gap-20"
+        >
+          {/* ── Left: price, desc, CTA ── */}
+          <div className="flex flex-col gap-5">
+            <div className="flex items-center gap-3">
+              <div className="h-px w-6 bg-indigo-500" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-indigo-400">
+                {ka ? data.nameKa : data.nameEn}
+              </span>
+            </div>
+
+            <div className="flex items-baseline gap-2">
+              <span className="text-4xl font-black tracking-tight text-white">
+                {data.price}
+              </span>
+              <span className="text-sm font-medium text-gray-500">
+                {ka ? data.periodKa : data.periodEn}
+              </span>
+            </div>
+
+            <p className="text-[14px] leading-relaxed text-gray-400">
+              {ka ? data.descKa : data.descEn}
+            </p>
+
+            <a
+              href={`https://wa.me/995557624243?text=${encodeURIComponent(whatsappMessage)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-1 inline-flex w-full items-center justify-center gap-2.5 rounded-xl bg-indigo-600 px-6 py-3.5 text-[14px] font-bold text-white shadow-lg shadow-indigo-600/20 transition-all hover:bg-indigo-500 active:scale-[0.98] md:w-auto"
+            >
+              <WhatsAppIcon className="h-4 w-4" />
+              <span>{ka ? data.ctaKa : data.ctaEn}</span>
+            </a>
+          </div>
+
+          {/* ── Right: feature list ── */}
+          <div className="border-t border-white/8 md:border-t-0 md:border-l md:pl-12 lg:pl-16">
+            <ul className="divide-y divide-white/6 pt-8 md:pt-0">
+              {features.map((feat, i) => (
+                <li key={i} className="flex items-start gap-3.5 py-3.5 first:pt-0 last:pb-0">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-indigo-500" />
+                  <span className="text-[14px] leading-relaxed text-gray-300">{feat}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 function NotFound() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-6 bg-[#060608] px-5 text-center text-white">
@@ -328,7 +400,11 @@ const IndustryLanding = () => {
     <main className="min-h-screen bg-[#060608] text-white selection:bg-indigo-500/30">
       <HeroSection config={config} ka={ka} />
       {/* <FeaturesSection config={config} ka={ka} /> */}
-      <PricingSection packages={config.packages} ka={ka} />
+      {service === "web" ? (
+        <PricingSection packages={config.packages} ka={ka} />
+      ) : (
+        <MarketingServiceSection data={config.packages[0]} ka={ka} />
+      )}
     </main>
   );
 };
