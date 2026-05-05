@@ -47,7 +47,7 @@ const SEO: React.FC<SEOProps> = ({
     defaultImage: '/viffa.png',
     email: 'vifa.official2020@gmail.com',
     socialLinks: [
-      'https://facebook.com/vifaweb',
+      'https://www.facebook.com/vifageo',
       'https://www.instagram.com/vifadigital'
     ]
   };

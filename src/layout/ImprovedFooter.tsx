@@ -110,7 +110,7 @@ const Footer: React.FC = () => {
   const socialLinks = [
     {
       icon: <FaFacebookF />,
-      href: isInventoRoute() && !isVifaRoute() ? "https://www.facebook.com/inventogeo" : "https://facebook.com/vifaweb",
+      href: isInventoRoute() && !isVifaRoute() ? "https://www.facebook.com/inventogeo" : "https://www.facebook.com/vifageo",
       label: "VIFA DIGITAL",
       color:
         "hover:text-blue-400 hover:bg-blue-500/10 hover:border-blue-400/50",

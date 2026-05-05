@@ -682,12 +682,12 @@ const StartProject: React.FC = () => {
                                           {currentLanguage === "ka" ? "მოგვწერეთ პირდაპირ Facebook-ზე:" : "Message us directly on Facebook:"}
                                         </div>
                                         <a
-                                          href="https://facebook.com/vifaweb"
+                                          href="https://www.facebook.com/vifageo"
                                           target="_blank"
                                           rel="noopener noreferrer"
                                           className="text-blue-300 font-mono text-sm bg-blue-900/30 px-2 py-1 rounded hover:bg-blue-800/40 transition-colors duration-200 cursor-pointer inline-block"
                                         >
-                                          facebook.com/vifaweb
+                                            facebook.com/vifaweb
                                         </a>
                                       </div>
                                       <div className="bg-green-600/20 border border-green-500/30 rounded-lg p-4">

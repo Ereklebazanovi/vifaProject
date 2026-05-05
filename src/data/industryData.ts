@@ -512,6 +512,185 @@ export const foodWebPackages: BilingualPricingTier[] = [
   },
 ];
 
+// ─── Marketing Packages (per niche) ──────────────────────────────────────────
+
+export const marketingBeautyPackages: BilingualPricingTier[] = [
+  {
+    nameKa: "კომპლექსური მართვა",
+    nameEn: "Comprehensive Management",
+    price: "₾ 600 - 1900",
+    periodKa: "/ თვე",
+    periodEn: "/ mo",
+    descKa:
+      "სრული სოციალური მედიის მართვა — კონტენტის შექმნიდან სარეკლამო კამპანიების ოპტიმიზაციამდე — შედეგზე ორიენტირებული მიდგომით.",
+    descEn:
+      "End-to-end social media management — from content creation to ad campaign optimization — with a results-driven approach.",
+    featuresKa: [
+      "სოციალური მედიის არხების შექმნა და მართვა",
+      "1-თვის კონტენტ-გეგმის შემუშავება",
+      "ქოფირაითინგი",
+      "ინტერაქტიული კონტენტის შექმნა (გამოკითხვები და ვიქტორინები)",
+      "ფოტო გადაღება",
+      "რილსების გადაღება და მონტაჟი",
+      "მიზნობრივი რეკლამის გაშვება და მართვა",
+      "ჩაწერებზე ფოკუსირებული ტარგეთირება",
+    ],
+    featuresEn: [
+      "Social media channel setup and management",
+      "Monthly content plan development",
+      "Professional copywriting",
+      "Interactive content creation (polls & quizzes)",
+      "Professional photo shoot",
+      "Reels filming and editing",
+      "Targeted ad campaign launch and management",
+      "Booking-focused audience targeting",
+    ],
+    ctaKa: "დაჯავშნე კონსულტაცია",
+    ctaEn: "Book Consultation",
+    highlighted: true,
+    glowColor: "rgba(99,102,241,0.18)",
+  },
+];
+
+export const marketingTourismPackages: BilingualPricingTier[] = [
+  {
+    nameKa: "კომპლექსური მართვა",
+    nameEn: "Comprehensive Management",
+    price: "₾ 800 - 2500",
+    periodKa: "/ თვე",
+    periodEn: "/ mo",
+    descKa:
+      "სრული მარკეტინგული პაკეტი სასტუმროებისა და ტურისტული ობიექტებისთვის — სტრატეგიიდან პანორამულ ვიდეო-კონტენტამდე.",
+    descEn:
+      "A complete marketing package for hotels and tourism venues — from strategy to panoramic video content.",
+    featuresKa: [
+      "მარკეტინგული სტრატეგიის შემუშავება",
+      "სოციალური მედიის არხების შექმნა და სრული მართვა",
+      "ინტერიერისა და ექსტერიერის პროფესიონალური ფოტოსესია",
+      "დრონით პანორამული გადაღება",
+      "სასტუმროს გასტრონომიული სივრცეების ვიზუალიზაცია",
+      "ჰორიზონტალური საიმიჯო ვიდეო გადაღება (სასტუმროს/ლოკაციის სრული მიმოხილვა)",
+      "რილსების სერიის შექმნა ტრენდული ფორმატით (5-დან 10-მდე)",
+      "ფასიანი რეკლამის მართვა გლობალურ და ლოკალურ ბაზრებზე",
+      "კონკურსების და აქციების ორგანიზება",
+    ],
+    featuresEn: [
+      "Marketing strategy development",
+      "Social media channel setup and full management",
+      "Professional interior and exterior photo shoot",
+      "Drone panoramic aerial photography",
+      "Hotel gastronomic space visual presentation",
+      "Horizontal image video shoot (full hotel/location walkthrough)",
+      "Reels series in trending format (5 to 10 units)",
+      "Paid ad management across global and local markets",
+      "Contest and promotional campaign organization",
+    ],
+    ctaKa: "დაჯავშნე კონსულტაცია",
+    ctaEn: "Book Consultation",
+    highlighted: true,
+    glowColor: "rgba(99,102,241,0.18)",
+  },
+];
+
+export const marketingFoodPackages: BilingualPricingTier[] = [
+  {
+    nameKa: "კომპლექსური მართვა",
+    nameEn: "Comprehensive Management",
+    price: "₾ 900 - 2000",
+    periodKa: "/ თვე",
+    periodEn: "/ mo",
+    descKa:
+      "სრული ვიზუალური მარკეტინგი რესტორნებისთვის — მენიუს დიზაინიდან კინემატოგრაფიულ ვიდეო-კონტენტამდე.",
+    descEn:
+      "Full visual marketing for restaurants — from menu design to cinematic video content.",
+    featuresKa: [
+      "მენიუს არქიტექტურისა და პოლიგრაფიული/ციფრული დიზაინის შემუშავება",
+      "მომხმარებელთა ქცევაზე მორგებული აქციებისა და სარეკლამო ბანერების დიზაინი",
+      "Food Photography (10-დან 20-მდე ერთეული)",
+      "სამზარეულოს კულისებისა და მზადების პროცესის კინემატოგრაფიული ვიდეო-გადაღება (3-დან 5-მდე რილსი)",
+      "ლოკალურ აუდიტორიაზე ფოკუსირებული ტარგეტირება",
+    ],
+    featuresEn: [
+      "Menu architecture and print/digital design development",
+      "Customer behavior-driven promotional and advertising banner design",
+      "Food Photography (10 to 20 units)",
+      "Cinematic behind-the-scenes kitchen and preparation video (3 to 5 reels)",
+      "Locally-focused audience targeting",
+    ],
+    ctaKa: "დაჯავშნე კონსულტაცია",
+    ctaEn: "Book Consultation",
+    highlighted: true,
+    glowColor: "rgba(99,102,241,0.18)",
+  },
+];
+
+export const marketingRetailPackages: BilingualPricingTier[] = [
+  {
+    nameKa: "კომპლექსური მართვა",
+    nameEn: "Comprehensive Management",
+    price: "₾ 800 - 2100",
+    periodKa: "/ თვე",
+    periodEn: "/ mo",
+    descKa:
+      "სრული მარკეტინგული გამოსავალი Retail და E-commerce ბიზნესებისთვის — პროდუქტის ვიზუალიდან გაყიდვებზე ორიენტირებულ სარეკლამო კამპანიებამდე.",
+    descEn:
+      "A complete marketing solution for retail and e-commerce businesses — from product visuals to sales-driven ad campaigns.",
+    featuresKa: [
+      "სოციალური არხების შექმნა და მენეჯმენტი",
+      "ინტერაქტიული პროდუქტ-პრეზენტაციები",
+      "გაყიდვებზე ორიენტირებული სარეკლამო ქოფირაითინგი",
+      "პროდუქციის კატალოგისთვის მაღალი ხარისხის ფოტოსესია (20-დან 30-მდე ფოტო)",
+      "სარეკლამო ვიდეო-რგოლებისა და პროდუქტის მიმოხილვების შექმნა (10-დან 15-მდე ერთეული)",
+    ],
+    featuresEn: [
+      "Social media channel creation and management",
+      "Interactive product presentations",
+      "Sales-oriented advertising copywriting",
+      "High-quality product catalog photo shoot (20 to 30 photos)",
+      "Advertising video spots and product review creation (10 to 15 units)",
+    ],
+    ctaKa: "დაჯავშნე კონსულტაცია",
+    ctaEn: "Book Consultation",
+    highlighted: true,
+    glowColor: "rgba(99,102,241,0.18)",
+  },
+];
+
+export const marketingLegalFinancePackages: BilingualPricingTier[] = [
+  {
+    nameKa: "კომპლექსური მართვა",
+    nameEn: "Comprehensive Management",
+    price: "₾ 1100 - 3000",
+    periodKa: "/ თვე",
+    periodEn: "/ mo",
+    descKa:
+      "კორპორატიული ბრენდის მშენებლობა და B2B მარკეტინგი — ინსტიტუციური იმიჯიდან კომპანიის ფილოსოფიის ამსახველ საიმიჯო კონტენტამდე.",
+    descEn:
+      "Corporate brand building and B2B marketing — from institutional image to a documentary spot that embodies your company's philosophy.",
+    featuresKa: [
+      "ინსტიტუციური იმიჯისა და კორპორატიული ბრენდბუქის დეველოპმენტი",
+      "სოციალური მედიის მართვა",
+      "წარმომადგენლობითი ბეჭდური მასალების (სავიზიტო ბარათები, კორპორატიული ბროშურები) დიზაინი",
+      "გუნდისა და საოფისე გარემოს პროფესიონალური ფოტოსესია (10-დან 20-მდე ფოტო)",
+      "კომპანიის ფილოსოფიისა და სერვისების ამსახველი საიმიჯო დოკუმენტური რგოლი (1 ერთეული)",
+      "ინტერაქტიული კონტენტის შექმნა (გამოკითხვები და ვიქტორინები)",
+    ],
+    featuresEn: [
+      "Institutional image and corporate brand book development",
+      "Social media management",
+      "Representative print material design (business cards, corporate brochures)",
+      "Professional team and office environment photo shoot (10 to 20 photos)",
+      "Corporate image documentary spot showcasing the company's philosophy and services (1 unit)",
+      "Interactive content creation (polls & quizzes)",
+    ],
+    ctaKa: "დაჯავშნე კონსულტაცია",
+    ctaEn: "Book Consultation",
+    highlighted: true,
+    glowColor: "rgba(99,102,241,0.18)",
+  },
+];
+
+// ─── Industry Data Store ──────────────────────────────────────────────────────
 export const industryData: Record<string, Record<string, IndustryConfig>> = {
   // ──────────────────────────────────────────────────────────────────────────
   web: {
@@ -836,7 +1015,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
             "Infrastructure built to scale from €500 to €50,000/mo without rebuilding.",
         },
       ],
-      packages: defaultPackages,
+      packages: marketingBeautyPackages,
     },
 
     // ── Tourism ────────────────────────────────────────────────────────────
@@ -891,7 +1070,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
             "Infrastructure built to scale from €500 to €50,000/mo without rebuilding.",
         },
       ],
-      packages: defaultPackages,
+      packages: marketingTourismPackages,
     },
 
     // ── Legal & Finance ────────────────────────────────────────────────────
@@ -946,7 +1125,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
             "Infrastructure built to scale from €500 to €50,000/mo without rebuilding.",
         },
       ],
-      packages: defaultPackages,
+      packages: marketingLegalFinancePackages,
     },
 
     // ── E-commerce & Retail ────────────────────────────────────────────────
@@ -997,7 +1176,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
           descEn: "Infrastructure built to scale from €500 to €50,000/mo.",
         },
       ],
-      packages: defaultPackages,
+      packages: marketingRetailPackages,
     },
 
     // ── Restaurants & Food ─────────────────────────────────────────────────
@@ -1048,7 +1227,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
           descEn: "Infrastructure built to scale from €500 to €50,000/mo.",
         },
       ],
-      packages: defaultPackages,
+      packages: marketingFoodPackages,
     },
   },
 };

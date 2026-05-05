@@ -16,7 +16,7 @@ export const siteConfig = {
 
   // Social Media
   social: {
-    facebook: "https://www.facebook.com/vifaweb",
+    facebook: "https://www.facebook.com/vifageo",
     instagram: "https://www.instagram.com/vifadigital",
     linkedin: "https://www.linkedin.com/company/vifadigital",
     twitter: "https://twitter.com/vifadigital",
