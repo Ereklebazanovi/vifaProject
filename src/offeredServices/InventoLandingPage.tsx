@@ -1,4 +1,4 @@
-//InventoLandingPage.tsx
+﻿//InventoLandingPage.tsx
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -31,7 +31,7 @@ const inventoTranslations = {
     "seo.invento.keywords": "instagram გაყიდვები, facebook კომერცია, საწყობის მართვა, ონლაინ ბიზნესი, ციფრული ინვოისი, CRM",
 
     "hero.title": "მართე Facebook და Instagram გაყიდვები ერთ სივრცეში",
-    "hero.subtitle": "Invento WMS — გაყიდვების, მარაგების და ფინანსების მართვის ცენტრალიზებული სისტემა ონლაინ ბიზნესისთვის.",
+    "hero.subtitle": "Invento WMS - გაყიდვების, მარაგების და ფინანსების მართვის ცენტრალიზებული სისტემა ონლაინ ბიზნესისთვის.",
     "btn.consultation": "უფასო კონსულტაცია",
     "btn.demo": "სისტემის გატესტვა",
     "phone.number": "557 62 42 43",

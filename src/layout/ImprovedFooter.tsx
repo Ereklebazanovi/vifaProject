@@ -111,7 +111,7 @@ const Footer: React.FC = () => {
     {
       icon: <FaFacebookF />,
       href: isInventoRoute() && !isVifaRoute() ? "https://www.facebook.com/inventogeo" : "https://facebook.com/vifaweb",
-      label: isInventoRoute() && !isVifaRoute() ? "Invento Technologies" : "VIFA WEB • ვიფა ვებ",
+      label: "VIFA DIGITAL",
       color:
         "hover:text-blue-400 hover:bg-blue-500/10 hover:border-blue-400/50",
     },
@@ -260,13 +260,13 @@ const Footer: React.FC = () => {
               <div>
                 <div className="text-2xl font-light tracking-wider">
                   <span className="text-blue-600 font-normal group-hover:text-blue-300 transition-colors duration-300">
-                    {isInventoRoute() && !isVifaRoute() ? "INVENTO TECHNOLOGIES" : "VIFA DIGITAL"}
+                    {"VIFA DIGITAL"}
                   </span>
                   <span className="text-blue-400 font-normal"> </span>
                 </div>
                 <div className="text-xs font-light tracking-wide -mt-1 text-slate-500 group-hover:text-slate-400 transition-colors duration-300">
                   {isInventoRoute() && !isVifaRoute() ?
-                    (currentLanguage === "ka" ? "ტექნოლოგიური პარტნიორი" : "Technology Partner") :
+                    (currentLanguage === "ka" ? "ციფრული პარტნიორი" : "Technology Partner") :
                     t("footer.brand.tagline")}
                 </div>
               </div>
@@ -474,7 +474,7 @@ const Footer: React.FC = () => {
                 true ? "text-slate-500" : "text-slate-600"
               }`}
             >
-              © {currentYear} {isInventoRoute() && !isVifaRoute() ? "Invento Technologies" : "VIFA Digital"}. {t("footer.copyright")}
+              © {currentYear} VIFA Digital. {t("footer.copyright")}
               <span className="mx-2">•</span>
               <Link
                 to="/privacy"
@@ -499,7 +499,7 @@ const Footer: React.FC = () => {
               >
                 {t("footer.createdBy")}{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 font-semibold">
-                  {isInventoRoute() && !isVifaRoute() ? "INVENTO TECHNOLOGIES" : "VIFA DIGITAL"}
+                  {"VIFA DIGITAL"}
                 </span>{" "}
                 {t("footer.createdByTeam")}
               </p>
