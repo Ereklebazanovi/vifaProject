@@ -303,7 +303,7 @@ function MarketingServiceSection({ data, ka }: { data: BilingualPricingTier; ka:
   const features = ka ? data.featuresKa : data.featuresEn;
 
   return (
-    <section id="pricing" className="relative bg-[#060608] py-8 md:py-10">
+    <section id="pricing" className="relative bg-[#060608] flex items-center min-h-screen py-24 md:py-32">
       <div className="mx-auto max-w-5xl px-5 lg:px-8">
         <motion.div
           ref={ref}
@@ -398,10 +398,12 @@ const IndustryLanding = () => {
 
   return (
     <main className="min-h-screen bg-[#060608] text-white selection:bg-indigo-500/30">
-      <HeroSection config={config} ka={ka} />
-      {/* <FeaturesSection config={config} ka={ka} /> */}
       {service === "web" ? (
-        <PricingSection packages={config.packages} ka={ka} />
+        <>
+          <HeroSection config={config} ka={ka} />
+          {/* <FeaturesSection config={config} ka={ka} /> */}
+          <PricingSection packages={config.packages} ka={ka} />
+        </>
       ) : (
         <MarketingServiceSection data={config.packages[0]} ka={ka} />
       )}
