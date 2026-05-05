@@ -297,8 +297,8 @@ function MarketingServiceSection({ data, ka, heroBgImage }: { data: BilingualPri
   const inView = useInView(ref, { once: true, amount: 0 });
 
   const whatsappMessage = ka
-    ? `გამარჯობა, მაინტერესებს მარკეტინგული სერვისი: "${data.nameKa}"`
-    : `Hello, I am interested in the marketing service: "${data.nameEn}"`;
+    ? `გამარჯობა, მაინტერესებს მარკეტინგული მომსახურების პირობების შესახებ.`
+    : `Hello, I would like to learn more about your marketing services.`;
 
   const features = ka ? data.featuresKa : data.featuresEn;
 
@@ -346,7 +346,7 @@ function MarketingServiceSection({ data, ka, heroBgImage }: { data: BilingualPri
             </p>
 
             <a
-              href={`https://wa.me/995557624243?text=${encodeURIComponent(whatsappMessage)}`}
+              href={`https://wa.me/995577175132?text=${encodeURIComponent(whatsappMessage)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-1 inline-flex w-full items-center justify-center gap-2.5 rounded-xl bg-indigo-600 px-6 py-3.5 text-[14px] md:text-[15px] font-bold text-white shadow-lg shadow-indigo-600/20 transition-all hover:bg-indigo-500 active:scale-[0.98] md:w-auto"
