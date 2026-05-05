@@ -292,7 +292,7 @@ function PricingCard({ tier, ka }: PricingCardProps) {
 
 // ─── Marketing Service Section ────────────────────────────────────────────────
 
-function MarketingServiceSection({ data, ka }: { data: BilingualPricingTier; ka: boolean }) {
+function MarketingServiceSection({ data, ka, heroBgImage }: { data: BilingualPricingTier; ka: boolean; heroBgImage?: string }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, amount: 0 });
 
@@ -303,8 +303,19 @@ function MarketingServiceSection({ data, ka }: { data: BilingualPricingTier; ka:
   const features = ka ? data.featuresKa : data.featuresEn;
 
   return (
-    <section id="pricing" className="relative bg-[#060608] flex items-center min-h-screen py-14 !mt-16">
-      <div className="mx-auto max-w-5xl px-5 lg:px-8">
+    <section id="pricing" className="relative bg-[#060608] flex items-center min-h-screen py-14 !mt-16 overflow-hidden">
+      {/* Background image — blurred & dimmed */}
+      {heroBgImage && (
+        <>
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+            style={{ backgroundImage: `url(${heroBgImage})` }}
+          />
+          <div className="absolute inset-0 bg-linear-to-r from-[#060608] via-[#060608]/70 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-[#060608] via-[#060608]/30 to-transparent" />
+        </>
+      )}
+      <div className="relative z-10 mx-auto max-w-5xl px-5 lg:px-8">
         <motion.div
           ref={ref}
           variants={sectionReveal}
@@ -405,7 +416,7 @@ const IndustryLanding = () => {
           <PricingSection packages={config.packages} ka={ka} />
         </>
       ) : (
-        <MarketingServiceSection data={config.packages[0]} ka={ka} />
+        <MarketingServiceSection data={config.packages[0]} ka={ka} heroBgImage={config.heroBgImage} />
       )}
     </main>
   );
