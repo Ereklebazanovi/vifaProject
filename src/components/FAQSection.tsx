@@ -27,7 +27,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({
   if (!items || items.length === 0) return null;
 
   return (
-    <section className="relative z-10 w-full py-16 lg:py-24">
+    <section className="relative z-10 w-full">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center">
           {eyebrow && (
