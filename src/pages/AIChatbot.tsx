@@ -4,6 +4,7 @@ import type React from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import Breadcrumbs from "../components/Breadcrumbs";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import { useNavigation } from "../contexts/NavigationContext";
 import { useLanguage } from "../contexts/LanguageContext";
@@ -295,6 +296,12 @@ const AIChatbot: React.FC = () => {
     answer: `${t(`faq.q${n}.answer`)} ${t(`faq.q${n}.details`)}`.trim(),
   }));
 
+  const en = currentLanguage === "en";
+  const breadcrumbItems = [
+    { name: en ? "Home" : "მთავარი", url: "https://vifadigital.ge/" },
+    { name: en ? "AI Chatbot" : "AI ჩატბოტი", url: "https://vifadigital.ge/services/ai-chatbot" },
+  ];
+
   const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20AI%20ჩატბოტის%20სერვისით.%20მსურს%20უფასო%20კონსულტაცია.";
 
   // Scroll to top and stop navigation when component mounts
@@ -351,6 +358,7 @@ const AIChatbot: React.FC = () => {
             { name: "AI ჩატბოტის ინტეგრაცია (setup)", price: 300 },
           ],
         }}
+        breadcrumbs={breadcrumbItems}
         faq={faqForSchema}
       />
 
@@ -371,6 +379,10 @@ const AIChatbot: React.FC = () => {
         <div
           className={`container mx-auto px-4 sm:px-6 lg:px-8 pt-25 sm:pt-28 md:pt-34 pb-10 ${getTransitionClasses()}`}
         >
+          <div className="max-w-7xl mx-auto mb-6">
+            <Breadcrumbs items={breadcrumbItems} />
+          </div>
+
           {/* Hero Section - Side-to-Side Layout */}
           <div className="max-w-7xl mx-auto mb-32">
             <div className="grid lg:grid-cols-2 gap-12 items-center">

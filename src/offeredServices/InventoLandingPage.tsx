@@ -3,6 +3,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Breadcrumbs from "../components/Breadcrumbs";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import { useLanguage } from "../contexts/LanguageContext";
 import {
@@ -295,6 +296,11 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
   }, []);
 
   const faqItems = inventoFaq[currentLanguage === "en" ? "en" : "ka"];
+  const en = currentLanguage === "en";
+  const breadcrumbItems = [
+    { name: en ? "Home" : "მთავარი", url: "https://vifadigital.ge/" },
+    { name: en ? "Invento WMS" : "საწყობის პროგრამა", url: "https://vifadigital.ge/inventowms" },
+  ];
 
   return (
     <>
@@ -315,6 +321,7 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
             { name: "E-commerce Bundle (ონლაინ მაღაზია + WMS)", price: 1999 },
           ],
         }}
+        breadcrumbs={breadcrumbItems}
         faq={faqItems}
       />
 
@@ -337,6 +344,7 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
           {/* HERO SECTION */}
           <section className="min-h-[85vh] flex items-center pt-32 pb-8">
             <div className="container mx-auto px-6 mt-14">
+              <Breadcrumbs items={breadcrumbItems} className="mb-6" />
               <div className="grid lg:grid-cols-2 gap-8 items-center">
                 <motion.div
                   initial={{ opacity: 0, x: -50 }}

@@ -4,6 +4,7 @@ import type React from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import Breadcrumbs from "../components/Breadcrumbs";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import {
   FaRocket,
@@ -266,6 +267,11 @@ const WebDev: React.FC = () => {
   ];
 
   const faqItems = webDevFaq[currentLanguage === "en" ? "en" : "ka"];
+  const en = currentLanguage === "en";
+  const breadcrumbItems = [
+    { name: en ? "Home" : "მთავარი", url: "https://vifadigital.ge/" },
+    { name: en ? "Web Development" : "ვებ დეველოპმენტი", url: "https://vifadigital.ge/services/web" },
+  ];
 
   return (
     <>
@@ -285,6 +291,7 @@ const WebDev: React.FC = () => {
             { name: "eCommerce ონლაინ მაღაზია", price: 1400 },
           ],
         }}
+        breadcrumbs={breadcrumbItems}
         faq={faqItems}
       />
 
@@ -308,6 +315,7 @@ const WebDev: React.FC = () => {
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-xl">
+            <Breadcrumbs items={breadcrumbItems} className="mb-5" />
             <span className="text-sm uppercase tracking-widest text-gray-400 mb-4 block">
               {t("webdev.hero.overline")}
             </span>

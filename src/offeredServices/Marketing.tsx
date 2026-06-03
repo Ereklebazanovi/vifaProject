@@ -3,6 +3,7 @@
 import type React from "react";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Breadcrumbs from "../components/Breadcrumbs";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import { useLanguage } from "../contexts/LanguageContext";
 
@@ -304,6 +305,11 @@ const Marketing: React.FC = () => {
   ];
 
   const faqItems = marketingFaq[currentLanguage === "en" ? "en" : "ka"];
+  const en = currentLanguage === "en";
+  const breadcrumbItems = [
+    { name: en ? "Home" : "მთავარი", url: "https://vifadigital.ge/" },
+    { name: en ? "Digital Marketing" : "ციფრული მარკეტინგი", url: "https://vifadigital.ge/services/marketing" },
+  ];
 
   return (
     <div className={`bg-[#060608] min-h-screen ${getTransitionClasses()}`}>
@@ -323,6 +329,7 @@ const Marketing: React.FC = () => {
             { name: "Premium პაკეტი", price: 2000 },
           ],
         }}
+        breadcrumbs={breadcrumbItems}
         faq={faqItems}
       />
 
@@ -341,6 +348,7 @@ const Marketing: React.FC = () => {
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 lg:pb-0">
           <div className="max-w-2xl">
+            <Breadcrumbs items={breadcrumbItems} className="mb-5" />
             <span className="text-sm uppercase tracking-[0.2em] text-gray-400 font-semibold mb-4 block">
               {t("marketing.hero.overline")}
             </span>
