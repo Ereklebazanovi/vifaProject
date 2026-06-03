@@ -21,6 +21,37 @@ import {
   FaShieldAlt
 } from "react-icons/fa";
 import SEO from "../components/SEO";
+import FAQSection from "../components/FAQSection";
+import type { FAQItem } from "../components/FAQSection";
+
+// FAQ built from the real Invento WMS plans/features on this page.
+const inventoFaq: FAQItem[] = [
+  {
+    question: "რა არის WMS სისტემა და რას აკეთებს Invento WMS?",
+    answer:
+      "WMS (საწყობის მართვის სისტემა) არის ერთიანი სივრცე, სადაც მართავთ Facebook და Instagram გაყიდვებს, მარაგებსა და ფინანსებს. შეკვეთას გაატარებთ 10 წამში, სისტემა ავტომატურად აკლებს ნაშთს და აგენერირებს ოფიციალურ დოკუმენტაციას.",
+  },
+  {
+    question: "რა ღირს WMS სისტემა?",
+    answer:
+      "სამი გეგმაა: ყოველთვიური — 79₾, წლიური — 750₾, ხოლო E-commerce Bundle (ონლაინ მაღაზია + WMS ლიცენზია და სრული სინქრონიზაცია) — 1999₾.",
+  },
+  {
+    question: "რა ფუნქციები აქვს Invento WMS-ს?",
+    answer:
+      "მარაგების აღრიცხვა ვარიაციებით (ფერი/ზომა), კრიტიკული ნაშთის შეტყობინებები, საკურიერო სტიკერების ბეჭდვა, ფინანსური რეპორტინგი და Excel ექსპორტი, როლების მართვა და E-commerce ინტეგრაცია.",
+  },
+  {
+    question: "WMS სისტემა მობილურზე მუშაობს?",
+    answer:
+      "დიახ. Invento WMS აგებულია PWA ტექნოლოგიაზე და მუშაობს ნებისმიერ მოწყობილობაზე — iOS, Android, Desktop და Tablet.",
+  },
+  {
+    question: "ერთვის თუ არა WMS ჩემს ონლაინ მაღაზიას?",
+    answer:
+      "დიახ. ხდება სრული სინქრონიზაცია Vifa/Invento-ს მიერ დამზადებულ ონლაინ მაღაზიებთან — მარაგი და შეკვეთები ავტომატურად ნაცვლდება ორივე მხარეს.",
+  },
+];
 import InventoScrollyTelling from "../components/InventoScrollyTelling";
 
 // Invento Translations
@@ -247,6 +278,7 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
             "WMS საწყობის მართვის სისტემა: მარაგების კონტროლი, შეკვეთების დამუშავება, ინვოისები და რეალურ დროში ანალიტიკა ბიზნესისთვის.",
           serviceType: "Warehouse Management System",
         }}
+        faq={inventoFaq}
       />
 
       <style>{`
@@ -671,6 +703,9 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
           </section>
         </div>
       </div>
+
+      {/* FAQ (visible — matches FAQPage schema) */}
+      <FAQSection items={inventoFaq} eyebrow="FAQ" />
     </>
   );
 };

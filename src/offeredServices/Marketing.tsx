@@ -23,6 +23,37 @@ import {
   FaBullseye,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
+import FAQSection from "../components/FAQSection";
+import type { FAQItem } from "../components/FAQSection";
+
+// FAQ built from the real marketing services/packages on this page.
+const marketingFaq: FAQItem[] = [
+  {
+    question: "რა შედის ციფრული მარკეტინგის სერვისში?",
+    answer:
+      "სრული პაკეტი მოიცავს სოციალური მედიის მართვას, პროფესიონალურ ვიდეო და ფოტო პროდუქციას, კონტენტის შექმნას, მარკეტინგ სტრატეგიას, ბრენდინგსა და გრაფიკულ დიზაინს.",
+  },
+  {
+    question: "რა ღირს სოციალური მედიის მართვა?",
+    answer:
+      "გთავაზობთ სამ პაკეტს — Core, Growth და Premium. ფასი დამოკიდებულია თქვენს მიზნებსა და კონტენტის მოცულობაზე. საწყისი კონსულტაცია უფასოა.",
+  },
+  {
+    question: "რამდენ პოსტს აქვეყნებთ თვეში?",
+    answer:
+      "Core პაკეტში — თვეში 10+ პოსტი, ხოლო Growth და Premium პაკეტებში გაფართოებული კონტენტი, ყოველკვირეული ანალიტიკა და ყოველდღიური კონტენტ მენეჯმენტი.",
+  },
+  {
+    question: "აკეთებთ ვიდეო და ფოტო გადაღებას?",
+    answer:
+      "დიახ. ვქმნით პროფესიონალურ ვიდეო კონტენტს და ფოტო სესიებს ბრენდებისთვის. Premium პაკეტში ხელმისაწვდომია დრონითა და სტუდიური გადაღებებიც.",
+  },
+  {
+    question: "ლოგოს და ბრენდინგს თუ აკეთებთ?",
+    answer:
+      "დიახ. ვქმნით უნიკალურ ლოგოს, ბრენდის ვიზუალურ იდენტობასა და პოზიციონირებას. საჭიროების შემთხვევაში — ბრენდის სრულ რებრენდინგსაც.",
+  },
+];
 
 // Marketing Translations
 const marketingTranslations = {
@@ -255,6 +286,7 @@ const Marketing: React.FC = () => {
             "ციფრული მარკეტინგის სერვისები: სოციალური მედია მართვა, ვიდეო და ფოტო პროდუქცია, კონტენტის შექმნა და სარეკლამო კამპანიები.",
           serviceType: "Digital Marketing",
         }}
+        faq={marketingFaq}
       />
 
       {/* Hero Section */}
@@ -447,6 +479,9 @@ const Marketing: React.FC = () => {
             ))}
           </div>
         </section>
+
+        {/* FAQ (visible — matches FAQPage schema) */}
+        <FAQSection items={marketingFaq} eyebrow="FAQ" />
 
       </div>
     </div>

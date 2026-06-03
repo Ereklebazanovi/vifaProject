@@ -23,7 +23,44 @@ import {
   SiTailwindcss,
 } from "react-icons/si";
 import SEO from "../components/SEO";
+import FAQSection from "../components/FAQSection";
+import type { FAQItem } from "../components/FAQSection";
 import { useLanguage } from "../contexts/LanguageContext";
+
+// FAQ — built from the real packages/pricing on this page.
+// Questions are phrased the way people actually search ("საიტის დამზადება").
+const webDevFaq: FAQItem[] = [
+  {
+    question: "რა ღირს საიტის დამზადება?",
+    answer:
+      "ფასი პაკეტზეა დამოკიდებული: სავიზიტო ვებსაიტი — 500₾-დან, პრემიუმ ვებსაიტი CMS-ით — 700₾-1000₾, ონლაინ მაღაზია — 1400₾-დან. კონსულტაცია უფასოა და ზუსტ შეთავაზებას თქვენი საჭიროებების მიხედვით მოგამზადებთ.",
+  },
+  {
+    question: "რამდენ ხანში მზადდება ვებსაიტი?",
+    answer:
+      "სავიზიტო ვებსაიტი საშუალოდ 1-2 კვირაში მზადდება, პრემიუმ კორპორატიული ვებსაიტი — 2-4 კვირაში, ონლაინ მაღაზია — 4-6 კვირაში. ზუსტ ვადას პროექტის მოცულობის მიხედვით შევთანხმდებით.",
+  },
+  {
+    question: "რა ტექნოლოგიებზე აშენებთ ვებსაიტებს?",
+    answer:
+      "ვიყენებთ თანამედროვე სტეკს — React, TypeScript, Node.js, Firebase და Vercel. ეს უზრუნველყოფს მაღალ სიჩქარეს, უსაფრთხოებას და SEO-ზე ოპტიმიზებულ შედეგს.",
+  },
+  {
+    question: "ვებსაიტი მობილურზე მორგებული და SEO-ზე ოპტიმიზებული იქნება?",
+    answer:
+      "დიახ. ყველა ვებსაიტი სრულად რესპონსიულია (მობილური, ტაბლეტი, კომპიუტერი), მოყვება SEO ოპტიმიზაცია, Google Analytics და SSL სერთიფიკატი დაცული კავშირისთვის.",
+  },
+  {
+    question: "აკეთებთ ონლაინ მაღაზიას ქართული ბანკებით გადახდით?",
+    answer:
+      "დიახ. ვქმნით სრულ ონლაინ მაღაზიას ქართული ბანკების გადახდის ინტეგრაციით, პროდუქტების მართვითა და Vifa WMS სისტემით — ავტომატური მარაგების სინქრონიზაცია, საკურიერო სტიკერები და შეკვეთების real-time კონტროლი.",
+  },
+  {
+    question: "შევძლებ ვებსაიტის კონტენტის დამოუკიდებლად მართვას?",
+    answer:
+      "დიახ. პრემიუმ პაკეტში მოყვება სრული მართვის სისტემა (CMS) და ადმინ პანელი, საიდანაც დეველოპერის გარეშე განაახლებთ ტექსტებს, პროდუქტებსა და სიახლეებს.",
+  },
+];
 
 const webDevTranslations = {
   ka: {
@@ -206,6 +243,7 @@ const WebDev: React.FC = () => {
             "საიტის დამზადება, კორპორატიული ვებსაიტები, eCommerce პლატფორმები და ვებ აპლიკაციები React/Node.js ტექნოლოგიებზე.",
           serviceType: "Web Development",
         }}
+        faq={webDevFaq}
       />
 
       <div className="fixed inset-0 z-0 bg-[#060608]">
@@ -360,6 +398,9 @@ const WebDev: React.FC = () => {
               {consultationLabel}
             </p>
           </section>
+
+          {/* ── FAQ (visible — matches FAQPage schema) ── */}
+          <FAQSection items={webDevFaq} eyebrow="FAQ" />
 
           {/* ── 4. CTA ── */}
           <section className="pb-24 border-t border-white/10 pt-16">
