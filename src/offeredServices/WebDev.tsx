@@ -278,6 +278,12 @@ const WebDev: React.FC = () => {
           description:
             "საიტის დამზადება, კორპორატიული ვებსაიტები, eCommerce პლატფორმები და ვებ აპლიკაციები React/Node.js ტექნოლოგიებზე.",
           serviceType: "Web Development",
+          offers: [
+            { name: "Landing Page საიტი", price: 500 },
+            { name: "კორპორატიული საიტი (CMS)", minPrice: 700, maxPrice: 1000 },
+            { name: "AI ინტეგრირებული ვებსაიტი", price: 300 },
+            { name: "eCommerce ონლაინ მაღაზია", price: 1400 },
+          ],
         }}
         faq={faqItems}
       />

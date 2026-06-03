@@ -347,6 +347,9 @@ const AIChatbot: React.FC = () => {
           description:
             "AI ჩატბოტის დამზადება და ინტეგრაცია: 24/7 მომხმარებელთა მხარდაჭერა, ავტომატური პასუხები და ლიდების გენერაცია ქართულ ენაზე.",
           serviceType: "AI Chatbot Development",
+          offers: [
+            { name: "AI ჩატბოტის ინტეგრაცია (setup)", price: 300 },
+          ],
         }}
         faq={faqForSchema}
       />

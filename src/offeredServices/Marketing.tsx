@@ -317,6 +317,11 @@ const Marketing: React.FC = () => {
           description:
             "ციფრული მარკეტინგის სერვისები: სოციალური მედია მართვა, ვიდეო და ფოტო პროდუქცია, კონტენტის შექმნა და სარეკლამო კამპანიები.",
           serviceType: "Digital Marketing",
+          offers: [
+            { name: "Standard პაკეტი", price: 1000 },
+            { name: "Pro პაკეტი", price: 1500 },
+            { name: "Premium პაკეტი", price: 2000 },
+          ],
         }}
         faq={faqItems}
       />

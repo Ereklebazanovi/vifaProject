@@ -66,9 +66,12 @@ class FacebookPixelManager {
     scriptElement.innerHTML = script;
     document.head.appendChild(scriptElement);
 
-    // Initialize pixel
-    window.fbq('init', this.pixelId);
-    window.fbq('track', 'PageView');
+    // Initialize pixel — guard against fbq being absent (e.g. blocked by an
+    // ad-blocker or during prerender) so we never throw in the console.
+    if (typeof window.fbq === 'function') {
+      window.fbq('init', this.pixelId);
+      window.fbq('track', 'PageView');
+    }
 
     this.isInitialized = true;
 

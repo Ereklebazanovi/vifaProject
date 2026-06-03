@@ -308,6 +308,11 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
           description:
             "WMS საწყობის მართვის სისტემა: მარაგების კონტროლი, შეკვეთების დამუშავება, ინვოისები და რეალურ დროში ანალიტიკა ბიზნესისთვის.",
           serviceType: "Warehouse Management System",
+          offers: [
+            { name: "ყოველთვიური გეგმა", price: 79 },
+            { name: "წლიური გეგმა", price: 750 },
+            { name: "E-commerce Bundle (ონლაინ მაღაზია + WMS)", price: 1999 },
+          ],
         }}
         faq={faqItems}
       />

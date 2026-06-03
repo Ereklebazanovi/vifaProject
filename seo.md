@@ -184,13 +184,16 @@ canonicals** (every page canonicalized to the homepage). Do not re-add meta here
 Technical / structural:
 - **Per-page OG images (1200×630):** currently all pages use the logo `viffa.png` as
   `og:image`. Design real branded social cards per service → much better CTR on shares.
-- **hreflang is weak:** EN is a client-only `?lang=en` state, not a distinct URL. Either
-  build real `/en/...` prerendered routes, or drop the `en`/`x-default` hreflang to avoid
-  sending Google a false signal. (Currently `SEO.tsx` emits `?lang=en` alternates.)
+- ~~**hreflang is weak:** EN is a client-only `?lang=en` state, not a distinct URL.~~
+  **DONE (2026-06-04):** dropped all `ka`/`en`/`x-default` hreflang alternates and made the
+  canonical ALWAYS the clean query-stripped URL (was `isKa ? base : base?lang=en` — a real
+  canonical bug). Re-add hreflang only when real prerendered `/en/...` routes exist.
 - **Visible breadcrumbs UI:** breadcrumb is in schema only; add a visible breadcrumb trail
   component on service/sub pages (UX + reinforces the BreadcrumbList).
-- **Offer/PriceSpecification schema:** add `Offer` with real prices to the `Service` nodes
-  (packages have concrete prices) → eligible for price-rich results.
+- ~~**Offer/PriceSpecification schema:**~~ **DONE (2026-06-04):** each `Service` node now
+  emits an `AggregateOffer` (lowPrice/highPrice + per-package `Offer`s) from real visible
+  prices via new `serviceSchema.offers` prop in `SEO.tsx`. Web 300–1400₾, Marketing
+  1000–2000₾, WMS 79–1999₾, AI from 300₾. (Future: model Invento WMS as `SoftwareApplication`.)
 - **Product/SoftwareApplication schema** for Invento WMS (it's a SaaS product with plans).
 - **AggregateRating/Review schema** — only once real reviews exist (never fake it).
 - **Make `/industry/:service/:slug` indexable** if those become real content pages — they're

@@ -14,8 +14,15 @@ interface SEOProps {
   faq?: Array<{ question: string; answer: string }>;
   /** Explicit breadcrumb trail. If omitted, a Home > Current trail is auto-built. */
   breadcrumbs?: Array<{ name: string; url: string }>;
-  /** Per-page Service schema (name + description) for /services/* pages. */
-  serviceSchema?: { name: string; description: string; serviceType?: string };
+  /** Per-page Service schema (name + description) for /services/* pages.
+   *  `offers` (real package prices) emit an AggregateOffer → price-rich results.
+   *  Each offer is either a fixed `price` or a `minPrice`/`maxPrice` range (GEL). */
+  serviceSchema?: {
+    name: string;
+    description: string;
+    serviceType?: string;
+    offers?: Array<{ name: string; price?: number; minPrice?: number; maxPrice?: number }>;
+  };
   articleMeta?: {
     publishedTime?: string;
     modifiedTime?: string;
@@ -83,13 +90,12 @@ const SEO: React.FC<SEOProps> = ({
 
   const canonicalUrl = normalizeCanonicalUrl(currentUrl.split('#')[0]);
 
-  // Generate language-specific URLs
-  const baseUrl = canonicalUrl.split('?')[0];
-  const georgianUrl = baseUrl;
-  const englishUrl = `${baseUrl}?lang=en`;
-
-  // Set canonical based on current language
-  const finalCanonicalUrl = isKa ? georgianUrl : englishUrl;
+  // Canonical is ALWAYS the clean, query-stripped URL — independent of the
+  // client-side language toggle. EN is a client-only `?lang=en` state, not a
+  // distinct server-rendered route, so it must never become a canonical/alternate
+  // (doing so signals false duplicate pages to Google). Re-add hreflang only when
+  // real prerendered `/en/...` routes exist.
+  const finalCanonicalUrl = canonicalUrl.split('?')[0];
 
   const fullImageUrl = metaImage.startsWith('http')
     ? metaImage
@@ -260,6 +266,38 @@ const SEO: React.FC<SEOProps> = ({
     })
   };
 
+  // AggregateOffer built from the page's real, visible package prices (GEL).
+  const buildOffers = (offers: NonNullable<NonNullable<SEOProps['serviceSchema']>['offers']>) => {
+    const offerItems = offers.map((o) => ({
+      '@type': 'Offer',
+      name: o.name,
+      priceCurrency: 'GEL',
+      availability: 'https://schema.org/InStock',
+      url: finalCanonicalUrl,
+      ...(o.price != null
+        ? { price: o.price }
+        : {
+          priceSpecification: {
+            '@type': 'PriceSpecification',
+            priceCurrency: 'GEL',
+            minPrice: o.minPrice,
+            maxPrice: o.maxPrice
+          }
+        })
+    }));
+    const prices = offers.flatMap((o) =>
+      o.price != null ? [o.price] : [o.minPrice, o.maxPrice]
+    ).filter((n): n is number => typeof n === 'number');
+    return {
+      '@type': 'AggregateOffer',
+      priceCurrency: 'GEL',
+      lowPrice: Math.min(...prices),
+      highPrice: Math.max(...prices),
+      offerCount: offerItems.length,
+      offers: offerItems
+    };
+  };
+
   const serviceNode = serviceSchema
     ? {
       '@type': 'Service',
@@ -269,7 +307,8 @@ const SEO: React.FC<SEOProps> = ({
       ...(serviceSchema.serviceType && { serviceType: serviceSchema.serviceType }),
       provider: { '@id': orgId },
       areaServed: { '@type': 'Country', name: 'Georgia' },
-      url: finalCanonicalUrl
+      url: finalCanonicalUrl,
+      ...(serviceSchema.offers?.length && { offers: buildOffers(serviceSchema.offers) })
     }
     : null;
 
@@ -354,10 +393,8 @@ const SEO: React.FC<SEOProps> = ({
       {/* Canonical URL */}
       <link rel="canonical" href={finalCanonicalUrl} />
 
-      {/* Alternative languages */}
-      <link rel="alternate" hrefLang="ka" href={georgianUrl} />
-      <link rel="alternate" hrefLang="en" href={englishUrl} />
-      <link rel="alternate" hrefLang="x-default" href={georgianUrl} />
+      {/* No hreflang alternates: EN is a client-only state, not a distinct route.
+          Re-add ka/en/x-default once real prerendered /en/... routes exist. */}
 
       {/* Preconnect for performance */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
