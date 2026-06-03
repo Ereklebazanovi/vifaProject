@@ -25,17 +25,6 @@
       "permanent": true
     },
     {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.vifadigital.ge"
-        }
-      ],
-      "destination": "https://vifadigital.ge/:path*",
-      "permanent": true
-    },
-    {
       "source": "/services/web-development",
       "destination": "/services/web",
       "permanent": true
