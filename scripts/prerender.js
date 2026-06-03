@@ -125,6 +125,23 @@ async function run() {
         { timeout: 15000 }
       ).catch(() => {});
 
+      // Strip analytics/pixel scripts that GA/FB useEffects injected into <head>.
+      // If left baked into static HTML they fire once on load AND again when React
+      // re-injects them on hydration → double GA pageviews / double FB pixel events.
+      // Removing them here means the live runtime injects exactly one clean copy.
+      await page.evaluate(() => {
+        document.querySelectorAll('script').forEach((s) => {
+          const src = s.getAttribute('src') || '';
+          const txt = s.textContent || '';
+          if (
+            /googletagmanager\.com|google-analytics\.com|connect\.facebook\.net/.test(src) ||
+            /gtag\(|dataLayer|fbq|connect\.facebook\.net/.test(txt)
+          ) {
+            s.remove();
+          }
+        });
+      });
+
       let html = await page.content();
 
       const outFile = route === '/'
