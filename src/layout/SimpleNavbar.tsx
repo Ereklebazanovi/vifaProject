@@ -146,8 +146,10 @@ const SimpleNavbar: React.FC = () => {
       generalHref: "/services/marketing",
       industryService: "marketing",
     },
-    { num: "04/", label: ka ? "ჩვენ შესახებ" : "ABOUT", path: "/about" },
-    { num: "05/", label: ka ? "კონტაქტი" : "CONTACT", path: "/contact" },
+    { num: "04/", label: ka ? "AI ჩატბოტი" : "AI CHATBOT", path: "/services/ai-chatbot" },
+    { num: "05/", label: ka ? "საწყობის პროგრამა" : "INVENTO WMS", path: "/inventowms" },
+    { num: "06/", label: ka ? "ჩვენ შესახებ" : "ABOUT", path: "/about" },
+    { num: "07/", label: ka ? "კონტაქტი" : "CONTACT", path: "/contact" },
   ];
 
   return (
@@ -165,7 +167,7 @@ const SimpleNavbar: React.FC = () => {
           <span className="text-white/50 group-hover:text-white transition-colors duration-300 italic">/</span>
           <span className="text-white group-hover:text-gray-300 transition-colors">VIFA</span>
         </Link>
-        <div ref={navLinksRef} className="hidden lg:flex items-center gap-10 ml-16">
+        <div ref={navLinksRef} className="hidden lg:flex items-center gap-6 ml-10 xl:ml-16">
           {links.map((link) => {
             const isDropdownItem = !!link.hasIndustryDropdown;
             const isOpen = openDropdownFor === link.path;
