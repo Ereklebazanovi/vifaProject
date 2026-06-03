@@ -129,9 +129,8 @@ const SimpleNavbar: React.FC = () => {
   const ka = currentLanguage === "ka";
 
   const links: NavLinkItem[] = [
-    { num: "01/", label: ka ? "მთავარი" : "HOME", path: "/" },
     {
-      num: "02/",
+      num: "01/",
       label: ka ? "ვებ დეველოპმენტი" : "WEB DEV",
       path: "/services/web-development",
       hasIndustryDropdown: true,
@@ -139,17 +138,16 @@ const SimpleNavbar: React.FC = () => {
       industryService: "web",
     },
     {
-      num: "03/",
+      num: "02/",
       label: ka ? "მარკეტინგი" : "MARKETING",
       path: "/services/digital-advertising",
       hasIndustryDropdown: true,
       generalHref: "/services/marketing",
       industryService: "marketing",
     },
-    { num: "04/", label: ka ? "AI ჩატბოტი" : "AI CHATBOT", path: "/services/ai-chatbot" },
-    { num: "05/", label: ka ? "საწყობის პროგრამა" : "INVENTO WMS", path: "/inventowms" },
-    { num: "06/", label: ka ? "ჩვენ შესახებ" : "ABOUT", path: "/about" },
-    { num: "07/", label: ka ? "კონტაქტი" : "CONTACT", path: "/contact" },
+    { num: "03/", label: ka ? "AI ჩატბოტი" : "AI CHATBOT", path: "/services/ai-chatbot" },
+    { num: "04/", label: ka ? "საწყობის პროგრამა" : "INVENTO WMS", path: "/inventowms" },
+    { num: "05/", label: ka ? "ჩვენ შესახებ" : "ABOUT", path: "/about" },
   ];
 
   return (
@@ -159,15 +157,16 @@ const SimpleNavbar: React.FC = () => {
         visible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <div className="w-full px-8 lg:px-16 py-5 flex items-center justify-between">
-<Link 
-          to="/" 
-          className="flex items-center gap-1.5 text-xl font-bold tracking-widest shrink-0 group"
+      <div className="w-full px-6 xl:px-16 py-5 flex items-center justify-between">
+<Link
+          to="/"
+          className="flex items-center gap-1.5 text-xl font-bold tracking-widest shrink-0 group cursor-pointer select-none"
+          aria-label="VIFA Digital — მთავარ გვერდზე დაბრუნება"
         >
-          <span className="text-white/50 group-hover:text-white transition-colors duration-300 italic">/</span>
-          <span className="text-white group-hover:text-gray-300 transition-colors">VIFA</span>
+          <span className="text-white/40 group-hover:text-indigo-400 transition-colors duration-300 italic">/</span>
+          <span className="text-white group-hover:text-indigo-300 transition-colors duration-300">VIFA</span>
         </Link>
-        <div ref={navLinksRef} className="hidden lg:flex items-center gap-6 ml-10 xl:ml-16">
+        <div ref={navLinksRef} className="hidden xl:flex items-center gap-6 ml-10 xl:ml-14">
           {links.map((link) => {
             const isDropdownItem = !!link.hasIndustryDropdown;
             const isOpen = openDropdownFor === link.path;
@@ -246,7 +245,7 @@ const SimpleNavbar: React.FC = () => {
           })}
         </div>
 
-        <div className="hidden lg:flex items-center gap-6">
+        <div className="hidden xl:flex items-center gap-6">
           <div className="text-right">
             <p className="text-slate-300 text-xs tracking-wider">vifadigital.ge</p>
             <Link
@@ -259,8 +258,8 @@ const SimpleNavbar: React.FC = () => {
           <LanguageToggle />
         </div>
 
-        {/* Mobile: lang toggle + hamburger */}
-        <div className="lg:hidden flex items-center gap-5">
+        {/* Mobile/tablet: lang toggle + hamburger (shows at <1280px) */}
+        <div className="xl:hidden flex items-center gap-5">
           <LanguageToggle />
           <button
             onClick={() => setMobileMenuOpen((p) => !p)}
@@ -298,7 +297,7 @@ const SimpleNavbar: React.FC = () => {
 
     {/* ── Mobile Full-Screen Overlay ── */}
     <div
-      className={`fixed inset-0 z-[60] bg-black/85 backdrop-blur-2xl flex flex-col lg:hidden transition-opacity duration-300 ${
+      className={`fixed inset-0 z-[60] bg-black/85 backdrop-blur-2xl flex flex-col xl:hidden transition-opacity duration-300 ${
         mobileMenuOpen
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"
