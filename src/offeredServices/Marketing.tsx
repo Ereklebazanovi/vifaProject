@@ -26,34 +26,63 @@ import SEO from "../components/SEO";
 import FAQSection from "../components/FAQSection";
 import type { FAQItem } from "../components/FAQSection";
 
-// FAQ built from the real marketing services/packages on this page.
-const marketingFaq: FAQItem[] = [
-  {
-    question: "რა შედის ციფრული მარკეტინგის სერვისში?",
-    answer:
-      "ჩვენი სრულფასოვანი პაკეტი მოიცავს სოციალური მედიის კომპლექსურ მართვას, პროფესიონალურ ვიდეო და ფოტო პროდუქციას, სტრატეგიული კონტენტის შექმნას, ბრენდინგსა და გრაფიკულ დიზაინს. ჩვენ ვუზრუნველყოფთ თქვენი ბიზნესის სრულყოფილ ციფრულ პოზიციონირებას."
-  },
-  {
-    question: "რა ღირს სოციალური მედიის მართვა?",
-    answer:
-      "მომხმარებლებს ვთავაზობთ სამ ძირითად პაკეტს: Core, Growth და Premium. მომსახურების ფასი ინდივიდუალურია და დამოკიდებულია თქვენს ბიზნეს მიზნებსა და შესაქმნელი კონტენტის მოცულობაზე. საწყისი კონსულტაცია სრულიად უფასოა, რომლის ფარგლებშიც შეგირჩევთ თქვენთვის ოპტიმალურ ვარიანტს."
-  },
-  {
-    question: "რამდენ პოსტს აქვეყნებთ თვეში?",
-    answer:
-      "საბაზისო (Core) პაკეტი თვეში მინიმუმ 10 პოსტის შექმნასა და გამოქვეყნებას მოიცავს. რაც შეეხება Growth და Premium პაკეტებს, ისინი უზრუნველყოფს გაფართოებულ კონტენტს, ყოველდღიურ მენეჯმენტსა და შედეგების ყოველკვირეულ ანალიტიკას."
-  },
-  {
-    question: "უზრუნველყოფთ თუ არა ვიდეო და ფოტო გადაღებას?",
-    answer:
-      "დიახ, ჩვენ ვქმნით მაღალი ხარისხის პროფესიონალურ ვიდეო და ფოტო კონტენტს ბრენდებისთვის. Premium პაკეტის არჩევის შემთხვევაში, სერვისში დამატებით შედის სტუდიური და დრონით გადაღებაც."
-  },
-  {
-    question: "შეგიძლიათ ლოგოსა და ბრენდინგის შექმნა?",
-    answer:
-      "რა თქმა უნდა. ვქმნით უნიკალურ ლოგოს, ბრენდის სრულ ვიზუალურ იდენტობასა და ეფექტურ პოზიციონირების სტრატეგიას. საჭიროების შემთხვევაში, უზრუნველვყოფთ კომპანიის სრულ რებრენდინგსაც, რათა თქვენი ბიზნესი მაქსიმალურად თანამედროვე და კონკურენტუნარიანი გახდეს."
-  }
-];
+// FAQ built from the real marketing services/packages on this page (bilingual).
+const marketingFaq: Record<"ka" | "en", FAQItem[]> = {
+  ka: [
+    {
+      question: "რა შედის ციფრული მარკეტინგის სერვისში?",
+      answer:
+        "ჩვენი სრულფასოვანი პაკეტი მოიცავს სოციალური მედიის კომპლექსურ მართვას, პროფესიონალურ ვიდეო და ფოტო პროდუქციას, სტრატეგიული კონტენტის შექმნას, ბრენდინგსა და გრაფიკულ დიზაინს. ჩვენ ვუზრუნველყოფთ თქვენი ბიზნესის სრულყოფილ ციფრულ პოზიციონირებას."
+    },
+    {
+      question: "რა ღირს სოციალური მედიის მართვა?",
+      answer:
+        "მომხმარებლებს ვთავაზობთ სამ ძირითად პაკეტს: Core, Growth და Premium. მომსახურების ფასი ინდივიდუალურია და დამოკიდებულია თქვენს ბიზნეს მიზნებსა და შესაქმნელი კონტენტის მოცულობაზე. საწყისი კონსულტაცია სრულიად უფასოა, რომლის ფარგლებშიც შეგირჩევთ თქვენთვის ოპტიმალურ ვარიანტს."
+    },
+    {
+      question: "რამდენ პოსტს აქვეყნებთ თვეში?",
+      answer:
+        "საბაზისო (Core) პაკეტი თვეში მინიმუმ 10 პოსტის შექმნასა და გამოქვეყნებას მოიცავს. რაც შეეხება Growth და Premium პაკეტებს, ისინი უზრუნველყოფს გაფართოებულ კონტენტს, ყოველდღიურ მენეჯმენტსა და შედეგების ყოველკვირეულ ანალიტიკას."
+    },
+    {
+      question: "უზრუნველყოფთ თუ არა ვიდეო და ფოტო გადაღებას?",
+      answer:
+        "დიახ, ჩვენ ვქმნით მაღალი ხარისხის პროფესიონალურ ვიდეო და ფოტო კონტენტს ბრენდებისთვის. Premium პაკეტის არჩევის შემთხვევაში, სერვისში დამატებით შედის სტუდიური და დრონით გადაღებაც."
+    },
+    {
+      question: "შეგიძლიათ ლოგოსა და ბრენდინგის შექმნა?",
+      answer:
+        "რა თქმა უნდა. ვქმნით უნიკალურ ლოგოს, ბრენდის სრულ ვიზუალურ იდენტობასა და ეფექტურ პოზიციონირების სტრატეგიას. საჭიროების შემთხვევაში, უზრუნველვყოფთ კომპანიის სრულ რებრენდინგსაც, რათა თქვენი ბიზნესი მაქსიმალურად თანამედროვე და კონკურენტუნარიანი გახდეს."
+    }
+  ],
+  en: [
+    {
+      question: "What is included in the digital marketing service?",
+      answer:
+        "Our full-service package includes comprehensive social media management, professional video and photo production, strategic content creation, branding and graphic design. We ensure complete digital positioning for your business."
+    },
+    {
+      question: "How much does social media management cost?",
+      answer:
+        "We offer three main packages: Core, Growth and Premium. Pricing is individual and depends on your business goals and the volume of content to be created. The initial consultation is completely free, during which we'll help you choose the optimal option."
+    },
+    {
+      question: "How many posts do you publish per month?",
+      answer:
+        "The basic (Core) package includes creating and publishing at least 10 posts per month. The Growth and Premium packages provide expanded content, daily management and weekly performance analytics."
+    },
+    {
+      question: "Do you provide video and photo shooting?",
+      answer:
+        "Yes, we create high-quality professional video and photo content for brands. With the Premium package, studio and drone shooting are additionally included in the service."
+    },
+    {
+      question: "Can you create a logo and branding?",
+      answer:
+        "Of course. We create a unique logo, a complete visual brand identity and an effective positioning strategy. If needed, we also provide a full company rebrand to make your business as modern and competitive as possible."
+    }
+  ]
+};
 
 // Marketing Translations
 const marketingTranslations = {
@@ -273,6 +302,9 @@ const Marketing: React.FC = () => {
     { icon: <FaYoutube />, name: "YouTube", color: "rose", link: "https://www.youtube.com/@vifaprodaction3750" },
     { icon: <FaTiktok />, name: "TikTok", color: "purple", link: "https://www.tiktok.com/@vifadigital" },
   ];
+
+  const faqItems = marketingFaq[currentLanguage === "en" ? "en" : "ka"];
+
   return (
     <div className={`bg-[#060608] min-h-screen ${getTransitionClasses()}`}>
       <SEO
@@ -286,7 +318,7 @@ const Marketing: React.FC = () => {
             "ციფრული მარკეტინგის სერვისები: სოციალური მედია მართვა, ვიდეო და ფოტო პროდუქცია, კონტენტის შექმნა და სარეკლამო კამპანიები.",
           serviceType: "Digital Marketing",
         }}
-        faq={marketingFaq}
+        faq={faqItems}
       />
 
       {/* Hero Section */}
@@ -481,7 +513,11 @@ const Marketing: React.FC = () => {
         </section>
 
         {/* FAQ (visible — matches FAQPage schema) */}
-        <FAQSection items={marketingFaq} eyebrow="FAQ" />
+        <FAQSection
+          items={faqItems}
+          eyebrow="FAQ"
+          title={currentLanguage === "en" ? "Frequently Asked Questions" : "ხშირად დასმული კითხვები"}
+        />
 
       </div>
     </div>

@@ -24,34 +24,63 @@ import SEO from "../components/SEO";
 import FAQSection from "../components/FAQSection";
 import type { FAQItem } from "../components/FAQSection";
 
-// FAQ built from the real Invento WMS plans/features on this page.
-const inventoFaq: FAQItem[] = [
-  {
-    question: "რა არის WMS სისტემა და რას აკეთებს Invento WMS?",
-    answer:
-      "WMS (საწყობის მართვის სისტემა) არის ერთიანი სივრცე, სადაც მართავთ Facebook და Instagram გაყიდვებს, მარაგებსა და ფინანსებს. შეკვეთას გაატარებთ 10 წამში, სისტემა ავტომატურად აკლებს ნაშთს და აგენერირებს ოფიციალურ დოკუმენტაციას.",
-  },
-  {
-    question: "რა ღირს WMS სისტემა?",
-    answer:
-      "სამი გეგმაა: ყოველთვიური — 79₾, წლიური — 750₾, ხოლო E-commerce Bundle (ონლაინ მაღაზია + WMS ლიცენზია და სრული სინქრონიზაცია) — 1999₾.",
-  },
-  {
-    question: "რა ფუნქციები აქვს Invento WMS-ს?",
-    answer:
-      "მარაგების აღრიცხვა ვარიაციებით (ფერი/ზომა), კრიტიკული ნაშთის შეტყობინებები, საკურიერო სტიკერების ბეჭდვა, ფინანსური რეპორტინგი და Excel ექსპორტი, როლების მართვა და E-commerce ინტეგრაცია.",
-  },
-  {
-    question: "WMS სისტემა მობილურზე მუშაობს?",
-    answer:
-      "დიახ. Invento WMS აგებულია PWA ტექნოლოგიაზე და მუშაობს ნებისმიერ მოწყობილობაზე — iOS, Android, Desktop და Tablet.",
-  },
-  {
-    question: "ერთვის თუ არა WMS ჩემს ონლაინ მაღაზიას?",
-    answer:
-      "დიახ. ხდება სრული სინქრონიზაცია Vifa/Invento-ს მიერ დამზადებულ ონლაინ მაღაზიებთან — მარაგი და შეკვეთები ავტომატურად ნაცვლდება ორივე მხარეს.",
-  },
-];
+// FAQ built from the real Invento WMS plans/features on this page (bilingual).
+const inventoFaq: Record<"ka" | "en", FAQItem[]> = {
+  ka: [
+    {
+      question: "რა არის WMS სისტემა და რას აკეთებს Invento WMS?",
+      answer:
+        "WMS (საწყობის მართვის სისტემა) არის ერთიანი სივრცე, სადაც მართავთ Facebook და Instagram გაყიდვებს, მარაგებსა და ფინანსებს. შეკვეთას გაატარებთ 10 წამში, სისტემა ავტომატურად აკლებს ნაშთს და აგენერირებს ოფიციალურ დოკუმენტაციას.",
+    },
+    {
+      question: "რა ღირს WMS სისტემა?",
+      answer:
+        "სამი გეგმაა: ყოველთვიური — 79₾, წლიური — 750₾, ხოლო E-commerce Bundle (ონლაინ მაღაზია + WMS ლიცენზია და სრული სინქრონიზაცია) — 1999₾.",
+    },
+    {
+      question: "რა ფუნქციები აქვს Invento WMS-ს?",
+      answer:
+        "მარაგების აღრიცხვა ვარიაციებით (ფერი/ზომა), კრიტიკული ნაშთის შეტყობინებები, საკურიერო სტიკერების ბეჭდვა, ფინანსური რეპორტინგი და Excel ექსპორტი, როლების მართვა და E-commerce ინტეგრაცია.",
+    },
+    {
+      question: "WMS სისტემა მობილურზე მუშაობს?",
+      answer:
+        "დიახ. Invento WMS აგებულია PWA ტექნოლოგიაზე და მუშაობს ნებისმიერ მოწყობილობაზე — iOS, Android, Desktop და Tablet.",
+    },
+    {
+      question: "ერთვის თუ არა WMS ჩემს ონლაინ მაღაზიას?",
+      answer:
+        "დიახ. ხდება სრული სინქრონიზაცია Vifa/Invento-ს მიერ დამზადებულ ონლაინ მაღაზიებთან — მარაგი და შეკვეთები ავტომატურად ნაცვლდება ორივე მხარეს.",
+    },
+  ],
+  en: [
+    {
+      question: "What is a WMS system and what does Invento WMS do?",
+      answer:
+        "A WMS (Warehouse Management System) is a single space where you manage Facebook and Instagram sales, inventory and finances. You can process an order in 10 seconds — the system automatically deducts stock and generates official documentation.",
+    },
+    {
+      question: "How much does the WMS system cost?",
+      answer:
+        "There are three plans: Monthly — 79₾, Annual — 750₾, and the E-commerce Bundle (online store + WMS license and full synchronization) — 1999₾.",
+    },
+    {
+      question: "What features does Invento WMS have?",
+      answer:
+        "Inventory tracking by variations (color/size), critical stock alerts, courier label printing, financial reporting and Excel export, role management and E-commerce integration.",
+    },
+    {
+      question: "Does the WMS system work on mobile?",
+      answer:
+        "Yes. Invento WMS is built on PWA technology and works on any device — iOS, Android, Desktop and Tablet.",
+    },
+    {
+      question: "Does the WMS connect to my online store?",
+      answer:
+        "Yes. Full synchronization happens with online stores built by Vifa/Invento — inventory and orders are automatically updated on both sides.",
+    },
+  ],
+};
 import InventoScrollyTelling from "../components/InventoScrollyTelling";
 
 // Invento Translations
@@ -265,6 +294,8 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
     scrollToTop();
   }, []);
 
+  const faqItems = inventoFaq[currentLanguage === "en" ? "en" : "ka"];
+
   return (
     <>
       <SEO
@@ -278,7 +309,7 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
             "WMS საწყობის მართვის სისტემა: მარაგების კონტროლი, შეკვეთების დამუშავება, ინვოისები და რეალურ დროში ანალიტიკა ბიზნესისთვის.",
           serviceType: "Warehouse Management System",
         }}
-        faq={inventoFaq}
+        faq={faqItems}
       />
 
       <style>{`
@@ -705,7 +736,11 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
       </div>
 
       {/* FAQ (visible — matches FAQPage schema) */}
-      <FAQSection items={inventoFaq} eyebrow="FAQ" />
+      <FAQSection
+        items={faqItems}
+        eyebrow="FAQ"
+        title={currentLanguage === "en" ? "Frequently Asked Questions" : "ხშირად დასმული კითხვები"}
+      />
     </>
   );
 };

@@ -27,40 +27,74 @@ import FAQSection from "../components/FAQSection";
 import type { FAQItem } from "../components/FAQSection";
 import { useLanguage } from "../contexts/LanguageContext";
 
-// FAQ — built from the real packages/pricing on this page.
+// FAQ — built from the real packages/pricing on this page (bilingual).
 // Questions are phrased the way people actually search ("საიტის დამზადება").
-const webDevFaq: FAQItem[] = [
-  {
-    question: "რა ღირს საიტის დამზადება?",
-    answer:
-      "პროექტის ღირებულება შერჩეულ პაკეტზეა დამოკიდებული. სავიზიტო ვებსაიტის ფასი 500₾-დან იწყება, CMS-ით უზრუნველყოფილი პრემიუმ ვებსაიტის ღირებულება 700₾-დან 1000₾-მდე მერყეობს, ხოლო სრულფასოვანი ონლაინ მაღაზიის დამზადება 1400₾-დან არის შესაძლებელი. ჩვენთან კონსულტაცია უფასოა და ზუსტ შეთავაზებას თქვენი ბიზნესის საჭიროებებზე მორგებით მოგიმზადებთ."
-  },
-  {
-    question: "რამდენ ხანში მზადდება ვებსაიტი?",
-    answer:
-      "სავიზიტო ვებსაიტის დასამზადებლად საშუალოდ 1-დან 2 კვირამდე დროა საჭირო. პრემიუმ კორპორატიული ვებსაიტის შექმნას 2-დან 4 კვირამდე ვუთმობთ, ხოლო ონლაინ მაღაზიის სრულყოფილად გამართვას 4-დან 6 კვირამდე სჭირდება. სამუშაოს ზუსტ ვადებს პროექტის სპეციფიკისა და მოცულობის მიხედვით ინდივიდუალურად ვათანხმებთ."
-  },
-  {
-    question: "რა ტექნოლოგიებზე აშენებთ ვებსაიტებს?",
-    answer:
-      "პროექტებისთვის ვიყენებთ უახლეს და მოწინავე ტექნოლოგიურ სტეკს, როგორიცაა React, TypeScript, Node.js, Firebase და Vercel. აღნიშნული ტექნოლოგიები უზრუნველყოფს საიტის მაქსიმალურ სისწრაფეს, უმაღლეს უსაფრთხოებასა და SEO-სთვის იდეალურად ოპტიმიზებულ სტრუქტურას."
-  },
-  {
-    question: "ვებსაიტი მობილურზე მორგებული და SEO-ზე ოპტიმიზებული იქნება?",
-    answer:
-      "რა თქმა უნდა. ჩვენ მიერ შექმნილი ყველა ვებსაიტი სრულად რესპონსიულია და იდეალურად მუშაობს როგორც მობილურსა და ტაბლეტზე, ისე კომპიუტერზე. საიტს ასევე ექნება საბაზისო SEO ოპტიმიზაცია, ინტეგრირებული Google Analytics და უსაფრთხო კავშირისთვის აუცილებელი SSL სერთიფიკატი."
-  },
-  {
-    question: "აკეთებთ ონლაინ მაღაზიას ქართული ბანკებით გადახდით?",
-    answer:
-      "დიახ, ვქმნით სრულყოფილ ონლაინ მაღაზიებს ქართული ბანკების გადახდის სისტემების სრული ინტეგრაციით. პლატფორმას ასევე ვუკავშირებთ Vifa WMS სისტემას, რაც საშუალებას გაძლევთ მართოთ პროდუქტები, ავტომატურად დაასინქრონოთ მარაგები, დაბეჭდოთ საკურიერო სტიკერები და აკონტროლოთ შეკვეთები რეალურ დროში (real-time)."
-  },
-  {
-    question: "შევძლებ ვებსაიტის კონტენტის დამოუკიდებლად მართვას?",
-    answer:
-      "დიახ, პრემიუმ პაკეტის არჩევის შემთხვევაში საიტს მოჰყვება სრულფასოვანი მართვის სისტემა (CMS) და მოსახერხებელი ადმინ პანელი. ამის დახმარებით, დეველოპერის ჩარევის გარეშე, დამოუკიდებლად შეძლებთ ტექსტების, პროდუქტებისა და სიახლეების განახლებას."
-  }
-];
+const webDevFaq: Record<"ka" | "en", FAQItem[]> = {
+  ka: [
+    {
+      question: "რა ღირს საიტის დამზადება?",
+      answer:
+        "პროექტის ღირებულება შერჩეულ პაკეტზეა დამოკიდებული. სავიზიტო ვებსაიტის ფასი 500₾-დან იწყება, CMS-ით უზრუნველყოფილი პრემიუმ ვებსაიტის ღირებულება 700₾-დან 1000₾-მდე მერყეობს, ხოლო სრულფასოვანი ონლაინ მაღაზიის დამზადება 1400₾-დან არის შესაძლებელი. ჩვენთან კონსულტაცია უფასოა და ზუსტ შეთავაზებას თქვენი ბიზნესის საჭიროებებზე მორგებით მოგიმზადებთ."
+    },
+    {
+      question: "რამდენ ხანში მზადდება ვებსაიტი?",
+      answer:
+        "სავიზიტო ვებსაიტის დასამზადებლად საშუალოდ 1-დან 2 კვირამდე დროა საჭირო. პრემიუმ კორპორატიული ვებსაიტის შექმნას 2-დან 4 კვირამდე ვუთმობთ, ხოლო ონლაინ მაღაზიის სრულყოფილად გამართვას 4-დან 6 კვირამდე სჭირდება. სამუშაოს ზუსტ ვადებს პროექტის სპეციფიკისა და მოცულობის მიხედვით ინდივიდუალურად ვათანხმებთ."
+    },
+    {
+      question: "რა ტექნოლოგიებზე აშენებთ ვებსაიტებს?",
+      answer:
+        "პროექტებისთვის ვიყენებთ უახლეს და მოწინავე ტექნოლოგიურ სტეკს, როგორიცაა React, TypeScript, Node.js, Firebase და Vercel. აღნიშნული ტექნოლოგიები უზრუნველყოფს საიტის მაქსიმალურ სისწრაფეს, უმაღლეს უსაფრთხოებასა და SEO-სთვის იდეალურად ოპტიმიზებულ სტრუქტურას."
+    },
+    {
+      question: "ვებსაიტი მობილურზე მორგებული და SEO-ზე ოპტიმიზებული იქნება?",
+      answer:
+        "რა თქმა უნდა. ჩვენ მიერ შექმნილი ყველა ვებსაიტი სრულად რესპონსიულია და იდეალურად მუშაობს როგორც მობილურსა და ტაბლეტზე, ისე კომპიუტერზე. საიტს ასევე ექნება საბაზისო SEO ოპტიმიზაცია, ინტეგრირებული Google Analytics და უსაფრთხო კავშირისთვის აუცილებელი SSL სერთიფიკატი."
+    },
+    {
+      question: "აკეთებთ ონლაინ მაღაზიას ქართული ბანკებით გადახდით?",
+      answer:
+        "დიახ, ვქმნით სრულყოფილ ონლაინ მაღაზიებს ქართული ბანკების გადახდის სისტემების სრული ინტეგრაციით. პლატფორმას ასევე ვუკავშირებთ Vifa WMS სისტემას, რაც საშუალებას გაძლევთ მართოთ პროდუქტები, ავტომატურად დაასინქრონოთ მარაგები, დაბეჭდოთ საკურიერო სტიკერები და აკონტროლოთ შეკვეთები რეალურ დროში (real-time)."
+    },
+    {
+      question: "შევძლებ ვებსაიტის კონტენტის დამოუკიდებლად მართვას?",
+      answer:
+        "დიახ, პრემიუმ პაკეტის არჩევის შემთხვევაში საიტს მოჰყვება სრულფასოვანი მართვის სისტემა (CMS) და მოსახერხებელი ადმინ პანელი. ამის დახმარებით, დეველოპერის ჩარევის გარეშე, დამოუკიდებლად შეძლებთ ტექსტების, პროდუქტებისა და სიახლეების განახლებას."
+    }
+  ],
+  en: [
+    {
+      question: "How much does it cost to build a website?",
+      answer:
+        "The price depends on the chosen package. A landing-page website starts from 500₾, a premium website with CMS ranges from 700₾ to 1000₾, and a full-featured online store starts from 1400₾. The consultation is free, and we'll prepare an exact quote tailored to your business needs."
+    },
+    {
+      question: "How long does it take to build a website?",
+      answer:
+        "A landing-page website takes on average 1-2 weeks, a premium corporate website 2-4 weeks, and a full online store 4-6 weeks. We agree on exact timelines individually, based on the project's scope and complexity."
+    },
+    {
+      question: "What technologies do you build websites with?",
+      answer:
+        "We use a modern, advanced stack such as React, TypeScript, Node.js, Firebase and Vercel. These technologies ensure maximum speed, top-tier security and a structure that is perfectly optimized for SEO."
+    },
+    {
+      question: "Will the website be mobile-responsive and SEO-optimized?",
+      answer:
+        "Absolutely. Every website we build is fully responsive and works perfectly on mobile, tablet and desktop. It also includes baseline SEO optimization, integrated Google Analytics and an SSL certificate for a secure connection."
+    },
+    {
+      question: "Do you build online stores with Georgian bank payments?",
+      answer:
+        "Yes, we build complete online stores with full integration of Georgian bank payment systems. We also connect the platform to the Vifa WMS system, letting you manage products, automatically sync inventory, print courier labels and control orders in real time."
+    },
+    {
+      question: "Can I manage the website content myself?",
+      answer:
+        "Yes. With the premium package, the site comes with a full content management system (CMS) and a convenient admin panel. With it, you can update texts, products and news independently, without involving a developer."
+    }
+  ]
+};
 
 const webDevTranslations = {
   ka: {
@@ -231,6 +265,8 @@ const WebDev: React.FC = () => {
     },
   ];
 
+  const faqItems = webDevFaq[currentLanguage === "en" ? "en" : "ka"];
+
   return (
     <>
       <SEO
@@ -243,7 +279,7 @@ const WebDev: React.FC = () => {
             "საიტის დამზადება, კორპორატიული ვებსაიტები, eCommerce პლატფორმები და ვებ აპლიკაციები React/Node.js ტექნოლოგიებზე.",
           serviceType: "Web Development",
         }}
-        faq={webDevFaq}
+        faq={faqItems}
       />
 
       <div className="fixed inset-0 z-0 bg-[#060608]">
@@ -400,7 +436,11 @@ const WebDev: React.FC = () => {
           </section>
 
           {/* ── FAQ (visible — matches FAQPage schema) ── */}
-          <FAQSection items={webDevFaq} eyebrow="FAQ" />
+          <FAQSection
+            items={faqItems}
+            eyebrow="FAQ"
+            title={currentLanguage === "en" ? "Frequently Asked Questions" : "ხშირად დასმული კითხვები"}
+          />
 
           {/* ── 4. CTA ── */}
           <section className="pb-24 border-t border-white/10 pt-16">

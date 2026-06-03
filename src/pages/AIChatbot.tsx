@@ -19,37 +19,6 @@ import {
   FaPhone,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
-import FAQSection from "../components/FAQSection";
-import type { FAQItem } from "../components/FAQSection";
-
-// FAQ built from the real AI chatbot pricing/features on this page.
-const aiChatbotFaq: FAQItem[] = [
-  {
-    question: "რა ღირს AI ჩატბოტი?",
-    answer:
-      "დაყენების (setup) ფასი იწყება 300₾-დან. ყოველთვიური ხარჯი დამოკიდებულია გამოყენებაზე — დაახლოებით 0.20₾-0.40₾ ყოველ 1000 ტოკენზე (მაგალითად, მცირე ბიზნესისთვის თვეში ~5₾-10₾).",
-  },
-  {
-    question: "რომელ პლატფორმებზე მუშაობს AI ჩატბოტი?",
-    answer:
-      "ჩატბოტი ერთვის WhatsApp-ს, Facebook Messenger-ს, Instagram-სა და თქვენს ვებსაიტს — ყველაფერი იმართება ერთიანი ადმინ პანელიდან.",
-  },
-  {
-    question: "AI ჩატბოტი ქართულ ენას ხვდება?",
-    answer:
-      "დიახ. ვიყენებთ Google Gemini-ს, რომელსაც ქართული ენის სრული მხარდაჭერა აქვს — ბუნებრივი კომუნიკაცია და კონტექსტური მეხსიერება, რომელსაც ახსოვს საუბრის ისტორია.",
-  },
-  {
-    question: "შევძლებ ჩატბოტის თვითონ რედაქტირებას?",
-    answer:
-      "დიახ. ადმინ პანელიდან რეალურ დროში დაამატებთ ახალ კითხვა-პასუხებს, მართავთ პროდუქტებს და ხედავთ საუბრების ისტორიასა და დეტალურ ანალიტიკას.",
-  },
-  {
-    question: "რამდენად სწრაფი და საიმედოა?",
-    answer:
-      "სისტემა მუშაობს 99.9% uptime-ით და საშუალოდ 0.5 წამში პასუხობს — 24/7 რეჟიმში, შეფერხების გარეშე.",
-  },
-];
 import { ChatbotDemoTerminal } from "../components/Terminal";
 import { AIConnectionDemo } from "../components/AIConnectionDemo";
 
@@ -319,6 +288,13 @@ const AIChatbot: React.FC = () => {
     return translations[key] || key;
   };
 
+  // FAQPage schema source — mirrors the visible FAQ section below (faq.q1..q5),
+  // localized automatically via t(). Keeps schema in sync with on-page content.
+  const faqForSchema = [1, 2, 3, 4, 5].map((n) => ({
+    question: t(`faq.q${n}.question`),
+    answer: `${t(`faq.q${n}.answer`)} ${t(`faq.q${n}.details`)}`.trim(),
+  }));
+
   const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20AI%20ჩატბოტის%20სერვისით.%20მსურს%20უფასო%20კონსულტაცია.";
 
   // Scroll to top and stop navigation when component mounts
@@ -372,7 +348,7 @@ const AIChatbot: React.FC = () => {
             "AI ჩატბოტის დამზადება და ინტეგრაცია: 24/7 მომხმარებელთა მხარდაჭერა, ავტომატური პასუხები და ლიდების გენერაცია ქართულ ენაზე.",
           serviceType: "AI Chatbot Development",
         }}
-        faq={aiChatbotFaq}
+        faq={faqForSchema}
       />
 
       {/* Background Image */}
@@ -390,7 +366,7 @@ const AIChatbot: React.FC = () => {
 
       <div className="relative z-10 min-h-screen lg:mt-15">
         <div
-          className={`container mx-auto px-4 sm:px-6 lg:px-8 pt-55 sm:pt-28 md:pt-34 pb-10 ${getTransitionClasses()}`}
+          className={`container mx-auto px-4 sm:px-6 lg:px-8 pt-25 sm:pt-28 md:pt-34 pb-10 ${getTransitionClasses()}`}
         >
           {/* Hero Section - Side-to-Side Layout */}
           <div className="max-w-7xl mx-auto mb-32">
@@ -860,8 +836,6 @@ const AIChatbot: React.FC = () => {
         </div>
       </div>
 
-      {/* FAQ (visible — matches FAQPage schema) */}
-      <FAQSection items={aiChatbotFaq} eyebrow="FAQ" />
     </>
   );
 };

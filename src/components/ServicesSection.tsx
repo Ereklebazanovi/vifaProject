@@ -163,26 +163,64 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
           {services.map((service, i) => {
             const isExpandable = service.hasIndustryLinks;
             const isExpanded = expandedServiceId === service.id;
+            const rowClasses =
+              "group relative flex items-center gap-4 sm:gap-6 md:gap-12 py-6 md:py-10 border-b border-white/10 -mx-4 sm:-mx-6 lg:-mx-12 px-4 sm:px-6 lg:px-12 transition-colors duration-300";
 
             return (
               <div key={service.id}>
-                <div
-                  className="relative flex items-center gap-4 sm:gap-6 md:gap-12 py-6 md:py-10 border-b border-white/10 cursor-pointer -mx-4 sm:-mx-6 lg:-mx-12 px-4 sm:px-6 lg:px-12"
-                  onClick={isExpandable ? () => toggleIndustryLinks(service.id) : undefined}
-                  role={isExpandable ? "button" : undefined}
-                  tabIndex={isExpandable ? 0 : undefined}
-                  onKeyDown={
-                    isExpandable
-                      ? (event) => {
-                          if (event.key === "Enter" || event.key === " ") {
-                            event.preventDefault();
-                            toggleIndustryLinks(service.id);
-                          }
-                        }
-                      : undefined
-                  }
-                  aria-expanded={isExpandable ? isExpanded : undefined}
-                >
+                {isExpandable ? (
+                  <div
+                    className={`${rowClasses} cursor-pointer hover:bg-white/[0.02]`}
+                    onClick={() => toggleIndustryLinks(service.id)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(event) => {
+                      if (event.key === "Enter" || event.key === " ") {
+                        event.preventDefault();
+                        toggleIndustryLinks(service.id);
+                      }
+                    }}
+                    aria-expanded={isExpanded}
+                  >
+                    <span
+                      className="hidden md:block flex-none text-[80px] lg:text-[96px] font-black leading-none select-none w-32 lg:w-40 text-right shrink-0"
+                      style={{
+                        backgroundImage: "url('/herophoto.jpg')",
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        WebkitBackgroundClip: "text",
+                        backgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        WebkitTextStroke: "1px rgba(255,255,255,0.15)",
+                      }}
+                    >
+                      0{i + 1}
+                    </span>
+
+                    <span className="hidden md:block w-px h-16 bg-white/10 shrink-0" />
+
+                    <div className="flex-1 min-w-0">
+                      <span className="md:hidden text-xs font-mono text-blue-500/70 mb-1 block tracking-widest">
+                        0{i + 1}
+                      </span>
+                      <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
+                        <span>{service.title}</span>
+                      </h3>
+                      <p className="text-sm md:text-base text-white/50 leading-relaxed max-w-lg">
+                        {service.description}
+                      </p>
+                    </div>
+
+                    <span aria-label={service.title} className="shrink-0 w-6 h-6 text-white/30">
+                      <ArrowDiagonalSVG />
+                    </span>
+                  </div>
+                ) : (
+                  <Link
+                    to={service.href}
+                    onClick={service.onClick}
+                    className={`${rowClasses} cursor-pointer hover:bg-white/[0.02]`}
+                  >
                   <span
                     className="hidden md:block flex-none text-[80px] lg:text-[96px] font-black leading-none select-none w-32 lg:w-40 text-right shrink-0"
                     style={{
@@ -205,54 +243,38 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
                       0{i + 1}
                     </span>
                     <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
-                      {isExpandable ? (
-                        <span>{service.title}</span>
-                      ) : (
-                        <Link to={service.href} onClick={service.onClick}>
-                          {service.title}
-                        </Link>
-                      )}
+                      <span>{service.title}</span>
                     </h3>
                     <p className="text-sm md:text-base text-white/50 leading-relaxed max-w-lg">
                       {service.description}
                     </p>
                   </div>
 
-                  {isExpandable ? (
-                    <span aria-label={service.title} className="shrink-0 w-6 h-6 text-white/30">
-                      <ArrowDiagonalSVG />
-                    </span>
-                  ) : (
-                    <Link
-                      to={service.href}
-                      onClick={service.onClick}
-                      aria-label={service.title}
-                      className="shrink-0 w-6 h-6 text-white/30"
-                    >
-                      <ArrowDiagonalSVG />
-                    </Link>
-                  )}
-                </div>
+                  <span aria-label={service.title} className="shrink-0 w-6 h-6 text-white/30">
+                    <ArrowDiagonalSVG />
+                  </span>
+                  </Link>
+                )}
 
                 {isExpandable && isExpanded && (
-                  <div className="border-b border-white/10 py-4 md:py-5">
-                    <p className="text-[10px] text-white/25 uppercase tracking-[0.2em] font-mono mb-3">
+                    <div className="border-b border-white/10 py-5 md:py-7">
+                      <p className="text-[10px] md:text-xs text-white/30 uppercase tracking-[0.24em] font-mono mb-4">
                       {ka ? "აირჩიე სფერო" : "Choose a sector"}
                     </p>
 
-                    <Link
-                      to={service.generalHref!}
-                      onClick={startNavigation}
-                      className="inline-flex items-center gap-2 mb-4 px-3.5 py-1.5 rounded-full border border-white/20 bg-white/5"
-                    >
-                      <Layers className="w-3.5 h-3.5 text-white/50" />
-                      <span className="text-xs text-white/70 font-medium tracking-wide">
+                      <Link
+                        to={service.generalHref!}
+                        onClick={startNavigation}
+                        className="inline-flex items-center gap-2 mb-5 px-4 py-2 rounded-full border border-white/20 bg-white/[0.08] hover:bg-white/[0.12] transition-colors"
+                      >
+                        <Layers className="w-4 h-4 text-white/60" />
+                        <span className="text-sm md:text-[15px] text-white/80 font-medium tracking-wide">
                         {ka ? "ზოგადი სერვისები" : "All Services"}
                       </span>
-                      <ArrowUpRight className="w-3 h-3 text-white/30" />
-                    </Link>
+                        <ArrowUpRight className="w-4 h-4 text-white/40" />
+                      </Link>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1.5">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-3 md:gap-4">
                       {industries.map((industry) => {
                         const IndustryIcon = industry.icon;
                         return (
@@ -260,15 +282,15 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ t }) => {
                             key={`${service.id}-${industry.slug}`}
                             to={`/industry/${service.industryService}/${industry.slug}`}
                             onClick={startNavigation}
-                            className="flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-white/10 bg-white/3"
+                              className="group flex items-center justify-between gap-4 px-4 md:px-5 py-4 rounded-2xl border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300 min-h-[72px] md:min-h-[80px]"
                           >
-                            <div className="flex items-center gap-2.5">
-                              <IndustryIcon className={`w-3.5 h-3.5 shrink-0 ${industry.iconColor}`} />
-                              <span className="text-xs text-white/55 leading-snug">
+                            <div className="flex items-center gap-3 min-w-0">
+                              <IndustryIcon className={`w-[18px] h-[18px] md:w-5 md:h-5 shrink-0 ${industry.iconColor} transition-colors duration-300`} />
+                              <span className="text-sm md:text-[15px] text-white/70 leading-snug font-medium">
                                 {ka ? industry.nameKa : industry.nameEn}
                               </span>
                             </div>
-                            <ArrowUpRight className="w-3 h-3 text-white/20 shrink-0" />
+                            <ArrowUpRight className="w-4 h-4 text-white/25 shrink-0 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white/45" />
                           </Link>
                         );
                       })}
