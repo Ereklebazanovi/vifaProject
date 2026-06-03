@@ -802,7 +802,7 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
     "legal-finance": {
       nameKa: "იურიდიული და საფინანსო",
       nameEn: "Legal & Finance",
-      heroBgImage: "/practice-hero.webp", // აქ ჩასვამ შესაბამის ფოტოს
+      heroBgImage: "/practice-hero.jpg", // აქ ჩასვამ შესაბამის ფოტოს
       eyebrowKa: "ვებ დეველოპმენტი",
       eyebrowEn: "Web Development",
 heroSublineKa: "თანამედროვე პლატფორმები, რომლებიც ამარტივებს კლიენტებთან კომუნიკაციას და ზრდის თქვენს სანდოობას.",
@@ -1080,7 +1080,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
     "legal-finance": {
       nameKa: "იურიდიული და საფინანსო",
       nameEn: "Legal & Finance",
-      heroBgImage: "/practice-hero.webp",
+      heroBgImage: "/practice-hero.jpg",
       eyebrowKa: "ზრდის მარკეტინგი",
       eyebrowEn: "Growth Marketing",
       heroSublineKa:

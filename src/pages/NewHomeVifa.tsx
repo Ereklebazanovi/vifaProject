@@ -333,7 +333,7 @@ const NewHomeVifa: React.FC = () => {
       <SEO
         title={t("seo.home.title")}
         description={t("seo.home.description")}
-        url="https://inventogeo.com"
+        url="https://vifadigital.ge/"
       />
 
       {/* ─── Cinematic Hero — Full Screen ─── */}
@@ -341,10 +341,10 @@ const NewHomeVifa: React.FC = () => {
 
         {/* Full-screen hero image background */}
         <picture>
-          <source media="(max-width: 768px)" srcSet="/hero-mobile.webp" />
-          <source media="(min-width: 769px)" srcSet="/hero-desktop.webp" />
+          <source media="(max-width: 768px)" srcSet="/hero-mobile.jpg" />
+          <source media="(min-width: 769px)" srcSet="/hero-desktop.jpg" />
           <img
-            src="/hero-desktop.webp"
+            src="/hero-desktop.jpg"
             alt=""
             fetchPriority="high"
             loading="eager"

@@ -10,20 +10,19 @@
           "value": "inventogeo.com"
         }
       ],
-      "destination": "https://www.inventogeo.com/:path*",
+      "destination": "https://vifadigital.ge/:path*",
       "permanent": true
-    }
-  ],
-  "rewrites": [
+    },
     {
       "source": "/:path*",
       "has": [
         {
           "type": "host",
-          "value": "vifadigital.ge"
+          "value": "www.inventogeo.com"
         }
       ],
-      "destination": "/index-vifa.html"
+      "destination": "https://vifadigital.ge/:path*",
+      "permanent": true
     },
     {
       "source": "/:path*",
@@ -33,19 +32,75 @@
           "value": "www.vifadigital.ge"
         }
       ],
-      "destination": "/index-vifa.html"
+      "destination": "https://vifadigital.ge/:path*",
+      "permanent": true
     },
     {
-      "source": "/blog/:slug/index.html",
-      "destination": "/blog/:slug/index.html"
+      "source": "/services/web-development",
+      "destination": "/services/web",
+      "permanent": true
     },
     {
-      "source": "/blog/:slug",
-      "destination": "/blog/:slug/index.html"
-    },
+      "source": "/services/digital-advertising",
+      "destination": "/services/marketing",
+      "permanent": true
+    }
+  ],
+  "trailingSlash": false,
+  "rewrites": [
     {
       "source": "/:path*",
       "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(jpg|jpeg|png|webp|avif|svg|gif|ico|woff2|woff|ttf|mp4)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.html",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        }
+      ]
     }
   ]
 }

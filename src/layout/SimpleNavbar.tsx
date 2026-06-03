@@ -147,8 +147,7 @@ const SimpleNavbar: React.FC = () => {
       industryService: "marketing",
     },
     { num: "04/", label: ka ? "ჩვენ შესახებ" : "ABOUT", path: "/about" },
-    { num: "05/", label: ka ? "ბლოგი" : "BLOG", path: "/blog" },
-    { num: "06/", label: ka ? "კონტაქტი" : "CONTACT", path: "/contact" },
+    { num: "05/", label: ka ? "კონტაქტი" : "CONTACT", path: "/contact" },
   ];
 
   return (

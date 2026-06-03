@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import FacebookPixel from "./components/FacebookPixel";
@@ -5,18 +6,19 @@ import GoogleAnalytics from "./components/GoogleAnalytics";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { NavigationProvider } from "./contexts/NavigationContext";
 import Layout from "./layout/Layout";
-import Marketing from "./offeredServices/Marketing";
-import WebDev from "./offeredServices/WebDev";
 import Home from "./pages/organic/Home";
-import AIChatbot from "./pages/AIChatbot";
-import ChatbotRequestForm from "./pages/ChatbotRequestForm";
-import NotFound from "./pages/NotFound";
-import IndustryLanding from "./pages/landing/IndustryLanding";
-import InventoLandingPage from "./offeredServices/InventoLandingPage";
-import AboutPage from "./pages/AboutPage";
-import BlogPage from "./pages/BlogPage";
-import BlogPostPage from "./pages/BlogPostPage";
-import ContactPage from "./pages/ContactPage";
+
+// Route-level code splitting: only the homepage ships in the initial bundle.
+// Every other page loads on demand, shrinking first-load JS / improving CWV.
+const WebDev = lazy(() => import("./offeredServices/WebDev"));
+const Marketing = lazy(() => import("./offeredServices/Marketing"));
+const AIChatbot = lazy(() => import("./pages/AIChatbot"));
+const ChatbotRequestForm = lazy(() => import("./pages/ChatbotRequestForm"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const IndustryLanding = lazy(() => import("./pages/landing/IndustryLanding"));
+const InventoLandingPage = lazy(() => import("./offeredServices/InventoLandingPage"));
+const AboutPage = lazy(() => import("./pages/AboutPage"));
+const ContactPage = lazy(() => import("./pages/ContactPage"));
 
 const App = () => {
   return (
@@ -34,39 +36,39 @@ const App = () => {
               <FacebookPixel pixelId={import.meta.env.VITE_FACEBOOK_PIXEL_ID} />
             )}
 
-            <Routes>
-              <Route path="/" element={<Layout />}>
-                <Route index element={<Home />} />
+            <Suspense fallback={<div className="min-h-screen bg-[#050404]" />}>
+              <Routes>
+                <Route path="/" element={<Layout />}>
+                  <Route index element={<Home />} />
 
-                {/* Organic Traffic Flow */}
-                <Route path="services/web" element={<WebDev />} />
-                <Route path="services/marketing" element={<Marketing />} />
+                  {/* Organic Traffic Flow */}
+                  <Route path="services/web" element={<WebDev />} />
+                  <Route path="services/marketing" element={<Marketing />} />
 
-                {/* Existing route aliases used inside the current homepage */}
-                <Route path="services/web-development" element={<WebDev />} />
-                <Route
-                  path="services/digital-advertising"
-                  element={<Marketing />}
-                />
-                <Route path="services/ai-chatbot" element={<AIChatbot />} />
-                <Route
-                  path="services/ai-chatbot/request"
-                  element={<ChatbotRequestForm />}
-                />
-                <Route path="contact" element={<ContactPage />} />
-                <Route path="about" element={<AboutPage />} />
-                <Route path="blog" element={<BlogPage />} />
-                <Route path="blog/:slug" element={<BlogPostPage />} />
-                <Route path="inventowms" element={<InventoLandingPage />} />
+                  {/* Route aliases (server-side 301'd to canonical in vercel.json) */}
+                  <Route path="services/web-development" element={<WebDev />} />
+                  <Route
+                    path="services/digital-advertising"
+                    element={<Marketing />}
+                  />
+                  <Route path="services/ai-chatbot" element={<AIChatbot />} />
+                  <Route
+                    path="services/ai-chatbot/request"
+                    element={<ChatbotRequestForm />}
+                  />
+                  <Route path="contact" element={<ContactPage />} />
+                  <Route path="about" element={<AboutPage />} />
+                  <Route path="inventowms" element={<InventoLandingPage />} />
 
-                {/* Dynamic Ad-Landing Flow */}
-                <Route path="industry/:service/:slug" element={<IndustryLanding />} />
+                  {/* Dynamic Ad-Landing Flow */}
+                  <Route path="industry/:service/:slug" element={<IndustryLanding />} />
 
-                <Route path="*" element={<NotFound />} />
-              </Route>
+                  <Route path="*" element={<NotFound />} />
+                </Route>
 
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </Suspense>
           </BrowserRouter>
         </NavigationProvider>
       </LanguageProvider>

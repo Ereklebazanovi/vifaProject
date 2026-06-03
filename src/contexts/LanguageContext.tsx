@@ -20,13 +20,16 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
   children,
 }) => {
   const [currentLanguage, setCurrentLanguage] = useState<Language>(() => {
+    // SSR / prerender guard: no browser APIs available on the server.
+    if (typeof window === 'undefined') {
+      return "ka";
+    }
+
     // Check URL parameter first
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search);
-      const langParam = urlParams.get('lang') as Language;
-      if (langParam === 'en' || langParam === 'ka') {
-        return langParam;
-      }
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang') as Language;
+    if (langParam === 'en' || langParam === 'ka') {
+      return langParam;
     }
 
     // Fall back to localStorage

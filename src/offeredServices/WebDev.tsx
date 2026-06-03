@@ -199,7 +199,7 @@ const WebDev: React.FC = () => {
       <SEO
         title={t("seo.webdev.title")}
         description={t("seo.webdev.description")}
-        url="https://vifadigital.ge/services/web-development"
+        url="https://vifadigital.ge/services/web"
       />
 
       <div className="fixed inset-0 z-0 bg-[#060608]">

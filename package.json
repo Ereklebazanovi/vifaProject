@@ -26,10 +26,9 @@
   "scripts": {
     "preinstall-check": "npm ls react || echo 'React version check finished with warnings'",
     "dev": "vite",
-    "build": "tsc -b && vite build && node scripts/generate-blog-pages.js && node scripts/generate-vifa-html.js",
+    "build": "tsc -b && vite build && node scripts/prerender.js",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start": "node server.js",
     "compress-video": "node scripts/compress-video.mjs"
   },
   "dependencies": {
@@ -39,11 +38,9 @@
     "@fontsource/space-grotesk": "^5.2.10",
     "@react-three/fiber": "^8.16.8",
     "@tailwindcss/vite": "^4.1.12",
-    "@types/next": "^8.0.7",
     "antd": "^5.27.0",
     "bpg-nino-mtavruli": "^1.0.0",
     "clsx": "^2.1.1",
-    "express": "^5.1.0",
     "firebase": "^12.1.0",
     "framer-motion": "^11.18.2",
     "gray-matter": "^4.0.3",
@@ -51,7 +48,6 @@
     "lenis": "^1.3.11",
     "lucide-react": "^0.462.0",
     "marked": "^16.4.0",
-    "next": "^15.5.7",
     "postprocessing": "^6.37.8",
     "react": "18.3.1",
     "react-dom": "18.3.1",
@@ -64,6 +60,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
+    "@sparticuz/chromium": "^149.0.0",
     "@types/antd": "^0.12.32",
     "@types/marked": "^5.0.2",
     "@types/node": "^25.2.1",
@@ -77,6 +74,7 @@
     "eslint-plugin-react-refresh": "^0.4.20",
     "ffmpeg-static": "^5.3.0",
     "globals": "^16.3.0",
+    "puppeteer": "^24.43.1",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.39.1",
     "vite": "^7.1.2"
