@@ -4,6 +4,7 @@ import { CheckCircle2, CreditCard } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { useLanguage } from "../../contexts/LanguageContext";
+import Breadcrumbs, { type Crumb } from "../../components/Breadcrumbs";
 import {
   industryData,
   type BilingualPricingTier,
@@ -49,9 +50,10 @@ const validSlugs = new Set(["tourism", "beauty", "legal-finance", "retail", "foo
 interface HeroProps {
   config: IndustryConfig;
   ka: boolean;
+  breadcrumbs: Crumb[];
 }
 
-function HeroSection({ config, ka }: HeroProps) {
+function HeroSection({ config, ka, breadcrumbs }: HeroProps) {
   const subline = ka ? config.heroSublineKa : config.heroSublineEn;
   const headlineText =
     config.headline.type === "cinematic"
@@ -89,6 +91,11 @@ function HeroSection({ config, ka }: HeroProps) {
         initial="hidden"
         animate="visible"
       >
+        {/* Breadcrumb trail */}
+        <motion.div variants={heroItem}>
+          <Breadcrumbs items={breadcrumbs} className="mb-5" />
+        </motion.div>
+
         {/* Editorial Eyebrow */}
         <motion.div variants={heroItem} className="mb-5 flex items-center gap-3 md:mb-6">
           <div className="h-px w-8 bg-indigo-500" />
@@ -292,7 +299,7 @@ function PricingCard({ tier, ka }: PricingCardProps) {
 
 // ─── Marketing Service Section ────────────────────────────────────────────────
 
-function MarketingServiceSection({ data, ka, heroBgImage }: { data: BilingualPricingTier; ka: boolean; heroBgImage?: string }) {
+function MarketingServiceSection({ data, ka, heroBgImage, breadcrumbs }: { data: BilingualPricingTier; ka: boolean; heroBgImage?: string; breadcrumbs: Crumb[] }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, amount: 0 });
 
@@ -325,6 +332,7 @@ function MarketingServiceSection({ data, ka, heroBgImage }: { data: BilingualPri
         >
           {/* ── Left: price, desc, CTA ── */}
           <div className="flex flex-col gap-5">
+            <Breadcrumbs items={breadcrumbs} className="-mb-1" />
             <div className="flex items-center gap-3">
               <div className="h-px w-6 bg-indigo-500" />
               <span className="text-[11px] md:text-[13px] font-bold uppercase tracking-[0.25em] text-indigo-400">
@@ -407,16 +415,27 @@ const IndustryLanding = () => {
     return <NotFound />;
   }
 
+  const serviceCrumb: Crumb =
+    service === "web"
+      ? { name: ka ? "ვებ დეველოპმენტი" : "Web Development", url: "/services/web" }
+      : { name: ka ? "ციფრული მარკეტინგი" : "Digital Marketing", url: "/services/marketing" };
+
+  const breadcrumbItems: Crumb[] = [
+    { name: ka ? "მთავარი" : "Home", url: "/" },
+    serviceCrumb,
+    { name: ka ? config.nameKa : config.nameEn, url: `/industry/${service}/${slug}` },
+  ];
+
   return (
     <main className="min-h-screen bg-[#060608] text-white selection:bg-indigo-500/30">
       {service === "web" ? (
         <>
-          <HeroSection config={config} ka={ka} />
+          <HeroSection config={config} ka={ka} breadcrumbs={breadcrumbItems} />
           {/* <FeaturesSection config={config} ka={ka} /> */}
           <PricingSection packages={config.packages} ka={ka} />
         </>
       ) : (
-        <MarketingServiceSection data={config.packages[0]} ka={ka} heroBgImage={config.heroBgImage} />
+        <MarketingServiceSection data={config.packages[0]} ka={ka} heroBgImage={config.heroBgImage} breadcrumbs={breadcrumbItems} />
       )}
     </main>
   );

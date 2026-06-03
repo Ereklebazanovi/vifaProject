@@ -407,9 +407,9 @@ const NewHomeVifa: React.FC = () => {
             {/* Stats Block — bottom right, desktop only */}
             <div className="hidden lg:flex items-end gap-10 pb-2 shrink-0">
               {[
-                { num: "100+", label: currentLanguage === "ka" ? "ჩაბარებული პროექტი" : "Submitted project" },
+                { num: "200 +", label: currentLanguage === "ka" ? "ჩაბარებული პროექტი" : "Submitted project" },
                 { num: "4", label: currentLanguage === "ka" ? "მთავარი მიმართულება" : "Main direction" },
-                { num: "7+", label: currentLanguage === "ka" ? "წელი ინდუსტრიაში" : "Years in industry" },
+                { num: "7 +", label: currentLanguage === "ka" ? "წელი ინდუსტრიაში" : "Years in industry" },
               ].map((stat, i) => (
                 <div key={i} className="flex items-end gap-10">
                   <div className="text-right">
