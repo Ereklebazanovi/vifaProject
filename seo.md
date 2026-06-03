@@ -195,7 +195,7 @@ Technical / structural:
   prices via new `serviceSchema.offers` prop in `SEO.tsx`. Web 300–1400₾, Marketing
   1000–2000₾, AI from 300₾. **Invento WMS uses a `SoftwareApplication` node** (not `Service`)
   via the new `softwareApplication` prop — accurate SaaS entity, 79–1999₾ AggregateOffer.
-- **Product/SoftwareApplication schema** for Invento WMS (it's a SaaS product with plans).
+- ~~**Product/SoftwareApplication schema** for Invento WMS~~ **DONE (2026-06-04)** — see above.
 - **AggregateRating/Review schema** — only once real reviews exist (never fake it).
 - **Make `/industry/:service/:slug` indexable** if those become real content pages — they're
   currently ad-landings excluded from prerender/sitemap. Strong industry-keyword landing
