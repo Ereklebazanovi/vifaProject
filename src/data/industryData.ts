@@ -699,7 +699,7 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
     beauty: {
       nameKa: "ესთეტიკა და სილამაზე",
       nameEn: "Beauty & Aesthetics",
-      heroBgImage: "/saloni.jpg", // შეგიძლია ამოიღო და სუფთა მუქი ფონი დატოვო უფრო ტექნიკური ლუქისთვის
+      heroBgImage: "/saloni.webp", // შეგიძლია ამოიღო და სუფთა მუქი ფონი დატოვო უფრო ტექნიკური ლუქისთვის
       eyebrowKa: "ვებ ინფრასტრუქტურა",
       eyebrowEn: "Web Infrastructure",
       heroSublineKa: "პრემიუმ კატალოგი და ჯავშნების 24/7 ავტომატიზაცია.",
@@ -747,7 +747,7 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
     tourism: {
       nameKa: "სასტუმროები და ტურიზმი",
       nameEn: "Hotels & Tourism",
-      heroBgImage: "/hotelphoto.jpg", 
+      heroBgImage: "/hotelphoto.webp", 
       eyebrowKa: "ვებ დეველოპმენტი",
       eyebrowEn: "Web Development",
       heroSublineKa: "წარმოაჩინეთ თქვენი სივრცე საუკეთესო კუთხით და მიიღეთ ჯავშნები პირდაპირ, ზედმეტი საკომისიოების გარეშე.",
@@ -802,7 +802,7 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
     "legal-finance": {
       nameKa: "იურიდიული და საფინანსო",
       nameEn: "Legal & Finance",
-      heroBgImage: "/practice-hero.jpg", // აქ ჩასვამ შესაბამის ფოტოს
+      heroBgImage: "/practice-hero.webp", // აქ ჩასვამ შესაბამის ფოტოს
       eyebrowKa: "ვებ დეველოპმენტი",
       eyebrowEn: "Web Development",
 heroSublineKa: "თანამედროვე პლატფორმები, რომლებიც ამარტივებს კლიენტებთან კომუნიკაციას და ზრდის თქვენს სანდოობას.",
@@ -857,7 +857,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
     retail: {
       nameKa: "ონლაინ მაღაზიები და Retail",
       nameEn: "E-commerce & Retail",
-      heroBgImage: "/eccomerce.jpg", 
+      heroBgImage: "/eccomerce.webp", 
       eyebrowKa: "ვებ დეველოპმენტი",
       eyebrowEn: "Web Development",
       heroSublineKa: "სწრაფი ვებსაიტი, ონლაინ გადახდები და საწყობის მართვის ინტეგრირებული სისტემა ერთ სივრცეში.",
@@ -911,7 +911,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
     food: {
       nameKa: "რესტორნები და კვება",
       nameEn: "Restaurants & Food",
-      heroBgImage: "/restorani.jpg", 
+      heroBgImage: "/restorani.webp", 
       eyebrowKa: "ვებ დეველოპმენტი",
       eyebrowEn: "Web Development",
       heroSublineKa: "ჩაანაცვლეთ შაბლონური პლატფორმები თქვენი საკუთარი სივრცით. ბრენდირებული მენიუები და ჯავშნების სრული ავტომატიზაცია.",
@@ -968,7 +968,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
     beauty: {
       nameKa: "ესთეტიკა და სილამაზე",
       nameEn: "Beauty & Aesthetics",
-      heroBgImage: "/saloni.jpg",
+      heroBgImage: "/saloni.webp",
       eyebrowKa: "ზრდის მარკეტინგი",
       eyebrowEn: "Growth Marketing",
       heroSublineKa:
@@ -1024,7 +1024,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
     tourism: {
       nameKa: "სასტუმროები და ტურიზმი",
       nameEn: "Hotels & Tourism",
-      heroBgImage: "/hotelphoto.jpg",
+      heroBgImage: "/hotelphoto.webp",
       eyebrowKa: "ზრდის მარკეტინგი",
       eyebrowEn: "Growth Marketing",
       heroSublineKa:
@@ -1080,7 +1080,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
     "legal-finance": {
       nameKa: "იურიდიული და საფინანსო",
       nameEn: "Legal & Finance",
-      heroBgImage: "/practice-hero.jpg",
+      heroBgImage: "/practice-hero.webp",
       eyebrowKa: "ზრდის მარკეტინგი",
       eyebrowEn: "Growth Marketing",
       heroSublineKa:
@@ -1136,7 +1136,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
     retail: {
       nameKa: "E-commerce და საცალო",
       nameEn: "E-commerce & Retail",
-      heroBgImage: "/eccomerce.jpg",
+      heroBgImage: "/eccomerce.webp",
       eyebrowKa: "ზრდის მარკეტინგი",
       eyebrowEn: "Growth Marketing",
       heroSublineKa:
@@ -1188,7 +1188,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
     food: {
       nameKa: "რესტორნები და კვება",
       nameEn: "Restaurants & Food",
-      heroBgImage: "/restorani.jpg",
+      heroBgImage: "/restorani.webp",
       eyebrowKa: "ზრდის მარკეტინგი",
       eyebrowEn: "Growth Marketing",
       heroSublineKa:
