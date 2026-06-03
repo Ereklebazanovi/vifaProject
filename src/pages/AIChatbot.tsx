@@ -334,7 +334,13 @@ const AIChatbot: React.FC = () => {
       <SEO
         title={t("seo.title")}
         description={t("seo.description")}
-        url="https://inventogeo.com/services/ai-chatbot"
+        url="https://vifadigital.ge/services/ai-chatbot"
+        serviceSchema={{
+          name: "AI ჩატბოტი ბიზნესისთვის",
+          description:
+            "AI ჩატბოტის დამზადება და ინტეგრაცია: 24/7 მომხმარებელთა მხარდაჭერა, ავტომატური პასუხები და ლიდების გენერაცია ქართულ ენაზე.",
+          serviceType: "AI Chatbot Development",
+        }}
       />
 
       {/* Background Image */}

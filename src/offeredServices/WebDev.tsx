@@ -200,6 +200,12 @@ const WebDev: React.FC = () => {
         title={t("seo.webdev.title")}
         description={t("seo.webdev.description")}
         url="https://vifadigital.ge/services/web"
+        serviceSchema={{
+          name: "ვებსაიტის დამზადება და ვებ დეველოპმენტი",
+          description:
+            "საიტის დამზადება, კორპორატიული ვებსაიტები, eCommerce პლატფორმები და ვებ აპლიკაციები React/Node.js ტექნოლოგიებზე.",
+          serviceType: "Web Development",
+        }}
       />
 
       <div className="fixed inset-0 z-0 bg-[#060608]">

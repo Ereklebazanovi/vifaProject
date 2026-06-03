@@ -249,6 +249,12 @@ const Marketing: React.FC = () => {
         description={t("seo.marketing.description")}
         keywords={t("seo.marketing.keywords")}
         url="https://vifadigital.ge/services/marketing"
+        serviceSchema={{
+          name: "ციფრული მარკეტინგი და სოციალური მედია მართვა",
+          description:
+            "ციფრული მარკეტინგის სერვისები: სოციალური მედია მართვა, ვიდეო და ფოტო პროდუქცია, კონტენტის შექმნა და სარეკლამო კამპანიები.",
+          serviceType: "Digital Marketing",
+        }}
       />
 
       {/* Hero Section */}

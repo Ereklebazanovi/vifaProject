@@ -240,7 +240,13 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
         title={t("seo.invento.title")}
         description={t("seo.invento.description")}
         keywords={t("seo.invento.keywords")}
-        url="https://inventogeo.com/inventowms"
+        url="https://vifadigital.ge/inventowms"
+        serviceSchema={{
+          name: "WMS სისტემა — საწყობის მართვის სისტემა",
+          description:
+            "WMS საწყობის მართვის სისტემა: მარაგების კონტროლი, შეკვეთების დამუშავება, ინვოისები და რეალურ დროში ანალიტიკა ბიზნესისთვის.",
+          serviceType: "Warehouse Management System",
+        }}
       />
 
       <style>{`

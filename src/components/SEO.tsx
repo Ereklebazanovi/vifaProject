@@ -10,6 +10,12 @@ interface SEOProps {
   url?: string;
   type?: 'website' | 'article' | 'service';
   structuredData?: object;
+  /** Per-page FAQ — injects FAQPage schema (rich results in SERP). */
+  faq?: Array<{ question: string; answer: string }>;
+  /** Explicit breadcrumb trail. If omitted, a Home > Current trail is auto-built. */
+  breadcrumbs?: Array<{ name: string; url: string }>;
+  /** Per-page Service schema (name + description) for /services/* pages. */
+  serviceSchema?: { name: string; description: string; serviceType?: string };
   articleMeta?: {
     publishedTime?: string;
     modifiedTime?: string;
@@ -27,6 +33,9 @@ const SEO: React.FC<SEOProps> = ({
   url,
   type = 'website',
   structuredData,
+  faq,
+  breadcrumbs,
+  serviceSchema,
   articleMeta
 }) => {
   const { currentLanguage } = useLanguage();
@@ -151,23 +160,42 @@ const SEO: React.FC<SEOProps> = ({
     ]
   };
 
-  // Generate comprehensive structured data
-  const defaultStructuredData = {
-    '@context': 'https://schema.org',
-    '@type': type === 'article' ? 'Article' : 'Organization',
-    name: type === 'article' ? fullTitle : siteName,
-    description: metaDescription,
-    url: finalCanonicalUrl,
-    logo: `${brandBaseUrl}${brandConfig.defaultImage}`,
+  // ── Structured data (@graph) ──────────────────────────────────────────────
+  const orgId = `${brandBaseUrl}/#organization`;
+  const websiteId = `${brandBaseUrl}/#website`;
+  const isHome = finalCanonicalUrl === `${brandBaseUrl}/`;
+
+  // Organization / local business node — the entity Google attaches everything to.
+  const organizationNode = {
+    '@type': ['Organization', 'ProfessionalService'],
+    '@id': orgId,
+    name: siteName,
+    url: brandBaseUrl,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${brandBaseUrl}${brandConfig.defaultImage}`
+    },
     image: fullImageUrl,
-    telephone: siteConfig.phone,
+    description: defaultDescription,
     email: brandConfig.email,
+    telephone: siteConfig.phone,
+    priceRange: '$$',
+    foundingDate: '2020',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Tbilisi',
-      addressCountry: 'GE',
-      addressRegion: 'Tbilisi'
+      addressRegion: 'Tbilisi',
+      addressCountry: 'GE'
     },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 41.7151,
+      longitude: 44.8271
+    },
+    areaServed: { '@type': 'Country', name: 'Georgia' },
+    sameAs: brandConfig.socialLinks,
+    knowsAbout,
+    hasOfferCatalog: offerCatalog,
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: siteConfig.phone,
@@ -175,34 +203,99 @@ const SEO: React.FC<SEOProps> = ({
       email: brandConfig.email,
       availableLanguage: ['Georgian', 'English'],
       areaServed: 'GE'
-    },
-    sameAs: brandConfig.socialLinks,
-    foundingDate: '2020',
-    knowsAbout,
-    serviceArea: {
-      '@type': 'Country',
-      name: 'Georgia'
-    },
-    hasOfferCatalog: offerCatalog,
+    }
+  };
+
+  const websiteNode = {
+    '@type': 'WebSite',
+    '@id': websiteId,
+    url: brandBaseUrl,
+    name: siteName,
+    inLanguage: isKa ? 'ka-GE' : 'en-US',
+    publisher: { '@id': orgId }
+  };
+
+  // Breadcrumbs: explicit prop wins, otherwise auto Home > Current (skipped on home).
+  const breadcrumbTrail =
+    breadcrumbs && breadcrumbs.length
+      ? breadcrumbs
+      : isHome
+        ? []
+        : [
+          { name: isKa ? 'მთავარი' : 'Home', url: `${brandBaseUrl}/` },
+          { name: title || siteName, url: finalCanonicalUrl }
+        ];
+
+  const breadcrumbNode = breadcrumbTrail.length
+    ? {
+      '@type': 'BreadcrumbList',
+      '@id': `${finalCanonicalUrl}#breadcrumb`,
+      itemListElement: breadcrumbTrail.map((b, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: b.name,
+        item: b.url
+      }))
+    }
+    : null;
+
+  const webPageNode = {
+    '@type': type === 'article' ? 'Article' : 'WebPage',
+    '@id': `${finalCanonicalUrl}#webpage`,
+    url: finalCanonicalUrl,
+    name: fullTitle,
+    description: metaDescription,
+    isPartOf: { '@id': websiteId },
+    inLanguage: isKa ? 'ka-GE' : 'en-US',
+    ...(breadcrumbNode && { breadcrumb: { '@id': `${finalCanonicalUrl}#breadcrumb` } }),
     ...(type === 'article' && articleMeta && {
       headline: fullTitle,
-      author: {
-        '@type': 'Person',
-        name: articleMeta.author || `${siteName} Team`
-      },
-      publisher: {
-        '@type': 'Organization',
-        name: siteName,
-        logo: {
-          '@type': 'ImageObject',
-          url: `${brandBaseUrl}${brandConfig.defaultImage}`
-        }
-      },
+      image: fullImageUrl,
+      author: { '@type': 'Person', name: articleMeta.author || `${siteName} Team` },
+      publisher: { '@id': orgId },
       datePublished: articleMeta.publishedTime,
       dateModified: articleMeta.modifiedTime || articleMeta.publishedTime,
       articleSection: articleMeta.section,
       keywords: articleMeta.tags?.join(', ')
     })
+  };
+
+  const serviceNode = serviceSchema
+    ? {
+      '@type': 'Service',
+      '@id': `${finalCanonicalUrl}#service`,
+      name: serviceSchema.name,
+      description: serviceSchema.description,
+      ...(serviceSchema.serviceType && { serviceType: serviceSchema.serviceType }),
+      provider: { '@id': orgId },
+      areaServed: { '@type': 'Country', name: 'Georgia' },
+      url: finalCanonicalUrl
+    }
+    : null;
+
+  const faqNode =
+    faq && faq.length
+      ? {
+        '@type': 'FAQPage',
+        '@id': `${finalCanonicalUrl}#faq`,
+        mainEntity: faq.map((f) => ({
+          '@type': 'Question',
+          name: f.question,
+          acceptedAnswer: { '@type': 'Answer', text: f.answer }
+        }))
+      }
+      : null;
+
+  const defaultStructuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      organizationNode,
+      websiteNode,
+      webPageNode,
+      breadcrumbNode,
+      serviceNode,
+      faqNode
+    ].filter(Boolean)
   };
 
   return (
@@ -214,30 +307,6 @@ const SEO: React.FC<SEOProps> = ({
       <meta name="keywords" content={metaKeywords} />
       <meta name="author" content={`${siteName} Team`} />
       <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-      <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-      <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-
-      {/* SEO Enhancement Meta Tags */}
-      <meta name="language" content={isKa ? 'Georgian' : 'English'} />
-      <meta name="revisit-after" content="7 days" />
-      <meta name="rating" content="General" />
-      <meta name="distribution" content="Global" />
-      <meta name="copyright" content={`© 2026 ${siteName}. All rights reserved.`} />
-      <meta name="subject" content="Premium Web Development, Digital Marketing and IT Solutions" />
-      <meta name="topic" content="Web Development, Digital Marketing, SEO, AI and IT Solutions" />
-      <meta name="summary" content={metaDescription} />
-      <meta name="classification" content="Business" />
-      <meta name="designer" content={siteName} />
-      <meta name="owner" content={siteName} />
-      <meta name="url" content={finalCanonicalUrl} />
-      <meta name="identifier-URL" content={finalCanonicalUrl} />
-      <meta name="directory" content="submission" />
-      <meta name="category" content="Web Development, Digital Marketing, IT Solutions, Business" />
-      <meta name="coverage" content="Georgia, Worldwide" />
-      <meta name="target" content="all" />
-      <meta name="HandheldFriendly" content="True" />
-      <meta name="MobileOptimized" content="320" />
 
       {/* Open Graph Meta Tags */}
       <meta property="og:type" content={type} />
@@ -282,22 +351,6 @@ const SEO: React.FC<SEOProps> = ({
       <meta name="twitter:site" content={siteConfig.twitterHandle} />
       <meta name="twitter:creator" content={siteConfig.twitterHandle} />
 
-      {/* Business/Contact Information */}
-      <meta name="contact" content={brandConfig.email} />
-      <meta name="reply-to" content={brandConfig.email} />
-
-      {/* Technical Meta Tags */}
-      <meta name="theme-color" content="#0f172a" />
-      <meta name="msapplication-TileColor" content="#0f172a" />
-      <meta name="apple-mobile-web-app-capable" content="yes" />
-      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-      <meta name="apple-mobile-web-app-title" content={siteName} />
-
-      {/* Schema.org markup for Google+ */}
-      <meta itemProp="name" content={fullTitle} />
-      <meta itemProp="description" content={metaDescription} />
-      <meta itemProp="image" content={fullImageUrl} />
-
       {/* Canonical URL */}
       <link rel="canonical" href={finalCanonicalUrl} />
 
@@ -311,11 +364,6 @@ const SEO: React.FC<SEOProps> = ({
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       <link rel="preconnect" href="https://www.googletagmanager.com" />
       <link rel="dns-prefetch" href="//www.google-analytics.com" />
-
-      {/* Favicon and Icons */}
-      <link rel="icon" type="image/png" href="/viffa.png" />
-      <link rel="apple-touch-icon" href="/viffa.png" />
-      <link rel="manifest" href="/site.webmanifest" />
 
       {/* Structured Data */}
       <script type="application/ld+json">
