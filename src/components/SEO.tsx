@@ -2,6 +2,9 @@ import { Helmet } from 'react-helmet-async';
 import { useLanguage } from '../contexts/LanguageContext';
 import { siteConfig } from '../config/siteConfig';
 
+/** A single priced package: fixed `price` OR a `minPrice`/`maxPrice` range (GEL). */
+type OfferInput = { name: string; price?: number; minPrice?: number; maxPrice?: number };
+
 interface SEOProps {
   title?: string;
   description?: string;
@@ -21,7 +24,16 @@ interface SEOProps {
     name: string;
     description: string;
     serviceType?: string;
-    offers?: Array<{ name: string; price?: number; minPrice?: number; maxPrice?: number }>;
+    offers?: OfferInput[];
+  };
+  /** Per-page SoftwareApplication schema for SaaS products (e.g. Invento WMS).
+   *  More accurate than Service for a licensed software product. Same `offers` shape. */
+  softwareApplication?: {
+    name: string;
+    description: string;
+    applicationCategory?: string;
+    operatingSystem?: string;
+    offers?: OfferInput[];
   };
   articleMeta?: {
     publishedTime?: string;
@@ -43,6 +55,7 @@ const SEO: React.FC<SEOProps> = ({
   faq,
   breadcrumbs,
   serviceSchema,
+  softwareApplication,
   articleMeta
 }) => {
   const { currentLanguage } = useLanguage();
@@ -267,7 +280,7 @@ const SEO: React.FC<SEOProps> = ({
   };
 
   // AggregateOffer built from the page's real, visible package prices (GEL).
-  const buildOffers = (offers: NonNullable<NonNullable<SEOProps['serviceSchema']>['offers']>) => {
+  const buildOffers = (offers: OfferInput[]) => {
     const offerItems = offers.map((o) => ({
       '@type': 'Offer',
       name: o.name,
@@ -312,6 +325,21 @@ const SEO: React.FC<SEOProps> = ({
     }
     : null;
 
+  // SoftwareApplication node — accurate entity type for a SaaS product (Invento WMS).
+  const softwareNode = softwareApplication
+    ? {
+      '@type': 'SoftwareApplication',
+      '@id': `${finalCanonicalUrl}#software`,
+      name: softwareApplication.name,
+      description: softwareApplication.description,
+      applicationCategory: softwareApplication.applicationCategory || 'BusinessApplication',
+      operatingSystem: softwareApplication.operatingSystem || 'Web',
+      provider: { '@id': orgId },
+      url: finalCanonicalUrl,
+      ...(softwareApplication.offers?.length && { offers: buildOffers(softwareApplication.offers) })
+    }
+    : null;
+
   const faqNode =
     faq && faq.length
       ? {
@@ -333,6 +361,7 @@ const SEO: React.FC<SEOProps> = ({
       webPageNode,
       breadcrumbNode,
       serviceNode,
+      softwareNode,
       faqNode
     ].filter(Boolean)
   };

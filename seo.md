@@ -193,7 +193,8 @@ Technical / structural:
 - ~~**Offer/PriceSpecification schema:**~~ **DONE (2026-06-04):** each `Service` node now
   emits an `AggregateOffer` (lowPrice/highPrice + per-package `Offer`s) from real visible
   prices via new `serviceSchema.offers` prop in `SEO.tsx`. Web 300–1400₾, Marketing
-  1000–2000₾, WMS 79–1999₾, AI from 300₾. (Future: model Invento WMS as `SoftwareApplication`.)
+  1000–2000₾, AI from 300₾. **Invento WMS uses a `SoftwareApplication` node** (not `Service`)
+  via the new `softwareApplication` prop — accurate SaaS entity, 79–1999₾ AggregateOffer.
 - **Product/SoftwareApplication schema** for Invento WMS (it's a SaaS product with plans).
 - **AggregateRating/Review schema** — only once real reviews exist (never fake it).
 - **Make `/industry/:service/:slug` indexable** if those become real content pages — they're

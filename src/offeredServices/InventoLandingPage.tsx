@@ -303,11 +303,12 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
         description={t("seo.invento.description")}
         keywords={t("seo.invento.keywords")}
         url="https://vifadigital.ge/inventowms"
-        serviceSchema={{
-          name: "WMS სისტემა — საწყობის მართვის სისტემა",
+        softwareApplication={{
+          name: "Invento WMS — საწყობის მართვის სისტემა",
           description:
             "WMS საწყობის მართვის სისტემა: მარაგების კონტროლი, შეკვეთების დამუშავება, ინვოისები და რეალურ დროში ანალიტიკა ბიზნესისთვის.",
-          serviceType: "Warehouse Management System",
+          applicationCategory: "BusinessApplication",
+          operatingSystem: "Web",
           offers: [
             { name: "ყოველთვიური გეგმა", price: 79 },
             { name: "წლიური გეგმა", price: 750 },
