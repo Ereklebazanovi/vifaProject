@@ -1410,7 +1410,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
       seoDescriptionEn:
         "Beauty salon marketing and social media management — content, reels, photo and booking-focused ads. From 600₾ per month. Book a consultation.",
       introKa:
-        "სილამაზის სალონის მარკეტინგი მხოლოდ ლამაზი პოსტები არ არის — ეს არის სისტემა, რომელიც დამთვალიერებელს ჩაწერად აქცევს. VIFA Digital უძღვება სალონებისა და ესთეტიკის ცენტრების სოციალურ მედიას კონტენტის შექმნიდან სარეკლამო კამპანიების ოპტიმიზაციამდე, ჩაწერებზე ფოკუსირებული ტარგეტირებით.",
+        "სილამაზის სალონის მარკეტინგი მხოლოდ ვიზუალურად მიმზიდველი პოსტები არ არის — ეს არის სისტემა, რომელიც გამომწერს თქვენს რეალურ კლიენტად აქცევს. VIFA Digital უზრუნველყოფს სალონებისა და ესთეტიკის ცენტრების სოციალური მედიის სრულყოფილ მართვას — შემოქმედებითი კონტენტის შექმნიდან დაწყებული, მიზნობრივი რეკლამებით დასრულებული, რათა მაქსიმალურად გავზარდოთ ვიზიტების ჯავშნები.",
       introEn:
         "Beauty salon marketing is more than pretty posts — it is a system that turns viewers into bookings. VIFA Digital runs social media for salons and aesthetics centers from content creation to ad-campaign optimization, with booking-focused targeting.",
       contentSections: [
