@@ -405,59 +405,66 @@ function IndustryContent({ config, ka }: { config: IndustryConfig; ka: boolean }
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, amount: 0 });
 
+  // Merge the deep SEO sections with the existing approach block into one prose list.
+  const sections = [
+    ...config.contentSections,
+    {
+      headingKa: config.approach.headingKa,
+      headingEn: config.approach.headingEn,
+      bodyKa: config.approach.descKa,
+      bodyEn: config.approach.descEn,
+    },
+  ];
+
   return (
     <section className="relative bg-[#060608]">
       <motion.div
         ref={ref}
-        className="mx-auto max-w-3xl px-5 lg:px-8"
+        className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8"
         variants={sectionReveal}
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
       >
-        {/* Lead / intro paragraph */}
-        <p className="text-lg leading-relaxed text-gray-300 md:text-xl">
+        {/* Eyebrow + lead — left-aligned reading column (matches WebDev/Marketing) */}
+        <span className="mb-5 inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.25em] text-indigo-400">
+          <span className="h-px w-8 bg-indigo-500" />
+          {ka ? "სერვისის შესახებ" : "About the Service"}
+        </span>
+        <p className="font-georgian-body max-w-3xl text-lg leading-[1.85] text-gray-200 md:text-xl">
           {ka ? config.introKa : config.introEn}
         </p>
 
         {/* Deep H2 content blocks */}
-        {config.contentSections.map((sec) => (
-          <div key={sec.headingEn} className="mt-12">
-            <h2 className="mb-4 text-2xl font-bold tracking-tight text-white md:text-3xl">
-              {ka ? sec.headingKa : sec.headingEn}
-            </h2>
-            <p className="text-[15px] leading-relaxed text-gray-400 md:text-base">
-              {ka ? sec.bodyKa : sec.bodyEn}
-            </p>
-          </div>
-        ))}
-
-        {/* Approach */}
-        <div className="mt-12">
-          <h2 className="mb-4 text-2xl font-bold tracking-tight text-white md:text-3xl">
-            {ka ? config.approach.headingKa : config.approach.headingEn}
-          </h2>
-          <p className="text-[15px] leading-relaxed text-gray-400 md:text-base">
-            {ka ? config.approach.descKa : config.approach.descEn}
-          </p>
+        <div className="mt-16 max-w-3xl space-y-12">
+          {sections.map((sec) => (
+            <div key={sec.headingEn}>
+              <h2 className="mb-4 text-2xl font-bold tracking-tight text-white md:text-[1.75rem] md:leading-snug">
+                {ka ? sec.headingKa : sec.headingEn}
+              </h2>
+              <p className="font-georgian-body text-[15px] leading-[1.9] text-gray-400 md:text-base">
+                {ka ? sec.bodyKa : sec.bodyEn}
+              </p>
+            </div>
+          ))}
         </div>
 
-        {/* Features grid */}
+        {/* Features grid — full container width */}
         {config.features.length > 0 && (
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {config.features.map((feat) => {
               const Icon = feat.icon;
               return (
                 <div
                   key={feat.titleEn}
-                  className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 transition-colors hover:border-white/20"
+                  className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-colors hover:border-white/20"
                 >
-                  <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500/10">
+                  <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-500/10">
                     <Icon className="h-5 w-5 text-indigo-400" />
                   </div>
-                  <h3 className="mb-1.5 text-base font-semibold text-white">
+                  <h3 className="mb-2 text-base font-semibold text-white">
                     {ka ? feat.titleKa : feat.titleEn}
                   </h3>
-                  <p className="text-sm leading-relaxed text-gray-400">
+                  <p className="font-georgian-body text-sm leading-[1.8] text-gray-400">
                     {ka ? feat.descKa : feat.descEn}
                   </p>
                 </div>

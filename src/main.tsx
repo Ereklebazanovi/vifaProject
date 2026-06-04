@@ -3,6 +3,12 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import 'bpg-nino-mtavruli/css/bpg-nino-mtavruli.min.css'
+// Noto Sans Georgian — readable mkhedruli for long Georgian body copy
+// (BPG Nino Mtavruli is all-caps mtavruli; great for headings, hard to read in paragraphs).
+import '@fontsource/noto-sans-georgian/400.css'
+import '@fontsource/noto-sans-georgian/500.css'
+import '@fontsource/noto-sans-georgian/600.css'
+import '@fontsource/noto-sans-georgian/700.css'
 import '@fontsource/inter/400.css'
 import '@fontsource/inter/500.css'
 import '@fontsource/inter/600.css'

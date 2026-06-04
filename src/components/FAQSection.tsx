@@ -99,7 +99,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="px-5 sm:px-6 pb-5 sm:pl-[4.5rem] text-[15px] text-gray-300 leading-relaxed">
+                    <p className="font-georgian-body px-5 sm:px-6 pb-5 sm:pl-[4.5rem] text-[15px] text-gray-300 leading-[1.85]">
                       {item.answer}
                     </p>
                   </div>
