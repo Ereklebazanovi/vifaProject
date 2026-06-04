@@ -41,6 +41,10 @@ per-route meta without executing JavaScript.
 - Intentionally NOT prerendered: `/industry/:service/:slug` (paid ad-landings, not for
   organic), `/services/ai-chatbot/request` (form), admin routes.
 - Blocks analytics/firebase network during render (avoids hangs on long-lived connections).
+- **Analytics script stripping (2026-06-04):** after render, before snapshot, removes any
+  GA/FB `<script>` nodes injected by React useEffects. Without this, baked HTML + runtime
+  re-injection = double GA pageviews / double FB pixel events. The `preconnect` hint for
+  GTM is preserved (harmless, speeds up runtime load).
 - Waits `domcontentloaded` + 5s + `#root` has children, then snapshots `page.content()`.
 - Warns if a route renders an almost-empty `#root` (<500 chars) — sanity guard.
 - **Chromium resolution (environment-aware):**
@@ -74,7 +78,7 @@ canonicals** (every page canonicalized to the homepage). Do not re-add meta here
 
 ---
 
-## 2. COMPLETED STEPS (the 6-step roadmap)
+## 2. COMPLETED STEPS (the 6-step roadmap + session 2 work)
 
 ### STEP 1 — Domain consolidation
 - Single canonical host enforced everywhere: `https://vifadigital.ge` (non-www).
@@ -118,8 +122,9 @@ canonicals** (every page canonicalized to the homepage). Do not re-add meta here
   `Organization`+`ProfessionalService` (`#organization`) ↔ `WebSite` (`#website`) ↔
   `WebPage` ↔ `BreadcrumbList` ↔ `Service` ↔ `FAQPage`.
 - New `SEO` props: `serviceSchema` (per service page), `faq` (FAQPage), `breadcrumbs`
-  (auto Home > Current if omitted). Org node includes geo (Tbilisi), address, priceRange,
-  areaServed, sameAs, knowsAbout, hasOfferCatalog.
+  (auto Home > Current if omitted), `softwareApplication` (SaaS product pages).
+- Org node includes geo (Tbilisi), address, priceRange, areaServed, sameAs, knowsAbout,
+  hasOfferCatalog.
 - **Removed ~20 zombie meta tags** (`revisit-after`, `distribution`, `rating`,
   `classification`, `directory:submission`, `coverage`, `HandheldFriendly`, itemProp×3,
   duplicate viewport/theme-color/Content-Type, contact/reply-to, etc.).
@@ -138,6 +143,67 @@ canonicals** (every page canonicalized to the homepage). Do not re-add meta here
   translations, bilingual). We did NOT add a duplicate FAQSection there — instead we build
   `faqForSchema` from those existing translations (`question` + `answer` + `details`) and
   pass it to `<SEO faq={faqForSchema}>`. So its existing FAQ is now SEO-optimized.
+
+### SESSION 2 — Schema fixes + analytics dedup + breadcrumbs (2026-06-04)
+
+#### 2a — Canonical/hreflang bug fix
+- **Bug:** `finalCanonicalUrl` in `SEO.tsx` was `isKa ? base : base?lang=en` — canonical
+  changed based on client-side language toggle. Fixed: canonical is ALWAYS the clean
+  query-stripped URL, independent of language state.
+- Dropped all `ka`/`en`/`x-default` hreflang `<link>` tags. EN is a client-only
+  `?lang=en` state, not a distinct prerendered route — these were false signals to Google.
+  Re-add hreflang only when real prerendered `/en/...` routes exist.
+
+#### 2b — Offer/AggregateOffer schema
+- Added `offers` prop to `serviceSchema` (and `softwareApplication`) in `SEO.tsx`.
+  Each service `Service` node now emits an `AggregateOffer` with `lowPrice`/`highPrice`
+  + per-package `Offer` items using real visible prices (GEL):
+  - **Web:** 300–1400₾ (Landing 500 / CMS 700–1000 / AI 300 / eCommerce 1400)
+  - **Marketing:** 1000–2000₾ (Standard/Pro/Premium)
+  - **AI Chatbot:** 300₾ (setup)
+  - **WMS:** 79–1999₾ (Monthly/Annual/eCommerce Bundle — as `SoftwareApplication`)
+
+#### 2c — Invento WMS → SoftwareApplication
+- Added `softwareApplication` prop to `SEO.tsx` emitting a `SoftwareApplication` @graph
+  node (`applicationCategory: BusinessApplication`, `operatingSystem: Web`).
+- `/inventowms` now uses `softwareApplication` instead of `serviceSchema` — a licensed
+  SaaS product is more accurately a SoftwareApplication than a Service.
+- Shared `OfferInput` type + `buildOffers()` helper reused by both node types.
+
+#### 2d — Analytics double-fire fix (`scripts/prerender.js`)
+- GA (`GoogleAnalytics.tsx`) and FB Pixel (`FacebookPixel.tsx`) inject `<script>` tags via
+  `useEffect`. The prerender baked those into static HTML. On load: fire once from baked
+  HTML, then React re-injects → **double GA pageviews + double FB pixel events**.
+- Fix: prerender strips any gtag/dataLayer/fbq/connect.facebook.net `<script>` nodes from
+  the DOM **after render, before snapshot**. Runtime injects exactly one clean copy.
+  Preconnect hints and JSON-LD are preserved.
+- Verified: 0 analytics `<script>` tags in baked HTML across all 7 routes.
+
+#### 2e — fbq guard in `facebookPixel.ts`
+- Added `typeof window.fbq === 'function'` guard on the `init`/`PageView` calls in
+  `loadPixelScript()` — the one spot that was unguarded. Prevents console errors when
+  fbq is blocked by ad-blockers or during prerender.
+
+#### 2f — Visible breadcrumbs (`src/components/Breadcrumbs.tsx`)
+- New reusable `Breadcrumbs` component: desktop (sm+) shows full trail with `›` chevrons;
+  mobile (<sm) collapses to `‹ Parent` back-link (3 Georgian labels don't fit one line).
+- Wired into all 4 service pages (WebDev, Marketing, AIChatbot, InventoWMS) with short
+  labels matching the BreadcrumbList schema exactly (Google requirement):
+  - `مثالی › ვებ დეველოპმენტი`
+  - `მThavari › ციფრული მარკეტინგი`
+  - `მThavari › AI ჩატბოტი`
+  - `მThavari › საწყობის პროგრამა`
+- **Verified:** schema labels === visible labels in baked HTML on all 4 pages.
+- Also wired into `IndustryLanding.tsx` for 3-level trail:
+  `მThavari › <Service> › <Industry>` — web service uses Web Dev crumb, marketing uses
+  Marketing crumb. Visible-only (industry pages are noindex ad-landings, no schema needed).
+
+#### 2g — Navbar cleanup
+- Removed "მThavari" link (VIFA logo serves as home nav). Renumbered 01–05.
+- Added `04/ AI ჩატბოტი → /services/ai-chatbot` and
+  `05/ საწყობის პროგრამა → /inventowms` to desktop + mobile nav.
+- Pushed all breakpoints `lg:` → `xl:` (1280px) to prevent horizontal overflow from wide
+  Georgian labels with `tracking-widest` at 1024px.
 
 ---
 
@@ -165,12 +231,14 @@ canonicals** (every page canonicalized to the homepage). Do not re-add meta here
    (Production + Preview). Required for the prerender build to succeed on Vercel.
 3. **Google Search Console:** add `vifadigital.ge`, submit `sitemap.xml`, and do
    "Change of Address" from the inventogeo property → vifadigital.ge.
-4. **Compress 7 in-use large images** (still heavy): `saloni.jpg` (10MB), `restorani.jpg`
-   (8.6MB), `statia-2.jpg`→now removed, `eccomerce.jpg` (3.2MB), `practice-hero.webp`
-   (1.8MB), `hotelphoto.jpg` (1.2MB). Target: WebP/AVIF, ≤1920px, <250KB each.
-   (These are referenced in `src/data/industryData.ts` as `heroBgImage`.)
-5. Verify FAQ language toggle on service pages live; run Rich Results Test on
-   `vifadigital.ge/services/web` (expect FAQ + Service + Breadcrumb + Organization).
+4. **Run Rich Results Test** on the 4 service pages live:
+   - `vifadigital.ge/services/web` — expect BreadcrumbList + Service + Organization
+   - `vifadigital.ge/services/marketing` — same
+   - `vifadigital.ge/services/ai-chatbot` — same + FAQPage
+   - `vifadigital.ge/inventowms` — SoftwareApplication + Organization
+   - **Note:** FAQ rich results no longer shown in SERP (Google deprecated Aug 2023 for
+     non-health/gov), Service price rich results not visual either — both still valuable
+     as entity signals. Only Organization/Logo is currently a visual rich result.
 
 ### Code work pending
 - **Blog rebuild** (planned): proper CMS-style blog with `react-quill` editor + Firebase
@@ -179,30 +247,37 @@ canonicals** (every page canonicalized to the homepage). Do not re-add meta here
 
 ---
 
-## 5. RECOMMENDATIONS FOR VERY STRONG SEO (future work)
+## 5. RECOMMENDATIONS FOR VERY STRONG SEO (future work, prioritized)
 
-Technical / structural:
+### 🔴 High impact
+
+- **Make `/industry/:service/:slug` indexable** — currently noindex ad-landings excluded
+  from prerender/sitemap. Converting them to real content pages (500+ words, H1/H2, FAQ
+  block, internal links) with dedicated keywords like "რესტორნის საიტის დამზადება",
+  "სასტუმროს ვებსაიტი" etc. would be the **biggest organic traffic unlock** remaining.
+  Required steps: (1) add routes to `ROUTES` in prerender.js, (2) add to sitemap.xml,
+  (3) remove noindex if present, (4) add `BreadcrumbList` schema (3-level), (5) beef up
+  content beyond the current pricing-only layout.
+
 - **Per-page OG images (1200×630):** currently all pages use the logo `viffa.png` as
   `og:image`. Design real branded social cards per service → much better CTR on shares.
-- ~~**hreflang is weak:** EN is a client-only `?lang=en` state, not a distinct URL.~~
-  **DONE (2026-06-04):** dropped all `ka`/`en`/`x-default` hreflang alternates and made the
-  canonical ALWAYS the clean query-stripped URL (was `isKa ? base : base?lang=en` — a real
-  canonical bug). Re-add hreflang only when real prerendered `/en/...` routes exist.
-- **Visible breadcrumbs UI:** breadcrumb is in schema only; add a visible breadcrumb trail
-  component on service/sub pages (UX + reinforces the BreadcrumbList).
-- ~~**Offer/PriceSpecification schema:**~~ **DONE (2026-06-04):** each `Service` node now
-  emits an `AggregateOffer` (lowPrice/highPrice + per-package `Offer`s) from real visible
-  prices via new `serviceSchema.offers` prop in `SEO.tsx`. Web 300–1400₾, Marketing
-  1000–2000₾, AI from 300₾. **Invento WMS uses a `SoftwareApplication` node** (not `Service`)
-  via the new `softwareApplication` prop — accurate SaaS entity, 79–1999₾ AggregateOffer.
-- ~~**Product/SoftwareApplication schema** for Invento WMS~~ **DONE (2026-06-04)** — see above.
+
+### 🟡 Medium impact
+
 - **AggregateRating/Review schema** — only once real reviews exist (never fake it).
-- **Make `/industry/:service/:slug` indexable** if those become real content pages — they're
-  currently ad-landings excluded from prerender/sitemap. Strong industry-keyword landing
-  pages (e.g. "რესტორნის საიტის დამზადება") would be powerful.
-- **Georgian font subsetting + preload LCP image** (`hero-desktop.webp`) to cut LCP further.
+  When ready: add `aggregateRating` to the `Organization` + `Service` nodes.
+
+- **Georgian font subsetting + preload LCP image** to cut LCP further.
+
 - **Auto-generate sitemap** from a single routes source of truth (currently hand-maintained
   `public/sitemap.xml`) and automate `lastmod`.
+
+### 🟢 Low impact / housekeeping
+
+- ~~**hreflang:**~~ **DONE.** Re-add only when real `/en/...` prerendered routes exist.
+- ~~**Offer/PriceSpecification schema:**~~ **DONE (2026-06-04).**
+- ~~**SoftwareApplication schema for WMS:**~~ **DONE (2026-06-04).**
+- ~~**Visible breadcrumbs UI:**~~ **DONE (2026-06-04).**
 - **Reintroduce three.js/canvas backgrounds only via `ClientOnly`/lazy** if needed — they
   are currently NOT in the routed tree (good; keep them out of the critical path).
 
@@ -219,27 +294,39 @@ Content / authority (the real ranking lever):
 
 | File | Role |
 |---|---|
-| `scripts/prerender.js` | Puppeteer SSG prerender (the core of STEP 2) |
-| `src/components/SEO.tsx` | react-helmet meta + `@graph` JSON-LD; props: `faq`, `serviceSchema`, `breadcrumbs` |
+| `scripts/prerender.js` | Puppeteer SSG prerender — strips analytics scripts before snapshot |
+| `src/components/SEO.tsx` | react-helmet meta + `@graph` JSON-LD; props: `faq`, `serviceSchema`, `softwareApplication`, `breadcrumbs`, `offers` |
 | `src/components/FAQSection.tsx` | Reusable visible FAQ accordion (feeds same data to schema) |
+| `src/components/Breadcrumbs.tsx` | Visible breadcrumb trail — desktop full, mobile back-link; used on all 4 service pages + industry landings |
 | `index.html` | Minimal SPA shell — DO NOT add SEO meta here |
 | `vercel.json` | Path redirects + SPA rewrite + cache/security headers (NO host redirects) |
 | `public/sitemap.xml`, `public/robots.txt` | 7 real routes, single sitemap |
 | `src/App.tsx` | Routes (lazy-loaded) + providers; aliases kept for 308 |
-| `src/offeredServices/WebDev.tsx` | `/services/web` — bilingual FAQ, serviceSchema |
-| `src/offeredServices/Marketing.tsx` | `/services/marketing` — bilingual FAQ, serviceSchema |
-| `src/pages/AIChatbot.tsx` | `/services/ai-chatbot` — existing FAQ → `faqForSchema` |
-| `src/offeredServices/InventoLandingPage.tsx` | `/inventowms` — bilingual FAQ, serviceSchema |
+| `src/layout/SimpleNavbar.tsx` | Nav — xl: breakpoint (1280px) for desktop, AI Chatbot + WMS links added |
+| `src/offeredServices/WebDev.tsx` | `/services/web` — bilingual FAQ, serviceSchema + offers, breadcrumbs |
+| `src/offeredServices/Marketing.tsx` | `/services/marketing` — bilingual FAQ, serviceSchema + offers, breadcrumbs |
+| `src/pages/AIChatbot.tsx` | `/services/ai-chatbot` — existing FAQ → `faqForSchema`, serviceSchema + offers, breadcrumbs |
+| `src/offeredServices/InventoLandingPage.tsx` | `/inventowms` — bilingual FAQ, softwareApplication + offers, breadcrumbs |
+| `src/pages/landing/IndustryLanding.tsx` | `/industry/:service/:slug` — 3-level visible breadcrumbs, noindex ad-landing |
 | `src/config/siteConfig.ts` | phone, email, social, location |
+| `src/utils/facebookPixel.ts` | FB Pixel manager — all fbq calls guarded with typeof check |
 
 **Verification commands:**
 ```bash
 npm run build            # tsc + vite + prerender (must end "7/7 routes OK")
-# then inspect a prerendered page's JSON-LD:
+
+# Inspect JSON-LD @graph types on a prerendered page:
 node -e "const h=require('fs').readFileSync('dist/services/web/index.html','utf8');const m=h.match(/application\/ld\+json[^>]*>(.*?)<\/script>/s);console.log(JSON.parse(m[1])['@graph'].map(n=>n['@type']))"
+
+# Verify no analytics scripts baked in (should all be 0):
+node -e "const fs=require('fs');['','services/web','inventowms'].forEach(r=>{const h=fs.readFileSync('dist/'+(r?r+'/':'')+'index.html','utf8');console.log(r||'/',  'gtag:', (h.match(/gtag\(/g)||[]).length, 'fbq:', (h.match(/fbq=function/g)||[]).length)})"
+
+# Verify breadcrumb schema === visible on all 4 service pages:
+node -e "const fs=require('fs');for(const r of ['services/web','services/marketing','services/ai-chatbot','inventowms']){const h=fs.readFileSync('dist/'+r+'/index.html','utf8');const g=JSON.parse(h.match(/application\/ld\+json[^>]*>(.*?)<\/script>/s)[1])['@graph'];const bc=g.find(n=>n['@type']==='BreadcrumbList');console.log(r,bc.itemListElement.map(x=>x.name))}"
 ```
 
 ---
 
-_Last updated: 2026-06-04. Status: STEP 1–6 complete + verified locally; STEP 2 verified
-live on Vercel. Pending = user manual tasks (§4) + blog rebuild + §5 enhancements._
+_Last updated: 2026-06-04. Status: STEP 1–6 complete + Session 2 complete (canonical fix,
+Offer schema, SoftwareApplication, analytics dedup, breadcrumbs, navbar). All deployed to
+Vercel. Pending = user manual tasks (§4) + blog rebuild + §5 high-impact items._
