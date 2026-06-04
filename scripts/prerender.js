@@ -10,7 +10,7 @@
 //                 (and PUPPETEER_SKIP_DOWNLOAD=true so install stays light).
 
 import { createServer } from 'http';
-import { readFileSync, existsSync, mkdirSync, writeFileSync, statSync } from 'fs';
+import { readFileSync, existsSync, mkdirSync, writeFileSync, statSync, rmSync } from 'fs';
 import { join, dirname, extname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -159,6 +159,11 @@ async function run() {
   const puppeteer = (await import('puppeteer')).default;
   const server = await startStaticServer();
   console.log(`[prerender] static server on http://localhost:${PORT}`);
+
+  // vite build uses emptyOutDir:false, so stale /blog/<slug> dirs from earlier builds
+  // (or the old markdown blog) can linger in dist. Wipe dist/blog so only the current
+  // Firestore posts get baked — prevents orphan pages with outdated titles/branding.
+  rmSync(join(distDir, 'blog'), { recursive: true, force: true });
 
   // Discover published blog posts from Firestore and add them to the render list.
   const blogPosts = await fetchPublishedBlogPosts();
