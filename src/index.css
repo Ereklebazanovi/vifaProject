@@ -485,6 +485,33 @@ html.ka .font-georgian-body {
   font-size: 0.9em;
 }
 
+/* The global `* { max-width: 100% }` above is UNLAYERED, so it beats Tailwind v4's
+   layered `max-w-*` utilities — making the article span full width. `!important`
+   wins back the reading-column width without touching that global guard. */
+.blog-article {
+  max-width: 44rem !important; /* ~704px reading column */
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.blog-wrap {
+  max-width: 80rem !important; /* matches max-w-7xl for the index grid */
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+/* Never let long words / pasted URLs / embeds push past the column. */
+.blog-prose,
+.blog-prose * {
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+}
+.blog-prose img,
+.blog-prose iframe,
+.blog-prose video,
+.blog-prose table {
+  max-width: 100% !important;
+  height: auto;
+}
+
 /* Modern font families */
 .font-inter {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;

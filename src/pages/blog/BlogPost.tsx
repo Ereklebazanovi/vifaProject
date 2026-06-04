@@ -110,7 +110,7 @@ const BlogPost = () => {
         }}
       />
 
-      <article className="relative mx-auto max-w-2xl px-5 sm:px-6 pt-32 pb-24 md:pt-36">
+      <article className="blog-article relative mx-auto max-w-2xl px-5 sm:px-6 pt-32 pb-24 md:pt-36">
         <Breadcrumbs items={breadcrumbItems} className="mb-8" />
 
         <div className="mb-4 flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.15em] text-indigo-400">
@@ -164,6 +164,13 @@ const BlogPost = () => {
               className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-bold text-black transition-colors hover:bg-gray-200"
             >
               {ka ? "ვებ დეველოპმენტი" : "Web Development"}
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              to="/services/marketing"
+              className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-indigo-500"
+            >
+              {ka ? "ციფრული მარკეტინგი" : "Digital Marketing"}
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link

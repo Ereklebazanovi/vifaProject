@@ -60,7 +60,7 @@ const BlogIndex = () => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_65%_-5%,rgba(99,102,241,0.06)_0%,transparent_65%)]" />
       </div>
 
-      <section className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 pt-32 pb-20 md:pt-40 md:pb-28">
+      <section className="blog-wrap relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 pt-32 pb-20 md:pt-40 md:pb-28">
         <Breadcrumbs items={breadcrumbItems} className="mb-6" />
 
         <span className="mb-4 inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.25em] text-indigo-400">
