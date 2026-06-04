@@ -39,7 +39,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className = "" }) => {
           to={toPath(parent.url)}
           className="sm:hidden inline-flex items-center gap-1.5 text-xs text-white/45 hover:text-indigo-300 transition-colors duration-200"
         >
-          <svg className="w-3 h-3 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <svg className="block w-3 h-3 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="m15 18-6-6 6-6" />
           </svg>
           {parent.name}
@@ -54,7 +54,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className = "" }) => {
             <li key={item.url} className="flex items-center gap-2">
               {i > 0 && (
                 <svg
-                  className="w-3.5 h-3.5 text-white/25 shrink-0"
+                  className="block w-3.5 h-3.5 text-white/25 shrink-0"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"

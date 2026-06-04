@@ -18,8 +18,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const distDir = join(__dirname, '..', 'dist');
 const PORT = 4178;
 
-// Canonical organic pages only. Ad-landing (/industry/*), the chatbot request
-// form and admin routes are intentionally excluded from indexing.
+// Canonical organic pages. The chatbot request form and admin routes are still
+// intentionally excluded from indexing.
 const ROUTES = [
   '/',
   '/services/web',
@@ -29,6 +29,14 @@ const ROUTES = [
   '/about',
   '/contact',
 ];
+
+// Industry landing pages — now real indexable money-SEO pages (session 3).
+// Keep these arrays in sync with validServices/validSlugs in IndustryLanding.tsx.
+const INDUSTRY_SERVICES = ['web', 'marketing'];
+const INDUSTRY_SLUGS = ['tourism', 'beauty', 'legal-finance', 'retail', 'food'];
+for (const s of INDUSTRY_SERVICES)
+  for (const slug of INDUSTRY_SLUGS)
+    ROUTES.push(`/industry/${s}/${slug}`);
 
 // Network noise to block during prerender (keeps render fast + avoids hangs on
 // long-lived firebase / analytics connections).

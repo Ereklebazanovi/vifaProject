@@ -1,15 +1,33 @@
 //IndudsryLanding.tsx
-import { useParams } from "react-router-dom";
-import { CheckCircle2, CreditCard } from "lucide-react";
+import { Link, useParams } from "react-router-dom";
+import { CheckCircle2, CreditCard, ArrowRight } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { useLanguage } from "../../contexts/LanguageContext";
 import Breadcrumbs, { type Crumb } from "../../components/Breadcrumbs";
+import SEO from "../../components/SEO";
+import FAQSection from "../../components/FAQSection";
 import {
   industryData,
   type BilingualPricingTier,
   type IndustryConfig,
 } from "../../data/industryData";
+
+/** A priced package -> Offer input (GEL). Parses "₾ 700 - 1000" / "₾ 1500 +" / "€799". */
+type OfferInput = { name: string; price?: number; minPrice?: number; maxPrice?: number };
+function tierToOffer(tier: BilingualPricingTier): OfferInput {
+  const nums = (tier.price.match(/\d[\d,]*/g) || []).map((n) => Number(n.replace(/,/g, "")));
+  if (nums.length >= 2) return { name: tier.nameEn, minPrice: nums[0], maxPrice: nums[1] };
+  if (nums.length === 1) return { name: tier.nameEn, price: nums[0] };
+  return { name: tier.nameEn };
+}
+/** Only GEL-priced offers carry numbers; EUR defaults (€) are skipped to avoid mixing currencies. */
+function buildOffers(packages: BilingualPricingTier[]): OfferInput[] {
+  return packages
+    .filter((t) => t.price.includes("₾"))
+    .map(tierToOffer)
+    .filter((o) => o.price != null || o.minPrice != null);
+}
 
 // ─── Custom Icons ─────────────────────────────────────────────────────────────
 
@@ -381,6 +399,125 @@ function MarketingServiceSection({ data, ka, heroBgImage, breadcrumbs }: { data:
   );
 }
 
+// ─── Organic SEO Content (intro + H2 sections + approach + features) ──────────
+
+function IndustryContent({ config, ka }: { config: IndustryConfig; ka: boolean }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0 });
+
+  return (
+    <section className="relative bg-[#060608] py-16 md:py-24">
+      <motion.div
+        ref={ref}
+        className="mx-auto max-w-3xl px-5 lg:px-8"
+        variants={sectionReveal}
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+      >
+        {/* Lead / intro paragraph */}
+        <p className="text-lg leading-relaxed text-gray-300 md:text-xl">
+          {ka ? config.introKa : config.introEn}
+        </p>
+
+        {/* Deep H2 content blocks */}
+        {config.contentSections.map((sec) => (
+          <div key={sec.headingEn} className="mt-12">
+            <h2 className="mb-4 text-2xl font-bold tracking-tight text-white md:text-3xl">
+              {ka ? sec.headingKa : sec.headingEn}
+            </h2>
+            <p className="text-[15px] leading-relaxed text-gray-400 md:text-base">
+              {ka ? sec.bodyKa : sec.bodyEn}
+            </p>
+          </div>
+        ))}
+
+        {/* Approach */}
+        <div className="mt-12">
+          <h2 className="mb-4 text-2xl font-bold tracking-tight text-white md:text-3xl">
+            {ka ? config.approach.headingKa : config.approach.headingEn}
+          </h2>
+          <p className="text-[15px] leading-relaxed text-gray-400 md:text-base">
+            {ka ? config.approach.descKa : config.approach.descEn}
+          </p>
+        </div>
+
+        {/* Features grid */}
+        {config.features.length > 0 && (
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {config.features.map((feat) => {
+              const Icon = feat.icon;
+              return (
+                <div
+                  key={feat.titleEn}
+                  className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 transition-colors hover:border-white/20"
+                >
+                  <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500/10">
+                    <Icon className="h-5 w-5 text-indigo-400" />
+                  </div>
+                  <h3 className="mb-1.5 text-base font-semibold text-white">
+                    {ka ? feat.titleKa : feat.titleEn}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-gray-400">
+                    {ka ? feat.descKa : feat.descEn}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </motion.div>
+    </section>
+  );
+}
+
+// ─── Internal-link cluster (parent service + sibling industries) ──────────────
+
+function RelatedLinks({ service, slug, ka }: { service: string; slug: string; ka: boolean }) {
+  const parentUrl = service === "web" ? "/services/web" : "/services/marketing";
+  const parentLabel =
+    service === "web"
+      ? ka ? "ვებ დეველოპმენტი" : "Web Development"
+      : ka ? "ციფრული მარკეტინგი" : "Digital Marketing";
+
+  const siblings = Object.entries(industryData[service] || {})
+    .filter(([s]) => s !== slug)
+    .map(([s, cfg]) => ({
+      url: `/industry/${service}/${s}`,
+      name: ka ? cfg.nameKa : cfg.nameEn,
+    }));
+
+  return (
+    <section className="relative bg-[#060608] border-t border-white/8 py-16 md:py-20">
+      <div className="mx-auto max-w-5xl px-5 lg:px-8">
+        <h2 className="mb-8 text-xl font-bold tracking-tight text-white md:text-2xl">
+          {ka ? "დაკავშირებული სერვისები" : "Related services"}
+        </h2>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <Link
+            to={parentUrl}
+            className="group flex items-center justify-between rounded-2xl border border-indigo-500/30 bg-indigo-950/20 p-5 transition-colors hover:border-indigo-500/60"
+          >
+            <span className="text-[15px] font-semibold text-white">
+              {parentLabel}
+            </span>
+            <ArrowRight className="h-4 w-4 text-indigo-400 transition-transform group-hover:translate-x-1" />
+          </Link>
+          {siblings.map((s) => (
+            <Link
+              key={s.url}
+              to={s.url}
+              className="group flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.02] p-5 transition-colors hover:border-white/25"
+            >
+              <span className="text-[15px] font-medium text-gray-200">{s.name}</span>
+              <ArrowRight className="h-4 w-4 text-white/30 transition-transform group-hover:translate-x-1" />
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function NotFound() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-6 bg-[#060608] px-5 text-center text-white">
@@ -415,28 +552,57 @@ const IndustryLanding = () => {
     return <NotFound />;
   }
 
+  const base = "https://vifadigital.ge";
   const serviceCrumb: Crumb =
     service === "web"
-      ? { name: ka ? "ვებ დეველოპმენტი" : "Web Development", url: "/services/web" }
-      : { name: ka ? "ციფრული მარკეტინგი" : "Digital Marketing", url: "/services/marketing" };
+      ? { name: ka ? "ვებ დეველოპმენტი" : "Web Development", url: `${base}/services/web` }
+      : { name: ka ? "ციფრული მარკეტინგი" : "Digital Marketing", url: `${base}/services/marketing` };
 
+  // Absolute URLs (matches WebDev.tsx convention) — Breadcrumbs converts to paths for routing.
   const breadcrumbItems: Crumb[] = [
-    { name: ka ? "მთავარი" : "Home", url: "/" },
+    { name: ka ? "მთავარი" : "Home", url: `${base}/` },
     serviceCrumb,
-    { name: ka ? config.nameKa : config.nameEn, url: `/industry/${service}/${slug}` },
+    { name: ka ? config.nameKa : config.nameEn, url: `${base}/industry/${service}/${slug}` },
   ];
+
+  const faqItems = ka ? config.faqKa : config.faqEn;
 
   return (
     <main className="min-h-screen bg-[#060608] text-white selection:bg-indigo-500/30">
+      <SEO
+        title={ka ? config.seoTitleKa : config.seoTitleEn}
+        description={ka ? config.seoDescriptionKa : config.seoDescriptionEn}
+        url={`${base}/industry/${service}/${slug}`}
+        breadcrumbs={breadcrumbItems}
+        serviceSchema={{
+          name: ka ? config.seoTitleKa : config.seoTitleEn,
+          description: ka ? config.seoDescriptionKa : config.seoDescriptionEn,
+          serviceType: service === "web" ? "Web Development" : "Digital Marketing",
+          offers: buildOffers(config.packages),
+        }}
+        faq={faqItems}
+      />
+
       {service === "web" ? (
         <>
           <HeroSection config={config} ka={ka} breadcrumbs={breadcrumbItems} />
-          {/* <FeaturesSection config={config} ka={ka} /> */}
           <PricingSection packages={config.packages} ka={ka} />
         </>
       ) : (
         <MarketingServiceSection data={config.packages[0]} ka={ka} heroBgImage={config.heroBgImage} breadcrumbs={breadcrumbItems} />
       )}
+
+      <IndustryContent config={config} ka={ka} />
+
+      <section className="relative bg-[#060608] py-16 md:py-24">
+        <FAQSection
+          items={faqItems}
+          title={ka ? "ხშირად დასმული კითხვები" : "Frequently Asked Questions"}
+          eyebrow={ka ? "კითხვა-პასუხი" : "FAQ"}
+        />
+      </section>
+
+      <RelatedLinks service={service} slug={slug} ka={ka} />
     </main>
   );
 };

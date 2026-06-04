@@ -36,10 +36,11 @@ per-route meta without executing JavaScript.
    - every other route → `dist/<route>/index.html`
 
 ### `scripts/prerender.js` — key facts
-- **Routes prerendered** (`ROUTES` array): `/`, `/services/web`, `/services/marketing`,
-  `/services/ai-chatbot`, `/inventowms`, `/about`, `/contact` (7 routes).
-- Intentionally NOT prerendered: `/industry/:service/:slug` (paid ad-landings, not for
-  organic), `/services/ai-chatbot/request` (form), admin routes.
+- **Routes prerendered** (`ROUTES` array): 7 canonical (`/`, `/services/web`,
+  `/services/marketing`, `/services/ai-chatbot`, `/inventowms`, `/about`, `/contact`) +
+  10 industry pages (`/industry/{web,marketing}/{tourism,beauty,legal-finance,retail,food}`)
+  = **17 routes** (industry pages added session 3, see §2).
+- Intentionally NOT prerendered: `/services/ai-chatbot/request` (form), admin routes.
 - Blocks analytics/firebase network during render (avoids hangs on long-lived connections).
 - **Analytics script stripping (2026-06-04):** after render, before snapshot, removes any
   GA/FB `<script>` nodes injected by React useEffects. Without this, baked HTML + runtime
@@ -52,7 +53,7 @@ per-route meta without executing JavaScript.
   - Vercel: set env `PRERENDER_CHROMIUM=sparticuz` → uses `@sparticuz/chromium`
     (devDependency) executablePath. Also set `PUPPETEER_SKIP_DOWNLOAD=true` so install
     stays light. **Both Vercel env vars are required together.**
-- **Verified working live on Vercel** (build log showed `7/7 routes OK`, sparticuz Chromium).
+- **Verified working live on Vercel** (build log showed all routes OK, sparticuz Chromium).
 
 ### `index.html` (SPA shell) — deliberately minimal
 Contains ONLY: charset, viewport, theme-color, favicon/apple-touch/manifest,
@@ -205,6 +206,41 @@ canonicals** (every page canonicalized to the homepage). Do not re-add meta here
 - Pushed all breakpoints `lg:` → `xl:` (1280px) to prevent horizontal overflow from wide
   Georgian labels with `tracking-widest` at 1024px.
 
+### SESSION 3 — Industry landing pages → indexable money-SEO pages (2026-06-04)
+
+The headline §5 high-impact item. The 10 `/industry/:service/:slug` pages were paid
+ad-landings with **no `<SEO>` at all** (no per-page meta, excluded from prerender/sitemap).
+Converted all 10 (web + marketing × tourism/beauty/legal-finance/retail/food) into real
+indexable organic pages. URL scheme kept unchanged (ad campaigns rely on it).
+
+#### 3a — `industryData.ts`: content fields on `IndustryConfig`
+- New required fields per niche: `seoTitleKa/En`, `seoDescriptionKa/En`, `introKa/En`,
+  `contentSections: ContentSection[]` (2 deep H2 blocks each), `faqKa/En: FAQItem[]` (3–4 Q&A).
+- New `ContentSection` interface exported. `FAQItem` imported from `FAQSection`.
+- Content authored from the REAL packages/prices already in the file (50/50 split, GEL
+  prices, WMS integration, etc.) so FAQ schema === visible content.
+- Keyword targets: web/food=`რესტორნის საიტის დამზადება`, web/beauty=`სალონის ვებსაიტი`,
+  web/tourism=`სასტუმროს საიტის დამზადება`, web/legal-finance=`იურიდიული კომპანიის საიტი`,
+  web/retail=`ონლაინ მაღაზიის დამზადება`; marketing niches mirror with `მარკეტინგი`/`რეკლამა`.
+
+#### 3b — `IndustryLanding.tsx`: SEO + content render
+- Added `<SEO>` with per-niche `title`/`description`, `serviceSchema` (name/description +
+  `offers` built from `config.packages`), 3-level `breadcrumbs`, and `faq`. No `noindex`
+  existed; `SEO.tsx` emits `index, follow` by default → adding `<SEO>` makes them indexable.
+- `breadcrumbItems` switched to **absolute URLs** (`https://vifadigital.ge/...`) to match
+  `WebDev.tsx` convention; visible `Breadcrumbs` still renders via `toPath()`.
+- Offers helper `buildOffers()` parses GEL price strings (`"₾ 700 - 1000"` → min/max,
+  `"₾ 1500 +"` → price); EUR (`€`) defaults skipped to avoid currency mixing.
+- New `IndustryContent` component renders intro (lead) + `contentSections` (H2) + the
+  previously-unused `approach` + `features` grid (both web and marketing variants now get it).
+- New `RelatedLinks` component: internal-link cluster → parent service + 4 sibling industries.
+- Reuses `FAQSection` (visible accordion) with the same `faq` items passed to schema.
+
+#### 3c — prerender + sitemap
+- `scripts/prerender.js`: `INDUSTRY_SERVICES × INDUSTRY_SLUGS` loop pushes the 10 routes →
+  **17 total** (`17/17 routes OK`). Arrays must stay in sync with `validServices`/`validSlugs`.
+- `public/sitemap.xml`: 10 industry URLs added (`changefreq monthly`, `priority 0.8`).
+
 ---
 
 ## 3. CLEANUPS / REMOVALS
@@ -251,13 +287,10 @@ canonicals** (every page canonicalized to the homepage). Do not re-add meta here
 
 ### 🔴 High impact
 
-- **Make `/industry/:service/:slug` indexable** — currently noindex ad-landings excluded
-  from prerender/sitemap. Converting them to real content pages (500+ words, H1/H2, FAQ
-  block, internal links) with dedicated keywords like "რესტორნის საიტის დამზადება",
-  "სასტუმროს ვებსაიტი" etc. would be the **biggest organic traffic unlock** remaining.
-  Required steps: (1) add routes to `ROUTES` in prerender.js, (2) add to sitemap.xml,
-  (3) remove noindex if present, (4) add `BreadcrumbList` schema (3-level), (5) beef up
-  content beyond the current pricing-only layout.
+- ~~**Make `/industry/:service/:slug` indexable**~~ **DONE (2026-06-04, session 3).** All 10
+  industry pages (2 services × 5 niches) are now real indexable content pages with keyword-rich
+  meta, 500+ words of Georgian content (H1/H2), `Service`+`BreadcrumbList`+`FAQPage` schema,
+  visible FAQ, and an internal-link cluster. See SESSION 3 below.
 
 - **Per-page OG images (1200×630):** currently all pages use the logo `viffa.png` as
   `og:image`. Design real branded social cards per service → much better CTR on shares.
@@ -307,13 +340,14 @@ Content / authority (the real ranking lever):
 | `src/offeredServices/Marketing.tsx` | `/services/marketing` — bilingual FAQ, serviceSchema + offers, breadcrumbs |
 | `src/pages/AIChatbot.tsx` | `/services/ai-chatbot` — existing FAQ → `faqForSchema`, serviceSchema + offers, breadcrumbs |
 | `src/offeredServices/InventoLandingPage.tsx` | `/inventowms` — bilingual FAQ, softwareApplication + offers, breadcrumbs |
-| `src/pages/landing/IndustryLanding.tsx` | `/industry/:service/:slug` — 3-level visible breadcrumbs, noindex ad-landing |
+| `src/pages/landing/IndustryLanding.tsx` | `/industry/:service/:slug` — indexable money-SEO pages: `<SEO>` (serviceSchema+offers+faq+3-level breadcrumbs), `IndustryContent`, `RelatedLinks` |
+| `src/data/industryData.ts` | 10 niches × `IndustryConfig` — incl. SEO content fields (`seoTitle/Description`, `intro`, `contentSections`, `faq`) per niche |
 | `src/config/siteConfig.ts` | phone, email, social, location |
 | `src/utils/facebookPixel.ts` | FB Pixel manager — all fbq calls guarded with typeof check |
 
 **Verification commands:**
 ```bash
-npm run build            # tsc + vite + prerender (must end "7/7 routes OK")
+npm run build            # tsc + vite + prerender (must end "17/17 routes OK")
 
 # Inspect JSON-LD @graph types on a prerendered page:
 node -e "const h=require('fs').readFileSync('dist/services/web/index.html','utf8');const m=h.match(/application\/ld\+json[^>]*>(.*?)<\/script>/s);console.log(JSON.parse(m[1])['@graph'].map(n=>n['@type']))"
@@ -327,6 +361,7 @@ node -e "const fs=require('fs');for(const r of ['services/web','services/marketi
 
 ---
 
-_Last updated: 2026-06-04. Status: STEP 1–6 complete + Session 2 complete (canonical fix,
-Offer schema, SoftwareApplication, analytics dedup, breadcrumbs, navbar). All deployed to
-Vercel. Pending = user manual tasks (§4) + blog rebuild + §5 high-impact items._
+_Last updated: 2026-06-04. Status: STEP 1–6 + Session 2 + Session 3 complete (Session 3 =
+10 industry landing pages converted to indexable money-SEO pages). All committed locally;
+deploy to Vercel pending. Pending = user manual tasks (§4: GSC submit new industry URLs +
+sitemap re-submit) + blog rebuild + remaining §5 items (per-page OG images)._
