@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 import {
@@ -8,6 +8,7 @@ import {
   getAllPosts,
   slugify,
 } from "../../service/blogService";
+import { uploadToCloudinary } from "../../service/cloudinary";
 import type { BlogPost, BlogStatus } from "../../types/blog";
 
 // Optional obscurity gate (NOT real auth). Leave "" to disable. The route itself is unlinked.
@@ -28,16 +29,6 @@ const emptyForm = {
   publishedAt: "",
 };
 
-const quillModules = {
-  toolbar: [
-    [{ header: [2, 3, false] }],
-    ["bold", "italic", "underline", "blockquote"],
-    [{ list: "ordered" }, { list: "bullet" }],
-    ["link", "image"],
-    ["clean"],
-  ],
-};
-
 const BlogEditor = () => {
   const [authed, setAuthed] = useState(EDITOR_PASS === "");
   const [passInput, setPassInput] = useState("");
@@ -45,9 +36,70 @@ const BlogEditor = () => {
   const [form, setForm] = useState({ ...emptyForm });
   const [slugTouched, setSlugTouched] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [uploadingCover, setUploadingCover] = useState(false);
   const [msg, setMsg] = useState("");
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const quillRef = useRef<any>(null);
 
   const editing = Boolean(form.id);
+
+  // Custom quill image button → upload to Cloudinary (NOT base64) and insert the URL.
+  const imageHandler = useCallback(() => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
+    input.onchange = async () => {
+      const file = input.files?.[0];
+      if (!file) return;
+      const editor = quillRef.current?.getEditor?.();
+      const range = editor?.getSelection?.(true);
+      const at = range ? range.index : 0;
+      try {
+        editor?.insertText?.(at, "  ⏳ ");
+        const url = await uploadToCloudinary(file);
+        editor?.deleteText?.(at, 4);
+        editor?.insertEmbed?.(at, "image", url);
+        editor?.setSelection?.(at + 1, 0);
+      } catch (e) {
+        console.error(e);
+        editor?.deleteText?.(at, 4);
+        alert("ფოტოს ატვირთვა ვერ მოხერხდა");
+      }
+    };
+    input.click();
+  }, []);
+
+  const quillModules = useMemo(
+    () => ({
+      toolbar: {
+        container: [
+          [{ header: [2, 3, false] }],
+          ["bold", "italic", "underline", "blockquote"],
+          [{ list: "ordered" }, { list: "bullet" }],
+          ["link", "image"],
+          ["clean"],
+        ],
+        handlers: { image: imageHandler },
+      },
+    }),
+    [imageHandler]
+  );
+
+  const onCoverFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadingCover(true);
+    setMsg("");
+    try {
+      const url = await uploadToCloudinary(file);
+      setForm((f) => ({ ...f, coverImage: url }));
+    } catch (err) {
+      console.error(err);
+      setMsg("✗ cover ფოტოს ატვირთვა ვერ მოხერხდა");
+    } finally {
+      setUploadingCover(false);
+    }
+  };
 
   const refresh = () => getAllPosts().then(setPosts).catch((e) => console.error(e));
 
@@ -214,13 +266,27 @@ const BlogEditor = () => {
             <textarea className={field} rows={2} value={form.description} onChange={(e) => set("description", e.target.value)} />
           </div>
           <div>
-            <label className="mb-1 block text-xs text-slate-400">cover image URL (1200×630)</label>
-            <input className={field} value={form.coverImage} onChange={(e) => set("coverImage", e.target.value)} placeholder="https://…" />
+            <label className="mb-1 block text-xs text-slate-400">cover image (1200×630)</label>
+            <div className="flex flex-wrap items-center gap-3">
+              <label className="cursor-pointer rounded-lg bg-slate-700 px-4 py-2 text-sm font-medium hover:bg-slate-600">
+                {uploadingCover ? "იტვირთება…" : "ფაილის ატვირთვა"}
+                <input type="file" accept="image/*" className="hidden" onChange={onCoverFile} disabled={uploadingCover} />
+              </label>
+              {form.coverImage && (
+                <img src={form.coverImage} alt="" className="h-12 w-20 rounded-md object-cover" />
+              )}
+            </div>
+            <input
+              className={`${field} mt-2`}
+              value={form.coverImage}
+              onChange={(e) => set("coverImage", e.target.value)}
+              placeholder="ან ჩასვი URL: https://…"
+            />
           </div>
           <div>
             <label className="mb-1 block text-xs text-slate-400">ტექსტი</label>
             <div className="rounded-lg bg-white text-black">
-              <ReactQuill theme="snow" modules={quillModules} value={form.contentHtml} onChange={(v) => set("contentHtml", v)} />
+              <ReactQuill ref={quillRef} theme="snow" modules={quillModules} value={form.contentHtml} onChange={(v) => set("contentHtml", v)} />
             </div>
           </div>
 

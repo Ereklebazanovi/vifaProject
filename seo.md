@@ -278,6 +278,14 @@ no auth) — and is wired into the SAME Puppeteer prerender so posts ship as sta
   posts only). Verified homepage references neither → no site-wide CWV regression from the editor.
 - Footer: added a `/blog` quick link (crawlable entry point).
 
+#### 4f — Blog images via Cloudinary (unsigned upload)
+- `src/service/cloudinary.ts` — `uploadToCloudinary(file)` → unsigned POST to Cloudinary
+  (`cloud_name: dnjsdlkp9`, preset `vifaWeb`), returns hosted `secure_url`. cloud name + preset
+  are public by design. (Firebase Storage was avoided — it needs the Blaze billing plan.)
+- Editor: cover image file-picker + a **custom quill image handler** that uploads to Cloudinary
+  and inserts the URL — replacing quill's default base64 embed (which would bloat the Firestore
+  doc past the 1 MB limit). Cloudinary also auto-optimizes/serves webp → better image SEO + CWV.
+
 #### 4e — Tradeoff + security (by design, user-approved)
 - A new post is live immediately (client-rendered) but gets **static SEO HTML only after the
   next deploy** (rebuild). "Rebuild site" button or Vercel Redeploy triggers it.
@@ -332,7 +340,7 @@ no auth) — and is wired into the SAME Puppeteer prerender so posts ship as sta
    submit the updated `sitemap.xml` in GSC and Request-Index the new `/blog/<slug>` URLs.
 
 ### Code work pending
-- Blog image upload to Firebase Storage (v1 uses image URLs). Per-post OG images.
+- Per-post OG images polish. (Blog image upload = DONE via Cloudinary unsigned, see 4f.)
 
 ---
 
