@@ -110,7 +110,7 @@ const BlogPost = () => {
         }}
       />
 
-      <article className="blog-article relative mx-auto max-w-2xl px-5 sm:px-6 pt-32 pb-24 md:pt-36">
+      <article className="blog-article relative mx-auto max-w-2xl px-5 sm:px-6 pt-24 pb-24 md:pt-28">
         <Breadcrumbs items={breadcrumbItems} className="mb-8" />
 
         <div className="mb-4 flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.15em] text-indigo-400">
