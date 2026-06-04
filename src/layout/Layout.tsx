@@ -88,6 +88,14 @@ const Layout: React.FC = () => {
     }
   }, [location.pathname]);
 
+  // Scroll to top on route change — in an SPA the path changes but the scroll
+  // position is otherwise kept, leaving the new page frozen mid-scroll (e.g.
+  // clicking a "Related services" link at the bottom of an industry page).
+  // Hash anchors (#pricing) don't change pathname, so they're unaffected.
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   // Also stop manual navigation state
   useEffect(() => {
     stopNavigation();

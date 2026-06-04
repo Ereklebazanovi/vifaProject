@@ -22,6 +22,14 @@ interface IndustryItem {
 
 const industries: IndustryItem[] = [
   {
+    nameKa: "E-commerce & საცალო ვაჭრობა",
+    nameEn: "E-commerce & Retail",
+    slug: "retail",
+    icon: ShoppingCart,
+    iconColor: "text-indigo-600/60",
+    iconHoverColor: "group-hover:text-indigo-400/80",
+  },
+  {
     nameKa: "იურიდიული და ბუღალტერიის სექტორი",
     nameEn: "Legal & Finance",
     slug: "legal-finance",
@@ -45,14 +53,7 @@ const industries: IndustryItem[] = [
     iconColor: "text-rose-700/60",
     iconHoverColor: "group-hover:text-rose-400/80",
   },
-  {
-    nameKa: "E-commerce & საცალო ვაჭრობა",
-    nameEn: "E-commerce & Retail",
-    slug: "retail",
-    icon: ShoppingCart,
-    iconColor: "text-indigo-600/60",
-    iconHoverColor: "group-hover:text-indigo-400/80",
-  },
+  
   {
     nameKa: "რესტორნები და კვების ინდუსტრია",
     nameEn: "Restaurants & Food Service",

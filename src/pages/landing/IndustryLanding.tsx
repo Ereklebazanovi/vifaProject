@@ -406,7 +406,7 @@ function IndustryContent({ config, ka }: { config: IndustryConfig; ka: boolean }
   const inView = useInView(ref, { once: true, amount: 0 });
 
   return (
-    <section className="relative bg-[#060608] py-16 md:py-24">
+    <section className="relative bg-[#060608]">
       <motion.div
         ref={ref}
         className="mx-auto max-w-3xl px-5 lg:px-8"

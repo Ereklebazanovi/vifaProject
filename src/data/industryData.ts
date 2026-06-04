@@ -448,7 +448,7 @@ export const ecommerceWebPackages: BilingualPricingTier[] = [
   {
     nameKa: "სრული Retail ეკოსისტემა",
     nameEn: "Full Retail Ecosystem",
-    price: "₾ 3500+",
+    price: "₾ 2500+",
     periodKa: "პროექტი",
     periodEn: "project",
     descKa: "პლატფორმა + CRM და საწყობის მართვა (WMS). ტექნოლოგიური ინფრასტრუქტურა დიდი გაყიდვებისთვის.",
@@ -771,7 +771,7 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
       seoDescriptionEn:
         "Beauty salon & aesthetics center website development with online booking, Before/After gallery and 0% commission. From 700₾. Free consultation.",
       introKa:
-        "სილამაზის სალონის ვებსაიტი დღეს უკვე აღარ არის ფუფუნება — ეს თქვენი ციფრული მიმღებია, რომელიც 24/7 მუშაობს. VIFA Digital ქმნის ესთეტიკის ცენტრებისა და სალონების საიტებს, რომლებიც კლიენტს ჩაწერის საშუალებას აძლევს პირდაპირ თქვენს გვერდზე, ინსტაგრამში მიმოწერის ლოდინის გარეშე. შედეგი — ნაკლები გაცდენილი ჯავშანი და მეტი დაკავებული სავარძელი.",
+        "სილამაზის სალონის ვებსაიტი დღეს უკვე აღარ არის ფუფუნება, ეს თქვენი ციფრული მიმღებია, რომელიც 24/7 მუშაობს. VIFA Digital ქმნის ესთეტიკის ცენტრებისა და სალონების საიტებს, რომლებიც კლიენტს ჩაწერის საშუალებას აძლევს პირდაპირ თქვენს გვერდზე, ინსტაგრამში მიმოწერის ლოდინის გარეშე. შედეგი - ნაკლები გაცდენილი ჯავშანი და მეტი დაკავებული სავარძელი.",
       introEn:
         "A beauty salon website is no longer a luxury — it is your digital front desk working 24/7. VIFA Digital builds websites for aesthetics centers and salons that let clients book directly on your page, without waiting in Instagram DMs. The result: fewer missed bookings and more filled chairs.",
       contentSections: [
@@ -779,7 +779,7 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
           headingKa: "რას მოიცავს სალონის ვებსაიტის დამზადება",
           headingEn: "What beauty salon website development includes",
           bodyKa:
-            "თითოეული პროექტი იწყება პრემიუმ, მობილურზე მორგებული დიზაინით, რადგან თქვენი კლიენტების უმეტესობა საიტს ტელეფონიდან ნახულობს. ვამზადებთ სერვისებისა და ფასების სრულ კატალოგს, Before/After გალერეას, რომელიც ნდობას ზრდის, და მრავალენოვან ინტერფეისს უცხოელი კლიენტებისთვის. პრემიუმ პაკეტში ემატება ონლაინ ჩაწერის სისტემა 0% საკომისიოთი — კლიენტი თავად ირჩევს დროსა და სპეციალისტს, თქვენ კი ჯავშნებს მართავთ ადმინ პანელიდან.",
+            "თითოეული პროექტი იწყება პრემიუმ, მობილურზე მორგებული დიზაინით, რადგან თქვენი კლიენტების უმეტესობა საიტს ტელეფონიდან ნახულობს. ვამზადებთ სერვისებისა და ფასების სრულ კატალოგს, Before/After გალერეას და მრავალენოვან ინტერფეისს უცხოელი კლიენტებისთვის. პრემიუმ პაკეტში ემატება ონლაინ ჩაწერის სისტემა 0% საკომისიოთი — კლიენტი თავად ირჩევს დროსა და სპეციალისტს, თქვენ კი ჯავშნებს მართავთ ადმინ პანელიდან.",
           bodyEn:
             "Every project starts with a premium, mobile-first design, because most of your clients view the site from a phone. We build a full catalog of services and prices, a trust-building Before/After gallery, and a multilingual interface for foreign clients. The premium package adds an online booking system with 0% commission — clients pick their time and specialist, while you manage everything from an admin panel.",
         },
@@ -787,7 +787,7 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
           headingKa: "რატომ სჭირდება სილამაზის ბიზნესს საკუთარი საიტი",
           headingEn: "Why a beauty business needs its own website",
           bodyKa:
-            "სოციალური ქსელები შესანიშნავია ხილვადობისთვის, მაგრამ ისინი თქვენ არ გეკუთვნით — ალგორითმი წყვეტს ვინ დაგინახავთ. საკუთარი ვებსაიტი თქვენი აქტივია: ის უმჯობესებს Google-ში ძიებად პოზიციებს, აგროვებს კლიენტების ბაზას და ანაცვლებს ძვირადღირებულ შუამავალ პლატფორმებს. სრული ეკოსისტემის პაკეტში დამატებით შესაძლებელია მოვლის პროდუქციის ონლაინ გაყიდვაც, საბანკო ბარათით გადახდის ინტეგრაციით.",
+            "სოციალური ქსელები შესანიშნავია ხილვადობისთვის, მაგრამ ისინი თქვენ არ გეკუთვნით — ალგორითმი წყვეტს ვინ დაგინახავთ. საკუთარი ვებსაიტი თქვენი აქტივია: ის უმჯობესებს Google-ში ძიებად პოზიციებს, აგროვებს კლიენტების ბაზას და ანაცვლებს ძვირადღირებულ შუამავალ პლატფორმებს. სრული ეკოსისტემის პაკეტში დამატებით შესაძლებელია თავის მოვლის პროდუქციის ონლაინ გაყიდვაც, საბანკო ბარათით გადახდის ინტეგრაციით.",
           bodyEn:
             "Social media is great for visibility, but it doesn't belong to you — an algorithm decides who sees you. Your own website is an asset: it improves your Google rankings, collects a client database, and replaces costly third-party platforms. The Full Ecosystem package can also add online sales of care products with bank-card payment integration.",
         },
@@ -899,7 +899,7 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
       seoDescriptionEn:
         "Hotel website development with a calendar booking form, multilingual interface and SEO. Get direct bookings without commissions. From 700₾.",
       introKa:
-        "სასტუმროს საიტის დამზადება საუკეთესო გზაა, რომ Booking.com-ისა და Airbnb-ის მაღალ საკომისიოს გადააღწიოთ და სტუმარი პირდაპირ თქვენთან დაჯავშნოს. VIFA Digital ქმნის სასტუმროებისა და ტურისტული ობიექტების ვებსაიტებს, რომლებიც თქვენს სივრცეს საუკეთესო კუთხით წარმოაჩენს და ჯავშნის მოთხოვნას პირდაპირ მეილზე გიგზავნით.",
+        "სასტუმროს საიტის დამზადება საუკეთესო გზაა, რომ Booking.com-ისა და Airbnb-ის მაღალ საკომისიოს თავი დააღწიოთ და სტუმარი პირდაპირ თქვენი ვებსაიტიდან მიიღოთ. VIFA Digital ქმნის სასტუმროებისა და ტურისტული ობიექტების ვებსაიტებს, რომლებიც თქვენს სივრცეს საუკეთესო კუთხით წარმოაჩენს და ჯავშნის მოთხოვნებს პირდაპირ თქვენთან აგზავნის.",
       introEn:
         "Hotel website development is the best way to escape the high commissions of Booking.com and Airbnb and let guests book directly with you. VIFA Digital builds websites for hotels and tourism venues that showcase your space from its best angle and send booking requests straight to your inbox.",
       contentSections: [
@@ -934,7 +934,7 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
         {
           question: "საიტი უცხოურ ენებზე იქნება ხელმისაწვდომი?",
           answer:
-            "დიახ, ვამზადებთ მრავალენოვან ინტერფეისს, რომელიც სპეციალურად უცხოელ სტუმრებზეა მორგებული, რათა მათ მარტივად დაგიკავშირდნენ და დაჯავშნონ.",
+            "დიახ, ვამზადებთ მრავალენოვან ინტერფეისს, რომელიც სპეციალურად უცხოელ სტუმრებზეა მორგებული, რათა ისინი მარტივად დაგიკავშირდნენ.",
         },
         {
           question: "რამდენ ხანში მზადდება სასტუმროს ვებსაიტი?",
@@ -1026,7 +1026,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
       seoDescriptionEn:
         "Corporate website development for legal & finance firms — private client portal, secure document exchange and CMS. From 700₾. Free consultation.",
       introKa:
-        "იურიდიულ და საფინანსო სფეროში მთავარი ვალუტა ნდობაა, და ის ციფრული პირველი შთაბეჭდილებიდან იწყება. იურიდიული კომპანიის საიტის დამზადება VIFA Digital-თან ნიშნავს პრემიუმ, სოლიდურ ვებსაიტს, რომელიც ხაზს უსვამს თქვენს სტატუსს, წარმოაჩენს გუნდსა და სერვისებს და კლიენტს გაძლევთ უსაფრთხო კომუნიკაციის არხს.",
+        "იურიდიულ და საფინანსო სფეროში მთავარი ვალუტა ნდობაა, და ის ციფრული პირველი შთაბეჭდილებიდან იწყება. იურიდიული კომპანიის საიტის დამზადება VIFA Digital-თან ნიშნავს პრემიუმ, სოლიდურ ვებსაიტს, რომელიც ხაზს უსვამს თქვენს სტატუსს, წარმოაჩენს გუნდს, სერვისებს და პარტნიორებს, რომელიც გაძლევთ უსაფრთხო კომუნიკაციის არხს.",
       introEn:
         "In the legal and finance sector trust is the main currency, and it begins with the first digital impression. Law firm website development with VIFA Digital means a premium, solid website that highlights your status, presents your team and services, and gives clients a secure communication channel.",
       contentSections: [
@@ -1153,7 +1153,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
       seoDescriptionEn:
         "Online store development with Georgian bank payments, warehouse management (WMS) and automated courier labels. eCommerce sites from 700₾.",
       introKa:
-        "ონლაინ მაღაზიის დამზადება დღეს ნიშნავს არა მხოლოდ პროდუქტების კატალოგს, არამედ სრულ ციფრულ ეკოსისტემას — გაყიდვებიდან ლოგისტიკამდე. VIFA Digital ქმნის eCommerce საიტებს ქართული ბანკების გადახდის სისტემებით, საწყობის მართვითა (WMS) და კურიერის ინტეგრაციით, რათა მაღაზია არა მხოლოდ ლამაზი, არამედ მომგებიანი იყოს.",
+        "ონლაინ მაღაზიის დამზადება დღეს ნიშნავს არა მხოლოდ პროდუქტების კატალოგს, არამედ სრულ ციფრულ ეკოსისტემას: გაყიდვებიდან - ლოგისტიკამდე. VIFA Digital ქმნის eCommerce საიტებს ქართული ბანკების გადახდის სისტემებით, საწყობის მართვითა (WMS) და კურიერის ინტეგრაციით, რათა მაღაზია არა მხოლოდ ლამაზი, არამედ მომგებიანი იყოს.",
       introEn:
         "Online store development today means not just a product catalog but a full digital ecosystem — from sales to logistics. VIFA Digital builds eCommerce sites with Georgian bank payment systems, warehouse management (WMS) and courier integration, so your store is not just beautiful but profitable.",
       contentSections: [
@@ -1161,12 +1161,12 @@ heroSublineKa: "თანამედროვე პლატფორმებ
           headingKa: "ციფრული შოურუმიდან სრულ ინტერნეტ მაღაზიამდე",
           headingEn: "From digital showroom to full online store",
           bodyKa:
-            "თუ სოციალურ ქსელებში ყიდით, „ციფრული შოურუმის“ პაკეტი იდეალური დასაწყისია — პრემიუმ კატალოგი ვარიაციებით, კალათა და ავტომატური მეილ-შეტყობინებები. „ავტომატიზებული E-commerce“ ამატებს ონლაინ გადახდებს ნებისმიერი Visa/Mastercard ბარათით, შეკვეთების სრული ციკლის მართვასა და გაყიდვების ანალიტიკას. თითოეული საიტი ულტრა-სწრაფია მობილურზე, რადგან მყიდველების უმეტესობა ტელეფონს იყენებს.",
+            "თუ სოციალურ ქსელებში ყიდით, „ციფრული შოურუმის“ პაკეტი იდეალური დასაწყისია - პრემიუმ კატალოგი ვარიაციებით, კალათა და ავტომატური მეილ-შეტყობინებები. „ავტომატიზებული E-commerce“ მოიცავს ონლაინ გადახდებს ნებისმიერი Visa/Mastercard ბარათით, შეკვეთების სრული ციკლის მართვასა და გაყიდვების ანალიტიკას. თითოეული საიტი ულტრა-სწრაფია მობილურზე, რადგან მყიდველების უმეტესობა ტელეფონს იყენებს.",
           bodyEn:
             "If you sell on social media, the Digital Showroom package is the ideal start — a premium catalog with variations, a cart and automated email notifications. The Automated E-commerce package adds online payments with any Visa/Mastercard, full-cycle order management and sales analytics. Every site is ultra-fast on mobile, because most buyers use a phone.",
         },
         {
-          headingKa: "WMS ინტეგრაცია — საწყობი და ლოგისტიკა ერთ სივრცეში",
+          headingKa: "WMS ინტეგრაცია - საწყობი და ლოგისტიკა ერთ სივრცეში",
           headingEn: "WMS integration — warehouse and logistics in one place",
           bodyKa:
             "სრული Retail ეკოსისტემის პაკეტი აერთიანებს მაღაზიას VIFA-ს საწყობის მართვის სისტემასთან (WMS): მარაგების ავტომატური სინქრონიზაცია, კურიერის ინვოისებისა და PDF ლეიბლების გენერაცია, CRM-ით მომხმარებლების სეგმენტაცია და დეტალური Excel რეპორტები. ეს ის ინფრასტრუქტურაა, რომელიც დიდი მოცულობის გაყიდვებს ხელით მართვის ქაოსის გარეშე უძლებს.",
@@ -1178,7 +1178,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
         {
           question: "რა ღირს ონლაინ მაღაზიის დამზადება?",
           answer:
-            "ციფრული შოურუმი 700₾-დან 900₾-მდეა, ავტომატიზებული E-commerce ონლაინ გადახდებით 1000₾-დან 1500₾-მდე, ხოლო WMS-ით ინტეგრირებული სრული Retail ეკოსისტემა 3500₾-დან. კონსულტაცია უფასოა და მოქმედებს 50/50 გადახდა.",
+            "ციფრული შოურუმი 700₾-დან 900₾-მდეა, ავტომატიზებული E-commerce ონლაინ გადახდებით 1000₾-დან 1500₾-მდე, ხოლო WMS-ით ინტეგრირებული სრული Retail ეკოსისტემა 2500₾-დან. კონსულტაცია უფასოა და მოქმედებს 50/50 გადახდა.",
         },
         {
           question: "შესაძლებელია ქართული ბანკებით გადახდის ინტეგრაცია?",
@@ -1279,12 +1279,12 @@ heroSublineKa: "თანამედროვე პლატფორმებ
       seoDescriptionEn:
         "Restaurant website development with a branded digital menu, table reservation system and multilingual interface. Restaurant sites from 600₾.",
       introKa:
-        "რესტორნის საიტის დამზადება საშუალებას გაძლევთ ჩაანაცვლოთ შაბლონური და ძვირადღირებული პლატფორმები თქვენი საკუთარი ციფრული სივრცით. VIFA Digital ქმნის რესტორნებისა და კაფეების ვებსაიტებს ბრენდირებული ციფრული მენიუთი, მაგიდის ჯავშნისა და ბანკეტების მართვის სისტემით — ყველაფერი თქვენი ბრენდის სტილში, მესამე მხარის აპლიკაციების გარეშე.",
+        "რესტორნის საიტის დამზადება საშუალებას გაძლევთ ჩაანაცვლოთ შაბლონური და ძვირადღირებული პლატფორმები თქვენი საკუთარი ციფრული სივრცით. VIFA Digital ქმნის რესტორნებისა და კაფეების ვებსაიტებს ბრენდირებული ციფრული მენიუთი, მაგიდის ჯავშნისა და ბანკეტების მართვის სისტემით - ყველაფერი თქვენი ბრენდის სტილში, მესამე მხარის აპლიკაციების გარეშე.",
       introEn:
         "Restaurant website development lets you replace generic, expensive platforms with your own digital space. VIFA Digital builds websites for restaurants and cafes with a branded digital menu and a table reservation and banquet management system — all in your brand's style, free of third-party apps.",
       contentSections: [
         {
-          headingKa: "ბრენდირებული ციფრული მენიუ, რომელიც გყვართ",
+          headingKa: "ბრენდირებული ციფრული მენიუ",
           headingEn: "A branded digital menu that sells",
           bodyKa:
             "პრემიუმ ვებ-მენიუ წარმოაჩენს კერძებს მაღალი ხარისხის ფოტოებითა და აღწერებით, მრავალენოვან ინტერფეისს ტურისტებისთვის და სრულ მართვის პანელს, საიდანაც ფასებსა და მარაგებს თავად მართავთ. QR-მენიუსგან განსხვავებით, ეს თქვენი დამოუკიდებელი, სწრაფი და SEO-ზე ოპტიმიზებული საიტია, რომელიც Google-ში ჩანს და სოციალურ ქსელებს უკავშირდება.",
@@ -1295,7 +1295,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
           headingKa: "მაგიდის ჯავშნა და ბანკეტების ავტომატიზაცია",
           headingEn: "Table reservations and banquet automation",
           bodyKa:
-            "რესტორნის ვებ-პლატფორმის პაკეტში საიტს ემატება მაგიდის ავტომატიზებული ჯავშნის სისტემა კალენდრით, კორპორატიული საღამოებისა და ბანკეტების მოთხოვნის ფორმა და ავტომატური მეილ-ნოტიფიკაციები ადმინისტრაციასთან. ეს ამცირებს მესენჯერში ლოდინისა და ხელით მართვის ქაოსს და ჯავშნებს ერთ სისტემაში კრებავს.",
+            "რესტორნის ვებ-პლატფორმის პაკეტში საიტს ემატება მაგიდის ავტომატიზებული ჯავშნის სისტემა კალენდრით, კორპორატიული საღამოებისა და ბანკეტების მოთხოვნის ფორმა და ავტომატური მეილ-ნოტიფიკაციები ადმინისტრაციასთან. ეს ამცირებს მესენჯერში ლოდინისა და ხელით მართვის ქაოსს და ჯავშნებს ერთ სისტემაში აქცევს.",
           bodyEn:
             "In the Restaurant Web Platform package the site gains an automated table reservation system with a calendar, a corporate events and banquet inquiry form, and automated email notifications to the admin. This reduces the chaos of waiting in messengers and manual handling, gathering all bookings in one system.",
         },
