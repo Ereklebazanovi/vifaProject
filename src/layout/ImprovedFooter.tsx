@@ -77,6 +77,7 @@ import {
   FaHome,
   FaUser,
   FaProjectDiagram,
+  FaBlog,
 } from "react-icons/fa";
 
 const Footer: React.FC = () => {
@@ -145,6 +146,11 @@ const Footer: React.FC = () => {
       name: t("footer.quickLinks.about"),
       href: "/about",
       icon: <FaUser className="w-4 h-4" />,
+    },
+    {
+      name: currentLanguage === "ka" ? "ბლოგი" : "Blog",
+      href: "/blog",
+      icon: <FaBlog className="w-4 h-4" />,
     },
     {
       name: currentLanguage === "ka" ? "პროექტის დაწყება" : "Start Project",

@@ -19,6 +19,9 @@ const IndustryLanding = lazy(() => import("./pages/landing/IndustryLanding"));
 const InventoLandingPage = lazy(() => import("./offeredServices/InventoLandingPage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
+const BlogIndex = lazy(() => import("./pages/blog/BlogIndex"));
+const BlogPost = lazy(() => import("./pages/blog/BlogPost"));
+const BlogEditor = lazy(() => import("./pages/blog/BlogEditor"));
 
 const App = () => {
   return (
@@ -60,11 +63,18 @@ const App = () => {
                   <Route path="about" element={<AboutPage />} />
                   <Route path="inventowms" element={<InventoLandingPage />} />
 
+                  {/* Blog (organic content engine) */}
+                  <Route path="blog" element={<BlogIndex />} />
+                  <Route path="blog/:slug" element={<BlogPost />} />
+
                   {/* Dynamic Ad-Landing Flow */}
                   <Route path="industry/:service/:slug" element={<IndustryLanding />} />
 
                   <Route path="*" element={<NotFound />} />
                 </Route>
+
+                {/* Hidden blog editor — unlinked, no auth. Standalone (no navbar/footer). */}
+                <Route path="/vifa-studio" element={<BlogEditor />} />
 
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>

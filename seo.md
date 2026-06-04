@@ -39,8 +39,10 @@ per-route meta without executing JavaScript.
 - **Routes prerendered** (`ROUTES` array): 7 canonical (`/`, `/services/web`,
   `/services/marketing`, `/services/ai-chatbot`, `/inventowms`, `/about`, `/contact`) +
   10 industry pages (`/industry/{web,marketing}/{tourism,beauty,legal-finance,retail,food}`)
-  = **17 routes** (industry pages added session 3, see §2).
-- Intentionally NOT prerendered: `/services/ai-chatbot/request` (form), admin routes.
+  = **17 routes** (industry pages added session 3, see §2) + `/blog` and every published
+  `/blog/<slug>` fetched from Firestore at build (session 4). Total varies with post count.
+- Intentionally NOT prerendered: `/services/ai-chatbot/request` (form), `/vifa-studio` (hidden
+  editor), draft posts, admin routes.
 - Blocks analytics/firebase network during render (avoids hangs on long-lived connections).
 - **Analytics script stripping (2026-06-04):** after render, before snapshot, removes any
   GA/FB `<script>` nodes injected by React useEffects. Without this, baked HTML + runtime
@@ -241,6 +243,47 @@ indexable organic pages. URL scheme kept unchanged (ad campaigns rely on it).
   **17 total** (`17/17 routes OK`). Arrays must stay in sync with `validServices`/`validSlugs`.
 - `public/sitemap.xml`: 10 industry URLs added (`changefreq monthly`, `priority 0.8`).
 
+### SESSION 4 — Blog rebuilt: Firestore CMS + hidden editor + build-time prerender (2026-06-04)
+
+The §4 "blog rebuild" + §5 content-engine item. Blog content lives in **Firestore** (`posts`
+collection), authored via a **hidden, unlinked editor** (`/vifa-studio`, react-quill-new,
+no auth) — and is wired into the SAME Puppeteer prerender so posts ship as static HTML.
+
+#### 4a — Data + service
+- `src/types/blog.ts` (`BlogPost`), `src/service/blogService.ts` (Firestore CRUD, mirrors
+  `leadService.ts`). `getPublishedPosts` sorts client-side (single-field `where`) to avoid a
+  composite index. `slugify()` keeps Georgian letters.
+
+#### 4b — Pages (`src/pages/blog/`)
+- `BlogIndex.tsx` (`/blog`): published-post grid, SEO + breadcrumb, links into service pages.
+- `BlogPost.tsx` (`/blog/:slug`): fetch by slug, render `contentHtml` via **DOMPurify**
+  (XSS-safe — writes are open), `<SEO type="article" articleMeta image>` → Article schema
+  (reused existing support in `SEO.tsx`). `.blog-prose` styles (in `index.css`) + `.font-georgian-body`.
+  Unknown slug → 404. CTA → /services/web + /contact.
+- `BlogEditor.tsx` (`/vifa-studio`): react-quill-new editor, create/edit/delete, optional
+  passphrase const + optional "Rebuild site" button (`VITE_VERCEL_DEPLOY_HOOK`). Standalone
+  route (outside Layout — no navbar/footer). Routes lazy-loaded in `App.tsx`.
+
+#### 4c — Prerender integration (the SEO core) — `scripts/prerender.js`
+- Build-time `fetchPublishedBlogPosts()` hits the Firestore **REST** API, adds `/blog` +
+  each `/blog/<slug>` to `ROUTES`. Firestore host is **un-blocked only for blog routes** so the
+  SDK can load real content; blog routes get an extra wait (loading-state gone + content > 200ch)
+  before snapshot. `injectBlogSitemap()` splices `/blog` + post URLs into `dist/sitemap.xml`.
+- **Fails soft:** if Firestore read is denied/unreachable, blog routes are skipped (build still
+  green). Currently returns **403 until Firestore rules allow public read on `posts`** (§4 task).
+
+#### 4d — Bundle isolation (`vite.config.ts`)
+- quill + its exclusive deps (parchment, quill-delta, eventemitter3, lodash-es, …) → **`editor`
+  chunk** (only the lazy /vifa-studio route loads it); dompurify → **`sanitize`** chunk (blog
+  posts only). Verified homepage references neither → no site-wide CWV regression from the editor.
+- Footer: added a `/blog` quick link (crawlable entry point).
+
+#### 4e — Tradeoff + security (by design, user-approved)
+- A new post is live immediately (client-rendered) but gets **static SEO HTML only after the
+  next deploy** (rebuild). "Rebuild site" button or Vercel Redeploy triggers it.
+- No auth + open Firestore writes (same mode as `leads`): editor at an obscure path. **Firestore
+  rules must allow public read on `posts` (site + prerender) and write (editor).**
+
 ---
 
 ## 3. CLEANUPS / REMOVALS
@@ -276,10 +319,20 @@ indexable organic pages. URL scheme kept unchanged (ad campaigns rely on it).
      non-health/gov), Service price rich results not visual either — both still valuable
      as entity signals. Only Organization/Logo is currently a visual rich result.
 
+### Blog — user manual tasks (REQUIRED for the blog to work — session 4)
+1. **Firestore security rules** — the blog is dead until `posts` is readable. In Firebase
+   console → Firestore → Rules, allow public **read** on `posts` (needed by the live site AND
+   the build-time prerender REST fetch — currently returns 403) and, since there's no auth,
+   **write** on `posts` (for the `/vifa-studio` editor). Example:
+   `match /posts/{id} { allow read: if true; allow write: if true; }`
+   (Same open mode as the existing `leads` collection. Tighten later if desired.)
+2. **(Optional) Vercel Deploy Hook** — create one in Vercel → set env `VITE_VERCEL_DEPLOY_HOOK`
+   so the editor's "Rebuild site" button can trigger a static rebuild after publishing.
+3. After publishing posts: **redeploy** (button or Vercel) so posts get prerendered, then
+   submit the updated `sitemap.xml` in GSC and Request-Index the new `/blog/<slug>` URLs.
+
 ### Code work pending
-- **Blog rebuild** (planned): proper CMS-style blog with `react-quill` editor + Firebase
-  storage. When rebuilt, add blog post slugs to `scripts/prerender.js` `ROUTES` (or make
-  prerender read slugs dynamically) so posts ship as static HTML with `Article` schema.
+- Blog image upload to Firebase Storage (v1 uses image URLs). Per-post OG images.
 
 ---
 
@@ -342,12 +395,16 @@ Content / authority (the real ranking lever):
 | `src/offeredServices/InventoLandingPage.tsx` | `/inventowms` — bilingual FAQ, softwareApplication + offers, breadcrumbs |
 | `src/pages/landing/IndustryLanding.tsx` | `/industry/:service/:slug` — indexable money-SEO pages: `<SEO>` (serviceSchema+offers+faq+3-level breadcrumbs), `IndustryContent`, `RelatedLinks` |
 | `src/data/industryData.ts` | 10 niches × `IndustryConfig` — incl. SEO content fields (`seoTitle/Description`, `intro`, `contentSections`, `faq`) per niche |
+| `src/pages/blog/BlogIndex.tsx` | `/blog` — published-post grid (Firestore), SEO + breadcrumb |
+| `src/pages/blog/BlogPost.tsx` | `/blog/:slug` — DOMPurify-sanitized HTML + Article schema |
+| `src/pages/blog/BlogEditor.tsx` | `/vifa-studio` — hidden react-quill-new editor, Firestore CRUD |
+| `src/service/blogService.ts`, `src/types/blog.ts` | Firestore `posts` CRUD + `BlogPost` type |
 | `src/config/siteConfig.ts` | phone, email, social, location |
 | `src/utils/facebookPixel.ts` | FB Pixel manager — all fbq calls guarded with typeof check |
 
 **Verification commands:**
 ```bash
-npm run build            # tsc + vite + prerender (must end "17/17 routes OK")
+npm run build            # tsc + vite + prerender (ends "N/N routes OK"; N = 17 + 1 /blog + posts)
 
 # Inspect JSON-LD @graph types on a prerendered page:
 node -e "const h=require('fs').readFileSync('dist/services/web/index.html','utf8');const m=h.match(/application\/ld\+json[^>]*>(.*?)<\/script>/s);console.log(JSON.parse(m[1])['@graph'].map(n=>n['@type']))"
@@ -361,7 +418,8 @@ node -e "const fs=require('fs');for(const r of ['services/web','services/marketi
 
 ---
 
-_Last updated: 2026-06-04. Status: STEP 1–6 + Session 2 + Session 3 complete (Session 3 =
-10 industry landing pages converted to indexable money-SEO pages). All committed locally;
-deploy to Vercel pending. Pending = user manual tasks (§4: GSC submit new industry URLs +
-sitemap re-submit) + blog rebuild + remaining §5 items (per-page OG images)._
+_Last updated: 2026-06-04. Status: STEP 1–6 + Sessions 2, 3, 4 complete. Session 3 = 10
+industry money-SEO pages. Session 4 = Firestore blog + hidden /vifa-studio editor + build-time
+prerender. Pending = user manual tasks (§4: **Firestore rules for `posts`** [blog is 403 until
+done], GSC sitemap re-submit + index new industry/blog URLs) + remaining §5 items (per-page OG
+images, blog Storage image upload)._

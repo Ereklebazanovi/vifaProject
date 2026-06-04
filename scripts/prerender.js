@@ -38,13 +38,64 @@ for (const s of INDUSTRY_SERVICES)
   for (const slug of INDUSTRY_SLUGS)
     ROUTES.push(`/industry/${s}/${slug}`);
 
+// Blog posts live in Firestore. At build time we fetch the published slugs via the
+// Firestore REST API and prerender each /blog/<slug> so crawlers get static HTML.
+const FIREBASE_PROJECT = 'vifa-project';
+const FIRESTORE_REST = `https://firestore.googleapis.com/v1/projects/${FIREBASE_PROJECT}/databases/(default)/documents/posts?pageSize=300`;
+
 // Network noise to block during prerender (keeps render fast + avoids hangs on
 // long-lived firebase / analytics connections).
 const BLOCKED = [
   'google-analytics.com', 'googletagmanager.com', 'doubleclick.net',
-  'connect.facebook.net', 'facebook.com/tr', 'firestore.googleapis.com',
+  'connect.facebook.net', 'facebook.com/tr',
   'firebaseio.com', 'identitytoolkit', 'fonts.googleapis.com/css',
 ];
+// Firestore is blocked for normal routes but ALLOWED while rendering /blog* pages,
+// so the Firestore SDK can fetch real post content to bake into the static HTML.
+const FIRESTORE_HOST = 'firestore.googleapis.com';
+
+// Fetch published blog slugs from Firestore REST (no SDK/auth; needs public read rules).
+// Returns [{ slug, publishedAt }]. Fails soft: on any error the blog is just skipped.
+async function fetchPublishedBlogPosts() {
+  try {
+    const res = await fetch(FIRESTORE_REST);
+    if (!res.ok) {
+      console.warn(`[prerender] blog: Firestore REST ${res.status} — skipping blog routes`);
+      return [];
+    }
+    const data = await res.json();
+    const docs = data.documents || [];
+    return docs
+      .map((d) => ({
+        slug: d.fields?.slug?.stringValue || '',
+        status: d.fields?.status?.stringValue || '',
+        publishedAt: d.fields?.publishedAt?.stringValue || '',
+      }))
+      .filter((p) => p.slug && p.status === 'published');
+  } catch (e) {
+    console.warn('[prerender] blog: Firestore fetch failed — skipping blog routes:', e.message);
+    return [];
+  }
+}
+
+// Splice blog <url> entries into dist/sitemap.xml (copied from public/ by vite build).
+function injectBlogSitemap(posts) {
+  const sitemapPath = join(distDir, 'sitemap.xml');
+  if (!existsSync(sitemapPath)) return;
+  let xml = readFileSync(sitemapPath, 'utf-8');
+  if (xml.includes('/blog</loc>') || xml.includes('/blog<')) return; // already injected
+  const today = new Date().toISOString().slice(0, 10);
+  const entry = (loc, lastmod, priority) =>
+    `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${priority}</priority>\n  </url>\n`;
+  let block = '\n  <!-- Blog (auto-injected by prerender) -->\n';
+  block += entry('https://vifadigital.ge/blog', today, '0.8');
+  for (const p of posts) {
+    block += entry(`https://vifadigital.ge/blog/${p.slug}`, (p.publishedAt || today).slice(0, 10), '0.7');
+  }
+  xml = xml.replace('</urlset>', `${block}</urlset>`);
+  writeFileSync(sitemapPath, xml, 'utf-8');
+  console.log(`[prerender] sitemap: injected /blog + ${posts.length} post URL(s)`);
+}
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -107,15 +158,28 @@ async function run() {
   const server = await startStaticServer();
   console.log(`[prerender] static server on http://localhost:${PORT}`);
 
+  // Discover published blog posts from Firestore and add them to the render list.
+  const blogPosts = await fetchPublishedBlogPosts();
+  if (blogPosts.length) {
+    ROUTES.push('/blog');
+    for (const p of blogPosts) ROUTES.push(`/blog/${p.slug}`);
+    console.log(`[prerender] blog: ${blogPosts.length} published post(s) → prerendering /blog + posts`);
+  } else {
+    ROUTES.push('/blog'); // still bake the (possibly empty) index
+  }
+
   const browser = await resolveBrowser(puppeteer);
   let failures = 0;
 
   for (const route of ROUTES) {
+    const isBlog = route === '/blog' || route.startsWith('/blog/');
     const page = await browser.newPage();
     await page.setViewport({ width: 1366, height: 900 });
     await page.setRequestInterception(true);
     page.on('request', (r) => {
       const url = r.url();
+      // Firestore is allowed only for blog routes (so post content can load + bake).
+      if (!isBlog && url.includes(FIRESTORE_HOST)) return r.abort().catch(() => {});
       if (BLOCKED.some((b) => url.includes(b))) r.abort().catch(() => {});
       else r.continue().catch(() => {});
     });
@@ -132,6 +196,21 @@ async function run() {
         () => document.querySelector('#root') && document.querySelector('#root').children.length > 0,
         { timeout: 15000 }
       ).catch(() => {});
+
+      // Blog routes load content async from Firestore — the initial paint is a
+      // loading state. Wait until that's gone and real content is in the DOM.
+      if (isBlog) {
+        await page.waitForFunction(
+          () => {
+            const root = document.querySelector('#root');
+            if (!root) return false;
+            const txt = root.innerText || '';
+            if (txt.includes('იტვირთება') || txt.includes('Loading')) return false;
+            return txt.length > 200;
+          },
+          { timeout: 20000 }
+        ).catch(() => {});
+      }
 
       // Strip analytics/pixel scripts that GA/FB useEffects injected into <head>.
       // If left baked into static HTML they fire once on load AND again when React
@@ -175,6 +254,10 @@ async function run() {
 
   await browser.close();
   server.close();
+
+  // Add /blog + post URLs to the deployed sitemap.
+  injectBlogSitemap(blogPosts);
+
   console.log(`[prerender] done. ${ROUTES.length - failures}/${ROUTES.length} routes OK.`);
   if (failures > 0) process.exitCode = 1;
 }

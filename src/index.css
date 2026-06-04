@@ -417,6 +417,74 @@ html.ka .font-georgian-body {
   font-family: "Noto Sans Georgian", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+/* Blog article body — styles the rich HTML produced by the editor (react-quill).
+   Self-contained so we don't need the Tailwind typography plugin. */
+.blog-prose {
+  color: #cbd5e1; /* slate-300 */
+  font-size: 1.0625rem;
+  line-height: 1.9;
+}
+.blog-prose > * + * {
+  margin-top: 1.25rem;
+}
+.blog-prose h2 {
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: 2.5rem;
+  margin-bottom: 0.25rem;
+}
+.blog-prose h3 {
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 0.25rem;
+}
+.blog-prose a {
+  color: #a5b4fc; /* indigo-300 */
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.blog-prose a:hover {
+  color: #c7d2fe;
+}
+.blog-prose strong {
+  color: #fff;
+  font-weight: 700;
+}
+.blog-prose ul,
+.blog-prose ol {
+  padding-left: 1.5rem;
+}
+.blog-prose ul {
+  list-style: disc;
+}
+.blog-prose ol {
+  list-style: decimal;
+}
+.blog-prose li {
+  margin-top: 0.5rem;
+}
+.blog-prose img {
+  border-radius: 1rem;
+  width: 100%;
+  height: auto;
+}
+.blog-prose blockquote {
+  border-left: 3px solid #6366f1;
+  padding-left: 1.25rem;
+  color: #94a3b8;
+  font-style: italic;
+}
+.blog-prose code {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.15em 0.4em;
+  border-radius: 0.35rem;
+  font-size: 0.9em;
+}
+
 /* Modern font families */
 .font-inter {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
