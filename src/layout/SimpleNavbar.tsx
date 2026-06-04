@@ -247,6 +247,17 @@ const SimpleNavbar: React.FC = () => {
         </div>
 
         <div className="hidden xl:flex items-center gap-6">
+          <Link
+            to="/blog"
+            className={`text-[13px] tracking-widest uppercase font-medium transition-colors duration-200 ${
+              location.pathname.startsWith("/blog")
+                ? "text-white"
+                : "text-slate-300 hover:text-white"
+            }`}
+          >
+            {ka ? "ბლოგი" : "BLOG"}
+          </Link>
+          <div className="h-4 w-px bg-white/15" />
           <div className="text-right">
             <p className="text-slate-300 text-xs tracking-wider">vifadigital.ge</p>
             <Link
@@ -381,6 +392,24 @@ const SimpleNavbar: React.FC = () => {
               </div>
             );
           })}
+
+          {/* Blog — simple link, no accordion */}
+          <div className="border-b border-white/[0.07] last:border-0">
+            <button
+              onClick={() => {
+                navigate("/blog");
+                setMobileMenuOpen(false);
+              }}
+              className="w-full flex items-center py-4 text-left group"
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-white/20 text-[9px] font-mono tabular-nums">06/</span>
+                <span className="text-white text-2xl font-light tracking-[0.12em] uppercase group-hover:text-white/40 transition-colors duration-200">
+                  {ka ? "ბლოგი" : "BLOG"}
+                </span>
+              </div>
+            </button>
+          </div>
         </nav>
       </div>
 
