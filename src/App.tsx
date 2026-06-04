@@ -22,6 +22,8 @@ const ContactPage = lazy(() => import("./pages/ContactPage"));
 const BlogIndex = lazy(() => import("./pages/blog/BlogIndex"));
 const BlogPost = lazy(() => import("./pages/blog/BlogPost"));
 const BlogEditor = lazy(() => import("./pages/blog/BlogEditor"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 
 const App = () => {
   return (
@@ -66,6 +68,10 @@ const App = () => {
                   {/* Blog (organic content engine) */}
                   <Route path="blog" element={<BlogIndex />} />
                   <Route path="blog/:slug" element={<BlogPost />} />
+
+                  {/* Legal pages (linked from footer) */}
+                  <Route path="privacy" element={<PrivacyPolicy />} />
+                  <Route path="terms" element={<TermsOfService />} />
 
                   {/* Dynamic Ad-Landing Flow */}
                   <Route path="industry/:service/:slug" element={<IndustryLanding />} />

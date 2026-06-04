@@ -4,10 +4,9 @@ import { useLocation } from "react-router-dom";
 // Route preloading for faster navigation
 const routeMap: Record<string, () => Promise<any>> = {
   "/about": () => import("../pages/AboutPage"),
-  "/start-project": () => import("../service/StartProject"),
-
-  "/services/digital-advertising": () => import("../offeredServices/Marketing"),
-  "/services/web-development": () => import("../offeredServices/WebDev"),
+  "/contact": () => import("../pages/ContactPage"),
+  "/services/marketing": () => import("../offeredServices/Marketing"),
+  "/services/web": () => import("../offeredServices/WebDev"),
   // Note: AIChatbot deliberately not preloaded to show loading spinner
 };
 
@@ -25,17 +24,17 @@ export const useRoutePreload = () => {
           case "/":
             return [
               "/about",
-              "/start-project",
-              "/services/digital-advertising",
+              "/contact",
+              "/services/marketing",
             ];
           case "/about":
-            return ["/start-project", "/services/web-development"];
-          case "/services/digital-advertising":
-            return ["/services/web-development", "/services/social-media"];
-          case "/services/web-development":
-            return ["/start-project"];
-          case "/services/social-media":
-            return ["/start-project", "/about"];
+            return ["/contact", "/services/web"];
+          case "/services/marketing":
+            return ["/services/web", "/services/ai-chatbot"];
+          case "/services/web":
+            return ["/contact", "/services/ai-chatbot"];
+          case "/services/ai-chatbot":
+            return ["/contact", "/inventowms"];
           default:
             return ["/"];
         }

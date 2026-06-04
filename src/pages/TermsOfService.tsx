@@ -8,17 +8,18 @@ import {
   FaExclamationTriangle,
   FaHandshake,
 } from "react-icons/fa";
+import SEO from "../components/SEO";
 
-// Terms of Service Translations for Invento Technologies
+// Terms of Service Translations for VIFA Digital
 const termsTranslations = {
   ka: {
     "terms.title": "მომსახურების პირობები",
-    "terms.description": "Invento Technologies-ის სერვისების გამოყენების წესები და პირობები",
+    "terms.description": "VIFA Digital-ის სერვისების გამოყენების წესები და პირობები",
     "terms.lastUpdated": "ბოლო განახლება",
 
     "terms.services.title": "ჩვენი სერვისები",
     "terms.services.content":
-      "Invento Technologies გთავაზობთ შემდეგ მომსახურებას:\n\n• ვებგვერდების შექმნა და ტექნიკური მხარდაჭერა\n• პერსონალიზებული ციფრული სისტემების შემუშავება\n• ვებ-აპლიკაციების განვითარება\n• UI/UX დიზაინის წარმოება\n• ციფრული კონსულტაცია და სტრატეგია\n\nყველა სერვისს გთავაზობთ მაღალი ტექნოლოგიური სტანდარტებით, წინასწარ შეთანხმებული ვადებისა და ბიუჯეტის ფარგლებში.",
+      "VIFA Digital გთავაზობთ შემდეგ მომსახურებას:\n\n• ვებგვერდების შექმნა და ტექნიკური მხარდაჭერა\n• ციფრული მარკეტინგი და კონტენტის წარმოება\n• AI ჩატბოტების ინტეგრაცია\n• საწყობის პროგრამა და ბიზნეს ავტომატიზაცია\n• ციფრული კონსულტაცია და სტრატეგია\n\nყველა სერვისს გთავაზობთ მაღალი ტექნოლოგიური სტანდარტებით, წინასწარ შეთანხმებული ვადებისა და ბიუჯეტის ფარგლებში.",
 
     "terms.userResponsibilities.title": "კლიენტის ვალდებულებები",
     "terms.userResponsibilities.content":
@@ -26,7 +27,7 @@ const termsTranslations = {
 
     "terms.limitations.title": "პასუხისმგებლობის შეზღუდვა",
     "terms.limitations.content":
-      "Invento Technologies-ის პასუხისმგებლობა შემოიფარგლება შემდეგით:\n\n• ჩვენი პასუხისმგებლობა არ აღემატება კონკრეტული პროექტის ჯამურ ღირებულებას\n• არ ვართ პასუხისმგებლები მესამე მხარის სერვისების (მაგ: ჰოსტინგი, API) დროებით შეფერხებებზე\n• ციფრული პროდუქტის ეფექტურობა დამოკიდებულია კლიენტის მიერ მოწოდებული ინფორმაციის სისწორეზე\n\nყველა ტექნიკური გარანტია განისაზღვრება ინდივიდუალური ხელშეკრულების საფუძველზე.",
+      "VIFA Digital-ის პასუხისმგებლობა შემოიფარგლება შემდეგით:\n\n• ჩვენი პასუხისმგებლობა არ აღემატება კონკრეტული პროექტის ჯამურ ღირებულებას\n• არ ვართ პასუხისმგებლები მესამე მხარის სერვისების (მაგ: ჰოსტინგი, API) დროებით შეფერხებებზე\n• ციფრული პროდუქტის ეფექტურობა დამოკიდებულია კლიენტის მიერ მოწოდებული ინფორმაციის სისწორეზე\n\nყველა ტექნიკური გარანტია განისაზღვრება ინდივიდუალური ხელშეკრულების საფუძველზე.",
 
     "terms.termination.title": "ხელშეკრულების შეწყვეტა",
     "terms.termination.content":
@@ -34,12 +35,12 @@ const termsTranslations = {
   },
   en: {
     "terms.title": "Terms of Service",
-    "terms.description": "Rules and conditions for using Invento Technologies services",
+    "terms.description": "Rules and conditions for using VIFA Digital services",
     "terms.lastUpdated": "Last updated",
 
     "terms.services.title": "Our Services",
     "terms.services.content":
-      "Invento Technologies offers the following services:\n\n• Website creation and technical support\n• Development of personalized digital systems\n• Web application development\n• UI/UX design production\n• Digital consulting and strategy\n\nAll services are provided according to high technological standards, within agreed timelines and budgets.",
+      "VIFA Digital offers the following services:\n\n• Website creation and technical support\n• Digital marketing and content production\n• AI chatbot integration\n• Warehouse management software and business automation\n• Digital consulting and strategy\n\nAll services are provided according to high technological standards, within agreed timelines and budgets.",
 
     "terms.userResponsibilities.title": "Client Responsibilities",
     "terms.userResponsibilities.content":
@@ -47,7 +48,7 @@ const termsTranslations = {
 
     "terms.limitations.title": "Limitation of Liability",
     "terms.limitations.content":
-      "Invento Technologies' liability is limited to:\n\n• Our liability does not exceed the total value of the specific project\n• We are not responsible for temporary failures of third-party services (e.g., hosting, API)\n• The effectiveness of the digital product depends on the accuracy of client-provided information\n\nAll technical warranties are defined based on individual contracts.",
+      "VIFA Digital's liability is limited to:\n\n• Our liability does not exceed the total value of the specific project\n• We are not responsible for temporary failures of third-party services (e.g., hosting, API)\n• The effectiveness of the digital product depends on the accuracy of client-provided information\n\nAll technical warranties are defined based on individual contracts.",
 
     "terms.termination.title": "Contract Termination",
     "terms.termination.content":
@@ -92,9 +93,16 @@ const TermsOfService: React.FC = () => {
   ];
 
   return (
-    <div
-      className={`mt-20 min-h-screen transition-colors duration-500 bg-black ${getTransitionClasses()}`}
-    >
+    <>
+      <SEO
+        title={t("terms.title")}
+        description={t("terms.description")}
+        url="https://vifadigital.ge/terms"
+        type="website"
+      />
+      <div
+        className={`mt-20 min-h-screen transition-colors duration-500 bg-black ${getTransitionClasses()}`}
+      >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -143,7 +151,8 @@ const TermsOfService: React.FC = () => {
           ))}
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 

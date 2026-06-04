@@ -24,9 +24,9 @@ import { submitLead, type LeadData } from "../leadService";
 
 const startProjectTranslations = {
   ka: {
-    "seo.startProject.title": "პროექტის დაწყება - Invento Technologies | inventogeo.com",
-    "seo.startProject.description": "დაიწყე თქვენი ტექნოლოგიური პროექტი Invento Technologies-ს ექსპერტებთან. Invento WMS, AI ჩატბოტები და ვებ განვითარება.",
-    "seo.startProject.keywords": "პროექტის დაწყება, Invento WMS, AI ჩატბოტები, ვებ განვითარება, მონაცემთა ბაზების მართვა, inventogeo.com",
+    "seo.startProject.title": "პროექტის დაწყება - VIFA Digital",
+    "seo.startProject.description": "დაიწყეთ ციფრული პროექტი VIFA Digital-ის გუნდთან. ვებ დეველოპმენტი, მარკეტინგი, AI ჩატბოტები და საწყობის პროგრამა.",
+    "seo.startProject.keywords": "პროექტის დაწყება, VIFA Digital, ვებ დეველოპმენტი, ციფრული მარკეტინგი, AI ჩატბოტები, საწყობის პროგრამა, WMS სისტემა",
     "startProject.hero.title": "მზად ხარ",
     "startProject.hero.titleHighlight": "ციფრული ტრანსფორმაციისთვის",
     "startProject.hero.titleSuffix": "?",
@@ -47,9 +47,9 @@ const startProjectTranslations = {
     "startProject.errors.submitError": "შეცდომა წარმოიშვა. გთხოვთ ცადეთ სამ საათში.",
   },
   en: {
-    "seo.startProject.title": "Start Your Project - Invento Technologies | inventogeo.com",
-    "seo.startProject.description": "Start your technology project with Invento Technologies experts. Invento WMS, AI Chatbots and Web Development solutions.",
-    "seo.startProject.keywords": "start project, Invento WMS, AI chatbots, web development, database management, inventogeo.com",
+    "seo.startProject.title": "Start Your Project - VIFA Digital",
+    "seo.startProject.description": "Start your digital project with VIFA Digital: web development, digital marketing, AI chatbots, and warehouse management software.",
+    "seo.startProject.keywords": "start project, VIFA Digital, web development, digital marketing, AI chatbots, warehouse management software, WMS system",
     "startProject.hero.title": "Ready for",
     "startProject.hero.titleHighlight": "Digital Transformation",
     "startProject.hero.titleSuffix": "?",
@@ -226,8 +226,8 @@ const StartProject: React.FC = () => {
     description: t("seo.startProject.description"),
     provider: {
       "@type": "Organization",
-      name: "Invento Technologies",
-      url: "https://inventogeo.com",
+      name: "VIFA Digital",
+      url: "https://vifadigital.ge",
     },
   };
 
@@ -237,7 +237,7 @@ const StartProject: React.FC = () => {
         title={t("seo.startProject.title")}
         description={t("seo.startProject.description")}
         keywords={t("seo.startProject.keywords")}
-        url="https://inventogeo.com/start-project"
+        url="https://vifadigital.ge/start-project"
         type="website"
         structuredData={startProjectStructuredData}
       />

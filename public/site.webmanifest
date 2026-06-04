@@ -1,7 +1,7 @@
 {
   "name": "Vifa Digital - Premium Web Development, Digital Marketing & IT Solutions",
   "short_name": "Vifa Digital",
-  "description": "Vifa Digital is a premium full-service digital agency in Georgia, delivering web development, digital marketing, IT solutions, Vifa WMS, and AI-powered systems.",
+  "description": "Vifa Digital is a premium full-service digital agency in Georgia, delivering web development, digital marketing, AI chatbots, and warehouse management software.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0f172a",
@@ -41,10 +41,10 @@
   ],
   "shortcuts": [
     {
-      "name": "Vifa WMS",
+      "name": "საწყობის პროგრამა",
       "short_name": "WMS",
       "description": "Inventory and sales management for online businesses.",
-      "url": "/vifawms",
+      "url": "/inventowms",
       "icons": [
         {
           "src": "/viffa.png",
@@ -56,7 +56,7 @@
       "name": "Vifa Web",
       "short_name": "Web",
       "description": "Premium website design and development services.",
-      "url": "/services/web-development",
+      "url": "/services/web",
       "icons": [
         {
           "src": "/viffa.png",

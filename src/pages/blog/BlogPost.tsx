@@ -88,7 +88,15 @@ const BlogPost = () => {
     { name: post.title, url: `${base}/blog/${post.slug}` },
   ];
 
-  const cleanHtml = DOMPurify.sanitize(post.contentHtml, {
+  // Normalize pasted content (Word/Docs/AI artifacts) before sanitizing:
+  //  • &nbsp; / U+00A0 → real space, so the browser can wrap at word boundaries
+  //    instead of treating a whole sentence as one unbreakable token (which then
+  //    gets force-broken mid-word).
+  //  • strip invisible break chars (soft hyphen, zero-width space/joiners, BOM).
+  const normalizedHtml = post.contentHtml
+    .replace(/&nbsp;/gi, " ")
+    .replace(/[ ­​‌‍﻿]/g, (m) => (m === " " ? " " : ""));
+  const cleanHtml = DOMPurify.sanitize(normalizedHtml, {
     ADD_ATTR: ["target", "rel"],
   });
 

@@ -125,7 +125,9 @@ const SEO: React.FC<SEOProps> = ({
       'სოციალური მედია მენეჯმენტი',
       'IT გადაწყვეტილებები',
       'ბიზნეს ავტომატიზაცია',
+      'AI ჩატბოტი',
       'AI ინტეგრაცია',
+      'საწყობის პროგრამა',
       'WMS სისტემები'
     ]
     : [
@@ -138,7 +140,9 @@ const SEO: React.FC<SEOProps> = ({
       'Social Media Management',
       'IT Solutions',
       'Business Automation',
+      'AI Chatbot',
       'AI Integration',
+      'Warehouse Management Software',
       'WMS Systems'
     ];
 
@@ -151,6 +155,7 @@ const SEO: React.FC<SEOProps> = ({
         itemOffered: {
           '@type': 'Service',
           name: isKa ? 'ვებ დეველოპმენტი' : 'Web Development',
+          url: `${brandBaseUrl}/services/web`,
           description: isKa
             ? 'კორპორატიული ვებსაიტები, eCommerce პლატფორმები და კონვერსიაზე ორიენტირებული ვებ პროდუქტები.'
             : 'Corporate websites, eCommerce platforms, and conversion-focused web products.'
@@ -161,6 +166,7 @@ const SEO: React.FC<SEOProps> = ({
         itemOffered: {
           '@type': 'Service',
           name: isKa ? 'ციფრული მარკეტინგი' : 'Digital Marketing',
+          url: `${brandBaseUrl}/services/marketing`,
           description: isKa
             ? 'SEO, Google Ads, Facebook/Instagram რეკლამა და სოციალური მედია მენეჯმენტი.'
             : 'SEO, Google Ads, Facebook/Instagram advertising, and social media management.'
@@ -170,10 +176,23 @@ const SEO: React.FC<SEOProps> = ({
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: isKa ? 'IT და AI გადაწყვეტილებები' : 'IT & AI Solutions',
+          name: isKa ? 'AI ჩატბოტი' : 'AI Chatbot',
+          url: `${brandBaseUrl}/services/ai-chatbot`,
           description: isKa
-            ? 'ბიზნეს პროცესების ავტომატიზაცია, AI ინტეგრაცია და ინდივიდუალური ტექნოლოგიური გადაწყვეტები.'
-            : 'Business process automation, AI integration, and custom technology solutions.'
+            ? 'AI ჩატბოტის დამზადება და ინტეგრაცია მომხმარებელთა 24/7 მხარდაჭერისა და ლიდების გენერაციისთვის.'
+            : 'AI chatbot development and integration for 24/7 customer support and lead generation.'
+        }
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: isKa ? 'საწყობის პროგრამა' : 'Warehouse Management Software',
+          alternateName: 'Invento WMS',
+          url: `${brandBaseUrl}/inventowms`,
+          description: isKa
+            ? 'Invento WMS საწყობის, მარაგების, შეკვეთებისა და ფინანსური რეპორტინგის სამართავად.'
+            : 'Invento WMS for warehouse, inventory, order, and finance management.'
         }
       }
     ]

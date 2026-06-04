@@ -26,8 +26,8 @@ import { AIConnectionDemo } from "../components/AIConnectionDemo";
 // AI Chatbot Translations
 const aiChatbotTranslations = {
   ka: {
-    "seo.title": "ჩატბოტები თქვენი ბიზნესისთვის | Invento Technologies",
-    "seo.description": "Invento AI ჩატბოტები Facebook, WhatsApp და Instagram-ისთვის. 24/7 მომხმარებელთა მხარდაჭერა, გაყიდვების ზრდა და ხარჯების ოპტიმიზაცია. Google Gemini AI ტექნოლოგია.",
+    "seo.title": "AI ჩატბოტი ბიზნესისთვის",
+    "seo.description": "VIFA Digital-ის AI ჩატბოტები Facebook, WhatsApp და Instagram-ისთვის. 24/7 მომხმარებელთა მხარდაჭერა, გაყიდვების ზრდა და ხარჯების ოპტიმიზაცია.",
 
     // "hero.title": "Invento AI -",
     "hero.titleHighlight": "თქვენი ბიზნესის ციფრული რევოლუცია",
@@ -151,8 +151,8 @@ const aiChatbotTranslations = {
     "phone.number": "557 62 42 43",
   },
     en: {
-    "seo.title": "Invento AI - Chatbots for Your Business | Invento Technologies",
-    "seo.description": "Invento AI Chatbots for Facebook, WhatsApp, and Instagram. 24/7 customer support, sales growth, and cost optimization. Powered by Google Gemini AI technology.",
+    "seo.title": "AI Chatbot for Business",
+    "seo.description": "VIFA Digital AI chatbots for Facebook, WhatsApp, and Instagram. 24/7 customer support, sales growth, and cost optimization.",
 
     // "hero.title": "Invento AI -",
     "hero.titleHighlight": "Your Business's Digital Revolution",
@@ -829,7 +829,7 @@ const AIChatbot: React.FC = () => {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
   {/* არსებული "უფასო კონსულტაცია" ღილაკი */}
   <Link
-    to="/start-project"
+    to="/contact"
     className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105"
   >
     <FaRocket />

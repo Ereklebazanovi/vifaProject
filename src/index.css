@@ -498,11 +498,21 @@ html.ka .font-georgian-body {
   margin-left: auto !important;
   margin-right: auto !important;
 }
-/* Never let long words / pasted URLs / embeds push past the column. */
+/* Georgian wrapping: never split a word mid-word (no reliable browser hyphenation
+   for Georgian), so words move WHOLE to the next line — correct ქართული typography.
+   overflow-wrap only kicks in for genuinely unbreakable tokens (long URLs). */
 .blog-prose,
 .blog-prose * {
-  overflow-wrap: break-word !important;
-  word-break: break-word !important;
+  overflow-wrap: break-word;
+  word-break: normal !important;
+  hyphens: none !important;
+}
+/* Smarter line breaks where supported — avoids a lone word / "." on the last line. */
+.blog-prose p,
+.blog-prose li,
+.blog-prose h2,
+.blog-prose h3 {
+  text-wrap: pretty;
 }
 .blog-prose img,
 .blog-prose iframe,

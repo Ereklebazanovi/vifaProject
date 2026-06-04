@@ -28,6 +28,8 @@ const ROUTES = [
   '/inventowms',
   '/about',
   '/contact',
+  '/privacy',
+  '/terms',
 ];
 
 // Industry landing pages — now real indexable money-SEO pages (session 3).

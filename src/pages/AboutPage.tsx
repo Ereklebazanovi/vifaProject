@@ -16,7 +16,7 @@ import { useLanguageTransition } from "../hooks/useLanguageTransition";
 // AboutPage Translations
 const aboutPageTranslations = {
   ka: {
-    "seo.about.title": "ჩვენ შესახებ | VIFA DIGITAL",
+    "seo.about.title": "ჩვენ შესახებ",
     "seo.about.description": "VIFA - ტექნოლოგიური და კრეატიული სააგენტო. ციფრული ტრანსფორმაცია, ვებ დეველოპმენტი, მარკეტინგი და ქონთენთ პროდუქცია.",
     "seo.about.keywords": "VIFA, სააგენტო, ციფრული მარკეტინგი, ვებ დეველოპმენტი, ფოტო ვიდეო გადაღება, საქართველო",
     
@@ -46,7 +46,7 @@ const aboutPageTranslations = {
     "about.cta.button": "დაიწყე პროექტი",
   },
   en: {
-    "seo.about.title": "About Us | VIFA DIGITAL",
+    "seo.about.title": "About Us",
     "seo.about.description": "VIFA - Technology and Creative Agency. Digital transformation, web development, marketing, and content production.",
     "seo.about.keywords": "VIFA, creative agency, digital marketing, web development, photo video production, Georgia",
     

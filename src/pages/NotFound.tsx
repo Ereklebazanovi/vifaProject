@@ -66,7 +66,7 @@ const NotFound: React.FC = () => {
               </button>
 
               <Link
-                to="/start-project"
+                to="/contact"
                 className="flex items-center gap-3 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 <FaPhone />
@@ -90,14 +90,14 @@ const NotFound: React.FC = () => {
               </p>
               <div className="flex flex-wrap justify-center gap-3">
                 <Link
-                  to="/services/web-development"
+                  to="/services/web"
                   className="text-blue-400 hover:text-blue-300 hover:underline transition-colors"
                 >
                   ვებ განვითარება
                 </Link>
                 <span className="text-slate-600">•</span>
                 <Link
-                  to="/services/digital-advertising"
+                  to="/services/marketing"
                   className="text-blue-400 hover:text-blue-300 hover:underline transition-colors"
                 >
                   ციფრული მარკეტინგი

@@ -44,7 +44,7 @@
       "name": "ციფრული მარკეტინგი",
       "short_name": "მარკეტინგი",
       "description": "სოციალური მედია მართვა და ციფრული რეკლამა",
-      "url": "/services/digital-advertising",
+      "url": "/services/marketing",
       "icons": [
         {
           "src": "/viffa.png",
@@ -56,7 +56,7 @@
       "name": "ვიდეო გადაღება",
       "short_name": "ვიდეო",
       "description": "პროფესიონალური ვიდეო კონტენტის შექმნა",
-      "url": "/services/digital-advertising#video-production",
+      "url": "/services/marketing#video-production",
       "icons": [
         {
           "src": "/viffa.png",
@@ -68,7 +68,7 @@
       "name": "ფოტო სესიები",
       "short_name": "ფოტო",
       "description": "სპეციალური ფოტო სესიები ბრენდებისთვის",
-      "url": "/services/digital-advertising#photo-shooting",
+      "url": "/services/marketing#photo-shooting",
       "icons": [
         {
           "src": "/viffa.png",

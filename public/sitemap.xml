@@ -50,6 +50,20 @@
     <priority>0.7</priority>
   </url>
 
+  <url>
+    <loc>https://vifadigital.ge/privacy</loc>
+    <lastmod>2026-06-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://vifadigital.ge/terms</loc>
+    <lastmod>2026-06-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
   <!-- Industry landing pages (money-SEO, session 3) -->
   <url>
     <loc>https://vifadigital.ge/industry/web/food</loc>

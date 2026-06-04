@@ -87,9 +87,9 @@ import InventoScrollyTelling from "../components/InventoScrollyTelling";
 // Invento Translations
 const inventoTranslations = {
   ka: {
-    "seo.invento.title": "Invento WMS - სოციალური კომერციის და მარაგების მართვის სისტემა | Invento Technologies",
-    "seo.invento.description": "მართეთ გაყიდვები, საწყობი და ფინანსები ერთ სივრცეში. ავტომატური ინვოისინგი და საკურიერო სერვისების ინტეგრაცია.",
-    "seo.invento.keywords": "instagram გაყიდვები, facebook კომერცია, საწყობის მართვა, ონლაინ ბიზნესი, ციფრული ინვოისი, CRM",
+    "seo.invento.title": "საწყობის პროგრამა - Invento WMS",
+    "seo.invento.description": "VIFA Digital-ის Invento WMS: მართეთ გაყიდვები, საწყობი და ფინანსები ერთ სივრცეში. ავტომატური ინვოისინგი და საკურიერო სერვისების ინტეგრაცია.",
+    "seo.invento.keywords": "საწყობის პროგრამა, WMS სისტემა, მარაგების მართვა, instagram გაყიდვები, facebook კომერცია, ონლაინ ბიზნესი, ციფრული ინვოისი, CRM",
 
     "hero.title": "მართე Facebook და Instagram გაყიდვები ერთ სივრცეში",
     "hero.subtitle": "Invento WMS - გაყიდვების, მარაგების და ფინანსების მართვის ცენტრალიზებული სისტემა ონლაინ ბიზნესისთვის.",
@@ -115,7 +115,7 @@ const inventoTranslations = {
     "feature5.title": "PWA ტექნოლოგია",
     "feature5.desc": "ადაპტირებული ინტერფეისი ნებისმიერი მოწყობილობისთვის (iOS, Android, Desktop, Tablet).",
     "feature6.title": "E-commerce ინტეგრაცია",
-    "feature6.desc": "სრული სინქრონიზაცია Invento Technologies-ის მიერ დამზადებულ ონლაინ მაღაზიებთან.",
+    "feature6.desc": "სრული სინქრონიზაცია VIFA Digital-ის მიერ დამზადებულ ონლაინ მაღაზიებთან.",
 
     "pricing.title": "საინვესტიციო გეგმები",
 
@@ -154,9 +154,9 @@ const inventoTranslations = {
     "cta.btn": "მოგვწერეთ WhatsApp-ში"
   },
   en: {
-    "seo.invento.title": "Invento WMS - Social Commerce & Inventory Management System | Invento Technologies",
-    "seo.invento.description": "Manage sales, inventory, and finance in one place. Automated invoicing and courier integration.",
-    "seo.invento.keywords": "instagram sales, facebook commerce, inventory management, online business, digital invoicing, CRM",
+    "seo.invento.title": "Warehouse Management Software - Invento WMS",
+    "seo.invento.description": "VIFA Digital's Invento WMS helps you manage sales, inventory, and finance in one place with automated invoicing and courier integration.",
+    "seo.invento.keywords": "warehouse management software, WMS system, inventory management, instagram sales, facebook commerce, online business, digital invoicing, CRM",
 
     "hero.title": "Manage Social Sales & Inventory in One Place",
     "hero.subtitle": "Invento WMS — A centralized system for sales, inventory, and financial management for online businesses.",

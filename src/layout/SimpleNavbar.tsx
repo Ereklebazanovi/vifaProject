@@ -133,7 +133,7 @@ const SimpleNavbar: React.FC = () => {
     {
       num: "01/",
       label: ka ? "ვებ დეველოპმენტი" : "WEB DEV",
-      path: "/services/web-development",
+      path: "/services/web",
       hasIndustryDropdown: true,
       generalHref: "/services/web",
       industryService: "web",
@@ -141,7 +141,7 @@ const SimpleNavbar: React.FC = () => {
     {
       num: "02/",
       label: ka ? "მარკეტინგი" : "MARKETING",
-      path: "/services/digital-advertising",
+      path: "/services/marketing",
       hasIndustryDropdown: true,
       generalHref: "/services/marketing",
       industryService: "marketing",

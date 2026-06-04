@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 
@@ -17,9 +17,10 @@ const footerTranslations = {
     "footer.quickLinks.contact": "კონტაქტი",
 
     "footer.services.title": "სერვისები",
-    "footer.services.webdev": "ვებ განვითარება",
-    "footer.services.ads": "ციფრული რეკლამა",
-    "footer.services.social": "სოციალური მედია",
+    "footer.services.webdev": "ვებ დეველოპმენტი",
+    "footer.services.ads": "ციფრული მარკეტინგი",
+    "footer.services.ai": "AI ჩატბოტი",
+    "footer.services.wms": "საწყობის პროგრამა",
 
     "footer.contact.title": "კონტაქტი",
     "footer.contact.location": "თბილისი, საქართველო",
@@ -47,8 +48,9 @@ const footerTranslations = {
 
     "footer.services.title": "Services",
     "footer.services.webdev": "Web Development",
-    "footer.services.ads": "Digital Ads",
-    "footer.services.social": "Social Media",
+    "footer.services.ads": "Digital Marketing",
+    "footer.services.ai": "AI Chatbot",
+    "footer.services.wms": "Warehouse Software",
 
     "footer.contact.title": "Contact",
     "footer.contact.location": "Tbilisi, Georgia",
@@ -86,23 +88,6 @@ const Footer: React.FC = () => {
   const [showBackToTop] = useState(true);
   const { currentLanguage } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
-  const location = useLocation();
-
-  // Determine if current route should show Invento branding
-  const isInventoRoute = () => {
-    const path = location.pathname;
-    return path.includes('/services/web-development') ||
-           path.includes('/services/ai-chatbot') ||
-           path.includes('/inventowms') ||
-           path === '/';
-  };
-
-  const isVifaRoute = () => {
-    const path = location.pathname;
-    return path.includes('/services/digital-advertising') ||
-           path.includes('/about');
-  };
-
   const t = (key: string): string => {
     const translations = footerTranslations[currentLanguage as keyof typeof footerTranslations] as Record<string, string>;
     return translations[key] || key;
@@ -111,7 +96,7 @@ const Footer: React.FC = () => {
   const socialLinks = [
     {
       icon: <FaFacebookF />,
-      href: isInventoRoute() && !isVifaRoute() ? "https://www.facebook.com/inventogeo" : "https://www.facebook.com/vifageo",
+      href: "https://www.facebook.com/vifageo",
       label: "VIFA DIGITAL",
       color:
         "hover:text-blue-400 hover:bg-blue-500/10 hover:border-blue-400/50",
@@ -120,19 +105,24 @@ const Footer: React.FC = () => {
 
   const services = [
     {
-      name: currentLanguage === "ka" ? "Vifa Web" : "Vifa Web",
-      href: "/services/web-development",
+      name: t("footer.services.webdev"),
+      href: "/services/web",
       icon: <FaCode className="w-4 h-4" />,
     },
     {
       name: t("footer.services.ads"),
-      href: "/services/digital-advertising",
+      href: "/services/marketing",
       icon: <FaChartLine className="w-4 h-4" />,
     },
     {
-      name: currentLanguage === "ka" ? "Vifa AI" : "Vifa AI",
+      name: t("footer.services.ai"),
       href: "/services/ai-chatbot",
       icon: <FaRobot className="w-4 h-4" />,
+    },
+    {
+      name: t("footer.services.wms"),
+      href: "/inventowms",
+      icon: <FaProjectDiagram className="w-4 h-4" />,
     },
   ];
 
@@ -153,8 +143,8 @@ const Footer: React.FC = () => {
       icon: <FaBlog className="w-4 h-4" />,
     },
     {
-      name: currentLanguage === "ka" ? "პროექტის დაწყება" : "Start Project",
-      href: "/start-project",
+      name: t("footer.quickLinks.contact"),
+      href: "/contact",
       icon: <FaProjectDiagram className="w-4 h-4" />,
     },
   ];
@@ -176,8 +166,8 @@ const Footer: React.FC = () => {
     },
     {
       icon: <FaEnvelope className="w-4 h-4" />,
-      text: isInventoRoute() && !isVifaRoute() ? "vifa.official2020@gmail.com" : "vifa.official2020@gmail.com",
-      href: isInventoRoute() && !isVifaRoute() ? "mailto:vifa.official2020@gmail.com" : "mailto:vifa.official2020@gmail.com",
+      text: "vifa.official2020@gmail.com",
+      href: "mailto:vifa.official2020@gmail.com",
       color: "text-blue-400",
     },                                                       
     {
@@ -245,23 +235,13 @@ const Footer: React.FC = () => {
                 transition={{ duration: 0.3 }}
                 className="w-12 h-12 bg-slate-800/50 border border-slate-600/30 rounded-xl flex items-center justify-center hover:bg-blue-500/10 hover:border-blue-400/40 transition-all duration-300 overflow-hidden"
               >
-                {isInventoRoute() && !isVifaRoute() ? (
-                  <img
-                    src="/viffa.png"
-                    alt="Invento Technologies - ვებ განვითარება და AI ჩატბოტები"
-                    className="w-10 h-10 rounded-lg object-cover"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                ) : (
-                  <img
-                    src="/viffa.png"
-                    alt="VIFA Digital - ციფრული მარკეტინგი და ვებ განვითარება საქართველოში"
-                    className="w-10 h-10 rounded-lg object-cover"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                )}
+                <img
+                  src="/viffa.png"
+                  alt="VIFA Digital - ციფრული მარკეტინგი და ვებ განვითარება საქართველოში"
+                  className="w-10 h-10 rounded-lg object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
               </motion.div>
               <div>
                 <div className="text-2xl font-light tracking-wider">
@@ -271,9 +251,7 @@ const Footer: React.FC = () => {
                   <span className="text-blue-400 font-normal"> </span>
                 </div>
                 <div className="text-xs font-light tracking-wide -mt-1 text-slate-500 group-hover:text-slate-400 transition-colors duration-300">
-                  {isInventoRoute() && !isVifaRoute() ?
-                    (currentLanguage === "ka" ? "ციფრული პარტნიორი" : "Technology Partner") :
-                    t("footer.brand.tagline")}
+                  {t("footer.brand.tagline")}
                 </div>
               </div>
             </Link>

@@ -3,21 +3,22 @@ import { motion } from "framer-motion";
 import { useLanguage } from '../contexts/LanguageContext';
 import { useLanguageTransition } from '../hooks/useLanguageTransition';
 import { FaShieldAlt, FaLock, FaEye, FaUserShield } from "react-icons/fa";
+import SEO from "../components/SEO";
 
-// Privacy Policy Translations for Invento Technologies
+// Privacy Policy Translations for VIFA Digital
 const privacyTranslations = {
   ka: {
     "privacy.title": "კონფიდენციალურობის პოლიტიკა",
-    "privacy.description": "Invento Technologies-ისთვის თქვენი პერსონალური მონაცემების დაცვა უმნიშვნელოვანესია",
+    "privacy.description": "VIFA Digital-ისთვის თქვენი პერსონალური მონაცემების დაცვა უმნიშვნელოვანესია",
     "privacy.lastUpdated": "ბოლო განახლება",
 
     "privacy.dataCollection.title": "მონაცემების შეგროვება",
     "privacy.dataCollection.content":
-      "Invento Technologies აგროვებს თქვენს მიერ ნებაყოფლობით მოწოდებულ ინფორმაციას, როდესაც:\n\n• სარგებლობთ ჩვენი ვებგვერდით\n• მიმართავთ ჩვენს გუნდს\n• იყენებთ ჩვენს ციფრულ მომსახურებას\n• გამოიწერთ ჩვენს სიახლეებსა თუ განახლებებს\n\nჩვენ მიერ შეგროვებული ინფორმაცია მოიცავს:\n\n• სახელსა და გვარს\n• ელექტრონული ფოსტის მისამართს\n• ტელეფონის ნომერს\n• ბიზნესთან დაკავშირებულ ინფორმაციას",
+      "VIFA Digital აგროვებს თქვენს მიერ ნებაყოფლობით მოწოდებულ ინფორმაციას, როდესაც:\n\n• სარგებლობთ ჩვენი ვებგვერდით\n• მიმართავთ ჩვენს გუნდს\n• იყენებთ ჩვენს ციფრულ მომსახურებას\n• გამოიწერთ ჩვენს სიახლეებსა თუ განახლებებს\n\nჩვენ მიერ შეგროვებული ინფორმაცია მოიცავს:\n\n• სახელსა და გვარს\n• ელექტრონული ფოსტის მისამართს\n• ტელეფონის ნომერს\n• ბიზნესთან დაკავშირებულ ინფორმაციას",
 
     "privacy.dataUsage.title": "მონაცემების გამოყენება",
     "privacy.dataUsage.content":
-      "თქვენი პერსონალური მონაცემები გამოიყენება შემდეგი მიზნებისთვის:\n\n• თქვენთვის ტექნოლოგიური მომსახურების გაწევა\n• თქვენთან კომუნიკაცია და კონსულტაციების ჩატარება\n• ჩვენი სერვისების გაუმჯობესება\n• კანონმდებლობით გათვალისწინებული ვალდებულებების შესრულება\n\nInvento Technologies არასდროს გადასცემს ან ყიდის თქვენს პერსონალურ მონაცემებს მესამე მხარეებზე კომერციული მიზნებისთვის.",
+      "თქვენი პერსონალური მონაცემები გამოიყენება შემდეგი მიზნებისთვის:\n\n• თქვენთვის ციფრული მომსახურების გაწევა\n• თქვენთან კომუნიკაცია და კონსულტაციების ჩატარება\n• ჩვენი სერვისების გაუმჯობესება\n• კანონმდებლობით გათვალისწინებული ვალდებულებების შესრულება\n\nVIFA Digital არასდროს გადასცემს ან ყიდის თქვენს პერსონალურ მონაცემებს მესამე მხარეებზე კომერციული მიზნებისთვის.",
 
     "privacy.dataSecurity.title": "მონაცემების უსაფრთხოება",
     "privacy.dataSecurity.content":
@@ -25,20 +26,20 @@ const privacyTranslations = {
 
     "privacy.userRights.title": "თქვენი უფლებები",
     "privacy.userRights.content":
-      "თქვენ გაქვთ შემდეგი უფლებები:\n\n• მოითხოვოთ თქვენს შესახებ არსებული ინფორმაციის გაცნობა\n• მოითხოვოთ თქვენი მონაცემების გასწორება ან განახლება\n• მოითხოვოთ თქვენი მონაცემების წაშლა\n• შეაჩეროთ თქვენი მონაცემების დამუშავება\n\nამ უფლებების რეალიზაციისთვის დაგვიკავშირდით Invento Technologies-ის საკონტაქტო არხების მეშვეობით.",
+      "თქვენ გაქვთ შემდეგი უფლებები:\n\n• მოითხოვოთ თქვენს შესახებ არსებული ინფორმაციის გაცნობა\n• მოითხოვოთ თქვენი მონაცემების გასწორება ან განახლება\n• მოითხოვოთ თქვენი მონაცემების წაშლა\n• შეაჩეროთ თქვენი მონაცემების დამუშავება\n\nამ უფლებების რეალიზაციისთვის დაგვიკავშირდით VIFA Digital-ის საკონტაქტო არხების მეშვეობით.",
   },
   en: {
     "privacy.title": "Privacy Policy",
-    "privacy.description": "Protecting your personal data is of utmost importance to Invento Technologies",
+    "privacy.description": "Protecting your personal data is of utmost importance to VIFA Digital",
     "privacy.lastUpdated": "Last updated",
 
     "privacy.dataCollection.title": "Data Collection",
     "privacy.dataCollection.content":
-      "Invento Technologies collects information that you voluntarily provide to us when:\n\n• You use our website\n• You contact our team\n• You use our digital services\n• You subscribe to our newsletters or updates\n\nThe information we collect includes:\n\n• First and last name\n• Email address\n• Phone number\n• Business-related information",
+      "VIFA Digital collects information that you voluntarily provide to us when:\n\n• You use our website\n• You contact our team\n• You use our digital services\n• You subscribe to our newsletters or updates\n\nThe information we collect includes:\n\n• First and last name\n• Email address\n• Phone number\n• Business-related information",
 
     "privacy.dataUsage.title": "Data Usage",
     "privacy.dataUsage.content":
-      "Your personal data is used for the following purposes:\n\n• To provide you with our technological services\n• To communicate with you and conduct consultations\n• To improve our services\n• To comply with legal obligations\n\nInvento Technologies never shares or sells your personal data to third parties for commercial purposes.",
+      "Your personal data is used for the following purposes:\n\n• To provide you with our digital services\n• To communicate with you and conduct consultations\n• To improve our services\n• To comply with legal obligations\n\nVIFA Digital never shares or sells your personal data to third parties for commercial purposes.",
 
     "privacy.dataSecurity.title": "Data Security",
     "privacy.dataSecurity.content":
@@ -46,7 +47,7 @@ const privacyTranslations = {
 
     "privacy.userRights.title": "Your Rights",
     "privacy.userRights.content":
-      "You have the following rights:\n\n• Request access to information we have about you\n• Request correction or update of your data\n• Request deletion of your data\n• Halt processing of your data\n\nTo exercise these rights, please contact us via Invento Technologies official channels.",
+      "You have the following rights:\n\n• Request access to information we have about you\n• Request correction or update of your data\n• Request deletion of your data\n• Halt processing of your data\n\nTo exercise these rights, please contact us via VIFA Digital official channels.",
   },
 };
 
@@ -87,7 +88,14 @@ const PrivacyPolicy: React.FC = () => {
   ];
 
   return (
-    <div className={`mt-20 min-h-screen transition-colors duration-500 bg-black ${getTransitionClasses()}`}>
+    <>
+      <SEO
+        title={t("privacy.title")}
+        description={t("privacy.description")}
+        url="https://vifadigital.ge/privacy"
+        type="website"
+      />
+      <div className={`mt-20 min-h-screen transition-colors duration-500 bg-black ${getTransitionClasses()}`}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -134,7 +142,8 @@ const PrivacyPolicy: React.FC = () => {
           ))}
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 

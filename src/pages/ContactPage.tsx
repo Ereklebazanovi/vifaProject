@@ -16,7 +16,7 @@ import { useLanguageTransition } from "../hooks/useLanguageTransition";
 
 const contactTranslations = {
   ka: {
-    "seo.title": "კონტაქტი | VIFA DIGITAL",
+    "seo.title": "კონტაქტი",
     "seo.description": "დაგვიკავშირდით პროექტის დასაწყებად. აირჩიეთ თქვენთვის სასურველი მიმართულება.",
     
     "contact.hero.subtitle": "სწრაფი კომუნიკაცია",
@@ -33,7 +33,7 @@ const contactTranslations = {
     "contact.info.location": "თბილისი, საქართველო",
   },
   en: {
-    "seo.title": "Contact Us | VIFA DIGITAL",
+    "seo.title": "Contact Us",
     "seo.description": "Contact us to start your project. Choose the department you need.",
     
     "contact.hero.subtitle": "Fast Communication",
