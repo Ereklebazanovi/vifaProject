@@ -110,35 +110,35 @@ const BlogPost = () => {
         }}
       />
 
-      <article className="relative mx-auto max-w-3xl px-5 sm:px-6 lg:px-8 pt-32 pb-24 md:pt-40">
-        <Breadcrumbs items={breadcrumbItems} className="mb-6" />
+      <article className="relative mx-auto max-w-2xl px-5 sm:px-6 pt-32 pb-24 md:pt-36">
+        <Breadcrumbs items={breadcrumbItems} className="mb-8" />
 
-        <div className="mb-4 flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-wider text-indigo-400">
+        <div className="mb-4 flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.15em] text-indigo-400">
           {post.tags.slice(0, 3).map((t) => (
-            <span key={t} className="rounded-full bg-indigo-500/10 px-2.5 py-0.5">
-              {t}
-            </span>
+            <span key={t}>{t}</span>
           ))}
         </div>
 
-        <h1 className="mb-5 text-3xl font-extrabold leading-[1.2] tracking-tight text-white md:text-[2.75rem] md:leading-[1.15]">
+        <h1 className="mb-4 text-[1.7rem] font-bold leading-[1.3] tracking-tight text-white sm:text-3xl md:text-[2.1rem] md:leading-[1.25]">
           {post.title}
         </h1>
 
-        <div className="mb-10 flex items-center gap-3 text-sm text-gray-500">
+        <div className="flex items-center gap-2.5 text-[13px] text-gray-500">
           <span>{post.author}</span>
           <span className="h-1 w-1 rounded-full bg-gray-600" />
           <time dateTime={post.publishedAt}>{formatDate(post.publishedAt, ka)}</time>
         </div>
 
+        <div className="my-8 h-px w-full bg-white/10" />
+
         {post.coverImage && (
           <motion.img
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
             src={post.coverImage}
             alt={post.title}
-            className="mb-12 aspect-[16/9] w-full rounded-2xl object-cover"
+            className="mb-10 h-52 w-full rounded-xl border border-white/10 object-cover md:h-72"
           />
         )}
 
