@@ -417,6 +417,15 @@ html.ka .font-georgian-body {
   font-family: "Noto Sans Georgian", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+/* Blog article body copy: force readable mkhedruli (Noto Sans Georgian) on every text
+   element inside .blog-prose EXCEPT headings/code. Needed because the global :lang(ka)
+   rule applies "BPG Nino Mtavruli" (all-caps, unreadable for long text) directly to each
+   child <p>/<li>/<a>, overriding the inherited body font. Headings keep Nino Mtavruli. */
+:lang(ka) .blog-prose *:not(h2):not(h3):not(code),
+html.ka .blog-prose *:not(h2):not(h3):not(code) {
+  font-family: "Noto Sans Georgian", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 /* Blog article body — styles the rich HTML produced by the editor (react-quill).
    Self-contained so we don't need the Tailwind typography plugin. */
 .blog-prose {
