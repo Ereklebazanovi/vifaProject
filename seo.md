@@ -350,6 +350,45 @@ post and prerenders `/blog` + `/blog/<slug>` (e.g. `21/21 routes OK`).
   untouched. The two demo widgets (`Terminal`, `AIConnectionDemo`) keep their own blue accent (out
   of scope — self-contained; can be unified later).
 
+### SESSION 6 — Photo/Video/Drone production vertical + keyword enrichment (2026-06-05)
+
+The §5 "Photo/Video Production page" high-impact item (user-flagged). The offering was
+buried inside Marketing packages with NO dedicated indexable page → couldn't rank for
+`ფოტო გადაღება`, `ვიდეო გადაღება`, `დრონით გადაღება`, `კომერციული ფოტოგრაფია`, `რილსების გადაღება`.
+**Constraint (user):** strengthen marketing (photo/video/drone) AND web-dev keywords WITHOUT
+cluttering the navbar — so the new page follows the industry-page model: indexable, prerendered,
+sitemap'd, reached via internal links + footer, but **NOT in the navbar**.
+
+#### 6a — New `/services/production` landing (`src/offeredServices/Production.tsx`)
+- Self-contained bilingual page (own translations object, same pattern as Marketing/WebDev).
+  Indigo/#060608 palette, `Breadcrumbs` + `SEO` + `FAQSection` reused.
+- 3 keyword verticals as deep H2 sections: **ფოტო გადაღება / კომერციული ფოტოგრაფია**,
+  **ვიდეო გადაღება / რილსები**, **დრონით (აერო) გადაღება**. Intro lead + services grid +
+  estimate pricing + platforms + related-links cluster (→ /services/marketing + /services/web) + FAQ + CTA.
+- `<SEO>`: `serviceSchema` (`serviceType: "Photo and Video Production"`) + `offers`
+  (300/400/500₾ → AggregateOffer 300–500), 3-level breadcrumbs (Home › Marketing › Production),
+  `faq` (6 Q&A, visible === FAQPage schema). Verified baked graph: Org/Website/WebPage/Breadcrumb/Service/FAQPage.
+- ⚠️ **Prices are PLACEHOLDER estimates** (labeled საორიენტაციო, like the rest of the site) —
+  user should confirm/adjust the real production prices in `productionTranslations` + the `offers` array.
+- Route `services/production` lazy-added in `App.tsx`; added to `prerender.js` ROUTES and
+  `public/sitemap.xml` (priority 0.9). Footer `services` array got a crawlable link
+  (`footer.services.production`, FaCamera) — **footer only, not navbar**.
+
+#### 6b — Marketing.tsx enrichment
+- serviceSchema name/description now explicitly name ფოტო/ვიდეო/დრონ keywords.
+- New internal-link callout card → `/services/production` (between services grid and packages).
+  (Existing Marketing FAQ already covers video/photo/drone — left as-is, matches schema.)
+
+#### 6c — WebDev.tsx enrichment (web keywords not suppressed)
+- Added deep organic-content section (intro + 3 H2): **ვებსაიტის დამზადება / საიტის აწყობა**,
+  **ონლაინ მაღაზიის დამზადება (eCommerce)**, **ლენდინგ პეიჯი**. Adds body text + H2 keyword
+  targets between pricing and IndustryLinks. `font-georgian-body` reading column.
+
+#### 6d — Verified
+- `npm run build` → **22/22 routes OK** (was 21). Production page html=96kB/rootContent=84kB.
+- Keywords present in baked HTML (დრონით გადაღება, კომერციული ფოტოგრაფია, რილსები, ვიდეო გადაღება);
+  0 analytics scripts baked; H1 present; FAQPage=6, breadcrumb matches visible.
+
 ---
 
 ## 3. CLEANUPS / REMOVALS
@@ -416,10 +455,8 @@ post and prerenders `/blog` + `/blog/<slug>` (e.g. `21/21 routes OK`).
 - **🔴 Google Business Profile** — biggest untapped win for the Georgian market ("near me",
   Maps, local pack). User task. Then add `LocalBusiness` signals / `aggregateRating` once reviews.
 - **🔴 Backlinks / citations** — directories, partners, PR. Off-page; the main authority lever.
-- **🔴 Photo/Video Production page(s)** — the offering is buried inside marketing packages with
-  NO dedicated indexable page; can't rank for `კომერციული ფოტოგრაფია`, `ვიდეო გადაღება`,
-  `დრონით გადაღება`, `რილსების გადაღება`. Same playbook as industry pages (dedicated page(s) +
-  `serviceSchema` + FAQ + prerender + sitemap + internal links). **User flagged wanting this.**
+- ~~**🔴 Photo/Video Production page(s)**~~ **DONE (session 6)** — `/services/production` (photo/
+  video/drone), industry-page model, hidden from navbar. Placeholder prices need user confirmation.
 - **🟡 Per-page OG images (1200×630):** all pages use logo `viffa.png`; design branded social
   cards per service → better share CTR.
 - **🟡 Blog cadence** — engine is built; publish 2–4 keyword articles/month (topical authority).
@@ -463,7 +500,8 @@ Content / authority (the real ranking lever):
 | `src/App.tsx` | Routes (lazy-loaded) + providers; aliases kept for 308 |
 | `src/layout/SimpleNavbar.tsx` | Nav — xl: breakpoint (1280px) for desktop, AI Chatbot + WMS links added |
 | `src/offeredServices/WebDev.tsx` | `/services/web` — bilingual FAQ, serviceSchema + offers, breadcrumbs |
-| `src/offeredServices/Marketing.tsx` | `/services/marketing` — bilingual FAQ, serviceSchema + offers, breadcrumbs |
+| `src/offeredServices/Marketing.tsx` | `/services/marketing` — bilingual FAQ, serviceSchema + offers, breadcrumbs, internal-link card → /services/production |
+| `src/offeredServices/Production.tsx` | `/services/production` (session 6) — photo/video/drone money-SEO page, NOT in navbar; serviceSchema+offers (placeholder prices)+faq+3-level breadcrumbs |
 | `src/pages/AIChatbot.tsx` | `/services/ai-chatbot` — **redesigned (session 5)**: indigo/#060608 flat cards, strong H1, 3 platforms, shared FAQSection; serviceSchema + offers + faqForSchema |
 | `src/components/IndustryLinks.tsx` | service→industry cluster cards; used on WebDev + Marketing |
 | `src/service/cloudinary.ts` | unsigned Cloudinary image upload for the blog editor |
@@ -493,10 +531,11 @@ node -e "const fs=require('fs');for(const r of ['services/web','services/marketi
 
 ---
 
-_Last updated: 2026-06-05. Status: STEP 1–6 + Sessions 2–5 complete. S3 = 10 industry money-SEO
+_Last updated: 2026-06-05. Status: STEP 1–6 + Sessions 2–6 complete. S3 = 10 industry money-SEO
 pages. S4 = Firestore blog + `/vifa-studio` editor + Cloudinary images. S5 = brand cleanup
 (Invento→VIFA), /privacy+/terms routes, prerender stale-blog fix, internal-linking cluster,
-AIChatbot redesign. Firestore rules SET (blog live). Build = `21/21 routes OK`.
-**Next (not started):** Google Business Profile + backlinks (off-page, user) · Photo/Video
-production page(s) (user-requested keyword vertical) · per-page OG images · blog cadence.
+AIChatbot redesign. S6 = `/services/production` photo/video/drone vertical (hidden from navbar) +
+Marketing/WebDev keyword enrichment. Firestore rules SET (blog live). Build = `22/22 routes OK`.
+**Next (not started):** Google Business Profile + backlinks (off-page, user) · CONFIRM production
+prices in `Production.tsx` (placeholder estimates) · per-page OG images · blog cadence.
 **Watch out for:** the Tailwind v4 `* { max-width:100% }` layer quirk (§ SESSION 5d / files map)._

@@ -19,6 +19,7 @@ const footerTranslations = {
     "footer.services.title": "სერვისები",
     "footer.services.webdev": "ვებ დეველოპმენტი",
     "footer.services.ads": "ციფრული მარკეტინგი",
+    "footer.services.production": "ფოტო & ვიდეო გადაღება",
     "footer.services.ai": "AI ჩატბოტი",
     "footer.services.wms": "საწყობის პროგრამა",
 
@@ -49,6 +50,7 @@ const footerTranslations = {
     "footer.services.title": "Services",
     "footer.services.webdev": "Web Development",
     "footer.services.ads": "Digital Marketing",
+    "footer.services.production": "Photo & Video Production",
     "footer.services.ai": "AI Chatbot",
     "footer.services.wms": "Warehouse Software",
 
@@ -76,6 +78,7 @@ import {
   FaMapMarkerAlt,
   FaArrowUp,
   FaRobot,
+  FaCamera,
   FaHome,
   FaUser,
   FaProjectDiagram,
@@ -113,6 +116,11 @@ const Footer: React.FC = () => {
       name: t("footer.services.ads"),
       href: "/services/marketing",
       icon: <FaChartLine className="w-4 h-4" />,
+    },
+    {
+      name: t("footer.services.production"),
+      href: "/services/production",
+      icon: <FaCamera className="w-4 h-4" />,
     },
     {
       name: t("footer.services.ai"),

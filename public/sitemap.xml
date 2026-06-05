@@ -23,6 +23,13 @@
   </url>
 
   <url>
+    <loc>https://vifadigital.ge/services/production</loc>
+    <lastmod>2026-06-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
     <loc>https://vifadigital.ge/services/ai-chatbot</loc>
     <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>

@@ -2,6 +2,7 @@
 
 import type React from "react";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Breadcrumbs from "../components/Breadcrumbs";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
@@ -320,9 +321,9 @@ const Marketing: React.FC = () => {
         keywords={t("seo.marketing.keywords")}
         url="https://vifadigital.ge/services/marketing"
         serviceSchema={{
-          name: "ციფრული მარკეტინგი და სოციალური მედია მართვა",
+          name: "ციფრული მარკეტინგი, ფოტო და ვიდეო გადაღება",
           description:
-            "ციფრული მარკეტინგის სერვისები: სოციალური მედია მართვა, ვიდეო და ფოტო პროდუქცია, კონტენტის შექმნა და სარეკლამო კამპანიები.",
+            "ციფრული მარკეტინგის სერვისები: სოციალური მედია მართვა, ფოტო გადაღება, ვიდეო გადაღება და რილსები, დრონით (აერო) გადაღება, კონტენტის შექმნა და სარეკლამო კამპანიები.",
           serviceType: "Digital Marketing",
           offers: [
             { name: "Standard პაკეტი", price: 1000 },
@@ -453,6 +454,35 @@ const Marketing: React.FC = () => {
               </motion.div>
             ))}
           </div>
+        </section>
+
+        {/* ── Production cross-link (photo/video/drone landing — internal link) ── */}
+        <section className="mb-32">
+          <Link
+            to="/services/production"
+            className="group flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/[0.02] p-8 transition-colors hover:border-indigo-500/40 sm:flex-row sm:items-center sm:justify-between"
+          >
+            <div className="max-w-2xl">
+              <span className="mb-2 inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.25em] text-indigo-400">
+                <span className="h-px w-8 bg-indigo-500" />
+                {currentLanguage === "en" ? "Production" : "პროდუქცია"}
+              </span>
+              <h3 className="text-xl font-semibold text-white sm:text-2xl">
+                {currentLanguage === "en"
+                  ? "Photo, video & drone shooting"
+                  : "ფოტო, ვიდეო და დრონით გადაღება"}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-gray-400">
+                {currentLanguage === "en"
+                  ? "Commercial photography, advertising videos, reels and cinematic aerial footage for your brand."
+                  : "კომერციული ფოტოგრაფია, სარეკლამო ვიდეო, რილსები და კინემატოგრაფიული აეროგადაღება თქვენი ბრენდისთვის."}
+              </p>
+            </div>
+            <span className="inline-flex shrink-0 items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium text-white transition-colors group-hover:bg-white group-hover:text-black">
+              {currentLanguage === "en" ? "View Production" : "გადაღების ნახვა"}
+              <FaArrowRight className="text-xs" />
+            </span>
+          </Link>
         </section>
 
         {/* ── Marketing Packages (SaaS Style) ── */}

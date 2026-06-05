@@ -149,6 +149,19 @@ const webDevTranslations = {
     "webdev.cta.question": "მზად ხარ ბიზნესის ციფრული ტრანსფორმაციისთვის?",
     "webdev.cta.button": "დაგვიკავშირდი WhatsApp-ზე",
     "webdev.whatsapp.consult": "კონსულტაცია WhatsApp-ზე",
+
+    "webdev.content.eyebrow": "სერვისის შესახებ",
+    "webdev.content.intro":
+      "ვებსაიტი დღეს ბიზნესის მთავარი ციფრული ვიტრინაა. VIFA Digital აკეთებს საიტის დამზადებას სრული ციკლით — დიზაინიდან და დეველოპმენტიდან SEO ოპტიმიზაციამდე და გაშვებამდე. ვქმნით სწრაფ, მობილურზე მორგებულ და კონვერსიაზე ორიენტირებულ ვებგვერდებს, რომლებიც რეალურ შედეგს — ვიზიტორებსა და გაყიდვებს მოგიტანთ.",
+    "webdev.content.h2_1": "ვებსაიტის დამზადება და საიტის აწყობა",
+    "webdev.content.p_1":
+      "ვაკეთებთ კორპორატიული ვებსაიტებისა და სავიზიტო საიტების დამზადებას მცირე და საშუალო ბიზნესისთვის. თითოეული ვებგვერდი იქმნება უნიკალური დიზაინით, თქვენი ბრენდის სტილზე მორგებით და სუფთა, სწრაფი კოდით (React, TypeScript). საიტი თავიდანვე SEO-ზე ოპტიმიზებულია, რათა Google-ში სწორ სიტყვებზე გამოჩნდეს და ახალი კლიენტები მოიზიდოს.",
+    "webdev.content.h2_2": "ონლაინ მაღაზიის დამზადება (eCommerce)",
+    "webdev.content.p_2":
+      "ვქმნით სრულფასოვან ონლაინ მაღაზიებს ქართული ბანკების გადახდის სისტემების ინტეგრაციით. პლატფორმა უკავშირდება Vifa WMS სისტემას — ავტომატურად ასინქრონებს მარაგებს, ბეჭდავს საკურიერო სტიკერებს და გაძლევთ შეკვეთების კონტროლს რეალურ დროში. იდეალურია მათთვის, ვისაც სურს გაყიდვების ონლაინ მასშტაბირება.",
+    "webdev.content.h2_3": "ლენდინგ პეიჯი და კონვერსიის ოპტიმიზაცია",
+    "webdev.content.p_3":
+      "სარეკლამო კამპანიებისთვის ვამზადებთ ლენდინგ პეიჯებს (landing page), რომლებიც ერთ მკაფიო მიზანზეა აწყობილი — ლიდის ან გაყიდვის მიღებაზე. სწრაფი ჩატვირთვა, გასაგები მესიჯი და ძლიერი call-to-action ზრდის რეკლამის ეფექტურობას და ამცირებს მოზიდვის ღირებულებას.",
   },
   en: {
     "seo.webdev.title": "Vifa Web - Web Development Services | Vifa Technologies",
@@ -448,6 +461,29 @@ const WebDev: React.FC = () => {
             <p className="text-center text-gray-500 text-sm mt-8">
               {consultationLabel}
             </p>
+          </section>
+
+          {/* ── Organic SEO content (deep H2 keyword landing) ── */}
+          <section className="border-t border-white/10 pt-16 pb-8">
+            <span className="mb-5 inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.25em] text-indigo-400">
+              <span className="h-px w-8 bg-indigo-500" />
+              {t("webdev.content.eyebrow")}
+            </span>
+            <p className="font-georgian-body max-w-3xl text-lg leading-[1.85] text-gray-200 md:text-xl">
+              {t("webdev.content.intro")}
+            </p>
+            <div className="mt-14 max-w-3xl space-y-12">
+              {[1, 2, 3].map((n) => (
+                <div key={n}>
+                  <h2 className="mb-4 text-2xl font-bold tracking-tight text-white md:text-[1.75rem] md:leading-snug">
+                    {t(`webdev.content.h2_${n}`)}
+                  </h2>
+                  <p className="font-georgian-body text-[15px] leading-[1.9] text-gray-400 md:text-base">
+                    {t(`webdev.content.p_${n}`)}
+                  </p>
+                </div>
+              ))}
+            </div>
           </section>
 
           {/* ── Industries (cornerstone → cluster internal links) ── */}

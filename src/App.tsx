@@ -12,6 +12,7 @@ import Home from "./pages/organic/Home";
 // Every other page loads on demand, shrinking first-load JS / improving CWV.
 const WebDev = lazy(() => import("./offeredServices/WebDev"));
 const Marketing = lazy(() => import("./offeredServices/Marketing"));
+const Production = lazy(() => import("./offeredServices/Production"));
 const AIChatbot = lazy(() => import("./pages/AIChatbot"));
 const ChatbotRequestForm = lazy(() => import("./pages/ChatbotRequestForm"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -49,6 +50,9 @@ const App = () => {
                   {/* Organic Traffic Flow */}
                   <Route path="services/web" element={<WebDev />} />
                   <Route path="services/marketing" element={<Marketing />} />
+                  {/* Photo/video/drone production — indexable, NOT in navbar (linked from
+                      Marketing + footer). Same model as industry money-SEO pages. */}
+                  <Route path="services/production" element={<Production />} />
 
                   {/* Route aliases (server-side 301'd to canonical in vercel.json) */}
                   <Route path="services/web-development" element={<WebDev />} />
