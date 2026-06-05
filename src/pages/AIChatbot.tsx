@@ -11,15 +11,16 @@ import { useLanguage } from "../contexts/LanguageContext";
 import {
   FaBrain,
   FaFacebook,
+  FaWhatsapp,
+  FaInstagram,
   FaRocket,
   FaCheck,
   FaShieldAlt,
   FaCog,
   FaCloud,
-  FaCommentDots,
-  FaPhone,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
+import FAQSection from "../components/FAQSection";
 import { ChatbotDemoTerminal } from "../components/Terminal";
 import { AIConnectionDemo } from "../components/AIConnectionDemo";
 
@@ -312,7 +313,9 @@ const AIChatbot: React.FC = () => {
   }, [stopNavigation]);
 
   const platforms = [
-    { icon: <FaFacebook />, key: "facebook", color: "blue" },
+    { icon: <FaFacebook />, key: "facebook" },
+    { icon: <FaWhatsapp />, key: "whatsapp" },
+    { icon: <FaInstagram />, key: "instagram" },
   ];
 
   const technicalFeatures = [
@@ -326,22 +329,6 @@ const AIChatbot: React.FC = () => {
     { key: "medium" },
     { key: "large" },
   ];
-
-  const faq = [
-    { key: "q1" },
-    { key: "q2" },
-    { key: "q3" },
-    { key: "q4" },
-    { key: "q5" },
-  ];
-
-  const getColorClass = () => {
-    return "border-slate-600 bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800/70 hover:to-slate-900/70";
-  };
-
-  const getTextColorClass = () => {
-    return "text-blue-400";
-  };
 
   return (
     <>
@@ -362,400 +349,265 @@ const AIChatbot: React.FC = () => {
         faq={faqForSchema}
       />
 
-      {/* Background Image */}
-      <div className="fixed inset-0 z-0">
-        <div
-          className="w-full h-full bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage:
-              "url(https://images.pexels.com/photos/8294604/pexels-photo-8294604.jpeg)",
-          }}
-        />
-        <div className="absolute inset-0 bg-black/85"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/80 via-transparent to-blue-900/30"></div>
+      {/* Site-consistent dark background */}
+      <div className="fixed inset-0 z-0 bg-[#060608]">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_65%_-5%,rgba(99,102,241,0.06)_0%,transparent_65%)]" />
       </div>
 
-      <div className="relative z-10 min-h-screen lg:mt-15">
-        <div
-          className={`container mx-auto px-4 sm:px-6 lg:px-8 pt-25 sm:pt-28 md:pt-34 pb-10 ${getTransitionClasses()}`}
-        >
-          <div className="max-w-7xl mx-auto mb-6">
-            <Breadcrumbs items={breadcrumbItems} />
-          </div>
+      <main
+        className={`relative z-10 min-h-screen text-white selection:bg-indigo-500/30 ${getTransitionClasses()}`}
+      >
+        <div className="mx-auto max-w-6xl px-5 sm:px-6 lg:px-8 pt-28 md:pt-36 pb-24">
+          <Breadcrumbs items={breadcrumbItems} className="mb-8" />
 
-          {/* Hero Section - Side-to-Side Layout */}
-          <div className="max-w-7xl mx-auto mb-32">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              {/* Left Side - Content & Connection Demo */}
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="space-y-8 max-w-lg flex flex-col justify-center h-full"
-              >
-                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight tracking-tight font-['Inter','Noto_Sans_Georgian',sans-serif] text-center lg:text-left">
-                  
-                  <span className="text-transparent bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text">
-                    {t("hero.titleHighlight")}
-                  </span>
-                </h1>
-                {/* AI Connection Demo */}
-                <AIConnectionDemo />
+          {/* ── Hero ── */}
+          <section className="mb-20 grid items-center gap-12 md:mb-28 lg:grid-cols-2">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="flex flex-col"
+            >
+              <span className="mb-5 inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.25em] text-indigo-400">
+                <span className="h-px w-8 bg-indigo-500" />
+                {en ? "AI Chatbot" : "AI ჩატბოტი"}
+              </span>
+              <h1 className="mb-6 text-3xl font-extrabold leading-[1.2] tracking-tight text-white md:text-[2.6rem] md:leading-[1.15]">
+                {en ? "AI Chatbot for Your Business" : "AI ჩატბოტი თქვენი ბიზნესისთვის"}
+                <span className="mt-2 block bg-gradient-to-r from-indigo-400 to-indigo-600 bg-clip-text text-transparent">
+                  {t("hero.titleHighlight")}
+                </span>
+              </h1>
 
-                {/* WhatsApp Consultation Button */}
-                <div className="bg-gradient-to-r from-green-600/20 to-green-700/20 rounded-xl p-4 border border-green-500/30 backdrop-blur-sm">
-                  <div className="flex flex-col sm:flex-row items-center gap-4">
-                    <div className="flex-1 text-center sm:text-left">
-                      <p className="text-green-400 font-semibold mb-1">{t("consultation.whatsapp")}</p>
-                      <div className="flex items-center justify-center sm:justify-start gap-2">
-                        <FaPhone className="text-green-400 text-sm" />
-                        <span className="text-green-300 text-sm">{t("phone.number")}</span>
-                      </div>
-                    </div>
-                    <a
-                      href={whatsappUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg font-medium text-white transition-all duration-300 hover:scale-105 shadow-lg shadow-green-600/25"
-                    >
-                      <FaCommentDots size={16} />
-                      WhatsApp
-                    </a>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-slate-300 leading-relaxed font-['Inter','Noto_Sans_Georgian',sans-serif]">
-                      <span className="text-blue-400 font-bold">
-                        {t("hero.feature1.title")}
-                      </span>{" "}
-                      {t("hero.feature1.description")}
+              <div className="mb-8 space-y-3">
+                {["feature1", "feature2", "feature3"].map((f) => (
+                  <div key={f} className="flex items-start gap-3">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-400" />
+                    <p className="leading-relaxed text-gray-300">
+                      <span className="font-semibold text-white">{t(`hero.${f}.title`)}</span>{" "}
+                      {t(`hero.${f}.description`)}
                     </p>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-slate-300 leading-relaxed font-['Inter','Noto_Sans_Georgian',sans-serif]">
-                      <span className="text-blue-400 font-bold">
-                        {t("hero.feature2.title")}
-                      </span>{" "}
-                      {t("hero.feature2.description")}
-                    </p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-slate-300 leading-relaxed font-['Inter','Noto_Sans_Georgian',sans-serif]">
-                      <span className="text-blue-400 font-bold">
-                        {t("hero.feature3.title")}
-                      </span>{" "}
-                      {t("hero.feature3.description")}
-                    </p>
-                  </div>
-                </div>
+                ))}
+              </div>
 
-                <div className="text-center lg:text-left">
-                  <p className="text-base sm:text-lg text-blue-400 font-bold mb-2 font-['Inter','Noto_Sans_Georgian',sans-serif]">
-                    {t("hero.demoLabel")}
-                  </p>
-                  <p className="text-xs sm:text-sm text-slate-400 font-['Inter','Noto_Sans_Georgian',sans-serif]">
-                    {t("hero.demoDescription")}
-                  </p>
-                </div>
-              </motion.div>
-
-              {/* Right Side - Terminal Demo */}
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="lg:pl-8"
-              >
-                <ChatbotDemoTerminal />
-              </motion.div>
-            </div>
-          </div>
-
-          {/* Platforms Section - Enhanced */}
-          <div className="max-w-6xl mx-auto mb-32">
-            <div className="text-center mb-12 sm:mb-16">
-              <h2 className="text-xl sm:text-2xl text-slate-300">
-                {t("platforms.title")}
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {platforms.map((platform) => (
-                <motion.div
-                  key={platform.key}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: platforms.indexOf(platform) * 0.2 }}
-                  whileHover={{ y: -10 }}
-                  className={`p-4 sm:p-6 lg:p-8 rounded-3xl border-2 ${getColorClass()} border-opacity-30 hover:border-opacity-100 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20 backdrop-blur-sm`}
+              <div className="mb-10 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-600 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-green-500"
                 >
-                  <div className={`text-4xl ${getTextColorClass()} mb-4`}>
-                    {platform.icon}
-                  </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-white mb-2">
+                  <FaWhatsapp className="text-lg" />
+                  {t("consultation.whatsapp")}
+                </a>
+                <Link
+                  to="/services/ai-chatbot/request"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-indigo-500"
+                >
+                  <FaBrain />
+                  {en ? "Request AI Chatbot" : "მოითხოვე AI ჩატბოტი"}
+                </Link>
+              </div>
+
+              <AIConnectionDemo />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+            >
+              <ChatbotDemoTerminal />
+            </motion.div>
+          </section>
+
+          {/* ── Platforms ── */}
+          <section className="mb-20 md:mb-24">
+            <h2 className="mb-10 text-center text-2xl font-bold tracking-tight text-white md:text-3xl">
+              {t("platforms.title")}
+            </h2>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {platforms.map((platform) => (
+                <div
+                  key={platform.key}
+                  className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-colors hover:border-indigo-500/40"
+                >
+                  <div className="mb-4 text-3xl text-indigo-400">{platform.icon}</div>
+                  <h3 className="mb-1.5 text-lg font-bold text-white">
                     {t(`platform.${platform.key}.name`)}
                   </h3>
-                  <p
-                    className={`text-sm ${getTextColorClass()} mb-4 font-medium`}
-                  >
+                  <p className="mb-4 text-sm font-medium text-indigo-300">
                     {t(`platform.${platform.key}.stats`)}
                   </p>
                   <ul className="space-y-2">
                     {[1, 2, 3].map((idx) => (
-                      <li
-                        key={idx}
-                        className="flex items-start gap-2 text-slate-300"
-                      >
-                        <FaCheck
-                          className={`${getTextColorClass()} mt-1 flex-shrink-0`}
-                        />
-                        <span className="text-sm">{t(`platform.${platform.key}.feature${idx}`)}</span>
+                      <li key={idx} className="flex items-start gap-2 text-sm text-gray-300">
+                        <FaCheck className="mt-1 shrink-0 text-indigo-400" />
+                        <span>{t(`platform.${platform.key}.feature${idx}`)}</span>
                       </li>
                     ))}
                   </ul>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </div>
+          </section>
 
-          {/* Cost Structure Section */}
-          <div className="!max-w-6xl mx-auto mb-32">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-white mb-4">
+          {/* ── Pricing ── */}
+          <section className="mb-20 md:mb-24">
+            <div className="mb-10 text-center">
+              <h2 className="mb-3 text-2xl font-bold tracking-tight text-white md:text-3xl">
                 {t("pricing.title")}
               </h2>
-              <p className="text-xl text-slate-300">
-                {t("pricing.description")}
-              </p>
+              <p className="mx-auto max-w-2xl text-gray-400">{t("pricing.description")}</p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-12">
+            <div className="mb-6 grid gap-5 lg:grid-cols-2">
               {/* One-time Investment */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-                whileHover={{ scale: 1.02 }}
-                className="bg-gradient-to-br from-blue-900/20 to-slate-800/30 rounded-3xl p-4 sm:p-6 lg:p-8 border border-blue-500/30 h-full hover:border-blue-400/60 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10 backdrop-blur-sm"
-              >
-                <h3 className="text-2xl font-bold text-white mb-6">
-                  <FaRocket className="text-blue-400 mr-3 inline" />
+              <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 lg:p-8">
+                <h3 className="mb-6 flex items-center gap-3 text-xl font-bold text-white">
+                  <FaRocket className="text-indigo-400" />
                   {t("pricing.investment.title")}
                 </h3>
-                <div className="space-y-4">
-                  <div className="text-center mb-4">
-                    <div className="text-3xl font-bold text-blue-400 mb-2">
-                      {t("pricing.investment.price")}
-                    </div>
-                    <div className="text-sm text-slate-400">
-                      {t("pricing.investment.priceNote")}
-                    </div>
+                <div className="mb-5 text-center">
+                  <div className="text-3xl font-black text-indigo-400">
+                    {t("pricing.investment.price")}
                   </div>
-                  <div className="text-sm text-slate-400 mb-4">{t("pricing.investment.includes")}</div>
-                  <div className="space-y-3">
-                    {[1, 2, 3, 4, 5].map((num) => (
-                      <div key={num} className="flex items-start gap-3">
-                        <FaCheck className="text-blue-400 text-sm mt-1 flex-shrink-0" />
-                        <span className="text-slate-300 text-sm">
-                          {t(`pricing.investment.feature${num}`)}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+                  <div className="text-sm text-gray-500">{t("pricing.investment.priceNote")}</div>
                 </div>
-              </motion.div>
+                <div className="mb-3 text-sm text-gray-500">{t("pricing.investment.includes")}</div>
+                <div className="space-y-3">
+                  {[1, 2, 3, 4, 5].map((num) => (
+                    <div key={num} className="flex items-start gap-3">
+                      <FaCheck className="mt-1 shrink-0 text-sm text-indigo-400" />
+                      <span className="text-sm text-gray-300">
+                        {t(`pricing.investment.feature${num}`)}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
 
               {/* Operational Costs */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                whileHover={{ scale: 1.02 }}
-                className="bg-gradient-to-br from-cyan-900/20 to-slate-800/30 rounded-3xl p-4 sm:p-6 lg:p-8 border border-cyan-500/30 h-full hover:border-cyan-400/60 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/10 backdrop-blur-sm"
-              >
-                <h3 className="text-2xl font-bold text-white mb-6">
-                  <FaCloud className="text-blue-400 mr-3 inline" />
+              <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 lg:p-8">
+                <h3 className="mb-6 flex items-center gap-3 text-xl font-bold text-white">
+                  <FaCloud className="text-indigo-400" />
                   {t("pricing.monthly.title")}
                 </h3>
-                <div className="space-y-4">
-                  <div className="text-center mb-4">
-                    <div className="text-3xl font-bold text-blue-400 mb-2">
-                      {t("pricing.monthly.api")}
-                    </div>
-                    <div className="text-sm text-slate-400">
-                      {t("pricing.monthly.price")}
-                    </div>
-                  </div>
-                  <div className="space-y-3">
-                    <div className="flex items-start gap-3">
-                      <FaCheck className="text-blue-400 text-sm mt-1 flex-shrink-0" />
-                      <div>
-                        <span className="text-slate-300 text-sm font-medium">
-                          {t("pricing.monthly.billing.title")}{" "}
-                        </span>
-                        <span className="text-slate-300 text-sm">
-                          {t("pricing.monthly.billing.description")}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <FaCheck className="text-blue-400 text-sm mt-1 flex-shrink-0" />
-                      <div>
-                        <span className="text-slate-300 text-sm font-medium">
-                          {t("pricing.monthly.monitoring.title")}{" "}
-                        </span>
-                        <span className="text-slate-300 text-sm">
-                          {t("pricing.monthly.monitoring.description")}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <FaCheck className="text-blue-400 text-sm mt-1 flex-shrink-0" />
-                      <div>
-                        <span className="text-slate-300 text-sm font-medium">
-                          {t("pricing.monthly.transparency.title")}{" "}
-                        </span>
-                        <span className="text-slate-300 text-sm">
-                          {t("pricing.monthly.transparency.description")}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
+                <div className="mb-5 text-center">
+                  <div className="text-3xl font-black text-indigo-400">{t("pricing.monthly.api")}</div>
+                  <div className="text-sm text-gray-500">{t("pricing.monthly.price")}</div>
                 </div>
-              </motion.div>
+                <div className="space-y-3">
+                  {[
+                    ["pricing.monthly.billing.title", "pricing.monthly.billing.description"],
+                    ["pricing.monthly.monitoring.title", "pricing.monthly.monitoring.description"],
+                    ["pricing.monthly.transparency.title", "pricing.monthly.transparency.description"],
+                  ].map(([titleKey, descKey]) => (
+                    <div key={titleKey} className="flex items-start gap-3">
+                      <FaCheck className="mt-1 shrink-0 text-sm text-indigo-400" />
+                      <p className="text-sm text-gray-300">
+                        <span className="font-medium text-white">{t(titleKey)} </span>
+                        {t(descKey)}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
 
             {/* API Cost Examples */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="bg-gradient-to-br from-purple-900/20 via-slate-800/40 to-slate-900/30 rounded-3xl p-8 border border-purple-500/30 mb-8 backdrop-blur-sm hover:border-purple-400/60 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/10">
-              <h4 className="text-xl font-bold text-white mb-4 text-center">
+            <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 md:p-8">
+              <h3 className="mb-2 text-center text-lg font-bold text-white">
                 {t("pricing.examples.title")}
-              </h4>
-              <p className="text-sm text-slate-400 mb-6 text-center">
-                {t("pricing.examples.note")}
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+              </h3>
+              <p className="mb-6 text-center text-sm text-gray-500">{t("pricing.examples.note")}</p>
+              <div className="grid gap-4 sm:grid-cols-3">
                 {apiCosts.map((cost) => (
-                  <div key={cost.key} className="text-center">
-                    <div className="text-white font-medium mb-2">
+                  <div
+                    key={cost.key}
+                    className="rounded-xl border border-white/10 bg-white/[0.02] p-4 text-center"
+                  >
+                    <div className="mb-1 font-medium text-white">
                       {t(`pricing.examples.${cost.key}`)}
                     </div>
-                    <div className="text-slate-400 text-sm mb-2">
+                    <div className="mb-2 text-sm text-gray-500">
                       {t(`pricing.examples.${cost.key}Queries`)}
                     </div>
-                    <div className="text-2xl font-bold text-blue-400">
+                    <div className="text-2xl font-bold text-indigo-400">
                       {t(`pricing.examples.${cost.key}Cost`)}
                     </div>
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
+          </section>
 
-            {/* Admin Panel Section */}
-            <div className="!max-w-6xl mx-auto mb-32">
-              <div className="text-center mb-16">
-                <h2 className="text-3xl font-bold text-white mb-4">
-                  <FaCog className="text-blue-400 mr-3 inline" />
-                  {t("admin.title")}
-                </h2>
+          {/* ── Admin Panel ── */}
+          <section className="mb-20 md:mb-24">
+            <h2 className="mb-10 flex items-center justify-center gap-3 text-center text-2xl font-bold tracking-tight text-white md:text-3xl">
+              <FaCog className="text-indigo-400" />
+              {t("admin.title")}
+            </h2>
+            <div className="grid gap-6 rounded-2xl border border-white/10 bg-white/[0.02] p-6 md:grid-cols-2 md:p-8">
+              <div>
+                <h3 className="mb-4 text-lg font-bold text-white">{t("admin.canDo")}</h3>
+                <div className="space-y-3">
+                  {[1, 2, 3, 4, 5].map((num) => (
+                    <div key={num} className="flex items-center gap-2">
+                      <FaCheck className="shrink-0 text-sm text-indigo-400" />
+                      <span className="text-sm text-gray-300">{t(`admin.canDo.feature${num}`)}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-
-              <div className="mx-auto">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
-                  whileHover={{ scale: 1.01 }}
-                  className="bg-gradient-to-br from-emerald-900/20 via-slate-800/40 to-blue-900/20 rounded-3xl p-6 border border-emerald-500/30 backdrop-blur-sm hover:border-emerald-400/60 transition-all duration-300 hover:shadow-2xl hover:shadow-emerald-500/10"
-                >
-                  {/* cool s */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                    <div>
-                      <h4 className="text-lg font-bold text-white mb-4">
-                        {t("admin.canDo")}
-                      </h4>
-                      <div className="space-y-3">
-                        {[1, 2, 3, 4, 5].map((num) => (
-                          <div
-                            key={num}
-                            className="flex items-center gap-2"
-                          >
-                            <FaCheck className="text-blue-400 text-sm" />
-                            <span className="text-slate-300 text-sm">
-                              {t(`admin.canDo.feature${num}`)}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
+              <div>
+                <h3 className="mb-4 text-lg font-bold text-white">{t("admin.howWorks")}</h3>
+                <div className="space-y-3">
+                  {[1, 2, 3, 4].map((step, index) => (
+                    <div key={step} className="flex items-start gap-2.5">
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-indigo-500 text-xs font-bold text-white">
+                        {index + 1}
+                      </span>
+                      <span className="text-sm text-gray-300">{t(`admin.howWorks.step${step}`)}</span>
                     </div>
-                    <div>
-                      <h4 className="text-lg font-bold text-white mb-4">
-                        {t("admin.howWorks")}
-                      </h4>
-                      <div className="space-y-3">
-                        {[1, 2, 3, 4].map((step, index) => (
-                          <div key={step} className="flex items-start gap-2">
-                            <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold mt-0.5 flex-shrink-0">
-                              {index + 1}
-                            </div>
-                            <span className="text-slate-300 text-sm">
-                              {t(`admin.howWorks.step${step}`)}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
+          </section>
 
-          {/* Technical Features */}
-          <div className="!max-w-6xl mx-auto mb-24">
-            <div className="text-center mb-8 sm:mb-12">
-              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+          {/* ── Technical Features ── */}
+          <section>
+            <div className="mb-10 text-center">
+              <h2 className="mb-3 text-2xl font-bold tracking-tight text-white md:text-3xl">
                 {t("technical.title")}
               </h2>
-              <p className="text-lg sm:text-xl text-slate-300 px-4">
-                {t("technical.subtitle")}
-              </p>
+              <p className="text-gray-400">{t("technical.subtitle")}</p>
             </div>
-
-            <div className="space-y-6 sm:space-y-8">
+            <div className="space-y-5">
               {technicalFeatures.map((feature, index) => (
                 <motion.div
                   key={feature.key}
                   initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
-                  whileHover={{ scale: 1.01, y: -5 }}
-                  className="bg-gradient-to-br from-indigo-900/20 via-slate-800/40 to-slate-900/30 rounded-3xl p-4 sm:p-6 lg:p-8 border border-indigo-500/30 backdrop-blur-sm hover:border-indigo-400/60 transition-all duration-300 hover:shadow-2xl hover:shadow-indigo-500/10"
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 lg:p-8"
                 >
-                  <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
-                    <div className="text-3xl sm:text-4xl lg:text-5xl text-blue-400 flex-shrink-0 mt-1 sm:mt-2">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
+                    <div className="mt-1 shrink-0 text-3xl text-indigo-400 sm:text-4xl">
                       {feature.icon}
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
+                      <h3 className="mb-4 text-lg font-bold text-white sm:text-xl">
                         {t(`technical.${feature.key}.title`)}
                       </h3>
-                      <div className="space-y-3 sm:space-y-4">
+                      <div className="space-y-3">
                         {[1, 2, 3].map((pointNum) => (
-                          <div
-                            key={pointNum}
-                            className="flex items-start gap-2 sm:gap-3"
-                          >
-                            <FaCheck className="text-blue-400 text-xs sm:text-sm mt-1 flex-shrink-0" />
-                            <span className="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                          <div key={pointNum} className="flex items-start gap-3">
+                            <FaCheck className="mt-1 shrink-0 text-sm text-indigo-400" />
+                            <span className="text-sm leading-relaxed text-gray-300">
                               {t(`technical.${feature.key}.point${pointNum}`)}
                             </span>
                           </div>
@@ -766,91 +618,37 @@ const AIChatbot: React.FC = () => {
                 </motion.div>
               ))}
             </div>
-          </div>
+          </section>
         </div>
 
-        {/* FAQ Section */}
-        <div className="w-full !max-w-5xl mx-auto mb-24">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4">
-              {t("faq.title")}
-            </h2>
-          </div>
+        {/* ── FAQ (shared component) ── */}
+        <section className="py-12">
+          <FAQSection items={faqForSchema} eyebrow="FAQ" title={t("faq.title")} />
+        </section>
 
-          <div className="max-w-2xl mx-auto space-y-6">
-            {faq.map((item, index) => (
-              <motion.div
-                key={item.key}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ x: 10, scale: 1.01 }}
-                className="bg-gradient-to-r from-slate-800/50 via-slate-700/40 to-slate-800/30 rounded-2xl p-6 border border-slate-600/30 hover:border-blue-400/60 transition-all duration-300 backdrop-blur-sm hover:shadow-xl hover:shadow-blue-500/10"
+        {/* ── CTA ── */}
+        <section className="mx-auto max-w-3xl px-5 pb-24 sm:px-6">
+          <div className="rounded-2xl border border-indigo-500/30 bg-indigo-950/20 p-8 text-center">
+            <h2 className="mb-6 text-2xl font-bold text-white md:text-3xl">{t("cta.question")}</h2>
+            <div className="flex flex-col justify-center gap-3 sm:flex-row">
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-3.5 text-sm font-bold text-black transition-colors hover:bg-gray-200"
               >
-                <h3 className="text-lg font-semibold text-white mb-3 flex items-start gap-2">
-                  <span className="text-blue-400 mt-1">•</span>
-                  {t(`faq.${item.key}.question`)}
-                </h3>
-                <div className="ml-4">
-                  <p className="text-blue-300 font-medium mb-2">
-                    {t(`faq.${item.key}.answer`)}
-                  </p>
-                  <p className="text-slate-400 text-sm leading-relaxed">
-                    {t(`faq.${item.key}.details`)}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* CTA Section - Back inside container */}
-      <div className="relative z-10 min-h-screen">
-        <div
-          className={`!max-w-5xl container mx-auto px-4 sm:px-6 lg:px-8 pb-10 ${getTransitionClasses()}`}
-        >
-          {/* CTA Section */}
-
-          {/* CTA Section */}
-          <div className="text-center">
-            <div className="max-w-4xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                whileHover={{ scale: 1.02, y: -5 }}
-                className="bg-gradient-to-r from-blue-500/20 via-blue-600/15 to-blue-700/20 rounded-3xl p-8 border border-blue-400/40 backdrop-blur-sm hover:border-blue-300/80 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/20"
+                <FaRocket />
+                {t("cta.button")}
+              </Link>
+              <Link
+                to="/services/ai-chatbot/request"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-indigo-500"
               >
-                <h3 className="text-3xl font-bold text-white mb-6">
-                  {t("cta.question")}
-                </h3>
-
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-  {/* არსებული "უფასო კონსულტაცია" ღილაკი */}
-  <Link
-    to="/contact"
-    className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105"
-  >
-    <FaRocket />
-    {t("cta.button")}
-  </Link>
-
-  {/* ახალი "მოითხოვე AI ჩატბოტი" ღილაკი */}
-  <Link
-    to="/services/ai-chatbot/request"
-    className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-medium hover:from-purple-600 hover:to-purple-700 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 border border-purple-400/50"
-  >
-    <FaBrain />
-    {currentLanguage === 'ka' ? 'მოითხოვე AI ჩატბოტი' : 'Request AI Chatbot'}
-  </Link>
-</div>
-              </motion.div>
+                <FaBrain />
+                {en ? "Request AI Chatbot" : "მოითხოვე AI ჩატბოტი"}
+              </Link>
             </div>
           </div>
-        </div>
-      </div>
-
+        </section>
+      </main>
     </>
   );
 };
