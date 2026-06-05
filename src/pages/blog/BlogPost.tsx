@@ -109,7 +109,11 @@ const BlogPost = () => {
   //  • strip invisible break chars (soft hyphen, zero-width space/joiners, BOM).
   const normalizedHtml = post.contentHtml
     .replace(/&nbsp;/gi, " ")
-    .replace(/[ ­​‌‍﻿]/g, (m) => (m === " " ? " " : ""));
+    .replace(/ /g, " ") // non-breaking space -> real space
+    // strip invisible break chars ONLY (soft hyphen, zero-width space/joiners, BOM).
+    // Must NOT touch U+0020: an earlier version compared against a U+00A0 literal
+    // here and silently deleted every real space.
+    .replace(/[­​‌‍﻿]/g, "");
   const cleanHtml = DOMPurify.sanitize(normalizedHtml, {
     ADD_ATTR: ["target", "rel"],
   });
