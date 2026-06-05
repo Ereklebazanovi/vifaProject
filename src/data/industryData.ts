@@ -1153,9 +1153,9 @@ heroSublineKa: "თანამედროვე პლატფორმებ
       seoDescriptionEn:
         "Online store development with Georgian bank payments, warehouse management (WMS) and automated courier labels. eCommerce sites from 700₾.",
       introKa:
-        "ონლაინ მაღაზიის დამზადება დღეს ნიშნავს არა მხოლოდ პროდუქტების კატალოგს, არამედ სრულ ციფრულ ეკოსისტემას: გაყიდვებიდან - ლოგისტიკამდე. VIFA Digital ქმნის eCommerce საიტებს ქართული ბანკების გადახდის სისტემებით, საწყობის მართვითა (WMS) და კურიერის ინტეგრაციით, რათა მაღაზია არა მხოლოდ ლამაზი, არამედ მომგებიანი იყოს.",
+        "ონლაინ მაღაზიის საიტის დამზადება დღეს ნიშნავს არა მხოლოდ პროდუქტების კატალოგს, არამედ სრულ ციფრულ ეკოსისტემას: გაყიდვებიდან ლოგისტიკამდე. VIFA Digital გთავაზობთ ონლაინ მაღაზიის დამზადებას ქართული ბანკების გადახდის სისტემებით, საწყობის მართვითა (WMS) და კურიერის ინტეგრაციით, რათა თქვენი ინტერნეტ მაღაზია არა მხოლოდ ლამაზი, არამედ მომგებიანი იყოს.",
       introEn:
-        "Online store development today means not just a product catalog but a full digital ecosystem — from sales to logistics. VIFA Digital builds eCommerce sites with Georgian bank payment systems, warehouse management (WMS) and courier integration, so your store is not just beautiful but profitable.",
+        "Online store website development today means not just a product catalog but a full digital ecosystem — from sales to logistics. VIFA Digital offers online store development with Georgian bank payment systems, warehouse management (WMS) and courier integration, so your store is not just beautiful but profitable.",
       contentSections: [
         {
           headingKa: "ციფრული შოურუმიდან სრულ ინტერნეტ მაღაზიამდე",
@@ -1181,6 +1181,11 @@ heroSublineKa: "თანამედროვე პლატფორმებ
             "ციფრული შოურუმი 700₾-დან 900₾-მდეა, ავტომატიზებული E-commerce ონლაინ გადახდებით 1000₾-დან 1500₾-მდე, ხოლო WMS-ით ინტეგრირებული სრული Retail ეკოსისტემა 2500₾-დან. კონსულტაცია უფასოა და მოქმედებს 50/50 გადახდა.",
         },
         {
+          question: "რამდენ ხანში მზადდება ონლაინ მაღაზიის საიტი?",
+          answer:
+            "ონლაინ მაღაზიის საიტის დამზადებას საშუალოდ 3-დან 6 კვირამდე სჭირდება პაკეტის მიხედვით — ციფრული შოურუმი უფრო სწრაფად მზადდება, ხოლო WMS-ით ინტეგრირებული სრული ინტერნეტ მაღაზიის გასამართად მეტი დროა საჭირო. ზუსტ ვადებს უფასო კონსულტაციის შემდეგ ვათანხმებთ.",
+        },
+        {
           question: "შესაძლებელია ქართული ბანკებით გადახდის ინტეგრაცია?",
           answer:
             "დიახ, ვამზადებთ მაღაზიებს ქართული ბანკების (TBC, BOG) გადახდის სისტემების სრული ინტეგრაციით — მყიდველი ნებისმიერი Visa/Mastercard ბარათით გადაიხდის.",
@@ -1201,6 +1206,11 @@ heroSublineKa: "თანამედროვე პლატფორმებ
           question: "How much does online store development cost?",
           answer:
             "The Digital Showroom is 700–900₾, Automated E-commerce with online payments is 1000–1500₾, and the WMS-integrated Full Retail Ecosystem starts from 3500₾. Consultation is free and a 50/50 payment split is available.",
+        },
+        {
+          question: "How long does online store website development take?",
+          answer:
+            "Online store website development takes 3 to 6 weeks on average depending on the package — the Digital Showroom is faster, while a full WMS-integrated online store needs more time. We agree on exact timelines after a free consultation.",
         },
         {
           question: "Can Georgian bank payments be integrated?",
