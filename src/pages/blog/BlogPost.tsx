@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 import SEO from "../../components/SEO";
 import Breadcrumbs, { type Crumb } from "../../components/Breadcrumbs";
 import { useLanguage } from "../../contexts/LanguageContext";
-import { getPostBySlug } from "../../service/blogService";
+import { getPostBySlug, getPublishedPosts } from "../../service/blogService";
 import type { BlogPost as BlogPostType } from "../../types/blog";
 
 const base = "https://vifadigital.ge";
@@ -29,6 +29,7 @@ const BlogPost = () => {
   const { currentLanguage } = useLanguage();
   const ka = currentLanguage === "ka";
   const [post, setPost] = useState<BlogPostType | null>(null);
+  const [related, setRelated] = useState<BlogPostType[]>([]);
   const [state, setState] = useState<LoadState>("loading");
 
   useEffect(() => {
@@ -52,6 +53,19 @@ const BlogPost = () => {
         console.error("[blog] failed to load post:", e);
         if (alive) setState("notfound");
       });
+    return () => {
+      alive = false;
+    };
+  }, [slug]);
+
+  // Related articles (internal linking) — other published posts, newest first.
+  useEffect(() => {
+    let alive = true;
+    getPublishedPosts()
+      .then((all) => {
+        if (alive) setRelated(all.filter((p) => p.slug !== slug).slice(0, 3));
+      })
+      .catch(() => {});
     return () => {
       alive = false;
     };
@@ -189,6 +203,50 @@ const BlogPost = () => {
             </Link>
           </div>
         </div>
+
+        {/* Related articles (internal linking) */}
+        {related.length > 0 && (
+          <div className="mt-16 border-t border-white/10 pt-10">
+            <h2 className="mb-6 text-xl font-bold text-white">
+              {ka ? "სხვა სტატიები" : "More articles"}
+            </h2>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {related.map((r) => (
+                <Link
+                  key={r.id}
+                  to={`/blog/${r.slug}`}
+                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] transition-colors hover:border-indigo-500/40"
+                >
+                  {r.coverImage && (
+                    <div className="aspect-[16/9] w-full overflow-hidden bg-white/5">
+                      <img
+                        src={r.coverImage}
+                        alt={r.title}
+                        loading="lazy"
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                  )}
+                  <div className="flex flex-1 flex-col p-4">
+                    <h3 className="mb-1 line-clamp-2 text-[15px] font-semibold text-white group-hover:text-indigo-200">
+                      {r.title}
+                    </h3>
+                    <span className="mt-auto pt-2 text-xs text-gray-500">
+                      {formatDate(r.publishedAt, ka)}
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            <Link
+              to="/blog"
+              className="mt-8 inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-300 hover:text-indigo-200"
+            >
+              {ka ? "ყველა სტატია" : "All articles"}
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        )}
       </article>
     </main>
   );

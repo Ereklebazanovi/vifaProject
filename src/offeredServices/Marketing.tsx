@@ -26,6 +26,7 @@ import {
 import SEO from "../components/SEO";
 import FAQSection from "../components/FAQSection";
 import type { FAQItem } from "../components/FAQSection";
+import IndustryLinks from "../components/IndustryLinks";
 
 // FAQ built from the real marketing services/packages on this page (bilingual).
 const marketingFaq: Record<"ka" | "en", FAQItem[]> = {
@@ -524,6 +525,9 @@ const Marketing: React.FC = () => {
             ))}
           </div>
         </section>
+
+        {/* Industries (cornerstone → cluster internal links) */}
+        <IndustryLinks service="marketing" className="mb-32" />
 
         {/* FAQ (visible — matches FAQPage schema) */}
         <FAQSection

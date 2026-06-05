@@ -26,6 +26,7 @@ import {
 import SEO from "../components/SEO";
 import FAQSection from "../components/FAQSection";
 import type { FAQItem } from "../components/FAQSection";
+import IndustryLinks from "../components/IndustryLinks";
 import { useLanguage } from "../contexts/LanguageContext";
 
 // FAQ — built from the real packages/pricing on this page (bilingual).
@@ -448,6 +449,9 @@ const WebDev: React.FC = () => {
               {consultationLabel}
             </p>
           </section>
+
+          {/* ── Industries (cornerstone → cluster internal links) ── */}
+          <IndustryLinks service="web" className="pb-24 border-t border-white/10 pt-16" />
 
           {/* ── FAQ (visible — matches FAQPage schema) ── */}
           <FAQSection
