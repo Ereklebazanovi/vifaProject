@@ -128,7 +128,7 @@ const webDevTranslations = {
     "webdev.pricing.ai.title": "AI ჩატბოტი",
     "webdev.pricing.ai.description":
       "ინტელექტუალური ასისტენტი სოციალურ ქსელებში. 24/7 ავტომატური პასუხები, კლიენტების კმაყოფილება და გაყიდვების ზრდა.",
-    "webdev.pricing.ai.price": "300₾-დან",
+    "webdev.pricing.ai.price": "500₾-დან",
     "webdev.pricing.ai.feature1": "Google Gemini AI",
     "webdev.pricing.ai.feature2": "3 პლატფორმაზე ინტეგრაცია",
     "webdev.pricing.ai.feature3": "ქართული ენის მხარდაჭერა",
@@ -179,7 +179,7 @@ const webDevTranslations = {
     "webdev.pricing.ai.title": "AI Chatbot",
     "webdev.pricing.ai.description":
       "Intelligent assistant on social media. 24/7 automatic responses, customer satisfaction and sales growth.",
-    "webdev.pricing.ai.price": "From 300₾",
+    "webdev.pricing.ai.price": "From 500₾",
     "webdev.pricing.ai.feature1": "Google Gemini AI",
     "webdev.pricing.ai.feature2": "3 Platform Integration",
     "webdev.pricing.ai.feature3": "Georgian Language Support",

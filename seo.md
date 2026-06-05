@@ -292,6 +292,64 @@ no auth) — and is wired into the SAME Puppeteer prerender so posts ship as sta
 - No auth + open Firestore writes (same mode as `leads`): editor at an obscure path. **Firestore
   rules must allow public read on `posts` (site + prerender) and write (editor).**
 
+### SESSION 5 — Brand cleanup, blog polish, internal linking, chatbot redesign (2026-06-05)
+
+Firestore rules for `posts` are now **set by the user** → blog works; build finds the 1 real
+post and prerenders `/blog` + `/blog/<slug>` (e.g. `21/21 routes OK`).
+
+#### 5a — Brand cleanup (Invento Technologies → VIFA) — partly via a 2nd AI (Codex), verified here
+- Removed leftover `Invento Technologies` from indexable page **titles**: `AIChatbot.tsx`
+  (was `… | Invento Technologies` → clean `AI ჩატბოტი ბიზნესისთვის`), `InventoLandingPage.tsx`
+  WMS title, `StartProject.tsx`. (`Invento WMS` stays — it's the real product name.)
+- `SEO.tsx` Organization `hasOfferCatalog` now names **4 services with `url`s**
+  (web, marketing, ai-chatbot, inventowms) → stronger sitelink/entity signal.
+- Visible nav/footer links switched to **canonical** paths (`/services/web` not the
+  `web-development` alias). About/Contact `<title>`s de-duplicated (removed inline `| VIFA DIGITAL`;
+  `SEO.tsx` already appends `| Vifa Digital`).
+- **Google sitelinks are automatic** — these are signals only; they refresh over days→weeks on
+  re-crawl. Cannot be forced to a specific set.
+
+#### 5b — `/privacy` + `/terms` now real routes
+- Added lazy routes in `App.tsx` (footer linked them but they 404'd → NotFound). Added to
+  `prerender.js` `ROUTES` and `sitemap.xml` (priority 0.3). Pages already had `<SEO>`.
+
+#### 5c — Prerender stale-blog cleanup (`scripts/prerender.js`)
+- `vite build` uses `emptyOutDir:false`, so old `dist/blog/<slug>` dirs lingered (3 orphan pages
+  from the deleted markdown blog still had `Invento Technologies` titles). Fix: `rmSync(dist/blog)`
+  before regenerating → only current Firestore posts get baked. (Vercel clean builds were already
+  fine; this protects local builds + safety.)
+
+#### 5d — Blog typography / readability (`src/index.css`, `BlogPost.tsx`)
+- **Tailwind v4 layer gotcha (IMPORTANT):** `index.css` has an unlayered `* { max-width: 100% }`
+  which BEATS Tailwind's layered `max-w-*` utilities (unlayered > layered, regardless of
+  specificity) — so `max-w-2xl` etc. silently don't constrain. Fix WITHOUT touching the global
+  rule: scoped `!important` classes `.blog-article` (max-width 44rem) + `.blog-wrap` (80rem).
+  **The same quirk affects other `max-w-*` reading columns site-wide** (industry/service) — apply
+  the same targeted `!important` fix if a column looks full-width.
+- `.blog-prose` gets `word-break: normal !important` + `overflow-wrap` + `hyphens: none` (Georgian
+  words never split mid-word; no browser KA hyphenation) + media `max-width:100%`.
+- `BlogPost` normalizes pasted content: `&nbsp;`/U+00A0 → space (Word/Docs/AI paste joins every
+  word with nbsp → forced mid-word breaks) and strips invisible break chars. Cover image is a
+  compact fixed-height banner (not full-bleed). Added a "related articles" block (other posts) +
+  CTA now links web + marketing + contact.
+
+#### 5e — Internal linking (topical cluster, both directions)
+- New `src/components/IndustryLinks.tsx` — renders the 5 industry cards from a service page;
+  wired into `WebDev.tsx` + `Marketing.tsx` ("ინდუსტრიები, რომლებსაც ვემსახურებით"). Completes
+  **cornerstone → cluster** (industry pages already link UP via `RelatedLinks`).
+- Blog posts → other posts (related) + `/blog`. Navbar got a `/blog` link (desktop right cluster +
+  mobile `06/`), footer too. Global scroll-to-top on route change (`Layout.tsx`).
+
+#### 5f — `/services/ai-chatbot` redesign (visual; H1 = SEO win)
+- Full restyle of `AIChatbot.tsx` render to the site palette (one **indigo + `#060608`**, dropped
+  the 6-color rainbow + pexels bg + `backdrop-blur`/hover-scale chrome → flat cards). Fixed two
+  structural bugs (Admin nested in Pricing; empty `min-h-screen` before CTA). **Strong descriptive
+  H1** added (was an empty gradient span). Platforms restored to 3 cards (Facebook/WhatsApp/
+  Instagram). FAQ now uses the shared `FAQSection`. **All SEO preserved** (title, `Service`+`FAQPage`
+  +`BreadcrumbList` @graph, FAQ schema === visible). Translations/`serviceSchema`/`faqForSchema`
+  untouched. The two demo widgets (`Terminal`, `AIConnectionDemo`) keep their own blue accent (out
+  of scope — self-contained; can be unified later).
+
 ---
 
 ## 3. CLEANUPS / REMOVALS
@@ -327,20 +385,21 @@ no auth) — and is wired into the SAME Puppeteer prerender so posts ship as sta
      non-health/gov), Service price rich results not visual either — both still valuable
      as entity signals. Only Organization/Logo is currently a visual rich result.
 
-### Blog — user manual tasks (REQUIRED for the blog to work — session 4)
-1. **Firestore security rules** — the blog is dead until `posts` is readable. In Firebase
-   console → Firestore → Rules, allow public **read** on `posts` (needed by the live site AND
-   the build-time prerender REST fetch — currently returns 403) and, since there's no auth,
-   **write** on `posts` (for the `/vifa-studio` editor). Example:
-   `match /posts/{id} { allow read: if true; allow write: if true; }`
-   (Same open mode as the existing `leads` collection. Tighten later if desired.)
+### Blog — user manual tasks
+1. ~~**Firestore security rules**~~ **DONE** — `posts` read+write are open (user set them);
+   blog works, prerender finds posts. (Same open mode as `leads`. Tighten later if desired.)
 2. **(Optional) Vercel Deploy Hook** — create one in Vercel → set env `VITE_VERCEL_DEPLOY_HOOK`
    so the editor's "Rebuild site" button can trigger a static rebuild after publishing.
 3. After publishing posts: **redeploy** (button or Vercel) so posts get prerendered, then
    submit the updated `sitemap.xml` in GSC and Request-Index the new `/blog/<slug>` URLs.
 
+### Indexing status (user is doing this now)
+- GSC sitemap submitted; Request-Indexing the priority URLs (home, 4 service pages, top industry
+  pages), ~10/day quota. Sitemap **re-submit not required** — Google re-reads it automatically.
+  Pages confirmed indexable ("URL is available to Google").
+
 ### Code work pending
-- Per-post OG images polish. (Blog image upload = DONE via Cloudinary unsigned, see 4f.)
+- Per-post OG images polish (all pages still use logo `viffa.png` as `og:image`).
 
 ---
 
@@ -348,23 +407,28 @@ no auth) — and is wired into the SAME Puppeteer prerender so posts ship as sta
 
 ### 🔴 High impact
 
-- ~~**Make `/industry/:service/:slug` indexable**~~ **DONE (2026-06-04, session 3).** All 10
-  industry pages (2 services × 5 niches) are now real indexable content pages with keyword-rich
-  meta, 500+ words of Georgian content (H1/H2), `Service`+`BreadcrumbList`+`FAQPage` schema,
-  visible FAQ, and an internal-link cluster. See SESSION 3 below.
+- ~~**Make `/industry/:service/:slug` indexable**~~ **DONE (session 3).**
+- ~~**Internal linking / topical cluster**~~ **DONE (session 5)** — service→industry
+  (`IndustryLinks`), industry→service+siblings (`RelatedLinks`), blog→blog (related articles),
+  navbar/footer `/blog`.
 
-- **Per-page OG images (1200×630):** currently all pages use the logo `viffa.png` as
-  `og:image`. Design real branded social cards per service → much better CTR on shares.
+#### The real remaining levers (next-session ideas)
+- **🔴 Google Business Profile** — biggest untapped win for the Georgian market ("near me",
+  Maps, local pack). User task. Then add `LocalBusiness` signals / `aggregateRating` once reviews.
+- **🔴 Backlinks / citations** — directories, partners, PR. Off-page; the main authority lever.
+- **🔴 Photo/Video Production page(s)** — the offering is buried inside marketing packages with
+  NO dedicated indexable page; can't rank for `კომერციული ფოტოგრაფია`, `ვიდეო გადაღება`,
+  `დრონით გადაღება`, `რილსების გადაღება`. Same playbook as industry pages (dedicated page(s) +
+  `serviceSchema` + FAQ + prerender + sitemap + internal links). **User flagged wanting this.**
+- **🟡 Per-page OG images (1200×630):** all pages use logo `viffa.png`; design branded social
+  cards per service → better share CTR.
+- **🟡 Blog cadence** — engine is built; publish 2–4 keyword articles/month (topical authority).
+- **🟡 AggregateRating/Review schema** — only with real reviews (never fake).
 
-### 🟡 Medium impact
-
-- **AggregateRating/Review schema** — only once real reviews exist (never fake it).
-  When ready: add `aggregateRating` to the `Organization` + `Service` nodes.
-
+### 🟡 Medium impact (technical)
 - **Georgian font subsetting + preload LCP image** to cut LCP further.
-
-- **Auto-generate sitemap** from a single routes source of truth (currently hand-maintained
-  `public/sitemap.xml`) and automate `lastmod`.
+- **Auto-generate sitemap** from a single routes source of truth (currently `public/sitemap.xml`
+  is hand-maintained + blog URLs auto-injected by prerender) and automate `lastmod`.
 
 ### 🟢 Low impact / housekeeping
 
@@ -393,13 +457,16 @@ Content / authority (the real ranking lever):
 | `src/components/FAQSection.tsx` | Reusable visible FAQ accordion (feeds same data to schema) |
 | `src/components/Breadcrumbs.tsx` | Visible breadcrumb trail — desktop full, mobile back-link; used on all 4 service pages + industry landings |
 | `index.html` | Minimal SPA shell — DO NOT add SEO meta here |
+| `src/index.css` | Global styles. ⚠️ unlayered `* { max-width:100% }` beats Tailwind v4 `max-w-*`; `.blog-article`/`.blog-wrap`/`.blog-prose`/`.font-georgian-body` use `!important` to win back |
 | `vercel.json` | Path redirects + SPA rewrite + cache/security headers (NO host redirects) |
 | `public/sitemap.xml`, `public/robots.txt` | 7 real routes, single sitemap |
 | `src/App.tsx` | Routes (lazy-loaded) + providers; aliases kept for 308 |
 | `src/layout/SimpleNavbar.tsx` | Nav — xl: breakpoint (1280px) for desktop, AI Chatbot + WMS links added |
 | `src/offeredServices/WebDev.tsx` | `/services/web` — bilingual FAQ, serviceSchema + offers, breadcrumbs |
 | `src/offeredServices/Marketing.tsx` | `/services/marketing` — bilingual FAQ, serviceSchema + offers, breadcrumbs |
-| `src/pages/AIChatbot.tsx` | `/services/ai-chatbot` — existing FAQ → `faqForSchema`, serviceSchema + offers, breadcrumbs |
+| `src/pages/AIChatbot.tsx` | `/services/ai-chatbot` — **redesigned (session 5)**: indigo/#060608 flat cards, strong H1, 3 platforms, shared FAQSection; serviceSchema + offers + faqForSchema |
+| `src/components/IndustryLinks.tsx` | service→industry cluster cards; used on WebDev + Marketing |
+| `src/service/cloudinary.ts` | unsigned Cloudinary image upload for the blog editor |
 | `src/offeredServices/InventoLandingPage.tsx` | `/inventowms` — bilingual FAQ, softwareApplication + offers, breadcrumbs |
 | `src/pages/landing/IndustryLanding.tsx` | `/industry/:service/:slug` — indexable money-SEO pages: `<SEO>` (serviceSchema+offers+faq+3-level breadcrumbs), `IndustryContent`, `RelatedLinks` |
 | `src/data/industryData.ts` | 10 niches × `IndustryConfig` — incl. SEO content fields (`seoTitle/Description`, `intro`, `contentSections`, `faq`) per niche |
@@ -412,7 +479,7 @@ Content / authority (the real ranking lever):
 
 **Verification commands:**
 ```bash
-npm run build            # tsc + vite + prerender (ends "N/N routes OK"; N = 17 + 1 /blog + posts)
+npm run build            # tsc + vite + prerender (ends "N/N routes OK"; N = 9 static + 10 industry + /blog + posts = 21 with 1 post)
 
 # Inspect JSON-LD @graph types on a prerendered page:
 node -e "const h=require('fs').readFileSync('dist/services/web/index.html','utf8');const m=h.match(/application\/ld\+json[^>]*>(.*?)<\/script>/s);console.log(JSON.parse(m[1])['@graph'].map(n=>n['@type']))"
@@ -426,8 +493,10 @@ node -e "const fs=require('fs');for(const r of ['services/web','services/marketi
 
 ---
 
-_Last updated: 2026-06-04. Status: STEP 1–6 + Sessions 2, 3, 4 complete. Session 3 = 10
-industry money-SEO pages. Session 4 = Firestore blog + hidden /vifa-studio editor + build-time
-prerender. Pending = user manual tasks (§4: **Firestore rules for `posts`** [blog is 403 until
-done], GSC sitemap re-submit + index new industry/blog URLs) + remaining §5 items (per-page OG
-images, blog Storage image upload)._
+_Last updated: 2026-06-05. Status: STEP 1–6 + Sessions 2–5 complete. S3 = 10 industry money-SEO
+pages. S4 = Firestore blog + `/vifa-studio` editor + Cloudinary images. S5 = brand cleanup
+(Invento→VIFA), /privacy+/terms routes, prerender stale-blog fix, internal-linking cluster,
+AIChatbot redesign. Firestore rules SET (blog live). Build = `21/21 routes OK`.
+**Next (not started):** Google Business Profile + backlinks (off-page, user) · Photo/Video
+production page(s) (user-requested keyword vertical) · per-page OG images · blog cadence.
+**Watch out for:** the Tailwind v4 `* { max-width:100% }` layer quirk (§ SESSION 5d / files map)._
