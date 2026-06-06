@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from './SimpleNavbar';
 import Footer from './ImprovedFooter';
 import { useNavigation } from '../contexts/NavigationContext';
+import { facebookPixel } from '../utils/facebookPixel';
 // import ChatBot, { ChatBotButton } from '../components/ChatBot';
 
 // Top progress bar — triggers on any route change automatically
@@ -100,6 +101,25 @@ const Layout: React.FC = () => {
   useEffect(() => {
     stopNavigation();
   }, [location.pathname, stopNavigation]);
+
+  // Global WhatsApp click tracker. One delegated listener captures every wa.me
+  // link click site-wide, fires a Meta Pixel "Contact" event with the source
+  // path so Meta's ad algorithm can optimize for real conversions (not just
+  // PageViews). Without this, low-budget conversion campaigns burn money on
+  // cold traffic Meta can't tell apart from genuine leads.
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      const link = target?.closest?.('a[href*="wa.me"]') as HTMLAnchorElement | null;
+      if (!link) return;
+      facebookPixel.trackStandardEvent('Contact', {
+        content_name: 'whatsapp_click',
+        content_category: window.location.pathname,
+      });
+    };
+    document.addEventListener('click', onClick, true);
+    return () => document.removeEventListener('click', onClick, true);
+  }, []);
 
   // const toggleChatBot = () => {
   //   setIsChatBotOpen(!isChatBotOpen);

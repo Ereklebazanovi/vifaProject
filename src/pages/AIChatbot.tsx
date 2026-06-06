@@ -401,13 +401,6 @@ const AIChatbot: React.FC = () => {
                   <FaWhatsapp className="text-lg" />
                   {t("consultation.whatsapp")}
                 </a>
-                <Link
-                  to="/services/ai-chatbot/request"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-indigo-500"
-                >
-                  <FaBrain />
-                  {en ? "Request AI Chatbot" : "მოითხოვე AI ჩატბოტი"}
-                </Link>
               </div>
 
               <AIConnectionDemo />
@@ -638,13 +631,15 @@ const AIChatbot: React.FC = () => {
                 <FaRocket />
                 {t("cta.button")}
               </Link>
-              <Link
-                to="/services/ai-chatbot/request"
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-indigo-500"
               >
-                <FaBrain />
-                {en ? "Request AI Chatbot" : "მოითხოვე AI ჩატბოტი"}
-              </Link>
+                <FaWhatsapp className="text-lg" />
+                {en ? "Order AI Chatbot" : "შეუკვეთე AI ჩატბოტი"}
+              </a>
             </div>
           </div>
         </section>

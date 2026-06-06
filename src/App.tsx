@@ -14,7 +14,6 @@ const WebDev = lazy(() => import("./offeredServices/WebDev"));
 const Marketing = lazy(() => import("./offeredServices/Marketing"));
 const Production = lazy(() => import("./offeredServices/Production"));
 const AIChatbot = lazy(() => import("./pages/AIChatbot"));
-const ChatbotRequestForm = lazy(() => import("./pages/ChatbotRequestForm"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const IndustryLanding = lazy(() => import("./pages/landing/IndustryLanding"));
 const InventoLandingPage = lazy(() => import("./offeredServices/InventoLandingPage"));
@@ -61,10 +60,6 @@ const App = () => {
                     element={<Marketing />}
                   />
                   <Route path="services/ai-chatbot" element={<AIChatbot />} />
-                  <Route
-                    path="services/ai-chatbot/request"
-                    element={<ChatbotRequestForm />}
-                  />
                   <Route path="contact" element={<ContactPage />} />
                   <Route path="about" element={<AboutPage />} />
                   <Route path="inventowms" element={<InventoLandingPage />} />
