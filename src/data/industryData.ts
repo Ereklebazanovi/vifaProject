@@ -794,9 +794,9 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
       ],
       faqKa: [
         {
-          question: "რა ღირს სალონის ვებსაიტის დამზადება?",
+          question: "რა ღირს სალონის საიტის დამზადება?",
           answer:
-            "ციფრული კატალოგის პაკეტი 700₾-დან 1000₾-მდეა, ონლაინ ჩაწერის სისტემით უზრუნველყოფილი „ციფრული ადმინისტრატორი“ 1000₾-დან 1400₾-მდე, ხოლო პროდუქციის ონლაინ მაღაზიის ჩათვლით სრული ეკოსისტემა 1500₾-დან. კონსულტაცია უფასოა და მოქმედებს 50/50 გადახდის სისტემა.",
+            "სალონის საიტის დამზადება სამ პაკეტად გვაქვს: ციფრული კატალოგი 700₾-დან 1000₾-მდე, ონლაინ ჩაწერის სისტემით უზრუნველყოფილი „ციფრული ადმინისტრატორი“ 1000₾-დან 1400₾-მდე, ხოლო პროდუქციის ონლაინ მაღაზიის ჩათვლით სრული ეკოსისტემა 1500₾-დან. კონსულტაცია უფასოა და მოქმედებს 50/50 გადახდის სისტემა.",
         },
         {
           question: "შესაძლებელია ონლაინ ჩაწერის სისტემის დამატება?",
@@ -818,7 +818,7 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
         {
           question: "How much does a beauty salon website cost?",
           answer:
-            "The Digital Catalog package is 700–1000₾, the Digital Administrator with an online booking system is 1000–1400₾, and the Full Ecosystem with an online product store starts from 1500₾. Consultation is free and a 50/50 payment split is available.",
+            "Beauty salon website development comes in three packages: Digital Catalog 700-1000₾, Digital Administrator with an online booking system 1000-1400₾, and the Full Ecosystem with an online product store from 1500₾. Consultation is free and a 50/50 payment split is available.",
         },
         {
           question: "Can an online booking system be added?",
@@ -895,7 +895,7 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
       seoTitleKa: "სასტუმროს საიტის დამზადება — პირდაპირი ჯავშნები საკომისიოს გარეშე",
       seoTitleEn: "Hotel Website Development — Direct Bookings, No Commission",
       seoDescriptionKa:
-        "სასტუმროს ვებსაიტის დამზადება კალენდარული ჯავშნის ფორმით, მრავალენოვანი ინტერფეისითა და SEO ოპტიმიზაციით. მიიღეთ პირდაპირი ჯავშნები. ფასი 700₾-დან.",
+        "სასტუმროს საიტის დამზადება და ვებსაიტი კალენდარული ჯავშნის ფორმით, მრავალენოვანი ინტერფეისითა და SEO ოპტიმიზაციით. მიიღეთ პირდაპირი ჯავშნები. ფასი 700₾-დან.",
       seoDescriptionEn:
         "Hotel website development with a calendar booking form, multilingual interface and SEO. Get direct bookings without commissions. From 700₾.",
       introKa:
@@ -1176,9 +1176,9 @@ heroSublineKa: "თანამედროვე პლატფორმებ
       ],
       faqKa: [
         {
-          question: "რა ღირს ონლაინ მაღაზიის დამზადება?",
+          question: "რა ღირს ონლაინ მაღაზიის საიტის დამზადება?",
           answer:
-            "ციფრული შოურუმი 700₾-დან 900₾-მდეა, ავტომატიზებული E-commerce ონლაინ გადახდებით 1000₾-დან 1500₾-მდე, ხოლო WMS-ით ინტეგრირებული სრული Retail ეკოსისტემა 2500₾-დან. კონსულტაცია უფასოა და მოქმედებს 50/50 გადახდა.",
+            "ონლაინ მაღაზიის საიტის დამზადება სამ პაკეტად გვაქვს: ციფრული შოურუმი 700₾-დან 900₾-მდე, ავტომატიზებული E-commerce ონლაინ გადახდებით 1000₾-დან 1500₾-მდე, ხოლო WMS-ით ინტეგრირებული სრული Retail ეკოსისტემა 2500₾-დან. კონსულტაცია უფასოა და მოქმედებს 50/50 გადახდა.",
         },
         {
           question: "რამდენ ხანში მზადდება ონლაინ მაღაზიის საიტი?",
@@ -1203,9 +1203,9 @@ heroSublineKa: "თანამედროვე პლატფორმებ
       ],
       faqEn: [
         {
-          question: "How much does online store development cost?",
+          question: "How much does online store website development cost?",
           answer:
-            "The Digital Showroom is 700–900₾, Automated E-commerce with online payments is 1000–1500₾, and the WMS-integrated Full Retail Ecosystem starts from 3500₾. Consultation is free and a 50/50 payment split is available.",
+            "Online store website development comes in three packages: Digital Showroom 700-900₾, Automated E-commerce with online payments 1000-1500₾, and the WMS-integrated Full Retail Ecosystem from 3500₾. Consultation is free and a 50/50 payment split is available.",
         },
         {
           question: "How long does online store website development take?",
