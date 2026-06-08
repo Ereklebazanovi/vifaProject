@@ -17,14 +17,26 @@ interface FacebookPixelProps {
 const FacebookPixel: React.FC<FacebookPixelProps> = ({ pixelId, enabled = true }) => {
   const location = useLocation();
 
-  // Initialize Facebook Pixel on component mount
+  // Initialize Facebook Pixel on component mount — deferred out of the critical
+  // load window so the script inject + first PageView beacon never keep the
+  // browser tab's loading spinner active. Runs once the page is idle/loaded.
   useEffect(() => {
     const config: FacebookPixelConfig = {
       pixelId,
       enabled: enabled && !!pixelId,
     };
 
-    facebookPixel.init(config);
+    const start = () => facebookPixel.init(config);
+    const schedule = () => {
+      const ric = (window as unknown as { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => void }).requestIdleCallback;
+      if (typeof ric === 'function') ric(start, { timeout: 3000 });
+      else setTimeout(start, 1500);
+    };
+
+    if (document.readyState === 'complete') schedule();
+    else window.addEventListener('load', schedule, { once: true });
+
+    return () => window.removeEventListener('load', schedule);
   }, [pixelId, enabled]);
 
   // Track page views on route changes
