@@ -25,20 +25,6 @@
       "purpose": "any maskable"
     }
   ],
-  "screenshots": [
-    {
-      "src": "/screenshot-mobile.jpg",
-      "sizes": "640x1136",
-      "type": "image/jpeg",
-      "platform": "narrow"
-    },
-    {
-      "src": "/screenshot-desktop.jpg",
-      "sizes": "1280x720",
-      "type": "image/jpeg",
-      "platform": "wide"
-    }
-  ],
   "shortcuts": [
     {
       "name": "საწყობის პროგრამა",
