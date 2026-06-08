@@ -104,7 +104,7 @@ const webDevTranslations = {
     "seo.webdev.description":
       "პროფესიონალური ვებ განვითარების სერვისები React, Node.js, მობილურზე მორგებული დიზაინი და თანამედროვე ვებ აპლიკაციები.",
     "webdev.hero.overline": "ვებ დეველოპმენტი",
-    "webdev.hero.main_title": "ციფრული ფუნდამენტი თქვენი ბიზნესისთვის.",
+    "webdev.hero.main_title": "ვებსაიტის დამზადება თქვენი ბიზნესისთვის.",
     "webdev.hero.description": "ვქმნით პრემიუმ კლასის ვებგვერდებს და E-commerce პლატფორმებს, რომლებიც ზრდის თქვენს გაყიდვებს.",
     "webdev.pricing.title": "აირჩიეთ პაკეტი",
     "webdev.pricing.landing.title": "სავიზიტო ვებსაიტი",
@@ -168,7 +168,7 @@ const webDevTranslations = {
     "seo.webdev.description":
       "Professional web development services including React, Node.js, mobile responsive design, and modern web applications.",
     "webdev.hero.overline": "Web Development",
-    "webdev.hero.main_title": "The Digital Foundation for Your Business.",
+    "webdev.hero.main_title": "Website Development for Your Business.",
     "webdev.hero.description": "We build premium websites and E-commerce platforms that drive your sales and growth.",
     "webdev.pricing.title": "Choose Your Package",
     "webdev.pricing.landing.title": "Landing Page",

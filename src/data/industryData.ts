@@ -731,8 +731,8 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
       heroSublineEn: "Premium catalog, automated booking systems, and full control over your business.",
       headline: {
         type: "simple",
-        textKa: "თქვენი ესთეტიკის ცენტრის პრემიუმ ციფრული სივრცე",
-        textEn: "Digital Systems for Aesthetics Centers",
+        textKa: "სალონის საიტის დამზადება ონლაინ ჩაწერით",
+        textEn: "Beauty Salon Website Development with Online Booking",
       },
       approach: {
         headingKa: "სისტემა, რომელიც ზოგავს დროს და ზრდის შემოსავალს",
@@ -851,8 +851,8 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
       heroSublineEn: "Showcase your space from the best angle and receive bookings directly, without extra commissions.",
       headline: {
         type: "simple",
-        textKa: "პრემიუმ ვებსაიტი თქვენი სასტუმროსთვის",
-        textEn: "Premium Website for Your Hotel",
+        textKa: "სასტუმროს საიტის დამზადება პირდაპირი ჯავშნებისთვის",
+        textEn: "Hotel Website Development for Direct Bookings",
       },
       approach: {
         headingKa: "შექმნილი პირდაპირი ჯავშნებისთვის",
@@ -978,8 +978,8 @@ heroSublineKa: "თანამედროვე პლატფორმებ
       heroSublineEn: "Modern platforms that simplify client communication and increase your credibility.",
       headline: {
         type: "simple",
-        textKa: "თქვენი სფეროს სანდო ციფრული ინფრასტრუქტურა",
-        textEn: "Premium Web Systems for Professionals.",
+        textKa: "იურიდიული კომპანიის საიტის დამზადება",
+        textEn: "Law Firm Website Development",
       },
             approach: {
         headingKa: "ორიენტირებული ნდობასა და უსაფრთხოებაზე",
@@ -1105,8 +1105,8 @@ heroSublineKa: "თანამედროვე პლატფორმებ
       heroSublineEn: "Fast website, online payments, and an integrated warehouse management system in one place.",
       headline: {
         type: "simple",
-        textKa: "ყველაფერი თქვენი ონლაინ გაყიდვებისთვის",
-        textEn: "Everything for Your Online Sales",
+        textKa: "ონლაინ მაღაზიის საიტის დამზადება",
+        textEn: "Online Store Website Development",
       },
       approach: {
         headingKa: "შექმნილია ბიზნესის ზრდისთვის",
@@ -1241,8 +1241,8 @@ heroSublineKa: "თანამედროვე პლატფორმებ
       heroSublineEn: "Replace generic platforms with your own space. Branded menus and full booking automation.",
       headline: {
         type: "simple",
-        textKa: "პრემიუმ ციფრული გამოცდილება თქვენი სტუმრებისთვის",
-        textEn: "A Premium Digital Experience for Your Guests",
+        textKa: "რესტორნის საიტის დამზადება ციფრული მენიუთი",
+        textEn: "Restaurant Website Development with a Digital Menu",
       },
       approach: {
         headingKa: "ორიენტირებული ბრენდსა და კომფორტზე",
