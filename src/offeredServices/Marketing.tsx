@@ -359,7 +359,7 @@ const Marketing: React.FC = () => {
               {t("marketing.hero.main_title")}
             </h1>
 
-            <p className="text-base sm:text-lg text-gray-300 leading-relaxed mb-10 max-w-xl">
+            <p className="font-georgian-body text-base sm:text-lg text-gray-300 leading-relaxed mb-10 max-w-xl">
               {t("marketing.hero.description")}
             </p>
 
@@ -448,7 +448,7 @@ const Marketing: React.FC = () => {
                 <h3 className="text-white font-medium text-lg mb-2">
                   {service.title}
                 </h3>
-                <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-grow">
+                <p className="font-georgian-body text-gray-400 text-sm leading-relaxed mb-4 flex-grow">
                   {service.description}
                 </p>
               </motion.div>
@@ -472,7 +472,7 @@ const Marketing: React.FC = () => {
                   ? "Photo, video & drone shooting"
                   : "ფოტო, ვიდეო და დრონით გადაღება"}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-gray-400">
+              <p className="font-georgian-body mt-2 text-sm leading-relaxed text-gray-400">
                 {currentLanguage === "en"
                   ? "Commercial photography, advertising videos, reels and cinematic aerial footage for your brand."
                   : "კომერციული ფოტოგრაფია, სარეკლამო ვიდეო, რილსები და კინემატოგრაფიული აეროგადაღება თქვენი ბრენდისთვის."}
@@ -491,7 +491,7 @@ const Marketing: React.FC = () => {
             <h3 className="text-3xl font-light text-white mb-4">
               {t("section.pricing")}
             </h3>
-            <p className="text-gray-400">
+            <p className="font-georgian-body text-gray-400">
               {t("section.pricingDesc")}
             </p>
           </div>
@@ -509,13 +509,13 @@ const Marketing: React.FC = () => {
                 <div className="text-3xl font-bold text-white mb-1 mt-4">
                   {pkg.price}
                 </div>
-                <div className="text-xs text-gray-500 mb-8">{t("price.note")}</div>
+                <div className="font-georgian-body text-xs text-gray-500 mb-8">{t("price.note")}</div>
                 
                 <div className="space-y-3 mb-8 flex-grow">
                   {pkg.features.map((feature, idx) => (
                     <div key={idx} className="flex items-start gap-3">
                       <FaCheckCircle className={`text-xs mt-1 transition-colors ${getIconColor(pkg.color).split(' ')[0]}`} />
-                      <span className="text-gray-400 text-sm">{feature}</span>
+                      <span className="font-georgian-body text-gray-400 text-sm">{feature}</span>
                     </div>
                   ))}
                 </div>

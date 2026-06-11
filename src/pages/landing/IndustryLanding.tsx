@@ -133,7 +133,7 @@ function HeroSection({ config, ka, breadcrumbs }: HeroProps) {
         {/* ქვესათაური */}
         <motion.p
           variants={heroItem}
-          className="mb-10 max-w-xl text-base leading-relaxed text-gray-300 md:text-lg"
+          className="font-georgian-body mb-10 max-w-xl text-base leading-relaxed text-gray-300 md:text-lg"
         >
           {subline}
         </motion.p>
@@ -272,7 +272,7 @@ function PricingCard({ tier, ka }: PricingCardProps) {
       <div className="mb-4 h-px w-full bg-gradient-to-r from-white/10 to-transparent" />
 
       {/* 3. აღწერა */}
-      <p className="mb-4 text-sm leading-relaxed text-gray-300">
+      <p className="font-georgian-body mb-4 text-sm leading-relaxed text-gray-300">
         {ka ? tier.descKa : tier.descEn}
       </p>
 
@@ -287,7 +287,7 @@ function PricingCard({ tier, ka }: PricingCardProps) {
                   isInherited ? "text-white/20" : "text-indigo-400"
                 }`}
               />
-              <span className={`text-[15px] leading-snug ${
+              <span className={`font-georgian-body text-[15px] leading-snug ${
                 isInherited ? "text-gray-500 italic" : "text-gray-200"
               }`}>
                 {feat}
@@ -367,7 +367,7 @@ function MarketingServiceSection({ data, ka, heroBgImage, breadcrumbs }: { data:
               </span>
             </div>
 
-            <p className="text-[14px] md:text-[16px] leading-relaxed text-gray-400">
+            <p className="font-georgian-body text-[14px] md:text-[16px] leading-relaxed text-gray-400">
               {ka ? data.descKa : data.descEn}
             </p>
 
@@ -388,7 +388,7 @@ function MarketingServiceSection({ data, ka, heroBgImage, breadcrumbs }: { data:
               {features.map((feat, i) => (
                 <li key={i} className="flex items-start gap-3.5 py-3.5 first:pt-0 last:pb-0">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-indigo-500" />
-                  <span className="text-[14px] md:text-[16px] leading-relaxed text-gray-300">{feat}</span>
+                  <span className="font-georgian-body text-[14px] md:text-[16px] leading-relaxed text-gray-300">{feat}</span>
                 </li>
               ))}
             </ul>

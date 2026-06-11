@@ -336,7 +336,7 @@ const WebDev: React.FC = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.15] mb-6 max-w-2xl">
               {t("webdev.hero.main_title")}
             </h1>
-            <p className="text-lg text-gray-300 leading-relaxed mb-8 max-w-xl">
+            <p className="font-georgian-body text-lg text-gray-300 leading-relaxed mb-8 max-w-xl">
               {t("webdev.hero.description")}
             </p>
             <a
@@ -407,7 +407,7 @@ const WebDev: React.FC = () => {
                       {t(`webdev.pricing.${card.key}.price`)}
                     </div>
                     
-                    <p className="text-gray-400 text-sm leading-relaxed mb-8 h-14">
+                    <p className="font-georgian-body text-gray-400 text-sm leading-relaxed mb-8 h-14">
                       {t(`webdev.pricing.${card.key}.description`)}
                     </p>
 
@@ -417,7 +417,7 @@ const WebDev: React.FC = () => {
                       {[1, 2, 3, 4, 5].map((num) => (
                         <li key={num} className="flex items-start gap-3">
                           <FaCheckCircle className={`text-xs mt-1 ${card.featured ? "text-gray-300" : "text-gray-600 group-hover:text-gray-400"} transition-colors`} />
-                          <span className="text-gray-300 text-sm leading-tight">
+                          <span className="font-georgian-body text-gray-300 text-sm leading-tight">
                             {t(`webdev.pricing.${card.key}.feature${num}`)}
                           </span>
                         </li>
@@ -458,7 +458,7 @@ const WebDev: React.FC = () => {
               ))}
             </div>
             
-            <p className="text-center text-gray-500 text-sm mt-8">
+            <p className="font-georgian-body text-center text-gray-500 text-sm mt-8">
               {consultationLabel}
             </p>
           </section>
