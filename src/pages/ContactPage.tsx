@@ -178,8 +178,7 @@ const ContactPage: React.FC = () => {
               </div>
               <div>
                 <div className="text-xs uppercase tracking-wider text-gray-500">{t("contact.info.email")}</div>
-                <a href="mailto:vifa.official2020@gmail.com
-" className="text-white hover:text-blue-400 transition-colors">
+                <a href="mailto:vifa.official2020@gmail.com" className="text-white hover:text-blue-400 transition-colors">
                   vifa.official2020@gmail.com
                 </a>
               </div>

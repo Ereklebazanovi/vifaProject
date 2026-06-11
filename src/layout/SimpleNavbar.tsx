@@ -320,7 +320,7 @@ const SimpleNavbar: React.FC = () => {
 
       {/* Scrollable area — NO justify-center so accordion scroll works */}
       <div className="flex-1 overflow-y-auto overscroll-contain">
-        <nav className="px-6 py-4">
+        <nav className="px-6 py-4 mt-8">
           {links.map((link) => {
             const isDropdown = !!link.hasIndustryDropdown;
             const isAccordionOpen = mobileAccordion === link.path;

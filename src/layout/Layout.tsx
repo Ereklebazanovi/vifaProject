@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from './SimpleNavbar';
 import Footer from './ImprovedFooter';
+import FloatingContact from '../components/FloatingContact';
 import { useNavigation } from '../contexts/NavigationContext';
 import { facebookPixel } from '../utils/facebookPixel';
 // import ChatBot, { ChatBotButton } from '../components/ChatBot';
@@ -133,6 +134,9 @@ const Layout: React.FC = () => {
         <Outlet />
       </main>
       <Footer />
+
+      {/* Restrained site-wide WhatsApp button (hidden on routes with their own contact bar) */}
+      <FloatingContact />
 
       {/* ChatBot Components */}
       {/* <ChatBot isOpen={isChatBotOpen} onToggle={toggleChatBot} />

@@ -337,7 +337,7 @@ const NewHomeVifa: React.FC = () => {
       />
 
       {/* ─── Cinematic Hero — Full Screen ─── */}
-      <div className={`relative min-h-[75vh] md:min-h-screen overflow-hidden ${getTransitionClasses()}`}>
+      <div className={`relative min-h-[66vh] md:min-h-screen overflow-hidden ${getTransitionClasses()}`}>
 
         {/* Full-screen hero image background */}
         <picture>
@@ -363,45 +363,68 @@ const NewHomeVifa: React.FC = () => {
         <div className="absolute inset-x-0 bottom-0 h-[55%] md:h-[65%] bg-linear-to-t from-[#050404] via-[#050404]/85 via-30% to-transparent z-10" />
 
         {/* Content layer */}
-        <div className="relative z-10 w-full min-h-[75vh] md:min-h-screen flex flex-col justify-center md:justify-end px-5 sm:px-8 lg:px-16 pt-20 pb-10 md:pb-0">
+        <div className="relative z-10 w-full min-h-[66vh] md:min-h-screen flex flex-col justify-end px-5 sm:px-8 lg:px-16 pt-24 pb-10 md:pb-0">
 
           {/* Bottom — headline left, stats right on desktop */}
           <div className="flex flex-col md:flex-row md:items-end md:justify-between md:pb-12 gap-4 md:gap-0">
 
             {/* Headline + Description + CTA — left on both mobile and desktop */}
             <div className="w-full max-w-full md:max-w-2xl lg:max-w-3xl text-left">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-[1.35] tracking-tight mb-4 md:mb-4 md:max-w-xl lg:max-w-2xl">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-[1.35] tracking-tight mb-5 md:mb-4 md:max-w-xl lg:max-w-2xl">
                 {currentLanguage === "ka"
                   ? "VIFA - თქვენი ციფრული პარტნიორი"
                   : "Digital Infrastructure Built to Grow"}
               </h1>
-              <p className="text-slate-400 text-sm md:text-base font-light leading-relaxed mb-7 md:mb-6 md:max-w-sm lg:max-w-md">
+              <p className="text-slate-400 text-sm md:text-base font-light leading-relaxed mb-9 md:mb-6 md:max-w-sm lg:max-w-md">
                 {currentLanguage === "ka"
                   ? "თქვენი ბიზნესის სრული ციფრული მხარდაჭერა."
                   : "Vifa builds robust digital systems and automated sales pipelines for your business."}
               </p>
 
-              {/* Mobile CTA — solid full-width button */}
-              <button
-                onClick={scrollToServices}
-                className="md:hidden w-full flex items-center justify-center gap-2 px-6 py-4 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold tracking-wide rounded-2xl transition-colors duration-200"
-              >
-                <FaArrowDown className="text-xs" />
-                {currentLanguage === "ka" ? "სერვისების ნახვა" : "View Services"}
-              </button>
-
-              {/* Desktop CTA — circle + label */}
-              <button
-                onClick={scrollToServices}
-                className="group hidden md:inline-flex items-center gap-4 mt-6"
-              >
-                <span className="w-11 h-11 rounded-full bg-blue-600 flex items-center justify-center shrink-0 group-hover:bg-blue-500 transition-colors duration-200">
-                  <FaArrowDown className="text-white text-sm" />
-                </span>
-                <span className="text-sm tracking-widest uppercase font-medium text-white group-hover:text-blue-400 transition-colors duration-200">
+              {/* Mobile CTAs — primary (services) + restrained consultation */}
+              <div className="md:hidden flex flex-col gap-3">
+                <button
+                  onClick={scrollToServices}
+                  className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold tracking-wide rounded-2xl transition-colors duration-200"
+                >
+                  <FaArrowDown className="text-xs" />
                   {currentLanguage === "ka" ? "სერვისების ნახვა" : "View Services"}
-                </span>
-              </button>
+                </button>
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full flex items-center justify-center gap-2 px-6 py-4 border border-white/20 text-white text-sm font-medium tracking-wide rounded-2xl hover:bg-white/10 transition-colors duration-200"
+                >
+                  <FaWhatsapp className="text-base" />
+                  {currentLanguage === "ka" ? "უფასო კონსულტაცია" : "Free Consultation"}
+                </a>
+              </div>
+
+              {/* Desktop CTAs — circle+label (services) + ghost consultation */}
+              <div className="hidden md:flex items-center gap-6 mt-6">
+                <button
+                  onClick={scrollToServices}
+                  className="group inline-flex items-center gap-4"
+                >
+                  <span className="w-11 h-11 rounded-full bg-blue-600 flex items-center justify-center shrink-0 group-hover:bg-blue-500 transition-colors duration-200">
+                    <FaArrowDown className="text-white text-sm" />
+                  </span>
+                  <span className="text-sm tracking-widest uppercase font-medium text-white group-hover:text-blue-400 transition-colors duration-200">
+                    {currentLanguage === "ka" ? "სერვისების ნახვა" : "View Services"}
+                  </span>
+                </button>
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/20 text-sm font-medium text-white hover:bg-white/10 transition-colors duration-200"
+                >
+                  <FaWhatsapp className="text-base" />
+                  {currentLanguage === "ka" ? "უფასო კონსულტაცია" : "Free Consultation"}
+                </a>
+              </div>
+
             </div>
 
             {/* Stats Block — bottom right, desktop only */}
@@ -427,6 +450,22 @@ const NewHomeVifa: React.FC = () => {
             </div>
 
           </div>
+        </div>
+      </div>
+
+      {/* Trust stats — mobile/tablet strip (desktop shows them inside the hero) */}
+      <div className="lg:hidden bg-[#050404] px-5 sm:px-8 py-10">
+        <div className="grid grid-cols-3 gap-4">
+          {[
+            { num: "200+", label: currentLanguage === "ka" ? "პროექტი" : "Projects" },
+            { num: "7+", label: currentLanguage === "ka" ? "წელი" : "Years" },
+            { num: "4", label: currentLanguage === "ka" ? "მიმართულება" : "Services" },
+          ].map((s, i) => (
+            <div key={i} className="text-center">
+              <div className="text-2xl font-semibold text-white">{s.num}</div>
+              <div className="mt-1.5 text-[11px] uppercase tracking-wider text-white/40">{s.label}</div>
+            </div>
+          ))}
         </div>
       </div>
 
