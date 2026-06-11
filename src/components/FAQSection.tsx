@@ -28,7 +28,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({
 
   return (
     <section className="relative z-10 w-full">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="!max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
           {eyebrow && (
             <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-indigo-400 mb-3">

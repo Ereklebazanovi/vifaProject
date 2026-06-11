@@ -426,6 +426,15 @@ html.ka .blog-prose *:not(h2):not(h3):not(code) {
   font-family: "Noto Sans Georgian", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+/* Landing-page body copy (Invento WMS etc.): paragraphs get readable mkhedruli
+   (Noto Sans Georgian), while headings/labels/buttons keep BPG Nino Mtavruli.
+   Same rationale as .blog-prose — :lang(ka) applies Nino directly to each <p>,
+   so we override it on <p> only (NOT h1-h3/span/button) to keep the design intact. */
+:lang(ka) .invento-readable p,
+html.ka .invento-readable p {
+  font-family: "Noto Sans Georgian", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 /* Blog article body — styles the rich HTML produced by the editor (react-quill).
    Self-contained so we don't need the Tailwind typography plugin. */
 .blog-prose {

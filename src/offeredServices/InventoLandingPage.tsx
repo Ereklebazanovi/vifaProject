@@ -34,9 +34,9 @@ const inventoFaq: Record<"ka" | "en", FAQItem[]> = {
         "WMS (საწყობის მართვის სისტემა) არის ერთიანი სივრცე, სადაც მართავთ Facebook და Instagram გაყიდვებს, მარაგებსა და ფინანსებს. შეკვეთას გაატარებთ 10 წამში, სისტემა ავტომატურად აკლებს ნაშთს და აგენერირებს ოფიციალურ დოკუმენტაციას.",
     },
     {
-      question: "რა ღირს WMS სისტემა?",
+      question: "რა ღირს საწყობის პროგრამა?",
       answer:
-        "სამი გეგმაა: ყოველთვიური — 79₾, წლიური — 750₾, ხოლო E-commerce Bundle (ონლაინ მაღაზია + WMS ლიცენზია და სრული სინქრონიზაცია) — 1999₾.",
+        "სამი გეგმაა: ყოველთვიური 79₾, წლიური 750₾, ხოლო E-commerce Bundle (ონლაინ მაღაზია + WMS ლიცენზია და სრული სინქრონიზაცია) 1999₾. ყველა გეგმას ახლავს 7-დღიანი უფასო საცდელი პერიოდი.",
     },
     {
       question: "რა ფუნქციები აქვს Invento WMS-ს?",
@@ -46,24 +46,44 @@ const inventoFaq: Record<"ka" | "en", FAQItem[]> = {
     {
       question: "WMS სისტემა მობილურზე მუშაობს?",
       answer:
-        "დიახ. Invento WMS აგებულია PWA ტექნოლოგიაზე და მუშაობს ნებისმიერ მოწყობილობაზე — iOS, Android, Desktop და Tablet.",
+        "დიახ. Invento WMS აგებულია PWA ტექნოლოგიაზე და მუშაობს ნებისმიერ მოწყობილობაზე: iOS, Android, Desktop და Tablet. ინსტალაცია არ სჭირდება.",
     },
     {
       question: "ერთვის თუ არა WMS ჩემს ონლაინ მაღაზიას?",
       answer:
-        "დიახ. ხდება სრული სინქრონიზაცია Vifa/Invento-ს მიერ დამზადებულ ონლაინ მაღაზიებთან — მარაგი და შეკვეთები ავტომატურად ნაცვლდება ორივე მხარეს.",
+        "დიახ. ხდება სრული სინქრონიზაცია Vifa/Invento-ს მიერ დამზადებულ ონლაინ მაღაზიებთან: მარაგი და შეკვეთები ავტომატურად ნაცვლდება ორივე მხარეს.",
+    },
+    {
+      question: "ვისთვის არის განკუთვნილი Invento WMS?",
+      answer:
+        "ყველასთვის, ვინც Instagram-სა და Facebook-ზე ყიდის და შეკვეთებს პირად მიმოწერაში (DM) იღებს, ასევე ონლაინ მაღაზიებისა და ფიზიკური საწყობის მქონე ბიზნესებისთვის, რომლებსაც სჭირდებათ მარაგების ზუსტი აღრიცხვა და გაყიდვების მართვა ერთ სივრცეში.",
+    },
+    {
+      question: "გამოდგება თუ არა Invento მაღაზიის აღრიცხვის პროგრამად?",
+      answer:
+        "დიახ. Invento WMS სრულად ფარავს მაღაზიის აღრიცხვას: საქონლის მიღება, ნაშთების კონტროლი, გაყიდვების აღრიცხვა და დღის ბოლოს ფინანსური სურათი. ონლაინ და ფიზიკური გაყიდვები ერთ სისტემაში აღირიცხება, ამიტომ ცალკე პროგრამები აღარ გჭირდებათ.",
+    },
+    {
+      question: "რით ჯობია WMS პროგრამა Excel-ში აღრიცხვას?",
+      answer:
+        "Excel-ში ყველაფერი ხელით შეგაქვთ და შეცდომის რისკი მაღალია. Invento WMS-ში შეკვეთის გატარებისას ნაშთი ავტომატურად აკლდება, ინვოისები და სტიკერები თავად გენერირდება, გუნდის ყველა წევრი კი ერთსა და იმავე განახლებულ მონაცემს ხედავს რეალურ დროში.",
+    },
+    {
+      question: "როგორ დავიწყო Invento WMS-ით სარგებლობა?",
+      answer:
+        "მოგვწერეთ WhatsApp-ში ან დაგვირეკეთ და მიიღებთ 7-დღიან სრულიად უფასო საცდელ პერიოდს. წლიური გეგმის შემთხვევაში თქვენს არსებულ პროდუქციას სისტემაში ჩვენ ავტვირთავთ და ათვისებაში პერსონალურად დაგეხმარებით.",
     },
   ],
   en: [
     {
       question: "What is a WMS system and what does Invento WMS do?",
       answer:
-        "A WMS (Warehouse Management System) is a single space where you manage Facebook and Instagram sales, inventory and finances. You can process an order in 10 seconds — the system automatically deducts stock and generates official documentation.",
+        "A WMS (Warehouse Management System) is a single space where you manage Facebook and Instagram sales, inventory and finances. You can process an order in 10 seconds: the system automatically deducts stock and generates official documentation.",
     },
     {
-      question: "How much does the WMS system cost?",
+      question: "How much does the warehouse software cost?",
       answer:
-        "There are three plans: Monthly — 79₾, Annual — 750₾, and the E-commerce Bundle (online store + WMS license and full synchronization) — 1999₾.",
+        "There are three plans: Monthly 79₾, Annual 750₾, and the E-commerce Bundle (online store + WMS license and full synchronization) 1999₾. Every plan comes with a 7-day free trial.",
     },
     {
       question: "What features does Invento WMS have?",
@@ -73,12 +93,32 @@ const inventoFaq: Record<"ka" | "en", FAQItem[]> = {
     {
       question: "Does the WMS system work on mobile?",
       answer:
-        "Yes. Invento WMS is built on PWA technology and works on any device — iOS, Android, Desktop and Tablet.",
+        "Yes. Invento WMS is built on PWA technology and works on any device: iOS, Android, Desktop and Tablet. No installation needed.",
     },
     {
       question: "Does the WMS connect to my online store?",
       answer:
-        "Yes. Full synchronization happens with online stores built by Vifa/Invento — inventory and orders are automatically updated on both sides.",
+        "Yes. Full synchronization happens with online stores built by Vifa/Invento: inventory and orders are automatically updated on both sides.",
+    },
+    {
+      question: "Who is Invento WMS for?",
+      answer:
+        "For anyone selling on Instagram and Facebook who takes orders in DMs, as well as online stores and businesses with a physical warehouse that need accurate inventory tracking and sales management in one place.",
+    },
+    {
+      question: "Can Invento be used as store accounting software?",
+      answer:
+        "Yes. Invento WMS fully covers store accounting: receiving goods, stock control, sales tracking and an end-of-day financial picture. Online and in-store sales are recorded in one system, so you no longer need separate programs.",
+    },
+    {
+      question: "Why is a WMS better than tracking in Excel?",
+      answer:
+        "In Excel everything is entered manually and the risk of errors is high. In Invento WMS, stock is deducted automatically when an order is processed, invoices and labels are generated for you, and your whole team sees the same up-to-date data in real time.",
+    },
+    {
+      question: "How do I get started with Invento WMS?",
+      answer:
+        "Message us on WhatsApp or call us and you will get a completely free 7-day trial. With the annual plan we upload your existing products into the system and personally help you with onboarding.",
     },
   ],
 };
@@ -87,12 +127,13 @@ import InventoScrollyTelling from "../components/InventoScrollyTelling";
 // Invento Translations
 const inventoTranslations = {
   ka: {
-    "seo.invento.title": "საწყობის პროგრამა - Invento WMS",
-    "seo.invento.description": "VIFA Digital-ის Invento WMS: მართეთ გაყიდვები, საწყობი და ფინანსები ერთ სივრცეში. ავტომატური ინვოისინგი და საკურიერო სერვისების ინტეგრაცია.",
-    "seo.invento.keywords": "საწყობის პროგრამა, WMS სისტემა, მარაგების მართვა, instagram გაყიდვები, facebook კომერცია, ონლაინ ბიზნესი, ციფრული ინვოისი, CRM",
+    "seo.invento.title": "საწყობის პროგრამა Invento WMS - მარაგების მართვა 79₾-დან",
+    "seo.invento.description": "საწყობისა და მაღაზიის აღრიცხვის პროგრამა: საქონლის და ნაშთების აღრიცხვა, ინვენტარიზაცია, შეკვეთის გატარება 10 წამში, ინვოისები და ფინანსური რეპორტინგი. ფასი 79₾-დან, 7 დღე უფასოდ.",
+    "seo.invento.keywords": "საწყობის პროგრამა, საწყობის აღრიცხვის პროგრამა, მაღაზიის აღრიცხვის პროგრამა, მაღაზიის პროგრამა, საქონლის აღრიცხვის პროგრამა, ნაშთების აღრიცხვა, სკლადის პროგრამა, საწყობის მართვის სისტემა, WMS სისტემა, მარაგების მართვა, მარაგების აღრიცხვა, ინვენტარიზაციის პროგრამა, გაყიდვების აღრიცხვა, შეკვეთების მართვა, instagram გაყიდვები, facebook კომერცია",
 
-    "hero.title": "მართე Facebook და Instagram გაყიდვები ერთ სივრცეში",
-    "hero.subtitle": "Invento WMS - გაყიდვების, მარაგების და ფინანსების მართვის ცენტრალიზებული სისტემა ონლაინ ბიზნესისთვის.",
+    "hero.title": "საწყობის პროგრამა Facebook და Instagram გაყიდვებისთვის",
+    "hero.subtitle": "Invento WMS - საქონლის აღრიცხვის, შეკვეთებისა და ფინანსების მართვის ერთიანი სისტემა მაღაზიებისა და ონლაინ ბიზნესისთვის.",
+    "hero.trust": "🎁 7 დღე უფასოდ · გააუქმებთ ნებისმიერ დროს",
     "btn.consultation": "უფასო კონსულტაცია",
     "btn.demo": "სისტემის გატესტვა",
     "phone.number": "557 62 42 43",
@@ -101,7 +142,7 @@ const inventoTranslations = {
     "problem.label": "გამოწვევა",
     "problem.text": "ქაოსი შეკვეთებში, დაკარგული მესიჯები და ნაშთების მუდმივი გადამოწმება Excel-ში ან რვეულში.",
     "solution.label": "Invento-ს გადაწყვეტა",
-    "solution.text": "Social Commerce Hub — გაატარეთ შეკვეთა 10 წამში. სისტემა ავტომატურად აკლებს ნაშთს და აგენერირებს ოფიციალურ დოკუმენტაციას.",
+    "solution.text": "Social Commerce Hub - გაატარეთ შეკვეთა 10 წამში. სისტემა ავტომატურად აკლებს ნაშთს და აგენერირებს ოფიციალურ დოკუმენტაციას.",
 
     "features.title": "რას გთავაზობთ Invento WMS",
     "feature1.title": "საწყობი და მარაგები",
@@ -148,18 +189,35 @@ const inventoTranslations = {
     "plan3.f5": "SEO ოპტიმიზაცია და Google Analytics",
     "plan3.btn": "უფასო კონსულტაცია",
 
-    "payment.terms": "🎁 7 - დღიანი სრულიად უფასო საცდელი პერიოდი — გამოსცადეთ სისტემა თქვენს რეალურ ბიზნესში!",
+    "payment.terms": "🎁 7-დღიანი სრულიად უფასო საცდელი პერიოდი - გამოსცადეთ სისტემა თქვენს რეალურ ბიზნესში!",
 
-    "cta.title": "Invento WMS — სრული კონტროლი თქვენს ონლაინ გაყიდვებზე",
-    "cta.btn": "მოგვწერეთ WhatsApp-ში"
+    "seoContent.eyebrow": "რატომ Invento WMS",
+    "seoContent.h1": "საწყობის და მაღაზიის აღრიცხვის პროგრამა ქართული ბიზნესისთვის",
+    "seoContent.body1":
+      "Invento WMS არის საწყობის აღრიცხვის პროგრამა (ბევრისთვის უბრალოდ „სკლადის პროგრამა\"), რომელიც Excel-სა და რვეულს ერთიანი სისტემით ანაცვლებს. საქონლის აღრიცხვა, ნაშთები და შეკვეთები ერთ სივრცეშია: შეკვეთის გატარებისას სისტემა ავტომატურად აკლებს ნაშთს, აგენერირებს ინვოისს და საკურიერო სტიკერს. თვის ბოლოს კი მზად გხვდებათ ბრუნვის უწყისი და მოგება-ზარალის რეპორტი, რომელსაც ერთი ღილაკით ექსპორტავთ Excel-ში.",
+    "seoContent.h2": "ნაშთების კონტროლი, მარაგების მართვა და ინვენტარიზაცია რეალურ დროში",
+    "seoContent.body2":
+      "ნაშთების აღრიცხვა ხდება ვარიაციების დონეზე: ფერი, ზომა და სხვა მახასიათებლები ცალ-ცალკე აღირიცხება. როცა პროდუქტი კრიტიკულ ნაშთს მიაღწევს, სისტემა გაგაფრთხილებთ, ამიტომ ინვენტარიზაცია აღარ არის თვის ბოლოს ჩასატარებელი სტრესი და მარაგების ზუსტი სურათი ნებისმიერ მომენტში გაქვთ. PWA ტექნოლოგიის წყალობით საწყობის მართვის სისტემა მუშაობს ტელეფონზე, პლანშეტსა და კომპიუტერზე, ინსტალაციის გარეშე.",
+    "seoContent.h3": "ვისთვის არის Invento WMS",
+    "seoContent.body3":
+      "სისტემა შექმნილია მათთვის, ვინც Instagram-სა და Facebook-ზე ყიდის და შეკვეთებს პირად მიმოწერაში (DM) იღებს. ასევე იდეალურია ონლაინ მაღაზიებისთვის და ფიზიკური მაღაზიებისთვის, სადაც საქონლის აღრიცხვა ჯერ კიდევ რვეულში ან Excel-ში მიმდინარეობს და გაყიდვების აღრიცხვას ხელით აკეთებენ. ფასი იწყება თვეში 79₾-დან, ხოლო E-commerce Bundle-ით ერთდროულად იღებთ ონლაინ მაღაზიასა და WMS ლიცენზიას სრული სინქრონიზაციით. დაიწყეთ 7-დღიანი უფასო საცდელი პერიოდით და სისტემა საკუთარ ბიზნესში გამოსცადეთ.",
+
+    "cta.title": "სრული კონტროლი თქვენს გაყიდვებსა და საწყობზე",
+    "cta.subtitle": "მოგვწერეთ და დღესვე მიიღეთ უფასო კონსულტაცია და 7-დღიანი საცდელი წვდომა.",
+    "cta.btn": "მოგვწერეთ WhatsApp-ში",
+    "cta.call": "დაგვირეკეთ",
+
+    "sticky.whatsapp": "WhatsApp-ში მოწერა",
+    "sticky.call": "დარეკვა"
   },
   en: {
-    "seo.invento.title": "Warehouse Management Software - Invento WMS",
-    "seo.invento.description": "VIFA Digital's Invento WMS helps you manage sales, inventory, and finance in one place with automated invoicing and courier integration.",
-    "seo.invento.keywords": "warehouse management software, WMS system, inventory management, instagram sales, facebook commerce, online business, digital invoicing, CRM",
+    "seo.invento.title": "Warehouse Management Software Invento WMS - from 79₾",
+    "seo.invento.description": "Warehouse and inventory management software for business: real-time stock tracking, order processing in 10 seconds, invoicing and financial reporting. From 79₾/month, 7-day free trial.",
+    "seo.invento.keywords": "warehouse management software, WMS system, inventory management, inventory tracking, stock management, sales management, instagram sales, facebook commerce, online business, digital invoicing",
 
-    "hero.title": "Manage Social Sales & Inventory in One Place",
-    "hero.subtitle": "Invento WMS — A centralized system for sales, inventory, and financial management for online businesses.",
+    "hero.title": "Warehouse Software for Facebook & Instagram Sales",
+    "hero.subtitle": "Invento WMS - a unified system for inventory tracking, orders and financial management for online businesses.",
+    "hero.trust": "🎁 7-day free trial · Cancel anytime",
     "btn.consultation": "Free Consultation",
     "btn.demo": "Test the System",
     "phone.number": "557 62 42 43",
@@ -168,7 +226,7 @@ const inventoTranslations = {
     "problem.label": "The Challenge",
     "problem.text": "Chaos in orders, lost messages, and constant manual stock checking in Excel or notebooks.",
     "solution.label": "The Solution",
-    "solution.text": "Social Commerce Hub — Process orders in 10 seconds. The system automatically deducts stock and generates official documentation.",
+    "solution.text": "Social Commerce Hub - Process orders in 10 seconds. The system automatically deducts stock and generates official documentation.",
 
     "features.title": "Invento WMS Features for Growth",
     "feature1.title": "Warehouse & Inventory",
@@ -215,10 +273,26 @@ const inventoTranslations = {
     "plan3.f5": "SEO Optimization & Google Analytics",
     "plan3.btn": "Free Consultation",
 
-    "payment.terms": "Payment Terms: 50% Upfront — 50% Upon Completion",
+    "payment.terms": "🎁 Completely free 7-day trial - test the system in your real business!",
 
-    "cta.title": "Invento WMS — Complete Control Over Your Online Sales",
-    "cta.btn": "Message us on WhatsApp"
+    "seoContent.eyebrow": "Why Invento WMS",
+    "seoContent.h1": "Warehouse and Inventory Tracking Software for Business",
+    "seoContent.body1":
+      "Invento WMS is warehouse accounting software that replaces Excel and notebooks with a single system. Every product, stock level and order lives in one place: when an order is processed, the system automatically deducts stock and generates an invoice and a courier label. At the end of the month, your turnover statement and profit and loss report are ready, exportable to Excel in one click.",
+    "seoContent.h2": "Real-Time Stock Management and Inventory",
+    "seoContent.body2":
+      "Stock is managed at the variation level: color, size and other attributes are tracked separately. When a product reaches critical stock, the system alerts you, so inventory counting is no longer an end-of-month stress and you always have an accurate picture. Thanks to PWA technology, the warehouse management system works on phone, tablet and desktop with no installation.",
+    "seoContent.h3": "Who Invento WMS Is For",
+    "seoContent.body3":
+      "The system is built for sellers on Instagram and Facebook who take orders in DMs, as well as online stores and businesses with a physical warehouse. Pricing starts at 79₾ per month, and the E-commerce Bundle gives you an online store and a WMS license with full synchronization at once. Start with a 7-day free trial and test the system in your own business.",
+
+    "cta.title": "Complete Control Over Your Sales and Warehouse",
+    "cta.subtitle": "Message us today to get a free consultation and 7-day trial access.",
+    "cta.btn": "Message us on WhatsApp",
+    "cta.call": "Call us",
+
+    "sticky.whatsapp": "WhatsApp us",
+    "sticky.call": "Call"
   }
 };
 
@@ -310,9 +384,9 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
         keywords={t("seo.invento.keywords")}
         url="https://vifadigital.ge/inventowms"
         softwareApplication={{
-          name: "Invento WMS — საწყობის მართვის სისტემა",
+          name: "Invento WMS - საწყობის მართვის სისტემა",
           description:
-            "WMS საწყობის მართვის სისტემა: მარაგების კონტროლი, შეკვეთების დამუშავება, ინვოისები და რეალურ დროში ანალიტიკა ბიზნესისთვის.",
+            "საწყობის აღრიცხვის პროგრამა: მარაგების მართვა და ინვენტარიზაცია, შეკვეთების დამუშავება, ინვოისები და რეალურ დროში ფინანსური ანალიტიკა ბიზნესისთვის.",
           applicationCategory: "BusinessApplication",
           operatingSystem: "Web",
           offers: [
@@ -330,7 +404,7 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
       `}</style>
 
       <div
-        className={`min-h-screen bg-[#0a0a0a] text-white ${
+        className={`invento-readable min-h-screen bg-[#0a0a0a] text-white ${
           currentLanguage === 'ka' ? "font-['Noto_Sans_Georgian',sans-serif]" : "font-sans"
         } ${getTransitionClasses()}`}
       >
@@ -394,6 +468,8 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
                         </a>
                       </div>
                     </div>
+
+                    <p className="text-xs text-gray-500">{t("hero.trust")}</p>
                   </div>
                 </motion.div>
 
@@ -420,7 +496,11 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
                       <motion.img
                         key={currentImageIndex}
                         src={images[currentImageIndex]}
-                        alt={`Invento Preview ${currentImageIndex + 1}`}
+                        alt={
+                          en
+                            ? `Invento WMS warehouse management software interface, screenshot ${currentImageIndex + 1}`
+                            : `Invento WMS საწყობის პროგრამის ინტერფეისი, სქრინშოტი ${currentImageIndex + 1}`
+                        }
                         className="w-full h-full object-contain p-1 transition-transform duration-300 group-hover:scale-[1.02]"
                         initial={{
                           opacity: 0
@@ -719,6 +799,31 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
             </div>
           </section>
 
+          {/* SEO CONTENT — keyword-targeted organic prose (visible, prerendered) */}
+          <section className="py-14 bg-[#0a0a0a]">
+            <div className="container mx-auto px-6">
+              <div className="max-w-3xl! mx-auto">
+                <span className="mb-8 inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.25em] text-blue-400">
+                  <span className="h-px w-8 bg-blue-500" />
+                  {t("seoContent.eyebrow")}
+                </span>
+
+                <div className="space-y-10">
+                  {(["1", "2", "3"] as const).map((n) => (
+                    <div key={n}>
+                      <h2 className={`text-xl md:text-2xl mb-4 text-white ${currentLanguage === 'ka' ? 'font-semibold' : 'font-semibold'}`}>
+                        {t(`seoContent.h${n}`)}
+                      </h2>
+                      <p className="text-sm md:text-base text-gray-400 leading-relaxed">
+                        {t(`seoContent.body${n}`)}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* FOOTER CTA */}
           <section className="py-12 bg-[#0a0a0a]">
             <div className="container mx-auto px-6 text-center">
@@ -733,16 +838,30 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
                   {t("cta.title")}
                 </h2>
 
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 px-6 py-3 bg-green-600 hover:bg-green-700 rounded-lg font-semibold text-white transition-all duration-300 hover:scale-105 shadow-lg shadow-green-600/25"
-                >
-                  <FaCommentDots size={20} />
-                  {t("cta.btn")}
-                  <FaArrowRight size={16} />
-                </a>
+                <p className="text-sm md:text-base text-gray-400">
+                  {t("cta.subtitle")}
+                </p>
+
+                <div className="flex flex-wrap items-center justify-center gap-4">
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 px-6 py-3 bg-green-600 hover:bg-green-700 rounded-lg font-semibold text-white transition-all duration-300 hover:scale-105 shadow-lg shadow-green-600/25"
+                  >
+                    <FaCommentDots size={20} />
+                    {t("cta.btn")}
+                    <FaArrowRight size={16} />
+                  </a>
+
+                  <a
+                    href={phoneNumber}
+                    className="inline-flex items-center gap-2 px-6 py-3 border border-gray-600 hover:border-gray-400 rounded-lg font-semibold text-gray-200 hover:text-white transition-all"
+                  >
+                    <FaPhone size={16} />
+                    {t("cta.call")}: {t("phone.number")}
+                  </a>
+                </div>
               </motion.div>
             </div>
           </section>
@@ -755,6 +874,29 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
         eyebrow="FAQ"
         title={currentLanguage === "en" ? "Frequently Asked Questions" : "ხშირად დასმული კითხვები"}
       />
+
+      {/* Spacer so the sticky bar doesn't cover the last content on mobile */}
+      <div className="h-16 md:hidden" />
+
+      {/* Sticky mobile lead bar */}
+      <div className="fixed inset-x-0 bottom-0 z-50 flex gap-2 border-t border-white/10 bg-[#0a0a0a]/95 p-3 backdrop-blur md:hidden">
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-green-600 py-3 text-sm font-bold text-white"
+        >
+          <FaCommentDots size={16} />
+          {t("sticky.whatsapp")}
+        </a>
+        <a
+          href={phoneNumber}
+          className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-white/15 py-3 text-sm font-bold text-gray-200"
+        >
+          <FaPhone size={14} />
+          {t("sticky.call")}
+        </a>
+      </div>
     </>
   );
 };
