@@ -246,7 +246,7 @@ const SimpleNavbar: React.FC = () => {
           })}
         </div>
 
-        <div className="hidden xl:flex items-center gap-6">
+        <div className="hidden xl:flex items-center gap-4">
           <Link
             to="/blog"
             className={`text-[13px] tracking-widest uppercase font-medium transition-colors duration-200 ${
@@ -257,16 +257,16 @@ const SimpleNavbar: React.FC = () => {
           >
             {ka ? "ბლოგი" : "BLOG"}
           </Link>
-          <div className="h-4 w-px bg-white/15" />
-          <div className="text-right">
-            <p className="text-slate-300 text-xs tracking-wider">vifadigital.ge</p>
-            <Link
-              to="/contact"
-              className="text-slate-500 text-[10px] tracking-widest uppercase hover:text-slate-300 transition-colors"
-            >
-              {ka ? "კონტაქტი" : "GET IN TOUCH"}
-            </Link>
-          </div>
+          <Link
+            to="/contact"
+            className={`inline-flex items-center rounded-full px-4 py-2 text-[13px] font-semibold uppercase tracking-wider transition-all duration-200 ${
+              location.pathname === "/contact"
+                ? "bg-indigo-500 text-white"
+                : "bg-indigo-600 text-white hover:bg-indigo-500 hover:shadow-lg hover:shadow-indigo-600/30"
+            }`}
+          >
+            {ka ? "კონტაქტი" : "GET IN TOUCH"}
+          </Link>
           <LanguageToggle />
         </div>
 
@@ -414,9 +414,18 @@ const SimpleNavbar: React.FC = () => {
       </div>
 
       {/* Bottom bar */}
-      <div className="shrink-0 px-6 py-5 border-t border-white/[0.07] flex items-center justify-between">
-        <LanguageToggle />
-        <span className="text-white/15 text-[10px] tracking-widest font-mono">vifadigital.ge</span>
+      <div className="shrink-0 px-6 py-5 border-t border-white/[0.07] space-y-4">
+        <Link
+          to="/contact"
+          onClick={() => setMobileMenuOpen(false)}
+          className="flex w-full items-center justify-center rounded-full bg-indigo-600 py-3.5 text-sm font-semibold uppercase tracking-wider text-white transition-colors hover:bg-indigo-500"
+        >
+          {ka ? "კონტაქტი" : "GET IN TOUCH"}
+        </Link>
+        <div className="flex items-center justify-between">
+          <LanguageToggle />
+          <span className="text-white/15 text-[10px] tracking-widest font-mono">vifadigital.ge</span>
+        </div>
       </div>
     </div>
     </>

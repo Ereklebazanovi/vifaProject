@@ -420,7 +420,7 @@ function IndustryContent({ config, ka }: { config: IndustryConfig; ka: boolean }
     <section className="relative bg-[#060608]">
       <motion.div
         ref={ref}
-        className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8"
+        className="mx-auto !max-w-7xl px-5 sm:px-6 lg:px-8"
         variants={sectionReveal}
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
