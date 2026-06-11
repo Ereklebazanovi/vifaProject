@@ -100,9 +100,9 @@ const webDevFaq: Record<"ka" | "en", FAQItem[]> = {
 
 const webDevTranslations = {
   ka: {
-    "seo.webdev.title": "ვებ განვითარება | Web Development Services",
+    "seo.webdev.title": "საიტის დამზადება - ვებსაიტი და ონლაინ მაღაზია 500₾-დან",
     "seo.webdev.description":
-      "პროფესიონალური ვებ განვითარების სერვისები React, Node.js, მობილურზე მორგებული დიზაინი და თანამედროვე ვებ აპლიკაციები.",
+      "ვებსაიტის დამზადება 500₾-დან: სავიზიტო საიტი, კორპორატიული ვებსაიტი CMS ადმინ პანელით და ონლაინ მაღაზია. უნიკალური დიზაინი, SEO ოპტიმიზაცია, SSL და უფასო ჰოსტინგი.",
     "webdev.hero.overline": "ვებ დეველოპმენტი",
     "webdev.hero.main_title": "ვებსაიტის დამზადება თქვენი ბიზნესისთვის.",
     "webdev.hero.description": "ვქმნით პრემიუმ კლასის ვებგვერდებს და E-commerce პლატფორმებს, რომლებიც ზრდის თქვენს გაყიდვებს.",
@@ -164,9 +164,9 @@ const webDevTranslations = {
       "სარეკლამო კამპანიებისთვის ვამზადებთ ლენდინგ პეიჯებს (landing page), რომლებიც ერთ მკაფიო მიზანზეა აწყობილი — ლიდის ან გაყიდვის მიღებაზე. სწრაფი ჩატვირთვა, გასაგები მესიჯი და ძლიერი call-to-action ზრდის რეკლამის ეფექტურობას და ამცირებს მოზიდვის ღირებულებას.",
   },
   en: {
-    "seo.webdev.title": "Vifa Web - Web Development Services | Vifa Technologies",
+    "seo.webdev.title": "Website Development in Georgia - from 500₾",
     "seo.webdev.description":
-      "Professional web development services including React, Node.js, mobile responsive design, and modern web applications.",
+      "Website and online store development from 500₾: landing pages, corporate websites with a CMS admin panel and eCommerce. Unique design, mobile-responsive, SEO and free hosting.",
     "webdev.hero.overline": "Web Development",
     "webdev.hero.main_title": "Website Development for Your Business.",
     "webdev.hero.description": "We build premium websites and E-commerce platforms that drive your sales and growth.",

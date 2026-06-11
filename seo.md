@@ -389,6 +389,27 @@ sitemap'd, reached via internal links + footer, but **NOT in the navbar**.
 - Keywords present in baked HTML (დრონით გადაღება, კომერციული ფოტოგრაფია, რილსები, ვიდეო გადაღება);
   0 analytics scripts baked; H1 present; FAQPage=6, breadcrumb matches visible.
 
+### SESSION 7 — Money-keyword title rewrite + H1 fix (2026-06-11)
+
+Live audit found the main money keyword missing from key titles. Fixed (ka + en both):
+
+- **Homepage (`NewHomeVifa.tsx`)**: title was `VIFA Digital - ციფრული სააგენტო | vifadigital.ge`
+  (+ `| Vifa Digital` appended by SEO.tsx = triple brand, zero keywords) → now
+  `ციფრული სააგენტო - საიტის დამზადება, მარკეტინგი, AI ჩატბოტი`. Description typo fixed
+  (`ვებ დეველოპენტი`) + rewritten with all 5 service keywords.
+- **WebDev (`seo.webdev.title`)**: was `ვებ განვითარება | Web Development Services` (no money
+  keyword!) → `საიტის დამზადება - ვებსაიტი და ონლაინ მაღაზია 500₾-დან`. EN title had leftover
+  `| Vifa Technologies` brand — removed. Descriptions rewritten with prices/keywords.
+- **Marketing (`seo.marketing.title`)**: was `ციფრული მარკეტინგი - VIFA DIGITAL` (double brand)
+  → `ციფრული მარკეტინგი - SMM, რეკლამა და კონტენტი`; description/keywords now name
+  Facebook/Instagram რეკლამა + Google Ads + `პაკეტები 1000₾-დან`.
+- **AIChatbot H1 bug**: gradient tagline `<span>` was INSIDE the `<h1>` → text read as
+  `…ბიზნესისთვისთქვენი ბიზნესის…`. Tagline moved to a sibling `<p>` with identical typography
+  classes (visual unchanged); H1 is now clean `AI ჩატბოტი თქვენი ბიზნესისთვის`.
+- **Known + accepted:** marketing industry pages (`MarketingServiceSection`) have NO H1 —
+  user decision (design constraint), do not "fix".
+- Verified: `npm run build` → 25/25 routes OK (4 blog posts now); baked titles/H1 checked in dist.
+
 ---
 
 ## 3. CLEANUPS / REMOVALS

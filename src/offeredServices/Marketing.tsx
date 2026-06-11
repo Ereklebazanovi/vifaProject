@@ -90,9 +90,9 @@ const marketingFaq: Record<"ka" | "en", FAQItem[]> = {
 // Marketing Translations
 const marketingTranslations = {
   ka: {
-    "seo.marketing.title": "ციფრული მარკეტინგი - VIFA DIGITAL",
-    "seo.marketing.description": "VIFA Digital გთავაზობთ პრემიუმ ციფრული მარკეტინგის სერვისებს: ვიდეო/ფოტო პროდუქცია, სოციალური მედიის მართვა და სტრატეგიული კონტენტის შექმნა.",
-    "seo.marketing.keywords": "ციფრული მარკეტინგი, სოციალური მედია მართვა, ვიდეო გადაღება, ფოტოგრაფია, კონტენტის შექმნა, ბრენდინგი, მარკეტინგის სააგენტო vifa digital",
+    "seo.marketing.title": "ციფრული მარკეტინგი - SMM, რეკლამა და კონტენტი",
+    "seo.marketing.description": "ციფრული მარკეტინგის სააგენტო: სოციალური მედიის მართვა (SMM), Facebook და Instagram რეკლამა, Google Ads, ფოტო/ვიდეო კონტენტი და ბრენდინგი. პაკეტები 1000₾-დან.",
+    "seo.marketing.keywords": "ციფრული მარკეტინგი, სოციალური მედია მართვა, SMM, Facebook რეკლამა, Instagram რეკლამა, Google Ads, ვიდეო გადაღება, ფოტოგრაფია, კონტენტის შექმნა, ბრენდინგი, მარკეტინგის სააგენტო",
     
     "marketing.hero.overline": "ციფრული მარკეტინგი",
     "marketing.hero.main_title": "ციფრული მარკეტინგი, რომელიც გაყიდვებს ზრდის.",
@@ -152,9 +152,9 @@ const marketingTranslations = {
     "pkg.prem7": "პრიორიტეტული მხარდაჭერა",
   },
   en: {
-    "seo.marketing.title": "Digital Marketing - VIFA DIGITAL",
-    "seo.marketing.description": "VIFA Digital offers premium digital marketing services: video/photo production, social media management, and strategic content creation.",
-    "seo.marketing.keywords": "digital marketing, social media management, video production, photography, content creation, branding, marketing agency vifa digital",
+    "seo.marketing.title": "Digital Marketing - SMM, Ads & Content",
+    "seo.marketing.description": "Digital marketing agency: social media management (SMM), Facebook and Instagram ads, Google Ads, photo/video content and branding. Packages from 1000₾.",
+    "seo.marketing.keywords": "digital marketing, social media management, SMM, Facebook ads, Instagram ads, Google Ads, video production, photography, content creation, branding, marketing agency",
     
     "marketing.hero.overline": "Digital Marketing",
     "marketing.hero.main_title": "Strategic Brand Growth & Sales.",

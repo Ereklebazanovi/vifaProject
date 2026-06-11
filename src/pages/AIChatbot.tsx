@@ -372,12 +372,12 @@ const AIChatbot: React.FC = () => {
                 <span className="h-px w-8 bg-indigo-500" />
                 {en ? "AI Chatbot" : "AI ჩატბოტი"}
               </span>
-              <h1 className="mb-6 text-3xl font-extrabold leading-[1.2] tracking-tight text-white md:text-[2.6rem] md:leading-[1.15]">
+              <h1 className="text-3xl font-extrabold leading-[1.2] tracking-tight text-white md:text-[2.6rem] md:leading-[1.15]">
                 {en ? "AI Chatbot for Your Business" : "AI ჩატბოტი თქვენი ბიზნესისთვის"}
-                <span className="mt-2 block bg-gradient-to-r from-indigo-400 to-indigo-600 bg-clip-text text-transparent">
-                  {t("hero.titleHighlight")}
-                </span>
               </h1>
+              <p className="mb-6 mt-2 block bg-linear-to-r from-indigo-400 to-indigo-600 bg-clip-text text-3xl font-extrabold leading-[1.2] tracking-tight text-transparent md:text-[2.6rem] md:leading-[1.15]">
+                {t("hero.titleHighlight")}
+              </p>
 
               <div className="mb-8 space-y-3">
                 {["feature1", "feature2", "feature3"].map((f) => (

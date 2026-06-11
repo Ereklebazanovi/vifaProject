@@ -12,9 +12,9 @@ import ServicesSection from "../components/ServicesSection";
 const newHomeTranslations = {
   ka: {
     "seo.home.title":
-      "VIFA Digital - ციფრული სააგენტო | vifadigital.ge",
+      "ციფრული სააგენტო - საიტის დამზადება, მარკეტინგი, AI ჩატბოტი",
     "seo.home.description":
-      "VIFA Digital - ციფრული სააგენტო  : ვიდეო გადაღება, ფოტოგრაფია, ვებ დეველოპენტი, ავტომატიზაცია, სოციალური მედია მართვა, კონტენტის შექმნა. სრული მარკეტინგ პაკეტი თქვენი ბიზნესისთვის. ",
+      "VIFA Digital - ციფრული სააგენტო თბილისში: საიტის დამზადება, ციფრული მარკეტინგი, ფოტო და ვიდეო გადაღება, AI ჩატბოტები და საწყობის პროგრამა. უფასო კონსულტაცია თქვენი ბიზნესისთვის.",
 
     "ome.badge": "გააციფრულე შენი ბიზნესი",
     "newHome.hero.title": "შექმენი კომუნიკაციის ხიდი",
@@ -155,9 +155,9 @@ const newHomeTranslations = {
   },
   en: {
     "seo.home.title":
-      "VIFA Digital - Digital Marketing in Georgia | vifadigital.ge",
+      "Digital Agency in Georgia - Web Development, Marketing, AI Chatbots",
     "seo.home.description":
-      "VIFA Digital - Digital marketing services: video production, photography, social media management, content creation. Full marketing package for your business.",
+      "VIFA Digital is a digital agency in Tbilisi: website development, digital marketing, photo and video production, AI chatbots and warehouse software. Free consultation.",
 
     "newHome.badge": "Digitize Your Business",
     "newHome.hero.title": "Build a Communication Bridge",
