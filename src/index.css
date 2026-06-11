@@ -503,6 +503,28 @@ html.ka .invento-readable p {
   font-size: 0.9em;
 }
 
+/* Defensive text color: the editor is open and pasted content (Word/Docs/styled HTML)
+   often carries INLINE `color:` styles that beat the stylesheet (inline > class) and
+   render text dark-on-dark = invisible. The blog is always on the #060608 dark bg, so
+   we force readable colors on every text node regardless of pasted inline styles.
+   Specific roles (headings, links, bold, blockquote) keep their own color. */
+.blog-prose,
+.blog-prose *:not(a):not(strong):not(b):not(h2):not(h3):not(blockquote):not(code) {
+  color: #cbd5e1 !important; /* slate-300 */
+}
+.blog-prose h2,
+.blog-prose h3,
+.blog-prose strong,
+.blog-prose b {
+  color: #ffffff !important;
+}
+.blog-prose a {
+  color: #a5b4fc !important; /* indigo-300 */
+}
+.blog-prose blockquote {
+  color: #94a3b8 !important; /* slate-400 */
+}
+
 /* The global `* { max-width: 100% }` above is UNLAYERED, so it beats Tailwind v4's
    layered `max-w-*` utilities — making the article span full width. `!important`
    wins back the reading-column width without touching that global guard. */
