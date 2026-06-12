@@ -1,5 +1,6 @@
 ﻿import React, { useState, useEffect, useRef } from "react";
 import {
+  ChevronDown,
   Layers,
   Map,
   Scale,
@@ -189,18 +190,35 @@ const SimpleNavbar: React.FC = () => {
                   aria-expanded={isDropdownItem ? isOpen : undefined}
                   aria-haspopup={isDropdownItem ? "menu" : undefined}
                 >
-                  <span className="text-slate-500 text-[10px] font-mono">
+                  <span className="text-slate-500 text-[10px] font-mono transition-colors duration-200 group-hover:text-indigo-400">
                     {link.num}
                   </span>
-                  <span
-                    className={`text-[15px] tracking-widest uppercase font-medium transition-colors duration-200 ${
-                      location.pathname === link.path
-                        ? "text-white"
-                        : "text-slate-200 group-hover:text-white"
-                    }`}
-                  >
-                    {link.label}
+                  <span className="relative inline-block">
+                    <span
+                      className={`text-[15px] tracking-widest uppercase font-medium transition-colors duration-200 ${
+                        location.pathname === link.path
+                          ? "text-white"
+                          : "text-slate-200 group-hover:text-white"
+                      }`}
+                    >
+                      {link.label}
+                    </span>
+                    {/* animated underline — grows on hover, stays for active */}
+                    <span
+                      className={`pointer-events-none absolute -bottom-1.5 left-0 h-px bg-indigo-400 transition-all duration-300 ease-out ${
+                        location.pathname === link.path ? "w-full" : "w-0 group-hover:w-full"
+                      }`}
+                    />
                   </span>
+                  {isDropdownItem && (
+                    <ChevronDown
+                      className={`h-3.5 w-3.5 transition-all duration-300 ${
+                        isOpen
+                          ? "rotate-180 text-indigo-400"
+                          : "text-slate-500 group-hover:text-indigo-400"
+                      }`}
+                    />
+                  )}
                 </button>
 
                 {isDropdownItem && (
@@ -249,13 +267,18 @@ const SimpleNavbar: React.FC = () => {
         <div className="hidden xl:flex items-center gap-4">
           <Link
             to="/blog"
-            className={`text-[13px] tracking-widest uppercase font-medium transition-colors duration-200 ${
+            className={`group relative inline-block text-[13px] tracking-widest uppercase font-medium transition-colors duration-200 ${
               location.pathname.startsWith("/blog")
                 ? "text-white"
                 : "text-slate-300 hover:text-white"
             }`}
           >
             {ka ? "ბლოგი" : "BLOG"}
+            <span
+              className={`pointer-events-none absolute -bottom-1.5 left-0 h-px bg-indigo-400 transition-all duration-300 ease-out ${
+                location.pathname.startsWith("/blog") ? "w-full" : "w-0 group-hover:w-full"
+              }`}
+            />
           </Link>
           <Link
             to="/contact"
