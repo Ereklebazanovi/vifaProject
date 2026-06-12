@@ -1,0 +1,523 @@
+"use client";
+
+import type React from "react";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import Breadcrumbs from "../components/Breadcrumbs";
+import { useLanguageTransition } from "../hooks/useLanguageTransition";
+import {
+  FaRocket,
+  FaCode,
+  FaCheckCircle,
+  FaArrowRight,
+  FaBrain,
+  FaShoppingCart,
+  FaWhatsapp,
+} from "react-icons/fa";
+import {
+  SiFirebase,
+  SiTypescript,
+  SiVercel,
+  SiReact,
+  SiNodedotjs,
+  SiTailwindcss,
+} from "react-icons/si";
+import SEO from "../components/SEO";
+import FAQSection from "../components/FAQSection";
+import type { FAQItem } from "../components/FAQSection";
+import IndustryLinks from "../components/IndustryLinks";
+import { useLanguage } from "../contexts/LanguageContext";
+
+// FAQ — built from the real packages/pricing on this page (bilingual).
+// Questions are phrased the way people actually search ("საიტის დამზადება").
+const webDevFaq: Record<"ka" | "en", FAQItem[]> = {
+  ka: [
+    {
+      question: "რა ღირს საიტის დამზადება?",
+      answer:
+        "პროექტის ღირებულება შერჩეულ პაკეტზეა დამოკიდებული. სავიზიტო ვებსაიტის ფასი 500₾-დან იწყება, CMS-ით უზრუნველყოფილი პრემიუმ ვებსაიტის ღირებულება 700₾-დან 1000₾-მდე მერყეობს, ხოლო სრულფასოვანი ონლაინ მაღაზიის დამზადება 1400₾-დან არის შესაძლებელი. ჩვენთან კონსულტაცია უფასოა და ზუსტ შეთავაზებას თქვენი ბიზნესის საჭიროებებზე მორგებით მოგიმზადებთ."
+    },
+    {
+      question: "რამდენ ხანში მზადდება ვებსაიტი?",
+      answer:
+        "სავიზიტო ვებსაიტის დასამზადებლად საშუალოდ 1-დან 2 კვირამდე დროა საჭირო. პრემიუმ კორპორატიული ვებსაიტის შექმნას 2-დან 4 კვირამდე ვუთმობთ, ხოლო ონლაინ მაღაზიის სრულყოფილად გამართვას 4-დან 6 კვირამდე სჭირდება. სამუშაოს ზუსტ ვადებს პროექტის სპეციფიკისა და მოცულობის მიხედვით ინდივიდუალურად ვათანხმებთ."
+    },
+    {
+      question: "რა ტექნოლოგიებზე აშენებთ ვებსაიტებს?",
+      answer:
+        "პროექტებისთვის ვიყენებთ უახლეს და მოწინავე ტექნოლოგიურ სტეკს, როგორიცაა React, TypeScript, Node.js, Firebase და Vercel. აღნიშნული ტექნოლოგიები უზრუნველყოფს საიტის მაქსიმალურ სისწრაფეს, უმაღლეს უსაფრთხოებასა და SEO-სთვის იდეალურად ოპტიმიზებულ სტრუქტურას."
+    },
+    {
+      question: "ვებსაიტი მობილურზე მორგებული და SEO-ზე ოპტიმიზებული იქნება?",
+      answer:
+        "რა თქმა უნდა. ჩვენ მიერ შექმნილი ყველა ვებსაიტი სრულად რესპონსიულია და იდეალურად მუშაობს როგორც მობილურსა და ტაბლეტზე, ისე კომპიუტერზე. საიტს ასევე ექნება საბაზისო SEO ოპტიმიზაცია, ინტეგრირებული Google Analytics და უსაფრთხო კავშირისთვის აუცილებელი SSL სერთიფიკატი."
+    },
+    {
+      question: "აკეთებთ ონლაინ მაღაზიას ქართული ბანკებით გადახდით?",
+      answer:
+        "დიახ, ვქმნით სრულყოფილ ონლაინ მაღაზიებს ქართული ბანკების გადახდის სისტემების სრული ინტეგრაციით. პლატფორმას ასევე ვუკავშირებთ Vifa WMS სისტემას, რაც საშუალებას გაძლევთ მართოთ პროდუქტები, ავტომატურად დაასინქრონოთ მარაგები, დაბეჭდოთ საკურიერო სტიკერები და აკონტროლოთ შეკვეთები რეალურ დროში (real-time)."
+    },
+    {
+      question: "შევძლებ ვებსაიტის კონტენტის დამოუკიდებლად მართვას?",
+      answer:
+        "დიახ, პრემიუმ პაკეტის არჩევის შემთხვევაში საიტს მოჰყვება სრულფასოვანი მართვის სისტემა (CMS) და მოსახერხებელი ადმინ პანელი. ამის დახმარებით, დეველოპერის ჩარევის გარეშე, დამოუკიდებლად შეძლებთ ტექსტების, პროდუქტებისა და სიახლეების განახლებას."
+    }
+  ],
+  en: [
+    {
+      question: "How much does it cost to build a website?",
+      answer:
+        "The price depends on the chosen package. A landing-page website starts from 500₾, a premium website with CMS ranges from 700₾ to 1000₾, and a full-featured online store starts from 1400₾. The consultation is free, and we'll prepare an exact quote tailored to your business needs."
+    },
+    {
+      question: "How long does it take to build a website?",
+      answer:
+        "A landing-page website takes on average 1-2 weeks, a premium corporate website 2-4 weeks, and a full online store 4-6 weeks. We agree on exact timelines individually, based on the project's scope and complexity."
+    },
+    {
+      question: "What technologies do you build websites with?",
+      answer:
+        "We use a modern, advanced stack such as React, TypeScript, Node.js, Firebase and Vercel. These technologies ensure maximum speed, top-tier security and a structure that is perfectly optimized for SEO."
+    },
+    {
+      question: "Will the website be mobile-responsive and SEO-optimized?",
+      answer:
+        "Absolutely. Every website we build is fully responsive and works perfectly on mobile, tablet and desktop. It also includes baseline SEO optimization, integrated Google Analytics and an SSL certificate for a secure connection."
+    },
+    {
+      question: "Do you build online stores with Georgian bank payments?",
+      answer:
+        "Yes, we build complete online stores with full integration of Georgian bank payment systems. We also connect the platform to the Vifa WMS system, letting you manage products, automatically sync inventory, print courier labels and control orders in real time."
+    },
+    {
+      question: "Can I manage the website content myself?",
+      answer:
+        "Yes. With the premium package, the site comes with a full content management system (CMS) and a convenient admin panel. With it, you can update texts, products and news independently, without involving a developer."
+    }
+  ]
+};
+
+const webDevTranslations = {
+  ka: {
+    "seo.webdev.title": "საიტის დამზადება - ვებსაიტი და ონლაინ მაღაზია 500₾-დან",
+    "seo.webdev.description":
+      "ვებსაიტის დამზადება 500₾-დან: სავიზიტო საიტი, კორპორატიული ვებსაიტი CMS ადმინ პანელით და ონლაინ მაღაზია. უნიკალური დიზაინი, SEO ოპტიმიზაცია, SSL და უფასო ჰოსტინგი.",
+    "webdev.hero.overline": "ვებ დეველოპმენტი",
+    "webdev.hero.main_title": "ვებსაიტის დამზადება თქვენი ბიზნესისთვის.",
+    "webdev.hero.description": "ვქმნით პრემიუმ კლასის ვებგვერდებს და E-commerce პლატფორმებს, რომლებიც ზრდის თქვენს გაყიდვებს.",
+    "webdev.pricing.title": "აირჩიეთ პაკეტი",
+    "webdev.pricing.landing.title": "სავიზიტო ვებსაიტი",
+    "webdev.pricing.landing.description":
+      "კომპაქტური და ეფექტური ვებგვერდი 2-4 გვერდით. იდეალური მცირე ბიზნესისა და პირადი ბრენდის ონლაინ ხილვადობისთვის.",
+    "webdev.pricing.landing.price": "500₾-დან",
+    "webdev.pricing.landing.feature1": "იდეალური ყველა მოწყობილობაზე",
+    "webdev.pricing.landing.feature2": "SEO ოპტიმიზაცია",
+    "webdev.pricing.landing.feature3": "კონტაქტის ფორმა",
+    "webdev.pricing.landing.feature4": "Google ანალიტიკა",
+    "webdev.pricing.landing.feature5": "SSL სერთიფიკატი (დაცული კავშირი)",
+    "webdev.pricing.corporate.title": "პრემიუმ ვებსაიტი",
+    "webdev.pricing.corporate.description":
+      "სრულფასოვანი ვებგვერდი CMS, SEO ოპტიმიზაცია და ადმინისტრაციული პანელით. კომპანიების ონლაინ ხილვადობის ზრდისთვის.",
+    "webdev.pricing.corporate.price": "₾ 700 - 1000",
+    "webdev.pricing.corporate.feature1": "სრულფასოვანი მართვის სისტემა (CMS)",
+    "webdev.pricing.corporate.feature2": "ადმინ პანელი / მართვის პანელი",
+    "webdev.pricing.corporate.feature3": "მრავალენოვანი მხარდაჭერა",
+    "webdev.pricing.corporate.feature4": "ანალიტიკის / სტატისტიკის დაფა",
+    "webdev.pricing.corporate.feature5": "ავტომატური მონაცემთა დაცვა",
+    "webdev.pricing.ai.title": "AI ჩატბოტი",
+    "webdev.pricing.ai.description":
+      "ინტელექტუალური ასისტენტი სოციალურ ქსელებში. 24/7 ავტომატური პასუხები, კლიენტების კმაყოფილება და გაყიდვების ზრდა.",
+    "webdev.pricing.ai.price": "500₾-დან",
+    "webdev.pricing.ai.feature1": "Google Gemini AI",
+    "webdev.pricing.ai.feature2": "3 პლატფორმაზე ინტეგრაცია",
+    "webdev.pricing.ai.feature3": "ქართული ენის მხარდაჭერა",
+    "webdev.pricing.ai.feature4": "რეალურ დროში რედაქტირება",
+    "webdev.pricing.ai.feature5": "დეტალური ანალიტიკა",
+    "webdev.pricing.ecommerce.title": "ონლაინ მაღაზია",
+    "webdev.pricing.ecommerce.description":
+      "სრული ონლაინ მაღაზია - ქართული ბანკებით გადახდა, პროდუქტების მართვა და შეკვეთების კონტროლი.",
+    "webdev.pricing.ecommerce.price": "1400₾-დან",
+    "webdev.pricing.ecommerce.feature1": "ონლაინ მაღაზია + Vifa WMS სისტემა",
+    "webdev.pricing.ecommerce.feature2": "ავტომატური მარაგების სინქრონიზაცია",
+    "webdev.pricing.ecommerce.feature3": "საკურიერო სტიკერები და ინვოისინგი",
+    "webdev.pricing.ecommerce.feature4": "Real-time შეკვეთების კონტროლი",
+    "webdev.pricing.ecommerce.feature5": "Excel რეპორტები და ანალიტიკა",
+    "webdev.pricing.consultation": "კონსულტაცია უფასოა",
+    "webdev.pricing.cta": "პაკეტების ნახვა",
+    "webdev.pricing.learn_more": "იხილეთ მეტი",
+    "webdev.cta.question": "მზად ხარ ბიზნესის ციფრული ტრანსფორმაციისთვის?",
+    "webdev.cta.button": "დაგვიკავშირდი WhatsApp-ზე",
+    "webdev.whatsapp.consult": "კონსულტაცია WhatsApp-ზე",
+
+    "webdev.content.eyebrow": "სერვისის შესახებ",
+    "webdev.content.intro":
+      "ვებსაიტი დღეს ბიზნესის მთავარი ციფრული ვიტრინაა. VIFA Digital აკეთებს საიტის დამზადებას სრული ციკლით: დიზაინიდან და დეველოპმენტიდან SEO ოპტიმიზაციამდე და გაშვებამდე. ვქმნით სწრაფ, მობილურზე მორგებულ და კონვერსიაზე ორიენტირებულ ვებგვერდებს, რომლებიც რეალურ შედეგს, ვიზიტორებსა და გაყიდვებს მოგიტანთ.",
+    "webdev.content.h2_1": "ვებსაიტის დამზადება და საიტის აწყობა",
+    "webdev.content.p_1":
+      "ვაკეთებთ კორპორატიული ვებსაიტებისა და სავიზიტო საიტების დამზადებას მცირე და საშუალო ბიზნესისთვის. თითოეული ვებგვერდი იქმნება უნიკალური დიზაინით, თქვენი ბრენდის სტილზე მორგებით და სუფთა, სწრაფი კოდით (React, TypeScript). საიტი თავიდანვე SEO-ზე ოპტიმიზებულია, რათა Google-ში სწორ სიტყვებზე გამოჩნდეს და ახალი კლიენტები მოიზიდოს.",
+    "webdev.content.h2_2": "ონლაინ მაღაზიის დამზადება (eCommerce)",
+    "webdev.content.p_2":
+      "ონლაინ მაღაზიის საიტის დამზადება ჩვენთან ნიშნავს სრულფასოვან eCommerce პლატფორმას ქართული ბანკების გადახდის სისტემების ინტეგრაციით. პლატფორმა უკავშირდება Vifa WMS სისტემას — ავტომატურად ასინქრონებს მარაგებს, ბეჭდავს საკურიერო სტიკერებს და გაძლევთ შეკვეთების კონტროლს რეალურ დროში. იდეალურია მათთვის, ვისაც სურს გაყიდვების ონლაინ მასშტაბირება.",
+    "webdev.content.h2_3": "ლენდინგ პეიჯი და კონვერსიის ოპტიმიზაცია",
+    "webdev.content.p_3":
+      "სარეკლამო კამპანიებისთვის ვამზადებთ ლენდინგ პეიჯებს (landing page), რომლებიც ერთ მკაფიო მიზანზეა აწყობილი — ლიდის ან გაყიდვის მიღებაზე. სწრაფი ჩატვირთვა, გასაგები მესიჯი და ძლიერი call-to-action ზრდის რეკლამის ეფექტურობას და ამცირებს მოზიდვის ღირებულებას.",
+  },
+  en: {
+    "seo.webdev.title": "Website Development in Georgia - from 500₾",
+    "seo.webdev.description":
+      "Website and online store development from 500₾: landing pages, corporate websites with a CMS admin panel and eCommerce. Unique design, mobile-responsive, SEO and free hosting.",
+    "webdev.hero.overline": "Web Development",
+    "webdev.hero.main_title": "Website Development for Your Business.",
+    "webdev.hero.description": "We build premium websites and E-commerce platforms that drive your sales and growth.",
+    "webdev.pricing.title": "Choose Your Package",
+    "webdev.pricing.landing.title": "Landing Page",
+    "webdev.pricing.landing.description":
+      "Compact and effective webpage with 2-4 pages. Perfect for small businesses and personal branding.",
+    "webdev.pricing.landing.price": "From 500₾",
+    "webdev.pricing.landing.feature1": "Mobile-Responsive Design",
+    "webdev.pricing.landing.feature2": "SEO Optimization",
+    "webdev.pricing.landing.feature3": "Contact Form",
+    "webdev.pricing.landing.feature4": "Google Analytics",
+    "webdev.pricing.landing.feature5": "SSL Certificate",
+    "webdev.pricing.corporate.title": "Premium Website",
+    "webdev.pricing.corporate.description":
+      "Full-featured website with CMS, SEO optimization and admin panel. For growing company online presence.",
+    "webdev.pricing.corporate.price": "From 800₾",
+    "webdev.pricing.corporate.feature1": "Full CMS System",
+    "webdev.pricing.corporate.feature2": "Admin Panel",
+    "webdev.pricing.corporate.feature3": "Multi-language Support",
+    "webdev.pricing.corporate.feature4": "Analytics Dashboard",
+    "webdev.pricing.corporate.feature5": "Automatic Backups",
+    "webdev.pricing.ai.title": "AI Chatbot",
+    "webdev.pricing.ai.description":
+      "Intelligent assistant on social media. 24/7 automatic responses, customer satisfaction and sales growth.",
+    "webdev.pricing.ai.price": "From 500₾",
+    "webdev.pricing.ai.feature1": "Google Gemini AI",
+    "webdev.pricing.ai.feature2": "3 Platform Integration",
+    "webdev.pricing.ai.feature3": "Georgian Language Support",
+    "webdev.pricing.ai.feature4": "Real-time Editing",
+    "webdev.pricing.ai.feature5": "Detailed Analytics",
+    "webdev.pricing.ecommerce.title": "Online Store",
+    "webdev.pricing.ecommerce.description":
+      "Complete online store - Georgian bank payments, product management, and order tracking.",
+    "webdev.pricing.ecommerce.price": "From 1999₾",
+    "webdev.pricing.ecommerce.feature1": "Online Store + Vifa WMS System",
+    "webdev.pricing.ecommerce.feature2": "Automatic Inventory Sync",
+    "webdev.pricing.ecommerce.feature3": "Courier Labels & Invoicing",
+    "webdev.pricing.ecommerce.feature4": "Real-time Order Control",
+    "webdev.pricing.ecommerce.feature5": "Excel Reports & Analytics",
+    "webdev.pricing.consultation": "Consultation is Free",
+    "webdev.pricing.cta": "Start Project",
+    "webdev.pricing.learn_more": "Learn More",
+    "webdev.cta.question": "Ready for Digital Transformation?",
+    "webdev.cta.button": "Contact us on WhatsApp",
+    "webdev.whatsapp.consult": "Consult on WhatsApp",
+  },
+};
+
+const technologies = [
+  { icon: <SiReact />,      name: "React",      color: "text-sky-400" },
+  { icon: <SiTypescript />, name: "TypeScript", color: "text-blue-400" },
+  { icon: <SiNodedotjs />,  name: "Node.js",    color: "text-green-400" },
+  { icon: <SiTailwindcss />,name: "Tailwind",   color: "text-cyan-400" },
+  { icon: <SiFirebase />,   name: "Firebase",   color: "text-amber-400" },
+  { icon: <SiVercel />,     name: "Vercel",     color: "text-gray-200" },
+];
+
+const WebDev: React.FC = () => {
+  const { currentLanguage } = useLanguage();
+  const { getTransitionClasses } = useLanguageTransition();
+
+  const whatsappUrl =
+    "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20ვებ%20განვითარების%20სერვისით.%20მსურს%20უფასო%20კონსულტაცია.";
+
+  const t = (key: string): string => {
+    const translations = webDevTranslations[
+      currentLanguage as keyof typeof webDevTranslations
+    ] as Record<string, string>;
+    return translations[key] || key;
+  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const consultationLabel = t("webdev.pricing.consultation");
+
+  const pricingCards = [
+    {
+      key: "landing",
+      icon: <FaRocket />,
+      iconColor: "text-emerald-400",
+      isLink: false,
+      waLink: "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20სავიზიტო%20ვებსაიტის%20შექმნით.%20მსურს%20უფასო%20კონსულტაცია.",
+      featured: false,
+    },
+    {
+      key: "corporate",
+      icon: <FaCode />,
+      iconColor: "text-blue-400",
+      isLink: false,
+      waLink: "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20პრემიუმ%20ვებსაიტის%20შექმნით.%20მსურს%20უფასო%20კონსულტაცია.",
+      featured: true, 
+    },
+    {
+      key: "ecommerce",
+      icon: <FaShoppingCart />,
+      iconColor: "text-amber-400",
+      isLink: false,
+      waLink: "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20ონლაინ%20მაღაზიისა%20და%20WMS%20სისტემის%20შექმნით.%20მსურს%20უფასო%20კონსულტაცია.",
+      featured: false,
+    },
+    {
+      key: "ai",
+      icon: <FaBrain />,
+      iconColor: "text-purple-400",
+      isLink: true,
+      waLink: "/services/ai-chatbot",
+      featured: false,
+    },
+  ];
+
+  const faqItems = webDevFaq[currentLanguage === "en" ? "en" : "ka"];
+  const en = currentLanguage === "en";
+  const breadcrumbItems = [
+    { name: en ? "Home" : "მთავარი", url: "https://vifadigital.ge/" },
+    { name: en ? "Web Development" : "ვებ დეველოპმენტი", url: "https://vifadigital.ge/services/web" },
+  ];
+
+  return (
+    <>
+      <SEO
+        title={t("seo.webdev.title")}
+        description={t("seo.webdev.description")}
+        url="https://vifadigital.ge/services/web"
+        serviceSchema={{
+          name: "ვებსაიტის დამზადება და ვებ დეველოპმენტი",
+          description:
+            "საიტის დამზადება, კორპორატიული ვებსაიტები, eCommerce პლატფორმები და ვებ აპლიკაციები React/Node.js ტექნოლოგიებზე.",
+          serviceType: "Web Development",
+          offers: [
+            { name: "Landing Page საიტი", price: 500 },
+            { name: "კორპორატიული საიტი (CMS)", minPrice: 700, maxPrice: 1000 },
+            { name: "AI ინტეგრირებული ვებსაიტი", price: 300 },
+            { name: "eCommerce ონლაინ მაღაზია", price: 1400 },
+          ],
+        }}
+        breadcrumbs={breadcrumbItems}
+        faq={faqItems}
+      />
+
+      <div className="fixed inset-0 z-0 bg-[#060608]">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_65%_-5%,rgba(148,163,184,0.045)_0%,transparent_65%)]" />
+      </div>
+
+      {/* ── 1. Hero ── */}
+      <section className="relative z-10 w-full overflow-hidden flex flex-col justify-center pt-36 pb-12 lg:pt-44 lg:pb-16">
+        <div className="absolute inset-0 w-full h-full z-0">
+          <img
+            src="/vebisphoto.webp"
+            alt=""
+            className="w-full h-full object-cover opacity-60"
+            loading="eager"
+            draggable={false}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#060608] via-[#060608]/90 to-transparent" />
+          <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-[#060608] to-transparent" />
+        </div>
+
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-xl">
+            <Breadcrumbs items={breadcrumbItems} className="mb-5" />
+            <span className="text-sm uppercase tracking-widest text-gray-400 mb-4 block">
+              {t("webdev.hero.overline")}
+            </span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.15] mb-6 max-w-2xl">
+              {t("webdev.hero.main_title")}
+            </h1>
+            <p className="font-georgian-body text-lg text-gray-300 leading-relaxed mb-8 max-w-xl">
+              {t("webdev.hero.description")}
+            </p>
+            <a
+              href="#pricing"
+              className="inline-flex items-center gap-2.5 bg-white text-black px-8 py-3.5 rounded-full text-sm font-bold tracking-wide hover:bg-gray-200 transition-colors duration-200"
+            >
+              {t("webdev.pricing.cta")}
+              <FaArrowRight className="text-xs" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <div className={`relative z-10 language-transition language-fade-in ${getTransitionClasses()}`}>
+        
+        {/* ── 2. Tech Stack Ticker (Minimal Trust Banner) ── */}
+        <section className="border-y border-white/[0.04] bg-white/[0.01]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex flex-wrap justify-center sm:justify-between items-center gap-6 sm:gap-4 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+            {technologies.map((tech) => (
+              <div key={tech.name} className="flex items-center gap-2 text-gray-400">
+                <div className={`text-xl sm:text-2xl ${tech.color}`}>{tech.icon}</div>
+                <span className="text-sm font-medium hidden sm:block">{tech.name}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* ── 3. Pricing ── */}
+          <section id="pricing" className="pt-20 pb-16">
+            <div className="mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+                {t("webdev.pricing.title")}
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+              {pricingCards.map((card, idx) => (
+                <motion.div
+                  key={card.key}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: idx * 0.08 }}
+                  className={`group relative flex flex-col rounded-2xl border transition-all duration-300 ${
+                    card.featured
+                      ? "border-white/20 bg-white/[0.03] shadow-lg shadow-white/5 scale-[1.02] z-10"
+                      : "border-white/[0.06] bg-[#0A0A0C] hover:bg-white/[0.02] hover:border-white/15"
+                  }`}
+                >
+                  <div className="p-6 sm:p-8 flex flex-col flex-1">
+                    <div className="flex items-center justify-between mb-6">
+                      <div className={`w-12 h-12 rounded-xl border border-white/10 bg-white/[0.02] flex items-center justify-center text-xl ${card.iconColor}`}>
+                        {card.icon}
+                      </div>
+                      {card.featured && (
+                        <span className="px-3 py-1 text-[10px] uppercase tracking-widest text-white bg-white/10 rounded-full border border-white/10">
+                          პოპულარული
+                        </span>
+                      )}
+                    </div>
+
+                    <h4 className="text-xl font-medium text-white mb-2">
+                      {t(`webdev.pricing.${card.key}.title`)}
+                    </h4>
+                    
+                    <div className="text-3xl font-bold text-white mb-4">
+                      {t(`webdev.pricing.${card.key}.price`)}
+                    </div>
+                    
+                    <p className="font-georgian-body text-gray-400 text-sm leading-relaxed mb-8 h-14">
+                      {t(`webdev.pricing.${card.key}.description`)}
+                    </p>
+
+                    <div className="h-px w-full bg-white/[0.05] mb-8" />
+
+                    <ul className="space-y-4 mb-8 flex-1">
+                      {[1, 2, 3, 4, 5].map((num) => (
+                        <li key={num} className="flex items-start gap-3">
+                          <FaCheckCircle className={`text-xs mt-1 ${card.featured ? "text-gray-300" : "text-gray-600 group-hover:text-gray-400"} transition-colors`} />
+                          <span className="font-georgian-body text-gray-300 text-sm leading-tight">
+                            {t(`webdev.pricing.${card.key}.feature${num}`)}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="mt-auto">
+                      {card.isLink ? (
+                        <Link
+                          to={card.waLink}
+                          className={`flex items-center justify-center gap-2 w-full py-3.5 px-5 rounded-xl border text-sm font-medium transition-all duration-300 ${
+                            card.featured
+                              ? "bg-white border-white text-black hover:bg-gray-200"
+                              : "border-white/15 text-white hover:bg-white hover:text-black"
+                          }`}
+                        >
+                          {t("webdev.pricing.learn_more")}
+                          <FaArrowRight className="text-xs" />
+                        </Link>
+                      ) : (
+                        <a
+                          href={card.waLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`flex items-center justify-center gap-2 w-full py-3.5 px-5 rounded-xl border text-sm font-medium transition-all duration-300 ${
+                            card.featured
+                              ? "bg-white border-white text-black hover:bg-gray-200"
+                              : "border-white/15 text-white hover:bg-white hover:text-black"
+                          }`}
+                        >
+                          <FaWhatsapp className="text-lg" />
+                          {t("webdev.whatsapp.consult")}
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            
+            <p className="font-georgian-body text-center text-gray-500 text-sm mt-8">
+              {consultationLabel}
+            </p>
+          </section>
+
+          {/* ── Organic SEO content (deep H2 keyword landing) ── */}
+          <section className="border-t border-white/10 pt-16 pb-8">
+            <span className="mb-5 inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.25em] text-indigo-400">
+              <span className="h-px w-8 bg-indigo-500" />
+              {t("webdev.content.eyebrow")}
+            </span>
+            <p className="font-georgian-body max-w-3xl text-lg leading-[1.85] text-gray-200 md:text-xl">
+              {t("webdev.content.intro")}
+            </p>
+            <div className="mt-14 max-w-3xl space-y-12">
+              {[1, 2, 3].map((n) => (
+                <div key={n}>
+                  <h2 className="mb-4 text-2xl font-bold tracking-tight text-white md:text-[1.75rem] md:leading-snug">
+                    {t(`webdev.content.h2_${n}`)}
+                  </h2>
+                  <p className="font-georgian-body text-[15px] leading-[1.9] text-gray-400 md:text-base">
+                    {t(`webdev.content.p_${n}`)}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* ── Industries (cornerstone → cluster internal links) ── */}
+          <IndustryLinks service="web" className="pb-24 border-t border-white/10 pt-16" />
+
+          {/* ── FAQ (visible — matches FAQPage schema) ── */}
+          <FAQSection
+            items={faqItems}
+            eyebrow="FAQ"
+            title={currentLanguage === "en" ? "Frequently Asked Questions" : "ხშირად დასმული კითხვები"}
+          />
+
+          {/* ── 4. CTA ── */}
+          <section className="pb-24 border-t border-white/10 pt-16">
+            <div className="max-w-2xl">
+              <h3 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-4 leading-tight">
+                {t("webdev.cta.question")}
+              </h3>
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 bg-white text-black px-7 py-3.5 mt-4 rounded-full text-sm font-semibold hover:bg-gray-200 transition-colors duration-200"
+              >
+                <FaWhatsapp className="text-lg" />
+                {t("webdev.cta.button")}
+              </a>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default WebDev;

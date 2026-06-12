@@ -1,108 +1,94 @@
-import type React from "react"
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom"
-import { Suspense, lazy, useState, useEffect } from "react"
-import Layout from "./layout/Layout"
-import { ThemeProvider } from "./contexts/ThemeContext"
-import { LanguageProvider } from "./contexts/LanguageContext"
-import "./index.css"
+import { lazy, Suspense } from "react";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
+import FacebookPixel from "./components/FacebookPixel";
+import GoogleAnalytics from "./components/GoogleAnalytics";
+import { LanguageProvider } from "./contexts/LanguageContext";
+import { NavigationProvider } from "./contexts/NavigationContext";
+import Layout from "./layout/Layout";
+import Home from "./pages/organic/Home";
 
-// Lazy load components
-const Home = lazy(() => import("./pages/Home"))
-const AboutPage = lazy(() => import("./pages/AboutPage"))
-const StartProject = lazy(() => import("./service/StartProject"))
-const AdminDashboard = lazy(() => import("./admin/AdminDashboard"))
-const SocialMediaService = lazy(() => import("./offeredServices/SocialMediaService"))
-const DigitalAdvertising = lazy(() => import("./offeredServices/DigitalAdvertising"))
-const WebDevelopment = lazy(() => import("./offeredServices/WebDevelopment"))
+// Route-level code splitting: only the homepage ships in the initial bundle.
+// Every other page loads on demand, shrinking first-load JS / improving CWV.
+const WebDev = lazy(() => import("./offeredServices/WebDev"));
+const Marketing = lazy(() => import("./offeredServices/Marketing"));
+const Production = lazy(() => import("./offeredServices/Production"));
+const AIChatbot = lazy(() => import("./pages/AIChatbot"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const IndustryLanding = lazy(() => import("./pages/landing/IndustryLanding"));
+const InventoLandingPage = lazy(() => import("./offeredServices/InventoLandingPage"));
+const AboutPage = lazy(() => import("./pages/AboutPage"));
+const ContactPage = lazy(() => import("./pages/ContactPage"));
+const BlogIndex = lazy(() => import("./pages/blog/BlogIndex"));
+const BlogPost = lazy(() => import("./pages/blog/BlogPost"));
+const BlogEditor = lazy(() => import("./pages/blog/BlogEditor"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 
-
-// Enhanced Loading component
-const LoadingSpinner = () => (
-  <div className="flex items-center justify-center min-h-screen bg-slate-950">
-    <div className="flex flex-col items-center space-y-6">
-      {/* Main spinner */}
-      <div className="relative">
-        {/* Outer ring */}
-        <div className="w-16 h-16 border-4 border-slate-700 rounded-full"></div>
-        {/* Animated ring */}
-        <div className="absolute top-0 left-0 w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-        {/* Inner dot */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
-      </div>
-      
-      {/* Loading text */}
-      <div className="flex flex-col items-center space-y-2">
-        <p className="text-white text-lg font-medium">იტვირთება</p>
-        <div className="flex space-x-1">
-          <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-          <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-          <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
-        </div>
-      </div>
-    </div>
-  </div>
-)
-
-const Contact = () => (
-  <div className="pt-24 pb-20">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 className="text-4xl font-bold text-center mb-8">Contact Us</h1>
-      <p className="text-gray-400 text-center">Contact page coming soon...</p>
-    </div>
-  </div>
-)
-
-// Route transition wrapper component
-const RouteTransition: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const location = useLocation()
-  const [loading, setLoading] = useState(false)
-
-  useEffect(() => {
-    setLoading(true)
-    const timer = setTimeout(() => {
-      setLoading(false)
-    }, 200) // Minimum loading time for smooth UX
-
-    return () => clearTimeout(timer)
-  }, [location.pathname])
-
-  if (loading) {
-    return <LoadingSpinner />
-  }
-
-  return <>{children}</>
-}
-
-const App: React.FC = () => {
+const App = () => {
   return (
-    <ThemeProvider>
+    <HelmetProvider>
       <LanguageProvider>
-        <Router>
-          <Suspense fallback={<LoadingSpinner />}>
-            <RouteTransition>
+        <NavigationProvider>
+          <BrowserRouter>
+            {import.meta.env.VITE_GA_MEASUREMENT_ID && (
+              <GoogleAnalytics
+                measurementId={import.meta.env.VITE_GA_MEASUREMENT_ID}
+              />
+            )}
+
+            {import.meta.env.VITE_FACEBOOK_PIXEL_ID && (
+              <FacebookPixel pixelId={import.meta.env.VITE_FACEBOOK_PIXEL_ID} />
+            )}
+
+            <Suspense fallback={<div className="min-h-screen bg-[#050404]" />}>
               <Routes>
                 <Route path="/" element={<Layout />}>
                   <Route index element={<Home />} />
-                  <Route path="services/social-media" element={<SocialMediaService />} />
-                  <Route path="services/digital-advertising" element={<DigitalAdvertising />} />
-                  <Route path="services/web-development" element={<WebDevelopment />} />
 
+                  {/* Organic Traffic Flow */}
+                  <Route path="services/web" element={<WebDev />} />
+                  <Route path="services/marketing" element={<Marketing />} />
+                  {/* Photo/video/drone production — indexable, NOT in navbar (linked from
+                      Marketing + footer). Same model as industry money-SEO pages. */}
+                  <Route path="services/production" element={<Production />} />
+
+                  {/* Route aliases (server-side 301'd to canonical in vercel.json) */}
+                  <Route path="services/web-development" element={<WebDev />} />
+                  <Route
+                    path="services/digital-advertising"
+                    element={<Marketing />}
+                  />
+                  <Route path="services/ai-chatbot" element={<AIChatbot />} />
+                  <Route path="contact" element={<ContactPage />} />
                   <Route path="about" element={<AboutPage />} />
-                  
-                  <Route path="contact" element={<Contact />} />
-                  <Route path="start-project" element={<StartProject />} />
+                  <Route path="inventowms" element={<InventoLandingPage />} />
+
+                  {/* Blog (organic content engine) */}
+                  <Route path="blog" element={<BlogIndex />} />
+                  <Route path="blog/:slug" element={<BlogPost />} />
+
+                  {/* Legal pages (linked from footer) */}
+                  <Route path="privacy" element={<PrivacyPolicy />} />
+                  <Route path="terms" element={<TermsOfService />} />
+
+                  {/* Dynamic Ad-Landing Flow */}
+                  <Route path="industry/:service/:slug" element={<IndustryLanding />} />
+
+                  <Route path="*" element={<NotFound />} />
                 </Route>
 
-                {/* Admin routes without Layout (no navbar/footer) */}
-                <Route path="/admin" element={<AdminDashboard />} />
-                <Route path="/admin/leads" element={<AdminDashboard />} />
-              </Routes>
-            </RouteTransition>
-          </Suspense>
-        </Router>
-      </LanguageProvider>
-    </ThemeProvider>
-  )
-}
+                {/* Hidden blog editor — unlinked, no auth. Standalone (no navbar/footer). */}
+                <Route path="/vifa-studio" element={<BlogEditor />} />
 
-export default App
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </Suspense>
+          </BrowserRouter>
+        </NavigationProvider>
+      </LanguageProvider>
+    </HelmetProvider>
+  );
+};
+
+export default App;
