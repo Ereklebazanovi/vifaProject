@@ -27,6 +27,7 @@ const ROUTES = [
   '/services/production',
   '/services/ai-chatbot',
   '/inventowms',
+  '/lineup',
   '/about',
   '/contact',
   '/privacy',

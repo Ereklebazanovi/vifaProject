@@ -17,6 +17,7 @@ const AIChatbot = lazy(() => import("./pages/AIChatbot"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const IndustryLanding = lazy(() => import("./pages/landing/IndustryLanding"));
 const InventoLandingPage = lazy(() => import("./offeredServices/InventoLandingPage"));
+const LineupLandingPage = lazy(() => import("./offeredServices/LineupLandingPage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 const BlogIndex = lazy(() => import("./pages/blog/BlogIndex"));
@@ -63,6 +64,8 @@ const App = () => {
                   <Route path="contact" element={<ContactPage />} />
                   <Route path="about" element={<AboutPage />} />
                   <Route path="inventowms" element={<InventoLandingPage />} />
+                  {/* LineUp — sports academy app (product page with a live demo) */}
+                  <Route path="lineup" element={<LineupLandingPage />} />
 
                   {/* Blog (organic content engine) */}
                   <Route path="blog" element={<BlogIndex />} />
