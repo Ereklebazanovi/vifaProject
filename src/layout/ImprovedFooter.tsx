@@ -22,6 +22,7 @@ const footerTranslations = {
     "footer.services.production": "ფოტო & ვიდეო გადაღება",
     "footer.services.ai": "AI ჩატბოტი",
     "footer.services.wms": "საწყობის პროგრამა",
+    "footer.services.lineup": "სპორტული აკადემიის აპი",
 
     "footer.contact.title": "კონტაქტი",
     "footer.contact.location": "თბილისი, საქართველო",
@@ -53,6 +54,7 @@ const footerTranslations = {
     "footer.services.production": "Photo & Video Production",
     "footer.services.ai": "AI Chatbot",
     "footer.services.wms": "Warehouse Software",
+    "footer.services.lineup": "Sports Academy App",
 
     "footer.contact.title": "Contact",
     "footer.contact.location": "Tbilisi, Georgia",
@@ -83,6 +85,7 @@ import {
   FaUser,
   FaProjectDiagram,
   FaBlog,
+  FaTrophy,
 } from "react-icons/fa";
 
 const Footer: React.FC = () => {
@@ -131,6 +134,11 @@ const Footer: React.FC = () => {
       name: t("footer.services.wms"),
       href: "/inventowms",
       icon: <FaProjectDiagram className="w-4 h-4" />,
+    },
+    {
+      name: t("footer.services.lineup"),
+      href: "/lineup",
+      icon: <FaTrophy className="w-4 h-4" />,
     },
   ];
 

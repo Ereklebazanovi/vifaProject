@@ -3,9 +3,11 @@ import {
   ChevronDown,
   Layers,
   Map,
+  Package,
   Scale,
   ShoppingCart,
   Sparkles,
+  Trophy,
   Utensils,
 } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -65,6 +67,39 @@ const industries: IndustryItem[] = [
   },
 ];
 
+// Our own products (as opposed to services): one menu entry, so the bar does
+// not grow with every product. Each says in one line what it is.
+interface ProductItem {
+  nameKa: string;
+  nameEn: string;
+  descKa: string;
+  descEn: string;
+  path: string;
+  icon: React.ComponentType<{ className?: string }>;
+  iconColor: string;
+}
+
+const products: ProductItem[] = [
+  {
+    nameKa: "საწყობის პროგრამა",
+    nameEn: "Invento WMS",
+    descKa: "Invento WMS: მარაგები, შეკვეთები, ფინანსები",
+    descEn: "Inventory, orders and finance",
+    path: "/inventowms",
+    icon: Package,
+    iconColor: "text-indigo-400/70",
+  },
+  {
+    nameKa: "სპორტული აკადემიის აპი",
+    nameEn: "LineUp",
+    descKa: "LineUp: გადახდები, დასწრება, მშობლები",
+    descEn: "Sports academy app: payments, attendance, parents",
+    path: "/lineup",
+    icon: Trophy,
+    iconColor: "text-orange-400/70",
+  },
+];
+
 interface NavLinkItem {
   num: string;
   label: string;
@@ -72,10 +107,13 @@ interface NavLinkItem {
   hasIndustryDropdown?: boolean;
   generalHref?: string;
   industryService?: "web" | "marketing";
+  /** Opens the products list instead of navigating. */
+  productsDropdown?: boolean;
 }
 
 const SimpleNavbar: React.FC = () => {
   const [visible, setVisible] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
   const [lastY, setLastY] = useState(0);
   const [openDropdownFor, setOpenDropdownFor] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -89,6 +127,9 @@ const SimpleNavbar: React.FC = () => {
     const handleScroll = () => {
       const y = window.scrollY;
       setVisible(y < lastY || y < 60);
+      // Past the top the bar gets a solid backdrop, so it no longer lies
+      // transparent over the page content when it slides back in.
+      setScrolled(y > 60);
       setLastY(y);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -148,30 +189,33 @@ const SimpleNavbar: React.FC = () => {
       industryService: "marketing",
     },
     { num: "03/", label: ka ? "AI ჩატბოტი" : "AI CHATBOT", path: "/services/ai-chatbot" },
-    { num: "04/", label: ka ? "საწყობის პროგრამა" : "INVENTO WMS", path: "/inventowms" },
+    { num: "04/", label: ka ? "პროდუქტები" : "PRODUCTS", path: "/products", productsDropdown: true },
     { num: "05/", label: ka ? "ჩვენ შესახებ" : "ABOUT", path: "/about" },
   ];
 
   return (
     <>
     <nav
-      className={`fixed w-full top-0 z-100 transition-transform duration-300 ${
+      className={`fixed w-full top-0 z-100 border-b transition-[transform,background-color,border-color] duration-300 ${
         visible ? "translate-y-0" : "-translate-y-full"
-      }`}
+      } ${scrolled ? "bg-[#0a0a0a]/90 backdrop-blur-md border-white/[0.06]" : "border-transparent"}`}
     >
       <div className="w-full px-6 xl:px-16 py-5 flex items-center justify-between">
 <Link
           to="/"
           className="flex items-center gap-1.5 text-xl font-bold tracking-widest shrink-0 group cursor-pointer select-none"
-          aria-label="VIFA Digital — მთავარ გვერდზე დაბრუნება"
+          aria-label="VIFA Digital: მთავარ გვერდზე დაბრუნება"
         >
           <span className="text-white/40 group-hover:text-indigo-400 transition-colors duration-300 italic">/</span>
           <span className="text-white group-hover:text-indigo-300 transition-colors duration-300">VIFA</span>
         </Link>
         <div ref={navLinksRef} className="hidden xl:flex items-center gap-6 ml-10 xl:ml-14">
           {links.map((link) => {
-            const isDropdownItem = !!link.hasIndustryDropdown;
+            const isDropdownItem = !!link.hasIndustryDropdown || !!link.productsDropdown;
             const isOpen = openDropdownFor === link.path;
+            const isActive = link.productsDropdown
+              ? products.some((p) => location.pathname === p.path)
+              : location.pathname === link.path;
 
             return (
               <div key={link.path} className="relative px-1 -mx-1">
@@ -196,7 +240,7 @@ const SimpleNavbar: React.FC = () => {
                   <span className="relative inline-block">
                     <span
                       className={`text-[15px] tracking-widest uppercase font-medium transition-colors duration-200 ${
-                        location.pathname === link.path
+                        isActive
                           ? "text-white"
                           : "text-slate-200 group-hover:text-white"
                       }`}
@@ -206,7 +250,7 @@ const SimpleNavbar: React.FC = () => {
                     {/* animated underline — grows on hover, stays for active */}
                     <span
                       className={`pointer-events-none absolute -bottom-1.5 left-0 h-px bg-indigo-400 transition-all duration-300 ease-out ${
-                        location.pathname === link.path ? "w-full" : "w-0 group-hover:w-full"
+                        isActive ? "w-full" : "w-0 group-hover:w-full"
                       }`}
                     />
                   </span>
@@ -221,7 +265,39 @@ const SimpleNavbar: React.FC = () => {
                   )}
                 </button>
 
-                {isDropdownItem && (
+                {link.productsDropdown && (
+                  <div
+                    className={`absolute top-full left-0 pt-2 z-[140] transition-all duration-200 ${
+                      isOpen
+                        ? "opacity-100 translate-y-0 pointer-events-auto"
+                        : "opacity-0 -translate-y-2 pointer-events-none"
+                    }`}
+                  >
+                    <div className="min-w-[380px] bg-black/70 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl p-3">
+                      {products.map((product) => {
+                        const ProductIcon = product.icon;
+                        return (
+                          <Link
+                            key={product.path}
+                            to={product.path}
+                            onClick={() => setOpenDropdownFor(null)}
+                            className="group flex w-full items-start rounded-xl px-4 py-3 text-base text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-300"
+                          >
+                            <ProductIcon className={`w-4 h-4 mr-3 mt-1 shrink-0 ${product.iconColor}`} />
+                            <span>
+                              <span className="block">{ka ? product.nameKa : product.nameEn}</span>
+                              <span className="block text-[13px] text-white/40 group-hover:text-white/60 transition-colors">
+                                {ka ? product.descKa : product.descEn}
+                              </span>
+                            </span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {link.hasIndustryDropdown && (
                   <div
                     className={`absolute top-full left-0 pt-2 z-[140] transition-all duration-200 ${
                       isOpen
@@ -345,7 +421,7 @@ const SimpleNavbar: React.FC = () => {
       <div className="flex-1 overflow-y-auto overscroll-contain">
         <nav className="px-6 py-4 mt-8">
           {links.map((link) => {
-            const isDropdown = !!link.hasIndustryDropdown;
+            const isDropdown = !!link.hasIndustryDropdown || !!link.productsDropdown;
             const isAccordionOpen = mobileAccordion === link.path;
 
             return (
@@ -378,8 +454,37 @@ const SimpleNavbar: React.FC = () => {
                   )}
                 </button>
 
-                {/* Accordion */}
-                {isDropdown && (
+                {/* Products accordion */}
+                {link.productsDropdown && (
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      isAccordionOpen ? "max-h-[22rem]" : "max-h-0"
+                    }`}
+                  >
+                    <div className="pb-4 pl-8 space-y-1">
+                      {products.map((product) => {
+                        const ProductIcon = product.icon;
+                        return (
+                          <Link
+                            key={`mob-${product.path}`}
+                            to={product.path}
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="group flex items-start gap-2.5 py-2.5 transition-colors"
+                          >
+                            <ProductIcon className={`w-3.5 h-3.5 mt-1 shrink-0 ${product.iconColor}`} />
+                            <span>
+                              <span className="block text-sm text-white/70 group-hover:text-white">{ka ? product.nameKa : product.nameEn}</span>
+                              <span className="block text-xs text-white/35">{ka ? product.descKa : product.descEn}</span>
+                            </span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* Industries accordion */}
+                {link.hasIndustryDropdown && (
                   <div
                     className={`overflow-hidden transition-all duration-300 ease-in-out ${
                       isAccordionOpen ? "max-h-[22rem]" : "max-h-0"
