@@ -108,6 +108,9 @@ const Layout: React.FC = () => {
   // path so Meta's ad algorithm can optimize for real conversions (not just
   // PageViews). Without this, low-budget conversion campaigns burn money on
   // cold traffic Meta can't tell apart from genuine leads.
+  // The same click is also sent to GA4 as `generate_lead`, so every WhatsApp
+  // lead can be traced back to its traffic source (Google organic, Facebook,
+  // direct...) and the page it came from. Mark it as a Key Event in GA4.
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
@@ -117,6 +120,13 @@ const Layout: React.FC = () => {
         content_name: 'whatsapp_click',
         content_category: window.location.pathname,
       });
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'generate_lead', {
+          method: 'whatsapp',
+          lead_page: window.location.pathname,
+          link_url: link.href,
+        });
+      }
     };
     document.addEventListener('click', onClick, true);
     return () => document.removeEventListener('click', onClick, true);

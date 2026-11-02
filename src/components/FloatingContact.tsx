@@ -6,8 +6,28 @@ import { useLanguage } from "../contexts/LanguageContext";
 // Routes that already have their own persistent contact UI (or shouldn't show one).
 const HIDDEN_PREFIXES = ["/inventowms", "/vifa-studio"];
 
-const WHATSAPP_URL =
-  "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90,%20%E1%83%93%E1%83%90%E1%83%95%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%93%E1%83%98%20%E1%83%97%E1%83%A5%E1%83%95%E1%83%94%E1%83%9C%E1%83%98%20%E1%83%A1%E1%83%94%E1%83%A0%E1%83%95%E1%83%98%E1%83%A1%E1%83%94%E1%83%91%E1%83%98%E1%83%97.";
+const WHATSAPP_NUMBER = "995557624243";
+
+// Pre-filled message follows the page the visitor is on, so the chat opens
+// with their actual interest (less to type) and the incoming message itself
+// shows which page the lead came from.
+const MESSAGE_BY_PREFIX: [string, string][] = [
+  ["/services/ai-chatbot", "გამარჯობა, დავინტერესდი AI ჩატბოტის სერვისით."],
+  ["/services/web", "გამარჯობა, დავინტერესდი საიტის დამზადებით."],
+  ["/industry/web", "გამარჯობა, დავინტერესდი საიტის დამზადებით."],
+  ["/services/marketing", "გამარჯობა, დავინტერესდი ციფრული მარკეტინგის სერვისით."],
+  ["/services/digital-advertising", "გამარჯობა, დავინტერესდი ციფრული მარკეტინგის სერვისით."],
+  ["/industry/marketing", "გამარჯობა, დავინტერესდი ციფრული მარკეტინგის სერვისით."],
+  ["/services/production", "გამარჯობა, დავინტერესდი ფოტო/ვიდეო გადაღების სერვისით."],
+  ["/blog", "გამარჯობა, ბლოგიდან გწერთ. მაინტერესებს თქვენი სერვისები."],
+];
+const DEFAULT_MESSAGE = "გამარჯობა, დავინტერესდი თქვენი სერვისებით.";
+
+const whatsappUrlFor = (pathname: string) => {
+  const match = MESSAGE_BY_PREFIX.find(([prefix]) => pathname.startsWith(prefix));
+  const text = match ? match[1] : DEFAULT_MESSAGE;
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+};
 
 /**
  * Restrained, site-wide floating WhatsApp button. Appears only after a little
@@ -33,7 +53,7 @@ const FloatingContact: React.FC = () => {
 
   return (
     <a
-      href={WHATSAPP_URL}
+      href={whatsappUrlFor(location.pathname)}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}

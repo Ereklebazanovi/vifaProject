@@ -27,11 +27,11 @@ import { AIConnectionDemo } from "../components/AIConnectionDemo";
 // AI Chatbot Translations
 const aiChatbotTranslations = {
   ka: {
-    "seo.title": "AI ჩატბოტი ბიზნესისთვის",
-    "seo.description": "VIFA Digital-ის AI ჩატბოტები Facebook, WhatsApp და Instagram-ისთვის. 24/7 მომხმარებელთა მხარდაჭერა, გაყიდვების ზრდა და ხარჯების ოპტიმიზაცია.",
+    "seo.title": "ჩატბოტი და AI ბოტის დამზადება ბიზნესისთვის, 500₾-დან",
+    "seo.description": "AI ჩატბოტის დამზადება Facebook Messenger-ის, WhatsApp-ის, Instagram-ისა და ვებსაიტისთვის. ჩატ ბოტი ქართულად პასუხობს კლიენტებს 24/7. ფასი 500₾-დან, გაშვება 7-14 დღეში.",
 
     // "hero.title": "Invento AI -",
-    "hero.titleHighlight": "თქვენი ბიზნესის ციფრული რევოლუცია",
+    "hero.titleHighlight": "ჩატბოტის დამზადება 7-14 დღეში",
     "hero.feature1.title": "24/7 ავტომატური მომსახურება",
     "hero.feature1.description": "- თქვენი კლიენტები პასუხს მიიღებენ ნებისმიერ დროს",
     "hero.feature2.title": "სპეციალიზებული ტრენინგი",
@@ -145,6 +145,14 @@ const aiChatbotTranslations = {
     "faq.q5.question": "რამდენ ენაზე შეუძლია AI-ს საუბარი?",
     "faq.q5.answer": "ძირითადად, ქართულად და ინგლისურად.",
     "faq.q5.details": "AI-ს აქვს მრავალენოვანი შესაძლებლობები. ჩვენ ტრენინგს ვატარებთ ძირითადად ქართულ და ინგლისურ ენებზე, მაგრამ საჭიროების შემთხვევაში, დამატებითი ენების სწავლება შესაძლებელია.",
+
+    "faq.q6.question": "რა ღირს AI ჩატბოტის დამზადება?",
+    "faq.q6.answer": "ერთჯერადი ღირებულება 500₾-დან.",
+    "faq.q6.details": "ზუსტი ფასი დამოკიდებულია ბოტის სირთულესა და ინტეგრაციების რაოდენობაზე. გაშვების შემდეგ იხდით მხოლოდ AI-ს გამოყენების ხარჯს, რომელიც მცირე ბიზნესისთვის თვეში დაახლოებით 5₾-დან 10₾-მდეა.",
+
+    "faq.q7.question": "რით განსხვავდება AI ჩატბოტი ჩვეულებრივი ჩატ ბოტისგან?",
+    "faq.q7.answer": "AI ბოტს ესმის თავისუფლად დაწერილი შეკითხვა.",
+    "faq.q7.details": "ჩვეულებრივი ჩატ ბოტი მხოლოდ წინასწარ გაწერილ ღილაკებსა და სიტყვებზე რეაგირებს. AI ჩატბოტი თქვენი ბიზნესის ინფორმაციაზეა დატრენინგებული, ესმის ქართულად ნებისმიერად დაწერილი კითხვა და პასუხობს ბუნებრივად, როგორც ცოცხალი ოპერატორი.",
 
     "cta.question": "მზად ხარ გამოსცადო?",
     "cta.button": "უფასო კონსულტაცია",
@@ -271,6 +279,14 @@ const aiChatbotTranslations = {
     "faq.q5.answer": "Primarily, Georgian and English.",
     "faq.q5.details": "The AI has multilingual capabilities. We primarily conduct training in Georgian and English, but training for additional languages is possible if needed.",
 
+    "faq.q6.question": "How much does an AI chatbot cost?",
+    "faq.q6.answer": "A one-time fee from 500₾.",
+    "faq.q6.details": "The exact price depends on the bot's complexity and the number of integrations. After launch you only pay for AI usage, which for a small business is roughly 5₾ to 10₾ per month.",
+
+    "faq.q7.question": "How is an AI chatbot different from a regular chat bot?",
+    "faq.q7.answer": "An AI bot understands freely written questions.",
+    "faq.q7.details": "A regular chat bot only reacts to pre-set buttons and keywords. An AI chatbot is trained on your business information, understands questions written any way in Georgian, and answers naturally, like a live operator.",
+
     "cta.question": "Ready to Test it Out?",
     "cta.button": "Free Consultation",
     "consultation.whatsapp": "Free Consultation",
@@ -292,7 +308,7 @@ const AIChatbot: React.FC = () => {
 
   // FAQPage schema source — mirrors the visible FAQ section below (faq.q1..q5),
   // localized automatically via t(). Keeps schema in sync with on-page content.
-  const faqForSchema = [1, 2, 3, 4, 5].map((n) => ({
+  const faqForSchema = [1, 2, 3, 4, 5, 6, 7].map((n) => ({
     question: t(`faq.q${n}.question`),
     answer: `${t(`faq.q${n}.answer`)} ${t(`faq.q${n}.details`)}`.trim(),
   }));
@@ -342,7 +358,7 @@ const AIChatbot: React.FC = () => {
             "AI ჩატბოტის დამზადება და ინტეგრაცია: 24/7 მომხმარებელთა მხარდაჭერა, ავტომატური პასუხები და ლიდების გენერაცია ქართულ ენაზე.",
           serviceType: "AI Chatbot Development",
           offers: [
-            { name: "AI ჩატბოტის ინტეგრაცია (setup)", price: 300 },
+            { name: "AI ჩატბოტის ინტეგრაცია (setup)", price: 500 },
           ],
         }}
         breadcrumbs={breadcrumbItems}

@@ -318,8 +318,10 @@ const NewHomeVifa: React.FC = () => {
     document.getElementById("services-header")?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // WhatsApp URL for consultation
-  const whatsappUrl = "https://wa.me/995557624243";
+  // WhatsApp URL for consultation (pre-filled so the chat doesn't open empty)
+  const whatsappUrl = `https://wa.me/995557624243?text=${encodeURIComponent(
+    "გამარჯობა, მსურს უფასო კონსულტაცია."
+  )}`;
 
   const t = (key: string): string => {
     const translations = newHomeTranslations[
