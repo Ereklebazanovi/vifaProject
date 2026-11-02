@@ -6,14 +6,15 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { app, page } from "./content";
 import type { Lang, AppText } from "./content";
-import { CoachAttendance, ManagerPayments, ParentProgress, PhoneFrame } from "./AppKit";
+import { CoachEvaluation, ManagerAnnounce, ParentProgress, PhoneFrame, ScaledPhone } from "./AppKit";
 
 type Role = "manager" | "coach" | "parent";
 const ROLES: Role[] = ["manager", "coach", "parent"];
 
 function RoleScreen({ role, t }: { role: Role; t: AppText }) {
-  if (role === "manager") return <ManagerPayments t={t} lukaPaid={false} />;
-  if (role === "coach") return <CoachAttendance t={t} lukaPresent lukaStar />;
+  // Not the demo's screens again: what the roles do beyond the demo.
+  if (role === "manager") return <ManagerAnnounce t={t} />;
+  if (role === "coach") return <CoachEvaluation t={t} />;
   return <ParentProgress t={t} />;
 }
 
@@ -84,10 +85,12 @@ export default function RoleStory({ lang }: { lang: Lang }) {
                   </li>
                 ))}
               </ul>
-              <div className="mt-12 flex justify-center lg:hidden">
-                <PhoneFrame>
-                  <RoleScreen role={r} t={t} />
-                </PhoneFrame>
+              <div className="mt-10 flex justify-center lg:hidden">
+                <ScaledPhone scale={0.8}>
+                  <PhoneFrame>
+                    <RoleScreen role={r} t={t} />
+                  </PhoneFrame>
+                </ScaledPhone>
               </div>
             </div>
           );

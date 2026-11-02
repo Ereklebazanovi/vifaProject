@@ -19,6 +19,7 @@ import {
   CreditCard,
   House,
   LayoutDashboard,
+  Megaphone,
   Menu,
   MessageCircle,
   Search,
@@ -29,6 +30,7 @@ import {
   Wallet,
   X,
 } from "lucide-react";
+import { monthIndex } from "./content";
 import type { AppText } from "./content";
 
 /** The app's dark-mode primary (hsl 24 96% 56%). */
@@ -222,7 +224,7 @@ export function Pulse({ on, children, className = "", radius = "rounded-xl" }: {
     <span className={`relative inline-flex ${className}`}>
       {on && (
         <motion.span
-          className={`pointer-events-none absolute -inset-[3px] ${radius} border-[1.5px]`}
+          className={`pointer-events-none absolute -inset-[3px] ${radius} border-2`}
           style={{ borderColor: P }}
           animate={{ opacity: [0.35, 1, 0.35] }}
           transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
@@ -372,7 +374,7 @@ export function ParentHome({
 
       <div className={`${card} mt-2.5 flex items-center gap-2 px-3.5 py-3`}>
         <CreditCard className="h-4 w-4 text-zinc-500" />
-        <span className="flex-1 text-[11px]">{t.fee}</span>
+        <span className="flex-1 text-[11px]">{t.feeOf(monthIndex())}</span>
         <AnimatePresence mode="wait">
           <motion.span
             key={feePaid ? "paid" : "due"}
@@ -421,12 +423,23 @@ export function ParentProgress({ t }: { t: AppText }) {
           ))}
         </div>
       </div>
-      <div className={`${card} mt-2.5 p-3.5`}>
-        <svg viewBox={`-4 -4 ${w + 8} ${h + 8}`} className="w-full">
+      <div className={`${card} mt-2.5 px-3.5 pb-2.5 pt-3`}>
+        <svg viewBox={`-10 -16 ${w + 20} ${h + 34}`} className="w-full">
           <polyline points={path} fill="none" stroke={P} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-          {points.map((p, i) => (
-            <circle key={i} cx={(i / (points.length - 1)) * w} cy={y(p)} r={3} fill={P} />
-          ))}
+          {points.map((p, i) => {
+            const x = (i / (points.length - 1)) * w;
+            return (
+              <g key={i}>
+                <circle cx={x} cy={y(p)} r={3} fill={P} />
+                <text x={x} y={y(p) - 8} textAnchor="middle" fontSize="9" fill={i === points.length - 1 ? C.text : C.faint}>
+                  {p.toFixed(1)}
+                </text>
+                <text x={x} y={h + 14} textAnchor="middle" fontSize="9" fill={C.faint}>
+                  {t.monthShort(monthIndex() - (points.length - 1 - i))}
+                </text>
+              </g>
+            );
+          })}
         </svg>
       </div>
       <div className={`${card} mt-2.5 p-3.5`}>
@@ -445,14 +458,13 @@ export function ParentProgress({ t }: { t: AppText }) {
 /* ─────────────────────────────── manager ────────────────────────────── */
 
 export function ManagerPayments({ t, lukaPaid, onToggle, pulse = false }: { t: AppText; lukaPaid: boolean; onToggle?: () => void; pulse?: boolean }) {
-  const others = [true, false, true, true];
   const paidCount = 31 + (lukaPaid ? 1 : 0);
   return (
     <Screen header={<AcademyHeader t={t} />} nav={<BottomNav labels={t.navManager} icons={MANAGER_ICONS} active={2} />}>
       <div className="mb-2.5 flex items-center justify-between">
         <span className="text-[15px] font-semibold">{t.payments}</span>
         <span className="flex items-center gap-1 rounded-full border border-[#27272a] px-2.5 py-1 text-[10.5px] text-zinc-300">
-          {t.month} <ChevronDown className="h-3 w-3" />
+          {t.monthName(monthIndex())} <ChevronDown className="h-3 w-3" />
         </span>
       </div>
       <div className={`${card} p-3.5`}>
@@ -474,39 +486,80 @@ export function ManagerPayments({ t, lukaPaid, onToggle, pulse = false }: { t: A
       <div className="mt-2 flex items-center gap-1.5 rounded-xl border border-[#27272a] px-2.5 py-2 text-[10.5px] text-zinc-500">
         <Search className="h-3.5 w-3.5" /> {t.search}
       </div>
-      <div className={`${card} mt-2 divide-y divide-[#27272a]`}>
-        {t.kids.map((k, i) => {
+      <div className={`${card} mt-2`}>
+        {t.academyKids.map((k, i) => {
           const isLuka = i === 0;
-          const paid = isLuka ? lukaPaid : others[i - 1];
-          const pill = (
-            <span className={`flex shrink-0 items-center gap-0.5 whitespace-nowrap rounded-full px-2 py-0.5 text-[9px] font-semibold ${paid ? pillPaid : pillDue}`}>
-              {paid && <Check className="h-2.5 w-2.5" />}
-              {paid ? t.statusPaid : t.statusUnpaid}
-            </span>
-          );
-          return (
-            <div key={k.first} className="flex items-center gap-2.5 px-2.5 py-2.5">
+          const paid = isLuka ? lukaPaid : t.academyPaid[i - 1];
+          const row = (
+            <span className={`flex w-full items-center gap-2.5 px-2.5 py-2.5 text-left ${i > 0 ? "border-t border-[#27272a]" : ""}`}>
               <Avatar first={k.first} last={k.last} size={30} />
               <span className="min-w-0 flex-1">
                 <span className="block truncate text-[11px] font-medium">
                   {k.first} {k.last}
                 </span>
                 <span className="block text-[9.5px] text-zinc-500">
-                  {t.group} · #{k.no}
+                  {k.group} · #{k.no}
                 </span>
               </span>
-              {isLuka && onToggle ? (
-                <Pulse on={pulse} radius="rounded-full">
-                  <button type="button" onClick={onToggle} disabled={lukaPaid} className="rounded-full">
-                    {pill}
-                  </button>
-                </Pulse>
-              ) : (
-                pill
-              )}
-            </div>
+              <span className={`flex shrink-0 items-center gap-0.5 whitespace-nowrap rounded-full px-2 py-0.5 text-[9px] font-semibold ${paid ? pillPaid : pillDue}`}>
+                {paid && <Check className="h-2.5 w-2.5" />}
+                {paid ? t.statusPaid : t.statusUnpaid}
+              </span>
+            </span>
+          );
+          // The visitor taps Luka's whole row, not a 9px pill.
+          return isLuka && onToggle ? (
+            <Pulse key={k.first} on={pulse} className="w-full" radius="rounded-xl">
+              <button type="button" onClick={onToggle} disabled={lukaPaid} className="w-full rounded-xl active:bg-white/[0.03]">
+                {row}
+              </button>
+            </Pulse>
+          ) : (
+            <span key={k.first} className="block">
+              {row}
+            </span>
           );
         })}
+      </div>
+    </Screen>
+  );
+}
+
+export function ManagerAnnounce({ t }: { t: AppText }) {
+  return (
+    <Screen header={<AcademyHeader t={t} />} nav={<BottomNav labels={t.navManager} icons={MANAGER_ICONS} active={0} />}>
+      <div className="mb-2.5 flex items-center gap-2 text-[15px] font-semibold">
+        <Megaphone className="h-4 w-4" style={{ color: P }} />
+        {t.announce}
+      </div>
+      <div className={`${card} p-3.5`}>
+        <div className="text-[10px] text-zinc-500">{t.to}</div>
+        <div className="mt-1.5 flex gap-1.5">
+          {t.audiences.map((a, i) => (
+            <span key={a} className={`rounded-full px-2.5 py-1 text-[10px] ${i === 0 ? "text-white" : "bg-[#27272a] text-zinc-400"}`} style={i === 0 ? { background: P } : undefined}>
+              {a}
+            </span>
+          ))}
+        </div>
+        <div className="mt-3 rounded-xl border border-[#27272a] p-2.5">
+          <div className="text-[11.5px] font-medium">{t.announceTitle}</div>
+          <p className="mt-1 text-[10.5px] leading-snug text-zinc-400">{t.announceBody}</p>
+        </div>
+        <div className="mt-3 flex items-center justify-between">
+          <span className="text-[9.5px] text-zinc-500">{t.recipients(93)}</span>
+          <span className="rounded-xl px-3.5 py-1.5 text-[11px] font-semibold text-white" style={{ background: P }}>
+            {t.send}
+          </span>
+        </div>
+      </div>
+      <div className="mt-4 text-[10px] text-zinc-500">{t.sentLately}</div>
+      <div className={`${card} mt-1.5`}>
+        {t.sent.map((s, i) => (
+          <div key={s.title} className={`px-3.5 py-2.5 ${i > 0 ? "border-t border-[#27272a]" : ""}`}>
+            <div className="text-[11px] font-medium">{s.title}</div>
+            <div className="text-[9.5px] text-zinc-500">{s.meta}</div>
+          </div>
+        ))}
       </div>
     </Screen>
   );
@@ -546,29 +599,17 @@ export function CoachAttendance({
         <span className="flex-1">{t.today}</span>
         <ChevronDown className="h-3.5 w-3.5 text-zinc-500" />
       </div>
-      <div className="mt-2 rounded-xl border border-emerald-500/30 py-1.5 text-center text-[11px] font-medium text-emerald-400">✓ {t.everyoneCame}</div>
-      <p className="mt-2 text-[9px] leading-snug text-zinc-500">{t.starHint}</p>
-      <div className="mt-1 divide-y divide-[#27272a]">
+      <p className="mt-2.5 text-[9px] leading-snug text-zinc-500">{t.starHint}</p>
+      <div className="mt-1">
         {t.kids.map((k, i) => {
           const isLuka = i === 0;
           const isIn = isLuka ? lukaPresent : true;
           return (
-            <div key={k.first} className="flex items-center gap-2.5 py-2">
+            <div key={k.first} className={`flex items-center gap-2 py-2 ${i > 0 ? "border-t border-[#27272a]" : ""}`}>
               <Avatar first={k.first} last={k.last} size={30} />
               <span className="min-w-0 flex-1">
-                <span className="flex items-center gap-1 text-[11px] font-medium">
-                  <span className="truncate">
-                    {k.first} {k.last}
-                  </span>
-                  {isLuka && isIn && (
-                    <Pulse on={pulseStep === 2} radius="rounded-full">
-                      <button type="button" onClick={onStar} disabled={!onStar || lukaStar} className="grid h-5 w-5 place-items-center rounded-full" aria-label="star">
-                        <motion.span animate={lukaStar ? { scale: [1, 1.4, 1] } : {}} transition={{ duration: 0.4 }}>
-                          <Star className={`h-3.5 w-3.5 ${lukaStar ? "fill-yellow-300 text-yellow-300" : "text-zinc-600"}`} />
-                        </motion.span>
-                      </button>
-                    </Pulse>
-                  )}
+                <span className="block truncate text-[11px] font-medium">
+                  {k.first} {k.last}
                 </span>
                 <span className="flex items-center gap-1 text-[9.5px] text-zinc-500">
                   #{k.no}
@@ -579,6 +620,27 @@ export function CoachAttendance({
                   )}
                 </span>
               </span>
+              {isLuka && isIn && onStar ? (
+                <Pulse on={pulseStep === 2}>
+                  <button
+                    type="button"
+                    onClick={onStar}
+                    disabled={lukaStar}
+                    aria-label="star"
+                    className={`grid h-8 w-8 place-items-center rounded-xl transition-colors ${lukaStar ? "bg-yellow-300 text-black" : "border border-yellow-300/40 text-yellow-300"}`}
+                  >
+                    <motion.span animate={lukaStar ? { scale: [1, 1.35, 1] } : {}} transition={{ duration: 0.4 }}>
+                      <Star className={`h-4 w-4 ${lukaStar ? "fill-black" : ""}`} />
+                    </motion.span>
+                  </button>
+                </Pulse>
+              ) : isLuka && lukaStar ? (
+                <span className="grid h-8 w-8 place-items-center rounded-xl bg-yellow-300 text-black">
+                  <Star className="h-4 w-4 fill-black" />
+                </span>
+              ) : (
+                <span className="h-8 w-8" />
+              )}
               <Pulse on={isLuka && pulseStep === 1}>
                 <button
                   type="button"
@@ -603,6 +665,49 @@ export function CoachAttendance({
         <span className="flex-1 rounded-xl py-2 text-center text-[11px] font-semibold text-white" style={{ background: P }}>
           {t.save}
         </span>
+      </div>
+    </Screen>
+  );
+}
+
+export function CoachEvaluation({ t }: { t: AppText }) {
+  const luka = t.kids[0];
+  return (
+    <Screen header={<GroupHeader t={t} />} nav={<BottomNav labels={t.navCoach} icons={COACH_ICONS} active={0} />}>
+      <div className="mb-2.5 text-[15px] font-semibold">{t.newEvaluation}</div>
+      <div className={`${card} flex items-center gap-2.5 p-3`}>
+        <Avatar first={luka.first} last={luka.last} size={34} />
+        <span>
+          <span className="block text-[12px] font-medium">
+            {luka.first} {luka.last}
+          </span>
+          <span className="block text-[9.5px] text-zinc-500">
+            {luka.group} · #{luka.no}
+          </span>
+        </span>
+      </div>
+      <div className={`${card} mt-2.5 space-y-3.5 p-3.5`}>
+        {t.skills.map((s) => (
+          <div key={s.label}>
+            <div className="mb-1.5 flex justify-between text-[10.5px]">
+              <span>{s.label}</span>
+              <span className="font-semibold" style={{ color: P }}>
+                {s.value}
+              </span>
+            </div>
+            <div className="relative h-1.5 rounded-full bg-[#27272a]">
+              <div className="h-full rounded-full" style={{ width: `${s.value * 10}%`, background: P }} />
+              <span className="absolute top-1/2 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 bg-white" style={{ left: `${s.value * 10}%`, borderColor: P }} />
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className={`${card} mt-2.5 p-3.5`}>
+        <div className="text-[10px] text-zinc-500">{t.evalComment}</div>
+        <p className="mt-1 text-[11px] leading-snug text-zinc-300">{t.comment}</p>
+      </div>
+      <div className="mt-2.5 rounded-xl py-2.5 text-center text-[11px] font-semibold text-white" style={{ background: P }}>
+        {t.save}
       </div>
     </Screen>
   );
@@ -668,5 +773,14 @@ export function CoachCalendar({ t, cancelled, onCancel, pulse = false }: { t: Ap
         </span>
       </div>
     </Screen>
+  );
+}
+
+/** A phone shrunk to fit a short screen, keeping its true layout. */
+export function ScaledPhone({ scale, children }: { scale: number; children: ReactNode }) {
+  return (
+    <div style={{ width: 304 * scale, height: 640 * scale }}>
+      <div style={{ transform: `scale(${scale})`, transformOrigin: "top left", width: 304 }}>{children}</div>
+    </div>
   );
 }

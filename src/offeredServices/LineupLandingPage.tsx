@@ -19,10 +19,11 @@ import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Plus } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import SEO from "../components/SEO";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
-import { ACCENT, PHONE_HREF, PHONE_LABEL, PLAY_URL, WHATSAPP_URL, faq, page } from "../components/lineup/content";
+import { ACCENT, PHONE_HREF, PHONE_LABEL, PLAY_URL, faq, page, whatsappUrl } from "../components/lineup/content";
 import type { Lang } from "../components/lineup/content";
 import LiveDemo from "../components/lineup/LiveDemo";
 import RoleStory from "../components/lineup/RoleStory";
@@ -38,14 +39,16 @@ const fade = {
   transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
 };
 
-function PrimaryButton({ children }: { children: ReactNode }) {
+/** Says where it goes: straight into a WhatsApp chat, no form. */
+function PrimaryButton({ lang, children }: { lang: Lang; children: ReactNode }) {
   return (
     <a
-      href={WHATSAPP_URL}
+      href={whatsappUrl(lang)}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex h-12 items-center rounded-full bg-white px-7 text-[15px] font-medium text-black transition-colors active:bg-zinc-300"
+      className="inline-flex h-12 items-center gap-2.5 rounded-full bg-white pl-5 pr-6 text-[15px] font-medium text-black transition-colors active:bg-zinc-300"
     >
+      <FaWhatsapp className="h-[18px] w-[18px]" />
       {children}
     </a>
   );
@@ -124,26 +127,31 @@ const LineupLandingPage = () => {
 
       <div className={`lu-page min-h-screen overflow-x-clip bg-[#0b0b0c] text-white antialiased ${getTransitionClasses()}`}>
         {/* ───────── The demo IS the first screen: no separate hero ───────── */}
-        <section className="pb-8 pt-24 md:pt-28 xl:min-h-[100svh] xl:pt-24">
+        <section className="pb-8 pt-20 md:pt-28 xl:min-h-[100svh] xl:pt-24">
           <div className="mx-auto w-full !max-w-[1240px] px-5 sm:px-8 xl:flex xl:min-h-[calc(100svh-96px)] xl:items-center">
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7 }} className="w-full">
               <LiveDemo
                 lang={lang}
                 intro={
                   <div>
-                    <div className="inline-flex items-center gap-2.5 text-[13px] text-zinc-400">
-                      <span className="h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} />
+                    <p className="text-[13px] leading-relaxed text-zinc-400">
+                      <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full align-middle" style={{ background: ACCENT }} />
                       LineUp
-                      <span className="text-zinc-700">/</span>
+                      <span className="mx-2 text-zinc-700">/</span>
                       {c.kicker}
-                    </div>
+                    </p>
                     <h1 className="mt-4 text-[28px] font-medium leading-[1.12] tracking-[-0.02em] text-white md:text-[36px]">{c.heroTitle}</h1>
-                    <p className="mt-4 text-[16px] leading-relaxed text-zinc-400">{c.heroSubtitle}</p>
+                    <p className="mt-4 hidden text-[16px] leading-relaxed text-zinc-400 sm:block">{c.heroSubtitle}</p>
                   </div>
                 }
                 cta={
-                  <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
-                    <PrimaryButton>{c.ctaDemo}</PrimaryButton>
+                  <div className="flex flex-col items-center gap-3 xl:items-start">
+                    <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-3">
+                      <PrimaryButton lang={lang}>{c.ctaWrite}</PrimaryButton>
+                      <a href={PHONE_HREF} className="text-[14px] text-zinc-400 active:text-white">
+                        {c.orCall} {PHONE_LABEL}
+                      </a>
+                    </div>
                     <span className="text-[13px] text-zinc-600">{c.proofLine}</span>
                   </div>
                 }
@@ -231,7 +239,7 @@ const LineupLandingPage = () => {
               <h2 className="text-[36px] font-medium leading-[1.08] tracking-[-0.03em] text-white md:text-[60px]">{c.finalTitle}</h2>
               <p className="mx-auto mt-6 !max-w-[520px] text-[18px] leading-relaxed text-zinc-400">{c.finalText}</p>
               <div className="mt-10 flex flex-col items-center gap-5">
-                <PrimaryButton>{c.ctaDemo}</PrimaryButton>
+                <PrimaryButton lang={lang}>{c.ctaWrite}</PrimaryButton>
                 <a href={PHONE_HREF} className="text-[14px] text-zinc-500 active:text-white">
                   {c.orCall} {PHONE_LABEL}
                 </a>

@@ -3,15 +3,16 @@
 // does: the same push texts, the same screens updating.
 //
 // Wide screens show both phones side by side. On a phone there is room for one,
-// so after the tap it turns around to show the receiving side.
+// so after the tap it turns around to show the receiving side, and it is scaled
+// to fit the screen together with the instruction above it.
 
 import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { RotateCcw } from "lucide-react";
-import { app, page, ACCENT } from "./content";
+import { ArrowRight, RotateCcw } from "lucide-react";
+import { app, page, ACCENT, monthIndex } from "./content";
 import type { Lang } from "./content";
-import { CoachAttendance, CoachCalendar, ManagerPayments, ParentHome, PhoneFrame, PushBanner } from "./AppKit";
+import { CoachAttendance, CoachCalendar, ManagerPayments, ParentHome, PhoneFrame, PushBanner, ScaledPhone } from "./AppKit";
 
 type Scenario = "payment" | "star" | "cancel" | "absence";
 type Side = "staff" | "parent";
@@ -24,7 +25,6 @@ export default function LiveDemo({ lang, intro, cta }: { lang: Lang; intro?: Rea
 
   const [scenario, setScenario] = useState<Scenario>("payment");
   const [paid, setPaid] = useState(false);
-  const [present, setPresent] = useState(false);
   const [starred, setStarred] = useState(false);
   const [cancelled, setCancelled] = useState(false);
   const [absent, setAbsent] = useState(false);
@@ -34,6 +34,7 @@ export default function LiveDemo({ lang, intro, cta }: { lang: Lang; intro?: Rea
   const [mobileSide, setMobileSide] = useState<Side>("staff");
   const [wide, setWide] = useState(true);
   const [xl, setXl] = useState(true);
+  const [scale, setScale] = useState(1);
   const timers = useRef<number[]>([]);
 
   useEffect(() => {
@@ -42,13 +43,18 @@ export default function LiveDemo({ lang, intro, cta }: { lang: Lang; intro?: Rea
     const apply = () => {
       setWide(mq.matches);
       setXl(mqXl.matches);
+      // On a phone: the instruction, the role switch and the whole phone fit
+      // one screen together, so nothing the visitor needs scrolls away.
+      setScale(Math.min(0.9, Math.max(0.72, (window.innerHeight - 140) / 640)));
     };
     apply();
     mq.addEventListener("change", apply);
     mqXl.addEventListener("change", apply);
+    window.addEventListener("resize", apply);
     return () => {
       mq.removeEventListener("change", apply);
       mqXl.removeEventListener("change", apply);
+      window.removeEventListener("resize", apply);
     };
   }, []);
 
@@ -65,7 +71,6 @@ export default function LiveDemo({ lang, intro, cta }: { lang: Lang; intro?: Rea
   const reset = (next: Scenario) => {
     clearTimers();
     setPaid(false);
-    setPresent(false);
     setStarred(false);
     setCancelled(false);
     setAbsent(false);
@@ -87,14 +92,15 @@ export default function LiveDemo({ lang, intro, cta }: { lang: Lang; intro?: Rea
     later(() => {
       setBanner({ side: to, title, body });
       setDelivered(to);
-    }, wide ? 650 : 1000);
-    later(() => setBanner(null), wide ? 5800 : 6200);
+    }, wide ? 900 : 1000);
+    later(() => setBanner(null), wide ? 6000 : 6200);
   };
 
   const staffRole = scenario === "payment" ? "manager" : "coach";
+  const actor: Side = scenario === "absence" ? "parent" : "staff";
   const sc = c.scenarios[scenario];
-  const hint = scenario === "star" && present ? c.scenarios.star.hint2 : sc.hint;
   const done = delivered !== null;
+  const nextScenario = ORDER[(ORDER.indexOf(scenario) + 1) % ORDER.length];
 
   const staffScreen = (() => {
     switch (scenario) {
@@ -106,18 +112,19 @@ export default function LiveDemo({ lang, intro, cta }: { lang: Lang; intro?: Rea
             pulse={!paid}
             onToggle={() => {
               setPaid(true);
-              deliver("parent", t.pushPaidTitle, t.pushPaidBody);
+              deliver("parent", t.pushPaidTitle, t.pushPaidBody(monthIndex()));
             }}
           />
         );
       case "star":
+        // Luka is already marked present: the visitor does the one thing that
+        // reaches the parent, the star.
         return (
           <CoachAttendance
             t={t}
-            lukaPresent={present}
+            lukaPresent
             lukaStar={starred}
-            pulseStep={!present ? 1 : !starred ? 2 : 0}
-            onPresent={() => setPresent(true)}
+            pulseStep={starred ? 0 : 2}
             onStar={() => {
               setStarred(true);
               deliver("parent", t.pushStarTitle, t.pushStarBody);
@@ -148,7 +155,7 @@ export default function LiveDemo({ lang, intro, cta }: { lang: Lang; intro?: Rea
       feePaid={paid && delivered === "parent"}
       starred={starred && delivered === "parent"}
       cancelled={cancelled && delivered === "parent"}
-      practicedToday={present}
+      practicedToday={scenario === "star"}
       absent={absent}
       pulseAbsent={scenario === "absence" && !absent}
       onAbsent={
@@ -169,48 +176,46 @@ export default function LiveDemo({ lang, intro, cta }: { lang: Lang; intro?: Rea
     </PhoneFrame>
   );
 
+  /** Above each phone: whose it is, and on the one to tap, "tap here". */
   const label = (side: Side) => (
-    <div className="mt-4 text-center text-[13px] text-zinc-500">{side === "staff" ? c.phoneOf[staffRole] : c.phoneOf.parent}</div>
-  );
-
-  /** What to tap next, or what just happened. */
-  const status = (align: "left" | "center") => (
-    <div className={`flex min-h-[48px] items-start gap-4 ${align === "center" ? "justify-center text-center" : ""}`}>
-      <AnimatePresence mode="wait">
-        <motion.p
-          key={done ? `done-${scenario}` : `hint-${scenario}-${hint}`}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className={`text-[15px] leading-relaxed ${done ? "text-zinc-200" : "text-zinc-500"}`}
-        >
-          {done ? sc.done : hint}
-        </motion.p>
-      </AnimatePresence>
-      {done && (
-        <button type="button" onClick={() => reset(scenario)} className="inline-flex shrink-0 items-center gap-1.5 pt-0.5 text-[13px] text-zinc-500 active:text-white">
-          <RotateCcw className="h-3.5 w-3.5" /> {c.replay}
-        </button>
+    <div className="mb-4 flex h-5 items-center justify-center gap-2 text-[13px]">
+      <span className="text-zinc-500">{side === "staff" ? c.phoneOf[staffRole] : c.phoneOf.parent}</span>
+      {side === actor && !done && (
+        <motion.span key={scenario} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="font-medium" style={{ color: ACCENT }}>
+          · {c.tapHere} ↓
+        </motion.span>
       )}
     </div>
+  );
+
+  const after = (
+    <span className="flex shrink-0 items-center gap-5 text-[13px]">
+      <button type="button" onClick={() => reset(scenario)} className="inline-flex items-center gap-1.5 text-zinc-500 active:text-white">
+        <RotateCcw className="h-3.5 w-3.5" /> {c.replay}
+      </button>
+      <button type="button" onClick={() => choose(nextScenario)} className="inline-flex items-center gap-1.5 font-medium text-white active:text-zinc-300">
+        {c.next}: {c.scenarios[nextScenario].tab} <ArrowRight className="h-3.5 w-3.5" />
+      </button>
+    </span>
   );
 
   const phones = (
     <div className="flex items-start justify-center">
       <div>
-        {phone("staff")}
         {label("staff")}
+        {phone("staff")}
       </div>
       <SignalLine signal={signal} />
       <div>
-        {phone("parent")}
         {label("parent")}
+        {phone("parent")}
       </div>
     </div>
   );
 
-  // ≥1280: a narrow panel (intro, the four scenarios, status, CTA) beside the
-  // two phones, so the whole thing fits the first screen.
+  // ≥1280: a narrow panel beside the phones. The active scenario opens in
+  // place with its instruction, so the scenarios read as choices, not as a
+  // static list.
   if (xl) {
     return (
       <div className="grid grid-cols-[minmax(0,400px)_1fr] items-center gap-14">
@@ -220,21 +225,34 @@ export default function LiveDemo({ lang, intro, cta }: { lang: Lang; intro?: Rea
             {ORDER.map((s, i) => {
               const on = s === scenario;
               return (
-                <button
-                  key={s}
-                  type="button"
-                  onClick={() => choose(s)}
-                  className="flex w-full items-center gap-5 border-b border-white/[0.08] py-4 text-left first:border-t"
-                >
-                  <span className="text-[13px] tabular-nums text-zinc-600">{String(i + 1).padStart(2, "0")}</span>
-                  <span className={`text-[16px] transition-colors ${on ? "text-white" : "text-zinc-500"}`}>{c.scenarios[s].tab}</span>
-                  {on && <motion.span layoutId="lu-demo-dot" className="ml-auto h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} />}
-                </button>
+                <div key={s} className={`relative border-b border-white/[0.08] first:border-t ${on ? "pb-5" : ""}`}>
+                  {on && <motion.span layoutId="lu-demo-bar" className="absolute -left-4 bottom-3 top-3 w-[2px] rounded-full" style={{ background: ACCENT }} />}
+                  <button type="button" onClick={() => choose(s)} className="flex w-full items-center gap-5 py-4 text-left">
+                    <span className="text-[13px] tabular-nums text-zinc-600">{String(i + 1).padStart(2, "0")}</span>
+                    <span className={`text-[16px] transition-colors ${on ? "font-medium text-white" : "text-zinc-500"}`}>{c.scenarios[s].tab}</span>
+                  </button>
+                  {on && (
+                    <div className="pl-[38px]">
+                      <AnimatePresence mode="wait">
+                        <motion.p
+                          key={done ? "done" : "hint"}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          className={`text-[15px] leading-relaxed ${done ? "text-zinc-300" : "font-medium"}`}
+                          style={done ? undefined : { color: ACCENT }}
+                        >
+                          {done ? sc.done : `${sc.hint} →`}
+                        </motion.p>
+                      </AnimatePresence>
+                      {done && <div className="mt-3">{after}</div>}
+                    </div>
+                  )}
+                </div>
               );
             })}
           </div>
-          <div className="mt-6">{status("left")}</div>
-          {cta && <div className="mt-6">{cta}</div>}
+          {cta && <div className="mt-9">{cta}</div>}
         </div>
         {phones}
       </div>
@@ -250,25 +268,56 @@ export default function LiveDemo({ lang, intro, cta }: { lang: Lang; intro?: Rea
             key={s}
             type="button"
             onClick={() => choose(s)}
-            className={`relative shrink-0 pb-3 text-[15px] transition-colors ${on ? "text-white" : "text-zinc-500 active:text-zinc-300"}`}
+            className={`relative shrink-0 pb-3 text-[15px] transition-colors ${on ? "font-medium text-white" : "text-zinc-500 active:text-zinc-300"}`}
           >
             {c.scenarios[s].tab}
-            {on && <motion.span layoutId="lu-demo-tab" className="absolute bottom-0 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full" style={{ background: ACCENT }} />}
+            {on && <motion.span layoutId="lu-demo-tab" className="absolute inset-x-0 bottom-0 h-[2px] rounded-full" style={{ background: ACCENT }} />}
           </button>
         );
       })}
     </div>
   );
 
+  const status = (
+    <div className="flex min-h-[44px] flex-col items-center justify-center gap-2 text-center">
+      <AnimatePresence mode="wait">
+        <motion.p
+          key={done ? `done-${scenario}` : `hint-${scenario}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className={`text-[15px] leading-snug ${done ? "text-zinc-300" : "font-medium"}`}
+          style={done ? undefined : { color: ACCENT }}
+        >
+          {done ? sc.done : sc.hint}
+        </motion.p>
+      </AnimatePresence>
+      {done && after}
+    </div>
+  );
+
   return (
     <div>
-      {intro && <div className="mx-auto mb-8 !max-w-xl text-center">{intro}</div>}
+      {intro && <div className="mx-auto mb-7 !max-w-xl text-center">{intro}</div>}
       {tabs}
-      <div className="mt-4">{status("center")}</div>
+      <div className="mt-4">{status}</div>
       {wide ? (
         <div className="mt-8">{phones}</div>
       ) : (
-        <div className="mt-6 flex flex-col items-center">
+        <div className="mt-5 flex flex-col items-center">
+          <div className="mb-4 flex gap-6 text-[13px]">
+            {(["staff", "parent"] as Side[]).map((s) => (
+              <button
+                key={s}
+                type="button"
+                onClick={() => setMobileSide(s)}
+                className={`relative pb-1.5 ${mobileSide === s ? "font-medium text-white" : "text-zinc-500"}`}
+              >
+                {s === "staff" ? c.phoneOf[staffRole] : c.phoneOf.parent}
+                {mobileSide === s && <span className="absolute inset-x-0 bottom-0 h-px bg-white/60" />}
+              </button>
+            ))}
+          </div>
           <div style={{ perspective: 1400 }}>
             <AnimatePresence mode="wait">
               <motion.div
@@ -278,16 +327,9 @@ export default function LiveDemo({ lang, intro, cta }: { lang: Lang; intro?: Rea
                 exit={{ rotateY: mobileSide === "parent" ? 80 : -80, opacity: 0 }}
                 transition={{ duration: 0.32 }}
               >
-                {phone(mobileSide)}
+                <ScaledPhone scale={scale}>{phone(mobileSide)}</ScaledPhone>
               </motion.div>
             </AnimatePresence>
-          </div>
-          <div className="mt-5 flex gap-6 text-[13px]">
-            {(["staff", "parent"] as Side[]).map((s) => (
-              <button key={s} type="button" onClick={() => setMobileSide(s)} className={mobileSide === s ? "text-white" : "text-zinc-500"}>
-                {s === "staff" ? c.phoneOf[staffRole] : c.phoneOf.parent}
-              </button>
-            ))}
           </div>
         </div>
       )}
@@ -300,17 +342,17 @@ export default function LiveDemo({ lang, intro, cta }: { lang: Lang; intro?: Rea
 function SignalLine({ signal }: { signal: { to: Side; id: number } | null }) {
   const W = 96;
   return (
-    <div className="relative mt-[316px] h-2 shrink-0" style={{ width: W }}>
-      <div className="absolute left-4 right-4 top-1/2 border-t border-white/10" />
+    <div className="relative mt-[352px] h-2 shrink-0" style={{ width: W }}>
+      <div className="absolute left-3 right-3 top-1/2 border-t border-white/15" />
       <AnimatePresence>
         {signal && (
           <motion.span
             key={signal.id}
             className="absolute top-1/2 h-2 w-2 -translate-y-1/2 rounded-full"
             style={{ background: ACCENT }}
-            initial={{ x: signal.to === "parent" ? 16 : W - 24, opacity: 0 }}
-            animate={{ x: signal.to === "parent" ? W - 24 : 16, opacity: [0, 1, 1, 0] }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
+            initial={{ x: signal.to === "parent" ? 12 : W - 20, opacity: 0 }}
+            animate={{ x: signal.to === "parent" ? W - 20 : 12, opacity: [0, 1, 1, 0] }}
+            transition={{ duration: 0.9, ease: "easeInOut" }}
           />
         )}
       </AnimatePresence>
