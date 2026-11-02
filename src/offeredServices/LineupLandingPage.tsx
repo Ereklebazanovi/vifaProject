@@ -19,7 +19,6 @@ import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Plus } from "lucide-react";
-import Breadcrumbs from "../components/Breadcrumbs";
 import SEO from "../components/SEO";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
@@ -124,32 +123,31 @@ const LineupLandingPage = () => {
       `}</style>
 
       <div className={`lu-page min-h-screen overflow-x-clip bg-[#0b0b0c] text-white antialiased ${getTransitionClasses()}`}>
-        {/* ───────── HERO: the demo is the first screen ───────── */}
-        <section className="pt-28 md:pt-36">
-          <div className={wrap}>
-            <Breadcrumbs items={breadcrumbItems} />
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="mx-auto mt-16 !max-w-[820px] text-center md:mt-20"
-            >
-              <div className="inline-flex items-center gap-2.5 text-[13px] text-zinc-400">
-                <span className="h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} />
-                LineUp
-                <span className="text-zinc-700">/</span>
-                {c.kicker}
-              </div>
-              <h1 className="mt-7 text-[40px] font-medium leading-[1.06] tracking-[-0.03em] text-white md:text-[68px]">{c.heroTitle}</h1>
-              <p className="mx-auto mt-7 !max-w-[560px] text-[18px] leading-relaxed text-zinc-400 md:text-[20px]">{c.heroSubtitle}</p>
-              <div className="mt-10 flex flex-col items-center gap-5">
-                <PrimaryButton>{c.ctaDemo}</PrimaryButton>
-                <span className="text-[13px] text-zinc-600">{c.proofLine}</span>
-              </div>
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.25 }} className="mt-24 md:mt-32">
-              <LiveDemo lang={lang} />
+        {/* ───────── The demo IS the first screen: no separate hero ───────── */}
+        <section className="pb-8 pt-24 md:pt-28 xl:min-h-[100svh] xl:pt-24">
+          <div className="mx-auto w-full !max-w-[1240px] px-5 sm:px-8 xl:flex xl:min-h-[calc(100svh-96px)] xl:items-center">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7 }} className="w-full">
+              <LiveDemo
+                lang={lang}
+                intro={
+                  <div>
+                    <div className="inline-flex items-center gap-2.5 text-[13px] text-zinc-400">
+                      <span className="h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} />
+                      LineUp
+                      <span className="text-zinc-700">/</span>
+                      {c.kicker}
+                    </div>
+                    <h1 className="mt-4 text-[28px] font-medium leading-[1.12] tracking-[-0.02em] text-white md:text-[36px]">{c.heroTitle}</h1>
+                    <p className="mt-4 text-[16px] leading-relaxed text-zinc-400">{c.heroSubtitle}</p>
+                  </div>
+                }
+                cta={
+                  <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+                    <PrimaryButton>{c.ctaDemo}</PrimaryButton>
+                    <span className="text-[13px] text-zinc-600">{c.proofLine}</span>
+                  </div>
+                }
+              />
             </motion.div>
           </div>
         </section>
