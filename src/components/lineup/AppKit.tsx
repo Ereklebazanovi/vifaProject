@@ -1,4 +1,4 @@
-// LineUp — the real app's screens, rebuilt for the /lineup page.
+// LineUp: the real app's screens, rebuilt for the /lineup page.
 //
 // These are faithful copies of the live app's light theme (orange primary, white
 // cards, bottom navigation, the same labels), not screenshots: they react to the
@@ -37,8 +37,8 @@ const O = "#FA650F";
 export function PhoneFrame({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
     <div className={`lu-app relative select-none ${className}`}>
-      <div className="relative h-[600px] w-[290px] rounded-[48px] bg-gradient-to-b from-zinc-600 via-zinc-800 to-zinc-900 p-[3px] shadow-[0_40px_90px_-30px_rgba(250,101,15,0.45)]">
-        <div className="h-full w-full rounded-[45px] bg-black p-[9px]">
+      <div className="relative h-[600px] w-[290px] rounded-[48px] bg-[#1c1c1e] p-[1px] ring-1 ring-white/10">
+        <div className="h-full w-full rounded-[47px] bg-black p-[9px]">
           <div className="relative h-full w-full overflow-hidden rounded-[37px] bg-[#fafafa] text-zinc-900">
             <div className="absolute left-1/2 top-[9px] z-50 h-[24px] w-[84px] -translate-x-1/2 rounded-full bg-black" />
             {children}
@@ -177,7 +177,7 @@ export function PushBanner({ show, title, body, t }: { show: boolean; title: str
           animate={{ y: 0, opacity: 1, scale: 1 }}
           exit={{ y: -110, opacity: 0 }}
           transition={{ type: "spring", stiffness: 260, damping: 24 }}
-          className="absolute left-2 right-2 top-[40px] z-40 flex gap-2.5 rounded-[18px] bg-white/90 p-2.5 shadow-[0_12px_30px_-8px_rgba(0,0,0,0.35)] ring-1 ring-black/5 backdrop-blur-xl"
+          className="absolute left-2 right-2 top-[40px] z-40 flex gap-2.5 rounded-[18px] bg-white/90 p-2.5 shadow-[0_6px_20px_-6px_rgba(0,0,0,0.25)] ring-1 ring-black/5 backdrop-blur-xl"
         >
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-[10px] text-[15px] font-black text-white" style={{ background: O }}>
             L
@@ -256,7 +256,7 @@ export function ParentHome({
   return (
     <Screen header={<AcademyHeader t={t} badge={badge} />} nav={<BottomNav labels={t.navParent} icons={PARENT_ICONS} active={0} />}>
       <div className={`${card} overflow-hidden shadow-sm`}>
-        <div className="relative flex items-center gap-3 overflow-hidden p-3" style={{ background: `linear-gradient(135deg, ${O}, #ff8a3d)` }}>
+        <div className="relative flex items-center gap-3 overflow-hidden p-3" style={{ background: O }}>
           <span className="pointer-events-none absolute -right-2 -top-4 text-[86px] font-black leading-none text-white/15">{luka.no}</span>
           <span className="grid h-12 w-12 place-items-center rounded-xl bg-white text-[15px] font-bold" style={{ color: O }}>
             {luka.first[0]}

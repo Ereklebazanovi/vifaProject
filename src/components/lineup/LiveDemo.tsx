@@ -1,4 +1,4 @@
-// LineUp — the two-phone live demo. The visitor acts on one phone (the academy's
+// LineUp: the two-phone live demo. The visitor acts on one phone (the academy's
 // or the parent's) and watches the other receive it, exactly as the real app
 // does: the same push texts, the same screens updating.
 //
@@ -7,7 +7,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { CheckCircle2, Hand, RotateCcw } from "lucide-react";
+import { Check, RotateCcw } from "lucide-react";
 import { app, page, ACCENT } from "./content";
 import type { Lang } from "./content";
 import { CoachAttendance, CoachCalendar, ManagerPayments, ParentHome, PhoneFrame, PushBanner } from "./AppKit";
@@ -82,7 +82,6 @@ export default function LiveDemo({ lang }: { lang: Lang }) {
   };
 
   const staffRole = scenario === "payment" ? "manager" : "coach";
-  const staffLabel = staffRole === "manager" ? c.roleManager : c.roleCoach;
   const sc = c.scenarios[scenario];
   const hint = scenario === "star" && present ? c.scenarios.star.hint2 : sc.hint;
   const done = delivered !== null;
@@ -161,16 +160,12 @@ export default function LiveDemo({ lang }: { lang: Lang }) {
   );
 
   const label = (side: Side) => (
-    <div className="mb-4 flex items-center justify-center gap-2 text-sm font-medium text-gray-300">
-      <span className="h-2 w-2 rounded-full" style={{ background: side === "staff" ? "#a78bfa" : ACCENT }} />
-      {side === "staff" ? staffLabel : c.roleParent}
-    </div>
+    <div className="mb-5 text-center text-sm text-zinc-500">{side === "staff" ? c.phoneOf[staffRole] : c.phoneOf.parent}</div>
   );
 
   return (
     <div>
-      {/* scenario tabs */}
-      <div className="lu-noscroll -mx-4 mb-6 flex gap-2 overflow-x-auto px-4 pb-1 sm:justify-center">
+      <div className="lu-noscroll -mx-5 flex gap-7 overflow-x-auto border-b border-white/10 px-5 sm:mx-0 sm:px-0">
         {ORDER.map((s) => {
           const on = s === scenario;
           return (
@@ -178,58 +173,50 @@ export default function LiveDemo({ lang }: { lang: Lang }) {
               key={s}
               type="button"
               onClick={() => choose(s)}
-              className={`shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition-all ${
-                on ? "border-transparent text-white shadow-lg shadow-orange-500/25" : "border-white/10 bg-white/5 text-gray-300 active:bg-white/10"
-              }`}
-              style={on ? { background: `linear-gradient(135deg, ${ACCENT}, #ff9a4d)` } : undefined}
+              className={`relative shrink-0 pb-4 text-[15px] transition-colors ${on ? "text-white" : "text-zinc-500 active:text-zinc-300"}`}
             >
               {c.scenarios[s].tab}
+              {on && <motion.span layoutId="lu-demo-tab" className="absolute inset-x-0 -bottom-px h-[2px]" style={{ background: ACCENT }} />}
             </button>
           );
         })}
       </div>
 
-      {/* what to do now / what just happened */}
-      <div className="mx-auto mb-8 flex min-h-[52px] !max-w-xl items-center justify-center px-2 text-center">
+      <div className="mt-6 flex min-h-[52px] items-start justify-between gap-6">
         <AnimatePresence mode="wait">
           {done ? (
-            <motion.div
+            <motion.p
               key={`done-${scenario}`}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              className="flex flex-col items-center gap-3 sm:flex-row"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="flex items-start gap-2.5 text-[15px] leading-relaxed text-zinc-200"
             >
-              <span className="font-georgian-body flex items-start gap-2 text-left text-sm text-emerald-300 sm:text-base">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" /> {sc.done}
-              </span>
-              <button
-                type="button"
-                onClick={() => reset(scenario)}
-                className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-medium text-gray-200 active:bg-white/10"
-              >
-                <RotateCcw className="h-3.5 w-3.5" /> {c.replay}
-              </button>
-            </motion.div>
+              <Check className="mt-1 h-4 w-4 shrink-0 text-emerald-400" />
+              {sc.done}
+            </motion.p>
           ) : (
-            <motion.div
+            <motion.p
               key={`hint-${scenario}-${hint}`}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-500/10 px-4 py-2 text-sm text-orange-200"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="flex items-center gap-2.5 text-[15px] text-zinc-400"
             >
-              <motion.span animate={{ y: [0, -3, 0] }} transition={{ repeat: Infinity, duration: 1.2 }}>
-                <Hand className="h-4 w-4" />
-              </motion.span>
-              <span className="font-georgian-body">{hint}</span>
-            </motion.div>
+              <span className="h-1.5 w-1.5 shrink-0 animate-pulse rounded-full" style={{ background: ACCENT }} />
+              {hint}
+            </motion.p>
           )}
         </AnimatePresence>
+        {done && (
+          <button type="button" onClick={() => reset(scenario)} className="inline-flex shrink-0 items-center gap-1.5 pt-0.5 text-sm text-zinc-400 active:text-white">
+            <RotateCcw className="h-3.5 w-3.5" /> {c.replay}
+          </button>
+        )}
       </div>
 
       {wide ? (
-        <div className="flex items-start justify-center gap-6 xl:gap-10">
+        <div className="mt-10 flex items-start justify-center">
           <div>
             {label("staff")}
             {phone("staff")}
@@ -241,14 +228,14 @@ export default function LiveDemo({ lang }: { lang: Lang }) {
           </div>
         </div>
       ) : (
-        <div className="flex flex-col items-center">
-          <div className="mb-5 inline-flex rounded-full border border-white/10 bg-white/5 p-1">
+        <div className="mt-8 flex flex-col items-center">
+          <div className="mb-6 inline-flex rounded-lg border border-white/10 p-1">
             {(["staff", "parent"] as Side[]).map((s) => (
               <button
                 key={s}
                 type="button"
                 onClick={() => setMobileSide(s)}
-                className={`rounded-full px-4 py-1.5 text-xs font-medium transition-colors ${mobileSide === s ? "bg-white text-black" : "text-gray-300"}`}
+                className={`rounded-md px-4 py-1.5 text-sm transition-colors ${mobileSide === s ? "bg-white/10 text-white" : "text-zinc-500"}`}
               >
                 {s === "staff" ? c.phoneOf[staffRole] : c.phoneOf.parent}
               </button>
@@ -273,21 +260,21 @@ export default function LiveDemo({ lang }: { lang: Lang }) {
   );
 }
 
-/** The dotted wire between the two phones; a pulse runs along it on delivery. */
+/** A hairline between the two phones; a dot runs along it on delivery. */
 function SignalLine({ signal }: { signal: { to: Side; id: number } | null }) {
-  const W = 120;
+  const W = 140;
   return (
-    <div className="relative mt-[290px] h-8 shrink-0" style={{ width: W }}>
-      <div className="absolute left-0 right-0 top-1/2 border-t-2 border-dashed border-white/15" />
+    <div className="relative mt-[320px] h-2 shrink-0" style={{ width: W }}>
+      <div className="absolute left-4 right-4 top-1/2 border-t border-white/15" />
       <AnimatePresence>
         {signal && (
           <motion.span
             key={signal.id}
-            className="absolute top-1/2 h-4 w-4 -translate-y-1/2 rounded-full"
-            style={{ background: ACCENT, boxShadow: `0 0 18px 6px ${ACCENT}88` }}
-            initial={{ x: signal.to === "parent" ? 0 : W - 16, opacity: 0 }}
-            animate={{ x: signal.to === "parent" ? W - 16 : 0, opacity: [0, 1, 1, 0] }}
-            transition={{ duration: 0.65, ease: "easeInOut" }}
+            className="absolute top-1/2 h-2 w-2 -translate-y-1/2 rounded-full"
+            style={{ background: ACCENT }}
+            initial={{ x: signal.to === "parent" ? 16 : W - 24, opacity: 0 }}
+            animate={{ x: signal.to === "parent" ? W - 24 : 16, opacity: [0, 1, 1, 0] }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
           />
         )}
       </AnimatePresence>
