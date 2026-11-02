@@ -170,40 +170,12 @@ export const page = {
     seoKeywords:
       "სპორტული აკადემიის მართვა, აკადემიის აპლიკაცია, ფეხბურთის აკადემიის პროგრამა, კალათბურთის აკადემია, დასწრების აღრიცხვა, გადახდების აღრიცხვა, მშობლების აპლიკაცია, მწვრთნელის აპლიკაცია, სპორტული სკოლის პროგრამა, LineUp",
     breadcrumb: "LineUp",
-    kicker: "LineUp · სპორტული აკადემიებისთვის",
-    heroTitleA: "სპორტული აკადემიის მართვა",
-    heroTitleB: "ერთ აპში.",
-    heroSubtitle:
-      "გადახდები, დასწრება, შეფასებები და მშობლებთან კავშირი ერთ ადგილას: მენეჯერის, მწვრთნელისა და მშობლის ტელეფონში.",
+    kicker: "სპორტული აკადემიებისთვის",
+    heroTitle: "სპორტული აკადემიის მართვა, ერთ აპში.",
+    heroSubtitle: "მენეჯერი ნიშნავს გადახდას, მწვრთნელი დასწრებას. მშობელი ყველაფერს იმავე წამს ხედავს.",
     ctaDemo: "მოითხოვე დემო",
-    ctaTry: "ნახე როგორ მუშაობს",
-    proofLabel: "მუშაობს რუსთავის კალათბურთის აკადემიაში",
+    proofLine: "მუშაობს რუსთავის კალათბურთის აკადემიაში",
 
-    compareLabel: "რა იცვლება",
-    compareTitle: "რვეული, Excel და მესენჯერის ჯგუფი ერთ აპში",
-    compareNow: "ახლა",
-    compareAfter: "LineUp-ით",
-    compare: [
-      {
-        topic: "გადახდები",
-        now: "ბანკის ამონაწერი, Excel და ხელით მონიშვნა. ყოველ თვე, ყველა ბავშვზე.",
-        after: "თვის სია ერთ ეკრანზე. ერთი შეხება და მშობელს ქვითარი მისდის.",
-      },
-      {
-        topic: "შეტყობინებები",
-        now: "„ხვალ ვარჯიში არ გვაქვს“ ასობით სხვა შეტყობინებაში იკარგება.",
-        after: "შეტყობინება პირდაპირ მშობლის ტელეფონზე, მხოლოდ მისი შვილის გუნდზე.",
-      },
-      {
-        topic: "პროგრესი",
-        now: "მშობელი პროგრესს ვერ ხედავს, მწვრთნელი ყველას ცალ-ცალკე უხსნის.",
-        after: "დასწრება, შეფასებები და მწვრთნელის კომენტარი მშობლის ტელეფონში.",
-      },
-    ],
-
-    demoLabel: "ცოცხალი დემო",
-    demoTitle: "დააჭირე და ნახე, რას ხედავს მშობელი",
-    demoSubtitle: "მარცხნივ აკადემიის ტელეფონია, მარჯვნივ მშობლის. ეკრანები ნამდვილი აპისაა, ბავშვები და ციფრები მოგონილი.",
     scenarios: {
       payment: {
         tab: "გადახდა",
@@ -214,96 +186,69 @@ export const page = {
         tab: "დღის ვარსკვლავი",
         hint: "მონიშნე, რომ ლუკა მოვიდა",
         hint2: "ახლა მიანიჭე ვარსკვლავი",
-        done: "მწვრთნელი დასწრებას ვარჯიშზევე ნიშნავს. ვარსკვლავზე მშობელი იმავე წამს იგებს.",
+        done: "მწვრთნელი ვარჯიშზევე ნიშნავს. მშობელი იმავე წამს იგებს.",
       },
       cancel: {
-        tab: "ვარჯიში გაუქმდა",
+        tab: "გაუქმება",
         hint: "გააუქმე ხვალინდელი ვარჯიში",
         done: "გუნდის ყველა მშობელს ერთდროულად მისდის.",
       },
       absence: {
         tab: "გაცდენა",
         hint: "მშობლის ტელეფონზე დააჭირე „ვერ დაესწრება?“",
-        done: "მშობელი ერთი შეხებით აცნობებს. მწვრთნელმა ვარჯიშამდე იცის, ვინ არ მოვა.",
+        done: "მწვრთნელმა ვარჯიშამდე იცის, ვინ არ მოვა.",
       },
     },
-    roleManager: "მენეჯერი",
-    roleCoach: "მწვრთნელი",
-    roleParent: "მშობელი",
     replay: "თავიდან",
     phoneOf: { manager: "მენეჯერი", coach: "მწვრთნელი", parent: "მშობელი" },
 
-    rolesLabel: "სამი როლი",
-    rolesTitle: "თითოეულს თავისი ეკრანი",
     roles: {
       manager: {
-        title: "მთელი აკადემია ერთ ადგილას",
-        points: [
-          "გადახდები თვეების მიხედვით: ვინ გადაიხადა, ვინ არა",
-          "ქვითარი მშობელს ავტომატურად მისდის",
-          "გადახდების ისტორია: ვინ მონიშნა და როდის",
-          "განცხადება ყველა მშობელს ან ერთ გუნდს",
-          "გუნდები, მწვრთნელები და მოთამაშეები",
-          "ონლაინ რეგისტრაცია ახალი მშობლებისთვის",
-        ],
+        label: "მენეჯერი",
+        title: "ვინ გადაიხადა, ერთი შეხედვით.",
+        text: "თვის სია ერთ ეკრანზე. ერთი შეხება და მშობელს ქვითარი მისდის. ყოველი მონიშვნა ისტორიაში რჩება: ვინ და როდის.",
+        points: ["განცხადება ყველა მშობელს ან ერთ გუნდს", "გუნდები, მწვრთნელები და მოთამაშეები", "ონლაინ რეგისტრაცია ახალი მშობლებისთვის"],
       },
       coach: {
-        title: "ვარჯიშზე, ტელეფონით",
-        points: [
-          "დასწრება 10 წამში, „ყველა მოვიდა“ ერთი ღილაკით",
-          "„დღის ვარსკვლავი“ და კომენტარი მშობლებისთვის",
-          "შეფასებები: ტექნიკა, ფიზიკა, დისციპლინა",
-          "კალენდარი: ვარჯიშები, თამაშები, გაუქმება",
-          "თამაშის შედეგები და ფოტოგალერეა",
-        ],
+        label: "მწვრთნელი",
+        title: "დასწრება ათ წამში.",
+        text: "„ყველა მოვიდა“ ერთი ღილაკით. „დღის ვარსკვლავი“ და კომენტარი მშობლისთვის, პირდაპირ ვარჯიშიდან.",
+        points: ["შეფასებები: ტექნიკა, ფიზიკა, დისციპლინა", "კალენდარი: ვარჯიშები, თამაშები, გაუქმება", "თამაშის შედეგები და ფოტოგალერეა"],
       },
       parent: {
-        title: "ყველაფერი საკუთარ შვილზე",
-        points: [
-          "დასწრება, შეფასება და ზრდა მთავარ ეკრანზე",
-          "პროგრესის გრაფიკები და მწვრთნელის კომენტარები",
-          "კალენდარი და „ვერ დაესწრება“ ერთი შეხებით",
-          "გადასახადის სტატუსი და ქვითარი",
-          "მიწერა მწვრთნელს და მენეჯერს",
-          "რამდენიმე შვილი ერთ ანგარიშში",
-        ],
+        label: "მშობელი",
+        title: "მშობელმა ყველაფერი იცის.",
+        text: "დასწრება, შეფასება და მწვრთნელის კომენტარი მის ტელეფონში. შეტყობინება მოდის მხოლოდ მისი შვილის გუნდზე.",
+        points: ["პროგრესის გრაფიკები", "„ვერ დაესწრება“ ერთი შეხებით", "გადასახადის სტატუსი და ქვითარი", "რამდენიმე შვილი ერთ ანგარიშში"],
       },
     },
 
-    caseLabel: "უკვე მუშაობს",
-    caseTitle: "Rustavi Basketball Academy",
-    caseText:
-      "მშობლები ყოველდღე ხედავენ დასწრებას, შეფასებებს და გადასახადის სტატუსს. მწვრთნელები დასწრებას ვარჯიშზევე ნიშნავენ, მენეჯერი გადახდებს ერთ სიაში ხედავს.",
-    caseStats: [
+    proofLabel: "უკვე მუშაობს",
+    proofTitle: "Rustavi Basketball Academy",
+    proofText: "აპი Google Play-ზეა და ყოველდღე იყენებენ მშობლები, მწვრთნელები და აკადემიის მენეჯერი.",
+    stats: [
       { value: "140+", label: "მოთამაშე" },
       { value: "90+", label: "მშობელი" },
       { value: "5", label: "მწვრთნელი" },
     ],
-    casePlay: "Google Play-ზე",
+    playLink: "ნახე Google Play-ზე",
 
     startLabel: "დაწყება",
-    startTitle: "თქვენს აკადემიაზე მორგებული",
+    startTitle: "თქვენს აკადემიაზე აწყობილი.",
     startText:
-      "თქვენი სახელი, ლოგო და ფერები. გუნდები, ასაკობრივი ჯგუფები და შეფასების კრიტერიუმები თქვენს სპორტზე ეწყობა. მოთამაშეებს და გუნდებს ჩვენ შევიტანთ.",
-    sports: ["ფეხბურთი", "კალათბურთი", "ჭიდაობა", "ცურვა", "ძიუდო", "ჩოგბურთი", "ფრენბურთი", "ტანვარჯიში"],
+      "თქვენი სახელი, ლოგო და ფერები. ფეხბურთი, კალათბურთი, ჭიდაობა თუ ცურვა: გუნდები და შეფასების კრიტერიუმები თქვენს სპორტზე ეწყობა.",
     steps: [
-      { title: "გაცნობა", text: "მოკლე ზარი: რამდენი გუნდი, მწვრთნელი და ბავშვი გყავთ, როგორ აგროვებთ გადასახადს." },
-      { title: "მორგება", text: "ვაწყობთ თქვენს სახელზე, ლოგოსა და ფერებზე. მოთამაშეებს და გუნდებს ჩვენ შევიტანთ." },
-      { title: "მშობლები შედიან", text: "ტელეფონის ნომრით, მეილი არ სჭირდებათ. მუშაობს Android-ზე და iPhone-ზე." },
+      { title: "გაცნობა", text: "მოკლე ზარი: რამდენი გუნდი, მწვრთნელი და ბავშვი გყავთ." },
+      { title: "მორგება", text: "ვაწყობთ თქვენს სახელზე. მოთამაშეებს და გუნდებს ჩვენ შევიტანთ." },
+      { title: "მშობლები შედიან", text: "ტელეფონის ნომრით, მეილის გარეშე. Android-ზე და iPhone-ზე." },
       { title: "მუშაობს", text: "გადახდები, დასწრება და შეტყობინებები პირველივე კვირიდან." },
     ],
-    trustTitle: "ბავშვების მონაცემები",
-    trust: [
-      "ბავშვის მონაცემებს ხედავს მხოლოდ მისი მშობელი, მწვრთნელი და მენეჯერი.",
-      "ყოველი გადახდის მონიშვნა ჟურნალში იწერება: ვინ და როდის.",
-      "რეკლამის და მონაცემების გაყიდვის გარეშე.",
-    ],
 
-    faqLabel: "კითხვები",
-    faqTitle: "ხშირად დასმული კითხვები",
+    faqTitle: "კითხვები",
 
     finalTitle: "ვაჩვენოთ თქვენს აკადემიაზე?",
     finalText: "მოგვწერეთ და მოკლე ზარში გაჩვენებთ, როგორ იმუშავებს LineUp თქვენს გუნდებზე.",
+    orCall: "ან დაგვირეკეთ",
   },
   en: {
     seoTitle: "LineUp: Sports Academy Management App | Payments, Attendance, Parents",
@@ -312,40 +257,12 @@ export const page = {
     seoKeywords:
       "sports academy management, academy app, football academy software, basketball academy, attendance tracking, payment tracking, parent app, coach app, sports school software, LineUp",
     breadcrumb: "LineUp",
-    kicker: "LineUp · for sports academies",
-    heroTitleA: "Run your sports academy",
-    heroTitleB: "from one app.",
-    heroSubtitle:
-      "Payments, attendance, ratings and parent communication in one place: on the manager's, the coach's and the parent's phone.",
+    kicker: "For sports academies",
+    heroTitle: "Run your sports academy from one app.",
+    heroSubtitle: "The manager marks a payment, the coach marks attendance. The parent sees it the same second.",
     ctaDemo: "Request a demo",
-    ctaTry: "See how it works",
-    proofLabel: "Running at Rustavi Basketball Academy",
+    proofLine: "Running at Rustavi Basketball Academy",
 
-    compareLabel: "What changes",
-    compareTitle: "The notebook, the spreadsheet and the group chat, in one app",
-    compareNow: "Today",
-    compareAfter: "With LineUp",
-    compare: [
-      {
-        topic: "Payments",
-        now: "Bank statements, spreadsheets and ticking boxes by hand. Every month, for every child.",
-        after: "The month's list on one screen. One tap and the parent gets a receipt.",
-      },
-      {
-        topic: "Notifications",
-        now: "“No practice tomorrow” drowns among hundreds of other messages.",
-        after: "A notification straight to the parent's phone, only for their child's team.",
-      },
-      {
-        topic: "Progress",
-        now: "Parents never see the progress. The coach explains it to each of them, one by one.",
-        after: "Attendance, ratings and the coach's comment on the parent's phone.",
-      },
-    ],
-
-    demoLabel: "Live demo",
-    demoTitle: "Tap, and see what the parent sees",
-    demoSubtitle: "The academy's phone is on the left, a parent's on the right. The screens are the real app's; the children and numbers are made up.",
     scenarios: {
       payment: {
         tab: "Payment",
@@ -356,96 +273,69 @@ export const page = {
         tab: "Star of the day",
         hint: "Mark Luka as present",
         hint2: "Now give him the star",
-        done: "The coach marks attendance at practice. The parent hears about the star the same second.",
+        done: "The coach marks it at practice. The parent knows the same second.",
       },
       cancel: {
-        tab: "Cancelled practice",
+        tab: "Cancellation",
         hint: "Cancel tomorrow's practice",
         done: "Every parent on the team gets it at once.",
       },
       absence: {
         tab: "Absence",
         hint: "On the parent's phone, tap “Can't make it?”",
-        done: "The parent lets the coach know in one tap. The coach knows who's missing before practice.",
+        done: "The coach knows who's missing before practice.",
       },
     },
-    roleManager: "Manager",
-    roleCoach: "Coach",
-    roleParent: "Parent",
     replay: "Replay",
     phoneOf: { manager: "Manager", coach: "Coach", parent: "Parent" },
 
-    rolesLabel: "Three roles",
-    rolesTitle: "Each with its own screen",
     roles: {
       manager: {
-        title: "The whole academy in one place",
-        points: [
-          "Payments month by month: who paid, who didn't",
-          "Receipts go to parents automatically",
-          "Payment history: who marked it, and when",
-          "Announcements to every parent or one team",
-          "Teams, coaches and players",
-          "Online sign-up for new parents",
-        ],
+        label: "Manager",
+        title: "Who paid, at a glance.",
+        text: "The month's list on one screen. One tap and the parent gets a receipt. Every mark stays in the history: who and when.",
+        points: ["Announcements to every parent or one team", "Teams, coaches and players", "Online sign-up for new parents"],
       },
       coach: {
-        title: "At practice, on the phone",
-        points: [
-          "Attendance in 10 seconds, “Everyone came” in one tap",
-          "“Star of the day” and comments for parents",
-          "Ratings: technique, physical, discipline",
-          "Calendar: practices, games, cancellations",
-          "Game results and a photo gallery",
-        ],
+        label: "Coach",
+        title: "Attendance in ten seconds.",
+        text: "“Everyone came” in one tap. “Star of the day” and a comment for parents, straight from practice.",
+        points: ["Ratings: technique, physical, discipline", "Calendar: practices, games, cancellations", "Game results and a photo gallery"],
       },
       parent: {
-        title: "Everything about their own child",
-        points: [
-          "Attendance, rating and growth on the home screen",
-          "Progress charts and the coach's comments",
-          "Calendar and “can't make it” in one tap",
-          "Fee status and receipts",
-          "Messages to the coach and the manager",
-          "Several children in one account",
-        ],
+        label: "Parent",
+        title: "Parents know everything.",
+        text: "Attendance, ratings and the coach's comment on their phone. Notifications only about their own child's team.",
+        points: ["Progress charts", "“Can't make it” in one tap", "Fee status and receipts", "Several children in one account"],
       },
     },
 
-    caseLabel: "Already running",
-    caseTitle: "Rustavi Basketball Academy",
-    caseText:
-      "Parents see attendance, ratings and fee status every day. Coaches mark attendance at practice, and the manager sees every payment in one list.",
-    caseStats: [
+    proofLabel: "Already running",
+    proofTitle: "Rustavi Basketball Academy",
+    proofText: "The app is on Google Play and used every day by parents, coaches and the academy's manager.",
+    stats: [
       { value: "140+", label: "players" },
       { value: "90+", label: "parents" },
       { value: "5", label: "coaches" },
     ],
-    casePlay: "On Google Play",
+    playLink: "See it on Google Play",
 
     startLabel: "Getting started",
-    startTitle: "Made for your academy",
+    startTitle: "Set up for your academy.",
     startText:
-      "Your name, logo and colours. Teams, age groups and rating criteria are set up for your sport, and we enter your players and teams for you.",
-    sports: ["Football", "Basketball", "Wrestling", "Swimming", "Judo", "Tennis", "Volleyball", "Gymnastics"],
+      "Your name, logo and colours. Football, basketball, wrestling or swimming: teams and rating criteria are set up for your sport.",
     steps: [
-      { title: "Get to know you", text: "A short call: how many teams, coaches and children you have, and how you collect fees." },
-      { title: "Set it up", text: "Your name, logo and colours. We enter your players and teams for you." },
-      { title: "Parents sign in", text: "With their phone number, no email needed. Works on Android and iPhone." },
-      { title: "It runs", text: "Payments, attendance and notifications from the very first week." },
-    ],
-    trustTitle: "Children's data",
-    trust: [
-      "A child's data is visible only to their parent, their coach and the manager.",
-      "Every payment mark is logged: who and when.",
-      "No ads, and no selling of data.",
+      { title: "Get to know you", text: "A short call: how many teams, coaches and children you have." },
+      { title: "Set it up", text: "Built on your name. We enter your players and teams for you." },
+      { title: "Parents sign in", text: "With their phone number, no email. On Android and iPhone." },
+      { title: "It runs", text: "Payments, attendance and notifications from the first week." },
     ],
 
-    faqLabel: "Questions",
-    faqTitle: "Frequently asked questions",
+    faqTitle: "Questions",
 
     finalTitle: "Shall we show it on your academy?",
     finalText: "Message us and in a short call we'll show you how LineUp would run your teams.",
+    orCall: "or call",
   },
 };
 
