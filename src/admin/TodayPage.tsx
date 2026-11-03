@@ -1,21 +1,23 @@
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Plus } from "lucide-react";
 import { useAdmin } from "./AdminLayout";
-import { todayStr } from "./leads/leadsService";
-import { LeadEditor, LeadRow } from "./leads/LeadParts";
+import { btnPrimary } from "./ui";
+import { longDay, todayStr } from "./leads/leadsService";
+import { LeadCard, LeadEditor, NewLeadDialog } from "./leads/LeadParts";
 import { isActive, type Lead } from "./leads/types";
 
 const DAY = 864e5;
 
 /**
- * The morning list: who to contact today, offers left unanswered, and active
- * leads with no next step (the ones that silently get lost).
+ * The morning page: who to contact today, offers waiting on an answer, and
+ * active inquiries with no date (the ones that silently get lost).
  */
 const TodayPage = () => {
-  const { leads, leadsLoading, leadsError } = useAdmin();
+  const { user, leads, leadsLoading, leadsError } = useAdmin();
   const [open, setOpen] = useState<Lead | null>(null);
+  const [adding, setAdding] = useState(false);
 
-  const { due, staleOffers, noStep, stats } = useMemo(() => {
+  const { due, waiting, unplanned, stats } = useMemo(() => {
     const today = todayStr();
     const now = Date.now();
     const active = leads.filter(isActive);
@@ -25,94 +27,104 @@ const TodayPage = () => {
       .sort((a, b) => a.nextStepAt!.localeCompare(b.nextStepAt!));
     const dueIds = new Set(due.map((l) => l.id));
 
-    const staleOffers = active.filter(
-      (l) =>
-        l.stage === "offer" &&
-        !dueIds.has(l.id) &&
-        l.stageChangedAt &&
-        now - l.stageChangedAt.toMillis() > 3 * DAY
+    const waiting = active.filter(
+      (l) => l.stage === "offer" && !dueIds.has(l.id) && l.stageChangedAt && now - l.stageChangedAt.toMillis() > 3 * DAY
     );
-    const staleIds = new Set(staleOffers.map((l) => l.id));
-
-    const noStep = active.filter((l) => !l.nextStepAt && !dueIds.has(l.id) && !staleIds.has(l.id));
+    const waitingIds = new Set(waiting.map((l) => l.id));
+    const unplanned = active.filter((l) => !l.nextStepAt && !dueIds.has(l.id) && !waitingIds.has(l.id));
 
     const month = today.slice(0, 7);
-    const wonThisMonth = leads.filter(
-      (l) =>
-        l.stage === "won" &&
-        l.stageChangedAt &&
+    const won = leads.filter(
+      (l) => l.stage === "won" && l.stageChangedAt &&
         new Date(l.stageChangedAt.toMillis()).toLocaleDateString("en-CA").startsWith(month)
     );
-
     return {
       due,
-      staleOffers,
-      noStep,
+      waiting,
+      unplanned,
       stats: {
         active: active.length,
         offers: active.filter((l) => l.stage === "offer").length,
-        won: wonThisMonth.length,
-        wonValue: wonThisMonth.reduce((s, l) => s + (l.value || 0), 0),
+        won: won.length,
+        wonValue: won.reduce((s, l) => s + (l.value || 0), 0),
       },
     };
   }, [leads]);
 
-  if (leadsLoading) return <p className="text-sm text-slate-500">იტვირთება…</p>;
+  const dateLine = longDay(new Date());
 
   return (
     <div className="space-y-8">
-      {leadsError && <p className="text-sm text-rose-400">{leadsError}</p>}
+      <header className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p className="text-sm text-slate-500">{dateLine}</p>
+          <h1 className="mt-1 text-2xl font-semibold text-slate-900">დღის საქმეები</h1>
+          <p className="mt-1 text-slate-500">ვის უნდა დაუკავშირდე დღეს. დაკავშირების შემდეგ დააჭირე „რა მოხდა?“.</p>
+        </div>
+        <button onClick={() => setAdding(true)} className={btnPrimary}><Plus size={16} />ახალი მომართვა</button>
+      </header>
 
-      <div className="grid grid-cols-3 gap-3">
-        <Stat label="აქტიური ლიდი" value={stats.active} />
-        <Stat label="გაგზავნილი შეთავაზება" value={stats.offers} />
-        <Stat label="მოგებული ამ თვეში" value={stats.won} note={stats.wonValue ? `${stats.wonValue}₾` : ""} />
+      {leadsError && <p className="rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-700">{leadsError}</p>}
+
+      <div className="grid gap-3 sm:grid-cols-3">
+        <Stat value={stats.active} label="აქტიური მომართვა" />
+        <Stat value={stats.offers} label="შეთავაზება გაგზავნილია" />
+        <Stat value={stats.won} label="ამ თვის ახალი კლიენტი" note={stats.wonValue ? `${stats.wonValue}₾` : ""} />
       </div>
 
-      <Section title="დღეს დასაკავშირებელი" empty="დღეს დასაკავშირებელი არავინაა." leads={due} onOpen={setOpen} snooze />
-      <Section title="შეთავაზება, 3 დღეზე მეტია პასუხი არ არის" leads={staleOffers} onOpen={setOpen} snooze />
-      <Section title="აქტიური, შემდეგი ნაბიჯის გარეშე" leads={noStep} onOpen={setOpen} />
+      {leadsLoading ? (
+        <p className="text-slate-500">იტვირთება…</p>
+      ) : (
+        <>
+          <Section title="დღეს დასაკავშირებელი" count={due.length}>
+            {due.length === 0 ? (
+              <Empty>
+                {leads.length === 0
+                  ? "ჯერ არცერთი მომართვა არ გაქვს. როცა ვინმე მოგწერს ან დაგირეკავს, დაამატე „ახალი მომართვით“ და აქ გამოჩნდება."
+                  : "დღეს დასაკავშირებელი არავინაა."}
+              </Empty>
+            ) : (
+              due.map((l) => <LeadCard key={l.id} lead={l} onOpen={() => setOpen(l)} />)
+            )}
+          </Section>
 
-      {leads.length === 0 && (
-        <p className="text-sm text-slate-400">
-          ჯერ ლიდი არ არის. <Link to="../leads" className="text-indigo-400 hover:underline">დაამატე პირველი</Link>.
-        </p>
+          {waiting.length > 0 && (
+            <Section title="შეთავაზებაზე პასუხს 3 დღეზე მეტია ელოდები" count={waiting.length}>
+              {waiting.map((l) => <LeadCard key={l.id} lead={l} onOpen={() => setOpen(l)} />)}
+            </Section>
+          )}
+
+          {unplanned.length > 0 && (
+            <Section title="დაუგეგმავი: არ წერია, როდის დაუკავშირდე" count={unplanned.length}>
+              {unplanned.map((l) => <LeadCard key={l.id} lead={l} onOpen={() => setOpen(l)} />)}
+            </Section>
+          )}
+        </>
       )}
 
       {open && <LeadEditor lead={open} onClose={() => setOpen(null)} />}
+      {adding && <NewLeadDialog email={user.email || ""} onClose={() => setAdding(false)} />}
     </div>
   );
 };
 
-function Section({ title, leads, onOpen, snooze, empty }: {
-  title: string;
-  leads: Lead[];
-  onOpen: (l: Lead) => void;
-  snooze?: boolean;
-  empty?: string;
-}) {
-  // Optional sections disappear when empty; only the main one says "nothing today".
-  if (leads.length === 0 && !empty) return null;
-  return (
-    <section>
-      <h2 className="mb-3 text-sm font-semibold text-slate-300">
-        {title} <span className="text-slate-500">({leads.length})</span>
-      </h2>
-      {leads.length === 0 ? (
-        <p className="text-sm text-slate-500">{empty}</p>
-      ) : (
-        <div className="space-y-2">
-          {leads.map((l) => <LeadRow key={l.id} lead={l} onOpen={() => onOpen(l)} snooze={snooze} />)}
-        </div>
-      )}
-    </section>
-  );
-}
+const Section = ({ title, count, children }: { title: string; count: number; children: React.ReactNode }) => (
+  <section>
+    <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500">
+      {title} <span className="text-slate-400">· {count}</span>
+    </h2>
+    <div className="grid gap-3">{children}</div>
+  </section>
+);
 
-const Stat = ({ label, value, note }: { label: string; value: number; note?: string }) => (
-  <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-    <p className="text-2xl font-bold">{value}</p>
-    <p className="mt-1 text-xs text-slate-400">{label}{note ? ` · ${note}` : ""}</p>
+const Empty = ({ children }: { children: React.ReactNode }) => (
+  <p className="rounded-2xl border border-dashed border-slate-300 bg-white px-5 py-8 text-center text-slate-500">{children}</p>
+);
+
+const Stat = ({ value, label, note }: { value: number; label: string; note?: string }) => (
+  <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+    <p className="text-3xl font-semibold text-slate-900">{value}</p>
+    <p className="mt-1 text-sm text-slate-500">{label}{note ? ` · ${note}` : ""}</p>
   </div>
 );
 

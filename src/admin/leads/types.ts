@@ -48,22 +48,23 @@ export const PRODUCT_LABELS: Record<Product, string> = {
 };
 
 export const SOURCE_LABELS: Record<Source, string> = {
-  meta: "Meta რეკლამა",
+  meta: "Facebook / Instagram",
   google: "Google",
   site: "საიტი",
   partner: "პარტნიორი",
-  referral: "რეკომენდაცია",
+  referral: "ნაცნობის რეკომენდაცია",
   tender: "ტენდერი",
   direct: "პირადი კონტაქტი",
   other: "სხვა",
 };
 
+/** Status words written from the owner's side, not CRM jargon. */
 export const STAGE_LABELS: Record<Stage, string> = {
   new: "ახალი",
-  contacted: "საუბარი",
-  offer: "შეთავაზება",
-  won: "მოგებული",
-  lost: "წაგებული",
+  contacted: "საუბარში",
+  offer: "შეთავაზება გაგზავნილია",
+  won: "კლიენტი გახდა",
+  lost: "უარი თქვა",
 };
 
 export const ACTIVE_STAGES: Stage[] = ["new", "contacted", "offer"];

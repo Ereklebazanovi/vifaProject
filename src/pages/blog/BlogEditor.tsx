@@ -158,7 +158,7 @@ const BlogEditor = () => {
     try {
       if (editing) await updatePost(form.id, payload);
       else await createPost(payload);
-      setMsg(status === "published" ? "✓ გამოქვეყნდა" : "✓ შენახულია (draft)");
+      setMsg(status === "published" ? "✓ გამოქვეყნდა" : "✓ შენახულია მონახაზად");
       reset();
       refresh();
     } catch (e) {
@@ -183,43 +183,43 @@ const BlogEditor = () => {
     }
     try {
       await fetch(DEPLOY_HOOK, { method: "POST" });
-      setMsg("✓ Rebuild გაეშვა — ~2-3 წუთში სტატიკური HTML განახლდება");
+      setMsg("✓ საიტის განახლება დაიწყო, 2-3 წუთში მზად იქნება");
     } catch {
-      setMsg("✗ rebuild ვერ გაეშვა");
+      setMsg("✗ საიტის განახლება ვერ დაიწყო");
     }
   };
 
-  const field = "w-full rounded-lg border border-slate-600 bg-slate-800 px-3 py-2 text-white outline-none focus:border-indigo-500";
+  const field = "w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-slate-900 outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100";
 
   return (
-    <div className="text-white">
-      <div className="mx-auto max-w-3xl">
+    <div className="text-slate-900">
+      <div className="w-[min(100%,48rem)]">
         <div className="mb-6 flex items-center justify-between">
-          <h1 className="text-2xl font-bold">Blog Studio</h1>
+          <h1 className="text-2xl font-semibold">ბლოგი</h1>
           <div className="flex gap-2">
             {DEPLOY_HOOK && (
-              <button onClick={rebuild} className="rounded-lg bg-emerald-600 px-3 py-1.5 text-sm font-semibold hover:bg-emerald-500">
-                Rebuild site
+              <button onClick={rebuild} className="rounded-xl bg-emerald-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-emerald-700">
+                საიტის განახლება
               </button>
             )}
             {editing && (
-              <button onClick={reset} className="rounded-lg bg-slate-700 px-3 py-1.5 text-sm hover:bg-slate-600">
-                + New post
+              <button onClick={reset} className="rounded-xl border border-slate-300 bg-white px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">
+                + ახალი სტატია
               </button>
             )}
           </div>
         </div>
 
-        {msg && <div className="mb-4 rounded-lg border border-slate-700 bg-slate-900 px-4 py-2 text-sm">{msg}</div>}
+        {msg && <div className="mb-4 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700">{msg}</div>}
 
-        <div className="space-y-4 rounded-xl border border-slate-800 bg-slate-900/60 p-5">
+        <div className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
           <div>
-            <label className="mb-1 block text-xs text-slate-400">სათაური *</label>
+            <label className="mb-1.5 block text-sm font-medium text-slate-700">სათაური *</label>
             <input className={field} value={form.title} onChange={(e) => set("title", e.target.value)} />
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="mb-1 block text-xs text-slate-400">slug (URL) *</label>
+              <label className="mb-1.5 block text-sm font-medium text-slate-700">slug (URL) *</label>
               <input
                 className={field}
                 value={form.slug}
@@ -230,18 +230,18 @@ const BlogEditor = () => {
               />
             </div>
             <div>
-              <label className="mb-1 block text-xs text-slate-400">tags (მძიმით)</label>
+              <label className="mb-1.5 block text-sm font-medium text-slate-700">tags (მძიმით)</label>
               <input className={field} value={form.tags} onChange={(e) => set("tags", e.target.value)} />
             </div>
           </div>
           <div>
-            <label className="mb-1 block text-xs text-slate-400">აღწერა (meta description, 150-160 სიმბ.)</label>
+            <label className="mb-1.5 block text-sm font-medium text-slate-700">აღწერა (meta description, 150-160 სიმბ.)</label>
             <textarea className={field} rows={2} value={form.description} onChange={(e) => set("description", e.target.value)} />
           </div>
           <div>
-            <label className="mb-1 block text-xs text-slate-400">cover image (1200×630)</label>
+            <label className="mb-1.5 block text-sm font-medium text-slate-700">cover image (1200×630)</label>
             <div className="flex flex-wrap items-center gap-3">
-              <label className="cursor-pointer rounded-lg bg-slate-700 px-4 py-2 text-sm font-medium hover:bg-slate-600">
+              <label className="cursor-pointer rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">
                 {uploadingCover ? "იტვირთება…" : "ფაილის ატვირთვა"}
                 <input type="file" accept="image/*" className="hidden" onChange={onCoverFile} disabled={uploadingCover} />
               </label>
@@ -257,8 +257,8 @@ const BlogEditor = () => {
             />
           </div>
           <div>
-            <label className="mb-1 block text-xs text-slate-400">ტექსტი</label>
-            <div className="rounded-lg bg-white text-black">
+            <label className="mb-1.5 block text-sm font-medium text-slate-700">ტექსტი</label>
+            <div className="overflow-hidden rounded-xl border border-slate-300 bg-white text-slate-900">
               <ReactQuill ref={quillRef} theme="snow" modules={quillModules} value={form.contentHtml} onChange={(v) => set("contentHtml", v)} />
             </div>
           </div>
@@ -267,41 +267,41 @@ const BlogEditor = () => {
             <button
               disabled={saving}
               onClick={() => save("published")}
-              className="rounded-lg bg-indigo-600 px-5 py-2 font-semibold hover:bg-indigo-500 disabled:opacity-50"
+              className="rounded-xl bg-indigo-600 px-5 py-2.5 font-semibold text-white hover:bg-indigo-700 disabled:opacity-50"
             >
               {editing ? "განახლება + გამოქვეყნება" : "გამოქვეყნება"}
             </button>
             <button
               disabled={saving}
               onClick={() => save("draft")}
-              className="rounded-lg bg-slate-700 px-5 py-2 font-semibold hover:bg-slate-600 disabled:opacity-50"
+              className="rounded-xl border border-slate-300 bg-white px-5 py-2.5 font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-50"
             >
-              Draft-ად შენახვა
+              მონახაზად შენახვა
             </button>
           </div>
-          <p className="text-xs text-slate-500">
-            გამოქვეყნების შემდეგ პოსტი მაშინვე ცოცხალია. სრული SEO (სტატიკური HTML) მოვა შემდეგ deploy-ზე —
-            დააჭირე „Rebuild site“-ს ან Vercel-ზე Redeploy.
+          <p className="text-sm text-slate-500">
+            გამოქვეყნებული სტატია საიტზე მაშინვე ჩანს. Google-ისთვის სრული ვერსია შემდეგი ატვირთვისას მზადდება:
+            დააჭირე „საიტის განახლებას“ ან Vercel-ში Redeploy-ს.
           </p>
         </div>
 
         {/* Existing posts */}
-        <h2 className="mb-3 mt-10 text-lg font-bold">პოსტები ({posts.length})</h2>
+        <h2 className="mb-3 mt-10 text-lg font-semibold">სტატიები ({posts.length})</h2>
         <div className="space-y-2">
           {posts.map((p) => (
-            <div key={p.id} className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-900/60 px-4 py-3">
+            <div key={p.id} className="flex items-center justify-between rounded-xl border border-slate-200 bg-white px-4 py-3">
               <div className="min-w-0">
                 <div className="truncate font-medium">{p.title || "(უსათაურო)"}</div>
                 <div className="text-xs text-slate-500">
-                  /blog/{p.slug} · {p.status === "published" ? "🟢 published" : "⚪ draft"}
+                  /blog/{p.slug} · {p.status === "published" ? "გამოქვეყნებული" : "მონახაზი"}
                 </div>
               </div>
               <div className="flex shrink-0 gap-2">
-                <button onClick={() => loadForEdit(p)} className="rounded-md bg-slate-700 px-3 py-1 text-sm hover:bg-slate-600">
-                  edit
+                <button onClick={() => loadForEdit(p)} className="rounded-lg border border-slate-300 px-3 py-1 text-sm text-slate-700 hover:bg-slate-50">
+                  რედაქტირება
                 </button>
-                <button onClick={() => remove(p)} className="rounded-md bg-red-900/60 px-3 py-1 text-sm text-red-200 hover:bg-red-900">
-                  delete
+                <button onClick={() => remove(p)} className="rounded-lg px-3 py-1 text-sm text-rose-600 hover:bg-rose-50">
+                  წაშლა
                 </button>
               </div>
             </div>

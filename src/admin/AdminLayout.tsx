@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { NavLink, Outlet, useOutletContext } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import type { User } from "firebase/auth";
+import { CalendarCheck, Inbox, LogOut, PenLine } from "lucide-react";
 import { checkAdminAccess, signInWithGoogle, signOutAdmin, watchAuth } from "./auth";
 import { subscribeLeads } from "./leads/leadsService";
 import type { Lead } from "./leads/types";
+import { btnPrimary, btnSecondary } from "./ui";
 
 type Status = "checking" | "anon" | "denied" | "authed";
 
@@ -16,6 +18,12 @@ export interface AdminContext {
 }
 
 export const useAdmin = () => useOutletContext<AdminContext>();
+
+const NAV = [
+  { to: "today", label: "დღის საქმეები", hint: "ვის დაუკავშირდე დღეს", Icon: CalendarCheck },
+  { to: "leads", label: "მომართვები", hint: "ყველა დაინტერესებული", Icon: Inbox },
+  { to: "blog", label: "ბლოგი", hint: "სტატიები საიტზე", Icon: PenLine },
+];
 
 /**
  * /studio shell. The gate here is a convenience; the real lock is
@@ -59,7 +67,7 @@ const AdminLayout = () => {
       },
       (e) => {
         console.error(e);
-        setLeadsError("ლიდების ჩატვირთვა ვერ მოხერხდა.");
+        setLeadsError("მომართვების ჩატვირთვა ვერ მოხერხდა.");
         setLeadsLoading(false);
       }
     );
@@ -83,89 +91,108 @@ const AdminLayout = () => {
   };
 
   return (
-    <div className="studio min-h-screen bg-slate-950 text-white">
+    <div className="studio min-h-screen bg-slate-50 text-slate-900">
       <Helmet>
         <title>VIFA Studio</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
-      {status === "checking" && <Centered>იტვირთება…</Centered>}
+      {status === "checking" && <Centered><p className="text-slate-500">იტვირთება…</p></Centered>}
 
       {status === "anon" && (
         <Centered>
-          <div className="w-[min(100%,24rem)] rounded-xl border border-slate-700 bg-slate-900 p-6 text-left text-white">
-            <h1 className="text-lg font-bold">VIFA Studio</h1>
-            <p className="mt-1 text-sm text-slate-400">შესვლა მხოლოდ ადმინის ანგარიშით.</p>
-            <button
-              onClick={onSignIn}
-              className="mt-5 w-full rounded-lg bg-indigo-600 px-4 py-2.5 font-semibold hover:bg-indigo-500"
-            >
-              Google-ით შესვლა
-            </button>
-            {authError && <p className="mt-3 text-sm text-rose-400">{authError}</p>}
-          </div>
+          <Card>
+            <Logo />
+            <h1 className="mt-6 text-xl font-semibold">შესვლა</h1>
+            <p className="mt-1 text-slate-500">VIFA-ს სამუშაო სივრცე: მომართვები, დღის საქმეები და ბლოგი.</p>
+            <button onClick={onSignIn} className={`${btnPrimary} mt-6 w-full py-3`}>Google-ით შესვლა</button>
+            {authError && <p className="mt-3 text-sm text-rose-600">{authError}</p>}
+          </Card>
         </Centered>
       )}
 
       {status === "denied" && (
         <Centered>
-          <div className="w-[min(100%,24rem)] rounded-xl border border-slate-700 bg-slate-900 p-6 text-left text-white">
-            <h1 className="text-lg font-bold">წვდომა არ არის</h1>
-            <p className="mt-2 text-sm text-slate-400">
-              {user?.email} ადმინების სიაში არ არის.
-            </p>
-            <button
-              onClick={signOutAdmin}
-              className="mt-5 w-full rounded-lg border border-slate-600 px-4 py-2.5 hover:bg-slate-800"
-            >
-              სხვა ანგარიშით შესვლა
-            </button>
-          </div>
+          <Card>
+            <Logo />
+            <h1 className="mt-6 text-xl font-semibold">წვდომა არ არის</h1>
+            <p className="mt-1 text-slate-500">{user?.email} ამ სივრცეში შესვლის უფლება არ აქვს.</p>
+            <button onClick={signOutAdmin} className={`${btnSecondary} mt-6 w-full py-3`}>სხვა ანგარიშით შესვლა</button>
+          </Card>
         </Centered>
       )}
 
       {status === "authed" && user && (
-        <>
-          <header className="sticky top-0 z-30 border-b border-slate-800 bg-slate-950/95 backdrop-blur">
-            <div className="mx-auto flex w-[min(100%,72rem)] flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3">
-              <span className="font-bold tracking-tight">VIFA Studio</span>
-              <nav className="flex gap-1 text-sm">
-                <Tab to="today">დღეს</Tab>
-                <Tab to="leads">ლიდები</Tab>
-                <Tab to="blog">ბლოგი</Tab>
-              </nav>
-              <div className="ml-auto flex items-center gap-3 text-xs text-slate-400">
-                <span className="hidden sm:inline">{user.email}</span>
-                <button onClick={signOutAdmin} className="rounded-md border border-slate-700 px-2.5 py-1 hover:bg-slate-800">
-                  გასვლა
-                </button>
-              </div>
+        <div className="md:flex">
+          {/* Desktop: side menu */}
+          <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-slate-200 bg-white px-4 py-6 md:flex">
+            <div className="px-2"><Logo /></div>
+            <nav className="mt-8 grid gap-1">
+              {NAV.map(({ to, label, hint, Icon }) => (
+                <NavLink key={to} to={to}
+                  className={({ isActive }) =>
+                    `flex items-start gap-3 rounded-xl px-3 py-2.5 transition ${
+                      isActive ? "bg-indigo-50 text-indigo-700" : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                    }`}>
+                  <Icon size={18} className="mt-0.5 shrink-0" />
+                  <span>
+                    <span className="block text-sm font-medium">{label}</span>
+                    <span className="block text-xs text-slate-400">{hint}</span>
+                  </span>
+                </NavLink>
+              ))}
+            </nav>
+            <div className="mt-auto border-t border-slate-200 px-2 pt-4">
+              <p className="truncate text-xs text-slate-500">{user.email}</p>
+              <button onClick={signOutAdmin} className="mt-2 inline-flex items-center gap-1.5 text-sm text-slate-600 hover:text-slate-900">
+                <LogOut size={14} />გასვლა
+              </button>
             </div>
+          </aside>
+
+          {/* Phone: top bar with tabs */}
+          <header className="sticky top-0 z-30 border-b border-slate-200 bg-white md:hidden">
+            <div className="flex items-center justify-between px-4 py-3">
+              <Logo />
+              <button onClick={signOutAdmin} className="text-slate-500" aria-label="გასვლა"><LogOut size={18} /></button>
+            </div>
+            <nav className="flex gap-1 px-2 pb-2">
+              {NAV.map(({ to, label, Icon }) => (
+                <NavLink key={to} to={to}
+                  className={({ isActive }) =>
+                    `flex flex-1 items-center justify-center gap-1.5 rounded-lg px-2 py-2 text-sm ${
+                      isActive ? "bg-indigo-50 font-medium text-indigo-700" : "text-slate-600"
+                    }`}>
+                  <Icon size={15} />{label}
+                </NavLink>
+              ))}
+            </nav>
           </header>
-          <main className="mx-auto w-[min(100%,72rem)] px-4 py-6">
-            <Outlet context={{ user, leads, leadsLoading, leadsError } satisfies AdminContext} />
+
+          <main className="min-w-0 flex-1 px-4 py-6 md:px-10 md:py-10">
+            <div className="mx-auto w-[min(100%,64rem)]">
+              <Outlet context={{ user, leads, leadsLoading, leadsError } satisfies AdminContext} />
+            </div>
           </main>
-        </>
+        </div>
       )}
     </div>
   );
 };
 
-const Centered = ({ children }: { children: React.ReactNode }) => (
-  <div className="flex min-h-screen items-center justify-center px-5 text-center text-sm text-slate-400">
-    {children}
-  </div>
+const Logo = () => (
+  <span className="inline-flex items-center gap-2">
+    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600 text-sm font-bold text-white">V</span>
+    <span className="font-semibold tracking-tight text-slate-900">VIFA Studio</span>
+  </span>
 );
 
-const Tab = ({ to, children }: { to: string; children: React.ReactNode }) => (
-  <NavLink
-    to={to}
-    className={({ isActive }) =>
-      `rounded-md px-3 py-1.5 ${isActive ? "bg-slate-800 text-white" : "text-slate-400 hover:text-white"}`
-    }
-  >
-    {children}
-  </NavLink>
+const Centered = ({ children }: { children: React.ReactNode }) => (
+  <div className="flex min-h-screen items-center justify-center px-5">{children}</div>
+);
+
+const Card = ({ children }: { children: React.ReactNode }) => (
+  <div className="w-[min(100%,26rem)] rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">{children}</div>
 );
 
 export default AdminLayout;

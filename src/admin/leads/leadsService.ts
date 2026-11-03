@@ -65,6 +65,18 @@ export const addDaysStr = (days: number) => {
   return d.toLocaleDateString("en-CA");
 };
 
+// Georgian names written out: browsers without Georgian locale data fall back
+// to English for toLocaleDateString("ka-GE").
+const MONTHS = ["იანვარი", "თებერვალი", "მარტი", "აპრილი", "მაისი", "ივნისი", "ივლისი", "აგვისტო", "სექტემბერი", "ოქტომბერი", "ნოემბერი", "დეკემბერი"];
+const WEEKDAYS = ["კვირა", "ორშაბათი", "სამშაბათი", "ოთხშაბათი", "ხუთშაბათი", "პარასკევი", "შაბათი"];
+
+/** "YYYY-MM-DD" → "7 ნოე". */
+export const shortDay = (date: string) =>
+  `${Number(date.slice(8, 10))} ${MONTHS[Number(date.slice(5, 7)) - 1].slice(0, 3)}`;
+
+/** A Date → "სამშაბათი, 3 ნოემბერი". */
+export const longDay = (d: Date) => `${WEEKDAYS[d.getDay()]}, ${d.getDate()} ${MONTHS[d.getMonth()]}`;
+
 /** wa.me link for a Georgian number written any way ("555 12 34 56", "+995..."). */
 export function whatsappLink(phone: string) {
   let digits = phone.replace(/\D/g, "");
