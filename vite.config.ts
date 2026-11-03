@@ -26,6 +26,11 @@ export default defineConfig({
           if (id.includes('node_modules/framer-motion')) {
             return 'framer';
           }
+          // Firebase Auth is used only by the lazy /vifa-studio admin; its own chunk keeps
+          // it out of the shared vendor bundle every public page downloads.
+          if (id.includes('node_modules/@firebase/auth') || id.includes('node_modules/firebase/auth')) {
+            return 'firebase-auth';
+          }
           if (id.includes('node_modules/firebase')) {
             return 'firebase';
           }

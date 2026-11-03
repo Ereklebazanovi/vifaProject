@@ -11,8 +11,6 @@ import {
 import { uploadToCloudinary } from "../../service/cloudinary";
 import type { BlogPost, BlogStatus } from "../../types/blog";
 
-// Optional obscurity gate (NOT real auth). Leave "" to disable. The route itself is unlinked.
-const EDITOR_PASS = "";
 // Optional: a Vercel Deploy Hook URL to rebuild the static site after publishing.
 const DEPLOY_HOOK = import.meta.env.VITE_VERCEL_DEPLOY_HOOK as string | undefined;
 
@@ -30,8 +28,6 @@ const emptyForm = {
 };
 
 const BlogEditor = () => {
-  const [authed, setAuthed] = useState(EDITOR_PASS === "");
-  const [passInput, setPassInput] = useState("");
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [form, setForm] = useState({ ...emptyForm });
   const [slugTouched, setSlugTouched] = useState(false);
@@ -104,37 +100,14 @@ const BlogEditor = () => {
   const refresh = () => getAllPosts().then(setPosts).catch((e) => console.error(e));
 
   useEffect(() => {
-    if (authed) refresh();
-  }, [authed]);
+    refresh();
+  }, []);
 
   // Auto-generate slug from the title until the user edits the slug manually.
   const autoSlug = useMemo(() => slugify(form.title), [form.title]);
   useEffect(() => {
     if (!slugTouched && !editing) setForm((f) => ({ ...f, slug: autoSlug }));
   }, [autoSlug, slugTouched, editing]);
-
-  if (!authed) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-slate-950 px-5">
-        <div className="w-full max-w-sm rounded-xl border border-slate-700 bg-slate-900 p-6">
-          <h1 className="mb-4 text-lg font-bold text-white">Studio</h1>
-          <input
-            type="password"
-            value={passInput}
-            onChange={(e) => setPassInput(e.target.value)}
-            placeholder="passphrase"
-            className="mb-3 w-full rounded-lg border border-slate-600 bg-slate-800 px-3 py-2 text-white outline-none focus:border-indigo-500"
-          />
-          <button
-            onClick={() => setAuthed(passInput === EDITOR_PASS)}
-            className="w-full rounded-lg bg-indigo-600 px-4 py-2 font-semibold text-white hover:bg-indigo-500"
-          >
-            Enter
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   const set = (k: keyof typeof form, v: string) => setForm((f) => ({ ...f, [k]: v }));
 
@@ -219,7 +192,7 @@ const BlogEditor = () => {
   const field = "w-full rounded-lg border border-slate-600 bg-slate-800 px-3 py-2 text-white outline-none focus:border-indigo-500";
 
   return (
-    <div className="min-h-screen bg-slate-950 px-5 py-10 text-white">
+    <div className="text-white">
       <div className="mx-auto max-w-3xl">
         <div className="mb-6 flex items-center justify-between">
           <h1 className="text-2xl font-bold">Blog Studio</h1>

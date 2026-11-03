@@ -1,5 +1,5 @@
 // One-off blog upsert: writes/updates a fully-formed SEO post straight into
-// Firestore (`posts` collection - same backend the /vifa-studio editor uses).
+// Firestore (`posts` collection - same backend the /studio editor uses).
 // Run: node scripts/seed-post.mjs
 // Upsert: updates the post in place if a doc with the same slug already exists.
 import { initializeApp } from "firebase/app";

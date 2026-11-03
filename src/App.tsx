@@ -23,8 +23,16 @@ const ContactPage = lazy(() => import("./pages/ContactPage"));
 const BlogIndex = lazy(() => import("./pages/blog/BlogIndex"));
 const BlogPost = lazy(() => import("./pages/blog/BlogPost"));
 const BlogEditor = lazy(() => import("./pages/blog/BlogEditor"));
+const AdminLayout = lazy(() => import("./admin/AdminLayout"));
+const TodayPage = lazy(() => import("./admin/TodayPage"));
+const LeadsPage = lazy(() => import("./admin/leads/LeadsPage"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
+
+// The admin is entered directly by URL, never via in-app navigation, so the
+// initial path is enough to keep its visits out of GA and the Meta Pixel.
+const isStudio =
+  typeof window !== "undefined" && window.location.pathname.startsWith("/studio");
 
 const App = () => {
   return (
@@ -32,13 +40,13 @@ const App = () => {
       <LanguageProvider>
         <NavigationProvider>
           <BrowserRouter>
-            {import.meta.env.VITE_GA_MEASUREMENT_ID && (
+            {!isStudio && import.meta.env.VITE_GA_MEASUREMENT_ID && (
               <GoogleAnalytics
                 measurementId={import.meta.env.VITE_GA_MEASUREMENT_ID}
               />
             )}
 
-            {import.meta.env.VITE_FACEBOOK_PIXEL_ID && (
+            {!isStudio && import.meta.env.VITE_FACEBOOK_PIXEL_ID && (
               <FacebookPixel pixelId={import.meta.env.VITE_FACEBOOK_PIXEL_ID} />
             )}
 
@@ -81,8 +89,13 @@ const App = () => {
                   <Route path="*" element={<NotFound />} />
                 </Route>
 
-                {/* Hidden blog editor — unlinked, no auth. Standalone (no navbar/footer). */}
-                <Route path="/vifa-studio" element={<BlogEditor />} />
+                {/* Admin (Google sign-in, locked by firestore.rules). Standalone, no navbar/footer. */}
+                <Route path="/studio" element={<AdminLayout />}>
+                  <Route index element={<Navigate to="today" replace />} />
+                  <Route path="today" element={<TodayPage />} />
+                  <Route path="leads" element={<LeadsPage />} />
+                  <Route path="blog" element={<BlogEditor />} />
+                </Route>
 
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>

@@ -4,7 +4,7 @@ import { FaWhatsapp } from "react-icons/fa";
 import { useLanguage } from "../contexts/LanguageContext";
 
 // Routes that already have their own persistent contact UI (or shouldn't show one).
-const HIDDEN_PREFIXES = ["/inventowms", "/vifa-studio"];
+const HIDDEN_PREFIXES = ["/inventowms", "/studio"];
 
 const WHATSAPP_NUMBER = "995557624243";
 

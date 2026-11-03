@@ -3,6 +3,7 @@
 User-agent: *
 Allow: /
 Disallow: /admin/
+Disallow: /studio
 Disallow: /api/
 
 # Allow CSS and JS for better crawling

@@ -435,6 +435,13 @@ html.ka .invento-readable p {
   font-family: "Noto Sans Georgian", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+/* Admin (/studio): every element in readable mkhedruli. A work tool full of
+   names, notes and numbers, so no all-caps Nino Mtavruli anywhere inside .studio. */
+:lang(ka) .studio *,
+html.ka .studio * {
+  font-family: "Noto Sans Georgian", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 /* Blog article body — styles the rich HTML produced by the editor (react-quill).
    Self-contained so we don't need the Tailwind typography plugin. */
 .blog-prose {

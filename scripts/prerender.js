@@ -45,7 +45,16 @@ for (const s of INDUSTRY_SERVICES)
 // Blog posts live in Firestore. At build time we fetch the published slugs via the
 // Firestore REST API and prerender each /blog/<slug> so crawlers get static HTML.
 const FIREBASE_PROJECT = 'vifa-project';
-const FIRESTORE_REST = `https://firestore.googleapis.com/v1/projects/${FIREBASE_PROJECT}/databases/(default)/documents/posts?pageSize=300`;
+// A filtered query, not a plain list: firestore.rules let the public read published posts
+// only, and an unfiltered list that could include drafts is refused as a whole.
+const FIRESTORE_QUERY = `https://firestore.googleapis.com/v1/projects/${FIREBASE_PROJECT}/databases/(default)/documents:runQuery`;
+const PUBLISHED_POSTS_QUERY = {
+  structuredQuery: {
+    from: [{ collectionId: 'posts' }],
+    where: { fieldFilter: { field: { fieldPath: 'status' }, op: 'EQUAL', value: { stringValue: 'published' } } },
+    limit: 300,
+  },
+};
 
 // Network noise to block during prerender (keeps render fast + avoids hangs on
 // long-lived firebase / analytics connections).
@@ -58,17 +67,22 @@ const BLOCKED = [
 // so the Firestore SDK can fetch real post content to bake into the static HTML.
 const FIRESTORE_HOST = 'firestore.googleapis.com';
 
-// Fetch published blog slugs from Firestore REST (no SDK/auth; needs public read rules).
+// Fetch published blog slugs from Firestore REST (no SDK/auth; allowed by the public read rule).
 // Returns [{ slug, publishedAt }]. Fails soft: on any error the blog is just skipped.
 async function fetchPublishedBlogPosts() {
   try {
-    const res = await fetch(FIRESTORE_REST);
+    const res = await fetch(FIRESTORE_QUERY, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(PUBLISHED_POSTS_QUERY),
+    });
     if (!res.ok) {
       console.warn(`[prerender] blog: Firestore REST ${res.status} — skipping blog routes`);
       return [];
     }
     const data = await res.json();
-    const docs = data.documents || [];
+    // runQuery answers with one entry per match; entries without `document` carry only read metadata.
+    const docs = (Array.isArray(data) ? data : []).map((r) => r.document).filter(Boolean);
     return docs
       .map((d) => ({
         slug: d.fields?.slug?.stringValue || '',

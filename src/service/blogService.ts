@@ -1,5 +1,5 @@
 // Blog Firestore service — `posts` collection.
-// Mirrors the pattern in src/leadService.ts (Firestore Web SDK, no auth).
+// Public reads see published posts only; writes need an admin (see firestore.rules).
 import {
   collection,
   addDoc,
@@ -44,9 +44,15 @@ export async function getPublishedPosts(): Promise<BlogPost[]> {
     .sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1));
 }
 
-/** Single published-or-any post by slug — for /blog/:slug. Returns null if not found. */
+/** Single published post by slug — for /blog/:slug. Returns null if not found.
+ *  The status filter is required: firestore.rules only let the public read published posts,
+ *  and a query that could match a draft is refused as a whole. */
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
-  const q = query(collection(db, COLLECTION), where("slug", "==", slug));
+  const q = query(
+    collection(db, COLLECTION),
+    where("slug", "==", slug),
+    where("status", "==", "published")
+  );
   const snap = await getDocs(q);
   if (snap.empty) return null;
   const d = snap.docs[0];
