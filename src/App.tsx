@@ -24,8 +24,7 @@ const BlogIndex = lazy(() => import("./pages/blog/BlogIndex"));
 const BlogPost = lazy(() => import("./pages/blog/BlogPost"));
 const BlogEditor = lazy(() => import("./pages/blog/BlogEditor"));
 const AdminLayout = lazy(() => import("./admin/AdminLayout"));
-const TodayPage = lazy(() => import("./admin/TodayPage"));
-const LeadsPage = lazy(() => import("./admin/leads/LeadsPage"));
+const ContactsPage = lazy(() => import("./admin/contacts/ContactsPage"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 
@@ -91,9 +90,8 @@ const App = () => {
 
                 {/* Admin (Google sign-in, locked by firestore.rules). Standalone, no navbar/footer. */}
                 <Route path="/studio" element={<AdminLayout />}>
-                  <Route index element={<Navigate to="today" replace />} />
-                  <Route path="today" element={<TodayPage />} />
-                  <Route path="leads" element={<LeadsPage />} />
+                  <Route index element={<Navigate to="contacts" replace />} />
+                  <Route path="contacts" element={<ContactsPage />} />
                   <Route path="blog" element={<BlogEditor />} />
                 </Route>
 

@@ -103,6 +103,19 @@ const Layout: React.FC = () => {
     stopNavigation();
   }, [location.pathname, stopNavigation]);
 
+  // Remember which ad or partner link brought this visit (utm_* / ref on the landing
+  // URL), so a form filled three pages later still says where the person came from.
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "ref"];
+      const found = Object.fromEntries(keys.map((k) => [k, params.get(k) || ""]).filter(([, v]) => v));
+      if (Object.keys(found).length) sessionStorage.setItem("vifa_utm", JSON.stringify(found));
+    } catch {
+      // Storage blocked (private mode etc.): the form simply sends no UTM.
+    }
+  }, []);
+
   // Global WhatsApp click tracker. One delegated listener captures every wa.me
   // link click site-wide, fires a Meta Pixel "Contact" event with the source
   // path so Meta's ad algorithm can optimize for real conversions (not just

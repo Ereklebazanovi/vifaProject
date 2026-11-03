@@ -1,0 +1,186 @@
+import { useEffect, useMemo, useState } from "react";
+import { FaWhatsapp } from "react-icons/fa";
+import { Mail, Phone, Search } from "lucide-react";
+import { useAdmin } from "../AdminLayout";
+import { Modal } from "../ui";
+import {
+  formatPhone,
+  formatWhen,
+  getEvents,
+  PRODUCT_LABELS,
+  SMS_STATUS,
+  SOURCE_LABELS,
+  type Contact,
+  type ContactEvent,
+} from "./contactsService";
+
+const WEEK = 7 * 864e5;
+
+/** Everyone who left their details, filled in automatically. Nothing here is typed by hand. */
+const ContactsPage = () => {
+  const { contacts, contactsLoading, contactsError } = useAdmin();
+  const [product, setProduct] = useState("all");
+  const [search, setSearch] = useState("");
+  const [open, setOpen] = useState<Contact | null>(null);
+
+  const shown = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    return contacts.filter(
+      (c) =>
+        (product === "all" || c.products?.includes(product)) &&
+        (!q || [c.name, c.phone, c.email].some((v) => v?.toLowerCase().includes(q)))
+    );
+  }, [contacts, product, search]);
+
+  const stats = useMemo(() => {
+    const now = Date.now();
+    return {
+      total: contacts.length,
+      week: contacts.filter((c) => c.firstSeenAt && now - c.firstSeenAt.toMillis() < WEEK).length,
+      consent: contacts.filter((c) => c.consent && !c.unsubscribed).length,
+    };
+  }, [contacts]);
+
+  return (
+    <div className="space-y-6">
+      <header>
+        <h1 className="text-2xl font-semibold text-slate-900">კონტაქტები</h1>
+        <p className="mt-1 w-[min(100%,46rem)] text-slate-500">
+          ყველა, ვინც საიტზე ფორმა შეავსო. აქ ყველაფერი თავისით ჩნდება: ყოველ ახალ კონტაქტზე მეილი
+          მოგდის, ადამიანს კი ავტომატური პასუხი მიდის.
+        </p>
+      </header>
+
+      <div className="grid gap-3 sm:grid-cols-3">
+        <Stat value={stats.total} label="სულ კონტაქტი" />
+        <Stat value={stats.week} label="ახალი ამ კვირაში" />
+        <Stat value={stats.consent} label="თანხმობა აქვს შეთავაზებებზე" />
+      </div>
+
+      <div className="flex flex-wrap items-center gap-2">
+        <select value={product} onChange={(e) => setProduct(e.target.value)}
+          className="rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700">
+          <option value="all">ყველა სერვისი</option>
+          {Object.entries(PRODUCT_LABELS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
+        </select>
+        <label className="relative">
+          <Search size={15} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+          <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="სახელი, ნომერი, მეილი"
+            className="w-60 rounded-xl border border-slate-300 bg-white py-2 pl-9 pr-3 text-sm text-slate-900 outline-none focus:border-indigo-500" />
+        </label>
+      </div>
+
+      {contactsError && <p className="rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-700">{contactsError}</p>}
+
+      <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div className="hidden grid-cols-[1.4fr_1.1fr_1.5fr_1.2fr_1fr] gap-4 border-b border-slate-200 bg-slate-50 px-5 py-3 text-xs font-medium uppercase tracking-wide text-slate-500 md:grid">
+          <span>ვინ</span><span>ტელეფონი</span><span>მეილი</span><span>რით დაინტერესდა</span><span>ბოლოს</span>
+        </div>
+        {contactsLoading ? (
+          <p className="px-5 py-10 text-center text-slate-500">იტვირთება…</p>
+        ) : shown.length === 0 ? (
+          <p className="px-5 py-10 text-center text-slate-500">
+            {contacts.length === 0
+              ? "ჯერ კონტაქტი არ არის. როცა ვინმე საიტის ფორმას შეავსებს, აქ თავისით გამოჩნდება."
+              : "ამ ფილტრით არაფერი მოიძებნა."}
+          </p>
+        ) : (
+          shown.map((c) => (
+            <button key={c.id} onClick={() => setOpen(c)}
+              className="grid w-full gap-1 border-b border-slate-100 px-5 py-4 text-left transition last:border-0 hover:bg-slate-50 md:grid-cols-[1.4fr_1.1fr_1.5fr_1.2fr_1fr] md:items-center md:gap-4">
+              <span className="font-medium text-slate-900">
+                {c.name || "უსახელო"}
+                {c.consent && !c.unsubscribed && (
+                  <span className="ml-2 rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-normal text-emerald-700">თანხმობა</span>
+                )}
+              </span>
+              <span className="text-sm text-slate-700">{formatPhone(c.phone)}</span>
+              <span className="truncate text-sm text-slate-700">{c.email}</span>
+              <span className="text-sm text-slate-600">{(c.products || []).map((p) => PRODUCT_LABELS[p] || p).join(", ")}</span>
+              <span className="text-sm text-slate-500">{formatWhen(c.lastSeenAt)}</span>
+            </button>
+          ))
+        )}
+      </div>
+
+      {open && <ContactDetail contact={open} onClose={() => setOpen(null)} />}
+    </div>
+  );
+};
+
+/** One person: how to reach them, and everything that happened, newest first. */
+function ContactDetail({ contact: c, onClose }: { contact: Contact; onClose: () => void }) {
+  const [events, setEvents] = useState<ContactEvent[] | null>(null);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    getEvents(c.id).then(setEvents).catch((e) => {
+      console.error(e);
+      setError("ისტორია ვერ ჩაიტვირთა.");
+    });
+  }, [c.id]);
+
+  const btn = "inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition";
+  return (
+    <Modal title={c.name || "უსახელო"} subtitle={(c.sources || []).map((s) => SOURCE_LABELS[s] || s).join(", ")} onClose={onClose} width="38rem">
+      <div className="flex flex-wrap gap-2">
+        {c.phone && (
+          <>
+            <a href={`https://wa.me/${c.phone}`} target="_blank" rel="noopener noreferrer" className={`${btn} bg-emerald-50 text-emerald-700 hover:bg-emerald-100`}>
+              <FaWhatsapp className="text-base" />WhatsApp
+            </a>
+            <a href={`tel:+${c.phone}`} className={`${btn} bg-slate-100 text-slate-700 hover:bg-slate-200`}><Phone size={15} />{formatPhone(c.phone)}</a>
+          </>
+        )}
+        {c.email && (
+          <a href={`mailto:${c.email}`} className={`${btn} bg-slate-100 text-slate-700 hover:bg-slate-200`}><Mail size={15} />{c.email}</a>
+        )}
+      </div>
+
+      <p className="mt-4 text-sm text-slate-500">
+        შეთავაზებებზე თანხმობა:{" "}
+        <span className="font-medium text-slate-700">
+          {c.unsubscribed ? "გააუქმა" : c.consent ? "აქვს" : "არ აქვს (მხოლოდ საკუთარ მოთხოვნაზე პასუხი)"}
+        </span>
+      </p>
+
+      <h3 className="mb-3 mt-6 text-sm font-semibold uppercase tracking-wide text-slate-500">ისტორია</h3>
+      {error && <p className="text-sm text-rose-600">{error}</p>}
+      {!events && !error && <p className="text-sm text-slate-500">იტვირთება…</p>}
+      <ol className="space-y-3">
+        {events?.map((e) => (
+          <li key={e.id} className="rounded-xl border border-slate-200 px-4 py-3">
+            <p className="flex justify-between gap-3 text-sm">
+              <span className="font-medium text-slate-900">
+                {e.type === "inquiry"
+                  ? `მოთხოვნა: ${PRODUCT_LABELS[e.product || ""] || e.product}`
+                  : e.type === "email"
+                    ? `მეილი: ${e.template === "auto_reply" ? "ავტომატური პასუხი" : e.template}${e.ok ? "" : " (ვერ გაიგზავნა)"}`
+                    : `SMS: ${e.template === "auto_reply" ? "ავტომატური პასუხი" : e.template} · ${SMS_STATUS[e.status || ""] || e.status}`}
+              </span>
+              <span className="shrink-0 text-slate-400">{formatWhen(e.at)}</span>
+            </p>
+            {e.message && <p className="mt-1 whitespace-pre-wrap text-sm text-slate-700">{e.message}</p>}
+            {e.type === "inquiry" && (e.page || Object.keys(e.utm || {}).length > 0) && (
+              <p className="mt-1 text-xs text-slate-400">
+                {e.page}
+                {Object.entries(e.utm || {}).map(([k, v]) => ` · ${k}: ${v}`).join("")}
+              </p>
+            )}
+            {e.type !== "inquiry" && !e.ok && e.detail && <p className="mt-1 text-xs text-rose-600">{e.detail}</p>}
+            {e.type === "sms" && e.reason && <p className="mt-1 text-xs text-slate-500">{e.reason}</p>}
+          </li>
+        ))}
+      </ol>
+    </Modal>
+  );
+}
+
+const Stat = ({ value, label }: { value: number; label: string }) => (
+  <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+    <p className="text-3xl font-semibold text-slate-900">{value}</p>
+    <p className="mt-1 text-sm text-slate-500">{label}</p>
+  </div>
+);
+
+export default ContactsPage;

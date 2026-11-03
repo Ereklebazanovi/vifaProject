@@ -11,6 +11,7 @@ import {
   FaBullhorn,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
+import LeadForm from "../components/LeadForm";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 
@@ -31,6 +32,8 @@ const contactTranslations = {
     "contact.btn.whatsapp": "მოგვწერეთ WhatsApp-ში",
     "contact.info.email": "ზოგადი შეკითხვებისთვის",
     "contact.info.location": "თბილისი, საქართველო",
+    "contact.form.title": "ან დაგვიტოვეთ საკონტაქტო",
+    "contact.form.desc": "დაგიკავშირდებით დღესვე.",
   },
   en: {
     "seo.title": "Contact Us",
@@ -48,6 +51,8 @@ const contactTranslations = {
     "contact.btn.whatsapp": "Message on WhatsApp",
     "contact.info.email": "For general inquiries",
     "contact.info.location": "Tbilisi, Georgia",
+    "contact.form.title": "Or leave your details",
+    "contact.form.desc": "We will get back to you today.",
   },
 };
 
@@ -164,6 +169,18 @@ const ContactPage: React.FC = () => {
             </motion.div>
 
           </div>
+
+          {/* ── Call-back form: for people who'd rather leave a number than open WhatsApp ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="mb-16 rounded-3xl border border-white/10 bg-[#0A0A0C] p-8 md:p-10"
+          >
+            <h2 className="text-2xl font-semibold text-white">{t("contact.form.title")}</h2>
+            <p className="mb-8 mt-2 text-gray-400">{t("contact.form.desc")}</p>
+            <LeadForm />
+          </motion.div>
 
           {/* ── General Info Bottom Bar ── */}
           <motion.div

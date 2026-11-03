@@ -28,7 +28,16 @@ service cloud.firestore {
       allow create, update, delete: if isAdmin();
     }
 
-    // CRM pipeline (/studio). Names and phone numbers: admin only.
+    // Contacts: written by the server (/api, admin SDK, bypasses these rules) when
+    // someone fills a form; the studio reads them. Names, phones, emails: admin only.
+    match /contacts/{contactId} {
+      allow read, write: if isAdmin();
+      match /events/{eventId} {
+        allow read, write: if isAdmin();
+      }
+    }
+
+    // Earlier manual pipeline (/studio, replaced by contacts). Admin only.
     match /crmLeads/{leadId} {
       allow read, write: if isAdmin();
     }

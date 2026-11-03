@@ -45,6 +45,7 @@
     "clsx": "^2.1.1",
     "dompurify": "^3.4.8",
     "firebase": "^12.1.0",
+    "firebase-admin": "^13.10.0",
     "framer-motion": "^11.18.2",
     "gray-matter": "^4.0.3",
     "gsap": "^3.13.0",

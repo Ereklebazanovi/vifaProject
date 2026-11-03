@@ -2,26 +2,24 @@ import { useEffect, useState } from "react";
 import { NavLink, Outlet, useOutletContext } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import type { User } from "firebase/auth";
-import { CalendarCheck, Inbox, LogOut, PenLine } from "lucide-react";
+import { LogOut, PenLine, Users } from "lucide-react";
 import { checkAdminAccess, signInWithGoogle, signOutAdmin, watchAuth } from "./auth";
-import { subscribeLeads } from "./leads/leadsService";
-import type { Lead } from "./leads/types";
+import { subscribeContacts, type Contact } from "./contacts/contactsService";
 import { btnPrimary, btnSecondary } from "./ui";
 
 type Status = "checking" | "anon" | "denied" | "authed";
 
 export interface AdminContext {
   user: User;
-  leads: Lead[];
-  leadsLoading: boolean;
-  leadsError: string;
+  contacts: Contact[];
+  contactsLoading: boolean;
+  contactsError: string;
 }
 
 export const useAdmin = () => useOutletContext<AdminContext>();
 
 const NAV = [
-  { to: "today", label: "დღის საქმეები", hint: "ვის დაუკავშირდე დღეს", Icon: CalendarCheck },
-  { to: "leads", label: "მომართვები", hint: "ყველა დაინტერესებული", Icon: Inbox },
+  { to: "contacts", label: "კონტაქტები", hint: "ვინც საიტზე ფორმა შეავსო", Icon: Users },
   { to: "blog", label: "ბლოგი", hint: "სტატიები საიტზე", Icon: PenLine },
 ];
 
@@ -34,9 +32,9 @@ const AdminLayout = () => {
   const [status, setStatus] = useState<Status>("checking");
   const [user, setUser] = useState<User | null>(null);
   const [authError, setAuthError] = useState("");
-  const [leads, setLeads] = useState<Lead[]>([]);
-  const [leadsLoading, setLeadsLoading] = useState(true);
-  const [leadsError, setLeadsError] = useState("");
+  const [contacts, setContacts] = useState<Contact[]>([]);
+  const [contactsLoading, setContactsLoading] = useState(true);
+  const [contactsError, setContactsError] = useState("");
 
   useEffect(
     () =>
@@ -58,17 +56,17 @@ const AdminLayout = () => {
   // One live subscription for the whole panel, shared by every page via context.
   useEffect(() => {
     if (status !== "authed") return;
-    setLeadsLoading(true);
-    return subscribeLeads(
+    setContactsLoading(true);
+    return subscribeContacts(
       (data) => {
-        setLeads(data);
-        setLeadsLoading(false);
-        setLeadsError("");
+        setContacts(data);
+        setContactsLoading(false);
+        setContactsError("");
       },
       (e) => {
         console.error(e);
-        setLeadsError("მომართვების ჩატვირთვა ვერ მოხერხდა.");
-        setLeadsLoading(false);
+        setContactsError("კონტაქტების ჩატვირთვა ვერ მოხერხდა.");
+        setContactsLoading(false);
       }
     );
   }, [status]);
@@ -104,7 +102,7 @@ const AdminLayout = () => {
           <Card>
             <Logo />
             <h1 className="mt-6 text-xl font-semibold">შესვლა</h1>
-            <p className="mt-1 text-slate-500">VIFA-ს სამუშაო სივრცე: მომართვები, დღის საქმეები და ბლოგი.</p>
+            <p className="mt-1 text-slate-500">VIFA-ს სამუშაო სივრცე: კონტაქტები და ბლოგი.</p>
             <button onClick={onSignIn} className={`${btnPrimary} mt-6 w-full py-3`}>Google-ით შესვლა</button>
             {authError && <p className="mt-3 text-sm text-rose-600">{authError}</p>}
           </Card>
@@ -171,7 +169,7 @@ const AdminLayout = () => {
 
           <main className="min-w-0 flex-1 px-4 py-6 md:px-10 md:py-10">
             <div className="mx-auto w-[min(100%,64rem)]">
-              <Outlet context={{ user, leads, leadsLoading, leadsError } satisfies AdminContext} />
+              <Outlet context={{ user, contacts, contactsLoading, contactsError } satisfies AdminContext} />
             </div>
           </main>
         </div>
