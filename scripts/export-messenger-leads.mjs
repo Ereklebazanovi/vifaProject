@@ -39,7 +39,8 @@ export function parseLeadMessage(text) {
   return digits.length >= 9 || lead.email.includes("@") ? lead : null;
 }
 
-const csvCell = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+// One line per person: chat snippets may hold line breaks, which would split the row on import.
+const csvCell = (v) => `"${String(v ?? "").replace(/\s*\r?\n\s*/g, " ").replace(/"/g, '""')}"`;
 
 if (process.argv.includes("--test")) {
   const sample = "Phone number: 592 18 81 67\nFull name: Davit Giladze\nროგორი ვებგვერდის შექმნა გსურთ ?: პრემიუმ ვებსაიტი";
