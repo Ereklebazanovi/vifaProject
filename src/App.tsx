@@ -25,6 +25,7 @@ const BlogPost = lazy(() => import("./pages/blog/BlogPost"));
 const BlogEditor = lazy(() => import("./pages/blog/BlogEditor"));
 const AdminLayout = lazy(() => import("./admin/AdminLayout"));
 const ContactsPage = lazy(() => import("./admin/contacts/ContactsPage"));
+const SendPage = lazy(() => import("./admin/send/SendPage"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 
@@ -92,6 +93,7 @@ const App = () => {
                 <Route path="/studio" element={<AdminLayout />}>
                   <Route index element={<Navigate to="contacts" replace />} />
                   <Route path="contacts" element={<ContactsPage />} />
+                  <Route path="send" element={<SendPage />} />
                   <Route path="blog" element={<BlogEditor />} />
                 </Route>
 
