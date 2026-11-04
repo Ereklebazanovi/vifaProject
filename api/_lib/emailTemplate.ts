@@ -8,6 +8,19 @@ const LOGO = `${SITE}/viffa.png`; // white mark on black: the black margins vani
 export const escHtml = (s: string) =>
   s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 
+/**
+ * "{name}" → the name. With no name, the placeholder goes away cleanly:
+ * "{name}, საიტი…" → "საიტი…", "გამარჯობა {name}!" → "გამარჯობა!".
+ */
+export function personalize(text: string, name?: string) {
+  const n = (name || "").trim();
+  if (n) return text.split("{name}").join(n);
+  return text
+    .replace(/\{name\}\s*[,:]\s*/g, "")
+    .replace(/\s*[,:]?\s*\{name\}/g, "")
+    .replace(/^\s*[,:]\s*/, "");
+}
+
 export interface BrandEmail {
   /** Shown in the inbox list next to the subject. */
   preheader?: string;

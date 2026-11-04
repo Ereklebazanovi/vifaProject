@@ -2,7 +2,7 @@
 // and the unsubscribe link every message carries.
 import { randomBytes } from "node:crypto";
 import type { DocumentData, QueryDocumentSnapshot } from "firebase-admin/firestore";
-import { brandEmailHtml, brandEmailText, type BrandEmail } from "./emailTemplate.js";
+import { brandEmailHtml, brandEmailText, personalize, type BrandEmail } from "./emailTemplate.js";
 import { isGeorgianMobile } from "./sms.js";
 
 export type Channel = "sms" | "email" | "both";
@@ -29,11 +29,8 @@ export function audienceOf(docs: QueryDocumentSnapshot[], product: string, chann
     .sort((a, b) => a.id.localeCompare(b.id));
 }
 
-/** "{name}" → the person's name, or nothing when we don't know it. */
-export function personalize(text: string, name?: string) {
-  const n = (name || "").trim();
-  return n ? text.split("{name}").join(n) : text.replace(/\s*\{name\}/g, "");
-}
+// One personalize for everything (server sends and the studio preview), see emailTemplate.ts.
+export { personalize };
 
 export const newUnsubToken = () => randomBytes(6).toString("base64url"); // 8 chars
 /** Email unsubscribe: straight to the confirmation (and the one-click POST target). */

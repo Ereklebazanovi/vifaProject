@@ -13,7 +13,8 @@ const ERRORS: Record<string, string> = {
 /** One branded email to one person: pick a template, add your offer, send. */
 const PersonalEmail = ({ email: fixedEmail, name: fixedName, onSent }: { email?: string; name?: string; onSent?: () => void }) => {
   const [email, setEmail] = useState(fixedEmail || "");
-  const [name, setName] = useState("");
+  // What's in this field is exactly what {name} becomes; empty means no name at all.
+  const [name, setName] = useState(fixedName || "");
   const [draft, setDraft] = useState<EmailDraft>(emptyDraft);
   const [state, setState] = useState<"idle" | "sending" | "sent">("idle");
   const [error, setError] = useState("");
@@ -23,7 +24,7 @@ const PersonalEmail = ({ email: fixedEmail, name: fixedName, onSent }: { email?:
     setState("sending");
     try {
       await apiPost("/api/email", {
-        email, name: fixedName ? "" : name,
+        email, name: name.trim(),
         subject: draft.subject, body: draft.body, emailImage: draft.image,
         buttonText: draft.buttonKind === "none" ? "" : draft.buttonText,
         buttonUrl: draft.buttonKind === "none" ? "" : draft.buttonUrl,
@@ -39,15 +40,15 @@ const PersonalEmail = ({ email: fixedEmail, name: fixedName, onSent }: { email?:
 
   return (
     <div className="grid gap-5">
-      {!fixedEmail && (
-        <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2">
+        {!fixedEmail && (
           <Field label="მეილი"><input className={inputCls} type="email" value={email} onChange={(e) => { setEmail(e.target.value); setState("idle"); }} placeholder="name@company.ge" /></Field>
-          <Field label="სახელი" hint="არასავალდებულო. {name}-ის ადგილას ჩაჯდება.">
-            <input className={inputCls} value={name} onChange={(e) => setName(e.target.value)} />
-          </Field>
-        </div>
-      )}
-      <EmailComposer value={draft} onChange={(d) => { setDraft(d); setState("idle"); }} />
+        )}
+        <Field label="სახელი" hint="რასაც აქ ჩაწერ, ის ჩაჯდება {name}-ის ადგილას. ცარიელი: უბრალოდ „გამარჯობა!“">
+          <input className={inputCls} value={name} onChange={(e) => { setName(e.target.value); setState("idle"); }} />
+        </Field>
+      </div>
+      <EmailComposer value={draft} onChange={(d) => { setDraft(d); setState("idle"); }} previewName={name} />
       <div className="flex flex-wrap items-center gap-3">
         <button onClick={send} disabled={state === "sending" || !email.trim() || !draft.subject.trim() || !draft.body.trim()} className={btnPrimary}>
           {state === "sending" ? "იგზავნება…" : "მეილის გაგზავნა"}

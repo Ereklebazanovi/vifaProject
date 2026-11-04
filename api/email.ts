@@ -1,5 +1,6 @@
 // POST /api/email (admins only): one branded email to one person, from the studio.
 // Body: { email, name?, subject, body, emailImage?, buttonText?, buttonUrl? }
+// {name} becomes exactly the `name` sent (empty → no name), never a stored one.
 // One-to-one, like /api/sms: no consent needed, nothing implied. The person is saved as a
 // contact (matched by email if they already exist) and the email carries their own
 // unsubscribe link, since it's usually an offer.
@@ -50,7 +51,8 @@ export default async function handler(req: Req, res: Res) {
   await ref.set(
     {
       email,
-      ...(name && !prev.name ? { name } : {}),
+      // The name typed now is the latest truth about this person.
+      ...(name ? { name } : {}),
       unsubToken: token,
       sources: FieldValue.arrayUnion("manual"),
       lastSeenAt: FieldValue.serverTimestamp(),
@@ -61,7 +63,9 @@ export default async function handler(req: Req, res: Res) {
 
   const mail = campaignEmail(
     { subject, body, imageUrl: httpsUrl(b.emailImage), buttonText: str(b.buttonText, 60), buttonUrl: httpsUrl(b.buttonUrl) },
-    (prev.name as string) || name,
+    // Exactly what the sender gave: a typed name, or none at all ("გამარჯობა!").
+    // Never a name stored earlier: what's on screen is what gets sent.
+    name,
     token
   );
   let ok = true, detail = "";

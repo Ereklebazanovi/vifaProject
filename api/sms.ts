@@ -43,7 +43,7 @@ export default async function handler(req: Req, res: Res) {
   await ref.set(
     {
       phone,
-      ...(name && !prev.name ? { name } : {}),
+      ...(name ? { name } : {}), // the name typed now wins over an older one
       unsubToken: token,
       sources: FieldValue.arrayUnion("manual"),
       lastSeenAt: FieldValue.serverTimestamp(),

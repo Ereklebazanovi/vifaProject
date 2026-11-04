@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { ImagePlus, X } from "lucide-react";
 import { uploadToCloudinary } from "../../service/cloudinary";
-import { brandEmailHtml } from "../../../api/_lib/emailTemplate";
+import { brandEmailHtml, personalize } from "../../../api/_lib/emailTemplate";
 import { btnSecondary, Chips, Field, inputCls } from "../ui";
 import { EMAIL_TEMPLATES } from "./templates";
 
@@ -26,13 +26,15 @@ export const emptyDraft: EmailDraft = {
 };
 
 const SAMPLE_NAME = "ნინო";
-const personalize = (t: string) => t.split("{name}").join(SAMPLE_NAME);
 
 /**
  * The email editor: pick a ready template (photo, text, button) or write from scratch,
  * then edit anything. The preview is the real email HTML the person will get.
+ * `previewName`: the exact name this email will carry ("" = none); left out for group
+ * sends, where every person gets their own, so the preview shows a sample name.
  */
-const EmailComposer = ({ value: d, onChange }: { value: EmailDraft; onChange: (d: EmailDraft) => void }) => {
+const EmailComposer = ({ value: d, onChange, previewName }: { value: EmailDraft; onChange: (d: EmailDraft) => void; previewName?: string }) => {
+  const shownName = previewName === undefined ? SAMPLE_NAME : previewName;
   const [template, setTemplate] = useState("");
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState("");
@@ -69,14 +71,14 @@ const EmailComposer = ({ value: d, onChange }: { value: EmailDraft; onChange: (d
   const html = useMemo(
     () =>
       brandEmailHtml({
-        title: personalize(d.subject) || "სათაური",
-        body: personalize(d.body) || "აქ გამოჩნდება მეილის ტექსტი.",
+        title: personalize(d.subject, shownName) || "სათაური",
+        body: personalize(d.body, shownName) || "აქ გამოჩნდება მეილის ტექსტი.",
         imageUrl: d.image || undefined,
         button: d.buttonText && d.buttonUrl ? { text: d.buttonText, url: d.buttonUrl } : undefined,
         secondary: d.buttonUrl.includes("wa.me") ? undefined : { text: "მოგვწერეთ WhatsApp-ში", url: "https://wa.me/995557624243" },
         unsubscribeUrl: "https://vifadigital.ge/u/preview",
       }),
-    [d]
+    [d, shownName]
   );
 
   return (
