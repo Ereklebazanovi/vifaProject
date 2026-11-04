@@ -25,6 +25,7 @@ import {
   FaBullseye,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
+import CallbackLink from "../components/CallbackLink";
 import FAQSection from "../components/FAQSection";
 import type { FAQItem } from "../components/FAQSection";
 import IndustryLinks from "../components/IndustryLinks";
@@ -372,6 +373,9 @@ const Marketing: React.FC = () => {
               {t("cta.button")}
               <FaArrowRight className="text-xs" />
             </a>
+            <div className="mt-5">
+              <CallbackLink product="marketing" />
+            </div>
           </div>
         </div>
 

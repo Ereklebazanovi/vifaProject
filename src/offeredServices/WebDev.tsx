@@ -24,6 +24,7 @@ import {
   SiTailwindcss,
 } from "react-icons/si";
 import SEO from "../components/SEO";
+import CallbackLink from "../components/CallbackLink";
 import FAQSection from "../components/FAQSection";
 import type { FAQItem } from "../components/FAQSection";
 import IndustryLinks from "../components/IndustryLinks";
@@ -511,6 +512,9 @@ const WebDev: React.FC = () => {
                 <FaWhatsapp className="text-lg" />
                 {t("webdev.cta.button")}
               </a>
+              <div className="mt-5">
+                <CallbackLink product="web" />
+              </div>
             </div>
           </section>
 

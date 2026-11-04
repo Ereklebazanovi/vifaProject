@@ -20,6 +20,7 @@ import {
   FaCloud,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
+import CallbackLink from "../components/CallbackLink";
 import FAQSection from "../components/FAQSection";
 import { ChatbotDemoTerminal } from "../components/Terminal";
 import { AIConnectionDemo } from "../components/AIConnectionDemo";
@@ -417,6 +418,7 @@ const AIChatbot: React.FC = () => {
                   <FaWhatsapp className="text-lg" />
                   {t("consultation.whatsapp")}
                 </a>
+                <CallbackLink product="chatbot" className="self-center" />
               </div>
 
               <AIConnectionDemo />

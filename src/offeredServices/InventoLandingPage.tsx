@@ -22,6 +22,7 @@ import {
   FaShieldAlt
 } from "react-icons/fa";
 import SEO from "../components/SEO";
+import CallbackLink from "../components/CallbackLink";
 import FAQSection from "../components/FAQSection";
 import type { FAQItem } from "../components/FAQSection";
 
@@ -469,6 +470,7 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
                       </div>
                     </div>
 
+                    <CallbackLink product="wms" />
                     <p className="text-xs text-gray-500">{t("hero.trust")}</p>
                   </div>
                 </motion.div>

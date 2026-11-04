@@ -21,6 +21,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Plus } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import SEO from "../components/SEO";
+import CallbackLink from "../components/CallbackLink";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 import { ACCENT, PHONE_HREF, PHONE_LABEL, PLAY_URL, faq, page, whatsappUrl } from "../components/lineup/content";
@@ -152,6 +153,7 @@ const LineupLandingPage = () => {
                         {c.orCall} {PHONE_LABEL}
                       </a>
                     </div>
+                    <CallbackLink product="lineup" />
                     <span className="text-[13px] text-zinc-600">{c.proofLine}</span>
                   </div>
                 }
