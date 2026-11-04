@@ -2,7 +2,7 @@
 // and the unsubscribe link every message carries.
 import { randomBytes } from "node:crypto";
 import type { DocumentData, QueryDocumentSnapshot } from "firebase-admin/firestore";
-import { esc } from "./mail.js";
+import { brandEmailHtml, brandEmailText, type BrandEmail } from "./emailTemplate.js";
 import { isGeorgianMobile } from "./sms.js";
 
 export type Channel = "sms" | "email" | "both";
@@ -39,19 +39,31 @@ export const newUnsubToken = () => randomBytes(6).toString("base64url"); // 8 ch
 export const unsubUrl = (token: string) => `${SITE}/u/${token}`;
 export const smsUnsubLine = (token: string) => `\nგაუქმება: vifadigital.ge/u/${token}`;
 
-export function campaignEmail(subject: string, body: string, name: string | undefined, token: string) {
-  const text = personalize(body, name);
+export interface CampaignEmailInput {
+  subject: string;
+  body: string;
+  imageUrl?: string;
+  buttonText?: string;
+  buttonUrl?: string;
+}
+
+/** A group email in the branded flyer template, personal and with its own unsubscribe link. */
+export function campaignEmail(c: CampaignEmailInput, name: string | undefined, token: string) {
   const url = unsubUrl(token);
-  const paragraphs = esc(text)
-    .split(/\n{2,}/)
-    .map((p) => `<p style="margin:0 0 14px">${p.replace(/\n/g, "<br>")}</p>`)
-    .join("");
+  const mail: BrandEmail = {
+    preheader: personalize(c.body, name).slice(0, 110),
+    title: personalize(c.subject, name),
+    body: personalize(c.body, name),
+    imageUrl: c.imageUrl || undefined,
+    button: c.buttonText && c.buttonUrl ? { text: c.buttonText, url: c.buttonUrl } : undefined,
+    // The WhatsApp line under the button, unless the button already is WhatsApp.
+    secondary: c.buttonUrl?.includes("wa.me") ? undefined : { text: "მოგვწერეთ WhatsApp-ში", url: "https://wa.me/995557624243" },
+    unsubscribeUrl: url,
+  };
   return {
-    subject: personalize(subject, name),
-    html: `<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:#0f172a;max-width:560px">${paragraphs}
-<p style="margin-top:28px">VIFA Digital<br><a href="${SITE}">vifadigital.ge</a></p>
-<p style="margin-top:24px;font-size:12px;color:#94a3b8">ამ წერილს იღებთ, რადგან VIFA Digital-ის სიახლეების მიღებას დათანხმდით. <a href="${url}" style="color:#94a3b8">გამოწერის გაუქმება</a></p></div>`,
-    text: `${text}\n\nVIFA Digital\nvifadigital.ge\n\nგამოწერის გაუქმება: ${url}`,
+    subject: personalize(c.subject, name),
+    html: brandEmailHtml(mail),
+    text: brandEmailText(mail),
     headers: { "List-Unsubscribe": `<${url}>`, "List-Unsubscribe-Post": "List-Unsubscribe=One-Click" },
   };
 }

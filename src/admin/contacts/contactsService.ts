@@ -75,6 +75,8 @@ export interface Campaign {
   status: "sending" | "done";
   createdBy?: string;
   createdAt?: Timestamp;
+  /** Who got it: one entry per person, written by /api/send batch by batch. */
+  recipients?: { id: string; name: string; phone: string; email: string; sms?: string; smsRef?: string; emailStatus?: string }[];
 }
 
 export function subscribeCampaigns(onData: (c: Campaign[]) => void, onError: (e: Error) => void) {

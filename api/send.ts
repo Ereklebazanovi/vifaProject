@@ -1,5 +1,6 @@
 // POST /api/send: a group send from the studio (admins only).
-// Body: { channel, product, smsText, emailSubject, emailBody, campaignId?, offset? }
+// Body: { channel, product, smsText, emailSubject, emailBody, emailImage?, buttonText?, buttonUrl?,
+//         exclude?: contactIds[], campaignId?, offset? }
 // Sends to one batch of the audience per call; the studio calls again with `next`
 // until it is null, showing progress. The audience is always re-derived here from
 // Firestore (consent, not unsubscribed), never taken from the browser.
@@ -27,6 +28,15 @@ type Res = ServerResponse & { status: (code: number) => Res; json: (body: unknow
 
 const BATCH = 40;
 const str = (v: unknown, max: number) => (typeof v === "string" ? v.trim().slice(0, max) : "");
+/** Only https links go into an email (image, button). */
+const httpsUrl = (v: unknown) => {
+  const u = str(v, 500);
+  try {
+    return u && new URL(u).protocol === "https:" ? u : "";
+  } catch {
+    return "";
+  }
+};
 
 export default async function handler(req: Req, res: Res) {
   res.setHeader("Cache-Control", "no-store");
@@ -40,6 +50,10 @@ export default async function handler(req: Req, res: Res) {
   const smsText = str(b.smsText, 400);
   const emailSubject = str(b.emailSubject, 150);
   const emailBody = str(b.emailBody, 8000);
+  const emailImage = httpsUrl(b.emailImage);
+  const buttonText = str(b.buttonText, 60);
+  const buttonUrl = httpsUrl(b.buttonUrl);
+  const exclude = new Set(Array.isArray(b.exclude) ? (b.exclude as unknown[]).slice(0, 5000).map(String) : []);
   const useSms = channel === "sms" || channel === "both";
   const useEmail = channel === "email" || channel === "both";
 
@@ -51,13 +65,15 @@ export default async function handler(req: Req, res: Res) {
 
   const db = adminDb();
   const snap = await db.collection("contacts").where("consent", "==", true).get();
-  const audience = audienceOf(snap.docs, product, channel);
+  // People the sender unticked in the studio stay out of every batch.
+  const audience = audienceOf(snap.docs, product, channel).filter((d) => !exclude.has(d.id));
 
   let campaignId = str(b.campaignId, 40);
   if (!campaignId) {
     const ref = await db.collection("campaigns").add({
-      channel, product, smsText, emailSubject, emailBody,
+      channel, product, smsText, emailSubject, emailBody, emailImage, buttonText, buttonUrl,
       total: audience.length,
+      recipients: [],
       smsSent: 0, smsFailed: 0, emailSent: 0, emailFailed: 0,
       status: "sending",
       createdBy: admin,
@@ -84,6 +100,10 @@ export default async function handler(req: Req, res: Res) {
   await tokenWrites.commit();
 
   let smsSent = 0, smsFailed = 0, emailSent = 0, emailFailed = 0;
+  // Per person in this batch, for the campaign's recipient list in the studio.
+  const outcome = new Map<string, { sms?: string; smsRef?: string; emailStatus?: string }>();
+  const note = (id: string, patch: { sms?: string; smsRef?: string; emailStatus?: string }) =>
+    outcome.set(id, { ...(outcome.get(id) || {}), ...patch });
 
   if (useSms) {
     const targets = batch.filter((d) => canSms(d.data()));
@@ -99,10 +119,12 @@ export default async function handler(req: Req, res: Res) {
             if (content.length > SMS_MAX) throw new Error(`ტექსტი ${content.length} სიმბოლოა, მაქსიმუმ ${SMS_MAX}`);
             await sendSms(c.phone, content, reference);
             smsSent++;
+            note(d.id, { sms: "sent", smsRef: reference });
           } catch (e) {
             ok = false;
             detail = errText(e);
             smsFailed++;
+            note(d.id, { sms: "failed", smsRef: reference });
           }
           const w = db.batch();
           w.set(d.ref.collection("events").doc(reference), {
@@ -121,16 +143,22 @@ export default async function handler(req: Req, res: Res) {
     if (targets.length) {
       const mails = targets.map((d) => {
         const c = d.data();
-        return { to: [c.email as string], replyTo: [admin], ...campaignEmail(emailSubject, emailBody, c.name, tokens.get(d.id)!) };
+        return {
+          to: [c.email as string],
+          replyTo: [admin],
+          ...campaignEmail({ subject: emailSubject, body: emailBody, imageUrl: emailImage, buttonText, buttonUrl }, c.name, tokens.get(d.id)!),
+        };
       });
       let ids: string[] = [];
       let detail = "";
       try {
         ids = await sendEmailBatch(mails);
         emailSent += targets.length;
+        targets.forEach((d) => note(d.id, { emailStatus: "sent" }));
       } catch (e) {
         detail = errText(e);
         emailFailed += targets.length;
+        targets.forEach((d) => note(d.id, { emailStatus: "failed" }));
       }
       const w = db.batch();
       targets.forEach((d, i) =>
@@ -150,6 +178,17 @@ export default async function handler(req: Req, res: Res) {
     smsFailed: FieldValue.increment(smsFailed),
     emailSent: FieldValue.increment(emailSent),
     emailFailed: FieldValue.increment(emailFailed),
+    // arrayUnion needs at least one element.
+    ...(batch.length
+      ? {
+          recipients: FieldValue.arrayUnion(
+            ...batch.map((d) => {
+              const c = d.data();
+              return { id: d.id, name: c.name || "", phone: c.phone || "", email: c.email || "", ...(outcome.get(d.id) || {}) };
+            })
+          ),
+        }
+      : {}),
     ...(done ? { status: "done", finishedAt: FieldValue.serverTimestamp() } : {}),
   });
 

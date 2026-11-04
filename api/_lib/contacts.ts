@@ -1,6 +1,7 @@
 // Contacts pipeline: validate an inquiry, store it once per person, and write the emails.
 import { FieldValue } from "firebase-admin/firestore";
 import { adminDb } from "./firebase.js";
+import { brandEmailHtml, brandEmailText, type BrandEmail } from "./emailTemplate.js";
 import { esc } from "./mail.js";
 
 export const PRODUCTS = {
@@ -180,17 +181,14 @@ export function alertEmail(q: Inquiry, source: string) {
 /** The instant reply to the person who wrote. */
 export function autoReplyEmail(q: Inquiry) {
   const p = PRODUCTS[q.product];
-  const wa = waLink(WHATSAPP[p.team]);
-  const helloText = q.name ? `გამარჯობა, ${q.name}!` : "გამარჯობა!";
-  const hello = esc(helloText);
-  return {
-    subject: "მადლობა, თქვენი მოთხოვნა მივიღეთ | VIFA Digital",
-    html: `<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:#0f172a;max-width:520px">
-<p>${hello}</p>
-<p>მადლობა, რომ დაგვიკავშირდით. თქვენი მოთხოვნა (${esc(p.label)}) მივიღეთ და დღესვე დაგიკავშირდებით.</p>
-<p>თუ გეჩქარებათ, მოგვწერეთ პირდაპირ <a href="${wa}">WhatsApp-ში</a>.</p>
-<p>მანამდე შეგიძლიათ ნახოთ დეტალები და ფასები: <a href="${p.page}">${p.page.replace("https://", "")}</a></p>
-<p style="margin-top:24px">პატივისცემით,<br>VIFA Digital<br><a href="https://vifadigital.ge">vifadigital.ge</a></p></div>`,
-    text: `${helloText}\n\nმადლობა, რომ დაგვიკავშირდით. თქვენი მოთხოვნა (${p.label}) მივიღეთ და დღესვე დაგიკავშირდებით.\n\nთუ გეჩქარებათ, მოგვწერეთ WhatsApp-ში: ${wa}\n\nდეტალები და ფასები: ${p.page}\n\nპატივისცემით,\nVIFA Digital\nvifadigital.ge`,
+  const mail: BrandEmail = {
+    preheader: "მივიღეთ თქვენი მოთხოვნა და დღესვე დაგიკავშირდებით.",
+    title: q.name ? `მადლობა, ${q.name}!` : "მადლობა!",
+    body: `თქვენი მოთხოვნა (${p.label}) მივიღეთ და დღესვე დაგიკავშირდებით.
+
+მანამდე შეგიძლიათ ნახოთ დეტალები და ფასები ჩვენს საიტზე.`,
+    button: { text: `${p.label}: დეტალები`, url: p.page },
+    secondary: { text: "გეჩქარებათ? მოგვწერეთ WhatsApp-ში", url: waLink(WHATSAPP[p.team]) },
   };
+  return { subject: "მადლობა, თქვენი მოთხოვნა მივიღეთ | VIFA Digital", html: brandEmailHtml(mail), text: brandEmailText(mail) };
 }
