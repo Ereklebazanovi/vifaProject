@@ -37,6 +37,11 @@ service cloud.firestore {
       }
     }
 
+    // Group sends from the studio (written by /api/send). Admin only.
+    match /campaigns/{campaignId} {
+      allow read: if isAdmin();
+    }
+
     // Earlier manual pipeline (/studio, replaced by contacts). Admin only.
     match /crmLeads/{leadId} {
       allow read, write: if isAdmin();

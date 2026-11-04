@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
-import { Mail, Phone, Search } from "lucide-react";
+import { Mail, Phone, Search, Upload } from "lucide-react";
 import { useAdmin } from "../AdminLayout";
-import { Modal } from "../ui";
+import { btnSecondary, Modal } from "../ui";
+import ImportDialog from "./ImportDialog";
 import {
   formatPhone,
   formatWhen,
@@ -22,6 +23,7 @@ const ContactsPage = () => {
   const [product, setProduct] = useState("all");
   const [search, setSearch] = useState("");
   const [open, setOpen] = useState<Contact | null>(null);
+  const [importing, setImporting] = useState(false);
 
   const shown = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -43,12 +45,15 @@ const ContactsPage = () => {
 
   return (
     <div className="space-y-6">
-      <header>
-        <h1 className="text-2xl font-semibold text-slate-900">კონტაქტები</h1>
-        <p className="mt-1 w-[min(100%,46rem)] text-slate-500">
-          ყველა, ვინც საიტზე ფორმა შეავსო. აქ ყველაფერი თავისით ჩნდება: ყოველ ახალ კონტაქტზე მეილი
-          მოგდის, ადამიანს კი ავტომატური პასუხი მიდის.
-        </p>
+      <header className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-semibold text-slate-900">კონტაქტები</h1>
+          <p className="mt-1 w-[min(100%,46rem)] text-slate-500">
+            ყველა, ვინც საიტზე ან Facebook-ის რეკლამაში ფორმა შეავსო. აქ ყველაფერი თავისით ჩნდება:
+            ყოველ ახალ კონტაქტზე მეილი მოგდის, ადამიანს კი ავტომატური პასუხი მიდის.
+          </p>
+        </div>
+        <button onClick={() => setImporting(true)} className={btnSecondary}><Upload size={16} />იმპორტი</button>
       </header>
 
       <div className="grid gap-3 sm:grid-cols-3">
@@ -104,6 +109,7 @@ const ContactsPage = () => {
       </div>
 
       {open && <ContactDetail contact={open} onClose={() => setOpen(null)} />}
+      {importing && <ImportDialog onClose={() => setImporting(false)} />}
     </div>
   );
 };
@@ -152,11 +158,7 @@ function ContactDetail({ contact: c, onClose }: { contact: Contact; onClose: () 
           <li key={e.id} className="rounded-xl border border-slate-200 px-4 py-3">
             <p className="flex justify-between gap-3 text-sm">
               <span className="font-medium text-slate-900">
-                {e.type === "inquiry"
-                  ? `მოთხოვნა: ${PRODUCT_LABELS[e.product || ""] || e.product}`
-                  : e.type === "email"
-                    ? `მეილი: ${e.template === "auto_reply" ? "ავტომატური პასუხი" : e.template}${e.ok ? "" : " (ვერ გაიგზავნა)"}`
-                    : `SMS: ${e.template === "auto_reply" ? "ავტომატური პასუხი" : e.template} · ${SMS_STATUS[e.status || ""] || e.status}`}
+                {eventTitle(e)}
               </span>
               <span className="shrink-0 text-slate-400">{formatWhen(e.at)}</span>
             </p>
@@ -174,6 +176,17 @@ function ContactDetail({ contact: c, onClose }: { contact: Contact; onClose: () 
       </ol>
     </Modal>
   );
+}
+
+const TEMPLATE: Record<string, string> = { auto_reply: "ავტომატური პასუხი", campaign: "ჯგუფური გაგზავნა" };
+
+function eventTitle(e: ContactEvent) {
+  if (e.type === "inquiry") return `მოთხოვნა: ${PRODUCT_LABELS[e.product || ""] || e.product} · ${SOURCE_LABELS[e.source || ""] || e.source}`;
+  if (e.type === "email") return `მეილი: ${TEMPLATE[e.template || ""] || e.template}${e.ok ? "" : " (ვერ გაიგზავნა)"}`;
+  if (e.type === "sms") return `SMS: ${TEMPLATE[e.template || ""] || e.template} · ${SMS_STATUS[e.status || ""] || e.status}`;
+  if (e.type === "import") return "იმპორტი";
+  if (e.type === "unsubscribe") return "გამოწერა გააუქმა";
+  return e.type;
 }
 
 const Stat = ({ value, label }: { value: number; label: string }) => (

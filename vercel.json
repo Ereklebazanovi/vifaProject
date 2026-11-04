@@ -16,6 +16,10 @@
   "trailingSlash": false,
   "rewrites": [
     {
+      "source": "/u/:t",
+      "destination": "/api/unsubscribe?t=:t"
+    },
+    {
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
@@ -69,5 +73,13 @@
         }
       ]
     }
-  ]
+  ],
+  "functions": {
+    "api/send.ts": {
+      "maxDuration": 60
+    },
+    "api/import.ts": {
+      "maxDuration": 60
+    }
+  }
 }

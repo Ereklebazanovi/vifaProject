@@ -36,6 +36,36 @@ export async function sendEmail(mail: OutgoingEmail): Promise<string> {
   return body.id || "";
 }
 
+export interface BatchEmail extends OutgoingEmail {
+  headers?: Record<string, string>;
+}
+
+/** Up to 100 emails in one Resend call. Returns one id per email, in order. */
+export async function sendEmailBatch(mails: BatchEmail[]): Promise<string[]> {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) throw new Error("RESEND_API_KEY is not set");
+  const from = process.env.MAIL_FROM || DEFAULT_FROM;
+  const res = await fetch(`${ENDPOINT}/batch`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+    body: JSON.stringify(
+      mails.map((m) => ({
+        from,
+        to: m.to,
+        subject: m.subject,
+        html: m.html,
+        text: m.text,
+        ...(m.replyTo?.length ? { reply_to: m.replyTo } : {}),
+        ...(m.headers ? { headers: m.headers } : {}),
+      }))
+    ),
+    signal: AbortSignal.timeout(15000),
+  });
+  const body = (await res.json().catch(() => ({}))) as { data?: { id: string }[]; message?: string };
+  if (!res.ok) throw new Error(`Resend ${res.status}: ${body.message || "unknown error"}`);
+  return (body.data || []).map((d) => d.id);
+}
+
 /** Escape user text before it goes into an HTML email. */
 export const esc = (s: string) =>
   s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);

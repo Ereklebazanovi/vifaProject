@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink, Outlet, useOutletContext } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import type { User } from "firebase/auth";
-import { LogOut, PenLine, Users } from "lucide-react";
+import { LogOut, PenLine, Send, Users } from "lucide-react";
 import { checkAdminAccess, signInWithGoogle, signOutAdmin, watchAuth } from "./auth";
 import { subscribeContacts, type Contact } from "./contacts/contactsService";
 import { btnPrimary, btnSecondary } from "./ui";
@@ -19,7 +19,8 @@ export interface AdminContext {
 export const useAdmin = () => useOutletContext<AdminContext>();
 
 const NAV = [
-  { to: "contacts", label: "კონტაქტები", hint: "ვინც საიტზე ფორმა შეავსო", Icon: Users },
+  { to: "contacts", label: "კონტაქტები", hint: "ვინც ფორმა შეავსო", Icon: Users },
+  { to: "send", label: "გაგზავნა", hint: "SMS და მეილი ჯგუფს", Icon: Send },
   { to: "blog", label: "ბლოგი", hint: "სტატიები საიტზე", Icon: PenLine },
 ];
 
@@ -102,7 +103,7 @@ const AdminLayout = () => {
           <Card>
             <Logo />
             <h1 className="mt-6 text-xl font-semibold">შესვლა</h1>
-            <p className="mt-1 text-slate-500">VIFA-ს სამუშაო სივრცე: კონტაქტები და ბლოგი.</p>
+            <p className="mt-1 text-slate-500">VIFA-ს სამუშაო სივრცე: კონტაქტები, გაგზავნა და ბლოგი.</p>
             <button onClick={onSignIn} className={`${btnPrimary} mt-6 w-full py-3`}>Google-ით შესვლა</button>
             {authError && <p className="mt-3 text-sm text-rose-600">{authError}</p>}
           </Card>

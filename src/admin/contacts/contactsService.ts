@@ -36,7 +36,7 @@ export interface Contact {
 
 export interface ContactEvent {
   id: string;
-  type: "inquiry" | "email" | "sms";
+  type: "inquiry" | "email" | "sms" | "import" | "unsubscribe";
   source?: string;
   product?: string;
   message?: string;
@@ -60,6 +60,44 @@ export const SMS_STATUS: Record<string, string> = {
   unknown: "სტატუსი უცნობია",
   failed: "ვერ გაიგზავნა",
 };
+
+export interface Campaign {
+  id: string;
+  channel: "sms" | "email" | "both";
+  product: string;
+  smsText?: string;
+  emailSubject?: string;
+  total: number;
+  smsSent: number;
+  smsFailed: number;
+  emailSent: number;
+  emailFailed: number;
+  status: "sending" | "done";
+  createdBy?: string;
+  createdAt?: Timestamp;
+}
+
+export function subscribeCampaigns(onData: (c: Campaign[]) => void, onError: (e: Error) => void) {
+  const q = query(collection(db, "campaigns"), orderBy("createdAt", "desc"));
+  return onSnapshot(
+    q,
+    (snap) => onData(snap.docs.map((d) => ({ id: d.id, ...d.data({ serverTimestamps: "estimate" }) }) as Campaign)),
+    onError
+  );
+}
+
+/** Same audience rule as /api/send: agreed to offers, never unsubscribed, reachable. */
+export const canSms = (c: Contact) => /^9955\d{8}$/.test(c.phone || "");
+export const canEmail = (c: Contact) => Boolean(c.email?.includes("@"));
+export function audienceOf(contacts: Contact[], product: string, channel: "sms" | "email" | "both") {
+  return contacts.filter(
+    (c) =>
+      c.consent === true &&
+      c.unsubscribed !== true &&
+      (product === "all" || c.products?.includes(product)) &&
+      (channel === "sms" ? canSms(c) : channel === "email" ? canEmail(c) : canSms(c) || canEmail(c))
+  );
+}
 
 export function subscribeContacts(onData: (c: Contact[]) => void, onError: (e: Error) => void) {
   const q = query(collection(db, CONTACTS), orderBy("lastSeenAt", "desc"));
