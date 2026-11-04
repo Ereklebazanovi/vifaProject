@@ -18,6 +18,7 @@ import {
   smsUnsubLine,
   type Channel,
 } from "./_lib/campaign.js";
+import { normalizePhone } from "./_lib/contacts.js";
 import { adminDb } from "./_lib/firebase.js";
 import { isEmailConfigured, sendEmailBatch } from "./_lib/mail.js";
 import { errText } from "./_lib/pipeline.js";
@@ -64,6 +65,47 @@ export default async function handler(req: Req, res: Res) {
   if (useEmail && !isEmailConfigured()) return res.status(400).json({ ok: false, error: "emailNotConfigured" });
 
   const db = adminDb();
+
+  // Addresses the sender typed by hand (first call only): saved as contacts with the
+  // sender's say-so as consent, so they get a token, an unsubscribe link and a history.
+  // Someone who already unsubscribed stays unsubscribed and is skipped.
+  let manualSkipped = 0;
+  const typed = !b.campaignId && Array.isArray(b.extra) ? (b.extra as unknown[]).slice(0, 200).map((v) => String(v).trim()) : [];
+  const manual = typed
+    .map((v) => {
+      const email = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? v.toLowerCase().slice(0, 120) : "";
+      const phone = email ? "" : normalizePhone(v);
+      return email || phone ? { id: phone || `e_${email}`, email, phone } : null;
+    })
+    .filter((m): m is { id: string; email: string; phone: string } => Boolean(m));
+  if (manual.length) {
+    const snaps = await db.getAll(...manual.map((m) => db.collection("contacts").doc(m.id)));
+    const w = db.batch();
+    snaps.forEach((s, i) => {
+      const m = manual[i];
+      if (s.data()?.unsubscribed === true) {
+        manualSkipped++;
+        return;
+      }
+      const tag = product !== "all" ? product : "other";
+      w.set(
+        s.ref,
+        {
+          ...(m.email ? { email: m.email } : {}),
+          ...(m.phone ? { phone: m.phone } : {}),
+          consent: true,
+          consentAt: FieldValue.serverTimestamp(),
+          consentSource: `manual:${admin}`,
+          sources: FieldValue.arrayUnion("manual"),
+          products: FieldValue.arrayUnion(tag),
+          ...(s.exists ? {} : { lastProduct: tag, firstSeenAt: FieldValue.serverTimestamp(), lastSeenAt: FieldValue.serverTimestamp(), unsubscribed: false }),
+        },
+        { merge: true }
+      );
+    });
+    await w.commit();
+  }
+
   const snap = await db.collection("contacts").where("consent", "==", true).get();
   // People the sender unticked in the studio stay out of every batch.
   const audience = audienceOf(snap.docs, product, channel).filter((d) => !exclude.has(d.id));
@@ -86,15 +128,13 @@ export default async function handler(req: Req, res: Res) {
   const offset = Math.max(0, Number(b.offset) || 0);
   const batch = audience.slice(offset, offset + BATCH);
 
-  // Every recipient needs a personal unsubscribe token before anything is sent.
+  // Every recipient needs a personal token (their /u/ page) before anything is sent, and
+  // that page shows the offer they got last, so remember this campaign on them.
   const tokens = new Map<string, string>();
   const tokenWrites = db.batch();
   for (const d of batch) {
-    let t = d.data().unsubToken as string | undefined;
-    if (!t) {
-      t = newUnsubToken();
-      tokenWrites.update(d.ref, { unsubToken: t });
-    }
+    const t = (d.data().unsubToken as string | undefined) || newUnsubToken();
+    tokenWrites.update(d.ref, { unsubToken: t, lastCampaignId: campaignId });
     tokens.set(d.id, t);
   }
   await tokenWrites.commit();
@@ -199,5 +239,6 @@ export default async function handler(req: Req, res: Res) {
     processed,
     next: done ? null : processed,
     smsSent, smsFailed, emailSent, emailFailed,
+    manualSkipped,
   });
 }

@@ -36,7 +36,7 @@ const ERRORS: Record<string, string> = {
   auth: "სერვერმა შენი ანგარიში ვერ დაადასტურა. გამოდი და ხელახლა შედი.",
 };
 
-interface Result { smsSent: number; smsFailed: number; emailSent: number; emailFailed: number }
+interface Result { smsSent: number; smsFailed: number; emailSent: number; emailFailed: number; manualSkipped?: number }
 
 const personalize = (t: string) => t.split("{name}").join(SAMPLE_NAME);
 
@@ -59,16 +59,41 @@ const SendPage = () => {
   const [error, setError] = useState("");
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [openCampaign, setOpenCampaign] = useState<Campaign | null>(null);
+  const [extraText, setExtraText] = useState("");
 
   useEffect(() => subscribeCampaigns(setCampaigns, (e) => console.error(e)), []);
 
+  const useSms = channel !== "email";
+  const useEmail = channel !== "sms";
   const eligible = useMemo(() => audienceOf(contacts, product, channel), [contacts, product, channel]);
   const audience = eligible.filter((c) => !excluded.has(c.id));
   const consented = contacts.filter((c) => c.consent && !c.unsubscribed);
-  const smsCount = audience.filter(canSms).length;
-  const emailCount = audience.filter(canEmail).length;
-  const useSms = channel !== "email";
-  const useEmail = channel !== "sms";
+
+  // Typed by hand: one per line or comma. Only the ones this channel can reach, that aren't
+  // already in the list, and that never unsubscribed (the server checks that again).
+  const manual = useMemo(() => {
+    const inList = new Set(audience.map((c) => c.id));
+    const unsub = new Set(contacts.filter((c) => c.unsubscribed).map((c) => c.id));
+    const seen = new Set<string>();
+    return extraText
+      .split(/[\n,;]+/)
+      .map((v) => v.trim())
+      .filter(Boolean)
+      .map((raw) => {
+        const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(raw);
+        let digits = raw.replace(/\D/g, "");
+        if (digits.length === 9 && digits.startsWith("5")) digits = `995${digits}`;
+        const id = isEmail ? `e_${raw.toLowerCase()}` : digits;
+        const reachable = isEmail ? useEmail : /^9955\d{8}$/.test(digits) && useSms;
+        return { raw, id, isEmail, ok: reachable && !inList.has(id) && !unsub.has(id) };
+      })
+      .filter((m) => (seen.has(m.id) ? false : (seen.add(m.id), true)));
+  }, [extraText, audience, contacts, useSms, useEmail]);
+  const manualOk = manual.filter((m) => m.ok);
+
+  const smsCount = audience.filter(canSms).length + manualOk.filter((m) => !m.isEmail).length;
+  const emailCount = audience.filter(canEmail).length + manualOk.filter((m) => m.isEmail).length;
+  const total = audience.length + manualOk.length;
 
   // Length as sent: a sample name in place of {name} plus the unsubscribe line.
   const smsFull = smsText.split("{name}").join("ნინო ბერიძე") + SMS_UNSUB_SAMPLE;
@@ -89,7 +114,7 @@ const SendPage = () => {
   );
 
   const ready =
-    audience.length > 0 && !progress &&
+    total > 0 && !progress &&
     (!useSms || (smsText.trim() && !smsTooLong)) &&
     (!useEmail || (subject.trim() && body.trim()));
 
@@ -130,13 +155,16 @@ const SendPage = () => {
     const totals: Result = { smsSent: 0, smsFailed: 0, emailSent: 0, emailFailed: 0 };
     let campaignId = "";
     let offset: number | null = 0;
-    setProgress({ done: 0, total: audience.length });
+    setProgress({ done: 0, total });
     try {
       while (offset !== null) {
         const r: Result & { campaignId: string; next: number | null; processed: number; total: number } = await apiPost("/api/send", {
           channel, product, smsText, emailSubject: subject, emailBody: body, emailImage: image,
           buttonText, buttonUrl, exclude: [...excluded], campaignId, offset,
+          // Typed addresses go only with the first call; after that they are contacts.
+          extra: campaignId ? [] : manualOk.map((m) => m.raw),
         });
+        if (!campaignId) totals.manualSkipped = r.manualSkipped || 0;
         campaignId = r.campaignId;
         totals.smsSent += r.smsSent; totals.smsFailed += r.smsFailed;
         totals.emailSent += r.emailSent; totals.emailFailed += r.emailFailed;
@@ -144,6 +172,7 @@ const SendPage = () => {
         offset = r.next;
       }
       setResult(totals);
+      setExtraText("");
     } catch (e) {
       const code = e instanceof Error ? e.message : "";
       setError(ERRORS[code] || `გაგზავნა შეწყდა (${code}). უკვე გაგზავნილები ისტორიაში ჩანს.`);
@@ -172,14 +201,14 @@ const SendPage = () => {
         </div>
 
         <p className="mt-4 text-slate-700">
-          <span className="text-2xl font-semibold text-slate-900">{contactsLoading ? "…" : audience.length}</span> ადამიანი მიიღებს
+          <span className="text-2xl font-semibold text-slate-900">{contactsLoading ? "…" : total}</span> ადამიანი მიიღებს
           {useSms && useEmail && ` (${smsCount} SMS-ით, ${emailCount} მეილით)`}
         </p>
 
         {!contactsLoading && consented.length === 0 && (
           <p className="mt-2 text-sm text-amber-700">
             ჯერ არავის აქვს თანხმობა. თანხმობა ჩნდება, როცა ადამიანი ფორმაში მონიშნავს, ან როცა
-            იმპორტისას მიუთითებ, რომ ამ ხალხმა თანხმობა გითხრა.
+            იმპორტისას მიუთითებ, რომ ამ ხალხმა თანხმობა გითხრა. ან ჩაწერე მისამართი ქვემოთ, ხელით.
           </p>
         )}
 
@@ -205,6 +234,24 @@ const SendPage = () => {
                 </label>
               ))}
             </div>
+          </div>
+        )}
+      </Card>
+
+      <Card title="დამატებით, ხელით">
+        <Field label={useEmail && useSms ? "მეილები ან ნომრები" : useEmail ? "მეილები" : "ნომრები"}
+          hint="თითო ხაზზე ან მძიმით. კონტაქტებში დაემატებიან თანხმობით, ამიტომ ჩაწერე მხოლოდ ისინი, ვინც გიცნობს და შენგან შეთავაზებას ელის.">
+          <textarea className={`${inputCls} min-h-[70px]`} value={extraText} onChange={(e) => setExtraText(e.target.value)}
+            placeholder={useEmail ? "nino@gmail.com, client@company.ge" : "555 12 34 56"} />
+        </Field>
+        {manual.length > 0 && (
+          <div className="mt-3 flex flex-wrap gap-2">
+            {manual.map((m) => (
+              <span key={m.id} className={`rounded-full px-3 py-1 text-sm ${m.ok ? "bg-indigo-50 text-indigo-700" : "bg-slate-100 text-slate-400 line-through"}`}
+                title={m.ok ? "" : "ამ არხით ვერ მიიღებს, უკვე სიაშია ან გამოწერა გააუქმა"}>
+                {m.raw}
+              </span>
+            ))}
           </div>
         )}
       </Card>
@@ -281,12 +328,13 @@ const SendPage = () => {
 
       <div className="flex flex-wrap items-center gap-4">
         <button onClick={send} disabled={!ready} className={`${btnPrimary} px-6 py-3`}>
-          {progress ? `იგზავნება… ${progress.done} / ${progress.total}` : `გაგზავნა ${audience.length} ადამიანს`}
+          {progress ? `იგზავნება… ${progress.done} / ${progress.total}` : `გაგზავნა ${total} ადამიანს`}
         </button>
         {result && (
           <p className="text-sm text-emerald-700">
             გაიგზავნა: {result.smsSent} SMS, {result.emailSent} მეილი
             {(result.smsFailed || result.emailFailed) ? ` · ვერ გაიგზავნა ${result.smsFailed + result.emailFailed} (მიზეზი კონტაქტის ისტორიაშია)` : ""}
+            {result.manualSkipped ? ` · ${result.manualSkipped} ხელით ჩაწერილს გამოწერა აქვს გაუქმებული და არ გაეგზავნა` : ""}
           </p>
         )}
         {error && <p className="text-sm text-rose-600">{error}</p>}
@@ -308,6 +356,8 @@ const SendPage = () => {
                   {c.status === "sending" ? "იგზავნება · " : ""}
                   {c.smsSent + c.emailSent} / {c.total} გაიგზავნა
                   {c.smsFailed + c.emailFailed > 0 && <span className="text-rose-600"> · {c.smsFailed + c.emailFailed} ვერა</span>}
+                  {c.opens ? <span className="text-indigo-600"> · {c.opens} გახსნა</span> : null}
+                  {c.callbacks ? <span className="font-medium text-emerald-700"> · {c.callbacks} ზარს ითხოვს</span> : null}
                 </span>
               </button>
             ))}

@@ -1,5 +1,5 @@
 // Contacts written by /api (site form, later Meta Lead Ads). The studio only reads them.
-import { collection, getDocs, onSnapshot, orderBy, query, type Timestamp } from "firebase/firestore";
+import { addDoc, collection, doc, getDocs, onSnapshot, orderBy, query, serverTimestamp, updateDoc, type Timestamp } from "firebase/firestore";
 import { db } from "../../firebase";
 
 export const CONTACTS = "contacts";
@@ -36,7 +36,7 @@ export interface Contact {
 
 export interface ContactEvent {
   id: string;
-  type: "inquiry" | "email" | "sms" | "import" | "unsubscribe";
+  type: "inquiry" | "email" | "sms" | "import" | "unsubscribe" | "link_open" | "callback_request" | "edit";
   source?: string;
   product?: string;
   message?: string;
@@ -73,6 +73,9 @@ export interface Campaign {
   emailSent: number;
   emailFailed: number;
   status: "sending" | "done";
+  /** People who opened their SMS page / pressed "call me back" there. */
+  opens?: number;
+  callbacks?: number;
   createdBy?: string;
   createdAt?: Timestamp;
   /** Who got it: one entry per person, written by /api/send batch by batch. */
@@ -99,6 +102,19 @@ export function audienceOf(contacts: Contact[], product: string, channel: "sms" 
       (product === "all" || c.products?.includes(product)) &&
       (channel === "sms" ? canSms(c) : channel === "email" ? canEmail(c) : canSms(c) || canEmail(c))
   );
+}
+
+/** Studio edit of a contact: name, email, and consent the admin vouches for. */
+export async function updateContact(id: string, patch: { name: string; email: string; consent: boolean }, wasConsent: boolean, by: string) {
+  const email = patch.email.trim().toLowerCase();
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) throw new Error("email");
+  await updateDoc(doc(db, CONTACTS, id), {
+    name: patch.name.trim(),
+    email,
+    consent: patch.consent,
+    ...(patch.consent && !wasConsent ? { consentAt: serverTimestamp(), consentSource: `manual:${by}` } : {}),
+  });
+  await addDoc(collection(db, CONTACTS, id, "events"), { type: "edit", message: `რედაქტირება: ${by}`, at: serverTimestamp() });
 }
 
 export function subscribeContacts(onData: (c: Contact[]) => void, onError: (e: Error) => void) {

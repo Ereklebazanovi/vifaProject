@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import { Mail, Phone, Search, Upload } from "lucide-react";
 import { useAdmin } from "../AdminLayout";
-import { btnSecondary, Modal } from "../ui";
+import { btnPrimary, btnSecondary, Field, inputCls, Modal } from "../ui";
 import ImportDialog from "./ImportDialog";
 import {
   formatPhone,
@@ -13,6 +13,7 @@ import {
   SOURCE_LABELS,
   type Contact,
   type ContactEvent,
+  updateContact,
 } from "./contactsService";
 
 const WEEK = 7 * 864e5;
@@ -115,9 +116,30 @@ const ContactsPage = () => {
 };
 
 /** One person: how to reach them, and everything that happened, newest first. */
-function ContactDetail({ contact: c, onClose }: { contact: Contact; onClose: () => void }) {
+function ContactDetail({ contact: initial, onClose }: { contact: Contact; onClose: () => void }) {
+  const { user } = useAdmin();
+  const [c, setC] = useState(initial);
   const [events, setEvents] = useState<ContactEvent[] | null>(null);
   const [error, setError] = useState("");
+  const [editing, setEditing] = useState(false);
+  const [form, setForm] = useState({ name: initial.name || "", email: initial.email || "", consent: Boolean(initial.consent) });
+  const [saving, setSaving] = useState(false);
+  const [editError, setEditError] = useState("");
+
+  const save = async () => {
+    setSaving(true);
+    setEditError("");
+    try {
+      await updateContact(c.id, form, Boolean(c.consent), user.email || "studio");
+      setC({ ...c, name: form.name.trim(), email: form.email.trim().toLowerCase(), consent: form.consent });
+      setEditing(false);
+      getEvents(c.id).then(setEvents).catch(() => {});
+    } catch (e) {
+      setEditError(e instanceof Error && e.message === "email" ? "მეილი არასწორია." : "შენახვა ვერ მოხერხდა.");
+    } finally {
+      setSaving(false);
+    }
+  };
 
   useEffect(() => {
     getEvents(c.id).then(setEvents).catch((e) => {
@@ -148,7 +170,28 @@ function ContactDetail({ contact: c, onClose }: { contact: Contact; onClose: () 
         <span className="font-medium text-slate-700">
           {c.unsubscribed ? "გააუქმა" : c.consent ? "აქვს" : "არ აქვს (მხოლოდ საკუთარ მოთხოვნაზე პასუხი)"}
         </span>
+        {!editing && (
+          <button onClick={() => setEditing(true)} className="ml-3 text-indigo-600 hover:underline">რედაქტირება</button>
+        )}
       </p>
+
+      {editing && (
+        <div className="mt-4 grid gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <Field label="სახელი"><input className={inputCls} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} /></Field>
+          <Field label="მეილი"><input className={inputCls} type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="name@gmail.com" /></Field>
+          {!c.unsubscribed && (
+            <label className="flex items-start gap-2 text-sm text-slate-700">
+              <input type="checkbox" checked={form.consent} onChange={(e) => setForm({ ...form, consent: e.target.checked })} className="mt-0.5 h-4 w-4 accent-indigo-600" />
+              თანხმობა მომცა შეთავაზებების მიღებაზე (ჯგუფურ გაგზავნებს მიიღებს)
+            </label>
+          )}
+          {editError && <p className="text-sm text-rose-600">{editError}</p>}
+          <div className="flex gap-2">
+            <button onClick={save} disabled={saving} className={btnPrimary}>{saving ? "ინახება…" : "შენახვა"}</button>
+            <button onClick={() => setEditing(false)} className={btnSecondary}>გაუქმება</button>
+          </div>
+        </div>
+      )}
 
       <h3 className="mb-3 mt-6 text-sm font-semibold uppercase tracking-wide text-slate-500">ისტორია</h3>
       {error && <p className="text-sm text-rose-600">{error}</p>}
@@ -186,6 +229,9 @@ function eventTitle(e: ContactEvent) {
   if (e.type === "sms") return `SMS: ${TEMPLATE[e.template || ""] || e.template} · ${SMS_STATUS[e.status || ""] || e.status}`;
   if (e.type === "import") return "იმპორტი";
   if (e.type === "unsubscribe") return "გამოწერა გააუქმა";
+  if (e.type === "link_open") return "SMS-ის ბმული გახსნა";
+  if (e.type === "callback_request") return "ითხოვს, რომ დაურეკოთ";
+  if (e.type === "edit") return "რედაქტირდა";
   return e.type;
 }
 

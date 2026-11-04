@@ -36,8 +36,10 @@ export function personalize(text: string, name?: string) {
 }
 
 export const newUnsubToken = () => randomBytes(6).toString("base64url"); // 8 chars
-export const unsubUrl = (token: string) => `${SITE}/u/${token}`;
-export const smsUnsubLine = (token: string) => `\nგაუქმება: vifadigital.ge/u/${token}`;
+/** Email unsubscribe: straight to the confirmation (and the one-click POST target). */
+export const unsubUrl = (token: string) => `${SITE}/api/unsubscribe?t=${token}&a=unsub`;
+/** Every group SMS ends with the person's own page: offer, call-back, WhatsApp, unsubscribe. */
+export const smsUnsubLine = (token: string) => `\nდეტალები და გაუქმება: vifadigital.ge/u/${token}`;
 
 export interface CampaignEmailInput {
   subject: string;

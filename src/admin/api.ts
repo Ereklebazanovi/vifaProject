@@ -16,7 +16,7 @@ export async function apiPost<T = Record<string, unknown>>(path: string, body: u
 }
 
 /** The line /api/send appends to every SMS (token is 8 characters). */
-export const SMS_UNSUB_SAMPLE = "\nგაუქმება: vifadigital.ge/u/AbCd1234";
+export const SMS_UNSUB_SAMPLE = "\nდეტალები და გაუქმება: vifadigital.ge/u/AbCd1234";
 export const SMS_MAX = 160;
 
 /** How many SMS a text costs: Georgian letters → 70 per SMS (67 when split), Latin → 160 (153). */
