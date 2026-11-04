@@ -84,7 +84,12 @@ try {
   if (pages.length) {
     const want = (process.env.META_PAGE_NAME || "vifa").toLowerCase();
     // Only the page we were asked for: never fall back to another page the user manages.
-    const page = pages.find((p) => p.name.toLowerCase().includes(want));
+    let page = pages.find((p) => p.name.toLowerCase().includes(want));
+    // A business-owned page may be missing from /me/accounts; ask for it by id instead.
+    if (!page && process.env.META_PAGE_ID) {
+      page = await get(`${GRAPH}/${process.env.META_PAGE_ID}?fields=id,name,access_token`).catch(() => null);
+      if (page && !page.access_token) page = null;
+    }
     if (!page) {
       console.error(`The token doesn't include a page named "${want}". Pages it covers: ${pages.map((p) => p.name).join(", ")}.`);
       console.error('Regenerate it and tick the VIFA page in Facebook\'s "choose pages" step (or set META_PAGE_NAME).');
@@ -101,6 +106,9 @@ const me = await get(`${GRAPH}/me?fields=id,name`);
 console.log(`Page: ${me.name} (${me.id})`);
 
 const leads = new Map(); // phone digits or email → row
+const FREE = process.argv.includes("--free");
+const OUR_NUMBERS = new Set(["995557624243", "995577175132"]); // VIFA's own, quoted in chats
+const chatNumbers = new Map();
 let conversations = 0, messagesSeen = 0;
 let next = `${GRAPH}/me/conversations?platform=messenger&fields=participants,updated_time&limit=50`;
 while (next) {
@@ -114,7 +122,18 @@ while (next) {
       for (const msg of m.data || []) {
         messagesSeen++;
         const lead = parseLeadMessage(msg.message);
-        if (!lead) continue;
+        if (!lead) {
+          // --free: a Georgian mobile the person typed into the chat themselves.
+          if (FREE && msg.from?.id !== me.id) {
+            const flat = String(msg.message || "").replace(/[\s()-]/g, "");
+            for (const m of flat.matchAll(/(?:\+?995)?(5\d{8})(?!\d)/g)) {
+              const digits = `995${m[1]}`;
+              if (OUR_NUMBERS.has(digits) || chatNumbers.has(digits)) continue;
+              chatNumbers.set(digits, { name: person?.name || "", phone: `+${digits}`, email: "", answers: [`ნომერი ჩატიდან: ${String(msg.message).slice(0, 120)}`], date: msg.created_time });
+            }
+          }
+          continue;
+        }
         const key = lead.phone.replace(/\D/g, "") || lead.email.toLowerCase();
         const prev = leads.get(key);
         // Keep the newest answers per person.
@@ -134,3 +153,13 @@ const rows = [...leads.values()].sort((a, b) => (a.date < b.date ? 1 : -1));
 const csv = ["name,phone,email,answers,date", ...rows.map((r) => [r.name, r.phone, r.email, r.answers.join(" | "), r.date.slice(0, 10)].map(csvCell).join(","))].join("\n");
 fs.writeFileSync(OUT, "﻿" + csv, "utf8");
 console.log(`Done: ${conversations} conversations, ${messagesSeen} messages, ${rows.length} leads with a phone or email → ${OUT}`);
+
+if (FREE) {
+  // Numbers typed in chats, minus everyone already found through a lead form.
+  const formPhones = new Set([...leads.keys()].map((k) => (k.length === 9 ? `995${k}` : k)));
+  const extra = [...chatNumbers.entries()].filter(([d]) => !formPhones.has(d) && !formPhones.has(d.slice(3))).map(([, r]) => r);
+  const out2 = path.resolve("private-data/messenger-chat-numbers.csv");
+  const csv2 = ["name,phone,email,answers,date", ...extra.sort((a, b) => (a.date < b.date ? 1 : -1)).map((r) => [r.name, r.phone, r.email, r.answers.join(" | "), r.date.slice(0, 10)].map(csvCell).join(","))].join("\n");
+  fs.writeFileSync(out2, "﻿" + csv2, "utf8");
+  console.log(`Chat numbers (not from forms): ${extra.length} → ${out2}`);
+}
