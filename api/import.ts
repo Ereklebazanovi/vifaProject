@@ -52,7 +52,9 @@ export default async function handler(req: Req, res: Res) {
     const product = asProduct(b.product);
     const consent = b.consent === true;
     for (const x of list as Record<string, unknown>[]) {
-      const r = clean(x?.name, x?.phone, x?.email, product, consent, "იმპორტი სიიდან");
+      // Form answers / comments from the file go into the contact's history.
+      const note = typeof x?.note === "string" && x.note.trim() ? `იმპორტი: ${x.note.trim().slice(0, 900)}` : "იმპორტი სიიდან";
+      const r = clean(x?.name, x?.phone, x?.email, product, consent, note);
       if (r) rows.push(r); else skipped++;
     }
   }

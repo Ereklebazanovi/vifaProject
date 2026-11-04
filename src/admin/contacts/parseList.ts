@@ -3,7 +3,8 @@
 // "ტელეფონი", "full_name", "phone_number"…) columns are matched by name; without one,
 // each cell is recognised by what it looks like.
 
-export interface Row { name: string; phone: string; email: string }
+/** `note`: form answers or comments from the file, kept in the contact's history. */
+export interface Row { name: string; phone: string; email: string; note?: string }
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const looksPhone = (c: string) => c.replace(/\D/g, "").length >= 9 && /^[\d\s()+-]+$/.test(c);
@@ -36,6 +37,7 @@ const HEADERS = {
   name: [/^(full[_ ]?name|სრული სახელი|სახელი|name|სახელი და გვარი)$/i, /^(?!.*(ad|adset|campaign|form|page)[_ ]?name).*(სახელ|name)/i],
   phone: [/^(phone[_ ]?number|phone|ტელეფონი|ნომერი|mobile)$/i, /ტელ|phone|ნომ|mobile|მობ/i],
   email: [/^(e-?mail|მეილი|ელ\.? ?ფოსტა)$/i, /მეილ|ფოსტ|e-?mail/i],
+  note: [/^(answers|notes?|comments?|შენიშვნა|კომენტარი|პასუხები)$/i],
 };
 
 export function parse(text: string) {
@@ -53,7 +55,7 @@ export function parse(text: string) {
     }
     return -1;
   };
-  const [n, p, e] = [col(HEADERS.name), col(HEADERS.phone), col(HEADERS.email)];
+  const [n, p, e, k] = [col(HEADERS.name), col(HEADERS.phone), col(HEADERS.email), col(HEADERS.note)];
   const hasHeader = !first.some((c) => EMAIL.test(c) || looksPhone(c)) && (p >= 0 || e >= 0);
 
   if (hasHeader) {
@@ -61,7 +63,7 @@ export function parse(text: string) {
       const c = cells(line);
       const email = e >= 0 && EMAIL.test(c[e] || "") ? c[e] : "";
       const phone = p >= 0 && looksPhone(c[p] || "") ? c[p] : "";
-      if (email || phone) rows.push({ name: n >= 0 ? c[n] || "" : "", phone, email });
+      if (email || phone) rows.push({ name: n >= 0 ? c[n] || "" : "", phone, email, ...(k >= 0 && c[k] ? { note: c[k] } : {}) });
       else skipped++;
     }
     return { rows, skipped };
