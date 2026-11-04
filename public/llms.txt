@@ -1,0 +1,36 @@
+# VIFA Digital
+
+> VIFA Digital is a premium full-service digital agency based in Tbilisi, Georgia. We build websites and online stores, run digital marketing, create AI chatbots, produce photo and video content, and develop warehouse management software (Invento WMS). Free initial consultation. Website: https://vifadigital.ge
+
+VIFA Digital (ვიფა დიჯიტალ) is a Georgian digital agency serving the local market. Primary language: Georgian (ka). Services are also delivered in English and Russian on request. All prices are in Georgian Lari (GEL, ₾) and are starting estimates finalized during a free consultation. A 50/50 payment split is available (half at start, half on delivery).
+
+## Services
+
+- [Website Development / ვებსაიტის დამზადება](https://vifadigital.ge/services/web): Website and online store development with React and TypeScript. Landing/visit-card site from 500₾, premium website with CMS admin panel 700-1000₾, full online store (eCommerce) from 1400₾, AI-integrated website from 500₾. Includes unique design, mobile-responsive layout, base SEO, and SSL. Free hosting included.
+- [Digital Marketing / ციფრული მარკეტინგი](https://vifadigital.ge/services/marketing): Social media management, advertising (Facebook, Instagram, Google Ads), SEO, branding, logo design, and content creation. Monthly packages from 1000₾ to 2000₾.
+- [Photo and Video Production / ფოტო და ვიდეო გადაღება](https://vifadigital.ge/services/production): Commercial photography, product photos, advertising video, social media reels, and drone (aerial) shooting. Photo from 300₾, video and reels from 400₾, drone shooting from 500₾.
+- [AI Chatbot / AI ჩატბოტი](https://vifadigital.ge/services/ai-chatbot): AI chatbot development and integration for Facebook, Instagram, and WhatsApp. 24/7 automated customer support and lead generation, with Georgian language support. From 500₾.
+- [Invento WMS / საწყობის პროგრამა](https://vifadigital.ge/inventowms): Warehouse and inventory management software for online and retail businesses. Inventory sync, order management, courier labels, and reporting. Subscription from 79₾ per month.
+
+## Industry-specific website development
+
+- [Online Store / ონლაინ მაღაზიის საიტის დამზადება](https://vifadigital.ge/industry/web/retail): eCommerce websites with Georgian bank payments (TBC, BOG) and WMS integration. From 700₾.
+- [Hotel Website / სასტუმროს საიტის დამზადება](https://vifadigital.ge/industry/web/tourism): Hotel and tourism websites with a calendar booking form and multilingual interface for direct, commission-free bookings. From 700₾.
+- [Beauty Salon Website / სალონის საიტის დამზადება](https://vifadigital.ge/industry/web/beauty): Salon websites with an online booking system and price/service catalog.
+- [Restaurant Website / რესტორნის საიტის დამზადება](https://vifadigital.ge/industry/web/food): Restaurant websites with a digital menu and reservations.
+- [Law and Finance Website / იურიდიული კომპანიის საიტის დამზადება](https://vifadigital.ge/industry/web/legal-finance): Trust-focused websites for law firms and financial professionals.
+
+## Blog and guides
+
+- [How much does website development cost in 2026 / რა ღირს ვებსაიტის დამზადება 2026](https://vifadigital.ge/blog/ra-girs-vebsaitis-damzadeba-fasebi-2026): Full pricing guide for website development in Georgia.
+- [Why your site does not appear in Google / საიტი არ ჩანს Google-ში](https://vifadigital.ge/blog/saiti-ar-chans-googleshi-mizezebi): 7 reasons a website is not indexed and how to fix them.
+- [How to open an online store in Georgia / ონლაინ მაღაზიის გახსნა](https://vifadigital.ge/blog/online-magaziis-gaxsna-sakartveloshi-gzamkvlevi): Step-by-step guide to launching an online store.
+- [Blog index](https://vifadigital.ge/blog): All published articles.
+
+## Contact
+
+- Location: Tbilisi, Georgia
+- Email: vifa.official2020@gmail.com
+- Web development and IT (WhatsApp): +995 557 62 42 43
+- Marketing and creative (WhatsApp): +995 577 17 51 32
+- [Contact page](https://vifadigital.ge/contact)
