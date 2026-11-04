@@ -40,11 +40,52 @@ const HEADERS = {
   note: [/^(answers|notes?|comments?|შენიშვნა|კომენტარი|პასუხები)$/i],
 };
 
+// Messenger lead-form answers copied straight from the inbox:
+//   Phone number: 592 18 81 67
+//   Full name: Davit Giladze
+//   \u10E0\u10DD\u10D2\u10DD\u10E0\u10D8 \u10D5\u10D4\u10D1\u10D2\u10D5\u10D4\u10E0\u10D3\u10D8\u10E1 \u10E8\u10D4\u10E5\u10DB\u10DC\u10D0 \u10D2\u10E1\u10E3\u10E0\u10D7 ?: \u10DE\u10E0\u10D4\u10DB\u10D8\u10E3\u10DB \u10D5\u10D4\u10D1\u10E1\u10D0\u10D8\u10E2\u10D8
+const LEAD_KEY = {
+  phone: /^(phone( number)?|\u10E2\u10D4\u10DA\u10D4\u10E4\u10DD\u10DC\u10D8?\u10E1?( \u10DC\u10DD\u10DB\u10D4\u10E0\u10D8)?|mobile)$/i,
+  name: /^(full name|name|\u10E1\u10E0\u10E3\u10DA\u10D8 \u10E1\u10D0\u10EE\u10D4\u10DA\u10D8|\u10E1\u10D0\u10EE\u10D4\u10DA\u10D8( \u10D3\u10D0 \u10D2\u10D5\u10D0\u10E0\u10D8)?)$/i,
+  email: /^(e-?mail|email address|\u10D4\u10DA\.? ?\u10E4\u10DD\u10E1\u10E2\u10D0|\u10DB\u10D4\u10D8\u10DA\u10D8)$/i,
+};
+
+/** Several pasted lead messages \u2192 one row each (a new phone or name starts the next person). */
+function parseLeadMessages(lines: string[]) {
+  const rows: Row[] = [];
+  let cur: Row & { answers: string[] } = { name: "", phone: "", email: "", answers: [] };
+  const flush = () => {
+    if (cur.phone || cur.email) rows.push({ name: cur.name, phone: cur.phone, email: cur.email, ...(cur.answers.length ? { note: cur.answers.join(" | ") } : {}) });
+    cur = { name: "", phone: "", email: "", answers: [] };
+  };
+  for (const line of lines) {
+    const m = line.match(/^\s*(.+?)\s*:\s*(.+?)\s*$/);
+    if (!m) continue;
+    const [, key, value] = m;
+    if (LEAD_KEY.phone.test(key)) {
+      if (cur.phone) flush();
+      cur.phone = value.replace(/^p:\s*/i, "");
+    } else if (LEAD_KEY.name.test(key)) {
+      if (cur.name && (cur.phone || cur.email)) flush();
+      cur.name = value;
+    } else if (LEAD_KEY.email.test(key)) {
+      if (cur.email) flush();
+      cur.email = EMAIL.test(value) ? value : "";
+    } else cur.answers.push(`${key.replace(/\s*\?$/, "?")} ${value}`);
+  }
+  flush();
+  return rows;
+}
+
 export function parse(text: string) {
   const lines = text.replace(/^\uFEFF/, "").split(/\r?\n/).filter((l) => l.trim());
   const rows: Row[] = [];
   let skipped = 0;
   if (!lines.length) return { rows, skipped };
+
+  if (lines.some((l) => /^\s*(phone number|full name|\u10E2\u10D4\u10DA\u10D4\u10E4\u10DD\u10DC\u10D8\u10E1 \u10DC\u10DD\u10DB\u10D4\u10E0\u10D8|\u10E1\u10E0\u10E3\u10DA\u10D8 \u10E1\u10D0\u10EE\u10D4\u10DA\u10D8)\s*:/i.test(l))) {
+    return { rows: parseLeadMessages(lines), skipped: 0 };
+  }
 
   // A header row names the columns and holds no phone or email itself.
   const first = cells(lines[0]);
