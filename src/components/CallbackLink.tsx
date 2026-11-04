@@ -1,17 +1,23 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { X } from "lucide-react";
+import { PhoneCall, X } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
 import LeadForm from "./LeadForm";
 
 type Product = "web" | "chatbot" | "wms" | "lineup" | "marketing" | "production" | "other";
 
 /**
- * A quiet text link under a page's WhatsApp button: "or leave your number".
- * Opens the call-back form for that page's service in a dialog. WhatsApp stays
- * the main action; this catches people who'd rather not start a chat.
+ * Secondary button next to a page's WhatsApp button: "leave your number".
+ * Outline only, so WhatsApp stays the main action; its shape follows the page's
+ * primary button (`shape`). Opens the call-back form for that page's service.
  */
-const CallbackLink = ({ product, className = "" }: { product: Product; className?: string }) => {
+const SHAPES = {
+  pill: "rounded-full px-7 py-3.5 text-sm font-semibold",
+  rounded: "rounded-xl px-6 py-3.5 text-sm font-bold",
+  lg: "rounded-lg px-6 py-3 font-semibold",
+};
+
+const CallbackLink = ({ product, shape = "pill", className = "" }: { product: Product; shape?: keyof typeof SHAPES; className?: string }) => {
   const { currentLanguage } = useLanguage();
   const en = currentLanguage === "en";
   const [open, setOpen] = useState(false);
@@ -28,9 +34,10 @@ const CallbackLink = ({ product, className = "" }: { product: Product; className
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className={`font-georgian-body text-sm text-gray-400 underline decoration-white/20 underline-offset-4 transition-colors hover:text-white hover:decoration-white/60 ${className}`}
+        className={`inline-flex items-center justify-center gap-2 border border-white/20 bg-white/[0.04] text-white transition-colors duration-200 hover:border-white/40 hover:bg-white/10 ${SHAPES[shape]} ${className}`}
       >
-        {en ? "Or leave your number, we'll call you" : "ან დაგვიტოვეთ ნომერი, დაგირეკავთ"}
+        <PhoneCall size={16} strokeWidth={2} />
+        {en ? "Leave your number" : "დაგვიტოვეთ ნომერი"}
       </button>
 
       {open &&

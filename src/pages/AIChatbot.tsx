@@ -418,7 +418,7 @@ const AIChatbot: React.FC = () => {
                   <FaWhatsapp className="text-lg" />
                   {t("consultation.whatsapp")}
                 </a>
-                <CallbackLink product="chatbot" className="self-center" />
+                <CallbackLink product="chatbot" shape="rounded" />
               </div>
 
               <AIConnectionDemo />

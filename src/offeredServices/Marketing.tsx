@@ -364,6 +364,7 @@ const Marketing: React.FC = () => {
               {t("marketing.hero.description")}
             </p>
 
+            <div className="flex flex-wrap items-center gap-3">
             <a
               href={whatsappUrl}
               target="_blank"
@@ -373,8 +374,7 @@ const Marketing: React.FC = () => {
               {t("cta.button")}
               <FaArrowRight className="text-xs" />
             </a>
-            <div className="mt-5">
-              <CallbackLink product="marketing" />
+            <CallbackLink product="marketing" />
             </div>
           </div>
         </div>

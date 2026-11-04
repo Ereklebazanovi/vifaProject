@@ -448,6 +448,7 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
                         <FaCommentDots size={18} />
                         {t("btn.consultation")}
                       </a>
+                      <CallbackLink product="wms" shape="lg" />
 
                       {/* <a
                         href="https://demo.inventogeo.com/admin?direct=admin"
@@ -470,7 +471,6 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
                       </div>
                     </div>
 
-                    <CallbackLink product="wms" />
                     <p className="text-xs text-gray-500">{t("hero.trust")}</p>
                   </div>
                 </motion.div>

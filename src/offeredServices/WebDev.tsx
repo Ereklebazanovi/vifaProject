@@ -503,17 +503,17 @@ const WebDev: React.FC = () => {
               <h3 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-4 leading-tight">
                 {t("webdev.cta.question")}
               </h3>
+              <div className="mt-4 flex flex-wrap items-center gap-3">
               <a
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 bg-white text-black px-7 py-3.5 mt-4 rounded-full text-sm font-semibold hover:bg-gray-200 transition-colors duration-200"
+                className="inline-flex items-center gap-2.5 bg-white text-black px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-gray-200 transition-colors duration-200"
               >
                 <FaWhatsapp className="text-lg" />
                 {t("webdev.cta.button")}
               </a>
-              <div className="mt-5">
-                <CallbackLink product="web" />
+              <CallbackLink product="web" />
               </div>
             </div>
           </section>

@@ -356,6 +356,7 @@ const Production: React.FC = () => {
             <p className="text-base sm:text-lg text-gray-300 leading-relaxed mb-10 max-w-xl">
               {t("hero.description")}
             </p>
+            <div className="flex flex-wrap items-center gap-3">
             <a
               href={whatsappUrl}
               target="_blank"
@@ -365,8 +366,7 @@ const Production: React.FC = () => {
               {t("hero.cta")}
               <FaArrowRight className="text-xs" />
             </a>
-            <div className="mt-5">
-              <CallbackLink product="production" />
+            <CallbackLink product="production" />
             </div>
           </div>
         </div>

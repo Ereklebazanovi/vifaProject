@@ -149,11 +149,11 @@ const LineupLandingPage = () => {
                   <div className="flex flex-col items-center gap-3 xl:items-start">
                     <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-3">
                       <PrimaryButton lang={lang}>{c.ctaWrite}</PrimaryButton>
+                      <CallbackLink product="lineup" className="!h-12 !py-0 !text-[15px] !font-medium" />
                       <a href={PHONE_HREF} className="text-[14px] text-zinc-400 active:text-white">
                         {c.orCall} {PHONE_LABEL}
                       </a>
                     </div>
-                    <CallbackLink product="lineup" />
                     <span className="text-[13px] text-zinc-600">{c.proofLine}</span>
                   </div>
                 }
