@@ -4,6 +4,7 @@ import { Mail, Phone, Search, Upload } from "lucide-react";
 import { useAdmin } from "../AdminLayout";
 import { btnPrimary, btnSecondary, Field, inputCls, Modal } from "../ui";
 import ImportDialog from "./ImportDialog";
+import PersonalEmail from "../send/PersonalEmail";
 import PersonalSms from "../send/PersonalSms";
 import {
   formatPhone,
@@ -123,7 +124,9 @@ function ContactDetail({ contact: initial, onClose }: { contact: Contact; onClos
   const [events, setEvents] = useState<ContactEvent[] | null>(null);
   const [error, setError] = useState("");
   const [editing, setEditing] = useState(false);
-  const [smsOpen, setSmsOpen] = useState(false);
+  const [compose, setCompose] = useState<"sms" | "email" | null>(null);
+  const canText = Boolean(c.phone && /^9955\d{8}$/.test(c.phone));
+  const refreshEvents = () => getEvents(c.id).then(setEvents).catch(() => {});
   const [form, setForm] = useState({ name: initial.name || "", email: initial.email || "", consent: Boolean(initial.consent) });
   const [saving, setSaving] = useState(false);
   const [editError, setEditError] = useState("");
@@ -177,15 +180,20 @@ function ContactDetail({ contact: initial, onClose }: { contact: Contact; onClos
         )}
       </p>
 
-      {c.phone && /^9955\d{8}$/.test(c.phone) && (
-        <div className="mt-4">
-          {!smsOpen ? (
-            <button onClick={() => setSmsOpen(true)} className={btnSecondary}>SMS-ის მიწერა</button>
+      {(canText || c.email) && !compose && (
+        <div className="mt-4 flex flex-wrap gap-2">
+          {c.email && <button onClick={() => setCompose("email")} className={btnSecondary}>მეილის მიწერა</button>}
+          {canText && <button onClick={() => setCompose("sms")} className={btnSecondary}>SMS-ის მიწერა</button>}
+        </div>
+      )}
+      {compose && (
+        <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4">
+          {compose === "sms" ? (
+            <PersonalSms phone={c.phone} name={c.name} onSent={refreshEvents} />
           ) : (
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-              <PersonalSms phone={c.phone} name={c.name} onSent={() => getEvents(c.id).then(setEvents).catch(() => {})} />
-            </div>
+            <PersonalEmail email={c.email} name={c.name} onSent={refreshEvents} />
           )}
+          <button onClick={() => setCompose(null)} className="mt-3 text-sm text-slate-500 hover:underline">დახურვა</button>
         </div>
       )}
 

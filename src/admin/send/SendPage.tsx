@@ -1,13 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
-import { ImagePlus, X } from "lucide-react";
 import { db } from "../../firebase";
-import { uploadToCloudinary } from "../../service/cloudinary";
-import { brandEmailHtml } from "../../../api/_lib/emailTemplate";
 import { useAdmin } from "../AdminLayout";
-import PersonalSms from "./PersonalSms";
 import { apiPost, SMS_MAX, SMS_UNSUB_SAMPLE, smsParts } from "../api";
-import { btnPrimary, btnSecondary, Chips, Field, inputCls, Modal } from "../ui";
+import { btnPrimary, Chips, Field, inputCls, Modal } from "../ui";
 import {
   audienceOf,
   canEmail,
@@ -20,16 +16,12 @@ import {
   subscribeCampaigns,
   type Campaign,
 } from "../contacts/contactsService";
+import EmailComposer, { emptyDraft, type EmailDraft } from "./EmailComposer";
+import PersonalEmail from "./PersonalEmail";
+import PersonalSms from "./PersonalSms";
 
 type Channel = "sms" | "email" | "both";
 const CHANNELS: Record<Channel, string> = { sms: "SMS", email: "მეილი", both: "SMS და მეილი" };
-const SAMPLE_NAME = "ნინო";
-
-const BUTTONS: Record<string, { text: string; url: string }> = {
-  whatsapp: { text: "მოგვწერეთ WhatsApp-ში", url: "https://wa.me/995557624243" },
-  site: { text: "ნახეთ საიტზე", url: "https://vifadigital.ge" },
-  none: { text: "", url: "" },
-};
 
 const ERRORS: Record<string, string> = {
   smsNotConfigured: "SMS ჯერ არ არის ჩართული (Vercel-ში SMSOFFICE_API_KEY და SMS_SENDER).",
@@ -39,29 +31,59 @@ const ERRORS: Record<string, string> = {
 
 interface Result { smsSent: number; smsFailed: number; emailSent: number; emailFailed: number; manualSkipped?: number }
 
-const personalize = (t: string) => t.split("{name}").join(SAMPLE_NAME);
-
-/** One message to everyone who agreed to receive offers, with an unsubscribe link in each. */
+/**
+ * Sending, two ways: to one person (SMS or a templated email, anyone), or to a group
+ * (everyone who agreed to receive offers, each with an unsubscribe link).
+ */
 const SendPage = () => {
+  const [mode, setMode] = useState<"personal" | "group">("personal");
+  const [personalChannel, setPersonalChannel] = useState<"email" | "sms">("email");
+
+  return (
+    <div className="space-y-6">
+      <header>
+        <h1 className="text-2xl font-semibold text-slate-900">გაგზავნა</h1>
+        <p className="mt-1 w-[min(100%,46rem)] text-slate-500">
+          <b className="font-medium text-slate-700">ერთ ადამიანს:</b> ნებისმიერ ნომერზე ან მეილზე, მზა შაბლონით.{" "}
+          <b className="font-medium text-slate-700">ჯგუფს:</b> ყველას, ვინც შეთავაზებებზე თანხმობა მოგცა, თითოეულს გამოწერის გაუქმების ბმულით.
+        </p>
+      </header>
+
+      <div className="flex w-fit gap-1 rounded-xl bg-slate-100 p-1">
+        {([["personal", "ერთ ადამიანს"], ["group", "ჯგუფს"]] as const).map(([k, label]) => (
+          <button key={k} onClick={() => setMode(k)}
+            className={`rounded-lg px-4 py-2 text-sm transition ${mode === k ? "bg-white font-medium text-slate-900 shadow-sm" : "text-slate-600 hover:text-slate-900"}`}>
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {mode === "personal" ? (
+        <Card title="ერთ ადამიანს">
+          <div className="mb-5"><Chips options={{ email: "მეილი", sms: "SMS" }} value={personalChannel} onChange={setPersonalChannel} /></div>
+          {personalChannel === "email" ? <PersonalEmail /> : <PersonalSms />}
+          <p className="mt-5 text-xs text-slate-500">მიმღები კონტაქტებში შეინახება და გაგზავნილი მის ისტორიაში ჩაიწერება.</p>
+        </Card>
+      ) : (
+        <GroupSend />
+      )}
+    </div>
+  );
+};
+
+function GroupSend() {
   const { contacts, contactsLoading } = useAdmin();
   const [product, setProduct] = useState("all");
-  const [channel, setChannel] = useState<Channel>("sms");
+  const [channel, setChannel] = useState<Channel>("email");
   const [excluded, setExcluded] = useState<Set<string>>(new Set());
   const [smsText, setSmsText] = useState("");
-  const [subject, setSubject] = useState("");
-  const [body, setBody] = useState("");
-  const [image, setImage] = useState("");
-  const [uploading, setUploading] = useState(false);
-  const [buttonKind, setButtonKind] = useState("whatsapp");
-  const [buttonText, setButtonText] = useState(BUTTONS.whatsapp.text);
-  const [buttonUrl, setButtonUrl] = useState(BUTTONS.whatsapp.url);
+  const [draft, setDraft] = useState<EmailDraft>(emptyDraft);
+  const [extraText, setExtraText] = useState("");
   const [progress, setProgress] = useState<{ done: number; total: number } | null>(null);
   const [result, setResult] = useState<Result | null>(null);
   const [error, setError] = useState("");
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [openCampaign, setOpenCampaign] = useState<Campaign | null>(null);
-  const [extraText, setExtraText] = useState("");
-  const [mode, setMode] = useState<"group" | "personal">("group");
 
   useEffect(() => subscribeCampaigns(setCampaigns, (e) => console.error(e)), []);
 
@@ -97,28 +119,15 @@ const SendPage = () => {
   const emailCount = audience.filter(canEmail).length + manualOk.filter((m) => m.isEmail).length;
   const total = audience.length + manualOk.length;
 
-  // Length as sent: a sample name in place of {name} plus the unsubscribe line.
+  // Length as sent: a sample name in place of {name} plus the personal-page line.
   const smsFull = smsText.split("{name}").join("ნინო ბერიძე") + SMS_UNSUB_SAMPLE;
   const smsTooLong = smsFull.length > SMS_MAX;
   const parts = smsParts(smsFull);
 
-  const emailHtml = useMemo(
-    () =>
-      brandEmailHtml({
-        title: personalize(subject) || "სათაური",
-        body: personalize(body) || "აქ გამოჩნდება მეილის ტექსტი.",
-        imageUrl: image || undefined,
-        button: buttonText && buttonUrl ? { text: buttonText, url: buttonUrl } : undefined,
-        secondary: buttonUrl.includes("wa.me") ? undefined : { text: "მოგვწერეთ WhatsApp-ში", url: "https://wa.me/995557624243" },
-        unsubscribeUrl: "https://vifadigital.ge/u/preview",
-      }),
-    [subject, body, image, buttonText, buttonUrl]
-  );
-
   const ready =
     total > 0 && !progress &&
     (!useSms || (smsText.trim() && !smsTooLong)) &&
-    (!useEmail || (subject.trim() && body.trim()));
+    (!useEmail || (draft.subject.trim() && draft.body.trim()));
 
   const toggle = (id: string) =>
     setExcluded((prev) => {
@@ -126,28 +135,6 @@ const SendPage = () => {
       if (next.has(id)) next.delete(id); else next.add(id);
       return next;
     });
-
-  const pickButton = (kind: string) => {
-    setButtonKind(kind);
-    if (kind !== "custom") {
-      setButtonText(BUTTONS[kind].text);
-      setButtonUrl(BUTTONS[kind].url);
-    }
-  };
-
-  const onImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setUploading(true);
-    try {
-      setImage(await uploadToCloudinary(file));
-    } catch (err) {
-      console.error(err);
-      setError("სურათი ვერ აიტვირთა.");
-    } finally {
-      setUploading(false);
-    }
-  };
 
   const send = async () => {
     const what = [useSms && smsCount ? `${smsCount} SMS` : "", useEmail && emailCount ? `${emailCount} მეილი` : ""].filter(Boolean).join(" და ");
@@ -161,8 +148,11 @@ const SendPage = () => {
     try {
       while (offset !== null) {
         const r: Result & { campaignId: string; next: number | null; processed: number; total: number } = await apiPost("/api/send", {
-          channel, product, smsText, emailSubject: subject, emailBody: body, emailImage: image,
-          buttonText, buttonUrl, exclude: [...excluded], campaignId, offset,
+          channel, product, smsText,
+          emailSubject: draft.subject, emailBody: draft.body, emailImage: draft.image,
+          buttonText: draft.buttonKind === "none" ? "" : draft.buttonText,
+          buttonUrl: draft.buttonKind === "none" ? "" : draft.buttonUrl,
+          exclude: [...excluded], campaignId, offset,
           // Typed addresses go only with the first call; after that they are contacts.
           extra: campaignId ? [] : manualOk.map((m) => m.raw),
         });
@@ -184,35 +174,7 @@ const SendPage = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <header>
-        <h1 className="text-2xl font-semibold text-slate-900">გაგზავნა</h1>
-        <p className="mt-1 w-[min(100%,46rem)] text-slate-500">
-          ერთი შეტყობინება ყველას, ვინც შეთავაზებების მიღებაზე თანხმობა მოგცა. თითოეულს თავისი
-          გამოწერის გაუქმების ბმული ახლავს. ვინც გააუქმა, აღარ მიიღებს.
-        </p>
-      </header>
-
-      <div className="flex w-fit gap-1 rounded-xl bg-slate-100 p-1">
-        {([["group", "ჯგუფს"], ["personal", "ერთ ადამიანს (SMS)"]] as const).map(([k, label]) => (
-          <button key={k} onClick={() => setMode(k)}
-            className={`rounded-lg px-4 py-2 text-sm transition ${mode === k ? "bg-white font-medium text-slate-900 shadow-sm" : "text-slate-600 hover:text-slate-900"}`}>
-            {label}
-          </button>
-        ))}
-      </div>
-
-      {mode === "personal" ? (
-        <Card title="პირადი SMS">
-          <p className="mb-4 text-sm text-slate-500">
-            ნებისმიერ ქართულ ნომერზე, ფორმა შეუვსია თუ არა. ეს ერთი ადამიანისთვის განკუთვნილი შეტყობინებაა,
-            მაგ. ვინც ზარით, ნაცნობით ან სხვა გზით გაიცანი. ნომერი კონტაქტებში შეინახება.
-          </p>
-          <PersonalSms />
-        </Card>
-      ) : (
-      <>
-
+    <>
       <Card title="1. ვის">
         <div className="flex flex-wrap items-center gap-3">
           <select value={product} onChange={(e) => { setProduct(e.target.value); setExcluded(new Set()); }} className={`${inputCls} w-[min(100%,20rem)]`}>
@@ -230,7 +192,7 @@ const SendPage = () => {
         {!contactsLoading && consented.length === 0 && (
           <p className="mt-2 text-sm text-amber-700">
             ჯერ არავის აქვს თანხმობა. თანხმობა ჩნდება, როცა ადამიანი ფორმაში მონიშნავს, ან როცა
-            იმპორტისას მიუთითებ, რომ ამ ხალხმა თანხმობა გითხრა. ან ჩაწერე მისამართი ქვემოთ, ხელით.
+            იმპორტისას მიუთითებ, რომ ამ ხალხმა თანხმობა გითხრა. ან ჩაწერე მისამართები ქვემოთ, ხელით.
           </p>
         )}
 
@@ -258,93 +220,49 @@ const SendPage = () => {
             </div>
           </div>
         )}
-      </Card>
 
-      <Card title="დამატებით, ხელით">
-        <Field label={useEmail && useSms ? "მეილები ან ნომრები" : useEmail ? "მეილები" : "ნომრები"}
-          hint="თითო ხაზზე ან მძიმით. კონტაქტებში დაემატებიან თანხმობით, ამიტომ ჩაწერე მხოლოდ ისინი, ვინც გიცნობს და შენგან შეთავაზებას ელის.">
-          <textarea className={`${inputCls} min-h-[70px]`} value={extraText} onChange={(e) => setExtraText(e.target.value)}
-            placeholder={useEmail ? "nino@gmail.com, client@company.ge" : "555 12 34 56"} />
-        </Field>
-        {manual.length > 0 && (
-          <div className="mt-3 flex flex-wrap gap-2">
-            {manual.map((m) => (
-              <span key={m.id} className={`rounded-full px-3 py-1 text-sm ${m.ok ? "bg-indigo-50 text-indigo-700" : "bg-slate-100 text-slate-400 line-through"}`}
-                title={m.ok ? "" : "ამ არხით ვერ მიიღებს, უკვე სიაშია ან გამოწერა გააუქმა"}>
-                {m.raw}
-              </span>
-            ))}
-          </div>
-        )}
-      </Card>
-
-      <Card title="2. ტექსტი">
-        <p className="mb-4 text-sm text-slate-500">
-          <code className="rounded bg-slate-100 px-1.5 py-0.5">{"{name}"}</code> ადამიანის სახელით ჩანაცვლდება, მაგ. „გამარჯობა {"{name}"}!“
-        </p>
-        <div className="grid gap-5">
-          {useSms && (
-            <Field label="SMS">
-              <textarea className={`${inputCls} min-h-[90px]`} value={smsText} onChange={(e) => setSmsText(e.target.value)}
-                placeholder="მაგ. გამარჯობა {name}! VIFA-ს ახალი შეთავაზება: საიტი 20%-იანი ფასდაკლებით ნოემბრის ბოლომდე." />
-              <span className={`mt-1.5 block text-xs ${smsTooLong ? "text-rose-600" : "text-slate-500"}`}>
-                {smsFull.length} / {SMS_MAX} სიმბოლო გაუქმების ბმულით · {parts} SMS თითო ადამიანზე
-                {smsCount > 0 && ` · სულ დაახლოებით ${parts * smsCount} SMS`}
-                {smsTooLong && " · შეამოკლე ტექსტი"}
-              </span>
-            </Field>
-          )}
-          {useEmail && (
-            <>
-              <Field label="მეილის სათაური" hint="ჩანს როგორც წერილის თემა და დიდი სათაური წერილში.">
-                <input className={inputCls} value={subject} onChange={(e) => setSubject(e.target.value)} placeholder="მაგ. {name}, ახალი შეთავაზება VIFA-სგან" />
-              </Field>
-              <div>
-                <p className="mb-1.5 text-sm font-medium text-slate-700">სურათი (ფლაერი)</p>
-                {image ? (
-                  <div className="flex items-center gap-3">
-                    <img src={image} alt="" className="h-16 w-28 rounded-lg object-cover" />
-                    <button onClick={() => setImage("")} className={btnSecondary}><X size={15} />მოხსნა</button>
-                  </div>
-                ) : (
-                  <label className={`${btnSecondary} cursor-pointer`}>
-                    <ImagePlus size={16} />{uploading ? "იტვირთება…" : "სურათის ატვირთვა"}
-                    <input type="file" accept="image/*" className="hidden" onChange={onImage} disabled={uploading} />
-                  </label>
-                )}
-                <span className="mt-1 block text-xs text-slate-500">არასავალდებულო. საუკეთესოა ჰორიზონტალური სურათი, 1200 პიქსელი სიგანით.</span>
-              </div>
-              <Field label="მეილის ტექსტი" hint="ცარიელი ხაზით გამოყავი აბზაცები. ლოგო, ხელმოწერა და გაუქმების ბმული თავისით ემატება.">
-                <textarea className={`${inputCls} min-h-[160px]`} value={body} onChange={(e) => setBody(e.target.value)} />
-              </Field>
-              <div>
-                <p className="mb-2 text-sm font-medium text-slate-700">ღილაკი</p>
-                <Chips options={{ whatsapp: "WhatsApp", site: "საიტი", custom: "სხვა ბმული", none: "ღილაკის გარეშე" }} value={buttonKind} onChange={pickButton} />
-                {buttonKind === "custom" && (
-                  <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                    <input className={inputCls} value={buttonText} onChange={(e) => setButtonText(e.target.value)} placeholder="ღილაკის ტექსტი, მაგ. ნახეთ შეთავაზება" />
-                    <input className={inputCls} value={buttonUrl} onChange={(e) => setButtonUrl(e.target.value)} placeholder="https://vifadigital.ge/lineup" />
-                  </div>
-                )}
-              </div>
-            </>
+        <div className="mt-5">
+          <Field label={useEmail && useSms ? "დამატებით, ხელით: მეილები ან ნომრები" : useEmail ? "დამატებით, ხელით: მეილები" : "დამატებით, ხელით: ნომრები"}
+            hint="თითო ხაზზე ან მძიმით. კონტაქტებში დაემატებიან თანხმობით, ამიტომ ჩაწერე მხოლოდ ისინი, ვინც გიცნობს და შენგან შეთავაზებას ელის.">
+            <textarea className={`${inputCls} min-h-[64px]`} value={extraText} onChange={(e) => setExtraText(e.target.value)}
+              placeholder={useEmail ? "nino@gmail.com, client@company.ge" : "555 12 34 56"} />
+          </Field>
+          {manual.length > 0 && (
+            <div className="mt-3 flex flex-wrap gap-2">
+              {manual.map((m) => (
+                <span key={m.id} className={`rounded-full px-3 py-1 text-sm ${m.ok ? "bg-indigo-50 text-indigo-700" : "bg-slate-100 text-slate-400 line-through"}`}
+                  title={m.ok ? "" : "ამ არხით ვერ მიიღებს, უკვე სიაშია ან გამოწერა გააუქმა"}>
+                  {m.raw}
+                </span>
+              ))}
+            </div>
           )}
         </div>
       </Card>
 
-      {((useSms && smsText) || useEmail) && (
-        <Card title="3. ასე მიიღებენ">
-          <div className={`grid gap-5 ${useSms && smsText && useEmail ? "lg:grid-cols-[1fr_1.4fr]" : ""}`}>
-            {useSms && smsText && (
-              <div className="h-fit whitespace-pre-wrap rounded-2xl bg-slate-100 p-4 text-[15px] text-slate-800">
-                <p className="mb-2 text-xs font-medium text-slate-500">SMS · VifaDigital</p>
-                {smsFull}
-              </div>
-            )}
-            {useEmail && (
-              <iframe title="მეილის ნიმუში" srcDoc={emailHtml} className="mx-auto h-[680px] w-[min(100%,40rem)] rounded-2xl border border-slate-200 bg-white" />
-            )}
-          </div>
+      {useEmail && (
+        <Card title="2. მეილი">
+          <EmailComposer value={draft} onChange={setDraft} />
+        </Card>
+      )}
+
+      {useSms && (
+        <Card title={useEmail ? "3. SMS" : "2. SMS"}>
+          <Field label="ტექსტი">
+            <textarea className={`${inputCls} min-h-[90px]`} value={smsText} onChange={(e) => setSmsText(e.target.value)}
+              placeholder="მაგ. გამარჯობა {name}! VIFA-ს ახალი შეთავაზება: საიტი 20%-იანი ფასდაკლებით ნოემბრის ბოლომდე." />
+            <span className={`mt-1.5 block text-xs ${smsTooLong ? "text-rose-600" : "text-slate-500"}`}>
+              {smsFull.length} / {SMS_MAX} სიმბოლო ბმულით · {parts} SMS თითო ადამიანზე
+              {smsCount > 0 && ` · სულ დაახლოებით ${parts * smsCount} SMS`}
+              {smsTooLong && " · შეამოკლე ტექსტი"}
+            </span>
+          </Field>
+          {smsText && (
+            <div className="mt-4 w-[min(100%,24rem)] whitespace-pre-wrap rounded-2xl bg-slate-100 p-4 text-[15px] text-slate-800">
+              <p className="mb-2 text-xs font-medium text-slate-500">SMS · VifaDigital</p>
+              {smsFull}
+            </div>
+          )}
         </Card>
       )}
 
@@ -387,13 +305,10 @@ const SendPage = () => {
         </section>
       )}
 
-      </>
-      )}
-
       {openCampaign && <CampaignDetail campaign={openCampaign} onClose={() => setOpenCampaign(null)} />}
-    </div>
+    </>
   );
-};
+}
 
 /** Who got a group send and how it went; SMS delivery comes from smsoffice's receipts. */
 function CampaignDetail({ campaign: c, onClose }: { campaign: Campaign; onClose: () => void }) {
@@ -409,8 +324,7 @@ function CampaignDetail({ campaign: c, onClose }: { campaign: Campaign; onClose:
     ).then((pairs) => setDelivery(Object.fromEntries(pairs))).catch((e) => console.error(e));
   }, [c]);
 
-  const status = (s?: string) =>
-    s === "sent" ? "გაიგზავნა" : s === "failed" ? "ვერ გაიგზავნა" : "";
+  const status = (s?: string) => (s === "sent" ? "გაიგზავნა" : s === "failed" ? "ვერ გაიგზავნა" : "");
 
   return (
     <Modal title={c.emailSubject || c.smsText?.slice(0, 60) || "გაგზავნა"} subtitle={`${formatWhen(c.createdAt)} · ${CHANNELS[c.channel]}${c.createdBy ? ` · ${c.createdBy}` : ""}`} onClose={onClose} width="40rem">
