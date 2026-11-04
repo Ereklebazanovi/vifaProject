@@ -1,11 +1,15 @@
 // Contact lists for the studio import: pasted from Excel / Google Sheets, typed by hand,
-// or a CSV export. With a header row ("სახელი", "ტელეფონი", "ელ. ფოსტა"…) columns are
-// matched by name; without one, each cell is recognised by what it looks like.
+// or a CSV export (including Meta Lead Ads downloads). With a header row ("სახელი",
+// "ტელეფონი", "full_name", "phone_number"…) columns are matched by name; without one,
+// each cell is recognised by what it looks like.
 
 export interface Row { name: string; phone: string; email: string }
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const looksPhone = (c: string) => c.replace(/\D/g, "").length >= 9 && /^[\d\s()+-]+$/.test(c);
+
+// Meta's lead export writes phones as "p:+995…" so spreadsheets keep the plus sign.
+const clean = (c: string) => c.trim().replace(/^"|"$/g, "").trim().replace(/^p:\s*/i, "");
 
 /** One line into cells: tab or semicolon separated, or CSV commas with "quoted, cells". */
 function cells(line: string): string[] {
@@ -26,27 +30,33 @@ function cells(line: string): string[] {
   return out;
 }
 
-const clean = (c: string) => c.trim().replace(/^"|"$/g, "").trim();
-
-const HEADER = {
-  name: /სახელ|name|სრული/i,
-  phone: /ტელ|phone|ნომ|mobile|მობ/i,
-  email: /მეილ|ფოსტ|e-?mail/i,
+// Most specific first: Meta files also have ad_name, campaign_name, form_name, which
+// must never be taken for the person's name.
+const HEADERS = {
+  name: [/^(full[_ ]?name|სრული სახელი|სახელი|name|სახელი და გვარი)$/i, /^(?!.*(ad|adset|campaign|form|page)[_ ]?name).*(სახელ|name)/i],
+  phone: [/^(phone[_ ]?number|phone|ტელეფონი|ნომერი|mobile)$/i, /ტელ|phone|ნომ|mobile|მობ/i],
+  email: [/^(e-?mail|მეილი|ელ\.? ?ფოსტა)$/i, /მეილ|ფოსტ|e-?mail/i],
 };
 
 export function parse(text: string) {
-  const lines = text.replace(/^﻿/, "").split(/\r?\n/).filter((l) => l.trim());
+  const lines = text.replace(/^\uFEFF/, "").split(/\r?\n/).filter((l) => l.trim());
   const rows: Row[] = [];
   let skipped = 0;
   if (!lines.length) return { rows, skipped };
 
   // A header row names the columns and holds no phone or email itself.
   const first = cells(lines[0]);
-  const col = (re: RegExp) => first.findIndex((c) => re.test(c));
-  const hasHeader = !first.some((c) => EMAIL.test(c) || looksPhone(c)) && (col(HEADER.phone) >= 0 || col(HEADER.email) >= 0);
+  const col = (patterns: RegExp[]) => {
+    for (const re of patterns) {
+      const i = first.findIndex((c) => re.test(c));
+      if (i >= 0) return i;
+    }
+    return -1;
+  };
+  const [n, p, e] = [col(HEADERS.name), col(HEADERS.phone), col(HEADERS.email)];
+  const hasHeader = !first.some((c) => EMAIL.test(c) || looksPhone(c)) && (p >= 0 || e >= 0);
 
   if (hasHeader) {
-    const [n, p, e] = [col(HEADER.name), col(HEADER.phone), col(HEADER.email)];
     for (const line of lines.slice(1)) {
       const c = cells(line);
       const email = e >= 0 && EMAIL.test(c[e] || "") ? c[e] : "";
@@ -66,4 +76,12 @@ export function parse(text: string) {
     else skipped++;
   }
   return { rows, skipped };
+}
+
+/** Read an uploaded file as text, whatever its encoding (Meta exports are often UTF-16). */
+export async function readTextFile(file: File): Promise<string> {
+  const buf = await file.arrayBuffer();
+  const b = new Uint8Array(buf);
+  const enc = b[0] === 0xff && b[1] === 0xfe ? "utf-16le" : b[0] === 0xfe && b[1] === 0xff ? "utf-16be" : "utf-8";
+  return new TextDecoder(enc).decode(buf);
 }

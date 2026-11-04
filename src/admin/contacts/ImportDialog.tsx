@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { apiPost } from "../api";
 import { btnPrimary, btnSecondary, Field, inputCls, Modal } from "../ui";
 import { PRODUCT_LABELS } from "./contactsService";
-import { parse } from "./parseList";
+import { parse, readTextFile } from "./parseList";
 
 const ImportDialog = ({ onClose }: { onClose: () => void }) => {
   const [text, setText] = useState("");
@@ -29,7 +29,7 @@ const ImportDialog = ({ onClose }: { onClose: () => void }) => {
   return (
     <Modal title="კონტაქტების იმპორტი" subtitle="არსებული ხალხი ერთ ბაზაში. ავტომატური შეტყობინება არავის წავა." onClose={onClose} width="42rem">
       <div className="grid gap-4">
-        <Field label="ჩასვი სია ან ატვირთე CSV ფაილი" hint="Excel-იდან ან Google Sheets-იდან დააკოპირე სვეტები: სახელი, ტელეფონი, მეილი. თანმიმდევრობას მნიშვნელობა არ აქვს. CSV-ში სათაურების ხაზს (სახელი, ტელეფონი, ელ. ფოსტა) თავად ვცნობ.">
+        <Field label="ჩასვი სია ან ატვირთე CSV ფაილი" hint="Excel-იდან ან Google Sheets-იდან დააკოპირე სვეტები: სახელი, ტელეფონი, მეილი. თანმიმდევრობას მნიშვნელობა არ აქვს. CSV-ში სათაურების ხაზს (სახელი, ტელეფონი, ელ. ფოსტა) თავად ვცნობ, Facebook-ის რეკლამის ფორმებიდან ჩამოტვირთულ ფაილსაც.">
           <textarea className={`${inputCls} min-h-[150px] font-mono text-sm`} value={text} onChange={(e) => setText(e.target.value)}
             placeholder={"ნინო ბერიძე\t555 12 34 56\tnino@gmail.com\nგიორგი, 599112233"} />
         </Field>
@@ -38,7 +38,7 @@ const ImportDialog = ({ onClose }: { onClose: () => void }) => {
           <input type="file" accept=".csv,text/csv,.txt" className="hidden"
             onChange={async (e) => {
               const file = e.target.files?.[0];
-              if (file) setText(await file.text());
+              if (file) setText(await readTextFile(file));
               e.target.value = "";
             }} />
         </label>
