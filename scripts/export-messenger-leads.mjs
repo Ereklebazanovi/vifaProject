@@ -109,6 +109,11 @@ console.log(`Page: ${me.name} (${me.id})`);
 const leads = new Map(); // phone digits or email → row
 const FREE = process.argv.includes("--free");
 const OUR_NUMBERS = new Set(["995557624243", "995577175132"]); // VIFA's own, quoted in chats
+const OUR_EMAILS = new Set(["vifa.official2020@gmail.com", "info@vifadigital.ge"]);
+const normalizeDigits = (p) => {
+  const d = String(p || "").replace(/\D/g, "");
+  return d.length === 9 && d.startsWith("5") ? `995${d}` : d;
+};
 const chatNumbers = new Map();
 let conversations = 0, messagesSeen = 0;
 let next = `${GRAPH}/me/conversations?platform=messenger&fields=participants,updated_time&limit=50`;
@@ -122,7 +127,11 @@ while (next) {
       const m = await get(msgs);
       for (const msg of m.data || []) {
         messagesSeen++;
-        const lead = parseLeadMessage(msg.message);
+        // Only what the person sent: the page's own messages (our contact details, templates)
+        // also look like "Key: value" and must never become a lead.
+        const fromPage = msg.from?.id === me.id;
+        let lead = fromPage ? null : parseLeadMessage(msg.message);
+        if (lead && (OUR_NUMBERS.has(normalizeDigits(lead.phone)) || OUR_EMAILS.has(lead.email.toLowerCase()))) lead = null;
         if (!lead) {
           // --free: a Georgian mobile the person typed into the chat themselves.
           if (FREE && msg.from?.id !== me.id) {

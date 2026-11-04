@@ -16,6 +16,7 @@ import {
   type Contact,
   type ContactEvent,
   updateContact,
+  deleteContact,
 } from "./contactsService";
 
 const WEEK = 7 * 864e5;
@@ -211,6 +212,22 @@ function ContactDetail({ contact: initial, onClose }: { contact: Contact; onClos
           <div className="flex gap-2">
             <button onClick={save} disabled={saving} className={btnPrimary}>{saving ? "ინახება…" : "შენახვა"}</button>
             <button onClick={() => setEditing(false)} className={btnSecondary}>გაუქმება</button>
+            <button
+              onClick={async () => {
+                if (!confirm(`წავშალო ${c.name || "ეს კონტაქტი"} და მისი მთელი ისტორია? ამის დაბრუნება შეუძლებელია.`)) return;
+                setSaving(true);
+                try {
+                  await deleteContact(c.id);
+                  onClose();
+                } catch {
+                  setEditError("წაშლა ვერ მოხერხდა.");
+                  setSaving(false);
+                }
+              }}
+              className="ml-auto text-sm text-rose-600 hover:underline"
+            >
+              კონტაქტის წაშლა
+            </button>
           </div>
         </div>
       )}

@@ -1,5 +1,5 @@
 // Contacts written by /api (site form, later Meta Lead Ads). The studio only reads them.
-import { addDoc, collection, doc, getDocs, onSnapshot, orderBy, query, serverTimestamp, updateDoc, type Timestamp } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query, serverTimestamp, updateDoc, type Timestamp } from "firebase/firestore";
 import { db } from "../../firebase";
 
 export const CONTACTS = "contacts";
@@ -105,6 +105,13 @@ export function audienceOf(contacts: Contact[], product: string, channel: "sms" 
 }
 
 /** Studio edit of a contact: name, email, and consent the admin vouches for. */
+/** Remove a contact and its whole history (events first: Firestore keeps subcollections otherwise). */
+export async function deleteContact(id: string) {
+  const events = await getDocs(collection(db, CONTACTS, id, "events"));
+  await Promise.all(events.docs.map((d) => deleteDoc(d.ref)));
+  await deleteDoc(doc(db, CONTACTS, id));
+}
+
 export async function updateContact(id: string, patch: { name: string; email: string; consent: boolean }, wasConsent: boolean, by: string) {
   const email = patch.email.trim().toLowerCase();
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) throw new Error("email");
