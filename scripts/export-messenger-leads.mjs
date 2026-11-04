@@ -61,7 +61,7 @@ function readEnvLocal() {
   }
 }
 readEnvLocal();
-const TOKEN = process.env.META_PAGE_TOKEN;
+let TOKEN = process.env.META_PAGE_TOKEN;
 if (!TOKEN) {
   console.error("META_PAGE_TOKEN is missing: put it in .env.local (see the comment at the top).");
   process.exit(1);
@@ -75,6 +75,27 @@ async function get(url) {
 }
 
 // ---------- export ----------
+
+// A User token (Graph API Explorer's default) is swapped for the Page's own token.
+// META_PAGE_NAME picks the page when the user manages several (default: the one named VIFA).
+try {
+  const accounts = await get(`${GRAPH}/me/accounts?fields=id,name,access_token&limit=100`);
+  const pages = accounts.data || [];
+  if (pages.length) {
+    const want = (process.env.META_PAGE_NAME || "vifa").toLowerCase();
+    // Only the page we were asked for: never fall back to another page the user manages.
+    const page = pages.find((p) => p.name.toLowerCase().includes(want));
+    if (!page) {
+      console.error(`The token doesn't include a page named "${want}". Pages it covers: ${pages.map((p) => p.name).join(", ")}.`);
+      console.error('Regenerate it and tick the VIFA page in Facebook\'s "choose pages" step (or set META_PAGE_NAME).');
+      process.exit(1);
+    }
+    console.log(`Using page "${page.name}"`);
+    TOKEN = page.access_token;
+  }
+} catch {
+  /* already a Page token: /me/accounts isn't available for pages */
+}
 
 const me = await get(`${GRAPH}/me?fields=id,name`);
 console.log(`Page: ${me.name} (${me.id})`);
