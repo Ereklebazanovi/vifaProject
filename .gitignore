@@ -29,3 +29,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Exports with people's data: never in public/ (served) or in git
+private-data/
+*.csv
