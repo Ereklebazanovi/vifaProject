@@ -4,6 +4,7 @@ import { Mail, Phone, Search, Upload } from "lucide-react";
 import { useAdmin } from "../AdminLayout";
 import { btnPrimary, btnSecondary, Field, inputCls, Modal } from "../ui";
 import ImportDialog from "./ImportDialog";
+import PersonalSms from "../send/PersonalSms";
 import {
   formatPhone,
   formatWhen,
@@ -122,6 +123,7 @@ function ContactDetail({ contact: initial, onClose }: { contact: Contact; onClos
   const [events, setEvents] = useState<ContactEvent[] | null>(null);
   const [error, setError] = useState("");
   const [editing, setEditing] = useState(false);
+  const [smsOpen, setSmsOpen] = useState(false);
   const [form, setForm] = useState({ name: initial.name || "", email: initial.email || "", consent: Boolean(initial.consent) });
   const [saving, setSaving] = useState(false);
   const [editError, setEditError] = useState("");
@@ -175,6 +177,18 @@ function ContactDetail({ contact: initial, onClose }: { contact: Contact; onClos
         )}
       </p>
 
+      {c.phone && /^9955\d{8}$/.test(c.phone) && (
+        <div className="mt-4">
+          {!smsOpen ? (
+            <button onClick={() => setSmsOpen(true)} className={btnSecondary}>SMS-ის მიწერა</button>
+          ) : (
+            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <PersonalSms phone={c.phone} name={c.name} onSent={() => getEvents(c.id).then(setEvents).catch(() => {})} />
+            </div>
+          )}
+        </div>
+      )}
+
       {editing && (
         <div className="mt-4 grid gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4">
           <Field label="სახელი"><input className={inputCls} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} /></Field>
@@ -221,7 +235,7 @@ function ContactDetail({ contact: initial, onClose }: { contact: Contact; onClos
   );
 }
 
-const TEMPLATE: Record<string, string> = { auto_reply: "ავტომატური პასუხი", campaign: "ჯგუფური გაგზავნა" };
+const TEMPLATE: Record<string, string> = { auto_reply: "ავტომატური პასუხი", campaign: "ჯგუფური გაგზავნა", personal: "პირადი" };
 
 function eventTitle(e: ContactEvent) {
   if (e.type === "inquiry") return `მოთხოვნა: ${PRODUCT_LABELS[e.product || ""] || e.product} · ${SOURCE_LABELS[e.source || ""] || e.source}`;

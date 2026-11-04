@@ -5,6 +5,7 @@ import { db } from "../../firebase";
 import { uploadToCloudinary } from "../../service/cloudinary";
 import { brandEmailHtml } from "../../../api/_lib/emailTemplate";
 import { useAdmin } from "../AdminLayout";
+import PersonalSms from "./PersonalSms";
 import { apiPost, SMS_MAX, SMS_UNSUB_SAMPLE, smsParts } from "../api";
 import { btnPrimary, btnSecondary, Chips, Field, inputCls, Modal } from "../ui";
 import {
@@ -60,6 +61,7 @@ const SendPage = () => {
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [openCampaign, setOpenCampaign] = useState<Campaign | null>(null);
   const [extraText, setExtraText] = useState("");
+  const [mode, setMode] = useState<"group" | "personal">("group");
 
   useEffect(() => subscribeCampaigns(setCampaigns, (e) => console.error(e)), []);
 
@@ -190,6 +192,26 @@ const SendPage = () => {
           გამოწერის გაუქმების ბმული ახლავს. ვინც გააუქმა, აღარ მიიღებს.
         </p>
       </header>
+
+      <div className="flex w-fit gap-1 rounded-xl bg-slate-100 p-1">
+        {([["group", "ჯგუფს"], ["personal", "ერთ ადამიანს (SMS)"]] as const).map(([k, label]) => (
+          <button key={k} onClick={() => setMode(k)}
+            className={`rounded-lg px-4 py-2 text-sm transition ${mode === k ? "bg-white font-medium text-slate-900 shadow-sm" : "text-slate-600 hover:text-slate-900"}`}>
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {mode === "personal" ? (
+        <Card title="პირადი SMS">
+          <p className="mb-4 text-sm text-slate-500">
+            ნებისმიერ ქართულ ნომერზე, ფორმა შეუვსია თუ არა. ეს ერთი ადამიანისთვის განკუთვნილი შეტყობინებაა,
+            მაგ. ვინც ზარით, ნაცნობით ან სხვა გზით გაიცანი. ნომერი კონტაქტებში შეინახება.
+          </p>
+          <PersonalSms />
+        </Card>
+      ) : (
+      <>
 
       <Card title="1. ვის">
         <div className="flex flex-wrap items-center gap-3">
@@ -363,6 +385,9 @@ const SendPage = () => {
             ))}
           </div>
         </section>
+      )}
+
+      </>
       )}
 
       {openCampaign && <CampaignDetail campaign={openCampaign} onClose={() => setOpenCampaign(null)} />}

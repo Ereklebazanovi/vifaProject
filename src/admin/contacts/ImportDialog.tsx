@@ -29,10 +29,19 @@ const ImportDialog = ({ onClose }: { onClose: () => void }) => {
   return (
     <Modal title="კონტაქტების იმპორტი" subtitle="არსებული ხალხი ერთ ბაზაში. ავტომატური შეტყობინება არავის წავა." onClose={onClose} width="42rem">
       <div className="grid gap-4">
-        <Field label="ჩასვი სია" hint="Excel-იდან ან Google Sheets-იდან დააკოპირე სვეტები: სახელი, ტელეფონი, მეილი. თანმიმდევრობას მნიშვნელობა არ აქვს.">
+        <Field label="ჩასვი სია ან ატვირთე CSV ფაილი" hint="Excel-იდან ან Google Sheets-იდან დააკოპირე სვეტები: სახელი, ტელეფონი, მეილი. თანმიმდევრობას მნიშვნელობა არ აქვს. CSV-ში სათაურების ხაზს (სახელი, ტელეფონი, ელ. ფოსტა) თავად ვცნობ.">
           <textarea className={`${inputCls} min-h-[150px] font-mono text-sm`} value={text} onChange={(e) => setText(e.target.value)}
             placeholder={"ნინო ბერიძე\t555 12 34 56\tnino@gmail.com\nგიორგი, 599112233"} />
         </Field>
+        <label className={`${btnSecondary} w-fit cursor-pointer`}>
+          CSV ფაილის ატვირთვა
+          <input type="file" accept=".csv,text/csv,.txt" className="hidden"
+            onChange={async (e) => {
+              const file = e.target.files?.[0];
+              if (file) setText(await file.text());
+              e.target.value = "";
+            }} />
+        </label>
         {text.trim() && (
           <p className="text-sm text-slate-600">
             ნაპოვნია <b>{rows.length}</b> კონტაქტი ({rows.filter((r) => r.phone).length} ნომრით, {rows.filter((r) => r.email).length} მეილით)
