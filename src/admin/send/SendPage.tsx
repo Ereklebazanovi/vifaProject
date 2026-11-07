@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
-import { useAdmin } from "../AdminLayout";
+import { useAdmin, useShow } from "../AdminLayout";
 import { apiPost, SMS_MAX, SMS_UNSUB_SAMPLE, smsParts } from "../api";
 import { btnPrimary, Chips, Field, inputCls, Modal } from "../ui";
 import {
@@ -9,7 +9,6 @@ import {
   canEmail,
   canSms,
   CONTACTS,
-  formatPhone,
   formatWhen,
   PRODUCT_LABELS,
   SMS_STATUS,
@@ -42,7 +41,7 @@ const SendPage = () => {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-2xl font-semibold text-slate-900">გაგზავნა</h1>
+        <h1 className="text-2xl font-semibold tracking-tight text-slate-900">კამპანიები</h1>
         <p className="mt-1 w-[min(100%,46rem)] text-slate-500">
           <b className="font-medium text-slate-700">ერთ ადამიანს:</b> ნებისმიერ ნომერზე ან მეილზე, მზა შაბლონით.{" "}
           <b className="font-medium text-slate-700">ჯგუფს:</b> ყველას, ვინც შეთავაზებებზე თანხმობა მოგცა, თითოეულს გამოწერის გაუქმების ბმულით.
@@ -73,6 +72,7 @@ const SendPage = () => {
 
 function GroupSend() {
   const { contacts, contactsLoading } = useAdmin();
+  const show = useShow();
   const [product, setProduct] = useState("all");
   const [channel, setChannel] = useState<Channel>("email");
   const [excluded, setExcluded] = useState<Set<string>>(new Set());
@@ -211,7 +211,7 @@ function GroupSend() {
                   <span className="min-w-0 flex-1">
                     <span className="font-medium text-slate-900">{c.name || "უსახელო"}</span>
                     <span className="ml-2 text-sm text-slate-500">
-                      {[useSms && canSms(c) ? formatPhone(c.phone) : "", useEmail && canEmail(c) ? c.email : ""].filter(Boolean).join(" · ")}
+                      {[useSms && canSms(c) ? show.phone(c.phone) : "", useEmail && canEmail(c) ? show.email(c.email) : ""].filter(Boolean).join(" · ")}
                     </span>
                   </span>
                   <span className="hidden text-xs text-slate-400 sm:inline">{(c.products || []).map((p) => PRODUCT_LABELS[p] || p).join(", ")}</span>
@@ -312,6 +312,7 @@ function GroupSend() {
 
 /** Who got a group send and how it went; SMS delivery comes from smsoffice's receipts. */
 function CampaignDetail({ campaign: c, onClose }: { campaign: Campaign; onClose: () => void }) {
+  const show = useShow();
   const [delivery, setDelivery] = useState<Record<string, string>>({});
 
   useEffect(() => {
@@ -335,7 +336,7 @@ function CampaignDetail({ campaign: c, onClose }: { campaign: Campaign; onClose:
           <div key={r.id} className="grid gap-1 border-b border-slate-100 px-4 py-3 last:border-0 sm:grid-cols-[1.3fr_1fr] sm:items-center">
             <span>
               <span className="font-medium text-slate-900">{r.name || "უსახელო"}</span>
-              <span className="ml-2 text-sm text-slate-500">{[formatPhone(r.phone), r.email].filter(Boolean).join(" · ")}</span>
+              <span className="ml-2 text-sm text-slate-500">{[show.phone(r.phone), show.email(r.email)].filter(Boolean).join(" · ")}</span>
             </span>
             <span className="text-sm text-slate-600">
               {r.sms && <>SMS: {SMS_STATUS[delivery[r.id]] || status(r.sms)}</>}

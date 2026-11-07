@@ -109,8 +109,16 @@ const Layout: React.FC = () => {
     try {
       const params = new URLSearchParams(window.location.search);
       const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "ref"];
-      const found = Object.fromEntries(keys.map((k) => [k, params.get(k) || ""]).filter(([, v]) => v));
+      const found: Record<string, string> = Object.fromEntries(keys.map((k) => [k, params.get(k) || ""]).filter(([, v]) => v));
+      // Ad clicks without our tags still carry the network's click id.
+      if (!found.utm_source && params.get("gclid")) Object.assign(found, { utm_source: "google", utm_medium: "cpc" });
+      if (!found.utm_source && params.get("fbclid")) found.utm_source = "facebook";
       if (Object.keys(found).length) sessionStorage.setItem("vifa_utm", JSON.stringify(found));
+      // No tags at all: keep the site that sent the visitor (www.google.com, l.facebook.com...).
+      else if (!sessionStorage.getItem("vifa_utm") && document.referrer) {
+        const host = new URL(document.referrer).hostname;
+        if (host && host !== window.location.hostname) sessionStorage.setItem("vifa_utm", JSON.stringify({ referrer: host }));
+      }
     } catch {
       // Storage blocked (private mode etc.): the form simply sends no UTM.
     }

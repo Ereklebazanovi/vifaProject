@@ -1,20 +1,24 @@
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
 import { Mail, Phone, Search, Upload } from "lucide-react";
-import { useAdmin } from "../AdminLayout";
+import { useAdmin, useShow } from "../AdminLayout";
 import { btnPrimary, btnSecondary, Field, inputCls, Modal } from "../ui";
 import ImportDialog from "./ImportDialog";
 import PersonalEmail from "../send/PersonalEmail";
 import PersonalSms from "../send/PersonalSms";
 import {
-  formatPhone,
   formatWhen,
   getEvents,
   PRODUCT_LABELS,
   SMS_STATUS,
   SOURCE_LABELS,
+  STAGES,
+  setStage,
+  stageOf,
   type Contact,
   type ContactEvent,
+  type Stage,
   updateContact,
   deleteContact,
 } from "./contactsService";
@@ -28,6 +32,17 @@ const ContactsPage = () => {
   const [search, setSearch] = useState("");
   const [open, setOpen] = useState<Contact | null>(null);
   const [importing, setImporting] = useState(false);
+  const show = useShow();
+
+  // /studio/contacts?c=<id> (from the overview feed) opens that person's card.
+  const [params, setParams] = useSearchParams();
+  useEffect(() => {
+    const id = params.get("c");
+    if (!id || contactsLoading) return;
+    const found = contacts.find((c) => c.id === id);
+    if (found) setOpen(found);
+    setParams({}, { replace: true });
+  }, [params, contacts, contactsLoading, setParams]);
 
   const shown = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -103,8 +118,8 @@ const ContactsPage = () => {
                   <span className="ml-2 rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-normal text-emerald-700">თანხმობა</span>
                 )}
               </span>
-              <span className="text-sm text-slate-700">{formatPhone(c.phone)}</span>
-              <span className="truncate text-sm text-slate-700">{c.email}</span>
+              <span className="text-sm text-slate-700">{show.phone(c.phone)}</span>
+              <span className="truncate text-sm text-slate-700">{show.email(c.email)}</span>
               <span className="text-sm text-slate-600">{(c.products || []).map((p) => PRODUCT_LABELS[p] || p).join(", ")}</span>
               <span className="text-sm text-slate-500">{formatWhen(c.lastSeenAt)}</span>
             </button>
@@ -121,7 +136,25 @@ const ContactsPage = () => {
 /** One person: how to reach them, and everything that happened, newest first. */
 function ContactDetail({ contact: initial, onClose }: { contact: Contact; onClose: () => void }) {
   const { user } = useAdmin();
+  const show = useShow();
   const [c, setC] = useState(initial);
+  const [stageError, setStageError] = useState("");
+  const stage = stageOf(c);
+
+  const moveTo = async (s: Stage) => {
+    if (s === c.stage) return;
+    setStageError("");
+    const before = c;
+    setC({ ...c, stage: s }); // show it at once; undo if the write fails
+    try {
+      const reached = await setStage(before, s, user.email || "studio");
+      setC((cur) => ({ ...cur, stage: s, stageReached: reached }));
+      getEvents(c.id).then(setEvents).catch(() => {});
+    } catch {
+      setC(before);
+      setStageError("ეტაპი ვერ შეიცვალა.");
+    }
+  };
   const [events, setEvents] = useState<ContactEvent[] | null>(null);
   const [error, setError] = useState("");
   const [editing, setEditing] = useState(false);
@@ -163,12 +196,31 @@ function ContactDetail({ contact: initial, onClose }: { contact: Contact; onClos
             <a href={`https://wa.me/${c.phone}`} target="_blank" rel="noopener noreferrer" className={`${btn} bg-emerald-50 text-emerald-700 hover:bg-emerald-100`}>
               <FaWhatsapp className="text-base" />WhatsApp
             </a>
-            <a href={`tel:+${c.phone}`} className={`${btn} bg-slate-100 text-slate-700 hover:bg-slate-200`}><Phone size={15} />{formatPhone(c.phone)}</a>
+            <a href={`tel:+${c.phone}`} className={`${btn} bg-slate-100 text-slate-700 hover:bg-slate-200`}><Phone size={15} />{show.phone(c.phone)}</a>
           </>
         )}
         {c.email && (
-          <a href={`mailto:${c.email}`} className={`${btn} bg-slate-100 text-slate-700 hover:bg-slate-200`}><Mail size={15} />{c.email}</a>
+          <a href={`mailto:${c.email}`} className={`${btn} bg-slate-100 text-slate-700 hover:bg-slate-200`}><Mail size={15} />{show.email(c.email)}</a>
         )}
+      </div>
+
+      <div className="mt-5">
+        <p className="mb-2 text-sm text-slate-500">
+          გაყიდვის ეტაპი{!stage && <span className="text-slate-400">: ჯერ დაფაზე არ არის, აირჩიე ეტაპი</span>}
+        </p>
+        <div className="inline-flex flex-wrap rounded-lg bg-slate-100 p-0.5">
+          {(Object.keys(STAGES) as Stage[]).map((s) => (
+            <button key={s} type="button" onClick={() => moveTo(s)} aria-pressed={stage === s}
+              className={`rounded-md px-3 py-1.5 text-sm transition ${
+                stage === s
+                  ? s === "lost" ? "bg-white font-medium text-slate-500 shadow-sm" : "bg-white font-medium text-indigo-700 shadow-sm"
+                  : "text-slate-500 hover:text-slate-800"
+              }`}>
+              {STAGES[s]}
+            </button>
+          ))}
+        </div>
+        {stageError && <p className="mt-2 text-sm text-rose-600">{stageError}</p>}
       </div>
 
       <p className="mt-4 text-sm text-slate-500">
@@ -271,6 +323,7 @@ function eventTitle(e: ContactEvent) {
   if (e.type === "link_open") return "SMS-ის ბმული გახსნა";
   if (e.type === "callback_request") return "ითხოვს, რომ დაურეკოთ";
   if (e.type === "edit") return "რედაქტირდა";
+  if (e.type === "stage") return `ეტაპი: ${STAGES[e.stage as Stage] || e.stage}`;
   return e.type;
 }
 

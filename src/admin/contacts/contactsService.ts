@@ -18,7 +18,28 @@ export const SOURCE_LABELS: Record<string, string> = {
   site: "საიტის ფორმა",
   meta: "Facebook რეკლამა",
   import: "იმპორტი",
+  manual: "სტუდიოდან",
 };
+
+/** Sales stages, in order. "lost" can follow any of them. */
+export const STAGES = {
+  new: "ახალი",
+  contacted: "დავურეკეთ",
+  offer: "შეთავაზება",
+  won: "დილი",
+  lost: "წაგებული",
+} as const;
+export type Stage = keyof typeof STAGES;
+export const STAGE_RANK: Record<Stage, number> = { new: 0, contacted: 1, offer: 2, won: 3, lost: -1 };
+
+/**
+ * A contact's stage. Someone who wrote to us (site form, Facebook form) starts as "new";
+ * imported lists join the pipeline only once a stage is picked for them.
+ */
+export function stageOf(c: Contact): Stage | null {
+  if (c.stage) return c.stage;
+  return c.sources?.some((s) => s === "site" || s === "meta") ? "new" : null;
+}
 
 export interface Contact {
   id: string;
@@ -32,11 +53,16 @@ export interface Contact {
   unsubscribed?: boolean;
   firstSeenAt?: Timestamp;
   lastSeenAt?: Timestamp;
+  stage?: Stage;
+  /** Furthest stage ever reached (STAGE_RANK), so the funnel still counts people later lost. */
+  stageReached?: number;
+  stageAt?: Timestamp;
 }
 
 export interface ContactEvent {
   id: string;
-  type: "inquiry" | "email" | "sms" | "import" | "unsubscribe" | "link_open" | "callback_request" | "edit";
+  type: "inquiry" | "email" | "sms" | "import" | "unsubscribe" | "link_open" | "callback_request" | "edit" | "stage";
+  stage?: Stage;
   source?: string;
   product?: string;
   message?: string;
@@ -124,6 +150,14 @@ export async function updateContact(id: string, patch: { name: string; email: st
   await addDoc(collection(db, CONTACTS, id, "events"), { type: "edit", message: `რედაქტირება: ${by}`, at: serverTimestamp() });
 }
 
+/** Move a contact to a sales stage, and note it in the history. */
+export async function setStage(c: Contact, stage: Stage, by: string) {
+  const reached = Math.max(c.stageReached ?? 0, STAGE_RANK[stage]);
+  await updateDoc(doc(db, CONTACTS, c.id), { stage, stageReached: reached, stageAt: serverTimestamp() });
+  await addDoc(collection(db, CONTACTS, c.id, "events"), { type: "stage", stage, message: by, at: serverTimestamp() });
+  return reached;
+}
+
 export function subscribeContacts(onData: (c: Contact[]) => void, onError: (e: Error) => void) {
   const q = query(collection(db, CONTACTS), orderBy("lastSeenAt", "desc"));
   return onSnapshot(
@@ -146,12 +180,26 @@ export function formatPhone(d?: string) {
   return `+${d}`;
 }
 
-const MONTHS = ["იან", "თებ", "მარ", "აპრ", "მაი", "ივნ", "ივლ", "აგვ", "სექ", "ოქტ", "ნოე", "დეკ"];
+/** Privacy mode (shown on a screen to others): "+995 599 *** *45". */
+export function maskPhone(d?: string) {
+  if (!d) return "";
+  if (d.length === 12 && d.startsWith("995")) return `+995 ${d.slice(3, 6)} *** *${d.slice(10)}`;
+  return `+${d.slice(0, 3)} *** *${d.slice(-2)}`;
+}
+
+/** Privacy mode: "i***@gmail.com". */
+export function maskEmail(e?: string) {
+  if (!e) return "";
+  const at = e.indexOf("@");
+  return at < 1 ? "***" : `${e[0]}***${e.slice(at)}`;
+}
+
+const MONTHS =["იან", "თებ", "მარ", "აპრ", "მაი", "ივნ", "ივლ", "აგვ", "სექ", "ოქტ", "ნოე", "დეკ"];
 
 /** Timestamp → "3 ნოე, 14:05" (today: "დღეს, 14:05"). */
-export function formatWhen(t?: Timestamp) {
+export function formatWhen(t?: Timestamp | number) {
   if (!t) return "";
-  const d = new Date(t.toMillis());
+  const d = new Date(typeof t === "number" ? t : t.toMillis());
   const time = `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
   const today = new Date();
   if (d.toDateString() === today.toDateString()) return `დღეს, ${time}`;

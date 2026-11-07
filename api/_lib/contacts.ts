@@ -49,7 +49,7 @@ export function parseInquiry(body: unknown): { ok: true; inquiry: Inquiry } | { 
   const product = (str(b.product, 20) in PRODUCTS ? str(b.product, 20) : "other") as Product;
   const utmIn = (b.utm && typeof b.utm === "object" ? b.utm : {}) as Record<string, unknown>;
   const utm = Object.fromEntries(
-    ["utm_source", "utm_medium", "utm_campaign", "utm_content", "ref"]
+    ["utm_source", "utm_medium", "utm_campaign", "utm_content", "ref", "referrer"]
       .map((k) => [k, str(utmIn[k], 100)])
       .filter(([, v]) => v)
   );
