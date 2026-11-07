@@ -1,5 +1,8 @@
 // Contacts written by /api (site form, later Meta Lead Ads). The studio only reads them.
-import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query, serverTimestamp, updateDoc, type Timestamp } from "firebase/firestore";
+import {
+  addDoc, arrayRemove, arrayUnion, collection, deleteDoc, deleteField, doc, getDocs, onSnapshot, orderBy, query, serverTimestamp, updateDoc,
+  type Timestamp,
+} from "firebase/firestore";
 import { db } from "../../firebase";
 
 export const CONTACTS = "contacts";
@@ -31,6 +34,7 @@ export const STAGES = {
 } as const;
 export type Stage = keyof typeof STAGES;
 export const STAGE_RANK: Record<Stage, number> = { new: 0, contacted: 1, offer: 2, won: 3, lost: -1 };
+export const STAGE_TONE = { new: "indigo", contacted: "neutral", offer: "amber", won: "green", lost: "rose" } as const;
 
 /**
  * A contact's stage. Someone who wrote to us (site form, Facebook form) starts as "new";
@@ -57,6 +61,10 @@ export interface Contact {
   /** Furthest stage ever reached (STAGE_RANK), so the funnel still counts people later lost. */
   stageReached?: number;
   stageAt?: Timestamp;
+  /** Expected or closed amount, in GEL. */
+  dealValue?: number;
+  /** Free labels the team adds: "VIP", "ზარი ხვალ", "რესტორანი". */
+  tags?: string[];
 }
 
 export interface ContactEvent {
@@ -156,6 +164,18 @@ export async function setStage(c: Contact, stage: Stage, by: string) {
   await updateDoc(doc(db, CONTACTS, c.id), { stage, stageReached: reached, stageAt: serverTimestamp() });
   await addDoc(collection(db, CONTACTS, c.id, "events"), { type: "stage", stage, message: by, at: serverTimestamp() });
   return reached;
+}
+
+/** Add or remove one tag (trimmed, at most 30 characters). */
+export async function changeTag(id: string, tag: string, add: boolean) {
+  const t = tag.trim().slice(0, 30);
+  if (!t) return;
+  await updateDoc(doc(db, CONTACTS, id), { tags: add ? arrayUnion(t) : arrayRemove(t) });
+}
+
+/** The deal's amount in GEL; empty clears it. */
+export async function setDealValue(id: string, value: number | null) {
+  await updateDoc(doc(db, CONTACTS, id), { dealValue: value == null ? deleteField() : value });
 }
 
 export function subscribeContacts(onData: (c: Contact[]) => void, onError: (e: Error) => void) {

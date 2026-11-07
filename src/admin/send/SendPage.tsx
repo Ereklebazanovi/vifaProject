@@ -3,7 +3,8 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useAdmin, useShow } from "../AdminLayout";
 import { apiPost, SMS_MAX, SMS_UNSUB_SAMPLE, smsParts } from "../api";
-import { btnPrimary, Chips, Field, inputCls, Modal } from "../ui";
+import { btnPrimary, Chips, Field, inputCls, Modal, PageHeader, Panel, Segmented } from "../ui";
+import { MessageSquare, RefreshCw } from "lucide-react";
 import {
   audienceOf,
   canEmail,
@@ -37,25 +38,41 @@ interface Result { smsSent: number; smsFailed: number; emailSent: number; emailF
 const SendPage = () => {
   const [mode, setMode] = useState<"personal" | "group">("personal");
   const [personalChannel, setPersonalChannel] = useState<"email" | "sms">("email");
+  // SMS left on smsoffice.ge: undefined while loading, null when it can't be read.
+  const [balance, setBalance] = useState<number | null | undefined>(undefined);
+  const loadBalance = () =>
+    apiPost<{ balance: number | null }>("/api/studio", { action: "balance" })
+      .then((r) => setBalance(r.balance))
+      .catch(() => setBalance(null));
+  useEffect(() => {
+    loadBalance();
+  }, []);
 
   return (
     <div className="space-y-6">
-      <header>
-        <h1 className="text-2xl font-semibold tracking-tight text-slate-900">კამპანიები</h1>
-        <p className="mt-1 w-[min(100%,46rem)] text-slate-500">
-          <b className="font-medium text-slate-700">ერთ ადამიანს:</b> ნებისმიერ ნომერზე ან მეილზე, მზა შაბლონით.{" "}
-          <b className="font-medium text-slate-700">ჯგუფს:</b> ყველას, ვინც შეთავაზებებზე თანხმობა მოგცა, თითოეულს გამოწერის გაუქმების ბმულით.
-        </p>
-      </header>
+      <PageHeader
+        title="კამპანიები"
+        description={
+          <>
+            <b className="font-medium text-slate-700">ერთ ადამიანს:</b> ნებისმიერ ნომერზე ან მეილზე, მზა შაბლონით.{" "}
+            <b className="font-medium text-slate-700">ჯგუფს:</b> ყველას, ვინც შეთავაზებებზე თანხმობა მოგცა, თითოეულს გამოწერის გაუქმების ბმულით.
+          </>
+        }
+        actions={
+          <span className={`inline-flex items-center gap-2 rounded-lg border bg-white px-3 py-1.5 text-sm shadow-[0_1px_2px_rgba(16,24,40,0.04)] ${
+            balance != null && balance < 20 ? "border-amber-300 text-amber-800" : "border-slate-200 text-slate-600"
+          }`} title="smsoffice.ge-ზე დარჩენილი SMS">
+            <MessageSquare size={14} className="text-slate-400" />
+            SMS ბალანსი:
+            <b className="font-semibold tabular-nums text-slate-900">{balance === undefined ? "…" : balance ?? "უცნობია"}</b>
+            <button onClick={() => { setBalance(undefined); loadBalance(); }} aria-label="ბალანსის განახლება" className="rounded p-0.5 text-slate-400 hover:text-slate-700">
+              <RefreshCw size={13} />
+            </button>
+          </span>
+        }
+      />
 
-      <div className="flex w-fit gap-1 rounded-xl bg-slate-100 p-1">
-        {([["personal", "ერთ ადამიანს"], ["group", "ჯგუფს"]] as const).map(([k, label]) => (
-          <button key={k} onClick={() => setMode(k)}
-            className={`rounded-lg px-4 py-2 text-sm transition ${mode === k ? "bg-white font-medium text-slate-900 shadow-sm" : "text-slate-600 hover:text-slate-900"}`}>
-            {label}
-          </button>
-        ))}
-      </div>
+      <Segmented options={{ personal: "ერთ ადამიანს", group: "ჯგუფს" }} value={mode} onChange={setMode} />
 
       {mode === "personal" ? (
         <Card title="ერთ ადამიანს">
@@ -64,13 +81,13 @@ const SendPage = () => {
           <p className="mt-5 text-xs text-slate-500">მიმღები კონტაქტებში შეინახება და გაგზავნილი მის ისტორიაში ჩაიწერება.</p>
         </Card>
       ) : (
-        <GroupSend />
+        <GroupSend balance={balance} onSent={loadBalance} />
       )}
     </div>
   );
 };
 
-function GroupSend() {
+function GroupSend({ balance, onSent }: { balance?: number | null; onSent: () => void }) {
   const { contacts, contactsLoading } = useAdmin();
   const show = useShow();
   const [product, setProduct] = useState("all");
@@ -165,6 +182,7 @@ function GroupSend() {
       }
       setResult(totals);
       setExtraText("");
+      onSent();
     } catch (e) {
       const code = e instanceof Error ? e.message : "";
       setError(ERRORS[code] || `გაგზავნა შეწყდა (${code}). უკვე გაგზავნილები ისტორიაში ჩანს.`);
@@ -197,7 +215,7 @@ function GroupSend() {
         )}
 
         {eligible.length > 0 && (
-          <div className="mt-4 overflow-hidden rounded-xl border border-slate-200">
+          <div className="mt-4 overflow-hidden rounded-lg border border-slate-200">
             <div className="flex items-center justify-between bg-slate-50 px-4 py-2 text-xs text-slate-500">
               <span>მოხსენი ის, ვისაც ახლა არ გინდა გაუგზავნო</span>
               <button className="underline" onClick={() => setExcluded(excluded.size ? new Set() : new Set(eligible.map((c) => c.id)))}>
@@ -256,6 +274,11 @@ function GroupSend() {
               {smsCount > 0 && ` · სულ დაახლოებით ${parts * smsCount} SMS`}
               {smsTooLong && " · შეამოკლე ტექსტი"}
             </span>
+            {balance != null && smsCount > 0 && parts * smsCount > balance && (
+              <span className="mt-1.5 block rounded-md bg-amber-50 px-2.5 py-1.5 text-xs text-amber-800 ring-1 ring-inset ring-amber-600/20">
+                ბალანსი არ ყოფნის: საჭიროა დაახლოებით {parts * smsCount} SMS, ანგარიშზე {balance}. ჯერ შეავსე smsoffice.ge-ზე.
+              </span>
+            )}
           </Field>
           {smsText && (
             <div className="mt-4 w-[min(100%,24rem)] whitespace-pre-wrap rounded-2xl bg-slate-100 p-4 text-[15px] text-slate-800">
@@ -281,9 +304,8 @@ function GroupSend() {
       </div>
 
       {campaigns.length > 0 && (
-        <section>
-          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500">ისტორია</h2>
-          <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <Panel title="ისტორია" subtitle="ჯგუფური გაგზავნები: ვინ მიიღო, ვინ გახსნა, ვინ ითხოვს ზარს" bodyClass="">
+          <div className="overflow-hidden">
             {campaigns.map((c) => (
               <button key={c.id} onClick={() => setOpenCampaign(c)}
                 className="grid w-full gap-1 border-b border-slate-100 px-5 py-4 text-left transition last:border-0 hover:bg-slate-50 md:grid-cols-[1fr_2fr_1.2fr] md:items-center md:gap-4">
@@ -302,7 +324,7 @@ function GroupSend() {
               </button>
             ))}
           </div>
-        </section>
+        </Panel>
       )}
 
       {openCampaign && <CampaignDetail campaign={openCampaign} onClose={() => setOpenCampaign(null)} />}
@@ -330,7 +352,7 @@ function CampaignDetail({ campaign: c, onClose }: { campaign: Campaign; onClose:
   return (
     <Modal title={c.emailSubject || c.smsText?.slice(0, 60) || "გაგზავნა"} subtitle={`${formatWhen(c.createdAt)} · ${CHANNELS[c.channel]}${c.createdBy ? ` · ${c.createdBy}` : ""}`} onClose={onClose} width="40rem">
       {c.smsText && <p className="mb-4 whitespace-pre-wrap rounded-xl bg-slate-100 p-3 text-sm text-slate-800">{c.smsText}</p>}
-      <div className="overflow-hidden rounded-xl border border-slate-200">
+      <div className="overflow-hidden rounded-lg border border-slate-200">
         {(c.recipients || []).length === 0 && <p className="px-4 py-6 text-center text-sm text-slate-500">მიმღებების სია ამ გაგზავნისთვის არ ინახება.</p>}
         {(c.recipients || []).map((r) => (
           <div key={r.id} className="grid gap-1 border-b border-slate-100 px-4 py-3 last:border-0 sm:grid-cols-[1.3fr_1fr] sm:items-center">
@@ -351,10 +373,7 @@ function CampaignDetail({ campaign: c, onClose }: { campaign: Campaign; onClose:
 }
 
 const Card = ({ title, children }: { title: string; children: React.ReactNode }) => (
-  <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-    <h2 className="mb-4 font-semibold text-slate-900">{title}</h2>
-    {children}
-  </section>
+  <Panel title={title} bodyClass="p-5 sm:p-6">{children}</Panel>
 );
 
 export default SendPage;

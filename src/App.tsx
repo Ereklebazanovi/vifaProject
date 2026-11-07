@@ -27,6 +27,8 @@ const AdminLayout = lazy(() => import("./admin/AdminLayout"));
 const ContactsPage = lazy(() => import("./admin/contacts/ContactsPage"));
 const SendPage = lazy(() => import("./admin/send/SendPage"));
 const OverviewPage = lazy(() => import("./admin/overview/OverviewPage"));
+const PipelinePage = lazy(() => import("./admin/pipeline/PipelinePage"));
+const SourcesPage = lazy(() => import("./admin/sources/SourcesPage"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 
@@ -94,7 +96,9 @@ const App = () => {
                 <Route path="/studio" element={<AdminLayout />}>
                   <Route index element={<Navigate to="overview" replace />} />
                   <Route path="overview" element={<OverviewPage />} />
+                  <Route path="pipeline" element={<PipelinePage />} />
                   <Route path="contacts" element={<ContactsPage />} />
+                  <Route path="sources" element={<SourcesPage />} />
                   <Route path="campaigns" element={<SendPage />} />
                   <Route path="send" element={<Navigate to="/studio/campaigns" replace />} />
                   <Route path="blog" element={<BlogEditor />} />

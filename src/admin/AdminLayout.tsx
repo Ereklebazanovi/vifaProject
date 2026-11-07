@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink, Outlet, useLocation, useOutletContext } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import type { User } from "firebase/auth";
-import { Eye, EyeOff, LayoutDashboard, LogOut, PenLine, Send, Users } from "lucide-react";
+import { ChartColumn, Eye, EyeOff, SquareKanban, LayoutDashboard, LogOut, PenLine, Send, Users } from "lucide-react";
 import { checkAdminAccess, signInWithGoogle, signOutAdmin, watchAuth } from "./auth";
 import { formatPhone, maskEmail, maskPhone, subscribeContacts, type Contact } from "./contacts/contactsService";
 import { btnPrimary, btnSecondary } from "./ui";
@@ -31,11 +31,18 @@ export function useShow() {
 
 const NAV = [
   { items: [{ to: "overview", label: "მიმოხილვა", Icon: LayoutDashboard }] },
-  { title: "გაყიდვები", items: [{ to: "contacts", label: "კონტაქტები", Icon: Users }] },
+  {
+    title: "გაყიდვები",
+    items: [
+      { to: "pipeline", label: "გაყიდვების დაფა", Icon: SquareKanban },
+      { to: "contacts", label: "კონტაქტები", Icon: Users },
+    ],
+  },
   {
     title: "მარკეტინგი",
     items: [
       { to: "campaigns", label: "კამპანიები", Icon: Send },
+      { to: "sources", label: "წყაროები", Icon: ChartColumn },
       { to: "blog", label: "ბლოგი", Icon: PenLine },
     ],
   },
@@ -130,7 +137,7 @@ const AdminLayout = () => {
   };
 
   return (
-    <div className="studio min-h-screen bg-slate-50 text-slate-900">
+    <div className="studio min-h-screen bg-[#f5f6f8] text-slate-900">
       <Helmet>
         <title>VIFA Studio</title>
         <meta name="robots" content="noindex, nofollow" />
@@ -251,8 +258,13 @@ const AdminLayout = () => {
 
 const Logo = () => (
   <span className="inline-flex items-center gap-2">
-    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600 text-sm font-bold text-white">V</span>
-    <span className="font-semibold tracking-tight text-slate-900">VIFA Studio</span>
+    <span className="h-8 w-8 overflow-hidden rounded-lg bg-black ring-1 ring-slate-900/10">
+      <img src="/viffa.png" alt="" className="h-full w-full scale-[1.15] object-cover" />
+    </span>
+    <span className="leading-tight">
+      <span className="block text-[14px] font-semibold tracking-tight text-slate-900">VIFA Studio</span>
+      <span className="block text-[11px] text-slate-400">VIFA Digital</span>
+    </span>
   </span>
 );
 

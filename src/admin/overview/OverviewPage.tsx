@@ -1,60 +1,20 @@
 // /studio/overview: where people come from, how fast we answer, how many become deals.
 // Contacts arrive live from the layout; their histories come from /api/studio in one call.
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowDownRight, ArrowUpRight, Inbox, Mail, MessageSquare, MousePointerClick, PhoneCall, RefreshCw, Send, Trophy, Upload, UserMinus,
 } from "lucide-react";
 import { useAdmin, useShow } from "../AdminLayout";
-import { apiPost } from "../api";
+import { channelOf, firstTouch, historyOf, useStudioEvents, type Ev } from "../studioData";
+import { BarList, PageHeader, Panel, Segmented, StatStrip } from "../ui";
 import { formatWhen, PRODUCT_LABELS, STAGE_RANK, STAGES, stageOf, type Contact, type Stage } from "../contacts/contactsService";
-
-/** One history entry, as /api/studio returns it. */
-interface Ev {
-  c: string;
-  type: string;
-  at: number;
-  source?: string;
-  product?: string;
-  template?: string;
-  campaignId?: string;
-  ok?: boolean;
-  status?: string;
-  stage?: Stage;
-  utm?: Record<string, string>;
-  origin?: string;
-}
 
 const DAY = 864e5;
 const PERIODS = { "7": "7 დღე", "30": "30 დღე", "90": "90 დღე" } as const;
 type Period = keyof typeof PERIODS;
 
-// Kept between page visits, so coming back shows numbers at once while they refresh.
-let cached: Ev[] | null = null;
-
-/** The channel a contact first came through, from their first inquiry or import. */
-function channelOf(e: Ev | undefined, c: Contact) {
-  if (e?.type === "import") {
-    return { chat: "Messenger ჩატი", legacy: "საიტის ძველი ფორმა", form: "Facebook / Messenger ფორმა" }[e.origin || ""] || "სხვა სია";
-  }
-  if (e?.type === "inquiry") {
-    if (e.source === "meta") return "Facebook ლიდ-ფორმა";
-    const u = e.utm || {};
-    const src = (u.utm_source || "").toLowerCase();
-    if (u.ref) return "პარტნიორის ბმული";
-    if (/facebook|instagram|^fb$|^ig$|meta/.test(src)) return "Facebook / Instagram";
-    if (src.includes("google")) return /cpc|ppc|paid/.test((u.utm_medium || "").toLowerCase()) ? "Google რეკლამა" : "Google";
-    if (src) return "სხვა ბმული";
-    const r = (u.referrer || "").toLowerCase();
-    if (r.includes("google.")) return "Google ძიება";
-    if (/facebook|instagram/.test(r)) return "Facebook / Instagram";
-    if (r) return "სხვა საიტი";
-    return "საიტის ფორმა";
-  }
-  return c.sources?.includes("manual") ? "სტუდიოდან დამატებული" : "სხვა";
-}
-
-const pct = (n: number, of: number) => (of ? `${Math.round((n / of) * 100)}%` : "0%");
+const pct =(n: number, of: number) => (of ? `${Math.round((n / of) * 100)}%` : "0%");
 
 function fmtDelay(ms: number) {
   if (ms < 60e3) return `${Math.max(1, Math.round(ms / 1e3))} წამი`;
@@ -81,33 +41,8 @@ const OverviewPage = () => {
   const { contacts, contactsLoading } = useAdmin();
   const show = useShow();
   const [period, setPeriod] = useState<Period>("30");
-  const [events, setEvents] = useState<Ev[] | null>(cached);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [tick, setTick] = useState(0);
   const [feedAll, setFeedAll] = useState(false);
-
-  // Refetch when someone new writes (the contacts list is live), or on request.
-  const latest = useMemo(() => contacts.reduce((m, c) => Math.max(m, c.lastSeenAt?.toMillis() ?? 0), 0), [contacts]);
-  useEffect(() => {
-    let alive = true;
-    setLoading(true);
-    apiPost<{ events: Ev[] }>("/api/studio", { action: "overview" })
-      .then((r) => {
-        if (!alive) return;
-        cached = r.events;
-        setEvents(r.events);
-        setError("");
-      })
-      .catch((e) => {
-        console.error(e);
-        if (alive) setError("მონაცემები ვერ ჩაიტვირთა. სცადე განახლება.");
-      })
-      .finally(() => alive && setLoading(false));
-    return () => {
-      alive = false;
-    };
-  }, [latest, tick]);
+  const { events, error, loading, refresh } = useStudioEvents(contacts);
 
   const byId = useMemo(() => new Map(contacts.map((c) => [c.id, c])), [contacts]);
 
@@ -118,11 +53,7 @@ const OverviewPage = () => {
     const inP = (t: number) => t > now - span;
     const inPrev = (t: number) => t <= now - span && t > now - 2 * span;
 
-    const history = new Map<string, Ev[]>();
-    for (const e of [...events].sort((a, b) => a.at - b.at)) {
-      if (!history.has(e.c)) history.set(e.c, []);
-      history.get(e.c)!.push(e);
-    }
+    const history = historyOf(events);
     const isAutoReply = (e: Ev) => (e.type === "sms" || e.type === "email") && e.template === "auto_reply" && e.ok;
     /** The automatic answer that followed an inquiry, if any (within 10 minutes). */
     const replyTo = (q: Ev) => history.get(q.c)?.find((e) => isAutoReply(e) && e.at >= q.at - 5e3 && e.at - q.at < 600e3);
@@ -159,8 +90,7 @@ const OverviewPage = () => {
     // Where everyone came from: the channel of their first inquiry or import.
     const channels = new Map<string, number>();
     for (const c of contacts) {
-      const first = history.get(c.id)?.find((e) => e.type === "inquiry" || e.type === "import");
-      const ch = channelOf(first, c);
+      const ch = channelOf(firstTouch(history.get(c.id)), c);
       channels.set(ch, (channels.get(ch) || 0) + 1);
     }
     const sources = [...channels.entries()].map(([label, value]) => ({ label, value })).sort((a, b) => b.value - a.value);
@@ -227,6 +157,7 @@ const OverviewPage = () => {
       delivery: finals.length ? delivered / finals.length : null,
       wonNow: wonIn(inP),
       wonPrev: wonIn(inPrev),
+      wonSum: contacts.filter((c) => c.stage === "won" && inP(c.stageAt?.toMillis() ?? 0)).reduce((s, c) => s + (c.dealValue || 0), 0),
       pipeline: pipeline.length,
       funnel,
       lost,
@@ -238,35 +169,58 @@ const OverviewPage = () => {
   const label = PERIODS[period];
   const vs = `წინა ${label}`;
 
+  const wait = <span className="text-slate-300">…</span>;
   return (
     <div className="space-y-6">
-      <header className="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-slate-900">მიმოხილვა</h1>
-          <p className="mt-1 text-slate-500">საიდან მოდიან ადამიანები, რა სისწრაფით ვპასუხობთ და რამდენი ხდება დილი.</p>
-        </div>
-        <Segmented options={PERIODS} value={period} onChange={setPeriod} />
-      </header>
+      <PageHeader
+        title="მიმოხილვა"
+        description="საიდან მოდიან ადამიანები, რა სისწრაფით ვპასუხობთ და რამდენი ხდება დილი."
+        actions={<Segmented options={PERIODS} value={period} onChange={setPeriod} />}
+      />
 
-      {error && <p className="rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-700">{error}</p>}
+      {error && <p className="rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">{error}</p>}
 
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <Kpi icon={Inbox} label="ახალი მომართვა" value={data?.newNow} prev={data?.newPrev} vs={vs}
-          hint={`ვინც ბოლო ${label} საიტზე ან რეკლამაში მოგვწერა`} />
-        <Kpi icon={MessageSquare} label="პასუხის დრო"
-          text={data ? (data.answered ? fmtDelay(data.delay) : "ჯერ არ არის") : undefined}
-          note={data && data.asked ? `${data.answered} / ${data.asked} მომართვას ავტომატურად ვუპასუხეთ` : "ავტომატური SMS და მეილი"}
-          hint="მომართვიდან პირველ ავტომატურ პასუხამდე (მედიანა)" />
-        <Kpi icon={Send} label="გაგზავნილი შეტყობინება" value={data?.sentNow} prev={data?.sentPrev} vs={vs}
-          note={data?.delivery != null ? `SMS მიწოდება: ${pct(data.delivery, 1)}` : undefined}
-          hint="SMS და მეილი ერთად: ავტომატური, პირადი და ჯგუფური" />
-        <Kpi icon={Trophy} label="დილი" value={data?.wonNow} prev={data?.wonPrev} vs={vs}
-          note={data ? (data.pipeline ? `კონვერსია ${pct(data.funnel[3].value, data.pipeline)}, ყველა დროის` : "ეტაპს კონტაქტის ბარათში ცვლი") : undefined}
-          hint="ვინც ეტაპზე „დილი“ გადავიდა" />
-      </div>
+      <StatStrip
+        items={[
+          {
+            icon: Inbox, label: "ახალი მომართვა", hint: `ვინც ბოლო ${label} საიტზე ან რეკლამაში მოგვწერა`,
+            value: data ? data.newNow : wait,
+            sub: data && <Delta now={data.newNow} prev={data.newPrev} vs={vs} />,
+          },
+          {
+            icon: MessageSquare, label: "პასუხის დრო", hint: "მომართვიდან პირველ ავტომატურ პასუხამდე (მედიანა)",
+            value: data ? (data.answered ? fmtDelay(data.delay) : <span className="text-slate-400">არ არის</span>) : wait,
+            sub: data && data.asked ? `${data.answered} / ${data.asked} მომართვას ავტომატურად ვუპასუხეთ` : "ავტომატური SMS და მეილი",
+          },
+          {
+            icon: Send, label: "გაგზავნილი შეტყობინება", hint: "SMS და მეილი ერთად: ავტომატური, პირადი და ჯგუფური",
+            value: data ? data.sentNow : wait,
+            sub: data && (
+              <>
+                <Delta now={data.sentNow} prev={data.sentPrev} vs={vs} />
+                {data.delivery != null && <span className="block">SMS მიწოდება: {pct(data.delivery, 1)}</span>}
+              </>
+            ),
+          },
+          {
+            icon: Trophy, label: "დილი", hint: "ვინც ეტაპზე „დილი“ გადავიდა",
+            value: data ? data.wonNow : wait,
+            sub: data && (
+              <>
+                <Delta now={data.wonNow} prev={data.wonPrev} vs={vs} />
+                <span className="block">
+                  {data.wonSum ? `₾${data.wonSum.toLocaleString("en-US")} ჯამში · ` : ""}
+                  {data.pipeline ? `კონვერსია ${pct(data.funnel[3].value, data.pipeline)}` : "ეტაპს კონტაქტის ბარათში ცვლი"}
+                </span>
+              </>
+            ),
+          },
+        ]}
+      />
 
       <div className="grid gap-4 lg:grid-cols-2">
-        <Card title="საიდან მოდიან" subtitle={`ყველა კონტაქტი (${contacts.length}), პირველი შეხების მიხედვით`}>
+        <Card title="საიდან მოდიან" subtitle={`ყველა კონტაქტი (${contacts.length}), პირველი შეხების მიხედვით`}
+          action={<Link to="/studio/sources" className="text-sm text-slate-500 hover:text-slate-900">დეტალურად</Link>}>
           {!data || contactsLoading ? <Loading /> : data.sources.length === 0 ? (
             <Empty>ჯერ კონტაქტი არ არის.</Empty>
           ) : (
@@ -274,7 +228,8 @@ const OverviewPage = () => {
           )}
         </Card>
 
-        <Card title="ძაბრი" subtitle={data ? `გაყიდვების დაფაზე: ${data.pipeline} ადამიანი, ყველა დროის` : ""}>
+        <Card title="ძაბრი" subtitle={data ? `გაყიდვების დაფაზე: ${data.pipeline} ადამიანი, ყველა დროის` : ""}
+          action={<Link to="/studio/pipeline" className="text-sm text-slate-500 hover:text-slate-900">დაფის ნახვა</Link>}>
           {!data || contactsLoading ? <Loading /> : data.pipeline === 0 ? (
             <Empty>დაფაზე ჯერ არავინაა. ვინც საიტიდან ან რეკლამიდან მოგვწერს, აქ თავისით ჩნდება.</Empty>
           ) : (
@@ -286,7 +241,7 @@ const OverviewPage = () => {
               />
               <p className="mt-4 border-t border-slate-100 pt-3 text-sm text-slate-500">
                 წაგებული: <span className="font-medium text-slate-800">{data.lost}</span>
-                <span className="ml-2 text-slate-400">ეტაპს კონტაქტის ბარათში ცვლი</span>
+                <span className="ml-2 text-slate-400">ეტაპს დაფაზე ან კონტაქტის ბარათში ცვლი</span>
               </p>
             </>
           )}
@@ -297,8 +252,8 @@ const OverviewPage = () => {
         title="ბოლო მოვლენები"
         subtitle="ყველაფერი, რაც კონტაქტებთან ხდება, ერთ ადგილას"
         action={
-          <button onClick={() => setTick((t) => t + 1)} disabled={loading} title="განახლება"
-            className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm text-slate-500 transition hover:bg-slate-100 hover:text-slate-800 disabled:opacity-50">
+          <button onClick={refresh} disabled={loading} title="განახლება"
+            className="inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-sm text-slate-500 transition hover:bg-slate-100 hover:text-slate-800 disabled:opacity-50">
             <RefreshCw size={14} className={loading ? "animate-spin" : ""} />განახლება
           </button>
         }
@@ -432,93 +387,22 @@ function FeedRow({ item, contact, people, show }: { item: FeedItem; contact?: Co
   );
 }
 
-/** Stat tile: label, value, change against the period before. */
-function Kpi({ icon: Icon, label, value, text, prev, vs, note, hint }: {
-  icon: typeof Inbox;
-  label: string;
-  value?: number;
-  text?: string;
-  prev?: number;
-  vs?: string;
-  note?: string;
-  hint: string;
-}) {
-  const shown = text ?? value;
-  const diff = value != null && prev != null ? value - prev : null;
+/** Change against the period before: green up, red down. */
+function Delta({ now, prev, vs }: { now: number; prev: number; vs: string }) {
+  const diff = now - prev;
+  if (diff === 0) return <span className="block">უცვლელი, {vs}სთან</span>;
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-[0_1px_2px_rgba(15,23,42,0.04)]" title={hint}>
-      <p className="flex items-center gap-2 text-sm text-slate-500"><Icon size={15} className="text-slate-400" />{label}</p>
-      <p className="mt-3 text-3xl font-semibold tracking-tight text-slate-900">{shown ?? <span className="text-slate-300">…</span>}</p>
-      {diff != null && (
-        <p className="mt-1.5 text-xs text-slate-500">
-          {diff === 0 ? (
-            `უცვლელი, ${vs}სთან`
-          ) : (
-            <>
-              <span className={`mr-1 inline-flex items-center gap-0.5 font-medium ${diff > 0 ? "text-emerald-600" : "text-rose-600"}`}>
-                {diff > 0 ? <ArrowUpRight size={13} /> : <ArrowDownRight size={13} />}
-                {diff > 0 ? `+${diff}` : diff}
-              </span>
-              {vs}სთან
-            </>
-          )}
-        </p>
-      )}
-      {note && <p className="mt-1 text-xs text-slate-500">{note}</p>}
-    </div>
+    <span className="block">
+      <span className={`mr-1 inline-flex items-center gap-0.5 rounded px-1 font-medium ${diff > 0 ? "bg-emerald-50 text-emerald-700" : "bg-rose-50 text-rose-700"}`}>
+        {diff > 0 ? <ArrowUpRight size={12} /> : <ArrowDownRight size={12} />}
+        {diff > 0 ? `+${diff}` : diff}
+      </span>
+      {vs}სთან
+    </span>
   );
 }
 
-/** Ranked bars, one hue: label and value above a thin bar (square at the start, round at the end). */
-function BarList({ rows, total, keepOrder = false }: { rows: { label: string; value: number }[]; total: number; keepOrder?: boolean }) {
-  const list = keepOrder ? rows : [...rows].sort((a, b) => b.value - a.value);
-  const max = Math.max(1, ...list.map((r) => r.value));
-  return (
-    <ul className="space-y-3.5">
-      {list.map((r) => (
-        <li key={r.label} title={`${r.label}: ${r.value} (${pct(r.value, total)})`}>
-          <div className="mb-1.5 flex items-baseline justify-between gap-3 text-sm">
-            <span className="truncate text-slate-700">{r.label}</span>
-            <span className="shrink-0 tabular-nums text-slate-400">
-              <span className="font-medium text-slate-900">{r.value}</span> · {pct(r.value, total)}
-            </span>
-          </div>
-          <div className="h-2 w-full">
-            <div className="h-2 rounded-r-[4px] bg-indigo-500" style={{ width: r.value ? `max(4px, ${(r.value / max) * 100}%)` : 0 }} />
-          </div>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-function Card({ title, subtitle, action, children }: { title: string; subtitle?: string; action?: React.ReactNode; children: React.ReactNode }) {
-  return (
-    <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
-      <div className="mb-5 flex items-start justify-between gap-3">
-        <div>
-          <h2 className="font-semibold text-slate-900">{title}</h2>
-          {subtitle && <p className="mt-0.5 text-sm text-slate-500">{subtitle}</p>}
-        </div>
-        {action}
-      </div>
-      {children}
-    </section>
-  );
-}
-
-function Segmented<T extends string>({ options, value, onChange }: { options: Record<T, string>; value: T; onChange: (v: T) => void }) {
-  return (
-    <div className="inline-flex rounded-lg bg-slate-100 p-0.5">
-      {(Object.keys(options) as T[]).map((k) => (
-        <button key={k} type="button" onClick={() => onChange(k)} aria-pressed={value === k}
-          className={`rounded-md px-3 py-1.5 text-sm transition ${value === k ? "bg-white font-medium text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-800"}`}>
-          {options[k]}
-        </button>
-      ))}
-    </div>
-  );
-}
+const Card = (props: { title: string; subtitle?: string; action?: React.ReactNode; children: React.ReactNode }) => <Panel {...props} />;
 
 const Loading = () => <p className="py-6 text-center text-sm text-slate-400">იტვირთება…</p>;
 const Empty = ({ children }: { children: React.ReactNode }) => <p className="py-6 text-center text-sm text-slate-500">{children}</p>;
