@@ -6,15 +6,18 @@
 // Env: META_VERIFY_TOKEN (any secret phrase, typed again in the Meta app's webhook settings),
 //      META_PAGE_TOKEN (System User token with leads_retrieval + pages_* permissions),
 //      META_APP_SECRET (optional: verifies Meta's signature), META_GRAPH_VERSION (default v23.0).
+// No lead is lost silently: each lead id is handled once (metaLeads/{id}, Meta may resend),
+// a test lead from Meta's testing tool only marks the connection as working, and a lead we
+// can't read emails us to look in Meta's Leads Center.
 import { createHmac, timingSafeEqual } from "node:crypto";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { normalizePhone, PRODUCTS, type Inquiry, type Product } from "./_lib/contacts.js";
+import { adminDb } from "./_lib/firebase.js";
+import { envList, esc, isEmailConfigured, sendEmail } from "./_lib/mail.js";
+import { graph, noteMeta, pageToken } from "./_lib/meta.js";
 import { errText, handleInquiry } from "./_lib/pipeline.js";
 
 type Req = IncomingMessage & { body?: unknown };
-
-const graph = (path: string) =>
-  `https://graph.facebook.com/${process.env.META_GRAPH_VERSION || "v23.0"}/${path}${path.includes("?") ? "&" : "?"}access_token=${encodeURIComponent(process.env.META_PAGE_TOKEN || "")}`;
 
 async function readRaw(req: IncomingMessage): Promise<string> {
   const chunks: Buffer[] = [];
@@ -46,17 +49,24 @@ function productFrom(...names: string[]): Product {
 
 interface LeadField { name: string; values?: string[] }
 
-async function processLead(leadId: string) {
-  const res = await fetch(graph(`${encodeURIComponent(leadId)}?fields=field_data,form_id,ad_name,campaign_name,created_time`));
-  const lead = (await res.json()) as {
-    field_data?: LeadField[]; form_id?: string; ad_name?: string; campaign_name?: string; error?: { message: string };
-  };
-  if (!res.ok || lead.error) throw new Error(`Graph lead ${leadId}: ${lead.error?.message || res.status}`);
+interface Lead { field_data?: LeadField[]; form_id?: string; ad_name?: string; campaign_name?: string }
+
+/** "real" = went through the pipeline; "test" = a dummy lead from Meta's testing tool. */
+async function processLead(leadId: string): Promise<{ kind: "real" | "test"; name: string }> {
+  const token = await pageToken();
+  const id = encodeURIComponent(leadId);
+  // Ad and campaign names need ads permissions on the token; without them, read the lead anyway.
+  const lead = await graph<Lead>(`${id}?fields=field_data,form_id,ad_name,campaign_name,created_time`, token)
+    .catch(() => graph<Lead>(`${id}?fields=field_data,form_id,created_time`, token));
 
   let formName = "";
   if (lead.form_id) {
-    const f = await fetch(graph(`${encodeURIComponent(lead.form_id)}?fields=name`)).then((r) => r.json()).catch(() => ({}));
-    formName = (f as { name?: string }).name || "";
+    const f = await graph<{ name?: string }>(`${encodeURIComponent(lead.form_id)}?fields=name`, token).catch(() => ({ name: "" }));
+    formName = f.name || "";
+  }
+
+  if ((lead.field_data || []).some((f) => (f.values || []).some((v) => /dummy data|test lead/i.test(v)))) {
+    return { kind: "test", name: formName };
   }
 
   const fields = new Map((lead.field_data || []).map((f) => [f.name.toLowerCase(), (f.values || []).join(", ")]));
@@ -82,8 +92,48 @@ async function processLead(leadId: string) {
       ...(lead.ad_name ? { utm_content: lead.ad_name.slice(0, 100) } : {}),
     },
   };
-  if (!q.phone && !q.email) throw new Error(`lead ${leadId} has no phone or email`);
-  await handleInquiry(q, "meta", `Facebook რეკლამა${lead.ad_name ? ` (${lead.ad_name})` : ""} · ${PRODUCTS[product].label}`);
+  if (!q.phone && !q.email) throw new Error(`ფორმაში ტელეფონი და მეილი ვერ ვიპოვეთ (${[...fields.keys()].join(", ")})`);
+  const ok = await handleInquiry(q, "meta", `Facebook რეკლამა${lead.ad_name ? ` (${lead.ad_name})` : ""} · ${PRODUCTS[product].label}`);
+  if (!ok) throw new Error("ბაზაში ვერ ჩაიწერა და შეტყობინებაც ვერ გაიგზავნა");
+  return { kind: "real", name: q.name || q.phone || q.email };
+}
+
+/** Handles one lead id once, even when Meta sends the same event again. */
+async function handleLeadId(leadId: string) {
+  const mark = adminDb().collection("metaLeads").doc(leadId);
+  try {
+    await mark.create({ at: new Date(), status: "processing" });
+  } catch {
+    return; // already handled (or being handled) by an earlier delivery
+  }
+  try {
+    const r = await processLead(leadId);
+    await mark.set({ status: r.kind, done: new Date() }, { merge: true });
+    await noteMeta(r.kind === "test" ? { lastTestAt: "now" } : { lastLeadAt: "now", lastLeadName: r.name.slice(0, 80) });
+  } catch (e) {
+    const why = errText(e);
+    console.error("[meta-webhook]", leadId, why);
+    await mark.set({ status: "failed", error: why.slice(0, 500) }, { merge: true }).catch(() => {});
+    await noteMeta({ lastErrorAt: "now", lastError: why.slice(0, 300) });
+    await alertUnread(leadId, why);
+  }
+}
+
+/** The lead exists at Meta but we couldn't take it in: tell the team where to find it. */
+async function alertUnread(leadId: string, why: string) {
+  const to = [...envList("NOTIFY_EMAIL"), ...envList("NOTIFY_EMAIL_MARKETING")];
+  if (!isEmailConfigured() || !to.length) return;
+  const center = "https://business.facebook.com/latest/leads_center";
+  await sendEmail({
+    to,
+    subject: "Facebook-იდან ლიდი მოვიდა, მაგრამ ავტომატურად ვერ შემოვიდა",
+    html: `<div style="font-family:Arial,sans-serif;font-size:14px;color:#0f172a;max-width:560px">
+<p style="font-size:16px;font-weight:bold;margin:0">Facebook-ის ფორმა შეავსეს, მაგრამ Studio-ში ვერ შემოვიდა.</p>
+<p>ადამიანის მონაცემები Meta-შია: გახსენი Leads Center და დაუკავშირდი ხელით.</p>
+<p><a href="${center}" style="display:inline-block;background:#0f172a;color:#fff;text-decoration:none;padding:10px 18px;border-radius:8px;font-weight:bold">Leads Center-ის გახსნა</a></p>
+<p style="color:#64748b;font-size:13px">მიზეზი: ${esc(why)}<br>ლიდის ნომერი: ${esc(leadId)}</p></div>`,
+    text: `Facebook-ის ფორმა შეავსეს, მაგრამ Studio-ში ვერ შემოვიდა. გახსენი Leads Center: ${center}\nმიზეზი: ${why}\nლიდი: ${leadId}`,
+  }).catch((e) => console.error("[meta-webhook] alert failed", errText(e)));
 }
 
 export default async function handler(req: Req, res: ServerResponse) {
@@ -120,13 +170,8 @@ export default async function handler(req: Req, res: ServerResponse) {
     .filter((c) => c.field === "leadgen" && c.value?.leadgen_id)
     .map((c) => c.value!.leadgen_id!);
 
-  for (const id of leadIds) {
-    try {
-      await processLead(id);
-    } catch (e) {
-      console.error("[meta-webhook]", errText(e));
-    }
-  }
+  if (leadIds.length) await noteMeta({ lastWebhookAt: "now" });
+  for (const id of leadIds) await handleLeadId(id);
   res.statusCode = 200;
   res.end("ok");
 }

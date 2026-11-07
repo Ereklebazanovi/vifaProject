@@ -3,12 +3,15 @@
 //   overview counts (no message texts, no names: the studio already has the contacts live).
 // { action: "balance" } → SMS left on smsoffice.ge.
 // { action: "gsc", days } → Google Search Console: clicks, impressions, top searches and pages.
+// { action: "meta" } → is the Facebook lead-form connection working (see _lib/meta.ts);
+// { action: "meta-subscribe" } → switch on "form filled" events for our page.
 // One collection-group read needs no extra Firestore rule or index. It reads every event
 // each time, which is fine for thousands of events; past that, keep running totals instead.
 import { createSign } from "node:crypto";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { jsonBody, requireAdmin } from "./_lib/adminAuth.js";
 import { adminDb } from "./_lib/firebase.js";
+import { metaStatus, metaSubscribe } from "./_lib/meta.js";
 
 type Req = IncomingMessage & { body?: unknown };
 type Res = ServerResponse & { status: (code: number) => Res; json: (body: unknown) => void };
@@ -176,6 +179,15 @@ export default async function handler(req: Req, res: Res) {
   const b = jsonBody(req);
   if (b.action === "balance") return res.status(200).json({ ok: true, balance: await smsBalance() });
   if (b.action === "gsc") return res.status(200).json({ ok: true, ...(await searchConsole(Number(b.days) || 28)) });
+  if (b.action === "meta") return res.status(200).json({ ok: true, ...(await metaStatus()) });
+  if (b.action === "meta-subscribe") {
+    try {
+      await metaSubscribe();
+    } catch (e) {
+      return res.status(200).json({ ok: false, error: e instanceof Error ? e.message : String(e) });
+    }
+    return res.status(200).json({ ok: true, ...(await metaStatus()) });
+  }
   if (b.action !== "overview") return res.status(400).json({ ok: false, error: "action" });
 
   const snap = await adminDb().collectionGroup("events").get();

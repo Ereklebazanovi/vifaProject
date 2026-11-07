@@ -1,12 +1,12 @@
 // /studio/sources: which channel brings people and which one brings deals; Google search
 // numbers straight from Search Console (via /api/studio).
 import { useEffect, useMemo, useState } from "react";
-import { ExternalLink } from "lucide-react";
+import { Circle, CircleAlert, CircleCheck, ExternalLink, RefreshCw } from "lucide-react";
 import { useAdmin } from "../AdminLayout";
 import { apiPost } from "../api";
 import { channelOf, firstTouch, historyOf, useStudioEvents } from "../studioData";
-import { PageHeader, Panel, Segmented, StatStrip } from "../ui";
-import { STAGE_RANK, stageOf, type Contact } from "../contacts/contactsService";
+import { Badge, btnPrimary, btnSecondary, PageHeader, Panel, Segmented, StatStrip, type Tone } from "../ui";
+import { formatWhen, STAGE_RANK, stageOf, type Contact } from "../contacts/contactsService";
 
 const PERIODS = { "30": "30 დღე", "90": "90 დღე", "365": "1 წელი" } as const;
 type Period = keyof typeof PERIODS;
@@ -131,6 +131,8 @@ const SourcesPage = () => {
         )}
       </Panel>
 
+      <MetaSection />
+
       <GoogleSection gsc={gsc} error={gscError} period={PERIODS[period]} />
     </div>
   );
@@ -248,6 +250,163 @@ function GoogleSetup({ gsc }: { gsc: Gsc }) {
         </li>
       </ol>
       {gsc.reason && <p className="mt-4 text-xs text-slate-400">ტექნიკური მიზეზი: {gsc.reason}</p>}
+    </Panel>
+  );
+}
+
+interface MetaStatus {
+  env: Record<string, boolean>;
+  webhookUrl: string;
+  page?: string;
+  app?: string;
+  subscribed?: boolean | null;
+  forms?: { id: string; name: string; status: string; leads: number | null }[] | null;
+  lastLeadAt: number;
+  lastLeadName: string;
+  lastTestAt: number;
+  lastErrorAt: number;
+  lastError: string;
+  error?: string;
+}
+
+const TESTING_TOOL = "https://developers.facebook.com/tools/lead-ads-testing";
+const FORM_STATUS: Record<string, [string, Tone]> = {
+  ACTIVE: ["აქტიური", "green"],
+  ARCHIVED: ["არქივში", "neutral"],
+  DRAFT: ["მონახაზი", "amber"],
+  DELETED: ["წაშლილი", "neutral"],
+};
+const code = "rounded bg-slate-100 px-1.5 py-0.5 text-xs text-slate-800";
+
+/** Facebook / Instagram lead forms: each step of the connection, and the forms Meta has. */
+function MetaSection() {
+  const [s, setS] = useState<MetaStatus | null>(null);
+  const [error, setError] = useState("");
+  const [busy, setBusy] = useState(false);
+
+  const load = (action: "meta" | "meta-subscribe" = "meta") => {
+    setBusy(true);
+    setError("");
+    apiPost<MetaStatus>("/api/studio", { action })
+      .then(setS)
+      .catch((e: Error) => setError(action === "meta" ? "Meta-ს მონაცემები ვერ ჩაიტვირთა." : `ვერ ჩაირთო: ${e.message}`))
+      .finally(() => setBusy(false));
+  };
+  useEffect(() => load(), []);
+
+  const missing = s ? Object.keys(s.env).filter((k) => !s.env[k]) : [];
+  const lastIn = Math.max(s?.lastLeadAt || 0, s?.lastTestAt || 0);
+  const steps = s
+    ? [
+        {
+          ok: missing.length === 0,
+          title: "გასაღებები Vercel-ში",
+          body: missing.length ? (
+            <>აკლია: {missing.map((k) => <code key={k} className={`${code} mr-1`}>{k}</code>)}</>
+          ) : "სამივე ადგილზეა.",
+        },
+        {
+          ok: Boolean(s.page),
+          title: "კავშირი Facebook-თან",
+          body: s.page ? `გვერდი: ${s.page}${s.app ? `, აპი: ${s.app}` : ""}` : s.error ? `Facebook-ის პასუხი: ${s.error}` : "ტოკენი ჯერ არ არის.",
+        },
+        {
+          ok: s.subscribed === true,
+          title: "ფორმების მიღება ჩართულია",
+          body: s.subscribed ? "Facebook ყოველ შევსებულ ფორმაზე გვატყობინებს." : s.page ? "გვერდზე ჯერ არ არის ჩართული. ერთი დაჭერაა." : "ჯერ წინა ნაბიჯი.",
+          action: s.page && !s.subscribed && (
+            <button type="button" disabled={busy} onClick={() => load("meta-subscribe")} className={btnPrimary}>ჩართვა</button>
+          ),
+        },
+        {
+          ok: lastIn > 0,
+          title: "ლიდი მოვიდა",
+          body: s.lastLeadAt ? (
+            `ბოლო: ${formatWhen(s.lastLeadAt)}${s.lastLeadName ? `, ${s.lastLeadName}` : ""}${s.lastTestAt > s.lastLeadAt ? `. სატესტო: ${formatWhen(s.lastTestAt)}` : ""}`
+          ) : s.lastTestAt ? (
+            `სატესტო ლიდი მივიღეთ: ${formatWhen(s.lastTestAt)}. კავშირი მუშაობს.`
+          ) : (
+            <>
+              შექმენი სატესტო ლიდი{" "}
+              <a className="font-medium text-indigo-600 hover:underline" href={TESTING_TOOL} target="_blank" rel="noopener noreferrer">Meta-ს სატესტო გვერდზე</a>
+              , რამდენიმე წამში აქ მწვანე გახდება.
+            </>
+          ),
+        },
+      ]
+    : [];
+  const connected = steps.length > 0 && steps.every((x) => x.ok);
+
+  return (
+    <Panel
+      title="Facebook / Instagram ლიდ-ფორმები"
+      subtitle={connected ? "მიერთებულია: შევსებული ფორმა თავისით შემოდის, ადამიანს მყისიერად მიდის SMS" : "ოთხი ნაბიჯი. ყველა მწვანე რომ გახდება, რეკლამის ლიდები თავისით შემოვა"}
+      action={
+        <button type="button" onClick={() => load()} disabled={busy} className={btnSecondary}>
+          <RefreshCw size={14} className={busy ? "animate-spin" : ""} /> შემოწმება
+        </button>
+      }
+    >
+      {error && <p className="mb-3 text-sm text-rose-600">{error}</p>}
+      {!s ? (
+        !error && <p className="py-6 text-center text-sm text-slate-400">იტვირთება…</p>
+      ) : (
+        <>
+          <ol className="divide-y divide-slate-100">
+            {steps.map((x) => (
+              <li key={x.title} className="flex items-start gap-3 py-3 first:pt-0">
+                {x.ok ? <CircleCheck size={20} className="mt-px shrink-0 text-emerald-600" /> : <Circle size={20} className="mt-px shrink-0 text-slate-300" />}
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-medium text-slate-900">{x.title}</p>
+                  <p className="mt-0.5 break-words text-sm text-slate-500">{x.body}</p>
+                </div>
+                {x.action}
+              </li>
+            ))}
+          </ol>
+
+          {s.lastErrorAt > lastIn && (
+            <div className="mt-3 flex gap-2.5 rounded-lg bg-rose-50 px-3.5 py-3 text-sm text-rose-800 ring-1 ring-inset ring-rose-200">
+              <CircleAlert size={18} className="mt-px shrink-0" />
+              <p>
+                ბოლო ლიდი ვერ შემოვიდა ({formatWhen(s.lastErrorAt)}): {s.lastError}. მეილზე გამოგიგზავნეთ, მისი მონაცემები Meta-ს Leads Center-შია.
+              </p>
+            </div>
+          )}
+
+          {!connected && (
+            <p className="mt-3 text-xs text-slate-500">
+              Webhook-ის მისამართი Meta-სთვის: <code className={`${code} select-all break-all`}>{s.webhookUrl}</code>
+            </p>
+          )}
+
+          {s.forms && s.forms.length > 0 && (
+            <div className="mt-5 overflow-x-auto rounded-lg ring-1 ring-slate-200">
+              <table className="w-full min-w-[28rem] text-sm">
+                <thead>
+                  <tr className="border-b border-slate-200 bg-slate-50/80 text-left text-xs font-medium text-slate-500">
+                    <th className="px-4 py-2.5 font-medium">ფორმა</th>
+                    <th className="px-3 py-2.5 font-medium">სტატუსი</th>
+                    <th className="px-4 py-2.5 text-right font-medium">ლიდი Meta-ში</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 tabular-nums">
+                  {s.forms.map((f) => {
+                    const [label, tone] = FORM_STATUS[f.status] || [f.status, "neutral" as Tone];
+                    return (
+                      <tr key={f.id}>
+                        <td className="px-4 py-2.5 text-slate-800">{f.name}</td>
+                        <td className="px-3 py-2.5">{label && <Badge tone={tone}>{label}</Badge>}</td>
+                        <td className="px-4 py-2.5 text-right text-slate-700">{f.leads ?? ""}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </>
+      )}
     </Panel>
   );
 }
