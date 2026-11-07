@@ -1,7 +1,7 @@
 // Contacts written by /api (site form, later Meta Lead Ads). The studio only reads them.
 import {
-  addDoc, arrayRemove, arrayUnion, collection, deleteDoc, deleteField, doc, getDocs, onSnapshot, orderBy, query, serverTimestamp, updateDoc,
-  type Timestamp,
+  addDoc, arrayRemove, arrayUnion, collection, deleteDoc, deleteField, doc, getDocs, onSnapshot, orderBy, query, serverTimestamp, Timestamp,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "../../firebase";
 
@@ -65,6 +65,9 @@ export interface Contact {
   dealValue?: number;
   /** Free labels the team adds: "VIP", "ზარი ხვალ", "რესტორანი". */
   tags?: string[];
+  /** The next thing to do with this person, and when ("ხვალ 11:00, დარეკვა"). */
+  nextAt?: Timestamp;
+  nextNote?: string;
 }
 
 export interface ContactEvent {
@@ -172,6 +175,31 @@ export async function changeTag(id: string, tag: string, add: boolean) {
   if (!t) return;
   await updateDoc(doc(db, CONTACTS, id), { tags: add ? arrayUnion(t) : arrayRemove(t) });
 }
+
+/** Plan (or clear, with null) the next step: a date and a short note. */
+export async function setNextStep(id: string, at: Date | null, note: string) {
+  await updateDoc(doc(db, CONTACTS, id), at
+    ? { nextAt: Timestamp.fromDate(at), nextNote: note.trim().slice(0, 120) }
+    : { nextAt: deleteField(), nextNote: deleteField() });
+}
+
+/** "დღეს, 11:00" / "ხვალ, 11:00" / "14 ნოე, 11:00". */
+export function formatDue(ms: number) {
+  const d = new Date(ms);
+  const time = `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+  const today = new Date();
+  const tomorrow = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+  if (d.toDateString() === today.toDateString()) return `დღეს, ${time}`;
+  if (d.toDateString() === tomorrow.toDateString()) return `ხვალ, ${time}`;
+  return formatWhen(ms);
+}
+
+/** Due by the end of today (overdue ones included). */
+export const dueToday = (c: Contact) => {
+  const end = new Date();
+  end.setHours(23, 59, 59, 999);
+  return Boolean(c.nextAt && c.nextAt.toMillis() <= end.getTime());
+};
 
 /** The deal's amount in GEL; empty clears it. */
 export async function setDealValue(id: string, value: number | null) {

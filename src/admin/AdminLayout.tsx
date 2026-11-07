@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { NavLink, Outlet, useLocation, useOutletContext } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, NavLink, Outlet, useLocation, useOutletContext } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import type { User } from "firebase/auth";
-import { ChartColumn, Eye, EyeOff, SquareKanban, LayoutDashboard, LogOut, PenLine, Send, Users } from "lucide-react";
+import { ChartColumn, Eye, EyeOff, Inbox, SquareKanban, LayoutDashboard, LogOut, PenLine, Send, Users, X } from "lucide-react";
 import { checkAdminAccess, signInWithGoogle, signOutAdmin, watchAuth } from "./auth";
-import { formatPhone, maskEmail, maskPhone, subscribeContacts, type Contact } from "./contacts/contactsService";
+import { formatPhone, maskEmail, maskPhone, PRODUCT_LABELS, subscribeContacts, type Contact } from "./contacts/contactsService";
 import { btnPrimary, btnSecondary } from "./ui";
 
 type Status = "checking" | "anon" | "denied" | "authed";
@@ -71,6 +71,8 @@ const AdminLayout = () => {
   const [contactsLoading, setContactsLoading] = useState(true);
   const [contactsError, setContactsError] = useState("");
   const [privacy, setPrivacy] = useState(readPrivacy);
+  const seenRef = useRef<Map<string, number> | null>(null);
+  const [alerts, setAlerts] = useState<Contact[]>([]);
   const location = useLocation();
   const section = NAV_ITEMS.find((i) => location.pathname.startsWith(`/studio/${i.to}`))?.label || "";
 
@@ -107,6 +109,21 @@ const AdminLayout = () => {
     setContactsLoading(true);
     return subscribeContacts(
       (data) => {
+        // Someone just wrote (site form, Facebook form): a notice and a soft chime.
+        const now = Date.now();
+        const next = new Map(data.map((c) => [c.id, c.lastSeenAt?.toMillis() ?? 0]));
+        const prev = seenRef.current;
+        if (prev) {
+          const fresh = data.filter((c) => {
+            const t = next.get(c.id) || 0;
+            return c.sources?.some((s) => s === "site" || s === "meta") && t > (prev.get(c.id) ?? 0) && now - t < 5 * 60e3;
+          });
+          if (fresh.length) {
+            setAlerts((a) => [...fresh, ...a.filter((x) => !fresh.some((f) => f.id === x.id))].slice(0, 3));
+            chime();
+          }
+        }
+        seenRef.current = next;
         setContacts(data);
         setContactsLoading(false);
         setContactsError("");
@@ -250,6 +267,14 @@ const AdminLayout = () => {
               </div>
             </main>
           </div>
+
+          {alerts.length > 0 && (
+            <div className="fixed bottom-4 right-4 z-60 grid w-[min(calc(100%-2rem),22rem)] gap-2" aria-live="polite">
+              {alerts.map((c) => (
+                <NewLeadNotice key={c.id} c={c} privacy={privacy} onClose={() => setAlerts((a) => a.filter((x) => x.id !== c.id))} />
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -267,6 +292,55 @@ const Logo = () => (
     </span>
   </span>
 );
+
+/** Two soft notes, made in the browser (no sound file). Silently skipped if audio is blocked. */
+function chime() {
+  try {
+    const Ctx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+    const ctx = new Ctx();
+    [880, 1318.5].forEach((freq, i) => {
+      const start = ctx.currentTime + i * 0.16;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.0001, start);
+      gain.gain.exponentialRampToValueAtTime(0.12, start + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.45);
+      osc.connect(gain).connect(ctx.destination);
+      osc.start(start);
+      osc.stop(start + 0.5);
+    });
+    setTimeout(() => ctx.close(), 1500);
+  } catch {
+    /* no audio: the notice is enough */
+  }
+}
+
+/** "Someone just wrote": stays 20 seconds, opens the person's card. */
+function NewLeadNotice({ c, privacy, onClose }: { c: Contact; privacy: boolean; onClose: () => void }) {
+  // The parent re-renders on every live update; keep one timer per notice regardless.
+  const close = useRef(onClose);
+  close.current = onClose;
+  useEffect(() => {
+    const t = setTimeout(() => close.current(), 20000);
+    return () => clearTimeout(t);
+  }, [c.id]);
+  const who = c.name || (privacy ? maskPhone(c.phone) || maskEmail(c.email) : formatPhone(c.phone) || c.email);
+  return (
+    <div className="flex items-start gap-3 rounded-lg border border-slate-200 bg-white p-4 shadow-lg ring-1 ring-slate-900/5">
+      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-indigo-50 text-indigo-600"><Inbox size={17} /></span>
+      <div className="min-w-0 flex-1">
+        <p className="text-sm font-semibold text-slate-900">ახალი მომართვა</p>
+        <p className="truncate text-sm text-slate-600">{[who, PRODUCT_LABELS[c.lastProduct || ""]].filter(Boolean).join(" · ")}</p>
+        <Link to={`/studio/contacts?c=${encodeURIComponent(c.id)}`} onClick={onClose} className="mt-1.5 inline-block text-sm font-medium text-indigo-600 hover:underline">
+          ბარათის გახსნა
+        </Link>
+      </div>
+      <button onClick={onClose} aria-label="დახურვა" className="rounded-md p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-700"><X size={15} /></button>
+    </div>
+  );
+}
 
 /** Eye switch: hides phone numbers and emails before the screen is shown to someone else. */
 const PrivacyButton = ({ on, onClick, compact = false }: { on: boolean; onClick: () => void; compact?: boolean }) => (

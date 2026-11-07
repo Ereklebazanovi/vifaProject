@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
 import { Mail, Phone, Search, Upload, X } from "lucide-react";
+import { Timestamp } from "firebase/firestore";
 import { useAdmin, useShow } from "../AdminLayout";
 import { Badge, btnPrimary, btnSecondary, Field, inputCls, Modal, PageHeader, Panel, StatStrip } from "../ui";
 import ImportDialog from "./ImportDialog";
@@ -17,6 +18,8 @@ import {
   STAGE_TONE,
   changeTag,
   setDealValue,
+  setNextStep,
+  formatDue,
   setStage,
   stageOf,
   type Contact,
@@ -315,6 +318,8 @@ export function ContactDetail({ contact: initial, onClose }: { contact: Contact;
       </div>
       {fieldError && <p className="mt-2 text-sm text-rose-600">{fieldError}</p>}
 
+      <NextStep c={c} onChange={(patch) => setC((cur) => ({ ...cur, ...patch }))} />
+
       <p className="mt-5 text-sm text-slate-500">
         შეთავაზებებზე თანხმობა:{" "}
         <span className="font-medium text-slate-700">
@@ -417,6 +422,82 @@ function eventTitle(e: ContactEvent) {
   if (e.type === "edit") return "რედაქტირდა";
   if (e.type === "stage") return `ეტაპი: ${STAGES[e.stage as Stage] || e.stage}`;
   return e.type;
+}
+
+/** "2026-11-12T11:00" for a datetime-local field, in local time. */
+const toLocalInput = (ms: number) => new Date(ms - new Date(ms).getTimezoneOffset() * 6e4).toISOString().slice(0, 16);
+
+const QUICK = [["დღეს", 0], ["ხვალ", 1], ["3 დღეში", 3], ["კვირაში", 7]] as const;
+
+/** The next thing to do with this person, and when. Shows on the board and in the morning email. */
+function NextStep({ c, onChange }: { c: Contact; onChange: (patch: Partial<Contact>) => void }) {
+  const [when, setWhen] = useState(c.nextAt ? toLocalInput(c.nextAt.toMillis()) : "");
+  const [note, setNote] = useState(c.nextNote || "");
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState("");
+  const overdue = Boolean(c.nextAt && c.nextAt.toMillis() < Date.now());
+
+  // Today: the next full hour. Other days: 11:00.
+  const quick = (days: number) => {
+    const d = new Date();
+    if (days === 0) d.setHours(d.getHours() + 1, 0, 0, 0);
+    else {
+      d.setDate(d.getDate() + days);
+      d.setHours(11, 0, 0, 0);
+    }
+    setWhen(toLocalInput(d.getTime()));
+  };
+
+  const save = async (clear = false) => {
+    setBusy(true);
+    setErr("");
+    try {
+      const at = clear || !when ? null : new Date(when);
+      await setNextStep(c.id, at, note);
+      onChange(at ? { nextAt: Timestamp.fromDate(at), nextNote: note.trim() } : { nextAt: undefined, nextNote: undefined });
+      if (clear) {
+        setWhen("");
+        setNote("");
+      }
+    } catch {
+      setErr("ვერ შეინახა.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div className="mt-5 rounded-lg border border-slate-200 bg-slate-50/60 p-4">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <span className="text-sm font-medium text-slate-700">შემდეგი ნაბიჯი</span>
+        {c.nextAt && (
+          <span className={`text-xs font-medium ${overdue ? "text-rose-600" : "text-slate-500"}`}>
+            {overdue ? "ვადა გავიდა: " : ""}{formatDue(c.nextAt.toMillis())}{c.nextNote ? `, ${c.nextNote}` : ""}
+          </span>
+        )}
+      </div>
+      <div className="mt-2.5 flex flex-wrap gap-1.5">
+        {QUICK.map(([label, days]) => (
+          <button key={label} type="button" onClick={() => quick(days)}
+            className="rounded-md border border-slate-300 bg-white px-2.5 py-1 text-xs text-slate-700 transition hover:bg-slate-50">
+            {label}
+          </button>
+        ))}
+      </div>
+      <div className="mt-2 grid gap-2 sm:grid-cols-[13rem_1fr]">
+        <input type="datetime-local" className={inputCls} value={when} onChange={(e) => setWhen(e.target.value)} />
+        <input className={inputCls} value={note} maxLength={120} onChange={(e) => setNote(e.target.value)}
+          placeholder="რა: დარეკვა, შეთავაზების გაგზავნა, შეხვედრა" />
+      </div>
+      <div className="mt-2.5 flex flex-wrap items-center gap-3">
+        <button onClick={() => save()} disabled={busy || !when} className={btnPrimary}>{busy ? "ინახება…" : "შენახვა"}</button>
+        {c.nextAt && (
+          <button onClick={() => save(true)} disabled={busy} className="text-sm text-slate-500 hover:text-slate-900">შესრულდა, წაშლა</button>
+        )}
+        {err && <span className="text-sm text-rose-600">{err}</span>}
+      </div>
+    </div>
+  );
 }
 
 /** Tags as removable chips, plus a field: Enter or comma adds one. */

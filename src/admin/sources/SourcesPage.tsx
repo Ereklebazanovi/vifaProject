@@ -22,6 +22,7 @@ interface Gsc {
   previous?: Omit<GscRow, "key">;
   daily?: GscRow[];
   queries?: GscRow[];
+  opportunities?: (GscRow & { page: string })[];
   pages?: GscRow[];
 }
 
@@ -178,9 +179,45 @@ function GoogleSection({ gsc, error, period }: { gsc: Gsc | null; error: string;
           <GscTable rows={gsc.queries || []} first="ძიება" />
         </Panel>
         <Panel title="რომელ გვერდზე შემოდიან" subtitle="საიტის გვერდები Google-იდან" bodyClass="">
-          <GscTable rows={(gsc.pages || []).map((r) => ({ ...r, key: r.key.replace(/^https?:\/\/(www\.)?vifadigital\.ge/, "") || "/" }))} first="გვერდი" />
+          <GscTable rows={gsc.pages || []} first="გვერდი" />
         </Panel>
       </div>
+
+      <Panel
+        title="SEO შესაძლებლობები"
+        subtitle="ძიებები, სადაც უკვე ვჩანვართ, მაგრამ ჯერ ტოპ 3-ში არ ვართ. ამ გვერდების გაძლიერება ყველაზე სწრაფად მოიტანს ახალ კლიკებს."
+        bodyClass=""
+      >
+        {(gsc.opportunities || []).length === 0 ? (
+          <p className="px-5 py-8 text-center text-sm text-slate-500">ამ პერიოდში ასეთი ძიება არ არის.</p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[36rem] text-sm">
+              <thead>
+                <tr className="border-b border-slate-200 bg-slate-50/80 text-xs text-slate-500">
+                  <th className="px-5 py-2.5 text-left font-medium">ძიება</th>
+                  <th className="px-3 py-2.5 text-left font-medium">რომელი გვერდი ჩანს</th>
+                  <th className="w-24 px-3 py-2.5 text-right font-medium">ჩვენება</th>
+                  <th className="w-28 px-5 py-2.5 text-right font-medium">პოზიცია</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 tabular-nums">
+                {gsc.opportunities!.map((r) => (
+                  <tr key={r.key} className="hover:bg-slate-50/60">
+                    <td className="px-5 py-2.5 font-medium text-slate-800">{r.key}</td>
+                    <td className="px-3 py-2.5 text-slate-600">{r.page}</td>
+                    <td className="px-3 py-2.5 text-right text-slate-900">{num(r.impressions)}</td>
+                    <td className="px-5 py-2.5 text-right">
+                      <span className={r.position <= 10 ? "text-amber-700" : "text-slate-600"}>{r.position.toFixed(1)}</span>
+                      <span className="ml-1.5 text-xs text-slate-400">{r.position <= 10 ? "1-ლი გვერდი" : "მე-2 გვერდი"}</span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </Panel>
     </div>
   );
 }

@@ -81,5 +81,11 @@
     "api/import.ts": {
       "maxDuration": 60
     }
-  }
+  },
+  "crons": [
+    {
+      "path": "/api/digest",
+      "schedule": "0 5 * * *"
+    }
+  ]
 }

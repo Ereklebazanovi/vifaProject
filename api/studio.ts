@@ -57,6 +57,20 @@ async function googleToken(sa: { client_email: string; private_key: string }) {
 
 interface GscRow { keys?: string[]; clicks: number; impressions: number; ctr: number; position: number }
 
+/** Bot noise in Search Console ("ai32567"): letters followed by a long number. */
+const JUNK_QUERY = /^[a-z]{1,4}\d{4,}$/i;
+
+/** "https://www.vifadigital.ge/services/web/" → "/services/web"; the English home is "/ (EN)". */
+function pathOf(url = "") {
+  try {
+    const u = new URL(url);
+    const path = u.pathname.replace(/\/+$/, "") || "/";
+    return u.searchParams.get("lang") === "en" ? `${path} (EN)` : path;
+  } catch {
+    return url;
+  }
+}
+
 async function searchConsole(days: number) {
   let sa: { client_email: string; private_key: string; project_id?: string };
   try {
@@ -90,15 +104,39 @@ async function searchConsole(days: number) {
     const prev = { startDate: day(2 * span + 1), endDate: day(span + 2) };
     const q = (body: Record<string, unknown>) => api(`sites/${encodeURIComponent(site)}/searchAnalytics/query`, body).then((d) => (d.rows as GscRow[]) || []);
 
-    const [total, before, daily, queries, pages] = await Promise.all([
+    const [total, before, daily, queries, queryPages, pages] = await Promise.all([
       q({ ...range }),
       q({ ...prev }),
       q({ ...range, dimensions: ["date"] }),
-      q({ ...range, dimensions: ["query"], rowLimit: 15 }),
-      q({ ...range, dimensions: ["page"], rowLimit: 10 }),
+      q({ ...range, dimensions: ["query"], rowLimit: 250 }),
+      q({ ...range, dimensions: ["query", "page"], rowLimit: 1000 }),
+      q({ ...range, dimensions: ["page"], rowLimit: 100 }),
     ]);
     const sum = (rows: GscRow[]) => rows[0] || { clicks: 0, impressions: 0, ctr: 0, position: 0 };
     const row = (r: GscRow) => ({ key: r.keys?.[0] || "", clicks: r.clicks, impressions: r.impressions, ctr: r.ctr, position: r.position });
+
+    // The page Google shows most for each search.
+    const bestPage = new Map<string, { page: string; impressions: number }>();
+    for (const r of queryPages) {
+      const [query = "", page = ""] = r.keys || [];
+      const b = bestPage.get(query);
+      if (!b || r.impressions > b.impressions) bestPage.set(query, { page: pathOf(page), impressions: r.impressions });
+    }
+    const searches = queries
+      .filter((r) => !JUNK_QUERY.test(r.keys?.[0] || ""))
+      .map((r) => ({ ...row(r), page: bestPage.get(r.keys?.[0] || "")?.page || "" }));
+
+    // The same page under www / http / a trailing slash is one row.
+    const merged = new Map<string, { clicks: number; impressions: number; weighted: number }>();
+    for (const r of pages) {
+      const key = pathOf(r.keys?.[0]);
+      const m = merged.get(key) || { clicks: 0, impressions: 0, weighted: 0 };
+      m.clicks += r.clicks;
+      m.impressions += r.impressions;
+      m.weighted += r.position * r.impressions;
+      merged.set(key, m);
+    }
+
     return {
       connected: true,
       site,
@@ -106,8 +144,16 @@ async function searchConsole(days: number) {
       total: sum(total),
       previous: sum(before),
       daily: daily.map(row),
-      queries: queries.map(row),
-      pages: pages.map(row),
+      queries: [...searches].sort((a, b) => b.clicks - a.clicks || b.impressions - a.impressions).slice(0, 15),
+      // Searches where we already show, but below the top 3: the quickest clicks to win.
+      opportunities: searches
+        .filter((r) => r.position > 3 && r.position <= 20 && r.impressions >= 5)
+        .sort((a, b) => b.impressions - a.impressions)
+        .slice(0, 10),
+      pages: [...merged.entries()]
+        .map(([key, m]) => ({ key, clicks: m.clicks, impressions: m.impressions, ctr: m.impressions ? m.clicks / m.impressions : 0, position: m.impressions ? m.weighted / m.impressions : 0 }))
+        .sort((a, b) => b.clicks - a.clicks || b.impressions - a.impressions)
+        .slice(0, 12),
     };
   } catch (e) {
     return { connected: false, reason: e instanceof Error ? e.message.slice(0, 200) : "error", ...setup };

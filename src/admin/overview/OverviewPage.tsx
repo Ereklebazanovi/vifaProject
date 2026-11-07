@@ -228,7 +228,7 @@ const OverviewPage = () => {
           )}
         </Card>
 
-        <Card title="ძაბრი" subtitle={data ? `გაყიდვების დაფაზე: ${data.pipeline} ადამიანი, ყველა დროის` : ""}
+        <Card title="Funnel" subtitle={data ? `გაყიდვების დაფაზე: ${data.pipeline} ადამიანი, ყველა დროის` : ""}
           action={<Link to="/studio/pipeline" className="text-sm text-slate-500 hover:text-slate-900">დაფის ნახვა</Link>}>
           {!data || contactsLoading ? <Loading /> : data.pipeline === 0 ? (
             <Empty>დაფაზე ჯერ არავინაა. ვინც საიტიდან ან რეკლამიდან მოგვწერს, აქ თავისით ჩნდება.</Empty>

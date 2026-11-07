@@ -1,13 +1,14 @@
 // /studio/pipeline: the sales board. Everyone we are talking to, one column per stage.
 // Drag a card to another column, or open it and pick the stage on the contact card.
 import { useMemo, useState } from "react";
-import { Clock, Plus, Search } from "lucide-react";
+import { CalendarClock, Clock, Mail, Plus, Search } from "lucide-react";
 import { useAdmin, useShow } from "../AdminLayout";
+import { apiPost } from "../api";
 import { ContactDetail, Initial } from "../contacts/ContactsPage";
 import { channelsByContact, useStudioEvents } from "../studioData";
-import { Badge, btnPrimary, inputCls, Modal, PageHeader, StatStrip } from "../ui";
+import { Badge, btnPrimary, btnSecondary, inputCls, Modal, PageHeader, StatStrip } from "../ui";
 import {
-  formatWhen, PRODUCT_LABELS, setStage, STAGE_TONE, STAGES, stageOf, type Contact, type Stage,
+  dueToday, formatDue, formatWhen, PRODUCT_LABELS, setStage, STAGE_TONE, STAGES, stageOf, type Contact, type Stage,
 } from "../contacts/contactsService";
 
 const DAY = 864e5;
@@ -61,6 +62,20 @@ const PipelinePage = () => {
   const sum = (s: Stage) => columns[s].reduce((t, c) => t + (c.dealValue || 0), 0);
   const onBoard = ORDER.reduce((t, s) => t + columns[s].length, 0);
   const waiting = columns.new.filter((c) => waitingDays(c) > 0).length;
+  const today = contacts.filter(dueToday);
+  const overdue = today.filter((c) => c.nextAt!.toMillis() < Date.now()).length;
+
+  // The 9:00 email, on demand: lets you see it without waiting for the morning.
+  const [digest, setDigest] = useState<"" | "sending" | "sent" | "error">("");
+  const sendDigest = async () => {
+    setDigest("sending");
+    try {
+      await apiPost("/api/digest", {});
+      setDigest("sent");
+    } catch {
+      setDigest("error");
+    }
+  };
 
   const move = async (id: string, s: Stage) => {
     const c = contacts.find((x) => x.id === id);
@@ -79,15 +94,33 @@ const PipelinePage = () => {
       <PageHeader
         title="გაყიდვები"
         description="ყველა, ვისთანაც საქმე გვაქვს. ბარათი გადაათრიე შემდეგ სვეტში. ვინც საიტიდან ან რეკლამიდან მოგვწერს, „ახალში“ თავისით ჩნდება."
-        actions={<button onClick={() => setAdding(true)} className={btnPrimary}><Plus size={15} />დაფაზე დამატება</button>}
+        actions={
+          <>
+            <button onClick={sendDigest} disabled={digest === "sending"} className={btnSecondary}
+              title="ყოველ დილით 9:00-ზე თავისით მოდის. ეს ღილაკი ახლავე გამოგიგზავნის შენს მეილზე.">
+              <Mail size={15} />
+              {digest === "sending" ? "იგზავნება…" : digest === "sent" ? "გაიგზავნა შენს მეილზე" : digest === "error" ? "ვერ გაიგზავნა" : "დილის წერილი ახლა"}
+            </button>
+            <button onClick={() => setAdding(true)} className={btnPrimary}><Plus size={15} />დაფაზე დამატება</button>
+          </>
+        }
       />
 
       <StatStrip
         items={[
           { label: "დაფაზე", value: contactsLoading ? wait : onBoard, sub: "ყველა ეტაპი, წაგებულის ჩათვლით" },
           {
-            label: "ელოდება ზარს", value: contactsLoading ? wait : waiting,
-            sub: waiting ? <span className="text-amber-700">ახალი ლიდი, 1 დღეზე მეტია უპასუხოდ</span> : "ყველას დროულად დაუკავშირდით",
+            label: "დღეს გასაკეთებელი", value: contactsLoading ? wait : today.length,
+            sub: (
+              <>
+                {overdue > 0 && <span className="block text-rose-600">{overdue}-ს ვადა გაუვიდა</span>}
+                {waiting > 0 ? (
+                  <span className="block text-amber-700">{waiting} ახალი ლიდი 1 დღეზე მეტია ელოდება ზარს</span>
+                ) : (
+                  !overdue && <span className="block">შემდეგ ნაბიჯს კონტაქტის ბარათში ნიშნავ</span>
+                )}
+              </>
+            ),
           },
           { label: "ღია შეთავაზება", value: contactsLoading ? wait : columns.offer.length, sub: sum("offer") ? `${gel(sum("offer"))} მოსალოდნელი` : "თანხა ბარათში იწერება" },
           { label: "დილი", value: contactsLoading ? wait : columns.won.length, sub: sum("won") ? `${gel(sum("won"))} ჯამში` : "ყველა დროის" },
@@ -175,7 +208,13 @@ const PipelinePage = () => {
                         </div>
                       )}
                       <div className="mt-2.5 flex items-center justify-between gap-2 border-t border-slate-100 pt-2 text-xs">
-                        {late ? (
+                        {c.nextAt ? (
+                          <span className={`inline-flex min-w-0 items-center gap-1 font-medium ${c.nextAt.toMillis() < Date.now() ? "text-rose-600" : "text-slate-600"}`}
+                            title={c.nextNote || "შემდეგი ნაბიჯი"}>
+                            <CalendarClock size={12} className="shrink-0" />
+                            <span className="truncate">{formatDue(c.nextAt.toMillis())}{c.nextNote ? `, ${c.nextNote}` : ""}</span>
+                          </span>
+                        ) : late ? (
                           <span className="inline-flex items-center gap-1 font-medium text-amber-700"><Clock size={12} />ელოდება {late} დღე</span>
                         ) : (
                           <span className="text-slate-400">{formatWhen(c.stageAt || c.firstSeenAt)}</span>
