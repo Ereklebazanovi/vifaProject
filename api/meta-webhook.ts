@@ -43,7 +43,7 @@ function productFrom(...names: string[]): Product {
   if (/chatbot|ჩატბოტ|ბოტ/.test(n)) return "chatbot";
   if (/production|video|photo|გადაღ|ვიდეო/.test(n)) return "production";
   if (/marketing|smm|მარკეტ|რეკლამ/.test(n)) return "marketing";
-  if (/web|site|საიტ|მაღაზ/.test(n)) return "web";
+  if (/web|site|საიტ|ვებ|მაღაზ/.test(n)) return "web";
   return "other";
 }
 
@@ -77,7 +77,10 @@ async function processLead(leadId: string): Promise<{ kind: "real" | "test"; nam
   const consent = extra.some(([k, v]) => /consent|თანხმ|agree/.test(k) && /^(true|yes|კი|1)$/i.test(v.trim()));
   const email = take("email").toLowerCase();
 
-  const product = productFrom(formName, lead.campaign_name || "", lead.ad_name || "");
+  // The form / campaign / ad names say it best; when they don't ("ფორმა-copy"), the form's own
+  // questions usually do ("როგორი ვებგვერდის შექმნა გსურთ?").
+  const named = productFrom(formName, lead.campaign_name || "", lead.ad_name || "");
+  const product = named !== "other" ? named : productFrom(...extra.map(([k]) => k));
   const q: Inquiry = {
     name: name.slice(0, 80),
     phone: normalizePhone(take("phone_number", "phone")),
