@@ -3,6 +3,7 @@
 import {
   alertEmail,
   autoReplyEmail,
+  isTestInquiry,
   logEmailEvent,
   logSmsEvent,
   newSmsReference,
@@ -44,7 +45,7 @@ export async function handleInquiry(q: Inquiry, source: string, sourceLabel: str
       jobs.push(
         sendEmail({
           to: notify,
-          subject: saved ? alert.subject : `[ბაზაში ვერ ჩაიწერა] ${alert.subject}`,
+          subject: `${isTestInquiry(q) ? "[ტესტი] " : ""}${saved ? alert.subject : `[ბაზაში ვერ ჩაიწერა] ${alert.subject}`}`,
           html: alert.html,
           text: alert.text,
           ...(q.email ? { replyTo: [q.email] } : {}),

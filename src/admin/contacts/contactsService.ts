@@ -42,6 +42,7 @@ export const STAGE_TONE = { new: "indigo", contacted: "neutral", offer: "amber",
  */
 export function stageOf(c: Contact): Stage | null {
   if (c.stage) return c.stage;
+  if (c.test) return null; // our own form test: stays off the board until the morning cleanup
   return c.sources?.some((s) => s === "site" || s === "meta") ? "new" : null;
 }
 
@@ -68,6 +69,8 @@ export interface Contact {
   /** The next thing to do with this person, and when ("ხვალ 11:00, დარეკვა"). */
   nextAt?: Timestamp;
   nextNote?: string;
+  /** Our own try of a form (name "ტესტი" or a team number); deleted by the 9:00 run. */
+  test?: boolean;
 }
 
 export interface ContactEvent {

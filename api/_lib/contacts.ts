@@ -30,6 +30,15 @@ export interface Inquiry {
 
 const str = (v: unknown, max: number) => (typeof v === "string" ? v.trim().slice(0, max) : "");
 
+/**
+ * Our own tries of a form: the name says "ტესტი" / "test", or the number is one of our team's
+ * WhatsApp numbers. Such a contact works like any other (replies go out, so the test is real)
+ * but stays off the board, the numbers and the morning email, and the morning run deletes it.
+ */
+export function isTestInquiry(q: Pick<Inquiry, "name" | "phone">) {
+  return /ტესტ|\btest\b/i.test(q.name) || (Object.values(WHATSAPP) as string[]).includes(q.phone);
+}
+
 /** "555 12 34 56", "+995 555..." → "995555123456"; "" when it can't be a phone number. */
 export function normalizePhone(raw: string) {
   let d = raw.replace(/\D/g, "");
@@ -79,6 +88,7 @@ export async function saveInquiry(q: Inquiry, source: string, wantSms = false) {
   const db = adminDb();
   const id = q.phone || `e_${q.email}`;
   const ref = db.collection("contacts").doc(id);
+  const test = isTestInquiry(q);
 
   const { replyAllowed, smsAllowed } = await db.runTransaction(async (tx) => {
     const snap = await tx.get(ref);
@@ -103,11 +113,13 @@ export async function saveInquiry(q: Inquiry, source: string, wantSms = false) {
         ...(q.consent ? { consent: true, consentAt: FieldValue.serverTimestamp() } : {}),
         ...(allowed ? { lastAutoReplyAt: FieldValue.serverTimestamp() } : {}),
         ...(smsOk ? { lastAutoSmsAt: FieldValue.serverTimestamp() } : {}),
+        ...(test ? { test: true } : {}),
       },
       { merge: true }
     );
     tx.set(ref.collection("events").doc(), {
       type: "inquiry",
+      ...(test ? { test: true } : {}),
       source,
       product: q.product,
       message: q.message,

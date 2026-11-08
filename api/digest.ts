@@ -3,6 +3,7 @@
 // Cron: GET with "Authorization: Bearer <CRON_SECRET>" (Vercel adds it when CRON_SECRET is set),
 //   sent to NOTIFY_EMAIL + NOTIFY_EMAIL_MARKETING, skipped on a day with nothing in it.
 // Studio: POST by a signed-in admin sends it right away to that admin (to see how it looks).
+// The cron run first deletes our own form tests (contact.test) older than an hour.
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { requireAdmin } from "./_lib/adminAuth.js";
 import { PRODUCTS } from "./_lib/contacts.js";
@@ -26,14 +27,20 @@ interface C {
   nextAt?: { toMillis(): number };
   nextNote?: string;
   dealValue?: number;
+  test?: boolean;
 }
 
 const DAY = 864e5;
 const TZ = "Asia/Tbilisi";
 const SITE = "https://vifadigital.ge";
 const ms = (t?: { toMillis(): number }) => t?.toMillis?.() ?? 0;
+const MONTHS = ["იანვარი", "თებერვალი", "მარტი", "აპრილი", "მაისი", "ივნისი", "ივლისი", "აგვისტო", "სექტემბერი", "ოქტომბერი", "ნოემბერი", "დეკემბერი"];
 const time = (t: number) => new Date(t).toLocaleTimeString("en-GB", { timeZone: TZ, hour: "2-digit", minute: "2-digit" });
-const date = (t: number) => new Date(t).toLocaleDateString("en-GB", { timeZone: TZ, day: "numeric", month: "short" });
+/** "8 ნოემბერი", in Tbilisi time (UTC+4). */
+const date = (t: number) => {
+  const d = new Date(t + 4 * 3600e3);
+  return `${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]}`;
+};
 const phone = (d = "") => (d.length === 12 ? `+995 ${d.slice(3, 6)} ${d.slice(6, 8)} ${d.slice(8, 10)} ${d.slice(10)}` : d ? `+${d}` : "");
 const product = (c: C) => PRODUCTS[c.lastProduct as keyof typeof PRODUCTS]?.label || "";
 
@@ -44,9 +51,21 @@ function endOfToday() {
   return local - (local % DAY) + DAY - offset - 1;
 }
 
+/**
+ * Our own form tests (contact.test, see isTestInquiry) are deleted with their history once
+ * they are an hour old, unless someone already put them on the board.
+ */
+async function removeTests() {
+  const db = adminDb();
+  const snap = await db.collection("contacts").where("test", "==", true).get();
+  const old = snap.docs.filter((d) => !d.get("stage") && ms(d.get("lastSeenAt")) < Date.now() - 3600e3);
+  await Promise.all(old.map((d) => db.recursiveDelete(d.ref)));
+  return old.length;
+}
+
 async function buildDigest() {
   const snap = await adminDb().collection("contacts").get();
-  const all = snap.docs.map((d) => ({ id: d.id, ...d.data() }) as C);
+  const all = snap.docs.map((d) => ({ id: d.id, ...d.data() }) as C).filter((c) => !c.test);
   const now = Date.now();
   const wrote = (c: C) => c.sources?.some((s) => s === "site" || s === "meta");
   const stageOf = (c: C) => c.stage || (wrote(c) ? "new" : "");
@@ -113,6 +132,7 @@ export default async function handler(req: Req, res: Res) {
   const admin = req.method === "POST" ? await requireAdmin(req) : null;
   if (!fromCron && !admin) return res.status(401).json({ ok: false, error: "auth" });
 
+  if (fromCron) await removeTests().catch((e) => console.error("[digest] test cleanup failed", e));
   const d = await buildDigest();
   if (fromCron && d.empty) return res.status(200).json({ ok: true, sent: false });
   const to = admin ? [admin] : [...envList("NOTIFY_EMAIL"), ...envList("NOTIFY_EMAIL_MARKETING")];

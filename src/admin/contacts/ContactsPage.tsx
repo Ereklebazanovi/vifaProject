@@ -157,6 +157,7 @@ const ContactsPage = () => {
                       <span className="block truncate text-sm font-medium text-slate-900">{c.name || "უსახელო"}</span>
                       {c.consent && !c.unsubscribed && <span className="text-xs text-emerald-700">თანხმობა აქვს</span>}
                       {c.unsubscribed && <span className="text-xs text-slate-400">გამოწერა გააუქმა</span>}
+                      {c.test && <span className="text-xs text-amber-700">ტესტი, დილით წაიშლება</span>}
                     </span>
                   </span>
                   <span className="min-w-0 text-sm">

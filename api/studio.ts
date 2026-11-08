@@ -195,6 +195,7 @@ export default async function handler(req: Req, res: Res) {
     const contact = d.ref.parent.parent;
     if (!contact || contact.parent.id !== "contacts") return [];
     const e = d.data();
+    if (e.test) return []; // our own form tries (see isTestInquiry): not real numbers
     return [{
       c: contact.id,
       type: String(e.type || ""),
