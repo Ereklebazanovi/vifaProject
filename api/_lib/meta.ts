@@ -31,6 +31,18 @@ export async function pageToken(): Promise<string> {
   return cachedPageToken;
 }
 
+/**
+ * Until when Facebook lets the token read data (its "data access expiration", about 90 days
+ * for a token made through Graph API Explorer). Before then someone makes a new token once.
+ * 0 when there's no token or no date.
+ */
+export async function metaAccessUntil(): Promise<number> {
+  if (!process.env.META_PAGE_TOKEN) return 0;
+  const token = await pageToken();
+  const d = await graph<{ data?: { data_access_expires_at?: number } }>(`debug_token?input_token=${encodeURIComponent(token)}`, token);
+  return (d.data?.data_access_expires_at || 0) * 1000;
+}
+
 /** Last things the webhook saw, for the card in the studio (system/meta, server only). */
 export async function noteMeta(fields: Record<string, unknown>) {
   const at = FieldValue.serverTimestamp();
@@ -68,6 +80,7 @@ export async function metaStatus() {
     out.page = page.name || metaPageId();
     const app = await graph<{ id?: string; name?: string }>("app", token).catch(() => null);
     out.app = app?.name || "";
+    out.accessUntil = await metaAccessUntil().catch(() => 0);
     const subs = await graph<{ data?: Subscribed[] }>(`${metaPageId()}/subscribed_apps`, token).catch(() => null);
     out.subscribed = subs
       ? Boolean(subs.data?.some((a) => (!app?.id || a.id === app.id) && a.subscribed_fields?.includes("leadgen")))

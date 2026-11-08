@@ -9,6 +9,7 @@ import { requireAdmin } from "./_lib/adminAuth.js";
 import { PRODUCTS } from "./_lib/contacts.js";
 import { adminDb } from "./_lib/firebase.js";
 import { envList, esc, sendEmail } from "./_lib/mail.js";
+import { metaAccessUntil } from "./_lib/meta.js";
 
 type Req = IncomingMessage & { body?: unknown };
 type Res = ServerResponse & { status: (code: number) => Res; json: (body: unknown) => void };
@@ -76,7 +77,10 @@ async function buildDigest() {
   const tasks = all.filter((c) => c.nextAt && ms(c.nextAt) <= endOfToday()).sort((a, b) => ms(a.nextAt) - ms(b.nextAt));
   const offers = all.filter((c) => c.stage === "offer");
   const offerSum = offers.reduce((s, c) => s + (c.dealValue || 0), 0);
-  return { fresh, waiting, tasks, offers, offerSum, empty: !fresh.length && !waiting.length && !tasks.length };
+  // Two weeks before Facebook stops letting our token read leads, say so every morning.
+  const metaUntil = await metaAccessUntil().catch(() => 0);
+  const metaRenew = metaUntil && metaUntil - now < 14 * DAY ? metaUntil : 0;
+  return { fresh, waiting, tasks, offers, offerSum, metaRenew, empty: !fresh.length && !waiting.length && !tasks.length && !metaRenew };
 }
 
 function render(d: Awaited<ReturnType<typeof buildDigest>>) {
@@ -99,6 +103,8 @@ function render(d: Awaited<ReturnType<typeof buildDigest>>) {
   const html = `<div style="font-family:Arial,sans-serif;font-size:14px;color:#0f172a;max-width:560px">
 <p style="font-size:18px;font-weight:bold;margin:0">დილა მშვიდობისა!</p>
 <p style="color:#64748b;margin:4px 0 0">დღის მიმოხილვა, ${date(now)}</p>
+${d.metaRenew ? `<p style="margin:20px 0 0;padding:12px 14px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;color:#92400e">
+<b>Facebook-ის ფორმების კავშირს განახლება სჭირდება ${date(d.metaRenew)}-მდე.</b> Graph API Explorer-ში (აპი VIFA Studio) ახალი გვერდის ტოკენი აიღე ისე, როგორც პირველად, და Vercel-ში META_PAGE_TOKEN შეცვალე. თორემ რეკლამის ლიდები თავისით აღარ შემოვა.</p>` : ""}
 ${section("დღის საქმეები", "შემდეგი ნაბიჯები დღეისთვის (და ვადაგადაცილებული)", d.tasks.map((c) =>
     person(c, `${ms(c.nextAt) < now ? "ვადა გავიდა, " : ""}${ms(c.nextAt) < now - 12 * 3600e3 ? date(ms(c.nextAt)) : time(ms(c.nextAt))}${c.nextNote ? `: ${c.nextNote}` : ""}`)))}
 ${section("ახალი მომართვები", "ბოლო 24 საათში მოგვწერეს", d.fresh.map((c) => person(c, `${date(ms(c.lastSeenAt))}, ${time(ms(c.lastSeenAt))}`)))}
@@ -121,7 +127,7 @@ ${d.empty ? `<p style="margin:24px 0 0;color:#334155">დღეს გადა�
 
   const subject = d.empty
     ? "დილის მიმოხილვა: დღეს გადაუდებელი არაფერია"
-    : `დილის მიმოხილვა: ${[d.tasks.length && `${d.tasks.length} საქმე`, d.fresh.length && `${d.fresh.length} ახალი`, d.waiting.length && `${d.waiting.length} ელოდება ზარს`].filter(Boolean).join(", ")}`;
+    : `დილის მიმოხილვა: ${[d.tasks.length && `${d.tasks.length} საქმე`, d.fresh.length && `${d.fresh.length} ახალი`, d.waiting.length && `${d.waiting.length} ელოდება ზარს`, d.metaRenew && "Facebook-ს განახლება სჭირდება"].filter(Boolean).join(", ")}`;
   return { subject, html, text };
 }
 

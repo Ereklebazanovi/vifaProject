@@ -260,6 +260,7 @@ interface MetaStatus {
   page?: string;
   app?: string;
   subscribed?: boolean | null;
+  accessUntil?: number;
   forms?: { id: string; name: string; status: string; leads: number | null }[] | null;
   lastLeadAt: number;
   lastLeadName: string;
@@ -308,7 +309,16 @@ function MetaSection() {
         {
           ok: Boolean(s.page),
           title: "კავშირი Facebook-თან",
-          body: s.page ? `გვერდი: ${s.page}${s.app ? `, აპი: ${s.app}` : ""}` : s.error ? `Facebook-ის პასუხი: ${s.error}` : "ტოკენი ჯერ არ არის.",
+          body: s.page ? (
+            <>
+              გვერდი: {s.page}{s.app ? `, აპი: ${s.app}` : ""}
+              {s.accessUntil ? (
+                <span className={`block ${s.accessUntil - Date.now() < 14 * 864e5 ? "font-medium text-amber-700" : ""}`}>
+                  ტოკენს {formatWhen(s.accessUntil).split(",")[0]}-მდე განახლება სჭირდება (დილის წერილი 2 კვირით ადრე შეგახსენებს).
+                </span>
+              ) : null}
+            </>
+          ) : s.error ? `Facebook-ის პასუხი: ${s.error}` : "ტოკენი ჯერ არ არის.",
         },
         {
           ok: s.subscribed === true,
