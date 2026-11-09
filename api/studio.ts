@@ -3,6 +3,7 @@
 //   overview counts (no message texts, no names: the studio already has the contacts live).
 // { action: "balance" } → SMS left on smsoffice.ge.
 // { action: "gsc", days } → Google Search Console: clicks, impressions, top searches and pages.
+// { action: "ga", days } → Google Analytics 4: visitors, visits and form leads by channel, top pages.
 // { action: "meta" } → is the Facebook lead-form connection working (see _lib/meta.ts);
 // { action: "meta-subscribe" } → switch on "form filled" events for our page.
 // One collection-group read needs no extra Firestore rule or index. It reads every event
@@ -36,12 +37,12 @@ async function smsBalance(): Promise<number | null> {
 
 const b64url = (s: string | Buffer) => Buffer.from(s).toString("base64url");
 
-async function googleToken(sa: { client_email: string; private_key: string }) {
+async function googleToken(sa: { client_email: string; private_key: string }, scope = "https://www.googleapis.com/auth/webmasters.readonly") {
   const now = Math.floor(Date.now() / 1000);
   const head = b64url(JSON.stringify({ alg: "RS256", typ: "JWT" }));
   const claims = b64url(JSON.stringify({
     iss: sa.client_email,
-    scope: "https://www.googleapis.com/auth/webmasters.readonly",
+    scope,
     aud: "https://oauth2.googleapis.com/token",
     iat: now,
     exp: now + 3600,
@@ -163,6 +164,94 @@ async function searchConsole(days: number) {
   }
 }
 
+// ---------- Google Analytics 4 ----------
+// The same robot as Search Console. Works once (1) the Google Analytics Data API and Admin API
+// are enabled in that Google Cloud project and (2) the robot's email is a Viewer on the GA4
+// property. GA4_PROPERTY_ID (the number) skips looking the property up.
+
+interface GaReport { rows?: { dimensionValues?: { value: string }[]; metricValues?: { value: string }[] }[] }
+
+async function analytics(days: number) {
+  let sa: { client_email: string; private_key: string; project_id?: string };
+  try {
+    sa = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT || "");
+  } catch {
+    return { connected: false, reason: "no-service-account" };
+  }
+  const setup = { serviceAccount: sa.client_email, projectId: sa.project_id || "" };
+  try {
+    const token = await googleToken(sa, "https://www.googleapis.com/auth/analytics.readonly");
+    const call = async <T>(url: string, body?: unknown): Promise<T> => {
+      const r = await fetch(url, {
+        method: body ? "POST" : "GET",
+        headers: { Authorization: `Bearer ${token}`, ...(body ? { "Content-Type": "application/json" } : {}) },
+        body: body ? JSON.stringify(body) : undefined,
+        signal: AbortSignal.timeout(10000),
+      });
+      const data = (await r.json()) as T & { error?: { message?: string } };
+      if (!r.ok) throw new Error(data.error?.message || `HTTP ${r.status}`);
+      return data;
+    };
+
+    let property = process.env.GA4_PROPERTY_ID || "";
+    if (!property) {
+      const s = await call<{ accountSummaries?: { propertySummaries?: { property: string; displayName?: string }[] }[] }>(
+        "https://analyticsadmin.googleapis.com/v1beta/accountSummaries?pageSize=50"
+      );
+      const props = (s.accountSummaries || []).flatMap((a) => a.propertySummaries || []);
+      const pick = props.find((p) => /vifa/i.test(p.displayName || "")) || props[0];
+      if (!pick) return { connected: false, reason: "no-access", ...setup };
+      property = pick.property.replace("properties/", "");
+    }
+
+    const span = Math.min(Math.max(days, 7), 480);
+    const range = { startDate: `${span - 1}daysAgo`, endDate: "today" };
+    const prev = { startDate: `${2 * span - 1}daysAgo`, endDate: `${span}daysAgo` };
+    const report = (body: Record<string, unknown>) =>
+      call<GaReport>(`https://analyticsdata.googleapis.com/v1beta/properties/${property}:runReport`, body);
+    const n = (v?: { value: string }) => Number(v?.value || 0);
+
+    const [totals, channels, leads, pages] = await Promise.all([
+      report({ dateRanges: [range, prev], metrics: [{ name: "activeUsers" }, { name: "sessions" }] }),
+      report({
+        dateRanges: [range], dimensions: [{ name: "sessionDefaultChannelGroup" }],
+        metrics: [{ name: "activeUsers" }, { name: "sessions" }],
+        orderBys: [{ metric: { metricName: "activeUsers" }, desc: true }], limit: 12,
+      }),
+      // "generate_lead" is sent by the site's form (src/components/LeadForm.tsx).
+      report({
+        dateRanges: [range], dimensions: [{ name: "sessionDefaultChannelGroup" }], metrics: [{ name: "eventCount" }],
+        dimensionFilter: { filter: { fieldName: "eventName", stringFilter: { value: "generate_lead" } } },
+      }),
+      report({
+        dateRanges: [range], dimensions: [{ name: "pagePath" }], metrics: [{ name: "screenPageViews" }, { name: "activeUsers" }],
+        orderBys: [{ metric: { metricName: "screenPageViews" }, desc: true }], limit: 10,
+      }),
+    ]);
+
+    // With two date ranges every row is tagged "date_range_0" (this period) or "date_range_1".
+    const period = (tag: string) => {
+      const row = totals.rows?.find((r) => r.dimensionValues?.some((d) => d.value === tag));
+      return { users: n(row?.metricValues?.[0]), sessions: n(row?.metricValues?.[1]) };
+    };
+    const leadsBy = new Map((leads.rows || []).map((r) => [r.dimensionValues?.[0]?.value || "", n(r.metricValues?.[0])]));
+
+    return {
+      connected: true,
+      property,
+      total: period("date_range_0"),
+      previous: period("date_range_1"),
+      channels: (channels.rows || []).map((r) => {
+        const key = r.dimensionValues?.[0]?.value || "";
+        return { key, users: n(r.metricValues?.[0]), sessions: n(r.metricValues?.[1]), leads: leadsBy.get(key) || 0 };
+      }),
+      pages: (pages.rows || []).map((r) => ({ key: r.dimensionValues?.[0]?.value || "", views: n(r.metricValues?.[0]), users: n(r.metricValues?.[1]) })),
+    };
+  } catch (e) {
+    return { connected: false, reason: e instanceof Error ? e.message : String(e), ...setup };
+  }
+}
+
 /** Where an imported person came from, read off the import note (see api/import.ts). */
 function importOrigin(message: string) {
   if (message.startsWith("იმპორტი: ნომერი ჩატიდან")) return "chat";
@@ -179,6 +268,7 @@ export default async function handler(req: Req, res: Res) {
   const b = jsonBody(req);
   if (b.action === "balance") return res.status(200).json({ ok: true, balance: await smsBalance() });
   if (b.action === "gsc") return res.status(200).json({ ok: true, ...(await searchConsole(Number(b.days) || 28)) });
+  if (b.action === "ga") return res.status(200).json({ ok: true, ...(await analytics(Number(b.days) || 28)) });
   if (b.action === "meta") return res.status(200).json({ ok: true, ...(await metaStatus()) });
   if (b.action === "meta-subscribe") {
     try {

@@ -59,16 +59,30 @@ const SourcesPage = () => {
   const [gsc, setGsc] = useState<Gsc | null>(null);
   const [gscError, setGscError] = useState("");
 
+  const [ga, setGa] = useState<Ga | null>(null);
+  const [gaError, setGaError] = useState("");
+
   useEffect(() => {
     let alive = true;
     setGscError("");
+    setGaError("");
     apiPost<Gsc>("/api/studio", { action: "gsc", days: Number(period) })
       .then((r) => alive && setGsc(r))
       .catch(() => alive && setGscError("Google-ის მონაცემები ვერ ჩაიტვირთა."));
+    apiPost<Ga>("/api/studio", { action: "ga", days: Number(period) })
+      .then((r) => alive && setGa(r))
+      .catch(() => alive && setGaError("Analytics-ის მონაცემები ვერ ჩაიტვირთა."));
     return () => {
       alive = false;
     };
   }, [period]);
+
+  // People who filled the site's form in this period (our own count, the truth for conversion).
+  const siteLeads = useMemo(() => {
+    if (!events) return null;
+    const from = Date.now() - Number(period) * 864e5;
+    return new Set(events.filter((e) => e.type === "inquiry" && e.source === "site" && e.at >= from).map((e) => e.c)).size;
+  }, [events, period]);
 
   // One row per channel: people who first came through it in this period, and how far they got.
   const channels = useMemo(() => {
@@ -127,7 +141,7 @@ const SourcesPage = () => {
     <div className="space-y-6">
       <PageHeader
         title="წყაროები"
-        description="საიდან მოდიან ადამიანები და რომელი არხი იძლევა დილს. Google-ის ძიების რიცხვები პირდაპირ Search Console-იდან მოდის."
+        description="საიდან მოდიან ადამიანები და რომელი არხი იძლევა დილს. Google-ის რიცხვები პირდაპირ Search Console-იდან და Analytics-იდან მოდის."
         actions={<Segmented options={PERIODS} value={period} onChange={setPeriod} />}
       />
 
@@ -226,10 +240,167 @@ const SourcesPage = () => {
 
       <MetaSection />
 
+      <AnalyticsSection ga={ga} error={gaError} period={PERIODS[period]} siteLeads={siteLeads} />
+
       <GoogleSection gsc={gsc} error={gscError} period={PERIODS[period]} />
     </div>
   );
 };
+
+/** "+27% წინა პერიოდთან", green when it's better. */
+function change(now: number, before: number, lowerIsBetter = false) {
+  if (!before) return "";
+  const d = ((now - before) / before) * 100;
+  if (Math.abs(d) < 1) return "უცვლელი წინა პერიოდთან";
+  const good = lowerIsBetter ? d < 0 : d > 0;
+  return <span className={good ? "text-emerald-700" : "text-rose-700"}>{d > 0 ? "+" : ""}{Math.round(d)}% წინა პერიოდთან</span>;
+}
+
+interface Ga {
+  connected: boolean;
+  reason?: string;
+  serviceAccount?: string;
+  projectId?: string;
+  total?: { users: number; sessions: number };
+  previous?: { users: number; sessions: number };
+  channels?: { key: string; users: number; sessions: number; leads: number }[];
+  pages?: { key: string; views: number; users: number }[];
+}
+
+/** Google Analytics' channel groups, in plain Georgian. */
+const GA_CHANNEL: Record<string, string> = {
+  "Organic Search": "Google ძიება",
+  Direct: "პირდაპირ (მისამართით ან ბმულით)",
+  "Organic Social": "სოციალური ქსელები",
+  "Paid Social": "რეკლამა სოციალურ ქსელში",
+  "Paid Search": "Google რეკლამა",
+  "Cross-network": "Google რეკლამა",
+  Referral: "სხვა საიტებიდან",
+  Email: "მეილიდან",
+  SMS: "SMS-იდან",
+  "Organic Video": "YouTube",
+  Display: "ბანერული რეკლამა",
+  Unassigned: "უცნობი",
+};
+
+/** Site visitors from Google Analytics, next to the leads we actually got. */
+function AnalyticsSection({ ga, error, period, siteLeads }: { ga: Ga | null; error: string; period: string; siteLeads: number | null }) {
+  if (error) return <Panel title="საიტის ვიზიტორები"><p className="text-sm text-rose-600">{error}</p></Panel>;
+  if (!ga) return <Panel title="საიტის ვიზიტორები"><p className="py-6 text-center text-sm text-slate-400">იტვირთება…</p></Panel>;
+  if (!ga.connected) return <AnalyticsSetup ga={ga} />;
+
+  const t = ga.total!, p = ga.previous!;
+  const rate = siteLeads != null && t.users ? (siteLeads / t.users) * 100 : null;
+  const formLeads = (ga.channels || []).reduce((s, r) => s + r.leads, 0);
+  return (
+    <div className="space-y-4">
+      <div className="flex items-end justify-between gap-3">
+        <div>
+          <h2 className="text-[17px] font-semibold text-slate-900">საიტის ვიზიტორები</h2>
+          <p className="text-sm text-slate-500">Google Analytics, ბოლო {period}</p>
+        </div>
+        <a href="https://analytics.google.com/" target="_blank" rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 text-sm text-slate-500 hover:text-slate-900">Analytics<ExternalLink size={13} /></a>
+      </div>
+
+      <StatStrip
+        items={[
+          { label: "ვიზიტორი", value: num(t.users), sub: change(t.users, p.users), hint: "რამდენმა სხვადასხვა ადამიანმა გახსნა საიტი" },
+          { label: "ვიზიტი", value: num(t.sessions), sub: change(t.sessions, p.sessions), hint: "ერთი ადამიანი შეიძლება რამდენჯერმე შემოვიდეს" },
+          { label: "ლიდი საიტიდან", value: siteLeads == null ? "…" : num(siteLeads), sub: "ვინც საიტის ფორმა შეავსო (Studio-ს მონაცემი)" },
+          {
+            label: "კონვერსია", value: rate == null ? "…" : `${rate < 1 ? rate.toFixed(1) : Math.round(rate)}%`,
+            sub: rate == null ? "" : `ყოველი 100 ვიზიტორიდან ${rate < 1 ? rate.toFixed(1) : Math.round(rate)} ტოვებს ნომერს`,
+          },
+        ]}
+      />
+
+      <div className="grid gap-4 lg:grid-cols-2">
+        <Panel title="საიდან შემოდიან" subtitle="ვიზიტორები და ფორმის გაგზავნა არხების მიხედვით" bodyClass="">
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[26rem] text-sm">
+              <thead>
+                <tr className="border-b border-slate-200 bg-slate-50/80 text-left text-xs font-medium text-slate-500">
+                  <th className="px-5 py-2.5 font-medium">არხი</th>
+                  <th className="px-3 py-2.5 text-right font-medium">ვიზიტორი</th>
+                  <th className="px-3 py-2.5 text-right font-medium">ლიდი</th>
+                  <th className="px-5 py-2.5 text-right font-medium">%</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 tabular-nums">
+                {(ga.channels || []).map((r) => (
+                  <tr key={r.key} className="hover:bg-slate-50/60">
+                    <td className="px-5 py-2.5 text-slate-800">{GA_CHANNEL[r.key] || r.key}</td>
+                    <td className="px-3 py-2.5 text-right text-slate-900">{num(r.users)}</td>
+                    <td className="px-3 py-2.5 text-right text-slate-600">{r.leads || ""}</td>
+                    <td className="px-5 py-2.5 text-right text-slate-500">{r.leads && r.users ? `${((r.leads / r.users) * 100).toFixed(1)}%` : ""}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {siteLeads != null && formLeads < siteLeads && (
+            <p className="border-t border-slate-200 px-5 py-2.5 text-xs text-slate-500">
+              აქ {formLeads} ლიდი ჩანს, Studio-ში {siteLeads}: ზოგი ბრაუზერი Analytics-ს ბლოკავს, ამიტომ Google ყველას ვერ ხედავს.
+            </p>
+          )}
+        </Panel>
+        <Panel title="ყველაზე ნანახი გვერდები" subtitle="ყველა არხიდან, არა მხოლოდ Google-იდან" bodyClass="">
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[22rem] text-sm">
+              <thead>
+                <tr className="border-b border-slate-200 bg-slate-50/80 text-left text-xs font-medium text-slate-500">
+                  <th className="px-5 py-2.5 font-medium">გვერდი</th>
+                  <th className="px-3 py-2.5 text-right font-medium">ნახვა</th>
+                  <th className="px-5 py-2.5 text-right font-medium">ვიზიტორი</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 tabular-nums">
+                {(ga.pages || []).map((r) => (
+                  <tr key={r.key} className="hover:bg-slate-50/60">
+                    <td className="break-all px-5 py-2.5 text-slate-800">{r.key}</td>
+                    <td className="px-3 py-2.5 text-right text-slate-900">{num(r.views)}</td>
+                    <td className="px-5 py-2.5 text-right text-slate-600">{num(r.users)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Panel>
+      </div>
+    </div>
+  );
+}
+
+/** What to switch on once, in plain steps, while Google Analytics isn't connected. */
+function AnalyticsSetup({ ga }: { ga: Ga }) {
+  const lib = (api: string) => `https://console.cloud.google.com/apis/library/${api}${ga.projectId ? `?project=${ga.projectId}` : ""}`;
+  const step = "flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-900 text-xs font-semibold text-white";
+  const link = "font-medium text-indigo-600 hover:underline";
+  return (
+    <Panel title="საიტის ვიზიტორები" subtitle="Google Analytics ჯერ არ არის მიერთებული">
+      <p className="text-sm text-slate-600">სამი ნაბიჯი, ერთხელ. ამის მერე აქ გამოჩნდება, რამდენი შემოდის საიტზე, საიდან, და მათგან რამდენი ტოვებს ნომერს.</p>
+      <ol className="mt-4 space-y-3 text-sm text-slate-700">
+        <li className="flex gap-3">
+          <span className={step}>1</span>
+          <span>ჩართე Google Analytics Data API: <a className={link} target="_blank" rel="noopener noreferrer" href={lib("analyticsdata.googleapis.com")}>გახსნა</a> და დააჭირე Enable.</span>
+        </li>
+        <li className="flex gap-3">
+          <span className={step}>2</span>
+          <span>ჩართე Google Analytics Admin API: <a className={link} target="_blank" rel="noopener noreferrer" href={lib("analyticsadmin.googleapis.com")}>გახსნა</a> და დააჭირე Enable.</span>
+        </li>
+        <li className="flex gap-3">
+          <span className={step}>3</span>
+          <span>
+            Google Analytics → Admin (ქვემოთ, მარცხნივ) → Property access management → + → Add users. ჩაწერე ეს მეილი, როლი Viewer:
+            <code className="mt-1.5 block w-fit select-all break-all rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-800">{ga.serviceAccount}</code>
+          </span>
+        </li>
+      </ol>
+      {ga.reason && <p className="mt-4 text-xs text-slate-400">ტექნიკური მიზეზი: {ga.reason}</p>}
+    </Panel>
+  );
+}
 
 function GoogleSection({ gsc, error, period }: { gsc: Gsc | null; error: string; period: string }) {
   if (error) return <Panel title="Google ძიება"><p className="text-sm text-rose-600">{error}</p></Panel>;
@@ -237,14 +408,6 @@ function GoogleSection({ gsc, error, period }: { gsc: Gsc | null; error: string;
   if (!gsc.connected) return <GoogleSetup gsc={gsc} />;
 
   const t = gsc.total!, p = gsc.previous!;
-  const change = (now: number, before: number, lowerIsBetter = false) => {
-    if (!before) return "";
-    const d = ((now - before) / before) * 100;
-    if (Math.abs(d) < 1) return "უცვლელი წინა პერიოდთან";
-    const good = lowerIsBetter ? d < 0 : d > 0;
-    return <span className={good ? "text-emerald-700" : "text-rose-700"}>{d > 0 ? "+" : ""}{Math.round(d)}% წინა პერიოდთან</span>;
-  };
-
   return (
     <div className="space-y-4">
       <div className="flex items-end justify-between gap-3">
