@@ -225,6 +225,8 @@ async function analytics(days: number) {
       }),
       report({
         dateRanges: [range], dimensions: [{ name: "pagePath" }], metrics: [{ name: "screenPageViews" }, { name: "activeUsers" }],
+        // Our own studio visits (counted before the studio switched Analytics off) aren't site pages.
+        dimensionFilter: { notExpression: { filter: { fieldName: "pagePath", stringFilter: { matchType: "BEGINS_WITH", value: "/studio" } } } },
         orderBys: [{ metric: { metricName: "screenPageViews" }, desc: true }], limit: 10,
       }),
     ]);

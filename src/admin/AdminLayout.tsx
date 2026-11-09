@@ -6,6 +6,7 @@ import { ChartColumn, Eye, EyeOff, Inbox, SquareKanban, LayoutDashboard, LogOut,
 import { checkAdminAccess, signInWithGoogle, signOutAdmin, watchAuth } from "./auth";
 import { formatPhone, maskEmail, maskPhone, PRODUCT_LABELS, subscribeContacts, type Contact } from "./contacts/contactsService";
 import { btnPrimary, btnSecondary } from "./ui";
+import { gaId } from "../components/GoogleAnalytics";
 
 type Status = "checking" | "anon" | "denied" | "authed";
 
@@ -85,6 +86,13 @@ const AdminLayout = () => {
       }
       return !on;
     });
+
+  // Reached from the site by an in-app link, Analytics is already running and would count the
+  // studio's pages as site visits; GA's own "ga-disable-<id>" switch stops that for this tab.
+  useEffect(() => {
+    const id = gaId(import.meta.env.VITE_GA_MEASUREMENT_ID);
+    if (id) (window as unknown as Record<string, boolean>)[`ga-disable-${id}`] = true;
+  }, []);
 
   useEffect(
     () =>

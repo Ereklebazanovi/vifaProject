@@ -11,7 +11,17 @@ declare global {
   }
 }
 
-const GoogleAnalytics: React.FC<GoogleAnalyticsProps> = ({ measurementId }) => {
+/**
+ * GA4 ids always start with "G-". The Vercel variable was saved without it ("RSPBVV8K85"),
+ * which loaded the script but sent no visits at all, so add the prefix when it's missing.
+ */
+export const gaId = (raw = "") => {
+  const id = raw.trim();
+  return !id || /^G-/i.test(id) ? id : `G-${id}`;
+};
+
+const GoogleAnalytics: React.FC<GoogleAnalyticsProps> = ({ measurementId: raw }) => {
+  const measurementId = gaId(raw);
   useEffect(() => {
     let script1: HTMLScriptElement | null = null;
     let script2: HTMLScriptElement | null = null;
@@ -72,7 +82,7 @@ export const trackEvent = (action: string, category: string, label?: string, val
 // Helper function to track page views
 export const trackPageView = (page_title: string, page_location: string) => {
   if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('config', import.meta.env.VITE_GA_MEASUREMENT_ID, {
+    window.gtag('config', gaId(import.meta.env.VITE_GA_MEASUREMENT_ID), {
       page_title,
       page_location,
     });
