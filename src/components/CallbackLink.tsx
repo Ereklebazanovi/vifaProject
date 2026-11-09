@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { PhoneCall, X } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
 import LeadForm from "./LeadForm";
+import { isAfterHours } from "../utils/callTime";
 
 type Product = "web" | "chatbot" | "wms" | "lineup" | "marketing" | "production" | "other";
 
@@ -55,7 +56,9 @@ const CallbackLink = ({ product, shape = "pill", className = "" }: { product: Pr
               <div className="mb-6 flex items-start justify-between gap-4">
                 <div>
                   <p className="text-xl font-semibold text-white">{en ? "Leave your details" : "დაგვიტოვეთ საკონტაქტო"}</p>
-                  <p className="font-georgian-body mt-1 text-gray-400">{en ? "We'll get back to you today." : "დაგიკავშირდებით დღესვე."}</p>
+                  <p className="font-georgian-body mt-1 text-gray-400">{isAfterHours()
+                    ? en ? "We'll get back to you in the morning." : "დაგიკავშირდებით დილით."
+                    : en ? "We'll get back to you today." : "დაგიკავშირდებით დღესვე."}</p>
                 </div>
                 <button onClick={() => setOpen(false)} aria-label={en ? "Close" : "დახურვა"} className="rounded-lg p-1.5 text-gray-500 hover:bg-white/5 hover:text-white">
                   <X size={20} />

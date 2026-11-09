@@ -9,7 +9,7 @@
 // GET alone never changes anything: scanners and previews open links on their own.
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { FieldValue, type DocumentSnapshot } from "firebase-admin/firestore";
-import { PRODUCTS, type Product } from "./_lib/contacts.js";
+import { callWhen, PRODUCTS, type Product } from "./_lib/contacts.js";
 import { escHtml } from "./_lib/emailTemplate.js";
 import { adminDb } from "./_lib/firebase.js";
 import { envList, isEmailConfigured, sendEmail } from "./_lib/mail.js";
@@ -85,7 +85,7 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
       await event("callback_request");
       if (c.lastCampaignId) await db.collection("campaigns").doc(c.lastCampaignId).update({ callbacks: FieldValue.increment(1) }).catch(() => {});
       await alertUs(contact, `ზარს ითხოვს: ${c.name || (c.phone ? `+${c.phone}` : "კონტაქტი")}`, `${c.name || "კონტაქტი"} ითხოვს, რომ დაურეკოთ.`);
-      return send(200, shell("მადლობა", `<h1 style="font-size:22px;margin:0 0 10px">მადლობა!</h1><p style="color:#475569;line-height:1.6;margin:0">დღესვე დაგირეკავთ${c.phone ? ` ნომერზე +${escHtml(c.phone)}` : ""}.</p>`));
+      return send(200, shell("მადლობა", `<h1 style="font-size:22px;margin:0 0 10px">მადლობა!</h1><p style="color:#475569;line-height:1.6;margin:0">${callWhen()} დაგირეკავთ${c.phone ? ` ნომერზე +${escHtml(c.phone)}` : ""}.</p>`));
     }
     // a=unsub, or a mail client's one-click POST with no action.
     if (c.unsubscribed !== true) {

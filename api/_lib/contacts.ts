@@ -151,7 +151,16 @@ export async function logSmsEvent(contactId: string, reference: string, template
 }
 
 /** The instant SMS to the person who wrote. Short Georgian text: fits one SMS (70 Georgian characters). */
-export const smsReplyText = () => "მადლობა, თქვენი მოთხოვნა მივიღეთ. დღესვე დაგიკავშირდებით.";
+/**
+ * When we promise to call: "დღესვე" in working hours, "დილით" from 20:00 to 9:00 Tbilisi time
+ * (UTC+4), so a message at 23:00 doesn't promise a call the same day.
+ */
+export const callWhen = (now = Date.now()) => {
+  const h = new Date(now + 4 * 3600e3).getUTCHours();
+  return h >= 9 && h < 20 ? "დღესვე" : "დილით";
+};
+
+export const smsReplyText = () => `მადლობა, თქვენი მოთხოვნა მივიღეთ. ${callWhen()} დაგიკავშირდებით.`;
 
 export async function logEmailEvent(contactId: string, template: string, ok: boolean, detail: string) {
   await adminDb()
@@ -194,9 +203,9 @@ export function alertEmail(q: Inquiry, source: string) {
 export function autoReplyEmail(q: Inquiry) {
   const p = PRODUCTS[q.product];
   const mail: BrandEmail = {
-    preheader: "მივიღეთ თქვენი მოთხოვნა და დღესვე დაგიკავშირდებით.",
+    preheader: `მივიღეთ თქვენი მოთხოვნა და ${callWhen()} დაგიკავშირდებით.`,
     title: q.name ? `მადლობა, ${q.name}!` : "მადლობა!",
-    body: `თქვენი მოთხოვნა (${p.label}) მივიღეთ და დღესვე დაგიკავშირდებით.
+    body: `თქვენი მოთხოვნა (${p.label}) მივიღეთ და ${callWhen()} დაგიკავშირდებით.
 
 მანამდე შეგიძლიათ ნახოთ დეტალები და ფასები ჩვენს საიტზე.`,
     button: { text: `${p.label}: დეტალები`, url: p.page },

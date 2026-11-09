@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import { useLanguage } from "../contexts/LanguageContext";
 import { facebookPixel } from "../utils/facebookPixel";
+import { isAfterHours } from "../utils/callTime";
 
 type Product = "web" | "chatbot" | "wms" | "lineup" | "marketing" | "production" | "other";
 
@@ -33,6 +34,7 @@ const T = {
     error: "ვერ გაიგზავნა. მოგვწერეთ WhatsApp-ში:",
     doneTitle: "მადლობა, მივიღეთ!",
     doneText: "დღესვე დაგიკავშირდებით.",
+    doneTextLate: "დილით დაგიკავშირდებით.",
     doneEmail: "დადასტურება მეილზე გამოგიგზავნეთ.",
   },
   en: {
@@ -52,6 +54,7 @@ const T = {
     error: "Couldn't send. Message us on WhatsApp:",
     doneTitle: "Thank you, we got it!",
     doneText: "We'll get back to you today.",
+    doneTextLate: "We'll get back to you in the morning.",
     doneEmail: "We sent a confirmation to your email.",
   },
 };
@@ -122,7 +125,7 @@ const LeadForm = ({ defaultProduct = "web" }: { defaultProduct?: Product }) => {
     return (
       <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/[0.06] p-8 text-center">
         <p className="text-xl font-semibold text-white">{t.doneTitle}</p>
-        <p className="font-georgian-body mt-2 text-gray-300">{t.doneText} {form.email && t.doneEmail}</p>
+        <p className="font-georgian-body mt-2 text-gray-300">{isAfterHours() ? t.doneTextLate : t.doneText} {form.email && t.doneEmail}</p>
       </div>
     );
   }
