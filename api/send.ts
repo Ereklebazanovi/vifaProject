@@ -4,14 +4,19 @@
 // Sends to one batch of the audience per call; the studio calls again with `next`
 // until it is null, showing progress. The audience is always re-derived here from
 // Firestore (consent, not unsubscribed), never taken from the browser.
+// `cold: true`: the "ცივი სია" instead. Email only, to companies tagged "ცივი" (no consent),
+// one email per company ever, at most COLD_DAILY a day, sent from the team Gmail.
 import type { IncomingMessage, ServerResponse } from "node:http";
-import { FieldValue } from "firebase-admin/firestore";
+import { FieldValue, Timestamp } from "firebase-admin/firestore";
 import { jsonBody, requireAdmin } from "./_lib/adminAuth.js";
 import {
   audienceOf,
   campaignEmail,
   canEmail,
   canSms,
+  COLD_DAILY,
+  COLD_TAG,
+  coldAudienceOf,
   newUnsubToken,
   personalize,
   SMS_MAX,
@@ -20,6 +25,7 @@ import {
 } from "./_lib/campaign.js";
 import { normalizePhone } from "./_lib/contacts.js";
 import { adminDb } from "./_lib/firebase.js";
+import { gmailSender, isGmailConfigured } from "./_lib/gmail.js";
 import { isEmailConfigured, sendEmailBatch } from "./_lib/mail.js";
 import { errText } from "./_lib/pipeline.js";
 import { isSmsConfigured, sendSms } from "./_lib/sms.js";
@@ -28,6 +34,7 @@ type Req = IncomingMessage & { body?: unknown };
 type Res = ServerResponse & { status: (code: number) => Res; json: (body: unknown) => void };
 
 const BATCH = 40;
+const COLD_BATCH = 5; // one by one over SMTP, well inside the function's 60 s
 const str = (v: unknown, max: number) => (typeof v === "string" ? v.trim().slice(0, max) : "");
 /** Only https links go into an email (image, button). */
 const httpsUrl = (v: unknown) => {
@@ -46,8 +53,9 @@ export default async function handler(req: Req, res: Res) {
   if (!admin) return res.status(401).json({ ok: false, error: "auth" });
 
   const b = jsonBody(req);
-  const channel = (["sms", "email", "both"].includes(String(b.channel)) ? b.channel : "") as Channel | "";
-  const product = str(b.product, 20) || "all";
+  const cold = b.cold === true;
+  const channel = (cold ? "email" : ["sms", "email", "both"].includes(String(b.channel)) ? b.channel : "") as Channel | "";
+  const product = (!cold && str(b.product, 20)) || "all";
   const smsText = str(b.smsText, 400);
   const emailSubject = str(b.emailSubject, 150);
   const emailBody = str(b.emailBody, 8000);
@@ -62,15 +70,31 @@ export default async function handler(req: Req, res: Res) {
   if (useSms && !smsText) return res.status(400).json({ ok: false, error: "smsText" });
   if (useEmail && (!emailSubject || !emailBody)) return res.status(400).json({ ok: false, error: "email" });
   if (useSms && !isSmsConfigured()) return res.status(400).json({ ok: false, error: "smsNotConfigured" });
-  if (useEmail && !isEmailConfigured()) return res.status(400).json({ ok: false, error: "emailNotConfigured" });
+  if (useEmail && !cold && !isEmailConfigured()) return res.status(400).json({ ok: false, error: "emailNotConfigured" });
+  if (cold && !isGmailConfigured()) return res.status(400).json({ ok: false, error: "gmailNotConfigured" });
 
   const db = adminDb();
+
+  // Cold: how many are still allowed today, and log in to Gmail before anything is written.
+  let coldLeft = Infinity;
+  let gmail: Awaited<ReturnType<typeof gmailSender>> | null = null;
+  if (cold) {
+    const since = Timestamp.fromMillis(Date.now() - 24 * 3600 * 1000);
+    const today = await db.collection("contacts").where("coldSentAt", ">", since).count().get();
+    coldLeft = Math.max(0, COLD_DAILY - today.data().count);
+    if (!coldLeft && !b.campaignId) return res.status(400).json({ ok: false, error: "dailyLimit" });
+    try {
+      gmail = await gmailSender();
+    } catch {
+      return res.status(400).json({ ok: false, error: "gmailAuth" });
+    }
+  }
 
   // Addresses the sender typed by hand (first call only): saved as contacts with the
   // sender's say-so as consent, so they get a token, an unsubscribe link and a history.
   // Someone who already unsubscribed stays unsubscribed and is skipped.
   let manualSkipped = 0;
-  const typed = !b.campaignId && Array.isArray(b.extra) ? (b.extra as unknown[]).slice(0, 200).map((v) => String(v).trim()) : [];
+  const typed = !cold && !b.campaignId && Array.isArray(b.extra) ? (b.extra as unknown[]).slice(0, 200).map((v) => String(v).trim()) : [];
   const manual = typed
     .map((v) => {
       const email = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? v.toLowerCase().slice(0, 120) : "";
@@ -106,15 +130,21 @@ export default async function handler(req: Req, res: Res) {
     await w.commit();
   }
 
-  const snap = await db.collection("contacts").where("consent", "==", true).get();
+  const snap = cold
+    ? await db.collection("contacts").where("tags", "array-contains", COLD_TAG).get()
+    : await db.collection("contacts").where("consent", "==", true).get();
   // People the sender unticked in the studio stay out of every batch.
-  const audience = audienceOf(snap.docs, product, channel).filter((d) => !exclude.has(d.id));
+  const audience = (cold ? coldAudienceOf(snap.docs) : audienceOf(snap.docs, product, channel)).filter((d) => !exclude.has(d.id));
+  // Cold: everyone who got theirs drops out of the list, so each call takes the front of
+  // what's left, and the day's limit cuts the rest (the studio shows them as "tomorrow").
+  const coldTake = Math.min(audience.length, coldLeft);
 
   let campaignId = str(b.campaignId, 40);
   if (!campaignId) {
     const ref = await db.collection("campaigns").add({
       channel, product, smsText, emailSubject, emailBody, emailImage, buttonText, buttonUrl,
-      total: audience.length,
+      ...(cold ? { cold: true } : {}),
+      total: cold ? coldTake : audience.length,
       recipients: [],
       smsSent: 0, smsFailed: 0, emailSent: 0, emailFailed: 0,
       status: "sending",
@@ -126,7 +156,7 @@ export default async function handler(req: Req, res: Res) {
   const campaignRef = db.collection("campaigns").doc(campaignId);
 
   const offset = Math.max(0, Number(b.offset) || 0);
-  const batch = audience.slice(offset, offset + BATCH);
+  const batch = cold ? audience.slice(0, Math.min(COLD_BATCH, coldTake)) : audience.slice(offset, offset + BATCH);
 
   // Every recipient needs a personal token (their /u/ page) before anything is sent, and
   // that page shows the offer they got last, so remember this campaign on them.
@@ -178,7 +208,36 @@ export default async function handler(req: Req, res: Res) {
     }
   }
 
-  if (useEmail) {
+  if (gmail) {
+    // One by one from the team Gmail. Marked as done even when it fails, so nobody gets a
+    // second cold email and a bad address can't stall the list; the reason is in the history.
+    try {
+      for (const d of batch) {
+        const c = d.data();
+        const mail = campaignEmail({ subject: emailSubject, body: emailBody, buttonText, buttonUrl }, c.name, tokens.get(d.id)!, true);
+        let ok = true, detail = "";
+        try {
+          detail = await gmail.send({ to: c.email as string, ...mail });
+          emailSent++;
+          note(d.id, { emailStatus: "sent" });
+        } catch (e) {
+          ok = false;
+          detail = errText(e);
+          emailFailed++;
+          note(d.id, { emailStatus: "failed" });
+        }
+        const w = db.batch();
+        w.update(d.ref, { coldSentAt: FieldValue.serverTimestamp() });
+        w.set(d.ref.collection("events").doc(), {
+          type: "email", template: "cold", campaignId, ok, status: ok ? "sent" : "failed",
+          detail: detail.slice(0, 300), message: emailSubject, at: FieldValue.serverTimestamp(),
+        });
+        await w.commit();
+      }
+    } finally {
+      gmail.close();
+    }
+  } else if (useEmail) {
     const targets = batch.filter((d) => canEmail(d.data()));
     if (targets.length) {
       const mails = targets.map((d) => {
@@ -212,7 +271,7 @@ export default async function handler(req: Req, res: Res) {
   }
 
   const processed = offset + batch.length;
-  const done = processed >= audience.length;
+  const done = cold ? batch.length >= coldTake : processed >= audience.length;
   await campaignRef.update({
     smsSent: FieldValue.increment(smsSent),
     smsFailed: FieldValue.increment(smsFailed),
@@ -235,10 +294,12 @@ export default async function handler(req: Req, res: Res) {
   return res.status(200).json({
     ok: true,
     campaignId,
-    total: audience.length,
+    total: cold ? offset + coldTake : audience.length,
     processed,
     next: done ? null : processed,
     smsSent, smsFailed, emailSent, emailFailed,
     manualSkipped,
+    // Cold: still on the list after today's limit, for "the rest tomorrow".
+    ...(cold ? { coldWaiting: audience.length - coldTake } : {}),
   });
 }

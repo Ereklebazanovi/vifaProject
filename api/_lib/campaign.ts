@@ -29,6 +29,24 @@ export function audienceOf(docs: QueryDocumentSnapshot[], product: string, chann
     .sort((a, b) => a.id.localeCompare(b.id));
 }
 
+/** The cold list (studio "ცივი სია"; same rule in src/admin/contacts/contactsService.ts). */
+export const COLD_TAG = "ცივი";
+/** Cold emails per 24 hours, from one Gmail: few enough that a "Spam" click or two can't hurt. */
+export const COLD_DAILY = 30;
+
+/**
+ * Companies tagged "ცივი" that have an email, never said "don't write", and haven't had
+ * their one cold email yet. Consent is not needed here, and these people never get group sends.
+ */
+export function coldAudienceOf(docs: QueryDocumentSnapshot[]) {
+  return docs
+    .filter((d) => {
+      const c = d.data();
+      return (c.tags || []).includes(COLD_TAG) && c.unsubscribed !== true && !c.coldSentAt && canEmail(c);
+    })
+    .sort((a, b) => a.id.localeCompare(b.id));
+}
+
 // One personalize for everything (server sends and the studio preview), see emailTemplate.ts.
 export { personalize };
 
@@ -46,14 +64,18 @@ export interface CampaignEmailInput {
   buttonUrl?: string;
 }
 
-/** A group email in the branded flyer template, personal and with its own unsubscribe link. */
-export function campaignEmail(c: CampaignEmailInput, name: string | undefined, token: string) {
+/**
+ * A group email in the branded flyer template, personal and with its own unsubscribe link.
+ * Cold: no big image (flyers from strangers land in Gmail's "Promotions") and an honest footer.
+ */
+export function campaignEmail(c: CampaignEmailInput, name: string | undefined, token: string, cold = false) {
   const url = unsubUrl(token);
   const mail: BrandEmail = {
     preheader: personalize(c.body, name).slice(0, 110),
     title: personalize(c.subject, name),
     body: personalize(c.body, name),
-    imageUrl: c.imageUrl || undefined,
+    imageUrl: (!cold && c.imageUrl) || undefined,
+    cold,
     button: c.buttonText && c.buttonUrl ? { text: c.buttonText, url: c.buttonUrl } : undefined,
     // The WhatsApp line under the button, unless the button already is WhatsApp.
     secondary: c.buttonUrl?.includes("wa.me") ? undefined : { text: "მოგვწერეთ WhatsApp-ში", url: "https://wa.me/995557624243" },

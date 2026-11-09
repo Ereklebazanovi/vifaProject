@@ -79,7 +79,23 @@ export const EMAIL_TEMPLATES: EmailTemplate[] = [
     buttonText: "ნახეთ ლაივ დემო საიტზე",
     buttonUrl: "https://vifadigital.ge/lineup",
   },
-  
+  {
+    // For the cold list: a shop that sells through Facebook and has no site. Short and
+    // personal on purpose (the cold email goes without the big image).
+    id: "shop",
+    label: "მაღაზია (ცივი)",
+    subject: "{name}, Messenger-ის კითხვებს ავტომატურად ვუპასუხოთ?",
+    body:
+      "გამარჯობა,\n\n" +
+      "ვნახეთ, რომ ძირითადად Facebook-ით ყიდით და საკუთარი საიტი ჯერ არ გაქვთ.\n\n" +
+      "Messenger-ში ალბათ ყოველდღე ერთსა და იმავეს გეკითხებიან: ფასი, ზომა, მიტანა. ჩვენ ვაწყობთ ჩატბოტს, რომელიც ამ კითხვებს წამებში პასუხობს, დღისით და ღამით, და კლიენტის ნომერს შეკვეთასთან ერთად გიტოვებთ.\n\n" +
+      "თუ გინდათ, მარტივ საიტსაც გაგიკეთებთ, სადაც პროდუქცია ფასებით ჩანს და Google-ში მოიძებნება.\n\n" +
+      "ნახეთ, როგორ მუშაობს, ან უბრალოდ უპასუხეთ ამ წერილს.\n\n" +
+      "VIFA Digital-ის გუნდი",
+    image: `${IMG}/chatbot.jpg`,
+    buttonText: "ნახეთ, როგორ მუშაობს",
+    buttonUrl: "https://vifadigital.ge/services/ai-chatbot",
+  },
   {
     id: "vifa",
     label: "VIFA (ყველა სერვისი)",

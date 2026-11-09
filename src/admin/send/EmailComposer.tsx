@@ -32,9 +32,11 @@ const SAMPLE_NAME = "ნინო";
  * then edit anything. The preview is the real email HTML the person will get.
  * `previewName`: the exact name this email will carry ("" = none); left out for group
  * sends, where every person gets their own, so the preview shows a sample name.
+ * `cold`: the cold list, where the email goes without the big image (see campaignEmail).
  */
-const EmailComposer = ({ value: d, onChange, previewName }: { value: EmailDraft; onChange: (d: EmailDraft) => void; previewName?: string }) => {
-  const shownName = previewName === undefined ? SAMPLE_NAME : previewName;
+const EmailComposer = ({ value: d, onChange, previewName, cold = false }: { value: EmailDraft; onChange: (d: EmailDraft) => void; previewName?: string; cold?: boolean }) => {
+  // The cold list is companies, so the sample is a shop name there.
+  const shownName = previewName === undefined ? (cold ? "Flora Shop" : SAMPLE_NAME) : previewName;
   const [template, setTemplate] = useState("");
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState("");
@@ -73,12 +75,13 @@ const EmailComposer = ({ value: d, onChange, previewName }: { value: EmailDraft;
       brandEmailHtml({
         title: personalize(d.subject, shownName) || "სათაური",
         body: personalize(d.body, shownName) || "აქ გამოჩნდება მეილის ტექსტი.",
-        imageUrl: d.image || undefined,
+        imageUrl: (!cold && d.image) || undefined,
         button: d.buttonText && d.buttonUrl ? { text: d.buttonText, url: d.buttonUrl } : undefined,
         secondary: d.buttonUrl.includes("wa.me") ? undefined : { text: "მოგვწერეთ WhatsApp-ში", url: "https://wa.me/995557624243" },
         unsubscribeUrl: "https://vifadigital.ge/u/preview",
+        cold,
       }),
-    [d, shownName]
+    [d, shownName, cold]
   );
 
   return (
@@ -101,6 +104,9 @@ const EmailComposer = ({ value: d, onChange, previewName }: { value: EmailDraft;
         <input className={inputCls} value={d.subject} onChange={(e) => set({ subject: e.target.value })} placeholder="მაგ. {name}, ახალი შეთავაზება VIFA-სგან" />
       </Field>
 
+      {cold ? (
+        <p className="text-xs text-slate-500">ცივ წერილში დიდი სურათი არ ჩაისმება: უცნობისგან მიღებულ ფლაერს Gmail „Promotions“-ში აგდებს.</p>
+      ) : (
       <div>
         <p className="mb-1.5 text-sm font-medium text-slate-700">სურათი</p>
         <div className="flex flex-wrap items-center gap-3">
@@ -113,6 +119,7 @@ const EmailComposer = ({ value: d, onChange, previewName }: { value: EmailDraft;
         </div>
         {uploadError && <p className="mt-1 text-sm text-rose-600">{uploadError}</p>}
       </div>
+      )}
 
       <Field label="ტექსტი" hint="ცარიელი ხაზით გამოყავი აბზაცები. ლოგო, ხელმოწერა, კონტაქტი და გაუქმების ბმული თავისით ემატება.">
         <textarea className={`${inputCls} min-h-[180px]`} value={d.body} onChange={(e) => set({ body: e.target.value })} />

@@ -1,5 +1,6 @@
 // POST /api/import (admins only): bring existing people into `contacts`.
-// Body: { rows: [{ name, phone, email }], product, consent }  (a list pasted in the studio)
+// Body: { rows: [{ name, phone, email }], product, consent, tag? }  (a list pasted in the studio;
+//        tag goes on every row, e.g. "ცივი" for the cold list)
 //   or: { legacy: true }  (the old site forms: `chatbot-requests` and `leads`)
 // Same one-contact-per-person rule as the forms; nobody gets an automatic message.
 import type { IncomingMessage, ServerResponse } from "node:http";
@@ -33,6 +34,7 @@ export default async function handler(req: Req, res: Res) {
   const db = adminDb();
   const rows: Row[] = [];
   let skipped = 0;
+  const tag = b.legacy === true ? "" : str(b.tag, 30);
 
   if (b.legacy === true) {
     const [requests, leads] = await Promise.all([db.collection("chatbot-requests").get(), db.collection("leads").get()]);
@@ -85,6 +87,7 @@ export default async function handler(req: Req, res: Res) {
           ...(r.email ? { email: r.email } : {}),
           products: FieldValue.arrayUnion(r.product),
           sources: FieldValue.arrayUnion("import"),
+          ...(tag ? { tags: FieldValue.arrayUnion(tag) } : {}),
           ...(isNew
             ? { lastProduct: r.product, firstSeenAt: FieldValue.serverTimestamp(), lastSeenAt: FieldValue.serverTimestamp(), unsubscribed: false }
             : {}),

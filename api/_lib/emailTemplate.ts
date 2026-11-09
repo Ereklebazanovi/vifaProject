@@ -36,7 +36,15 @@ export interface BrandEmail {
   secondary?: { text: string; url: string };
   /** Unsubscribe link for group sends; omitted for replies to someone's own request. */
   unsubscribeUrl?: string;
+  /** A one-time email to a company that never wrote to us: honest footer, "don't write again". */
+  cold?: boolean;
 }
+
+const FOOTER_NOTE = {
+  consent: "ამ წერილს იღებთ, რადგან VIFA Digital-ის სიახლეების მიღებას დათანხმდით.",
+  cold: "ეს ერთჯერადი წერილია. თუ არ გაინტერესებთ, აღარ შეგაწუხებთ.",
+};
+const unsubLabel = (e: BrandEmail) => (e.cold ? "აღარ მომწეროთ" : "გამოწერის გაუქმება");
 
 const FONT = "Arial,'Helvetica Neue',Helvetica,sans-serif";
 
@@ -56,7 +64,7 @@ export function brandEmailHtml(e: BrandEmail): string {
     ? `<tr><td style="padding:0"><img src="${escHtml(e.imageUrl)}" width="600" alt="" style="display:block;width:100%;max-width:600px;height:auto;border:0"></td></tr>`
     : "";
   const unsubscribe = e.unsubscribeUrl
-    ? `<p style="margin:14px 0 0;font-size:12px;line-height:1.6;color:#94a3b8">ამ წერილს იღებთ, რადგან VIFA Digital-ის სიახლეების მიღებას დათანხმდით.<br><a href="${escHtml(e.unsubscribeUrl)}" style="color:#94a3b8;text-decoration:underline">გამოწერის გაუქმება</a></p>`
+    ? `<p style="margin:14px 0 0;font-size:12px;line-height:1.6;color:#94a3b8">${e.cold ? FOOTER_NOTE.cold : FOOTER_NOTE.consent}<br><a href="${escHtml(e.unsubscribeUrl)}" style="color:#94a3b8;text-decoration:underline">${unsubLabel(e)}</a></p>`
     : "";
 
   return `<!doctype html><html lang="ka"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -89,6 +97,6 @@ export function brandEmailText(e: BrandEmail): string {
     e.button ? `${e.button.text}: ${e.button.url}` : "",
     e.secondary ? `${e.secondary.text}: ${e.secondary.url}` : "",
     "VIFA Digital · vifadigital.ge · +995 557 62 42 43",
-    e.unsubscribeUrl ? `გამოწერის გაუქმება: ${e.unsubscribeUrl}` : "",
+    e.unsubscribeUrl ? `${e.cold ? `${FOOTER_NOTE.cold} ` : ""}${unsubLabel(e)}: ${e.unsubscribeUrl}` : "",
   ].filter(Boolean).join("\n\n");
 }

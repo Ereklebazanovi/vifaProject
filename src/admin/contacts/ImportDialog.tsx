@@ -1,13 +1,14 @@
 import { useMemo, useState } from "react";
 import { apiPost } from "../api";
 import { btnPrimary, btnSecondary, Field, inputCls, Modal } from "../ui";
-import { PRODUCT_LABELS } from "./contactsService";
+import { COLD_TAG, PRODUCT_LABELS } from "./contactsService";
 import { parse, readTextFile } from "./parseList";
 
 const ImportDialog = ({ onClose }: { onClose: () => void }) => {
   const [text, setText] = useState("");
   const [product, setProduct] = useState("other");
   const [consent, setConsent] = useState(false);
+  const [tag, setTag] = useState("");
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const { rows, skipped } = useMemo(() => parse(text), [text]);
@@ -53,6 +54,10 @@ const ImportDialog = ({ onClose }: { onClose: () => void }) => {
             {Object.entries(PRODUCT_LABELS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
           </select>
         </Field>
+        <Field label="ტეგი (არასავალდებულო)" hint="ყველას მიეწერება. „ცივი“: კომპანიები, რომლებიც ჩვენ ვიპოვეთ. მათ კამპანიები → ცივი სია აგზავნის, თანხმობას ნუ მონიშნავ.">
+          <input className={inputCls} value={tag} onChange={(e) => setTag(e.target.value)} placeholder="მაგ. ცივი" list="import-tags" />
+          <datalist id="import-tags"><option value={COLD_TAG} /></datalist>
+        </Field>
         <label className="flex items-start gap-3 rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900">
           <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5 h-4 w-4" />
           <span>
@@ -61,7 +66,7 @@ const ImportDialog = ({ onClose }: { onClose: () => void }) => {
           </span>
         </label>
         <div className="flex flex-wrap gap-2">
-          <button disabled={busy || rows.length === 0} onClick={() => run({ rows, product, consent })} className={btnPrimary}>
+          <button disabled={busy || rows.length === 0} onClick={() => run({ rows, product, consent, tag: tag.trim() })} className={btnPrimary}>
             {busy ? "იტვირთება…" : `${rows.length} კონტაქტის დამატება`}
           </button>
           <button disabled={busy} onClick={() => run({ legacy: true })} className={btnSecondary}

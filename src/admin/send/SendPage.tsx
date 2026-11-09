@@ -9,6 +9,9 @@ import {
   audienceOf,
   canEmail,
   canSms,
+  COLD_DAILY,
+  COLD_TAG,
+  coldAudienceOf,
   CONTACTS,
   formatWhen,
   PRODUCT_LABELS,
@@ -26,17 +29,20 @@ const CHANNELS: Record<Channel, string> = { sms: "SMS", email: "მეილი"
 const ERRORS: Record<string, string> = {
   smsNotConfigured: "SMS ჯერ არ არის ჩართული (Vercel-ში SMSOFFICE_API_KEY და SMS_SENDER).",
   emailNotConfigured: "მეილი ჯერ არ არის ჩართული (Vercel-ში RESEND_API_KEY).",
+  gmailNotConfigured: "Gmail ჯერ არ არის ჩართული (Vercel-ში GMAIL_USER და GMAIL_APP_PASSWORD).",
+  gmailAuth: "Gmail-მა შესვლა არ მიიღო. შეამოწმე GMAIL_USER და App Password Vercel-ში.",
+  dailyLimit: `დღეს ${COLD_DAILY} ცივი მეილი უკვე წავიდა. დანარჩენი ხვალ გააგზავნე.`,
   auth: "სერვერმა შენი ანგარიში ვერ დაადასტურა. გამოდი და ხელახლა შედი.",
 };
 
-interface Result { smsSent: number; smsFailed: number; emailSent: number; emailFailed: number; manualSkipped?: number }
+interface Result { smsSent: number; smsFailed: number; emailSent: number; emailFailed: number; manualSkipped?: number; coldWaiting?: number }
 
 /**
  * Sending, two ways: to one person (SMS or a templated email, anyone), or to a group
  * (everyone who agreed to receive offers, each with an unsubscribe link).
  */
 const SendPage = () => {
-  const [mode, setMode] = useState<"personal" | "group">("personal");
+  const [mode, setMode] = useState<"personal" | "group" | "cold">("personal");
   const [personalChannel, setPersonalChannel] = useState<"email" | "sms">("email");
   // SMS left on smsoffice.ge: undefined while loading, null when it can't be read.
   const [balance, setBalance] = useState<number | null | undefined>(undefined);
@@ -55,7 +61,8 @@ const SendPage = () => {
         description={
           <>
             <b className="font-medium text-slate-700">ერთ ადამიანს:</b> ნებისმიერ ნომერზე ან მეილზე, მზა შაბლონით.{" "}
-            <b className="font-medium text-slate-700">ჯგუფს:</b> ყველას, ვინც შეთავაზებებზე თანხმობა მოგცა, თითოეულს გამოწერის გაუქმების ბმულით.
+            <b className="font-medium text-slate-700">ჯგუფს:</b> ყველას, ვინც შეთავაზებებზე თანხმობა მოგცა, თითოეულს გამოწერის გაუქმების ბმულით.{" "}
+            <b className="font-medium text-slate-700">ცივი სია:</b> კომპანიებს, რომლებიც ჩვენ ვიპოვეთ, Gmail-იდან, თითოს ერთხელ.
           </>
         }
         actions={
@@ -72,7 +79,7 @@ const SendPage = () => {
         }
       />
 
-      <Segmented options={{ personal: "ერთ ადამიანს", group: "ჯგუფს" }} value={mode} onChange={setMode} />
+      <Segmented options={{ personal: "ერთ ადამიანს", group: "ჯგუფს", cold: "ცივი სია" }} value={mode} onChange={setMode} />
 
       {mode === "personal" ? (
         <Card title="ერთ ადამიანს">
@@ -81,17 +88,23 @@ const SendPage = () => {
           <p className="mt-5 text-xs text-slate-500">მიმღები კონტაქტებში შეინახება და გაგზავნილი მის ისტორიაში ჩაიწერება.</p>
         </Card>
       ) : (
-        <GroupSend balance={balance} onSent={loadBalance} />
+        // key: switching between group and cold starts from a clean form.
+        <GroupSend key={mode} cold={mode === "cold"} balance={balance} onSent={loadBalance} />
       )}
     </div>
   );
 };
 
-function GroupSend({ balance, onSent }: { balance?: number | null; onSent: () => void }) {
+/**
+ * `cold`: the cold list instead. Email only, to everyone tagged "ცივი" who hasn't had
+ * theirs, from the team Gmail, at most COLD_DAILY a day; no consent, no typed extras.
+ */
+function GroupSend({ balance, onSent, cold = false }: { balance?: number | null; onSent: () => void; cold?: boolean }) {
   const { contacts, contactsLoading } = useAdmin();
   const show = useShow();
   const [product, setProduct] = useState("all");
-  const [channel, setChannel] = useState<Channel>("email");
+  const [channelPick, setChannel] = useState<Channel>("email");
+  const channel: Channel = cold ? "email" : channelPick;
   const [excluded, setExcluded] = useState<Set<string>>(new Set());
   const [smsText, setSmsText] = useState("");
   const [draft, setDraft] = useState<EmailDraft>(emptyDraft);
@@ -103,12 +116,20 @@ function GroupSend({ balance, onSent }: { balance?: number | null; onSent: () =>
   const [openCampaign, setOpenCampaign] = useState<Campaign | null>(null);
 
   useEffect(() => subscribeCampaigns(setCampaigns, (e) => console.error(e)), []);
+  // Each tab shows its own history.
+  const shown = campaigns.filter((c) => Boolean(c.cold) === cold);
 
   const useSms = channel !== "email";
   const useEmail = channel !== "sms";
-  const eligible = useMemo(() => audienceOf(contacts, product, channel), [contacts, product, channel]);
+  const eligible = useMemo(() => (cold ? coldAudienceOf(contacts) : audienceOf(contacts, product, channel)), [cold, contacts, product, channel]);
   const audience = eligible.filter((c) => !excluded.has(c.id));
   const consented = contacts.filter((c) => c.consent && !c.unsubscribed);
+  // Cold: what's left of today's limit (the server counts the same way).
+  const coldLeft = useMemo(() => {
+    const since = Date.now() - 24 * 3600 * 1000;
+    return Math.max(0, COLD_DAILY - contacts.filter((c) => (c.coldSentAt?.toMillis?.() || 0) > since).length);
+  }, [contacts]);
+  const coldTagged = useMemo(() => contacts.filter((c) => c.tags?.includes(COLD_TAG)).length, [contacts]);
 
   // Typed by hand: one per line or comma. Only the ones this channel can reach, that aren't
   // already in the list, and that never unsubscribed (the server checks that again).
@@ -130,11 +151,11 @@ function GroupSend({ balance, onSent }: { balance?: number | null; onSent: () =>
       })
       .filter((m) => (seen.has(m.id) ? false : (seen.add(m.id), true)));
   }, [extraText, audience, contacts, useSms, useEmail]);
-  const manualOk = manual.filter((m) => m.ok);
+  const manualOk = cold ? [] : manual.filter((m) => m.ok);
 
   const smsCount = audience.filter(canSms).length + manualOk.filter((m) => !m.isEmail).length;
-  const emailCount = audience.filter(canEmail).length + manualOk.filter((m) => m.isEmail).length;
-  const total = audience.length + manualOk.length;
+  const emailCount = cold ? Math.min(audience.length, coldLeft) : audience.filter(canEmail).length + manualOk.filter((m) => m.isEmail).length;
+  const total = cold ? emailCount : audience.length + manualOk.length;
 
   // Length as sent: a sample name in place of {name} plus the personal-page line.
   const smsFull = smsText.split("{name}").join("ნინო ბერიძე") + SMS_UNSUB_SAMPLE;
@@ -154,7 +175,9 @@ function GroupSend({ balance, onSent }: { balance?: number | null; onSent: () =>
     });
 
   const send = async () => {
-    const what = [useSms && smsCount ? `${smsCount} SMS` : "", useEmail && emailCount ? `${emailCount} მეილი` : ""].filter(Boolean).join(" და ");
+    const what = cold
+      ? `${emailCount} ცივი მეილი Gmail-იდან`
+      : [useSms && smsCount ? `${smsCount} SMS` : "", useEmail && emailCount ? `${emailCount} მეილი` : ""].filter(Boolean).join(" და ");
     if (!confirm(`გავაგზავნო ${what}? ამის გაუქმება შეუძლებელია.`)) return;
     setError("");
     setResult(null);
@@ -169,11 +192,12 @@ function GroupSend({ balance, onSent }: { balance?: number | null; onSent: () =>
           emailSubject: draft.subject, emailBody: draft.body, emailImage: draft.image,
           buttonText: draft.buttonKind === "none" ? "" : draft.buttonText,
           buttonUrl: draft.buttonKind === "none" ? "" : draft.buttonUrl,
-          exclude: [...excluded], campaignId, offset,
+          exclude: [...excluded], campaignId, offset, cold,
           // Typed addresses go only with the first call; after that they are contacts.
           extra: campaignId ? [] : manualOk.map((m) => m.raw),
         });
         if (!campaignId) totals.manualSkipped = r.manualSkipped || 0;
+        totals.coldWaiting = r.coldWaiting;
         campaignId = r.campaignId;
         totals.smsSent += r.smsSent; totals.smsFailed += r.smsFailed;
         totals.emailSent += r.emailSent; totals.emailFailed += r.emailFailed;
@@ -194,6 +218,12 @@ function GroupSend({ balance, onSent }: { balance?: number | null; onSent: () =>
   return (
     <>
       <Card title="1. ვის">
+        {cold ? (
+          <p className="text-sm leading-relaxed text-slate-600">
+            ყველა კომპანია ტეგით <b className="font-medium text-slate-800">„{COLD_TAG}“</b>, რომელსაც მეილი აქვს და ჯერ არ მიუღია.
+            იგზავნება Gmail-იდან, თითოს მხოლოდ ერთხელ, დღეში მაქსიმუმ {COLD_DAILY}. პასუხები Gmail-ში მოვა.
+          </p>
+        ) : (
         <div className="flex flex-wrap items-center gap-3">
           <select value={product} onChange={(e) => { setProduct(e.target.value); setExcluded(new Set()); }} className={`${inputCls} w-[min(100%,20rem)]`}>
             <option value="all">ყველა, ვისაც თანხმობა აქვს</option>
@@ -201,13 +231,23 @@ function GroupSend({ balance, onSent }: { balance?: number | null; onSent: () =>
           </select>
           <Chips options={CHANNELS} value={channel} onChange={(v) => { setChannel(v); setExcluded(new Set()); }} />
         </div>
+        )}
 
         <p className="mt-4 text-slate-700">
-          <span className="text-2xl font-semibold text-slate-900">{contactsLoading ? "…" : total}</span> ადამიანი მიიღებს
+          <span className="text-2xl font-semibold text-slate-900">{contactsLoading ? "…" : total}</span> {cold ? "კომპანია მიიღებს დღეს" : "ადამიანი მიიღებს"}
           {useSms && useEmail && ` (${smsCount} SMS-ით, ${emailCount} მეილით)`}
+          {cold && audience.length > total && <span className="text-sm text-slate-500"> · დანარჩენი {audience.length - total} ხვალ</span>}
         </p>
 
-        {!contactsLoading && consented.length === 0 && (
+        {cold && !contactsLoading && eligible.length === 0 && (
+          <p className="mt-2 text-sm text-amber-700">
+            {coldTagged
+              ? `ტეგით „${COLD_TAG}“ ${coldTagged} კონტაქტია, ყველამ უკვე მიიღო ან მეილი არ აქვს.`
+              : `ჯერ არავინ. კონტაქტები → იმპორტი, და ტეგის ველში ჩაწერე „${COLD_TAG}“.`}
+          </p>
+        )}
+
+        {!cold && !contactsLoading && consented.length === 0 && (
           <p className="mt-2 text-sm text-amber-700">
             ჯერ არავის აქვს თანხმობა. თანხმობა ჩნდება, როცა ადამიანი ფორმაში მონიშნავს, ან როცა
             იმპორტისას მიუთითებ, რომ ამ ხალხმა თანხმობა გითხრა. ან ჩაწერე მისამართები ქვემოთ, ხელით.
@@ -239,6 +279,7 @@ function GroupSend({ balance, onSent }: { balance?: number | null; onSent: () =>
           </div>
         )}
 
+        {!cold && (
         <div className="mt-5">
           <Field label={useEmail && useSms ? "დამატებით, ხელით: მეილები ან ნომრები" : useEmail ? "დამატებით, ხელით: მეილები" : "დამატებით, ხელით: ნომრები"}
             hint="თითო ხაზზე ან მძიმით. კონტაქტებში დაემატებიან თანხმობით, ამიტომ ჩაწერე მხოლოდ ისინი, ვინც გიცნობს და შენგან შეთავაზებას ელის.">
@@ -256,11 +297,12 @@ function GroupSend({ balance, onSent }: { balance?: number | null; onSent: () =>
             </div>
           )}
         </div>
+        )}
       </Card>
 
       {useEmail && (
         <Card title="2. მეილი">
-          <EmailComposer value={draft} onChange={setDraft} />
+          <EmailComposer value={draft} onChange={setDraft} cold={cold} />
         </Card>
       )}
 
@@ -291,11 +333,12 @@ function GroupSend({ balance, onSent }: { balance?: number | null; onSent: () =>
 
       <div className="flex flex-wrap items-center gap-4">
         <button onClick={send} disabled={!ready} className={`${btnPrimary} px-6 py-3`}>
-          {progress ? `იგზავნება… ${progress.done} / ${progress.total}` : `გაგზავნა ${total} ადამიანს`}
+          {progress ? `იგზავნება… ${progress.done} / ${progress.total}` : `გაგზავნა ${total} ${cold ? "კომპანიას" : "ადამიანს"}`}
         </button>
         {result && (
           <p className="text-sm text-emerald-700">
-            გაიგზავნა: {result.smsSent} SMS, {result.emailSent} მეილი
+            {cold ? `გაიგზავნა: ${result.emailSent} მეილი` : `გაიგზავნა: ${result.smsSent} SMS, ${result.emailSent} მეილი`}
+            {result.coldWaiting ? ` · დანარჩენი ${result.coldWaiting} ხვალ` : ""}
             {(result.smsFailed || result.emailFailed) ? ` · ვერ გაიგზავნა ${result.smsFailed + result.emailFailed} (მიზეზი კონტაქტის ისტორიაშია)` : ""}
             {result.manualSkipped ? ` · ${result.manualSkipped} ხელით ჩაწერილს გამოწერა აქვს გაუქმებული და არ გაეგზავნა` : ""}
           </p>
@@ -303,10 +346,10 @@ function GroupSend({ balance, onSent }: { balance?: number | null; onSent: () =>
         {error && <p className="text-sm text-rose-600">{error}</p>}
       </div>
 
-      {campaigns.length > 0 && (
-        <Panel title="ისტორია" subtitle="ჯგუფური გაგზავნები: ვინ მიიღო, ვინ გახსნა, ვინ ითხოვს ზარს" bodyClass="">
+      {shown.length > 0 && (
+        <Panel title="ისტორია" subtitle={cold ? "ცივი გაგზავნები: ვინ მიიღო. პასუხები Gmail-ში მოდის." : "ჯგუფური გაგზავნები: ვინ მიიღო, ვინ გახსნა, ვინ ითხოვს ზარს"} bodyClass="">
           <div className="overflow-hidden">
-            {campaigns.map((c) => (
+            {shown.map((c) => (
               <button key={c.id} onClick={() => setOpenCampaign(c)}
                 className="grid w-full gap-1 border-b border-slate-100 px-5 py-4 text-left transition last:border-0 hover:bg-slate-50 md:grid-cols-[1fr_2fr_1.2fr] md:items-center md:gap-4">
                 <span className="text-sm text-slate-500">{formatWhen(c.createdAt)}</span>

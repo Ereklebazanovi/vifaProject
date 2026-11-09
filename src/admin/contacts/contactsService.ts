@@ -71,6 +71,8 @@ export interface Contact {
   nextNote?: string;
   /** Our own try of a form (name "ტესტი" or a team number); deleted by the 9:00 run. */
   test?: boolean;
+  /** When their one cold email went out (კამპანიები → ცივი სია); never twice. */
+  coldSentAt?: Timestamp;
 }
 
 export interface ContactEvent {
@@ -113,6 +115,8 @@ export interface Campaign {
   emailSent: number;
   emailFailed: number;
   status: "sending" | "done";
+  /** Sent to the cold list from the team Gmail. */
+  cold?: boolean;
   /** People who opened their SMS page / pressed "call me back" there. */
   opens?: number;
   callbacks?: number;
@@ -143,6 +147,12 @@ export function audienceOf(contacts: Contact[], product: string, channel: "sms" 
       (channel === "sms" ? canSms(c) : channel === "email" ? canEmail(c) : canSms(c) || canEmail(c))
   );
 }
+
+/** Cold list, same rule as api/_lib/campaign.ts: tagged "ცივი", has an email, not written to yet. */
+export const COLD_TAG = "ცივი";
+export const COLD_DAILY = 30;
+export const coldAudienceOf = (contacts: Contact[]) =>
+  contacts.filter((c) => c.tags?.includes(COLD_TAG) && c.unsubscribed !== true && !c.coldSentAt && canEmail(c));
 
 /** Studio edit of a contact: name, email, and consent the admin vouches for. */
 /** Remove a contact and its whole history (events first: Firestore keeps subcollections otherwise). */
