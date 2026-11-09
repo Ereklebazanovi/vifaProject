@@ -1,10 +1,10 @@
 // /studio/pipeline: the sales board. Everyone we are talking to, one column per stage.
 // Drag a card to another column, or open it and pick the stage on the contact card.
 import { useMemo, useState } from "react";
-import { CalendarClock, Clock, Mail, Plus, Search } from "lucide-react";
+import { CalendarClock, Clock, Mail, Plus, Search, Trash2 } from "lucide-react";
 import { useAdmin, useShow } from "../AdminLayout";
 import { apiPost } from "../api";
-import { ContactDetail, Initial } from "../contacts/ContactsPage";
+import { askAndDelete, ContactDetail, Initial } from "../contacts/ContactsPage";
 import { channelsByContact, useStudioEvents } from "../studioData";
 import { Badge, btnPrimary, btnSecondary, inputCls, Modal, PageHeader, StatStrip } from "../ui";
 import {
@@ -186,7 +186,7 @@ const PipelinePage = () => {
                         setOver(null);
                       }}
                       onClick={() => setOpen(c)}
-                      className={`cursor-pointer rounded-md border border-slate-200 bg-white p-3 shadow-[0_1px_2px_rgba(16,24,40,0.05)] transition hover:border-slate-300 hover:shadow-md ${
+                      className={`group cursor-pointer rounded-md border border-slate-200 bg-white p-3 shadow-[0_1px_2px_rgba(16,24,40,0.05)] transition hover:border-slate-300 hover:shadow-md ${
                         dragging === c.id ? "opacity-50" : ""
                       } ${s === "lost" ? "opacity-70" : ""}`}
                     >
@@ -198,6 +198,14 @@ const PipelinePage = () => {
                             {[PRODUCT_LABELS[c.lastProduct || ""] || PRODUCT_LABELS[c.products?.[0] || ""], channels.get(c.id)].filter(Boolean).join(" · ")}
                           </p>
                         </div>
+                        <button type="button" title="წაშლა" aria-label="წაშლა"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            askAndDelete([c]).catch(() => setError("კონტაქტი ვერ წაიშალა. სცადე თავიდან."));
+                          }}
+                          className="-mr-1 -mt-1 shrink-0 rounded p-1 text-slate-300 transition hover:bg-rose-50 hover:text-rose-600 md:opacity-0 md:group-hover:opacity-100 md:focus:opacity-100">
+                          <Trash2 size={14} />
+                        </button>
                       </div>
                       {(c.phone || c.email) && (
                         <p className="mt-2 truncate text-xs tabular-nums text-slate-600">{c.phone ? show.phone(c.phone) : show.email(c.email)}</p>

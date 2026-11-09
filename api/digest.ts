@@ -89,7 +89,7 @@ function render(d: Awaited<ReturnType<typeof buildDigest>>) {
       ? `<a href="tel:+${c.phone}" style="color:#0f172a">${phone(c.phone)}</a> · <a href="https://wa.me/${c.phone}" style="color:#16a34a">WhatsApp</a>`
       : c.email ? `<a href="mailto:${esc(c.email)}" style="color:#0f172a">${esc(c.email)}</a>` : "";
     return `<tr><td style="padding:10px 0;border-bottom:1px solid #f1f5f9">
-<div style="font-weight:bold;color:#0f172a">${esc(c.name || "უსახელო")}</div>
+<div style="font-weight:bold"><a href="${SITE}/studio/contacts?c=${encodeURIComponent(c.id)}" style="color:#0f172a;text-decoration:none">${esc(c.name || "უსახელო")}</a></div>
 <div style="color:#64748b;font-size:13px;margin-top:2px">${[extra, product(c)].filter(Boolean).map(esc).join(" · ")}</div>
 <div style="font-size:13px;margin-top:4px">${reach}</div></td></tr>`;
   };

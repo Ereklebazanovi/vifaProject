@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
-import { Mail, Phone, Search, Upload, X } from "lucide-react";
+import { Mail, Phone, Search, Trash2, Upload, X } from "lucide-react";
 import { Timestamp } from "firebase/firestore";
 import { useAdmin, useShow } from "../AdminLayout";
 import { Badge, btnPrimary, btnSecondary, Field, inputCls, Modal, PageHeader, Panel, StatStrip } from "../ui";
@@ -34,6 +34,15 @@ const COLS = "md:grid-cols-[1.7fr_1.5fr_0.9fr_1.2fr_1.1fr_0.9fr]";
 const selectCls =
   "rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-sm text-slate-700 shadow-[0_1px_2px_rgba(16,24,40,0.04)] outline-none focus:border-indigo-500 disabled:text-slate-400";
 
+/** Asks once, then deletes these people with their whole history. True when deleted. */
+export async function askAndDelete(list: Contact[]): Promise<boolean> {
+  if (!list.length) return false;
+  const who = list.length === 1 ? (list[0].name || "ეს კონტაქტი") : `${list.length} კონტაქტი`;
+  if (!confirm(`წავშალო ${who} და მთელი ისტორია? ამის დაბრუნება შეუძლებელია.`)) return false;
+  for (const c of list) await deleteContact(c.id);
+  return true;
+}
+
 /** Round initial in place of a photo. */
 export const Initial = ({ name }: { name?: string }) => (
   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-100 text-xs font-semibold text-slate-600 ring-1 ring-slate-200">
@@ -51,6 +60,16 @@ const ContactsPage = () => {
   const [open, setOpen] = useState<Contact | null>(null);
   const [importing, setImporting] = useState(false);
   const show = useShow();
+  const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [deleting, setDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState("");
+  const toggle = (id: string) =>
+    setSelected((cur) => {
+      const next = new Set(cur);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
 
   // /studio/contacts?c=<id> (from the overview feed) opens that person's card.
   const [params, setParams] = useSearchParams();
@@ -91,6 +110,19 @@ const ContactsPage = () => {
 
   const wait = <span className="text-slate-300">…</span>;
   const filtered = product !== "all" || stageFilter !== "all" || tag !== "all" || search.trim() !== "";
+  const picked = contacts.filter((c) => selected.has(c.id));
+  const allShownPicked = shown.length > 0 && shown.every((c) => selected.has(c.id));
+  const removePicked = async () => {
+    setDeleting(true);
+    setDeleteError("");
+    try {
+      if (await askAndDelete(picked)) setSelected(new Set());
+    } catch {
+      setDeleteError("ზოგი კონტაქტი ვერ წაიშალა. სცადე თავიდან.");
+    } finally {
+      setDeleting(false);
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -133,8 +165,25 @@ const ContactsPage = () => {
           </select>
         </div>
 
+        {picked.length > 0 && (
+          <div className="flex flex-wrap items-center gap-3 border-b border-slate-200 bg-slate-900 px-5 py-2.5 text-sm text-white">
+            <span className="font-medium">მონიშნულია {picked.length}</span>
+            <button type="button" onClick={removePicked} disabled={deleting}
+              className="inline-flex items-center gap-1.5 rounded-md bg-rose-600 px-2.5 py-1 font-medium hover:bg-rose-500 disabled:opacity-60">
+              <Trash2 size={14} />{deleting ? "იშლება…" : "წაშლა"}
+            </button>
+            <button type="button" onClick={() => setSelected(new Set())} className="text-slate-300 hover:text-white">მონიშვნის მოხსნა</button>
+            {deleteError && <span className="text-rose-300">{deleteError}</span>}
+          </div>
+        )}
+
         <div className={`hidden ${COLS} gap-4 border-b border-slate-200 bg-slate-50/80 px-5 py-2.5 text-xs font-medium text-slate-500 md:grid`}>
-          <span>სახელი</span><span>კონტაქტი</span><span>ეტაპი</span><span>ტეგები</span><span>სერვისი</span><span className="text-right">ბოლო აქტივობა</span>
+          <span className="flex items-center gap-3">
+            <input type="checkbox" aria-label="ყველას მონიშვნა" checked={allShownPicked} className="h-4 w-4 accent-slate-900"
+              onChange={() => setSelected(allShownPicked ? new Set() : new Set(shown.map((c) => c.id)))} />
+            სახელი
+          </span>
+          <span>კონტაქტი</span><span>ეტაპი</span><span>ტეგები</span><span>სერვისი</span><span className="text-right">ბოლო აქტივობა</span>
         </div>
         {contactsLoading ? (
           <p className="px-5 py-12 text-center text-sm text-slate-500">იტვირთება…</p>
@@ -149,9 +198,14 @@ const ContactsPage = () => {
             {shown.map((c) => {
               const s = stageOf(c);
               return (
-                <button key={c.id} onClick={() => setOpen(c)}
-                  className={`grid w-full gap-1.5 px-5 py-3 text-left transition hover:bg-slate-50 md:items-center md:gap-4 ${COLS}`}>
+                <div key={c.id} role="button" tabIndex={0} onClick={() => setOpen(c)}
+                  onKeyDown={(e) => e.key === "Enter" && setOpen(c)}
+                  className={`grid w-full cursor-pointer gap-1.5 px-5 py-3 text-left transition hover:bg-slate-50 md:items-center md:gap-4 ${COLS} ${
+                    selected.has(c.id) ? "bg-slate-50" : ""
+                  }`}>
                   <span className="flex min-w-0 items-center gap-3">
+                    <input type="checkbox" aria-label="მონიშვნა" checked={selected.has(c.id)} className="h-4 w-4 shrink-0 accent-slate-900"
+                      onClick={(e) => e.stopPropagation()} onChange={() => toggle(c.id)} />
                     <Initial name={c.name} />
                     <span className="min-w-0">
                       <span className="block truncate text-sm font-medium text-slate-900">{c.name || "უსახელო"}</span>
@@ -171,7 +225,7 @@ const ContactsPage = () => {
                   </span>
                   <span className="truncate text-sm text-slate-600">{(c.products || []).map((p) => PRODUCT_LABELS[p] || p).join(", ")}</span>
                   <span className="text-sm text-slate-500 md:text-right">{formatWhen(c.lastSeenAt)}</span>
-                </button>
+                </div>
               );
             })}
           </div>
@@ -285,6 +339,17 @@ export function ContactDetail({ contact: initial, onClose }: { contact: Contact;
         {c.email && (
           <a href={`mailto:${c.email}`} className={`${btn} bg-slate-100 text-slate-700 hover:bg-slate-200`}><Mail size={15} />{show.email(c.email)}</a>
         )}
+        <button type="button" title="კონტაქტის და მისი ისტორიის წაშლა"
+          onClick={async () => {
+            try {
+              if (await askAndDelete([c])) onClose();
+            } catch {
+              setFieldError("წაშლა ვერ მოხერხდა.");
+            }
+          }}
+          className={`${btn} ml-auto text-slate-500 hover:bg-rose-50 hover:text-rose-600`}>
+          <Trash2 size={15} />წაშლა
+        </button>
       </div>
 
       <div className="mt-5">
@@ -362,22 +427,6 @@ export function ContactDetail({ contact: initial, onClose }: { contact: Contact;
           <div className="flex gap-2">
             <button onClick={save} disabled={saving} className={btnPrimary}>{saving ? "ინახება…" : "შენახვა"}</button>
             <button onClick={() => setEditing(false)} className={btnSecondary}>გაუქმება</button>
-            <button
-              onClick={async () => {
-                if (!confirm(`წავშალო ${c.name || "ეს კონტაქტი"} და მისი მთელი ისტორია? ამის დაბრუნება შეუძლებელია.`)) return;
-                setSaving(true);
-                try {
-                  await deleteContact(c.id);
-                  onClose();
-                } catch {
-                  setEditError("წაშლა ვერ მოხერხდა.");
-                  setSaving(false);
-                }
-              }}
-              className="ml-auto text-sm text-rose-600 hover:underline"
-            >
-              კონტაქტის წაშლა
-            </button>
           </div>
         </div>
       )}
