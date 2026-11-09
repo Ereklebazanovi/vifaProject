@@ -48,7 +48,29 @@ const unsubLabel = (e: BrandEmail) => (e.cold ? "აღარ მომწერ
 
 const FONT = "Arial,'Helvetica Neue',Helvetica,sans-serif";
 
+/**
+ * The cold email as a plain letter, the way a person writes one in Gmail: no logo, no
+ * headline, no styled button, few links. A newsletter look from a stranger's Gmail is
+ * what sends it to Spam. The subject is only the subject here, not repeated in the body.
+ */
+const COLD_SIGNATURE = "VIFA Digital-ის გუნდი";
+const COLD_CONTACT = "vifadigital.ge · +995 557 62 42 43";
+
+function coldEmailHtml(e: BrandEmail): string {
+  const p = (html: string, style = "") => `<p style="margin:0 0 14px${style}">${html}</p>`;
+  const paragraphs = escHtml(e.body.trim()).split(/\n{2,}/).map((t) => p(t.replace(/\n/g, "<br>"))).join("");
+  const link = e.button ? p(`<a href="${escHtml(e.button.url)}" style="color:#1a56db">${escHtml(e.button.text)}</a>`) : "";
+  const unsubscribe = e.unsubscribeUrl
+    ? p(`${FOOTER_NOTE.cold} <a href="${escHtml(e.unsubscribeUrl)}" style="color:#888888">${unsubLabel(e)}</a>`, ";margin-top:24px;font-size:12px;color:#888888")
+    : "";
+  return `<!doctype html><html lang="ka"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:16px;background:#ffffff"><div style="max-width:600px;font-family:${FONT};font-size:15px;line-height:1.6;color:#222222">
+${paragraphs}${link}${p(`${COLD_SIGNATURE}<br><span style="color:#666666;font-size:13px">${COLD_CONTACT}</span>`, ";margin-top:22px")}${unsubscribe}
+</div></body></html>`;
+}
+
 export function brandEmailHtml(e: BrandEmail): string {
+  if (e.cold) return coldEmailHtml(e);
   const paragraphs = escHtml(e.body.trim())
     .split(/\n{2,}/)
     .map((p) => `<p style="margin:0 0 16px;font-size:16px;line-height:1.7;color:#334155">${p.replace(/\n/g, "<br>")}</p>`)
@@ -92,11 +114,11 @@ ${unsubscribe}
 /** Plain-text twin of the same email (for clients that don't show HTML, and for spam filters). */
 export function brandEmailText(e: BrandEmail): string {
   return [
-    e.title,
+    e.cold ? "" : e.title,
     e.body.trim(),
     e.button ? `${e.button.text}: ${e.button.url}` : "",
-    e.secondary ? `${e.secondary.text}: ${e.secondary.url}` : "",
-    "VIFA Digital · vifadigital.ge · +995 557 62 42 43",
+    e.secondary && !e.cold ? `${e.secondary.text}: ${e.secondary.url}` : "",
+    e.cold ? `${COLD_SIGNATURE}\n${COLD_CONTACT}` : "VIFA Digital · vifadigital.ge · +995 557 62 42 43",
     e.unsubscribeUrl ? `${e.cold ? `${FOOTER_NOTE.cold} ` : ""}${unsubLabel(e)}: ${e.unsubscribeUrl}` : "",
   ].filter(Boolean).join("\n\n");
 }

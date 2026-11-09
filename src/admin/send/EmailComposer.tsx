@@ -105,7 +105,7 @@ const EmailComposer = ({ value: d, onChange, previewName, cold = false }: { valu
       </Field>
 
       {cold ? (
-        <p className="text-xs text-slate-500">ცივ წერილში დიდი სურათი არ ჩაისმება: უცნობისგან მიღებულ ფლაერს Gmail „Promotions“-ში აგდებს.</p>
+        <p className="text-xs text-slate-500">ცივი წერილი ჩვეულებრივ წერილად მიდის, ლოგოს, სურათის და ფერადი ღილაკის გარეშე: უცნობისგან მიღებულ ფლაერს Gmail სპამში აგდებს. ღილაკი ტექსტში ბმულად ჩაჯდება.</p>
       ) : (
       <div>
         <p className="mb-1.5 text-sm font-medium text-slate-700">სურათი</p>

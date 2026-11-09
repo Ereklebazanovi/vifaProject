@@ -66,7 +66,7 @@ export interface CampaignEmailInput {
 
 /**
  * A group email in the branded flyer template, personal and with its own unsubscribe link.
- * Cold: no big image (flyers from strangers land in Gmail's "Promotions") and an honest footer.
+ * Cold: a plain letter instead (see coldEmailHtml), with an honest footer.
  */
 export function campaignEmail(c: CampaignEmailInput, name: string | undefined, token: string, cold = false) {
   const url = unsubUrl(token);
