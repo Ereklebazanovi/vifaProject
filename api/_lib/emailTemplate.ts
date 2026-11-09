@@ -49,9 +49,10 @@ const unsubLabel = (e: BrandEmail) => (e.cold ? "აღარ მომწერ
 const FONT = "Arial,'Helvetica Neue',Helvetica,sans-serif";
 
 /**
- * The cold email as a plain letter, the way a person writes one in Gmail: no logo, no
- * headline, no styled button, few links. A newsletter look from a stranger's Gmail is
- * what sends it to Spam. The subject is only the subject here, not repeated in the body.
+ * The cold email as a letter, the way a person writes one in Gmail: no header, card,
+ * headline or flyer, few links. A newsletter look from a stranger's Gmail is what sends
+ * it to Spam. The touch of brand: one small button and a signature with the logo badge.
+ * The subject is only the subject here, not repeated in the body.
  */
 const COLD_SIGNATURE = "VIFA Digital-ის გუნდი";
 const COLD_CONTACT = "vifadigital.ge · +995 557 62 42 43";
@@ -59,13 +60,21 @@ const COLD_CONTACT = "vifadigital.ge · +995 557 62 42 43";
 function coldEmailHtml(e: BrandEmail): string {
   const p = (html: string, style = "") => `<p style="margin:0 0 14px${style}">${html}</p>`;
   const paragraphs = escHtml(e.body.trim()).split(/\n{2,}/).map((t) => p(t.replace(/\n/g, "<br>"))).join("");
-  const link = e.button ? p(`<a href="${escHtml(e.button.url)}" style="color:#1a56db">${escHtml(e.button.text)}</a>`) : "";
+  const link = e.button
+    ? `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:22px 0 4px"><tr><td style="border-radius:999px;background:#0a0a0c">
+<a href="${escHtml(e.button.url)}" style="display:inline-block;padding:11px 22px;font-size:14px;font-weight:bold;color:#ffffff;text-decoration:none;border-radius:999px">${escHtml(e.button.text)}</a></td></tr></table>`
+    : "";
+  // A business signature: the logo as a small badge (the only image), name, contact.
+  const signature = `<div style="margin-top:28px;padding-top:16px;border-top:1px solid #eeeeee"><table role="presentation" cellpadding="0" cellspacing="0"><tr>
+<td style="padding-right:12px;vertical-align:middle"><img src="${LOGO}" width="52" height="40" alt="VIFA" style="display:block;border:0;border-radius:8px"></td>
+<td style="vertical-align:middle;font-size:14px;line-height:1.5"><b style="color:#0a0a0c">${COLD_SIGNATURE}</b><br><span style="color:#666666;font-size:13px">${COLD_CONTACT}</span></td>
+</tr></table></div>`;
   const unsubscribe = e.unsubscribeUrl
     ? p(`${FOOTER_NOTE.cold} <a href="${escHtml(e.unsubscribeUrl)}" style="color:#888888">${unsubLabel(e)}</a>`, ";margin-top:24px;font-size:12px;color:#888888")
     : "";
   return `<!doctype html><html lang="ka"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:16px;background:#ffffff"><div style="max-width:600px;font-family:${FONT};font-size:15px;line-height:1.6;color:#222222">
-${paragraphs}${link}${p(`${COLD_SIGNATURE}<br><span style="color:#666666;font-size:13px">${COLD_CONTACT}</span>`, ";margin-top:22px")}${unsubscribe}
+${paragraphs}${link}${signature}${unsubscribe}
 </div></body></html>`;
 }
 
