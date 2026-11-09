@@ -96,6 +96,25 @@ export const EMAIL_TEMPLATES: EmailTemplate[] = [
     buttonUrl: "https://vifadigital.ge/services/ai-chatbot",
   },
   {
+    // For the cold list: any company with a busy Facebook page, site or no site.
+    // Only what the product does today (see the "chatbot" template); no price in a first letter.
+    id: "chatbotCold",
+    label: "ჩატბოტი (ცივი)",
+    subject: "{name}, AI ასისტენტი თქვენი Facebook გვერდისთვის",
+    body:
+      "გამარჯობა,\n\n" +
+      "ვართ VIFA Digital, თბილისიდან. Facebook Messenger-ისთვის ვაწყობთ AI ასისტენტს, რომელიც კლიენტებს თქვენი კომპანიის სახელით პასუხობს.\n\n" +
+      "• წამებში პასუხობს ხშირ კითხვებს: ფასები, მისამართები, სამუშაო საათები, მიწოდება\n" +
+      "• წერს გამართული ქართულით, დღისით და ღამით, შაბათ-კვირასაც\n" +
+      "• იწერს კლიენტის ნომერს და მოთხოვნას, და თქვენს გუნდს მზა სახით გადასცემს\n" +
+      "• ფასებს და ინფორმაციას თავად ანახლებთ მარტივი პანელიდან\n\n" +
+      "ირთვება 7-10 დღეში, თქვენი ინფორმაციით და თქვენს სტილში.\n\n" +
+      "თუ საინტერესოა, უპასუხეთ ამ წერილს და მოკლედ გაჩვენებთ, როგორ იმუშავებს თქვენს გვერდზე.",
+    image: `${IMG}/chatbot.jpg`,
+    buttonText: "ნახეთ, როგორ მუშაობს",
+    buttonUrl: "https://vifadigital.ge/services/ai-chatbot",
+  },
+  {
     id: "vifa",
     label: "VIFA (ყველა სერვისი)",
     subject: "{name}, ვაჭრობის, საწყობის და კომუნიკაციის ავტომატიზაცია | VIFA Digital",
