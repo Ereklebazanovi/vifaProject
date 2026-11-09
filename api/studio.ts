@@ -208,6 +208,8 @@ export default async function handler(req: Req, res: Res) {
       ...(e.status ? { status: e.status } : {}),
       ...(e.stage ? { stage: e.stage } : {}),
       ...(e.type === "inquiry" && e.utm && Object.keys(e.utm).length ? { utm: e.utm } : {}),
+      // Facebook form name ("Facebook ფორმა: ჩატბოტი ნოემბერი"), shown when the ad's name is unknown.
+      ...(e.type === "inquiry" && e.source === "meta" && e.page ? { form: String(e.page).replace(/^Facebook ფორმა:?\s*/, "") } : {}),
       ...(e.type === "import" ? { origin: importOrigin(String(e.message || "")) } : {}),
     }];
   });

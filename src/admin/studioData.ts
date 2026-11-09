@@ -18,6 +18,8 @@ export interface Ev {
   stage?: Stage;
   utm?: Record<string, string>;
   origin?: string;
+  /** Facebook lead form's name (inquiries from Facebook forms only). */
+  form?: string;
 }
 
 // Kept between page visits, so coming back shows numbers at once while they refresh.

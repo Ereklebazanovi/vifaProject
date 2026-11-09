@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Circle, CircleAlert, CircleCheck, ExternalLink, RefreshCw } from "lucide-react";
 import { useAdmin } from "../AdminLayout";
 import { apiPost } from "../api";
-import { channelOf, firstTouch, historyOf, useStudioEvents } from "../studioData";
+import { channelOf, firstTouch, historyOf, useStudioEvents, type Ev } from "../studioData";
 import { Badge, btnPrimary, btnSecondary, PageHeader, Panel, Segmented, StatStrip, type Tone } from "../ui";
 import { formatWhen, STAGE_RANK, stageOf, type Contact } from "../contacts/contactsService";
 
@@ -25,6 +25,28 @@ interface Gsc {
   opportunities?: (GscRow & { page: string })[];
   pages?: GscRow[];
 }
+
+/**
+ * The ad an inquiry came from: any Facebook form, or a site visit whose link carried campaign
+ * tags (utm_campaign / utm_content, or a paid utm_medium). Null for everything else.
+ */
+function adOf(e: Ev) {
+  if (e.type !== "inquiry") return null;
+  const u = e.utm || {};
+  const tagged = Boolean(u.utm_campaign || u.utm_content) || /^(cpc|ppc|paid)$/i.test(u.utm_medium || "");
+  if (e.source !== "meta" && !tagged) return null;
+  const src = (u.utm_source || "").toLowerCase();
+  const channel =
+    e.source === "meta" ? "Facebook ფორმა"
+    : /facebook|instagram|^fb$|^ig$|meta/.test(src) ? "Facebook, საიტზე"
+    : /google/.test(src) ? "Google Ads"
+    : u.utm_source || "სხვა";
+  const ad = u.utm_content || (e.source === "meta" ? e.form || "Facebook ფორმა" : "") || "სახელი უცნობია";
+  const campaign = u.utm_campaign || "";
+  return { key: `${channel}|${campaign}|${ad}`, ad, campaign, channel };
+}
+
+const URL_PARAMS = "utm_source=facebook&utm_campaign={{campaign.name}}&utm_content={{ad.name}}";
 
 const pct = (n: number, of: number) => (of ? `${Math.round((n / of) * 100)}%` : "0%");
 const num = (n: number) => Math.round(n).toLocaleString("en-US");
@@ -70,6 +92,33 @@ const SourcesPage = () => {
       rows.set(label, r);
     }
     return [...rows.values()].sort((a, b) => b.people - a.people);
+  }, [events, contacts, period]);
+
+  // One row per ad: each person counts once, for the first ad they came through in this period.
+  const ads = useMemo(() => {
+    if (!events) return null;
+    const from = Date.now() - Number(period) * 864e5;
+    const byId = new Map(contacts.map((c) => [c.id, c]));
+    const first = new Map<string, NonNullable<ReturnType<typeof adOf>>>();
+    for (const e of [...events].sort((a, b) => a.at - b.at)) {
+      if (e.at < from || first.has(e.c)) continue;
+      const a = adOf(e);
+      if (a) first.set(e.c, a);
+    }
+    const rows = new Map<string, NonNullable<ReturnType<typeof adOf>> & { leads: number; called: number; won: number; value: number }>();
+    for (const [id, a] of first) {
+      const c = byId.get(id);
+      if (!c) continue;
+      const r = rows.get(a.key) || { ...a, leads: 0, called: 0, won: 0, value: 0 };
+      r.leads++;
+      if (reached(c) >= STAGE_RANK.contacted) r.called++;
+      if (c.stage === "won") {
+        r.won++;
+        r.value += c.dealValue || 0;
+      }
+      rows.set(a.key, r);
+    }
+    return [...rows.values()].sort((x, y) => y.leads - x.leads || y.won - x.won);
   }, [events, contacts, period]);
 
   const totals = channels?.reduce((t, r) => ({ people: t.people + r.people, won: t.won + r.won, value: t.value + r.value }), { people: 0, won: 0, value: 0 });
@@ -129,6 +178,50 @@ const SourcesPage = () => {
             </table>
           </div>
         )}
+      </Panel>
+
+      <Panel title="რეკლამები" subtitle={`რომელმა რეკლამამ რამდენი ლიდი და დილი მოიტანა, ბოლო ${PERIODS[period]}`} bodyClass="">
+        {!ads ? (
+          <p className="px-5 py-10 text-center text-sm text-slate-400">იტვირთება…</p>
+        ) : ads.length === 0 ? (
+          <p className="px-5 py-10 text-center text-sm text-slate-500">
+            ამ პერიოდში რეკლამიდან ლიდი ჯერ არ მოსულა. როგორც კი მოვა, აქ თითოეულ რეკლამაზე გამოჩნდება: რამდენი ლიდი, რამდენს დავურეკეთ, რამდენი დილი და რა თანხით.
+          </p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[40rem] text-sm">
+              <thead>
+                <tr className="border-b border-slate-200 bg-slate-50/80 text-left text-xs font-medium text-slate-500">
+                  <th className="px-5 py-2.5 font-medium">რეკლამა</th>
+                  <th className="px-3 py-2.5 font-medium">საიდან</th>
+                  <th className="px-3 py-2.5 text-right font-medium">ლიდი</th>
+                  <th className="px-3 py-2.5 text-right font-medium">დავურეკეთ</th>
+                  <th className="px-3 py-2.5 text-right font-medium">დილი</th>
+                  <th className="px-5 py-2.5 text-right font-medium">თანხა</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 tabular-nums">
+                {ads.map((r) => (
+                  <tr key={r.key} className="hover:bg-slate-50/60">
+                    <td className="px-5 py-3">
+                      <span className="block font-medium text-slate-800">{r.ad}</span>
+                      {r.campaign && <span className="block text-xs text-slate-500">კამპანია: {r.campaign}</span>}
+                    </td>
+                    <td className="px-3 py-3 text-slate-600">{r.channel}</td>
+                    <td className="px-3 py-3 text-right text-slate-900">{r.leads}</td>
+                    <td className="px-3 py-3 text-right text-slate-600">{r.called}</td>
+                    <td className="px-3 py-3 text-right font-medium text-slate-900">{r.won}</td>
+                    <td className="px-5 py-3 text-right text-slate-600">{r.value ? `₾${num(r.value)}` : ""}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+        <p className="border-t border-slate-200 px-5 py-3 text-xs leading-relaxed text-slate-500">
+          Facebook-ის ფორმის რეკლამა აქ თავისით ჩანს. საიტზე მიმავალ რეკლამას Ads Manager-ში, ველში "URL parameters", ეს ხაზი ჩაუწერეთ:{" "}
+          <code className={`${code} select-all break-all`}>{URL_PARAMS}</code>
+        </p>
       </Panel>
 
       <MetaSection />
