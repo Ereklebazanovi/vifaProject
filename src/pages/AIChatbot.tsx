@@ -10,20 +10,78 @@ import { useNavigation } from "../contexts/NavigationContext";
 import { useLanguage } from "../contexts/LanguageContext";
 import {
   FaBrain,
-  FaFacebook,
+  FaFacebookMessenger,
   FaWhatsapp,
   FaInstagram,
-  FaRocket,
+  FaGlobe,
   FaCheck,
   FaShieldAlt,
-  FaCog,
   FaCloud,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
 import CallbackLink from "../components/CallbackLink";
 import FAQSection from "../components/FAQSection";
-import { ChatbotDemoTerminal } from "../components/Terminal";
-import { AIConnectionDemo } from "../components/AIConnectionDemo";
+
+// One card style and one heading style for every section, so the page reads as one system.
+const card = "rounded-2xl border border-white/10 bg-white/3";
+
+const SectionHead = ({ eyebrow, title, subtitle }: { eyebrow: string; title: string; subtitle?: string }) => (
+  <div className="mx-auto mb-12 max-w-2xl text-center">
+    <span className="mb-4 inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.25em] text-indigo-400">
+      <span className="h-px w-6 bg-indigo-500/70" />
+      {eyebrow}
+      <span className="h-px w-6 bg-indigo-500/70" />
+    </span>
+    <h2 className="text-2xl font-bold tracking-tight text-white md:text-[2rem] md:leading-tight">{title}</h2>
+    {subtitle && <p className="mt-4 text-base leading-relaxed text-gray-400 md:text-[17px]">{subtitle}</p>}
+  </div>
+);
+
+/** A Messenger-style example conversation: what the assistant actually does for a shop. */
+const ChatExample = ({ t }: { t: (key: string) => string }) => {
+  const messages: ["customer" | "bot", string][] = [
+    ["customer", t("chat.c1")], ["bot", t("chat.b1")],
+    ["customer", t("chat.c2")], ["bot", t("chat.b2")],
+    ["customer", t("chat.c3")], ["bot", t("chat.b3")],
+  ];
+  return (
+    <figure className="mx-auto w-full max-w-md">
+      <div className="overflow-hidden rounded-3xl border border-white/10 bg-[#0c0c11] shadow-2xl shadow-indigo-950/40">
+        <div className="flex items-center gap-3 border-b border-white/10 px-5 py-4">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-indigo-500/15 text-sm font-bold text-indigo-300">LS</span>
+          <div className="min-w-0 flex-1">
+            <p className="text-[15px] font-semibold text-white">{t("chat.name")}</p>
+            <p className="flex items-center gap-1.5 text-xs text-gray-400">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              {t("chat.status")}
+            </p>
+          </div>
+          <FaFacebookMessenger className="text-xl text-indigo-300" aria-hidden />
+        </div>
+        <div className="space-y-3 px-5 py-6">
+          {messages.map(([who, text], i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35, delay: 0.3 + i * 0.25 }}
+              className={`flex ${who === "customer" ? "justify-end" : "justify-start"}`}
+            >
+              <p
+                className={`max-w-[82%] rounded-2xl px-4 py-2.5 text-[15px] leading-relaxed ${
+                  who === "customer" ? "rounded-br-md bg-indigo-600 text-white" : "rounded-bl-md bg-white/7 text-gray-100"
+                }`}
+              >
+                {text}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+      <figcaption className="mt-4 text-center text-sm text-gray-500">{t("chat.caption")}</figcaption>
+    </figure>
+  );
+};
 
 // AI Chatbot Translations
 const aiChatbotTranslations = {
@@ -31,100 +89,105 @@ const aiChatbotTranslations = {
     "seo.title": "ჩატბოტი და AI ბოტის დამზადება ბიზნესისთვის, 500₾-დან",
     "seo.description": "AI ჩატბოტის დამზადება Facebook Messenger-ის, WhatsApp-ის, Instagram-ისა და ვებსაიტისთვის. ჩატ ბოტი ქართულად პასუხობს კლიენტებს 24/7. ფასი 500₾-დან, გაშვება 7-14 დღეში.",
 
-    // "hero.title": "Invento AI -",
     "hero.titleHighlight": "ჩატბოტის დამზადება 7-14 დღეში",
-    "hero.feature1.title": "24/7 ავტომატური მომსახურება",
-    "hero.feature1.description": "- თქვენი კლიენტები პასუხს მიიღებენ ნებისმიერ დროს",
-    "hero.feature2.title": "სპეციალიზებული ტრენინგი",
-    "hero.feature2.description": "- AI სწავლობს თქვენი ბიზნესის სპეციფიკას",
-    "hero.feature3.title": "გაზრდილი მოგება",
-    "hero.feature3.description": "- დაზოგეთ თანხა და მიიღეთ გამოტოვებული შემოსავალი",
-    "hero.demoLabel": "იხილეთ როგორ მუშაობს Invento AI ასისტენტი →",
-    "hero.demoDescription": "რეალური საუბარი სალონის მფლობელთან",
+    "hero.lead": "AI ასისტენტი სწავლობს თქვენს პროდუქტებს, ფასებს და პირობებს, კლიენტებს წამებში პასუხობს და მათ ნომერს მოთხოვნასთან ერთად გიტოვებთ.",
+    "hero.fact1.value": "24/7",
+    "hero.fact1.label": "უწყვეტად",
+    "hero.fact2.value": "7-14 დღე",
+    "hero.fact2.label": "გაშვებამდე",
+    "hero.fact3.value": "500₾-დან",
+    "hero.fact3.label": "ერთჯერადი ფასი",
 
+    "chat.name": "Lumi Store",
+    "chat.status": "პასუხობს წამებში",
+    "chat.c1": "გამარჯობა, ეს კაბა M ზომაში გაქვთ?",
+    "chat.b1": "გამარჯობა! კი, M ზომა მარაგშია, ფასი 89₾.",
+    "chat.c2": "თბილისში მიტანა რა ღირს?",
+    "chat.b2": "თბილისში მიტანა 5₾-ია, 1-2 დღეში. შეკვეთისთვის დამიტოვეთ ნომერი და მისამართი.",
+    "chat.c3": "555 12 34 56, ვაკე, ჭავჭავაძის 10",
+    "chat.b3": "მადლობა! შეკვეთა მიღებულია, დასადასტურებლად მალე დაგიკავშირდებით.",
+    "chat.caption": "საუბრის მაგალითი: ტანსაცმლის მაღაზია Messenger-ში",
+
+    "eyebrow.how": "პროცესი",
+    "how.title": "როგორ ვაწყობთ",
+    "how.step1.title": "გვიზიარებთ ინფორმაციას",
+    "how.step1.text": "ფასები, პროდუქტები, მიწოდების პირობები და კითხვები, რომლებსაც კლიენტები ყველაზე ხშირად სვამენ.",
+    "how.step2.title": "ვასწავლით და ვამოწმებთ",
+    "how.step2.text": "ასისტენტს თქვენს ბიზნესზე ვამზადებთ და ერთად ვცდით, სანამ ყველა პასუხი ზუსტი არ იქნება.",
+    "how.step3.title": "ირთვება თქვენს გვერდზე",
+    "how.step3.text": "პასუხობს დღე-ღამე, ინფორმაციას კი თავად ანახლებთ მარტივი პანელიდან.",
+
+    "eyebrow.platforms": "არხები",
     "platforms.title": "ინტეგრაცია ყველა მთავარ პლატფორმაზე",
+    "platforms.subtitle": "ერთი ასისტენტი და ერთი ცოდნის ბაზა ყველა არხისთვის.",
     "platform.facebook.name": "Facebook Messenger",
-    "platform.facebook.stats": "2.3 მილიონზე მეტი აქტიური მომხმარებელი საქართველოში",
-    "platform.facebook.feature1": "მყისიერი პასუხი და კომუნიკაცია 24/7 რეჟიმში.",
-    "platform.facebook.feature2": "3-ჯერ მაღალი კონვერსიის (გაყიდვის) მაჩვენებელი.",
-    "platform.facebook.feature3": "მყისიერი კომუნიკაცია 24/7 რეჟიმში",
-
+    "platform.facebook.text": "პასუხობს Facebook გვერდის შეტყობინებებს.",
     "platform.whatsapp.name": "WhatsApp Business",
-    "platform.whatsapp.stats": "2.3 მილიონზე მეტი აქტიური მომხმარებელი საქართველოში",
-    "platform.whatsapp.feature1": "მყისიერი პასუხი და კომუნიკაცია 24/7 რეჟიმში.",
-    "platform.whatsapp.feature2": "3-ჯერ მაღალი კონვერსიის (გაყიდვის) მაჩვენებელი.",
-    "platform.whatsapp.feature3": "მყისიერი კომუნიკაცია 24/7 რეჟიმში",
-
+    "platform.whatsapp.text": "პასუხობს თქვენს WhatsApp Business ნომერზე.",
     "platform.instagram.name": "Instagram Direct",
-    "platform.instagram.stats": "2.3 მილიონზე მეტი აქტიური მომხმარებელი საქართველოში",
-    "platform.instagram.feature1": "მყისიერი პასუხი და კომუნიკაცია 24/7 რეჟიმში.",
-    "platform.instagram.feature2": "3-ჯერ მაღალი კონვერსიის (გაყიდვის) მაჩვენებელი.",
-    "platform.instagram.feature3": "მყისიერი კომუნიკაცია 24/7 რეჟიმში",
+    "platform.instagram.text": "პასუხობს Instagram-ის პირად შეტყობინებებს.",
+    "platform.web.name": "ვებსაიტი",
+    "platform.web.text": "ჩატის ფანჯარა თქვენს საიტზე, იმავე ცოდნით.",
 
-    "pricing.title": "ფინანსური სტრუქტურა და API ხარჯები",
-    "pricing.description": "ჩვენი ფასები მორგებულია კონკრეტული პროექტის სირთულესა და საჭიროებებზე. გთავაზობთ გამჭირვალე და მარტივად გასაგებ საფასო მოდელს:",
-    "pricing.investment.title": "საწყისი ინვესტიცია",
+    "eyebrow.pricing": "ფასი",
+    "pricing.title": "ფასი და ყოველთვიური ხარჯი",
+    "pricing.description": "ერთხელ იხდით გაშვებას, შემდეგ კი მხოლოდ AI-ს რეალურ მოხმარებას. დამალული გადასახადი არ არის.",
+    "pricing.investment.title": "გაშვება",
     "pricing.investment.price": "500₾-დან",
-    "pricing.investment.priceNote": "ფასი დამოკიდებულია მოთხოვნებზე",
+    "pricing.investment.priceNote": "ერთჯერადად. ზუსტი ფასი დამოკიდებულია მოთხოვნებზე.",
     "pricing.investment.includes": "მოიცავს:",
-    "pricing.investment.feature1": "AI მოდელის დატრენინგება თქვენი ბიზნეს ლოგიკისთვის",
-    "pricing.investment.feature2": "WhatsApp, Messenger და სხვა პლატფორმებთან ინტეგრაცია",
-    "pricing.investment.feature3": "სრულად ფუნქციონალური ადმინ პანელი",
-    "pricing.investment.feature4": "ანალიტიკა და სტატისტიკა",
-    "pricing.investment.feature5": "საწყისი ტექნიკური მხარდაჭერა – უფასოდ",
+    "pricing.investment.feature1": "AI-ს მომზადებას თქვენი ბიზნესის ინფორმაციაზე",
+    "pricing.investment.feature2": "Messenger-თან, WhatsApp-თან და სხვა არხებთან დაკავშირებას",
+    "pricing.investment.feature3": "ადმინ პანელს, საიდანაც ინფორმაციას თავად ცვლით",
+    "pricing.investment.feature4": "ანალიტიკას და სტატისტიკას",
+    "pricing.investment.feature5": "საწყის ტექნიკურ მხარდაჭერას, უფასოდ",
 
-    "pricing.monthly.title": "ყოველთვიური ხარჯები",
-    "pricing.monthly.subtitle": "კომპანიის მართვისა და უსაფრთხოების ქვეშ",
-    "pricing.monthly.api": "თქვენი გამოყენების დანახარჯები",
-    "pricing.monthly.price": "0.20₾ – 0.40₾ / 1,000 ტოკენზე",
-    "pricing.monthly.billing.title": "ბილინგი:",
-    "pricing.monthly.billing.description": "Gemini AI-ს ხარჯები მორგებულია მხოლოდ თქვენს ჩატბოტზე. ყოველთვიურად მიიღებთ დეტალურ ანგარიშს გამოყენების შესახებ.",
-    "pricing.monthly.monitoring.title": "მონიტორინგი: ხარჯების დინამიური ნახვა რეალურ დროში.",
-    "pricing.monthly.monitoring.description": "არანაირი დამალული გადასახადი.",
-    "pricing.monthly.transparency.title": "სრული უსაფრთხოება:",
-    "pricing.monthly.transparency.description": "Google Cloud-ის უმაღლესი დონის უსაფრთხოება + ჩვენი დამატებითი ზედამხედველობა. თქვენი მონაცემები 100% -ით დაცულია.",
-
-    "pricing.examples.title": "სავარაუდო API ხარჯები (ტოკენების გამოყენების მიხედვით)",
-    "pricing.examples.note": "შენიშვნა: ხარჯი დამოკიდებულია ტოკენების რაოდენობაზე, ანუ დამუშავებული ინფორმაციის მოცულობაზე.",
+    "pricing.monthly.title": "ყოველთვიურად",
+    "pricing.monthly.price": "5₾-დან",
+    "pricing.monthly.priceNote": "Google Gemini-ს მოხმარება, საუბრების რაოდენობის მიხედვით.",
+    "pricing.monthly.note": "ყოველთვიურად მიიღებთ ანგარიშს, რამდენი დაიხარჯა.",
     "pricing.examples.small": "მცირე ბიზნესი",
-    "pricing.examples.smallQueries": "500 დიალოგი/კომუნიკაცია",
-    "pricing.examples.smallCost": "5₾ - 10₾",
+    "pricing.examples.smallQueries": "500 საუბარი თვეში",
+    "pricing.examples.smallCost": "5-10₾",
     "pricing.examples.medium": "საშუალო ბიზნესი",
-    "pricing.examples.mediumQueries": "2,000 დიალოგი/კომუნიკაცია",
-    "pricing.examples.mediumCost": "20₾ - 35₾",
+    "pricing.examples.mediumQueries": "2,000 საუბარი თვეში",
+    "pricing.examples.mediumCost": "20-35₾",
     "pricing.examples.large": "დიდი ბიზნესი",
-    "pricing.examples.largeQueries": "10,000 დიალოგი/კომუნიკაცია",
-    "pricing.examples.largeCost": "100₾ - 160₾",
+    "pricing.examples.largeQueries": "10,000 საუბარი თვეში",
+    "pricing.examples.largeCost": "100-160₾",
 
-    "admin.title": "ადმინ პანელი - სრული კონტროლი",
-    "admin.canDo": "რას შეძლებთ:",
+    "eyebrow.admin": "მართვა",
+    "admin.title": "ადმინ პანელი: სრული კონტროლი",
+    "admin.subtitle": "ფასებს, პროდუქტებს და პასუხებს თავად ცვლით, პროგრამისტის გარეშე.",
+    "admin.canDo": "რას შეძლებთ",
     "admin.canDo.feature1": "რეალურ დროში რედაქტირება",
     "admin.canDo.feature2": "ახალი კითხვა-პასუხების დამატება",
     "admin.canDo.feature3": "პროდუქტების მენეჯმენტი",
     "admin.canDo.feature4": "საუბრების ისტორია",
     "admin.canDo.feature5": "დეტალური ანალიტიკა",
-    "admin.howWorks": "როგორ მუშაობს:",
+    "admin.howWorks": "როგორ მუშაობს",
     "admin.howWorks.step1": "შედით ბრაუზერიდან კომპანიის მოცემულ ბმულზე",
     "admin.howWorks.step2": "აირჩიეთ სექცია (პროდუქტები, კითხვები)",
     "admin.howWorks.step3": "შეცვალეთ ტექსტი ედიტორში",
-    "admin.howWorks.step4": "დააჭირეთ 'შენახვა' - მაშინვე ძალაში შედის!",
+    "admin.howWorks.step4": "დააჭირეთ „შენახვა“: ცვლილება მაშინვე ამოქმედდება",
 
+    "eyebrow.tech": "ტექნოლოგია",
     "technical.title": "ტექნიკური უპირატესობები",
-    "technical.subtitle": "მოწინავე ტექნოლოგიები საუკეთესო შედეგისთვის",
-    "technical.feature1.title": "ინტელექტუალური ბირთვი: Google Gemini",
-    "technical.feature1.point1": "ქართული ენის სრული მხარდაჭერა - ზუსტი და ბუნებრივი კომუნიკაცია.",
-    "technical.feature1.point2": "კონტექსტური მეხსიერება - სისტემას ახსოვს საუბრის ისტორია და არ იმეორებს შეცდომებს.",
-    "technical.feature1.point3": "მულტი-ტასკინგი - რთული ამოცანების ერთდროულად და ეფექტურად შესრულება.",
+    "technical.subtitle": "რაზე დგას ასისტენტი და როგორ იცავს თქვენს მონაცემებს.",
+    "technical.feature1.title": "Google Gemini",
+    "technical.feature1.point1": "ბუნებრივი ქართული: ესმის თავისუფლად დაწერილი კითხვა.",
+    "technical.feature1.point2": "ახსოვს საუბრის კონტექსტი და ნათქვამს არ იმეორებს.",
+    "technical.feature1.point3": "ერთ შეტყობინებაში დასმულ რამდენიმე კითხვასაც ხვდება.",
 
-    "technical.feature2.title": "ოპერაციული საიმედოობა და სისწრაფე",
-    "technical.feature2.point1": "99.9% Uptime - თქვენი სერვისი ხელმისაწვდომია თითქმის 24/7 შეფერხების გარეშე.",
-    "technical.feature2.point2": "0.5 წამი საშუალო პასუხის დრო - მყისიერი რეაგირება მომხმარებლის მოთხოვნებზე.",
-    "technical.feature2.point3": "ათასობით ერთდროული მომხმარებელი - მარტივი მასშტაბირება, ნებისმიერი დატვირთვისთვის მზადყოფნა.",
+    "technical.feature2.title": "საიმედოობა და სისწრაფე",
+    "technical.feature2.point1": "მუშაობს Google Cloud-ზე, დღე-ღამე, შესვენების გარეშე.",
+    "technical.feature2.point2": "პასუხობს წამებში, დატვირთვის მიუხედავად.",
+    "technical.feature2.point3": "ერთდროულად ათასობით საუბარს უძლებს.",
 
-    "technical.feature3.title": "უსაფრთხოება და კონფიდენციალურობა",
-    "technical.feature3.point1": "ბანკის დონის უსაფრთხოება - თქვენი მონაცემების დაცვა უმაღლესი სტანდარტით.",
-    "technical.feature3.point2": "GDPR დაცვა - მონაცემთა დაცვის საერთაშორისო მოთხოვნებთან სრული შესაბამისობა.",
-    "technical.feature3.point3": "ყველა მონაცემი დაშიფრულია - ინფორმაციის სრული კონფიდენციალურობა გადაცემისა და შენახვისას.",
+    "technical.feature3.title": "უსაფრთხოება",
+    "technical.feature3.point1": "მონაცემები დაშიფრულია გადაცემისას და შენახვისას.",
+    "technical.feature3.point2": "Google Cloud-ის დაცვა და ჩვენი დამატებითი ზედამხედველობა.",
+    "technical.feature3.point3": "GDPR-ის მოთხოვნებთან შესაბამისობა.",
 
     "faq.title": "ხშირად დასმული შეკითხვები",
     "faq.q1.question": "რამდენ დროს მოითხოვს ჩატბოტის გაშვება?",
@@ -155,8 +218,10 @@ const aiChatbotTranslations = {
     "faq.q7.answer": "AI ბოტს ესმის თავისუფლად დაწერილი შეკითხვა.",
     "faq.q7.details": "ჩვეულებრივი ჩატ ბოტი მხოლოდ წინასწარ გაწერილ ღილაკებსა და სიტყვებზე რეაგირებს. AI ჩატბოტი თქვენი ბიზნესის ინფორმაციაზეა დატრენინგებული, ესმის ქართულად ნებისმიერად დაწერილი კითხვა და პასუხობს ბუნებრივად, როგორც ცოცხალი ოპერატორი.",
 
-    "cta.question": "მზად ხარ გამოსცადო?",
+    "cta.question": "მზად ხართ გამოსცადოთ?",
+    "cta.text": "უფასო კონსულტაციაზე გაჩვენებთ, როგორ იმუშავებს ასისტენტი თქვენს გვერდზე.",
     "cta.button": "უფასო კონსულტაცია",
+    "cta.order": "შეუკვეთეთ AI ჩატბოტი",
     "consultation.whatsapp": "უფასო კონსულტაცია",
     "phone.number": "557 62 42 43",
   },
@@ -164,100 +229,105 @@ const aiChatbotTranslations = {
     "seo.title": "AI Chatbot for Business",
     "seo.description": "VIFA Digital AI chatbots for Facebook, WhatsApp, and Instagram. 24/7 customer support, sales growth, and cost optimization.",
 
-    // "hero.title": "Invento AI -",
-    "hero.titleHighlight": "Your Business's Digital Revolution",
-    "hero.feature1.title": "24/7 Automatic Service",
-    "hero.feature1.description": "- Your clients will receive answers anytime",
-    "hero.feature2.title": "Specialized Training",
-    "hero.feature2.description": "- AI learns your business specifics",
-    "hero.feature3.title": "Increased Profit",
-    "hero.feature3.description": "- Save money and recover missed revenue",
-    "hero.demoLabel": "See how Invento AI assistant works →",
-    "hero.demoDescription": "A real conversation with a barber shop owner",
+    "hero.titleHighlight": "Built and launched in 7-14 days",
+    "hero.lead": "The AI assistant learns your products, prices and terms, answers customers in seconds and hands you their number together with the request.",
+    "hero.fact1.value": "24/7",
+    "hero.fact1.label": "Non-stop",
+    "hero.fact2.value": "7-14 days",
+    "hero.fact2.label": "To launch",
+    "hero.fact3.value": "From 500₾",
+    "hero.fact3.label": "One-time price",
 
+    "chat.name": "Lumi Store",
+    "chat.status": "Replies in seconds",
+    "chat.c1": "Hi, do you have this dress in size M?",
+    "chat.b1": "Hi! Yes, size M is in stock, the price is 89₾.",
+    "chat.c2": "How much is delivery in Tbilisi?",
+    "chat.b2": "Delivery in Tbilisi is 5₾, within 1-2 days. To order, just leave your number and address.",
+    "chat.c3": "555 12 34 56, Vake, Chavchavadze 10",
+    "chat.b3": "Thank you! Your order is received, we will contact you shortly to confirm.",
+    "chat.caption": "Example conversation: a clothing store on Messenger",
+
+    "eyebrow.how": "Process",
+    "how.title": "How We Set It Up",
+    "how.step1.title": "You share the information",
+    "how.step1.text": "Prices, products, delivery terms and the questions customers ask most often.",
+    "how.step2.title": "We train and test it",
+    "how.step2.text": "We prepare the assistant on your business and test it together until every answer is right.",
+    "how.step3.title": "It goes live on your page",
+    "how.step3.text": "It answers day and night, and you update the information yourself from a simple panel.",
+
+    "eyebrow.platforms": "Channels",
     "platforms.title": "Integration on All Major Platforms",
+    "platforms.subtitle": "One assistant and one knowledge base for every channel.",
     "platform.facebook.name": "Facebook Messenger",
-    "platform.facebook.stats": "Over 2.3 million active users in Georgia",
-    "platform.facebook.feature1": "Instant response and 24/7 communication.",
-    "platform.facebook.feature2": "3 times higher conversion (sales) rate.",
-    "platform.facebook.feature3": "Instant 24/7 communication.",
-
+    "platform.facebook.text": "Answers your Facebook page messages.",
     "platform.whatsapp.name": "WhatsApp Business",
-    "platform.whatsapp.stats": "Over 2.3 million active users in Georgia",
-    "platform.whatsapp.feature1": "Instant response and 24/7 communication.",
-    "platform.whatsapp.feature2": "3 times higher conversion (sales) rate.",
-    "platform.whatsapp.feature3": "Instant 24/7 communication.",
-
+    "platform.whatsapp.text": "Answers on your WhatsApp Business number.",
     "platform.instagram.name": "Instagram Direct",
-    "platform.instagram.stats": "Over 2.3 million active users in Georgia",
-    "platform.instagram.feature1": "Instant response and 24/7 communication.",
-    "platform.instagram.feature2": "3 times higher conversion (sales) rate.",
-    "platform.instagram.feature3": "Instant 24/7 communication.",
+    "platform.instagram.text": "Answers Instagram direct messages.",
+    "platform.web.name": "Website",
+    "platform.web.text": "A chat window on your site, with the same knowledge.",
 
-    "pricing.title": "Financial Structure and API Costs",
-    "pricing.description": "Our pricing is tailored to the complexity and needs of a specific project. We offer a transparent and easy-to-understand pricing model:",
-    "pricing.investment.title": "Initial Investment",
-    "pricing.investment.price": "Starting from 500₾",
-    "pricing.investment.priceNote": "Price depends on requirements",
+    "eyebrow.pricing": "Pricing",
+    "pricing.title": "Price and Monthly Cost",
+    "pricing.description": "You pay once for the launch, then only for actual AI usage. No hidden fees.",
+    "pricing.investment.title": "Launch",
+    "pricing.investment.price": "From 500₾",
+    "pricing.investment.priceNote": "One-time. The exact price depends on your requirements.",
     "pricing.investment.includes": "Includes:",
-    "pricing.investment.feature1": "Training the AI model for your business logic",
-    "pricing.investment.feature2": "Integration with WhatsApp, Messenger, and other platforms",
-    "pricing.investment.feature3": "Fully functional Admin Panel",
-    "pricing.investment.feature4": "Analytics and Statistics",
-    "pricing.investment.feature5": "Initial technical support – free of charge",
+    "pricing.investment.feature1": "Training the AI on your business information",
+    "pricing.investment.feature2": "Connecting Messenger, WhatsApp and other channels",
+    "pricing.investment.feature3": "An admin panel to change the information yourself",
+    "pricing.investment.feature4": "Analytics and statistics",
+    "pricing.investment.feature5": "Initial technical support, free of charge",
 
-    "pricing.monthly.title": "Monthly Costs",
-    "pricing.monthly.subtitle": "Under company management and security",
-    "pricing.monthly.api": "Your usage costs",
-    "pricing.monthly.price": "0.20₾ – 0.40₾ / per 1,000 tokens",
-    "pricing.monthly.billing.title": "Billing:",
-    "pricing.monthly.billing.description": "Gemini AI costs are allocated solely to your chatbot. You will receive a detailed monthly usage report.",
-    "pricing.monthly.monitoring.title": "Monitoring: Dynamic, real-time viewing of costs.",
-    "pricing.monthly.monitoring.description": "No hidden fees.",
-    "pricing.monthly.transparency.title": "Full Security:",
-    "pricing.monthly.transparency.description": "Top-level Google Cloud security + our additional oversight. Your data is 100% protected.",
+    "pricing.monthly.title": "Monthly",
+    "pricing.monthly.price": "From 5₾",
+    "pricing.monthly.priceNote": "Google Gemini usage, based on the number of conversations.",
+    "pricing.monthly.note": "Every month you get a report of what was spent.",
+    "pricing.examples.small": "Small business",
+    "pricing.examples.smallQueries": "500 conversations a month",
+    "pricing.examples.smallCost": "5-10₾",
+    "pricing.examples.medium": "Medium business",
+    "pricing.examples.mediumQueries": "2,000 conversations a month",
+    "pricing.examples.mediumCost": "20-35₾",
+    "pricing.examples.large": "Large business",
+    "pricing.examples.largeQueries": "10,000 conversations a month",
+    "pricing.examples.largeCost": "100-160₾",
 
-    "pricing.examples.title": "Estimated API Costs (Based on Token Usage)",
-    "pricing.examples.note": "Note: Cost depends on the number of tokens, i.e., the volume of information processed.",
-    "pricing.examples.small": "Small Business",
-    "pricing.examples.smallQueries": "500 Dialogues/Communications",
-    "pricing.examples.smallCost": "5₾ - 10₾",
-    "pricing.examples.medium": "Medium Business",
-    "pricing.examples.mediumQueries": "2,000 Dialogues/Communications",
-    "pricing.examples.mediumCost": "20₾ - 35₾",
-    "pricing.examples.large": "Large Business",
-    "pricing.examples.largeQueries": "10,000 Dialogues/Communications",
-    "pricing.examples.largeCost": "100₾ - 160₾",
-
-    "admin.title": "Admin Panel - Full Control",
-    "admin.canDo": "What you can do:",
+    "eyebrow.admin": "Control",
+    "admin.title": "Admin Panel: Full Control",
+    "admin.subtitle": "Change prices, products and answers yourself, no developer needed.",
+    "admin.canDo": "What you can do",
     "admin.canDo.feature1": "Real-time Editing",
     "admin.canDo.feature2": "Adding New Q&A",
     "admin.canDo.feature3": "Product Management",
     "admin.canDo.feature4": "Conversation History",
     "admin.canDo.feature5": "Detailed Analytics",
-    "admin.howWorks": "How it Works:",
+    "admin.howWorks": "How it works",
     "admin.howWorks.step1": "Access the company-provided link via your browser",
     "admin.howWorks.step2": "Select a section (Products, Questions)",
     "admin.howWorks.step3": "Edit the text in the editor",
-    "admin.howWorks.step4": "Click 'Save' - the change takes effect immediately!",
+    "admin.howWorks.step4": "Click \"Save\": the change takes effect immediately",
 
+    "eyebrow.tech": "Technology",
     "technical.title": "Technical Advantages",
-    "technical.subtitle": "Advanced Technologies for the Best Results",
-    "technical.feature1.title": "Intellectual Core: Google Gemini",
-    "technical.feature1.point1": "Full Georgian language support - accurate and natural communication.",
-    "technical.feature1.point2": "Contextual memory - the system remembers the conversation history and avoids repeating errors.",
-    "technical.feature1.point3": "Multi-tasking - simultaneous and efficient execution of complex tasks.",
+    "technical.subtitle": "What the assistant runs on and how it protects your data.",
+    "technical.feature1.title": "Google Gemini",
+    "technical.feature1.point1": "Natural Georgian: understands freely written questions.",
+    "technical.feature1.point2": "Remembers the conversation context and does not repeat itself.",
+    "technical.feature1.point3": "Catches several questions asked in a single message.",
 
-    "technical.feature2.title": "Operational Reliability and Speed",
-    "technical.feature2.point1": "99.9% Uptime - your service is available almost 24/7 without interruption.",
-    "technical.feature2.point2": "0.5 second average response time - instant reaction to customer requests.",
-    "technical.feature2.point3": "Thousands of simultaneous users - easy scalability, ready for any load.",
+    "technical.feature2.title": "Reliability and Speed",
+    "technical.feature2.point1": "Runs on Google Cloud, day and night, without breaks.",
+    "technical.feature2.point2": "Replies in seconds, whatever the load.",
+    "technical.feature2.point3": "Handles thousands of conversations at once.",
 
-    "technical.feature3.title": "Security and Confidentiality",
-    "technical.feature3.point1": "Bank-level security - protecting your data with the highest standards.",
-    "technical.feature3.point2": "GDPR Compliance - full adherence to international data protection requirements.",
-    "technical.feature3.point3": "All data is encrypted - complete information confidentiality during transmission and storage.",
+    "technical.feature3.title": "Security",
+    "technical.feature3.point1": "Data is encrypted in transit and at rest.",
+    "technical.feature3.point2": "Google Cloud protection plus our own oversight.",
+    "technical.feature3.point3": "Compliant with GDPR requirements.",
 
     "faq.title": "Frequently Asked Questions",
     "faq.q1.question": "How long does it take to launch the chatbot?",
@@ -288,8 +358,10 @@ const aiChatbotTranslations = {
     "faq.q7.answer": "An AI bot understands freely written questions.",
     "faq.q7.details": "A regular chat bot only reacts to pre-set buttons and keywords. An AI chatbot is trained on your business information, understands questions written any way in Georgian, and answers naturally, like a live operator.",
 
-    "cta.question": "Ready to Test it Out?",
+    "cta.question": "Ready to Try It?",
+    "cta.text": "In a free consultation we will show you how the assistant would work on your page.",
     "cta.button": "Free Consultation",
+    "cta.order": "Order an AI Chatbot",
     "consultation.whatsapp": "Free Consultation",
     "phone.number": "557 62 42 43",
   },
@@ -330,9 +402,10 @@ const AIChatbot: React.FC = () => {
   }, [stopNavigation]);
 
   const platforms = [
-    { icon: <FaFacebook />, key: "facebook" },
+    { icon: <FaFacebookMessenger />, key: "facebook" },
     { icon: <FaWhatsapp />, key: "whatsapp" },
     { icon: <FaInstagram />, key: "instagram" },
+    { icon: <FaGlobe />, key: "web" },
   ];
 
   const technicalFeatures = [
@@ -378,7 +451,7 @@ const AIChatbot: React.FC = () => {
           <Breadcrumbs items={breadcrumbItems} className="mb-8" />
 
           {/* ── Hero ── */}
-          <section className="mb-20 grid items-center gap-12 md:mb-28 lg:grid-cols-2">
+          <section className="mb-24 grid items-center gap-14 md:mb-32 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -392,23 +465,13 @@ const AIChatbot: React.FC = () => {
               <h1 className="text-3xl font-extrabold leading-[1.2] tracking-tight text-white md:text-[2.6rem] md:leading-[1.15]">
                 {en ? "AI Chatbot for Your Business" : "AI ჩატბოტი თქვენი ბიზნესისთვის"}
               </h1>
-              <p className="mb-6 mt-2 block bg-linear-to-r from-indigo-400 to-indigo-600 bg-clip-text text-3xl font-extrabold leading-[1.2] tracking-tight text-transparent md:text-[2.6rem] md:leading-[1.15]">
+              <p className="mt-2 block bg-linear-to-r from-indigo-400 to-indigo-600 bg-clip-text text-3xl font-extrabold leading-[1.2] tracking-tight text-transparent md:text-[2.6rem] md:leading-[1.15]">
                 {t("hero.titleHighlight")}
               </p>
 
-              <div className="mb-8 space-y-3">
-                {["feature1", "feature2", "feature3"].map((f) => (
-                  <div key={f} className="flex items-start gap-3">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-400" />
-                    <p className="leading-relaxed text-gray-300">
-                      <span className="font-semibold text-white">{t(`hero.${f}.title`)}</span>{" "}
-                      {t(`hero.${f}.description`)}
-                    </p>
-                  </div>
-                ))}
-              </div>
+              <p className="mt-6 max-w-xl text-base leading-relaxed text-gray-300 md:text-[17px]">{t("hero.lead")}</p>
 
-              <div className="mb-10 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a
                   href={whatsappUrl}
                   target="_blank"
@@ -421,7 +484,14 @@ const AIChatbot: React.FC = () => {
                 <CallbackLink product="chatbot" shape="rounded" />
               </div>
 
-              <AIConnectionDemo />
+              <div className={`${card} mt-10 grid max-w-xl grid-cols-3 divide-x divide-white/10`}>
+                {[1, 2, 3].map((n) => (
+                  <div key={n} className="px-3 py-4 text-center sm:px-5">
+                    <p className="text-lg font-bold text-white sm:text-2xl">{t(`hero.fact${n}.value`)}</p>
+                    <p className="mt-1 text-xs leading-snug text-gray-400 sm:text-sm">{t(`hero.fact${n}.label`)}</p>
+                  </div>
+                ))}
+              </div>
             </motion.div>
 
             <motion.div
@@ -429,204 +499,139 @@ const AIChatbot: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.15 }}
             >
-              <ChatbotDemoTerminal />
+              <ChatExample t={t} />
             </motion.div>
           </section>
 
+          {/* ── How it works ── */}
+          <section className="mb-24 md:mb-32">
+            <SectionHead eyebrow={t("eyebrow.how")} title={t("how.title")} />
+            <ol className="grid gap-5 md:grid-cols-3">
+              {[1, 2, 3].map((n) => (
+                <li key={n} className={`${card} p-7`}>
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full border border-indigo-500/40 text-sm font-bold text-indigo-300">
+                    {n}
+                  </span>
+                  <h3 className="mt-5 text-lg font-bold text-white">{t(`how.step${n}.title`)}</h3>
+                  <p className="mt-2 text-[15px] leading-relaxed text-gray-400">{t(`how.step${n}.text`)}</p>
+                </li>
+              ))}
+            </ol>
+          </section>
+
           {/* ── Platforms ── */}
-          <section className="mb-20 md:mb-24">
-            <h2 className="mb-10 text-center text-2xl font-bold tracking-tight text-white md:text-3xl">
-              {t("platforms.title")}
-            </h2>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <section className="mb-24 md:mb-32">
+            <SectionHead eyebrow={t("eyebrow.platforms")} title={t("platforms.title")} subtitle={t("platforms.subtitle")} />
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {platforms.map((platform) => (
                 <div
                   key={platform.key}
-                  className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-colors hover:border-indigo-500/40"
+                  className={`${card} flex flex-col items-center p-7 text-center transition-colors hover:border-indigo-500/40`}
                 >
-                  <div className="mb-4 text-3xl text-indigo-400">{platform.icon}</div>
-                  <h3 className="mb-1.5 text-lg font-bold text-white">
-                    {t(`platform.${platform.key}.name`)}
-                  </h3>
-                  <p className="mb-4 text-sm font-medium text-indigo-300">
-                    {t(`platform.${platform.key}.stats`)}
-                  </p>
-                  <ul className="space-y-2">
-                    {[1, 2, 3].map((idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-sm text-gray-300">
-                        <FaCheck className="mt-1 shrink-0 text-indigo-400" />
-                        <span>{t(`platform.${platform.key}.feature${idx}`)}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-500/10 text-2xl text-indigo-300">
+                    {platform.icon}
+                  </span>
+                  <h3 className="mt-5 text-base font-bold text-white">{t(`platform.${platform.key}.name`)}</h3>
+                  <p className="mt-2 text-[15px] leading-relaxed text-gray-400">{t(`platform.${platform.key}.text`)}</p>
                 </div>
               ))}
             </div>
           </section>
 
           {/* ── Pricing ── */}
-          <section className="mb-20 md:mb-24">
-            <div className="mb-10 text-center">
-              <h2 className="mb-3 text-2xl font-bold tracking-tight text-white md:text-3xl">
-                {t("pricing.title")}
-              </h2>
-              <p className="mx-auto max-w-2xl text-gray-400">{t("pricing.description")}</p>
-            </div>
+          <section className="mb-24 md:mb-32">
+            <SectionHead eyebrow={t("eyebrow.pricing")} title={t("pricing.title")} subtitle={t("pricing.description")} />
 
-            <div className="mb-6 grid gap-5 lg:grid-cols-2">
-              {/* One-time Investment */}
-              <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 lg:p-8">
-                <h3 className="mb-6 flex items-center gap-3 text-xl font-bold text-white">
-                  <FaRocket className="text-indigo-400" />
-                  {t("pricing.investment.title")}
-                </h3>
-                <div className="mb-5 text-center">
-                  <div className="text-3xl font-black text-indigo-400">
-                    {t("pricing.investment.price")}
-                  </div>
-                  <div className="text-sm text-gray-500">{t("pricing.investment.priceNote")}</div>
-                </div>
-                <div className="mb-3 text-sm text-gray-500">{t("pricing.investment.includes")}</div>
-                <div className="space-y-3">
+            <div className="grid gap-5 lg:grid-cols-2">
+              {/* One-time launch */}
+              <div className={`${card} flex flex-col p-7 md:p-9`}>
+                <p className="text-sm font-semibold uppercase tracking-[0.15em] text-indigo-300">{t("pricing.investment.title")}</p>
+                <p className="mt-3 text-4xl font-extrabold tracking-tight text-white">{t("pricing.investment.price")}</p>
+                <p className="mt-2 text-[15px] text-gray-400">{t("pricing.investment.priceNote")}</p>
+                <div className="my-7 h-px bg-white/10" />
+                <p className="mb-4 text-[15px] font-semibold text-gray-200">{t("pricing.investment.includes")}</p>
+                <ul className="space-y-3">
                   {[1, 2, 3, 4, 5].map((num) => (
-                    <div key={num} className="flex items-start gap-3">
-                      <FaCheck className="mt-1 shrink-0 text-sm text-indigo-400" />
-                      <span className="text-sm text-gray-300">
-                        {t(`pricing.investment.feature${num}`)}
-                      </span>
+                    <li key={num} className="flex items-start gap-3 text-[15px] leading-relaxed text-gray-300">
+                      <FaCheck className="mt-1.5 shrink-0 text-xs text-indigo-400" />
+                      {t(`pricing.investment.feature${num}`)}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Monthly usage, with the three sizes as a table */}
+              <div className={`${card} flex flex-col p-7 md:p-9`}>
+                <p className="text-sm font-semibold uppercase tracking-[0.15em] text-indigo-300">{t("pricing.monthly.title")}</p>
+                <p className="mt-3 text-4xl font-extrabold tracking-tight text-white">{t("pricing.monthly.price")}</p>
+                <p className="mt-2 text-[15px] text-gray-400">{t("pricing.monthly.priceNote")}</p>
+                <div className="my-7 h-px bg-white/10" />
+                <div className="divide-y divide-white/10 rounded-xl border border-white/10">
+                  {apiCosts.map((cost) => (
+                    <div key={cost.key} className="flex items-center justify-between gap-4 px-5 py-4">
+                      <div>
+                        <p className="text-[15px] font-semibold text-white">{t(`pricing.examples.${cost.key}`)}</p>
+                        <p className="text-sm text-gray-500">{t(`pricing.examples.${cost.key}Queries`)}</p>
+                      </div>
+                      <p className="whitespace-nowrap text-lg font-bold text-indigo-300">{t(`pricing.examples.${cost.key}Cost`)}</p>
                     </div>
                   ))}
                 </div>
-              </div>
-
-              {/* Operational Costs */}
-              <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 lg:p-8">
-                <h3 className="mb-6 flex items-center gap-3 text-xl font-bold text-white">
-                  <FaCloud className="text-indigo-400" />
-                  {t("pricing.monthly.title")}
-                </h3>
-                <div className="mb-5 text-center">
-                  <div className="text-3xl font-black text-indigo-400">{t("pricing.monthly.api")}</div>
-                  <div className="text-sm text-gray-500">{t("pricing.monthly.price")}</div>
-                </div>
-                <div className="space-y-3">
-                  {[
-                    ["pricing.monthly.billing.title", "pricing.monthly.billing.description"],
-                    ["pricing.monthly.monitoring.title", "pricing.monthly.monitoring.description"],
-                    ["pricing.monthly.transparency.title", "pricing.monthly.transparency.description"],
-                  ].map(([titleKey, descKey]) => (
-                    <div key={titleKey} className="flex items-start gap-3">
-                      <FaCheck className="mt-1 shrink-0 text-sm text-indigo-400" />
-                      <p className="text-sm text-gray-300">
-                        <span className="font-medium text-white">{t(titleKey)} </span>
-                        {t(descKey)}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* API Cost Examples */}
-            <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 md:p-8">
-              <h3 className="mb-2 text-center text-lg font-bold text-white">
-                {t("pricing.examples.title")}
-              </h3>
-              <p className="mb-6 text-center text-sm text-gray-500">{t("pricing.examples.note")}</p>
-              <div className="grid gap-4 sm:grid-cols-3">
-                {apiCosts.map((cost) => (
-                  <div
-                    key={cost.key}
-                    className="rounded-xl border border-white/10 bg-white/[0.02] p-4 text-center"
-                  >
-                    <div className="mb-1 font-medium text-white">
-                      {t(`pricing.examples.${cost.key}`)}
-                    </div>
-                    <div className="mb-2 text-sm text-gray-500">
-                      {t(`pricing.examples.${cost.key}Queries`)}
-                    </div>
-                    <div className="text-2xl font-bold text-indigo-400">
-                      {t(`pricing.examples.${cost.key}Cost`)}
-                    </div>
-                  </div>
-                ))}
+                <p className="mt-auto pt-6 text-sm text-gray-500">{t("pricing.monthly.note")}</p>
               </div>
             </div>
           </section>
 
           {/* ── Admin Panel ── */}
-          <section className="mb-20 md:mb-24">
-            <h2 className="mb-10 flex items-center justify-center gap-3 text-center text-2xl font-bold tracking-tight text-white md:text-3xl">
-              <FaCog className="text-indigo-400" />
-              {t("admin.title")}
-            </h2>
-            <div className="grid gap-6 rounded-2xl border border-white/10 bg-white/[0.02] p-6 md:grid-cols-2 md:p-8">
-              <div>
-                <h3 className="mb-4 text-lg font-bold text-white">{t("admin.canDo")}</h3>
-                <div className="space-y-3">
+          <section className="mb-24 md:mb-32">
+            <SectionHead eyebrow={t("eyebrow.admin")} title={t("admin.title")} subtitle={t("admin.subtitle")} />
+            <div className="grid gap-5 md:grid-cols-2">
+              <div className={`${card} p-7 md:p-9`}>
+                <h3 className="mb-5 text-lg font-bold text-white">{t("admin.canDo")}</h3>
+                <ul className="space-y-3.5">
                   {[1, 2, 3, 4, 5].map((num) => (
-                    <div key={num} className="flex items-center gap-2">
-                      <FaCheck className="shrink-0 text-sm text-indigo-400" />
-                      <span className="text-sm text-gray-300">{t(`admin.canDo.feature${num}`)}</span>
-                    </div>
+                    <li key={num} className="flex items-start gap-3 text-[15px] leading-relaxed text-gray-300">
+                      <FaCheck className="mt-1.5 shrink-0 text-xs text-indigo-400" />
+                      {t(`admin.canDo.feature${num}`)}
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
-              <div>
-                <h3 className="mb-4 text-lg font-bold text-white">{t("admin.howWorks")}</h3>
-                <div className="space-y-3">
-                  {[1, 2, 3, 4].map((step, index) => (
-                    <div key={step} className="flex items-start gap-2.5">
-                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-indigo-500 text-xs font-bold text-white">
-                        {index + 1}
+              <div className={`${card} p-7 md:p-9`}>
+                <h3 className="mb-5 text-lg font-bold text-white">{t("admin.howWorks")}</h3>
+                <ol className="space-y-3.5">
+                  {[1, 2, 3, 4].map((step) => (
+                    <li key={step} className="flex items-start gap-3 text-[15px] leading-relaxed text-gray-300">
+                      <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-indigo-500/40 text-xs font-bold text-indigo-300">
+                        {step}
                       </span>
-                      <span className="text-sm text-gray-300">{t(`admin.howWorks.step${step}`)}</span>
-                    </div>
+                      {t(`admin.howWorks.step${step}`)}
+                    </li>
                   ))}
-                </div>
+                </ol>
               </div>
             </div>
           </section>
 
           {/* ── Technical Features ── */}
           <section>
-            <div className="mb-10 text-center">
-              <h2 className="mb-3 text-2xl font-bold tracking-tight text-white md:text-3xl">
-                {t("technical.title")}
-              </h2>
-              <p className="text-gray-400">{t("technical.subtitle")}</p>
-            </div>
-            <div className="space-y-5">
-              {technicalFeatures.map((feature, index) => (
-                <motion.div
-                  key={feature.key}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 lg:p-8"
-                >
-                  <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
-                    <div className="mt-1 shrink-0 text-3xl text-indigo-400 sm:text-4xl">
-                      {feature.icon}
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="mb-4 text-lg font-bold text-white sm:text-xl">
-                        {t(`technical.${feature.key}.title`)}
-                      </h3>
-                      <div className="space-y-3">
-                        {[1, 2, 3].map((pointNum) => (
-                          <div key={pointNum} className="flex items-start gap-3">
-                            <FaCheck className="mt-1 shrink-0 text-sm text-indigo-400" />
-                            <span className="text-sm leading-relaxed text-gray-300">
-                              {t(`technical.${feature.key}.point${pointNum}`)}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
+            <SectionHead eyebrow={t("eyebrow.tech")} title={t("technical.title")} subtitle={t("technical.subtitle")} />
+            <div className="grid gap-5 md:grid-cols-3">
+              {technicalFeatures.map((feature) => (
+                <div key={feature.key} className={`${card} p-7`}>
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-500/10 text-xl text-indigo-300">
+                    {feature.icon}
+                  </span>
+                  <h3 className="mt-5 text-lg font-bold text-white">{t(`technical.${feature.key}.title`)}</h3>
+                  <ul className="mt-4 space-y-3">
+                    {[1, 2, 3].map((pointNum) => (
+                      <li key={pointNum} className="flex items-start gap-3 text-[15px] leading-relaxed text-gray-400">
+                        <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-indigo-400" />
+                        {t(`technical.${feature.key}.point${pointNum}`)}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
             </div>
           </section>
@@ -638,17 +643,11 @@ const AIChatbot: React.FC = () => {
         </section>
 
         {/* ── CTA ── */}
-        <section className="mx-auto max-w-3xl px-5 pb-24 sm:px-6">
-          <div className="rounded-2xl border border-indigo-500/30 bg-indigo-950/20 p-8 text-center">
-            <h2 className="mb-6 text-2xl font-bold text-white md:text-3xl">{t("cta.question")}</h2>
-            <div className="flex flex-col justify-center gap-3 sm:flex-row">
-              <Link
-                to="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-3.5 text-sm font-bold text-black transition-colors hover:bg-gray-200"
-              >
-                <FaRocket />
-                {t("cta.button")}
-              </Link>
+        <section className="mx-auto max-w-4xl px-5 pb-24 sm:px-6">
+          <div className="rounded-3xl border border-indigo-500/25 bg-linear-to-b from-indigo-950/40 to-transparent px-6 py-12 text-center md:px-12 md:py-14">
+            <h2 className="text-2xl font-bold text-white md:text-3xl">{t("cta.question")}</h2>
+            <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-gray-400 md:text-[17px]">{t("cta.text")}</p>
+            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
               <a
                 href={whatsappUrl}
                 target="_blank"
@@ -656,8 +655,14 @@ const AIChatbot: React.FC = () => {
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-indigo-500"
               >
                 <FaWhatsapp className="text-lg" />
-                {en ? "Order AI Chatbot" : "შეუკვეთე AI ჩატბოტი"}
+                {t("cta.order")}
               </a>
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/5"
+              >
+                {t("cta.button")}
+              </Link>
             </div>
           </div>
         </section>
