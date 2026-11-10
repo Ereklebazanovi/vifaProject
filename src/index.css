@@ -435,6 +435,13 @@ html.ka .invento-readable p {
   font-family: "Noto Sans Georgian", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+/* A mock app screen (the Messenger phone on /services/ai-chatbot): every element in
+   readable mkhedruli, like the real app, not the all-caps heading font. */
+:lang(ka) .georgian-readable *,
+html.ka .georgian-readable * {
+  font-family: "Noto Sans Georgian", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 /* Admin (/studio): every element in readable mkhedruli. A work tool full of
    names, notes and numbers, so no all-caps Nino Mtavruli anywhere inside .studio. */
 :lang(ka) .studio *,
