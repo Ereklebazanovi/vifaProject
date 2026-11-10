@@ -18,12 +18,12 @@ export const navigationItems: NavItem[] = [
       },
       {
         key: "digital-ads",
-        path: "/services/digital-advertising",
+        path: "/services/marketing",
         label: "Digital Advertising",
       },
       {
         key: "web-dev",
-        path: "/services/web-development",
+        path: "/services/web",
         label: "Web Development",
       },
       {

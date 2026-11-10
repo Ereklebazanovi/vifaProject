@@ -1,23 +1,177 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
-import Navbar from './ImprovedNavbar';
+import React, { useEffect, useRef, useState } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
+import Navbar from './SimpleNavbar';
 import Footer from './ImprovedFooter';
-import { useTheme } from '../contexts/ThemeContext';
+import FloatingContact from '../components/FloatingContact';
+import { useNavigation } from '../contexts/NavigationContext';
+import { facebookPixel } from '../utils/facebookPixel';
+// import ChatBot, { ChatBotButton } from '../components/ChatBot';
+
+// Top progress bar — triggers on any route change automatically
+const NavigationProgressBar = ({ active }: { active: boolean }) => (
+  <div className="fixed top-0 left-0 right-0 z-9999 h-0.75 pointer-events-none overflow-hidden">
+    {/* Glow */}
+    <div
+      className="absolute inset-0 bg-indigo-400 blur-[3px]"
+      style={{
+        transform: active ? 'translateX(0)' : 'translateX(-100%)',
+        transition: active ? 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)' : 'transform 0.3s ease-in',
+        opacity: 0.7,
+      }}
+    />
+    {/* Main bar */}
+    <div
+      className="absolute inset-0"
+      style={{
+        background: 'linear-gradient(90deg, #6366f1, #a78bfa, #818cf8)',
+        transform: active ? 'translateX(0)' : 'translateX(-100%)',
+        transition: active ? 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)' : 'transform 0.3s ease-in',
+      }}
+    />
+  </div>
+);
 
 const Layout: React.FC = () => {
-  const { isDarkMode } = useTheme();
+  const { stopNavigation } = useNavigation();
+  const location = useLocation();
+  const [barActive, setBarActive] = useState(false);
+  const prevPath = useRef(location.pathname);
+  // const [isChatBotOpen, setIsChatBotOpen] = useState(false);
+
+  // Determine if current route should show Invento branding
+  const isInventoRoute = () => {
+    const path = location.pathname;
+    const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+
+    // If we're on inventogeo.com domain, show Invento branding
+    if (hostname.includes('inventogeo.com')) return true;
+
+    // For specific routes, show Invento branding
+    return path.includes('/services/web-development') ||
+           path.includes('/services/ai-chatbot') ||
+           path.includes('/inventowms') ||
+           path === '/';
+  };
+
+  const isVifaRoute = () => {
+    const path = location.pathname;
+    const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+
+    // If we're on vifadigital.ge domain, show VIFA branding
+    if (hostname.includes('vifadigital.ge')) return true;
+
+    // For specific routes, show VIFA branding
+    return path.includes('/services/digital-advertising') ||
+           path.includes('/about');
+  };
+
+  // Update favicon based on current route
+  useEffect(() => {
+    const favicon = document.querySelector('link[rel="icon"]') as HTMLLinkElement;
+    const appleTouchIcon = document.querySelector('link[rel="apple-touch-icon"]') as HTMLLinkElement;
+
+    const iconPath = isInventoRoute() && !isVifaRoute() ? '/invento.png' : '/viffa.png';
+
+    if (favicon) {
+      favicon.href = iconPath;
+    }
+    if (appleTouchIcon) {
+      appleTouchIcon.href = iconPath;
+    }
+  }, [location.pathname]);
+
+  // Show progress bar on any route change
+  useEffect(() => {
+    if (prevPath.current !== location.pathname) {
+      prevPath.current = location.pathname;
+      setBarActive(true);
+      const t = setTimeout(() => setBarActive(false), 700);
+      return () => clearTimeout(t);
+    }
+  }, [location.pathname]);
+
+  // Scroll to top on route change — in an SPA the path changes but the scroll
+  // position is otherwise kept, leaving the new page frozen mid-scroll (e.g.
+  // clicking a "Related services" link at the bottom of an industry page).
+  // Hash anchors (#pricing) don't change pathname, so they're unaffected.
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+  // Also stop manual navigation state
+  useEffect(() => {
+    stopNavigation();
+  }, [location.pathname, stopNavigation]);
+
+  // Remember which ad or partner link brought this visit (utm_* / ref on the landing
+  // URL), so a form filled three pages later still says where the person came from.
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "ref"];
+      const found: Record<string, string> = Object.fromEntries(keys.map((k) => [k, params.get(k) || ""]).filter(([, v]) => v));
+      // Ad clicks without our tags still carry the network's click id.
+      if (!found.utm_source && params.get("gclid")) Object.assign(found, { utm_source: "google", utm_medium: "cpc" });
+      if (!found.utm_source && params.get("fbclid")) found.utm_source = "facebook";
+      if (Object.keys(found).length) sessionStorage.setItem("vifa_utm", JSON.stringify(found));
+      // No tags at all: keep the site that sent the visitor (www.google.com, l.facebook.com...).
+      else if (!sessionStorage.getItem("vifa_utm") && document.referrer) {
+        const host = new URL(document.referrer).hostname;
+        if (host && host !== window.location.hostname) sessionStorage.setItem("vifa_utm", JSON.stringify({ referrer: host }));
+      }
+    } catch {
+      // Storage blocked (private mode etc.): the form simply sends no UTM.
+    }
+  }, []);
+
+  // Global WhatsApp click tracker. One delegated listener captures every wa.me
+  // link click site-wide, fires a Meta Pixel "Contact" event with the source
+  // path so Meta's ad algorithm can optimize for real conversions (not just
+  // PageViews). Without this, low-budget conversion campaigns burn money on
+  // cold traffic Meta can't tell apart from genuine leads.
+  // The same click is also sent to GA4 as `generate_lead`, so every WhatsApp
+  // lead can be traced back to its traffic source (Google organic, Facebook,
+  // direct...) and the page it came from. Mark it as a Key Event in GA4.
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      const link = target?.closest?.('a[href*="wa.me"]') as HTMLAnchorElement | null;
+      if (!link) return;
+      facebookPixel.trackStandardEvent('Contact', {
+        content_name: 'whatsapp_click',
+        content_category: window.location.pathname,
+      });
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'generate_lead', {
+          method: 'whatsapp',
+          lead_page: window.location.pathname,
+          link_url: link.href,
+        });
+      }
+    };
+    document.addEventListener('click', onClick, true);
+    return () => document.removeEventListener('click', onClick, true);
+  }, []);
+
+  // const toggleChatBot = () => {
+  //   setIsChatBotOpen(!isChatBotOpen);
+  // };
 
   return (
-    <div className={`min-h-screen transition-colors duration-500 ${
-      isDarkMode 
-        ? 'bg-slate-950 text-white' 
-        : 'bg-white text-slate-900'
-    }`}>
+    <div className="min-h-screen bg-transparent text-white">
+      <NavigationProgressBar active={barActive} />
       <Navbar />
       <main>
         <Outlet />
       </main>
       <Footer />
+
+      {/* Restrained site-wide WhatsApp button (hidden on routes with their own contact bar) */}
+      <FloatingContact />
+
+      {/* ChatBot Components */}
+      {/* <ChatBot isOpen={isChatBotOpen} onToggle={toggleChatBot} />
+      {!isChatBotOpen && <ChatBotButton onClick={toggleChatBot} />} */}
     </div>
   );
 };
