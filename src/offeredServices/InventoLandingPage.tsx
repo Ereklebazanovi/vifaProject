@@ -134,9 +134,10 @@ const inventoTranslations = {
 
     "hero.title": "საწყობის პროგრამა Facebook და Instagram გაყიდვებისთვის",
     "hero.subtitle": "Invento WMS - საქონლის აღრიცხვის, შეკვეთებისა და ფინანსების მართვის ერთიანი სისტემა მაღაზიებისა და ონლაინ ბიზნესისთვის.",
-    "hero.trust": "🎁 7 დღე უფასოდ · გააუქმებთ ნებისმიერ დროს",
+    "hero.trust": "7 დღე უფასოდ · გააუქმებთ ნებისმიერ დროს",
     "btn.consultation": "უფასო კონსულტაცია",
-    "btn.demo": "სისტემის გატესტვა",
+    "btn.demo": "ნახეთ დემო",
+    "hero.demoNote": "დემო ღიაა ყველასთვის: შედით რეგისტრაციის გარეშე და გამოსცადეთ სადემო მაღაზიაზე.",
     "phone.number": "557 62 42 43",
 
     "problem.title": "იღებთ შეკვეთებს პირად მიმოწერაში (DM)?",
@@ -218,9 +219,10 @@ const inventoTranslations = {
 
     "hero.title": "Warehouse Software for Facebook & Instagram Sales",
     "hero.subtitle": "Invento WMS - a unified system for inventory tracking, orders and financial management for online businesses.",
-    "hero.trust": "🎁 7-day free trial · Cancel anytime",
+    "hero.trust": "7-day free trial · Cancel anytime",
     "btn.consultation": "Free Consultation",
-    "btn.demo": "Test the System",
+    "btn.demo": "View Demo",
+    "hero.demoNote": "Open to everyone: no sign-up, try it on a demo shop.",
     "phone.number": "557 62 42 43",
 
     "problem.title": "Struggling with DM Orders?",
@@ -309,14 +311,17 @@ const InventoLandingPage: React.FC = () => {
     return translations[key] || key;
   };
 
+  // ცოცხალი დემოს ეკრანები (demo.vifadigital.ge, სადემო მონაცემები)
   const images = [
-    "/invento2.png",
-    "/invento3.png",
-    "/invento4.png",
-    "/invento5.png",
-    "/invento6.png",
-    "/invento7.png"
+    "/invento-demo-analytics.webp",
+    "/invento-demo-orders.webp",
+    "/invento-demo-inventory.webp",
+    "/invento-demo-showroom.webp",
   ];
+  const imageLabels = currentLanguage === "en"
+    ? ["Analytics", "Orders", "Warehouse", "Showroom"]
+    : ["ანალიტიკა", "შეკვეთები", "საწყობი", "შოურუმი"];
+  const DEMO_URL = "https://demo.vifadigital.ge";
 
 const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20Invento%20WMS-ის%20სისტემით.%20მსურს%20უფასო%20კონსულტაცია.";
   const phoneNumber = "tel:+995557624243";
@@ -427,51 +432,51 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
                   transition={{ duration: 0.8 }}
                   className="space-y-6"
                 >
-                  <h1 className={`text-3xl md:text-4xl lg:text-5xl leading-tight ${currentLanguage === 'ka' ? 'font-bold' : 'font-bold'}`}>
-                    <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl leading-tight font-bold tracking-tight">
+                    <span className="text-white">
                       {t("hero.title")}
                     </span>
                   </h1>
 
-                  <p className="text-base text-gray-400 leading-relaxed">
+                  <p className="text-lg text-gray-300 leading-relaxed max-w-xl">
                     {t("hero.subtitle")}
                   </p>
 
-                  <div className="space-y-4">
-                    <div className="flex flex-wrap gap-4 items-center">
+                  <div className="space-y-5">
+                    <div className="flex flex-wrap gap-3 items-center">
+                      <a
+                        href={DEMO_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 h-12 px-6 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-500 transition-colors"
+                      >
+                        {t("btn.demo")}
+                        <FaArrowRight size={14} />
+                      </a>
                       <a
                         href={whatsappUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg font-semibold text-white hover:scale-105 transition-transform duration-300 shadow-lg shadow-blue-500/25"
+                        className="inline-flex items-center gap-2 h-12 px-6 rounded-lg border border-white/25 text-white font-semibold hover:bg-white/5 hover:border-white/40 transition-colors"
                       >
-                        <FaCommentDots size={18} />
+                        <FaCommentDots size={16} />
                         {t("btn.consultation")}
                       </a>
                       <CallbackLink product="wms" shape="lg" />
-
-                      {/* <a
-                        href="https://demo.inventogeo.com/admin?direct=admin"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-6 py-3 border-2 border-purple-400/60 text-purple-400 rounded-lg font-semibold hover:bg-purple-400/10 hover:border-purple-400 hover:scale-105 transition-all duration-300 backdrop-blur-sm"
-                      >
-                        <FaBox size={16} />
-                        {t("btn.demo")}
-                      </a> */}
-
-                      <div className="flex items-center">
-                        <a
-                          href={phoneNumber}
-                          className="inline-flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
-                        >
-                          <FaPhone size={16} />
-                          <span className="text-base font-medium">{t("phone.number")}</span>
-                        </a>
-                      </div>
                     </div>
 
-                    <p className="text-xs text-gray-500">{t("hero.trust")}</p>
+                    <p className="text-sm text-gray-300">{t("hero.demoNote")}</p>
+
+                    <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-1 text-sm text-gray-300">
+                      <a href={phoneNumber} className="inline-flex items-center gap-2 text-gray-100 hover:text-white transition-colors">
+                        <FaPhone size={13} />
+                        <span className="text-base font-medium">{t("phone.number")}</span>
+                      </a>
+                      <span className="inline-flex items-center gap-2">
+                        <FaCheckCircle className="w-4 h-4 text-green-400" />
+                        {t("hero.trust")}
+                      </span>
+                    </div>
                   </div>
                 </motion.div>
 
@@ -481,83 +486,66 @@ const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა
                   transition={{ duration: 0.8, delay: 0.2 }}
                   className="relative"
                 >
-                  <div
-                    className="relative w-full max-w-[280px] sm:max-w-[320px] lg:max-w-[380px] h-[250px] sm:h-[320px] lg:h-[400px] mx-auto rounded-[20px] overflow-hidden border-2 border-gray-800/60 shadow-2xl shadow-black/40 group"
+                  <a
+                    href={DEMO_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={t("btn.demo")}
+                    className="block w-full max-w-[680px] mx-auto rounded-xl overflow-hidden border border-white/10 bg-[#111318] hover:border-white/25 transition-colors"
                     onMouseEnter={() => setIsPaused(true)}
                     onMouseLeave={() => setIsPaused(false)}
                   >
-                    {/* Loading indicator */}
-                    {!imagesLoaded[images[currentImageIndex]] && (
-                      <div className="absolute inset-0 flex items-center justify-center bg-[#0a0a0a]/80">
-                        <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-                      </div>
-                    )}
-
-                    {/* Image with improved animations */}
-                    <AnimatePresence mode="wait">
-                      <motion.img
-                        key={currentImageIndex}
-                        src={images[currentImageIndex]}
-                        alt={
-                          en
-                            ? `Invento WMS warehouse management software interface, screenshot ${currentImageIndex + 1}`
-                            : `Invento WMS საწყობის პროგრამის ინტერფეისი, სქრინშოტი ${currentImageIndex + 1}`
-                        }
-                        className="w-full h-full object-contain p-1 transition-transform duration-300 group-hover:scale-[1.02]"
-                        initial={{
-                          opacity: 0
-                        }}
-                        animate={{
-                          opacity: imagesLoaded[images[currentImageIndex]] ? 1 : 0
-                        }}
-                        exit={{
-                          opacity: 0
-                        }}
-                        transition={{
-                          duration: 0.3,
-                          ease: "easeInOut"
-                        }}
-                        onLoad={() => {
-                          setImagesLoaded(prev => ({
-                            ...prev,
-                            [images[currentImageIndex]]: true
-                          }));
-                        }}
-                      />
-                    </AnimatePresence>
-
-                    {/* Enhanced progress indicators */}
-                    <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                      {images.map((_, index) => (
-                        <motion.button
-                          key={index}
-                          onClick={() => setCurrentImageIndex(index)}
-                          className={`relative w-2 h-2 rounded-full transition-all duration-300 ${
-                            index === currentImageIndex
-                              ? 'bg-blue-500 scale-125 shadow-lg shadow-blue-500/50'
-                              : 'bg-gray-500/60 hover:bg-gray-400/80 hover:scale-110'
-                          }`}
-                          whileHover={{ scale: 1.2 }}
-                          whileTap={{ scale: 0.9 }}
-                        >
-                          {/* Active indicator with progress ring */}
-                          {index === currentImageIndex && (
-                            <motion.div
-                              className="absolute inset-0 rounded-full border-2 border-blue-300"
-                              initial={{ scale: 0, opacity: 0 }}
-                              animate={{ scale: 1, opacity: 1 }}
-                              transition={{ duration: 0.3 }}
-                            />
-                          )}
-                        </motion.button>
-                      ))}
+                    <div className="flex items-center gap-3 h-9 px-4 border-b border-white/10">
+                      <span className="flex gap-1.5" aria-hidden="true">
+                        {[0, 1, 2].map((dot) => (
+                          <span key={dot} className="w-2.5 h-2.5 rounded-full bg-white/15" />
+                        ))}
+                      </span>
+                      <span className="flex-1 text-center text-xs text-gray-300">demo.vifadigital.ge</span>
+                      <span className="text-xs font-medium text-blue-300">{t("btn.demo")} →</span>
                     </div>
+                    <div className="relative aspect-[16/10] bg-white">
+                      {!imagesLoaded[images[currentImageIndex]] && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-[#111318]">
+                          <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                        </div>
+                      )}
+                      <AnimatePresence mode="wait">
+                        <motion.img
+                          key={currentImageIndex}
+                          src={images[currentImageIndex]}
+                          alt={
+                            en
+                              ? `Invento WMS live demo: ${imageLabels[currentImageIndex]}`
+                              : `Invento WMS ცოცხალი დემო: ${imageLabels[currentImageIndex]}`
+                          }
+                          className="absolute inset-0 w-full h-full object-cover object-left-top"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: imagesLoaded[images[currentImageIndex]] ? 1 : 0 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          onLoad={() => {
+                            setImagesLoaded((prev) => ({ ...prev, [images[currentImageIndex]]: true }));
+                          }}
+                        />
+                      </AnimatePresence>
+                    </div>
+                  </a>
 
-                    {/* Hover overlay with navigation hints */}
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/5 to-transparent opacity-0 group-hover:opacity-100"
-                      transition={{ duration: 0.3 }}
-                    />
+                  {/* ეკრანების გადამრთველი */}
+                  <div className="mt-4 flex flex-wrap justify-center gap-2">
+                    {imageLabels.map((label, index) => (
+                      <button
+                        key={label}
+                        type="button"
+                        onClick={() => setCurrentImageIndex(index)}
+                        className={`h-8 px-3 rounded-md text-xs font-medium transition-colors ${
+                          index === currentImageIndex ? "bg-white/10 text-white" : "text-gray-300 hover:text-white"
+                        }`}
+                      >
+                        {label}
+                      </button>
+                    ))}
                   </div>
                 </motion.div>
               </div>
