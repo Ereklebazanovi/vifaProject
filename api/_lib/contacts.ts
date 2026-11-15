@@ -190,7 +190,7 @@ export function alertEmail(q: Inquiry, source: string) {
   return {
     subject: `ახალი მომართვა: ${who} · ${p.label}`,
     html: `<div style="font-family:Arial,sans-serif;font-size:15px;color:#0f172a">
-<p style="font-size:17px;font-weight:bold;margin:0 0 12px">ახალი მომართვა საიტიდან</p>
+<p style="font-size:17px;font-weight:bold;margin:0 0 12px">ახალი მომართვა: ${esc(source)}</p>
 <table cellpadding="6" style="border-collapse:collapse">${rows
       .map(([k, v]) => `<tr><td style="color:#64748b;vertical-align:top">${k}</td><td>${v}</td></tr>`)
       .join("")}</table>

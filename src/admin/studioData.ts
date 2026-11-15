@@ -76,6 +76,8 @@ export function channelOf(e: Ev | undefined, c: Contact) {
   }
   if (e?.type === "inquiry") {
     if (e.source === "meta") return "Facebook ლიდ-ფორმა";
+    if (e.source === "messenger") return "Messenger ჩატბოტი";
+    if (e.source === "instagram") return "Instagram ჩატბოტი";
     const u = e.utm || {};
     const src = (u.utm_source || "").toLowerCase();
     if (u.ref) return "პარტნიორის ბმული";

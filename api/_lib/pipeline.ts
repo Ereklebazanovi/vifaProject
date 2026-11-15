@@ -18,7 +18,7 @@ import { isGeorgianMobile, isSmsConfigured, sendSms } from "./sms.js";
 export const errText = (e: unknown) => (e instanceof Error ? e.message : String(e));
 
 /**
- * @param source     stored on the contact: "site" | "meta"
+ * @param source     stored on the contact: "site" | "meta" | "messenger" | "instagram"
  * @param sourceLabel shown in our alert email: "საიტის ფორმა", "Facebook რეკლამა (…)"
  * @returns ok when we have the person's details somewhere: the database or our inbox
  */

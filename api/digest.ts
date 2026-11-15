@@ -68,7 +68,8 @@ async function buildDigest() {
   const snap = await adminDb().collection("contacts").get();
   const all = snap.docs.map((d) => ({ id: d.id, ...d.data() }) as C).filter((c) => !c.test);
   const now = Date.now();
-  const wrote = (c: C) => c.sources?.some((s) => s === "site" || s === "meta");
+  // People who wrote to us themselves: site form, Facebook form, our chatbot.
+  const wrote = (c: C) => c.sources?.some((s) => ["site", "meta", "messenger", "instagram"].includes(s));
   const stageOf = (c: C) => c.stage || (wrote(c) ? "new" : "");
 
   const fresh = all.filter((c) => wrote(c) && ms(c.lastSeenAt) >= now - DAY).sort((a, b) => ms(b.lastSeenAt) - ms(a.lastSeenAt));

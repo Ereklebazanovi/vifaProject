@@ -20,9 +20,15 @@ export const PRODUCT_LABELS: Record<string, string> = {
 export const SOURCE_LABELS: Record<string, string> = {
   site: "საიტის ფორმა",
   meta: "Facebook რეკლამა",
+  messenger: "Messenger ჩატბოტი",
+  instagram: "Instagram ჩატბოტი",
   import: "იმპორტი",
   manual: "სტუდიოდან",
 };
+
+/** Sources where the person wrote to us themselves (same list in api/digest.ts). */
+export const INBOUND_SOURCES = ["site", "meta", "messenger", "instagram"];
+export const wroteToUs = (c: { sources?: string[] }) => Boolean(c.sources?.some((s) => INBOUND_SOURCES.includes(s)));
 
 /** Sales stages, in order. "lost" can follow any of them. */
 export const STAGES = {
@@ -43,7 +49,7 @@ export const STAGE_TONE = { new: "indigo", contacted: "neutral", offer: "amber",
 export function stageOf(c: Contact): Stage | null {
   if (c.stage) return c.stage;
   if (c.test) return null; // our own form test: stays off the board until the morning cleanup
-  return c.sources?.some((s) => s === "site" || s === "meta") ? "new" : null;
+  return wroteToUs(c) ? "new" : null;
 }
 
 export interface Contact {

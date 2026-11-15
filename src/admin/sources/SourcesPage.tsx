@@ -38,6 +38,8 @@ function adOf(e: Ev) {
   const src = (u.utm_source || "").toLowerCase();
   const channel =
     e.source === "meta" ? "Facebook ფორმა"
+    : e.source === "messenger" ? "Messenger ჩატბოტი"
+    : e.source === "instagram" ? "Instagram ჩატბოტი"
     : /facebook|instagram|^fb$|^ig$|meta/.test(src) ? "Facebook, საიტზე"
     : /google/.test(src) ? "Google Ads"
     : u.utm_source || "სხვა";

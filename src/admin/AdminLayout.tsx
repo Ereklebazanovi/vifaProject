@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 import type { User } from "firebase/auth";
 import { ChartColumn, Eye, EyeOff, Inbox, SquareKanban, LayoutDashboard, LogOut, PenLine, Send, Users, X } from "lucide-react";
 import { checkAdminAccess, signInWithGoogle, signOutAdmin, watchAuth } from "./auth";
-import { formatPhone, maskEmail, maskPhone, PRODUCT_LABELS, subscribeContacts, type Contact } from "./contacts/contactsService";
+import { formatPhone, maskEmail, maskPhone, PRODUCT_LABELS, subscribeContacts, wroteToUs, type Contact } from "./contacts/contactsService";
 import { btnPrimary, btnSecondary } from "./ui";
 import { gaId } from "../components/GoogleAnalytics";
 
@@ -117,14 +117,14 @@ const AdminLayout = () => {
     setContactsLoading(true);
     return subscribeContacts(
       (data) => {
-        // Someone just wrote (site form, Facebook form): a notice and a soft chime.
+        // Someone just wrote (site form, Facebook form, our chatbot): a notice and a soft chime.
         const now = Date.now();
         const next = new Map(data.map((c) => [c.id, c.lastSeenAt?.toMillis() ?? 0]));
         const prev = seenRef.current;
         if (prev) {
           const fresh = data.filter((c) => {
             const t = next.get(c.id) || 0;
-            return c.sources?.some((s) => s === "site" || s === "meta") && t > (prev.get(c.id) ?? 0) && now - t < 5 * 60e3;
+            return wroteToUs(c) && t > (prev.get(c.id) ?? 0) && now - t < 5 * 60e3;
           });
           if (fresh.length) {
             setAlerts((a) => [...fresh, ...a.filter((x) => !fresh.some((f) => f.id === x.id))].slice(0, 3));
