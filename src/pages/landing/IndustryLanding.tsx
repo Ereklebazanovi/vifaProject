@@ -417,10 +417,56 @@ const foodReel: GalleryPhoto = {
   srcSm: "/gallery/food/reel-poster.webp",
   w: 720,
   h: 1280,
-  altKa: "კერძების და სუშის მომზადების ვიდეო-კოლაჟი (Reels)",
-  altEn: "Food and sushi preparation video reel",
+  altKa: "კერძების და სუშის მომზადების ვიდეო",
+  altEn: "Food and sushi preparation video",
   isVideo: true,
 };
+
+function AutoLoopVideo({ src, poster, className }: { src: string; poster: string; className?: string }) {
+  const ref = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    v.muted = true;
+    v.defaultMuted = true;
+    v.playsInline = true;
+    const ensurePlay = () => {
+      v.muted = true;
+      if (v.paused) v.play().catch(() => {});
+    };
+    ensurePlay();
+    v.addEventListener("loadedmetadata", ensurePlay);
+    v.addEventListener("loadeddata", ensurePlay);
+    v.addEventListener("canplay", ensurePlay);
+    v.addEventListener("pause", ensurePlay);
+    const io = new IntersectionObserver((entries) => {
+      if (entries[0]?.isIntersecting) ensurePlay();
+    });
+    io.observe(v);
+    return () => {
+      v.removeEventListener("loadedmetadata", ensurePlay);
+      v.removeEventListener("loadeddata", ensurePlay);
+      v.removeEventListener("canplay", ensurePlay);
+      v.removeEventListener("pause", ensurePlay);
+      io.disconnect();
+    };
+  }, []);
+
+  return (
+    <video
+      ref={ref}
+      src={src}
+      poster={poster}
+      autoPlay
+      loop
+      muted
+      playsInline
+      preload="auto"
+      className={className}
+    />
+  );
+}
 
 // Made by scripts/gallery.mjs from photos/<name>/ (see that script). Keyed by "service/slug".
 const GALLERIES: Record<string, GalleryPhoto[]> = { "marketing/food": [foodReel, ...foodPhotos] };
@@ -450,7 +496,7 @@ function PhotoStrip({ photos, ka }: { photos: GalleryPhoto[]; ka: boolean }) {
         <div>
           <span className="inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.25em] text-indigo-400">
             <span className="h-px w-8 bg-indigo-500" />
-            {ka ? "ფოტო და ვიდეო გადაღება" : "Food Photography & Reels"}
+            {ka ? "ფოტოგადაღება" : "Food Photography"}
           </span>
           <h2 className="mt-3 text-2xl font-bold tracking-tight text-white md:text-[1.75rem]">
             {ka ? "ფოტო-გალერეა" : "Our Shoots"}
@@ -481,22 +527,11 @@ function PhotoStrip({ photos, ka }: { photos: GalleryPhoto[]; ka: boolean }) {
             aria-label={`${ka ? p.altKa : p.altEn}. ${ka ? "გადიდება" : "Open"}`}
           >
             {p.isVideo ? (
-              <>
-                <video
-                  src={p.src}
-                  poster={p.srcSm}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload="metadata"
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                />
-                <span className="pointer-events-none absolute left-2.5 top-2.5 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/60 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-md">
-                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-indigo-400" />
-                  Reels
-                </span>
-              </>
+              <AutoLoopVideo
+                src={p.src}
+                poster={p.srcSm}
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              />
             ) : (
               <img
                 src={p.srcSm}
