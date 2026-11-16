@@ -442,7 +442,7 @@ function PhotoStrip({ photos, ka }: { photos: GalleryPhoto[]; ka: boolean }) {
             {ka ? "ფოტოგადაღება" : "Food Photography"}
           </span>
           <h2 className="mt-3 text-2xl font-bold tracking-tight text-white md:text-[1.75rem]">
-            {ka ? "ჩვენი გადაღებები" : "Our Shoots"}
+            {ka ? "ფოტო-გალერეა" : "Our Shoots"}
             <span className="ml-3 text-base font-normal text-gray-500">
               {photos.length} {ka ? "ფოტო" : "photos"}
             </span>
