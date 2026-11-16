@@ -1,17 +1,33 @@
 "use client";
 
 import type React from "react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import {
   FaBullseye,
   FaChartLine,
   FaQuoteLeft,
   FaLayerGroup,
+  FaChevronLeft,
+  FaChevronRight,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
+
+const YOUTUBE_SHORTS = [
+  "gDKBtcuyUCY",
+  "-6gz2mUbBfs",
+  "zwRbx0ilnTs",
+  "hWko2KRtHdM",
+  "_HdtFWQZ_ac",
+  "oDM6byVucLM",
+  "1-fXww5ohHs",
+  "51FJn5u8eCM",
+  "PRkEkx5KHc0",
+  "HVErKyR78uc",
+  "0l538cGGcQk",
+];
 
 // AboutPage Translations
 const aboutPageTranslations = {
@@ -80,6 +96,14 @@ const aboutPageTranslations = {
 const AboutPage: React.FC = () => {
   const { currentLanguage } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
+  const shortsRowRef = useRef<HTMLDivElement>(null);
+
+  const scrollShorts = (dir: 1 | -1) => {
+    shortsRowRef.current?.scrollBy({
+      left: dir * 600,
+      behavior: "smooth",
+    });
+  };
 
   const t = (key: string): string => {
     const translations = aboutPageTranslations[currentLanguage as keyof typeof aboutPageTranslations] as Record<string, string>;
@@ -207,83 +231,60 @@ const AboutPage: React.FC = () => {
 
           {/* ── 4. Portfolio Shorts (Design Matched to Vifa) ── */}
           <div className="max-w-7xl mx-auto mb-32">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-white mb-3">
-                {t("about.portfolio.title")}
-              </h2>
-              <p className="text-gray-500">
-                {t("about.portfolio.subtitle")}
-              </p>
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+              <div className="text-center md:text-left">
+                <h2 className="text-3xl font-bold text-white mb-3">
+                  {t("about.portfolio.title")}
+                </h2>
+                <p className="text-gray-500">
+                  {t("about.portfolio.subtitle")}
+                </p>
+              </div>
+              <div className="hidden md:flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => scrollShorts(-1)}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white transition-colors hover:bg-white/10"
+                  aria-label="Previous videos"
+                >
+                  <FaChevronLeft className="h-4 w-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => scrollShorts(1)}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white transition-colors hover:bg-white/10"
+                  aria-label="Next videos"
+                >
+                  <FaChevronRight className="h-4 w-4" />
+                </button>
+              </div>
             </div>
 
             {/* Horizontal Scrollable Container */}
             <div className="relative">
               <div
+                ref={shortsRowRef}
                 className="flex gap-6 overflow-x-auto pb-8 scroll-smooth scrollbar-hide snap-x px-4 sm:px-0"
                 style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
               >
                 <style dangerouslySetInnerHTML={{ __html: `.scrollbar-hide::-webkit-scrollbar { display: none; }` }} />
 
-                {/* Video 1 */}
-                <div className="snap-center flex-shrink-0 w-[280px] h-[500px] bg-[#0A0A0C] border border-white/[0.05] rounded-2xl overflow-hidden relative">
-                  <iframe
-                    src="https://www.youtube-nocookie.com/embed/Mg9yzpeICo4"
-                    title="Portfolio 1"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="w-full h-full"
-                    loading="lazy"
-                  />
-                </div>
-                {/* Video 2 */}
-                <div className="snap-center flex-shrink-0 w-[280px] h-[500px] bg-[#0A0A0C] border border-white/[0.05] rounded-2xl overflow-hidden relative">
-                  <iframe
-                    src="https://www.youtube-nocookie.com/embed/QCL5rC97NHU"
-                    title="Portfolio 2"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="w-full h-full"
-                    loading="lazy"
-                  />
-                </div>
-                {/* Video 3 */}
-                <div className="snap-center flex-shrink-0 w-[280px] h-[500px] bg-[#0A0A0C] border border-white/[0.05] rounded-2xl overflow-hidden relative">
-                  <iframe
-                    src="https://www.youtube.com/embed/ILLhmaWTzjE"
-                    title="Portfolio 3"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="w-full h-full"
-                    loading="lazy"
-                  />
-                </div>
-                {/* Video 4 */}
-                <div className="snap-center flex-shrink-0 w-[280px] h-[500px] bg-[#0A0A0C] border border-white/[0.05] rounded-2xl overflow-hidden relative">
-                  <iframe
-                    src="https://www.youtube.com/embed/PRkEkx5KHc0"
-                    title="Portfolio 4"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="w-full h-full"
-                    loading="lazy"
-                  />
-                </div>
-                {/* Video 5 */}
-                <div className="snap-center flex-shrink-0 w-[280px] h-[500px] bg-[#0A0A0C] border border-white/[0.05] rounded-2xl overflow-hidden relative">
-                  <iframe
-                    src="https://www.youtube.com/embed/8UQypoxIP9c"
-                    title="Portfolio 5"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="w-full h-full"
-                    loading="lazy"
-                  />
-                </div>
+                {YOUTUBE_SHORTS.map((videoId, idx) => (
+                  <div
+                    key={videoId}
+                    className="snap-center flex-shrink-0 w-[280px] h-[500px] bg-[#0A0A0C] border border-white/[0.05] rounded-2xl overflow-hidden relative"
+                  >
+                    <iframe
+                      src={`https://www.youtube.com/embed/${videoId}`}
+                      title={`Portfolio Short ${idx + 1}`}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full"
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
               </div>
             </div>
 
