@@ -42,7 +42,7 @@ const altOf = new Map(previous.map((p) => [p.file, { altKa: p.altKa || "", altEn
 
 mkdirSync(outDir, { recursive: true });
 mkdirSync(dirname(jsonPath), { recursive: true });
-for (const f of readdirSync(outDir)) if (f.endsWith(".webp")) rmSync(join(outDir, f));
+for (const f of readdirSync(outDir)) if (/^\d+(-sm)?\.webp$/.test(f)) rmSync(join(outDir, f));
 
 const list = [];
 let bytes = 0;

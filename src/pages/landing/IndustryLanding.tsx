@@ -409,10 +409,21 @@ interface GalleryPhoto {
   h: number;
   altKa: string;
   altEn: string;
+  isVideo?: boolean;
 }
 
+const foodReel: GalleryPhoto = {
+  src: "/gallery/food/reel.mp4",
+  srcSm: "/gallery/food/reel-poster.webp",
+  w: 720,
+  h: 1280,
+  altKa: "კერძების და სუშის მომზადების ვიდეო-კოლაჟი (Reels)",
+  altEn: "Food and sushi preparation video reel",
+  isVideo: true,
+};
+
 // Made by scripts/gallery.mjs from photos/<name>/ (see that script). Keyed by "service/slug".
-const GALLERIES: Record<string, GalleryPhoto[]> = { "marketing/food": foodPhotos };
+const GALLERIES: Record<string, GalleryPhoto[]> = { "marketing/food": [foodReel, ...foodPhotos] };
 
 /** One compact row that scrolls sideways; a photo opens full screen. Link here with #photos. */
 function PhotoStrip({ photos, ka }: { photos: GalleryPhoto[]; ka: boolean }) {
@@ -439,7 +450,7 @@ function PhotoStrip({ photos, ka }: { photos: GalleryPhoto[]; ka: boolean }) {
         <div>
           <span className="inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.25em] text-indigo-400">
             <span className="h-px w-8 bg-indigo-500" />
-            {ka ? "ფოტოგადაღება" : "Food Photography"}
+            {ka ? "ფოტო და ვიდეო გადაღება" : "Food Photography & Reels"}
           </span>
           <h2 className="mt-3 text-2xl font-bold tracking-tight text-white md:text-[1.75rem]">
             {ka ? "ფოტო-გალერეა" : "Our Shoots"}
@@ -465,19 +476,38 @@ function PhotoStrip({ photos, ka }: { photos: GalleryPhoto[]; ka: boolean }) {
             key={p.src}
             type="button"
             onClick={() => setOpen(i)}
-            className="group h-55 shrink-0 snap-start overflow-hidden rounded-xl bg-white/5 md:h-75"
+            className="group relative h-55 shrink-0 snap-start overflow-hidden rounded-xl bg-white/5 md:h-75"
             style={{ aspectRatio: `${p.w} / ${p.h}` }}
             aria-label={`${ka ? p.altKa : p.altEn}. ${ka ? "გადიდება" : "Open"}`}
           >
-            <img
-              src={p.srcSm}
-              alt={ka ? p.altKa : p.altEn}
-              width={p.w}
-              height={p.h}
-              loading="lazy"
-              decoding="async"
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-            />
+            {p.isVideo ? (
+              <>
+                <video
+                  src={p.src}
+                  poster={p.srcSm}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                />
+                <span className="pointer-events-none absolute left-2.5 top-2.5 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/60 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-md">
+                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-indigo-400" />
+                  Reels
+                </span>
+              </>
+            ) : (
+              <img
+                src={p.srcSm}
+                alt={ka ? p.altKa : p.altEn}
+                width={p.w}
+                height={p.h}
+                loading="lazy"
+                decoding="async"
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              />
+            )}
           </button>
         ))}
       </div>
@@ -558,18 +588,33 @@ function PhotoViewer({ photos, index, onIndex, onClose, ka }: { photos: GalleryP
         {photos.map((ph, i) => (
           // A tap beside the photo closes; a tap on it doesn't.
           <div key={ph.src} className="flex h-full w-full shrink-0 snap-center snap-always items-center justify-center" onClick={onClose}>
-            <img
-              src={ph.src}
-              alt={ka ? ph.altKa : ph.altEn}
-              width={ph.w}
-              height={ph.h}
-              loading={Math.abs(i - index) <= 1 ? "eager" : "lazy"}
-              decoding="async"
-              // Inline: the site's global `* { max-width: 100% }` beats Tailwind's max-w classes.
-              style={{ maxWidth: "92vw", maxHeight: "84vh" }}
-              className="h-auto w-auto rounded-lg object-contain"
-              onClick={(e) => e.stopPropagation()}
-            />
+            {ph.isVideo ? (
+              <video
+                src={ph.src}
+                poster={ph.srcSm}
+                autoPlay
+                loop
+                muted
+                playsInline
+                controls
+                style={{ maxWidth: "92vw", maxHeight: "84vh" }}
+                className="h-auto w-auto rounded-lg object-contain"
+                onClick={(e) => e.stopPropagation()}
+              />
+            ) : (
+              <img
+                src={ph.src}
+                alt={ka ? ph.altKa : ph.altEn}
+                width={ph.w}
+                height={ph.h}
+                loading={Math.abs(i - index) <= 1 ? "eager" : "lazy"}
+                decoding="async"
+                // Inline: the site's global `* { max-width: 100% }` beats Tailwind's max-w classes.
+                style={{ maxWidth: "92vw", maxHeight: "84vh" }}
+                className="h-auto w-auto rounded-lg object-contain"
+                onClick={(e) => e.stopPropagation()}
+              />
+            )}
           </div>
         ))}
       </div>
