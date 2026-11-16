@@ -33,3 +33,6 @@ dist-ssr
 # Exports with people's data: never in public/ (served) or in git
 private-data/
 *.csv
+
+# Original photos for site galleries (scripts/gallery.mjs makes the web copies)
+photos/

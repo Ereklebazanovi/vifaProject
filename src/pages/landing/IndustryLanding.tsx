@@ -1,8 +1,9 @@
 //IndudsryLanding.tsx
 import { Link, useParams } from "react-router-dom";
-import { CheckCircle2, CreditCard, ArrowRight } from "lucide-react";
+import { CheckCircle2, CreditCard, ArrowRight, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import foodPhotos from "../../data/galleries/food.json";
 import { useLanguage } from "../../contexts/LanguageContext";
 import Breadcrumbs, { type Crumb } from "../../components/Breadcrumbs";
 import SEO from "../../components/SEO";
@@ -399,6 +400,169 @@ function MarketingServiceSection({ data, ka, heroBgImage, breadcrumbs }: { data:
   );
 }
 
+// ─── Photo strip (our own shoots) ──────────────────────────────────────────────
+
+interface GalleryPhoto {
+  src: string;
+  srcSm: string;
+  w: number;
+  h: number;
+  altKa: string;
+  altEn: string;
+}
+
+// Made by scripts/gallery.mjs from photos/<name>/ (see that script). Keyed by "service/slug".
+const GALLERIES: Record<string, GalleryPhoto[]> = { "marketing/food": foodPhotos };
+
+/** One compact row that scrolls sideways; a photo opens full screen. Link here with #photos. */
+function PhotoStrip({ photos, ka }: { photos: GalleryPhoto[]; ka: boolean }) {
+  const [open, setOpen] = useState<number | null>(null);
+  const row = useRef<HTMLDivElement>(null);
+  const section = useRef<HTMLElement>(null);
+
+  // vifadigital.ge/...#photos lands here. Layout scrolls every new page to the top after
+  // its children mount, so wait for that first.
+  useEffect(() => {
+    if (window.location.hash !== "#photos") return;
+    const t = setTimeout(() => section.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 350);
+    return () => clearTimeout(t);
+  }, []);
+
+  const scroll = (dir: 1 | -1) => row.current?.scrollBy({ left: dir * row.current.clientWidth * 0.8, behavior: "smooth" });
+  // The row lines up with the page's content column, then runs to the screen edge.
+  const edge = "max(1.25rem, calc((100vw - 80rem) / 2 + 2rem))";
+  const arrow = "flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white transition-colors hover:bg-white/10";
+
+  return (
+    <section ref={section} id="photos" className="relative scroll-mt-20 bg-[#060608] py-14 md:py-20">
+      <div className="mx-auto mb-6 flex w-[min(100%,80rem)] items-end justify-between gap-4 px-5 sm:px-6 lg:px-8">
+        <div>
+          <span className="inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.25em] text-indigo-400">
+            <span className="h-px w-8 bg-indigo-500" />
+            {ka ? "ფოტოგადაღება" : "Food Photography"}
+          </span>
+          <h2 className="mt-3 text-2xl font-bold tracking-tight text-white md:text-[1.75rem]">
+            {ka ? "ჩვენი გადაღებები" : "Our Shoots"}
+            <span className="ml-3 text-base font-normal text-gray-500">
+              {photos.length} {ka ? "ფოტო" : "photos"}
+            </span>
+          </h2>
+        </div>
+        <div className="hidden gap-2 md:flex">
+          <button type="button" onClick={() => scroll(-1)} className={arrow} aria-label={ka ? "წინა ფოტოები" : "Previous photos"}>
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <button type="button" onClick={() => scroll(1)} className={arrow} aria-label={ka ? "შემდეგი ფოტოები" : "Next photos"}>
+            <ChevronRight className="h-5 w-5" />
+          </button>
+        </div>
+      </div>
+
+      <div
+        ref={row}
+        className="flex snap-x snap-mandatory gap-3 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        style={{ paddingLeft: edge, paddingRight: edge, scrollPaddingLeft: edge }}
+      >
+        {photos.map((p, i) => (
+          <button
+            key={p.src}
+            type="button"
+            onClick={() => setOpen(i)}
+            className="group h-55 shrink-0 snap-start overflow-hidden rounded-xl bg-white/5 md:h-75"
+            style={{ aspectRatio: `${p.w} / ${p.h}` }}
+            aria-label={`${ka ? p.altKa : p.altEn}. ${ka ? "გადიდება" : "Open"}`}
+          >
+            <img
+              src={p.srcSm}
+              alt={ka ? p.altKa : p.altEn}
+              width={p.w}
+              height={p.h}
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            />
+          </button>
+        ))}
+      </div>
+
+      {open !== null && <PhotoViewer photos={photos} index={open} onIndex={setOpen} onClose={() => setOpen(null)} ka={ka} />}
+    </section>
+  );
+}
+
+/** Full-screen view: arrows, keyboard (← → Esc), swipe on phones, a counter. */
+function PhotoViewer({ photos, index, onIndex, onClose, ka }: { photos: GalleryPhoto[]; index: number; onIndex: (i: number) => void; onClose: () => void; ka: boolean }) {
+  const p = photos[index];
+  const n = photos.length;
+  const go = (d: 1 | -1) => onIndex((index + d + n) % n);
+  const touchX = useRef<number | null>(null);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowRight") onIndex((index + 1) % n);
+      if (e.key === "ArrowLeft") onIndex((index - 1 + n) % n);
+    };
+    window.addEventListener("keydown", onKey);
+    // Neighbours load ahead, so the next photo shows at once.
+    for (const j of [index + 1, index - 1]) new Image().src = photos[(j + n) % n].src;
+    return () => window.removeEventListener("keydown", onKey);
+  }, [index, n, photos, onIndex, onClose]);
+
+  useEffect(() => {
+    const before = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = before;
+    };
+  }, []);
+
+  const side = "absolute top-1/2 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 md:flex";
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={ka ? "ფოტოები" : "Photos"}
+      className="fixed inset-0 z-200 flex items-center justify-center bg-black"
+      onClick={onClose}
+      onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
+      onTouchEnd={(e) => {
+        if (touchX.current === null) return;
+        const dx = e.changedTouches[0].clientX - touchX.current;
+        touchX.current = null;
+        if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
+      }}
+    >
+      <img
+        src={p.src}
+        alt={ka ? p.altKa : p.altEn}
+        width={p.w}
+        height={p.h}
+        // Inline: the site's global `* { max-width: 100% }` beats Tailwind's max-w classes.
+        style={{ maxWidth: "92vw", maxHeight: "84vh" }}
+        className="h-auto w-auto rounded-lg object-contain"
+        onClick={(e) => e.stopPropagation()}
+      />
+      <p className="absolute left-5 top-5 text-sm font-medium tabular-nums text-white/70">
+        {index + 1} / {n}
+      </p>
+      <button type="button" onClick={onClose} className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20" aria-label={ka ? "დახურვა" : "Close"}>
+        <X className="h-5 w-5" />
+      </button>
+      <button type="button" onClick={(e) => { e.stopPropagation(); go(-1); }} className={`${side} left-4`} aria-label={ka ? "წინა" : "Previous"}>
+        <ChevronLeft className="h-6 w-6" />
+      </button>
+      <button type="button" onClick={(e) => { e.stopPropagation(); go(1); }} className={`${side} right-4`} aria-label={ka ? "შემდეგი" : "Next"}>
+        <ChevronRight className="h-6 w-6" />
+      </button>
+      <p className="font-georgian-body absolute bottom-5 left-1/2 w-[min(90vw,40rem)] -translate-x-1/2 text-center text-sm text-white/70">
+        {ka ? p.altKa : p.altEn}
+      </p>
+    </div>
+  );
+}
+
 // ─── Organic SEO Content (intro + H2 sections + approach + features) ──────────
 
 function IndustryContent({ config, ka }: { config: IndustryConfig; ka: boolean }) {
@@ -598,6 +762,8 @@ const IndustryLanding = () => {
       ) : (
         <MarketingServiceSection data={config.packages[0]} ka={ka} heroBgImage={config.heroBgImage} breadcrumbs={breadcrumbItems} />
       )}
+
+      {GALLERIES[`${service}/${slug}`] && <PhotoStrip photos={GALLERIES[`${service}/${slug}`]} ka={ka} />}
 
       <IndustryContent config={config} ka={ka} />
 
