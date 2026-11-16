@@ -2,7 +2,7 @@
 import { Link, useParams } from "react-router-dom";
 import { CheckCircle2, CreditCard, ArrowRight, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { motion, useInView } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import foodPhotos from "../../data/galleries/food.json";
 import { useLanguage } from "../../contexts/LanguageContext";
 import Breadcrumbs, { type Crumb } from "../../components/Breadcrumbs";
@@ -487,24 +487,55 @@ function PhotoStrip({ photos, ka }: { photos: GalleryPhoto[]; ka: boolean }) {
   );
 }
 
-/** Full-screen view: arrows, keyboard (← → Esc), swipe on phones, a counter. */
+/**
+ * Full-screen view. The photos sit in one row that the browser itself scrolls, one photo per
+ * snap, so a swipe is native and smooth; arrows and ← → move the same row. While the page is
+ * pinch-zoomed the row stops scrolling, so looking closer never jumps to another photo.
+ */
 function PhotoViewer({ photos, index, onIndex, onClose, ka }: { photos: GalleryPhoto[]; index: number; onIndex: (i: number) => void; onClose: () => void; ka: boolean }) {
   const p = photos[index];
   const n = photos.length;
-  const go = (d: 1 | -1) => onIndex((index + d + n) % n);
-  const touchX = useRef<number | null>(null);
+  const track = useRef<HTMLDivElement>(null);
+  const [zoomed, setZoomed] = useState(false);
+
+  // Open on the photo that was tapped, with no animation (only on open, not on every index change).
+  const openedAt = useRef(index);
+  useLayoutEffect(() => {
+    const el = track.current;
+    if (el) el.scrollLeft = openedAt.current * el.clientWidth;
+  }, []);
+
+  const goTo = (i: number) => {
+    const el = track.current;
+    if (el && i >= 0 && i < n) el.scrollTo({ left: i * el.clientWidth, behavior: "smooth" });
+  };
+
+  // The counter and the caption follow the row.
+  const onScroll = () => {
+    const el = track.current;
+    if (!el) return;
+    const i = Math.min(n - 1, Math.max(0, Math.round(el.scrollLeft / el.clientWidth)));
+    if (i !== index) onIndex(i);
+  };
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
-      if (e.key === "ArrowRight") onIndex((index + 1) % n);
-      if (e.key === "ArrowLeft") onIndex((index - 1 + n) % n);
+      if (e.key === "ArrowRight") goTo(index + 1);
+      if (e.key === "ArrowLeft") goTo(index - 1);
     };
     window.addEventListener("keydown", onKey);
-    // Neighbours load ahead, so the next photo shows at once.
-    for (const j of [index + 1, index - 1]) new Image().src = photos[(j + n) % n].src;
     return () => window.removeEventListener("keydown", onKey);
-  }, [index, n, photos, onIndex, onClose]);
+  });
+
+  // The browser's own pinch zoom: freeze the row while zoomed in.
+  useEffect(() => {
+    const vv = window.visualViewport;
+    if (!vv) return;
+    const check = () => setZoomed(vv.scale > 1.01);
+    vv.addEventListener("resize", check);
+    return () => vv.removeEventListener("resize", check);
+  }, []);
 
   useEffect(() => {
     const before = document.body.style.overflow;
@@ -517,43 +548,48 @@ function PhotoViewer({ photos, index, onIndex, onClose, ka }: { photos: GalleryP
   const side = "absolute top-1/2 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 md:flex";
 
   return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-label={ka ? "ფოტოები" : "Photos"}
-      className="fixed inset-0 z-200 flex items-center justify-center bg-black"
-      onClick={onClose}
-      onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
-      onTouchEnd={(e) => {
-        if (touchX.current === null) return;
-        const dx = e.changedTouches[0].clientX - touchX.current;
-        touchX.current = null;
-        if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
-      }}
-    >
-      <img
-        src={p.src}
-        alt={ka ? p.altKa : p.altEn}
-        width={p.w}
-        height={p.h}
-        // Inline: the site's global `* { max-width: 100% }` beats Tailwind's max-w classes.
-        style={{ maxWidth: "92vw", maxHeight: "84vh" }}
-        className="h-auto w-auto rounded-lg object-contain"
-        onClick={(e) => e.stopPropagation()}
-      />
+    <div role="dialog" aria-modal="true" aria-label={ka ? "ფოტოები" : "Photos"} className="fixed inset-0 z-200 bg-black">
+      <div
+        ref={track}
+        onScroll={onScroll}
+        className="flex h-full snap-x snap-mandatory overscroll-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        style={{ overflowX: zoomed ? "hidden" : "auto" }}
+      >
+        {photos.map((ph, i) => (
+          // A tap beside the photo closes; a tap on it doesn't.
+          <div key={ph.src} className="flex h-full w-full shrink-0 snap-center snap-always items-center justify-center" onClick={onClose}>
+            <img
+              src={ph.src}
+              alt={ka ? ph.altKa : ph.altEn}
+              width={ph.w}
+              height={ph.h}
+              loading={Math.abs(i - index) <= 1 ? "eager" : "lazy"}
+              decoding="async"
+              // Inline: the site's global `* { max-width: 100% }` beats Tailwind's max-w classes.
+              style={{ maxWidth: "92vw", maxHeight: "84vh" }}
+              className="h-auto w-auto rounded-lg object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+        ))}
+      </div>
       <p className="absolute left-5 top-5 text-sm font-medium tabular-nums text-white/70">
         {index + 1} / {n}
       </p>
       <button type="button" onClick={onClose} className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20" aria-label={ka ? "დახურვა" : "Close"}>
         <X className="h-5 w-5" />
       </button>
-      <button type="button" onClick={(e) => { e.stopPropagation(); go(-1); }} className={`${side} left-4`} aria-label={ka ? "წინა" : "Previous"}>
-        <ChevronLeft className="h-6 w-6" />
-      </button>
-      <button type="button" onClick={(e) => { e.stopPropagation(); go(1); }} className={`${side} right-4`} aria-label={ka ? "შემდეგი" : "Next"}>
-        <ChevronRight className="h-6 w-6" />
-      </button>
-      <p className="font-georgian-body absolute bottom-5 left-1/2 w-[min(90vw,40rem)] -translate-x-1/2 text-center text-sm text-white/70">
+      {index > 0 && (
+        <button type="button" onClick={() => goTo(index - 1)} className={`${side} left-4`} aria-label={ka ? "წინა" : "Previous"}>
+          <ChevronLeft className="h-6 w-6" />
+        </button>
+      )}
+      {index < n - 1 && (
+        <button type="button" onClick={() => goTo(index + 1)} className={`${side} right-4`} aria-label={ka ? "შემდეგი" : "Next"}>
+          <ChevronRight className="h-6 w-6" />
+        </button>
+      )}
+      <p className="font-georgian-body pointer-events-none absolute bottom-5 left-1/2 w-[min(90vw,40rem)] -translate-x-1/2 text-center text-sm text-white/70">
         {ka ? p.altKa : p.altEn}
       </p>
     </div>
