@@ -31,11 +31,14 @@ const PipelinePage = lazy(() => import("./admin/pipeline/PipelinePage"));
 const SourcesPage = lazy(() => import("./admin/sources/SourcesPage"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
+const ITHubPreview = lazy(() => import("./pages/preview/ITHubPreview"));
+const TypeSpecimen = lazy(() => import("./pages/preview/TypeSpecimen"));
 
-// The admin is entered directly by URL, never via in-app navigation, so the
-// initial path is enough to keep its visits out of GA and the Meta Pixel.
+// The admin and the design previews (/preview/*) are entered directly by URL,
+// never via in-app navigation, so the initial path is enough to keep their
+// visits out of GA and the Meta Pixel.
 const isStudio =
-  typeof window !== "undefined" && window.location.pathname.startsWith("/studio");
+  typeof window !== "undefined" && /^\/(studio|preview)(\/|$)/.test(window.location.pathname);
 
 const App = () => {
   return (
@@ -103,6 +106,24 @@ const App = () => {
                   <Route path="send" element={<Navigate to="/studio/campaigns" replace />} />
                   <Route path="blog" element={<BlogEditor />} />
                 </Route>
+
+                <Route
+                  path="/preview/it"
+                  element={
+                    <Suspense fallback={<div className="min-h-screen bg-[#f5f5f7]" />}>
+                      <ITHubPreview />
+                    </Suspense>
+                  }
+                />
+
+                <Route
+                  path="/preview/type"
+                  element={
+                    <Suspense fallback={<div className="min-h-screen bg-[#f5f5f7]" />}>
+                      <TypeSpecimen />
+                    </Suspense>
+                  }
+                />
 
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>

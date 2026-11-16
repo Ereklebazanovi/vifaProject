@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@fontsource-variable/google-sans": "^5.3.2",
     "@fontsource/firago": "^5.2.5",
     "@fontsource/inter": "^5.2.8",
     "@fontsource/noto-sans-georgian": "^5.2.8",
