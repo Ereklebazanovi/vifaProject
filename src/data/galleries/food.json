@@ -70,5 +70,59 @@
     "h": 1024,
     "altKa": "მიდიები კრემისებურ სოუსში, მოზაიკურ თეფშზე",
     "altEn": "Mussels in a creamy sauce on a mosaic plate"
+  },
+  {
+    "file": "09-151515155.png",
+    "src": "/gallery/food/09.webp",
+    "srcSm": "/gallery/food/09-sm.webp",
+    "w": 941,
+    "h": 1672,
+    "altKa": "შავ ხიზილალაში ამოვლებული სუშის როლები კრემ-ყველითა და სოუსით, თეთრ თეფშზე",
+    "altEn": "Sushi rolls coated in black tobiko topped with cream cheese, roe, and sauce on a white platter"
+  },
+  {
+    "file": "10-5151515.png",
+    "src": "/gallery/food/10.webp",
+    "srcSm": "/gallery/food/10-sm.webp",
+    "w": 1254,
+    "h": 1254,
+    "altKa": "ზღვის პროდუქტების პასტა კრევეტებით, მიდიებითა და ლიმნით, მოზაიკურ თეფშზე",
+    "altEn": "Creamy seafood pasta with shrimp, mussels, and lemon on a mosaic plate"
+  },
+  {
+    "file": "11-515151515.png",
+    "src": "/gallery/food/11.webp",
+    "srcSm": "/gallery/food/11-sm.webp",
+    "w": 941,
+    "h": 1672,
+    "altKa": "ორაგულის სუშის როლები წითელი ხიზილალითა და სოუსით, შავ დაფაზე",
+    "altEn": "Salmon sushi rolls topped with red caviar and drizzled with unagi sauce on a dark slate board"
+  },
+  {
+    "file": "12-61616161.png",
+    "src": "/gallery/food/12.webp",
+    "srcSm": "/gallery/food/12-sm.webp",
+    "w": 992,
+    "h": 1586,
+    "altKa": "შავ ხიზილალიან სუშის როლებზე უნაგის სოუსის მოსხმა ახლოდან",
+    "altEn": "Close-up of unagi sauce being drizzled onto black tobiko sushi rolls with cream cheese"
+  },
+  {
+    "file": "13-645454.png",
+    "src": "/gallery/food/13.webp",
+    "srcSm": "/gallery/food/13-sm.webp",
+    "w": 1240,
+    "h": 1268,
+    "altKa": "შემწვარი ორაგულის სუშის როლები წითელი ხიზილალით, ჯანჯაფილითა და ვასაბით შავ დაფაზე",
+    "altEn": "Seared salmon sushi rolls topped with red caviar, pickled ginger, and wasabi on a black slate plate"
+  },
+  {
+    "file": "14-88888.png",
+    "src": "/gallery/food/14.webp",
+    "srcSm": "/gallery/food/14-sm.webp",
+    "w": 1254,
+    "h": 1254,
+    "altKa": "სეზამში ამოვლებული სუშის როლები ორაგულითა და წითელი ხიზილალით, შავ დაფაზე",
+    "altEn": "Sesame-crusted salmon sushi rolls topped with red caviar on a black slate plate"
   }
 ]
