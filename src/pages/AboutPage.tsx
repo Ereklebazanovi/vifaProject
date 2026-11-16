@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import {
   FaBullseye,
@@ -97,6 +97,7 @@ const AboutPage: React.FC = () => {
   const { currentLanguage } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
   const shortsRowRef = useRef<HTMLDivElement>(null);
+  const [shorts, setShorts] = useState<string[]>(YOUTUBE_SHORTS);
 
   const scrollShorts = (dir: 1 | -1) => {
     shortsRowRef.current?.scrollBy({
@@ -112,6 +113,14 @@ const AboutPage: React.FC = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    fetch("/api/shorts")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data: { ids?: string[] } | null) => {
+        if (Array.isArray(data?.ids) && data.ids.length > 0) {
+          setShorts(data.ids);
+        }
+      })
+      .catch(() => {});
   }, []);
 
   const whyVifaFeatures = [
@@ -269,7 +278,7 @@ const AboutPage: React.FC = () => {
               >
                 <style dangerouslySetInnerHTML={{ __html: `.scrollbar-hide::-webkit-scrollbar { display: none; }` }} />
 
-                {YOUTUBE_SHORTS.map((videoId, idx) => (
+                {shorts.map((videoId, idx) => (
                   <div
                     key={videoId}
                     className="snap-center flex-shrink-0 w-[280px] h-[500px] bg-[#0A0A0C] border border-white/[0.05] rounded-2xl overflow-hidden relative"
