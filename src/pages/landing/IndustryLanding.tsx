@@ -443,9 +443,6 @@ function PhotoStrip({ photos, ka }: { photos: GalleryPhoto[]; ka: boolean }) {
           </span>
           <h2 className="mt-3 text-2xl font-bold tracking-tight text-white md:text-[1.75rem]">
             {ka ? "ფოტო-გალერეა" : "Our Shoots"}
-            <span className="ml-3 text-base font-normal text-gray-500">
-              {photos.length} {ka ? "ფოტო" : "photos"}
-            </span>
           </h2>
         </div>
         <div className="hidden gap-2 md:flex">
