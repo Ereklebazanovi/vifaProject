@@ -1,38 +1,52 @@
 import "@fontsource-variable/google-sans";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { BrowserWindowObject, ChatbotPhoneObject, LaptopObject, LineupPhoneObject } from "./ProductDevices";
-import { FamilyShot, CommerceFlow } from "./HubSections";
+import { HowWeStart } from "./HowWeStart";
+import { HubQuestions } from "./HubQuestions";
+import { hubFaqSchema } from "./hubFaqData";
 import "./hubSections.css";
 import { productColors } from "./productColors";
 import { useProductScene } from "./useProductScene";
 import type { ProductScene } from "./useProductScene";
+import { useServiceRotation } from "./useServiceRotation";
 
 const COLORS = {
+  // Apple's gray, with Apple's soft sky-blue fade at the top of the page (sampled from
+  // apple.com/store). A flat warm band was tried and rejected as "poured in Paint".
   page: "#f5f5f7",
+  band: "#d8f0fd",
   surface: "#ffffff",
   text: "#1d1d1f",
   text2: "#6e6e73",
   hairline: "#d2d2d7",
-  link: "#0066cc",
+  link: "#0071e3",
   button: "#0071e3",
   buttonHover: "#0077ed",
   cards: productColors,
 } as const;
 
 const CONTACT_NAME = "ერეკლე";
-const HERO_TITLE = "საიტიდან საწყობამდე, ერთი გუნდი.";
+const HERO_TITLE = "ოთხი მიმართულება, ერთი გუნდი.";
+// One soft color wash, fixed to the top of the screen so it stays with the visitor while
+// scrolling, slowly moving through these tones every WASH_STEP_MS.
+const WASH_PALETTE = ["#d8f0fd", "#fbe2ec", "#e9e3fb", "#dcf2e7"] as const;
+const WASH_STEP_MS = 8000;
 
-const industries = [
-  { title: "რესტორნები და კვება", body: "საიტი ციფრული მენიუთი და ჯავშნით.", photo: "/gallery/food/12.webp", to: "/industry/web/food" },
-  { title: "სასტუმროები და ტურიზმი", body: "საიტი პირდაპირი ჯავშნებისთვის.", photo: "/hotelphoto.webp", to: "/industry/web/tourism" },
-  { title: "ონლაინ მაღაზია და ვაჭრობა", body: "ონლაინ მაღაზია ბანკით გადახდით.", photo: "/eccomerce.webp", to: "/industry/web/retail" },
-  { title: "სილამაზე და ესთეტიკა", body: "საიტი ონლაინ ჩაწერით.", photo: "/saloni.webp", to: "/industry/web/beauty" },
-  { title: "იურიდიული და საფინანსო", body: "იურიდიული და ბუღალტრული კომპანიის საიტი.", photo: "/practice-hero.webp", to: "/industry/web/legal-finance" },
+// The text wordmark the owner chose (of four compared): the company name in two weights.
+function Wordmark() {
+  return <span className="it-wordmark"><span>VIFA</span><span className="it-wordmark-light">Digital</span></span>;
+}
+
+const INDUSTRY_LINKS = [
+  ["რესტორნები", "food"], ["სასტუმროები", "tourism"], ["მაღაზიები", "retail"],
+  ["სალონები", "beauty"], ["იურიდიული კომპანიები", "legal-finance"],
 ] as const;
+const CONSULTATION_URL = "https://wa.me/995557624243?text=" + encodeURIComponent("გამარჯობა, მინდა უფასო კონსულტაცია.");
+
 const contactPhotos = import.meta.glob("/public/preview/contact.{jpg,png,webp}", {
   eager: true,
   query: "?url",
@@ -44,143 +58,72 @@ const WHATSAPP_URL =
   "https://wa.me/995557624243?text=" +
   encodeURIComponent("გამარჯობა, IT სერვისებით დავინტერესდი.");
 
-function CardShelf({
-  lead,
-  leadColor,
-  rest,
-  children,
-  className = "",
-  id,
-}: {
-  lead: string;
-  leadColor: string;
-  rest: string;
-  children: ReactNode;
-  className?: string;
-  id?: string;
-}) {
-  const scrollerRef = useRef<HTMLDivElement | null>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
-
-  const updateScrollState = useCallback(() => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    setCanScrollLeft(el.scrollLeft > 4);
-    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
-  }, []);
-
-  useEffect(() => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    updateScrollState();
-    el.addEventListener("scroll", updateScrollState, { passive: true });
-    window.addEventListener("resize", updateScrollState);
-    return () => {
-      el.removeEventListener("scroll", updateScrollState);
-      window.removeEventListener("resize", updateScrollState);
-    };
-  }, [updateScrollState]);
-
-  const scrollByDirection = (direction: -1 | 1) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const reducedMotion =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const amount = Math.max(320, Math.round(el.clientWidth * 0.75)) * direction;
-    el.scrollBy({
-      left: amount,
-      behavior: reducedMotion ? "auto" : "smooth",
-    });
-  };
-
+function ServicesSection({ children }: { children: (rotation: ReturnType<typeof useServiceRotation>) => ReactNode }) {
+  const rotation = useServiceRotation();
   return (
-    <section id={id} className={`it-section ${className}`}>
-      <div className="it-col">
-        <h2 className="it-h2">
-          <span style={{ color: leadColor }}>{lead}</span>{" "}
-          <span className="it-tone-2">{rest}</span>
-        </h2>
-      </div>
-
-      <div className="it-shelf-wrap">
-        <div ref={scrollerRef} className="it-shelf-scroller">
-          {children}
-        </div>
-
-        <button
-          type="button"
-          aria-label="წინა"
-          onClick={() => scrollByDirection(-1)}
-          disabled={!canScrollLeft}
-          className={`it-shelf-arrow it-shelf-arrow-left ${
-            canScrollLeft ? "it-arrow-active" : "it-arrow-hidden"
-          }`}
-        >
-          <ChevronLeft size={20} strokeWidth={2.2} color="rgba(0,0,0,0.56)" />
-        </button>
-
-        <button
-          type="button"
-          aria-label="შემდეგი"
-          onClick={() => scrollByDirection(1)}
-          disabled={!canScrollRight}
-          className={`it-shelf-arrow it-shelf-arrow-right ${
-            canScrollRight ? "it-arrow-active" : "it-arrow-hidden"
-          }`}
-        >
-          <ChevronRight size={20} strokeWidth={2.2} color="rgba(0,0,0,0.56)" />
-        </button>
-      </div>
+    <section id="directions" className="it-section it-directions it-col">
+      <header className="it-directions-intro">
+        <h1 className="it-h1"><span className="it-h1-dark">IT.</span>{" "}<span className="it-h1-gray">{HERO_TITLE}</span></h1>
+      </header>
+      <div id="services" ref={rotation.gridRef} className="it-service-grid" data-active-product={rotation.activeProduct ?? "none"}
+        data-turn={rotation.turn} data-visible={rotation.visible}>{children(rotation)}</div>
+      {/* The industry pages are "a website for X": one quiet row of links instead of a whole section. */}
+      <p className="it-industry-row">
+        <span>საიტი თქვენი დარგისთვის:</span>{" "}
+        {INDUSTRY_LINKS.map(([name, slug], index) => <span key={slug}>
+          {index > 0 && <span className="it-industry-row-dot" aria-hidden="true"> · </span>}
+          <Link to={`/industry/web/${slug}`}>{name}</Link>
+        </span>)}
+      </p>
     </section>
   );
 }
-
 interface ColoredServiceCardProps {
   product: ProductScene;
+  active: boolean;
+  turn: number;
+  onDone: () => void;
+  onActivate: () => void;
   to: string;
   eyebrow: string;
   title: string;
   body: string;
   facts?: string;
-  topColor: string;
-  bandColor: string;
-  bandHeight: string;
-  children: (step: number, reducedMotion: boolean) => ReactNode;
+  children: (step: number, reducedMotion: boolean, exiting: boolean) => ReactNode;
 }
 
 function ColoredServiceCard({
   product,
+  active,
+  turn,
+  onDone,
+  onActivate,
   to,
   eyebrow,
   title,
   body,
   facts,
-  topColor,
-  bandColor,
-  bandHeight,
   children,
 }: ColoredServiceCardProps) {
-  const scene = useProductScene(product);
+  const scene = useProductScene(product, { active, activation: active ? turn : 0, onDone, loop: false });
+  const palette = COLORS.cards[product];
   return (
     <Link
       ref={scene.cardRef}
       to={to}
       className="it-card"
+      style={{ background: palette.soft }}
       data-product={product}
+      data-active={active}
       data-scene-step={scene.step}
       data-entered={scene.entered}
       data-reduced-motion={scene.reducedMotion}
-      onPointerEnter={scene.replay}
-      style={{ backgroundColor: topColor }}
+      data-exiting={scene.exiting}
+      data-loop-cycle={scene.cycle}
+      onPointerEnter={() => {
+        if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) onActivate();
+      }}
     >
-      <div
-        className="it-card-band"
-        style={{ backgroundColor: bandColor, height: bandHeight }}
-        aria-hidden="true"
-      />
-
       <div className="it-card-top">
         <p className="it-card-eyebrow">{eyebrow}</p>
         <h3 className="it-card-title">{title}</h3>
@@ -191,29 +134,55 @@ function ColoredServiceCard({
       <div className="it-device-stage">
         <div className="it-device-entrance">
           <div className="it-device-lift">
-            {children(scene.step, scene.reducedMotion)}
+            {children(scene.step, scene.reducedMotion, scene.exiting)}
           </div>
         </div>
       </div>
 
       <span className="it-card-arrow" aria-hidden="true">
-        <ChevronRight size={18} strokeWidth={2.2} color={COLORS.text} />
+        <ArrowUpRight size={18} strokeWidth={2.2} color="#1d1d1f" />
       </span>
     </Link>
   );
 }
 
 export default function ITHubPreview() {
+  // The nav is transparent over the color wash at the top and turns frosted once the page scrolls.
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const update = () => setScrolled(window.scrollY > 8);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, []);
+
+  // Rotate the washes. The registered custom properties transition in CSS, so the
+  // page repaints only during each 2.4s blend, not continuously.
+  const rootRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let step = 0;
+    const timer = window.setInterval(() => {
+      step = (step + 1) % WASH_PALETTE.length;
+      root.style.setProperty("--it-wash", WASH_PALETTE[step]);
+    }, WASH_STEP_MS);
+    return () => window.clearInterval(timer);
+  }, []);
+
   return (
-    <div className="it-preview">
+    <div className="it-preview" ref={rootRef}>
+      <div className="it-wash" aria-hidden="true" />
       <Helmet>
         <title>IT | VIFA (preview)</title>
         <meta name="robots" content="noindex,nofollow" />
+        <script type="application/ld+json">{JSON.stringify(hubFaqSchema)}</script>
       </Helmet>
 
       <style>{`
         :root {
           --it-page: ${COLORS.page};
+          --it-band: ${COLORS.band};
           --it-surface: ${COLORS.surface};
           --it-text: ${COLORS.text};
           --it-text-2: ${COLORS.text2};
@@ -252,6 +221,23 @@ export default function ITHubPreview() {
           background-color: var(--it-page);
           color: var(--it-text);
           overflow-x: clip;
+          transition: --it-wash 2400ms ease-in-out;
+        }
+
+        /* The wash: fixed to the top of the screen, a soft color fading into the page gray
+           (as on apple.com/store), so it stays in view while scrolling. */
+        .it-wash {
+          position: fixed;
+          inset: 0;
+          z-index: 0;
+          pointer-events: none;
+          background: linear-gradient(180deg, var(--it-wash) 0px, var(--it-wash) 110px, transparent 52vh);
+        }
+
+        .it-main,
+        .it-preview .it-footer {
+          position: relative;
+          z-index: 1;
         }
 
         .it-preview a,
@@ -274,11 +260,70 @@ export default function ITHubPreview() {
           position: sticky;
           top: 0;
           z-index: 40;
-          height: 48px;
-          background: rgba(255, 255, 255, 0.8);
+          height: 56px;
+          background: transparent;
+          border-bottom: 1px solid transparent;
+          transition: background-color 300ms ease, border-color 300ms ease;
+        }
+
+        .it-nav[data-scrolled="true"] {
+          /* Light enough that the fixed color wash shows through the frosted bar. */
+          background: rgba(255, 255, 255, 0.55);
           -webkit-backdrop-filter: saturate(180%) blur(20px);
           backdrop-filter: saturate(180%) blur(20px);
-          border-bottom: 1px solid var(--it-hairline);
+          border-bottom-color: rgba(0, 0, 0, 0.08);
+        }
+
+        .it-wordmark {
+          display: inline-flex;
+          align-items: baseline;
+          gap: 5px;
+          color: var(--it-text);
+          font-size: 19px;
+          font-weight: 700;
+          letter-spacing: 0.01em;
+          line-height: 1;
+          white-space: nowrap;
+        }
+
+        .it-wordmark-light {
+          font-weight: 400;
+          color: var(--it-text-2);
+        }
+
+        .it-nav-end {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+        }
+
+        /* Two classes so this wins over .it-nav-link's display, which is declared later. */
+        .it-nav-link.it-nav-contact {
+          display: none;
+        }
+
+        @media (min-width: 768px) {
+          .it-nav-link.it-nav-contact {
+            display: inline-flex;
+          }
+        }
+
+        .it-nav-cta {
+          display: inline-flex;
+          align-items: center;
+          height: 34px;
+          padding: 0 16px;
+          border-radius: 999px;
+          background: var(--it-button);
+          color: #ffffff;
+          font-size: 13px;
+          font-weight: 500;
+          line-height: 1;
+          transition: background-color 200ms ease;
+        }
+
+        .it-nav-cta:hover {
+          background: var(--it-button-hover);
         }
 
         .it-nav-inner {
@@ -289,16 +334,17 @@ export default function ITHubPreview() {
         }
 
         .it-nav-brand {
-          font-size: 17px;
-          font-weight: 600;
+          font-size: 19px;
+          font-weight: 700;
           line-height: 1.4;
+          letter-spacing: 0.02em;
           color: var(--it-text);
         }
 
         .it-nav-center {
           display: none;
           align-items: center;
-          gap: 28px;
+          gap: 4px;
         }
 
         @media (min-width: 768px) {
@@ -308,59 +354,27 @@ export default function ITHubPreview() {
         }
 
         .it-nav-link {
-          font-size: 13px;
+          display: inline-flex;
+          align-items: center;
+          height: 34px;
+          padding: 0 14px;
+          border-radius: 999px;
+          font-size: 14px;
           font-weight: 400;
-          line-height: 1.4;
-          color: var(--it-text);
-          opacity: 0.8;
-          transition: opacity 150ms ease;
+          line-height: 1;
+          color: #424245;
+          transition: background-color 200ms ease, color 200ms ease;
         }
 
         .it-nav-link:hover {
-          opacity: 1;
+          color: var(--it-text);
+          background: rgba(0, 0, 0, 0.05);
         }
 
         .it-nav-link-current {
-          opacity: 1;
-        }
-
-        /* Main spacing */
-        .it-main {
-          padding-top: 40px;
-          padding-bottom: 48px;
-        }
-
-        @media (min-width: 768px) {
-          .it-main {
-            padding-top: 64px;
-            padding-bottom: 64px;
-          }
-        }
-
-        .it-section {
-          margin-top: 48px;
-        }
-
-        @media (min-width: 768px) {
-          .it-section {
-            margin-top: 64px;
-          }
-        }
-
-        /* Header */
-        .it-header {
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
-        }
-
-        @media (min-width: 768px) {
-          .it-header {
-            flex-direction: row;
-            align-items: flex-end;
-            justify-content: space-between;
-            gap: 32px;
-          }
+          color: var(--it-text);
+          font-weight: 600;
+          background: rgba(0, 0, 0, 0.06);
         }
 
         .it-h1 {
@@ -409,111 +423,42 @@ export default function ITHubPreview() {
           color: var(--it-text-2);
         }
 
-        .it-help-block {
-          font-size: 14px;
-          line-height: 1.45;
-          display: flex;
-          flex-direction: column;
-          gap: 4px;
-          flex-shrink: 0;
-        }
-
-        .it-help-title {
-          font-weight: 600;
-          color: var(--it-text);
-        }
-
-        .it-text-link {
-          color: var(--it-link);
-          font-weight: 400;
-        }
-
-        .it-text-link:hover {
-          text-decoration: underline;
-        }
-
-        /* Horizontal card shelves */
-        .it-shelf-wrap {
-          position: relative;
-        }
-
-        .it-shelf-scroller {
-          display: flex;
-          gap: 16px;
-          overflow-x: auto;
-          scroll-snap-type: x mandatory;
-          scroll-behavior: smooth;
-          padding-inline: max(22px, calc((100vw - 980px) / 2));
-          scroll-padding-inline: max(22px, calc((100vw - 980px) / 2));
-          padding-top: 8px;
-          padding-bottom: 16px;
-          margin-bottom: -8px;
-          scrollbar-width: none;
-          -ms-overflow-style: none;
-        }
-
-        .it-shelf-scroller::-webkit-scrollbar {
-          display: none;
-        }
-
-        @media (min-width: 768px) {
-          .it-shelf-scroller {
-            gap: 20px;
-          }
-        }
-
-        /* Colored two-tone cards */
+        /* Pastel service cards */
         .it-card {
           position: relative;
-          scroll-snap-align: start;
-          flex-shrink: 0;
-          width: min(85vw, 340px);
-          aspect-ratio: 4 / 5;
-          border-radius: 24px;
-          overflow: hidden;
+          min-width: 0;
+          height: 500px;
+          width: 100%;
+          padding: 24px 24px 0;
+          border-radius: 28px;
+          overflow: clip;
           color: var(--it-text);
+          transition: transform 450ms var(--it-enter-ease);
           display: flex;
           flex-direction: column;
-          transition: transform 300ms cubic-bezier(0, 0, 0.5, 1);
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 900px) {
           .it-card {
-            width: 400px;
-            height: 500px;
-            aspect-ratio: auto;
+            height: 560px;
+            padding: 28px 28px 0;
           }
         }
 
         @media (hover: hover) and (pointer: fine) {
           .it-card:hover {
-            transform: scale(1.01);
+            transform: scale(1.015);
           }
           .it-card:hover .it-device-lift {
-            transform: translateY(-6px);
+            transform: translateY(-8px);
           }
-        }
-
-        .it-card-band {
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          z-index: 1;
-          pointer-events: none;
         }
 
         .it-card-top {
           position: relative;
           z-index: 3;
           flex-shrink: 0;
-          padding: 24px 24px 0 24px;
-        }
-
-        @media (min-width: 768px) {
-          .it-card-top {
-            padding: 32px 28px 0 28px;
-          }
+          padding-bottom: 24px;
         }
 
         .it-card-eyebrow {
@@ -521,7 +466,7 @@ export default function ITHubPreview() {
           font-weight: 600;
           line-height: 1.33;
           letter-spacing: 0;
-          color: var(--it-text);
+          color: rgba(29,29,31,0.7);
           margin: 0;
         }
 
@@ -530,11 +475,11 @@ export default function ITHubPreview() {
           font-weight: 600;
           line-height: 1.2;
           letter-spacing: 0;
-          color: var(--it-text);
+          color: #1d1d1f;
           margin: 8px 0 0 0;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 900px) {
           .it-card-title {
             font-size: 28px;
           }
@@ -545,11 +490,11 @@ export default function ITHubPreview() {
           font-weight: 400;
           line-height: 1.47;
           letter-spacing: 0;
-          color: var(--it-text);
+          color: #1d1d1f;
           margin: 12px 0 0 0;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 900px) {
           .it-card-body {
             font-size: 17px;
           }
@@ -563,7 +508,7 @@ export default function ITHubPreview() {
           width: 36px;
           height: 36px;
           border-radius: 9999px;
-          background: rgba(255, 255, 255, 0.9);
+          background: rgba(255,255,255,0.9);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -574,17 +519,21 @@ export default function ITHubPreview() {
           font-size: 14px;
           font-weight: 500;
           line-height: 1.4;
-          color: rgba(29, 29, 31, 0.72);
+          color: rgba(29,29,31,0.7);
           margin: 10px 0 0;
         }
 
         .it-device-stage {
           position: relative;
           z-index: 2;
-          flex: 1;
-          min-height: 0;
-          margin-top: 22px;
+          flex-shrink: 0;
+          height: 280px;
+          margin: auto -24px 0;
           container-type: size;
+        }
+
+        @media (min-width: 900px) {
+          .it-device-stage { height: 300px; margin-inline: -28px; }
         }
 
         .it-device-entrance,
@@ -595,7 +544,7 @@ export default function ITHubPreview() {
 
         .it-device-entrance {
           transform: translateY(28px);
-          transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
+          transition: transform 600ms var(--it-enter-ease);
         }
 
         .it-card[data-entered="true"] .it-device-entrance {
@@ -603,7 +552,7 @@ export default function ITHubPreview() {
         }
 
         .it-device-lift {
-          transition: transform 300ms ease;
+          transition: transform 450ms var(--it-enter-ease);
         }
 
         /* 1. Browser Window Object (Website card) */
@@ -752,20 +701,18 @@ export default function ITHubPreview() {
         }
 
         .it-light-chat-messages {
+          position: relative;
           height: calc(100cqh / var(--it-phone-scale) - 122px);
           min-height: 100px;
           flex-shrink: 0;
-          overflow-y: auto;
+          overflow: hidden;
           scrollbar-width: none;
           padding: 12px 14px;
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
+          display: block;
         }
 
         .it-light-bubble {
           flex-shrink: 0;
-          animation: it-bubble-enter 240ms ease both;
           font-size: 15px;
           font-weight: 400;
           line-height: 1.32;
@@ -846,54 +793,9 @@ export default function ITHubPreview() {
           border-radius: 0 0 4px 4px;
         }
 
-        /* Shelf arrow buttons (desktop only) */
-        .it-shelf-arrow {
-          display: none;
-        }
-
-        @media (min-width: 768px) {
-          .it-shelf-arrow {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 36px;
-            height: 36px;
-            border-radius: 9999px;
-            border: none;
-            background: rgba(210, 210, 215, 0.64);
-            cursor: pointer;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 200ms ease;
-            z-index: 10;
-          }
-
-          .it-shelf-arrow-left {
-            left: 18px;
-          }
-
-          .it-shelf-arrow-right {
-            right: 18px;
-          }
-
-          .it-shelf-wrap:hover .it-shelf-arrow.it-arrow-active,
-          .it-shelf-arrow.it-arrow-active:focus-visible {
-            opacity: 1;
-            pointer-events: auto;
-          }
-
-          .it-shelf-arrow.it-arrow-hidden {
-            opacity: 0 !important;
-            pointer-events: none !important;
-          }
-        }
-
         /* Contact section */
         .it-contact-card {
-          background: var(--it-surface);
+          background: #ffffff;
           border-radius: 24px;
           padding: 32px;
           display: flex;
@@ -986,12 +888,28 @@ export default function ITHubPreview() {
           font-size: 12px;
           line-height: 1.4;
           color: var(--it-text-2);
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          gap: 8px 24px;
+        }
+
+        .it-footer-links {
+          display: flex;
+          gap: 20px;
+        }
+
+        .it-footer-links a {
+          color: var(--it-text-2);
+          text-decoration: none;
+        }
+
+        .it-footer-links a:hover {
+          color: var(--it-text);
+          text-decoration: underline;
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .it-shelf-scroller {
-            scroll-behavior: auto;
-          }
           .it-card {
             transition: none;
           }
@@ -1025,7 +943,6 @@ export default function ITHubPreview() {
           color: #1d1d1f;
           font-size: 13px;
           line-height: 1.4;
-          animation: it-notification-enter 300ms ease both;
         }
         .it-scene-notification strong { font-weight: 600; }
         .it-scene-notification p { margin: 4px 0 0; }
@@ -1043,24 +960,23 @@ export default function ITHubPreview() {
         .it-notification-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
         .it-notification-heading > span { color: #6e6e73; font-size: 11px; }
         .it-stock-digit { display: inline-grid; font-variant-numeric: tabular-nums; }
-        .it-stock-digit > span { grid-area: 1 / 1; transition: opacity 250ms ease; }
+        .it-stock-digit > span { grid-area: 1 / 1; transition: opacity 600ms var(--it-enter-ease); }
         .it-stock-digit > span:last-child { opacity: 0; }
         .it-stock-digit[data-updated="true"] > span:first-child { opacity: 0; }
         .it-stock-digit[data-updated="true"] > span:last-child { opacity: 1; }
         .it-chat-typing { display: flex; gap: 4px; align-items: center; min-height: 32px; }
-        .it-chat-typing span { width: 5px; height: 5px; border-radius: 50%; background: #6e6e73; animation: it-typing 400ms ease-in-out 3; }
+        .it-chat-typing span { width: 5px; height: 5px; border-radius: 50%; background: #6e6e73; }
+        .it-chat-typing[data-show="true"] span { animation: it-typing 400ms ease-in-out 3; }
         .it-chat-typing span:nth-child(2) { animation-delay: 80ms; }
         .it-chat-typing span:nth-child(3) { animation-delay: 160ms; }
-        @keyframes it-notification-enter { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes it-bubble-enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes it-typing { 50% { opacity: 0.35; transform: translateY(-2px); } }
       `}</style>
 
       {/* Local sticky nav bar */}
-      <nav className="it-nav" aria-label="მთავარი ნავიგაცია">
+      <nav className="it-nav" data-scrolled={scrolled} aria-label="მთავარი ნავიგაცია">
         <div className="it-col it-nav-inner">
-          <Link to="/" className="it-nav-brand">
-            VIFA
+          <Link to="/" className="it-nav-brand" aria-label="VIFA Digital, მთავარი გვერდი">
+            <Wordmark />
           </Link>
 
           <div className="it-nav-center">
@@ -1082,124 +998,82 @@ export default function ITHubPreview() {
             </Link>
           </div>
 
-          <Link to="/contact" className="it-nav-link">
-            კონტაქტი
-          </Link>
+          <div className="it-nav-end">
+            <Link to="/contact" className="it-nav-link it-nav-contact">
+              კონტაქტი
+            </Link>
+            <a href={CONSULTATION_URL} target="_blank" rel="noopener noreferrer" className="it-nav-cta">
+              უფასო კონსულტაცია
+            </a>
+          </div>
         </div>
       </nav>
 
       <main className="it-main">
-        {/* 1. Hero */}
-        <section id="hero" className="it-section it-hero">
-        <header className="it-col it-header">
-          <div className="it-hero-copy">
-          <h1 className="it-h1">
-            <span className="it-h1-dark">IT.</span>{" "}
-            <span className="it-h1-gray">{HERO_TITLE}</span>
-          </h1>
-          <p className="it-hero-subtitle">საიტები, AI ჩატბოტები და ჩვენი საკუთარი პროგრამები ბიზნესისთვის.</p>
-          </div>
-
-          <div className="it-help-block">
-            <div className="it-help-title">კითხვა გაქვს?</div>
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="it-text-link"
-            >
-              მოგვწერეთ WhatsApp-ში ›
-            </a>
-            <Link to="/contact" className="it-text-link">
-              საკონტაქტო ფორმა ›
-            </Link>
-          </div>
-        </header>
-        <FamilyShot />
-        </section>
-
-        {/* 2. Row: services (four colored cards) */}
-        <CardShelf
-          id="services"
-          className="it-services"
-          lead="რა გჭირდებათ?"
-          leadColor={COLORS.text}
-          rest="ნახეთ, როგორ მუშაობს."
-        >
-          {/* 1. საიტი (blue) */}
+        {/* 1. Intro and the four directions */}
+        <ServicesSection>
+          {(rotation) => <>
+          {/* 1. საიტი */}
           <ColoredServiceCard
             product="web"
+            active={rotation.activeProduct === "web"} turn={rotation.turn}
+            onDone={() => rotation.finish("web", rotation.turn)} onActivate={() => rotation.activate("web")}
             to="/services/web"
             eyebrow="სავიზიტო, კორპორატიული, ონლაინ მაღაზია"
             title="საიტი"
-            body="სწრაფი, ტელეფონზე მორგებული და Google-ისთვის მომზადებული. როგორც ეს საიტი."
+            body="ვებსაიტი ან ონლაინ მაღაზია ქართული ბანკების გადახდით. ტელეფონზე მორგებული და Google-ისთვის მომზადებული."
             facts="500₾-დან · 1-2 კვირაში"
-            topColor={COLORS.cards.web.top}
-            bandColor={COLORS.cards.web.band}
-            bandHeight="24%"
           >
-            {(step) => <BrowserWindowObject step={step} />}
+            {(step, _reducedMotion, exiting) => <BrowserWindowObject step={step} exiting={exiting} />}
           </ColoredServiceCard>
 
-          {/* 2. AI ჩატბოტი (lavender) */}
+          {/* 2. AI ჩატბოტი */}
           <ColoredServiceCard
             product="chatbot"
+            active={rotation.activeProduct === "chatbot"} turn={rotation.turn}
+            onDone={() => rotation.finish("chatbot", rotation.turn)} onActivate={() => rotation.activate("chatbot")}
             to="/services/ai-chatbot"
             eyebrow="Messenger · Instagram · WhatsApp"
             title="AI ჩატბოტი"
-            body="ღამის 2 საათზე მოწერილ კლიენტსაც პასუხობს და მაგიდას უჯავშნის."
+            body="ქართულად და 24/7 პასუხობს კლიენტებს ფასებზე, მიწოდებაზე და ჯავშნებზე. შეკვეთას ნომრით და მისამართით გიტოვებთ."
             facts="500₾-დან · 7-14 დღეში"
-            topColor={COLORS.cards.chatbot.top}
-            bandColor={COLORS.cards.chatbot.band}
-            bandHeight="30%"
           >
-            {(step, reducedMotion) => <ChatbotPhoneObject step={step} reducedMotion={reducedMotion} />}
+            {(step, reducedMotion, exiting) => <ChatbotPhoneObject step={step} reducedMotion={reducedMotion} exiting={exiting} />}
           </ColoredServiceCard>
 
-          {/* 3. Invento WMS (green) */}
+          {/* 3. Invento WMS */}
           <ColoredServiceCard
             product="invento"
+            active={rotation.activeProduct === "invento"} turn={rotation.turn}
+            onDone={() => rotation.finish("invento", rotation.turn)} onActivate={() => rotation.activate("invento")}
             to="/inventowms"
             eyebrow="საწყობის პროგრამა"
             title="Invento WMS"
-            body="გაყიდეთ ერთი და საწყობში ერთით ნაკლები ჩანს. თავისით."
+            body="საქონლის აღრიცხვა, შეკვეთები და ფინანსები ერთ სისტემაში. მაღაზიებისა და ონლაინ ბიზნესისთვის."
             facts="79₾/თვე-დან · 7 დღე უფასოდ"
-            topColor={COLORS.cards.invento.top}
-            bandColor={COLORS.cards.invento.band}
-            bandHeight="52%"
           >
-            {(step) => <LaptopObject step={step} />}
+            {(step, _reducedMotion, exiting) => <LaptopObject step={step} exiting={exiting} />}
           </ColoredServiceCard>
 
-          {/* 4. LineUp (peach) */}
+          {/* 4. LineUp */}
           <ColoredServiceCard
             product="lineup"
+            active={rotation.activeProduct === "lineup"} turn={rotation.turn}
+            onDone={() => rotation.finish("lineup", rotation.turn)} onActivate={() => rotation.activate("lineup")}
             to="/lineup"
             eyebrow="სპორტული აკადემიის აპი"
             title="LineUp"
-            body="მშობელი აპში ხედავს დასწრებას და გადახდის სტატუსს."
-            topColor={COLORS.cards.lineup.top}
-            bandColor={COLORS.cards.lineup.band}
-            bandHeight="28%"
+            body="სპორტული აკადემიის მართვა ერთ აპში: გადახდები, დასწრება და მშობლებთან კავშირი."
+            facts="ცოცხალი დემო საიტზე"
           >
-            {(step, reducedMotion) => <LineupPhoneObject step={step} reducedMotion={reducedMotion} />}
+            {(step, reducedMotion, exiting) => <LineupPhoneObject step={step} reducedMotion={reducedMotion} exiting={exiting} />}
           </ColoredServiceCard>
-        </CardShelf>
+          </>}
+        </ServicesSection>
 
-        {/* 3. Connected website and warehouse */}
-        <CommerceFlow />
+        <HowWeStart />
 
-        {/* 4. Industries */}
-        <CardShelf id="industries" className="it-industries" lead="რა ბიზნესი გაქვთ?"
-          leadColor={COLORS.text} rest="ნახეთ, რას ვაკეთებთ თქვენი დარგისთვის.">
-          {industries.map((industry) => <Link key={industry.to} to={industry.to} className="it-industry-card">
-            <div className="it-industry-copy">
-              <h3 className="it-industry-title">{industry.title}</h3>
-              <p className="it-industry-body">{industry.body}</p>
-            </div>
-            <img src={industry.photo} alt="" className="it-industry-photo" loading="lazy" />
-          </Link>)}
-        </CardShelf>
+        <HubQuestions />
 
         {/* 5. Contact */}
         <section id="contact" className="it-section it-col it-contact-section">
@@ -1230,9 +1104,15 @@ export default function ITHubPreview() {
           </div>
         </section>
 
-        {/* 4. Footer */}
+        {/* Footer */}
         <footer className="it-footer it-col">
-          <div className="it-footer-line">© 2026 VIFA Digital</div>
+          <div className="it-footer-line">
+            <span>© 2026 VIFA Digital</span>
+            <nav className="it-footer-links" aria-label="იურიდიული ინფორმაცია">
+              <Link to="/privacy">კონფიდენციალურობის პოლიტიკა</Link>
+              <Link to="/terms">მომსახურების პირობები</Link>
+            </nav>
+          </div>
         </footer>
       </main>
     </div>

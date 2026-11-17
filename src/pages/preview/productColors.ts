@@ -1,6 +1,6 @@
 export const productColors = {
-  web: { top: "#b3cfea", band: "#1e71a5" },
-  chatbot: { top: "#c4b7ec", band: "#7869bb" },
-  invento: { top: "#9aceaa", band: "#397a59" },
-  lineup: { top: "#f8cdb0", band: "#e8743b" },
+  web: { soft: "#b3cfea", deep: "#1e71a5" },
+  chatbot: { soft: "#c4b7ec", deep: "#7869bb" },
+  invento: { soft: "#9aceaa", deep: "#397a59" },
+  lineup: { soft: "#f8cdb0", deep: "#e8743b" },
 } as const;

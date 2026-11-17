@@ -1,40 +1,48 @@
-import { useEffect, useRef } from "react";
-import type { ReactNode } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { MotionConfig } from "framer-motion";
 import { AcademyHeader, BottomNav, PARENT_ICONS, PhoneFrame, PushBanner, Screen } from "../../components/lineup/AppKit";
 import { app, monthIndex } from "../../components/lineup/content";
-export function BrowserWindowObject({ step, mode = "responsive", children }: {
+export function BrowserWindowObject({ step, exiting = false, mode = "responsive", children, notification, address = "vifadigital.ge" }: {
   step: number;
+  exiting?: boolean;
   mode?: "responsive" | "notification" | "checkout";
   children?: ReactNode;
+  notification?: { title: string; body: string };
+  address?: string;
 }) {
   return (
-    <div className={`it-obj-browser ${mode === "responsive" ? "it-responsive-browser" : ""}`}
-      data-mobile={mode === "responsive" && step > 0} aria-hidden="true">
+    <>
+    <div className="it-obj-browser" aria-hidden="true">
       <div className="it-browser-bar">
         <div className="it-browser-dots">
           <span className="it-browser-dot" />
           <span className="it-browser-dot" />
           <span className="it-browser-dot" />
         </div>
-        <div className="it-browser-pill">vifadigital.ge</div>
+        <div className="it-browser-pill">{address}</div>
       </div>
       <div className="it-browser-body">
         {children ?? <>
           <img src="/preview/vifa-desktop.png" alt="VIFA" className="it-browser-img it-browser-desktop-img" />
-          {mode === "responsive" && <img src="/preview/vifa-mobile.png" alt="" className="it-browser-img it-browser-mobile-img" />}
         </>}
-        {mode === "notification" && step > 0 && (
-          <div className="it-scene-notification it-website-notification">
+        {mode === "notification" && (
+          <div className="it-scene-notification it-website-notification it-scene-element" data-show={step > 0 && !exiting}>
             <div className="it-notification-heading">
-              <strong>ახალი მოთხოვნა საიტიდან</strong>
+              <strong>{notification?.title ?? "ახალი მოთხოვნა საიტიდან"}</strong>
               <span>ახლა</span>
             </div>
-            <p>მაინტერესებს საიტის ფასი.</p>
+            <p>{notification?.body ?? "მაინტერესებს საიტის ფასი."}</p>
           </div>
         )}
       </div>
     </div>
+    {mode === "responsive" && <div className="it-website-phone it-scene-element" data-show={step > 0 && !exiting} data-exiting={exiting} aria-hidden="true">
+      <PreviewPhone>
+        <div className="it-site-phone-screen"><img src="/preview/vifa-mobile.png" alt="" /></div>
+      </PreviewPhone>
+    </div>}
+    </>
   );
 }
 
@@ -50,15 +58,39 @@ function PreviewPhone({ children }: { children: ReactNode }) {
   );
 }
 
-export function ChatbotPhoneObject({ step, reducedMotion }: {
+const reservationChat = [
+  "ხვალ 20:00-ზე ოთხ კაცზე მაგიდა გაქვთ?",
+  "დიახ, თავისუფალია. ვისი სახელით დავჯავშნო?",
+  "ნინოს სახელით.",
+  "დაჯავშნილია: ხვალ, 20:00, ოთხი სტუმარი.",
+];
+
+export function ChatbotPhoneObject({ step, reducedMotion, exiting = false, messages = reservationChat, title = "რესტორანი" }: {
   step: number;
   reducedMotion: boolean;
+  exiting?: boolean;
+  messages?: readonly string[];
+  title?: string;
 }) {
   const messagesRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const messages = messagesRef.current;
-    if (messages) messages.scrollTo({ top: messages.scrollHeight, behavior: "instant" });
-  }, [step]);
+  const threadRef = useRef<HTMLDivElement>(null);
+  const [offset, setOffset] = useState(0);
+  useLayoutEffect(() => {
+    const viewport = messagesRef.current;
+    const thread = threadRef.current;
+    if (!viewport || !thread) return;
+    const measure = () => {
+      const index = Math.min(messages.length - 1, step >= 5 ? 3 : step >= 4 ? 2 : step >= 2 ? 1 : 0);
+      const turn = thread.children[index] as HTMLElement;
+      const bottom = step === 0 ? 0 : turn.offsetTop + ((step === 2 || step === 5) ? 32 : turn.offsetHeight);
+      setOffset(-Math.max(0, bottom - (viewport.clientHeight - 24)));
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(viewport);
+    observer.observe(thread);
+    return () => observer.disconnect();
+  }, [step, messages]);
 
   return (
     <PreviewPhone>
@@ -69,31 +101,33 @@ export function ChatbotPhoneObject({ step, reducedMotion }: {
         </div>
         <div className="it-light-chat-header">
           <span className="it-light-chat-avatar" />
-          <span className="it-light-chat-title">რესტორანი</span>
+          <span className="it-light-chat-title">{title}</span>
         </div>
         <div ref={messagesRef} className="it-light-chat-messages" data-reduced-motion={reducedMotion}>
-          {step >= 1 && <div className="it-light-bubble it-light-bubble-customer">
-            ხვალ 20:00-ზე ოთხ კაცზე მაგიდა გაქვთ?
-          </div>}
-          {step >= 3 && <div className="it-light-bubble it-light-bubble-bot">
-            დიახ, თავისუფალია. ვისი სახელით დავჯავშნო?
-          </div>}
-          {step >= 4 && <div className="it-light-bubble it-light-bubble-customer">
-            ნინოს სახელით.
-          </div>}
-          {step >= 6 && <div className="it-light-bubble it-light-bubble-bot">
-            დაჯავშნილია: ხვალ, 20:00, ოთხი სტუმარი.
-          </div>}
-          {(step === 2 || step === 5) && <div key={step} className="it-light-bubble it-light-bubble-bot it-chat-typing">
-            <span /><span /><span />
-          </div>}
+          <div ref={threadRef} className="it-chat-thread" data-reset={step === 0}
+            style={{ "--it-thread-offset": `${offset}px` } as CSSProperties}>
+          {messages.map((message, index) => {
+            const customer = index % 2 === 0;
+            const reveal = [1, 3, 4, 6][index];
+            return <div key={message} className={`it-chat-turn${customer ? " it-chat-turn-customer" : ""}`}>
+              <div className={`it-light-bubble it-light-bubble-${customer ? "customer" : "bot"} it-scene-element`} data-show={step >= reveal && !exiting}>{message}</div>
+              {!customer && <TypingIndicator show={step === reveal - 1 && !exiting} />}
+            </div>;
+          })}
+          </div>
         </div>
       </div>
     </PreviewPhone>
   );
 }
 
-export function LaptopObject({ step, shipping = false }: { step: number; shipping?: boolean }) {
+function TypingIndicator({ show }: { show: boolean }) {
+  return <div className="it-light-bubble it-light-bubble-bot it-chat-typing it-scene-element" data-show={show}>
+    <span /><span /><span />
+  </div>;
+}
+
+export function LaptopObject({ step, shipping = false, exiting = false }: { step: number; shipping?: boolean; exiting?: boolean }) {
   return (
     <div className="it-obj-laptop" aria-hidden="true">
       <div className="it-laptop-screen">
@@ -102,19 +136,17 @@ export function LaptopObject({ step, shipping = false }: { step: number; shippin
           alt="Invento WMS საწყობის მართვის სისტემა"
           className="it-laptop-img"
         />
-        {step > 0 && (
-          <div className="it-scene-notification it-invento-notification">
+          <div className="it-scene-notification it-invento-notification it-scene-element" data-show={step > 0 && !exiting}>
             <strong>ახალი შეკვეთა #1043</strong>
             <p>აბრეშუმის ბალიშისპირი × 1</p>
             <p>მარაგი: 21 → <span className="it-stock-digit" data-updated={step >= 2}>
               <span>21</span><span>20</span>
             </span> ცალი</p>
           </div>
-        )}
-        {shipping && <div className="it-scene-notification it-shipping-notification">
+        <div className="it-scene-notification it-shipping-notification it-scene-element" data-show={shipping && !exiting}>
           <strong>საკურიერო სტიკერი მზადაა</strong>
           <p>შეკვეთა #1043 · ბეჭდვა</p>
-        </div>}
+        </div>
       </div>
       <div className="it-laptop-base">
         <span className="it-laptop-notch" />
@@ -191,16 +223,17 @@ function LineupPhoneContent() {
   );
 }
 
-export function LineupPhoneObject({ step, reducedMotion }: {
+export function LineupPhoneObject({ step, reducedMotion, exiting = false }: {
   step: number;
   reducedMotion: boolean;
+  exiting?: boolean;
 }) {
   return (
     <PreviewPhone>
       <LineupPhoneContent />
-      <div className="it-lineup-push" data-reduced-motion={reducedMotion}>
+      <div className="it-lineup-push" data-reduced-motion={reducedMotion} data-show={step > 0 && !exiting}>
         <MotionConfig reducedMotion={reducedMotion ? "always" : "never"}>
-          <PushBanner show={step > 0} title={app.ka.pushPaidTitle}
+          <PushBanner show title={app.ka.pushPaidTitle}
             body={app.ka.pushPaidBody(monthIndex())} t={app.ka} />
         </MotionConfig>
       </div>
