@@ -27,33 +27,33 @@ interface Slide {
 const slides: Slide[] = [
   {
     slug: "food", photo: "restaurant", alt: "რესტორნის ინტერიერი ფირუზისფერი კედლით და ხის მაგიდებით",
-    title: "რესტორნები და კაფეები", line: "საიტი ციფრული მენიუთი და მაგიდის დაჯავშნით.",
+    title: "რესტორნები და კაფეები", line: "ციფრული მენიუ და მაგიდის ონლაინ დაჯავშნა.",
     block: "#dcefef", focus: "40% 55%",
     widget: <Widget heading="მაგიდის დაჯავშნა" rows={[["თარიღი", "ხვალ"], ["დრო", "20:00"], ["სტუმარი", "4"]]} action="დაჯავშნა" />,
   },
   {
     slug: "tourism", photo: "hotel", alt: "ძველი თბილისის სახლი ჩუქურთმიანი ხის აივნებით", focus: "48% 45%",
-    title: "სასტუმროები", line: "საიტი პირდაპირი ჯავშნებისთვის.",
+    title: "სასტუმროები", line: "ოთახის დაჯავშნა პირდაპირ თქვენი საიტიდან.",
     block: "#e3edf6",
     widget: <Widget heading="ოთახის დაჯავშნა" rows={[["შესვლა", "12 დეკ"], ["გასვლა", "15 დეკ"], ["სტუმარი", "2"]]} action="თავისუფალი ოთახები" />,
   },
   {
     slug: "retail", photo: "shop", alt: "ტანსაცმლის მაღაზია, პასტელის ფერის ტანსაცმელი საკიდზე", focus: "50% 62%",
-    title: "მაღაზიები", line: "ონლაინ მაღაზია ქართული ბანკების გადახდით.",
+    title: "მაღაზიები", line: "ონლაინ მაღაზია ქართული ბანკების გადახდის სისტემებით.",
     block: "#e9edf4",
     widget: <Widget heading="ცისფერი პერანგი" rows={[["ზომა", "M"], ["ფასი", "79.00 ₾"]]} action="კალათაში დამატება" />,
   },
   {
     slug: "beauty", photo: "salon", alt: "პასტელის ფერის მანიკური იასამნისფერ ფონზე", focus: "50% 38%",
-    title: "სალონები", line: "საიტი ონლაინ ჩაწერით.",
+    title: "სალონები", line: "კლიენტები თავად ირჩევენ დროს და ონლაინ ეწერებიან.",
     block: "#ece6f5",
     widget: <Slots />,
   },
   {
     slug: "legal-finance", photo: "legal", alt: "ხელშეკრულებაზე ხელმოწერა, ახლო ხედი", focus: "40% 45%",
-    title: "იურიდიული კომპანიები", line: "კორპორატიული საიტი და კლიენტთა პორტალი.",
+    title: "იურიდიული კომპანიები", line: "კლიენტის პორტალი დოკუმენტების გასაცვლელად.",
     block: "#eceae6",
-    widget: <Widget heading="კლიენტის პორტალი" rows={[["დოკუმენტი", "ხელშეკრულება.pdf"], ["სტატუსი", "ხელმოსაწერად"]]} action="გახსნა" />,
+    widget: <Widget heading="კლიენტის პორტალი" rows={[["დოკუმენტი", "ხელშეკრულება.pdf"], ["სტატუსი", "გაზიარებულია"]]} action="გახსნა" />,
   },
 ];
 
@@ -68,7 +68,7 @@ function Widget({ heading, rows, action }: { heading: string; rows: [string, str
 function Slots() {
   return <div className="it-ic-widget">
     <strong>ჩაწერა: მანიკური</strong>
-    <span className="it-ic-label">ხვალ, თავისუფალი დრო</span>
+    <span className="it-ic-label">თავისუფალი დრო ხვალ</span>
     <div className="it-ic-slots">{["11:00", "12:00", "15:30", "17:00"].map((t) => <span key={t} data-on={t === "12:00"}>{t}</span>)}</div>
     <span className="it-ic-button">ჩაწერა</span>
   </div>;
@@ -141,8 +141,10 @@ export function IndustryCarousel() {
 
   return (
     <section ref={sectionRef} id="industries" className="it-section it-industry-carousel"
-      aria-roledescription="carousel" aria-label="საიტი თქვენი დარგისთვის">
-      <h2 className="it-h2 it-col"><span>საიტი თქვენი დარგისთვის.</span>{" "}<span className="it-tone-2">ნახეთ, რას აკეთებს ის თქვენს სფეროში.</span></h2>
+      aria-roledescription="carousel" aria-labelledby="industries-heading">
+      <h2 id="industries-heading" className="it-h2 it-col">
+        <span>ვებსაიტები თქვენი სფეროსთვის.</span>{" "}<span className="it-tone-2">ჯავშნები, გადახდები და კლიენტის პორტალები.</span>
+      </h2>
       <div ref={trackRef} className="it-ic-track" onPointerDown={stop} onWheel={(e) => { if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) stop(); }}
         onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
         {slides.map((s, i) => (

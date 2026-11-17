@@ -24,7 +24,7 @@ export function BrowserWindowObject({ step, exiting = false, mode = "responsive"
       </div>
       <div className="it-browser-body">
         {children ?? <>
-          <img src="/preview/vifa-desktop.png" alt="VIFA" className="it-browser-img it-browser-desktop-img" />
+          <img src="/preview/vifa-desktop.png?v=2" alt="VIFA" className="it-browser-img it-browser-desktop-img" />
         </>}
         {mode === "notification" && (
           <div className="it-scene-notification it-website-notification it-scene-element" data-show={step > 0 && !exiting}>
@@ -39,7 +39,7 @@ export function BrowserWindowObject({ step, exiting = false, mode = "responsive"
     </div>
     {mode === "responsive" && <div className="it-website-phone it-scene-element" data-show={step > 0 && !exiting} data-exiting={exiting} aria-hidden="true">
       <PreviewPhone>
-        <div className="it-site-phone-screen"><img src="/preview/vifa-mobile.png" alt="" /></div>
+        <div className="it-site-phone-screen"><img src="/preview/vifa-mobile.png?v=2" alt="" /></div>
       </PreviewPhone>
     </div>}
     </>
@@ -59,10 +59,10 @@ function PreviewPhone({ children }: { children: ReactNode }) {
 }
 
 const reservationChat = [
-  "ხვალ 20:00-ზე ოთხ კაცზე მაგიდა გაქვთ?",
+  "ხვალ 20:00-ზე ოთხისთვის მაგიდა გაქვთ?",
   "დიახ, თავისუფალია. ვისი სახელით დავჯავშნო?",
   "ნინოს სახელით.",
-  "დაჯავშნილია: ხვალ, 20:00, ოთხი სტუმარი.",
+  "მაგიდა დაჯავშნილია. ხვალ 20:00-ზე გელოდებით.",
 ];
 
 export function ChatbotPhoneObject({ step, reducedMotion, exiting = false, messages = reservationChat, title = "რესტორანი" }: {

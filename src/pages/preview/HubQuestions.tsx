@@ -6,7 +6,7 @@ export function HubQuestions() {
   const id = useId();
   const [expanded, setExpanded] = useState<boolean[]>(() => hubFaqs.map(() => false));
   return <section id="questions" className="it-section it-questions it-col" aria-labelledby={`${id}-heading`}>
-    <h2 id={`${id}-heading`} className="it-h2"><span>ხშირი კითხვები.</span>{" "}<span className="it-tone-2">მოკლე პასუხები.</span></h2>
+    <h2 id={`${id}-heading`} className="it-h2">ხშირი კითხვები</h2>
     <div className="it-faq-list">
       {hubFaqs.map(({ question, answer }, index) => <article key={question} className="it-faq-item">
         <h3>

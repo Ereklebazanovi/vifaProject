@@ -31,7 +31,7 @@ const COLORS = {
 } as const;
 
 const CONTACT_NAME = "ერეკლე";
-const HERO_TITLE = "ოთხი მიმართულება, ერთი გუნდი.";
+const HERO_TITLE = "საიტები, ჩატბოტები და პროგრამები ბიზნესისთვის.";
 // One soft color wash, fixed to the top of the screen so it stays with the visitor while
 // scrolling, slowly moving through these tones every WASH_STEP_MS.
 const WASH_PALETTE = ["#d8f0fd", "#fbe2ec", "#e9e3fb", "#dcf2e7"] as const;
@@ -1008,10 +1008,10 @@ export default function ITHubPreview() {
             active={rotation.activeProduct === "web"} turn={rotation.turn}
             onDone={() => rotation.finish("web", rotation.turn)} onActivate={() => rotation.activate("web")}
             to="/services/web"
-            eyebrow="სავიზიტო, კორპორატიული, ონლაინ მაღაზია"
-            title="საიტი"
-            body="ვებსაიტი ან ონლაინ მაღაზია ქართული ბანკების გადახდით. ტელეფონზე მორგებული და Google-ისთვის მომზადებული."
-            facts="500₾-დან · 1-2 კვირაში"
+            eyebrow="დიზაინი და დეველოპმენტი"
+            title="ვებსაიტი"
+            body="სავიზიტო და კორპორატიული საიტები, ონლაინ მაღაზიები ბარათით გადახდით."
+            facts="სავიზიტო საიტი 1-2 კვირაში"
           >
             {(step, _reducedMotion, exiting) => <BrowserWindowObject step={step} exiting={exiting} />}
           </ColoredServiceCard>
@@ -1022,10 +1022,10 @@ export default function ITHubPreview() {
             active={rotation.activeProduct === "chatbot"} turn={rotation.turn}
             onDone={() => rotation.finish("chatbot", rotation.turn)} onActivate={() => rotation.activate("chatbot")}
             to="/services/ai-chatbot"
-            eyebrow="Messenger · Instagram · WhatsApp"
+            eyebrow="Messenger · Instagram · WhatsApp · ვებსაიტი"
             title="AI ჩატბოტი"
-            body="ქართულად და 24/7 პასუხობს კლიენტებს ფასებზე, მიწოდებაზე და ჯავშნებზე. შეკვეთას ნომრით და მისამართით გიტოვებთ."
-            facts="500₾-დან · 7-14 დღეში"
+            body="კლიენტებს ქართულად პასუხობს 24/7 და იღებს შეკვეთებსა და ჯავშნებს."
+            facts="500 ₾-დან · 7-14 სამუშაო დღე"
           >
             {(step, reducedMotion, exiting) => <ChatbotPhoneObject step={step} reducedMotion={reducedMotion} exiting={exiting} />}
           </ColoredServiceCard>
@@ -1036,10 +1036,10 @@ export default function ITHubPreview() {
             active={rotation.activeProduct === "invento"} turn={rotation.turn}
             onDone={() => rotation.finish("invento", rotation.turn)} onActivate={() => rotation.activate("invento")}
             to="/inventowms"
-            eyebrow="საწყობის პროგრამა"
+            eyebrow="მაღაზიებისა და საწყობებისთვის"
             title="Invento WMS"
-            body="საქონლის აღრიცხვა, შეკვეთები და ფინანსები ერთ სისტემაში. მაღაზიებისა და ონლაინ ბიზნესისთვის."
-            facts="79₾/თვე-დან · 7 დღე უფასოდ"
+            body="მართეთ მარაგები, შეკვეთები და ფინანსები ერთი პროგრამიდან."
+            facts="79 ₾ თვეში · 7 დღე უფასოდ"
           >
             {(step, _reducedMotion, exiting) => <LaptopObject step={step} exiting={exiting} />}
           </ColoredServiceCard>
@@ -1050,10 +1050,10 @@ export default function ITHubPreview() {
             active={rotation.activeProduct === "lineup"} turn={rotation.turn}
             onDone={() => rotation.finish("lineup", rotation.turn)} onActivate={() => rotation.activate("lineup")}
             to="/lineup"
-            eyebrow="სპორტული აკადემიის აპი"
+            eyebrow="გუნდები · განრიგი · გადახდები"
             title="LineUp"
-            body="სპორტული აკადემიის მართვა ერთ აპში: გადახდები, დასწრება და მშობლებთან კავშირი."
-            facts="ცოცხალი დემო საიტზე"
+            body="სპორტული აკადემიების, კლუბებისა და სტუდიების მართვის პორტალი."
+            facts="ნახეთ დემო"
           >
             {(step, reducedMotion, exiting) => <LineupPhoneObject step={step} reducedMotion={reducedMotion} exiting={exiting} />}
           </ColoredServiceCard>
@@ -1071,7 +1071,7 @@ export default function ITHubPreview() {
           <div className="it-contact-card">
             <h2 className="it-h2">
               <span className="it-tone-1">კითხვა გაქვთ?</span>{" "}
-              <span className="it-tone-2">მოგვწერეთ, გიპასუხებთ პირადად.</span>
+              <span className="it-tone-2">მოგვიყევით, რა გჭირდებათ.</span>
             </h2>
             <div className="it-contact-row">
               <div className="it-contact-person">
@@ -1082,12 +1082,12 @@ export default function ITHubPreview() {
                 )}
                 <div>
                   <h3 className="it-contact-name">{CONTACT_NAME}</h3>
-                  <p className="it-contact-note">WhatsApp-ზე პირადად გიპასუხებთ.</p>
+                  <p className="it-contact-note">პირადად გიპასუხებთ.</p>
                 </div>
               </div>
               <div className="it-contact-actions">
                 <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="it-pill-button">
-                  მოგვწერეთ
+                  მოგვწერეთ WhatsApp-ზე
                 </a>
                 <Link to="/contact" className="it-more-link">საკონტაქტო ფორმა ›</Link>
               </div>
