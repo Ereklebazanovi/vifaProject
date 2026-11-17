@@ -36,3 +36,11 @@ private-data/
 
 # Original photos for site galleries (scripts/gallery.mjs makes the web copies)
 photos/
+
+# Redesign working files: prompts for coding agents, the internal plan, a reference
+# screenshot of someone else's site, and agents' verification output. Local only.
+/CODEX_PILOT_*.md
+/GEMINI_*.md
+/GEMINI_REF_*.png
+/REDESIGN_PLAN.md
+/preview-verification/
