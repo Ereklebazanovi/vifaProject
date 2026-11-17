@@ -75,6 +75,8 @@ function Slots() {
 }
 
 const AUTOPLAY_MS = 6500;
+// Public photo URLs are cached as immutable. Bump after replacing these files.
+const PHOTO_REVISION = 2;
 
 export function IndustryCarousel() {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -153,8 +155,8 @@ export function IndustryCarousel() {
             </div>
             <div className="it-ic-tile" aria-hidden="true">{s.widget}</div>
             <picture className="it-ic-photo">
-              <source media="(max-width: 700px)" srcSet={`/preview/industries/${s.photo}-700.webp`} />
-              <img src={`/preview/industries/${s.photo}-1200.webp`} alt={s.alt} loading="lazy" decoding="async"
+              <source media="(max-width: 700px)" srcSet={`/preview/industries/${s.photo}-700.webp?v=${PHOTO_REVISION}`} />
+              <img src={`/preview/industries/${s.photo}-1200.webp?v=${PHOTO_REVISION}`} alt={s.alt} loading="lazy" decoding="async"
                 style={s.focus ? { objectPosition: s.focus } : undefined} />
             </picture>
           </article>
