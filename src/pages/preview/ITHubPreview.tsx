@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet-async";
 import { ArrowUpRight } from "lucide-react";
 import { BrowserWindowObject, ChatbotPhoneObject, LaptopObject, LineupPhoneObject } from "./ProductDevices";
 import { HowWeStart } from "./HowWeStart";
+import { IndustryCarousel } from "./IndustryCarousel";
 import { HubQuestions } from "./HubQuestions";
 import { hubFaqSchema } from "./hubFaqData";
 import "./hubSections.css";
@@ -41,10 +42,6 @@ function Wordmark() {
   return <span className="it-wordmark"><span>VIFA</span><span className="it-wordmark-light">Digital</span></span>;
 }
 
-const INDUSTRY_LINKS = [
-  ["რესტორნები", "food"], ["სასტუმროები", "tourism"], ["მაღაზიები", "retail"],
-  ["სალონები", "beauty"], ["იურიდიული კომპანიები", "legal-finance"],
-] as const;
 const CONSULTATION_URL = "https://wa.me/995557624243?text=" + encodeURIComponent("გამარჯობა, მინდა უფასო კონსულტაცია.");
 
 const contactPhotos = import.meta.glob("/public/preview/contact.{jpg,png,webp}", {
@@ -67,14 +64,6 @@ function ServicesSection({ children }: { children: (rotation: ReturnType<typeof 
       </header>
       <div id="services" ref={rotation.gridRef} className="it-service-grid" data-active-product={rotation.activeProduct ?? "none"}
         data-turn={rotation.turn} data-visible={rotation.visible}>{children(rotation)}</div>
-      {/* The industry pages are "a website for X": one quiet row of links instead of a whole section. */}
-      <p className="it-industry-row">
-        <span>საიტი თქვენი დარგისთვის:</span>{" "}
-        {INDUSTRY_LINKS.map(([name, slug], index) => <span key={slug}>
-          {index > 0 && <span className="it-industry-row-dot" aria-hidden="true"> · </span>}
-          <Link to={`/industry/web/${slug}`}>{name}</Link>
-        </span>)}
-      </p>
     </section>
   );
 }
@@ -1070,6 +1059,8 @@ export default function ITHubPreview() {
           </ColoredServiceCard>
           </>}
         </ServicesSection>
+
+        <IndustryCarousel />
 
         <HowWeStart />
 
