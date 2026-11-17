@@ -1,0 +1,96 @@
+[
+  {
+    "width": 1440,
+    "bounds": [
+      {
+        "id": "hero",
+        "x": 0,
+        "y": 48,
+        "width": 1440,
+        "height": 902
+      },
+      {
+        "id": "services",
+        "x": 0,
+        "y": 950,
+        "width": 1440,
+        "height": 1394
+      },
+      {
+        "id": "connected",
+        "x": 0,
+        "y": 2344,
+        "width": 1440,
+        "height": 822
+      },
+      {
+        "id": "industries",
+        "x": 0,
+        "y": 3167,
+        "width": 1440,
+        "height": 779
+      },
+      {
+        "id": "getting-started",
+        "x": 0,
+        "y": 3946,
+        "width": 1440,
+        "height": 380
+      },
+      {
+        "id": "contact",
+        "x": 0,
+        "y": 4326,
+        "width": 1440,
+        "height": 404
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "bounds": [
+      {
+        "id": "hero",
+        "x": 0,
+        "y": 48,
+        "width": 390,
+        "height": 838
+      },
+      {
+        "id": "services",
+        "x": 0,
+        "y": 886,
+        "width": 390,
+        "height": 2338
+      },
+      {
+        "id": "connected",
+        "x": 0,
+        "y": 3224,
+        "width": 390,
+        "height": 943
+      },
+      {
+        "id": "industries",
+        "x": 0,
+        "y": 4167,
+        "width": 390,
+        "height": 961
+      },
+      {
+        "id": "getting-started",
+        "x": 0,
+        "y": 5128,
+        "width": 390,
+        "height": 698
+      },
+      {
+        "id": "contact",
+        "x": 0,
+        "y": 5827,
+        "width": 390,
+        "height": 485
+      }
+    ]
+  }
+]

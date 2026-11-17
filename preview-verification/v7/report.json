@@ -1,0 +1,636 @@
+{
+  "auto": [
+    {
+      "width": 1440,
+      "slug": "food",
+      "devices": 2,
+      "tint": "rgb(196, 183, 236)",
+      "cycle": 1,
+      "heroHeight": 752,
+      "detailHeight": 276,
+      "shifts": []
+    },
+    {
+      "width": 390,
+      "slug": "food",
+      "devices": 2,
+      "tint": "rgb(196, 183, 236)",
+      "cycle": 1,
+      "heroHeight": 1194,
+      "detailHeight": 300,
+      "shifts": []
+    },
+    {
+      "width": 390,
+      "slug": "tourism",
+      "devices": 2,
+      "tint": "rgb(179, 207, 234)",
+      "cycle": 1,
+      "heroHeight": 1194,
+      "detailHeight": 300,
+      "shifts": []
+    },
+    {
+      "width": 1440,
+      "slug": "tourism",
+      "devices": 2,
+      "tint": "rgb(179, 207, 234)",
+      "cycle": 1,
+      "heroHeight": 752,
+      "detailHeight": 276,
+      "shifts": []
+    },
+    {
+      "width": 1440,
+      "slug": "retail",
+      "devices": 2,
+      "tint": "rgb(154, 206, 170)",
+      "cycle": 1,
+      "heroHeight": 752,
+      "detailHeight": 276,
+      "shifts": []
+    },
+    {
+      "width": 390,
+      "slug": "retail",
+      "devices": 2,
+      "tint": "rgb(154, 206, 170)",
+      "cycle": 1,
+      "heroHeight": 1194,
+      "detailHeight": 300,
+      "shifts": []
+    },
+    {
+      "width": 1440,
+      "slug": "beauty",
+      "devices": 2,
+      "tint": "rgb(245, 194, 216)",
+      "cycle": 1,
+      "heroHeight": 752,
+      "detailHeight": 276,
+      "shifts": []
+    },
+    {
+      "width": 390,
+      "slug": "beauty",
+      "devices": 2,
+      "tint": "rgb(245, 194, 216)",
+      "cycle": 1,
+      "heroHeight": 1194,
+      "detailHeight": 300,
+      "shifts": []
+    },
+    {
+      "width": 1440,
+      "slug": "legal-finance",
+      "devices": 1,
+      "tint": "rgb(217, 222, 232)",
+      "cycle": 1,
+      "heroHeight": 752,
+      "detailHeight": 276,
+      "shifts": []
+    },
+    {
+      "width": 390,
+      "slug": "legal-finance",
+      "devices": 1,
+      "tint": "rgb(217, 222, 232)",
+      "cycle": 1,
+      "heroHeight": 1194,
+      "detailHeight": 300,
+      "shifts": []
+    },
+    {
+      "width": 390,
+      "slug": "academy",
+      "devices": 1,
+      "tint": "rgb(248, 205, 176)",
+      "cycle": 1,
+      "heroHeight": 1194,
+      "detailHeight": 300,
+      "shifts": []
+    },
+    {
+      "width": 1440,
+      "slug": "academy",
+      "devices": 1,
+      "tint": "rgb(248, 205, 176)",
+      "cycle": 1,
+      "heroHeight": 752,
+      "detailHeight": 276,
+      "shifts": []
+    },
+    {
+      "width": 1440,
+      "slug": "other",
+      "devices": 2,
+      "tint": "rgb(232, 232, 237)",
+      "cycle": 1,
+      "heroHeight": 752,
+      "detailHeight": 276,
+      "shifts": []
+    },
+    {
+      "width": 390,
+      "slug": "other",
+      "devices": 2,
+      "tint": "rgb(232, 232, 237)",
+      "cycle": 1,
+      "heroHeight": 1194,
+      "detailHeight": 300,
+      "shifts": []
+    }
+  ],
+  "layouts": [
+    {
+      "width": 1440,
+      "page": 1440,
+      "scrollers": [],
+      "sections": [
+        "hero",
+        "services",
+        "getting-started",
+        "contact"
+      ],
+      "grid": "480px 480px",
+      "cards": [
+        {
+          "w": 480,
+          "h": 560,
+          "bg": "rgb(179, 207, 234)",
+          "border": "0px",
+          "shadow": "none"
+        },
+        {
+          "w": 480,
+          "h": 560,
+          "bg": "rgb(196, 183, 236)",
+          "border": "0px",
+          "shadow": "none"
+        },
+        {
+          "w": 480,
+          "h": 560,
+          "bg": "rgb(154, 206, 170)",
+          "border": "0px",
+          "shadow": "none"
+        },
+        {
+          "w": 480,
+          "h": 560,
+          "bg": "rgb(248, 205, 176)",
+          "border": "0px",
+          "shadow": "none"
+        }
+      ],
+      "heroHeight": 752,
+      "detailHeight": 276,
+      "stageHeight": 560,
+      "transitions": "background-color"
+    },
+    {
+      "width": 390,
+      "page": 390,
+      "scrollers": [],
+      "sections": [
+        "hero",
+        "services",
+        "getting-started",
+        "contact"
+      ],
+      "grid": "346px",
+      "cards": [
+        {
+          "w": 346,
+          "h": 500,
+          "bg": "rgb(179, 207, 234)",
+          "border": "0px",
+          "shadow": "none"
+        },
+        {
+          "w": 346,
+          "h": 500,
+          "bg": "rgb(196, 183, 236)",
+          "border": "0px",
+          "shadow": "none"
+        },
+        {
+          "w": 346,
+          "h": 500,
+          "bg": "rgb(154, 206, 170)",
+          "border": "0px",
+          "shadow": "none"
+        },
+        {
+          "w": 346,
+          "h": 500,
+          "bg": "rgb(248, 205, 176)",
+          "border": "0px",
+          "shadow": "none"
+        }
+      ],
+      "heroHeight": 1194,
+      "detailHeight": 300,
+      "stageHeight": 420,
+      "transitions": "background-color"
+    },
+    {
+      "width": 1024,
+      "page": 1024,
+      "scrollers": [],
+      "sections": [
+        "hero",
+        "services",
+        "getting-started",
+        "contact"
+      ],
+      "grid": "480px 480px",
+      "cards": [
+        {
+          "w": 480,
+          "h": 560,
+          "bg": "rgb(179, 207, 234)",
+          "border": "0px",
+          "shadow": "none"
+        },
+        {
+          "w": 480,
+          "h": 560,
+          "bg": "rgb(196, 183, 236)",
+          "border": "0px",
+          "shadow": "none"
+        },
+        {
+          "w": 480,
+          "h": 560,
+          "bg": "rgb(154, 206, 170)",
+          "border": "0px",
+          "shadow": "none"
+        },
+        {
+          "w": 480,
+          "h": 560,
+          "bg": "rgb(248, 205, 176)",
+          "border": "0px",
+          "shadow": "none"
+        }
+      ],
+      "heroHeight": 883,
+      "detailHeight": 300,
+      "stageHeight": 560,
+      "transitions": "background-color"
+    }
+  ],
+  "interactions": [
+    {
+      "manualLoop": {
+        "sameNodes": true,
+        "samples": [
+          {
+            "type": "reset",
+            "opacity": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "cycle": 3,
+        "slug": "retail",
+        "beforeAuditShifts": [
+          {
+            "time": 2271.600000000093,
+            "value": 6.545384724934896e-05
+          }
+        ],
+        "cls": 0
+      }
+    },
+    {
+      "keyboard": "End/Home/arrow wrap passed",
+      "sessionOptOut": true,
+      "otherScroll": true
+    },
+    {
+      "cleanup": {
+        "timers": 0,
+        "intervals": 0,
+        "observers": 0
+      }
+    }
+  ],
+  "cards": [
+    {
+      "product": "web",
+      "first": 1,
+      "afterHover": 2,
+      "autoRepeat": false,
+      "reentryRepeat": false
+    },
+    {
+      "product": "chatbot",
+      "first": 1,
+      "afterHover": 2,
+      "autoRepeat": false,
+      "reentryRepeat": false
+    },
+    {
+      "product": "invento",
+      "first": 1,
+      "afterHover": 2,
+      "autoRepeat": false,
+      "reentryRepeat": false
+    },
+    {
+      "product": "lineup",
+      "first": 1,
+      "afterHover": 2,
+      "autoRepeat": false,
+      "reentryRepeat": false
+    }
+  ],
+  "links": [
+    {
+      "slug": "food",
+      "features": [
+        "ბრენდირებული ვებ-სივრცე",
+        "ჯავშნების ავტომატიზაცია",
+        "სრული დამოუკიდებლობა (CMS)"
+      ],
+      "wa": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%A0%E1%83%94%E1%83%A1%E1%83%A2%E1%83%9D%E1%83%A0%E1%83%90%E1%83%9C%E1%83%98%20%E1%83%9B%E1%83%90%E1%83%A5%E1%83%95%E1%83%A1%20%E1%83%93%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20%E1%83%A1%E1%83%90%E1%83%98%E1%83%A2%E1%83%98.",
+      "target": "_blank",
+      "detail": "/industry/web/food",
+      "activation": {
+        "href": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%A0%E1%83%94%E1%83%A1%E1%83%A2%E1%83%9D%E1%83%A0%E1%83%90%E1%83%9C%E1%83%98%20%E1%83%9B%E1%83%90%E1%83%A5%E1%83%95%E1%83%A1%20%E1%83%93%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20%E1%83%A1%E1%83%90%E1%83%98%E1%83%A2%E1%83%98.",
+        "target": "_blank"
+      }
+    },
+    {
+      "slug": "tourism",
+      "features": [
+        "პრემიუმ ვიზუალი და კატალოგი",
+        "მოთხოვნების სისტემა",
+        "სრული მართვის პანელი (CMS)"
+      ],
+      "wa": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%A1%E1%83%90%E1%83%A1%E1%83%A2%E1%83%A3%E1%83%9B%E1%83%A0%E1%83%9D%20%E1%83%9B%E1%83%90%E1%83%A5%E1%83%95%E1%83%A1%20%E1%83%93%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20%E1%83%A1%E1%83%90%E1%83%98%E1%83%A2%E1%83%98.",
+      "target": "_blank",
+      "detail": "/industry/web/tourism",
+      "activation": {
+        "href": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%A1%E1%83%90%E1%83%A1%E1%83%A2%E1%83%A3%E1%83%9B%E1%83%A0%E1%83%9D%20%E1%83%9B%E1%83%90%E1%83%A5%E1%83%95%E1%83%A1%20%E1%83%93%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20%E1%83%A1%E1%83%90%E1%83%98%E1%83%A2%E1%83%98.",
+        "target": "_blank"
+      }
+    },
+    {
+      "slug": "retail",
+      "features": [
+        "სრულფასოვანი E-commerce",
+        "CRM & საწყობის მართვა (WMS)",
+        "ულტრა-სწრაფი მობილური ვერსია"
+      ],
+      "wa": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%9B%E1%83%90%E1%83%A6%E1%83%90%E1%83%96%E1%83%98%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%A5%E1%83%95%E1%83%A1%20%E1%83%93%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20%E1%83%9D%E1%83%9C%E1%83%9A%E1%83%90%E1%83%98%E1%83%9C%20%E1%83%9B%E1%83%90%E1%83%A6%E1%83%90%E1%83%96%E1%83%98%E1%83%90.",
+      "target": "_blank",
+      "detail": "/industry/web/retail",
+      "activation": {
+        "href": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%9B%E1%83%90%E1%83%A6%E1%83%90%E1%83%96%E1%83%98%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%A5%E1%83%95%E1%83%A1%20%E1%83%93%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20%E1%83%9D%E1%83%9C%E1%83%9A%E1%83%90%E1%83%98%E1%83%9C%20%E1%83%9B%E1%83%90%E1%83%A6%E1%83%90%E1%83%96%E1%83%98%E1%83%90.",
+        "target": "_blank"
+      }
+    },
+    {
+      "slug": "beauty",
+      "features": [
+        "პრემიუმ კატალოგი და იმიჯი",
+        "ჭკვიანი ჯავშნები 0% საკომისიოთი",
+        "პროდუქციის ონლაინ გაყიდვები"
+      ],
+      "wa": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%A1%E1%83%90%E1%83%9A%E1%83%9D%E1%83%9C%E1%83%98%20%E1%83%9B%E1%83%90%E1%83%A5%E1%83%95%E1%83%A1%20%E1%83%93%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20%E1%83%A1%E1%83%90%E1%83%98%E1%83%A2%E1%83%98.",
+      "target": "_blank",
+      "detail": "/industry/web/beauty",
+      "activation": {
+        "href": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%A1%E1%83%90%E1%83%9A%E1%83%9D%E1%83%9C%E1%83%98%20%E1%83%9B%E1%83%90%E1%83%A5%E1%83%95%E1%83%A1%20%E1%83%93%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20%E1%83%A1%E1%83%90%E1%83%98%E1%83%A2%E1%83%98.",
+        "target": "_blank"
+      }
+    },
+    {
+      "slug": "legal-finance",
+      "features": [
+        "უსაფრთხო კლიენტთა პორტალი",
+        "პრემიუმ კორპორატიული იმიჯი",
+        "სრული მართვის პანელი (CMS)"
+      ],
+      "wa": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%98%E1%83%A3%E1%83%A0%E1%83%98%E1%83%93%E1%83%98%E1%83%A3%E1%83%9A%E1%83%98%20%E1%83%99%E1%83%9D%E1%83%9B%E1%83%9E%E1%83%90%E1%83%9C%E1%83%98%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%A5%E1%83%95%E1%83%A1%20%E1%83%93%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20%E1%83%A1%E1%83%90%E1%83%98%E1%83%A2%E1%83%98.",
+      "target": "_blank",
+      "detail": "/industry/web/legal-finance",
+      "activation": {
+        "href": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%98%E1%83%A3%E1%83%A0%E1%83%98%E1%83%93%E1%83%98%E1%83%A3%E1%83%9A%E1%83%98%20%E1%83%99%E1%83%9D%E1%83%9B%E1%83%9E%E1%83%90%E1%83%9C%E1%83%98%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%A5%E1%83%95%E1%83%A1%20%E1%83%93%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20%E1%83%A1%E1%83%90%E1%83%98%E1%83%A2%E1%83%98.",
+        "target": "_blank"
+      }
+    },
+    {
+      "slug": "academy",
+      "features": [
+        "გადახდების აღრიცხვა",
+        "დასწრება და შეფასებები",
+        "შეტყობინებები მშობლებს"
+      ],
+      "wa": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%93%E1%83%90%E1%83%95%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%93%E1%83%98%20LineUp-%E1%83%98%E1%83%97%2C%20%E1%83%A1%E1%83%9E%E1%83%9D%E1%83%A0%E1%83%A2%E1%83%A3%E1%83%9A%E1%83%98%20%E1%83%90%E1%83%99%E1%83%90%E1%83%93%E1%83%94%E1%83%9B%E1%83%98%E1%83%98%E1%83%A1%20%E1%83%90%E1%83%9E%E1%83%9A%E1%83%98%E1%83%99%E1%83%90%E1%83%AA%E1%83%98%E1%83%98%E1%83%97.",
+      "target": "_blank",
+      "detail": "/lineup",
+      "activation": {
+        "href": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%93%E1%83%90%E1%83%95%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%93%E1%83%98%20LineUp-%E1%83%98%E1%83%97%2C%20%E1%83%A1%E1%83%9E%E1%83%9D%E1%83%A0%E1%83%A2%E1%83%A3%E1%83%9A%E1%83%98%20%E1%83%90%E1%83%99%E1%83%90%E1%83%93%E1%83%94%E1%83%9B%E1%83%98%E1%83%98%E1%83%A1%20%E1%83%90%E1%83%9E%E1%83%9A%E1%83%98%E1%83%99%E1%83%90%E1%83%AA%E1%83%98%E1%83%98%E1%83%97.",
+        "target": "_blank"
+      }
+    },
+    {
+      "slug": "other",
+      "features": [
+        "საიტი ან ონლაინ მაღაზია",
+        "AI ჩატბოტი Messenger-ში, Instagram-ში და WhatsApp-ში",
+        "Invento WMS საწყობისთვის"
+      ],
+      "wa": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%93%E1%83%90%E1%83%95%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%93%E1%83%98%20%E1%83%97%E1%83%A5%E1%83%95%E1%83%94%E1%83%9C%E1%83%98%20%E1%83%A1%E1%83%94%E1%83%A0%E1%83%95%E1%83%98%E1%83%A1%E1%83%94%E1%83%91%E1%83%98%E1%83%97.",
+      "target": "_blank",
+      "detail": "#services",
+      "activation": {
+        "href": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%93%E1%83%90%E1%83%95%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%93%E1%83%98%20%E1%83%97%E1%83%A5%E1%83%95%E1%83%94%E1%83%9C%E1%83%98%20%E1%83%A1%E1%83%94%E1%83%A0%E1%83%95%E1%83%98%E1%83%A1%E1%83%94%E1%83%91%E1%83%98%E1%83%97.",
+        "target": "_blank"
+      }
+    },
+    {
+      "slug": "contact",
+      "activation": {
+        "href": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20IT%20%E1%83%A1%E1%83%94%E1%83%A0%E1%83%95%E1%83%98%E1%83%A1%E1%83%94%E1%83%91%E1%83%98%E1%83%97%20%E1%83%93%E1%83%90%E1%83%95%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%93%E1%83%98.",
+        "target": "_blank"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "route": "/industry/web/food",
+      "status": 200,
+      "title": "რესტორნის საიტის დამზადება ციფრული მენიუთი"
+    },
+    {
+      "route": "/industry/web/tourism",
+      "status": 200,
+      "title": "სასტუმროს საიტის დამზადება პირდაპირი ჯავშნებისთვის"
+    },
+    {
+      "route": "/industry/web/retail",
+      "status": 200,
+      "title": "ონლაინ მაღაზიის საიტის დამზადება"
+    },
+    {
+      "route": "/industry/web/beauty",
+      "status": 200,
+      "title": "სალონის საიტის დამზადება ონლაინ ჩაწერით"
+    },
+    {
+      "route": "/industry/web/legal-finance",
+      "status": 200,
+      "title": "იურიდიული კომპანიის საიტის დამზადება"
+    },
+    {
+      "route": "/lineup",
+      "status": 200,
+      "title": "სპორტული აკადემიის მართვა, ერთ აპში."
+    },
+    {
+      "route": "/services/web",
+      "status": 200,
+      "title": "ვებსაიტის დამზადება თქვენი ბიზნესისთვის."
+    },
+    {
+      "route": "/services/ai-chatbot",
+      "status": 200,
+      "title": "AI ჩატბოტი თქვენი ბიზნესისთვის"
+    },
+    {
+      "route": "/inventowms",
+      "status": 200,
+      "title": "საწყობის პროგრამა Facebook და Instagram გაყიდვებისთვის"
+    },
+    {
+      "route": "/contact",
+      "status": 200,
+      "title": "დაგვიკავშირდით"
+    }
+  ],
+  "reduced": [
+    {
+      "width": 1440,
+      "autoplay": "false",
+      "timers": 0,
+      "intervals": 0,
+      "running": 0,
+      "cards": [
+        [
+          "web",
+          1
+        ],
+        [
+          "chatbot",
+          6
+        ],
+        [
+          "invento",
+          2
+        ],
+        [
+          "lineup",
+          1
+        ]
+      ]
+    },
+    {
+      "width": 1024,
+      "autoplay": "false",
+      "timers": 0,
+      "intervals": 0,
+      "running": 0,
+      "cards": [
+        [
+          "web",
+          1
+        ],
+        [
+          "chatbot",
+          6
+        ],
+        [
+          "invento",
+          2
+        ],
+        [
+          "lineup",
+          1
+        ]
+      ]
+    },
+    {
+      "width": 390,
+      "autoplay": "false",
+      "timers": 0,
+      "intervals": 0,
+      "running": 0,
+      "cards": [
+        [
+          "web",
+          1
+        ],
+        [
+          "chatbot",
+          6
+        ],
+        [
+          "invento",
+          2
+        ],
+        [
+          "lineup",
+          1
+        ]
+      ]
+    }
+  ],
+  "errors": [],
+  "warnings": [],
+  "notices": [
+    "You have Reduced Motion enabled on your device. Animations may not appear as expected.",
+    "You have Reduced Motion enabled on your device. Animations may not appear as expected.",
+    "You have Reduced Motion enabled on your device. Animations may not appear as expected.",
+    "You have Reduced Motion enabled on your device. Animations may not appear as expected."
+  ],
+  "result": "PASS",
+  "initialLoads": [
+    {
+      "width": 1440,
+      "shifts": [
+        {
+          "time": 2426.2000000001863,
+          "value": 0.010970322898582177
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "shifts": [
+        {
+          "time": 2653.7000000001863,
+          "value": 0.021498758652643897
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "typescript": {
+      "command": "npx tsc -p tsconfig.app.json --noEmit",
+      "result": "PASS"
+    },
+    "diffWhitespace": {
+      "command": "git diff --check",
+      "result": "PASS"
+    },
+    "branch": "preview/apple-it",
+    "ownedDevServer": "stopped"
+  }
+}

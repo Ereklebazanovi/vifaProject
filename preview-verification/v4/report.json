@@ -1,0 +1,380 @@
+{
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 900,
+      "cues": {
+        "web": 431.3999999985099,
+        "invento": 1608.8999999985099,
+        "chatbot": 2809.6999999955297,
+        "lineup": 4427.5
+      },
+      "browser": {
+        "initialBrowserWidth": 520,
+        "finalBrowserWidth": 197.59375
+      },
+      "flow": {
+        "button": "გადახდილია ✓",
+        "notifications": 2,
+        "activeSteps": 3,
+        "connector": {
+          "width": 80,
+          "height": 1
+        }
+      },
+      "layout": {
+        "viewport": 1440,
+        "scrollWidth": 1440,
+        "sections": [
+          {
+            "id": "hero",
+            "background": "rgb(255, 255, 255)",
+            "padding": "96px"
+          },
+          {
+            "id": "services",
+            "background": "rgb(245, 245, 247)",
+            "padding": "96px"
+          },
+          {
+            "id": "connected",
+            "background": "rgb(29, 29, 31)",
+            "padding": "96px"
+          },
+          {
+            "id": "industries",
+            "background": "rgb(255, 255, 255)",
+            "padding": "96px"
+          },
+          {
+            "id": "contact",
+            "background": "rgb(245, 245, 247)",
+            "padding": "96px"
+          }
+        ],
+        "cards": [
+          {
+            "product": "web",
+            "gap": 22,
+            "clipped": false
+          },
+          {
+            "product": "chatbot",
+            "gap": 22,
+            "clipped": false
+          },
+          {
+            "product": "invento",
+            "gap": 22,
+            "clipped": false
+          },
+          {
+            "product": "lineup",
+            "gap": 22,
+            "clipped": false
+          }
+        ],
+        "industryDimensions": [
+          {
+            "width": 313,
+            "height": 400
+          },
+          {
+            "width": 313,
+            "height": 400
+          },
+          {
+            "width": 313,
+            "height": 400
+          },
+          {
+            "width": 313,
+            "height": 400
+          },
+          {
+            "width": 313,
+            "height": 400
+          }
+        ],
+        "industryType": [
+          {
+            "size": "28px",
+            "clipped": false
+          },
+          {
+            "size": "28px",
+            "clipped": false
+          },
+          {
+            "size": "28px",
+            "clipped": false
+          },
+          {
+            "size": "28px",
+            "clipped": false
+          },
+          {
+            "size": "28px",
+            "clipped": false
+          }
+        ],
+        "images": [],
+        "visibleHero": [
+          "web",
+          "lineup",
+          "invento",
+          "chatbot"
+        ]
+      },
+      "cleanup": {
+        "timers": 0,
+        "observers": 0
+      },
+      "reduced": {
+        "timers": 0,
+        "animations": 0,
+        "entrances": [
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none"
+        ],
+        "stock": [
+          "1",
+          "1",
+          "1"
+        ],
+        "pushes": [
+          {
+            "opacity": "1",
+            "transform": "none"
+          },
+          {
+            "opacity": "1",
+            "transform": "none"
+          }
+        ]
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "cues": {
+        "web": 408.20000000298023,
+        "invento": 1610.8000000044703,
+        "chatbot": 2815.5,
+        "lineup": 4413.5
+      },
+      "browser": {
+        "initialBrowserWidth": 430.9375,
+        "finalBrowserWidth": 163.75
+      },
+      "flow": {
+        "button": "გადახდილია ✓",
+        "notifications": 2,
+        "activeSteps": 3,
+        "connector": {
+          "width": 1,
+          "height": 64
+        }
+      },
+      "layout": {
+        "viewport": 390,
+        "scrollWidth": 390,
+        "sections": [
+          {
+            "id": "hero",
+            "background": "rgb(255, 255, 255)",
+            "padding": "64px"
+          },
+          {
+            "id": "services",
+            "background": "rgb(245, 245, 247)",
+            "padding": "64px"
+          },
+          {
+            "id": "connected",
+            "background": "rgb(29, 29, 31)",
+            "padding": "64px"
+          },
+          {
+            "id": "industries",
+            "background": "rgb(255, 255, 255)",
+            "padding": "64px"
+          },
+          {
+            "id": "contact",
+            "background": "rgb(245, 245, 247)",
+            "padding": "64px"
+          }
+        ],
+        "cards": [
+          {
+            "product": "web",
+            "gap": 22,
+            "clipped": false
+          },
+          {
+            "product": "chatbot",
+            "gap": 22,
+            "clipped": false
+          },
+          {
+            "product": "invento",
+            "gap": 22,
+            "clipped": false
+          },
+          {
+            "product": "lineup",
+            "gap": 22,
+            "clipped": false
+          }
+        ],
+        "industryDimensions": [
+          {
+            "width": 300,
+            "height": 383
+          },
+          {
+            "width": 300,
+            "height": 383
+          },
+          {
+            "width": 300,
+            "height": 383
+          },
+          {
+            "width": 300,
+            "height": 383
+          },
+          {
+            "width": 300,
+            "height": 383
+          }
+        ],
+        "industryType": [
+          {
+            "size": "24px",
+            "clipped": false
+          },
+          {
+            "size": "24px",
+            "clipped": false
+          },
+          {
+            "size": "24px",
+            "clipped": false
+          },
+          {
+            "size": "24px",
+            "clipped": false
+          },
+          {
+            "size": "24px",
+            "clipped": false
+          }
+        ],
+        "images": [],
+        "visibleHero": [
+          "invento",
+          "chatbot"
+        ]
+      },
+      "cleanup": {
+        "timers": 0,
+        "observers": 0
+      },
+      "reduced": {
+        "timers": 0,
+        "animations": 0,
+        "entrances": [
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none",
+          "none"
+        ],
+        "stock": [
+          "1",
+          "1",
+          "1"
+        ],
+        "pushes": [
+          {
+            "opacity": "1",
+            "transform": "none"
+          },
+          {
+            "opacity": "1",
+            "transform": "none"
+          }
+        ]
+      }
+    }
+  ],
+  "routes": [
+    {
+      "path": "/services/web",
+      "status": 200,
+      "h1": "ვებსაიტის დამზადება თქვენი ბიზნესისთვის."
+    },
+    {
+      "path": "/services/ai-chatbot",
+      "status": 200,
+      "h1": "AI ჩატბოტი თქვენი ბიზნესისთვის"
+    },
+    {
+      "path": "/inventowms",
+      "status": 200,
+      "h1": "საწყობის პროგრამა Facebook და Instagram გაყიდვებისთვის"
+    },
+    {
+      "path": "/lineup",
+      "status": 200,
+      "h1": "სპორტული აკადემიის მართვა, ერთ აპში."
+    },
+    {
+      "path": "/industry/web/food",
+      "status": 200,
+      "h1": "რესტორნის საიტის დამზადება ციფრული მენიუთი"
+    },
+    {
+      "path": "/industry/web/tourism",
+      "status": 200,
+      "h1": "სასტუმროს საიტის დამზადება პირდაპირი ჯავშნებისთვის"
+    },
+    {
+      "path": "/industry/web/retail",
+      "status": 200,
+      "h1": "ონლაინ მაღაზიის საიტის დამზადება"
+    },
+    {
+      "path": "/industry/web/beauty",
+      "status": 200,
+      "h1": "სალონის საიტის დამზადება ონლაინ ჩაწერით"
+    },
+    {
+      "path": "/industry/web/legal-finance",
+      "status": 200,
+      "h1": "იურიდიული კომპანიის საიტის დამზადება"
+    }
+  ],
+  "errors": [],
+  "warnings": [],
+  "notices": [
+    "You have Reduced Motion enabled on your device. Animations may not appear as expected.",
+    "You have Reduced Motion enabled on your device. Animations may not appear as expected."
+  ],
+  "otherRouteMessages": []
+}

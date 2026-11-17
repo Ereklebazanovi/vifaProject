@@ -1,0 +1,639 @@
+{
+  "layouts": [
+    {
+      "width": 1440,
+      "grid": "480px 480px",
+      "cards": [
+        {
+          "width": 480,
+          "height": 560,
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(229, 229, 234)",
+          "title": "28px",
+          "panel": {
+            "height": 300,
+            "radius": "20px",
+            "color": "rgb(179, 207, 234)"
+          }
+        },
+        {
+          "width": 480,
+          "height": 560,
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(229, 229, 234)",
+          "title": "28px",
+          "panel": {
+            "height": 300,
+            "radius": "20px",
+            "color": "rgb(196, 183, 236)"
+          }
+        },
+        {
+          "width": 480,
+          "height": 560,
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(229, 229, 234)",
+          "title": "28px",
+          "panel": {
+            "height": 300,
+            "radius": "20px",
+            "color": "rgb(154, 206, 170)"
+          }
+        },
+        {
+          "width": 480,
+          "height": 560,
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(229, 229, 234)",
+          "title": "28px",
+          "panel": {
+            "height": 300,
+            "radius": "20px",
+            "color": "rgb(248, 205, 176)"
+          }
+        }
+      ],
+      "chipRows": 1,
+      "indices": [
+        {
+          "text": "01",
+          "font": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        },
+        {
+          "text": "02",
+          "font": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        },
+        {
+          "text": "03",
+          "font": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        },
+        {
+          "text": "04",
+          "font": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        },
+        {
+          "text": "01",
+          "font": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        },
+        {
+          "text": "02",
+          "font": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        },
+        {
+          "text": "03",
+          "font": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        }
+      ],
+      "backgrounds": [
+        "rgb(255, 255, 255)",
+        "rgb(245, 245, 247)",
+        "rgb(255, 255, 255)",
+        "rgb(245, 245, 247)",
+        "rgb(255, 255, 255)",
+        "rgb(245, 245, 247)"
+      ],
+      "obsoleteControls": 0,
+      "horizontal": {
+        "width": 1440,
+        "page": 1440,
+        "scrollable": []
+      }
+    },
+    {
+      "width": 1024,
+      "grid": "480px 480px",
+      "cards": [
+        {
+          "width": 480,
+          "height": 560,
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(229, 229, 234)",
+          "title": "28px",
+          "panel": {
+            "height": 300,
+            "radius": "20px",
+            "color": "rgb(179, 207, 234)"
+          }
+        },
+        {
+          "width": 480,
+          "height": 560,
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(229, 229, 234)",
+          "title": "28px",
+          "panel": {
+            "height": 300,
+            "radius": "20px",
+            "color": "rgb(196, 183, 236)"
+          }
+        },
+        {
+          "width": 480,
+          "height": 560,
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(229, 229, 234)",
+          "title": "28px",
+          "panel": {
+            "height": 300,
+            "radius": "20px",
+            "color": "rgb(154, 206, 170)"
+          }
+        },
+        {
+          "width": 480,
+          "height": 560,
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(229, 229, 234)",
+          "title": "28px",
+          "panel": {
+            "height": 300,
+            "radius": "20px",
+            "color": "rgb(248, 205, 176)"
+          }
+        }
+      ],
+      "chipRows": 1,
+      "indices": [
+        {
+          "text": "01",
+          "font": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        },
+        {
+          "text": "02",
+          "font": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        },
+        {
+          "text": "03",
+          "font": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        },
+        {
+          "text": "04",
+          "font": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        },
+        {
+          "text": "01",
+          "font": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        },
+        {
+          "text": "02",
+          "font": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        },
+        {
+          "text": "03",
+          "font": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        }
+      ],
+      "backgrounds": [
+        "rgb(255, 255, 255)",
+        "rgb(245, 245, 247)",
+        "rgb(255, 255, 255)",
+        "rgb(245, 245, 247)",
+        "rgb(255, 255, 255)",
+        "rgb(245, 245, 247)"
+      ],
+      "obsoleteControls": 0,
+      "horizontal": {
+        "width": 1024,
+        "page": 1024,
+        "scrollable": []
+      }
+    },
+    {
+      "width": 390,
+      "grid": "346px",
+      "cards": [
+        {
+          "width": 346,
+          "height": 520,
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(229, 229, 234)",
+          "title": "24px",
+          "panel": {
+            "height": 260,
+            "radius": "20px",
+            "color": "rgb(179, 207, 234)"
+          }
+        },
+        {
+          "width": 346,
+          "height": 520,
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(229, 229, 234)",
+          "title": "24px",
+          "panel": {
+            "height": 260,
+            "radius": "20px",
+            "color": "rgb(196, 183, 236)"
+          }
+        },
+        {
+          "width": 346,
+          "height": 520,
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(229, 229, 234)",
+          "title": "24px",
+          "panel": {
+            "height": 260,
+            "radius": "20px",
+            "color": "rgb(154, 206, 170)"
+          }
+        },
+        {
+          "width": 346,
+          "height": 520,
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(229, 229, 234)",
+          "title": "24px",
+          "panel": {
+            "height": 260,
+            "radius": "20px",
+            "color": "rgb(248, 205, 176)"
+          }
+        }
+      ],
+      "chipRows": 2,
+      "indices": [
+        {
+          "text": "01",
+          "font": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        },
+        {
+          "text": "02",
+          "font": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        },
+        {
+          "text": "03",
+          "font": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        },
+        {
+          "text": "04",
+          "font": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        },
+        {
+          "text": "01",
+          "font": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        },
+        {
+          "text": "02",
+          "font": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        },
+        {
+          "text": "03",
+          "font": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        }
+      ],
+      "backgrounds": [
+        "rgb(255, 255, 255)",
+        "rgb(245, 245, 247)",
+        "rgb(255, 255, 255)",
+        "rgb(245, 245, 247)",
+        "rgb(255, 255, 255)",
+        "rgb(245, 245, 247)"
+      ],
+      "obsoleteControls": 0,
+      "horizontal": {
+        "width": 390,
+        "page": 390,
+        "scrollable": []
+      }
+    }
+  ],
+  "interactions": [
+    {
+      "width": 1440,
+      "beforeAuto": {
+        "slug": "food",
+        "height": 422,
+        "time": 3614.5
+      },
+      "afterAuto": {
+        "slug": "tourism",
+        "height": 422,
+        "time": 9904.800000000047
+      },
+      "progress": {
+        "height": "2px",
+        "transform": "matrix(0.066676, 0, 0, 1, 0, 0)"
+      },
+      "industries": [
+        {
+          "title": "რესტორნები და კვება",
+          "features": [
+            "ბრენდირებული ვებ-სივრცე",
+            "ჯავშნების ავტომატიზაცია",
+            "სრული დამოუკიდებლობა (CMS)"
+          ],
+          "whatsapp": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%A0%E1%83%94%E1%83%A1%E1%83%A2%E1%83%9D%E1%83%A0%E1%83%90%E1%83%9C%E1%83%98%20%E1%83%9B%E1%83%90%E1%83%A5%E1%83%95%E1%83%A1%20%E1%83%93%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20%E1%83%A1%E1%83%90%E1%83%98%E1%83%A2%E1%83%98.",
+          "target": "_blank",
+          "detail": "/industry/web/food",
+          "panelHeight": 422,
+          "displayed": "food"
+        },
+        {
+          "title": "სასტუმროები და ტურიზმი",
+          "features": [
+            "პრემიუმ ვიზუალი და კატალოგი",
+            "მოთხოვნების სისტემა",
+            "სრული მართვის პანელი (CMS)"
+          ],
+          "whatsapp": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%A1%E1%83%90%E1%83%A1%E1%83%A2%E1%83%A3%E1%83%9B%E1%83%A0%E1%83%9D%20%E1%83%9B%E1%83%90%E1%83%A5%E1%83%95%E1%83%A1%20%E1%83%93%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20%E1%83%A1%E1%83%90%E1%83%98%E1%83%A2%E1%83%98.",
+          "target": "_blank",
+          "detail": "/industry/web/tourism",
+          "panelHeight": 422,
+          "displayed": "tourism"
+        },
+        {
+          "title": "ონლაინ მაღაზია და ვაჭრობა",
+          "features": [
+            "სრულფასოვანი E-commerce",
+            "CRM & საწყობის მართვა (WMS)",
+            "ულტრა-სწრაფი მობილური ვერსია"
+          ],
+          "whatsapp": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%9B%E1%83%90%E1%83%A6%E1%83%90%E1%83%96%E1%83%98%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%A5%E1%83%95%E1%83%A1%20%E1%83%93%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20%E1%83%9D%E1%83%9C%E1%83%9A%E1%83%90%E1%83%98%E1%83%9C%20%E1%83%9B%E1%83%90%E1%83%A6%E1%83%90%E1%83%96%E1%83%98%E1%83%90.",
+          "target": "_blank",
+          "detail": "/industry/web/retail",
+          "panelHeight": 422,
+          "displayed": "retail"
+        },
+        {
+          "title": "სილამაზე და ესთეტიკა",
+          "features": [
+            "პრემიუმ კატალოგი და იმიჯი",
+            "ჭკვიანი ჯავშნები 0% საკომისიოთი",
+            "პროდუქციის ონლაინ გაყიდვები"
+          ],
+          "whatsapp": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%A1%E1%83%90%E1%83%9A%E1%83%9D%E1%83%9C%E1%83%98%20%E1%83%9B%E1%83%90%E1%83%A5%E1%83%95%E1%83%A1%20%E1%83%93%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20%E1%83%A1%E1%83%90%E1%83%98%E1%83%A2%E1%83%98.",
+          "target": "_blank",
+          "detail": "/industry/web/beauty",
+          "panelHeight": 422,
+          "displayed": "beauty"
+        },
+        {
+          "title": "იურიდიული და საფინანსო",
+          "features": [
+            "უსაფრთხო კლიენტთა პორტალი",
+            "პრემიუმ კორპორატიული იმიჯი",
+            "სრული მართვის პანელი (CMS)"
+          ],
+          "whatsapp": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%98%E1%83%A3%E1%83%A0%E1%83%98%E1%83%93%E1%83%98%E1%83%A3%E1%83%9A%E1%83%98%20%E1%83%99%E1%83%9D%E1%83%9B%E1%83%9E%E1%83%90%E1%83%9C%E1%83%98%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%A5%E1%83%95%E1%83%A1%20%E1%83%93%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20%E1%83%A1%E1%83%90%E1%83%98%E1%83%A2%E1%83%98.",
+          "target": "_blank",
+          "detail": "/industry/web/legal-finance",
+          "panelHeight": 422,
+          "displayed": "legal-finance"
+        }
+      ],
+      "keyboard": "arrows, wrap, Home, End",
+      "stoppedAfterInteraction": true
+    },
+    {
+      "width": 1024,
+      "beforeAuto": {
+        "slug": "food",
+        "height": 422,
+        "time": 1932.6999999999534
+      },
+      "afterAuto": {
+        "slug": "tourism",
+        "height": 422,
+        "time": 9789.899999999907
+      },
+      "progress": {
+        "height": "2px",
+        "transform": "matrix(0.102405, 0, 0, 1, 0, 0)"
+      },
+      "industries": [
+        {
+          "title": "რესტორნები და კვება",
+          "features": [
+            "ბრენდირებული ვებ-სივრცე",
+            "ჯავშნების ავტომატიზაცია",
+            "სრული დამოუკიდებლობა (CMS)"
+          ],
+          "whatsapp": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%A0%E1%83%94%E1%83%A1%E1%83%A2%E1%83%9D%E1%83%A0%E1%83%90%E1%83%9C%E1%83%98%20%E1%83%9B%E1%83%90%E1%83%A5%E1%83%95%E1%83%A1%20%E1%83%93%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20%E1%83%A1%E1%83%90%E1%83%98%E1%83%A2%E1%83%98.",
+          "target": "_blank",
+          "detail": "/industry/web/food",
+          "panelHeight": 422,
+          "displayed": "food"
+        },
+        {
+          "title": "სასტუმროები და ტურიზმი",
+          "features": [
+            "პრემიუმ ვიზუალი და კატალოგი",
+            "მოთხოვნების სისტემა",
+            "სრული მართვის პანელი (CMS)"
+          ],
+          "whatsapp": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%A1%E1%83%90%E1%83%A1%E1%83%A2%E1%83%A3%E1%83%9B%E1%83%A0%E1%83%9D%20%E1%83%9B%E1%83%90%E1%83%A5%E1%83%95%E1%83%A1%20%E1%83%93%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20%E1%83%A1%E1%83%90%E1%83%98%E1%83%A2%E1%83%98.",
+          "target": "_blank",
+          "detail": "/industry/web/tourism",
+          "panelHeight": 422,
+          "displayed": "tourism"
+        },
+        {
+          "title": "ონლაინ მაღაზია და ვაჭრობა",
+          "features": [
+            "სრულფასოვანი E-commerce",
+            "CRM & საწყობის მართვა (WMS)",
+            "ულტრა-სწრაფი მობილური ვერსია"
+          ],
+          "whatsapp": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%9B%E1%83%90%E1%83%A6%E1%83%90%E1%83%96%E1%83%98%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%A5%E1%83%95%E1%83%A1%20%E1%83%93%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20%E1%83%9D%E1%83%9C%E1%83%9A%E1%83%90%E1%83%98%E1%83%9C%20%E1%83%9B%E1%83%90%E1%83%A6%E1%83%90%E1%83%96%E1%83%98%E1%83%90.",
+          "target": "_blank",
+          "detail": "/industry/web/retail",
+          "panelHeight": 422,
+          "displayed": "retail"
+        },
+        {
+          "title": "სილამაზე და ესთეტიკა",
+          "features": [
+            "პრემიუმ კატალოგი და იმიჯი",
+            "ჭკვიანი ჯავშნები 0% საკომისიოთი",
+            "პროდუქციის ონლაინ გაყიდვები"
+          ],
+          "whatsapp": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%A1%E1%83%90%E1%83%9A%E1%83%9D%E1%83%9C%E1%83%98%20%E1%83%9B%E1%83%90%E1%83%A5%E1%83%95%E1%83%A1%20%E1%83%93%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20%E1%83%A1%E1%83%90%E1%83%98%E1%83%A2%E1%83%98.",
+          "target": "_blank",
+          "detail": "/industry/web/beauty",
+          "panelHeight": 422,
+          "displayed": "beauty"
+        },
+        {
+          "title": "იურიდიული და საფინანსო",
+          "features": [
+            "უსაფრთხო კლიენტთა პორტალი",
+            "პრემიუმ კორპორატიული იმიჯი",
+            "სრული მართვის პანელი (CMS)"
+          ],
+          "whatsapp": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%98%E1%83%A3%E1%83%A0%E1%83%98%E1%83%93%E1%83%98%E1%83%A3%E1%83%9A%E1%83%98%20%E1%83%99%E1%83%9D%E1%83%9B%E1%83%9E%E1%83%90%E1%83%9C%E1%83%98%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%A5%E1%83%95%E1%83%A1%20%E1%83%93%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20%E1%83%A1%E1%83%90%E1%83%98%E1%83%A2%E1%83%98.",
+          "target": "_blank",
+          "detail": "/industry/web/legal-finance",
+          "panelHeight": 422,
+          "displayed": "legal-finance"
+        }
+      ],
+      "keyboard": "arrows, wrap, Home, End",
+      "stoppedAfterInteraction": true
+    },
+    {
+      "width": 390,
+      "beforeAuto": {
+        "slug": "food",
+        "height": 610.78125,
+        "time": 2111.3000000000466
+      },
+      "afterAuto": {
+        "slug": "tourism",
+        "height": 610.78125,
+        "time": 9954
+      },
+      "progress": {
+        "height": "2px",
+        "transform": "matrix(0.107152, 0, 0, 1, 0, 0)"
+      },
+      "industries": [
+        {
+          "title": "რესტორნები და კვება",
+          "features": [
+            "ბრენდირებული ვებ-სივრცე",
+            "ჯავშნების ავტომატიზაცია",
+            "სრული დამოუკიდებლობა (CMS)"
+          ],
+          "whatsapp": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%A0%E1%83%94%E1%83%A1%E1%83%A2%E1%83%9D%E1%83%A0%E1%83%90%E1%83%9C%E1%83%98%20%E1%83%9B%E1%83%90%E1%83%A5%E1%83%95%E1%83%A1%20%E1%83%93%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20%E1%83%A1%E1%83%90%E1%83%98%E1%83%A2%E1%83%98.",
+          "target": "_blank",
+          "detail": "/industry/web/food",
+          "panelHeight": 610.78125,
+          "displayed": "food"
+        },
+        {
+          "title": "სასტუმროები და ტურიზმი",
+          "features": [
+            "პრემიუმ ვიზუალი და კატალოგი",
+            "მოთხოვნების სისტემა",
+            "სრული მართვის პანელი (CMS)"
+          ],
+          "whatsapp": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%A1%E1%83%90%E1%83%A1%E1%83%A2%E1%83%A3%E1%83%9B%E1%83%A0%E1%83%9D%20%E1%83%9B%E1%83%90%E1%83%A5%E1%83%95%E1%83%A1%20%E1%83%93%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20%E1%83%A1%E1%83%90%E1%83%98%E1%83%A2%E1%83%98.",
+          "target": "_blank",
+          "detail": "/industry/web/tourism",
+          "panelHeight": 610.78125,
+          "displayed": "tourism"
+        },
+        {
+          "title": "ონლაინ მაღაზია და ვაჭრობა",
+          "features": [
+            "სრულფასოვანი E-commerce",
+            "CRM & საწყობის მართვა (WMS)",
+            "ულტრა-სწრაფი მობილური ვერსია"
+          ],
+          "whatsapp": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%9B%E1%83%90%E1%83%A6%E1%83%90%E1%83%96%E1%83%98%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%A5%E1%83%95%E1%83%A1%20%E1%83%93%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20%E1%83%9D%E1%83%9C%E1%83%9A%E1%83%90%E1%83%98%E1%83%9C%20%E1%83%9B%E1%83%90%E1%83%A6%E1%83%90%E1%83%96%E1%83%98%E1%83%90.",
+          "target": "_blank",
+          "detail": "/industry/web/retail",
+          "panelHeight": 610.78125,
+          "displayed": "retail"
+        },
+        {
+          "title": "სილამაზე და ესთეტიკა",
+          "features": [
+            "პრემიუმ კატალოგი და იმიჯი",
+            "ჭკვიანი ჯავშნები 0% საკომისიოთი",
+            "პროდუქციის ონლაინ გაყიდვები"
+          ],
+          "whatsapp": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%A1%E1%83%90%E1%83%9A%E1%83%9D%E1%83%9C%E1%83%98%20%E1%83%9B%E1%83%90%E1%83%A5%E1%83%95%E1%83%A1%20%E1%83%93%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20%E1%83%A1%E1%83%90%E1%83%98%E1%83%A2%E1%83%98.",
+          "target": "_blank",
+          "detail": "/industry/web/beauty",
+          "panelHeight": 610.78125,
+          "displayed": "beauty"
+        },
+        {
+          "title": "იურიდიული და საფინანსო",
+          "features": [
+            "უსაფრთხო კლიენტთა პორტალი",
+            "პრემიუმ კორპორატიული იმიჯი",
+            "სრული მართვის პანელი (CMS)"
+          ],
+          "whatsapp": "https://wa.me/995557624243?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90%2C%20%E1%83%98%E1%83%A3%E1%83%A0%E1%83%98%E1%83%93%E1%83%98%E1%83%A3%E1%83%9A%E1%83%98%20%E1%83%99%E1%83%9D%E1%83%9B%E1%83%9E%E1%83%90%E1%83%9C%E1%83%98%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%A5%E1%83%95%E1%83%A1%20%E1%83%93%E1%83%90%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1%20%E1%83%A1%E1%83%90%E1%83%98%E1%83%A2%E1%83%98.",
+          "target": "_blank",
+          "detail": "/industry/web/legal-finance",
+          "panelHeight": 610.78125,
+          "displayed": "legal-finance"
+        }
+      ],
+      "keyboard": "arrows, wrap, Home, End",
+      "stoppedAfterInteraction": true
+    }
+  ],
+  "routes": [
+    {
+      "path": "/industry/web/food",
+      "status": 200,
+      "heading": "რესტორნის საიტის დამზადება ციფრული მენიუთი"
+    },
+    {
+      "path": "/industry/web/tourism",
+      "status": 200,
+      "heading": "სასტუმროს საიტის დამზადება პირდაპირი ჯავშნებისთვის"
+    },
+    {
+      "path": "/industry/web/retail",
+      "status": 200,
+      "heading": "ონლაინ მაღაზიის საიტის დამზადება"
+    },
+    {
+      "path": "/industry/web/beauty",
+      "status": 200,
+      "heading": "სალონის საიტის დამზადება ონლაინ ჩაწერით"
+    },
+    {
+      "path": "/industry/web/legal-finance",
+      "status": 200,
+      "heading": "იურიდიული კომპანიის საიტის დამზადება"
+    }
+  ],
+  "reduced": [
+    {
+      "width": 1440,
+      "products": [
+        "1",
+        "6",
+        "2",
+        "1"
+      ],
+      "flow": "6",
+      "auto": "false",
+      "timers": 0,
+      "intervals": 0,
+      "animations": 0
+    },
+    {
+      "width": 1024,
+      "products": [
+        "1",
+        "6",
+        "2",
+        "1"
+      ],
+      "flow": "6",
+      "auto": "false",
+      "timers": 0,
+      "intervals": 0,
+      "animations": 0
+    },
+    {
+      "width": 390,
+      "products": [
+        "1",
+        "6",
+        "2",
+        "1"
+      ],
+      "flow": "6",
+      "auto": "false",
+      "timers": 0,
+      "intervals": 0,
+      "animations": 0
+    }
+  ],
+  "errors": [],
+  "warnings": [],
+  "notices": [
+    "You have Reduced Motion enabled on your device. Animations may not appear as expected.",
+    "You have Reduced Motion enabled on your device. Animations may not appear as expected.",
+    "You have Reduced Motion enabled on your device. Animations may not appear as expected."
+  ]
+}

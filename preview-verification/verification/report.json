@@ -1,0 +1,186 @@
+{
+  "viewports": [
+    {
+      "width": 1440,
+      "initial": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "afterInitial": [
+        1,
+        6,
+        2,
+        0
+      ],
+      "final": [
+        1,
+        6,
+        2,
+        1
+      ],
+      "layout": {
+        "pageWidth": 1440,
+        "scrollWidth": 1440,
+        "cards": [
+          {
+            "product": "web",
+            "width": 400,
+            "textBottom": 577.890625,
+            "deviceTop": 599.890625,
+            "clippedText": false,
+            "facts": {
+              "size": "14px",
+              "weight": "500"
+            }
+          },
+          {
+            "product": "chatbot",
+            "width": 400,
+            "textBottom": 577.890625,
+            "deviceTop": 599.890625,
+            "clippedText": false,
+            "facts": {
+              "size": "14px",
+              "weight": "500"
+            }
+          },
+          {
+            "product": "invento",
+            "width": 400,
+            "textBottom": 577.890625,
+            "deviceTop": 599.890625,
+            "clippedText": false,
+            "facts": {
+              "size": "14px",
+              "weight": "500"
+            }
+          },
+          {
+            "product": "lineup",
+            "width": 400,
+            "textBottom": 548.296875,
+            "deviceTop": 570.296875,
+            "clippedText": false,
+            "facts": null
+          }
+        ]
+      },
+      "chat": {
+        "scrolled": 1,
+        "bottom": 0
+      },
+      "lift": "matrix(1, 0, 0, 1, 0, -6)",
+      "cleanup": {
+        "timers": 0,
+        "observers": 0
+      },
+      "reduced": {
+        "activeAnimations": 0,
+        "timers": 0,
+        "entrance": "none",
+        "push": {
+          "opacity": "1",
+          "transform": "none"
+        }
+      }
+    },
+    {
+      "width": 390,
+      "initial": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "afterInitial": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "final": [
+        1,
+        6,
+        2,
+        1
+      ],
+      "layout": {
+        "pageWidth": 390,
+        "scrollWidth": 390,
+        "cards": [
+          {
+            "product": "web",
+            "width": 331.5,
+            "textBottom": 579.859375,
+            "deviceTop": 601.859375,
+            "clippedText": false,
+            "facts": {
+              "size": "14px",
+              "weight": "500"
+            }
+          },
+          {
+            "product": "chatbot",
+            "width": 331.5,
+            "textBottom": 603.375,
+            "deviceTop": 625.375,
+            "clippedText": false,
+            "facts": {
+              "size": "14px",
+              "weight": "500"
+            }
+          },
+          {
+            "product": "invento",
+            "width": 331.5,
+            "textBottom": 579.859375,
+            "deviceTop": 601.859375,
+            "clippedText": false,
+            "facts": {
+              "size": "14px",
+              "weight": "500"
+            }
+          },
+          {
+            "product": "lineup",
+            "width": 331.5,
+            "textBottom": 550.265625,
+            "deviceTop": 572.265625,
+            "clippedText": false,
+            "facts": null
+          }
+        ]
+      },
+      "chat": {
+        "scrolled": 64,
+        "bottom": 0
+      },
+      "lift": "matrix(1, 0, 0, 1, 0, -6)",
+      "cleanup": {
+        "timers": 0,
+        "observers": 0
+      },
+      "reduced": {
+        "activeAnimations": 0,
+        "timers": 0,
+        "entrance": "none",
+        "push": {
+          "opacity": "1",
+          "transform": "none"
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "warnings": [],
+  "existingHomeWarnings": [
+    "Warning: React does not recognize the `%s` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `%s` instead. If you accidentally passed it from a parent component, remove it from the DOM element.%s fetchPriority fetchpriority \n    at img\n    at picture\n    at div\n    at NewHomeVifa (http://localhost:5173/src/pages/NewHomeVifa.tsx:203:31)\n    at DomainBasedHome\n    at Home\n    at RenderedRoute (http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=3e2a6a79:6281:26)\n    at Outlet (http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=3e2a6a79:7056:26)\n    at main\n    at div\n    at Layout (http://localhost:5173/src/layout/Layout.tsx:57:30)\n    at RenderedRoute (http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=3e2a6a79:6281:26)\n    at Routes (http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=3e2a6a79:7124:3)\n    at Suspense\n    at Router (http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=3e2a6a79:7065:13)\n    at BrowserRouter (http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=3e2a6a79:10250:3)\n    at NavigationProvider (http://localhost:5173/src/contexts/NavigationContext.tsx:5:38)\n    at LanguageProvider (http://localhost:5173/src/contexts/LanguageContext.tsx:8:3)\n    at _HelmetProvider (http://localhost:5173/node_modules/.vite/deps/react-helmet-async.js?v=3e2a6a79:624:5)\n    at App",
+    "Warning: React does not recognize the `%s` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `%s` instead. If you accidentally passed it from a parent component, remove it from the DOM element.%s fetchPriority fetchpriority \n    at img\n    at picture\n    at div\n    at NewHomeVifa (http://localhost:5173/src/pages/NewHomeVifa.tsx:203:31)\n    at DomainBasedHome\n    at Home\n    at RenderedRoute (http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=3e2a6a79:6281:26)\n    at Outlet (http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=3e2a6a79:7056:26)\n    at main\n    at div\n    at Layout (http://localhost:5173/src/layout/Layout.tsx:57:30)\n    at RenderedRoute (http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=3e2a6a79:6281:26)\n    at Routes (http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=3e2a6a79:7124:3)\n    at Suspense\n    at Router (http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=3e2a6a79:7065:13)\n    at BrowserRouter (http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=3e2a6a79:10250:3)\n    at NavigationProvider (http://localhost:5173/src/contexts/NavigationContext.tsx:5:38)\n    at LanguageProvider (http://localhost:5173/src/contexts/LanguageContext.tsx:8:3)\n    at _HelmetProvider (http://localhost:5173/node_modules/.vite/deps/react-helmet-async.js?v=3e2a6a79:624:5)\n    at App"
+  ],
+  "notices": [
+    "You have Reduced Motion enabled on your device. Animations may not appear as expected.",
+    "You have Reduced Motion enabled on your device. Animations may not appear as expected."
+  ]
+}
