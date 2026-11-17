@@ -267,7 +267,8 @@ export default function ITHubPreview() {
           display: inline-flex;
           align-items: baseline;
           gap: 5px;
-          color: var(--it-text);
+          /* "VIFA" in the same blue as the consultation button; "Digital" stays gray. */
+          color: var(--it-button);
           font-size: 19px;
           font-weight: 700;
           letter-spacing: 0.01em;
@@ -279,7 +280,6 @@ export default function ITHubPreview() {
           font-weight: 400;
           color: var(--it-text-2);
         }
-
         .it-nav-end {
           display: flex;
           align-items: center;
