@@ -6,11 +6,17 @@ import { SectionHeading } from "./SectionHeading";
 import { IndustryPhoto, IndustryWidget } from "./IndustryShowcase";
 import { getIndustryShowcases } from "./industryShowcases";
 
+const heading = {
+  ka: ["ვებსაიტები თქვენი სფეროსთვის.", "ჯავშნები, გადახდები და კლიენტის პორტალები."],
+  en: ["Websites for your industry.", "Bookings, payments and client portals."],
+} as const;
+
 export function IndustryCarousel({ language = "ka" }: { language?: "ka" | "en" }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   const en = language === "en";
   const items = getIndustryShowcases(language);
+  const [title, subtitle] = heading[language];
   const count = items.length;
   const details = en ? "Details" : "დეტალურად";
 
@@ -47,22 +53,20 @@ export function IndustryCarousel({ language = "ka" }: { language?: "ka" | "en" }
   return (
     <section id="industries" className="it-section it-industry-carousel"
       aria-roledescription="carousel" aria-labelledby="industries-heading">
-      <SectionHeading id="industries-heading" className="it-col"
-        secondary={en ? "Bookings, payments and client portals." : "ჯავშნები, გადახდები და კლიენტის პორტალები."}>
-        {en ? "Websites for your industry." : "ვებსაიტები თქვენი სფეროსთვის."}
-      </SectionHeading>
+      <SectionHeading id="industries-heading" className="it-col" secondary={subtitle}>{title}</SectionHeading>
       <div ref={trackRef} className="it-ic-track">
-        {items.map((s, i) => (
-          <article key={s.slug} className="it-ic-slide" aria-roledescription="slide" aria-label={`${i + 1} / ${count}: ${s.title}`}
+        {items.map((s) => (
+          <PageLink key={s.slug} to={`/industry/web/${s.slug}`} className="it-ic-slide" draggable={false}
+            aria-label={`${s.title}: ${details}`}
             style={{ "--ic-block": s.block } as CSSProperties}>
             <div className="it-ic-copy">
               <h3>{s.title}</h3>
               <p>{s.line}</p>
-              <PageLink to={`/industry/web/${s.slug}`} className="it-ic-link" aria-label={`${s.title}: ${details}`}>{details} ›</PageLink>
+              <span className="it-ic-link" aria-hidden="true">{details} ›</span>
             </div>
             <div className="it-ic-tile" aria-hidden="true"><IndustryWidget widget={s.widget} /></div>
             <IndustryPhoto className="it-ic-photo" slide={s} />
-          </article>
+          </PageLink>
         ))}
       </div>
       <div className="it-ic-pager it-col">

@@ -11,7 +11,7 @@ const steps = [
 const englishSteps = [
   { title: "Tell us what you need", body: "Message us on WhatsApp or use the contact form to tell us about your project." },
   { title: "Get a proposal", body: "The proposal lists what's included, what it costs and how long the work will take." },
-  { title: "Receive your website", body: "We start after your approval and deliver the finished project within the agreed timeframe." },
+  { title: "Receive your project", body: "We start after your approval and deliver the finished project within the agreed timeframe." },
 ];
 
 interface ProcessExample {
@@ -23,13 +23,14 @@ interface ProcessExample {
 }
 
 export function HowWeStart({
-  language = "ka", whatsappHref = consultationUrl, processSteps, example, showActions = true,
+  language = "ka", whatsappHref = consultationUrl, processSteps, example, showActions = true, showExamples = true,
 }: {
   language?: "ka" | "en";
   whatsappHref?: string;
   processSteps?: ReadonlyArray<{ title: string; body?: string }>;
   example?: ProcessExample;
   showActions?: boolean;
+  showExamples?: boolean;
 }) {
   const en = language === "en";
   return <section id="getting-started" className="it-section it-getting-started it-col">
@@ -40,7 +41,7 @@ export function HowWeStart({
           <h3>{step.title}</h3>
           {step.body && <p className="it-start-description">{step.body}</p>}
         </div>
-        <div className="it-start-artifact-space" aria-hidden="true">
+        {showExamples && <div className="it-start-artifact-space" aria-hidden="true">
           <div className="it-start-artifact">
             {index === 0 && <div className="it-start-chat">
               <p className="it-start-chat-customer">{example?.inquiry ?? (en ? "Hello, I'm interested in a website." : "გამარჯობა, საიტი მაინტერესებს.")}</p>
@@ -64,7 +65,7 @@ export function HowWeStart({
               <div className="it-start-browser-body"><span>{en ? "Website is live ✓" : "საიტი გაშვებულია ✓"}</span></div>
             </div>)}
           </div>
-        </div>
+        </div>}
       </li>)}
     </ol>
     {showActions && <div className="it-start-consultation">

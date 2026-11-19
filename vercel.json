@@ -9,7 +9,7 @@
     },
     {
       "source": "/services/digital-advertising",
-      "destination": "/services/marketing",
+      "destination": "/services/advertising",
       "permanent": true
     }
   ],

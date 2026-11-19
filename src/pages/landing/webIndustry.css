@@ -83,13 +83,9 @@
   background: #d9cdf2;
 }
 
-.industry-invento-image {
-  display: block;
-  width: min(100%, 300px);
-  aspect-ratio: 16 / 10;
-  border-radius: 12px;
-  object-fit: cover;
-  object-position: top;
+.industry-invento-visual {
+  width: min(100%, 316px);
+  align-self: center;
 }
 
 .industry-service-link {

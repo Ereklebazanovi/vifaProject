@@ -12,6 +12,8 @@ import { ServiceCard } from "../components/ui/ServiceCard";
 import { ServiceHero } from "../components/ui/ServiceHero";
 import { SiteFooter } from "../components/ui/SiteFooter";
 import { SiteNav } from "../components/ui/SiteNav";
+import { OtherItServices } from "../components/ui/OtherItServices";
+import { itBreadcrumbs, itHref } from "../data/itServices";
 import { ChatbotPhoneDemo } from "./ChatbotPhoneDemo";
 import "./chatbotService.css";
 
@@ -384,10 +386,7 @@ export default function AIChatbot() {
   const translations: Record<string, string> = aiChatbotTranslations[language];
   const t: T = (key) => translations[key];
   const title = en ? "AI Chatbot for Your Business." : "AI ჩატბოტი თქვენი ბიზნესისთვის.";
-  const breadcrumbs = [
-    { name: en ? "Home" : "მთავარი", url: "https://vifadigital.ge/" },
-    { name: en ? "AI Chatbot" : "AI ჩატბოტი", url: "https://vifadigital.ge/services/ai-chatbot" },
-  ];
+  const breadcrumbs = itBreadcrumbs("chatbot", language);
   const faqForSchema = [6, 1, 2, 3, 4, 5, 7].map((number) => {
     const key = `faq.q${number}`;
     return { question: t(`${key}.question`), answer: `${t(`${key}.answer`)} ${t(`${key}.details`)}`.trim() };
@@ -435,9 +434,9 @@ export default function AIChatbot() {
         breadcrumbs={breadcrumbs}
         faq={faqForSchema}
       />
-      <SiteNav consultationHref={whatsappUrl} activeLink="/preview/it" language={language} onLanguageToggle={toggleLanguage} />
+      <SiteNav consultationHref={whatsappUrl} activeLink={itHref} language={language} onLanguageToggle={toggleLanguage} />
       <main className="it-main">
-        <ServiceHero id="chatbot-hero-title" breadcrumbs={breadcrumbs} title={title}
+        <ServiceHero id="chatbot-hero-title" breadcrumbs={breadcrumbs} fullBreadcrumbsOnMobile title={title}
           description={en
             ? "Answers in Georgian and takes orders and bookings."
             : "ქართულად პასუხობს კლიენტებს, იღებს შეკვეთებსა და ჯავშნებს."}
@@ -522,6 +521,7 @@ export default function AIChatbot() {
         </section>
 
         <FaqSection id="chatbot-faq" title={t("faq.title")} items={[...faqForSchema, ...detailItems]} />
+        <OtherItServices current="chatbot" language={language} />
         <ContactBlock whatsappHref={whatsappUrl} language={language}>
           <CallbackLink product="chatbot" className="it-callback" />
         </ContactBlock>

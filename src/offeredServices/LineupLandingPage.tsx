@@ -15,6 +15,8 @@ import { SectionHeading } from "../components/ui/SectionHeading";
 import { ServiceHero } from "../components/ui/ServiceHero";
 import { SiteFooter } from "../components/ui/SiteFooter";
 import { SiteNav } from "../components/ui/SiteNav";
+import { OtherItServices } from "../components/ui/OtherItServices";
+import { itBreadcrumbs, itHref } from "../data/itServices";
 import { useLanguage } from "../contexts/LanguageContext";
 import "./lineupService.css";
 
@@ -26,10 +28,7 @@ export default function LineupLandingPage() {
   const en = lang === "en";
   const c = page[lang];
   const whatsappHref = whatsappUrl(lang);
-  const breadcrumbs = [
-    { name: en ? "Home" : "მთავარი", url: "https://vifadigital.ge/" },
-    { name: c.breadcrumb, url: PAGE_URL },
-  ];
+  const breadcrumbs = itBreadcrumbs("lineup", lang);
 
   return (
     <LightPage className="lineup-service" tone="lineup" whatsappHref={whatsappHref}>
@@ -48,9 +47,9 @@ export default function LineupLandingPage() {
         breadcrumbs={breadcrumbs}
         faq={faq[lang]}
       />
-      <SiteNav consultationHref={whatsappHref} activeLink="/preview/it" language={lang} onLanguageToggle={toggleLanguage} />
+      <SiteNav consultationHref={whatsappHref} activeLink={itHref} language={lang} onLanguageToggle={toggleLanguage} />
       <main className="it-main">
-        <ServiceHero id="lineup-hero-title" breadcrumbs={breadcrumbs} title={c.heroTitle}
+        <ServiceHero id="lineup-hero-title" breadcrumbs={breadcrumbs} fullBreadcrumbsOnMobile title={c.heroTitle}
           description={c.heroSubtitle}
           actions={<a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="it-pill-button">{c.ctaWrite}</a>}
           facts={<p className="lineup-audience">LineUp · {c.kicker}</p>}>
@@ -108,6 +107,7 @@ export default function LineupLandingPage() {
           { question: en ? "How is LineUp set up for my academy?" : "როგორ მოარგებთ LineUp-ს ჩემს აკადემიას?", answer: c.startText },
           { question: en ? "Can I see a demo for my academy?" : "როგორ ვნახო დემო ჩემი აკადემიისთვის?", answer: c.finalText },
         ]} />
+        <OtherItServices current="lineup" language={lang} />
         <ContactBlock whatsappHref={whatsappHref} language={lang}>
           <CallbackLink product="lineup" className="it-callback" />
           <a href={PHONE_HREF} className="it-more-link" aria-label={`${c.orCall} ${PHONE_LABEL}`}>{PHONE_LABEL}</a>

@@ -4,6 +4,7 @@ import { MotionConfig } from "framer-motion";
 import { Building2, Menu } from "lucide-react";
 import { AcademyHeader, BottomNav, PARENT_ICONS, PhoneFrame, PushBanner, Screen } from "../../components/lineup/AppKit";
 import { app, monthIndex } from "../../components/lineup/content";
+import type { ItLanguage } from "../../data/itServices";
 export function BrowserWindowObject({ step, exiting = false, mode = "responsive", children, phone, notification, address = "vifadigital.ge" }: {
   step: number;
   exiting?: boolean;
@@ -50,27 +51,31 @@ export function BrowserWindowObject({ step, exiting = false, mode = "responsive"
 
 // Photo-led demo of a residential development, with a wide browser crop and a tall phone crop.
 // The courtyard photograph is Pexels 27307397.
-const realtyLinks = ["პროექტები", "ბინები", "კონტაქტი"];
+const realtyLinks = {
+  ka: ["პროექტები", "ბინები", "კონტაქტი"],
+  en: ["Projects", "Apartments", "Contact"],
+};
 
-function SiteDemo({ compact = false }: { compact?: boolean }) {
+function SiteDemo({ compact = false, language }: { compact?: boolean; language: ItLanguage }) {
   return (
     <div className="it-site-demo" data-compact={compact}>
       <div className="it-site-demo-nav">
         <span className="it-site-demo-mark"><Building2 size={compact ? 18 : 11} strokeWidth={2} /></span>
-        {compact ? <Menu className="it-site-demo-menu" size={24} /> : <span className="it-site-demo-links">{realtyLinks.map((link) => <span key={link}>{link}</span>)}</span>}
+        {compact ? <Menu className="it-site-demo-menu" size={24} /> : <span className="it-site-demo-links">{realtyLinks[language].map((link) => <span key={link}>{link}</span>)}</span>}
       </div>
       <div className="it-site-demo-photo">
         <img src={`/preview/site-demo-realty-${compact ? "tall" : "wide"}.webp?v=1`} alt="" />
-        <span className="it-site-demo-cta">ბინის არჩევა</span>
+        <span className="it-site-demo-cta">{language === "ka" ? "ბინის არჩევა" : "Find an apartment"}</span>
       </div>
     </div>
   );
 }
 
-export function WebsiteDemoObject({ step, exiting = false }: { step: number; exiting?: boolean }) {
+export function WebsiteDemoObject({ step, exiting = false, language = "ka" }: { step: number; exiting?: boolean; language?: ItLanguage }) {
   return (
-    <BrowserWindowObject step={step} exiting={exiting} address="თქვენისაიტი.ge" phone={<SiteDemo compact />}>
-      <SiteDemo />
+    <BrowserWindowObject step={step} exiting={exiting} address={language === "ka" ? "თქვენისაიტი.ge" : "yourwebsite.ge"}
+      phone={<SiteDemo compact language={language} />}>
+      <SiteDemo language={language} />
     </BrowserWindowObject>
   );
 }
@@ -87,19 +92,31 @@ function PreviewPhone({ children }: { children: ReactNode }) {
   );
 }
 
-const reservationChat = [
-  "ხვალ 20:00-ზე 4 სტუმრისთვის მაგიდა გაქვთ?",
-  "დიახ, თავისუფალია. ვისი სახელით დავჯავშნო?",
-  "ნინოს სახელით.",
-  "მაგიდა დაჯავშნილია. ხვალ 20:00-ზე გელოდებით.",
-];
+const reservationChat = {
+  ka: [
+    "ხვალ 20:00-ზე 4 სტუმრისთვის მაგიდა გაქვთ?",
+    "დიახ, თავისუფალია. ვისი სახელით დავჯავშნო?",
+    "ნინოს სახელით.",
+    "მაგიდა დაჯავშნილია. ხვალ 20:00-ზე გელოდებით.",
+  ],
+  en: [
+    "Do you have a table for four tomorrow at 8 pm?",
+    "Yes. What name should I put on the reservation?",
+    "Nino.",
+    "You're booked. See you tomorrow at 8 pm.",
+  ],
+};
 
-export function ChatbotPhoneObject({ step, reducedMotion, exiting = false, messages = reservationChat, title = "რესტორანი" }: {
+export function ChatbotPhoneObject({
+  step, reducedMotion, exiting = false, language = "ka", messages = reservationChat[language],
+  title = language === "ka" ? "რესტორანი" : "Restaurant",
+}: {
   step: number;
   reducedMotion: boolean;
   exiting?: boolean;
   messages?: readonly string[];
   title?: string;
+  language?: ItLanguage;
 }) {
   const messagesRef = useRef<HTMLDivElement>(null);
   const threadRef = useRef<HTMLDivElement>(null);
@@ -156,25 +173,30 @@ function TypingIndicator({ show }: { show: boolean }) {
   </div>;
 }
 
-export function LaptopObject({ step, shipping = false, exiting = false }: { step: number; shipping?: boolean; exiting?: boolean }) {
+export function LaptopObject({ step, shipping = false, exiting = false, language = "ka" }: {
+  step: number; shipping?: boolean; exiting?: boolean; language?: ItLanguage;
+}) {
+  const ka = language === "ka";
   return (
     <div className="it-obj-laptop" aria-hidden="true">
       <div className="it-laptop-screen">
         <img
           src="/invento-demo-inventory.webp"
-          alt="Invento WMS საწყობის მართვის სისტემა"
+          alt={ka ? "Invento WMS საწყობის მართვის სისტემა" : "Invento WMS stock management"}
           className="it-laptop-img"
+          width={1440}
+          height={900}
         />
           <div className="it-scene-notification it-invento-notification it-scene-element" data-show={step > 0 && !exiting}>
-            <strong>ახალი შეკვეთა #1043</strong>
-            <p>აბრეშუმის ბალიშისპირი × 1</p>
-            <p>მარაგი: 21 → <span className="it-stock-digit" data-updated={step >= 2}>
+            <strong>{ka ? "ახალი შეკვეთა #1043" : "New order #1043"}</strong>
+            <p>{ka ? "აბრეშუმის ბალიშისპირი" : "Silk pillowcase"} × 1</p>
+            <p>{ka ? "მარაგი" : "Stock"}: 21 → <span className="it-stock-digit" data-updated={step >= 2}>
               <span>21</span><span>20</span>
-            </span> ცალი</p>
+            </span> {ka ? "ცალი" : "units"}</p>
           </div>
         <div className="it-scene-notification it-shipping-notification it-scene-element" data-show={shipping && !exiting}>
-          <strong>საკურიერო სტიკერი მზადაა</strong>
-          <p>შეკვეთა #1043 · ბეჭდვა</p>
+          <strong>{ka ? "საკურიერო სტიკერი მზადაა" : "Shipping label ready"}</strong>
+          <p>{ka ? "შეკვეთა #1043 · ბეჭდვა" : "Order #1043 · Print"}</p>
         </div>
       </div>
       <div className="it-laptop-base">
@@ -184,8 +206,8 @@ export function LaptopObject({ step, shipping = false, exiting = false }: { step
   );
 }
 
-function LineupPhoneContent() {
-  const t = app.ka;
+function LineupPhoneContent({ language }: { language: ItLanguage }) {
+  const t = app[language];
   const luka = t.kids[0];
   return (
     <Screen
@@ -252,18 +274,20 @@ function LineupPhoneContent() {
   );
 }
 
-export function LineupPhoneObject({ step, reducedMotion, exiting = false }: {
+export function LineupPhoneObject({ step, reducedMotion, exiting = false, language = "ka" }: {
   step: number;
   reducedMotion: boolean;
   exiting?: boolean;
+  language?: ItLanguage;
 }) {
+  const t = app[language];
   return (
     <PreviewPhone>
-      <LineupPhoneContent />
+      <LineupPhoneContent language={language} />
       <div className="it-lineup-push" data-reduced-motion={reducedMotion} data-show={step > 0 && !exiting}>
         <MotionConfig reducedMotion={reducedMotion ? "always" : "never"}>
-          <PushBanner show title={app.ka.pushPaidTitle}
-            body={app.ka.pushPaidBody(monthIndex())} t={app.ka} />
+          <PushBanner show title={t.pushPaidTitle}
+            body={t.pushPaidBody(monthIndex())} t={t} />
         </MotionConfig>
       </div>
     </PreviewPhone>

@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import {
   FaBullseye,
@@ -15,19 +15,7 @@ import SEO from "../components/SEO";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useLanguageTransition } from "../hooks/useLanguageTransition";
 
-const YOUTUBE_SHORTS = [
-  "gDKBtcuyUCY",
-  "-6gz2mUbBfs",
-  "zwRbx0ilnTs",
-  "hWko2KRtHdM",
-  "_HdtFWQZ_ac",
-  "oDM6byVucLM",
-  "1-fXww5ohHs",
-  "51FJn5u8eCM",
-  "PRkEkx5KHc0",
-  "HVErKyR78uc",
-  "0l538cGGcQk",
-];
+import { useShorts } from "../hooks/useShorts";
 
 // AboutPage Translations
 const aboutPageTranslations = {
@@ -97,7 +85,7 @@ const AboutPage: React.FC = () => {
   const { currentLanguage } = useLanguage();
   const { getTransitionClasses } = useLanguageTransition();
   const shortsRowRef = useRef<HTMLDivElement>(null);
-  const [shorts, setShorts] = useState<string[]>(YOUTUBE_SHORTS);
+  const shorts = useShorts();
 
   const scrollShorts = (dir: 1 | -1) => {
     shortsRowRef.current?.scrollBy({
@@ -113,14 +101,6 @@ const AboutPage: React.FC = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetch("/api/shorts")
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data: { ids?: string[] } | null) => {
-        if (Array.isArray(data?.ids) && data.ids.length > 0) {
-          setShorts(data.ids);
-        }
-      })
-      .catch(() => {});
   }, []);
 
   const whyVifaFeatures = [

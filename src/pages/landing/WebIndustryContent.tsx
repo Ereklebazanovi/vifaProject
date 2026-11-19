@@ -7,13 +7,16 @@ import { IndustryPhoto, IndustryWidget } from "../../components/ui/IndustryShowc
 import { getIndustryShowcases, type IndustryShowcase } from "../../components/ui/industryShowcases";
 import { LightPage } from "../../components/ui/LightPage";
 import { PageLink } from "../../components/ui/PageLink";
+import { ScreenshotDetail } from "../../components/ui/ScreenshotDetail";
 import { SectionHeading } from "../../components/ui/SectionHeading";
 import { ServiceCard } from "../../components/ui/ServiceCard";
 import { ServiceHero } from "../../components/ui/ServiceHero";
 import { SiteFooter } from "../../components/ui/SiteFooter";
 import { SiteNav } from "../../components/ui/SiteNav";
+import { itHref } from "../../data/itServices";
 import { WebPackageCard, WebProjectCard } from "../../components/ui/WebCards";
 import type { IndustryConfig } from "../../data/industryData";
+import { inventoDetails } from "../../data/inventoScreenshots";
 import { webIndustryCopy } from "./webIndustryCopy";
 import "./webIndustry.css";
 
@@ -49,9 +52,9 @@ export function WebIndustryContent({ slide, config, language, breadcrumbs, onLan
 
   return (
     <LightPage tone="web" className="web-industry" whatsappHref={whatsappHref}>
-      <SiteNav consultationHref={whatsappHref} activeLink="/preview/it" language={language} onLanguageToggle={onLanguageToggle} />
+      <SiteNav consultationHref={whatsappHref} activeLink={itHref} language={language} onLanguageToggle={onLanguageToggle} />
       <main className="it-main">
-        <ServiceHero id="industry-title" breadcrumbs={breadcrumbs} title={content.title?.[language] ?? slide.title}
+        <ServiceHero id="industry-title" breadcrumbs={breadcrumbs} fullBreadcrumbsOnMobile title={breadcrumbs[breadcrumbs.length - 1].name}
           description={slide.slug === "legal-finance"
             ? ka ? "ვებსაიტი გუნდისა და მომსახურებების საჩვენებლად, დახურული პორტალით დოკუმენტების გასაცვლელად."
               : "Your team, services and a private document portal."
@@ -87,9 +90,9 @@ export function WebIndustryContent({ slide, config, language, breadcrumbs, onLan
             {slide.slug === "retail" && <ServiceCard variant="package" product="invento" title="Invento WMS" to="/inventowms"
               body={ka ? "მარაგი, შეკვეთები და კურიერის ეტიკეტები."
                 : "Stock, orders and courier labels."}>
-              <div className="industry-service-demo">
-                <img className="industry-invento-image" src="/preview/invento-features/inventory.webp"
-                  alt={ka ? "მარაგების ცხრილი Invento WMS-ში" : "Stock table in Invento WMS"} loading="lazy" decoding="async" />
+              <div className="industry-service-demo industry-invento-visual">
+                <ScreenshotDetail {...inventoDetails.inventory}
+                  alt={ka ? "პროდუქტის ნაშთი Invento WMS-ში" : "Product stock in Invento WMS"} />
               </div>
               {serviceLink}
             </ServiceCard>}

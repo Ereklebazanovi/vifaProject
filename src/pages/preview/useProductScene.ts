@@ -6,6 +6,10 @@ export const sceneTimings = {
   chatbot: { steps: [450, 850, 2050, 2550, 2950, 4150], duration: 4750 },
   invento: { steps: [600, 1400], duration: 2000 },
   lineup: { steps: [800], duration: 1400 },
+  socialMedia: { steps: [700], duration: 1700 },
+  advertising: { steps: [800], duration: 1600 },
+  production: { steps: [0], duration: 3400 },
+  branding: { steps: [420, 900], duration: 1650 },
 } as const;
 
 export type ProductScene = keyof typeof sceneTimings;

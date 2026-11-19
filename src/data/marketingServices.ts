@@ -1,0 +1,51 @@
+export const marketingHubHref = "/services/marketing";
+export const marketingServiceOrder = ["socialMedia", "advertising", "production", "branding"] as const;
+export type MarketingService = typeof marketingServiceOrder[number];
+export type MarketingLanguage = "ka" | "en";
+
+export const marketingServices = {
+  socialMedia: {
+    href: "/services/social-media",
+    ka: { title: "სოციალური მედიის მართვა", body: "კონტენტის გეგმა, პოსტები და გვერდების მართვა." },
+    en: { title: "Social media management", body: "Content planning, posts and page management." },
+  },
+  advertising: {
+    href: "/services/advertising",
+    ka: { title: "რეკლამა", body: "სარეკლამო კამპანიები Facebook-ზე, Instagram-ზე და Google-ში." },
+    en: { title: "Advertising", body: "Campaigns on Facebook, Instagram and Google." },
+  },
+  production: {
+    href: "/services/production",
+    ka: { title: "ფოტო და ვიდეო გადაღება", body: "ფოტოსესიები, რილსები, სარეკლამო ვიდეოები და დრონით გადაღება." },
+    en: { title: "Photo and video production", body: "Photo shoots, reels, commercial videos and drone footage." },
+  },
+  branding: {
+    href: "/services/branding",
+    ka: { title: "ბრენდინგი და დიზაინი", body: "ლოგო, ვიზუალური იდენტობა და კომუნიკაციის ტონი." },
+    en: { title: "Branding and design", body: "Logo, visual identity and brand voice." },
+  },
+} as const;
+
+export function marketingBreadcrumbs(language: MarketingLanguage, service?: MarketingService) {
+  const crumbs = [
+    { name: language === "ka" ? "მთავარი" : "Home", url: "https://vifadigital.ge/" },
+    { name: language === "ka" ? "მარკეტინგი" : "Marketing", url: `https://vifadigital.ge${marketingHubHref}` },
+  ];
+  if (service) crumbs.push({
+    name: marketingServices[service][language].title,
+    url: `https://vifadigital.ge${marketingServices[service].href}`,
+  });
+  return crumbs;
+}
+
+const whatsappBase = "https://wa.me/995577175132?text=";
+export const marketingWhatsappHref = whatsappBase +
+  encodeURIComponent("გამარჯობა, დავინტერესდი ციფრული მარკეტინგის სერვისით. მსურს უფასო კონსულტაცია.");
+
+export function marketingServiceWhatsapp(service: MarketingService, language: MarketingLanguage) {
+  const { title } = marketingServices[service][language];
+  const message = language === "ka"
+    ? `გამარჯობა, მსურს უფასო კონსულტაცია ამ სერვისზე: ${title}.`
+    : `Hello, I'd like a free consultation about ${title.toLowerCase()}.`;
+  return whatsappBase + encodeURIComponent(message);
+}

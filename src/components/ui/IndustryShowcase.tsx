@@ -12,7 +12,7 @@ export function IndustryPhoto({ slide, className, eager = false }: {
     <picture className={className}>
       <source media="(max-width: 700px)" srcSet={`/preview/industries/${slide.photo}-700.webp?v=${PHOTO_REVISION}`} />
       <img src={`/preview/industries/${slide.photo}-1200.webp?v=${PHOTO_REVISION}`} alt={slide.alt}
-        loading={eager ? "eager" : "lazy"} {...{ fetchpriority: eager ? "high" : undefined }} decoding="async"
+        loading={eager ? "eager" : "lazy"} {...{ fetchpriority: eager ? "high" : undefined }} decoding="async" draggable={false}
         style={{ objectPosition: slide.focus }} />
     </picture>
   );

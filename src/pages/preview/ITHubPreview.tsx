@@ -8,17 +8,16 @@ import { SectionHeading } from "../../components/ui/SectionHeading";
 import { ServiceCard } from "../../components/ui/ServiceCard";
 import { SiteFooter } from "../../components/ui/SiteFooter";
 import { SiteNav } from "../../components/ui/SiteNav";
+import { useLanguage } from "../../contexts/LanguageContext";
+import { itServiceOrder, itServices, type ItService } from "../../data/itServices";
 import { ChatbotPhoneObject, LaptopObject, LineupPhoneObject, WebsiteDemoObject } from "./ProductDevices";
 import { HubQuestions } from "./HubQuestions";
-import { hubFaqSchema } from "./hubFaqData";
+import { getHubFaqSchema } from "./hubFaqData";
 import { useProductScene } from "./useProductScene";
-import type { ProductScene } from "./useProductScene";
 import { useServiceRotation } from "./useServiceRotation";
 import "./hubSections.css";
 
-const HERO_TITLE = "ვებსაიტები და მართვის სისტემები ბიზნესისთვის.";
-
-const CONSULTATION_URL = "https://wa.me/995557624243?text=" + encodeURIComponent("გამარჯობა, მინდა უფასო კონსულტაცია.");
+const whatsappLink = (message: string) => "https://wa.me/995557624243?text=" + encodeURIComponent(message);
 
 const contactPhotos = import.meta.glob("/public/preview/contact.{jpg,png,webp}", {
   eager: true,
@@ -26,17 +25,12 @@ const contactPhotos = import.meta.glob("/public/preview/contact.{jpg,png,webp}",
   import: "default",
 });
 const CONTACT_PHOTO = Object.values(contactPhotos)[0] as string | undefined;
-
-const WHATSAPP_URL =
-  "https://wa.me/995557624243?text=" +
-  encodeURIComponent("გამარჯობა, IT სერვისებით დავინტერესდი.");
-
-function ServicesSection({ children }: { children: (rotation: ReturnType<typeof useServiceRotation>) => ReactNode }) {
-  const rotation = useServiceRotation();
+function ServicesSection({ title, children }: { title: string; children: (rotation: ReturnType<typeof useServiceRotation<ItService>>) => ReactNode }) {
+  const rotation = useServiceRotation(itServiceOrder);
   return (
     <section id="directions" className="it-section it-directions it-col">
       <header className="it-directions-intro">
-        <SectionHeading as="h1" secondary={HERO_TITLE}>IT.</SectionHeading>
+        <SectionHeading as="h1" secondary={title}>IT.</SectionHeading>
       </header>
       <div id="services" ref={rotation.gridRef} className="it-service-grid" data-active-product={rotation.activeProduct ?? "none"}
         data-turn={rotation.turn} data-visible={rotation.visible}>{children(rotation)}</div>
@@ -44,16 +38,11 @@ function ServicesSection({ children }: { children: (rotation: ReturnType<typeof 
   );
 }
 interface ColoredServiceCardProps {
-  product: ProductScene;
+  product: ItService;
   active?: boolean;
   turn?: number;
   onDone?: () => void;
   onActivate?: () => void;
-  to: string;
-  eyebrow: string;
-  title: string;
-  body: string;
-  facts?: string;
   children: (step: number, reducedMotion: boolean, exiting: boolean) => ReactNode;
 }
 
@@ -63,23 +52,17 @@ function ColoredServiceCard({
   turn = 0,
   onDone,
   onActivate,
-  to,
-  eyebrow,
-  title,
-  body,
-  facts,
   children,
 }: ColoredServiceCardProps) {
   const scene = useProductScene(product, { active, activation: active ? turn : 0, onDone, loop: false });
+  const { currentLanguage } = useLanguage();
+  const service = itServices[product];
   return (
     <ServiceCard
       product={product}
-      to={to}
+      to={service.href}
       linkRef={scene.cardRef}
-      eyebrow={eyebrow}
-      title={title}
-      body={body}
-      facts={facts}
+      {...service[currentLanguage]}
       scene={{ active, step: scene.step, entered: scene.entered, reducedMotion: scene.reducedMotion, exiting: scene.exiting, cycle: scene.cycle }}
       onPointerEnter={onActivate ? () => {
         if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) onActivate();
@@ -91,32 +74,32 @@ function ColoredServiceCard({
 }
 
 export default function ITHubPreview() {
+  const { currentLanguage: language, toggleLanguage } = useLanguage();
+  const ka = language === "ka";
+  const consultationHref = whatsappLink(ka ? "გამარჯობა, მინდა უფასო კონსულტაცია." : "Hello, I'd like a free consultation.");
+  const whatsappHref = whatsappLink(ka ? "გამარჯობა, IT სერვისებით დავინტერესდი." : "Hello, I'm interested in your IT services.");
+
   return (
-    <LightPage className="it-preview" whatsappHref={WHATSAPP_URL}>
+    <LightPage className="it-preview" whatsappHref={whatsappHref}>
       <Helmet>
         <title>IT | VIFA (preview)</title>
         <meta name="robots" content="noindex,nofollow" />
-        <script type="application/ld+json">{JSON.stringify(hubFaqSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(getHubFaqSchema(language))}</script>
       </Helmet>
 
-      <SiteNav consultationHref={CONSULTATION_URL} />
+      <SiteNav consultationHref={consultationHref} language={language} onLanguageToggle={toggleLanguage} />
 
       <main className="it-main">
         {/* 1. Intro and the four directions */}
-        <ServicesSection>
+        <ServicesSection title={ka ? "ვებსაიტები და მართვის სისტემები ბიზნესისთვის." : "Websites and business software."}>
           {(rotation) => <>
           {/* 1. საიტი */}
           <ColoredServiceCard
             product="web"
             active={rotation.activeProduct === "web"} turn={rotation.turn}
             onDone={() => rotation.finish("web", rotation.turn)} onActivate={() => rotation.activate("web")}
-            to="/services/web"
-            eyebrow="დიზაინი და დეველოპმენტი"
-            title="ვებსაიტი"
-            body="სავიზიტო და კორპორატიული საიტები, ონლაინ მაღაზიები ბარათით გადახდით."
-            facts="სავიზიტო საიტი 1-2 კვირაში"
           >
-            {(step, _reducedMotion, exiting) => <WebsiteDemoObject step={step} exiting={exiting} />}
+            {(step, _reducedMotion, exiting) => <WebsiteDemoObject step={step} exiting={exiting} language={language} />}
           </ColoredServiceCard>
 
           {/* 2. AI ჩატბოტი */}
@@ -124,13 +107,8 @@ export default function ITHubPreview() {
             product="chatbot"
             active={rotation.activeProduct === "chatbot"} turn={rotation.turn}
             onDone={() => rotation.finish("chatbot", rotation.turn)} onActivate={() => rotation.activate("chatbot")}
-            to="/services/ai-chatbot"
-            eyebrow="Messenger · Instagram · WhatsApp · ვებსაიტი"
-            title="AI ჩატბოტი"
-            body="კლიენტებს ქართულად პასუხობს 24/7 და იღებს შეკვეთებსა და ჯავშნებს."
-            facts="500 ₾-დან · 7-14 სამუშაო დღე"
           >
-            {(step, reducedMotion, exiting) => <ChatbotPhoneObject step={step} reducedMotion={reducedMotion} exiting={exiting} />}
+            {(step, reducedMotion, exiting) => <ChatbotPhoneObject step={step} reducedMotion={reducedMotion} exiting={exiting} language={language} />}
           </ColoredServiceCard>
 
           {/* 3. Invento WMS */}
@@ -138,13 +116,8 @@ export default function ITHubPreview() {
             product="invento"
             active={rotation.activeProduct === "invento"} turn={rotation.turn}
             onDone={() => rotation.finish("invento", rotation.turn)} onActivate={() => rotation.activate("invento")}
-            to="/inventowms"
-            eyebrow="მაღაზიებისა და საწყობებისთვის"
-            title="Invento WMS"
-            body="მართეთ მარაგები, შეკვეთები და ფინანსები ერთი პროგრამიდან."
-            facts="79 ₾ თვეში · 7 დღე უფასოდ"
           >
-            {(step, _reducedMotion, exiting) => <LaptopObject step={step} exiting={exiting} />}
+            {(step, _reducedMotion, exiting) => <LaptopObject step={step} exiting={exiting} language={language} />}
           </ColoredServiceCard>
 
           {/* 4. LineUp */}
@@ -152,25 +125,20 @@ export default function ITHubPreview() {
             product="lineup"
             active={rotation.activeProduct === "lineup"} turn={rotation.turn}
             onDone={() => rotation.finish("lineup", rotation.turn)} onActivate={() => rotation.activate("lineup")}
-            to="/lineup"
-            eyebrow="გუნდები · განრიგი · გადახდები"
-            title="LineUp"
-            body="სპორტული აკადემიების, კლუბებისა და სტუდიების მართვის პორტალი."
-            facts="ნახეთ დემო"
           >
-            {(step, reducedMotion, exiting) => <LineupPhoneObject step={step} reducedMotion={reducedMotion} exiting={exiting} />}
+            {(step, reducedMotion, exiting) => <LineupPhoneObject step={step} reducedMotion={reducedMotion} exiting={exiting} language={language} />}
           </ColoredServiceCard>
           </>}
         </ServicesSection>
 
-        <IndustryCarousel />
+        <IndustryCarousel language={language} />
 
-        <HowWeStart />
+        <HowWeStart language={language} whatsappHref={consultationHref} />
 
-        <HubQuestions />
+        <HubQuestions language={language} />
 
-        <ContactBlock whatsappHref={WHATSAPP_URL} photo={CONTACT_PHOTO} />
-        <SiteFooter />
+        <ContactBlock whatsappHref={whatsappHref} photo={CONTACT_PHOTO} language={language} />
+        <SiteFooter language={language} />
       </main>
     </LightPage>
   );

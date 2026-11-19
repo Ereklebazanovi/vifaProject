@@ -5,12 +5,16 @@ import { ContactBlock } from "../components/ui/ContactBlock";
 import { FaqSection } from "../components/ui/FaqSection";
 import { LightPage } from "../components/ui/LightPage";
 import { ScreenshotCarousel } from "../components/ui/ScreenshotCarousel";
+import { ScreenshotDetail } from "../components/ui/ScreenshotDetail";
 import { SectionHeading } from "../components/ui/SectionHeading";
 import { ServiceCard } from "../components/ui/ServiceCard";
 import { ServiceHero } from "../components/ui/ServiceHero";
 import { SiteFooter } from "../components/ui/SiteFooter";
 import { SiteNav } from "../components/ui/SiteNav";
+import { OtherItServices } from "../components/ui/OtherItServices";
+import { itBreadcrumbs, itHref } from "../data/itServices";
 import { useLanguage } from "../contexts/LanguageContext";
+import { inventoDetails, inventoOrderOverview, inventoScreenshots } from "../data/inventoScreenshots";
 import { inventoFaq, inventoTranslations } from "./inventoContent";
 import "./inventoService.css";
 
@@ -86,10 +90,7 @@ export default function InventoLandingPage() {
   const translations: Record<string, string> = inventoTranslations[language];
   const t = (key: string) => translations[key];
   const trialLabel = en ? "7 days free" : "7 დღე უფასოდ";
-  const breadcrumbs = [
-    { name: en ? "Home" : "მთავარი", url: "https://vifadigital.ge/" },
-    { name: en ? "Invento WMS" : "საწყობის პროგრამა", url: "https://vifadigital.ge/inventowms" },
-  ];
+  const breadcrumbs = itBreadcrumbs("invento", language);
   const questions = inventoFaq[language];
   const faqOrder = [1, 0, 2, 3, 4, 5, 6, 7, 8];
   const faqForSchema = faqOrder.map((index) => questions[index]);
@@ -124,9 +125,9 @@ export default function InventoLandingPage() {
         breadcrumbs={breadcrumbs}
         faq={faqForSchema}
       />
-      <SiteNav consultationHref={trialUrl} activeLink="/preview/it" language={language} onLanguageToggle={toggleLanguage} />
+      <SiteNav consultationHref={trialUrl} activeLink={itHref} language={language} onLanguageToggle={toggleLanguage} />
       <main className="it-main">
-        <ServiceHero id="invento-hero-title" breadcrumbs={breadcrumbs} title="Invento WMS"
+        <ServiceHero id="invento-hero-title" breadcrumbs={breadcrumbs} fullBreadcrumbsOnMobile title="Invento WMS"
           description={en
             ? "Manage stock and orders in one place. For online stores, sellers who take orders in chat, and shops tracking stock in Excel or notebooks."
             : "მართეთ მარაგი და შეკვეთები ერთ სივრცეში. გამოგადგებათ, თუ ჩატით ყიდით, ონლაინ მაღაზია გაქვთ ან ნაშთებს Excel-ში თუ რვეულში ითვლით."}
@@ -139,7 +140,8 @@ export default function InventoLandingPage() {
           </>}>
           <ScreenshotCarousel language={language} controlsLabel={en ? "Invento demo screenshots" : "Invento-ს დემოს ეკრანები"}
             slides={screenshots.map(({ file, label }) => ({
-              image: `/preview/invento-hero/${file}.webp`, href: demoUrl, name: label[language], caption: label[language],
+              image: inventoScreenshots[file], href: demoUrl, name: label[language], caption: label[language],
+              viewport: file === "orders" ? inventoOrderOverview : undefined,
             }))} />
         </ServiceHero>
 
@@ -148,8 +150,9 @@ export default function InventoLandingPage() {
           <div className="invento-feature-grid">
             {features.map(({ image, title, text }) => (
               <ServiceCard key={image} variant="package" title={title[language]} body={text[language]}>
-                <img className="invento-feature-image" src={`/preview/invento-features/${image}.webp`}
-                  alt="" width={704} height={396} loading="lazy" decoding="async" />
+                <div className="invento-feature-visual">
+                  <ScreenshotDetail {...inventoDetails[image]} alt="" />
+                </div>
               </ServiceCard>
             ))}
           </div>
@@ -193,6 +196,7 @@ export default function InventoLandingPage() {
             answer: [1, 2, 3, 4, 5].map((number) => t(`plan3.f${number}`)).join(" · "),
           },
         ]} />
+        <OtherItServices current="invento" language={language} />
         <ContactBlock whatsappHref={trialUrl} language={language}>
           <CallbackLink product="wms" className="it-callback" />
         </ContactBlock>

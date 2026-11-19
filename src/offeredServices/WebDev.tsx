@@ -8,11 +8,12 @@ import { FaqSection } from "../components/ui/FaqSection";
 import { HowWeStart } from "../components/ui/HowWeStart";
 import { IndustryCarousel } from "../components/ui/IndustryCarousel";
 import { LightPage } from "../components/ui/LightPage";
-import { RelatedProductCard } from "../components/ui/RelatedProductCard";
 import { SectionHeading } from "../components/ui/SectionHeading";
 import { ServiceHero } from "../components/ui/ServiceHero";
 import { SiteFooter } from "../components/ui/SiteFooter";
 import { SiteNav } from "../components/ui/SiteNav";
+import { OtherItServices } from "../components/ui/OtherItServices";
+import { itBreadcrumbs, itHref } from "../data/itServices";
 import { useLanguage } from "../contexts/LanguageContext";
 import { ScreenshotCarousel } from "../components/ui/ScreenshotCarousel";
 import { WebPackageCard, WebProjectCard } from "../components/ui/WebCards";
@@ -109,10 +110,6 @@ const webDevTranslations = {
     "webdev.pricing.corporate.feature1": "კონტენტის მართვის პანელი (CMS)",
     "webdev.pricing.corporate.feature2": "რამდენიმე ენის მხარდაჭერა",
     "webdev.pricing.corporate.feature3": "ავტომატური სარეზერვო ასლები",
-    "webdev.pricing.ai.title": "AI ჩატბოტი",
-    "webdev.pricing.ai.description":
-      "ინტელექტუალური ასისტენტი სოციალურ ქსელებში. 24/7 ავტომატური პასუხები, კლიენტების კმაყოფილება და გაყიდვების ზრდა.",
-    "webdev.pricing.ai.price": "500 ₾-დან",
     "webdev.pricing.ai.feature1": "Google Gemini AI",
     "webdev.pricing.ai.feature2": "3 პლატფორმაზე ინტეგრაცია",
     "webdev.pricing.ai.feature3": "ქართული ენის მხარდაჭერა",
@@ -126,7 +123,6 @@ const webDevTranslations = {
     "webdev.pricing.ecommerce.feature3": "საკურიერო ეტიკეტები და ინვოისები",
     "webdev.pricing.consultation": "კონსულტაცია უფასოა",
     "webdev.pricing.cta": "პაკეტების ნახვა",
-    "webdev.pricing.learn_more": "იხილეთ მეტი",
     "webdev.cta.question": "მზად ხარ ბიზნესის ციფრული ტრანსფორმაციისთვის?",
     "webdev.cta.button": "დაგვიკავშირდი WhatsApp-ზე",
     "webdev.whatsapp.consult": "კონსულტაცია WhatsApp-ზე",
@@ -164,10 +160,6 @@ const webDevTranslations = {
     "webdev.pricing.corporate.feature1": "Content management panel (CMS)",
     "webdev.pricing.corporate.feature2": "Multilingual support",
     "webdev.pricing.corporate.feature3": "Automatic backups",
-    "webdev.pricing.ai.title": "AI Chatbot",
-    "webdev.pricing.ai.description":
-      "Intelligent assistant on social media. 24/7 automatic responses, customer satisfaction and sales growth.",
-    "webdev.pricing.ai.price": "From 500 ₾",
     "webdev.pricing.ai.feature1": "Google Gemini AI",
     "webdev.pricing.ai.feature2": "3 Platform Integration",
     "webdev.pricing.ai.feature3": "Georgian Language Support",
@@ -181,7 +173,6 @@ const webDevTranslations = {
     "webdev.pricing.ecommerce.feature3": "Shipping labels and invoicing",
     "webdev.pricing.consultation": "Consultation is Free",
     "webdev.pricing.cta": "Start Project",
-    "webdev.pricing.learn_more": "Learn More",
     "webdev.cta.question": "Ready for Digital Transformation?",
     "webdev.cta.button": "Contact us on WhatsApp",
     "webdev.whatsapp.consult": "Consult on WhatsApp",
@@ -237,10 +228,7 @@ export default function WebDev() {
     { question: "რას მოიცავს ვებსაიტის დამზადება?", answer: t("webdev.content.intro") },
     ...[1, 2, 3].map((n) => ({ question: t("webdev.content.question_" + n), answer: t("webdev.content.p_" + n) })),
   ];
-  const breadcrumbItems = [
-    { name: en ? "Home" : "მთავარი", url: "https://vifadigital.ge/" },
-    { name: en ? "Web Development" : "ვებ დეველოპმენტი", url: "https://vifadigital.ge/services/web" },
-  ];
+  const breadcrumbItems = itBreadcrumbs("web", language);
 
   return (
     <LightPage className="web-service" tone="web" whatsappHref={whatsappUrl}>
@@ -263,9 +251,9 @@ export default function WebDev() {
         breadcrumbs={breadcrumbItems}
         faq={faqItems}
       />
-      <SiteNav consultationHref={whatsappUrl} activeLink="/preview/it" language={language} onLanguageToggle={toggleLanguage} />
+      <SiteNav consultationHref={whatsappUrl} activeLink={itHref} language={language} onLanguageToggle={toggleLanguage} />
       <main className="it-main">
-        <ServiceHero id="web-hero-title" breadcrumbs={breadcrumbItems} title={t("webdev.hero.main_title")}
+        <ServiceHero id="web-hero-title" breadcrumbs={breadcrumbItems} fullBreadcrumbsOnMobile title={t("webdev.hero.main_title")}
             description={en
               ? "Landing pages, corporate websites with a CMS and online stores with Georgian bank payments."
               : "სავიზიტო საიტები, კორპორატიული ვებსაიტები მართვის პანელით და ონლაინ მაღაზიები ქართული ბანკების გადახდის სისტემებით."}
@@ -321,10 +309,6 @@ export default function WebDev() {
         <IndustryCarousel language={language} />
         <HowWeStart language={language} whatsappHref={whatsappUrl} />
 
-        <RelatedProductCard product="chatbot" to="/services/ai-chatbot" title={t("webdev.pricing.ai.title")}
-          description={t("webdev.pricing.ai.description")} price={t("webdev.pricing.ai.price")}
-          action={t("webdev.pricing.learn_more")} />
-
         <FaqSection id="web-faq" title={en ? "Frequently asked questions" : "ხშირად დასმული კითხვები"}
           items={[...faqItems, ...details, {
             question: en ? "What does the AI chatbot package include?" : "რას მოიცავს AI ჩატბოტის პაკეტი?",
@@ -332,6 +316,7 @@ export default function WebDev() {
               <li key={num}>{t("webdev.pricing.ai.feature" + num)}</li>
             ))}</ul>,
           }]} />
+        <OtherItServices current="web" language={language} />
         <ContactBlock whatsappHref={whatsappUrl} language={language}>
           <CallbackLink product="web" className="it-callback" />
         </ContactBlock>

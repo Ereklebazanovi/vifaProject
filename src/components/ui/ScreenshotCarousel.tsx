@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { ScreenshotDetail, type ScreenshotViewport } from "./ScreenshotDetail";
 import "./screenshotCarousel.css";
 
 type Language = "ka" | "en";
@@ -8,6 +9,7 @@ interface ScreenshotSlide {
   href: string;
   image: string;
   caption: string;
+  viewport?: ScreenshotViewport;
 }
 
 const ROTATION_INTERVAL = 3500;
@@ -84,11 +86,17 @@ export function ScreenshotCarousel({ slides, language, controlsLabel }: {
             <span className="it-browser-pill">{domain}</span>
           </div>
           <div className="it-screenshot-images">
-            {(showMoreImages ? slides : slides.slice(0, 1)).map((slide, position) => (
-              <img key={slide.image} src={slide.image} alt="" width={1440} height={900}
-                loading="eager" decoding={position === 0 ? undefined : "async"} data-active={index === position}
-                onLoad={position === 0 ? undefined : () => setLoadedImages((loaded) => ({ ...loaded, [slide.image]: true }))} />
-            ))}
+            {(showMoreImages ? slides : slides.slice(0, 1)).map((slide, position) => {
+              const onLoad = position === 0 ? undefined : () => setLoadedImages((loaded) => ({ ...loaded, [slide.image]: true }));
+              return slide.viewport ? (
+                <div key={slide.image} className="it-screenshot-crop-slide" data-active={index === position}>
+                  <ScreenshotDetail src={slide.image} viewport={slide.viewport} alt="" loading="eager" onLoad={onLoad} />
+                </div>
+              ) : (
+                <img key={slide.image} src={slide.image} alt="" width={1440} height={900}
+                  loading="eager" decoding={position === 0 ? undefined : "async"} data-active={index === position} onLoad={onLoad} />
+              );
+            })}
           </div>
         </a>
         <figcaption className="it-screenshot-caption">

@@ -59,7 +59,7 @@ const FloatingContact: React.FC<{ whatsappHref?: string }> = ({ whatsappHref }) 
       rel="noopener noreferrer"
       aria-label={label}
       title={label}
-      className={`fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-black/30 transition-all duration-300 hover:bg-[#20bd5a] ${
+      className={`site-floating-contact fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-black/30 transition-all duration-300 hover:bg-[#20bd5a] ${
         shown ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"
       }`}
     >

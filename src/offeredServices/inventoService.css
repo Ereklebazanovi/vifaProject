@@ -18,17 +18,18 @@
 .invento-plans .it-card-title { font-size: clamp(18px, 2vw, 22px); }
 .invento-plans .it-card-body { font-size: 15px; }
 .invento-service .it-screenshot-caption { color: var(--it-text); }
+.invento-feature-grid .it-service-package .it-card-top { padding-bottom: 0; }
 .invento-feature-grid .it-card-body { margin-block: 6px 15px; }
 
-.invento-feature-image {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  margin-top: auto;
-  border: 1px solid var(--it-hairline);
+.invento-feature-visual {
+  --it-detail-max-height: 214px;
+  display: grid;
+  place-items: center;
+  flex: 1;
+  min-height: 176px;
+  padding: 12px;
   border-radius: 14px;
-  object-fit: cover;
+  background: #f2f5f3;
 }
 
 .invento-plan-price, .invento-plan-period { display: block; }
@@ -50,6 +51,13 @@
 
 @media (min-width: 720px) {
   .invento-feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .invento-feature-grid .it-service-package {
+    display: grid;
+    grid-row: span 2;
+    grid-template-rows: subgrid;
+    row-gap: 0;
+  }
+  .invento-feature-visual { min-height: 214px; }
 }
 
 @media (min-width: 900px) {

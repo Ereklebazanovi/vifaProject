@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import { itHref as defaultItHref } from "../../data/itServices";
 import { PageLink } from "./PageLink";
 
 const labels = {
@@ -27,7 +28,7 @@ interface SiteNavProps {
 }
 
 export function SiteNav({
-  consultationHref, itHref = "/preview/it", activeLink, language = "ka", onLanguageToggle,
+  consultationHref, itHref = defaultItHref, activeLink, language = "ka", onLanguageToggle,
 }: SiteNavProps) {
   const { pathname } = useLocation();
   const copy = labels[language];
@@ -70,12 +71,13 @@ export function SiteNav({
     { to: "/about", label: copy.about },
     { to: "/blog", label: copy.blog },
   ];
-  const renderLinks = (onNavigate?: () => void) => links.map(({ to, label }) => (
-    <PageLink key={to} to={to} onClick={onNavigate} aria-current={pathname === to ? "page" : undefined}
-      className={`it-nav-link${to === (activeLink ?? pathname) ? " it-nav-link-current" : ""}`}>
+  const renderLinks = (onNavigate?: () => void) => links.map(({ to, label }) => {
+    const path = to.split("?")[0];
+    return <PageLink key={to} to={to} onClick={onNavigate} aria-current={pathname === path ? "page" : undefined}
+      className={`it-nav-link${path === (activeLink ?? pathname) ? " it-nav-link-current" : ""}`}>
       {label}
-    </PageLink>
-  ));
+    </PageLink>;
+  });
   const languageButton = onLanguageToggle && (
     <button type="button" className="it-nav-link it-language-toggle" onClick={onLanguageToggle}
       aria-label={copy.switchLanguage}>{copy.otherLanguage}</button>

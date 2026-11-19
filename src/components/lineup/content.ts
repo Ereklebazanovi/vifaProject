@@ -243,7 +243,6 @@ export const page = {
       "სპორტული აკადემიის აპლიკაცია მენეჯერის, მწვრთნელისა და მშობლისთვის. გადახდების აღრიცხვა თვეების მიხედვით, დასწრება 10 წამში, შეფასებები და შეტყობინებები მშობლებს. ფეხბურთის, კალათბურთისა და სხვა სპორტის აკადემიებისთვის.",
     seoKeywords:
       "სპორტული აკადემიის მართვა, აკადემიის აპლიკაცია, ფეხბურთის აკადემიის პროგრამა, კალათბურთის აკადემია, დასწრების აღრიცხვა, გადახდების აღრიცხვა, მშობლების აპლიკაცია, მწვრთნელის აპლიკაცია, სპორტული სკოლის პროგრამა, LineUp",
-    breadcrumb: "LineUp",
     kicker: "ფეხბურთის, კალათბურთის და სხვა აკადემიებისთვის",
     heroTitle: "სპორტული აკადემიის მართვა, ერთ აპში.",
     heroSubtitle: "მენეჯერი ნიშნავს გადახდას, მწვრთნელი დასწრებას. მშობელი ყველაფერს იმავე წამს ხედავს.",
@@ -331,7 +330,6 @@ export const page = {
       "A sports academy app for managers, coaches and parents. Monthly payment tracking, attendance in 10 seconds, player ratings and notifications to parents. For football, basketball and other sports academies.",
     seoKeywords:
       "sports academy management, academy app, football academy software, basketball academy, attendance tracking, payment tracking, parent app, coach app, sports school software, LineUp",
-    breadcrumb: "LineUp",
     kicker: "For football, basketball and other academies",
     heroTitle: "Run your sports academy from one app.",
     heroSubtitle: "The manager marks a payment, the coach marks attendance. The parent sees it the same second.",

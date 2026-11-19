@@ -9,7 +9,9 @@ import Breadcrumbs, { type Crumb } from "../../components/Breadcrumbs";
 import SEO from "../../components/SEO";
 import FAQSection from "../../components/FAQSection";
 import { getIndustryShowcases } from "../../components/ui/industryShowcases";
+import { itBreadcrumbs } from "../../data/itServices";
 import { WebIndustryContent } from "./WebIndustryContent";
+import { webIndustryCopy } from "./webIndustryCopy";
 import {
   industryData,
   type BilingualPricingTier,
@@ -573,16 +575,17 @@ function IndustryLanding({ webRoute = false }: { webRoute?: boolean }) {
   }
 
   const base = "https://vifadigital.ge";
-  const serviceCrumb: Crumb =
-    service === "web"
-      ? { name: ka ? "ვებ დეველოპმენტი" : "Web Development", url: `${base}/services/web` }
-      : { name: ka ? "ციფრული მარკეტინგი" : "Digital Marketing", url: `${base}/services/marketing` };
+  const pageUrl = `${base}/industry/${service}/${slug}`;
+  const slide = service === "web" ? getIndustryShowcases(currentLanguage).find((item) => item.slug === slug) : undefined;
+  if (service === "web" && !slide) return <NotFound />;
 
-  // Absolute URLs (matches WebDev.tsx convention) — Breadcrumbs converts to paths for routing.
-  const breadcrumbItems: Crumb[] = [
+  const breadcrumbItems: Crumb[] = slide ? [
+    ...itBreadcrumbs("web", currentLanguage),
+    { name: webIndustryCopy[slide.slug].title?.[currentLanguage] ?? slide.title, url: pageUrl },
+  ] : [
     { name: ka ? "მთავარი" : "Home", url: `${base}/` },
-    serviceCrumb,
-    { name: ka ? config.nameKa : config.nameEn, url: `${base}/industry/${service}/${slug}` },
+    { name: ka ? "ციფრული მარკეტინგი" : "Digital Marketing", url: `${base}/services/marketing` },
+    { name: ka ? config.nameKa : config.nameEn, url: pageUrl },
   ];
 
   const faqItems = ka ? config.faqKa : config.faqEn;
@@ -591,7 +594,7 @@ function IndustryLanding({ webRoute = false }: { webRoute?: boolean }) {
     <SEO
       title={ka ? config.seoTitleKa : config.seoTitleEn}
       description={ka ? config.seoDescriptionKa : config.seoDescriptionEn}
-      url={`${base}/industry/${service}/${slug}`}
+      url={pageUrl}
       breadcrumbs={breadcrumbItems}
       serviceSchema={{
         name: ka ? config.seoTitleKa : config.seoTitleEn,
@@ -603,9 +606,7 @@ function IndustryLanding({ webRoute = false }: { webRoute?: boolean }) {
     />
   );
 
-  if (service === "web") {
-    const slide = getIndustryShowcases(currentLanguage).find((item) => item.slug === slug);
-    if (!slide) return <NotFound />;
+  if (slide) {
     return <>
       {seo}
       <WebIndustryContent slide={slide} config={config} language={currentLanguage}

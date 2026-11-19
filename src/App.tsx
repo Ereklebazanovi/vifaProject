@@ -6,6 +6,8 @@ import FacebookPixel from "./components/FacebookPixel";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { NavigationProvider } from "./contexts/NavigationContext";
+import { itHref } from "./data/itServices";
+import { marketingServices } from "./data/marketingServices";
 import Layout from "./layout/Layout";
 import Home from "./pages/organic/Home";
 
@@ -45,7 +47,13 @@ function AppShell() {
   );
 }
 
-const loadingClass = /^\/(preview|industry\/web)(\/|$)/.test(window.location.pathname) ? "bg-[#f5f5f7]" : "bg-[#050404]";
+function AdvertisingRedirect() {
+  const { search, hash } = useLocation();
+  return <Navigate to={{ pathname: marketingServices.advertising.href, search, hash }} replace />;
+}
+
+const loadingClass = /^\/(preview|industry\/web|services\/(marketing|production|social-media|advertising|branding|digital-advertising))(\/|$)/.test(window.location.pathname)
+  ? "bg-[#f5f5f7]" : "bg-[#050404]";
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route element={<AppShell />} hydrateFallbackElement={<div className={`min-h-screen ${loadingClass}`} />}>
@@ -58,12 +66,15 @@ const router = createBrowserRouter(createRoutesFromElements(
       <Route path="services/ai-chatbot" lazy={lazyRoute(() => import("./pages/AIChatbot"))} />
       <Route path="inventowms" lazy={lazyRoute(() => import("./offeredServices/InventoLandingPage"))} />
       <Route path="lineup" lazy={lazyRoute(() => import("./offeredServices/LineupLandingPage"))} />
+      <Route path="services/marketing" lazy={marketing} />
+      <Route path="services/production" lazy={lazyRoute(() => import("./offeredServices/Production"))} />
+      <Route path="services/social-media" lazy={lazyRoute(() => import("./offeredServices/SocialMedia"))} />
+      <Route path="services/advertising" lazy={lazyRoute(() => import("./offeredServices/Advertising"))} />
+      <Route path="services/branding" lazy={lazyRoute(() => import("./offeredServices/Branding"))} />
+      <Route path="services/digital-advertising" element={<AdvertisingRedirect />} />
     </Route>
     <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
-      <Route path="services/marketing" lazy={marketing} />
-      <Route path="services/production" lazy={lazyRoute(() => import("./offeredServices/Production"))} />
-      <Route path="services/digital-advertising" lazy={marketing} />
       <Route path="contact" lazy={lazyRoute(() => import("./pages/ContactPage"))} />
       <Route path="about" lazy={lazyRoute(() => import("./pages/AboutPage"))} />
       <Route path="blog" lazy={lazyRoute(() => import("./pages/blog/BlogIndex"))} />
@@ -86,7 +97,7 @@ const router = createBrowserRouter(createRoutesFromElements(
       <Route path="blog" lazy={lazyRoute(() => import("./pages/blog/BlogEditor"))} />
     </Route>
 
-    <Route path="/preview/it" lazy={lazyRoute(() => import("./pages/preview/ITHubPreview"))} />
+    <Route path={itHref} lazy={lazyRoute(() => import("./pages/preview/ITHubPreview"))} />
     <Route path="/preview/type" lazy={lazyRoute(() => import("./pages/preview/TypeSpecimen"))} />
     <Route path="*" element={<Navigate to="/" replace />} />
   </Route>,
