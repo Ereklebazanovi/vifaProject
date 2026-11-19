@@ -1,13 +1,15 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import type { CSSProperties, ReactNode } from "react";
 import { MotionConfig } from "framer-motion";
+import { Building2, Menu } from "lucide-react";
 import { AcademyHeader, BottomNav, PARENT_ICONS, PhoneFrame, PushBanner, Screen } from "../../components/lineup/AppKit";
 import { app, monthIndex } from "../../components/lineup/content";
-export function BrowserWindowObject({ step, exiting = false, mode = "responsive", children, notification, address = "vifadigital.ge" }: {
+export function BrowserWindowObject({ step, exiting = false, mode = "responsive", children, phone, notification, address = "vifadigital.ge" }: {
   step: number;
   exiting?: boolean;
   mode?: "responsive" | "notification" | "checkout";
   children?: ReactNode;
+  phone?: ReactNode; // the phone screen in "responsive" mode; defaults to this site's mobile screenshot
   notification?: { title: string; body: string };
   address?: string;
 }) {
@@ -39,10 +41,37 @@ export function BrowserWindowObject({ step, exiting = false, mode = "responsive"
     </div>
     {mode === "responsive" && <div className="it-website-phone it-scene-element" data-show={step > 0 && !exiting} data-exiting={exiting} aria-hidden="true">
       <PreviewPhone>
-        <div className="it-site-phone-screen"><img src="/preview/vifa-mobile.png?v=2" alt="" /></div>
+        <div className="it-site-phone-screen">{phone ?? <img src="/preview/vifa-mobile.png?v=2" alt="" />}</div>
       </PreviewPhone>
     </div>}
     </>
+  );
+}
+
+// Photo-led demo of a residential development, with a wide browser crop and a tall phone crop.
+// The courtyard photograph is Pexels 27307397.
+const realtyLinks = ["პროექტები", "ბინები", "კონტაქტი"];
+
+function SiteDemo({ compact = false }: { compact?: boolean }) {
+  return (
+    <div className="it-site-demo" data-compact={compact}>
+      <div className="it-site-demo-nav">
+        <span className="it-site-demo-mark"><Building2 size={compact ? 18 : 11} strokeWidth={2} /></span>
+        {compact ? <Menu className="it-site-demo-menu" size={24} /> : <span className="it-site-demo-links">{realtyLinks.map((link) => <span key={link}>{link}</span>)}</span>}
+      </div>
+      <div className="it-site-demo-photo">
+        <img src={`/preview/site-demo-realty-${compact ? "tall" : "wide"}.webp?v=1`} alt="" />
+        <span className="it-site-demo-cta">ბინის არჩევა</span>
+      </div>
+    </div>
+  );
+}
+
+export function WebsiteDemoObject({ step, exiting = false }: { step: number; exiting?: boolean }) {
+  return (
+    <BrowserWindowObject step={step} exiting={exiting} address="თქვენისაიტი.ge" phone={<SiteDemo compact />}>
+      <SiteDemo />
+    </BrowserWindowObject>
   );
 }
 
@@ -59,7 +88,7 @@ function PreviewPhone({ children }: { children: ReactNode }) {
 }
 
 const reservationChat = [
-  "ხვალ 20:00-ზე ოთხისთვის მაგიდა გაქვთ?",
+  "ხვალ 20:00-ზე 4 სტუმრისთვის მაგიდა გაქვთ?",
   "დიახ, თავისუფალია. ვისი სახელით დავჯავშნო?",
   "ნინოს სახელით.",
   "მაგიდა დაჯავშნილია. ხვალ 20:00-ზე გელოდებით.",

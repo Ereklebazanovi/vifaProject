@@ -7,10 +7,9 @@
 // to fit the screen together with the instruction above it.
 
 import { useEffect, useRef, useState } from "react";
-import type { ReactNode } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, RotateCcw } from "lucide-react";
-import { app, page, ACCENT, monthIndex } from "./content";
+import { app, page, monthIndex } from "./content";
 import type { Lang } from "./content";
 import { CoachAttendance, CoachCalendar, ManagerPayments, ParentHome, PhoneFrame, PushBanner, ScaledPhone } from "./AppKit";
 
@@ -19,7 +18,7 @@ type Side = "staff" | "parent";
 
 const ORDER: Scenario[] = ["payment", "star", "cancel", "absence"];
 
-export default function LiveDemo({ lang, intro, cta }: { lang: Lang; intro?: ReactNode; cta?: ReactNode }) {
+export default function LiveDemo({ lang }: { lang: Lang }) {
   const t = app[lang];
   const c = page[lang];
 
@@ -32,28 +31,20 @@ export default function LiveDemo({ lang, intro, cta }: { lang: Lang; intro?: Rea
   const [delivered, setDelivered] = useState<Side | null>(null);
   const [signal, setSignal] = useState<{ to: Side; id: number } | null>(null);
   const [mobileSide, setMobileSide] = useState<Side>("staff");
-  const [wide, setWide] = useState(true);
-  const [xl, setXl] = useState(true);
-  const [scale, setScale] = useState(1);
+  const [wide, setWide] = useState(() => window.innerWidth >= 768);
+  const [scale, setScale] = useState(0.54);
+  const reducedMotion = useReducedMotion();
   const timers = useRef<number[]>([]);
 
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1024px)");
-    const mqXl = window.matchMedia("(min-width: 1280px)");
     const apply = () => {
-      setWide(mq.matches);
-      setXl(mqXl.matches);
-      // On a phone: the instruction, the role switch and the whole phone fit
-      // one screen together, so nothing the visitor needs scrolls away.
-      setScale(Math.min(0.9, Math.max(0.72, (window.innerHeight - 140) / 640)));
+      const width = window.innerWidth;
+      setWide(width >= 768);
+      setScale(width >= 900 ? 0.54 : width >= 768 ? 0.47 : 0.54);
     };
     apply();
-    mq.addEventListener("change", apply);
-    mqXl.addEventListener("change", apply);
     window.addEventListener("resize", apply);
     return () => {
-      mq.removeEventListener("change", apply);
-      mqXl.removeEventListener("change", apply);
       window.removeEventListener("resize", apply);
     };
   }, []);
@@ -176,182 +167,68 @@ export default function LiveDemo({ lang, intro, cta }: { lang: Lang; intro?: Rea
     </PhoneFrame>
   );
 
-  /** Above each phone: whose it is, and on the one to tap, "tap here". */
   const label = (side: Side) => (
-    <div className="mb-4 flex h-5 items-center justify-center gap-2 text-[13px]">
-      <span className="text-zinc-500">{side === "staff" ? c.phoneOf[staffRole] : c.phoneOf.parent}</span>
-      {side === actor && !done && (
-        <motion.span key={scenario} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="font-medium" style={{ color: ACCENT }}>
-          · {c.tapHere} ↓
-        </motion.span>
-      )}
-    </div>
-  );
-
-  const after = (
-    <span className="flex shrink-0 items-center gap-5 text-[13px]">
-      <button type="button" onClick={() => reset(scenario)} className="inline-flex items-center gap-1.5 text-zinc-500 active:text-white">
-        <RotateCcw className="h-3.5 w-3.5" /> {c.replay}
-      </button>
-      <button type="button" onClick={() => choose(nextScenario)} className="inline-flex items-center gap-1.5 font-medium text-white active:text-zinc-300">
-        {c.next}: {c.scenarios[nextScenario].tab} <ArrowRight className="h-3.5 w-3.5" />
-      </button>
-    </span>
-  );
-
-  const phones = (
-    <div className="flex items-start justify-center">
-      <div>
-        {label("staff")}
-        {phone("staff")}
-      </div>
-      <SignalLine signal={signal} />
-      <div>
-        {label("parent")}
-        {phone("parent")}
-      </div>
-    </div>
-  );
-
-  // ≥1280: a narrow panel beside the phones. The active scenario opens in
-  // place with its instruction, so the scenarios read as choices, not as a
-  // static list.
-  if (xl) {
-    return (
-      <div className="grid grid-cols-[minmax(0,400px)_1fr] items-center gap-14">
-        <div>
-          {intro}
-          <div className="mt-10">
-            {ORDER.map((s, i) => {
-              const on = s === scenario;
-              return (
-                <div key={s} className={`relative border-b border-white/[0.08] first:border-t ${on ? "pb-5" : ""}`}>
-                  {on && <motion.span layoutId="lu-demo-bar" className="absolute -left-4 bottom-3 top-3 w-[2px] rounded-full" style={{ background: ACCENT }} />}
-                  <button type="button" onClick={() => choose(s)} className="flex w-full items-center gap-5 py-4 text-left">
-                    <span className="text-[13px] tabular-nums text-zinc-600">{String(i + 1).padStart(2, "0")}</span>
-                    <span className={`text-[16px] transition-colors ${on ? "font-medium text-white" : "text-zinc-500"}`}>{c.scenarios[s].tab}</span>
-                  </button>
-                  {on && (
-                    <div className="pl-[38px]">
-                      <AnimatePresence mode="wait">
-                        <motion.p
-                          key={done ? "done" : "hint"}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          className={`text-[15px] leading-relaxed ${done ? "text-zinc-300" : "font-medium"}`}
-                          style={done ? undefined : { color: ACCENT }}
-                        >
-                          {done ? sc.done : `${sc.hint} →`}
-                        </motion.p>
-                      </AnimatePresence>
-                      {done && <div className="mt-3">{after}</div>}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-          {cta && <div className="mt-9">{cta}</div>}
-        </div>
-        {phones}
-      </div>
-    );
-  }
-
-  const tabs = (
-    <div className="lu-noscroll -mx-5 flex gap-7 overflow-x-auto px-5 sm:justify-center">
-      {ORDER.map((s) => {
-        const on = s === scenario;
-        return (
-          <button
-            key={s}
-            type="button"
-            onClick={() => choose(s)}
-            className={`relative shrink-0 pb-3 text-[15px] transition-colors ${on ? "font-medium text-white" : "text-zinc-500 active:text-zinc-300"}`}
-          >
-            {c.scenarios[s].tab}
-            {on && <motion.span layoutId="lu-demo-tab" className="absolute inset-x-0 bottom-0 h-[2px] rounded-full" style={{ background: ACCENT }} />}
-          </button>
-        );
-      })}
-    </div>
-  );
-
-  const status = (
-    <div className="flex min-h-[44px] flex-col items-center justify-center gap-2 text-center">
-      <AnimatePresence mode="wait">
-        <motion.p
-          key={done ? `done-${scenario}` : `hint-${scenario}`}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className={`text-[15px] leading-snug ${done ? "text-zinc-300" : "font-medium"}`}
-          style={done ? undefined : { color: ACCENT }}
-        >
-          {done ? sc.done : sc.hint}
-        </motion.p>
-      </AnimatePresence>
-      {done && after}
+    <div className="lineup-demo-label">
+      {side === "staff" ? c.phoneOf[staffRole] : c.phoneOf.parent}
+      {side === actor && !done && <span className="lineup-demo-cue"> · {c.tapHere}</span>}
     </div>
   );
 
   return (
-    <div>
-      {intro && <div className="mx-auto mb-7 !max-w-xl text-center">{intro}</div>}
-      {tabs}
-      <div className="mt-4">{status}</div>
+    <div className="lineup-live-demo">
+      <div className="lineup-demo-tabs" role="group" aria-label={lang === "ka" ? "სადემო მოქმედებები" : "Demo actions"}>
+        {ORDER.map((item) => (
+          <button key={item} type="button" aria-pressed={item === scenario} onClick={() => choose(item)}>
+            {c.scenarios[item].tab}
+          </button>
+        ))}
+      </div>
       {wide ? (
-        <div className="mt-8">{phones}</div>
+        <div className="lineup-demo-phones">
+          <div>{label("staff")}<ScaledPhone scale={scale}>{phone("staff")}</ScaledPhone></div>
+          <SignalLine signal={reducedMotion ? null : signal} />
+          <div>{label("parent")}<ScaledPhone scale={scale}>{phone("parent")}</ScaledPhone></div>
+        </div>
       ) : (
-        <div className="mt-5 flex flex-col items-center">
-          <div className="mb-4 flex gap-6 text-[13px]">
-            {(["staff", "parent"] as Side[]).map((s) => (
-              <button
-                key={s}
-                type="button"
-                onClick={() => setMobileSide(s)}
-                className={`relative pb-1.5 ${mobileSide === s ? "font-medium text-white" : "text-zinc-500"}`}
-              >
-                {s === "staff" ? c.phoneOf[staffRole] : c.phoneOf.parent}
-                {mobileSide === s && <span className="absolute inset-x-0 bottom-0 h-px bg-white/60" />}
+        <>
+          <div className="lineup-demo-sides" role="group" aria-label={lang === "ka" ? "აირჩიეთ ტელეფონი" : "Choose a phone"}>
+            {(["staff", "parent"] as Side[]).map((side) => (
+              <button key={side} type="button" aria-pressed={side === mobileSide} onClick={() => setMobileSide(side)}>
+                {side === "staff" ? c.phoneOf[staffRole] : c.phoneOf.parent}
               </button>
             ))}
           </div>
-          <div style={{ perspective: 1400 }}>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={mobileSide}
-                initial={{ rotateY: mobileSide === "parent" ? -80 : 80, opacity: 0 }}
-                animate={{ rotateY: 0, opacity: 1 }}
-                exit={{ rotateY: mobileSide === "parent" ? 80 : -80, opacity: 0 }}
-                transition={{ duration: 0.32 }}
-              >
-                <ScaledPhone scale={scale}>{phone(mobileSide)}</ScaledPhone>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div key={mobileSide} className="lineup-demo-phone"
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              transition={{ duration: reducedMotion ? 0 : 0.18 }}>
+              <ScaledPhone scale={scale}>{phone(mobileSide)}</ScaledPhone>
+            </motion.div>
+          </AnimatePresence>
+        </>
       )}
-      {cta && <div className="mt-10 flex justify-center">{cta}</div>}
+      <div className="lineup-demo-status">
+        <p aria-live="polite">{done ? sc.done : sc.hint}</p>
+        {done && (
+          <div className="lineup-demo-after">
+            <button type="button" onClick={() => reset(scenario)}><RotateCcw size={14} aria-hidden="true" />{c.replay}</button>
+            <button type="button" onClick={() => choose(nextScenario)}>{c.next}: {c.scenarios[nextScenario].tab}<ArrowRight size={14} aria-hidden="true" /></button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
 
-/** A hairline between the two phones; a dot runs along it on delivery. */
 function SignalLine({ signal }: { signal: { to: Side; id: number } | null }) {
-  const W = 96;
   return (
-    <div className="relative mt-[352px] h-2 shrink-0" style={{ width: W }}>
-      <div className="absolute left-3 right-3 top-1/2 border-t border-white/15" />
+    <div className="lineup-demo-signal" aria-hidden="true">
       <AnimatePresence>
         {signal && (
           <motion.span
             key={signal.id}
-            className="absolute top-1/2 h-2 w-2 -translate-y-1/2 rounded-full"
-            style={{ background: ACCENT }}
-            initial={{ x: signal.to === "parent" ? 12 : W - 20, opacity: 0 }}
-            animate={{ x: signal.to === "parent" ? W - 20 : 12, opacity: [0, 1, 1, 0] }}
+            initial={{ x: signal.to === "parent" ? 0 : 20, opacity: 0 }}
+            animate={{ x: signal.to === "parent" ? 20 : 0, opacity: [0, 1, 1, 0] }}
             transition={{ duration: 0.9, ease: "easeInOut" }}
           />
         )}

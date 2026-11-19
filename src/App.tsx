@@ -1,5 +1,6 @@
-import { lazy, Suspense } from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { useLayoutEffect } from "react";
+import type { ComponentType } from "react";
+import { createBrowserRouter, createRoutesFromElements, Navigate, Outlet, Route, RouterProvider, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import FacebookPixel from "./components/FacebookPixel";
 import GoogleAnalytics from "./components/GoogleAnalytics";
@@ -10,29 +11,13 @@ import Home from "./pages/organic/Home";
 
 // Route-level code splitting: only the homepage ships in the initial bundle.
 // Every other page loads on demand, shrinking first-load JS / improving CWV.
-const WebDev = lazy(() => import("./offeredServices/WebDev"));
-const Marketing = lazy(() => import("./offeredServices/Marketing"));
-const Production = lazy(() => import("./offeredServices/Production"));
-const AIChatbot = lazy(() => import("./pages/AIChatbot"));
-const NotFound = lazy(() => import("./pages/NotFound"));
-const IndustryLanding = lazy(() => import("./pages/landing/IndustryLanding"));
-const InventoLandingPage = lazy(() => import("./offeredServices/InventoLandingPage"));
-const LineupLandingPage = lazy(() => import("./offeredServices/LineupLandingPage"));
-const AboutPage = lazy(() => import("./pages/AboutPage"));
-const ContactPage = lazy(() => import("./pages/ContactPage"));
-const BlogIndex = lazy(() => import("./pages/blog/BlogIndex"));
-const BlogPost = lazy(() => import("./pages/blog/BlogPost"));
-const BlogEditor = lazy(() => import("./pages/blog/BlogEditor"));
-const AdminLayout = lazy(() => import("./admin/AdminLayout"));
-const ContactsPage = lazy(() => import("./admin/contacts/ContactsPage"));
-const SendPage = lazy(() => import("./admin/send/SendPage"));
-const OverviewPage = lazy(() => import("./admin/overview/OverviewPage"));
-const PipelinePage = lazy(() => import("./admin/pipeline/PipelinePage"));
-const SourcesPage = lazy(() => import("./admin/sources/SourcesPage"));
-const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
-const TermsOfService = lazy(() => import("./pages/TermsOfService"));
-const ITHubPreview = lazy(() => import("./pages/preview/ITHubPreview"));
-const TypeSpecimen = lazy(() => import("./pages/preview/TypeSpecimen"));
+// Resolve the destination module before the router captures its transition.
+const lazyRoute = (load: () => Promise<{ default: ComponentType }>) => async () => ({
+  Component: (await load()).default,
+});
+
+const webDev = lazyRoute(() => import("./offeredServices/WebDev"));
+const marketing = lazyRoute(() => import("./offeredServices/Marketing"));
 
 // The admin and the design previews (/preview/*) are entered directly by URL,
 // never via in-app navigation, so the initial path is enough to keep their
@@ -40,95 +25,79 @@ const TypeSpecimen = lazy(() => import("./pages/preview/TypeSpecimen"));
 const isStudio =
   typeof window !== "undefined" && /^\/(studio|preview)(\/|$)/.test(window.location.pathname);
 
+function AppShell() {
+  const { pathname } = useLocation();
+
+  useLayoutEffect(() => {
+    if (!/^\/studio(\/|$)/.test(pathname)) window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return (
+    <>
+      {!isStudio && import.meta.env.VITE_GA_MEASUREMENT_ID && (
+        <GoogleAnalytics measurementId={import.meta.env.VITE_GA_MEASUREMENT_ID} />
+      )}
+      {!isStudio && import.meta.env.VITE_FACEBOOK_PIXEL_ID && (
+        <FacebookPixel pixelId={import.meta.env.VITE_FACEBOOK_PIXEL_ID} />
+      )}
+      <Outlet />
+    </>
+  );
+}
+
+const loadingClass = /^\/(preview|industry\/web)(\/|$)/.test(window.location.pathname) ? "bg-[#f5f5f7]" : "bg-[#050404]";
+
+const router = createBrowserRouter(createRoutesFromElements(
+  <Route element={<AppShell />} hydrateFallbackElement={<div className={`min-h-screen ${loadingClass}`} />}>
+    <Route element={<Layout light />}>
+      <Route path="services/web" lazy={webDev} />
+      <Route path="services/web-development" lazy={webDev} />
+      <Route path="industry/web/:slug" lazy={async () => ({
+        Component: (await import("./pages/landing/IndustryLanding")).WebIndustryLanding,
+      })} />
+      <Route path="services/ai-chatbot" lazy={lazyRoute(() => import("./pages/AIChatbot"))} />
+      <Route path="inventowms" lazy={lazyRoute(() => import("./offeredServices/InventoLandingPage"))} />
+      <Route path="lineup" lazy={lazyRoute(() => import("./offeredServices/LineupLandingPage"))} />
+    </Route>
+    <Route path="/" element={<Layout />}>
+      <Route index element={<Home />} />
+      <Route path="services/marketing" lazy={marketing} />
+      <Route path="services/production" lazy={lazyRoute(() => import("./offeredServices/Production"))} />
+      <Route path="services/digital-advertising" lazy={marketing} />
+      <Route path="contact" lazy={lazyRoute(() => import("./pages/ContactPage"))} />
+      <Route path="about" lazy={lazyRoute(() => import("./pages/AboutPage"))} />
+      <Route path="blog" lazy={lazyRoute(() => import("./pages/blog/BlogIndex"))} />
+      <Route path="blog/:slug" lazy={lazyRoute(() => import("./pages/blog/BlogPost"))} />
+      <Route path="privacy" lazy={lazyRoute(() => import("./pages/PrivacyPolicy"))} />
+      <Route path="terms" lazy={lazyRoute(() => import("./pages/TermsOfService"))} />
+      <Route path="industry/:service/:slug" lazy={lazyRoute(() => import("./pages/landing/IndustryLanding"))} />
+      <Route path="*" lazy={lazyRoute(() => import("./pages/NotFound"))} />
+    </Route>
+
+    {/* Admin routes use their own layout and navigation. */}
+    <Route path="/studio" lazy={lazyRoute(() => import("./admin/AdminLayout"))}>
+      <Route index element={<Navigate to="overview" replace />} />
+      <Route path="overview" lazy={lazyRoute(() => import("./admin/overview/OverviewPage"))} />
+      <Route path="pipeline" lazy={lazyRoute(() => import("./admin/pipeline/PipelinePage"))} />
+      <Route path="contacts" lazy={lazyRoute(() => import("./admin/contacts/ContactsPage"))} />
+      <Route path="sources" lazy={lazyRoute(() => import("./admin/sources/SourcesPage"))} />
+      <Route path="campaigns" lazy={lazyRoute(() => import("./admin/send/SendPage"))} />
+      <Route path="send" element={<Navigate to="/studio/campaigns" replace />} />
+      <Route path="blog" lazy={lazyRoute(() => import("./pages/blog/BlogEditor"))} />
+    </Route>
+
+    <Route path="/preview/it" lazy={lazyRoute(() => import("./pages/preview/ITHubPreview"))} />
+    <Route path="/preview/type" lazy={lazyRoute(() => import("./pages/preview/TypeSpecimen"))} />
+    <Route path="*" element={<Navigate to="/" replace />} />
+  </Route>,
+));
+
 const App = () => {
   return (
     <HelmetProvider>
       <LanguageProvider>
         <NavigationProvider>
-          <BrowserRouter>
-            {!isStudio && import.meta.env.VITE_GA_MEASUREMENT_ID && (
-              <GoogleAnalytics
-                measurementId={import.meta.env.VITE_GA_MEASUREMENT_ID}
-              />
-            )}
-
-            {!isStudio && import.meta.env.VITE_FACEBOOK_PIXEL_ID && (
-              <FacebookPixel pixelId={import.meta.env.VITE_FACEBOOK_PIXEL_ID} />
-            )}
-
-            <Suspense fallback={<div className="min-h-screen bg-[#050404]" />}>
-              <Routes>
-                <Route path="/" element={<Layout />}>
-                  <Route index element={<Home />} />
-
-                  {/* Organic Traffic Flow */}
-                  <Route path="services/web" element={<WebDev />} />
-                  <Route path="services/marketing" element={<Marketing />} />
-                  {/* Photo/video/drone production — indexable, NOT in navbar (linked from
-                      Marketing + footer). Same model as industry money-SEO pages. */}
-                  <Route path="services/production" element={<Production />} />
-
-                  {/* Route aliases (server-side 301'd to canonical in vercel.json) */}
-                  <Route path="services/web-development" element={<WebDev />} />
-                  <Route
-                    path="services/digital-advertising"
-                    element={<Marketing />}
-                  />
-                  <Route path="services/ai-chatbot" element={<AIChatbot />} />
-                  <Route path="contact" element={<ContactPage />} />
-                  <Route path="about" element={<AboutPage />} />
-                  <Route path="inventowms" element={<InventoLandingPage />} />
-                  {/* LineUp — sports academy app (product page with a live demo) */}
-                  <Route path="lineup" element={<LineupLandingPage />} />
-
-                  {/* Blog (organic content engine) */}
-                  <Route path="blog" element={<BlogIndex />} />
-                  <Route path="blog/:slug" element={<BlogPost />} />
-
-                  {/* Legal pages (linked from footer) */}
-                  <Route path="privacy" element={<PrivacyPolicy />} />
-                  <Route path="terms" element={<TermsOfService />} />
-
-                  {/* Dynamic Ad-Landing Flow */}
-                  <Route path="industry/:service/:slug" element={<IndustryLanding />} />
-
-                  <Route path="*" element={<NotFound />} />
-                </Route>
-
-                {/* Admin (Google sign-in, locked by firestore.rules). Standalone, no navbar/footer. */}
-                <Route path="/studio" element={<AdminLayout />}>
-                  <Route index element={<Navigate to="overview" replace />} />
-                  <Route path="overview" element={<OverviewPage />} />
-                  <Route path="pipeline" element={<PipelinePage />} />
-                  <Route path="contacts" element={<ContactsPage />} />
-                  <Route path="sources" element={<SourcesPage />} />
-                  <Route path="campaigns" element={<SendPage />} />
-                  <Route path="send" element={<Navigate to="/studio/campaigns" replace />} />
-                  <Route path="blog" element={<BlogEditor />} />
-                </Route>
-
-                <Route
-                  path="/preview/it"
-                  element={
-                    <Suspense fallback={<div className="min-h-screen bg-[#f5f5f7]" />}>
-                      <ITHubPreview />
-                    </Suspense>
-                  }
-                />
-
-                <Route
-                  path="/preview/type"
-                  element={
-                    <Suspense fallback={<div className="min-h-screen bg-[#f5f5f7]" />}>
-                      <TypeSpecimen />
-                    </Suspense>
-                  }
-                />
-
-                <Route path="*" element={<Navigate to="/" replace />} />
-              </Routes>
-            </Suspense>
-          </BrowserRouter>
+          <RouterProvider router={router} />
         </NavigationProvider>
       </LanguageProvider>
     </HelmetProvider>

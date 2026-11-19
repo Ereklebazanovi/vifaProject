@@ -35,7 +35,7 @@ const whatsappUrlFor = (pathname: string) => {
  * scroll (keeps the hero clean), fades in, and stays out of routes that already
  * have their own persistent contact bar. No pulsing / no text bubble by design.
  */
-const FloatingContact: React.FC = () => {
+const FloatingContact: React.FC<{ whatsappHref?: string }> = ({ whatsappHref }) => {
   const location = useLocation();
   const { currentLanguage } = useLanguage();
   const [shown, setShown] = useState(false);
@@ -47,14 +47,14 @@ const FloatingContact: React.FC = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const hidden = HIDDEN_PREFIXES.some((p) => location.pathname.startsWith(p));
+  const hidden = !whatsappHref && HIDDEN_PREFIXES.some((p) => location.pathname.startsWith(p));
   if (hidden) return null;
 
   const label = currentLanguage === "ka" ? "მოგვწერეთ WhatsApp-ში" : "Message us on WhatsApp";
 
   return (
     <a
-      href={whatsappUrlFor(location.pathname)}
+      href={whatsappHref ?? whatsappUrlFor(location.pathname)}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}

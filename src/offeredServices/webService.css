@@ -1,0 +1,43 @@
+.web-service {
+  --web-section-gap: 32px;
+}
+
+.web-service :is(.web-pricing, .web-portfolio) {
+  padding-block: var(--web-section-gap) 52px;
+}
+
+.web-pricing {
+  scroll-margin-top: 64px;
+}
+
+.web-packages, .web-project-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.web-consultation-note {
+  margin: 18px 0 0;
+  color: var(--it-text-2);
+  font-size: 14px;
+}
+
+.web-portfolio-more { color: inherit; }
+.web-portfolio-more:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.web-project-toggle { justify-self: center; }
+
+@media (max-width: 767px) {
+  .web-project-grid[data-expanded="false"] .web-project-extra { display: none; }
+}
+
+.web-faq-list { margin: 0; padding: 0 24px 24px; color: var(--it-text-2); line-height: 1.5; }
+
+@media (min-width: 768px) {
+  .web-project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .web-project-grid .web-project-toggle { display: none; }
+}
+
+@media (min-width: 900px) {
+  .web-packages { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}

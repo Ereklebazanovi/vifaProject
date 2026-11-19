@@ -31,7 +31,7 @@ const NavigationProgressBar = ({ active }: { active: boolean }) => (
   </div>
 );
 
-const Layout: React.FC = () => {
+const Layout: React.FC<{ light?: boolean }> = ({ light = false }) => {
   const { stopNavigation } = useNavigation();
   const location = useLocation();
   const [barActive, setBarActive] = useState(false);
@@ -88,14 +88,6 @@ const Layout: React.FC = () => {
       const t = setTimeout(() => setBarActive(false), 700);
       return () => clearTimeout(t);
     }
-  }, [location.pathname]);
-
-  // Scroll to top on route change — in an SPA the path changes but the scroll
-  // position is otherwise kept, leaving the new page frozen mid-scroll (e.g.
-  // clicking a "Related services" link at the bottom of an industry page).
-  // Hash anchors (#pricing) don't change pathname, so they're unaffected.
-  useEffect(() => {
-    window.scrollTo(0, 0);
   }, [location.pathname]);
 
   // Also stop manual navigation state
@@ -156,6 +148,10 @@ const Layout: React.FC = () => {
   // const toggleChatBot = () => {
   //   setIsChatBotOpen(!isChatBotOpen);
   // };
+
+  if (light) {
+    return <Outlet />;
+  }
 
   return (
     <div className="min-h-screen bg-transparent text-white">

@@ -773,30 +773,30 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
       introKa:
         "სილამაზის სალონის ვებსაიტი დღეს უკვე აღარ არის ფუფუნება, ეს თქვენი ციფრული მიმღებია, რომელიც 24/7 მუშაობს. VIFA Digital ქმნის ესთეტიკის ცენტრებისა და სალონების საიტებს, რომლებიც კლიენტს ჩაწერის საშუალებას აძლევს პირდაპირ თქვენს გვერდზე, ინსტაგრამში მიმოწერის ლოდინის გარეშე. შედეგი - ნაკლები გაცდენილი ჯავშანი და მეტი დაკავებული სავარძელი.",
       introEn:
-        "A beauty salon website is no longer a luxury — it is your digital front desk working 24/7. VIFA Digital builds websites for aesthetics centers and salons that let clients book directly on your page, without waiting in Instagram DMs. The result: fewer missed bookings and more filled chairs.",
+        "A beauty salon website is no longer a luxury - it is your digital front desk working 24/7. VIFA Digital builds websites for aesthetics centers and salons that let clients book directly on your page, without waiting in Instagram DMs. The result: fewer missed bookings and more filled chairs.",
       contentSections: [
         {
           headingKa: "რას მოიცავს სალონის ვებსაიტის დამზადება",
           headingEn: "What beauty salon website development includes",
           bodyKa:
-            "თითოეული პროექტი იწყება პრემიუმ, მობილურზე მორგებული დიზაინით, რადგან თქვენი კლიენტების უმეტესობა საიტს ტელეფონიდან ნახულობს. ვამზადებთ სერვისებისა და ფასების სრულ კატალოგს, Before/After გალერეას და მრავალენოვან ინტერფეისს უცხოელი კლიენტებისთვის. პრემიუმ პაკეტში ემატება ონლაინ ჩაწერის სისტემა 0% საკომისიოთი — კლიენტი თავად ირჩევს დროსა და სპეციალისტს, თქვენ კი ჯავშნებს მართავთ ადმინ პანელიდან.",
+            "თითოეული პროექტი იწყება პრემიუმ, მობილურზე მორგებული დიზაინით, რადგან თქვენი კლიენტების უმეტესობა საიტს ტელეფონიდან ნახულობს. ვამზადებთ სერვისებისა და ფასების სრულ კატალოგს, Before/After გალერეას და მრავალენოვან ინტერფეისს უცხოელი კლიენტებისთვის. პრემიუმ პაკეტში ემატება ონლაინ ჩაწერის სისტემა 0% საკომისიოთი - კლიენტი თავად ირჩევს დროსა და სპეციალისტს, თქვენ კი ჯავშნებს მართავთ ადმინ პანელიდან.",
           bodyEn:
-            "Every project starts with a premium, mobile-first design, because most of your clients view the site from a phone. We build a full catalog of services and prices, a trust-building Before/After gallery, and a multilingual interface for foreign clients. The premium package adds an online booking system with 0% commission — clients pick their time and specialist, while you manage everything from an admin panel.",
+            "Every project starts with a premium, mobile-first design, because most of your clients view the site from a phone. We build a full catalog of services and prices, a trust-building Before/After gallery, and a multilingual interface for foreign clients. The premium package adds an online booking system with 0% commission - clients pick their time and specialist, while you manage everything from an admin panel.",
         },
         {
           headingKa: "რატომ სჭირდება სილამაზის ბიზნესს საკუთარი საიტი",
           headingEn: "Why a beauty business needs its own website",
           bodyKa:
-            "სოციალური ქსელები შესანიშნავია ხილვადობისთვის, მაგრამ ისინი თქვენ არ გეკუთვნით — ალგორითმი წყვეტს ვინ დაგინახავთ. საკუთარი ვებსაიტი თქვენი აქტივია: ის უმჯობესებს Google-ში ძიებად პოზიციებს, აგროვებს კლიენტების ბაზას და ანაცვლებს ძვირადღირებულ შუამავალ პლატფორმებს. სრული ეკოსისტემის პაკეტში დამატებით შესაძლებელია თავის მოვლის პროდუქციის ონლაინ გაყიდვაც, საბანკო ბარათით გადახდის ინტეგრაციით.",
+            "სოციალური ქსელები შესანიშნავია ხილვადობისთვის, მაგრამ ისინი თქვენ არ გეკუთვნით - ალგორითმი წყვეტს ვინ დაგინახავთ. საკუთარი ვებსაიტი თქვენი აქტივია: ის უმჯობესებს Google-ში ძიებად პოზიციებს, აგროვებს კლიენტების ბაზას და ანაცვლებს ძვირადღირებულ შუამავალ პლატფორმებს. სრული ეკოსისტემის პაკეტში დამატებით შესაძლებელია თავის მოვლის პროდუქციის ონლაინ გაყიდვაც, საბანკო ბარათით გადახდის ინტეგრაციით.",
           bodyEn:
-            "Social media is great for visibility, but it doesn't belong to you — an algorithm decides who sees you. Your own website is an asset: it improves your Google rankings, collects a client database, and replaces costly third-party platforms. The Full Ecosystem package can also add online sales of care products with bank-card payment integration.",
+            "Social media is great for visibility, but it doesn't belong to you - an algorithm decides who sees you. Your own website is an asset: it improves your Google rankings, collects a client database, and replaces costly third-party platforms. The Full Ecosystem package can also add online sales of care products with bank-card payment integration.",
         },
       ],
       faqKa: [
         {
           question: "რა ღირს სალონის საიტის დამზადება?",
           answer:
-            "სალონის საიტის დამზადება სამ პაკეტად გვაქვს: ციფრული კატალოგი 700₾-დან 1000₾-მდე, ონლაინ ჩაწერის სისტემით უზრუნველყოფილი „ციფრული ადმინისტრატორი“ 1000₾-დან 1400₾-მდე, ხოლო პროდუქციის ონლაინ მაღაზიის ჩათვლით სრული ეკოსისტემა 1500₾-დან. კონსულტაცია უფასოა და მოქმედებს 50/50 გადახდის სისტემა.",
+            "სალონის საიტის დამზადება სამ პაკეტად გვაქვს: ციფრული კატალოგი 700 ₾-დან 1000 ₾-მდე, ონლაინ ჩაწერის სისტემით უზრუნველყოფილი „ციფრული ადმინისტრატორი“ 1000 ₾-დან 1400 ₾-მდე, ხოლო პროდუქციის ონლაინ მაღაზიის ჩათვლით სრული ეკოსისტემა 1500 ₾-დან. კონსულტაცია უფასოა და მოქმედებს 50/50 გადახდის სისტემა.",
         },
         {
           question: "შესაძლებელია ონლაინ ჩაწერის სისტემის დამატება?",
@@ -818,7 +818,7 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
         {
           question: "How much does a beauty salon website cost?",
           answer:
-            "Beauty salon website development comes in three packages: Digital Catalog 700-1000₾, Digital Administrator with an online booking system 1000-1400₾, and the Full Ecosystem with an online product store from 1500₾. Consultation is free and a 50/50 payment split is available.",
+            "Beauty salon website development comes in three packages: Digital Catalog 700-1000 ₾, Digital Administrator with an online booking system 1000-1400 ₾, and the Full Ecosystem with an online product store from 1500 ₾. Consultation is free and a 50/50 payment split is available.",
         },
         {
           question: "Can an online booking system be added?",
@@ -912,8 +912,8 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
             "The Premium Web Catalog with a photo/video-focused design presents your rooms and spaces the way a guest wants to see them. We add a multilingual interface for foreign guests, Google Maps integration, and a quick-communication module (WhatsApp / Viber / Email). The Booking Platform package adds a calendar booking form with date selection, automated email notifications for the guest and admin, and seasonal price management.",
         },
         {
-          headingKa: "SEO და სიჩქარე — ხილვადობა Google-ში",
-          headingEn: "SEO and speed — visibility on Google",
+          headingKa: "SEO და სიჩქარე - ხილვადობა Google-ში",
+          headingEn: "SEO and speed - visibility on Google",
           bodyKa:
             "სასტუმროს მაძიებელი ხშირად პირდაპირ Google-ში წერს „სასტუმრო ბაკურიანში“ ან „hotel in Tbilisi“. ჩვენი საიტები იქმნება SEO-სთვის ოპტიმიზებული სტრუქტურით და სტატიკურად რენდერდება (prerender), რაც სწრაფ ჩატვირთვასა და უკეთეს საძიებო პოზიციებს უზრუნველყოფს. შედეგად, თქვენი სასტუმრო ჩანს არა მხოლოდ შუამავალ პლატფორმებზე, არამედ პირდაპირ ძიების შედეგებში.",
           bodyEn:
@@ -924,12 +924,12 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
         {
           question: "რა ღირს სასტუმროს საიტის დამზადება?",
           answer:
-            "პრემიუმ ვებ-კატალოგი 700₾-დან 1000₾-მდეა, ხოლო კალენდარული ჯავშნის ფორმითა და ავტომატური ნოტიფიკაციებით აღჭურვილი ჯავშნების პლატფორმა 1000₾-დან 1300₾-მდე. კონსულტაცია უფასოა და მოქმედებს 50/50 გადახდა.",
+            "პრემიუმ ვებ-კატალოგი 700 ₾-დან 1000 ₾-მდეა, ხოლო კალენდარული ჯავშნის ფორმითა და ავტომატური ნოტიფიკაციებით აღჭურვილი ჯავშნების პლატფორმა 1000 ₾-დან 1300 ₾-მდე. კონსულტაცია უფასოა და მოქმედებს 50/50 გადახდა.",
         },
         {
           question: "შესაძლებელია ონლაინ ჯავშნის სისტემის ინტეგრაცია?",
           answer:
-            "დიახ. ჯავშნების პლატფორმის პაკეტი მოიცავს კალენდარულ ჯავშნის ფორმას თარიღების არჩევით და ავტომატურ მეილ-ნოტიფიკაციებს როგორც სტუმრისთვის, ისე ადმინისტრაციისთვის — ეს ამცირებს Booking-ის ტიპის საკომისიოებს.",
+            "დიახ. ჯავშნების პლატფორმის პაკეტი მოიცავს კალენდარულ ჯავშნის ფორმას თარიღების არჩევით და ავტომატურ მეილ-ნოტიფიკაციებს როგორც სტუმრისთვის, ისე ადმინისტრაციისთვის - ეს ამცირებს Booking-ის ტიპის საკომისიოებს.",
         },
         {
           question: "საიტი უცხოურ ენებზე იქნება ხელმისაწვდომი?",
@@ -946,12 +946,12 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
         {
           question: "How much does hotel website development cost?",
           answer:
-            "The Premium Web Catalog is 700–1000₾, and the Booking Platform with a calendar form and automated notifications is 1000–1300₾. Consultation is free and a 50/50 payment split is available.",
+            "The Premium Web Catalog is 700-1000 ₾, and the Booking Platform with a calendar form and automated notifications is 1000-1300 ₾. Consultation is free and a 50/50 payment split is available.",
         },
         {
           question: "Can an online booking system be integrated?",
           answer:
-            "Yes. The Booking Platform package includes a calendar booking form with date selection and automated email notifications for both the guest and admin — reducing Booking-style commissions.",
+            "Yes. The Booking Platform package includes a calendar booking form with date selection and automated email notifications for both the guest and admin - reducing Booking-style commissions.",
         },
         {
           question: "Will the website support foreign languages?",
@@ -1051,7 +1051,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
         {
           question: "რა ღირს იურიდიული კომპანიის საიტის დამზადება?",
           answer:
-            "კორპორატიული ვებსაიტი 700₾-დან 900₾-მდეა, ხოლო დახურული კლიენტთა პორტალითა და უსაფრთხო დოკუმენტბრუნვით აღჭურვილი ვებ-პორტალი 1000₾-დან 1400₾-მდე. კონსულტაცია უფასოა და მოქმედებს 50/50 გადახდა.",
+            "კორპორატიული ვებსაიტი 700 ₾-დან 900 ₾-მდეა, ხოლო დახურული კლიენტთა პორტალითა და უსაფრთხო დოკუმენტბრუნვით აღჭურვილი ვებ-პორტალი 1000 ₾-დან 1400 ₾-მდე. კონსულტაცია უფასოა და მოქმედებს 50/50 გადახდა.",
         },
         {
           question: "შესაძლებელია კლიენტების დახურული პორტალის შექმნა?",
@@ -1073,7 +1073,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
         {
           question: "How much does law firm website development cost?",
           answer:
-            "A corporate website is 700–900₾, and a Web Portal with a private client portal and secure document exchange is 1000–1400₾. Consultation is free and a 50/50 payment split is available.",
+            "A corporate website is 700-900 ₾, and a Web Portal with a private client portal and secure document exchange is 1000-1400 ₾. Consultation is free and a 50/50 payment split is available.",
         },
         {
           question: "Can you build a private client portal?",
@@ -1155,7 +1155,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
       introKa:
         "ონლაინ მაღაზიის საიტის დამზადება დღეს ნიშნავს არა მხოლოდ პროდუქტების კატალოგს, არამედ სრულ ციფრულ ეკოსისტემას: გაყიდვებიდან ლოგისტიკამდე. VIFA Digital გთავაზობთ ონლაინ მაღაზიის დამზადებას ქართული ბანკების გადახდის სისტემებით, საწყობის მართვითა (WMS) და კურიერის ინტეგრაციით, რათა თქვენი ინტერნეტ მაღაზია არა მხოლოდ ლამაზი, არამედ მომგებიანი იყოს.",
       introEn:
-        "Online store website development today means not just a product catalog but a full digital ecosystem — from sales to logistics. VIFA Digital offers online store development with Georgian bank payment systems, warehouse management (WMS) and courier integration, so your store is not just beautiful but profitable.",
+        "Online store website development today means not just a product catalog but a full digital ecosystem - from sales to logistics. VIFA Digital offers online store development with Georgian bank payment systems, warehouse management (WMS) and courier integration, so your store is not just beautiful but profitable.",
       contentSections: [
         {
           headingKa: "ციფრული შოურუმიდან სრულ ინტერნეტ მაღაზიამდე",
@@ -1163,11 +1163,11 @@ heroSublineKa: "თანამედროვე პლატფორმებ
           bodyKa:
             "თუ სოციალურ ქსელებში ყიდით, „ციფრული შოურუმის“ პაკეტი იდეალური დასაწყისია - პრემიუმ კატალოგი ვარიაციებით, კალათა და ავტომატური მეილ-შეტყობინებები. „ავტომატიზებული E-commerce“ მოიცავს ონლაინ გადახდებს ნებისმიერი Visa/Mastercard ბარათით, შეკვეთების სრული ციკლის მართვასა და გაყიდვების ანალიტიკას. თითოეული საიტი ულტრა-სწრაფია მობილურზე, რადგან მყიდველების უმეტესობა ტელეფონს იყენებს.",
           bodyEn:
-            "If you sell on social media, the Digital Showroom package is the ideal start — a premium catalog with variations, a cart and automated email notifications. The Automated E-commerce package adds online payments with any Visa/Mastercard, full-cycle order management and sales analytics. Every site is ultra-fast on mobile, because most buyers use a phone.",
+            "If you sell on social media, the Digital Showroom package is the ideal start - a premium catalog with variations, a cart and automated email notifications. The Automated E-commerce package adds online payments with any Visa/Mastercard, full-cycle order management and sales analytics. Every site is ultra-fast on mobile, because most buyers use a phone.",
         },
         {
           headingKa: "WMS ინტეგრაცია - საწყობი და ლოგისტიკა ერთ სივრცეში",
-          headingEn: "WMS integration — warehouse and logistics in one place",
+          headingEn: "WMS integration - warehouse and logistics in one place",
           bodyKa:
             "სრული Retail ეკოსისტემის პაკეტი აერთიანებს მაღაზიას VIFA-ს საწყობის მართვის სისტემასთან (WMS): მარაგების ავტომატური სინქრონიზაცია, კურიერის ინვოისებისა და PDF ლეიბლების გენერაცია, CRM-ით მომხმარებლების სეგმენტაცია და დეტალური Excel რეპორტები. ეს ის ინფრასტრუქტურაა, რომელიც დიდი მოცულობის გაყიდვებს ხელით მართვის ქაოსის გარეშე უძლებს.",
           bodyEn:
@@ -1178,22 +1178,22 @@ heroSublineKa: "თანამედროვე პლატფორმებ
         {
           question: "რა ღირს ონლაინ მაღაზიის საიტის დამზადება?",
           answer:
-            "ონლაინ მაღაზიის საიტის დამზადება სამ პაკეტად გვაქვს: ციფრული შოურუმი 700₾-დან 900₾-მდე, ავტომატიზებული E-commerce ონლაინ გადახდებით 1000₾-დან 1500₾-მდე, ხოლო WMS-ით ინტეგრირებული სრული Retail ეკოსისტემა 2500₾-დან. კონსულტაცია უფასოა და მოქმედებს 50/50 გადახდა.",
+            "ონლაინ მაღაზიის საიტის დამზადება სამ პაკეტად გვაქვს: ციფრული შოურუმი 700 ₾-დან 900 ₾-მდე, ავტომატიზებული E-commerce ონლაინ გადახდებით 1000 ₾-დან 1500 ₾-მდე, ხოლო WMS-ით ინტეგრირებული სრული Retail ეკოსისტემა 2500 ₾-დან. კონსულტაცია უფასოა და მოქმედებს 50/50 გადახდა.",
         },
         {
           question: "რამდენ ხანში მზადდება ონლაინ მაღაზიის საიტი?",
           answer:
-            "ონლაინ მაღაზიის საიტის დამზადებას საშუალოდ 3-დან 6 კვირამდე სჭირდება პაკეტის მიხედვით — ციფრული შოურუმი უფრო სწრაფად მზადდება, ხოლო WMS-ით ინტეგრირებული სრული ინტერნეტ მაღაზიის გასამართად მეტი დროა საჭირო. ზუსტ ვადებს უფასო კონსულტაციის შემდეგ ვათანხმებთ.",
+            "ონლაინ მაღაზიის საიტის დამზადებას საშუალოდ 3-დან 6 კვირამდე სჭირდება პაკეტის მიხედვით - ციფრული შოურუმი უფრო სწრაფად მზადდება, ხოლო WMS-ით ინტეგრირებული სრული ინტერნეტ მაღაზიის გასამართად მეტი დროა საჭირო. ზუსტ ვადებს უფასო კონსულტაციის შემდეგ ვათანხმებთ.",
         },
         {
           question: "შესაძლებელია ქართული ბანკებით გადახდის ინტეგრაცია?",
           answer:
-            "დიახ, ვამზადებთ მაღაზიებს ქართული ბანკების (TBC, BOG) გადახდის სისტემების სრული ინტეგრაციით — მყიდველი ნებისმიერი Visa/Mastercard ბარათით გადაიხდის.",
+            "დიახ, ვამზადებთ მაღაზიებს ქართული ბანკების (TBC, BOG) გადახდის სისტემების სრული ინტეგრაციით - მყიდველი ნებისმიერი Visa/Mastercard ბარათით გადაიხდის.",
         },
         {
           question: "შესაძლებელია საწყობისა და კურიერების მართვა საიტიდან?",
           answer:
-            "დიახ, სრული Retail ეკოსისტემა აერთიანებს მაღაზიას VIFA WMS სისტემასთან — მარაგების სინქრონიზაცია, კურიერის PDF ლეიბლები და Excel რეპორტები პირდაპირ ადმინ-პანელიდან.",
+            "დიახ, სრული Retail ეკოსისტემა აერთიანებს მაღაზიას VIFA WMS სისტემასთან - მარაგების სინქრონიზაცია, კურიერის PDF ლეიბლები და Excel რეპორტები პირდაპირ ადმინ-პანელიდან.",
         },
         {
           question: "მაღაზია მობილურზე სწრაფად იმუშავებს?",
@@ -1205,22 +1205,22 @@ heroSublineKa: "თანამედროვე პლატფორმებ
         {
           question: "How much does online store website development cost?",
           answer:
-            "Online store website development comes in three packages: Digital Showroom 700-900₾, Automated E-commerce with online payments 1000-1500₾, and the WMS-integrated Full Retail Ecosystem from 3500₾. Consultation is free and a 50/50 payment split is available.",
+            "Online store website development comes in three packages: Digital Showroom 700-900 ₾, Automated E-commerce with online payments 1000-1500 ₾, and the WMS-integrated Full Retail Ecosystem from 2500 ₾. Consultation is free and a 50/50 payment split is available.",
         },
         {
           question: "How long does online store website development take?",
           answer:
-            "Online store website development takes 3 to 6 weeks on average depending on the package — the Digital Showroom is faster, while a full WMS-integrated online store needs more time. We agree on exact timelines after a free consultation.",
+            "Online store website development takes 3 to 6 weeks on average depending on the package - the Digital Showroom is faster, while a full WMS-integrated online store needs more time. We agree on exact timelines after a free consultation.",
         },
         {
           question: "Can Georgian bank payments be integrated?",
           answer:
-            "Yes, we build stores with full integration of Georgian bank (TBC, BOG) payment systems — buyers can pay with any Visa/Mastercard.",
+            "Yes, we build stores with full integration of Georgian bank (TBC, BOG) payment systems - buyers can pay with any Visa/Mastercard.",
         },
         {
           question: "Can I manage warehouse and couriers from the site?",
           answer:
-            "Yes, the Full Retail Ecosystem connects the store with VIFA WMS — inventory sync, courier PDF labels and Excel reports directly from the admin panel.",
+            "Yes, the Full Retail Ecosystem connects the store with VIFA WMS - inventory sync, courier PDF labels and Excel reports directly from the admin panel.",
         },
         {
           question: "Will the store run fast on mobile?",
@@ -1291,7 +1291,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
       introKa:
         "რესტორნის საიტის დამზადება საშუალებას გაძლევთ ჩაანაცვლოთ შაბლონური და ძვირადღირებული პლატფორმები თქვენი საკუთარი ციფრული სივრცით. VIFA Digital ქმნის რესტორნებისა და კაფეების ვებსაიტებს ბრენდირებული ციფრული მენიუთი, მაგიდის ჯავშნისა და ბანკეტების მართვის სისტემით - ყველაფერი თქვენი ბრენდის სტილში, მესამე მხარის აპლიკაციების გარეშე.",
       introEn:
-        "Restaurant website development lets you replace generic, expensive platforms with your own digital space. VIFA Digital builds websites for restaurants and cafes with a branded digital menu and a table reservation and banquet management system — all in your brand's style, free of third-party apps.",
+        "Restaurant website development lets you replace generic, expensive platforms with your own digital space. VIFA Digital builds websites for restaurants and cafes with a branded digital menu and a table reservation and banquet management system - all in your brand's style, free of third-party apps.",
       contentSections: [
         {
           headingKa: "ბრენდირებული ციფრული მენიუ",
@@ -1314,12 +1314,12 @@ heroSublineKa: "თანამედროვე პლატფორმებ
         {
           question: "რა ღირს რესტორნის საიტის დამზადება?",
           answer:
-            "პრემიუმ ვებ-მენიუ 600₾-დან 800₾-მდეა, ხოლო მაგიდის ჯავშნისა და ბანკეტების მართვის სისტემით აღჭურვილი რესტორნის ვებ-პლატფორმა 1000₾-დან 1500₾-მდე. კონსულტაცია უფასოა და მოქმედებს 50/50 გადახდა.",
+            "პრემიუმ ვებ-მენიუ 600 ₾-დან 800 ₾-მდეა, ხოლო მაგიდის ჯავშნისა და ბანკეტების მართვის სისტემით აღჭურვილი რესტორნის ვებ-პლატფორმა 1000 ₾-დან 1500 ₾-მდე. კონსულტაცია უფასოა და მოქმედებს 50/50 გადახდა.",
         },
         {
           question: "რით სჯობს საკუთარი საიტი QR-მენიუს ან Wolt-ს?",
           answer:
-            "საკუთარი საიტი თქვენი აქტივია — ის არ იღებს საკომისიოს, ჩანს Google-ში, აგროვებს კლიენტების ბაზას და სრულად თქვენი ბრენდის სტილშია, შაბლონური აპლიკაციებისგან განსხვავებით.",
+            "საკუთარი საიტი თქვენი აქტივია - ის არ იღებს საკომისიოს, ჩანს Google-ში, აგროვებს კლიენტების ბაზას და სრულად თქვენი ბრენდის სტილშია, შაბლონური აპლიკაციებისგან განსხვავებით.",
         },
         {
           question: "შესაძლებელია მაგიდის ონლაინ ჯავშნის დამატება?",
@@ -1336,12 +1336,12 @@ heroSublineKa: "თანამედროვე პლატფორმებ
         {
           question: "How much does restaurant website development cost?",
           answer:
-            "The Premium Web Menu is 600–800₾, and the Restaurant Web Platform with a table reservation and banquet system is 1000–1500₾. Consultation is free and a 50/50 payment split is available.",
+            "The Premium Web Menu is 600-800 ₾, and the Restaurant Web Platform with a table reservation and banquet system is 1000-1500 ₾. Consultation is free and a 50/50 payment split is available.",
         },
         {
           question: "Why is my own site better than a QR menu or Wolt?",
           answer:
-            "Your own site is an asset — it takes no commission, appears on Google, collects a client database and is fully in your brand's style, unlike generic apps.",
+            "Your own site is an asset - it takes no commission, appears on Google, collects a client database and is fully in your brand's style, unlike generic apps.",
         },
         {
           question: "Can online table reservations be added?",

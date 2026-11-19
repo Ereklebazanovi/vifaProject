@@ -1,6 +1,6 @@
 //IndudsryLanding.tsx
 import { Link, useParams } from "react-router-dom";
-import { CheckCircle2, CreditCard, ArrowRight, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { CheckCircle2, ArrowRight, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import foodPhotos from "../../data/galleries/food.json";
@@ -8,6 +8,8 @@ import { useLanguage } from "../../contexts/LanguageContext";
 import Breadcrumbs, { type Crumb } from "../../components/Breadcrumbs";
 import SEO from "../../components/SEO";
 import FAQSection from "../../components/FAQSection";
+import { getIndustryShowcases } from "../../components/ui/industryShowcases";
+import { WebIndustryContent } from "./WebIndustryContent";
 import {
   industryData,
   type BilingualPricingTier,
@@ -40,281 +42,14 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
 
 // ─── Animation variants ───────────────────────────────────────────────────────
 
-const heroContainer = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
-};
-const heroItem = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
-};
 const sectionReveal = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
 };
-const cardStagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
-};
-const cardItem = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
-};
-
 const validServices = new Set(["web", "marketing"]);
 const validSlugs = new Set(["tourism", "beauty", "legal-finance", "retail", "food"]);
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
-
-interface HeroProps {
-  config: IndustryConfig;
-  ka: boolean;
-  breadcrumbs: Crumb[];
-}
-
-function HeroSection({ config, ka, breadcrumbs }: HeroProps) {
-  const subline = ka ? config.heroSublineKa : config.heroSublineEn;
-  const headlineText =
-    config.headline.type === "cinematic"
-      ? `${ka ? config.headline.preKa : config.headline.preEn} ${ka ? config.headline.outlineKa : config.headline.outlineEn} ${ka ? config.headline.solidKa : config.headline.solidEn} ${ka ? config.headline.postKa : config.headline.postEn}`.replace(/\s+/g, " ").trim()
-      : ka
-        ? config.headline.textKa
-        : config.headline.textEn;
-  
-  const ctaPrimary = ka ? "პაკეტების ნახვა" : "View Packages";
-  const ctaSecondary = ka ? "კონსულტაცია" : "Consultation";
-
-  return (
-   <section className="relative flex min-h-[75vh] flex-col justify-center overflow-hidden px-6 pt-28 pb-8 md:min-h-[92vh] md:pb-24 md:px-12 xl:px-24">
-      {/* Background Layer */}
-      <div className="absolute inset-0 bg-[#060608]" />
-      
-      {/* Background image - უფრო ნათელი და ხილვადი დესკტოპზე */}
-      {config.heroBgImage && (
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50 md:opacity-80"
-          style={{ backgroundImage: `url(${config.heroBgImage})` }}
-        />
-      )}
-
-      {/* 1. Horizontal Gradient - მარცხენა მხარეს აშავებს ტექსტისთვის */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#060608] via-[#060608]/70 to-transparent" />
-
-      {/* 2. Bottom Gradient - smooth cinematic fade into the next section */}
-      <div className="absolute inset-x-0 bottom-0 z-0 h-[90%] bg-gradient-to-t from-[#060608] via-[#060608]/55 via-35% to-transparent" />
-
-      {/* Content */}
-      <motion.div
-        className="relative z-10 w-full text-left mt-4 md:mt-12"
-        variants={heroContainer}
-        initial="hidden"
-        animate="visible"
-      >
-        {/* Breadcrumb trail */}
-        <motion.div variants={heroItem}>
-          <Breadcrumbs items={breadcrumbs} className="mb-5" />
-        </motion.div>
-
-        {/* Editorial Eyebrow */}
-        <motion.div variants={heroItem} className="mb-5 flex items-center gap-3 md:mb-6">
-          <div className="h-px w-8 bg-indigo-500" />
-          <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-indigo-400">
-            {ka ? config.nameKa : config.nameEn}
-          </span>
-        </motion.div>
-
-        {/* სათაური - იდეალური სიგანე, რომ არ გაიწელოს და ლამაზად ჩამოტყდეს */}
-        <motion.h1
-          variants={heroItem}
-          className="mb-6 max-w-[95%] text-3xl font-extrabold leading-[1.2] tracking-tight text-white sm:text-4xl md:max-w-2xl md:text-5xl lg:max-w-[850px] lg:text-[3.5rem] lg:leading-[1.15]"
-        >
-          {headlineText}
-        </motion.h1>
-
-        {/* ქვესათაური */}
-        <motion.p
-          variants={heroItem}
-          className="font-georgian-body mb-10 max-w-xl text-base leading-relaxed text-gray-300 md:text-lg"
-        >
-          {subline}
-        </motion.p>
-
-        {/* Buttons */}
-        <motion.div
-          variants={heroItem}
-          className="flex flex-col items-start gap-4 sm:flex-row"
-        >
-          <a
-            href="#pricing"
-            className="inline-flex w-full items-center justify-center rounded-xl bg-white px-8 py-4 text-[15px] font-bold text-black transition-all hover:bg-gray-200 sm:w-auto"
-          >
-            {ctaPrimary}
-          </a>
-          <a
-            href="/contact"
-            className="inline-flex w-full items-center justify-center rounded-xl border border-white/15 bg-white/5 px-8 py-4 text-[15px] font-bold text-white backdrop-blur-md transition-colors hover:bg-white/10 sm:w-auto"
-          >
-            {ctaSecondary}
-          </a>
-        </motion.div>
-      </motion.div>
-
-      {/* ვიზუალური ხიდი (Scroll Line) - ეს აკავშირებს ჰიროუს და ქვედა სექციას */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8, duration: 1 }}
-        className="absolute bottom-0 left-6 hidden h-24 w-px bg-gradient-to-b from-white/20 to-transparent md:block md:left-12 xl:left-24" 
-      />
-    </section>
-  );
-}
-// ─── Pricing Section ──────────────────────────────────────────────────────────
-
-interface PricingProps {
-  packages: BilingualPricingTier[];
-  ka: boolean;
-}
-
-function PricingSection({ packages, ka }: PricingProps) {
-  const pricingLabel = ka ? "ფასები" : "Pricing";
-  const badgeTextKa = "ფასები საორიენტაციოა • მოქმედებს 50/50 გადახდის სისტემა";
-  const badgeTextEn = "Prices are estimates • 50/50 payment split available";
-
-  const headerRef = useRef(null);
-  const cardsRef = useRef(null);
-  const headerInView = useInView(headerRef, { once: true, amount: 0 });
-  const cardsInView = useInView(cardsRef, { once: true, amount: 0 });
-
-  return (
-<section id="pricing" className="relative bg-[#060608] pt-4 pb-24 md:pt-2 md:pb-32">
-      <div className="relative mx-auto max-w-5xl px-5 lg:px-8 p-4">
-
-        <motion.div
-          ref={headerRef}
-          className="mb-8 text-center md:mb-16"
-          variants={sectionReveal}
-          initial="hidden"
-          animate={headerInView ? "visible" : "hidden"}
-        >
-          <span className="mb-3 inline-block text-[14px] font-semibold uppercase tracking-[0.25em] text-indigo-400">
-            {pricingLabel}
-          </span>
-
-          <div className="mt-6 flex justify-center md:mt-10">
-            <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.02] px-4 py-2 backdrop-blur-md transition-colors hover:bg-white/[0.04] md:px-5">
-              <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/10">
-                <CreditCard className="h-3.5 w-3.5 text-gray-300" />
-              </div>
-              <span className="text-[12px] font-medium tracking-wide text-gray-300 md:text-[13px]">
-                {ka ? badgeTextKa : badgeTextEn}
-              </span>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          ref={cardsRef}
-          className={`grid gap-6 md:items-start ${
-            packages.length === 2
-              ? "md:grid-cols-2 md:w-[1000px] md:mx-auto"
-              : "md:grid-cols-3"
-          }`}
-          variants={cardStagger}
-          initial="hidden"
-          animate={cardsInView ? "visible" : "hidden"}
-        >
-          {packages.map((tier) => (
-            <PricingCard key={tier.nameEn} tier={tier} ka={ka} />
-          ))}
-        </motion.div>
-        
-        {/* ქვედა Disclaimer ამოვიღეთ მთლიანად */}
-      </div>
-    </section>
-  );
-}
-
-interface PricingCardProps {
-  tier: BilingualPricingTier;
-  ka: boolean;
-}
-
-function PricingCard({ tier, ka }: PricingCardProps) {
-  // ავტომატური ტექსტი WhatsApp-ისთვის
-  const whatsappMessage = ka
-    ? `გამარჯობა, მაინტერესებს ვებ-ინფრასტრუქტურის პაკეტი: "${tier.nameKa}"`
-    : `Hello, I am interested in the Web Infrastructure package: "${tier.nameEn}"`;
-
-  return (
-    <motion.div
-      variants={cardItem}
-      className={`group relative flex flex-col overflow-hidden rounded-3xl border p-6 transition-all duration-400 ${
-        tier.highlighted
-          ? "border-indigo-500/40 bg-indigo-950/20 shadow-[0_0_40px_-15px_rgba(99,102,241,0.2)]"
-          : "border-white/15 bg-white/6 hover:border-white/25"
-      }`}
-    >
-      {/* 1. პაკეტის სახელი */}
-      <h3 className="mb-2 text-2xl font-bold tracking-tight text-white md:text-3xl">
-        {ka ? tier.nameKa : tier.nameEn}
-      </h3>
-
-      {/* 2. ფასი და პერიოდი */}
-      <div className="mb-4 flex items-baseline gap-2">
-        <span className="text-4xl font-black tracking-normal text-indigo-400">
-          {tier.price}
-        </span>
-        <span className="text-sm font-medium uppercase tracking-wider text-gray-400">
-          / {ka ? tier.periodKa : tier.periodEn}
-        </span>
-      </div>
-
-      <div className="mb-4 h-px w-full bg-gradient-to-r from-white/10 to-transparent" />
-
-      {/* 3. აღწერა */}
-      <p className="font-georgian-body mb-4 text-sm leading-relaxed text-gray-300">
-        {ka ? tier.descKa : tier.descEn}
-      </p>
-
-      {/* 4. ფუნქციები */}
-      <ul className="mb-6 flex-1 space-y-2">
-        {(ka ? tier.featuresKa : tier.featuresEn).map((feat) => {
-          const isInherited = feat.startsWith('+');
-          return (
-            <li key={feat} className="flex items-start gap-2.5 rounded-lg px-2 py-1.5 bg-white/3">
-              <CheckCircle2
-                className={`mt-0.5 h-4 w-4 shrink-0 ${
-                  isInherited ? "text-white/20" : "text-indigo-400"
-                }`}
-              />
-              <span className={`font-georgian-body text-[15px] leading-snug ${
-                isInherited ? "text-gray-500 italic" : "text-gray-200"
-              }`}>
-                {feat}
-              </span>
-            </li>
-          );
-        })}
-      </ul>
-
-      {/* Button (WhatsApp Link with Custom Icon) */}
-      <a
-        href={`https://wa.me/995557624243?text=${encodeURIComponent(whatsappMessage)}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`inline-flex w-full items-center justify-center gap-2.5 rounded-xl px-6 py-4 text-[15px] font-bold transition-all active:scale-[0.98] ${
-          tier.highlighted
-            ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/20 hover:bg-indigo-500"
-            : "bg-white/10 text-white hover:bg-white/15"
-        }`}
-      >
-        <WhatsAppIcon className="h-5 w-5" />
-        <span>{ka ? tier.ctaKa : tier.ctaEn}</span>
-      </a>
-    </motion.div>
-  );
-}
 
 // ─── Marketing Service Section ────────────────────────────────────────────────
 
@@ -821,9 +556,10 @@ function NotFound() {
   );
 }
 
-const IndustryLanding = () => {
-  const { service, slug } = useParams<{ service: string; slug: string }>();
-  const { currentLanguage } = useLanguage();
+function IndustryLanding({ webRoute = false }: { webRoute?: boolean }) {
+  const { service: serviceParam, slug } = useParams<{ service: string; slug: string }>();
+  const service = webRoute ? "web" : serviceParam;
+  const { currentLanguage, toggleLanguage } = useLanguage();
   const ka = currentLanguage === "ka";
 
   if (!service || !slug || !validServices.has(service) || !validSlugs.has(slug)) {
@@ -851,30 +587,36 @@ const IndustryLanding = () => {
 
   const faqItems = ka ? config.faqKa : config.faqEn;
 
+  const seo = (
+    <SEO
+      title={ka ? config.seoTitleKa : config.seoTitleEn}
+      description={ka ? config.seoDescriptionKa : config.seoDescriptionEn}
+      url={`${base}/industry/${service}/${slug}`}
+      breadcrumbs={breadcrumbItems}
+      serviceSchema={{
+        name: ka ? config.seoTitleKa : config.seoTitleEn,
+        description: ka ? config.seoDescriptionKa : config.seoDescriptionEn,
+        serviceType: service === "web" ? "Web Development" : "Digital Marketing",
+        offers: buildOffers(config.packages),
+      }}
+      faq={faqItems}
+    />
+  );
+
+  if (service === "web") {
+    const slide = getIndustryShowcases(currentLanguage).find((item) => item.slug === slug);
+    if (!slide) return <NotFound />;
+    return <>
+      {seo}
+      <WebIndustryContent slide={slide} config={config} language={currentLanguage}
+        breadcrumbs={breadcrumbItems} onLanguageToggle={toggleLanguage} />
+    </>;
+  }
+
   return (
     <main className="min-h-screen bg-[#060608] text-white selection:bg-indigo-500/30">
-      <SEO
-        title={ka ? config.seoTitleKa : config.seoTitleEn}
-        description={ka ? config.seoDescriptionKa : config.seoDescriptionEn}
-        url={`${base}/industry/${service}/${slug}`}
-        breadcrumbs={breadcrumbItems}
-        serviceSchema={{
-          name: ka ? config.seoTitleKa : config.seoTitleEn,
-          description: ka ? config.seoDescriptionKa : config.seoDescriptionEn,
-          serviceType: service === "web" ? "Web Development" : "Digital Marketing",
-          offers: buildOffers(config.packages),
-        }}
-        faq={faqItems}
-      />
-
-      {service === "web" ? (
-        <>
-          <HeroSection config={config} ka={ka} breadcrumbs={breadcrumbItems} />
-          <PricingSection packages={config.packages} ka={ka} />
-        </>
-      ) : (
-        <MarketingServiceSection data={config.packages[0]} ka={ka} heroBgImage={config.heroBgImage} breadcrumbs={breadcrumbItems} />
-      )}
+      {seo}
+      <MarketingServiceSection data={config.packages[0]} ka={ka} heroBgImage={config.heroBgImage} breadcrumbs={breadcrumbItems} />
 
       {GALLERIES[`${service}/${slug}`] && <PhotoStrip photos={GALLERIES[`${service}/${slug}`]} ka={ka} />}
 
@@ -891,6 +633,10 @@ const IndustryLanding = () => {
       <RelatedLinks service={service} slug={slug} ka={ka} />
     </main>
   );
-};
+}
+
+export function WebIndustryLanding() {
+  return <IndustryLanding webRoute />;
+}
 
 export default IndustryLanding;

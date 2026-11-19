@@ -236,7 +236,7 @@ function SpecimenView({
         <span
           style={{ color: spec.h1GrayColor, fontWeight: spec.h1GrayWeight }}
         >
-          საიტები, ჩატბოტები და პროგრამები ბიზნესისთვის.
+        ვებ-პლატფორმები და მართვის სისტემები თანამედროვე ბიზნესისთვის.
         </span>
       </div>
 

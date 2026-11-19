@@ -3,13 +3,25 @@
 // of the viewport. On a phone, each role carries its own screen below the text.
 
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { app, page } from "./content";
 import type { Lang, AppText } from "./content";
 import { CoachEvaluation, ManagerAnnounce, ParentProgress, PhoneFrame, ScaledPhone } from "./AppKit";
 
 type Role = "manager" | "coach" | "parent";
 const ROLES: Role[] = ["manager", "coach", "parent"];
+const summaries = {
+  ka: {
+    manager: "გადახდები თვეების მიხედვით და განცხადებები გუნდებისთვის.",
+    coach: "მონიშნეთ დასწრება და გაუზიარეთ მშობელს შეფასება.",
+    parent: "ნახეთ შვილის პროგრესი და მიიღეთ მისი გუნდის შეტყობინებები.",
+  },
+  en: {
+    manager: "Track monthly payments and send announcements to teams.",
+    coach: "Mark attendance and share ratings with parents.",
+    parent: "Follow your child's progress and get their team's notifications.",
+  },
+};
 
 function RoleScreen({ role, t }: { role: Role; t: AppText }) {
   // Not the demo's screens again: what the roles do beyond the demo.
@@ -22,6 +34,7 @@ export default function RoleStory({ lang }: { lang: Lang }) {
   const t = app[lang];
   const c = page[lang];
   const [active, setActive] = useState<Role>("manager");
+  const reducedMotion = useReducedMotion();
   const refs = useRef<Record<Role, HTMLDivElement | null>>({ manager: null, coach: null, parent: null });
   const colRef = useRef<HTMLDivElement | null>(null);
   const phoneRef = useRef<HTMLDivElement | null>(null);
@@ -30,14 +43,21 @@ export default function RoleStory({ lang }: { lang: Lang }) {
   // Not `position: sticky`: the site sets overflow-x: hidden on html and body,
   // which makes body the sticky container, and body never scrolls.
   useEffect(() => {
-    const PHONE_H = 640;
     const place = () => {
       const col = colRef.current;
       const phone = phoneRef.current;
       if (!col || !phone) return;
       const r = col.getBoundingClientRect();
-      const y = Math.max(0, Math.min(r.height - PHONE_H, window.innerHeight / 2 - PHONE_H / 2 - r.top));
+      const height = phone.offsetHeight;
+      if (!height) return;
+      const center = window.innerHeight / 2;
+      const y = Math.max(0, Math.min(r.height - height, center - height / 2 - r.top));
       phone.style.transform = `translateY(${y}px)`;
+      const distance = (role: Role) => {
+        const row = refs.current[role]?.getBoundingClientRect();
+        return row ? Math.abs(row.top + row.height / 2 - center) : Infinity;
+      };
+      setActive(ROLES.reduce((closest, role) => distance(role) < distance(closest) ? role : closest));
     };
     place();
     window.addEventListener("scroll", place, { passive: true });
@@ -48,22 +68,9 @@ export default function RoleStory({ lang }: { lang: Lang }) {
     };
   }, []);
 
-  useEffect(() => {
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) setActive((e.target as HTMLElement).dataset.role as Role);
-        }
-      },
-      { rootMargin: "-45% 0px -45% 0px" }
-    );
-    ROLES.forEach((r) => refs.current[r] && io.observe(refs.current[r]!));
-    return () => io.disconnect();
-  }, []);
-
   return (
-    <div className="grid lg:grid-cols-12 lg:gap-8">
-      <div className="lg:col-span-6">
+    <div className="lineup-role-story">
+      <div>
         {ROLES.map((r) => {
           const x = c.roles[r];
           return (
@@ -73,20 +80,13 @@ export default function RoleStory({ lang }: { lang: Lang }) {
               ref={(el) => {
                 refs.current[r] = el;
               }}
-              className="flex flex-col justify-center py-16 lg:min-h-[78vh] lg:py-0"
+              className="lineup-role-row"
             >
-              <div className={`text-[13px] transition-colors duration-300 ${active === r ? "text-[#FA7923]" : "text-zinc-600"}`}>{x.label}</div>
-              <h3 className="mt-4 text-[32px] font-medium leading-[1.12] tracking-[-0.02em] text-white md:text-[44px]">{x.title}</h3>
-              <p className="mt-5 !max-w-md text-[17px] leading-relaxed text-zinc-400">{x.text}</p>
-              <ul className="mt-8 space-y-3">
-                {x.points.map((p) => (
-                  <li key={p} className="text-[15px] text-zinc-500">
-                    {p}
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-10 flex justify-center lg:hidden">
-                <ScaledPhone scale={0.8}>
+              <div className="lineup-role-label">{x.label}</div>
+              <h3>{x.title}</h3>
+              <p>{summaries[lang][r]}</p>
+              <div className="lineup-role-mobile">
+                <ScaledPhone scale={0.51}>
                   <PhoneFrame>
                     <RoleScreen role={r} t={t} />
                   </PhoneFrame>
@@ -97,15 +97,15 @@ export default function RoleStory({ lang }: { lang: Lang }) {
         })}
       </div>
 
-      <div ref={colRef} className="hidden lg:col-span-6 lg:block">
-        <div ref={phoneRef} className="flex justify-end will-change-transform">
-          <PhoneFrame>
+      <div ref={colRef} className="lineup-role-desktop">
+        <div ref={phoneRef} className="lineup-role-stage" data-active-role={active}>
+          <ScaledPhone scale={0.65}><PhoneFrame>
             <AnimatePresence mode="wait">
-              <motion.div key={active} className="absolute inset-0" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}>
+              <motion.div key={active} className="absolute inset-0" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: reducedMotion ? 0 : 0.25 }}>
                 <RoleScreen role={active} t={t} />
               </motion.div>
             </AnimatePresence>
-          </PhoneFrame>
+          </PhoneFrame></ScaledPhone>
         </div>
       </div>
     </div>

@@ -1,34 +1,23 @@
-"use client";
-
-import type React from "react";
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import Breadcrumbs from "../components/Breadcrumbs";
-import { useLanguageTransition } from "../hooks/useLanguageTransition";
-import {
-  FaRocket,
-  FaCode,
-  FaCheckCircle,
-  FaArrowRight,
-  FaBrain,
-  FaShoppingCart,
-  FaWhatsapp,
-} from "react-icons/fa";
-import {
-  SiFirebase,
-  SiTypescript,
-  SiVercel,
-  SiReact,
-  SiNodedotjs,
-  SiTailwindcss,
-} from "react-icons/si";
-import SEO from "../components/SEO";
+import { ArrowDown } from "lucide-react";
+import { Fragment, useState } from "react";
 import CallbackLink from "../components/CallbackLink";
-import FAQSection from "../components/FAQSection";
 import type { FAQItem } from "../components/FAQSection";
-import IndustryLinks from "../components/IndustryLinks";
+import SEO from "../components/SEO";
+import { ContactBlock } from "../components/ui/ContactBlock";
+import { FaqSection } from "../components/ui/FaqSection";
+import { HowWeStart } from "../components/ui/HowWeStart";
+import { IndustryCarousel } from "../components/ui/IndustryCarousel";
+import { LightPage } from "../components/ui/LightPage";
+import { RelatedProductCard } from "../components/ui/RelatedProductCard";
+import { SectionHeading } from "../components/ui/SectionHeading";
+import { ServiceHero } from "../components/ui/ServiceHero";
+import { SiteFooter } from "../components/ui/SiteFooter";
+import { SiteNav } from "../components/ui/SiteNav";
 import { useLanguage } from "../contexts/LanguageContext";
+import { ScreenshotCarousel } from "../components/ui/ScreenshotCarousel";
+import { WebPackageCard, WebProjectCard } from "../components/ui/WebCards";
+import { webProjects } from "../data/webProjects";
+import "./webService.css";
 
 // FAQ — built from the real packages/pricing on this page (bilingual).
 // Questions are phrased the way people actually search ("საიტის დამზადება").
@@ -37,7 +26,7 @@ const webDevFaq: Record<"ka" | "en", FAQItem[]> = {
     {
       question: "რა ღირს საიტის დამზადება?",
       answer:
-        "პროექტის ღირებულება შერჩეულ პაკეტზეა დამოკიდებული. სავიზიტო ვებსაიტის ფასი 500₾-დან იწყება, CMS-ით უზრუნველყოფილი პრემიუმ ვებსაიტის ღირებულება 700₾-დან 1000₾-მდე მერყეობს, ხოლო სრულფასოვანი ონლაინ მაღაზიის დამზადება 1400₾-დან არის შესაძლებელი. ჩვენთან კონსულტაცია უფასოა და ზუსტ შეთავაზებას თქვენი ბიზნესის საჭიროებებზე მორგებით მოგიმზადებთ."
+        "სავიზიტო საიტის ფასი იწყება 500 ₾-დან, პრემიუმ ვებსაიტი ღირს 700-1000 ₾, ხოლო ონლაინ მაღაზიის ფასი იწყება 1400 ₾-დან. ზუსტ ფასს უფასო კონსულტაციის შემდეგ შემოგთავაზებთ."
     },
     {
       question: "რამდენ ხანში მზადდება ვებსაიტი?",
@@ -57,7 +46,7 @@ const webDevFaq: Record<"ka" | "en", FAQItem[]> = {
     {
       question: "აკეთებთ ონლაინ მაღაზიას ქართული ბანკებით გადახდით?",
       answer:
-        "დიახ, ვქმნით სრულყოფილ ონლაინ მაღაზიებს ქართული ბანკების გადახდის სისტემების სრული ინტეგრაციით. პლატფორმას ასევე ვუკავშირებთ Vifa WMS სისტემას, რაც საშუალებას გაძლევთ მართოთ პროდუქტები, ავტომატურად დაასინქრონოთ მარაგები, დაბეჭდოთ საკურიერო სტიკერები და აკონტროლოთ შეკვეთები რეალურ დროში (real-time)."
+        "დიახ, ვქმნით სრულყოფილ ონლაინ მაღაზიებს ქართული ბანკების გადახდის სისტემების სრული ინტეგრაციით. მაღაზიას ასევე ვუკავშირებთ Invento WMS-ს, რომ მართოთ პროდუქტები, ავტომატურად განაახლოთ მარაგები, დაბეჭდოთ საკურიერო ეტიკეტები და აკონტროლოთ შეკვეთები რეალურ დროში."
     },
     {
       question: "შევძლებ ვებსაიტის კონტენტის დამოუკიდებლად მართვას?",
@@ -69,7 +58,7 @@ const webDevFaq: Record<"ka" | "en", FAQItem[]> = {
     {
       question: "How much does it cost to build a website?",
       answer:
-        "The price depends on the chosen package. A landing-page website starts from 500₾, a premium website with CMS ranges from 700₾ to 1000₾, and a full-featured online store starts from 1400₾. The consultation is free, and we'll prepare an exact quote tailored to your business needs."
+        "A brochure website starts from 500 ₾, a premium website costs 700-1000 ₾, and an online store starts from 1400 ₾. We'll provide a quote after a free consultation."
     },
     {
       question: "How long does it take to build a website?",
@@ -89,7 +78,7 @@ const webDevFaq: Record<"ka" | "en", FAQItem[]> = {
     {
       question: "Do you build online stores with Georgian bank payments?",
       answer:
-        "Yes, we build complete online stores with full integration of Georgian bank payment systems. We also connect the platform to the Vifa WMS system, letting you manage products, automatically sync inventory, print courier labels and control orders in real time."
+        "Yes, we build online stores with Georgian bank payments and connect them to Invento WMS to sync stock, print shipping labels and track orders in real time."
     },
     {
       question: "Can I manage the website content myself?",
@@ -108,42 +97,33 @@ const webDevTranslations = {
     "webdev.hero.main_title": "ვებსაიტის დამზადება თქვენი ბიზნესისთვის.",
     "webdev.hero.description": "ვქმნით პრემიუმ კლასის ვებგვერდებს და E-commerce პლატფორმებს, რომლებიც ზრდის თქვენს გაყიდვებს.",
     "webdev.pricing.title": "აირჩიეთ პაკეტი",
-    "webdev.pricing.landing.title": "სავიზიტო ვებსაიტი",
-    "webdev.pricing.landing.description":
-      "კომპაქტური და ეფექტური ვებგვერდი 2-4 გვერდით. იდეალური მცირე ბიზნესისა და პირადი ბრენდის ონლაინ ხილვადობისთვის.",
-    "webdev.pricing.landing.price": "500₾-დან",
-    "webdev.pricing.landing.feature1": "იდეალური ყველა მოწყობილობაზე",
-    "webdev.pricing.landing.feature2": "SEO ოპტიმიზაცია",
-    "webdev.pricing.landing.feature3": "კონტაქტის ფორმა",
-    "webdev.pricing.landing.feature4": "Google ანალიტიკა",
-    "webdev.pricing.landing.feature5": "SSL სერთიფიკატი (დაცული კავშირი)",
+    "webdev.pricing.landing.title": "სავიზიტო საიტი",
+    "webdev.pricing.landing.description": "წარუდგინეთ კლიენტებს თქვენი ბიზნესი 2-4 გვერდზე.",
+    "webdev.pricing.landing.price": "500 ₾-დან",
+    "webdev.pricing.landing.feature1": "მომსახურების გვერდი",
+    "webdev.pricing.landing.feature2": "საკონტაქტო ფორმა",
+    "webdev.pricing.landing.feature3": "Google Analytics-ის ჩართვა",
     "webdev.pricing.corporate.title": "პრემიუმ ვებსაიტი",
-    "webdev.pricing.corporate.description":
-      "სრულფასოვანი ვებგვერდი CMS, SEO ოპტიმიზაცია და ადმინისტრაციული პანელით. კომპანიების ონლაინ ხილვადობის ზრდისთვის.",
-    "webdev.pricing.corporate.price": "₾ 700 - 1000",
-    "webdev.pricing.corporate.feature1": "სრულფასოვანი მართვის სისტემა (CMS)",
-    "webdev.pricing.corporate.feature2": "ადმინ პანელი / მართვის პანელი",
-    "webdev.pricing.corporate.feature3": "მრავალენოვანი მხარდაჭერა",
-    "webdev.pricing.corporate.feature4": "ანალიტიკის / სტატისტიკის დაფა",
-    "webdev.pricing.corporate.feature5": "ავტომატური მონაცემთა დაცვა",
+    "webdev.pricing.corporate.description": "განაახლეთ კომპანიის ვებსაიტი თავად.",
+    "webdev.pricing.corporate.price": "700-1000 ₾",
+    "webdev.pricing.corporate.feature1": "კონტენტის მართვის პანელი (CMS)",
+    "webdev.pricing.corporate.feature2": "რამდენიმე ენის მხარდაჭერა",
+    "webdev.pricing.corporate.feature3": "ავტომატური სარეზერვო ასლები",
     "webdev.pricing.ai.title": "AI ჩატბოტი",
     "webdev.pricing.ai.description":
       "ინტელექტუალური ასისტენტი სოციალურ ქსელებში. 24/7 ავტომატური პასუხები, კლიენტების კმაყოფილება და გაყიდვების ზრდა.",
-    "webdev.pricing.ai.price": "500₾-დან",
+    "webdev.pricing.ai.price": "500 ₾-დან",
     "webdev.pricing.ai.feature1": "Google Gemini AI",
     "webdev.pricing.ai.feature2": "3 პლატფორმაზე ინტეგრაცია",
     "webdev.pricing.ai.feature3": "ქართული ენის მხარდაჭერა",
     "webdev.pricing.ai.feature4": "რეალურ დროში რედაქტირება",
     "webdev.pricing.ai.feature5": "დეტალური ანალიტიკა",
     "webdev.pricing.ecommerce.title": "ონლაინ მაღაზია",
-    "webdev.pricing.ecommerce.description":
-      "სრული ონლაინ მაღაზია - ქართული ბანკებით გადახდა, პროდუქტების მართვა და შეკვეთების კონტროლი.",
-    "webdev.pricing.ecommerce.price": "1400₾-დან",
-    "webdev.pricing.ecommerce.feature1": "ონლაინ მაღაზია + Vifa WMS სისტემა",
-    "webdev.pricing.ecommerce.feature2": "ავტომატური მარაგების სინქრონიზაცია",
-    "webdev.pricing.ecommerce.feature3": "საკურიერო სტიკერები და ინვოისინგი",
-    "webdev.pricing.ecommerce.feature4": "Real-time შეკვეთების კონტროლი",
-    "webdev.pricing.ecommerce.feature5": "Excel რეპორტები და ანალიტიკა",
+    "webdev.pricing.ecommerce.description": "მიიღეთ შეკვეთები და გადახდები ონლაინ.",
+    "webdev.pricing.ecommerce.price": "1400 ₾-დან",
+    "webdev.pricing.ecommerce.feature1": "ქართული ბანკების გადახდის სისტემები",
+    "webdev.pricing.ecommerce.feature2": "მარაგების სინქრონიზაცია Invento WMS-თან",
+    "webdev.pricing.ecommerce.feature3": "საკურიერო ეტიკეტები და ინვოისები",
     "webdev.pricing.consultation": "კონსულტაცია უფასოა",
     "webdev.pricing.cta": "პაკეტების ნახვა",
     "webdev.pricing.learn_more": "იხილეთ მეტი",
@@ -154,15 +134,15 @@ const webDevTranslations = {
     "webdev.content.eyebrow": "სერვისის შესახებ",
     "webdev.content.intro":
       "ვებსაიტი დღეს ბიზნესის მთავარი ციფრული ვიტრინაა. VIFA Digital აკეთებს საიტის დამზადებას სრული ციკლით: დიზაინიდან და დეველოპმენტიდან SEO ოპტიმიზაციამდე და გაშვებამდე. ვქმნით სწრაფ, მობილურზე მორგებულ და კონვერსიაზე ორიენტირებულ ვებგვერდებს, რომლებიც რეალურ შედეგს, ვიზიტორებსა და გაყიდვებს მოგიტანთ.",
-    "webdev.content.h2_1": "ვებსაიტის დამზადება და საიტის აწყობა",
+    "webdev.content.question_1": "როგორ ამზადებთ კორპორატიულ ვებსაიტს?",
     "webdev.content.p_1":
       "ვაკეთებთ კორპორატიული ვებსაიტებისა და სავიზიტო საიტების დამზადებას მცირე და საშუალო ბიზნესისთვის. თითოეული ვებგვერდი იქმნება უნიკალური დიზაინით, თქვენი ბრენდის სტილზე მორგებით და სუფთა, სწრაფი კოდით (React, TypeScript). საიტი თავიდანვე SEO-ზე ოპტიმიზებულია, რათა Google-ში სწორ სიტყვებზე გამოჩნდეს და ახალი კლიენტები მოიზიდოს.",
-    "webdev.content.h2_2": "ონლაინ მაღაზიის დამზადება (eCommerce)",
+    "webdev.content.question_2": "როგორ ვმართავ მარაგებსა და შეკვეთებს ონლაინ მაღაზიაში?",
     "webdev.content.p_2":
-      "ონლაინ მაღაზიის საიტის დამზადება ჩვენთან ნიშნავს სრულფასოვან eCommerce პლატფორმას ქართული ბანკების გადახდის სისტემების ინტეგრაციით. პლატფორმა უკავშირდება Vifa WMS სისტემას — ავტომატურად ასინქრონებს მარაგებს, ბეჭდავს საკურიერო სტიკერებს და გაძლევთ შეკვეთების კონტროლს რეალურ დროში. იდეალურია მათთვის, ვისაც სურს გაყიდვების ონლაინ მასშტაბირება.",
-    "webdev.content.h2_3": "ლენდინგ პეიჯი და კონვერსიის ოპტიმიზაცია",
+      "ონლაინ მაღაზიას ვუკავშირებთ Invento WMS-ს. სისტემა ავტომატურად აახლებს მარაგებს, ბეჭდავს საკურიერო ეტიკეტებს და შეკვეთების კონტროლის საშუალებას გაძლევთ რეალურ დროში.",
+    "webdev.content.question_3": "როდის მჭირდება ცალკე გვერდი რეკლამისთვის?",
     "webdev.content.p_3":
-      "სარეკლამო კამპანიებისთვის ვამზადებთ ლენდინგ პეიჯებს (landing page), რომლებიც ერთ მკაფიო მიზანზეა აწყობილი — ლიდის ან გაყიდვის მიღებაზე. სწრაფი ჩატვირთვა, გასაგები მესიჯი და ძლიერი call-to-action ზრდის რეკლამის ეფექტურობას და ამცირებს მოზიდვის ღირებულებას.",
+      "სარეკლამო კამპანიებისთვის ვამზადებთ ლენდინგ პეიჯებს (landing page), რომლებიც ერთ მკაფიო მიზანზეა აწყობილი - ლიდის ან გაყიდვის მიღებაზე. სწრაფი ჩატვირთვა, გასაგები მესიჯი და ძლიერი call-to-action ზრდის რეკლამის ეფექტურობას და ამცირებს მოზიდვის ღირებულებას.",
   },
   en: {
     "seo.webdev.title": "Website Development in Georgia - from 500₾",
@@ -172,42 +152,33 @@ const webDevTranslations = {
     "webdev.hero.main_title": "Website Development for Your Business.",
     "webdev.hero.description": "We build premium websites and E-commerce platforms that drive your sales and growth.",
     "webdev.pricing.title": "Choose Your Package",
-    "webdev.pricing.landing.title": "Landing Page",
-    "webdev.pricing.landing.description":
-      "Compact and effective webpage with 2-4 pages. Perfect for small businesses and personal branding.",
-    "webdev.pricing.landing.price": "From 500₾",
-    "webdev.pricing.landing.feature1": "Mobile-Responsive Design",
-    "webdev.pricing.landing.feature2": "SEO Optimization",
-    "webdev.pricing.landing.feature3": "Contact Form",
-    "webdev.pricing.landing.feature4": "Google Analytics",
-    "webdev.pricing.landing.feature5": "SSL Certificate",
+    "webdev.pricing.landing.title": "Brochure Website",
+    "webdev.pricing.landing.description": "Introduce your business in 2-4 pages.",
+    "webdev.pricing.landing.price": "From 500 ₾",
+    "webdev.pricing.landing.feature1": "Services page",
+    "webdev.pricing.landing.feature2": "Contact form",
+    "webdev.pricing.landing.feature3": "Google Analytics setup",
     "webdev.pricing.corporate.title": "Premium Website",
-    "webdev.pricing.corporate.description":
-      "Full-featured website with CMS, SEO optimization and admin panel. For growing company online presence.",
-    "webdev.pricing.corporate.price": "From 800₾",
-    "webdev.pricing.corporate.feature1": "Full CMS System",
-    "webdev.pricing.corporate.feature2": "Admin Panel",
-    "webdev.pricing.corporate.feature3": "Multi-language Support",
-    "webdev.pricing.corporate.feature4": "Analytics Dashboard",
-    "webdev.pricing.corporate.feature5": "Automatic Backups",
+    "webdev.pricing.corporate.description": "Update your company website yourself.",
+    "webdev.pricing.corporate.price": "700-1000 ₾",
+    "webdev.pricing.corporate.feature1": "Content management panel (CMS)",
+    "webdev.pricing.corporate.feature2": "Multilingual support",
+    "webdev.pricing.corporate.feature3": "Automatic backups",
     "webdev.pricing.ai.title": "AI Chatbot",
     "webdev.pricing.ai.description":
       "Intelligent assistant on social media. 24/7 automatic responses, customer satisfaction and sales growth.",
-    "webdev.pricing.ai.price": "From 500₾",
+    "webdev.pricing.ai.price": "From 500 ₾",
     "webdev.pricing.ai.feature1": "Google Gemini AI",
     "webdev.pricing.ai.feature2": "3 Platform Integration",
     "webdev.pricing.ai.feature3": "Georgian Language Support",
     "webdev.pricing.ai.feature4": "Real-time Editing",
     "webdev.pricing.ai.feature5": "Detailed Analytics",
     "webdev.pricing.ecommerce.title": "Online Store",
-    "webdev.pricing.ecommerce.description":
-      "Complete online store - Georgian bank payments, product management, and order tracking.",
-    "webdev.pricing.ecommerce.price": "From 1999₾",
-    "webdev.pricing.ecommerce.feature1": "Online Store + Vifa WMS System",
-    "webdev.pricing.ecommerce.feature2": "Automatic Inventory Sync",
-    "webdev.pricing.ecommerce.feature3": "Courier Labels & Invoicing",
-    "webdev.pricing.ecommerce.feature4": "Real-time Order Control",
-    "webdev.pricing.ecommerce.feature5": "Excel Reports & Analytics",
+    "webdev.pricing.ecommerce.description": "Take orders and accept payments online.",
+    "webdev.pricing.ecommerce.price": "From 1400 ₾",
+    "webdev.pricing.ecommerce.feature1": "Georgian bank payments",
+    "webdev.pricing.ecommerce.feature2": "Stock sync with Invento WMS",
+    "webdev.pricing.ecommerce.feature3": "Shipping labels and invoicing",
     "webdev.pricing.consultation": "Consultation is Free",
     "webdev.pricing.cta": "Start Project",
     "webdev.pricing.learn_more": "Learn More",
@@ -217,79 +188,62 @@ const webDevTranslations = {
   },
 };
 
-const technologies = [
-  { icon: <SiReact />,      name: "React",      color: "text-sky-400" },
-  { icon: <SiTypescript />, name: "TypeScript", color: "text-blue-400" },
-  { icon: <SiNodedotjs />,  name: "Node.js",    color: "text-green-400" },
-  { icon: <SiTailwindcss />,name: "Tailwind",   color: "text-cyan-400" },
-  { icon: <SiFirebase />,   name: "Firebase",   color: "text-amber-400" },
-  { icon: <SiVercel />,     name: "Vercel",     color: "text-gray-200" },
+const whatsappUrl = "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20ვებ%20განვითარების%20სერვისით.%20მსურს%20უფასო%20კონსულტაცია.";
+const portfolioWhatsappUrl = "https://wa.me/995557624243?text=" +
+  encodeURIComponent("გამარჯობა, მინდა სხვა ნამუშევრებიც ვნახო.");
+const packageLinks = {
+  landing: "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20სავიზიტო%20ვებსაიტის%20შექმნით.%20მსურს%20უფასო%20კონსულტაცია.",
+  corporate: "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20პრემიუმ%20ვებსაიტის%20შექმნით.%20მსურს%20უფასო%20კონსულტაცია.",
+  ecommerce: "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20ონლაინ%20მაღაზიისა%20და%20WMS%20სისტემის%20შექმნით.%20მსურს%20უფასო%20კონსულტაცია.",
+};
+
+const timelines = {
+  ka: { landing: "1-2 კვირა", corporate: "2-4 კვირა", ecommerce: "4-6 კვირა" },
+  en: { landing: "1-2 weeks", corporate: "2-4 weeks", ecommerce: "4-6 weeks" },
+} as const;
+
+const { lifeStore, all4kids, darchiaPartners, geoMarti, adressRealty, geoTechnic, legard } = webProjects;
+const portfolio = [all4kids, darchiaPartners, geoMarti, adressRealty, geoTechnic, legard];
+const featuredProjects = [all4kids, lifeStore, darchiaPartners, adressRealty, geoMarti, geoTechnic, legard];
+
+const englishDetails: FAQItem[] = [
+  {
+    question: "What does website development include?",
+    answer: "VIFA Digital handles the full website development process, from design and development to SEO optimization and launch. We build fast, mobile-responsive websites.",
+  },
+  {
+    question: "How do you build a corporate website?",
+    answer: "We build corporate and landing-page websites for small and medium businesses. Design follows your brand, with React and TypeScript and a structure that is optimized for search from the start.",
+  },
+  {
+    question: "How do I manage stock and orders in my online store?",
+    answer: "We connect your store to Invento WMS, which syncs stock automatically, prints shipping labels and lets you track orders in real time.",
+  },
+  {
+    question: "When do I need a separate page for an ad campaign?",
+    answer: "We build landing pages around one goal, such as a lead or a sale. The page combines a clear message, a direct call to action and fast loading.",
+  },
 ];
 
-const WebDev: React.FC = () => {
-  const { currentLanguage } = useLanguage();
-  const { getTransitionClasses } = useLanguageTransition();
-
-  const whatsappUrl =
-    "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20ვებ%20განვითარების%20სერვისით.%20მსურს%20უფასო%20კონსულტაცია.";
-
-  const t = (key: string): string => {
-    const translations = webDevTranslations[
-      currentLanguage as keyof typeof webDevTranslations
-    ] as Record<string, string>;
-    return translations[key] || key;
-  };
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  const consultationLabel = t("webdev.pricing.consultation");
-
-  const pricingCards = [
-    {
-      key: "landing",
-      icon: <FaRocket />,
-      iconColor: "text-emerald-400",
-      isLink: false,
-      waLink: "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20სავიზიტო%20ვებსაიტის%20შექმნით.%20მსურს%20უფასო%20კონსულტაცია.",
-      featured: false,
-    },
-    {
-      key: "corporate",
-      icon: <FaCode />,
-      iconColor: "text-blue-400",
-      isLink: false,
-      waLink: "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20პრემიუმ%20ვებსაიტის%20შექმნით.%20მსურს%20უფასო%20კონსულტაცია.",
-      featured: true, 
-    },
-    {
-      key: "ecommerce",
-      icon: <FaShoppingCart />,
-      iconColor: "text-amber-400",
-      isLink: false,
-      waLink: "https://wa.me/995557624243?text=გამარჯობა,%20დავინტერესდი%20ონლაინ%20მაღაზიისა%20და%20WMS%20სისტემის%20შექმნით.%20მსურს%20უფასო%20კონსულტაცია.",
-      featured: false,
-    },
-    {
-      key: "ai",
-      icon: <FaBrain />,
-      iconColor: "text-purple-400",
-      isLink: true,
-      waLink: "/services/ai-chatbot",
-      featured: false,
-    },
-  ];
-
-  const faqItems = webDevFaq[currentLanguage === "en" ? "en" : "ka"];
+export default function WebDev() {
+  const { currentLanguage, toggleLanguage } = useLanguage();
   const en = currentLanguage === "en";
+  const [showAllProjects, setShowAllProjects] = useState(false);
+  const language = en ? "en" : "ka";
+  const translations: Record<string, string> = webDevTranslations[language];
+  const t = (key: string) => translations[key] ?? key;
+  const faqItems = webDevFaq[language];
+  const details = en ? englishDetails : [
+    { question: "რას მოიცავს ვებსაიტის დამზადება?", answer: t("webdev.content.intro") },
+    ...[1, 2, 3].map((n) => ({ question: t("webdev.content.question_" + n), answer: t("webdev.content.p_" + n) })),
+  ];
   const breadcrumbItems = [
     { name: en ? "Home" : "მთავარი", url: "https://vifadigital.ge/" },
     { name: en ? "Web Development" : "ვებ დეველოპმენტი", url: "https://vifadigital.ge/services/web" },
   ];
 
   return (
-    <>
+    <LightPage className="web-service" tone="web" whatsappHref={whatsappUrl}>
       <SEO
         title={t("seo.webdev.title")}
         description={t("seo.webdev.description")}
@@ -309,219 +263,80 @@ const WebDev: React.FC = () => {
         breadcrumbs={breadcrumbItems}
         faq={faqItems}
       />
+      <SiteNav consultationHref={whatsappUrl} activeLink="/preview/it" language={language} onLanguageToggle={toggleLanguage} />
+      <main className="it-main">
+        <ServiceHero id="web-hero-title" breadcrumbs={breadcrumbItems} title={t("webdev.hero.main_title")}
+            description={en
+              ? "Landing pages, corporate websites with a CMS and online stores with Georgian bank payments."
+              : "სავიზიტო საიტები, კორპორატიული ვებსაიტები მართვის პანელით და ონლაინ მაღაზიები ქართული ბანკების გადახდის სისტემებით."}
+            actions={<>
+              <a className="it-pill-button" href="#pricing">{en ? "See packages" : t("webdev.pricing.cta")} <ArrowDown size={16} aria-hidden="true" /></a>
+              <a className="it-more-link" href={whatsappUrl} target="_blank" rel="noopener noreferrer">{t("webdev.whatsapp.consult")} ›</a>
+            </>}>
+          <ScreenshotCarousel language={language} controlsLabel={en ? "Featured projects" : "გამორჩეული პროექტები"}
+            slides={featuredProjects.map(({ name, href, image, category }) => ({
+              name, href, image, caption: `${name} · ${category[language]}`,
+            }))} />
+        </ServiceHero>
 
-      <div className="fixed inset-0 z-0 bg-[#060608]">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_65%_-5%,rgba(148,163,184,0.045)_0%,transparent_65%)]" />
-      </div>
-
-      {/* ── 1. Hero ── */}
-      <section className="relative z-10 w-full overflow-hidden flex flex-col justify-center pt-36 pb-12 lg:pt-44 lg:pb-16">
-        <div className="absolute inset-0 w-full h-full z-0">
-          <img
-            src="/vebisphoto.webp"
-            alt=""
-            className="w-full h-full object-cover opacity-60"
-            loading="eager"
-            draggable={false}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#060608] via-[#060608]/90 to-transparent" />
-          <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-[#060608] to-transparent" />
-        </div>
-
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-xl">
-            <Breadcrumbs items={breadcrumbItems} className="mb-5" />
-            <span className="text-sm uppercase tracking-widest text-gray-400 mb-4 block">
-              {t("webdev.hero.overline")}
-            </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.15] mb-6 max-w-2xl">
-              {t("webdev.hero.main_title")}
-            </h1>
-            <p className="font-georgian-body text-lg text-gray-300 leading-relaxed mb-8 max-w-xl">
-              {t("webdev.hero.description")}
-            </p>
-            <a
-              href="#pricing"
-              className="inline-flex items-center gap-2.5 bg-white text-black px-8 py-3.5 rounded-full text-sm font-bold tracking-wide hover:bg-gray-200 transition-colors duration-200"
-            >
-              {t("webdev.pricing.cta")}
-              <FaArrowRight className="text-xs" />
-            </a>
+        <section id="pricing" className="it-section it-col web-pricing" aria-labelledby="web-pricing-title">
+          <SectionHeading id="web-pricing-title">{t("webdev.pricing.title")}</SectionHeading>
+          <div className="web-packages">
+            {(["landing", "corporate", "ecommerce"] as const).map((key) => {
+              const base = "webdev.pricing." + key + ".";
+              return (
+                <WebPackageCard key={key} highlighted={key === "ecommerce"} title={t(base + "title")}
+                  price={t(base + "price")} timeline={timelines[language][key]} body={t(base + "description")}
+                  features={[1, 2, 3].map((num) => t(base + "feature" + num))}
+                  href={packageLinks[key]} action={t("webdev.whatsapp.consult")} />
+              );
+            })}
           </div>
-        </div>
-      </section>
-
-      <div className={`relative z-10 language-transition language-fade-in ${getTransitionClasses()}`}>
-        
-        {/* ── 2. Tech Stack Ticker (Minimal Trust Banner) ── */}
-        <section className="border-y border-white/[0.04] bg-white/[0.01]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex flex-wrap justify-center sm:justify-between items-center gap-6 sm:gap-4 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
-            {technologies.map((tech) => (
-              <div key={tech.name} className="flex items-center gap-2 text-gray-400">
-                <div className={`text-xl sm:text-2xl ${tech.color}`}>{tech.icon}</div>
-                <span className="text-sm font-medium hidden sm:block">{tech.name}</span>
-              </div>
-            ))}
-          </div>
+          <p className="web-consultation-note">{t("webdev.pricing.consultation")}</p>
         </section>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          {/* ── 3. Pricing ── */}
-          <section id="pricing" className="pt-20 pb-16">
-            <div className="mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
-                {t("webdev.pricing.title")}
-              </h2>
-            </div>
+        <section className="it-section it-col web-portfolio" aria-labelledby="web-portfolio-title">
+          <SectionHeading id="web-portfolio-title">{en ? "Selected projects" : "შერჩეული ნამუშევრები"}</SectionHeading>
+          <div className="web-project-grid" data-expanded={showAllProjects}>
+            {portfolio.map((project, index) => (
+              <Fragment key={project.href}>
+                {index === 4 && (
+                  <button type="button" className="it-pill-button web-project-toggle" aria-expanded={showAllProjects}
+                    onClick={() => setShowAllProjects((shown) => !shown)}>
+                    {showAllProjects ? (en ? "Show less" : "ნაკლების ნახვა") : (en ? "Show more" : "მეტის ნახვა")}
+                  </button>
+                )}
+                <WebProjectCard project={project} language={language}
+                  className={index < 4 ? "" : "web-project-extra"} />
+              </Fragment>
+            ))}
+          </div>
+          <p className="web-consultation-note">
+            <a className="web-portfolio-more" href={portfolioWhatsappUrl} target="_blank" rel="noopener noreferrer">
+              {en ? "Message us to see more of our work" : "სხვა ნამუშევრების სანახავად მოგვწერეთ"} ›
+            </a>
+          </p>
+        </section>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-              {pricingCards.map((card, idx) => (
-                <motion.div
-                  key={card.key}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: idx * 0.08 }}
-                  className={`group relative flex flex-col rounded-2xl border transition-all duration-300 ${
-                    card.featured
-                      ? "border-white/20 bg-white/[0.03] shadow-lg shadow-white/5 scale-[1.02] z-10"
-                      : "border-white/[0.06] bg-[#0A0A0C] hover:bg-white/[0.02] hover:border-white/15"
-                  }`}
-                >
-                  <div className="p-6 sm:p-8 flex flex-col flex-1">
-                    <div className="flex items-center justify-between mb-6">
-                      <div className={`w-12 h-12 rounded-xl border border-white/10 bg-white/[0.02] flex items-center justify-center text-xl ${card.iconColor}`}>
-                        {card.icon}
-                      </div>
-                      {card.featured && (
-                        <span className="px-3 py-1 text-[10px] uppercase tracking-widest text-white bg-white/10 rounded-full border border-white/10">
-                          პოპულარული
-                        </span>
-                      )}
-                    </div>
+        <IndustryCarousel language={language} />
+        <HowWeStart language={language} whatsappHref={whatsappUrl} />
 
-                    <h4 className="text-xl font-medium text-white mb-2">
-                      {t(`webdev.pricing.${card.key}.title`)}
-                    </h4>
-                    
-                    <div className="text-3xl font-bold text-white mb-4">
-                      {t(`webdev.pricing.${card.key}.price`)}
-                    </div>
-                    
-                    <p className="font-georgian-body text-gray-400 text-sm leading-relaxed mb-8 h-14">
-                      {t(`webdev.pricing.${card.key}.description`)}
-                    </p>
+        <RelatedProductCard product="chatbot" to="/services/ai-chatbot" title={t("webdev.pricing.ai.title")}
+          description={t("webdev.pricing.ai.description")} price={t("webdev.pricing.ai.price")}
+          action={t("webdev.pricing.learn_more")} />
 
-                    <div className="h-px w-full bg-white/[0.05] mb-8" />
-
-                    <ul className="space-y-4 mb-8 flex-1">
-                      {[1, 2, 3, 4, 5].map((num) => (
-                        <li key={num} className="flex items-start gap-3">
-                          <FaCheckCircle className={`text-xs mt-1 ${card.featured ? "text-gray-300" : "text-gray-600 group-hover:text-gray-400"} transition-colors`} />
-                          <span className="font-georgian-body text-gray-300 text-sm leading-tight">
-                            {t(`webdev.pricing.${card.key}.feature${num}`)}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    <div className="mt-auto">
-                      {card.isLink ? (
-                        <Link
-                          to={card.waLink}
-                          className={`flex items-center justify-center gap-2 w-full py-3.5 px-5 rounded-xl border text-sm font-medium transition-all duration-300 ${
-                            card.featured
-                              ? "bg-white border-white text-black hover:bg-gray-200"
-                              : "border-white/15 text-white hover:bg-white hover:text-black"
-                          }`}
-                        >
-                          {t("webdev.pricing.learn_more")}
-                          <FaArrowRight className="text-xs" />
-                        </Link>
-                      ) : (
-                        <a
-                          href={card.waLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`flex items-center justify-center gap-2 w-full py-3.5 px-5 rounded-xl border text-sm font-medium transition-all duration-300 ${
-                            card.featured
-                              ? "bg-white border-white text-black hover:bg-gray-200"
-                              : "border-white/15 text-white hover:bg-white hover:text-black"
-                          }`}
-                        >
-                          <FaWhatsapp className="text-lg" />
-                          {t("webdev.whatsapp.consult")}
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-            
-            <p className="font-georgian-body text-center text-gray-500 text-sm mt-8">
-              {consultationLabel}
-            </p>
-          </section>
-
-          {/* ── Organic SEO content (deep H2 keyword landing) ── */}
-          <section className="border-t border-white/10 pt-16 pb-8">
-            <span className="mb-5 inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.25em] text-indigo-400">
-              <span className="h-px w-8 bg-indigo-500" />
-              {t("webdev.content.eyebrow")}
-            </span>
-            <p className="font-georgian-body max-w-3xl text-lg leading-[1.85] text-gray-200 md:text-xl">
-              {t("webdev.content.intro")}
-            </p>
-            <div className="mt-14 max-w-3xl space-y-12">
-              {[1, 2, 3].map((n) => (
-                <div key={n}>
-                  <h2 className="mb-4 text-2xl font-bold tracking-tight text-white md:text-[1.75rem] md:leading-snug">
-                    {t(`webdev.content.h2_${n}`)}
-                  </h2>
-                  <p className="font-georgian-body text-[15px] leading-[1.9] text-gray-400 md:text-base">
-                    {t(`webdev.content.p_${n}`)}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* ── Industries (cornerstone → cluster internal links) ── */}
-          <IndustryLinks service="web" className="pb-24 border-t border-white/10 pt-16" />
-
-          {/* ── FAQ (visible — matches FAQPage schema) ── */}
-          <FAQSection
-            items={faqItems}
-            eyebrow="FAQ"
-            title={currentLanguage === "en" ? "Frequently Asked Questions" : "ხშირად დასმული კითხვები"}
-          />
-
-          {/* ── 4. CTA ── */}
-          <section className="pb-24 border-t border-white/10 pt-16">
-            <div className="max-w-2xl">
-              <h3 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-4 leading-tight">
-                {t("webdev.cta.question")}
-              </h3>
-              <div className="mt-4 flex flex-wrap items-center gap-3">
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 bg-white text-black px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-gray-200 transition-colors duration-200"
-              >
-                <FaWhatsapp className="text-lg" />
-                {t("webdev.cta.button")}
-              </a>
-              <CallbackLink product="web" />
-              </div>
-            </div>
-          </section>
-
-        </div>
-      </div>
-    </>
+        <FaqSection id="web-faq" title={en ? "Frequently asked questions" : "ხშირად დასმული კითხვები"}
+          items={[...faqItems, ...details, {
+            question: en ? "What does the AI chatbot package include?" : "რას მოიცავს AI ჩატბოტის პაკეტი?",
+            answer: <ul className="web-faq-list">{[1, 2, 3, 4, 5].map((num) => (
+              <li key={num}>{t("webdev.pricing.ai.feature" + num)}</li>
+            ))}</ul>,
+          }]} />
+        <ContactBlock whatsappHref={whatsappUrl} language={language}>
+          <CallbackLink product="web" className="it-callback" />
+        </ContactBlock>
+        <SiteFooter language={language} />
+      </main>
+    </LightPage>
   );
-};
-
-export default WebDev;
+}
