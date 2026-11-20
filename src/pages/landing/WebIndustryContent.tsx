@@ -54,7 +54,7 @@ export function WebIndustryContent({ slide, config, language, breadcrumbs, onLan
     <LightPage tone="web" className="web-industry" whatsappHref={whatsappHref}>
       <SiteNav consultationHref={whatsappHref} activeLink={itHref} language={language} onLanguageToggle={onLanguageToggle} />
       <main className="it-main">
-        <ServiceHero id="industry-title" breadcrumbs={breadcrumbs} fullBreadcrumbsOnMobile title={breadcrumbs[breadcrumbs.length - 1].name}
+        <ServiceHero id="industry-title" breadcrumbs={breadcrumbs} title={breadcrumbs[breadcrumbs.length - 1].name}
           description={slide.slug === "legal-finance"
             ? ka ? "ვებსაიტი გუნდისა და მომსახურებების საჩვენებლად, დახურული პორტალით დოკუმენტების გასაცვლელად."
               : "Your team, services and a private document portal."

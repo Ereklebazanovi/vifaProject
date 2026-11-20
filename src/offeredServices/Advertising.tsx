@@ -57,5 +57,6 @@ const copy = {
 };
 
 export default function Advertising() {
-  return <MarketingServicePage service="advertising" serviceType="Digital Advertising" copy={copy} />;
+  return <MarketingServicePage service="advertising" serviceType="Digital Advertising" copy={copy}
+    cardArtifacts={["sponsored", "search", "audience"]} />;
 }

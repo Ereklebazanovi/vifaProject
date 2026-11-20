@@ -1,0 +1,111 @@
+.light-page:has(.marketing-lightbox[open]) + .site-floating-contact { display: none; }
+
+.marketing-work-grid { display: grid; gap: 16px; margin-top: 20px; }
+.marketing-work-intro { max-width: 60ch; margin: 12px 0 0; color: var(--it-text-2); font-size: 16px; line-height: 1.55; }
+
+.marketing-work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+.marketing-proof {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  overflow: clip;
+  border-radius: 17px;
+  background: var(--it-surface);
+  color: var(--it-text);
+  font-weight: 600;
+  text-align: start;
+  cursor: pointer;
+}
+
+.marketing-proof-image { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: #ece8e3; }
+.marketing-proof-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.marketing-proof-label { padding: 11px 12px; font-size: 14px; }
+.marketing-proof:is(:hover, :focus-visible) .marketing-proof-label { text-decoration: underline; }
+.marketing-proof-play {
+  position: absolute;
+  right: 9px;
+  bottom: 9px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  color: #262024;
+}
+
+.light-page .marketing-lightbox {
+  position: fixed;
+  inset: 0;
+  width: fit-content;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  border: 0;
+  border-radius: 16px;
+  background: #1d1d1f;
+  color: #fff;
+}
+
+.marketing-lightbox::backdrop { background: rgb(0 0 0 / 74%); }
+
+.marketing-lightbox-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 8px 6px 14px;
+}
+
+.marketing-lightbox-bar p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.marketing-lightbox-close {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 12%);
+  color: #fff;
+  cursor: pointer;
+}
+
+.marketing-lightbox-close:hover { background: rgb(255 255 255 / 22%); }
+
+.light-page .marketing-lightbox-photo {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: min(960px, calc(100vw - 32px));
+  max-height: 76dvh;
+  margin-inline: auto;
+  object-fit: contain;
+}
+
+.light-page .marketing-lightbox[data-kind="reel"] {
+  width: min(360px, calc(100vw - 32px), max(210px, 40dvh));
+}
+
+.marketing-lightbox-video {
+  display: block;
+  width: 100%;
+  max-height: 74dvh;
+  aspect-ratio: 9 / 16;
+  border: 0;
+}
+
+@media (min-width: 768px) {
+  .marketing-work-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}

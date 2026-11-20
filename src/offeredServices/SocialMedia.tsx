@@ -61,6 +61,7 @@ export default function SocialMedia() {
   const shorts = useShorts();
   return (
     <MarketingServicePage service="socialMedia" serviceType="Social Media Management" copy={copy}
+      cardArtifacts={["calendar", "post", "comment"]}
       offers={packages.map(({ name, price }) => ({ name, price }))}>
       {(language, whatsappHref) => <>
         <SocialMediaPackages language={language} whatsappHref={whatsappHref} />

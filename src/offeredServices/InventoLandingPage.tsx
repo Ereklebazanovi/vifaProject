@@ -127,7 +127,7 @@ export default function InventoLandingPage() {
       />
       <SiteNav consultationHref={trialUrl} activeLink={itHref} language={language} onLanguageToggle={toggleLanguage} />
       <main className="it-main">
-        <ServiceHero id="invento-hero-title" breadcrumbs={breadcrumbs} fullBreadcrumbsOnMobile title="Invento WMS"
+        <ServiceHero id="invento-hero-title" breadcrumbs={breadcrumbs} title="Invento WMS"
           description={en
             ? "Manage stock and orders in one place. For online stores, sellers who take orders in chat, and shops tracking stock in Excel or notebooks."
             : "მართეთ მარაგი და შეკვეთები ერთ სივრცეში. გამოგადგებათ, თუ ჩატით ყიდით, ონლაინ მაღაზია გაქვთ ან ნაშთებს Excel-ში თუ რვეულში ითვლით."}

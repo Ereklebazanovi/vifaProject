@@ -11,7 +11,6 @@
 .marketing-direction .marketing-service-card-header {
   background: color-mix(in srgb, var(--it-product-soft) 54%, white);
 }
-.marketing-direction:has(.marketing-lightbox[open]) + .site-floating-contact { display: none; }
 
 .marketing-direction :is(.marketing-section, .it-getting-started) { padding-block: 36px 42px; }
 .marketing-direction .it-service-hero { padding-bottom: 44px; }
@@ -208,17 +207,18 @@
 .marketing-direction .marketing-service-price { font-size: 15px; font-weight: 600; }
 
 .marketing-service-grid,
-.marketing-pricing-grid,
-.marketing-work-grid {
+.marketing-pricing-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 16px;
   margin-top: 20px;
 }
 
-.marketing-service-grid[data-columns="4"] {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+@media (min-width: 640px) {
+  .marketing-service-grid[data-columns="4"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
 }
 
 .marketing-service-card {
@@ -260,10 +260,15 @@ a.marketing-service-card:focus-visible { outline-offset: -3px; }
 @supports (grid-template-rows: subgrid) {
   .marketing-service-card {
     display: grid;
-    grid-row: span 2;
+    grid-row: span 3;
     grid-template-rows: subgrid;
     row-gap: 0;
   }
+}
+
+.marketing-production-services .marketing-service-card:not(:has(.marketing-card-artifact)) {
+  display: flex;
+  align-self: start;
 }
 
 .marketing-direction .it-start-steps {
@@ -292,109 +297,6 @@ a.marketing-service-card:focus-visible { outline-offset: -3px; }
 }
 
 .marketing-price-note { font-size: 14px; }
-.marketing-work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-
-.marketing-proof {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  padding: 0;
-  border: 0;
-  overflow: clip;
-  border-radius: 17px;
-  background: var(--it-surface);
-  color: var(--it-text);
-  font-weight: 600;
-  text-align: start;
-  cursor: pointer;
-}
-
-.marketing-proof-image { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: #ece8e3; }
-.marketing-proof-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.marketing-proof-label { padding: 11px 12px; font-size: 14px; }
-.marketing-proof:is(:hover, :focus-visible) .marketing-proof-label { text-decoration: underline; }
-.marketing-proof-play {
-  position: absolute;
-  right: 9px;
-  bottom: 9px;
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #fff;
-  color: #262024;
-}
-
-.marketing-direction .marketing-lightbox {
-  position: fixed;
-  inset: 0;
-  width: fit-content;
-  max-width: calc(100vw - 32px);
-  max-height: calc(100dvh - 32px);
-  margin: auto;
-  padding: 0;
-  overflow: auto;
-  border: 0;
-  border-radius: 16px;
-  background: #1d1d1f;
-  color: #fff;
-}
-
-.marketing-lightbox::backdrop { background: rgb(0 0 0 / 74%); }
-
-.marketing-lightbox-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 6px 8px 6px 14px;
-}
-
-.marketing-lightbox-bar p {
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.35;
-}
-
-.marketing-lightbox-close {
-  display: grid;
-  flex-shrink: 0;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: rgb(255 255 255 / 12%);
-  color: #fff;
-  cursor: pointer;
-}
-
-.marketing-lightbox-close:hover { background: rgb(255 255 255 / 22%); }
-
-.marketing-direction .marketing-lightbox-photo {
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: min(960px, calc(100vw - 32px));
-  max-height: 76dvh;
-  margin-inline: auto;
-  object-fit: contain;
-}
-
-.marketing-direction .marketing-lightbox[data-kind="reel"] {
-  width: min(360px, calc(100vw - 32px), max(210px, 40dvh));
-}
-
-.marketing-lightbox-video {
-  display: block;
-  width: 100%;
-  max-height: 74dvh;
-  aspect-ratio: 9 / 16;
-  border: 0;
-}
-
 .marketing-channel-row {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -481,13 +383,12 @@ a.marketing-service-card:focus-visible { outline-offset: -3px; }
   .marketing-direction :is(.marketing-section, .it-getting-started) { padding-block: 42px 50px; }
   .marketing-detail-scene { --marketing-detail-height: 422px; }
   .marketing-hub .it-start-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .marketing-service-grid[data-columns="4"] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .marketing-work-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .marketing-channel { display: flex; justify-content: center; align-items: center; gap: 10px; font-size: 15px; }
 }
 
 @media (min-width: 900px) {
   .marketing-hub .it-device-stage { height: 405px; }
+  .marketing-service-grid[data-columns="4"] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .marketing-direction .it-start-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .marketing-hub .it-start-steps { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .marketing-service-grid[data-columns="3"],

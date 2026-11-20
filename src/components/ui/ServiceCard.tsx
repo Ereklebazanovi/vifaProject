@@ -10,6 +10,7 @@ interface ServiceCardProps {
   facts?: ReactNode;
   product?: keyof typeof productColors;
   highlighted?: boolean;
+  headingAs?: "h2" | "h3";
   to?: string;
   linkRef?: Ref<HTMLAnchorElement>;
   onPointerEnter?: () => void;
@@ -19,7 +20,7 @@ interface ServiceCardProps {
 }
 
 export function ServiceCard({
-  title, eyebrow, body, facts, product, highlighted, to, linkRef, onPointerEnter, scene, variant = "showcase", children,
+  title, eyebrow, body, facts, product, highlighted, headingAs: Heading = "h3", to, linkRef, onPointerEnter, scene, variant = "showcase", children,
 }: ServiceCardProps) {
   const showcase = variant === "showcase";
   const rootProps = {
@@ -38,7 +39,7 @@ export function ServiceCard({
     <>
       <div className="it-card-top">
         {eyebrow && <p className="it-card-eyebrow">{eyebrow}</p>}
-        <h3 className="it-card-title">{title}</h3>
+        <Heading className="it-card-title">{title}</Heading>
         {showcase && body && <p className="it-card-body">{body}</p>}
         {facts && <p className="it-card-facts">{facts}</p>}
         {!showcase && body && <p className="it-card-body">{body}</p>}

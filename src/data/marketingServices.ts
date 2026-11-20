@@ -1,4 +1,11 @@
 export const marketingHubHref = "/services/marketing";
+export const marketingChannels = [
+  { name: "Instagram", href: "https://www.instagram.com/vifaproduction/" },
+  { name: "Facebook", href: "https://www.facebook.com/vifageo" },
+  { name: "YouTube", href: "https://www.youtube.com/@vifaprodaction3750" },
+  { name: "TikTok", href: "https://www.tiktok.com/@vifadigital" },
+] as const;
+
 export const marketingServiceOrder = ["socialMedia", "advertising", "production", "branding"] as const;
 export type MarketingService = typeof marketingServiceOrder[number];
 export type MarketingLanguage = "ka" | "en";

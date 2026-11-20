@@ -3,7 +3,7 @@ import { Grid3X3, Instagram, MessageCircle } from "lucide-react";
 import { foodPhoto, foodReel, foodReelPoster } from "../../data/marketingMedia";
 import type { MarketingLanguage, MarketingService } from "../../data/marketingServices";
 
-const profilePhotos = [1, 4, 10, 14, 8, 2, 3, 11, 12].map(foodPhoto);
+const profilePhotos = [10, 14, 8, 2, 3, 11, 7, 13].map(foodPhoto);
 const newPost = foodPhoto(6);
 const sponsoredPhoto = foodPhoto(5);
 
@@ -20,7 +20,7 @@ function SocialProfile({ posted }: { posted: boolean }) {
           {profilePhotos.map(photo => <img key={photo.src} src={photo.srcSm} alt="" loading="lazy" />)}
         </div>
         <div className="marketing-profile-grid marketing-profile-grid-new">
-          {[newPost, ...profilePhotos.slice(0, -1)].map(photo => <img key={photo.src} src={photo.srcSm} alt="" loading="lazy" />)}
+          {[newPost, ...profilePhotos].map(photo => <img key={photo.src} src={photo.srcSm} alt="" loading="lazy" />)}
         </div>
       </div>
     </div>

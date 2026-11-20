@@ -5,6 +5,8 @@ import type { FAQItem } from "../components/FAQSection";
 import SEO from "../components/SEO";
 import { ContactBlock } from "../components/ui/ContactBlock";
 import { FaqSection } from "../components/ui/FaqSection";
+import { MarketingArtifact } from "../components/ui/MarketingArtifacts";
+import { MarketingProcess } from "../components/ui/MarketingProcess";
 import { MarketingPage } from "../components/ui/MarketingPage";
 import { MarketingServiceCard } from "../components/ui/MarketingServiceCard";
 import { MarketingWork } from "../components/ui/MarketingWork";
@@ -218,6 +220,18 @@ const productionTranslations = {
 const serviceKeys = ["photo", "video", "drone"] as const;
 const serviceIcons = { photo: Camera, video: Video, drone: Plane };
 const heroPhotos = [foodPhoto(11), foodPhoto(2)];
+const process = {
+  ka: [
+    { title: "ვათანხმებთ კადრებს", body: "ვარკვევთ, რა მასალა გჭირდებათ კამპანიისთვის." },
+    { title: "ვიღებთ", body: "ვიღებთ შეთანხმებულ ფოტოებსა და ვიდეოს." },
+    { title: "ვამუშავებთ", body: "მასალას გამოსაქვეყნებელ ფორმატში ვამზადებთ." },
+  ],
+  en: [
+    { title: "Plan the shots", body: "We agree on what your campaign needs." },
+    { title: "Shoot", body: "We shoot the planned photos and video." },
+    { title: "Edit", body: "We prepare the files for publishing." },
+  ],
+};
 const whatsappUrl =
   "https://wa.me/995577175132?text=" +
   encodeURIComponent("გამარჯობა, დავინტერესდი ფოტო/ვიდეო გადაღების სერვისით. მსურს უფასო კონსულტაცია.");
@@ -256,7 +270,7 @@ export default function Production() {
       <SiteNav consultationHref={whatsappUrl} activeLink={marketingHubHref}
         language={language} onLanguageToggle={toggleLanguage} />
       <main className="it-main">
-        <ServiceHero id="production-title" breadcrumbs={breadcrumbItems} fullBreadcrumbsOnMobile title={t("hero.title")} description={t("hero.description")}
+        <ServiceHero id="production-title" breadcrumbs={breadcrumbItems} title={t("hero.title")} description={t("hero.description")}
           actions={<>
             <a className="it-pill-button" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
               <FaWhatsapp size={19} aria-hidden="true" />{t("hero.cta")}
@@ -274,9 +288,12 @@ export default function Production() {
           <p className="marketing-section-copy">{t("section.servicesDesc")}</p>
           <div className="marketing-service-grid marketing-production-services">
             {serviceKeys.map(key => <MarketingServiceCard key={key} icon={serviceIcons[key]}
-              title={t(`svc.${key}.title`)} body={t(`svc.${key}.desc`)} />)}
+              title={t(`svc.${key}.title`)} body={t(`svc.${key}.desc`)}
+              artifact={key !== "drone" && <MarketingArtifact kind={key === "photo" ? "photo" : "reel"} language={language} />} />)}
           </div>
         </section>
+
+        <MarketingProcess language={language} steps={process[language]} service="production" />
 
         <section className="it-section it-col marketing-section" aria-labelledby="production-pricing-title">
           <SectionHeading id="production-pricing-title">{t("section.pricing")}</SectionHeading>

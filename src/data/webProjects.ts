@@ -30,3 +30,12 @@ export const webProjects = {
     category: { ka: "სამშენებლო მასალები და ტექნიკა", en: "Construction materials and equipment" },
   },
 } as const;
+
+export const webPortfolio = [
+  webProjects.all4kids,
+  webProjects.darchiaPartners,
+  webProjects.geoMarti,
+  webProjects.adressRealty,
+  webProjects.geoTechnic,
+  webProjects.legard,
+] as const;

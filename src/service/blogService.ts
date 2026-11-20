@@ -8,6 +8,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  getDocsFromServer,
   query,
   where,
   orderBy,
@@ -36,9 +37,9 @@ const toPost = (id: string, data: Record<string, unknown>): BlogPost => ({
 
 /** Published posts, newest first — for the public /blog index.
  *  Sorts client-side (single-field `where` only) to avoid a Firestore composite index. */
-export async function getPublishedPosts(): Promise<BlogPost[]> {
+export async function getPublishedPosts({ fromServer = false } = {}): Promise<BlogPost[]> {
   const q = query(collection(db, COLLECTION), where("status", "==", "published"));
-  const snap = await getDocs(q);
+  const snap = await (fromServer ? getDocsFromServer(q) : getDocs(q));
   return snap.docs
     .map((d) => toPost(d.id, d.data()))
     .sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1));

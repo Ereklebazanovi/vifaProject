@@ -3,7 +3,7 @@ import CallbackLink from "../components/CallbackLink";
 import SEO from "../components/SEO";
 import { ContactBlock } from "../components/ui/ContactBlock";
 import { FaqSection } from "../components/ui/FaqSection";
-import { HowWeStart } from "../components/ui/HowWeStart";
+import { MarketingProcess } from "../components/ui/MarketingProcess";
 import { MarketingPage } from "../components/ui/MarketingPage";
 import { MarketingScene } from "../components/ui/MarketingScenes";
 import { MarketingWork } from "../components/ui/MarketingWork";
@@ -13,7 +13,7 @@ import { ServiceCard } from "../components/ui/ServiceCard";
 import { SiteFooter } from "../components/ui/SiteFooter";
 import { SiteNav } from "../components/ui/SiteNav";
 import { useLanguage } from "../contexts/LanguageContext";
-import { marketingBreadcrumbs, marketingHubHref, marketingServiceOrder, marketingServices, marketingWhatsappHref } from "../data/marketingServices";
+import { marketingBreadcrumbs, marketingChannels, marketingHubHref, marketingServices, marketingWhatsappHref } from "../data/marketingServices";
 import type { MarketingLanguage, MarketingService } from "../data/marketingServices";
 import { useShorts } from "../hooks/useShorts";
 import { useProductScene } from "../pages/preview/useProductScene";
@@ -47,12 +47,8 @@ const process = {
   ],
 };
 
-const channels = [
-  { name: "Instagram", href: "https://www.instagram.com/vifaproduction/", icon: FaInstagram },
-  { name: "Facebook", href: "https://www.facebook.com/vifageo", icon: FaFacebook },
-  { name: "YouTube", href: "https://www.youtube.com/@vifaprodaction3750", icon: FaYoutube },
-  { name: "TikTok", href: "https://www.tiktok.com/@vifadigital", icon: FaTiktok },
-];
+const hubCardOrder = ["socialMedia", "branding", "production", "advertising"] as const satisfies readonly MarketingService[];
+const channelIcons = { Instagram: FaInstagram, Facebook: FaFacebook, YouTube: FaYoutube, TikTok: FaTiktok };
 
 const industries = [
   { slug: "food", ka: "რესტორნები და კაფეები", en: "Restaurants and cafés" },
@@ -122,7 +118,7 @@ export default function Marketing() {
   const { currentLanguage: language, toggleLanguage } = useLanguage();
   const ka = language === "ka";
   const shorts = useShorts();
-  const rotation = useServiceRotation(marketingServiceOrder);
+  const rotation = useServiceRotation(hubCardOrder);
   const faq = marketingFaq[language];
   const breadcrumbs = marketingBreadcrumbs(language);
 
@@ -145,7 +141,7 @@ export default function Marketing() {
           </header>
           <div ref={rotation.gridRef} className="it-service-grid" data-active-product={rotation.activeProduct ?? "none"}
             data-turn={rotation.turn}>
-            {marketingServiceOrder.map(service => (
+            {hubCardOrder.map(service => (
               <MarketingHubCard key={service} service={service} language={language} rotation={rotation} />
             ))}
           </div>
@@ -162,17 +158,18 @@ export default function Marketing() {
             </li>)}
           </ul>
         </section>
-        <HowWeStart language={language} processSteps={process[language]} showExamples={false} showActions={false} />
+        <MarketingProcess language={language} steps={process[language]} service="hub" />
 
         <section className="it-section it-col marketing-section" aria-labelledby="marketing-channels-title">
           <SectionHeading id="marketing-channels-title">{ka ? "ჩვენი არხები" : "Our channels"}</SectionHeading>
           <div className="marketing-channel-row">
-            {channels.map(({ name, href, icon: Icon }) => (
-              <a key={name} className="marketing-channel" href={href} target="_blank" rel="noopener noreferrer">
+            {marketingChannels.map(({ name, href }) => {
+              const Icon = channelIcons[name];
+              return <a key={name} className="marketing-channel" href={href} target="_blank" rel="noopener noreferrer">
                 <Icon size={19} aria-hidden="true" />
                 <span>{name}</span>
-              </a>
-            ))}
+              </a>;
+            })}
           </div>
         </section>
         <FaqSection title={ka ? "ხშირად დასმული კითხვები" : "Frequently asked questions"} items={faq} />

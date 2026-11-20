@@ -436,7 +436,7 @@ export default function AIChatbot() {
       />
       <SiteNav consultationHref={whatsappUrl} activeLink={itHref} language={language} onLanguageToggle={toggleLanguage} />
       <main className="it-main">
-        <ServiceHero id="chatbot-hero-title" breadcrumbs={breadcrumbs} fullBreadcrumbsOnMobile title={title}
+        <ServiceHero id="chatbot-hero-title" breadcrumbs={breadcrumbs} title={title}
           description={en
             ? "Answers in Georgian and takes orders and bookings."
             : "ქართულად პასუხობს კლიენტებს, იღებს შეკვეთებსა და ჯავშნებს."}

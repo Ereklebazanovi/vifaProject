@@ -17,7 +17,7 @@ import { itBreadcrumbs, itHref } from "../data/itServices";
 import { useLanguage } from "../contexts/LanguageContext";
 import { ScreenshotCarousel } from "../components/ui/ScreenshotCarousel";
 import { WebPackageCard, WebProjectCard } from "../components/ui/WebCards";
-import { webProjects } from "../data/webProjects";
+import { webPortfolio as portfolio, webProjects } from "../data/webProjects";
 import "./webService.css";
 
 // FAQ — built from the real packages/pricing on this page (bilingual).
@@ -194,7 +194,6 @@ const timelines = {
 } as const;
 
 const { lifeStore, all4kids, darchiaPartners, geoMarti, adressRealty, geoTechnic, legard } = webProjects;
-const portfolio = [all4kids, darchiaPartners, geoMarti, adressRealty, geoTechnic, legard];
 const featuredProjects = [all4kids, lifeStore, darchiaPartners, adressRealty, geoMarti, geoTechnic, legard];
 
 const englishDetails: FAQItem[] = [
@@ -253,7 +252,7 @@ export default function WebDev() {
       />
       <SiteNav consultationHref={whatsappUrl} activeLink={itHref} language={language} onLanguageToggle={toggleLanguage} />
       <main className="it-main">
-        <ServiceHero id="web-hero-title" breadcrumbs={breadcrumbItems} fullBreadcrumbsOnMobile title={t("webdev.hero.main_title")}
+        <ServiceHero id="web-hero-title" breadcrumbs={breadcrumbItems} title={t("webdev.hero.main_title")}
             description={en
               ? "Landing pages, corporate websites with a CMS and online stores with Georgian bank payments."
               : "სავიზიტო საიტები, კორპორატიული ვებსაიტები მართვის პანელით და ონლაინ მაღაზიები ქართული ბანკების გადახდის სისტემებით."}

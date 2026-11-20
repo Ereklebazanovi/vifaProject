@@ -52,12 +52,14 @@ function AdvertisingRedirect() {
   return <Navigate to={{ pathname: marketingServices.advertising.href, search, hash }} replace />;
 }
 
-const loadingClass = /^\/(preview|industry\/web|services\/(marketing|production|social-media|advertising|branding|digital-advertising))(\/|$)/.test(window.location.pathname)
+const loadingClass = window.location.pathname === "/" ||
+  /^\/(preview|industry\/web|services\/(marketing|production|social-media|advertising|branding|digital-advertising))(\/|$)/.test(window.location.pathname)
   ? "bg-[#f5f5f7]" : "bg-[#050404]";
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route element={<AppShell />} hydrateFallbackElement={<div className={`min-h-screen ${loadingClass}`} />}>
     <Route element={<Layout light />}>
+      <Route index element={<Home />} />
       <Route path="services/web" lazy={webDev} />
       <Route path="services/web-development" lazy={webDev} />
       <Route path="industry/web/:slug" lazy={async () => ({
@@ -74,7 +76,6 @@ const router = createBrowserRouter(createRoutesFromElements(
       <Route path="services/digital-advertising" element={<AdvertisingRedirect />} />
     </Route>
     <Route path="/" element={<Layout />}>
-      <Route index element={<Home />} />
       <Route path="contact" lazy={lazyRoute(() => import("./pages/ContactPage"))} />
       <Route path="about" lazy={lazyRoute(() => import("./pages/AboutPage"))} />
       <Route path="blog" lazy={lazyRoute(() => import("./pages/blog/BlogIndex"))} />

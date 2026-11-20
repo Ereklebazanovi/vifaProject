@@ -59,5 +59,6 @@ const copy = {
 };
 
 export default function Branding() {
-  return <MarketingServicePage service="branding" serviceType="Branding and Design" copy={copy} />;
+  return <MarketingServicePage service="branding" serviceType="Branding and Design" copy={copy}
+    cardArtifacts={["logo", "identity", "poster", "voice"]} />;
 }

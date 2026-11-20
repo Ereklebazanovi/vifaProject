@@ -8,7 +8,9 @@ import { marketingBreadcrumbs, marketingHubHref, marketingServices, marketingSer
 import type { MarketingLanguage, MarketingService } from "../../data/marketingServices";
 import { ContactBlock } from "./ContactBlock";
 import { FaqSection } from "./FaqSection";
-import { HowWeStart } from "./HowWeStart";
+import { MarketingArtifact } from "./MarketingArtifacts";
+import type { MarketingArtifactKind } from "./MarketingArtifacts";
+import { MarketingProcess } from "./MarketingProcess";
 import { MarketingPage } from "./MarketingPage";
 import { MarketingScene } from "./MarketingScenes";
 import { MarketingServiceCard } from "./MarketingServiceCard";
@@ -26,14 +28,15 @@ interface ServiceCopy {
   sectionTitle: string;
   sectionLine?: string;
   cards: { icon: LucideIcon; title: string; body: string }[];
-  process?: { title: string; body: string }[];
+  process: { title: string; body: string }[];
   faq: { question: string; answer: string }[];
 }
 
-export function MarketingServicePage({ service, copy, serviceType, offers, children }: {
+export function MarketingServicePage({ service, copy, serviceType, cardArtifacts, offers, children }: {
   service: Exclude<MarketingService, "production">;
   copy: Record<MarketingLanguage, ServiceCopy>;
   serviceType: string;
+  cardArtifacts: readonly MarketingArtifactKind[];
   offers?: { name: string; price: number }[];
   children?: (language: MarketingLanguage, whatsappHref: string) => ReactNode;
 }) {
@@ -53,7 +56,7 @@ export function MarketingServicePage({ service, copy, serviceType, offers, child
         language={language} onLanguageToggle={toggleLanguage} />
       <main className="it-main">
         <ServiceHero id="marketing-service-title" title={title} description={description} breadcrumbs={breadcrumbs}
-          fullBreadcrumbsOnMobile facts={price && <p className="marketing-service-price">{price}</p>}
+          facts={price && <p className="marketing-service-price">{price}</p>}
           actions={<a className="it-pill-button" href={whatsappHref} target="_blank" rel="noopener noreferrer">
             <FaWhatsapp size={19} aria-hidden="true" />{ka ? "მოგვწერეთ WhatsApp-ზე" : "Message us on WhatsApp"}
           </a>}>
@@ -66,11 +69,12 @@ export function MarketingServicePage({ service, copy, serviceType, offers, child
           <SectionHeading id="marketing-services-title">{sectionTitle}</SectionHeading>
           {sectionLine && <p className="marketing-section-copy">{sectionLine}</p>}
           <div className="marketing-service-grid" data-columns={cards.length}>
-            {cards.map(card => <MarketingServiceCard key={card.title} {...card} />)}
+            {cards.map((card, index) => <MarketingServiceCard key={card.title} {...card}
+              artifact={<MarketingArtifact kind={cardArtifacts[index]} language={language} />} />)}
           </div>
         </section>
 
-        {process && <HowWeStart language={language} processSteps={process} showExamples={false} showActions={false} />}
+        <MarketingProcess language={language} steps={process} service={service} />
         {children?.(language, whatsappHref)}
         <FaqSection title={ka ? "ხშირად დასმული კითხვები" : "Frequently asked questions"} items={faq} />
         <OtherMarketingServices current={service} language={language} />

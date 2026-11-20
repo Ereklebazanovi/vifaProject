@@ -49,7 +49,7 @@ export default function LineupLandingPage() {
       />
       <SiteNav consultationHref={whatsappHref} activeLink={itHref} language={lang} onLanguageToggle={toggleLanguage} />
       <main className="it-main">
-        <ServiceHero id="lineup-hero-title" breadcrumbs={breadcrumbs} fullBreadcrumbsOnMobile title={c.heroTitle}
+        <ServiceHero id="lineup-hero-title" breadcrumbs={breadcrumbs} title={c.heroTitle}
           description={c.heroSubtitle}
           actions={<a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="it-pill-button">{c.ctaWrite}</a>}
           facts={<p className="lineup-audience">LineUp · {c.kicker}</p>}>

@@ -1,14 +1,21 @@
 import { Link } from "react-router-dom";
+import type { ReactNode } from "react";
 import { SectionHeading } from "./SectionHeading";
 
 const consultationUrl = "https://wa.me/995557624243?text=" + encodeURIComponent("გამარჯობა, მინდა უფასო კონსულტაცია.");
-const steps = [
+interface ProcessStep {
+  title: string;
+  body?: string;
+  artifact?: ReactNode;
+}
+
+const steps: ProcessStep[] = [
   { title: "მოგვწერეთ", body: "WhatsApp-ზე ან საკონტაქტო ფორმით მოგვიყევით, რა გჭირდებათ." },
   { title: "მიიღეთ შეთავაზება", body: "შეთავაზებაში დავწერთ, რა შედის პროექტში, რა ეღირება და რამდენი დრო დაგვჭირდება." },
   { title: "ჩაიბარეთ პროექტი", body: "თქვენი თანხმობის შემდეგ სამუშაოს ვიწყებთ. დასრულებულ პროექტს შეთანხმებულ ვადაში მიიღებთ." },
 ];
 
-const englishSteps = [
+const englishSteps: ProcessStep[] = [
   { title: "Tell us what you need", body: "Message us on WhatsApp or use the contact form to tell us about your project." },
   { title: "Get a proposal", body: "The proposal lists what's included, what it costs and how long the work will take." },
   { title: "Receive your project", body: "We start after your approval and deliver the finished project within the agreed timeframe." },
@@ -27,7 +34,7 @@ export function HowWeStart({
 }: {
   language?: "ka" | "en";
   whatsappHref?: string;
-  processSteps?: ReadonlyArray<{ title: string; body?: string }>;
+  processSteps?: readonly ProcessStep[];
   example?: ProcessExample;
   showActions?: boolean;
   showExamples?: boolean;
@@ -41,8 +48,8 @@ export function HowWeStart({
           <h3>{step.title}</h3>
           {step.body && <p className="it-start-description">{step.body}</p>}
         </div>
-        {showExamples && <div className="it-start-artifact-space" aria-hidden="true">
-          <div className="it-start-artifact">
+        {(step.artifact || showExamples) && <div className="it-start-artifact-space" aria-hidden="true">
+          {step.artifact ?? <div className="it-start-artifact">
             {index === 0 && <div className="it-start-chat">
               <p className="it-start-chat-customer">{example?.inquiry ?? (en ? "Hello, I'm interested in a website." : "გამარჯობა, საიტი მაინტერესებს.")}</p>
               <p className="it-start-chat-reply">{en ? "Hello! Tell us what you need." : "გამარჯობა! მოგვიყევით, რა გჭირდებათ."}</p>
@@ -64,7 +71,7 @@ export function HowWeStart({
               </div>
               <div className="it-start-browser-body"><span>{en ? "Website is live ✓" : "საიტი გაშვებულია ✓"}</span></div>
             </div>)}
-          </div>
+          </div>}
         </div>}
       </li>)}
     </ol>

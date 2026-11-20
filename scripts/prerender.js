@@ -74,14 +74,14 @@ const BLOCKED = [
 // so the Firestore SDK can fetch real post content to bake into the static HTML.
 const FIRESTORE_HOST = 'firestore.googleapis.com';
 
-// Fetch published blog slugs from Firestore REST (no SDK/auth; allowed by the public read rule).
-// Returns [{ slug, publishedAt }]. Fails soft: on any error the blog is just skipped.
+// Read published blog summaries and slugs from the same source as the blog pages.
 async function fetchPublishedBlogPosts() {
   try {
     const res = await fetch(FIRESTORE_QUERY, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(PUBLISHED_POSTS_QUERY),
+      signal: AbortSignal.timeout(10000),
     });
     if (!res.ok) {
       console.warn(`[prerender] blog: Firestore REST ${res.status} — skipping blog routes`);
@@ -92,7 +92,11 @@ async function fetchPublishedBlogPosts() {
     const docs = (Array.isArray(data) ? data : []).map((r) => r.document).filter(Boolean);
     return docs
       .map((d) => ({
+        id: d.name?.split('/').pop() || '',
         slug: d.fields?.slug?.stringValue || '',
+        title: d.fields?.title?.stringValue || '',
+        description: d.fields?.description?.stringValue || '',
+        tags: (d.fields?.tags?.arrayValue?.values ?? []).map((tag) => tag.stringValue).filter(Boolean),
         status: d.fields?.status?.stringValue || '',
         publishedAt: d.fields?.publishedAt?.stringValue || '',
       }))
@@ -134,8 +138,11 @@ const MIME = {
   '.txt': 'text/plain',
 };
 
-function startStaticServer() {
-  const indexHtml = readFileSync(join(distDir, 'index.html'));
+function startStaticServer(homePosts) {
+  const indexHtml = readFileSync(join(distDir, 'index.html'), 'utf8');
+  const blogData = JSON.stringify(homePosts).replaceAll('<', '\\u003c');
+  const homeHtml = homePosts.length ? indexHtml.replace('</head>',
+    () => `<script id="home-blog-data" type="application/json">${blogData}</script></head>`) : indexHtml;
   const server = createServer((req, res) => {
     try {
       const urlPath = decodeURIComponent((req.url || '/').split('?')[0]);
@@ -149,7 +156,7 @@ function startStaticServer() {
       }
       // SPA fallback -> serve the app shell, let the router render the route.
       res.writeHead(200, { 'Content-Type': MIME['.html'] });
-      res.end(indexHtml);
+      res.end(urlPath === '/' ? homeHtml : indexHtml);
     } catch (e) {
       res.writeHead(500);
       res.end('prerender static server error: ' + e.message);
@@ -180,8 +187,6 @@ async function run() {
   }
 
   const puppeteer = (await import('puppeteer')).default;
-  const server = await startStaticServer();
-  console.log(`[prerender] static server on http://localhost:${PORT}`);
 
   // vite build uses emptyOutDir:false, so stale /blog/<slug> dirs from earlier builds
   // (or the old markdown blog) can linger in dist. Wipe dist/blog so only the current
@@ -190,6 +195,10 @@ async function run() {
 
   // Discover published blog posts from Firestore and add them to the render list.
   const blogPosts = await fetchPublishedBlogPosts();
+  const homePosts = [...blogPosts].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt)).slice(0, 3)
+    .map(({ id, slug, title, description, tags }) => ({ id, slug, title, description, tags }));
+  const server = await startStaticServer(homePosts);
+  console.log(`[prerender] static server on http://localhost:${PORT}`);
   if (blogPosts.length) {
     ROUTES.push('/blog');
     for (const p of blogPosts) ROUTES.push(`/blog/${p.slug}`);
