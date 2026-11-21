@@ -11,6 +11,11 @@
       "source": "/services/digital-advertising",
       "destination": "/services/advertising",
       "permanent": true
+    },
+    {
+      "source": "/preview/it",
+      "destination": "/it",
+      "permanent": true
     }
   ],
   "trailingSlash": false,

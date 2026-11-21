@@ -46,9 +46,8 @@ for (const s of INDUSTRY_SERVICES)
   for (const slug of INDUSTRY_SLUGS)
     ROUTES.push(`/industry/${s}/${slug}`);
 
-// Hidden design preview (noindex, not in the sitemap, not linked). Baked only so a shared
-// link opens straight on the light page instead of flashing the prerendered dark home first.
-ROUTES.push('/preview/it');
+// The IT hub (public since 2026-11-21; /preview/it redirects here in vercel.json).
+ROUTES.push('/it');
 
 // Blog posts live in Firestore. At build time we fetch the published slugs via the
 // Firestore REST API and prerender each /blog/<slug> so crawlers get static HTML.

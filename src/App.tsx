@@ -58,6 +58,8 @@ const router = createBrowserRouter(createRoutesFromElements(
   <Route element={<AppShell />} hydrateFallbackElement={<div className={`min-h-screen ${loadingClass}`} />}>
     <Route element={<Layout />}>
       <Route index element={<Home />} />
+      {/* Inside Layout so the hub gets the same UTM memory and WhatsApp click tracking as every page. */}
+      <Route path={itHref} lazy={lazyRoute(() => import("./pages/preview/ITHubPreview"))} />
       <Route path="services/web" lazy={webDev} />
       <Route path="services/web-development" lazy={webDev} />
       <Route path="industry/web/:slug" lazy={async () => ({
@@ -97,7 +99,8 @@ const router = createBrowserRouter(createRoutesFromElements(
       <Route path="blog" lazy={lazyRoute(() => import("./pages/blog/BlogEditor"))} />
     </Route>
 
-    <Route path={itHref} lazy={lazyRoute(() => import("./pages/preview/ITHubPreview"))} />
+    {/* The old hidden address of the IT hub; vercel.json also redirects it permanently. */}
+    <Route path="/preview/it" element={<Navigate to={itHref} replace />} />
     <Route path="/preview/type" lazy={lazyRoute(() => import("./pages/preview/TypeSpecimen"))} />
   </Route>,
 ));

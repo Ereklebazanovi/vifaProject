@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Helmet } from "react-helmet-async";
+import SEO from "../../components/SEO";
 import { ContactBlock } from "../../components/ui/ContactBlock";
 import { HowWeStart } from "../../components/ui/HowWeStart";
 import { IndustryCarousel } from "../../components/ui/IndustryCarousel";
@@ -81,9 +82,18 @@ export default function ITHubPreview() {
 
   return (
     <LightPage className="it-preview" whatsappHref={whatsappHref}>
+      <SEO
+        title={ka ? "IT მომსახურება: ვებსაიტები, AI ჩატბოტი და მართვის სისტემები" : "IT services: websites, AI chatbots and business software"}
+        description={ka
+          ? "ვებსაიტები და ონლაინ მაღაზიები, AI ჩატბოტი Messenger-ში, Instagram-სა და WhatsApp-ში, Invento WMS მარაგებისთვის და LineUp სპორტული აკადემიებისთვის. უფასო კონსულტაცია."
+          : "Websites and online stores, an AI chatbot for Messenger, Instagram and WhatsApp, Invento WMS for stock and LineUp for sports academies. Free consultation."}
+        url="https://vifadigital.ge/it"
+        breadcrumbs={[
+          { name: ka ? "მთავარი" : "Home", url: "https://vifadigital.ge/" },
+          { name: "IT", url: "https://vifadigital.ge/it" },
+        ]}
+      />
       <Helmet>
-        <title>IT | VIFA (preview)</title>
-        <meta name="robots" content="noindex,nofollow" />
         <script type="application/ld+json">{JSON.stringify(getHubFaqSchema(language))}</script>
       </Helmet>
 

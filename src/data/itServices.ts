@@ -1,6 +1,7 @@
 import type { Crumb } from "../components/Breadcrumbs";
 
-export const itHref = "/preview/it";
+// The IT hub. Launched 2026-11-21 (was the hidden /preview/it, which now redirects here).
+export const itHref = "/it";
 
 export const itServices = {
   web: {

@@ -162,7 +162,7 @@ canonicals** (every page canonicalized to the homepage). Do not re-add meta here
   Each service `Service` node now emits an `AggregateOffer` with `lowPrice`/`highPrice`
   + per-package `Offer` items using real visible prices (GEL):
   - **Web:** 300–1400₾ (Landing 500 / CMS 700–1000 / AI 300 / eCommerce 1400)
-  - **Marketing:** 1000–2000₾ (Standard/Pro/Premium)
+  - **Social media management:** Core 1000 ₾, Growth 1500 ₾ and Scale 2000 ₾ per month.
   - **AI Chatbot:** 300₾ (setup)
   - **WMS:** 79–1999₾ (Monthly/Annual/eCommerce Bundle — as `SoftwareApplication`)
 
@@ -365,11 +365,8 @@ sitemap'd, reached via internal links + footer, but **NOT in the navbar**.
 - 3 keyword verticals as deep H2 sections: **ფოტო გადაღება / კომერციული ფოტოგრაფია**,
   **ვიდეო გადაღება / რილსები**, **დრონით (აერო) გადაღება**. Intro lead + services grid +
   estimate pricing + platforms + related-links cluster (→ /services/marketing + /services/web) + FAQ + CTA.
-- `<SEO>`: `serviceSchema` (`serviceType: "Photo and Video Production"`) + `offers`
-  (300/400/500₾ → AggregateOffer 300–500), 3-level breadcrumbs (Home › Marketing › Production),
-  `faq` (6 Q&A, visible === FAQPage schema). Verified baked graph: Org/Website/WebPage/Breadcrumb/Service/FAQPage.
-- ⚠️ **Prices are PLACEHOLDER estimates** (labeled საორიენტაციო, like the rest of the site) —
-  user should confirm/adjust the real production prices in `productionTranslations` + the `offers` array.
+- `<SEO>` includes the production service, breadcrumbs and FAQ. Pricing is agreed during a consultation.
+  The production service schema carries the service details without numeric offers.
 - Route `services/production` lazy-added in `App.tsx`; added to `prerender.js` ROUTES and
   `public/sitemap.xml` (priority 0.9). Footer `services` array got a crawlable link
   (`footer.services.production`, FaCamera) — **footer only, not navbar**.
@@ -521,8 +518,8 @@ Content / authority (the real ranking lever):
 | `src/App.tsx` | Routes (lazy-loaded) + providers; aliases kept for 308 |
 | `src/layout/SimpleNavbar.tsx` | Nav — xl: breakpoint (1280px) for desktop, AI Chatbot + WMS links added |
 | `src/offeredServices/WebDev.tsx` | `/services/web` — bilingual FAQ, serviceSchema + offers, breadcrumbs |
-| `src/offeredServices/Marketing.tsx` | `/services/marketing` — bilingual FAQ, serviceSchema + offers, breadcrumbs, internal-link card → /services/production |
-| `src/offeredServices/Production.tsx` | `/services/production` (session 6) — photo/video/drone money-SEO page, NOT in navbar; serviceSchema+offers (placeholder prices)+faq+3-level breadcrumbs |
+| `src/offeredServices/Marketing.tsx` | `/services/marketing` with bilingual FAQ, service schema and links to marketing directions |
+| `src/offeredServices/Production.tsx` | `/services/production` with production services, pricing on consultation, FAQ and breadcrumbs |
 | `src/pages/AIChatbot.tsx` | `/services/ai-chatbot` — **redesigned (session 5)**: indigo/#060608 flat cards, strong H1, 3 platforms, shared FAQSection; serviceSchema + offers + faqForSchema |
 | `src/components/IndustryLinks.tsx` | service→industry cluster cards; used on WebDev + Marketing |
 | `src/service/cloudinary.ts` | unsigned Cloudinary image upload for the blog editor |
@@ -557,6 +554,5 @@ pages. S4 = Firestore blog + `/vifa-studio` editor + Cloudinary images. S5 = bra
 (Invento→VIFA), /privacy+/terms routes, prerender stale-blog fix, internal-linking cluster,
 AIChatbot redesign. S6 = `/services/production` photo/video/drone vertical (hidden from navbar) +
 Marketing/WebDev keyword enrichment. Firestore rules SET (blog live). Build = `22/22 routes OK`.
-**Next (not started):** Google Business Profile + backlinks (off-page, user) · CONFIRM production
-prices in `Production.tsx` (placeholder estimates) · per-page OG images · blog cadence.
+**Next (not started)** Google Business Profile and backlinks (off-page, user), per-page OG images and blog cadence.
 **Watch out for:** the Tailwind v4 `* { max-width:100% }` layer quirk (§ SESSION 5d / files map)._
