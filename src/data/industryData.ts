@@ -765,8 +765,8 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
         },
       ],
       packages: beautyWebPackages,
-      seoTitleKa: "სალონის ვებსაიტის დამზადება — ესთეტიკისა და სილამაზის ცენტრებისთვის",
-      seoTitleEn: "Beauty Salon Website Development — Booking & Catalog",
+      seoTitleKa: "სალონის ვებსაიტის დამზადება: ესთეტიკისა და სილამაზის ცენტრებისთვის",
+      seoTitleEn: "Beauty Salon Website Development: Booking & Catalog",
       seoDescriptionKa:
         "სილამაზის სალონისა და ესთეტიკის ცენტრის ვებსაიტის დამზადება ონლაინ ჩაწერით, Before/After გალერეით და 0% საკომისიოთი. ფასი 700₾-დან. უფასო კონსულტაცია.",
       seoDescriptionEn:
@@ -893,8 +893,8 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
         },
       ],
       packages: tourismWebPackages,
-      seoTitleKa: "სასტუმროს საიტის დამზადება — პირდაპირი ჯავშნები საკომისიოს გარეშე",
-      seoTitleEn: "Hotel Website Development — Direct Bookings, No Commission",
+      seoTitleKa: "სასტუმროს საიტის დამზადება: პირდაპირი ჯავშნები საკომისიოს გარეშე",
+      seoTitleEn: "Hotel Website Development: Direct Bookings, No Commission",
       seoDescriptionKa:
         "სასტუმროს საიტის დამზადება და ვებსაიტი კალენდარული ჯავშნის ფორმით, მრავალენოვანი ინტერფეისითა და SEO ოპტიმიზაციით. მიიღეთ პირდაპირი ჯავშნები. ფასი 700₾-დან.",
       seoDescriptionEn:
@@ -1020,12 +1020,12 @@ heroSublineKa: "თანამედროვე პლატფორმებ
         },
       ],
       packages: legalFinanceWebPackages, // <-- აქ ვუკავშირებთ ჩვენს ახალ 2-პაკეტიან მასივს
-      seoTitleKa: "იურიდიული კომპანიის საიტის დამზადება — ადვოკატებისა და ფინანსისტებისთვის",
-      seoTitleEn: "Law Firm Website Development — Legal & Finance",
+      seoTitleKa: "იურიდიული კომპანიის საიტის დამზადება: ადვოკატებისა და ფინანსისტებისთვის",
+      seoTitleEn: "Law Firm Website Development: Legal & Finance",
       seoDescriptionKa:
-        "იურიდიული და საფინანსო კომპანიის კორპორატიული საიტის დამზადება — დახურული კლიენტთა პორტალი, უსაფრთხო დოკუმენტბრუნვა და CMS. ფასი 700₾-დან.",
+        "იურიდიული და საფინანსო კომპანიის კორპორატიული საიტის დამზადება: დახურული კლიენტთა პორტალი, უსაფრთხო დოკუმენტბრუნვა და CMS. ფასი 700₾-დან.",
       seoDescriptionEn:
-        "Corporate website development for legal & finance firms — private client portal, secure document exchange and CMS. From 700₾. Free consultation.",
+        "Corporate website development for legal & finance firms: private client portal, secure document exchange and CMS. From 700₾. Free consultation.",
       introKa:
         "იურიდიულ და საფინანსო სფეროში მთავარი ვალუტა ნდობაა, და ის ციფრული პირველი შთაბეჭდილებიდან იწყება. იურიდიული კომპანიის საიტის დამზადება VIFA Digital-თან ნიშნავს პრემიუმ, სოლიდურ ვებსაიტს, რომელიც ხაზს უსვამს თქვენს სტატუსს, წარმოაჩენს გუნდს, სერვისებს და პარტნიორებს, რომელიც გაძლევთ უსაფრთხო კომუნიკაციის არხს.",
       introEn:
@@ -1147,8 +1147,8 @@ heroSublineKa: "თანამედროვე პლატფორმებ
         },
       ],
       packages: ecommerceWebPackages, // <--- აქ დავაკავშირეთ ახალი მასივი
-      seoTitleKa: "ონლაინ მაღაზიის დამზადება — eCommerce საიტი ქართული ბანკებით",
-      seoTitleEn: "Online Store Development — eCommerce with Georgian Banks",
+      seoTitleKa: "ონლაინ მაღაზიის დამზადება: eCommerce საიტი ქართული ბანკებით",
+      seoTitleEn: "Online Store Development: eCommerce with Georgian Banks",
       seoDescriptionKa:
         "ონლაინ მაღაზიის დამზადება ქართული ბანკების გადახდით, საწყობის მართვითა (WMS) და კურიერის ლეიბლების ავტომატიზაციით. ინტერნეტ მაღაზია 700₾-დან.",
       seoDescriptionEn:
@@ -1283,8 +1283,8 @@ heroSublineKa: "თანამედროვე პლატფორმებ
         },
       ],
       packages: foodWebPackages,
-      seoTitleKa: "რესტორნის საიტის დამზადება — ციფრული მენიუ და ჯავშნები",
-      seoTitleEn: "Restaurant Website Development — Digital Menu & Bookings",
+      seoTitleKa: "რესტორნის საიტის დამზადება: ციფრული მენიუ და ჯავშნები",
+      seoTitleEn: "Restaurant Website Development: Digital Menu & Bookings",
       seoDescriptionKa:
         "რესტორნის საიტის დამზადება ბრენდირებული ციფრული მენიუთი, მაგიდის ჯავშნის სისტემითა და მრავალენოვანი ინტერფეისით. რესტორნის ვებსაიტი 600₾-დან.",
       seoDescriptionEn:
@@ -1414,8 +1414,8 @@ heroSublineKa: "თანამედროვე პლატფორმებ
         },
       ],
       packages: marketingBeautyPackages,
-      seoTitleKa: "სილამაზის სალონის მარკეტინგი — SMM და რეკლამა ჩაწერებისთვის",
-      seoTitleEn: "Beauty Salon Marketing — SMM & Ads for Bookings",
+      seoTitleKa: "სილამაზის სალონის მარკეტინგი: SMM და რეკლამა ჩაწერებისთვის",
+      seoTitleEn: "Beauty Salon Marketing: SMM & Ads for Bookings",
       seoDescriptionKa:
         "სილამაზის სალონების სოციალური მედიის მართვა, ფოტოები, რილსები და რეკლამა მეტი ჩაწერისთვის. გვერდების მართვა 1000 ₾-დან თვეში.",
       seoDescriptionEn:
@@ -1532,8 +1532,8 @@ heroSublineKa: "თანამედროვე პლატფორმებ
         },
       ],
       packages: marketingTourismPackages,
-      seoTitleKa: "სასტუმროს მარკეტინგი — ტურიზმის ციფრული რეკლამა და კონტენტი",
-      seoTitleEn: "Hotel Marketing — Tourism Digital Ads & Content",
+      seoTitleKa: "სასტუმროს მარკეტინგი: ტურიზმის ციფრული რეკლამა და კონტენტი",
+      seoTitleEn: "Hotel Marketing: Tourism Digital Ads & Content",
       seoDescriptionKa:
         "სასტუმროებისა და ტურისტული ობიექტების სოციალური მედიის მართვა, გადაღება და რეკლამა. გვერდების მართვა 1000 ₾-დან თვეში.",
       seoDescriptionEn:
@@ -1650,8 +1650,8 @@ heroSublineKa: "თანამედროვე პლატფორმებ
         },
       ],
       packages: marketingLegalFinancePackages,
-      seoTitleKa: "იურიდიული მარკეტინგი — B2B ბრენდინგი და კორპორატიული იმიჯი",
-      seoTitleEn: "Legal & Finance Marketing — B2B Branding",
+      seoTitleKa: "იურიდიული მარკეტინგი: B2B ბრენდინგი და კორპორატიული იმიჯი",
+      seoTitleEn: "Legal & Finance Marketing: B2B Branding",
       seoDescriptionKa:
         "იურიდიული და საფინანსო კომპანიების სოციალური მედიის მართვა, ბრენდინგი და B2B მასალა. გვერდების მართვა 1000 ₾-დან თვეში.",
       seoDescriptionEn:
@@ -1764,8 +1764,8 @@ heroSublineKa: "თანამედროვე პლატფორმებ
         },
       ],
       packages: marketingRetailPackages,
-      seoTitleKa: "ონლაინ მაღაზიის მარკეტინგი — eCommerce რეკლამა და გაყიდვები",
-      seoTitleEn: "E-commerce Marketing — Online Store Ads & Sales",
+      seoTitleKa: "ონლაინ მაღაზიის მარკეტინგი: eCommerce რეკლამა და გაყიდვები",
+      seoTitleEn: "E-commerce Marketing: Online Store Ads & Sales",
       seoDescriptionKa:
         "სოციალური მედიის მართვა ონლაინ და საცალო მაღაზიებისთვის. პროდუქტის ფოტოები, ვიდეოები და გაყიდვების კამპანიები. მართვა 1000 ₾-დან თვეში.",
       seoDescriptionEn:
@@ -1878,8 +1878,8 @@ heroSublineKa: "თანამედროვე პლატფორმებ
         },
       ],
       packages: marketingFoodPackages,
-      seoTitleKa: "რესტორნის მარკეტინგი — Food კონტენტი და ლოკალური რეკლამა",
-      seoTitleEn: "Restaurant Marketing — Food Content & Local Ads",
+      seoTitleKa: "რესტორნის მარკეტინგი: Food კონტენტი და ლოკალური რეკლამა",
+      seoTitleEn: "Restaurant Marketing: Food Content & Local Ads",
       seoDescriptionKa:
         "რესტორნებისა და კაფეების სოციალური მედიის მართვა, მენიუს დიზაინი, კერძების გადაღება და ადგილობრივი რეკლამა. მართვა 1000 ₾-დან თვეში.",
       seoDescriptionEn:

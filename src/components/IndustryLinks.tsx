@@ -55,11 +55,11 @@ const IndustryLinks: React.FC<Props> = ({ service, className = "" }) => {
           const cfg = niches[slug];
           if (!cfg) return null;
           const Icon = ICON[slug];
-          // Keyword-rich anchor text (the part of the SEO title before "—"),
+          // Keyword-rich anchor text (the part of the SEO title before ":"),
           // e.g. "ონლაინ მაღაზიის დამზადება" instead of "retail" → stronger
           // internal-link signal for Google. Falls back to the niche name.
           const anchor =
-            (ka ? cfg.seoTitleKa : cfg.seoTitleEn).split("—")[0].trim() ||
+            (ka ? cfg.seoTitleKa : cfg.seoTitleEn).split(":")[0].trim() ||
             (ka ? cfg.nameKa : cfg.nameEn);
           return (
             <Link

@@ -35,7 +35,7 @@ const BlogIndex = () => {
   return (
     <EditorialPage activeLink="/blog">
       <SEO
-        title={ka ? "ბლოგი — ვებ დეველოპმენტი, მარკეტინგი, SEO" : "Blog — Web Development, Marketing, SEO"}
+        title={ka ? "ბლოგი: ვებ დეველოპმენტი, მარკეტინგი, SEO" : "Blog: Web Development, Marketing, SEO"}
         description={
           ka
             ? "VIFA Digital-ის ბლოგი: პრაქტიკული რჩევები ვებსაიტის დამზადებაზე, ციფრულ მარკეტინგზე, SEO-სა და ბიზნესის ციფრულ ზრდაზე."
