@@ -5,22 +5,14 @@ import DOMPurify from "dompurify";
 import { ArrowRight } from "lucide-react";
 import SEO from "../../components/SEO";
 import Breadcrumbs, { type Crumb } from "../../components/Breadcrumbs";
+import { SectionHeading } from "../../components/ui/SectionHeading";
 import { useLanguage } from "../../contexts/LanguageContext";
 import { getPostBySlug, getPublishedPosts } from "../../service/blogService";
 import type { BlogPost as BlogPostType } from "../../types/blog";
+import { BlogCard } from "./BlogCard";
+import { formatPostDate } from "./formatPostDate";
 
 const base = "https://vifadigital.ge";
-
-function formatDate(iso: string, ka: boolean) {
-  if (!iso) return "";
-  const d = new Date(iso);
-  if (isNaN(d.getTime())) return "";
-  return d.toLocaleDateString(ka ? "ka-GE" : "en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-}
 
 type LoadState = "loading" | "ready" | "notfound";
 
@@ -137,107 +129,85 @@ const BlogPost = () => {
         }}
       />
 
-      <article className="blog-article ed-wrap ed-reading">
+      <div className="it-col blog-route blog-article-route">
         <Breadcrumbs items={breadcrumbItems} className="mb-8" />
 
-        <div className="mb-4 flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.15em] ed-accent">
-          {post.tags.slice(0, 3).map((t) => (
-            <span key={t}>{t}</span>
-          ))}
-        </div>
-
-        <h1 className="mb-4 text-[1.7rem] font-bold leading-[1.3] tracking-tight ed-ink sm:text-3xl md:text-[2.1rem] md:leading-[1.25]">
-          {post.title}
-        </h1>
-
-        <div className="flex items-center gap-2.5 text-[13px] ed-muted">
-          <span>{post.author}</span>
-          <span className="h-1 w-1 rounded-full bg-gray-600" />
-          <time dateTime={post.publishedAt}>{formatDate(post.publishedAt, ka)}</time>
-        </div>
-
-        <div className="my-8 h-px w-full ed-rule" />
-
-        {post.coverImage && (
-          <img
-            src={post.coverImage}
-            alt={post.title}
-            className="mb-10 h-52 w-full rounded-xl border ed-border object-cover md:h-72"
-          />
-        )}
-
-        {/* Sanitized rich content */}
-        <div
-          className="blog-prose ed-prose"
-          dangerouslySetInnerHTML={{ __html: cleanHtml }}
-        />
-
-        {/* CTA */}
-        <div className="ed-card mt-12 p-5 sm:p-7">
-          <h2 className="mb-2 text-xl font-bold ed-ink md:text-2xl">
-            {ka ? "მზად ხართ თქვენი პროექტისთვის?" : "Ready to start your project?"}
-          </h2>
-          <p className="font-georgian-body mb-5 text-[15px] leading-[1.8] ed-muted">
-            {ka
-              ? "VIFA Digital დაგეხმარებათ ვებსაიტის დამზადებაში, ციფრულ მარკეტინგსა და SEO-ში. უფასო კონსულტაცია."
-              : "VIFA Digital helps with website development, digital marketing and SEO. Free consultation."}
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <Link
-              to="/services/web"
-              className="it-pill-button gap-2"
-            >
-              {ka ? "ვებ დეველოპმენტი" : "Web Development"}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              to="/services/marketing"
-              className="it-pill-button gap-2"
-            >
-              {ka ? "ციფრული მარკეტინგი" : "Digital Marketing"}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              to="/contact"
-              className="it-pill-button gap-2"
-            >
-              {ka ? "კონტაქტი" : "Contact"}
-            </Link>
+        <article className="blog-article">
+          <div className="mb-4 flex flex-wrap items-center gap-2">
+            {post.tags.slice(0, 3).map((t) => (
+              <span key={t} className="blog-card-chip">{t}</span>
+            ))}
           </div>
-        </div>
 
-        {/* Related articles (internal linking) */}
-        {related.length > 0 && (
-          <div className="mt-16 border-t ed-border pt-10">
-            <h2 className="mb-6 text-xl font-bold ed-ink">
-              {ka ? "სხვა სტატიები" : "More articles"}
+          <h1 className="mb-4 text-[1.7rem] font-bold leading-[1.3] tracking-tight ed-ink sm:text-3xl md:text-[2.1rem] md:leading-[1.25]">
+            {post.title}
+          </h1>
+
+          <div className="flex items-center gap-2.5 text-[13px] ed-muted">
+            <span>{post.author}</span>
+            <span className="h-1 w-1 rounded-full bg-gray-600" />
+            <time dateTime={post.publishedAt}>{formatPostDate(post.publishedAt, currentLanguage)}</time>
+          </div>
+
+          <div className="my-8 h-px w-full ed-rule" />
+
+          {post.coverImage && (
+            <img
+              src={post.coverImage}
+              alt={post.title}
+              className="mb-10 h-52 w-full rounded-xl border ed-border object-cover md:h-72"
+            />
+          )}
+
+          {/* Sanitized rich content */}
+          <div
+            className="blog-prose ed-prose"
+            dangerouslySetInnerHTML={{ __html: cleanHtml }}
+          />
+
+          {/* CTA */}
+          <div className="ed-card mt-12 p-5 sm:p-7">
+            <h2 className="mb-2 text-xl font-bold ed-ink md:text-2xl">
+              {ka ? "მზად ხართ თქვენი პროექტისთვის?" : "Ready to start your project?"}
             </h2>
-            <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3">
-              {related.map((r) => (
-                <Link
-                  key={r.id}
-                  to={`/blog/${r.slug}`}
-                  className="group ed-card ed-blog-card flex h-full flex-col overflow-hidden"
-                >
-                  {r.coverImage && (
-                    <div className="aspect-[16/9] w-full overflow-hidden ed-tint">
-                      <img
-                        src={r.coverImage}
-                        alt={r.title}
-                        loading="lazy"
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    </div>
-                  )}
-                  <div className="flex flex-1 flex-col p-4">
-                    <h3 className="mb-1 line-clamp-2 text-[15px] font-semibold ed-ink group-hover:underline">
-                      {r.title}
-                    </h3>
-                    <span className="mt-auto pt-2 text-xs ed-muted">
-                      {formatDate(r.publishedAt, ka)}
-                    </span>
-                  </div>
-                </Link>
+            <p className="font-georgian-body mb-5 text-[15px] leading-[1.8] ed-muted">
+              {ka
+                ? "VIFA Digital დაგეხმარებათ ვებსაიტის დამზადებაში, ციფრულ მარკეტინგსა და SEO-ში. უფასო კონსულტაცია."
+                : "VIFA Digital helps with website development, digital marketing and SEO. Free consultation."}
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                to="/services/web"
+                className="it-pill-button gap-2"
+              >
+                {ka ? "ვებ დეველოპმენტი" : "Web Development"}
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                to="/services/marketing"
+                className="it-pill-button gap-2"
+              >
+                {ka ? "ციფრული მარკეტინგი" : "Digital Marketing"}
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                to="/contact"
+                className="it-pill-button gap-2"
+              >
+                {ka ? "კონტაქტი" : "Contact"}
+              </Link>
+            </div>
+          </div>
+        </article>
+
+        {related.length > 0 && (
+          <section className="blog-related" aria-labelledby="blog-related-title">
+            <SectionHeading id="blog-related-title">
+              {ka ? "სხვა სტატიები" : "More articles"}
+            </SectionHeading>
+            <div className="blog-card-grid">
+              {related.map((relatedPost) => (
+                <BlogCard key={relatedPost.id} post={relatedPost} language={currentLanguage} headingAs="h3" />
               ))}
             </div>
             <Link
@@ -247,9 +217,9 @@ const BlogPost = () => {
               {ka ? "ყველა სტატია" : "All articles"}
               <ArrowRight className="h-4 w-4" />
             </Link>
-          </div>
+          </section>
         )}
-      </article>
+      </div>
     </EditorialPage>
   );
 };

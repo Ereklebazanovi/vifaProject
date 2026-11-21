@@ -247,7 +247,7 @@ async function run() {
       if (route.startsWith('/blog/')) {
         await page.waitForSelector('.blog-article .blog-prose', { timeout: 20000 });
       } else if (route === '/blog' && blogPosts.length) {
-        await page.waitForSelector('.ed-blog-card', { timeout: 20000 });
+        await page.waitForSelector('.blog-card', { timeout: 20000 });
       }
 
       // Strip analytics/pixel scripts that GA/FB useEffects injected into <head>.

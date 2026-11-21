@@ -1,286 +1,49 @@
-"use client";
-
-import { EditorialPage } from "../components/ui/EditorialPage";
-import type React from "react";
-import { useEffect, useRef } from "react";
-import {
-  FaBullseye,
-  FaChartLine,
-  FaQuoteLeft,
-  FaLayerGroup,
-  FaChevronLeft,
-  FaChevronRight,
-} from "react-icons/fa";
 import SEO from "../components/SEO";
+import { whatsappUrlFor } from "../components/FloatingContact";
+import { ContactBlock } from "../components/ui/ContactBlock";
+import { EditorialPage } from "../components/ui/EditorialPage";
+import { HowWeStart } from "../components/ui/HowWeStart";
+import { SectionHeading } from "../components/ui/SectionHeading";
 import { useLanguage } from "../contexts/LanguageContext";
-import { useLanguageTransition } from "../hooks/useLanguageTransition";
-
 import { useShorts } from "../hooks/useShorts";
+import { HomeDirections, HomeProducts, HomeTrust } from "./HomeSections";
+import { HomeWorkShowcases } from "./HomeWorkShowcases";
 
-// AboutPage Translations
-const aboutPageTranslations = {
+const metadata = {
   ka: {
-    "seo.about.title": "ჩვენ შესახებ",
-    "seo.about.description": "VIFA - ტექნოლოგიური და კრეატიული სააგენტო. ციფრული ტრანსფორმაცია, ვებ დეველოპმენტი, მარკეტინგი და ქონთენთ პროდუქცია.",
-    "seo.about.keywords": "VIFA, სააგენტო, ციფრული მარკეტინგი, ვებ დეველოპმენტი, ფოტო ვიდეო გადაღება, საქართველო",
-    
-    "about.hero.title": "ჩვენს შესახებ",
-    "about.hero.subtitle": "ციფრული ტრანსფორმაციის სააგენტო",
-    
-    "about.intro.p1": "VIFA წარმოადგენს ტექნოლოგიურ და კრეატიულ სააგენტოს, რომელიც 2020 წლიდან აქტიურად პოზიციონირებს ქართულ ბაზარზე. ჩვენი საქმიანობის მთავარი პრიორიტეტია ადგილობრივი ბიზნესების ციფრული ტრანსფორმაცია და მათი პოტენციალის რეალურ წარმატებად გარდაქმნა.",
-    "about.intro.p2": "დაარსების დღიდან, VIFA-მ წარმატებით განახორციელა მრავალი კომპლექსური პროექტი სხვადასხვა ინდუსტრიაში - მათ შორის ტურიზმის, სილამაზისა და ჯანმრთელობის, რითეილისა და B2B სექტორებში. ჩვენი გუნდი აერთიანებს მაღალი კვალიფიკაციის მქონე ექსპერტებს, რომლებიც ორიენტირებულნი არიან არა მხოლოდ პროექტის ვიზუალურ ან ტექნიკურ სრულყოფაზე, არამედ პარტნიორი კომპანიების გრძელვადიან ეკონომიკურ პროგრესზე.",
-    
-    "about.philosophy.title": "ჩვენი მიდგომა",
-    "about.philosophy.quote": "ვქმნით სისტემებს, რომლებიც მუშაობს.",
-    "about.philosophy.desc": "ჩვენი სამუშაო პროცესი პრაგმატულია. იქნება ეს ტექნიკური არქიტექტურის შექმნა, ბრენდინგი თუ მარკეტინგული კამპანია, ყველაფერი ემსახურება ერთ მიზანს: მომხმარებლის იდეალურ გამოცდილებას და ბიზნესის ზრდას. ვმუშაობთ ზედმეტი ბიუროკრატიისა და შაბლონების გარეშე.",
-    
-    "about.why.title": "რატომ VIFA?",
-    "about.why.exp.title": "პრაქტიკული გამოცდილება",
-    "about.why.exp.desc": "2020 წლიდან ვმუშაობთ რეალურ პროექტებზე. ჩვენ არ ვიყენებთ შაბლონურ მეთოდებს - ვაანალიზებთ თქვენს სპეციფიკას და ვქმნით იმას, რაც ზუსტად ახლა სჭირდება თქვენს ბიზნესს.",
-    "about.why.fullservice.title": "360° ციფრული მხარდაჭერა",
-    "about.why.fullservice.desc": "ვებ-დეველოპმენტი, სოციალური მედიის მართვა, ციფრული რეკლამა და პროფესიონალური ფოტო/ვიდეო პროდუქცია - ყველაფერი ერთ სივრცეში, ბრენდის ერთიანი და ეფექტური კომუნიკაციისთვის.",
-    "about.why.results.title": "გაზომვადი შედეგები",
-    "about.why.results.desc": "არ ვქმნით პროდუქტს მხოლოდ ვიზუალისთვის. ჩვენი მიზანია კონვერსიის ზრდა, ოპერაციების გამარტივება და რეალური ბიზნეს-ღირებულების შექმნა.",
-    
-    "about.portfolio.title": "პორტფოლიო",
-    "about.portfolio.subtitle": "ჩვენი წარმატებული პროექტები",
-    "about.portfolio.swipe": "გასქროლეთ ვიდეოების სანახავად",
-
-    "about.outro": "დღეს VIFA არის თქვენი სტრატეგიული პარტნიორი ციფრული განვითარების გზაზე, რომელიც გეხმარებათ იდეების რეალურ ბიზნეს შედეგებად გარდაქმნაში.",
-    "about.cta.button": "დაიწყე პროექტი",
+    title: "ჩვენ შესახებ",
+    description: "VIFA - ტექნოლოგიური და კრეატიული სააგენტო. ციფრული ტრანსფორმაცია, ვებ დეველოპმენტი, მარკეტინგი და ქონთენთ პროდუქცია.",
   },
   en: {
-    "seo.about.title": "About Us",
-    "seo.about.description": "VIFA - Technology and Creative Agency. Digital transformation, web development, marketing, and content production.",
-    "seo.about.keywords": "VIFA, creative agency, digital marketing, web development, photo video production, Georgia",
-    
-    "about.hero.title": "About Us",
-    "about.hero.subtitle": "Digital Transformation Agency",
-    
-    "about.intro.p1": "VIFA is a technological and creative agency that has been actively positioning itself in the Georgian market since 2020. Our main priority is the digital transformation of local businesses and converting their potential into real success.",
-    "about.intro.p2": "Since its inception, VIFA has successfully executed numerous complex projects across various industries - including tourism, health and beauty, retail, and B2B sectors. Our team brings together highly qualified experts who focus not only on the visual or technical perfection of the project but also on the long-term economic progress of our partner companies.",
-    
-    "about.philosophy.title": "Our Approach",
-    "about.philosophy.quote": "We build systems that work.",
-    "about.philosophy.desc": "Our workflow is pragmatic. Whether it's building technical architecture, branding, or a marketing campaign, everything serves one goal: an ideal user experience and continuous business growth. We work without unnecessary bureaucracy or templates.",
-    
-    "about.why.title": "Why VIFA?",
-    "about.why.exp.title": "Practical Experience",
-    "about.why.exp.desc": "Working on real projects since 2020. We don't use template methods - we analyze your specifics and build exactly what your business needs right now.",
-    "about.why.fullservice.title": "360° Digital Support",
-    "about.why.fullservice.desc": "Web development, social media management, digital advertising, and professional photo/video production - everything in one place for your brand's unified and effective communication.",
-    "about.why.results.title": "Measurable Results",
-    "about.why.results.desc": "We don't create products just for aesthetics. Our goal is to increase conversion, streamline operations, and create real business value.",
-    
-    "about.portfolio.title": "Portfolio",
-    "about.portfolio.subtitle": "Our Successful Projects",
-    "about.portfolio.swipe": "Swipe to see videos",
-
-    "about.outro": "Today, VIFA is your strategic partner on the path to digital development, helping you transform ideas into real business results.",
-    "about.cta.button": "Start Project",
+    title: "About Us",
+    description: "VIFA - Technology and Creative Agency. Digital transformation, web development, marketing, and content production.",
   },
 };
 
-const AboutPage: React.FC = () => {
-  const { currentLanguage } = useLanguage();
-  const { getTransitionClasses } = useLanguageTransition();
-  const shortsRowRef = useRef<HTMLDivElement>(null);
+export default function AboutPage() {
+  const { currentLanguage: language } = useLanguage();
+  const ka = language === "ka";
   const shorts = useShorts();
-
-  const scrollShorts = (dir: 1 | -1) => {
-    shortsRowRef.current?.scrollBy({
-      left: dir * 600,
-      behavior: "smooth",
-    });
-  };
-
-  const t = (key: string): string => {
-    const translations = aboutPageTranslations[currentLanguage as keyof typeof aboutPageTranslations] as Record<string, string>;
-    return translations[key] || key;
-  };
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  const whyVifaFeatures = [
-    {
-      icon: <FaChartLine />,
-      color: "text-blue-400",
-      titleKey: "about.why.exp.title",
-      descKey: "about.why.exp.desc",
-    },
-    {
-      icon: <FaLayerGroup />,
-      color: "text-purple-400",
-      titleKey: "about.why.fullservice.title",
-      descKey: "about.why.fullservice.desc",
-    },
-    {
-      icon: <FaBullseye />,
-      color: "text-emerald-400",
-      titleKey: "about.why.results.title",
-      descKey: "about.why.results.desc",
-    },
-  ];
+  const whatsappHref = whatsappUrlFor("/about");
 
   return (
     <EditorialPage activeLink="/about">
-      <SEO
-        title={t("seo.about.title")}
-        description={t("seo.about.description")}
-        url="https://vifadigital.ge/about"
-      />
-
-      <div className={`ed-wrap ${getTransitionClasses()}`}>
-        <div>
-          
-          {/* ── 1. Hero & Intro ── */}
-          <div className="ed-about-intro text-center ed-section-gap">
-            <span className="text-sm uppercase tracking-widest ed-muted font-semibold mb-4 block">
-              {t("about.hero.subtitle")}
-            </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold ed-ink tracking-tight mb-10">
-              {t("about.hero.title")}
-            </h1>
-            
-            <div className="space-y-6 text-base sm:text-lg ed-muted leading-relaxed text-start sm:text-center">
-              <p>{t("about.intro.p1")}</p>
-              <p>{t("about.intro.p2")}</p>
-            </div>
-          </div>
-
-          {/* ── 2. Philosophy ── */}
-          <div
-            className="max-w-5xl mx-auto ed-section-gap"
-          >
-            <div className="ed-card p-6 sm:p-12">
-              
-              <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center md:items-start text-center md:text-left">
-                <div className="text-4xl sm:text-5xl ed-accent shrink-0">
-                  <FaQuoteLeft />
-                </div>
-                <div>
-                  <h3 className="text-sm font-mono ed-muted uppercase tracking-widest mb-4">
-                    {t("about.philosophy.title")}
-                  </h3>
-                  <p className="text-2xl sm:text-3xl font-medium ed-ink leading-tight mb-4 italic">
-                    "{t("about.philosophy.quote")}"
-                  </p>
-                  <p className="ed-muted leading-relaxed max-w-2xl">
-                    {t("about.philosophy.desc")}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* ── 3. Why VIFA? (Bento Grid) ── */}
-          <div className="max-w-6xl mx-auto ed-section-gap">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold ed-ink">
-                {t("about.why.title")}
-              </h2>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-6">
-              {whyVifaFeatures.map((feature, idx) => (
-                <div
-                  key={idx}
-                  className="ed-card p-6 sm:p-8"
-                >
-                  <div className={`text-2xl mb-6 ${feature.color}`}>
-                    {feature.icon}
-                  </div>
-                  <h3 className="text-xl font-medium ed-ink mb-3">
-                    {t(feature.titleKey)}
-                  </h3>
-                  <p className="ed-muted text-sm leading-relaxed">
-                    {t(feature.descKey)}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* ── 4. Portfolio Shorts (Design Matched to Vifa) ── */}
-          <div className="max-w-7xl mx-auto ed-section-gap">
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-              <div className="text-center md:text-left">
-                <h2 className="text-3xl font-bold ed-ink mb-3">
-                  {t("about.portfolio.title")}
-                </h2>
-                <p className="ed-muted">
-                  {t("about.portfolio.subtitle")}
-                </p>
-              </div>
-              <div className="hidden md:flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => scrollShorts(-1)}
-                  className="flex h-10 w-10 items-center justify-center ed-control"
-                  aria-label="Previous videos"
-                >
-                  <FaChevronLeft className="h-4 w-4" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => scrollShorts(1)}
-                  className="flex h-10 w-10 items-center justify-center ed-control"
-                  aria-label="Next videos"
-                >
-                  <FaChevronRight className="h-4 w-4" />
-                </button>
-              </div>
-            </div>
-
-            {/* Horizontal Scrollable Container */}
-            <div className="relative">
-              <div
-                ref={shortsRowRef}
-                className="flex gap-6 overflow-x-auto pb-8 scroll-smooth scrollbar-hide snap-x px-4 sm:px-0"
-                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-              >
-                <style dangerouslySetInnerHTML={{ __html: `.scrollbar-hide::-webkit-scrollbar { display: none; }` }} />
-
-                {shorts.map((videoId, idx) => (
-                  <div
-                    key={videoId}
-                    className="ed-reel snap-center"
-                  >
-                    <iframe
-                      src={`https://www.youtube.com/embed/${videoId}`}
-                      title={`Portfolio Short ${idx + 1}`}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full"
-                      loading="lazy"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="text-center mt-2 md:hidden">
-              <p className="ed-muted text-xs">
-                {t("about.portfolio.swipe")}
-              </p>
-            </div>
-          </div>
-
-          {/* ── 5. Outro & CTA ── */}
-          <div className="ed-about-intro ed-cta text-center">
-            <p className="text-lg sm:text-xl ed-muted leading-relaxed mb-10">
-              {t("about.outro")}
-            </p>
-           
-          </div>
-
-        </div>
-      </div>
+      <SEO {...metadata[language]} url="https://vifadigital.ge/about" />
+      <header className="it-col ed-hub-heading ed-about-heading">
+        <SectionHeading as="h1">{ka ? "ჩვენ შესახებ" : "About us"}</SectionHeading>
+        <p>{ka
+          ? "ბიზნესებს ვეხმარებით ვებსაიტების შექმნაში, მართვის სისტემების დანერგვასა და მარკეტინგში."
+          : "We help businesses build websites, set up management software and run their marketing."}</p>
+        <p>{ka
+          ? "VIFA 2020 წლიდან მუშაობს. საიტს, პროგრამას და მარკეტინგს ერთი გუნდი აკეთებს, ამიტომ სხვადასხვა სააგენტოს ძებნა არ გიწევთ. ვმუშაობთ ტურიზმის, სილამაზისა და ჯანმრთელობის, ვაჭრობისა და B2B კომპანიებთან."
+          : "VIFA has been working since 2020. One team handles the website, the software and the marketing, so you don't need to look for separate agencies. We work with companies in tourism, beauty and health, retail and B2B."}</p>
+      </header>
+      <HomeTrust language={language} />
+      <HomeDirections language={language} />
+      <HomeProducts language={language} />
+      <HomeWorkShowcases language={language} shorts={shorts} />
+      <HowWeStart language={language} showActions={false} showExamples={false} />
+      <ContactBlock language={language} whatsappHref={whatsappHref} />
     </EditorialPage>
   );
-};
-
-export default AboutPage;
+}

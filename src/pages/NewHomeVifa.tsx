@@ -3,21 +3,16 @@ import SEO from "../components/SEO";
 import { ContactBlock } from "../components/ui/ContactBlock";
 import { LightPage } from "../components/ui/LightPage";
 import { PageLink } from "../components/ui/PageLink";
-import { SectionHeading } from "../components/ui/SectionHeading";
-import { ServiceCard } from "../components/ui/ServiceCard";
 import { SiteFooter } from "../components/ui/SiteFooter";
 import { SiteNav } from "../components/ui/SiteNav";
 import { useLanguage } from "../contexts/LanguageContext";
-import { inventoScreenshots } from "../data/inventoScreenshots";
-import { itHref, itServices } from "../data/itServices";
-import { foodPhoto } from "../data/marketingMedia";
+import { itHref } from "../data/itServices";
 import { marketingHubHref } from "../data/marketingServices";
 import { useShorts } from "../hooks/useShorts";
-import { WebsiteDemoObject } from "./preview/ProductDevices";
 import { HomeBlog } from "./HomeBlog";
+import { HomeDirections, HomeProducts, HomeTrust } from "./HomeSections";
 import { HomeWorkShowcases } from "./HomeWorkShowcases";
 import "./preview/hubSections.css";
-import "./homeVifa.css";
 
 const metadata = {
   ka: {
@@ -31,7 +26,6 @@ const metadata = {
 };
 
 const showTrustStats = import.meta.env.VITE_SHOW_HOME_TRUST_STATS !== "false";
-const marketingPhotos = [5, 10, 11].map(foodPhoto);
 
 function HomeWordmark() {
   const vifaRef = useRef<HTMLSpanElement>(null);
@@ -107,52 +101,10 @@ export default function NewHomeVifa() {
         </div>
       </section>
 
-      <section id="directions" className="it-col home-direction-grid" aria-label={ka ? "მიმართულებები" : "Directions"}>
-        <ServiceCard headingAs="h2" product="web" title={itTitle} to={itHref}
-          body={ka ? "ვებსაიტები, AI ჩატბოტები და მართვის სისტემები." : "Websites, AI chatbots and business software."}>
-          <div className="home-web-preview" aria-hidden="true"><WebsiteDemoObject step={1} language={language} /></div>
-        </ServiceCard>
-        <ServiceCard headingAs="h2" product="production" title={ka ? "მარკეტინგი" : "Marketing"} to={marketingHubHref}
-          body={ka ? "სოციალური მედია, რეკლამა, გადაღება და ბრენდინგი." : "Social media, advertising, production and branding."}>
-          <div className="home-marketing-photos" aria-hidden="true">
-            {marketingPhotos.map(photo => <img key={photo.src} src={photo.srcSm} alt="" width={photo.w} height={photo.h}
-              loading="lazy" decoding="async" />)}
-          </div>
-        </ServiceCard>
-      </section>
-
+      <HomeDirections language={language} />
       <HomeWorkShowcases language={language} shorts={shorts} />
-
-      <section className="it-section it-col home-section" aria-labelledby="home-products">
-        <SectionHeading id="home-products">{ka ? "ჩვენი პროდუქტები" : "Our products"}</SectionHeading>
-        <div className="home-product-grid">
-          <ServiceCard product="invento" title="Invento WMS" to={itServices.invento.href} body={itServices.invento[language].body}>
-            <div className="home-invento-screen"><div className="home-browser-top"><i /><i /><i /></div>
-              <img src={inventoScreenshots.inventory} alt={ka ? "Invento WMS-ის მარაგების ეკრანი" : "Invento WMS inventory screen"}
-                width={1440} height={900} loading="lazy" decoding="async" />
-            </div>
-          </ServiceCard>
-          <ServiceCard product="lineup" title="LineUp" to={itServices.lineup.href} body={ka
-            ? "სპორტული აკადემიების მართვის აპი, რომელსაც რუსთავის კალათბურთის აკადემია იყენებს."
-            : "Sports academy management software used by Rustavi Basketball Academy."}>
-            <div className="home-lineup-screens">
-              <img src="/preview/lineup-store-teams.webp" alt={ka ? "LineUp-ის გუნდების სია" : "LineUp team list"}
-                width={540} height={1170} loading="lazy" decoding="async" />
-              <img src="/preview/lineup-store-calendar.webp" alt={ka ? "LineUp-ის კალენდარი" : "LineUp calendar"}
-                width={540} height={1170} loading="lazy" decoding="async" />
-            </div>
-          </ServiceCard>
-        </div>
-      </section>
-
-      {showTrustStats && <ul className="it-col home-trust" role="list">
-        <li><span><strong>5+</strong> {ka ? "წელი" : "years"}</span></li>
-        <li><span>{ka ? "მრავალი მიმართულება, ერთი გუნდი" : "Many services, one team"}</span></li>
-        <li>
-          <span><strong>2</strong> {ka ? "საკუთარი პროდუქტი" : "products of our own"}</span>
-          <small>Invento WMS, LineUp</small>
-        </li>
-      </ul>}
+      <HomeProducts language={language} />
+      {showTrustStats && <HomeTrust language={language} />}
 
       <HomeBlog language={language} />
       <ContactBlock whatsappHref={whatsappHref} language={language} />
