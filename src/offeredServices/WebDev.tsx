@@ -194,7 +194,7 @@ const timelines = {
 } as const;
 
 const { lifeStore, all4kids, darchiaPartners, geoMarti, adressRealty, geoTechnic, legard } = webProjects;
-const featuredProjects = [all4kids, lifeStore, darchiaPartners, adressRealty, geoMarti, geoTechnic, legard];
+const featuredProjects = [all4kids, geoMarti, darchiaPartners, adressRealty, geoTechnic, legard, lifeStore];
 
 const englishDetails: FAQItem[] = [
   {

@@ -16,12 +16,20 @@ export function BlogCard({ post, language, featured = false, headingAs: Heading 
   return (
     <article className="blog-card" data-featured={featured || undefined}>
       <PageLink to={`/blog/${post.slug}`} className="blog-card-link">
-        <span className="blog-card-chip">{category}</span>
-        <Heading>{post.title}</Heading>
-        <p>{post.description}</p>
-        <div className="blog-card-foot">
-          {date && <time dateTime={post.publishedAt}>{date}</time>}
-          <ArrowUpRight size={19} aria-hidden="true" />
+        {post.coverImage && (
+          <div className="blog-card-cover">
+            {/* The title sits right below, so the cover is decorative. */}
+            <img src={post.coverImage} alt="" loading={featured ? "eager" : "lazy"} decoding="async" />
+          </div>
+        )}
+        <div className="blog-card-body">
+          <span className="blog-card-chip">{category}</span>
+          <Heading>{post.title}</Heading>
+          <p>{post.description}</p>
+          <div className="blog-card-foot">
+            {date && <time dateTime={post.publishedAt}>{date}</time>}
+            <ArrowUpRight size={19} aria-hidden="true" />
+          </div>
         </div>
       </PageLink>
     </article>

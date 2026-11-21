@@ -115,9 +115,9 @@ export const webIndustryCopy: Record<WebIndustrySlug, {
         copy("მომხმარებელთა ბაზა", "Customer database")),
     ],
     projects: [
-      webProjects.lifeStore,
       { ...webProjects.all4kids, category: copy("საბავშვო მარკეტპლეისი", "Kids’ marketplace") },
       { ...webProjects.geoMarti, category: copy("ტექნიკის ონლაინ მაღაზია", "Online appliance store") },
+      webProjects.lifeStore,
     ],
     questions: {
       ka: ["რა ღირს ონლაინ მაღაზია?", "რამდენ ხანში მზადდება?", "შეიძლება ბარათით გადახდა?", "როგორ ვმართავ მარაგსა და კურიერებს?", "მობილურზე სწრაფად იმუშავებს?"],
