@@ -1,25 +1,108 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
-import Navbar from './ImprovedNavbar';
-import Footer from './ImprovedFooter';
-import { useTheme } from '../contexts/ThemeContext';
-
+import React, { useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
+import { useNavigation } from '../contexts/NavigationContext';
+import { facebookPixel } from '../utils/facebookPixel';
 const Layout: React.FC = () => {
-  const { isDarkMode } = useTheme();
+  const { stopNavigation } = useNavigation();
+  const location = useLocation();
+  // Determine if current route should show Invento branding
+  const isInventoRoute = () => {
+    const path = location.pathname;
+    const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
 
-  return (
-    <div className={`min-h-screen transition-colors duration-500 ${
-      isDarkMode 
-        ? 'bg-slate-950 text-white' 
-        : 'bg-white text-slate-900'
-    }`}>
-      <Navbar />
-      <main>
-        <Outlet />
-      </main>
-      <Footer />
-    </div>
-  );
+    // If we're on inventogeo.com domain, show Invento branding
+    if (hostname.includes('inventogeo.com')) return true;
+
+    // For specific routes, show Invento branding
+    return path.includes('/services/web-development') ||
+           path.includes('/services/ai-chatbot') ||
+           path.includes('/inventowms') ||
+           path === '/';
+  };
+
+  const isVifaRoute = () => {
+    const path = location.pathname;
+    const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+
+    // If we're on vifadigital.ge domain, show VIFA branding
+    if (hostname.includes('vifadigital.ge')) return true;
+
+    // For specific routes, show VIFA branding
+    return path.includes('/services/digital-advertising') ||
+           path.includes('/about');
+  };
+
+  // Update favicon based on current route
+  useEffect(() => {
+    const favicon = document.querySelector('link[rel="icon"]') as HTMLLinkElement;
+    const appleTouchIcon = document.querySelector('link[rel="apple-touch-icon"]') as HTMLLinkElement;
+
+    const iconPath = isInventoRoute() && !isVifaRoute() ? '/invento.png' : '/viffa.png';
+
+    if (favicon) {
+      favicon.href = iconPath;
+    }
+    if (appleTouchIcon) {
+      appleTouchIcon.href = iconPath;
+    }
+  }, [location.pathname]);
+
+  // Also stop manual navigation state
+  useEffect(() => {
+    stopNavigation();
+  }, [location.pathname, stopNavigation]);
+
+  // Remember which ad or partner link brought this visit (utm_* / ref on the landing
+  // URL), so a form filled three pages later still says where the person came from.
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "ref"];
+      const found: Record<string, string> = Object.fromEntries(keys.map((k) => [k, params.get(k) || ""]).filter(([, v]) => v));
+      // Ad clicks without our tags still carry the network's click id.
+      if (!found.utm_source && params.get("gclid")) Object.assign(found, { utm_source: "google", utm_medium: "cpc" });
+      if (!found.utm_source && params.get("fbclid")) found.utm_source = "facebook";
+      if (Object.keys(found).length) sessionStorage.setItem("vifa_utm", JSON.stringify(found));
+      // No tags at all: keep the site that sent the visitor (www.google.com, l.facebook.com...).
+      else if (!sessionStorage.getItem("vifa_utm") && document.referrer) {
+        const host = new URL(document.referrer).hostname;
+        if (host && host !== window.location.hostname) sessionStorage.setItem("vifa_utm", JSON.stringify({ referrer: host }));
+      }
+    } catch {
+      // Storage blocked (private mode etc.): the form simply sends no UTM.
+    }
+  }, []);
+
+  // Global WhatsApp click tracker. One delegated listener captures every wa.me
+  // link click site-wide, fires a Meta Pixel "Contact" event with the source
+  // path so Meta's ad algorithm can optimize for real conversions (not just
+  // PageViews). Without this, low-budget conversion campaigns burn money on
+  // cold traffic Meta can't tell apart from genuine leads.
+  // The same click is also sent to GA4 as `generate_lead`, so every WhatsApp
+  // lead can be traced back to its traffic source (Google organic, Facebook,
+  // direct...) and the page it came from. Mark it as a Key Event in GA4.
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      const link = target?.closest?.('a[href*="wa.me"]') as HTMLAnchorElement | null;
+      if (!link) return;
+      facebookPixel.trackStandardEvent('Contact', {
+        content_name: 'whatsapp_click',
+        content_category: window.location.pathname,
+      });
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'generate_lead', {
+          method: 'whatsapp',
+          lead_page: window.location.pathname,
+          link_url: link.href,
+        });
+      }
+    };
+    document.addEventListener('click', onClick, true);
+    return () => document.removeEventListener('click', onClick, true);
+  }, []);
+
+  return <Outlet />;
 };
 
 export default Layout;

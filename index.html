@@ -1,10 +1,25 @@
 <!doctype html>
-<html lang="en">
+<html lang="ka">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vifa.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    <meta name="theme-color" content="#0f172a" />
+
+    <!-- Favicon and Icons (non-helmet-managed) -->
+    <link rel="icon" type="image/png" href="/viffa.png" />
+    <link rel="apple-touch-icon" href="/viffa.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Facebook Domain Verification (not managed by react-helmet) -->
+    <meta name="facebook-domain-verification" content="sx9158rhzb5dowtu020etn5xcjnl14" />
+
+    <!--
+      All SEO-relevant tags (title, description, canonical, Open Graph, Twitter,
+      JSON-LD, hreflang) are injected per-route by react-helmet-async (src/components/SEO.tsx)
+      and baked into static HTML at build time by scripts/prerender.js.
+      Do NOT hardcode them here — duplicates create conflicting canonicals.
+    -->
+    <title>VIFA Digital</title>
   </head>
   <body>
     <div id="root"></div>

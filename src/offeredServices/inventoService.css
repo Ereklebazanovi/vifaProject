@@ -1,0 +1,65 @@
+.invento-hero-price {
+  flex-basis: 100%;
+  font-size: clamp(19px, 2.2vw, 25px);
+  font-weight: 600;
+}
+
+.invento-service .invento-section { padding-block: 36px 48px; }
+.invento-service #pricing { scroll-margin-top: 64px; }
+
+.invento-feature-grid, .invento-plans {
+  display: grid;
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.invento-feature-grid .it-service-package, .invento-plans .it-service-package { padding: 22px; }
+.invento-feature-grid .it-card-title { font-size: clamp(20px, 2vw, 26px); }
+.invento-plans .it-card-title { font-size: clamp(18px, 2vw, 22px); }
+.invento-plans .it-card-body { font-size: 15px; }
+.invento-service .it-screenshot-caption { color: var(--it-text); }
+.invento-feature-grid .it-service-package .it-card-top { padding-bottom: 0; }
+.invento-feature-grid .it-card-body { margin-block: 6px 15px; }
+
+.invento-feature-visual {
+  --it-detail-max-height: 214px;
+  display: grid;
+  place-items: center;
+  flex: 1;
+  min-height: 176px;
+  padding: 12px;
+  border-radius: 14px;
+  background: #f2f5f3;
+}
+
+.invento-plan-price, .invento-plan-period { display: block; }
+.invento-plan-price { color: var(--it-text); font-size: clamp(28px, 3.2vw, 36px); line-height: 1.2; }
+.invento-plan-period { margin-top: 5px; }
+.invento-plan-list {
+  display: grid;
+  gap: 9px;
+  margin: 16px 0 24px;
+  padding: 0;
+  list-style: none;
+  font-size: 15px;
+}
+.invento-plan-list li { display: flex; align-items: flex-start; gap: 8px; }
+.invento-plan-list svg { flex: none; margin-top: 3px; color: var(--it-link); }
+.invento-faq-copy { padding: 0 24px 22px; color: var(--it-text-2); }
+.invento-faq-copy p { margin: 0; }
+.invento-faq-copy p + p { margin-top: 10px; }
+
+@media (min-width: 720px) {
+  .invento-feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .invento-feature-grid .it-service-package {
+    display: grid;
+    grid-row: span 2;
+    grid-template-rows: subgrid;
+    row-gap: 0;
+  }
+  .invento-feature-visual { min-height: 214px; }
+}
+
+@media (min-width: 900px) {
+  .invento-plans { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}

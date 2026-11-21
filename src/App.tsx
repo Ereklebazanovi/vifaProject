@@ -1,108 +1,120 @@
-import type React from "react"
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom"
-import { Suspense, lazy, useState, useEffect } from "react"
-import Layout from "./layout/Layout"
-import { ThemeProvider } from "./contexts/ThemeContext"
-import { LanguageProvider } from "./contexts/LanguageContext"
-import "./index.css"
+import { useLayoutEffect } from "react";
+import type { ComponentType } from "react";
+import { createBrowserRouter, createRoutesFromElements, Navigate, Outlet, Route, RouterProvider, useLocation } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
+import FacebookPixel from "./components/FacebookPixel";
+import GoogleAnalytics from "./components/GoogleAnalytics";
+import { LanguageProvider } from "./contexts/LanguageContext";
+import { NavigationProvider } from "./contexts/NavigationContext";
+import { itHref } from "./data/itServices";
+import { marketingServices } from "./data/marketingServices";
+import Layout from "./layout/Layout";
+import Home from "./pages/organic/Home";
 
-// Lazy load components
-const Home = lazy(() => import("./pages/Home"))
-const AboutPage = lazy(() => import("./pages/AboutPage"))
-const StartProject = lazy(() => import("./service/StartProject"))
-const AdminDashboard = lazy(() => import("./admin/AdminDashboard"))
-const SocialMediaService = lazy(() => import("./offeredServices/SocialMediaService"))
-const DigitalAdvertising = lazy(() => import("./offeredServices/DigitalAdvertising"))
-const WebDevelopment = lazy(() => import("./offeredServices/WebDevelopment"))
+// Route-level code splitting: only the homepage ships in the initial bundle.
+// Every other page loads on demand, shrinking first-load JS / improving CWV.
+// Resolve the destination module before the router captures its transition.
+const lazyRoute = (load: () => Promise<{ default: ComponentType }>) => async () => ({
+  Component: (await load()).default,
+});
 
+const webDev = lazyRoute(() => import("./offeredServices/WebDev"));
+const marketing = lazyRoute(() => import("./offeredServices/Marketing"));
 
-// Enhanced Loading component
-const LoadingSpinner = () => (
-  <div className="flex items-center justify-center min-h-screen bg-slate-950">
-    <div className="flex flex-col items-center space-y-6">
-      {/* Main spinner */}
-      <div className="relative">
-        {/* Outer ring */}
-        <div className="w-16 h-16 border-4 border-slate-700 rounded-full"></div>
-        {/* Animated ring */}
-        <div className="absolute top-0 left-0 w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-        {/* Inner dot */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
-      </div>
-      
-      {/* Loading text */}
-      <div className="flex flex-col items-center space-y-2">
-        <p className="text-white text-lg font-medium">იტვირთება</p>
-        <div className="flex space-x-1">
-          <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-          <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-          <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
-        </div>
-      </div>
-    </div>
-  </div>
-)
+// The admin and the design previews (/preview/*) are entered directly by URL,
+// never via in-app navigation, so the initial path is enough to keep their
+// visits out of GA and the Meta Pixel.
+const isStudio =
+  typeof window !== "undefined" && /^\/(studio|preview)(\/|$)/.test(window.location.pathname);
 
-const Contact = () => (
-  <div className="pt-24 pb-20">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 className="text-4xl font-bold text-center mb-8">Contact Us</h1>
-      <p className="text-gray-400 text-center">Contact page coming soon...</p>
-    </div>
-  </div>
-)
+function AppShell() {
+  const { pathname } = useLocation();
 
-// Route transition wrapper component
-const RouteTransition: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const location = useLocation()
-  const [loading, setLoading] = useState(false)
+  useLayoutEffect(() => {
+    if (!/^\/studio(\/|$)/.test(pathname)) window.scrollTo(0, 0);
+  }, [pathname]);
 
-  useEffect(() => {
-    setLoading(true)
-    const timer = setTimeout(() => {
-      setLoading(false)
-    }, 200) // Minimum loading time for smooth UX
-
-    return () => clearTimeout(timer)
-  }, [location.pathname])
-
-  if (loading) {
-    return <LoadingSpinner />
-  }
-
-  return <>{children}</>
-}
-
-const App: React.FC = () => {
   return (
-    <ThemeProvider>
-      <LanguageProvider>
-        <Router>
-          <Suspense fallback={<LoadingSpinner />}>
-            <RouteTransition>
-              <Routes>
-                <Route path="/" element={<Layout />}>
-                  <Route index element={<Home />} />
-                  <Route path="services/social-media" element={<SocialMediaService />} />
-                  <Route path="services/digital-advertising" element={<DigitalAdvertising />} />
-                  <Route path="services/web-development" element={<WebDevelopment />} />
-
-                  <Route path="about" element={<AboutPage />} />
-                  
-                  <Route path="contact" element={<Contact />} />
-                  <Route path="start-project" element={<StartProject />} />
-                </Route>
-
-                {/* Admin routes without Layout (no navbar/footer) */}
-                <Route path="/admin" element={<AdminDashboard />} />
-                <Route path="/admin/leads" element={<AdminDashboard />} />
-              </Routes>
-            </RouteTransition>
-          </Suspense>
-        </Router>
-      </LanguageProvider>
-    </ThemeProvider>
-  )
+    <>
+      {!isStudio && import.meta.env.VITE_GA_MEASUREMENT_ID && (
+        <GoogleAnalytics measurementId={import.meta.env.VITE_GA_MEASUREMENT_ID} />
+      )}
+      {!isStudio && import.meta.env.VITE_FACEBOOK_PIXEL_ID && (
+        <FacebookPixel pixelId={import.meta.env.VITE_FACEBOOK_PIXEL_ID} />
+      )}
+      <Outlet />
+    </>
+  );
 }
 
-export default App
+function AdvertisingRedirect() {
+  const { search, hash } = useLocation();
+  return <Navigate to={{ pathname: marketingServices.advertising.href, search, hash }} replace />;
+}
+
+const loadingClass = /^\/studio(\/|$)/.test(window.location.pathname) ? "bg-[#050404]" : "bg-[#f5f5f7]";
+
+const router = createBrowserRouter(createRoutesFromElements(
+  <Route element={<AppShell />} hydrateFallbackElement={<div className={`min-h-screen ${loadingClass}`} />}>
+    <Route element={<Layout />}>
+      <Route index element={<Home />} />
+      {/* Inside Layout so the hub gets the same UTM memory and WhatsApp click tracking as every page. */}
+      <Route path={itHref} lazy={lazyRoute(() => import("./pages/preview/ITHubPreview"))} />
+      <Route path="services/web" lazy={webDev} />
+      <Route path="services/web-development" lazy={webDev} />
+      <Route path="industry/web/:slug" lazy={async () => ({
+        Component: (await import("./pages/landing/IndustryLanding")).WebIndustryLanding,
+      })} />
+      <Route path="industry/marketing/:slug" lazy={async () => ({
+        Component: (await import("./pages/landing/IndustryLanding")).MarketingIndustryLanding,
+      })} />
+      <Route path="services/ai-chatbot" lazy={lazyRoute(() => import("./pages/AIChatbot"))} />
+      <Route path="inventowms" lazy={lazyRoute(() => import("./offeredServices/InventoLandingPage"))} />
+      <Route path="lineup" lazy={lazyRoute(() => import("./offeredServices/LineupLandingPage"))} />
+      <Route path="services/marketing" lazy={marketing} />
+      <Route path="services/production" lazy={lazyRoute(() => import("./offeredServices/Production"))} />
+      <Route path="services/social-media" lazy={lazyRoute(() => import("./offeredServices/SocialMedia"))} />
+      <Route path="services/advertising" lazy={lazyRoute(() => import("./offeredServices/Advertising"))} />
+      <Route path="services/branding" lazy={lazyRoute(() => import("./offeredServices/Branding"))} />
+      <Route path="services/digital-advertising" element={<AdvertisingRedirect />} />
+      <Route path="contact" lazy={lazyRoute(() => import("./pages/ContactPage"))} />
+      <Route path="about" lazy={lazyRoute(() => import("./pages/AboutPage"))} />
+      <Route path="blog" lazy={lazyRoute(() => import("./pages/blog/BlogIndex"))} />
+      <Route path="blog/:slug" lazy={lazyRoute(() => import("./pages/blog/BlogPost"))} />
+      <Route path="privacy" lazy={lazyRoute(() => import("./pages/PrivacyPolicy"))} />
+      <Route path="terms" lazy={lazyRoute(() => import("./pages/TermsOfService"))} />
+      <Route path="industry/:service/:slug" lazy={lazyRoute(() => import("./pages/landing/IndustryLanding"))} />
+      <Route path="*" lazy={lazyRoute(() => import("./pages/NotFound"))} />
+    </Route>
+
+    {/* Admin routes use their own layout and navigation. */}
+    <Route path="/studio" lazy={lazyRoute(() => import("./admin/AdminLayout"))}>
+      <Route index element={<Navigate to="overview" replace />} />
+      <Route path="overview" lazy={lazyRoute(() => import("./admin/overview/OverviewPage"))} />
+      <Route path="pipeline" lazy={lazyRoute(() => import("./admin/pipeline/PipelinePage"))} />
+      <Route path="contacts" lazy={lazyRoute(() => import("./admin/contacts/ContactsPage"))} />
+      <Route path="sources" lazy={lazyRoute(() => import("./admin/sources/SourcesPage"))} />
+      <Route path="campaigns" lazy={lazyRoute(() => import("./admin/send/SendPage"))} />
+      <Route path="send" element={<Navigate to="/studio/campaigns" replace />} />
+      <Route path="blog" lazy={lazyRoute(() => import("./pages/blog/BlogEditor"))} />
+    </Route>
+
+    {/* The old hidden address of the IT hub; vercel.json also redirects it permanently. */}
+    <Route path="/preview/it" element={<Navigate to={itHref} replace />} />
+    <Route path="/preview/type" lazy={lazyRoute(() => import("./pages/preview/TypeSpecimen"))} />
+  </Route>,
+));
+
+const App = () => {
+  return (
+    <HelmetProvider>
+      <LanguageProvider>
+        <NavigationProvider>
+          <RouterProvider router={router} />
+        </NavigationProvider>
+      </LanguageProvider>
+    </HelmetProvider>
+  );
+};
+
+export default App;
