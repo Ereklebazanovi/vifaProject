@@ -79,6 +79,8 @@ function HomeWordmark() {
 
   return <h1 id="home-title" aria-label="VIFA Digital">
     <span ref={vifaRef} className="home-wordmark-vifa">VIFA</span>
+    {/* A space so the heading text reads "VIFA DIGITAL" for search engines; a grid ignores it visually. */}
+    {" "}
     <span ref={digitalRef} className="home-wordmark-digital">DIGITA<span>L</span></span>
   </h1>;
 }
