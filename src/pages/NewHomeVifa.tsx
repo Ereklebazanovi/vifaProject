@@ -1,5 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { useLayoutEffect, useRef } from "react";
 import SEO from "../components/SEO";
 import { ContactBlock } from "../components/ui/ContactBlock";
 import { LightPage } from "../components/ui/LightPage";
@@ -10,12 +9,12 @@ import { SiteFooter } from "../components/ui/SiteFooter";
 import { SiteNav } from "../components/ui/SiteNav";
 import { useLanguage } from "../contexts/LanguageContext";
 import { inventoScreenshots } from "../data/inventoScreenshots";
-import { itHref, itServices, type ItLanguage } from "../data/itServices";
+import { itHref, itServices } from "../data/itServices";
 import { foodPhoto } from "../data/marketingMedia";
 import { marketingHubHref } from "../data/marketingServices";
 import { useShorts } from "../hooks/useShorts";
-import type { BlogPost } from "../types/blog";
 import { WebsiteDemoObject } from "./preview/ProductDevices";
+import { HomeBlog } from "./HomeBlog";
 import { HomeWorkShowcases } from "./HomeWorkShowcases";
 import "./preview/hubSections.css";
 import "./homeVifa.css";
@@ -33,8 +32,6 @@ const metadata = {
 
 const showTrustStats = import.meta.env.VITE_SHOW_HOME_TRUST_STATS !== "false";
 const marketingPhotos = [5, 10, 11].map(foodPhoto);
-
-type BlogPreview = Pick<BlogPost, "id" | "slug" | "title" | "description" | "tags">;
 
 function HomeWordmark() {
   const vifaRef = useRef<HTMLSpanElement>(null);
@@ -84,43 +81,6 @@ function HomeWordmark() {
     <span ref={vifaRef} className="home-wordmark-vifa">VIFA</span>
     <span ref={digitalRef} className="home-wordmark-digital">DIGITA<span>L</span></span>
   </h1>;
-}
-
-function HomeBlog({ language }: { language: ItLanguage }) {
-  const ka = language === "ka";
-  const [posts, setPosts] = useState<BlogPreview[]>(() => {
-    const snapshot = document.getElementById("home-blog-data")?.textContent;
-    if (!snapshot) return [];
-    try { return JSON.parse(snapshot) as BlogPreview[]; } catch { return []; }
-  });
-
-  useEffect(() => {
-    let active = true;
-    void import("../service/blogService")
-      .then(({ getPublishedPosts }) => getPublishedPosts({ fromServer: true }))
-      .then(published => { if (active) setPosts(published.slice(0, 3)); })
-      .catch(() => {}); // The blog link is available even if articles cannot be fetched.
-    return () => { active = false; };
-  }, []);
-
-  return <section className="it-section it-col home-section" aria-labelledby="home-blog">
-    <div className="home-section-header">
-      <SectionHeading id="home-blog">{ka ? "ბლოგი" : "Blog"}</SectionHeading>
-      <PageLink to="/blog" className="it-more-link">{ka ? "ყველა სტატია" : "All articles"} <ArrowUpRight size={16} aria-hidden="true" /></PageLink>
-    </div>
-    <p className="home-blog-intro">{ka
-      ? "პრაქტიკული სტატიები ვებსაიტების, მარკეტინგისა და ბიზნესის პროგრამების შესახებ."
-      : "Practical articles on websites, marketing and business software."}</p>
-    {posts.length > 0 && <div className="home-blog-grid">
-      {posts.map(post => <article key={post.id}>
-        <PageLink to={`/blog/${post.slug}`} className="home-blog-card">
-          <h3>{post.title}</h3>
-          <p>{post.description}</p>
-          <span className="home-blog-category">{post.tags?.[0] || (ka ? "სტატია" : "Article")}</span>
-        </PageLink>
-      </article>)}
-    </div>}
-  </section>;
 }
 
 export default function NewHomeVifa() {

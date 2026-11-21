@@ -163,6 +163,7 @@
 .marketing-photo-preview { gap: 3px; }
 .marketing-poster-preview img,
 .marketing-photo-preview img { display: block; width: 100%; height: 106px; object-fit: cover; }
+.marketing-photo-preview img:only-child { grid-column: 1 / -1; }
 
 .marketing-voice-preview { display: grid; gap: 5px; }
 .marketing-voice-preview div { display: grid; gap: 2px; padding: 6px 8px; border-radius: 7px; background: #fff; }
@@ -183,6 +184,56 @@
 .marketing-reel-preview span { display: grid; grid-template-columns: auto repeat(3, minmax(0, 1fr)); align-items: center; gap: 3px; color: #674961; }
 .marketing-reel-preview i { height: 17px; border-radius: 3px; background: #edd9e6; }
 .marketing-reel-preview i:nth-child(3) { background: #e1c7da; }
+
+.marketing-aerial-preview {
+  position: relative;
+  height: 106px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #e6d8e5;
+}
+
+.marketing-aerial-plan {
+  position: absolute;
+  inset: -34% -13%;
+  overflow: hidden;
+  background: linear-gradient(90deg, #e5d5e5 43%, #efd8d0 43% 73%, #d8dfd0 73%);
+  transform: rotate(-16deg);
+}
+.marketing-aerial-plan::before,
+.marketing-aerial-plan::after { position: absolute; background: #f8efea; content: ""; }
+.marketing-aerial-plan::before { inset: 53% 0 auto; height: 16px; }
+.marketing-aerial-plan::after { inset: 0 auto 0 71%; width: 13px; }
+.marketing-aerial-plan i {
+  position: absolute;
+  inset: 23% auto auto 19%;
+  width: 21%;
+  height: 24%;
+  border: 1px solid rgb(96 70 101 / 24%);
+  border-radius: 4px;
+  background: #c5a9c3;
+  box-shadow: 4px 5px rgb(96 70 101 / 12%);
+}
+.marketing-aerial-plan i:nth-child(2) { inset: 29% auto auto 49%; width: 14%; height: 18%; background: #c49099; }
+.marketing-aerial-plan i:nth-child(3) { inset: 70% auto auto 36%; width: 23%; height: 16%; background: #c5a9c3; }
+
+.marketing-aerial-viewfinder {
+  position: absolute;
+  inset: 14px 17px;
+  color: #fff;
+  background:
+    linear-gradient(currentColor, currentColor) left top / 12px 2px,
+    linear-gradient(currentColor, currentColor) left top / 2px 12px,
+    linear-gradient(currentColor, currentColor) right top / 12px 2px,
+    linear-gradient(currentColor, currentColor) right top / 2px 12px,
+    linear-gradient(currentColor, currentColor) left bottom / 12px 2px,
+    linear-gradient(currentColor, currentColor) left bottom / 2px 12px,
+    linear-gradient(currentColor, currentColor) right bottom / 12px 2px,
+    linear-gradient(currentColor, currentColor) right bottom / 2px 12px,
+    linear-gradient(currentColor, currentColor) center / 1px 13px,
+    linear-gradient(currentColor, currentColor) center / 13px 1px;
+  background-repeat: no-repeat;
+}
 
 .marketing-process-chat,
 .marketing-process-document { display: grid; gap: 7px; padding: 8px; }

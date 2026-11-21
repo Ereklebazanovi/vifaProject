@@ -3,7 +3,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { siteConfig } from '../config/siteConfig';
 
 /** A single priced package: fixed `price` OR a `minPrice`/`maxPrice` range (GEL). */
-type OfferInput = { name: string; price?: number; minPrice?: number; maxPrice?: number };
+type OfferInput = { name: string; price?: number; minPrice?: number; maxPrice?: number; unitText?: string };
 
 interface SEOProps {
   title?: string;
@@ -306,16 +306,17 @@ const SEO: React.FC<SEOProps> = ({
       priceCurrency: 'GEL',
       availability: 'https://schema.org/InStock',
       url: finalCanonicalUrl,
-      ...(o.price != null
-        ? { price: o.price }
-        : {
-          priceSpecification: {
-            '@type': 'PriceSpecification',
-            priceCurrency: 'GEL',
-            minPrice: o.minPrice,
-            maxPrice: o.maxPrice
-          }
-        })
+      ...(o.price != null && { price: o.price }),
+      ...((o.price == null || o.unitText) && {
+        priceSpecification: {
+          '@type': o.unitText ? 'UnitPriceSpecification' : 'PriceSpecification',
+          priceCurrency: 'GEL',
+          price: o.price,
+          minPrice: o.minPrice,
+          maxPrice: o.maxPrice,
+          unitText: o.unitText,
+        }
+      }),
     }));
     const prices = offers.flatMap((o) =>
       o.price != null ? [o.price] : [o.minPrice, o.maxPrice]
@@ -324,7 +325,7 @@ const SEO: React.FC<SEOProps> = ({
       '@type': 'AggregateOffer',
       priceCurrency: 'GEL',
       lowPrice: Math.min(...prices),
-      highPrice: Math.max(...prices),
+      ...(offers.every(o => o.price != null || o.maxPrice != null) && { highPrice: Math.max(...prices) }),
       offerCount: offerItems.length,
       offers: offerItems
     };

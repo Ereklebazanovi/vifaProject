@@ -130,7 +130,7 @@ export default function InventoLandingPage() {
         <ServiceHero id="invento-hero-title" breadcrumbs={breadcrumbs} title="Invento WMS"
           description={en
             ? "Manage stock and orders in one place. For online stores, sellers who take orders in chat, and shops tracking stock in Excel or notebooks."
-            : "მართეთ მარაგი და შეკვეთები ერთ სივრცეში. გამოგადგებათ, თუ ჩატით ყიდით, ონლაინ მაღაზია გაქვთ ან ნაშთებს Excel-ში თუ რვეულში ითვლით."}
+            : "მარაგი და შეკვეთები ერთ სივრცეში, Excel-ისა და რვეულის ნაცვლად."}
           actions={<>
             <strong className="invento-hero-price">{en ? "From 79 ₾ per month" : "79 ₾-დან თვეში"}</strong>
             <a className="it-pill-button" href={trialUrl} target="_blank" rel="noopener noreferrer">{trialLabel}</a>

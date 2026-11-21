@@ -17,7 +17,8 @@ export function ContactBlock({ whatsappHref, language = "ka", title, secondary, 
   return (
     <section id="contact" className="it-section it-col it-contact-section">
       <div className="it-contact-card">
-        <SectionHeading secondary={secondary ?? (en ? "Tell us what you need." : "მოგვიყევით, რა გჭირდებათ.")}>
+        {/* Short heading (three lines on phones with the gray half); the ask moves into the note below. */}
+        <SectionHeading secondary={secondary}>
           {title ?? (en ? "Have a question?" : "კითხვა გაქვთ?")}
         </SectionHeading>
         <div className="it-contact-row">
@@ -27,7 +28,7 @@ export function ContactBlock({ whatsappHref, language = "ka", title, secondary, 
             ) : (
               <span className="it-contact-avatar" aria-hidden="true"><UsersRound size={24} strokeWidth={1.7} /></span>
             )}
-            <p className="it-contact-note">{en ? "Our team will reply personally." : "ჩვენი გუნდი პირადად გიპასუხებთ."}</p>
+            <p className="it-contact-note">{en ? "Tell us what you need. Our team will reply personally." : "მოგვიყევით, რა გჭირდებათ. ჩვენი გუნდი პირადად გიპასუხებთ."}</p>
           </div>
           <div className="it-contact-actions">
             <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="it-pill-button">

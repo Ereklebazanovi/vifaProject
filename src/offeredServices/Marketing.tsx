@@ -3,11 +3,11 @@ import CallbackLink from "../components/CallbackLink";
 import SEO from "../components/SEO";
 import { ContactBlock } from "../components/ui/ContactBlock";
 import { FaqSection } from "../components/ui/FaqSection";
+import { MarketingIndustryTiles } from "../components/ui/MarketingIndustryTiles";
 import { MarketingProcess } from "../components/ui/MarketingProcess";
 import { MarketingPage } from "../components/ui/MarketingPage";
 import { MarketingScene } from "../components/ui/MarketingScenes";
 import { MarketingWork } from "../components/ui/MarketingWork";
-import { PageLink } from "../components/ui/PageLink";
 import { SectionHeading } from "../components/ui/SectionHeading";
 import { ServiceCard } from "../components/ui/ServiceCard";
 import { SiteFooter } from "../components/ui/SiteFooter";
@@ -22,21 +22,21 @@ import { useServiceRotation } from "../pages/preview/useServiceRotation";
 const metadata = {
   ka: {
     title: "ციფრული მარკეტინგი - SMM, რეკლამა და კონტენტი",
-    description: "ციფრული მარკეტინგის სააგენტო: სოციალური მედიის მართვა (SMM), Facebook და Instagram რეკლამა, Google Ads, ფოტო/ვიდეო კონტენტი და ბრენდინგი. პაკეტები 1000₾-დან.",
+    description: "სოციალური მედიის მართვა, Facebook, Instagram და Google რეკლამა, გადაღება და ბრენდინგი. გვერდების მართვა 1000 ₾-დან თვეში.",
     keywords: "ციფრული მარკეტინგი, სოციალური მედია მართვა, SMM, Facebook რეკლამა, Instagram რეკლამა, Google Ads, ვიდეო გადაღება, ფოტოგრაფია, კონტენტის შექმნა, ბრენდინგი, მარკეტინგის სააგენტო",
   },
   en: {
     title: "Digital Marketing - SMM, Ads & Content",
-    description: "Digital marketing agency: social media management (SMM), Facebook and Instagram ads, Google Ads, photo/video content and branding. Packages from 1000₾.",
+    description: "Social media management, Facebook, Instagram and Google advertising, photo and video production and branding. Page management starts at 1000 ₾ per month.",
     keywords: "digital marketing, social media management, SMM, Facebook ads, Instagram ads, Google Ads, video production, photography, content creation, branding, marketing agency",
   },
 };
 
 const process = {
   ka: [
-    { title: "სტრატეგია", body: "ვადგენთ მიზანს და ვარჩევთ აუდიტორიას." },
+    { title: "სტრატეგია", body: "ვთანხმდებით, რა შედეგი გინდათ და ვის გსურთ მისწვდეთ." },
     { title: "კონტენტი", body: "ვამზადებთ ტექსტებს, ფოტოებსა და ვიდეოებს." },
-    { title: "გავრცელება", body: "ვაქვეყნებთ კონტენტს და ვუშვებთ რეკლამას." },
+    { title: "გავრცელება", body: "ვაქვეყნებთ პოსტებს და ვუშვებთ რეკლამას." },
     { title: "შედეგები", body: "შედეგების მიხედვით ვასწორებთ კამპანიას." },
   ],
   en: [
@@ -50,27 +50,19 @@ const process = {
 const hubCardOrder = ["socialMedia", "branding", "production", "advertising"] as const satisfies readonly MarketingService[];
 const channelIcons = { Instagram: FaInstagram, Facebook: FaFacebook, YouTube: FaYoutube, TikTok: FaTiktok };
 
-const industries = [
-  { slug: "food", ka: "რესტორნები და კაფეები", en: "Restaurants and cafés" },
-  { slug: "tourism", ka: "სასტუმროები და ტურიზმი", en: "Hotels and tourism" },
-  { slug: "retail", ka: "მაღაზიები", en: "Shops" },
-  { slug: "beauty", ka: "სალონები", en: "Beauty salons" },
-  { slug: "legal-finance", ka: "იურიდიული და საფინანსო", en: "Law and finance" },
-];
-
 const marketingFaq = {
   ka: [
     {
       question: "რა შედის მარკეტინგის მომსახურებაში?",
-      answer: "ვმართავთ სოციალურ მედიასა და რეკლამას, ვქმნით კონტენტს, ვიღებთ ფოტოებსა და ვიდეოებს და ვმუშაობთ ბრენდის ვიზუალურ იდენტობაზე. შეგიძლიათ აირჩიოთ თქვენთვის საჭირო მიმართულება ან რამდენიმე სერვისი გააერთიანოთ.",
+      answer: "ვმართავთ სოციალურ გვერდებსა და რეკლამას, ვამზადებთ პოსტებს, ვიღებთ ფოტოებსა და ვიდეოებს და ვქმნით ბრენდის ვიზუალურ სტილს. შეგიძლიათ შეუკვეთოთ ერთი ან რამდენიმე მომსახურება.",
     },
     {
-      question: "როგორ ავირჩიო სერვისი?",
-      answer: "უფასო კონსულტაციაზე განვიხილავთ თქვენი ბიზნესის მიზნებს და შევათანხმებთ, რა მოცულობის სამუშაო გჭირდებათ: გვერდების მართვა, რეკლამა, გადაღება თუ ბრენდინგი.",
+      question: "როგორ შევარჩიო მომსახურება?",
+      answer: "უფასო კონსულტაციაზე გვიამბეთ, რა შედეგი გინდათ. გირჩევთ, რომელი მომსახურებით დაიწყოთ და რა მოცულობის სამუშაო დაგჭირდებათ.",
     },
     {
-      question: "არსებულ სოციალურ გვერდებზეც შეგიძლიათ მუშაობა?",
-      answer: "დიახ. შეგვიძლია ვმართოთ თქვენი არსებული გვერდები, დავგეგმოთ კონტენტი და მოვამზადოთ ახალი პოსტები და რილსები.",
+      question: "ჩემს არსებულ გვერდებსაც მართავთ?",
+      answer: "დიახ. თქვენს გვერდებზე დავგეგმავთ და გამოვაქვეყნებთ ახალ პოსტებსა და რილსებს.",
     },
   ],
   en: [
@@ -147,17 +139,8 @@ export default function Marketing() {
           </div>
         </section>
 
+        <MarketingIndustryTiles language={language} />
         <MarketingWork language={language} shorts={shorts} />
-        <section id="industries" className="it-section it-col marketing-industries" aria-labelledby="marketing-industries-title">
-          <SectionHeading id="marketing-industries-title" className="marketing-industries-title">
-            {ka ? "მარკეტინგი თქვენი სფეროსთვის" : "Marketing for your industry"}
-          </SectionHeading>
-          <ul className="marketing-industry-links" role="list">
-            {industries.map(({ slug, ...labels }) => <li key={slug}>
-              <PageLink to={`/industry/marketing/${slug}`}>{labels[language]}</PageLink>
-            </li>)}
-          </ul>
-        </section>
         <MarketingProcess language={language} steps={process[language]} service="hub" />
 
         <section className="it-section it-col marketing-section" aria-labelledby="marketing-channels-title">

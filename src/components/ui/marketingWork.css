@@ -94,7 +94,7 @@
   object-fit: contain;
 }
 
-.light-page .marketing-lightbox[data-kind="reel"] {
+.light-page .marketing-lightbox:is([data-kind="reel"], [data-kind="video"]) {
   width: min(360px, calc(100vw - 32px), max(210px, 40dvh));
 }
 

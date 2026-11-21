@@ -232,11 +232,14 @@
 }
 
 .marketing-service-card-header {
+  position: relative;
   display: grid;
   align-content: start;
   gap: 9px;
   padding: 14px;
 }
+
+.marketing-service-card-arrow { position: absolute; top: 16px; right: 14px; color: var(--it-link); }
 
 .marketing-service-card h3 {
   margin: 0;
@@ -266,9 +269,10 @@ a.marketing-service-card:focus-visible { outline-offset: -3px; }
   }
 }
 
-.marketing-production-services .marketing-service-card:not(:has(.marketing-card-artifact)) {
-  display: flex;
-  align-self: start;
+@media (width < 900px) {
+  .marketing-production-services { grid-auto-rows: 1fr; }
+  .marketing-production-services .marketing-service-card { display: flex; grid-row: auto; }
+  .marketing-production-services .marketing-card-artifact { margin-top: auto; }
 }
 
 .marketing-direction .it-start-steps {
@@ -320,31 +324,74 @@ a.marketing-service-card:focus-visible { outline-offset: -3px; }
 .marketing-channel:hover span { text-decoration: underline; }
 
 .marketing-direction .it-section.marketing-industries { padding-block: 16px 20px; }
+.light-page.marketing-hub .it-section.it-directions { padding-bottom: 28px; }
+.marketing-hub .it-section.marketing-industries { padding-top: 0; }
 .marketing-industries-title { font-size: clamp(20px, 3vw, 25px); }
-.marketing-industry-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 13px 0 0;
+.marketing-industry-tiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 16px 0 0;
   padding: 0;
   list-style: none;
 }
-.marketing-industry-links a {
-  display: flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 6px 13px;
-  border-radius: 12px;
+.marketing-industry-tiles > li { min-width: 0; }
+.marketing-industry-tile {
+  display: grid;
+  grid-template-rows: minmax(82px, 1fr) auto;
+  height: 100%;
+  min-height: 146px;
+  overflow: clip;
+  border-radius: 15px;
   background: var(--it-surface);
   color: var(--it-text);
-  font-size: 14px;
 }
-.marketing-industry-links a:is(:hover, :focus-visible) { color: var(--it-link); }
+.marketing-industry-photo-area { position: relative; min-width: 0; min-height: 0; }
+.marketing-industry-photo { position: absolute; inset: 0; }
+.marketing-industry-photo,
+.marketing-industry-photo img { display: block; width: 100%; height: 100%; min-height: 0; object-fit: cover; }
+.marketing-industry-tile-name {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 5px;
+  min-height: 47px;
+  padding: 8px 9px;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.marketing-industry-tile-name svg { color: var(--it-link); }
+.marketing-industry-tile:is(:hover, :focus-visible) .marketing-industry-tile-name { color: var(--it-link); }
+.marketing-industry-tile--other {
+  grid-template-rows: auto 1fr;
+  background: #ececef;
+}
+.marketing-industry-tile--other .marketing-industry-tile-name { min-height: 38px; }
+.marketing-industry-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  align-content: start;
+  align-items: center;
+  padding: 0 7px 8px;
+}
+.marketing-industry-chips > span {
+  padding: 2px 4px;
+  border-radius: 999px;
+  background: var(--it-surface);
+  font-size: 10px;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
 
-@media (max-width: 599px) {
-  .marketing-industry-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .marketing-industry-links a { height: 100%; }
-  .marketing-industry-links li:last-child { grid-column: 1 / -1; justify-self: start; }
+@media (min-width: 600px) {
+  .marketing-industry-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (min-width: 900px) {
+  .marketing-industry-tiles { grid-template-columns: repeat(6, minmax(0, 1fr)); }
 }
 
 .marketing-production-panel {
@@ -382,12 +429,12 @@ a.marketing-service-card:focus-visible { outline-offset: -3px; }
 @media (min-width: 768px) {
   .marketing-direction :is(.marketing-section, .it-getting-started) { padding-block: 42px 50px; }
   .marketing-detail-scene { --marketing-detail-height: 422px; }
+  .marketing-hub .it-device-stage { flex: 1; height: auto; min-height: 0; }
   .marketing-hub .it-start-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .marketing-channel { display: flex; justify-content: center; align-items: center; gap: 10px; font-size: 15px; }
 }
 
 @media (min-width: 900px) {
-  .marketing-hub .it-device-stage { height: 405px; }
   .marketing-service-grid[data-columns="4"] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .marketing-direction .it-start-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .marketing-hub .it-start-steps { grid-template-columns: repeat(4, minmax(0, 1fr)); }

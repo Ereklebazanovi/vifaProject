@@ -4,7 +4,7 @@ import type { MarketingLanguage } from "../../data/marketingServices";
 import "./marketingArtifacts.css";
 
 export type MarketingArtifactKind = "calendar" | "post" | "comment" | "sponsored" | "search" |
-  "audience" | "logo" | "identity" | "poster" | "voice" | "photo" | "reel";
+  "audience" | "logo" | "identity" | "poster" | "voice" | "photo" | "reel" | "aerial";
 
 const postPhoto = foodPhoto(5);
 const photoPair = [foodPhoto(1), foodPhoto(3)];
@@ -40,7 +40,11 @@ function CommentThread({ language }: { language: MarketingLanguage }) {
   </div>;
 }
 
-export function MarketingArtifact({ kind, language }: { kind: MarketingArtifactKind; language: MarketingLanguage }) {
+export function MarketingArtifact({ kind, language, photo }: {
+  kind: MarketingArtifactKind;
+  language: MarketingLanguage;
+  photo?: string;
+}) {
   const ka = language === "ka";
   switch (kind) {
     case "calendar":
@@ -81,12 +85,18 @@ export function MarketingArtifact({ kind, language }: { kind: MarketingArtifactK
         <div><small>{ka ? "ოფიციალური" : "Formal"}</small><strong>{ka ? "გიწვევთ სტუმრად." : "You’re invited."}</strong></div>
       </div>;
     case "photo":
-      return <div className="marketing-photo-preview">{photoPair.map(photo => <img key={photo.src} src={photo.srcSm}
-        alt="" loading="lazy" />)}</div>;
+      return <div className="marketing-photo-preview">
+        {(photo ? [photo] : photoPair.map(item => item.srcSm)).map(src => <img key={src} src={src} alt="" loading="lazy" />)}
+      </div>;
     case "reel":
       return <div className="marketing-reel-preview">
         <img src={foodReelPoster} alt="" loading="lazy" />
         <span><Film size={15} /><i /><i /><i /></span>
+      </div>;
+    case "aerial":
+      return <div className="marketing-aerial-preview">
+        <div className="marketing-aerial-plan"><i /><i /><i /></div>
+        <span className="marketing-aerial-viewfinder" />
       </div>;
   }
 }

@@ -18,18 +18,11 @@ import { WebPackageCard, WebProjectCard } from "../../components/ui/WebCards";
 import type { IndustryConfig } from "../../data/industryData";
 import { inventoDetails } from "../../data/inventoScreenshots";
 import { webIndustryCopy } from "./webIndustryCopy";
+import { displayIndustryPrice } from "./industryPricing";
 import "./webIndustry.css";
 
 function whatsappLink(message: string) {
   return `https://wa.me/995557624243?text=${encodeURIComponent(message)}`;
-}
-
-// The source prices also feed the original schema. Format them only for display.
-function displayPrice(price: string, ka: boolean) {
-  const amount = price.replace("₾", "").trim().replace(/\s*-\s*/g, "-");
-  return amount.endsWith("+")
-    ? ka ? `${amount.slice(0, -1).trim()} ₾-დან` : `From ${amount.slice(0, -1).trim()} ₾`
-    : `${amount} ₾`;
 }
 
 export function WebIndustryContent({ slide, config, language, breadcrumbs, onLanguageToggle }: {
@@ -107,7 +100,7 @@ export function WebIndustryContent({ slide, config, language, breadcrumbs, onLan
               const summary = content.packages[index];
               const packageMessage = ka ? `გამარჯობა, მაინტერესებს ვებ-ინფრასტრუქტურის პაკეტი: "${name}"`
                 : `Hello, I am interested in the Web Infrastructure package: "${name}"`;
-              return <WebPackageCard key={tier.nameEn} title={name} price={displayPrice(tier.price, ka)} highlighted={tier.highlighted}
+              return <WebPackageCard key={tier.nameEn} title={name} price={displayIndustryPrice(tier.price, ka)} highlighted={tier.highlighted}
                 body={summary?.body[language] ?? (ka ? tier.descKa : tier.descEn)}
                 features={summary?.features.map((item) => item[language]) ?? (ka ? tier.featuresKa : tier.featuresEn).slice(0, 3)}
                 href={whatsappLink(packageMessage)} action={ka ? "კონსულტაცია WhatsApp-ზე" : "Ask on WhatsApp"} />;

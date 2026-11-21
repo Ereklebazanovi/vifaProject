@@ -1,17 +1,19 @@
 import { useState } from "react";
 import { Play } from "lucide-react";
-import { foodPhoto } from "../../data/marketingMedia";
+import { foodPhoto, foodReel, foodReelPoster } from "../../data/marketingMedia";
 import { SectionHeading } from "./SectionHeading";
 import { WorkLightbox, type WorkSelection } from "./WorkLightbox";
 
-export function MarketingWork({ language, shorts, title, photoNumbers = [1, 4] }: {
+export function MarketingWork({ language, shorts = [], title, photoNumbers = [1, 4], localFoodReel = false }: {
   language: "ka" | "en";
-  shorts: readonly string[];
+  shorts?: readonly string[];
   title?: string;
   photoNumbers?: number[];
+  localFoodReel?: boolean;
 }) {
   const ka = language === "ka";
   const [selection, setSelection] = useState<WorkSelection | null>(null);
+  const reelLabel = ka ? "კერძების მომზადების ვიდეო" : "Food preparation reel";
   const photoCards = photoNumbers.map(number => {
     const photo = foodPhoto(number);
     const label = ka ? photo.altKa : photo.altEn;
@@ -45,6 +47,19 @@ export function MarketingWork({ language, shorts, title, photoNumbers = [1, 4] }
         ? "კერძების ფოტოები, გადაღების კადრები და მოკლე ვიდეოები."
         : "Food photography, behind-the-scenes shots and short videos."}</p>
       <div className="marketing-work-grid">
+        {localFoodReel && (
+          <button type="button" className="marketing-proof" aria-haspopup="dialog" aria-label={reelLabel}
+            onClick={event => setSelection({
+              item: { kind: "video", src: foodReel, poster: foodReelPoster, label: reelLabel },
+              trigger: event.currentTarget,
+            })}>
+            <span className="marketing-proof-image">
+              <img src={foodReelPoster} alt="" width={720} height={1280} loading="lazy" />
+              <span className="marketing-proof-play" aria-hidden="true"><Play size={18} fill="currentColor" /></span>
+            </span>
+            <span className="marketing-proof-label">{ka ? "რილსი" : "Reel"}</span>
+          </button>
+        )}
         {photoCards}
         {reelCards}
       </div>

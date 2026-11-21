@@ -35,10 +35,11 @@ const ROUTES = [
   '/contact',
   '/privacy',
   '/terms',
+  '/404',
 ];
 
 // Industry landing pages — now real indexable money-SEO pages (session 3).
-// Keep these arrays in sync with validServices/validSlugs in IndustryLanding.tsx.
+// Keep these arrays in sync with the industry routes and available industry data.
 const INDUSTRY_SERVICES = ['web', 'marketing'];
 const INDUSTRY_SLUGS = ['tourism', 'beauty', 'legal-finance', 'retail', 'food'];
 for (const s of INDUSTRY_SERVICES)
@@ -74,37 +75,42 @@ const BLOCKED = [
 // so the Firestore SDK can fetch real post content to bake into the static HTML.
 const FIRESTORE_HOST = 'firestore.googleapis.com';
 
-// Read published blog summaries and slugs from the same source as the blog pages.
-async function fetchPublishedBlogPosts() {
-  try {
-    const res = await fetch(FIRESTORE_QUERY, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(PUBLISHED_POSTS_QUERY),
-      signal: AbortSignal.timeout(10000),
-    });
-    if (!res.ok) {
-      console.warn(`[prerender] blog: Firestore REST ${res.status} — skipping blog routes`);
-      return [];
+async function queryPublishedBlogPosts() {
+  const attempts = 3;
+  for (let attempt = 1; ; attempt++) {
+    try {
+      const response = await fetch(FIRESTORE_QUERY, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(PUBLISHED_POSTS_QUERY),
+        signal: AbortSignal.timeout(10000),
+      });
+      if (!response.ok) throw new Error(`Firestore REST ${response.status}`);
+      const data = await response.json();
+      if (!Array.isArray(data)) throw new Error('Unexpected Firestore response');
+      return data;
+    } catch (error) {
+      if (attempt === attempts) throw new Error('Could not discover published blog routes', { cause: error });
+      console.warn(`[prerender] blog: discovery attempt ${attempt} failed, retrying: ${error.message}`);
+      await new Promise((resolve) => setTimeout(resolve, attempt * 1000));
     }
-    const data = await res.json();
-    // runQuery answers with one entry per match; entries without `document` carry only read metadata.
-    const docs = (Array.isArray(data) ? data : []).map((r) => r.document).filter(Boolean);
-    return docs
-      .map((d) => ({
-        id: d.name?.split('/').pop() || '',
-        slug: d.fields?.slug?.stringValue || '',
-        title: d.fields?.title?.stringValue || '',
-        description: d.fields?.description?.stringValue || '',
-        tags: (d.fields?.tags?.arrayValue?.values ?? []).map((tag) => tag.stringValue).filter(Boolean),
-        status: d.fields?.status?.stringValue || '',
-        publishedAt: d.fields?.publishedAt?.stringValue || '',
-      }))
-      .filter((p) => p.slug && p.status === 'published');
-  } catch (e) {
-    console.warn('[prerender] blog: Firestore fetch failed — skipping blog routes:', e.message);
-    return [];
   }
+}
+
+// runQuery entries without `document` carry only read metadata.
+async function fetchPublishedBlogPosts() {
+  const results = await queryPublishedBlogPosts();
+  return results.map((entry) => entry.document).filter(Boolean)
+    .map((d) => ({
+      id: d.name?.split('/').pop() || '',
+      slug: d.fields?.slug?.stringValue || '',
+      title: d.fields?.title?.stringValue || '',
+      description: d.fields?.description?.stringValue || '',
+      tags: (d.fields?.tags?.arrayValue?.values ?? []).map((tag) => tag.stringValue).filter(Boolean),
+      status: d.fields?.status?.stringValue || '',
+      publishedAt: d.fields?.publishedAt?.stringValue || '',
+    }))
+    .filter((p) => p.slug && p.status === 'published');
 }
 
 // Splice blog <url> entries into dist/sitemap.xml (copied from public/ by vite build).
@@ -188,13 +194,14 @@ async function run() {
 
   const puppeteer = (await import('puppeteer')).default;
 
+  const blogPosts = await fetchPublishedBlogPosts();
+
   // vite build uses emptyOutDir:false, so stale /blog/<slug> dirs from earlier builds
   // (or the old markdown blog) can linger in dist. Wipe dist/blog so only the current
   // Firestore posts get baked — prevents orphan pages with outdated titles/branding.
   rmSync(join(distDir, 'blog'), { recursive: true, force: true });
 
-  // Discover published blog posts from Firestore and add them to the render list.
-  const blogPosts = await fetchPublishedBlogPosts();
+  // Add the published blog routes and supply the home page's latest posts.
   const homePosts = [...blogPosts].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt)).slice(0, 3)
     .map(({ id, slug, title, description, tags }) => ({ id, slug, title, description, tags }));
   const server = await startStaticServer(homePosts);
@@ -236,19 +243,12 @@ async function run() {
         { timeout: 15000 }
       ).catch(() => {});
 
-      // Blog routes load content async from Firestore — the initial paint is a
-      // loading state. Wait until that's gone and real content is in the DOM.
-      if (isBlog) {
-        await page.waitForFunction(
-          () => {
-            const root = document.querySelector('#root');
-            if (!root) return false;
-            const txt = root.innerText || '';
-            if (txt.includes('იტვირთება') || txt.includes('Loading')) return false;
-            return txt.length > 200;
-          },
-          { timeout: 20000 }
-        ).catch(() => {});
+      // Require the fetched content where discovery returned published posts.
+      // The shared navigation and footer also render in loading and error states.
+      if (route.startsWith('/blog/')) {
+        await page.waitForSelector('.blog-article .blog-prose', { timeout: 20000 });
+      } else if (route === '/blog' && blogPosts.length) {
+        await page.waitForSelector('.ed-blog-card', { timeout: 20000 });
       }
 
       // Strip analytics/pixel scripts that GA/FB useEffects injected into <head>.

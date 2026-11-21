@@ -1,19 +1,21 @@
 import { ArrowUpRight, Check } from "lucide-react";
+import type { ReactNode } from "react";
 import { ServiceCard } from "./ServiceCard";
 import "./webCards.css";
 
-export function WebPackageCard({ title, price, timeline, body, features, highlighted, href, action }: {
+export function WebPackageCard({ title, price, timeline, body, features, highlighted, href, action, secondaryAction }: {
   title: string;
-  price: string;
+  price?: string;
   timeline?: string;
-  body: string;
+  body?: string;
   features: string[];
   highlighted?: boolean;
   href: string;
   action: string;
+  secondaryAction?: ReactNode;
 }) {
   return (
-    <ServiceCard variant="package" highlighted={highlighted} title={title} body={body} facts={<>
+    <ServiceCard variant="package" highlighted={highlighted} title={title} body={body} facts={price && <>
       <strong className="web-package-price">{price}</strong>
       {timeline && <span className="web-package-time">{timeline}</span>}
     </>}>
@@ -23,6 +25,7 @@ export function WebPackageCard({ title, price, timeline, body, features, highlig
       <a className="it-pill-button it-package-cta web-package-cta" href={href} target="_blank" rel="noopener noreferrer">
         {action}
       </a>
+      {secondaryAction}
     </ServiceCard>
   );
 }

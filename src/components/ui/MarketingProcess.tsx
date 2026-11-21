@@ -9,15 +9,15 @@ const examples = {
     en: { request: "We need a campaign plan.", plan: "Content plan", output: "Campaign report", items: ["Channel review", "Next steps"] },
   },
   socialMedia: {
-    ka: { request: "გვერდის მართვა გვჭირდება.", plan: "პოსტების გეგმა", output: "კონტენტის ანგარიში", items: ["პოსტების მიმოხილვა", "შემდეგი თემები"] },
+    ka: { request: "გვერდის მართვა გვჭირდება.", plan: "პოსტების გეგმა", output: "პოსტების ანგარიში", items: ["პოსტების მიმოხილვა", "შემდეგი თემები"] },
     en: { request: "We need help managing our page.", plan: "Publishing plan", output: "Content report", items: ["Post review", "Upcoming topics"] },
   },
   advertising: {
-    ka: { request: "რეკლამის გაშვება გვინდა.", plan: "კამპანიის ბრიფი", output: "რეკლამის ანგარიში", items: ["კამპანიის მიმოხილვა", "შესაცვლელი დეტალები"] },
+    ka: { request: "რეკლამის გაშვება გვინდა.", plan: "კამპანიის მოკლე აღწერა", output: "რეკლამის ანგარიში", items: ["კამპანიის მიმოხილვა", "შესაცვლელი დეტალები"] },
     en: { request: "We’d like to run an ad.", plan: "Campaign brief", output: "Advertising report", items: ["Campaign review", "Proposed changes"] },
   },
   branding: {
-    ka: { request: "ლოგოს განახლება გვინდა.", plan: "დიზაინის ბრიფი", output: "ჩაბარებული ფაილები", items: ["ლოგო", "გრაფიკული მასალა"] },
+    ka: { request: "ლოგოს განახლება გვინდა.", plan: "დიზაინის მოკლე აღწერა", output: "ჩაბარებული ფაილები", items: ["ლოგო", "გრაფიკული მასალა"] },
     en: { request: "We’d like to refresh our logo.", plan: "Design brief", output: "Delivered files", items: ["Logo", "Graphic assets"] },
   },
   production: {

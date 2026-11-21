@@ -6,7 +6,7 @@
   line-height: 1.2;
 }
 
-.it-service-package:has(.web-package-price) .it-card-title { font-size: clamp(22px, 2.1vw, 28px); }
+.it-service-package:has(.web-package-features) .it-card-title { font-size: clamp(22px, 2.1vw, 28px); }
 
 .web-package-time {
   display: block;

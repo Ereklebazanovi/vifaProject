@@ -4,6 +4,7 @@ import "./marketingWork.css";
 
 export type WorkMedia =
   | { kind: "photo"; src: string; label: string }
+  | { kind: "video"; src: string; poster: string; label: string }
   | { kind: "reel"; id: string; label: string };
 
 export type WorkSelection = { item: WorkMedia; trigger: HTMLButtonElement };
@@ -55,7 +56,10 @@ export function WorkLightbox({ selection, language, onClose, playOnOpen = true }
         </div>
         {item.kind === "photo"
           ? <img className="marketing-lightbox-photo" src={item.src} alt={item.label} />
-          : <iframe className="marketing-lightbox-video" title={item.label}
+          : item.kind === "video" ? (
+            <video className="marketing-lightbox-video" src={item.src} poster={item.poster}
+              aria-label={item.label} controls playsInline preload="metadata" />
+          ) : <iframe className="marketing-lightbox-video" title={item.label}
               src={`https://www.youtube-nocookie.com/embed/${item.id}?autoplay=${playOnOpen ? 1 : 0}&playsinline=1`}
               allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen />}
       </div>

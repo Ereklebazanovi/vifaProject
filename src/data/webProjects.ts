@@ -39,3 +39,8 @@ export const webPortfolio = [
   webProjects.geoTechnic,
   webProjects.legard,
 ] as const;
+
+export const webPortfolioIndustryFields = {
+  ka: ["უძრავი ქონება", "მშენებლობა", "სამრეწველო ტექნიკა", "ელექტრონიკა", "საბავშვო პროდუქტები"],
+  en: ["Real estate", "Construction", "Industrial machinery", "Electronics", "Children’s products"],
+} as const;

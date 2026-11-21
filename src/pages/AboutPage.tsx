@@ -1,8 +1,8 @@
 "use client";
 
+import { EditorialPage } from "../components/ui/EditorialPage";
 import type React from "react";
 import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
 import {
   FaBullseye,
   FaChartLine,
@@ -125,107 +125,92 @@ const AboutPage: React.FC = () => {
   ];
 
   return (
-    <>
+    <EditorialPage activeLink="/about">
       <SEO
         title={t("seo.about.title")}
         description={t("seo.about.description")}
         url="https://vifadigital.ge/about"
       />
 
-      {/* Modern Dark Background Layer */}
-      <div className="fixed inset-0 z-0 bg-[#060608]">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(59,130,246,0.05)_0%,transparent_70%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(147,51,234,0.03)_0%,transparent_50%)]" />
-      </div>
-
-      <div className={`relative z-10 w-full min-h-screen pt-32 pb-24 ${getTransitionClasses()}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className={`ed-wrap ${getTransitionClasses()}`}>
+        <div>
           
           {/* ── 1. Hero & Intro ── */}
-          <div className="max-w-3xl mx-auto text-center mb-20">
-            <span className="text-sm uppercase tracking-widest text-gray-500 font-semibold mb-4 block">
+          <div className="ed-about-intro text-center ed-section-gap">
+            <span className="text-sm uppercase tracking-widest ed-muted font-semibold mb-4 block">
               {t("about.hero.subtitle")}
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-10">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold ed-ink tracking-tight mb-10">
               {t("about.hero.title")}
             </h1>
             
-            <div className="space-y-6 text-base sm:text-lg text-gray-400 leading-relaxed text-justify sm:text-center">
+            <div className="space-y-6 text-base sm:text-lg ed-muted leading-relaxed text-start sm:text-center">
               <p>{t("about.intro.p1")}</p>
               <p>{t("about.intro.p2")}</p>
             </div>
           </div>
 
-          {/* ── 2. Philosophy (Glassmorphism Quote Banner) ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-5xl mx-auto mb-32"
+          {/* ── 2. Philosophy ── */}
+          <div
+            className="max-w-5xl mx-auto ed-section-gap"
           >
-            <div className="relative p-8 sm:p-12 rounded-3xl bg-white/[0.02] border border-white/[0.05] overflow-hidden group">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+            <div className="ed-card p-6 sm:p-12">
               
               <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center md:items-start text-center md:text-left">
-                <div className="text-4xl sm:text-5xl text-white/10 shrink-0">
+                <div className="text-4xl sm:text-5xl ed-accent shrink-0">
                   <FaQuoteLeft />
                 </div>
                 <div>
-                  <h3 className="text-sm font-mono text-gray-500 uppercase tracking-widest mb-4">
+                  <h3 className="text-sm font-mono ed-muted uppercase tracking-widest mb-4">
                     {t("about.philosophy.title")}
                   </h3>
-                  <p className="text-2xl sm:text-3xl font-medium text-white leading-tight mb-4 italic">
+                  <p className="text-2xl sm:text-3xl font-medium ed-ink leading-tight mb-4 italic">
                     "{t("about.philosophy.quote")}"
                   </p>
-                  <p className="text-gray-400 leading-relaxed max-w-2xl">
+                  <p className="ed-muted leading-relaxed max-w-2xl">
                     {t("about.philosophy.desc")}
                   </p>
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* ── 3. Why VIFA? (Bento Grid) ── */}
-          <div className="max-w-6xl mx-auto mb-32">
+          <div className="max-w-6xl mx-auto ed-section-gap">
             <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-white">
+              <h2 className="text-3xl font-bold ed-ink">
                 {t("about.why.title")}
               </h2>
             </div>
 
             <div className="grid md:grid-cols-3 gap-6">
               {whyVifaFeatures.map((feature, idx) => (
-                <motion.div
+                <div
                   key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className="p-8 rounded-2xl bg-[#0A0A0C] border border-white/[0.04] hover:border-white/10 hover:bg-white/[0.02] transition-all duration-300"
+                  className="ed-card p-6 sm:p-8"
                 >
                   <div className={`text-2xl mb-6 ${feature.color}`}>
                     {feature.icon}
                   </div>
-                  <h3 className="text-xl font-medium text-white mb-3">
+                  <h3 className="text-xl font-medium ed-ink mb-3">
                     {t(feature.titleKey)}
                   </h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">
+                  <p className="ed-muted text-sm leading-relaxed">
                     {t(feature.descKey)}
                   </p>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
 
           {/* ── 4. Portfolio Shorts (Design Matched to Vifa) ── */}
-          <div className="max-w-7xl mx-auto mb-32">
+          <div className="max-w-7xl mx-auto ed-section-gap">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
               <div className="text-center md:text-left">
-                <h2 className="text-3xl font-bold text-white mb-3">
+                <h2 className="text-3xl font-bold ed-ink mb-3">
                   {t("about.portfolio.title")}
                 </h2>
-                <p className="text-gray-500">
+                <p className="ed-muted">
                   {t("about.portfolio.subtitle")}
                 </p>
               </div>
@@ -233,7 +218,7 @@ const AboutPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => scrollShorts(-1)}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white transition-colors hover:bg-white/10"
+                  className="flex h-10 w-10 items-center justify-center ed-control"
                   aria-label="Previous videos"
                 >
                   <FaChevronLeft className="h-4 w-4" />
@@ -241,7 +226,7 @@ const AboutPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => scrollShorts(1)}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white transition-colors hover:bg-white/10"
+                  className="flex h-10 w-10 items-center justify-center ed-control"
                   aria-label="Next videos"
                 >
                   <FaChevronRight className="h-4 w-4" />
@@ -261,7 +246,7 @@ const AboutPage: React.FC = () => {
                 {shorts.map((videoId, idx) => (
                   <div
                     key={videoId}
-                    className="snap-center flex-shrink-0 w-[280px] h-[500px] bg-[#0A0A0C] border border-white/[0.05] rounded-2xl overflow-hidden relative"
+                    className="ed-reel snap-center"
                   >
                     <iframe
                       src={`https://www.youtube.com/embed/${videoId}`}
@@ -278,15 +263,15 @@ const AboutPage: React.FC = () => {
             </div>
 
             <div className="text-center mt-2 md:hidden">
-              <p className="text-gray-500 text-xs">
+              <p className="ed-muted text-xs">
                 {t("about.portfolio.swipe")}
               </p>
             </div>
           </div>
 
           {/* ── 5. Outro & CTA ── */}
-          <div className="max-w-3xl mx-auto text-center border-t border-white/[0.05] pt-20">
-            <p className="text-lg sm:text-xl text-gray-300 leading-relaxed mb-10">
+          <div className="ed-about-intro ed-cta text-center">
+            <p className="text-lg sm:text-xl ed-muted leading-relaxed mb-10">
               {t("about.outro")}
             </p>
            
@@ -294,7 +279,7 @@ const AboutPage: React.FC = () => {
 
         </div>
       </div>
-    </>
+    </EditorialPage>
   );
 };
 

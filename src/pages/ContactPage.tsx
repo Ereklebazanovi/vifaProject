@@ -1,8 +1,8 @@
 "use client";
 
+import { EditorialPage } from "../components/ui/EditorialPage";
 import type React from "react";
 import { useEffect } from "react";
-import { motion } from "framer-motion";
 import {
   FaWhatsapp,
   FaEnvelope,
@@ -74,7 +74,7 @@ const ContactPage: React.FC = () => {
   const marketingWhatsappUrl = "https://wa.me/995577175132?text=გამარჯობა,%20ციფრული%20მარკეტინგის%20და%20კრეატიული%20სერვისებით%20დავინტერესდი.";
 
   return (
-    <>
+    <EditorialPage>
       <SEO
         title={t("seo.title")}
         description={t("seo.description")}
@@ -82,23 +82,18 @@ const ContactPage: React.FC = () => {
       />
 
       {/* Modern Dark Background Layer */}
-      <div className="fixed inset-0 z-0 bg-[#060608]">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(59,130,246,0.05)_0%,transparent_70%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(217,70,239,0.03)_0%,transparent_50%)]" />
-      </div>
-
-      <div className={`relative z-10 w-full min-h-screen pt-32 pb-24 flex flex-col justify-center ${getTransitionClasses()}`}>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div className={`ed-wrap ${getTransitionClasses()}`}>
+        <div className="ed-contact">
           
           {/* ── Header ── */}
           <div className="text-center mb-16">
-            <span className="text-sm uppercase tracking-widest text-fuchsia-400 font-semibold mb-4 block">
+            <span className="text-sm uppercase tracking-widest ed-accent font-semibold mb-4 block">
               {t("contact.hero.subtitle")}
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold ed-ink tracking-tight mb-6">
               {t("contact.hero.title")}
             </h1>
-            <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+            <p className="text-lg ed-muted max-w-2xl mx-auto">
               {t("contact.hero.desc")}
             </p>
           </div>
@@ -107,22 +102,19 @@ const ContactPage: React.FC = () => {
           <div className="grid md:grid-cols-2 gap-6 mb-16">
             
             {/* IT / Web Dept Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="group bg-[#0A0A0C] border border-white/10 rounded-3xl p-8 hover:bg-white/[0.02] hover:border-blue-500/30 transition-all duration-300 shadow-xl relative overflow-hidden flex flex-col h-full"
+            <div
+              className="group ed-card p-6 md:p-8 relative overflow-hidden flex flex-col h-full"
             >
               <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-20 transition-opacity text-6xl text-blue-500">
                 <FaCode />
               </div>
-              <div className="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-400 text-2xl mb-6">
+              <div className="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center ed-accent text-2xl mb-6">
                 <FaCode />
               </div>
-              <h3 className="text-2xl font-semibold text-white mb-3">
+              <h3 className="text-2xl font-semibold ed-ink mb-3">
                 {t("contact.dept.web.title")}
               </h3>
-              <p className="text-gray-400 mb-8 flex-grow">
+              <p className="ed-muted mb-8 flex-grow">
                 {t("contact.dept.web.desc")}
               </p>
               
@@ -130,30 +122,27 @@ const ContactPage: React.FC = () => {
                 href={webWhatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 w-full bg-white/[0.03] border border-white/10 hover:bg-green-500 hover:border-green-400 hover:text-white text-gray-300 py-4 rounded-xl font-medium transition-all duration-300"
+                className="it-pill-button gap-3 w-full"
               >
                 <FaWhatsapp className="text-xl" />
                 <span>+995 557 62 42 43</span>
               </a>
-            </motion.div>
+            </div>
 
             {/* Marketing Dept Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="group bg-[#0A0A0C] border border-white/10 rounded-3xl p-8 hover:bg-white/[0.02] hover:border-fuchsia-500/30 transition-all duration-300 shadow-xl relative overflow-hidden flex flex-col h-full"
+            <div
+              className="group ed-card p-6 md:p-8 relative overflow-hidden flex flex-col h-full"
             >
               <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-20 transition-opacity text-6xl text-fuchsia-500">
                 <FaBullhorn />
               </div>
-              <div className="w-14 h-14 rounded-2xl bg-fuchsia-500/10 flex items-center justify-center text-fuchsia-400 text-2xl mb-6">
+              <div className="w-14 h-14 rounded-2xl bg-fuchsia-500/10 flex items-center justify-center ed-accent text-2xl mb-6">
                 <FaBullhorn />
               </div>
-              <h3 className="text-2xl font-semibold text-white mb-3">
+              <h3 className="text-2xl font-semibold ed-ink mb-3">
                 {t("contact.dept.marketing.title")}
               </h3>
-              <p className="text-gray-400 mb-8 flex-grow">
+              <p className="ed-muted mb-8 flex-grow">
                 {t("contact.dept.marketing.desc")}
               </p>
               
@@ -161,62 +150,56 @@ const ContactPage: React.FC = () => {
                 href={marketingWhatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 w-full bg-white/[0.03] border border-white/10 hover:bg-green-500 hover:border-green-400 hover:text-white text-gray-300 py-4 rounded-xl font-medium transition-all duration-300"
+                className="it-pill-button gap-3 w-full"
               >
                 <FaWhatsapp className="text-xl" />
                 <span>+995 577 17 51 32</span>
               </a>
-            </motion.div>
+            </div>
 
           </div>
 
           {/* ── Call-back form: for people who'd rather leave a number than open WhatsApp ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="mb-16 rounded-3xl border border-white/10 bg-[#0A0A0C] p-8 md:p-10"
+          <div
+            className="ed-form ed-card mb-16 p-5 md:p-10"
           >
-            <h2 className="text-2xl font-semibold text-white">{t("contact.form.title")}</h2>
-            <p className="mb-8 mt-2 text-gray-400">{t("contact.form.desc")}</p>
+            <h2 className="text-2xl font-semibold ed-ink">{t("contact.form.title")}</h2>
+            <p className="mb-8 mt-2 ed-muted">{t("contact.form.desc")}</p>
             <LeadForm />
-          </motion.div>
+          </div>
 
           {/* ── General Info Bottom Bar ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-col sm:flex-row justify-center items-center gap-8 pt-8 border-t border-white/5"
+          <div
+            className="flex flex-col sm:flex-row justify-center items-center gap-8 pt-8 border-t ed-border"
           >
-            <div className="flex items-center gap-3 text-gray-400">
-              <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-300">
+            <div className="flex items-center gap-3 ed-muted">
+              <div className="w-10 h-10 rounded-full ed-tint flex items-center justify-center ed-muted">
                 <FaEnvelope />
               </div>
               <div>
-                <div className="text-xs uppercase tracking-wider text-gray-500">{t("contact.info.email")}</div>
-                <a href="mailto:vifa.official2020@gmail.com" className="text-white hover:text-blue-400 transition-colors">
+                <div className="text-xs uppercase tracking-wider ed-muted">{t("contact.info.email")}</div>
+                <a href="mailto:vifa.official2020@gmail.com" className="ed-ink hover:underline transition-colors">
                   vifa.official2020@gmail.com
                 </a>
               </div>
             </div>
 
-            <div className="hidden sm:block w-px h-10 bg-white/10"></div>
+            <div className="hidden sm:block w-px h-10 ed-rule"></div>
 
-            <div className="flex items-center gap-3 text-gray-400">
-              <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-300">
+            <div className="flex items-center gap-3 ed-muted">
+              <div className="w-10 h-10 rounded-full ed-tint flex items-center justify-center ed-muted">
                 <FaMapMarkerAlt />
               </div>
               <div>
-                <div className="text-xs uppercase tracking-wider text-gray-500">ლოკაცია</div>
-                <div className="text-white">{t("contact.info.location")}</div>
+                <div className="text-xs uppercase tracking-wider ed-muted">ლოკაცია</div>
+                <div className="ed-ink">{t("contact.info.location")}</div>
               </div>
             </div>
-          </motion.div>
+          </div>
 
         </div>
       </div>
-    </>
+    </EditorialPage>
   );
 };
 

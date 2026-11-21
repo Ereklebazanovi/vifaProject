@@ -1,6 +1,6 @@
+import { EditorialPage } from "../../components/ui/EditorialPage";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import SEO from "../../components/SEO";
 import Breadcrumbs, { type Crumb } from "../../components/Breadcrumbs";
@@ -44,7 +44,7 @@ const BlogIndex = () => {
   ];
 
   return (
-    <main className="min-h-screen bg-[#060608] text-white selection:bg-indigo-500/30">
+    <EditorialPage activeLink="/blog">
       <SEO
         title={ka ? "ბლოგი — ვებ დეველოპმენტი, მარკეტინგი, SEO" : "Blog — Web Development, Marketing, SEO"}
         description={
@@ -56,47 +56,40 @@ const BlogIndex = () => {
         breadcrumbs={breadcrumbItems}
       />
 
-      <div className="fixed inset-0 z-0 bg-[#060608]">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_65%_-5%,rgba(99,102,241,0.06)_0%,transparent_65%)]" />
-      </div>
-
-      <section className="blog-wrap relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 pt-32 pb-20 md:pt-40 md:pb-28">
+      <section className="ed-wrap">
         <Breadcrumbs items={breadcrumbItems} className="mb-6" />
 
-        <span className="mb-4 inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.25em] text-indigo-400">
-          <span className="h-px w-8 bg-indigo-500" />
+        <span className="mb-4 inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.25em] ed-accent">
+          <span className="h-px w-8 bg-current" />
           {ka ? "ბლოგი" : "Blog"}
         </span>
-        <h1 className="mb-5 max-w-3xl text-4xl font-extrabold leading-[1.15] tracking-tight text-white md:text-5xl">
+        <h1 className="mb-5 ed-about-intro ed-about-intro-start text-4xl font-extrabold leading-[1.15] tracking-tight ed-ink md:text-5xl">
           {ka ? "ცოდნა, რომელიც ბიზნესს ზრდის" : "Insights that grow your business"}
         </h1>
-        <p className="font-georgian-body mb-14 max-w-2xl text-lg leading-[1.85] text-gray-300">
+        <p className="mb-14 ed-about-intro ed-about-intro-start text-lg leading-[1.85] ed-muted">
           {ka
-            ? "სტატიები ვებსაიტის დამზადებაზე, ციფრულ მარკეტინგზე, SEO-სა და ტექნოლოგიებზე — პრაქტიკული რჩევები ქართული ბიზნესისთვის."
-            : "Articles on website development, digital marketing, SEO and technology — practical advice for Georgian businesses."}
+            ? "სტატიები ვებსაიტის დამზადებაზე, ციფრულ მარკეტინგზე, SEO-სა და ტექნოლოგიებზე. პრაქტიკული რჩევები ქართული ბიზნესისთვის."
+            : "Articles on website development, digital marketing, SEO and technology. Practical advice for Georgian businesses."}
         </p>
 
         {loading ? (
-          <div className="py-20 text-center text-gray-500">{ka ? "იტვირთება…" : "Loading…"}</div>
+          <div className="py-20 text-center ed-muted">{ka ? "იტვირთება…" : "Loading…"}</div>
         ) : posts.length === 0 ? (
-          <div className="py-20 text-center text-gray-500">
+          <div className="py-20 text-center ed-muted">
             {ka ? "მალე დაემატება სტატიები." : "Articles coming soon."}
           </div>
         ) : (
           <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
-            {posts.map((post, i) => (
-              <motion.article
+            {posts.map((post) => (
+              <article
                 key={post.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: Math.min(i * 0.06, 0.3) }}
               >
                 <Link
                   to={`/blog/${post.slug}`}
-                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] transition-colors hover:border-indigo-500/40"
+                  className="group ed-card ed-blog-card flex h-full flex-col overflow-hidden"
                 >
                   {post.coverImage && (
-                    <div className="aspect-[16/9] w-full overflow-hidden bg-white/5">
+                    <div className="aspect-[16/9] w-full overflow-hidden ed-tint">
                       <img
                         src={post.coverImage}
                         alt={post.title}
@@ -106,31 +99,31 @@ const BlogIndex = () => {
                     </div>
                   )}
                   <div className="flex flex-1 flex-col p-5">
-                    <div className="mb-3 flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-wider text-indigo-400">
+                    <div className="mb-3 flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-wider ed-accent">
                       {post.tags.slice(0, 2).map((t) => (
-                        <span key={t} className="rounded-full bg-indigo-500/10 px-2 py-0.5">
+                        <span key={t} className="ed-tag">
                           {t}
                         </span>
                       ))}
                     </div>
-                    <h2 className="mb-2 text-lg font-bold leading-snug text-white group-hover:text-indigo-200">
+                    <h2 className="mb-2 text-lg font-bold leading-snug ed-ink group-hover:underline">
                       {post.title}
                     </h2>
-                    <p className="font-georgian-body mb-4 line-clamp-3 flex-1 text-sm leading-[1.8] text-gray-400">
+                    <p className="font-georgian-body mb-4 line-clamp-3 flex-1 text-sm leading-[1.8] ed-muted">
                       {post.description}
                     </p>
-                    <div className="flex items-center justify-between text-xs text-gray-500">
+                    <div className="flex items-center justify-between text-xs ed-muted">
                       <span>{formatDate(post.publishedAt, ka)}</span>
-                      <ArrowRight className="h-4 w-4 text-indigo-400 transition-transform group-hover:translate-x-1" />
+                      <ArrowRight className="h-4 w-4 ed-accent transition-transform group-hover:translate-x-1" />
                     </div>
                   </div>
                 </Link>
-              </motion.article>
+              </article>
             ))}
           </div>
         )}
       </section>
-    </main>
+    </EditorialPage>
   );
 };
 

@@ -1,7 +1,7 @@
 import type { IndustryShowcase } from "./industryShowcases";
 
 // Public photo URLs are cached as immutable. Bump after replacing these files.
-const PHOTO_REVISION = 2;
+const PHOTO_REVISION = 3;
 
 export function IndustryPhoto({ slide, className, eager = false }: {
   slide: IndustryShowcase;

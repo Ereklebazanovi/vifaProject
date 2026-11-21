@@ -24,7 +24,7 @@ const MESSAGE_BY_PREFIX: [string, string][] = [
 ];
 const DEFAULT_MESSAGE = "გამარჯობა, დავინტერესდი თქვენი სერვისებით.";
 
-const whatsappUrlFor = (pathname: string) => {
+export const whatsappUrlFor = (pathname: string) => {
   const match = MESSAGE_BY_PREFIX.find(([prefix]) => pathname.startsWith(prefix));
   const text = match ? match[1] : DEFAULT_MESSAGE;
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;

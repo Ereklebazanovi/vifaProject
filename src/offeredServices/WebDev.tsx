@@ -255,7 +255,7 @@ export default function WebDev() {
         <ServiceHero id="web-hero-title" breadcrumbs={breadcrumbItems} title={t("webdev.hero.main_title")}
             description={en
               ? "Landing pages, corporate websites with a CMS and online stores with Georgian bank payments."
-              : "სავიზიტო საიტები, კორპორატიული ვებსაიტები მართვის პანელით და ონლაინ მაღაზიები ქართული ბანკების გადახდის სისტემებით."}
+              : "სავიზიტო და კორპორატიული საიტები, ონლაინ მაღაზიები ბარათით გადახდით."}
             actions={<>
               <a className="it-pill-button" href="#pricing">{en ? "See packages" : t("webdev.pricing.cta")} <ArrowDown size={16} aria-hidden="true" /></a>
               <a className="it-more-link" href={whatsappUrl} target="_blank" rel="noopener noreferrer">{t("webdev.whatsapp.consult")} ›</a>

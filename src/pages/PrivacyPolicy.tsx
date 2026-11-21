@@ -1,5 +1,5 @@
+import { EditorialPage } from "../components/ui/EditorialPage";
 import React, { useEffect } from "react";
-import { motion } from "framer-motion";
 import { useLanguage } from '../contexts/LanguageContext';
 import { useLanguageTransition } from '../hooks/useLanguageTransition';
 import { FaShieldAlt, FaLock, FaEye, FaUserShield } from "react-icons/fa";
@@ -88,62 +88,51 @@ const PrivacyPolicy: React.FC = () => {
   ];
 
   return (
-    <>
+    <EditorialPage>
       <SEO
         title={t("privacy.title")}
         description={t("privacy.description")}
         url="https://vifadigital.ge/privacy"
         type="website"
       />
-      <div className={`mt-20 min-h-screen transition-colors duration-500 bg-black ${getTransitionClasses()}`}>
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
+      <div className={`ed-wrap ed-reading ${getTransitionClasses()}`}>
+        <header className="text-center mb-10">
           <div className="flex items-center justify-center mb-6">
-            <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/25">
-              <FaShieldAlt className="w-8 h-8 text-white" />
+            <div className="ed-icon ed-icon-large">
+              <FaShieldAlt className="w-8 h-8 ed-ink" />
             </div>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <h1 className="ed-legal-title mb-6">
             {t('privacy.title')}
           </h1>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+          <p className="ed-intro">
             {t('privacy.description')}
           </p>
-          <div className="mt-4 text-sm text-slate-500">
+          <div className="mt-4 text-sm ed-muted">
             {t('privacy.lastUpdated')}: {new Date().toLocaleDateString('ka-GE')}
           </div>
-        </motion.div>
+        </header>
 
-        <div className="space-y-12">
+        <div className="space-y-5">
           {sections.map((section, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-slate-800/30 backdrop-blur-xl border border-slate-700/20 rounded-2xl p-8"
+              className="ed-card p-5 sm:p-8"
             >
               <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500/20 to-purple-600/20 border border-blue-400/30 rounded-xl flex items-center justify-center text-blue-400 mr-4">
+                <div className="ed-icon mr-4 shrink-0">
                   {section.icon}
                 </div>
-                <h2 className="text-2xl font-bold text-white">{section.title}</h2>
+                <h2 className="text-2xl font-bold ed-ink">{section.title}</h2>
               </div>
-              <div className="text-slate-300 leading-relaxed whitespace-pre-line">
+              <div className="ed-prose whitespace-pre-line">
                 {section.content}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
-      </div>
-    </>
+    </EditorialPage>
   );
 };
 

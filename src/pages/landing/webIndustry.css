@@ -6,11 +6,14 @@
   min-height: 46px;
 }
 
+/* The photo itself is the card: no colored mat around it (the framed "picture in a box" look was
+   rejected). Same radius as the other cards on the page. Shared by the web and marketing industries. */
 .industry-hero-visual {
   aspect-ratio: 16 / 11;
   min-width: 0;
-  padding: clamp(10px, 2vw, 20px);
+  padding: 0;
   border-radius: 28px;
+  overflow: hidden;
 }
 
 .industry-hero-photo {
@@ -18,7 +21,7 @@
   overflow: hidden;
   width: 100%;
   height: 100%;
-  border-radius: 18px;
+  border-radius: 28px;
 }
 
 .industry-hero-photo img {

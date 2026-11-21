@@ -37,7 +37,7 @@ export function MarketingServicePage({ service, copy, serviceType, cardArtifacts
   copy: Record<MarketingLanguage, ServiceCopy>;
   serviceType: string;
   cardArtifacts: readonly MarketingArtifactKind[];
-  offers?: { name: string; price: number }[];
+  offers?: { name: string; price: number; unitText?: string }[];
   children?: (language: MarketingLanguage, whatsappHref: string) => ReactNode;
 }) {
   const { currentLanguage: language, toggleLanguage } = useLanguage();
