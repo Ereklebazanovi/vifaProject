@@ -6,8 +6,8 @@ import "./marketingArtifacts.css";
 export type MarketingArtifactKind = "calendar" | "post" | "comment" | "sponsored" | "search" |
   "audience" | "logo" | "identity" | "poster" | "voice" | "photo" | "reel" | "aerial";
 
-const postPhoto = foodPhoto(5);
-const photoPair = [foodPhoto(1), foodPhoto(3)];
+const postPhoto = foodPhoto(10);
+const photoPair = [foodPhoto(14), foodPhoto(4)];
 const swatches = ["#403150", "#9c7db1", "#ecc6ad", "#f8e6d9"];
 
 function Calendar({ language }: { language: MarketingLanguage }) {

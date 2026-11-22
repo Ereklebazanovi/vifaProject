@@ -13,6 +13,7 @@ export const siteConfig = {
   email: "vifa.official2020@gmail.com",
 
   phone: "+995 557 62 42 43", // IT Department
+  marketingPhone: "+995 577 17 51 32",
 
   // Social Media
   social: {

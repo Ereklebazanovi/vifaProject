@@ -41,7 +41,7 @@ const directions = [
     key: "marketing",
     title: { ka: "მარკეტინგი", en: "Marketing" },
     href: marketingHubHref,
-    wash: productColors.production.wash,
+    wash: productColors.marketing.wash,
     phone: { href: "tel:+995577175132", label: "+995 577 17 51 32" },
     services: marketingServiceOrder.map(key => marketingServices[key]),
   },

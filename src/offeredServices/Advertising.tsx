@@ -5,7 +5,7 @@ const copy = {
   ka: {
     seoTitle: "ციფრული რეკლამა Facebook-ზე, Instagram-ზე და Google-ში",
     seoDescription: "Facebook და Instagram რეკლამა, Google Ads და სარეკლამო კამპანიების მართვა. ფასი ინდივიდუალურია, საწყისი კონსულტაცია უფასოა.",
-    description: "ვგეგმავთ და ვმართავთ კამპანიებს Facebook-ზე, Instagram-ზე და Google-ში თქვენი ბიზნესის მიზნების მიხედვით.",
+    description: "ვამზადებთ რეკლამის ტექსტსა და ვიზუალს, ვარჩევთ, ვის ვაჩვენოთ, და კამპანიას შედეგის მიხედვით ვასწორებთ.",
     price: "ფასი კონსულტაციაზე",
     sectionTitle: "რეკლამის არხები და კამპანიის მართვა",
     sectionLine: "თავიდანვე ვთანხმდებით, ვის უნდა ვაჩვენოთ რეკლამა და რა შედეგს ელით.",
@@ -31,7 +31,7 @@ const copy = {
   en: {
     seoTitle: "Digital Advertising on Facebook, Instagram and Google",
     seoDescription: "Facebook and Instagram advertising, Google Ads and campaign management. Get a custom quote in a free initial consultation.",
-    description: "We plan and manage campaigns on Facebook, Instagram and Google around your business goals.",
+    description: "We write the ad copy, make the visuals, choose who sees them and adjust the campaign by its results.",
     price: "Pricing on consultation",
     sectionTitle: "Ad channels and campaign management",
     sectionLine: "We start by agreeing on who you want to reach and what you want the campaign to achieve.",

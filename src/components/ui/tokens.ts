@@ -8,4 +8,7 @@ export const productColors = {
   advertising: { soft: "#f1cbc6", wash: "#fbebe8", deep: "#923f42" },
   production: { soft: "#f1cddb", wash: "#fbebf1", deep: "#853753" },
   branding: { soft: "#dcd2f2", wash: "#f2eefb", deep: "#5c438e" },
+  // The marketing direction as a whole (home card, About panel, hover wash). Lavender since 2026-11-21:
+  // the owner and Luka wanted something other than pink next to the blue IT card.
+  marketing: { soft: "#dcd2f2", wash: "#f2eefb", deep: "#5c438e" },
 } as const;

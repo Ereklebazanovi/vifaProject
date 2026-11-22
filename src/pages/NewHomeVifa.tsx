@@ -2,15 +2,11 @@ import { useLayoutEffect, useRef } from "react";
 import SEO from "../components/SEO";
 import { ContactBlock } from "../components/ui/ContactBlock";
 import { LightPage } from "../components/ui/LightPage";
-import { PageLink } from "../components/ui/PageLink";
 import { SiteFooter } from "../components/ui/SiteFooter";
 import { SiteNav } from "../components/ui/SiteNav";
 import { useLanguage } from "../contexts/LanguageContext";
-import { itHref } from "../data/itServices";
-import { marketingHubHref } from "../data/marketingServices";
 import { useShorts } from "../hooks/useShorts";
-import { HomeBlog } from "./HomeBlog";
-import { HomeDirections, HomeProducts, HomeTrust } from "./HomeSections";
+import { HomeDirections, HomeProducts } from "./HomeSections";
 import { HomeWorkShowcases } from "./HomeWorkShowcases";
 import "./preview/hubSections.css";
 
@@ -24,8 +20,6 @@ const metadata = {
     description: "VIFA Digital is a digital agency in Tbilisi: website development, digital marketing, photo and video production, AI chatbots and warehouse software. Free consultation.",
   },
 };
-
-const showTrustStats = import.meta.env.VITE_SHOW_HOME_TRUST_STATS !== "false";
 
 function HomeWordmark() {
   const vifaRef = useRef<HTMLSpanElement>(null);
@@ -82,7 +76,6 @@ function HomeWordmark() {
 export default function NewHomeVifa() {
   const { currentLanguage: language, toggleLanguage } = useLanguage();
   const ka = language === "ka";
-  const itTitle = ka ? "IT მომსახურება" : "IT services";
   const shorts = useShorts();
   const whatsappHref = "https://wa.me/995557624243?text=" + encodeURIComponent(
     ka ? "გამარჯობა, მსურს უფასო კონსულტაცია." : "Hello, I’d like a free consultation.",
@@ -94,19 +87,13 @@ export default function NewHomeVifa() {
     <main className="it-main">
       <section className="it-col home-hero" aria-labelledby="home-title">
         <HomeWordmark />
-        <div className="home-hero-links">
-          <PageLink to={itHref} data-wash="web"><span aria-hidden="true">‹</span> {itTitle}</PageLink>
-          <span className="home-hero-link-divider" aria-hidden="true" />
-          <PageLink to={marketingHubHref} data-wash="marketing">{ka ? "მარკეტინგი" : "Marketing"} <span aria-hidden="true">›</span></PageLink>
-        </div>
       </section>
 
       <HomeDirections language={language} />
       <HomeWorkShowcases language={language} shorts={shorts} />
       <HomeProducts language={language} />
-      {showTrustStats && <HomeTrust language={language} />}
-
-      <HomeBlog language={language} />
+      {/* The trust row and the blog teaser were removed from the home page on 2026-11-22 (owner's call);
+          the trust row still lives on /about and the blog has its own page. */}
       <ContactBlock whatsappHref={whatsappHref} language={language} />
     </main>
     <SiteFooter language={language} />

@@ -13,7 +13,7 @@ const articleTopics = [
   { kind: "stock", match: /საწყობ|მარაგ|\b(?:inventory|warehouse|wms)\b/i, palette: productColors.invento },
   { kind: "search", match: /\bseo\b|ინდექსაცი|საძიებო|google-ში|google search/i, palette: productColors.web },
   { kind: "website", match: /ვებსაიტ|საიტი|საიტის|\b(?:website|web development)\b/i, palette: productColors.branding },
-  { kind: "marketing", match: /მარკეტინგ|რეკლამ|ბრენდინგ|\b(?:marketing|advertising|branding|social media)\b/i, palette: productColors.production },
+  { kind: "marketing", match: /მარკეტინგ|რეკლამ|ბრენდინგ|\b(?:marketing|advertising|branding|social media)\b/i, palette: productColors.marketing },
 ] as const;
 
 function ArticleArtwork({ post }: { post: BlogPreview }) {

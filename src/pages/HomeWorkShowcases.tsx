@@ -3,6 +3,7 @@ import { Play } from "lucide-react";
 import { PageLink } from "../components/ui/PageLink";
 import { ScreenshotCarousel } from "../components/ui/ScreenshotCarousel";
 import { SectionHeading } from "../components/ui/SectionHeading";
+import { ShowcasePager } from "../components/ui/ShowcasePager";
 import { WorkLightbox, type WorkMedia, type WorkSelection } from "../components/ui/WorkLightbox";
 import { useShowcaseRotation } from "../components/ui/useShowcaseRotation";
 import { foodPhoto } from "../data/marketingMedia";
@@ -14,7 +15,7 @@ type MediaSlide = { item: WorkMedia; image: string; caption: string; fallback?: 
 function ProductionShowcase({ language, shorts }: { language: Language; shorts: readonly string[] }) {
   const ka = language === "ka";
   const [selection, setSelection] = useState<WorkSelection | null>(null);
-  const photos: MediaSlide[] = [1, 4, 7, 13].map(number => {
+  const photos: MediaSlide[] = [4, 13, 1, 7].map(number => {
     const photo = foodPhoto(number);
     return {
       item: { kind: "photo", src: photo.src, label: ka ? photo.altKa : photo.altEn },
@@ -60,13 +61,9 @@ function ProductionShowcase({ language, shorts }: { language: Language; shorts: 
         <figcaption className="it-screenshot-caption">{caption}</figcaption>
       </figure>
       {!reducedMotion && (
-        <div className="it-screenshot-pagination" role="group" aria-label={ka ? "გადაღების არჩევა" : "Choose a photo or reel"}>
-          {slides.map((slide, position) => (
-            <button key={slide.image} type="button" className="it-screenshot-dot" aria-label={slide.item.label}
-              aria-current={position === index ? "true" : undefined} disabled={!isReady(position)}
-              onClick={() => setActive(position)} />
-          ))}
-        </div>
+        <ShowcasePager count={slides.length} index={index} isReady={isReady} onSelect={setActive}
+          label={ka ? "გადაღების არჩევა" : "Choose a photo or reel"} dotLabel={position => slides[position].item.label}
+          language={language} />
       )}
     </div>
     {selection && <WorkLightbox selection={selection} language={language} onClose={() => setSelection(null)} playOnOpen={false} />}

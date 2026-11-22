@@ -1,4 +1,5 @@
 import { ScreenshotDetail, type ScreenshotViewport } from "./ScreenshotDetail";
+import { ShowcasePager } from "./ShowcasePager";
 import { useShowcaseRotation } from "./useShowcaseRotation";
 import "./screenshotCarousel.css";
 
@@ -58,14 +59,8 @@ export function ScreenshotCarousel({ slides, language, controlsLabel }: {
         </figcaption>
       </figure>
       {!reducedMotion && (
-        <div className="it-screenshot-pagination" role="group" aria-label={controlsLabel}>
-          {slides.map((slide, position) => (
-            <button key={slide.image} type="button" className="it-screenshot-dot" aria-label={slide.name}
-              aria-current={position === index ? "true" : undefined}
-              disabled={!isReady(position)}
-              onClick={() => setActive(position)} />
-          ))}
-        </div>
+        <ShowcasePager count={slides.length} index={index} isReady={isReady} onSelect={setActive}
+          label={controlsLabel} dotLabel={position => slides[position].name} language={language} />
       )}
     </div>
   );

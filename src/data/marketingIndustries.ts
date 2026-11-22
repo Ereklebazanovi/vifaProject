@@ -4,7 +4,7 @@ import type { MarketingLanguage } from "./marketingServices";
 
 type Localized = Record<MarketingLanguage, string>;
 
-const restaurantPhoto = foodPhoto(1);
+const restaurantPhoto = foodPhoto(10);
 
 export const marketingIndustryOrder = ["food", "tourism", "retail", "beauty", "legal-finance"] as const;
 

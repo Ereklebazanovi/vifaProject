@@ -66,8 +66,14 @@
 .it-screenshot-pagination {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-top: 4px;
 }
+
+/* Round arrows on both sides of the dots (look from .it-ic-arrow, the industry carousel's buttons). */
+.it-screenshot-pagination .it-screenshot-arrow { flex: 0 0 32px; width: 32px; height: 32px; }
+.it-screenshot-pagination .it-screenshot-arrow:first-child { margin-inline-end: 8px; }
+.it-screenshot-pagination .it-screenshot-arrow:last-child { margin-inline-start: 8px; }
 
 .it-screenshot-dot {
   display: grid;

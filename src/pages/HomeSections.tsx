@@ -2,12 +2,11 @@ import { SectionHeading } from "../components/ui/SectionHeading";
 import { ServiceCard } from "../components/ui/ServiceCard";
 import { inventoScreenshots } from "../data/inventoScreenshots";
 import { itHref, itServices, type ItLanguage } from "../data/itServices";
-import { foodPhoto } from "../data/marketingMedia";
+import { SocialProfile, SponsoredPost } from "../components/ui/MarketingScenes";
 import { marketingHubHref } from "../data/marketingServices";
 import { WebsiteDemoObject } from "./preview/ProductDevices";
+import "../components/ui/marketingDirection.css";
 import "./homeVifa.css";
-
-const marketingPhotos = [5, 10, 11].map(foodPhoto);
 
 export function HomeDirections({ language }: { language: ItLanguage }) {
   const ka = language === "ka";
@@ -18,11 +17,13 @@ export function HomeDirections({ language }: { language: ItLanguage }) {
         body={ka ? "ვებსაიტები, AI ჩატბოტები და მართვის სისტემები." : "Websites, AI chatbots and business software."}>
         <div className="home-web-preview" aria-hidden="true"><WebsiteDemoObject step={1} language={language} /></div>
       </ServiceCard>
-      <ServiceCard headingAs="h2" product="production" title={ka ? "მარკეტინგი" : "Marketing"} to={marketingHubHref}
+      <ServiceCard headingAs="h2" product="marketing" title={ka ? "მარკეტინგი" : "Marketing"} to={marketingHubHref}
         body={ka ? "სოციალური მედია, რეკლამა, გადაღება და ბრენდინგი." : "Social media, advertising, production and branding."}>
-        <div className="home-marketing-photos" aria-hidden="true">
-          {marketingPhotos.map(photo => <img key={photo.src} src={photo.srcSm} alt="" width={photo.w} height={photo.h}
-            loading="lazy" decoding="async" />)}
+        {/* Marketing work itself (an ad and an Instagram profile), mirroring the IT card's browser and phone.
+            Plain food shots read as "we photograph food", not marketing (Luka's note). */}
+        <div className="home-marketing-preview" aria-hidden="true">
+          <SponsoredPost language={language} ready />
+          <SocialProfile posted />
         </div>
       </ServiceCard>
     </section>
