@@ -11,12 +11,12 @@
 //   DEMO_AI_FALLBACK_KEY  paid API key used when the free one fails (optional)
 //   DEMO_AI_MODEL     model name, e.g. gemini-3.5-flash-lite (required)
 //   DEMO_AI_TIMEOUT_MS    how long the free key may take before the paid one is tried (default 4000)
-//   DEMO_FALLBACK_MONTHLY_USD  most the paid key may spend on the demo per month (default 0.2)
+//   DEMO_FALLBACK_MONTHLY_USD  most the paid key may spend on the demo per month (default 1)
 //   DEMO_PRICE_IN_PER_M / DEMO_PRICE_OUT_PER_M  the model's USD price per million tokens (default 0.30 / 2.50)
 //   DEMO_AI_BASE_URL  OpenAI-compatible endpoint; default is Google Gemini's
 //                     (https://generativelanguage.googleapis.com/v1beta/openai). Groq: https://api.groq.com/openai/v1
 //   DEMO_AI_REASONING optional reasoning_effort to send (e.g. "none" or "low") for models that think first
-//   DEMO_PER_VISITOR  messages one visitor may send per day (default 12)
+//   DEMO_PER_VISITOR  messages one visitor may send per day (default 8)
 //   DEMO_PER_DAY      messages all visitors together may send per day (default 100)
 //   FIREBASE_SERVICE_ACCOUNT  already set for /api/lead; used here to count messages
 import { createHash } from "node:crypto";
@@ -33,10 +33,10 @@ type Turn = { role: "user" | "assistant"; content: string };
 const ALLOWED_HOSTS = ["vifadigital.ge", "www.vifadigital.ge", "localhost"];
 const MAX_TURNS = 24;
 const MAX_CHARS = 600;
-const PER_VISITOR = Number(process.env.DEMO_PER_VISITOR) || 12;
+const PER_VISITOR = Number(process.env.DEMO_PER_VISITOR) || 8;
 const PER_DAY = Number(process.env.DEMO_PER_DAY) || 100;
 const FREE_TIMEOUT_MS = Number(process.env.DEMO_AI_TIMEOUT_MS) || 4000;
-const FALLBACK_MONTHLY_USD = Number(process.env.DEMO_FALLBACK_MONTHLY_USD) || 0.2;
+const FALLBACK_MONTHLY_USD = Number(process.env.DEMO_FALLBACK_MONTHLY_USD) || 1;
 const PRICE_IN = Number(process.env.DEMO_PRICE_IN_PER_M) || 0.3;
 const PRICE_OUT = Number(process.env.DEMO_PRICE_OUT_PER_M) || 2.5;
 
