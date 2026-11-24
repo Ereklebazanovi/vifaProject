@@ -294,12 +294,14 @@ const chatChannels = [
 ] as const;
 const heroChannels = [...chatChannels, { key: "web", Icon: FaGlobe, color: "#594e97" }] as const;
 
+// One online shop's inbox, so the dashboard reads as a single owner's view (since 2026-11-25; it used to
+// mix the shop, clinic, salon and rental demo chats).
 const inboxRows = [
-  { channel: heroChannels[0], scenario: "shop", message: "m1" },
-  { channel: heroChannels[1], scenario: "clinic", message: "m1" },
-  { channel: heroChannels[2], scenario: "salon", message: "m1" },
-  { channel: heroChannels[3], scenario: "rent", message: "m1" },
-  { channel: heroChannels[0], scenario: "shop", message: "m3" },
+  { channel: heroChannels[0], time: "23:48", ka: "შეკვეთა გავაკეთე, როდის მომივა?", en: "I placed an order, when will it arrive?" },
+  { channel: heroChannels[1], time: "02:15", ka: "ბათუმში მიტანა გაქვთ?", en: "Do you deliver to Batumi?" },
+  { channel: heroChannels[2], time: "08:05", ka: "ბარათით გადახდა შეიძლება?", en: "Can I pay by card?" },
+  { channel: heroChannels[3], time: "21:30", ka: "Do you deliver on weekends?", en: "Do you deliver on weekends?", lang: "en" },
+  { channel: heroChannels[0], time: "13:20", ka: "კომპანიაზე ინვოისს გამოწერთ?", en: "Can you invoice a company?" },
 ] as const;
 const usageBands = ["small", "medium", "large"] as const;
 const formatLari = (price: string) => price.replace(/(\d)₾/g, "$1 ₾");
@@ -321,15 +323,13 @@ function ChatbotOwnerPreview({ t, en }: { t: T; en: boolean }) {
             <article className="chatbot-owner-inbox">
               <h4><MessageSquare size={18} aria-hidden="true" />{en ? "Recent conversations" : "ბოლო საუბრები"}</h4>
               <ul role="list">
-                {inboxRows.map(({ channel: { key, Icon, color }, scenario, message }) => {
-                  const time = t(`chat.${scenario}.time`);
+                {inboxRows.map((row) => {
+                  const { key, Icon, color } = row.channel;
                   return (
-                    <li key={`${scenario}-${message}`}>
+                    <li key={row.time}>
                       <Icon color={color} aria-label={t(`platform.${key}.name`)} role="img" />
-                      <span lang={scenario === "rent" ? "en" : undefined}>
-                        {t(`chat.${scenario}.${message}`).replace(/^(?:გამარჯობა, |Hi[!,] )/u, "")}
-                      </span>
-                      <time dateTime={time.padStart(5, "0")}>{time}</time>
+                      <span lang={"lang" in row ? row.lang : undefined}>{en ? row.en : row.ka}</span>
+                      <time dateTime={row.time}>{row.time}</time>
                     </li>
                   );
                 })}
@@ -341,8 +341,8 @@ function ChatbotOwnerPreview({ t, en }: { t: T; en: boolean }) {
                 <div className="chatbot-owner-order">
                   <span>Messenger</span>
                   <dl>
-                    <div><dt>{en ? "Item" : "ნივთი"}</dt><dd>{en ? "Dress · size M" : "კაბა · ზომა M"}</dd></div>
-                    <div><dt>{en ? "Price" : "ფასი"}</dt><dd>89 ₾</dd></div>
+                    <div><dt>{en ? "Item" : "ნივთი"}</dt><dd>{en ? "Coffee machine" : "ყავის აპარატი"}</dd></div>
+                    <div><dt>{en ? "Price" : "ფასი"}</dt><dd>349 ₾</dd></div>
                     <div><dt>{t("admin.mock.row1.k")}</dt><dd>{formatLari(t("admin.mock.row1.v"))}</dd></div>
                   </dl>
                 </div>
