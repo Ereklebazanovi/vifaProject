@@ -64,6 +64,18 @@ async function removeTests() {
   return old.length;
 }
 
+/**
+ * The live chatbot demo (api/demo-chat.ts): its talks are kept 90 days, as the privacy page says,
+ * and its day counters (with the hashed visitor ids under them) 30 days.
+ */
+async function removeOldDemoChats() {
+  const db = adminDb();
+  const talks = await db.collection("demoChatLogs").where("updatedAt", "<", Date.now() - 90 * DAY).limit(300).get();
+  const firstDay = new Date(Date.now() - 30 * DAY).toISOString().slice(0, 10);
+  const days = (await db.collection("demoChat").listDocuments()).filter((d) => d.id < firstDay);
+  await Promise.all([...talks.docs.map((d) => d.ref.delete()), ...days.map((d) => db.recursiveDelete(d))]);
+}
+
 async function buildDigest() {
   const snap = await adminDb().collection("contacts").get();
   const all = snap.docs.map((d) => ({ id: d.id, ...d.data() }) as C).filter((c) => !c.test);
@@ -140,6 +152,7 @@ export default async function handler(req: Req, res: Res) {
   if (!fromCron && !admin) return res.status(401).json({ ok: false, error: "auth" });
 
   if (fromCron) await removeTests().catch((e) => console.error("[digest] test cleanup failed", e));
+  if (fromCron) await removeOldDemoChats().catch((e) => console.error("[digest] demo chat cleanup failed", e));
   const d = await buildDigest();
   if (fromCron && d.empty) return res.status(200).json({ ok: true, sent: false });
   const to = admin ? [admin] : [...envList("NOTIFY_EMAIL"), ...envList("NOTIFY_EMAIL_MARKETING")];

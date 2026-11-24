@@ -94,6 +94,7 @@ const router = createBrowserRouter(createRoutesFromElements(
       <Route path="pipeline" lazy={lazyRoute(() => import("./admin/pipeline/PipelinePage"))} />
       <Route path="contacts" lazy={lazyRoute(() => import("./admin/contacts/ContactsPage"))} />
       <Route path="sources" lazy={lazyRoute(() => import("./admin/sources/SourcesPage"))} />
+      <Route path="chatbot" lazy={lazyRoute(() => import("./admin/chatbot/ChatbotDemoPage"))} />
       <Route path="campaigns" lazy={lazyRoute(() => import("./admin/send/SendPage"))} />
       <Route path="send" element={<Navigate to="/studio/campaigns" replace />} />
       <Route path="blog" lazy={lazyRoute(() => import("./pages/blog/BlogEditor"))} />

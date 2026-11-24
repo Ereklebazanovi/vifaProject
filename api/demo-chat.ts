@@ -19,6 +19,10 @@
 //   DEMO_PER_VISITOR  messages one visitor may send per day (default 8)
 //   DEMO_PER_DAY      messages all visitors together may send per day (default 100)
 //   FIREBASE_SERVICE_ACCOUNT  already set for /api/lead; used here to count messages
+//
+// Firestore: demoChat/{day} (count, failed, limited; visitors/{hash of day+IP} for the per-visitor
+// limit), demoChatMonth/{YYYY-MM} (paid-key usd and answers), demoChatLogs/{conversation} (the talk
+// itself, for /studio/chatbot). api/digest.ts deletes day counters after 30 days and talks after 90.
 import { createHash } from "node:crypto";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { jsonBody } from "./_lib/adminAuth.js";
@@ -123,11 +127,11 @@ function fallbackRef() {
 }
 
 /** Free key first; the paid key only when the free one failed and this month's cap is not reached. */
-async function answer(turns: Turn[]): Promise<string | null> {
+async function answer(turns: Turn[]): Promise<{ reply: string; paid: boolean; usd: number } | null> {
   const free = process.env.DEMO_AI_KEY;
   if (free) {
     const result = await askAi(free, turns, FREE_TIMEOUT_MS);
-    if (result) return result.reply;
+    if (result) return { reply: result.reply, paid: false, usd: 0 };
   }
   const paid = process.env.DEMO_AI_FALLBACK_KEY;
   if (!paid) return null;
@@ -136,7 +140,35 @@ async function answer(turns: Turn[]): Promise<string | null> {
   const result = await askAi(paid, turns, 20000);
   if (!result) return null;
   await fallbackRef().set({ usd: FieldValue.increment(result.usd), answers: FieldValue.increment(1) }, { merge: true });
-  return result.reply;
+  return { reply: result.reply, paid: true, usd: result.usd };
+}
+
+/** Adds one to a field of today's counter doc (failed answers, visitors stopped by the limit). */
+function countToday(field: "failed" | "limited") {
+  return adminDb().doc(`demoChat/${new Date().toISOString().slice(0, 10)}`)
+    .set({ [field]: FieldValue.increment(1) }, { merge: true })
+    .catch((error) => console.error("demo-chat: count", field, error));
+}
+
+/**
+ * Keeps the conversation for the studio (/studio/chatbot), 90 days (the morning cron deletes older
+ * ones). Each turn carries its own time, so arrayUnion never merges two identical questions.
+ */
+async function saveTurn(id: string, question: string, reply: { reply: string; paid: boolean; usd: number }, language: string) {
+  const at = Date.now();
+  const ref = adminDb().doc(`demoChatLogs/${id}`);
+  const fresh = !(await ref.get()).exists;
+  await ref.set({
+    ...(fresh ? { startedAt: at, language } : {}),
+    updatedAt: at,
+    turns: FieldValue.arrayUnion(
+      { role: "user", content: question, at },
+      { role: "assistant", content: reply.reply, at: at + 1, paid: reply.paid },
+    ),
+    questions: FieldValue.increment(1),
+    paidAnswers: FieldValue.increment(reply.paid ? 1 : 0),
+    usd: FieldValue.increment(reply.usd),
+  }, { merge: true });
 }
 
 export default async function handler(req: Req, res: Res) {
@@ -150,13 +182,20 @@ export default async function handler(req: Req, res: Res) {
     return res.status(403).json({ ok: false });
   }
 
-  const turns = readTurns(jsonBody(req));
+  const body = jsonBody(req);
+  const turns = readTurns(body);
   if (!turns) return res.status(400).json({ ok: false, error: "messages" });
+  const conversation = typeof body.conversation === "string" && /^[A-Za-z0-9-]{8,64}$/.test(body.conversation)
+    ? body.conversation : null;
+  const language = body.language === "en" ? "en" : "ka";
 
   const ip = String(req.headers["x-forwarded-for"] || "").split(",")[0].trim() || "unknown";
   try {
     const counted = await countMessage(ip);
-    if (counted !== "ok") return res.status(429).json({ ok: false, error: counted });
+    if (counted !== "ok") {
+      await countToday("limited");
+      return res.status(429).json({ ok: false, error: counted });
+    }
   } catch (error) {
     // Without the counter we cannot cap the cost, so production stops; a local test may go on.
     console.error("demo-chat: counter", error);
@@ -164,11 +203,19 @@ export default async function handler(req: Req, res: Res) {
   }
 
   try {
-    const reply = await answer(turns);
-    if (!reply) return res.status(503).json({ ok: false, error: "unavailable" });
-    return res.status(200).json({ ok: true, reply });
+    const result = await answer(turns);
+    if (!result) {
+      await countToday("failed");
+      return res.status(503).json({ ok: false, error: "unavailable" });
+    }
+    if (conversation) {
+      await saveTurn(conversation, turns[turns.length - 1].content, result, language)
+        .catch((error) => console.error("demo-chat: save", error));
+    }
+    return res.status(200).json({ ok: true, reply: result.reply });
   } catch (error) {
     console.error("demo-chat: failed", error);
+    await countToday("failed");
     return res.status(503).json({ ok: false, error: "unavailable" });
   }
 }

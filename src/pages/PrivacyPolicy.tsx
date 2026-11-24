@@ -2,7 +2,7 @@ import { EditorialPage } from "../components/ui/EditorialPage";
 import React, { useEffect } from "react";
 import { useLanguage } from '../contexts/LanguageContext';
 import { useLanguageTransition } from '../hooks/useLanguageTransition';
-import { FaShieldAlt, FaLock, FaEye, FaUserShield } from "react-icons/fa";
+import { FaShieldAlt, FaLock, FaEye, FaUserShield, FaRobot } from "react-icons/fa";
 import SEO from "../components/SEO";
 
 // Privacy Policy Translations for VIFA Digital
@@ -24,6 +24,10 @@ const privacyTranslations = {
     "privacy.dataSecurity.content":
       "ჩვენ ვიყენებთ თანამედროვე უსაფრთხოების ზომებს, მათ შორის:\n\n• SSL შიფრაციას მონაცემთა გადაცემის უზრუნველსაყოფად\n• უსაფრთხო სერვერებსა და დაცულ მონაცემთა ბაზებს\n• მონაცემებზე წვდომის მკაცრ შეზღუდვას\n• უსაფრთხოების რეგულარულ აუდიტს\n\nმიუხედავად ჩვენი ძალისხმევისა, გთხოვთ, გაითვალისწინოთ, რომ ინტერნეტის საშუალებით მონაცემთა გადაცემა 100%-ით დაცული ვერ იქნება.",
 
+    "privacy.chatbotDemo.title": "ჩატბოტის დემო",
+    "privacy.chatbotDemo.content":
+      "ჩატბოტის გვერდზე, „სცადეთ თავად“-ში დაწერილ შეტყობინებებს პასუხის მოსამზადებლად Google Gemini-ს (Google) ვუგზავნით.\n\n• საუბრებს 90 დღე ვინახავთ, რომ ვნახოთ, რას კითხულობენ, და ბოტი გავაუმჯობესოთ. შემდეგ ავტომატურად იშლება.\n• IP მისამართს არ ვინახავთ. ლიმიტის დასათვლელად ვიყენებთ მისგან მიღებულ შეუქცევად კოდს, რომელიც 30 დღეში იშლება.\n\nგთხოვთ, ამ ჩატში პირადი მონაცემები არ ჩაწეროთ.",
+
     "privacy.userRights.title": "თქვენი უფლებები",
     "privacy.userRights.content":
       "თქვენ გაქვთ შემდეგი უფლებები:\n\n• მოითხოვოთ თქვენს შესახებ არსებული ინფორმაციის გაცნობა\n• მოითხოვოთ თქვენი მონაცემების გასწორება ან განახლება\n• მოითხოვოთ თქვენი მონაცემების წაშლა\n• შეაჩეროთ თქვენი მონაცემების დამუშავება\n\nამ უფლებების რეალიზაციისთვის დაგვიკავშირდით VIFA Digital-ის საკონტაქტო არხების მეშვეობით.",
@@ -44,6 +48,10 @@ const privacyTranslations = {
     "privacy.dataSecurity.title": "Data Security",
     "privacy.dataSecurity.content":
       "We use modern security measures, including:\n\n• SSL encryption for data transmission\n• Secure servers and protected databases\n• Restricted access to data\n• Regular security audits\n\nDespite our efforts, please note that data transmission via the internet cannot be 100% secure.",
+
+    "privacy.chatbotDemo.title": "Chatbot demo",
+    "privacy.chatbotDemo.content":
+      "Messages written in \"Try it yourself\" on the chatbot page are sent to Google Gemini (Google) to prepare the reply.\n\n• We keep the chats for 90 days to see what people ask and improve the bot. After that they are deleted automatically.\n• We do not store IP addresses. To count the limit we use a one-way code derived from it, deleted within 30 days.\n\nPlease don't share personal details in this chat.",
 
     "privacy.userRights.title": "Your Rights",
     "privacy.userRights.content":
@@ -79,6 +87,11 @@ const PrivacyPolicy: React.FC = () => {
       title: t('privacy.dataSecurity.title'),
       icon: <FaShieldAlt className="w-6 h-6" />,
       content: t('privacy.dataSecurity.content')
+    },
+    {
+      title: t('privacy.chatbotDemo.title'),
+      icon: <FaRobot className="w-6 h-6" />,
+      content: t('privacy.chatbotDemo.content')
     },
     {
       title: t('privacy.userRights.title'),

@@ -19,7 +19,7 @@ const copy = {
     chips: ["რა ღირს?", "Instagram-ზეც პასუხობს?", "რამდენ ხანში ააწყობთ?", "ჩემს ბიზნესს მოერგება?"],
     placeholder: "დაწერეთ კითხვა...",
     send: "გაგზავნა",
-    note: "პირადი მონაცემები არ ჩაწეროთ.",
+    note: "საუბარი ინახება ბოტის გასაუმჯობესებლად. პირადი მონაცემები არ ჩაწეროთ.",
     whatsapp: "მოგვწერეთ WhatsApp-ზე",
     limit: "დღეისთვის დემოს ლიმიტი ამოიწურა. დანარჩენზე სიამოვნებით გიპასუხებთ WhatsApp-ზე, კონსულტაცია უფასოა.",
     unavailable: "ახლა ვერ გიპასუხებთ, ტექნიკური შეფერხებაა. მოგვწერეთ WhatsApp-ზე და გუნდი მალე გიპასუხებთ.",
@@ -32,7 +32,7 @@ const copy = {
     chips: ["How much is it?", "Does it work on Instagram?", "How long does setup take?", "Will it fit my business?"],
     placeholder: "Type a question...",
     send: "Send",
-    note: "Please don't share personal details.",
+    note: "Chats are saved to improve the bot. Please don't share personal details.",
     whatsapp: "Message us on WhatsApp",
     limit: "The demo limit for today is reached. We'll gladly answer the rest on WhatsApp, the consultation is free.",
     unavailable: "I can't answer right now because of a technical issue. Message us on WhatsApp and the team will reply soon.",
@@ -47,12 +47,18 @@ export function ChatbotTry({ language, whatsappHref }: { language: Language; wha
   const [closed, setClosed] = useState(false);
   // The greeting is "typed" when the chat first scrolls into view, so the window reads as a live bot.
   const [greeted, setGreeted] = useState(false);
+  // One id per conversation, so the studio can show each talk as a whole (api/demo-chat.ts).
+  const conversation = useRef("");
   const windowRef = useRef<HTMLDivElement>(null);
   const log = useRef<HTMLDivElement>(null);
   const input = useRef<HTMLInputElement>(null);
 
   // A new language starts a new conversation, greeting included.
-  useEffect(() => { setTurns([]); setClosed(false); }, [language]);
+  useEffect(() => {
+    setTurns([]);
+    setClosed(false);
+    conversation.current = Array.from(crypto.getRandomValues(new Uint8Array(12)), (b) => b.toString(16).padStart(2, "0")).join("");
+  }, [language]);
 
   useEffect(() => {
     const target = windowRef.current;
@@ -88,6 +94,8 @@ export function ChatbotTry({ language, whatsappHref }: { language: Language; wha
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          conversation: conversation.current,
+          language,
           messages: [{ role: "assistant", content: text.greeting }, ...history].map(({ role, content }) => ({ role, content })),
         }),
       });

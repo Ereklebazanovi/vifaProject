@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, Outlet, useLocation, useOutletContext } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import type { User } from "firebase/auth";
-import { ChartColumn, Eye, EyeOff, Inbox, SquareKanban, LayoutDashboard, LogOut, PenLine, Send, Users, X } from "lucide-react";
+import { Bot, ChartColumn, Eye, EyeOff, Inbox, SquareKanban, LayoutDashboard, LogOut, PenLine, Send, Users, X } from "lucide-react";
 import { checkAdminAccess, signInWithGoogle, signOutAdmin, watchAuth } from "./auth";
 import { formatPhone, maskEmail, maskPhone, PRODUCT_LABELS, subscribeContacts, wroteToUs, type Contact } from "./contacts/contactsService";
 import { btnPrimary, btnSecondary } from "./ui";
@@ -44,6 +44,7 @@ const NAV = [
     items: [
       { to: "campaigns", label: "კამპანიები", Icon: Send },
       { to: "sources", label: "წყაროები", Icon: ChartColumn },
+      { to: "chatbot", label: "ჩატბოტის დემო", Icon: Bot },
       { to: "blog", label: "ბლოგი", Icon: PenLine },
     ],
   },

@@ -6,11 +6,13 @@
 // { action: "ga", days } → Google Analytics 4: visitors, visits and form leads by channel, top pages.
 // { action: "meta" } → is the Facebook lead-form connection working (see _lib/meta.ts);
 // { action: "meta-subscribe" } → switch on "form filled" events for our page.
+// { action: "chatbot" } → the live chatbot demo: spend, daily counts and the latest talks.
 // One collection-group read needs no extra Firestore rule or index. It reads every event
 // each time, which is fine for thousands of events; past that, keep running totals instead.
 import { createSign } from "node:crypto";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { jsonBody, requireAdmin } from "./_lib/adminAuth.js";
+import { FieldPath } from "firebase-admin/firestore";
 import { adminDb } from "./_lib/firebase.js";
 import { metaStatus, metaSubscribe } from "./_lib/meta.js";
 
@@ -254,6 +256,40 @@ async function analytics(days: number) {
   }
 }
 
+/**
+ * The live chatbot demo on /services/ai-chatbot (see api/demo-chat.ts): this month's paid-key spend,
+ * the last 30 days' counters, and the latest 100 talks.
+ */
+async function chatbotDemo() {
+  const db = adminDb();
+  const month = new Date().toISOString().slice(0, 7);
+  const firstDay = new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10);
+  const [monthSnap, daySnap, talkSnap] = await Promise.all([
+    db.doc(`demoChatMonth/${month}`).get(),
+    db.collection("demoChat").where(FieldPath.documentId(), ">=", firstDay).get(),
+    db.collection("demoChatLogs").orderBy("updatedAt", "desc").limit(100).get(),
+  ]);
+  return {
+    month: { usd: Number(monthSnap.get("usd") || 0), answers: Number(monthSnap.get("answers") || 0) },
+    cap: Number(process.env.DEMO_FALLBACK_MONTHLY_USD) || 1,
+    days: daySnap.docs.map((d) => ({
+      day: d.id,
+      count: Number(d.get("count") || 0),
+      failed: Number(d.get("failed") || 0),
+      limited: Number(d.get("limited") || 0),
+    })),
+    talks: talkSnap.docs.map((d) => ({
+      id: d.id,
+      startedAt: Number(d.get("startedAt") || 0),
+      updatedAt: Number(d.get("updatedAt") || 0),
+      language: String(d.get("language") || "ka"),
+      usd: Number(d.get("usd") || 0),
+      turns: (d.get("turns") as { role: string; content: string; at: number; paid?: boolean }[] | undefined ?? [])
+        .slice().sort((a, b) => a.at - b.at),
+    })),
+  };
+}
+
 /** Where an imported person came from, read off the import note (see api/import.ts). */
 function importOrigin(message: string) {
   if (message.startsWith("იმპორტი: ნომერი ჩატიდან")) return "chat";
@@ -272,6 +308,7 @@ export default async function handler(req: Req, res: Res) {
   if (b.action === "gsc") return res.status(200).json({ ok: true, ...(await searchConsole(Number(b.days) || 28)) });
   if (b.action === "ga") return res.status(200).json({ ok: true, ...(await analytics(Number(b.days) || 28)) });
   if (b.action === "meta") return res.status(200).json({ ok: true, ...(await metaStatus()) });
+  if (b.action === "chatbot") return res.status(200).json({ ok: true, ...(await chatbotDemo()) });
   if (b.action === "meta-subscribe") {
     try {
       await metaSubscribe();
