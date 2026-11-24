@@ -1,5 +1,4 @@
 import { CalendarDays, PanelsTopLeft, PenLine } from "lucide-react";
-import { MarketingIndustryTiles } from "../components/ui/MarketingIndustryTiles";
 import { MarketingServicePage } from "../components/ui/MarketingServicePage";
 import { MarketingWork } from "../components/ui/MarketingWork";
 import { useShorts } from "../hooks/useShorts";
@@ -57,7 +56,6 @@ export default function SocialMedia() {
       {(language, whatsappHref) => <>
         <SocialMediaPackages language={language} whatsappHref={whatsappHref} />
         <MarketingWork language={language} shorts={shorts} />
-        <MarketingIndustryTiles language={language} />
       </>}
     </MarketingServicePage>
   );
