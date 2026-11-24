@@ -34,7 +34,7 @@ export const packages = [
   },
 ];
 
-export function SocialMediaPackages({ language, whatsappHref }: { language: MarketingLanguage; whatsappHref: string }) {
+export function SocialMediaPackages({ language, whatsappHref, title }: { language: MarketingLanguage; whatsappHref: string; title?: string }) {
   const ka = language === "ka";
   const { hash } = useLocation();
   const sectionRef = useRef<HTMLElement>(null);
@@ -44,7 +44,7 @@ export function SocialMediaPackages({ language, whatsappHref }: { language: Mark
 
   return (
     <section ref={sectionRef} id="marketing-pricing" className="it-section it-col marketing-section" aria-labelledby="packages">
-      <SectionHeading id="packages">{ka ? "პაკეტები" : "Packages"}</SectionHeading>
+      <SectionHeading id="packages">{title ?? (ka ? "პაკეტები" : "Packages")}</SectionHeading>
       <div className="marketing-pricing-grid">
         {packages.map(({ name, price, ...text }) => <WebPackageCard key={name} title={name} price={`${price} ₾`} timeline={ka ? "თვეში" : "per month"}
           highlighted={name === "Growth"} body={text[language].body} features={text[language].features}

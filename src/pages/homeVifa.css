@@ -178,7 +178,7 @@
   background: #e8f2fb;
 }
 
-.home-showcase-card .home-showcase-stage--production { background: #dff2e9; }
+.home-showcase-card .home-showcase-stage--production { background: #f6f7e4; }
 
 .home-showcase-card .it-screenshot-frame {
   width: min(100%, calc((var(--home-showcase-stage-height) - 58px) * 1.6), 376px);

@@ -4,7 +4,6 @@ import SEO from "../components/SEO";
 import { ContactBlock } from "../components/ui/ContactBlock";
 import { FaqSection } from "../components/ui/FaqSection";
 import { HubHeader } from "../components/ui/HubHeader";
-import { MarketingIndustryTiles } from "../components/ui/MarketingIndustryTiles";
 import { MarketingPage } from "../components/ui/MarketingPage";
 import { MarketingScene } from "../components/ui/MarketingScenes";
 import { MarketingWork } from "../components/ui/MarketingWork";
@@ -16,6 +15,7 @@ import { useLanguage } from "../contexts/LanguageContext";
 import { marketingBreadcrumbs, marketingChannels, marketingHubHref, marketingServices, marketingWhatsappHref } from "../data/marketingServices";
 import type { MarketingLanguage, MarketingService } from "../data/marketingServices";
 import { useShorts } from "../hooks/useShorts";
+import { SocialMediaPackages } from "./SocialMediaPackages";
 import { useProductScene } from "../pages/preview/useProductScene";
 import { useServiceRotation } from "../pages/preview/useServiceRotation";
 
@@ -32,7 +32,7 @@ const metadata = {
   },
 };
 
-const hubCardOrder = ["socialMedia", "branding", "production", "advertising"] as const satisfies readonly MarketingService[];
+const hubCardOrder = ["production", "advertising", "socialMedia", "branding"] as const satisfies readonly MarketingService[];
 const channelIcons = { Instagram: FaInstagram, Facebook: FaFacebook, YouTube: FaYoutube, TikTok: FaTiktok };
 
 const marketingFaq = {
@@ -122,7 +122,8 @@ export default function Marketing() {
           </div>
         </section>
 
-        <MarketingIndustryTiles language={language} />
+        <SocialMediaPackages language={language} whatsappHref={marketingWhatsappHref}
+          title={ka ? "მარკეტინგის პაკეტები" : "Marketing packages"} />
         <MarketingWork language={language} shorts={shorts} />
 
         <section className="it-section it-col marketing-section" aria-labelledby="marketing-channels-title">

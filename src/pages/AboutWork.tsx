@@ -82,7 +82,7 @@ export function AboutWork({ language, shorts }: { language: Language; shorts: re
         })}
         <li>
           <PageLink className="about-client about-client-more about-photo-more" to={marketingServices.production.href}>
-            <span>{ka ? "ფოტო და ვიდეო გადაღება" : "Photo and video production"} <ChevronRight size={17} aria-hidden="true" className="inline align-[-3px]" /></span>
+            <span>{ka ? "ფოტოები და ვიდეოები" : "Photos and videos"} <ChevronRight size={17} aria-hidden="true" className="inline align-[-3px]" /></span>
           </PageLink>
         </li>
       </ul>

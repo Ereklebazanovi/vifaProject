@@ -21,13 +21,13 @@ export const marketingServices = {
   },
   advertising: {
     href: "/services/advertising",
-    ka: { title: "რეკლამა", body: "სარეკლამო კამპანიები Facebook-ზე, Instagram-ზე და Google-ში.", facts: consultationPrice.ka },
-    en: { title: "Advertising", body: "Campaigns on Facebook, Instagram and Google.", facts: consultationPrice.en },
+    ka: { title: "სარეკლამო კამპანიების მენეჯმენტი", body: "Facebook-ზე, Instagram-ზე და Google-ში.", facts: consultationPrice.ka },
+    en: { title: "Ad campaign management", body: "On Facebook, Instagram and Google.", facts: consultationPrice.en },
   },
   production: {
     href: "/services/production",
-    ka: { title: "ფოტო და ვიდეო გადაღება", body: "ფოტოსესიები, რილსები, სარეკლამო ვიდეოები და დრონით გადაღება.", facts: consultationPrice.ka },
-    en: { title: "Photo and video production", body: "Photo shoots, reels, commercial videos and drone footage.", facts: consultationPrice.en },
+    ka: { title: "ფოტოები და ვიდეოები", body: "ფოტოსესიები, რილსები, სარეკლამო ვიდეოები და დრონით გადაღება.", facts: consultationPrice.ka },
+    en: { title: "Photos and videos", body: "Photo shoots, reels, commercial videos and drone footage.", facts: consultationPrice.en },
   },
   branding: {
     href: "/services/branding",

@@ -534,8 +534,8 @@ a.marketing-service-card:focus-visible { outline-offset: -3px; }
   font-size: 11px;
 }
 .marketing-plan-week i { width: 5px; height: 5px; border-radius: 50%; background: transparent; }
-.marketing-plan-week [data-post] { background: #f6f7e4; color: #1d1d1f; font-weight: 600; }
-.marketing-plan-week [data-post] i { background: #8a9022; }
+.marketing-plan-week [data-post] { background: #dff2e9; color: #1d1d1f; font-weight: 600; }
+.marketing-plan-week [data-post] i { background: #2f8a66; }
 .marketing-plan-list { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; }
 .marketing-plan-list li {
   display: grid;
@@ -559,8 +559,8 @@ a.marketing-service-card:focus-visible { outline-offset: -3px; }
   gap: 4px;
   padding: 4px 8px;
   border-radius: 999px;
-  background: #eef0c8;
-  color: #4d5210;
+  background: #d6efe3;
+  color: #1d6b4e;
   font-size: 11px;
   font-weight: 600;
   white-space: nowrap;
@@ -593,3 +593,6 @@ a.marketing-service-card:focus-visible { outline-offset: -3px; }
   .marketing-plan-status { padding: 5px; }
   .marketing-plan-status span { display: none; }
 }
+
+/* Hub packages (2026-11-25): the highlighted price card stays lime, the owner's pick from the industry pages. */
+.marketing-hub #marketing-pricing { --it-product-soft: #dfe387; }
