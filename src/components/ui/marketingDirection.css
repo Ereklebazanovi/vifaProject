@@ -470,7 +470,6 @@ a.marketing-service-card:focus-visible { outline-offset: -3px; }
 
 @media (max-width: 767px) {
   .marketing-hub .it-device-stage { height: 266px; }
-  .marketing-hub .marketing-profile { --marketing-phone-scale: 0.37; }
 }
 
 @media (max-width: 899px) {
@@ -502,4 +501,95 @@ a.marketing-service-card:focus-visible { outline-offset: -3px; }
 
 @media (prefers-reduced-motion: reduce) {
   .marketing-scene * { transition: none !important; }
+}
+
+/* Content plan (social media card and hero): a white board like the brand board, with the week on top and
+   three scheduled posts. The last post and its day appear when the card plays. */
+.marketing-plan {
+  width: min(100%, 355px);
+  padding: 15px;
+  border-radius: 18px;
+  background: var(--it-surface);
+  box-shadow: 0 16px 36px rgb(54 32 47 / 15%);
+  color: #1d1d1f;
+}
+.marketing-plan-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.marketing-plan-head strong { font-size: 14px; font-weight: 600; }
+.marketing-plan-head span { color: var(--it-text-2); font-size: 12px; }
+.marketing-plan-week {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+  margin: 12px 0 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #efefef;
+}
+.marketing-plan-week span {
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  padding: 6px 0 7px;
+  border-radius: 9px;
+  color: #6e6e73;
+  font-size: 11px;
+}
+.marketing-plan-week i { width: 5px; height: 5px; border-radius: 50%; background: transparent; }
+.marketing-plan-week [data-post] { background: #f6f7e4; color: #1d1d1f; font-weight: 600; }
+.marketing-plan-week [data-post] i { background: #8a9022; }
+.marketing-plan-list { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; }
+.marketing-plan-list li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px 8px 8px;
+  border-radius: 11px;
+  background: #f7f7f8;
+}
+.marketing-plan-icon { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; }
+.marketing-plan-icon[data-network="instagram"] { background: #fbe7ef; color: #c13584; }
+.marketing-plan-icon[data-network="facebook"] { background: #e6efff; color: #1877f2; }
+.marketing-plan-icon[data-network="tiktok"] { background: #ececee; color: #1d1d1f; }
+.marketing-plan-text { display: grid; min-width: 0; }
+.marketing-plan-text strong { font-size: 13px; font-weight: 600; line-height: 1.3; }
+.marketing-plan-text span { overflow: hidden; color: var(--it-text-2); font-size: 11.5px; line-height: 1.3; text-overflow: ellipsis; white-space: nowrap; }
+.marketing-plan-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #eef0c8;
+  color: #4d5210;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.marketing-plan [data-ready] {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 500ms var(--it-enter-ease), transform 500ms var(--it-enter-ease);
+}
+.marketing-plan [data-ready="true"] { opacity: 1; transform: none; }
+.marketing-plan-week [data-ready] { transform: none; }
+.marketing-detail-scene .marketing-plan { width: min(100%, 390px); padding: 18px; }
+
+@media (max-width: 420px) {
+  .marketing-plan { padding: 12px; }
+  .marketing-plan-week { margin: 9px 0 8px; padding-bottom: 8px; gap: 2px; }
+  .marketing-plan-week span { padding: 4px 0 5px; }
+  .marketing-plan-list { gap: 5px; }
+  .marketing-plan-list li { gap: 8px; padding: 6px 8px 6px 6px; }
+  .marketing-plan-icon { width: 26px; height: 26px; }
+}
+/* On the phone-width hub card the board would reach the card's arrow, so the week row is left out there. */
+@media (max-width: 767px) {
+  .marketing-hub .it-card .marketing-plan-week { display: none; }
+  .marketing-hub .it-card .marketing-plan-head { margin-bottom: 10px; }
+  .marketing-hub .it-card[data-product="socialMedia"] .marketing-scene { padding-block: 0 58px; }
+}
+/* Very narrow phones: the status keeps only its check mark so the day and time stay readable. */
+@media (max-width: 359px) {
+  .marketing-plan-status { padding: 5px; }
+  .marketing-plan-status span { display: none; }
 }
