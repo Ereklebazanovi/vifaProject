@@ -15,6 +15,7 @@ import { SiteNav } from "../components/ui/SiteNav";
 import { OtherItServices } from "../components/ui/OtherItServices";
 import { itBreadcrumbs, itHref } from "../data/itServices";
 import { ChatbotPhoneDemo } from "./ChatbotPhoneDemo";
+import { ChatbotTry } from "./ChatbotTry";
 import "./chatbotService.css";
 
 type T = (key: string) => string;
@@ -441,7 +442,7 @@ export default function AIChatbot() {
             ? "Answers in Georgian and takes orders and bookings."
             : "ქართულად პასუხობს კლიენტებს, იღებს შეკვეთებსა და ჯავშნებს."}
           actions={<>
-            <a className="it-pill-button" href="#pricing">{en ? "See pricing" : "ფასების ნახვა"} <ArrowDown size={16} aria-hidden="true" /></a>
+            <a className="it-pill-button" href="#try">{en ? "Try it yourself" : "სცადეთ თავად"} <ArrowDown size={16} aria-hidden="true" /></a>
             <a className="it-more-link" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
               {en ? "Consult on WhatsApp" : "კონსულტაცია WhatsApp-ზე"} ›
             </a>
@@ -460,6 +461,8 @@ export default function AIChatbot() {
           </>}>
           <ChatbotPhoneDemo t={t} language={language} />
         </ServiceHero>
+
+        <ChatbotTry language={language} whatsappHref={whatsappUrl} />
 
         <section className="it-section it-col chatbot-section" aria-labelledby="chatbot-capabilities-title">
           <SectionHeading id="chatbot-capabilities-title">{en ? "What the chatbot does" : "რას აკეთებს ჩატბოტი"}</SectionHeading>
