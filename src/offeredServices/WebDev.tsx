@@ -5,7 +5,6 @@ import type { FAQItem } from "../components/FAQSection";
 import SEO from "../components/SEO";
 import { ContactBlock } from "../components/ui/ContactBlock";
 import { FaqSection } from "../components/ui/FaqSection";
-import { HowWeStart } from "../components/ui/HowWeStart";
 import { IndustryCarousel } from "../components/ui/IndustryCarousel";
 import { LightPage } from "../components/ui/LightPage";
 import { SectionHeading } from "../components/ui/SectionHeading";
@@ -306,8 +305,6 @@ export default function WebDev() {
         </section>
 
         <IndustryCarousel language={language} />
-        <HowWeStart language={language} whatsappHref={whatsappUrl} />
-
         <FaqSection id="web-faq" title={en ? "Frequently asked questions" : "ხშირად დასმული კითხვები"}
           items={[...faqItems, ...details, {
             question: en ? "What does the AI chatbot package include?" : "რას მოიცავს AI ჩატბოტის პაკეტი?",

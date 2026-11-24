@@ -2,7 +2,6 @@ import type { ReactNode } from "react";
 import { Helmet } from "react-helmet-async";
 import SEO from "../../components/SEO";
 import { ContactBlock } from "../../components/ui/ContactBlock";
-import { HowWeStart } from "../../components/ui/HowWeStart";
 import { HubHeader } from "../../components/ui/HubHeader";
 import { IndustryCarousel } from "../../components/ui/IndustryCarousel";
 import { LightPage } from "../../components/ui/LightPage";
@@ -140,8 +139,6 @@ export default function ITHubPreview() {
         </ServicesSection>
 
         <IndustryCarousel language={language} />
-
-        <HowWeStart language={language} whatsappHref={consultationHref} />
 
         <HubQuestions language={language} />
 

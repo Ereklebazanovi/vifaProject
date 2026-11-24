@@ -79,16 +79,6 @@ export default function LineupLandingPage() {
           </div>
         </section>
 
-        <section className="it-section it-col lineup-section" aria-labelledby="lineup-start-title">
-          <SectionHeading id="lineup-start-title">{c.startTitle}</SectionHeading>
-          <p className="lineup-start-note">{en
-            ? "Your name, logo and colours. Teams and rating criteria are set up for your sport."
-            : "თქვენი სახელი, ლოგო და ფერები. გუნდები და შეფასების კრიტერიუმები თქვენს სპორტს ერგება."}</p>
-          <ol className="lineup-start-steps">
-            {c.steps.map((step) => <li key={step.title}><h3>{step.title}</h3><p>{step.text}</p></li>)}
-          </ol>
-        </section>
-
         <FaqSection id="lineup-faq" title={en ? "Frequently asked questions" : "ხშირად დასმული კითხვები"} items={[
           ...faq[lang],
           {

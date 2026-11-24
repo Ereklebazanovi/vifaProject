@@ -5,7 +5,6 @@ import SEO from "../components/SEO";
 import CallbackLink from "../components/CallbackLink";
 import { ContactBlock } from "../components/ui/ContactBlock";
 import { FaqSection } from "../components/ui/FaqSection";
-import { HowWeStart } from "../components/ui/HowWeStart";
 import { LightPage } from "../components/ui/LightPage";
 import { SectionHeading } from "../components/ui/SectionHeading";
 import { ServiceCard } from "../components/ui/ServiceCard";
@@ -93,12 +92,6 @@ const aiChatbotTranslations = {
     "admin.mock.row2.k": "სამუშაო საათები",
     "admin.mock.row2.v": "10:00-20:00",
 
-    "how.step1.title": "გვიზიარებთ ინფორმაციას",
-    "how.step1.text": "გვიგზავნით ფასებს, პროდუქტებსა და ხშირ კითხვებს.",
-    "how.step2.title": "ვასწავლით და ვამოწმებთ",
-    "how.step2.text": "ვცდით თქვენი კლიენტების კითხვებზე.",
-    "how.step3.title": "ჩატბოტს ვრთავთ",
-    "how.step3.text": "ვრთავთ თქვენს არხებზე და ბოტი იწყებს პასუხს.",
 
     "pricing.title": "ფასი და ყოველთვიური ხარჯი",
     "pricing.investment.title": "გაშვება",
@@ -230,12 +223,6 @@ const aiChatbotTranslations = {
     "admin.mock.row2.k": "Opening hours",
     "admin.mock.row2.v": "10:00-20:00",
 
-    "how.step1.title": "You share the information",
-    "how.step1.text": "Send us your prices, products and common questions.",
-    "how.step2.title": "We train and test it",
-    "how.step2.text": "We test your customers’ questions.",
-    "how.step3.title": "We launch the chatbot",
-    "how.step3.text": "We connect it to your channels so it can start replying.",
 
     "pricing.title": "Price and Monthly Cost",
     "pricing.investment.title": "Launch",
@@ -320,7 +307,7 @@ const formatLari = (price: string) => price.replace(/(\d)₾/g, "$1 ₾");
 function ChatbotOwnerPreview({ t, en }: { t: T; en: boolean }) {
   return (
     <article className="chatbot-owner-preview" aria-labelledby="chatbot-owner-title">
-      <h3 id="chatbot-owner-title" className="chatbot-owner-title">{en ? "You update the information" : "ინფორმაციას თავად ცვლით"}</h3>
+      <SectionHeading id="chatbot-owner-title">{en ? "You update the information" : "ინფორმაციას თავად ცვლით"}</SectionHeading>
       <div className="chatbot-owner-panel">
         <div className="chatbot-owner-window">
           <div className="it-browser-bar chatbot-owner-bar">
@@ -417,7 +404,6 @@ export default function AIChatbot() {
   ];
   const setupPrice = formatLari(t("pricing.investment.price"));
   const monthlyPrice = formatLari(t("pricing.monthly.price"));
-  const timeline = en ? "7-14 business days" : "7-14 სამუშაო დღე";
 
   return (
     <LightPage className="chatbot-service" tone="chatbot" whatsappHref={whatsappUrl}>
@@ -464,35 +450,9 @@ export default function AIChatbot() {
 
         <ChatbotTry language={language} whatsappHref={whatsappUrl} />
 
-        <section className="it-section it-col chatbot-section" aria-labelledby="chatbot-capabilities-title">
-          <SectionHeading id="chatbot-capabilities-title">{en ? "What the chatbot does" : "რას აკეთებს ჩატბოტი"}</SectionHeading>
-          <div className="chatbot-capabilities">
-            <ServiceCard variant="package" title={en ? "Answers on your behalf" : "პასუხობს თქვენს ნაცვლად"}>
-              <div className="chatbot-example"><p>{t("qa.q1")}</p><p>{t("qa.a1")}</p></div>
-            </ServiceCard>
-            <ServiceCard variant="package" title={en ? "Takes orders and bookings" : "იღებს შეკვეთებსა და ჯავშნებს"}>
-              <div className="chatbot-example"><p>{t("qa.q5")}</p><p>{t("qa.a5")}</p></div>
-            </ServiceCard>
-          </div>
+        <section className="it-section it-col chatbot-section" aria-labelledby="chatbot-owner-title">
           <ChatbotOwnerPreview t={t} en={en} />
         </section>
-
-        <HowWeStart language={language} showActions={false}
-          processSteps={[
-            { title: t("how.step1.title"), body: t("how.step1.text") },
-            { title: t("how.step2.title"), body: t("how.step2.text") },
-            { title: t("how.step3.title"), body: t("how.step3.text") },
-          ]}
-          example={{
-            inquiry: en ? "Hello, I'd like a chatbot." : "გამარჯობა, ჩატბოტი მაინტერესებს.",
-            project: en ? "AI chatbot" : "AI ჩატბოტი",
-            price: setupPrice, timeline,
-            readyChat: {
-              label: en ? "Chatbot is live" : "ჩატბოტი ჩართულია",
-              question: en ? "Are you open on Sunday?" : "კვირას მუშაობთ?",
-              answer: en ? "Yes, from 11:00 to 19:00." : "კი, 11:00-დან 19:00-მდე.",
-            },
-          }} />
 
         <section id="pricing" className="it-section it-col chatbot-section chatbot-pricing" aria-labelledby="chatbot-pricing-title">
           <SectionHeading id="chatbot-pricing-title">{t("pricing.title")}</SectionHeading>
