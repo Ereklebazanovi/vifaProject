@@ -117,7 +117,6 @@ export function ChatbotTry({ language, whatsappHref }: { language: Language; wha
   return (
     <section id="try" className="it-section it-col chatbot-section chatbot-try" aria-labelledby="chatbot-try-title">
       <SectionHeading id="chatbot-try-title">{text.title}</SectionHeading>
-      <div className="chatbot-try-stage">
       <div ref={windowRef} className="chatbot-try-window">
         <header className="chatbot-try-header">
           <span className="chatbot-try-avatar" aria-hidden="true">V</span>
@@ -146,7 +145,6 @@ export function ChatbotTry({ language, whatsappHref }: { language: Language; wha
             <ArrowUp size={18} strokeWidth={2.4} aria-hidden="true" />
           </button>
         </form>
-      </div>
       </div>
       <p className="chatbot-try-note">{text.note}</p>
     </section>
