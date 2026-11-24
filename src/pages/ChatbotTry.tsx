@@ -45,11 +45,31 @@ export function ChatbotTry({ language, whatsappHref }: { language: Language; wha
   const [draft, setDraft] = useState("");
   const [pending, setPending] = useState(false);
   const [closed, setClosed] = useState(false);
+  // The greeting is "typed" when the chat first scrolls into view, so the window reads as a live bot.
+  const [greeted, setGreeted] = useState(false);
+  const windowRef = useRef<HTMLDivElement>(null);
   const log = useRef<HTMLDivElement>(null);
   const input = useRef<HTMLInputElement>(null);
 
   // A new language starts a new conversation, greeting included.
   useEffect(() => { setTurns([]); setClosed(false); }, [language]);
+
+  useEffect(() => {
+    const target = windowRef.current;
+    if (!target || greeted) return;
+    if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setGreeted(true);
+      return;
+    }
+    let timer = 0;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      observer.disconnect();
+      timer = window.setTimeout(() => setGreeted(true), 1100);
+    }, { threshold: 0.45 });
+    observer.observe(target);
+    return () => { observer.disconnect(); window.clearTimeout(timer); };
+  }, [greeted]);
 
   useEffect(() => {
     const panel = log.current;
@@ -97,13 +117,15 @@ export function ChatbotTry({ language, whatsappHref }: { language: Language; wha
   return (
     <section id="try" className="it-section it-col chatbot-section chatbot-try" aria-labelledby="chatbot-try-title">
       <SectionHeading id="chatbot-try-title">{text.title}</SectionHeading>
-      <div className="chatbot-try-window">
+      <div className="chatbot-try-stage">
+      <div ref={windowRef} className="chatbot-try-window">
         <header className="chatbot-try-header">
           <span className="chatbot-try-avatar" aria-hidden="true">V</span>
           <div><strong>{text.name}</strong><span>{text.status}</span></div>
         </header>
         <div ref={log} className="chatbot-try-log" role="log" aria-live="polite" lang={language}>
-          <p className="chatbot-try-bubble" data-bot="true">{text.greeting}</p>
+          {greeted ? <p className="chatbot-try-bubble" data-bot="true">{text.greeting}</p>
+            : <span className="chatbot-try-typing" aria-hidden="true"><i /><i /><i /></span>}
           {turns.map((turn, index) => (
             <div key={index} className="chatbot-try-turn" data-bot={turn.role === "assistant"}>
               <p className="chatbot-try-bubble" data-bot={turn.role === "assistant"}>{turn.content}</p>
@@ -114,7 +136,7 @@ export function ChatbotTry({ language, whatsappHref }: { language: Language; wha
           ))}
           {pending && <span className="chatbot-try-typing" aria-hidden="true"><i /><i /><i /></span>}
         </div>
-        {!asked && <div className="chatbot-try-chips">
+        {!asked && <div className="chatbot-try-chips" data-ready={greeted}>
           {text.chips.map((chip) => <button key={chip} type="button" onClick={() => send(chip)}>{chip}</button>)}
         </div>}
         <form className="chatbot-try-form" onSubmit={submit}>
@@ -124,6 +146,7 @@ export function ChatbotTry({ language, whatsappHref }: { language: Language; wha
             <ArrowUp size={18} strokeWidth={2.4} aria-hidden="true" />
           </button>
         </form>
+      </div>
       </div>
       <p className="chatbot-try-note">{text.note}</p>
     </section>

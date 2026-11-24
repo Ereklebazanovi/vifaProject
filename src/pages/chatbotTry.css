@@ -1,15 +1,23 @@
 /* Live chatbot demo: one chat window, Messenger-like but in the site's light style. */
 .chatbot-try .it-h2 { text-align: center; }
+/* The chat sits on a panel in the chatbot's own color, like the product cards on the hub, so it reads as
+   the product itself rather than one more box on the page. */
+.chatbot-try-stage {
+  margin-top: 8px;
+  padding: 56px 24px;
+  border-radius: 32px;
+  background: var(--it-product-soft, #c4b7ec);
+}
 .chatbot-try-window {
   display: flex;
   flex-direction: column;
-  width: min(100%, 620px);
+  width: min(100%, 600px);
   height: 520px;
-  margin: 8px auto 0;
+  margin: 0 auto;
   overflow: clip;
-  border: 1px solid #e3e3e8;
   border-radius: 24px;
   background: var(--it-surface);
+  box-shadow: 0 22px 48px rgb(43 35 80 / 18%);
 }
 .chatbot-try-header {
   display: flex;
@@ -76,7 +84,8 @@
 .chatbot-try-typing i:nth-child(2) { animation-delay: 140ms; }
 .chatbot-try-typing i:nth-child(3) { animation-delay: 280ms; }
 
-.chatbot-try-chips { display: flex; flex: none; flex-wrap: wrap; justify-content: center; gap: 8px; padding: 0 16px 12px; }
+.chatbot-try-chips { display: flex; flex: none; flex-wrap: wrap; justify-content: center; gap: 8px; padding: 0 16px 12px; transition: opacity 400ms ease, transform 400ms ease; }
+.chatbot-try-chips[data-ready="false"] { opacity: 0; transform: translateY(6px); pointer-events: none; }
 .chatbot-try-chips button {
   padding: 8px 14px;
   border: 1px solid #cfe3fa;
@@ -121,8 +130,10 @@
 @keyframes chatbot-try-typing { from { opacity: .35; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) {
   .chatbot-try-bubble, .chatbot-try-typing i { animation: none; }
+  .chatbot-try-chips { transition: none; }
 }
 @media (max-width: 560px) {
+  .chatbot-try-stage { margin-inline: -4px; padding: 16px 10px; border-radius: 24px; }
   .chatbot-try-window { height: 480px; border-radius: 20px; }
   .chatbot-try-bubble { max-width: 88%; }
   .chatbot-try-chips { gap: 6px; }
