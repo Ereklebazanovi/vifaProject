@@ -3,8 +3,8 @@ import CallbackLink from "../components/CallbackLink";
 import SEO from "../components/SEO";
 import { ContactBlock } from "../components/ui/ContactBlock";
 import { FaqSection } from "../components/ui/FaqSection";
+import { HubHeader } from "../components/ui/HubHeader";
 import { MarketingIndustryTiles } from "../components/ui/MarketingIndustryTiles";
-import { MarketingProcess } from "../components/ui/MarketingProcess";
 import { MarketingPage } from "../components/ui/MarketingPage";
 import { MarketingScene } from "../components/ui/MarketingScenes";
 import { MarketingWork } from "../components/ui/MarketingWork";
@@ -30,21 +30,6 @@ const metadata = {
     description: "Social media management, Facebook, Instagram and Google advertising, photo and video production and branding. Page management starts at 1000 ₾ per month.",
     keywords: "digital marketing, social media management, SMM, Facebook ads, Instagram ads, Google Ads, video production, photography, content creation, branding, marketing agency",
   },
-};
-
-const process = {
-  ka: [
-    { title: "სტრატეგია", body: "ვთანხმდებით, რა შედეგი გინდათ და ვის გსურთ მისწვდეთ." },
-    { title: "კონტენტი", body: "ვამზადებთ ტექსტებს, ფოტოებსა და ვიდეოებს." },
-    { title: "გავრცელება", body: "ვაქვეყნებთ პოსტებს და ვუშვებთ რეკლამას." },
-    { title: "შედეგები", body: "შედეგების მიხედვით ვასწორებთ კამპანიას." },
-  ],
-  en: [
-    { title: "Strategy", body: "We define the audience and agree on the campaign goal." },
-    { title: "Content", body: "We prepare the copy, photos and videos." },
-    { title: "Distribution", body: "We publish the content and run the ads." },
-    { title: "Results", body: "We review the results and adjust the campaign." },
-  ],
 };
 
 const hubCardOrder = ["socialMedia", "branding", "production", "advertising"] as const satisfies readonly MarketingService[];
@@ -127,10 +112,8 @@ export default function Marketing() {
         language={language} onLanguageToggle={toggleLanguage} />
       <main className="it-main">
         <section id="directions" className="it-section it-col it-directions" aria-labelledby="marketing-title">
-          <header className="marketing-hub-intro">
-            <SectionHeading as="h1" id="marketing-title">{ka ? "მარკეტინგი." : "Marketing."}</SectionHeading>
-            <p>{ka ? "კონტენტი, რეკლამა და ბრენდის დიზაინი." : "Content, advertising and brand design."}</p>
-          </header>
+          <HubHeader id="marketing-title" title={ka ? "მარკეტინგი" : "Marketing"}
+            subtitle={ka ? "კონტენტი, რეკლამა და ბრენდის დიზაინი." : "Content, advertising and brand design."} />
           <div ref={rotation.gridRef} className="it-service-grid" data-active-product={rotation.activeProduct ?? "none"}
             data-turn={rotation.turn}>
             {hubCardOrder.map(service => (
@@ -141,7 +124,6 @@ export default function Marketing() {
 
         <MarketingIndustryTiles language={language} />
         <MarketingWork language={language} shorts={shorts} />
-        <MarketingProcess language={language} steps={process[language]} service="hub" />
 
         <section className="it-section it-col marketing-section" aria-labelledby="marketing-channels-title">
           <SectionHeading id="marketing-channels-title">{ka ? "ჩვენი არხები" : "Our channels"}</SectionHeading>

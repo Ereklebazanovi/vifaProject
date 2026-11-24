@@ -10,7 +10,6 @@ import { ContactBlock } from "./ContactBlock";
 import { FaqSection } from "./FaqSection";
 import { MarketingArtifact } from "./MarketingArtifacts";
 import type { MarketingArtifactKind } from "./MarketingArtifacts";
-import { MarketingProcess } from "./MarketingProcess";
 import { MarketingPage } from "./MarketingPage";
 import { MarketingScene } from "./MarketingScenes";
 import { MarketingServiceCard } from "./MarketingServiceCard";
@@ -26,9 +25,7 @@ interface ServiceCopy {
   description: string;
   price?: string;
   sectionTitle: string;
-  sectionLine?: string;
   cards: { icon: LucideIcon; title: string; body: string }[];
-  process: { title: string; body: string }[];
   faq: { question: string; answer: string }[];
 }
 
@@ -43,7 +40,7 @@ export function MarketingServicePage({ service, copy, serviceType, cardArtifacts
   const { currentLanguage: language, toggleLanguage } = useLanguage();
   const ka = language === "ka";
   const { title } = marketingServices[service][language];
-  const { seoTitle, seoDescription, description, price, sectionTitle, sectionLine, cards, process, faq } = copy[language];
+  const { seoTitle, seoDescription, description, price, sectionTitle, cards, faq } = copy[language];
   const breadcrumbs = marketingBreadcrumbs(language, service);
   const whatsappHref = marketingServiceWhatsapp(service, language);
 
@@ -67,14 +64,12 @@ export function MarketingServicePage({ service, copy, serviceType, cardArtifacts
 
         <section className="it-section it-col marketing-section" aria-labelledby="marketing-services-title">
           <SectionHeading id="marketing-services-title">{sectionTitle}</SectionHeading>
-          {sectionLine && <p className="marketing-section-copy">{sectionLine}</p>}
           <div className="marketing-service-grid" data-columns={cards.length}>
             {cards.map((card, index) => <MarketingServiceCard key={card.title} {...card}
               artifact={<MarketingArtifact kind={cardArtifacts[index]} language={language} />} />)}
           </div>
         </section>
 
-        <MarketingProcess language={language} steps={process} service={service} />
         {children?.(language, whatsappHref)}
         <FaqSection title={ka ? "ხშირად დასმული კითხვები" : "Frequently asked questions"} items={faq} />
         <OtherMarketingServices current={service} language={language} />

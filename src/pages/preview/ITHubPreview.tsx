@@ -3,9 +3,9 @@ import { Helmet } from "react-helmet-async";
 import SEO from "../../components/SEO";
 import { ContactBlock } from "../../components/ui/ContactBlock";
 import { HowWeStart } from "../../components/ui/HowWeStart";
+import { HubHeader } from "../../components/ui/HubHeader";
 import { IndustryCarousel } from "../../components/ui/IndustryCarousel";
 import { LightPage } from "../../components/ui/LightPage";
-import { SectionHeading } from "../../components/ui/SectionHeading";
 import { ServiceCard } from "../../components/ui/ServiceCard";
 import { SiteFooter } from "../../components/ui/SiteFooter";
 import { SiteNav } from "../../components/ui/SiteNav";
@@ -30,9 +30,7 @@ function ServicesSection({ title, children }: { title: string; children: (rotati
   const rotation = useServiceRotation(itServiceOrder);
   return (
     <section id="directions" className="it-section it-directions it-col">
-      <header className="it-directions-intro">
-        <SectionHeading as="h1" secondary={title}>IT.</SectionHeading>
-      </header>
+      <HubHeader title="IT" subtitle={title} />
       <div id="services" ref={rotation.gridRef} className="it-service-grid" data-active-product={rotation.activeProduct ?? "none"}
         data-turn={rotation.turn} data-visible={rotation.visible}>{children(rotation)}</div>
     </section>

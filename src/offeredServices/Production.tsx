@@ -6,7 +6,6 @@ import SEO from "../components/SEO";
 import { ContactBlock } from "../components/ui/ContactBlock";
 import { FaqSection } from "../components/ui/FaqSection";
 import { MarketingArtifact } from "../components/ui/MarketingArtifacts";
-import { MarketingProcess } from "../components/ui/MarketingProcess";
 import { MarketingPage } from "../components/ui/MarketingPage";
 import { MarketingServiceCard } from "../components/ui/MarketingServiceCard";
 import { MarketingWork } from "../components/ui/MarketingWork";
@@ -98,14 +97,13 @@ const productionTranslations = {
 
     "hero.title": "ფოტო და ვიდეო გადაღება ბრენდებისთვის",
     "hero.description":
-      "ვიღებთ ფოტოებს, სარეკლამო ვიდეოებსა და რილსებს. საჭიროებისას გადაღებაში დრონსაც ვიყენებთ.",
+      "ფოტოები, სარეკლამო ვიდეოები, რილსები და დრონით გადაღება.",
     "hero.cta": "უფასო კონსულტაცია",
 
     "intro":
       "VIFA Production დაგეგმავს გადაღებას, დაამუშავებს ფოტოებს და დაამონტაჟებს ვიდეოს. ფაილებს გამოსაქვეყნებლად საჭირო ფორმატში ჩაგაბარებთ.",
 
     "section.services": "რას გთავაზობთ",
-    "section.servicesDesc": "გადაღებასა და დამუშავებას ერთი გუნდი უძღვება.",
 
     "svc.photo.title": "კომერციული ფოტოგრაფია",
     "svc.photo.desc": "პროდუქტის, ინტერიერისა და კერძების ფოტოები.",
@@ -157,14 +155,13 @@ const productionTranslations = {
 
     "hero.title": "Photo and video production for brands",
     "hero.description":
-      "We shoot photography, advertising videos and aerial footage for your campaigns.",
+      "Photos, advertising videos, reels and drone footage.",
     "hero.cta": "Free Consultation",
 
     "intro":
       "VIFA Production handles shooting, editing and aerial footage. We prepare the final files in the format required for your planned channels.",
 
     "section.services": "What We Offer",
-    "section.servicesDesc": "One team handles the shoot and editing.",
 
     "svc.photo.title": "Commercial Photography",
     "svc.photo.desc": "Photography for products, interiors and food.",
@@ -213,18 +210,6 @@ const serviceKeys = ["photo", "video", "drone"] as const;
 const serviceIcons = { photo: Camera, video: Video, drone: Plane };
 const serviceArtifacts = { photo: "photo", video: "reel", drone: "aerial" } as const;
 const heroPhotos = [foodPhoto(11), foodPhoto(2)];
-const process = {
-  ka: [
-    { title: "ვგეგმავთ გადაღებას", body: "ვარკვევთ, რა მასალა გჭირდებათ კამპანიისთვის." },
-    { title: "ვიღებთ მასალას", body: "გადაღებისას შეთანხმებულ გეგმას მივყვებით." },
-    { title: "ვამუშავებთ და ვაბარებთ", body: "მზა ფოტოებსა და ვიდეოს საჭირო ფორმატში გადმოგცემთ." },
-  ],
-  en: [
-    { title: "Plan the shots", body: "We agree on what your campaign needs." },
-    { title: "Shoot", body: "We shoot the planned photos and video." },
-    { title: "Edit", body: "We prepare the files for publishing." },
-  ],
-};
 const whatsappUrl =
   "https://wa.me/995577175132?text=" +
   encodeURIComponent("გამარჯობა, მაინტერესებს ფოტო და ვიდეო გადაღება. მსურს უფასო კონსულტაცია.");
@@ -273,15 +258,12 @@ export default function Production() {
 
         <section className="it-section it-col marketing-section" aria-labelledby="production-services-title">
           <SectionHeading id="production-services-title">{t("section.services")}</SectionHeading>
-          <p className="marketing-section-copy">{t("section.servicesDesc")}</p>
           <div className="marketing-service-grid marketing-production-services">
             {serviceKeys.map(key => <MarketingServiceCard key={key} icon={serviceIcons[key]}
               title={t(`svc.${key}.title`)} body={t(`svc.${key}.desc`)}
               artifact={<MarketingArtifact kind={serviceArtifacts[key]} language={language} />} />)}
           </div>
         </section>
-
-        <MarketingProcess language={language} steps={process[language]} service="production" />
 
         <section className="it-section it-col marketing-section" aria-labelledby="production-pricing-title">
           <SectionHeading id="production-pricing-title">{t("section.pricing")}</SectionHeading>

@@ -48,7 +48,7 @@ const slides: IndustryShowcase[] = [
     widget: { heading: "ჩაწერა: თმის შეჭრა", slotsLabel: "თავისუფალი დრო ხვალ", action: "ჩაწერა" },
   },
   {
-    slug: "legal-finance", photo: "legal", alt: "ოფისი ხის სამუშაო მაგიდით და წიგნების თაროთი", focus: "60% 50%",
+    slug: "legal-finance", photo: "law", alt: "ძველებური სასწორი ხის მაგიდაზე", focus: "50% 50%",
     title: "იურიდიული კომპანიები", line: "კლიენტის პორტალი დოკუმენტების გასაცვლელად.",
     block: "#eceae6",
     widget: { heading: "კლიენტის პორტალი", rows: [["დოკუმენტი", "ხელშეკრულება.pdf"], ["სტატუსი", "გაზიარებულია"]], action: "გახსნა" },

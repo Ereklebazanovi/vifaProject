@@ -115,7 +115,7 @@
   color: #1d1d1f;
 }
 
-.about-photo-more { aspect-ratio: 4 / 5; min-height: 0; background: #fbebf1; }
+.about-photo-more { aspect-ratio: 4 / 5; min-height: 0; background: #dff2e9; }
 
 .about-reel-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
 .about-reel-nav { display: none; gap: 8px; }

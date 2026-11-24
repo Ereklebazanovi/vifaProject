@@ -1,11 +1,4 @@
 .marketing-hub { --it-band: #fae8ee; }
-.marketing-hub-intro { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
-.marketing-hub-intro p {
-  margin: 0;
-  color: var(--it-text-2);
-  font-size: clamp(20px, 3.2vw, 36px);
-  line-height: 1.2;
-}
 
 .marketing-hero-panel { overflow: clip; border-radius: 28px; background: var(--it-product-soft); }
 .marketing-direction .marketing-service-card-header {

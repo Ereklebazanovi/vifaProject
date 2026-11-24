@@ -9,18 +9,13 @@ const copy = {
   ka: {
     seoTitle: "სოციალური მედიის მართვა (SMM) და კონტენტის შექმნა",
     seoDescription: "სოციალური მედიის მართვა, პოსტების გეგმა, ფოტოები და რილსები. შეადარეთ Core, Growth და Scale. გვერდების მართვა 1000 ₾-დან თვეში.",
-    description: "ვმართავთ თქვენი ბიზნესის სოციალურ გვერდებს. ვგეგმავთ, ვამზადებთ და ვაქვეყნებთ პოსტებსა და რილსებს.",
+    description: "ვგეგმავთ, ვამზადებთ და ვაქვეყნებთ პოსტებსა და რილსებს.",
     price: "1000 ₾-დან თვეში",
     sectionTitle: "რას მოიცავს გვერდების მართვა",
     cards: [
-      { icon: CalendarDays, title: "კონტენტის გეგმა", body: "ერთად ვწყვეტთ, ვის ვესაუბრებით და რა თემებზე. შემდეგ ვადგენთ, რა ფორმატით და როდის გამოქვეყნდება თითოეული პოსტი." },
-      { icon: PenLine, title: "კონტენტის შექმნა", body: "ვწერთ ტექსტებს, ვაფორმებთ პოსტებს და ვიღებთ ფოტოებსა და რილსებს თქვენი ბრენდისთვის." },
-      { icon: PanelsTopLeft, title: "გვერდების მართვა", body: "პოსტებს შეთანხმებულ დროს ვაქვეყნებთ. Growth და Scale პაკეტებში შედეგებს ყოველ კვირას ვამოწმებთ." },
-    ],
-    process: [
-      { title: "ვარჩევთ პაკეტს", body: "გვიამბეთ თქვენს ბიზნესზე და გირჩევთ შესაბამის პაკეტს." },
-      { title: "ვგეგმავთ პოსტებს", body: "ვთანხმდებით, რა გამოვაქვეყნოთ და როდის." },
-      { title: "ვმართავთ გვერდებს", body: "ვაქვეყნებთ პოსტებს და შედეგებს არჩეული პაკეტის მიხედვით ვამოწმებთ." },
+      { icon: CalendarDays, title: "კონტენტის გეგმა", body: "ვადგენთ თემებს და ვწყვეტთ, რა როდის გამოქვეყნდება." },
+      { icon: PenLine, title: "კონტენტის შექმნა", body: "ვწერთ ტექსტებს, ვაფორმებთ პოსტებს, ვიღებთ ფოტოებსა და რილსებს." },
+      { icon: PanelsTopLeft, title: "გვერდების მართვა", body: "პოსტებს შეთანხმებულ დროს ვაქვეყნებთ და შედეგებს ვამოწმებთ." },
     ],
     faq: [
       { question: "რა ღირს სოციალური მედიის მართვა?",
@@ -34,18 +29,13 @@ const copy = {
   en: {
     seoTitle: "Social Media Management (SMM) and Content Creation",
     seoDescription: "Social media management, posts, photos and reels. Compare Core, Growth and Scale, starting at 1000 GEL per month.",
-    description: "We plan content, create posts and reels, and manage your business's social media pages.",
+    description: "We plan, create and publish posts and reels.",
     price: "From 1000 ₾ per month",
     sectionTitle: "What social media management includes",
     cards: [
-      { icon: CalendarDays, title: "Content planning", body: "We agree on goals, audiences and topics, then choose a format for each post." },
-      { icon: PenLine, title: "Content creation", body: "We write the copy and prepare graphics, photos and reels for your brand." },
-      { icon: PanelsTopLeft, title: "Page management", body: "We publish on schedule. Growth and Scale include a weekly review of performance." },
-    ],
-    process: [
-      { title: "Choose a package", body: "Tell us about your business and we’ll help you choose a package." },
-      { title: "Plan the posts", body: "We agree on when to publish and which formats to use." },
-      { title: "Manage the pages", body: "We publish the posts and review results according to your package." },
+      { icon: CalendarDays, title: "Content planning", body: "We pick the topics and decide what goes out when." },
+      { icon: PenLine, title: "Content creation", body: "We write the copy, design the posts and shoot photos and reels." },
+      { icon: PanelsTopLeft, title: "Page management", body: "We publish on schedule and check the results." },
     ],
     faq: [
       { question: "How much does social media management cost?",

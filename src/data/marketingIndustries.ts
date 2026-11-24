@@ -33,6 +33,6 @@ export const marketingIndustries: Record<WebIndustrySlug, {
   },
   "legal-finance": {
     label: { ka: "იურიდიული და საფინანსო", en: "Law and finance" },
-    originalPhoto: "/preview/industries/legal-1200.webp",
+    originalPhoto: "/preview/industries/law-1200.webp",
   },
 };

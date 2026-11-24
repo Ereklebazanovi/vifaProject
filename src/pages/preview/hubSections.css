@@ -16,8 +16,6 @@
 .it-industry-row a { color: var(--it-link); }
 .it-industry-row a:hover { text-decoration: underline; }
 .it-industry-row-dot { color: #aeaeb2; }
-.it-directions-intro { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
-.it-directions-intro .it-h1 { min-width: 0; }
 .it-intro-contact { flex-shrink: 0; }
 .it-intro-contact p { margin: 0 0 10px; font-size: 15px; font-weight: 600; line-height: 1.4; }
 .it-preview .it-card[data-active="false"] .it-lineup-push > div { animation: none !important; transition: none !important; }
@@ -61,9 +59,6 @@
   .it-industry-tile { grid-column: span 2; height: 284px; }
   .it-industry-tile:nth-child(n+4) { grid-column: span 3; }
   .it-industry-tile:last-child { grid-column: span 3; }
-}
-@media (min-width: 900px) {
-  .it-directions-intro { flex-direction: row; justify-content: space-between; align-items: center; gap: 32px; }
 }
 .it-hero-grid { display: grid; grid-template-columns: minmax(0,1fr); grid-template-areas: "copy" "controls" "stage" "details"; gap: 24px; width: min(1200px, calc(100% - 44px)); margin-inline: auto; }
 .it-hero-copy { grid-area: copy; min-width: 0; }
