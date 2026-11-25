@@ -6,8 +6,6 @@ import { getIndustryShowcases } from "../../components/ui/industryShowcases";
 import { useLanguage } from "../../contexts/LanguageContext";
 import { industryData, type BilingualPricingTier } from "../../data/industryData";
 import { itBreadcrumbs } from "../../data/itServices";
-import { marketingHubHref, marketingServices, socialMediaMonthlyPrices } from "../../data/marketingServices";
-import { MarketingIndustryContent } from "./MarketingIndustryContent";
 import { WebIndustryContent } from "./WebIndustryContent";
 import { webIndustryCopy } from "./webIndustryCopy";
 
@@ -40,13 +38,15 @@ function NotFound() {
   );
 }
 
-function IndustryLanding({ serviceRoute }: { serviceRoute?: "web" | "marketing" }) {
+function IndustryLanding({ serviceRoute }: { serviceRoute?: "web" }) {
   const { service: serviceParam, slug } = useParams<{ service: string; slug: string }>();
   const service = serviceRoute ?? serviceParam;
   const { currentLanguage, toggleLanguage } = useLanguage();
   const ka = currentLanguage === "ka";
 
-  if (!slug || (service !== "web" && service !== "marketing")) return <NotFound />;
+  // Only websites have industry pages; the marketing ones were removed on 2026-11-25 and
+  // /industry/marketing/* redirects to the marketing hub in vercel.json.
+  if (!slug || service !== "web") return <NotFound />;
 
   const slide = getIndustryShowcases(currentLanguage).find((item) => item.slug === slug);
   const config = industryData[service]?.[slug];
@@ -54,20 +54,10 @@ function IndustryLanding({ serviceRoute }: { serviceRoute?: "web" | "marketing" 
 
   const base = "https://vifadigital.ge";
   const pageUrl = base + "/industry/" + service + "/" + slug;
-  const breadcrumbs: Crumb[] = service === "web" ? [
+  const breadcrumbs: Crumb[] = [
     ...itBreadcrumbs("web", currentLanguage),
     { name: webIndustryCopy[slide.slug].title?.[currentLanguage] ?? slide.title, url: pageUrl },
-  ] : [
-    { name: ka ? "მთავარი" : "Home", url: base + "/" },
-    { name: ka ? "ციფრული მარკეტინგი" : "Digital Marketing", url: base + marketingHubHref },
-    { name: ka ? config.nameKa : config.nameEn, url: pageUrl },
   ];
-
-  // Retain the published breadcrumb schema label while using the shorter label in the UI.
-  const visibleBreadcrumbs = service === "marketing"
-    ? breadcrumbs.map((crumb, index) => index === 1 ? { ...crumb, name: ka ? "მარკეტინგი" : "Marketing" } : crumb)
-    : breadcrumbs;
-  const Content = service === "web" ? WebIndustryContent : MarketingIndustryContent;
 
   return <>
     <SEO
@@ -78,24 +68,18 @@ function IndustryLanding({ serviceRoute }: { serviceRoute?: "web" | "marketing" 
       serviceSchema={{
         name: ka ? config.seoTitleKa : config.seoTitleEn,
         description: ka ? config.seoDescriptionKa : config.seoDescriptionEn,
-        serviceType: service === "web" ? "Web Development" : "Digital Marketing",
-        offers: service === "marketing"
-          ? [{ name: marketingServices.socialMedia[currentLanguage].title, minPrice: socialMediaMonthlyPrices.Core, unitText: "month" }]
-          : buildOffers(config.packages),
+        serviceType: "Web Development",
+        offers: buildOffers(config.packages),
       }}
       faq={ka ? config.faqKa : config.faqEn}
     />
-    <Content slide={slide} config={config} language={currentLanguage}
-      breadcrumbs={visibleBreadcrumbs} onLanguageToggle={toggleLanguage} />
+    <WebIndustryContent slide={slide} config={config} language={currentLanguage}
+      breadcrumbs={breadcrumbs} onLanguageToggle={toggleLanguage} />
   </>;
 }
 
 export function WebIndustryLanding() {
   return <IndustryLanding serviceRoute="web" />;
-}
-
-export function MarketingIndustryLanding() {
-  return <IndustryLanding serviceRoute="marketing" />;
 }
 
 export default IndustryLanding;
