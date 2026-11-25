@@ -40,7 +40,7 @@ const ROUTES = [
 
 // Industry landing pages — now real indexable money-SEO pages (session 3).
 // Keep these arrays in sync with the industry routes and available industry data.
-const INDUSTRY_SERVICES = ['web'];
+const INDUSTRY_SERVICES = ['web', 'marketing'];
 const INDUSTRY_SLUGS = ['tourism', 'beauty', 'legal-finance', 'retail', 'food'];
 for (const s of INDUSTRY_SERVICES)
   for (const slug of INDUSTRY_SLUGS)

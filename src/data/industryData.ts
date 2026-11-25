@@ -1,7 +1,9 @@
 //industryData.ts
-import { Shield, BarChart3, CalendarCheck, ShoppingBag, Smartphone } from "lucide-react";
+import { Calendar, Shield, BarChart3, CalendarCheck, ShoppingBag, Smartphone } from "lucide-react";
 import type { ComponentType } from "react";
 import type { FAQItem } from "../components/FAQSection";
+import { marketingIndustries } from "./marketingIndustries";
+import { marketingServices, socialMediaMonthlyPrices } from "./marketingServices";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -532,6 +534,184 @@ export const foodWebPackages: BilingualPricingTier[] = [
     ],
     ctaKa: "უფასო კონსულტაცია",
     ctaEn: "Free Consultation",
+    highlighted: true,
+    glowColor: "rgba(99,102,241,0.18)",
+  },
+];
+
+// ─── Marketing Packages (per niche) ──────────────────────────────────────────
+
+export const marketingBeautyPackages: BilingualPricingTier[] = [
+  {
+    nameKa: marketingServices.socialMedia.ka.title,
+    nameEn: marketingServices.socialMedia.en.title,
+    price: "₾ " + socialMediaMonthlyPrices.Core + "+",
+    periodKa: "თვეში",
+    periodEn: "per month",
+    descKa:
+      "სალონის სოციალური გვერდების მართვას შეგვიძლია დავუმატოთ ფოტოები, ვიდეოები და რეკლამა. მოცულობას წინასწარ ვათანხმებთ.",
+    descEn:
+      "We can add photography, video and ads to social media management. We agree on the scope in advance.",
+    featuresKa: [
+      "სოციალური გვერდების შექმნა და მართვა",
+      "პოსტების ტექსტების მომზადება",
+      "გამომწერების ჩასართავი მოკლე ვიდეოები",
+      "ფოტოგადაღება",
+      "რილსების გადაღება და მონტაჟი",
+      "რეკლამის გაშვება და მართვა",
+      "რეკლამა იმ ადამიანებისთვის, ვინც ჩაწერას გეგმავს",
+    ],
+    featuresEn: [
+      "Social media channel setup and management",
+      "Monthly content plan development",
+      "Professional copywriting",
+      "Interactive content creation (polls & quizzes)",
+      "Professional photo shoot",
+      "Reels filming and editing",
+      "Targeted ad campaign launch and management",
+      "Booking-focused audience targeting",
+    ],
+    ctaKa: "დაჯავშნე კონსულტაცია",
+    ctaEn: "Book Consultation",
+    highlighted: true,
+    glowColor: "rgba(99,102,241,0.18)",
+  },
+];
+
+export const marketingTourismPackages: BilingualPricingTier[] = [
+  {
+    nameKa: marketingServices.socialMedia.ka.title,
+    nameEn: marketingServices.socialMedia.en.title,
+    price: "₾ " + socialMediaMonthlyPrices.Core + "+",
+    periodKa: "თვეში",
+    periodEn: "per month",
+    descKa:
+      "პაკეტს მოვარგებთ სასტუმროს ან ტურისტულ ობიექტს. საჭიროების მიხედვით ვათანხმებთ სტრატეგიას, გადაღებასა და რეკლამას.",
+    descEn:
+      "We tailor the work to the property and agree on strategy, photography, filming and ads as needed.",
+    featuresKa: [
+      "მარკეტინგის გეგმის შედგენა",
+      "სოციალური გვერდების შექმნა და მართვა",
+      "ინტერიერისა და ექსტერიერის გადაღება",
+      "ფართო ხედების გადაღება დრონით",
+      "სასტუმროს კვების სივრცეების გადაღება",
+      "ჰორიზონტალური ვიდეო სასტუმროს მიმოხილვით",
+      "5-დან 10 რილსამდე არჩეული ფორმატით",
+      "რეკლამა ადგილობრივ და უცხოელ სტუმრებზე",
+      "კონკურსები და აქციები",
+    ],
+    featuresEn: [
+      "Marketing strategy development",
+      "Social media channel setup and full management",
+      "Professional interior and exterior photo shoot",
+      "Drone panoramic aerial photography",
+      "Hotel gastronomic space visual presentation",
+      "Horizontal image video shoot (full hotel/location walkthrough)",
+      "Reels series in trending format (5 to 10 units)",
+      "Paid ad management across global and local markets",
+      "Contest and promotional campaign organization",
+    ],
+    ctaKa: "დაჯავშნე კონსულტაცია",
+    ctaEn: "Book Consultation",
+    highlighted: true,
+    glowColor: "rgba(99,102,241,0.18)",
+  },
+];
+
+export const marketingFoodPackages: BilingualPricingTier[] = [
+  {
+    nameKa: marketingServices.socialMedia.ka.title,
+    nameEn: marketingServices.socialMedia.en.title,
+    price: "₾ " + socialMediaMonthlyPrices.Core + "+",
+    periodKa: "თვეში",
+    periodEn: "per month",
+    descKa:
+      "გვერდების მართვასთან ერთად შეგვიძლია მოვამზადოთ მენიუ, გადავიღოთ კერძები და გავუშვათ რეკლამა თქვენს უბანში.",
+    descEn:
+      "We can add menu design, food photography and local advertising to social media management.",
+    featuresKa: [
+      "ბეჭდური და ციფრული მენიუს დიზაინი",
+      "აქციებისა და სარეკლამო ბანერების დიზაინი",
+      "კერძების გადაღება, 10-დან 20 ფოტომდე",
+      "3-დან 5 რილსამდე კერძების მომზადების პროცესზე",
+      "რეკლამა მახლობლად მყოფი სტუმრებისთვის",
+    ],
+    featuresEn: [
+      "Menu architecture and print/digital design development",
+      "Customer behavior-driven promotional and advertising banner design",
+      "Food Photography (10 to 20 units)",
+      "Cinematic behind-the-scenes kitchen and preparation video (3 to 5 reels)",
+      "Locally-focused audience targeting",
+    ],
+    ctaKa: "დაჯავშნე კონსულტაცია",
+    ctaEn: "Book Consultation",
+    highlighted: true,
+    glowColor: "rgba(99,102,241,0.18)",
+  },
+];
+
+export const marketingRetailPackages: BilingualPricingTier[] = [
+  {
+    nameKa: marketingServices.socialMedia.ka.title,
+    nameEn: marketingServices.socialMedia.en.title,
+    price: "₾ " + socialMediaMonthlyPrices.Core + "+",
+    periodKa: "თვეში",
+    periodEn: "per month",
+    descKa:
+      "გვერდების მართვას შეგვიძლია დავუმატოთ კატალოგის გადაღება, პროდუქტის ვიდეოები და აქციების რეკლამა.",
+    descEn:
+      "We can add catalogue photography, product videos and promotional ads to social media management.",
+    featuresKa: [
+      "სოციალური გვერდების შექმნა და მართვა",
+      "პროდუქტის პრეზენტაციები მომხმარებლის ჩასართავად",
+      "სარეკლამო ტექსტების მომზადება",
+      "კატალოგისთვის 20-დან 30 ფოტომდე",
+      "10-დან 15 სარეკლამო ვიდეომდე ან ვიდეომიმოხილვამდე",
+      "აქციების დაგეგმვა და მაღაზიაში ვიზიტების მოზიდვა",
+    ],
+    featuresEn: [
+      "Social media channel creation and management",
+      "Interactive product presentations",
+      "Sales-oriented advertising copywriting",
+      "High-quality product catalog photo shoot (20 to 30 photos)",
+      "Advertising video spots and product review creation (10 to 15 units)",
+    ],
+    ctaKa: "დაჯავშნე კონსულტაცია",
+    ctaEn: "Book Consultation",
+    highlighted: true,
+    glowColor: "rgba(99,102,241,0.18)",
+  },
+];
+
+export const marketingLegalFinancePackages: BilingualPricingTier[] = [
+  {
+    nameKa: marketingServices.socialMedia.ka.title,
+    nameEn: marketingServices.socialMedia.en.title,
+    price: "₾ " + socialMediaMonthlyPrices.Core + "+",
+    periodKa: "თვეში",
+    periodEn: "per month",
+    descKa:
+      "სოციალური გვერდების მართვასთან ერთად შეგვიძლია მოვამზადოთ ბრენდის მასალა და ვიდეო B2B აუდიტორიისთვის.",
+    descEn:
+      "We can add brand materials and video for business audiences to social media management.",
+    featuresKa: [
+      "ბრენდბუქი და კომპანიის ერთიანი ვიზუალური სტილი",
+      "სოციალური მედიის მართვა",
+      "სავიზიტო ბარათებისა და ბროშურების დიზაინი",
+      "გუნდისა და ოფისის ფოტოსესია, 10-დან 20 ფოტომდე",
+      "ერთი მოკლე დოკუმენტური ვიდეო კომპანიის საქმიანობაზე",
+      "გამომწერების ჩასართავი რილსები",
+    ],
+    featuresEn: [
+      "Institutional image and corporate brand book development",
+      "Social media management",
+      "Representative print material design (business cards, corporate brochures)",
+      "Professional team and office environment photo shoot (10 to 20 photos)",
+      "Corporate image documentary spot showcasing the company's philosophy and services (1 unit)",
+      "Interactive content creation (polls & quizzes)",
+    ],
+    ctaKa: "დაჯავშნე კონსულტაცია",
+    ctaEn: "Book Consultation",
     highlighted: true,
     glowColor: "rgba(99,102,241,0.18)",
   },
@@ -1173,6 +1353,591 @@ heroSublineKa: "თანამედროვე პლატფორმებ
           question: "How many languages will the menu support?",
           answer:
             "We build a multilingual interface tailored specifically to tourists, so foreign guests can easily understand the menu.",
+        },
+      ],
+    },
+  },
+
+  // მარკეტინგის ნიშები──────────────────────────────────────────────────────────────────────────
+  marketing: {
+    // ── Beauty & Aesthetics ────────────────────────────────────────────────
+    beauty: {
+      nameKa: "ესთეტიკა და სილამაზე",
+      nameEn: "Beauty & Aesthetics",
+      heroBgImage: marketingIndustries.beauty.originalPhoto,
+      eyebrowKa: "ზრდის მარკეტინგი",
+      eyebrowEn: "Growth Marketing",
+      heroSublineKa:
+        "მაღალი განზრახვის შესყიდვის სისტემები, შექმნილი გაზომვადი შემოსავლის ზრდისთვის.",
+      heroSublineEn:
+        "High-intent acquisition systems built for measurable revenue growth.",
+      headline: {
+        type: "simple",
+        textKa: "ზრდის მარკეტინგი ესთეტიკა და სილამაზე-სთვის",
+        textEn: "Growth Marketing for Beauty & Aesthetics",
+      },
+      approach: {
+        headingKa: "მიზნები და სამუშაოს გეგმა",
+        headingEn: "Goals and plan",
+        descKa:
+          "ვთანხმდებით, რომელ მომსახურებაზე გსურთ მეტი ჩაწერა და გეგმას ამ მიზანს ვარგებთ.",
+        descEn:
+          "We plan the content and advertising around your goals and the audience you want to reach.",
+      },
+      features: [
+        {
+          icon: BarChart3,
+          titleKa: "სწორი აუდიტორიის შერჩევა",
+          titleEn: "High-intent Lead Generation",
+          descKa:
+            "რეკლამას ვაჩვენებთ ადამიანებს, რომლებიც სალონის მომსახურებას ეძებენ.",
+          descEn:
+            "We target buyers at the decision stage, not browsers. Campaigns built around search intent.",
+        },
+        {
+          icon: Shield,
+          titleKa: "დანახარჯი და შედეგები",
+          titleEn: "Ad spending and results",
+          descKa:
+            "ვაკვირდებით სარეკლამო დანახარჯსა და შედეგებს, რომ გავიგოთ, რას მოაქვს მეტი მოთხოვნა.",
+          descEn:
+            "We track ad spending and results to see what brings in more enquiries.",
+        },
+        {
+          icon: Calendar,
+          titleKa: "კამპანიის გაფართოება",
+          titleEn: "Growing the campaign",
+          descKa:
+            "შედეგების მიხედვით შეგვიძლია რეკლამის მოცულობა გავზარდოთ.",
+          descEn:
+            "We can expand the campaign based on its results.",
+        },
+      ],
+      packages: marketingBeautyPackages,
+      seoTitleKa: "სილამაზის სალონის მარკეტინგი: SMM და რეკლამა ჩაწერებისთვის",
+      seoTitleEn: "Beauty Salon Marketing: SMM & Ads for Bookings",
+      seoDescriptionKa:
+        "სილამაზის სალონების სოციალური მედიის მართვა, ფოტოები, რილსები და რეკლამა მეტი ჩაწერისთვის. გვერდების მართვა 1000 ₾-დან თვეში.",
+      seoDescriptionEn:
+        "Social media management for beauty salons, with photography, reels and advertising for bookings. From 1000 ₾ per month for page management.",
+      introKa:
+        "სილამაზის სალონებსა და ესთეტიკის ცენტრებს სოციალურ გვერდებს ვუმართავთ. ვქმნით მასალას, რომელიც თქვენს მომსახურებას აჩვენებს, და ვუშვებთ რეკლამას მეტი ჩაწერისთვის.",
+      introEn:
+        "We manage social media for salons and aesthetic clinics, show their services through content and run ads to attract bookings.",
+      contentSections: [
+        {
+          headingKa: "როგორ ვაჩვენებთ სალონის მომსახურებას?",
+          headingEn: "How do you showcase salon services?",
+          bodyKa:
+            "ვქმნით და ვმართავთ სოციალურ გვერდებს, ვწერთ პოსტებს, ვიღებთ ფოტოებსა და რილსებს. ყველა გვერდზე ბრენდის ერთიან იერს ვინარჩუნებთ და ვამზადებთ მასალას გამომწერების ჩასართავად.",
+          bodyEn:
+            "We set up and manage social channels, write posts, and shoot photos and reels. We keep the brand’s look consistent and create content that encourages followers to engage.",
+        },
+        {
+          headingKa: "როგორ ვეხმარებით სალონს ჩაწერების მიღებაში?",
+          headingEn: "How do you help salons get bookings?",
+          bodyKa:
+            "Meta-სა და Google-ზე რეკლამას ვაჩვენებთ ადამიანებს, რომლებიც თქვენს მომსახურებას ეძებენ. ვაკვირდებით, რომელი რეკლამიდან მოდის ჩაწერები და კამპანიას შედეგების მიხედვით ვასწორებთ.",
+          bodyEn:
+            "We run ads on Meta and Google for people looking for your services. We track which ads lead to appointments and adjust the campaign based on the results.",
+        },
+      ],
+      faqKa: [
+        {
+          question: "რა ღირს სალონის სოციალური მედიის მართვა?",
+          answer:
+            "სოციალური მედიის მართვა თვეში 1000 ₾-დან იწყება. ზუსტ ფასს სამუშაოს მოცულობის მიხედვით, უფასო კონსულტაციაზე ვათანხმებთ.",
+        },
+        {
+          question: "ფოტოებსა და რილსებსაც იღებთ?",
+          answer:
+            "დიახ. შეგვიძლია ჩავატაროთ ფოტოსესია, გადავიღოთ რილსები და დავამონტაჟოთ. გადაღების მოცულობა არჩეულ პაკეტზეა დამოკიდებული.",
+        },
+        {
+          question: "რეკლამის ბიუჯეტი ცალკე იხდება?",
+          answer:
+            "დიახ. Meta-სა და Google-ზე რეკლამის ბიუჯეტი მომსახურების ფასისგან ცალკეა. თანხას მიზნებისა და სეზონის მიხედვით ვგეგმავთ.",
+        },
+      ],
+      faqEn: [
+        {
+          question: "How much does salon social media management cost?",
+          answer:
+            "Social media management starts at 1000 ₾ per month. We agree on the exact price for your scope in a free consultation.",
+        },
+        {
+          question: "Do you shoot photos and reels?",
+          answer:
+            "Yes. We can organise a photo shoot and film and edit reels. The scope depends on your package.",
+        },
+        {
+          question: "Is the ad budget paid separately?",
+          answer:
+            "Yes. The Meta or Google ad budget is separate from our service fee. We plan it around your goals and season.",
+        },
+      ],
+    },
+
+    // ── Tourism ────────────────────────────────────────────────────────────
+    tourism: {
+      nameKa: "სასტუმროები და ტურიზმი",
+      nameEn: "Hotels & Tourism",
+      heroBgImage: marketingIndustries.tourism.originalPhoto,
+      eyebrowKa: "ზრდის მარკეტინგი",
+      eyebrowEn: "Growth Marketing",
+      heroSublineKa:
+        "მაღალი განზრახვის შესყიდვის სისტემები, შექმნილი გაზომვადი შემოსავლის ზრდისთვის.",
+      heroSublineEn:
+        "High-intent acquisition systems built for measurable revenue growth.",
+      headline: {
+        type: "simple",
+        textKa: "ზრდის მარკეტინგი სასტუმროები და ტურიზმი-სთვის",
+        textEn: "Growth Marketing for Hotels & Tourism",
+      },
+      approach: {
+        headingKa: "მიზნები და სამუშაოს გეგმა",
+        headingEn: "Goals and plan",
+        descKa:
+          "ერთად ვწყვეტთ, რომელ სტუმრებს გსურთ მისწვდეთ და რა უნდა ნახონ დაჯავშნამდე.",
+        descEn:
+          "We plan the content and advertising around your goals and the audience you want to reach.",
+      },
+      features: [
+        {
+          icon: BarChart3,
+          titleKa: "სწორი აუდიტორიის შერჩევა",
+          titleEn: "High-intent Lead Generation",
+          descKa:
+            "რეკლამას ვაჩვენებთ სტუმრებს, რომლებიც მოგზაურობას გეგმავენ და არჩევანს აკეთებენ.",
+          descEn:
+            "We target buyers at the decision stage, not browsers.",
+        },
+        {
+          icon: Shield,
+          titleKa: "დანახარჯი და შედეგები",
+          titleEn: "Ad spending and results",
+          descKa:
+            "ვაკვირდებით სარეკლამო დანახარჯსა და შედეგებს, რომ გავიგოთ, რას მოაქვს მეტი მოთხოვნა.",
+          descEn:
+            "We track ad spending and results to see what brings in more enquiries.",
+        },
+        {
+          icon: Calendar,
+          titleKa: "კამპანიის გაფართოება",
+          titleEn: "Growing the campaign",
+          descKa:
+            "შედეგების მიხედვით შეგვიძლია რეკლამის მოცულობა გავზარდოთ.",
+          descEn:
+            "We can expand the campaign based on its results.",
+        },
+      ],
+      packages: marketingTourismPackages,
+      seoTitleKa: "სასტუმროს მარკეტინგი: ტურიზმის ციფრული რეკლამა და კონტენტი",
+      seoTitleEn: "Hotel Marketing: Tourism Digital Ads & Content",
+      seoDescriptionKa:
+        "სასტუმროებისა და ტურისტული ობიექტების სოციალური მედიის მართვა, გადაღება და რეკლამა. გვერდების მართვა 1000 ₾-დან თვეში.",
+      seoDescriptionEn:
+        "Social media management, photography, video and advertising for hotels and tourism venues. Page management starts at 1000 ₾ per month.",
+      introKa:
+        "სტუმარს დაჯავშნამდე უნდა ჰქონდეს წარმოდგენა, სად მიდის. ვგეგმავთ, როგორ აჩვენოთ თქვენი სივრცე ფოტოებითა და ვიდეოებით და როგორ მიაწვდინოთ ხმა ადგილობრივ და უცხოელ სტუმრებს.",
+      introEn:
+        "Guests want to know what to expect before they book. We plan how to show your property through photos and videos and reach local and international visitors.",
+      contentSections: [
+        {
+          headingKa: "რას ვიღებთ სასტუმროში?",
+          headingEn: "What do you shoot at a hotel?",
+          bodyKa:
+            "ვიღებთ ინტერიერს, ექსტერიერსა და კვების სივრცეებს. დრონით შეგვიძლია გადავიღოთ ფართო ხედები. ჰორიზონტალურ ვიდეოში სასტუმროს მთლიანად ვაჩვენებთ, მოკლე რილსებით კი სოციალურ ქსელებში მეტ ადამიანს ვწვდებით.",
+          bodyEn:
+            "We shoot interiors, exteriors and dining spaces. We can capture panoramic drone footage and make a landscape video showing the full property. Short reels help reach more people on social media.",
+        },
+        {
+          headingKa: "როგორ ვეხმარებით სასტუმროს პირდაპირი ჯავშნების მიღებაში?",
+          headingEn: "How do you encourage direct bookings?",
+          bodyKa:
+            "რეკლამას ვუშვებთ ადგილობრივი და უცხოელი სტუმრებისთვის. მიზანი პირდაპირი ჯავშნების მიღება და შუამავალ საიტებზე დამოკიდებულების შემცირებაა. დაბალ სეზონზე შეგვიძლია დავგეგმოთ აქციები და კონკურსები.",
+          bodyEn:
+            "We advertise to local and international guests to encourage direct bookings and reduce reliance on third-party platforms. We can plan promotions and contests for the low season.",
+        },
+      ],
+      faqKa: [
+        {
+          question: "რა ღირს სასტუმროს სოციალური მედიის მართვა?",
+          answer:
+            "სოციალური მედიის მართვა თვეში 1000 ₾-დან იწყება. ფასს სამუშაოსა და გადაღების მოცულობის მიხედვით, უფასო კონსულტაციაზე ვათანხმებთ.",
+        },
+        {
+          question: "სასტუმროს დრონითაც გადაიღებთ?",
+          answer:
+            "დიახ. შეგვიძლია გადავიღოთ ხედები დრონით და მოვამზადოთ ვიდეო, რომელიც სასტუმროს მთლიანად აჩვენებს. გადაღების მოცულობას წინასწარ შევათანხმებთ.",
+        },
+        {
+          question: "რეკლამას უცხოურ ბაზრებზეც უშვებთ?",
+          answer:
+            "დიახ. რეკლამას ვუშვებთ როგორც საქართველოში, ისე უცხოეთში, რომ სასტუმრომ პირდაპირი ჯავშნები მიიღოს.",
+        },
+      ],
+      faqEn: [
+        {
+          question: "How much does hotel social media management cost?",
+          answer:
+            "Social media management starts at 1000 ₾ per month. We agree on the price based on the services and shoots you need in a free consultation.",
+        },
+        {
+          question: "Can you film the hotel with a drone?",
+          answer:
+            "Yes. We can capture panoramic drone footage and make a video showing the full property. We agree on the scope in advance.",
+        },
+        {
+          question: "Do you advertise internationally?",
+          answer:
+            "Yes. We advertise locally and abroad to encourage direct bookings.",
+        },
+      ],
+    },
+
+    // ── Legal & Finance ────────────────────────────────────────────────────
+    "legal-finance": {
+      nameKa: "იურიდიული და საფინანსო",
+      nameEn: "Legal & Finance",
+      heroBgImage: marketingIndustries["legal-finance"].originalPhoto,
+      eyebrowKa: "ზრდის მარკეტინგი",
+      eyebrowEn: "Growth Marketing",
+      heroSublineKa:
+        "მაღალი განზრახვის შესყიდვის სისტემები, შექმნილი გაზომვადი შემოსავლის ზრდისთვის.",
+      heroSublineEn:
+        "High-intent acquisition systems built for measurable revenue growth.",
+      headline: {
+        type: "simple",
+        textKa: "ზრდის მარკეტინგი იურიდიული და საფინანსო-სთვის",
+        textEn: "Growth Marketing for Legal & Finance",
+      },
+      approach: {
+        headingKa: "მიზნები და სამუშაოს გეგმა",
+        headingEn: "Goals and plan",
+        descKa:
+          "ვარკვევთ, ვის სჭირდება თქვენი მომსახურება და რა უნდა იცოდეს კლიენტმა, რომ კონსულტაციაზე დაგიკავშირდეთ.",
+        descEn:
+          "We plan the content and advertising around your goals and the audience you want to reach.",
+      },
+      features: [
+        {
+          icon: BarChart3,
+          titleKa: "სწორი აუდიტორიის შერჩევა",
+          titleEn: "High-intent Lead Generation",
+          descKa:
+            "ვეძებთ იმ სიტყვებს, რომლებითაც პოტენციური კლიენტები თქვენს მომსახურებასა და კონსულტაციას ეძებენ.",
+          descEn:
+            "We target clients at the consultation stage, with competitive, high-value keywords.",
+        },
+        {
+          icon: Shield,
+          titleKa: "დანახარჯი და შედეგები",
+          titleEn: "Ad spending and results",
+          descKa:
+            "ვაკვირდებით სარეკლამო დანახარჯსა და შედეგებს, რომ გავიგოთ, რას მოაქვს მეტი მოთხოვნა.",
+          descEn:
+            "We track ad spending and results to see what brings in more enquiries.",
+        },
+        {
+          icon: Calendar,
+          titleKa: "კამპანიის გაფართოება",
+          titleEn: "Growing the campaign",
+          descKa:
+            "შედეგების მიხედვით შეგვიძლია რეკლამის მოცულობა გავზარდოთ.",
+          descEn:
+            "We can expand the campaign based on its results.",
+        },
+      ],
+      packages: marketingLegalFinancePackages,
+      seoTitleKa: "იურიდიული მარკეტინგი: B2B ბრენდინგი და კორპორატიული იმიჯი",
+      seoTitleEn: "Legal & Finance Marketing: B2B Branding",
+      seoDescriptionKa:
+        "იურიდიული და საფინანსო კომპანიების სოციალური მედიის მართვა, ბრენდინგი და B2B მასალა. გვერდების მართვა 1000 ₾-დან თვეში.",
+      seoDescriptionEn:
+        "Social media management, corporate branding and B2B content for legal and finance firms. Page management starts at 1000 ₾ per month.",
+      introKa:
+        "იურიდიულ და საფინანსო კომპანიებს ვეხმარებით, კლიენტებს ნათლად აჩვენონ, რას აკეთებენ და რა გამოცდილება აქვთ. ვქმნით ერთიან ვიზუალურ სტილს და მასალას B2B აუდიტორიისთვის.",
+      introEn:
+        "We help legal and finance firms explain what they do and show their expertise. We create a consistent visual style and content for business clients.",
+      contentSections: [
+        {
+          headingKa: "როგორ ვაწყობთ კომპანიის ვიზუალურ სტილს?",
+          headingEn: "How do you create a consistent look for the firm?",
+          bodyKa:
+            "ვამზადებთ ბრენდბუქს, სავიზიტო ბარათებსა და ბროშურებს. საჭიროებისას ვიღებთ გუნდსა და ოფისს. ამ მასალებს ერთ სტილში ვაერთიანებთ.",
+          bodyEn:
+            "We create a brand book, business cards and brochures. We can photograph the team and the office and give the materials a consistent look.",
+        },
+        {
+          headingKa: "რას ვაჩვენებთ სოციალურ ქსელებში?",
+          headingEn: "What do you show on social media?",
+          bodyKa:
+            "სოციალურ გვერდებზე ვაჩვენებთ კომპანიის გამოცდილებასა და მომსახურებას. შეგვიძლია გადავიღოთ მოკლე დოკუმენტური ვიდეო კომპანიის ხედვასა და საქმიანობაზე. მასალას გადაწყვეტილების მიმღებ ადამიანებს ვარგებთ.",
+          bodyEn:
+            "We show the firm’s expertise and services on social channels. We can shoot a short documentary about the company and its work. We tailor the content to business decision makers.",
+        },
+      ],
+      faqKa: [
+        {
+          question: "რა ღირს იურიდიული კომპანიის სოციალური მედიის მართვა?",
+          answer:
+            "სოციალური მედიის მართვა თვეში 1000 ₾-დან იწყება. ბრენდინგისა და სხვა მასალის ფასს საჭირო სამუშაოს მიხედვით, უფასო კონსულტაციაზე ვათანხმებთ.",
+        },
+        {
+          question: "კომპანიის ვიდეოსაც გადაიღებთ?",
+          answer:
+            "დიახ. შეგვიძლია შევქმნათ ერთი მოკლე დოკუმენტური ვიდეო, რომელიც კომპანიის საქმიანობასა და მომსახურებას აჩვენებს. ვიდეოს მოცულობას წინასწარ ვათანხმებთ.",
+        },
+        {
+          question: "მუშაობთ B2B კომპანიებთან?",
+          answer:
+            "დიახ. მასალას ვამზადებთ კომპანიებისთვის და იმ ადამიანებისთვის, რომლებიც პარტნიორის არჩევაზე გადაწყვეტილებას იღებენ.",
+        },
+      ],
+      faqEn: [
+        {
+          question: "How much does social media management cost for a legal or finance firm?",
+          answer:
+            "Social media management starts at 1000 ₾ per month. We agree on the price of branding and other work based on scope in a free consultation.",
+        },
+        {
+          question: "Can you make a video about our firm?",
+          answer:
+            "Yes. We can create one short documentary about the firm and its services. We agree on the scope in advance.",
+        },
+        {
+          question: "Do you work with B2B companies?",
+          answer:
+            "Yes. We tailor the content to businesses and the people who make decisions about choosing a partner.",
+        },
+      ],
+    },
+
+    // ── E-commerce & Retail ────────────────────────────────────────────────
+    retail: {
+      nameKa: "ონლაინ და საცალო მაღაზიები",
+      nameEn: "E-commerce & Retail",
+      heroBgImage: marketingIndustries.retail.originalPhoto,
+      eyebrowKa: "ზრდის მარკეტინგი",
+      eyebrowEn: "Growth Marketing",
+      heroSublineKa:
+        "მაღალი განზრახვის შესყიდვის სისტემები, შექმნილი გაზომვადი შემოსავლის ზრდისთვის.",
+      heroSublineEn:
+        "High-intent acquisition systems built for measurable revenue growth.",
+      headline: {
+        type: "simple",
+        textKa: "ზრდის მარკეტინგი E-commerce და საცალო-სთვის",
+        textEn: "Growth Marketing for E-commerce & Retail",
+      },
+      approach: {
+        headingKa: "მიზნები და სამუშაოს გეგმა",
+        headingEn: "Goals and plan",
+        descKa:
+          "ვარჩევთ, რომელი პროდუქტი გავაცნოთ მყიდველებს და რომელ შეთავაზებაზე გავუშვათ რეკლამა.",
+        descEn:
+          "We plan the content and advertising around your goals and the audience you want to reach.",
+      },
+      features: [
+        {
+          icon: BarChart3,
+          titleKa: "სწორი აუდიტორიის შერჩევა",
+          titleEn: "High-intent Lead Generation",
+          descKa: "რეკლამას ვაჩვენებთ ადამიანებს, რომლებიც პროდუქტს ეძებენ და ყიდვას განიხილავენ.",
+          descEn: "We target buyers at the decision stage.",
+        },
+        {
+          icon: Shield,
+          titleKa: "დანახარჯი და შედეგები",
+          titleEn: "Ad spending and results",
+          descKa:
+            "ვაკვირდებით სარეკლამო დანახარჯსა და შედეგებს, რომ გავიგოთ, რას მოაქვს მეტი მოთხოვნა.",
+          descEn: "We track ad spending and results to see what brings in more enquiries.",
+        },
+        {
+          icon: Calendar,
+          titleKa: "კამპანიის გაფართოება",
+          titleEn: "Growing the campaign",
+          descKa:
+            "შედეგების მიხედვით შეგვიძლია რეკლამის მოცულობა გავზარდოთ.",
+          descEn: "We can expand the campaign based on its results.",
+        },
+      ],
+      packages: marketingRetailPackages,
+      seoTitleKa: "ონლაინ მაღაზიის მარკეტინგი: eCommerce რეკლამა და გაყიდვები",
+      seoTitleEn: "E-commerce Marketing: Online Store Ads & Sales",
+      seoDescriptionKa:
+        "სოციალური მედიის მართვა ონლაინ და საცალო მაღაზიებისთვის. პროდუქტის ფოტოები, ვიდეოები და გაყიდვების კამპანიები. მართვა 1000 ₾-დან თვეში.",
+      seoDescriptionEn:
+        "Social media management for online and retail shops, with product photos, videos and sales campaigns. Page management starts at 1000 ₾ per month.",
+      introKa:
+        "მაღაზიებს ვეხმარებით პროდუქტის უკეთ ჩვენებასა და გაყიდვების კამპანიების დაგეგმვაში. ვამზადებთ კატალოგის ფოტოებს, ვიდეომიმოხილვებსა და სარეკლამო მასალას.",
+      introEn:
+        "We help shops present their products and plan sales campaigns. We make catalogue photos, product review videos and advertising materials.",
+      contentSections: [
+        {
+          headingKa: "როგორ ვამზადებთ პროდუქტის მასალას?",
+          headingEn: "How do you create product content?",
+          bodyKa:
+            "ვმართავთ სოციალურ გვერდებს და ვამზადებთ პროდუქტის პრეზენტაციებს. შეთანხმებული მოცულობით შეგვიძლია გადავიღოთ კატალოგისთვის 20-დან 30 ფოტომდე და მოვამზადოთ 10-დან 15 ვიდეომდე. ტექსტებში ვუხსნით მყიდველს, რას მიიღებს პროდუქტის შეძენისას.",
+          bodyEn:
+            "We manage social channels and prepare product presentations. Depending on the agreed scope, we can shoot 20 to 30 catalogue photos and make 10 to 15 videos. The copy explains what the customer gets.",
+        },
+        {
+          headingKa: "როგორ ვუშვებთ აქციების რეკლამას?",
+          headingEn: "How do you promote sales and discounts?",
+          bodyKa:
+            "ვგეგმავთ აქციებს და დაინტერესებულ მყიდველებს მაღაზიაში მივმართავთ. ვაკვირდებით ვიზიტებს, შეკვეთებსა და დანახარჯს და რეკლამას შედეგების მიხედვით ვასწორებთ.",
+          bodyEn:
+            "We plan promotions and campaigns that bring interested shoppers to the store. We track visits, orders and spending and use the results to adjust the ads.",
+        },
+      ],
+      faqKa: [
+        {
+          question: "რა ღირს მაღაზიის სოციალური მედიის მართვა?",
+          answer:
+            "სოციალური მედიის მართვა თვეში 1000 ₾-დან იწყება. საბოლოო ფასი დამოკიდებულია მასალისა და რეკლამის მოცულობაზე. შეთავაზებას უფასო კონსულტაციაზე ვათანხმებთ.",
+        },
+        {
+          question: "პროდუქტის ფოტოებსა და ვიდეოებსაც იღებთ?",
+          answer:
+            "დიახ. შეთანხმებული მოცულობით შეგვიძლია გადავიღოთ კატალოგისთვის 20-დან 30 ფოტომდე და მოვამზადოთ 10-დან 15 სარეკლამო ვიდეომდე.",
+        },
+        {
+          question: "თუ მხოლოდ სოციალურ ქსელებში ვყიდი, მაინც გამომადგება?",
+          answer:
+            "დიახ. ვმუშაობთ ონლაინ მაღაზიებთანაც და იმ ბიზნესებთანაც, რომლებიც Facebook-ზე, Instagram-ზე ან TikTok-ზე ყიდიან.",
+        },
+      ],
+      faqEn: [
+        {
+          question: "How much does shop social media management cost?",
+          answer:
+            "Social media management starts at 1000 ₾ per month. The final price depends on the scope of content and advertising. We agree on it in a free consultation.",
+        },
+        {
+          question: "Do you shoot product photos and videos?",
+          answer:
+            "Yes. Depending on the scope, we can shoot 20 to 30 catalogue photos and make 10 to 15 ad videos.",
+        },
+        {
+          question: "Is this suitable if I only sell through social media?",
+          answer:
+            "Yes. We work with online stores and businesses that sell on Facebook, Instagram or TikTok.",
+        },
+      ],
+    },
+
+    // ── Restaurants & Food ─────────────────────────────────────────────────
+    food: {
+      nameKa: "რესტორნები და კვება",
+      nameEn: "Restaurants & Food",
+      heroBgImage: marketingIndustries.food.originalPhoto,
+      eyebrowKa: "ზრდის მარკეტინგი",
+      eyebrowEn: "Growth Marketing",
+      heroSublineKa:
+        "მაღალი განზრახვის შესყიდვის სისტემები, შექმნილი გაზომვადი შემოსავლის ზრდისთვის.",
+      heroSublineEn:
+        "High-intent acquisition systems built for measurable revenue growth.",
+      headline: {
+        type: "simple",
+        textKa: "ზრდის მარკეტინგი რესტორნები და კვება-სთვის",
+        textEn: "Growth Marketing for Restaurants & Food",
+      },
+      approach: {
+        headingKa: "მიზნები და სამუშაოს გეგმა",
+        headingEn: "Goals and plan",
+        descKa:
+          "ერთად ვარჩევთ, რა კერძები ან შეთავაზებები ვაჩვენოთ სტუმრებს და რომელ უბანში გავუშვათ რეკლამა.",
+        descEn:
+          "We plan the content and advertising around your goals and the audience you want to reach.",
+      },
+      features: [
+        {
+          icon: BarChart3,
+          titleKa: "სწორი აუდიტორიის შერჩევა",
+          titleEn: "High-intent Lead Generation",
+          descKa: "რეკლამას ვაჩვენებთ მახლობლად მყოფ ადამიანებს, რომლებიც სადილის ან შეხვედრის ადგილს ეძებენ.",
+          descEn: "We target diners at the local search stage.",
+        },
+        {
+          icon: Shield,
+          titleKa: "დანახარჯი და შედეგები",
+          titleEn: "Ad spending and results",
+          descKa:
+            "ვაკვირდებით სარეკლამო დანახარჯსა და შედეგებს, რომ გავიგოთ, რას მოაქვს მეტი მოთხოვნა.",
+          descEn: "We track ad spending and results to see what brings in more enquiries.",
+        },
+        {
+          icon: Calendar,
+          titleKa: "კამპანიის გაფართოება",
+          titleEn: "Growing the campaign",
+          descKa:
+            "შედეგების მიხედვით შეგვიძლია რეკლამის მოცულობა გავზარდოთ.",
+          descEn: "We can expand the campaign based on its results.",
+        },
+      ],
+      packages: marketingFoodPackages,
+      seoTitleKa: "რესტორნის მარკეტინგი: Food კონტენტი და ლოკალური რეკლამა",
+      seoTitleEn: "Restaurant Marketing: Food Content & Local Ads",
+      seoDescriptionKa:
+        "რესტორნებისა და კაფეების სოციალური მედიის მართვა, მენიუს დიზაინი, კერძების გადაღება და ადგილობრივი რეკლამა. მართვა 1000 ₾-დან თვეში.",
+      seoDescriptionEn:
+        "Social media management, menu design, food photography and local advertising for restaurants and cafés. Page management starts at 1000 ₾ per month.",
+      introKa:
+        "რესტორნებსა და კაფეებს ვეხმარებით, სტუმრებს კერძები და სივრცე წინასწარ აჩვენონ. ვამზადებთ მენიუს, ფოტოებსა და ვიდეოებს და ვუშვებთ რეკლამას მახლობლად მყოფი ადამიანებისთვის.",
+      introEn:
+        "We help restaurants and cafés show guests their food and space before they visit. We create menus, take photos, make videos and run ads for nearby guests.",
+      contentSections: [
+        {
+          headingKa: "როგორ ვაჩვენებთ კერძებსა და მენიუს?",
+          headingEn: "How do you present the food and menu?",
+          bodyKa:
+            "შეგვიძლია გადავიღოთ 10-დან 20 ფოტომდე და მოვამზადოთ 3-დან 5 რილსამდე კერძების მომზადების პროცესზე. ვაწყობთ მენიუს, ვაფორმებთ ბეჭდურ და ციფრულ ვერსიებს და ვამზადებთ აქციების ბანერებს.",
+          bodyEn:
+            "We can shoot 10 to 20 photos and create 3 to 5 reels about how the food is prepared. We design print and digital menus and put together promotional banners.",
+        },
+        {
+          headingKa: "როგორ ვაჩვენებთ რეკლამას ახლოს მყოფ სტუმრებს?",
+          headingEn: "How do you reach nearby guests?",
+          bodyKa:
+            "რეკლამას ვაჩვენებთ იმ ადამიანებს, რომლებიც თქვენს უბანში ეძებენ სად ივახშმონ ან შეხვდნენ მეგობრებს. ამ გზით ბიუჯეტს იმ ადამიანებზე ვხარჯავთ, ვისაც თქვენთან მოსვლა შეუძლია.",
+          bodyEn:
+            "We advertise to people looking for a place to eat or meet near your restaurant. That way the budget reaches people who can visit.",
+        },
+      ],
+      faqKa: [
+        {
+          question: "რა ღირს რესტორნის სოციალური მედიის მართვა?",
+          answer:
+            "სოციალური მედიის მართვა თვეში 1000 ₾-დან იწყება. ზუსტ ფასს მასალისა და გადაღებების მოცულობის მიხედვით, უფასო კონსულტაციაზე ვათანხმებთ.",
+        },
+        {
+          question: "კერძების ფოტოებსა და ვიდეოსაც იღებთ?",
+          answer:
+            "დიახ. შეგვიძლია გადავიღოთ 10-დან 20 ფოტომდე და მოვამზადოთ 3-დან 5 რილსამდე მომზადების პროცესზე. მოცულობას პაკეტის მიხედვით ვათანხმებთ.",
+        },
+        {
+          question: "რეკლამა ახლოს მყოფ სტუმრებსაც მიუვა?",
+          answer:
+            "დიახ. რესტორნის რეკლამას იმ ადამიანებს ვაჩვენებთ, რომლებიც ახლოს არიან და სტუმრობას განიხილავენ.",
+        },
+      ],
+      faqEn: [
+        {
+          question: "How much does restaurant social media management cost?",
+          answer:
+            "Social media management starts at 1000 ₾ per month. We agree on the exact price for the content and shoots you need in a free consultation.",
+        },
+        {
+          question: "Do you shoot food photos and videos?",
+          answer:
+            "Yes. Depending on the package, we can take 10 to 20 food photos and create 3 to 5 reels about preparation.",
+        },
+        {
+          question: "Can you reach people near the restaurant?",
+          answer:
+            "Yes. We show ads to nearby people who may be interested in visiting.",
         },
       ],
     },

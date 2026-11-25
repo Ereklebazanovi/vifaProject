@@ -65,6 +65,9 @@ const router = createBrowserRouter(createRoutesFromElements(
       <Route path="industry/web/:slug" lazy={async () => ({
         Component: (await import("./pages/landing/IndustryLanding")).WebIndustryLanding,
       })} />
+      <Route path="industry/marketing/:slug" lazy={async () => ({
+        Component: (await import("./pages/landing/IndustryLanding")).MarketingIndustryLanding,
+      })} />
       <Route path="services/ai-chatbot" lazy={lazyRoute(() => import("./pages/AIChatbot"))} />
       <Route path="inventowms" lazy={lazyRoute(() => import("./offeredServices/InventoLandingPage"))} />
       <Route path="lineup" lazy={lazyRoute(() => import("./offeredServices/LineupLandingPage"))} />
