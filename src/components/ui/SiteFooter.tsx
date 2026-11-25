@@ -1,4 +1,5 @@
 import { itHref, itServiceOrder, itServices } from "../../data/itServices";
+import { marketingIndustries, marketingIndustryOrder } from "../../data/marketingIndustries";
 import { marketingChannels, marketingHubHref, marketingServiceOrder, marketingServices } from "../../data/marketingServices";
 import { PageLink } from "./PageLink";
 
@@ -21,6 +22,16 @@ export function SiteFooter({ language = "ka" }: { language?: "ka" | "en" }) {
             </ul>
           </nav>
         ))}
+        {/* The marketing industry pages bring search traffic (a hotel found us through them) but have no
+            tiles on the marketing pages since 2026-11-25, so the footer keeps them linked from every page. */}
+        <nav className="it-footer-column" aria-label={en ? "Marketing by industry" : "მარკეტინგი დარგებისთვის"}>
+          <h2>{en ? "Marketing by industry" : "მარკეტინგი დარგებისთვის"}</h2>
+          <ul className="it-footer-list">
+            {marketingIndustryOrder.map(slug => (
+              <li key={slug}><PageLink to={`/industry/marketing/${slug}`}>{marketingIndustries[slug].label[language]}</PageLink></li>
+            ))}
+          </ul>
+        </nav>
         <section className="it-footer-column" aria-labelledby="it-footer-contact">
           <h2 id="it-footer-contact">{en ? "Contact" : "კონტაქტი"}</h2>
           <address>
