@@ -19,11 +19,11 @@ import "./about.css";
 const metadata = {
   ka: {
     title: "ჩვენ შესახებ",
-    description: "VIFA - ტექნოლოგიური და კრეატიული სააგენტო. ციფრული ტრანსფორმაცია, ვებ დეველოპმენტი, მარკეტინგი და ქონთენთ პროდუქცია.",
+    description: "VIFA Digital 2020 წლიდან: ვებსაიტები, AI ჩატბოტი, ბიზნესის პროგრამები, მარკეტინგი, ფოტოები და ვიდეოები ერთ გუნდში.",
   },
   en: {
     title: "About Us",
-    description: "VIFA - Technology and Creative Agency. Digital transformation, web development, marketing, and content production.",
+    description: "VIFA Digital since 2020: websites, AI chatbots, business software, marketing, photos and videos from one team.",
   },
 };
 

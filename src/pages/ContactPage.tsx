@@ -20,17 +20,17 @@ const contactTranslations = {
     "seo.title": "კონტაქტი",
     "seo.description": "დაგვიკავშირდით პროექტის დასაწყებად. აირჩიეთ თქვენთვის სასურველი მიმართულება.",
     
-    "contact.hero.subtitle": "სწრაფი კომუნიკაცია",
     "contact.hero.title": "დაგვიკავშირდით",
     "contact.hero.desc": "აირჩიეთ თქვენთვის სასურველი მიმართულება და მოგვწერეთ პირდაპირ WhatsApp-ში.",
-    
-    "contact.dept.web.title": "ვებ-დეველოპმენტი & IT",
+
+    "contact.dept.web.title": "ვებსაიტები და IT",
     "contact.dept.web.desc": "ვებსაიტები, პლატფორმები და ტექნიკური მხარდაჭერა.",
-    "contact.dept.marketing.title": "მარკეტინგი & კრეატივი",
-    "contact.dept.marketing.desc": "სოციალური მედია, რეკლამა და კონტენტ პროდუქცია.",
-    
+    "contact.dept.marketing.title": "მარკეტინგი",
+    "contact.dept.marketing.desc": "სოციალური მედია, რეკლამა, ფოტოები და ვიდეოები.",
+
     "contact.btn.whatsapp": "მოგვწერეთ WhatsApp-ში",
     "contact.info.email": "ზოგადი შეკითხვებისთვის",
+    "contact.info.locationLabel": "მისამართი",
     "contact.info.location": "თბილისი, საქართველო",
     "contact.form.title": "ან დაგვიტოვეთ საკონტაქტო",
     "contact.form.desc": "დაგიკავშირდებით დღესვე.",
@@ -39,17 +39,17 @@ const contactTranslations = {
     "seo.title": "Contact Us",
     "seo.description": "Contact us to start your project. Choose the department you need.",
     
-    "contact.hero.subtitle": "Fast Communication",
     "contact.hero.title": "Get in Touch",
-    "contact.hero.desc": "Choose the department you need and message us directly on WhatsApp. Our experts are ready to help.",
-    
-    "contact.dept.web.title": "Web Development & IT",
+    "contact.hero.desc": "Choose a direction and message us directly on WhatsApp.",
+
+    "contact.dept.web.title": "Websites and IT",
     "contact.dept.web.desc": "Websites, platforms, and technical support.",
-    "contact.dept.marketing.title": "Marketing & Creative",
-    "contact.dept.marketing.desc": "Social media, advertising, and content production.",
-    
+    "contact.dept.marketing.title": "Marketing",
+    "contact.dept.marketing.desc": "Social media, advertising, photos and videos.",
+
     "contact.btn.whatsapp": "Message on WhatsApp",
     "contact.info.email": "For general inquiries",
+    "contact.info.locationLabel": "Location",
     "contact.info.location": "Tbilisi, Georgia",
     "contact.form.title": "Or leave your details",
     "contact.form.desc": "We will get back to you today.",
@@ -87,9 +87,6 @@ const ContactPage: React.FC = () => {
           
           {/* ── Header ── */}
           <div className="text-center mb-16">
-            <span className="text-sm uppercase tracking-widest ed-accent font-semibold mb-4 block">
-              {t("contact.hero.subtitle")}
-            </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold ed-ink tracking-tight mb-6">
               {t("contact.hero.title")}
             </h1>
@@ -177,7 +174,7 @@ const ContactPage: React.FC = () => {
                 <FaEnvelope />
               </div>
               <div>
-                <div className="text-xs uppercase tracking-wider ed-muted">{t("contact.info.email")}</div>
+                <div className="text-xs ed-muted">{t("contact.info.email")}</div>
                 <a href="mailto:vifa.official2020@gmail.com" className="ed-ink hover:underline transition-colors">
                   vifa.official2020@gmail.com
                 </a>
@@ -191,7 +188,7 @@ const ContactPage: React.FC = () => {
                 <FaMapMarkerAlt />
               </div>
               <div>
-                <div className="text-xs uppercase tracking-wider ed-muted">ლოკაცია</div>
+                <div className="text-xs ed-muted">{t("contact.info.locationLabel")}</div>
                 <div className="ed-ink">{t("contact.info.location")}</div>
               </div>
             </div>

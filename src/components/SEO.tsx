@@ -42,6 +42,8 @@ interface SEOProps {
     section?: string;
     tags?: string[];
   };
+  /** Keeps the page out of Google (the 404 page: unknown URLs are served with HTTP 200 by the SPA rewrite). */
+  noindex?: boolean;
 }
 
 const SEO: React.FC<SEOProps> = ({
@@ -56,20 +58,21 @@ const SEO: React.FC<SEOProps> = ({
   breadcrumbs,
   serviceSchema,
   softwareApplication,
-  articleMeta
+  articleMeta,
+  noindex = false
 }) => {
   const { currentLanguage } = useLanguage();
   const isKa = currentLanguage === 'ka';
   const brandBaseUrl = 'https://vifadigital.ge';
 
   const brandConfig = {
-    siteName: 'Vifa Digital',
+    siteName: 'VIFA Digital',
     siteTitle: isKa
-      ? 'Vifa Digital - პრემიუმ ვებ დეველოპმენტი, ციფრული მარკეტინგი და IT გადაწყვეტილებები'
-      : 'Vifa Digital - Premium Web Development, Digital Marketing & IT Solutions',
+      ? 'VIFA Digital: ვებსაიტები, AI ჩატბოტი, ბიზნესის პროგრამები და მარკეტინგი'
+      : 'VIFA Digital: websites, AI chatbots, business software and marketing',
     defaultDescription: isKa
-      ? 'Vifa Digital არის პრემიუმ სრულ-სერვისიანი სააგენტო საქართველოში, რომელიც აერთიანებს ვებ დეველოპმენტს, ციფრულ მარკეტინგს და IT გადაწყვეტილებებს ბიზნესის ზრდისთვის.'
-      : 'Vifa Digital is a premium full-service agency in Georgia, delivering web development, digital marketing, and IT solutions for business growth.',
+      ? 'VIFA Digital თბილისში: ვებსაიტების დამზადება, AI ჩატბოტები, მარაგების მართვის პროგრამა და ციფრული მარკეტინგი ბიზნესისთვის.'
+      : 'VIFA Digital in Tbilisi: website development, AI chatbots, inventory software and digital marketing for businesses.',
     defaultKeywords: isKa
       ? 'Vifa Digital, ვებ დეველოპმენტი, ვებსაიტის შექმნა, ციფრული მარკეტინგი, SEO, Google Ads, Facebook რეკლამა, IT სერვისები, ბიზნეს ავტომატიზაცია, AI გადაწყვეტილებები, WMS, ტექნოლოგიური სააგენტო, თბილისი, საქართველო'
       : 'Vifa Digital, web development, website development, digital marketing, SEO, Google Ads, Facebook ads, IT solutions, business automation, AI solutions, WMS, technology agency, Tbilisi, Georgia',
@@ -394,7 +397,7 @@ const SEO: React.FC<SEOProps> = ({
       <meta name="description" content={metaDescription} />
       <meta name="keywords" content={metaKeywords} />
       <meta name="author" content={`${siteName} Team`} />
-      <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+      <meta name="robots" content={noindex ? "noindex, follow" : "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"} />
 
       {/* Open Graph Meta Tags */}
       <meta property="og:type" content={type} />

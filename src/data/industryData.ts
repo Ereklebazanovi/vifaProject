@@ -514,14 +514,14 @@ export const foodWebPackages: BilingualPricingTier[] = [
     price: "₾ 1000 - 1500",
     periodKa: "პროექტი",
     periodEn: "project",
-    descKa: "ციფრული ჰაბი დიდი ობიექტებისთვის. მაგიდების ჯავშნისა და ივენთების მართვის ავტომატიზებული სისტემა.",
+    descKa: "ციფრული ჰაბი დიდი ობიექტებისთვის. მაგიდების ჯავშნისა და ღონისძიებების მართვის ავტომატიზებული სისტემა.",
     descEn: "A digital hub for large venues. Automated system for table reservations and event management.",
     featuresKa: [
       "+ 'პრემიუმ ვებ-მენიუ'-ს ყველა ფუნქცია",
       "მაგიდის ავტომატიზებული ჯავშნის სისტემა (კალენდრით)",
       "კორპორატიული საღამოების და ბანკეტების მოთხოვნის ფორმა",
       "ავტომატური მეილ-ნოტიფიკაციები ადმინისტრაციასთან",
-      "ივენთების და Live მუსიკის კალენდარი (ანონსებისთვის)",
+      "ღონისძიებების და Live მუსიკის კალენდარი (ანონსებისთვის)",
       "Meta/Google Pixel ინტეგრაცია ტრაფიკის სამართავად",
     ],
     featuresEn: [
@@ -738,7 +738,7 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
       approach: {
         headingKa: "სისტემა, რომელიც ზოგავს დროს და ზრდის შემოსავალს",
         headingEn: "Systems that save time and increase revenue",
-        descKa: "ჩვენ არ ვქმნით უბრალოდ ვებსაიტებს. ჩვენ ვაწყობთ ინფრასტრუქტურას, რომელიც ანაცვლებს შუამავალ პლატფორმებს და გიტოვებთ სრულ კონტროლს კლიენტებზე.",
+        descKa: "საიტზე კლიენტი პირდაპირ ეწერება ვიზიტზე, შუამავალი პლატფორმის გარეშე. კლიენტების სია და ჯავშნები თქვენთან რჩება.",
         descEn: "We don't just build websites. We set up infrastructure that replaces third-party platforms and gives you full control over your clients.",
       },
       features: [
@@ -859,7 +859,7 @@ export const industryData: Record<string, Record<string, IndustryConfig>> = {
         headingKa: "შექმნილი პირდაპირი ჯავშნებისთვის",
         headingEn: "Built for Direct Bookings",
         descKa:
-          "ჩვენ ვქმნით ულამაზეს, თანამედროვე ვებსაიტებს, რომლებიც სტუმრებს უმარტივებს თქვენთან დაკავშირებას და ჯავშნის მოთხოვნის გამოგზავნას.",
+          "საიტზე სტუმარი ხედავს ნომრებს და პირდაპირ გიგზავნით ჯავშნის მოთხოვნას.",
         descEn:
           "We create beautiful, modern websites that make it easy for guests to connect with you and send booking requests.",
       },
@@ -986,7 +986,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
         headingKa: "ორიენტირებული ნდობასა და უსაფრთხოებაზე",
         headingEn: "Focused on Trust and Security",
         descKa:
-          "საფინანსო და იურიდიულ სექტორში მთავარი ვალუტა ნდობაა. ჩვენ ვქმნით პრემიუმ ვებსაიტებს და კლიენტთა პორტალებს, რომლებიც ხაზს უსვამს თქვენს პროფესიონალიზმს.",
+          "იურიდიულ და საფინანსო კომპანიას კლიენტი ხშირად ჯერ საიტით აფასებს. ვამზადებთ ვებსაიტებს და კლიენტის პორტალებს, სადაც მკაფიოდ ჩანს გუნდი, მომსახურება და გამოცდილება.",
         descEn:
           "In the finance and legal sector, trust is the main currency. We build premium websites and client portals that highlight your professionalism.",
       },
@@ -996,7 +996,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
           titleKa: "უსაფრთხო კლიენტთა პორტალი",
           titleEn: "Secure Client Portal",
           descKa:
-            "დახურული სივრცე (Login), სადაც თქვენ და თქვენს კლიენტებს შეგიძლიათ უსაფრთხოდ გაცვალოთ სენსიტიური დოკუმენტები.",
+            "დახურული სივრცე (Login), სადაც თქვენ და თქვენს კლიენტებს შეგიძლიათ უსაფრთხოდ გაცვალოთ კონფიდენციალური დოკუმენტები.",
           descEn:
             "A private space (Login) where you and your clients can securely exchange sensitive documents.",
         },
@@ -1027,7 +1027,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
       seoDescriptionEn:
         "Corporate website development for legal & finance firms: private client portal, secure document exchange and CMS. From 700₾. Free consultation.",
       introKa:
-        "იურიდიულ და საფინანსო სფეროში მთავარი ვალუტა ნდობაა, და ის ციფრული პირველი შთაბეჭდილებიდან იწყება. იურიდიული კომპანიის საიტის დამზადება VIFA Digital-თან ნიშნავს პრემიუმ, სოლიდურ ვებსაიტს, რომელიც ხაზს უსვამს თქვენს სტატუსს, წარმოაჩენს გუნდს, სერვისებს და პარტნიორებს, რომელიც გაძლევთ უსაფრთხო კომუნიკაციის არხს.",
+        "იურიდიული კომპანიის საიტის დამზადება VIFA Digital-თან ნიშნავს სოლიდურ ვებსაიტს, სადაც მკაფიოდ ჩანს გუნდი, მომსახურება და პარტნიორები, კლიენტს კი თქვენთან დაკავშირების უსაფრთხო არხი აქვს.",
       introEn:
         "In the legal and finance sector trust is the main currency, and it begins with the first digital impression. Law firm website development with VIFA Digital means a premium, solid website that highlights your status, presents your team and services, and gives clients a secure communication channel.",
       contentSections: [
@@ -1043,7 +1043,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
           headingKa: "დახურული პორტალი და უსაფრთხო დოკუმენტბრუნვა",
           headingEn: "Private portal and secure document exchange",
           bodyKa:
-            "ვებ-პორტალის პაკეტში საიტს ემატება კლიენტების დახურული კაბინეტი (Login), სადაც თქვენ და თქვენს კლიენტებს შეგიძლიათ უსაფრთხოდ გაცვალოთ სენსიტიური დოკუმენტები. ეს განსაკუთრებით მნიშვნელოვანია ადვოკატებისა და საფინანსო კონსულტანტებისთვის, რომლებიც კონფიდენციალურ ინფორმაციას ამუშავებენ. ვამატებთ ასევე Live Chat-სა და Meta/Google Pixel ინტეგრაციას ანალიტიკისთვის.",
+            "ვებ-პორტალის პაკეტში საიტს ემატება კლიენტების დახურული კაბინეტი (Login), სადაც თქვენ და თქვენს კლიენტებს შეგიძლიათ უსაფრთხოდ გაცვალოთ კონფიდენციალური დოკუმენტები. ეს განსაკუთრებით მნიშვნელოვანია ადვოკატებისა და საფინანსო კონსულტანტებისთვის, რომლებიც კონფიდენციალურ ინფორმაციას ამუშავებენ. ვამატებთ ასევე Live Chat-სა და Meta/Google Pixel ინტეგრაციას ანალიტიკისთვის.",
           bodyEn:
             "In the Web Portal package the site gains a private client dashboard (Login) where you and your clients can securely exchange sensitive documents. This is especially important for lawyers and financial consultants handling confidential information. We also add Live Chat and Meta/Google Pixel integration for analytics.",
         },
@@ -1057,7 +1057,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
         {
           question: "შესაძლებელია კლიენტების დახურული პორტალის შექმნა?",
           answer:
-            "დიახ, ვებ-პორტალის პაკეტი მოიცავს Login-ით დაცულ კაბინეტს და უსაფრთხო დოკუმენტბრუნვას, რაც სენსიტიური ინფორმაციის გაცვლას უსაფრთხოს ხდის.",
+            "დიახ, ვებ-პორტალის პაკეტი მოიცავს Login-ით დაცულ კაბინეტს და უსაფრთხო დოკუმენტბრუნვას, რაც კონფიდენციალური ინფორმაციის გაცვლას უსაფრთხოს ხდის.",
         },
         {
           question: "საიტი მრავალენოვანი იქნება?",
@@ -1113,7 +1113,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
         headingKa: "შექმნილია ბიზნესის ზრდისთვის",
         headingEn: "Built for Business Growth",
         descKa:
-          "ჩვენ არ ვქმნით უბრალოდ ვებსაიტებს. ჩვენ გაძლევთ სრულ ეკოსისტემას, რომელიც აერთიანებს პრემიუმ ვიზუალს, ონლაინ გადახდებს და ლოგისტიკის (კურიერების, მარაგების) ავტომატიზაციას.",
+          "საიტი, ონლაინ გადახდები, კურიერები და მარაგები ერთ სისტემაშია, ამიტომ შეკვეთებს ხელით აღარ გადაწერთ.",
         descEn:
           "We don't just build websites. We provide a full ecosystem combining premium visuals, online payments, and logistics (couriers, inventory) automation.",
       },
@@ -1154,7 +1154,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
       seoDescriptionEn:
         "Online store development with Georgian bank payments, warehouse management (WMS) and automated courier labels. eCommerce sites from 700₾.",
       introKa:
-        "ონლაინ მაღაზიის საიტის დამზადება დღეს ნიშნავს არა მხოლოდ პროდუქტების კატალოგს, არამედ სრულ ციფრულ ეკოსისტემას: გაყიდვებიდან ლოგისტიკამდე. VIFA Digital გთავაზობთ ონლაინ მაღაზიის დამზადებას ქართული ბანკების გადახდის სისტემებით, საწყობის მართვითა (WMS) და კურიერის ინტეგრაციით, რათა თქვენი ინტერნეტ მაღაზია არა მხოლოდ ლამაზი, არამედ მომგებიანი იყოს.",
+        "ონლაინ მაღაზიის საიტის დამზადება კატალოგით არ მთავრდება. VIFA Digital გთავაზობთ ონლაინ მაღაზიის დამზადებას ქართული ბანკების გადახდის სისტემებით, საწყობის მართვითა (WMS) და კურიერის ინტეგრაციით, რომ ინტერნეტ მაღაზიაში შეკვეთა, გადახდა და მიწოდება ერთ სისტემაში იმართებოდეს.",
       introEn:
         "Online store website development today means not just a product catalog but a full digital ecosystem - from sales to logistics. VIFA Digital offers online store development with Georgian bank payment systems, warehouse management (WMS) and courier integration, so your store is not just beautiful but profitable.",
       contentSections: [
@@ -1238,7 +1238,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
       heroBgImage: "/restorani.webp", 
       eyebrowKa: "ვებ დეველოპმენტი",
       eyebrowEn: "Web Development",
-      heroSublineKa: "ჩაანაცვლეთ შაბლონური პლატფორმები თქვენი საკუთარი სივრცით. ბრენდირებული მენიუები და ჯავშნების სრული ავტომატიზაცია.",
+      heroSublineKa: "საკუთარი საიტი მენიუთი და ონლაინ ჯავშნით, შუამავალი პლატფორმის გარეშე.",
       heroSublineEn: "Replace generic platforms with your own space. Branded menus and full booking automation.",
       headline: {
         type: "simple",
@@ -1249,7 +1249,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
         headingKa: "ორიენტირებული ბრენდსა და კომფორტზე",
         headingEn: "Focused on Brand and Comfort",
         descKa:
-          "მაღალი კლასის მომსახურება ციფრული სივრციდან იწყება. ჩვენ ვქმნით პლატფორმებს, რომლებიც ხაზს უსვამს თქვენი რესტორნის იმიჯს და ამარტივებს ჯავშნების მართვას.",
+          "რესტორნის საიტზე სტუმარი ხედავს მენიუს და მაგიდას პირდაპირ ჯავშნის, თქვენ კი ჯავშნებს ერთ სიაში მართავთ.",
         descEn:
           "High-class service starts in the digital space. We build platforms that highlight your restaurant's image and simplify booking management.",
       },
@@ -1277,7 +1277,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
           titleKa: "სრული დამოუკიდებლობა (CMS)",
           titleEn: "Full Independence (CMS)",
           descKa:
-            "ფასების, მენიუს და ივენთების მართვა თქვენივე ადმინ-პანელიდან მარტივად, ნებისმიერ დროს.",
+            "ფასების, მენიუს და ღონისძიებების მართვა თქვენივე ადმინ-პანელიდან მარტივად, ნებისმიერ დროს.",
           descEn:
             "Manage prices, menus, and events effortlessly from your own admin panel, at any time.",
         },

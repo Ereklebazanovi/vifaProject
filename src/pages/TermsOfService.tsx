@@ -114,7 +114,7 @@ const TermsOfService: React.FC = () => {
             {t("terms.description")}
           </p>
           <div className="mt-4 text-sm ed-muted">
-            {t("terms.lastUpdated")}: {new Date().toLocaleDateString("ka-GE")}
+            {t("terms.lastUpdated")}: {currentLanguage === "en" ? "21 November 2026" : "21 ნოემბერი, 2026"}
           </div>
         </header>
 

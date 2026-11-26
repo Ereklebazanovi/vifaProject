@@ -31,17 +31,17 @@ const webDevFaq: Record<"ka" | "en", FAQItem[]> = {
     {
       question: "რამდენ ხანში მზადდება ვებსაიტი?",
       answer:
-        "სავიზიტო ვებსაიტის დასამზადებლად საშუალოდ 1-დან 2 კვირამდე დროა საჭირო. პრემიუმ კორპორატიული ვებსაიტის შექმნას 2-დან 4 კვირამდე ვუთმობთ, ხოლო ონლაინ მაღაზიის სრულყოფილად გამართვას 4-დან 6 კვირამდე სჭირდება. სამუშაოს ზუსტ ვადებს პროექტის სპეციფიკისა და მოცულობის მიხედვით ინდივიდუალურად ვათანხმებთ."
+        "სავიზიტო საიტს საშუალოდ 1-2 კვირა სჭირდება, პრემიუმ კორპორატიულ ვებსაიტს 2-4 კვირა, ონლაინ მაღაზიას 4-6 კვირა. ზუსტ ვადას სამუშაოს მოცულობის მიხედვით წინასწარ ვათანხმებთ."
     },
     {
       question: "რა ტექნოლოგიებზე აშენებთ ვებსაიტებს?",
       answer:
-        "პროექტებისთვის ვიყენებთ უახლეს და მოწინავე ტექნოლოგიურ სტეკს, როგორიცაა React, TypeScript, Node.js, Firebase და Vercel. აღნიშნული ტექნოლოგიები უზრუნველყოფს საიტის მაქსიმალურ სისწრაფეს, უმაღლეს უსაფრთხოებასა და SEO-სთვის იდეალურად ოპტიმიზებულ სტრუქტურას."
+        "ვიყენებთ React-ს, TypeScript-ს, Node.js-ს, Firebase-სა და Vercel-ს. ამ ტექნოლოგიებით საიტი სწრაფად იტვირთება, დაცულია და Google-ისთვის სწორად არის აწყობილი."
     },
     {
       question: "ვებსაიტი მობილურზე მორგებული და SEO-ზე ოპტიმიზებული იქნება?",
       answer:
-        "რა თქმა უნდა. ჩვენ მიერ შექმნილი ყველა ვებსაიტი სრულად რესპონსიულია და იდეალურად მუშაობს როგორც მობილურსა და ტაბლეტზე, ისე კომპიუტერზე. საიტს ასევე ექნება საბაზისო SEO ოპტიმიზაცია, ინტეგრირებული Google Analytics და უსაფრთხო კავშირისთვის აუცილებელი SSL სერთიფიკატი."
+        "დიახ. ყველა ვებსაიტი მორგებულია ტელეფონზე, პლანშეტსა და კომპიუტერზე. საიტს მოჰყვება საბაზისო SEO ოპტიმიზაცია, Google Analytics და SSL სერტიფიკატი."
     },
     {
       question: "აკეთებთ ონლაინ მაღაზიას ქართული ბანკებით გადახდით?",
@@ -68,12 +68,12 @@ const webDevFaq: Record<"ka" | "en", FAQItem[]> = {
     {
       question: "What technologies do you build websites with?",
       answer:
-        "We use a modern, advanced stack such as React, TypeScript, Node.js, Firebase and Vercel. These technologies ensure maximum speed, top-tier security and a structure that is perfectly optimized for SEO."
+        "We use React, TypeScript, Node.js, Firebase and Vercel. With them the site loads fast, stays secure and is built so Google can read it well."
     },
     {
       question: "Will the website be mobile-responsive and SEO-optimized?",
       answer:
-        "Absolutely. Every website we build is fully responsive and works perfectly on mobile, tablet and desktop. It also includes baseline SEO optimization, integrated Google Analytics and an SSL certificate for a secure connection."
+        "Yes. Every website works on phones, tablets and computers. It comes with baseline SEO optimization, Google Analytics and an SSL certificate."
     },
     {
       question: "Do you build online stores with Georgian bank payments?",
@@ -110,7 +110,7 @@ const webDevTranslations = {
     "webdev.pricing.corporate.feature2": "რამდენიმე ენის მხარდაჭერა",
     "webdev.pricing.corporate.feature3": "ავტომატური სარეზერვო ასლები",
     "webdev.pricing.ai.feature1": "Google Gemini AI",
-    "webdev.pricing.ai.feature2": "3 პლატფორმაზე ინტეგრაცია",
+    "webdev.pricing.ai.feature2": "4 არხი: Messenger, Instagram, WhatsApp და ვებსაიტი",
     "webdev.pricing.ai.feature3": "ქართული ენის მხარდაჭერა",
     "webdev.pricing.ai.feature4": "რეალურ დროში რედაქტირება",
     "webdev.pricing.ai.feature5": "დეტალური ანალიტიკა",
@@ -128,16 +128,16 @@ const webDevTranslations = {
 
     "webdev.content.eyebrow": "სერვისის შესახებ",
     "webdev.content.intro":
-      "ვებსაიტი დღეს ბიზნესის მთავარი ციფრული ვიტრინაა. VIFA Digital აკეთებს საიტის დამზადებას სრული ციკლით: დიზაინიდან და დეველოპმენტიდან SEO ოპტიმიზაციამდე და გაშვებამდე. ვქმნით სწრაფ, მობილურზე მორგებულ და კონვერსიაზე ორიენტირებულ ვებგვერდებს, რომლებიც რეალურ შედეგს, ვიზიტორებსა და გაყიდვებს მოგიტანთ.",
+      "საიტის დამზადება მოიცავს დიზაინს, დეველოპმენტს, SEO ოპტიმიზაციას და გაშვებას. ყველაფერს ერთი გუნდი აკეთებს. საიტი სწრაფად იტვირთება და ტელეფონზე მორგებულია.",
     "webdev.content.question_1": "როგორ ამზადებთ კორპორატიულ ვებსაიტს?",
     "webdev.content.p_1":
-      "ვაკეთებთ კორპორატიული ვებსაიტებისა და სავიზიტო საიტების დამზადებას მცირე და საშუალო ბიზნესისთვის. თითოეული ვებგვერდი იქმნება უნიკალური დიზაინით, თქვენი ბრენდის სტილზე მორგებით და სუფთა, სწრაფი კოდით (React, TypeScript). საიტი თავიდანვე SEO-ზე ოპტიმიზებულია, რათა Google-ში სწორ სიტყვებზე გამოჩნდეს და ახალი კლიენტები მოიზიდოს.",
+      "კორპორატიულ ვებსაიტებს და სავიზიტო საიტებს მცირე და საშუალო ბიზნესისთვის ვამზადებთ. დიზაინს თქვენი ბრენდის სტილზე ვაწყობთ, კოდს React-სა და TypeScript-ზე ვწერთ. საიტი თავიდანვე SEO-ზეა გამართული, რომ Google-ში სწორ სიტყვებზე გამოჩნდეს.",
     "webdev.content.question_2": "როგორ ვმართავ მარაგებსა და შეკვეთებს ონლაინ მაღაზიაში?",
     "webdev.content.p_2":
       "ონლაინ მაღაზიას ვუკავშირებთ Invento WMS-ს. სისტემა ავტომატურად აახლებს მარაგებს, ბეჭდავს საკურიერო ეტიკეტებს და შეკვეთების კონტროლის საშუალებას გაძლევთ რეალურ დროში.",
     "webdev.content.question_3": "როდის მჭირდება ცალკე გვერდი რეკლამისთვის?",
     "webdev.content.p_3":
-      "სარეკლამო კამპანიებისთვის ვამზადებთ ლენდინგ პეიჯებს (landing page), რომლებიც ერთ მკაფიო მიზანზეა აწყობილი - ლიდის ან გაყიდვის მიღებაზე. სწრაფი ჩატვირთვა, გასაგები მესიჯი და ძლიერი call-to-action ზრდის რეკლამის ეფექტურობას და ამცირებს მოზიდვის ღირებულებას.",
+      "სარეკლამო კამპანიისთვის ვამზადებთ ლენდინგ გვერდს (landing page), რომელსაც ერთი მიზანი აქვს: განაცხადის ან შეკვეთის მიღება. გვერდი სწრაფად იტვირთება, ტექსტი მოკლეა და ღილაკი თვალსაჩინო, ეს კი რეკლამის შედეგს აუმჯობესებს.",
   },
   en: {
     "seo.webdev.title": "Website Development in Georgia - from 500₾",
@@ -160,7 +160,7 @@ const webDevTranslations = {
     "webdev.pricing.corporate.feature2": "Multilingual support",
     "webdev.pricing.corporate.feature3": "Automatic backups",
     "webdev.pricing.ai.feature1": "Google Gemini AI",
-    "webdev.pricing.ai.feature2": "3 Platform Integration",
+    "webdev.pricing.ai.feature2": "4 channels: Messenger, Instagram, WhatsApp and website",
     "webdev.pricing.ai.feature3": "Georgian Language Support",
     "webdev.pricing.ai.feature4": "Real-time Editing",
     "webdev.pricing.ai.feature5": "Detailed Analytics",
@@ -242,7 +242,6 @@ export default function WebDev() {
           offers: [
             { name: "Landing Page საიტი", price: 500 },
             { name: "კორპორატიული საიტი (CMS)", minPrice: 700, maxPrice: 1000 },
-            { name: "AI ინტეგრირებული ვებსაიტი", price: 300 },
             { name: "eCommerce ონლაინ მაღაზია", price: 1400 },
           ],
         }}

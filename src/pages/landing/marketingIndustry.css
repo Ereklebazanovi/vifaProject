@@ -9,6 +9,8 @@
 .marketing-industry .industry-pricing-grid:has(> :only-child) { grid-template-columns: minmax(0, 1fr); }
 .marketing-industry #pricing { scroll-margin-top: 56px; }
 .industry-package-compare { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; align-self: flex-start; }
+/* Dark, not blue: the blue link read at about 2:1 on the colored package cards (site review 2026-11-26). */
+.industry-pricing-grid .industry-package-compare { color: var(--it-text); }
 
 .marketing-industry .marketing-proof-image { width: 100%; }
 
