@@ -67,11 +67,11 @@ const plans = [
     ] },
   },
   {
-    id: "bundle", price: "1999 ₾",
-    ka: { title: "ონლაინ მაღაზია + WMS", period: "ერთჯერადად", summary: "მაღაზიის დამზადება და გაშვება.", bullets: [
+    id: "bundle", price: "1400 ₾-დან",
+    ka: { title: "ონლაინ მაღაზია + WMS", period: "ერთჯერადად, WMS-ის გამოწერა ცალკე", summary: "მაღაზიის დამზადება და გაშვება.", bullets: [
       "მარაგისა და შეკვეთების სინქრონიზაცია", "TBC, BOG და Apple Pay", "სერვერი და დომენის დაკავშირება",
     ] },
-    en: { title: "E-commerce Bundle", period: "one-time", summary: "We build and launch your online store.", bullets: [
+    en: { title: "Online store + WMS", period: "one-time, WMS subscription separate", summary: "We build and launch your online store.", bullets: [
       "Inventory and order sync", "TBC, BOG and Apple Pay", "Server setup and domain connection",
     ] },
   },
@@ -119,7 +119,7 @@ export default function InventoLandingPage() {
           offers: [
             { name: "ყოველთვიური გეგმა", price: 79 },
             { name: "წლიური გეგმა", price: 750 },
-            { name: "E-commerce Bundle (ონლაინ მაღაზია + WMS)", price: 1999 },
+            { name: "ონლაინ მაღაზია (WMS-ის გამოწერა ცალკე)", price: 1400 },
           ],
         }}
         breadcrumbs={breadcrumbs}

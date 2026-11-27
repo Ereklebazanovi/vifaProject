@@ -392,7 +392,7 @@ export const ecommerceWebPackages: BilingualPricingTier[] = [
   {
     nameKa: "ციფრული შოურუმი",
     nameEn: "Digital Showroom",
-    price: "₾ 700 - 900",
+    price: "₾ 700 - 1000",
     periodKa: "პროექტი",
     periodEn: "project",
     descKa: "იდეალურია სოც. ქსელებით (FB/IG/TikTok) მოვაჭრე ბიზნესებისთვის. პრემიუმ კატალოგი გაყიდვების მარტივი პროცესით.",
@@ -421,7 +421,7 @@ export const ecommerceWebPackages: BilingualPricingTier[] = [
   {
     nameKa: "ავტომატიზებული E-commerce",
     nameEn: "Automated E-commerce",
-    price: "₾ 1000 - 1500",
+    price: "₾ 1400+",
     periodKa: "პროექტი",
     periodEn: "project",
     descKa: "სრულფასოვანი ონლაინ მაღაზია უსაფრთხო გადახდებითა და შეკვეთების სრული ციკლის მართვით.",
@@ -448,13 +448,13 @@ export const ecommerceWebPackages: BilingualPricingTier[] = [
     glowColor: "rgba(99,102,241,0.18)",
   },
   {
-    nameKa: "სრული Retail ეკოსისტემა",
-    nameEn: "Full Retail Ecosystem",
-    price: "₾ 2500+",
+    nameKa: "მაღაზია + Invento WMS",
+    nameEn: "Store + Invento WMS",
+    price: "₾ 1400+",
     periodKa: "პროექტი",
     periodEn: "project",
-    descKa: "პლატფორმა + CRM და საწყობის მართვა (WMS). ტექნოლოგიური ინფრასტრუქტურა დიდი გაყიდვებისთვის.",
-    descEn: "Platform + CRM and Warehouse Management (WMS). Tech infrastructure for high-volume sales.",
+    descKa: "ონლაინ მაღაზია მარაგების მართვის პროგრამასთან (Invento WMS) დაკავშირებით. WMS-ის გამოწერა ცალკე იხდება.",
+    descEn: "An online store connected to the Invento WMS inventory software. The WMS subscription is paid separately.",
     featuresKa: [
       "+ 'ავტომატიზებული E-commerce'-ს ყველა ფუნქცია",
       "საწყობის მართვის ინტეგრირებული სისტემა (WMS)",
@@ -1150,9 +1150,9 @@ heroSublineKa: "თანამედროვე პლატფორმებ
       seoTitleKa: "ონლაინ მაღაზიის დამზადება: eCommerce საიტი ქართული ბანკებით",
       seoTitleEn: "Online Store Development: eCommerce with Georgian Banks",
       seoDescriptionKa:
-        "ონლაინ მაღაზიის დამზადება ქართული ბანკების გადახდით, საწყობის მართვითა (WMS) და კურიერის ლეიბლების ავტომატიზაციით. ინტერნეტ მაღაზია 700₾-დან.",
+        "ონლაინ მაღაზიის დამზადება ქართული ბანკების გადახდით, საწყობის მართვითა (WMS) და კურიერის ლეიბლების ავტომატიზაციით. ინტერნეტ მაღაზია 1400₾-დან.",
       seoDescriptionEn:
-        "Online store development with Georgian bank payments, warehouse management (WMS) and automated courier labels. eCommerce sites from 700₾.",
+        "Online store development with Georgian bank payments, warehouse management (WMS) and automated courier labels. eCommerce sites from 1400₾.",
       introKa:
         "ონლაინ მაღაზიის საიტის დამზადება კატალოგით არ მთავრდება. VIFA Digital გთავაზობთ ონლაინ მაღაზიის დამზადებას ქართული ბანკების გადახდის სისტემებით, საწყობის მართვითა (WMS) და კურიერის ინტეგრაციით, რომ ინტერნეტ მაღაზიაში შეკვეთა, გადახდა და მიწოდება ერთ სისტემაში იმართებოდეს.",
       introEn:
@@ -1179,7 +1179,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
         {
           question: "რა ღირს ონლაინ მაღაზიის საიტის დამზადება?",
           answer:
-            "ონლაინ მაღაზიის საიტის დამზადება სამ პაკეტად გვაქვს: ციფრული შოურუმი 700 ₾-დან 900 ₾-მდე, ავტომატიზებული E-commerce ონლაინ გადახდებით 1000 ₾-დან 1500 ₾-მდე, ხოლო WMS-ით ინტეგრირებული სრული Retail ეკოსისტემა 2500 ₾-დან. კონსულტაცია უფასოა და მოქმედებს 50/50 გადახდა.",
+            "ონლაინ მაღაზიის საიტის დამზადება 1400 ₾-დან იწყება. თუ მხოლოდ კატალოგი გჭირდებათ ონლაინ გადახდის გარეშე, ციფრული შოურუმი 700-1000 ₾ ღირს. მაღაზიას Invento WMS-საც დავუკავშირებთ, WMS-ის გამოწერა ცალკე იხდება. კონსულტაცია უფასოა და მოქმედებს 50/50 გადახდა.",
         },
         {
           question: "რამდენ ხანში მზადდება ონლაინ მაღაზიის საიტი?",
@@ -1206,7 +1206,7 @@ heroSublineKa: "თანამედროვე პლატფორმებ
         {
           question: "How much does online store website development cost?",
           answer:
-            "Online store website development comes in three packages: Digital Showroom 700-900 ₾, Automated E-commerce with online payments 1000-1500 ₾, and the WMS-integrated Full Retail Ecosystem from 2500 ₾. Consultation is free and a 50/50 payment split is available.",
+            "An online store starts at 1400 ₾. If you only need a catalog without online payments, the Digital Showroom costs 700-1000 ₾. We can also connect the store to Invento WMS; the WMS subscription is paid separately. Consultation is free and a 50/50 payment split is available.",
         },
         {
           question: "How long does online store website development take?",

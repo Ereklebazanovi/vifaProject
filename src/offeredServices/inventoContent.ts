@@ -10,7 +10,7 @@ export const inventoFaq: Record<"ka" | "en", FAQItem[]> = {
     {
       question: "რა ღირს Invento WMS?",
       answer:
-        "სამი გეგმაა: ყოველთვიური 79₾, წლიური 750₾, ხოლო E-commerce Bundle (ონლაინ მაღაზია + WMS ლიცენზია და სრული სინქრონიზაცია) 1999₾. თვიურ და წლიურ გეგმებს ახლავს 7-დღიანი უფასო საცდელი პერიოდი. ონლაინ მაღაზიის პაკეტზე კონსულტაცია უფასოა.",
+        "სამი გეგმაა: ყოველთვიური 79₾, წლიური 750₾, ხოლო თუ ონლაინ მაღაზიაც გჭირდებათ, მის დამზადებას 1400₾-დან ვიწყებთ და Invento WMS-თან სრულად ვაკავშირებთ. თვიურ და წლიურ გეგმებს ახლავს 7-დღიანი უფასო საცდელი პერიოდი. ონლაინ მაღაზიის პაკეტზე კონსულტაცია უფასოა.",
     },
     {
       question: "რის მართვა შემიძლია Invento-ში?",
@@ -57,7 +57,7 @@ export const inventoFaq: Record<"ka" | "en", FAQItem[]> = {
     {
       question: "How much does the warehouse software cost?",
       answer:
-        "There are three plans: Monthly 79₾, Annual 750₾, and the E-commerce Bundle (online store + WMS license and full synchronization) 1999₾. Monthly and annual plans include a 7-day free trial. The online store bundle comes with a free consultation.",
+        "There are three plans: Monthly 79₾, Annual 750₾, and if you also need an online store, we build it from 1400₾ and connect it fully to Invento WMS. Monthly and annual plans include a 7-day free trial. The online store bundle comes with a free consultation.",
     },
     {
       question: "What features does Invento WMS have?",
@@ -107,7 +107,7 @@ export const inventoTranslations = {
     "feature4.desc": "წვდომის დონეების განსაზღვრა (მენეჯერი / ადმინი / ოპერატორი). აკონტროლეთ თანამშრომლების აქტივობა.",
 
     "plan3.f1": "თანამედროვე ონლაინ მაღაზიის დამზადება",
-    "plan3.f2": "Invento WMS-ის ლიცენზია + სრული სინქრონიზაცია",
+    "plan3.f2": "Invento WMS-თან სრული სინქრონიზაცია (WMS-ის გამოწერა ცალკე)",
     "plan3.f3": "გადახდის სისტემები (TBC, BOG, Apple Pay)",
     "plan3.f4": "სერვერული გამართვა და დომენის დაკავშირება",
     "plan3.f5": "SEO ოპტიმიზაცია და Google Analytics",
@@ -117,7 +117,7 @@ export const inventoTranslations = {
     "seoContent.body2":
       "ნაშთების აღრიცხვა ხდება ვარიაციების დონეზე: ფერი, ზომა და სხვა მახასიათებლები ცალ-ცალკე აღირიცხება. როცა პროდუქტი კრიტიკულ ნაშთს მიაღწევს, სისტემა გაგაფრთხილებთ, ამიტომ ინვენტარიზაცია აღარ არის თვის ბოლოს ჩასატარებელი სტრესი და მარაგების ზუსტი სურათი ნებისმიერ მომენტში გაქვთ. PWA ტექნოლოგიის წყალობით საწყობის მართვის სისტემა მუშაობს ტელეფონზე, პლანშეტსა და კომპიუტერზე, ინსტალაციის გარეშე.",
     "seoContent.body3":
-      "განსაკუთრებით გამოდგება ონლაინ და ფიზიკური მაღაზიებისთვის, სადაც საქონლის აღრიცხვა ჯერ კიდევ რვეულში ან Excel-ში მიმდინარეობს და გაყიდვების აღრიცხვას ხელით აკეთებენ. ფასი იწყება თვეში 79₾-დან, ხოლო E-commerce Bundle-ით ერთდროულად იღებთ ონლაინ მაღაზიასა და WMS ლიცენზიას სრული სინქრონიზაციით. დაიწყეთ 7-დღიანი უფასო საცდელი პერიოდით და სისტემა საკუთარ ბიზნესში გამოსცადეთ.",
+      "განსაკუთრებით გამოდგება ონლაინ და ფიზიკური მაღაზიებისთვის, სადაც საქონლის აღრიცხვა ჯერ კიდევ რვეულში ან Excel-ში მიმდინარეობს და გაყიდვების აღრიცხვას ხელით აკეთებენ. ფასი იწყება თვეში 79₾-დან, ონლაინ მაღაზიას კი 1400₾-დან ვამზადებთ და WMS-თან სრულად ვაკავშირებთ. დაიწყეთ 7-დღიანი უფასო საცდელი პერიოდით და სისტემა საკუთარ ბიზნესში გამოსცადეთ.",
 
   },
   en: {
@@ -129,7 +129,7 @@ export const inventoTranslations = {
     "feature4.desc": "Role-based access control (Manager vs Admin). Monitor employee activity.",
 
     "plan3.f1": "Custom E-commerce Website Development",
-    "plan3.f2": "Invento WMS License + Real-time Sync",
+    "plan3.f2": "Full sync with Invento WMS (WMS subscription separate)",
     "plan3.f3": "Payment Gateway Integration (TBC, BOG, Apple Pay)",
     "plan3.f4": "Server Configuration & Domain Setup",
     "plan3.f5": "SEO Optimization & Google Analytics",
@@ -139,7 +139,7 @@ export const inventoTranslations = {
     "seoContent.body2":
       "Stock is managed at the variation level: color, size and other attributes are tracked separately. When a product reaches critical stock, the system alerts you, so inventory counting is no longer an end-of-month stress and you always have an accurate picture. Thanks to PWA technology, the warehouse management system works on phone, tablet and desktop with no installation.",
     "seoContent.body3":
-      "The system is built for sellers on Instagram and Facebook who take orders in DMs, as well as online stores and businesses with a physical warehouse. Pricing starts at 79₾ per month, and the E-commerce Bundle gives you an online store and a WMS license with full synchronization at once. Start with a 7-day free trial and test the system in your own business.",
+      "The system is built for sellers on Instagram and Facebook who take orders in DMs, as well as online stores and businesses with a physical warehouse. Pricing starts at 79₾ per month, and we build online stores from 1400₾, fully synced with the WMS. Start with a 7-day free trial and test the system in your own business.",
 
   }
 };

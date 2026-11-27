@@ -109,7 +109,7 @@ export const webIndustryCopy: Record<WebIndustrySlug, {
         copy("Visa და Mastercard", "Visa and Mastercard"),
         copy("ყიდვა რეგისტრაციის გარეშე", "Guest checkout"),
         copy("ფასდაკლების კუპონები", "Discount coupons")),
-      packageCopy(copy("მაღაზია საწყობის ინტეგრაციით.", "Store with WMS."),
+      packageCopy(copy("მაღაზია მარაგების პროგრამით. WMS-ის გამოწერა ცალკეა.", "Store with WMS. The WMS subscription is separate."),
         copy("მარაგის სინქრონიზაცია", "Stock sync"),
         copy("კურიერის ეტიკეტები", "Courier labels"),
         copy("მომხმარებელთა ბაზა", "Customer database")),
