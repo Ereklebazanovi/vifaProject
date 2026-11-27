@@ -1,0 +1,16 @@
+.it-screenshot-detail {
+  position: relative;
+  width: min(100%, var(--it-detail-width), calc(var(--it-detail-max-height, 1000px) * var(--it-detail-ratio)));
+  aspect-ratio: var(--it-detail-ratio);
+  overflow: hidden;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgb(29 29 31 / 9%);
+}
+
+.it-screenshot-detail > img {
+  position: absolute;
+  display: block;
+  max-width: none;
+  height: auto;
+}

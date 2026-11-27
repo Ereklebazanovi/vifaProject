@@ -1,0 +1,45 @@
+/* The closing contact block (ContactBlock.tsx). Kept out of light.css on purpose. */
+.contact-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(36px, 6vw, 64px) clamp(20px, 5vw, 48px);
+  border-radius: 28px;
+  background: var(--it-surface, #fff);
+  text-align: center;
+}
+
+.contact-block .it-h2 { max-width: 760px; margin: 0; text-wrap: balance; }
+
+.contact-block-photo {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 18px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.contact-block-note {
+  max-width: 520px;
+  margin: 14px 0 0;
+  color: var(--it-text-2, #6e6e73);
+  font-size: 17px;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.contact-block-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 14px 24px;
+  margin-top: 28px;
+}
+
+/* Phones: the WhatsApp button takes the full width, the quieter links sit below it. */
+@media (width < 560px) {
+  .contact-block { padding-inline: 20px; }
+  .contact-block-actions { flex-direction: column; width: 100%; gap: 14px; }
+  .contact-block-actions > * { width: 100%; justify-content: center; }
+}

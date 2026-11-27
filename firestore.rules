@@ -1,0 +1,61 @@
+rules_version = '2';
+
+// Firestore rules for vifa-project (vifadigital.ge).
+//
+// Publish after every change: Firebase Console -> Firestore -> Rules -> paste -> Publish,
+// or `npx firebase-tools deploy --only firestore:rules` (uses firebase.json).
+//
+// The admin allowlist lives ONLY here, so the emails never ship in public JS.
+// /studio asks Firestore whether the signed-in account may read contacts,
+// and that answer comes from isAdmin() below. Server endpoints (/api) use the
+// admin SDK, which these rules don't apply to.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email in [
+          'ebazanovi@gmail.com',
+          'vifa.official2020@gmail.com'
+        ];
+    }
+
+    // Blog: the public site (and the build-time prerender) reads published posts;
+    // drafts and every write belong to the admin. Public queries must filter on
+    // status == 'published', otherwise they are refused as a whole.
+    match /posts/{postId} {
+      allow read: if resource.data.status == 'published' || isAdmin();
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Contacts: written by the server (/api, admin SDK, bypasses these rules) when
+    // someone fills a form; the studio reads them. Names, phones, emails: admin only.
+    match /contacts/{contactId} {
+      allow read, write: if isAdmin();
+      match /events/{eventId} {
+        allow read, write: if isAdmin();
+      }
+    }
+
+    // Group sends from the studio (written by /api/send). Admin only.
+    match /campaigns/{campaignId} {
+      allow read: if isAdmin();
+    }
+
+    // Earlier manual pipeline (/studio, replaced by contacts). Admin only.
+    match /crmLeads/{leadId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Old public-form leads (the form is no longer on the site). Admin only.
+    match /leads/{leadId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Everything else is closed.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
