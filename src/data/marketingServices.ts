@@ -10,7 +10,7 @@ export const marketingServiceOrder = ["socialMedia", "advertising", "production"
 export type MarketingService = typeof marketingServiceOrder[number];
 export type MarketingLanguage = "ka" | "en";
 
-export const socialMediaMonthlyPrices = { Core: 1000, Growth: 1500, Scale: 2000 } as const;
+export const socialMediaMonthlyPrices = { Core: 1000, Growth: 1500, Scale: 2500 } as const;
 export const consultationPrice = { ka: "ფასი კონსულტაციაზე", en: "Pricing on consultation" } as const;
 
 export const marketingServices = {

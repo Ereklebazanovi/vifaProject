@@ -4,32 +4,39 @@ import { SectionHeading } from "../components/ui/SectionHeading";
 import { WebPackageCard } from "../components/ui/WebCards";
 import { socialMediaMonthlyPrices, type MarketingLanguage } from "../data/marketingServices";
 
+// Package contents from Luka, 2026-11-27. Prices are approximate ("საორიენტაციო") on every card.
 export const packages = [
   {
     name: "Core", price: socialMediaMonthlyPrices.Core,
-    ka: { body: "დაგეგმილი პოსტები და რეგულარული გამოქვეყნება.", features: [
-      "თვეში მინიმუმ 10 პოსტი", "რილსები თქვენი მიზნის მიხედვით", "ბრენდის ფოტოსესია",
+    ka: { body: "გვერდის რეგულარული მართვა და რეკლამა.", features: [
+      "5 პოსტი თვეში: რილსი, ვიდეო ან პოსტერი", "კონტენტის განთავსება", "სარეკლამო კამპანიების მართვა",
     ] },
-    en: { body: "Planned content and publishing.", features: [
-      "At least 10 posts per month", "Reels tailored to your goals", "Brand photo shoot",
+    en: { body: "Regular page management and ads.", features: [
+      "5 posts a month: reels, videos or posters", "Content publishing", "Ad campaign management",
     ] },
   },
   {
     name: "Growth", price: socialMediaMonthlyPrices.Growth,
-    ka: { body: "სოციალური მედიის სრული მართვა და რეკლამა.", features: [
-      "მეტი ვიდეო და რილსი", "სარეკლამო კამპანიების მართვა", "შედეგების განხილვა ყოველ კვირას",
+    ka: { body: "სტრატეგია, გადაღება და რეკლამა ერთად.", features: [
+      "მარკეტინგული სტრატეგიის განსაზღვრა", "ვიდეოს სცენარების შექმნა", "ფოტოგადაღება",
+      "სარეკლამო კამპანიების მართვა", "კონტენტის განთავსება", "ვიდეოების რაოდენობა ინდივიდუალურად",
     ] },
-    en: { body: "Social media management and ads.", features: [
-      "Expanded video production", "Ad campaign management", "Weekly performance reports",
+    en: { body: "Strategy, shoots and ads together.", features: [
+      "Marketing strategy", "Video scripts", "Photo shoots",
+      "Ad campaign management", "Content publishing", "Number of videos agreed individually",
     ] },
   },
   {
     name: "Scale", price: socialMediaMonthlyPrices.Scale,
-    ka: { body: "მასალა ყოველდღე და უფრო ფართო სარეკლამო კამპანიები.", features: [
-      "სტუდიური და დრონით გადაღება", "სარეკლამო სტრატეგია", "ბრენდის განახლება საჭიროებისას",
+    ka: { body: "სრული წარმოება: ვიდეო, სპიკერები და TikTok.", features: [
+      "მარკეტინგული სტრატეგიის განსაზღვრა", "ვიდეოს სცენარების შექმნა", "სააგენტოს სპიკერები ვიდეოებში",
+      "ვიდეოგადაღება", "ფოტოგადაღება", "სარეკლამო კამპანიების მართვა", "კონტენტის განთავსება",
+      "TikTok-ის კონტენტის შექმნა",
     ] },
-    en: { body: "Daily content, broader campaigns.", features: [
-      "Studio and drone shoots", "Advertising strategy", "Rebranding when needed",
+    en: { body: "Full production: video, speakers and TikTok.", features: [
+      "Marketing strategy", "Video scripts", "Agency speakers in videos",
+      "Video shoots", "Photo shoots", "Ad campaign management", "Content publishing",
+      "TikTok content",
     ] },
   },
 ];
@@ -46,13 +53,13 @@ export function SocialMediaPackages({ language, whatsappHref, title }: { languag
     <section ref={sectionRef} id="marketing-pricing" className="it-section it-col marketing-section" aria-labelledby="packages">
       <SectionHeading id="packages">{title ?? (ka ? "პაკეტები" : "Packages")}</SectionHeading>
       <div className="marketing-pricing-grid">
-        {packages.map(({ name, price, ...text }) => <WebPackageCard key={name} title={name} price={`${price} ₾`} timeline={ka ? "თვეში" : "per month"}
+        {packages.map(({ name, price, ...text }) => <WebPackageCard key={name} title={name} price={`${price} ₾`} timeline={ka ? "საორიენტაციო ფასი თვეში" : "approximate, per month"}
           highlighted={name === "Growth"} body={text[language].body} features={text[language].features}
           href={whatsappHref} action={ka ? "კონსულტაცია WhatsApp-ზე" : "Consult on WhatsApp"} />)}
       </div>
       <p className="marketing-price-note">{ka
-        ? "უფასო კონსულტაციაზე დაგეხმარებით პაკეტის შერჩევაში და დამატებით სამუშაოს საჭიროების მიხედვით შევათანხმებთ."
-        : "We’ll help you choose a package in a free consultation and agree on any additional work."}</p>
+        ? "ფასები საორიენტაციოა. ზუსტ ფასს სამუშაოს მოცულობის მიხედვით უფასო კონსულტაციაზე შევათანხმებთ."
+        : "Prices are approximate. We agree on the exact price for your scope in a free consultation."}</p>
     </section>
   );
 }

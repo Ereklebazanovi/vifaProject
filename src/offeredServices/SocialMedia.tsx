@@ -1,6 +1,7 @@
 import { CalendarDays, PanelsTopLeft, PenLine } from "lucide-react";
 import { MarketingServicePage } from "../components/ui/MarketingServicePage";
 import { MarketingWork } from "../components/ui/MarketingWork";
+import { socialMediaMonthlyPrices } from "../data/marketingServices";
 import { useShorts } from "../hooks/useShorts";
 import { packages, SocialMediaPackages } from "./SocialMediaPackages";
 
@@ -18,11 +19,11 @@ const copy = {
     ],
     faq: [
       { question: "რა ღირს სოციალური მედიის მართვა?",
-        answer: "Core თვეში 1000 ₾ ღირს, Growth 1500 ₾, Scale კი 2000 ₾. უფასო კონსულტაციაზე დაგეხმარებით, მიზნებისა და სამუშაოს მოცულობის მიხედვით შეარჩიოთ პაკეტი." },
+        answer: `საორიენტაციო ფასები თვეში: Core ${socialMediaMonthlyPrices.Core} ₾, Growth ${socialMediaMonthlyPrices.Growth} ₾, Scale ${socialMediaMonthlyPrices.Scale} ₾. ზუსტ ფასს სამუშაოს მოცულობის მიხედვით უფასო კონსულტაციაზე შევათანხმებთ.` },
       { question: "რამდენ პოსტს აქვეყნებთ თვეში?",
-        answer: "Core პაკეტში თვეში სულ მცირე 10 პოსტს ვამზადებთ და ვაქვეყნებთ. Growth და Scale პაკეტებში მეტ მასალას ვამზადებთ, გვერდებს ყოველდღე ვმართავთ და შედეგებს ყოველ კვირას ვამოწმებთ." },
+        answer: "Core პაკეტში თვეში 5 პოსტს ვამზადებთ და ვაქვეყნებთ: რილსს, ვიდეოს ან პოსტერს. Growth-სა და Scale-ში მასალის რაოდენობას ინდივიდუალურად ვათანხმებთ." },
       { question: "პაკეტებში ფოტო და ვიდეო გადაღებაც შედის?",
-        answer: "დიახ, პაკეტებში შედის ფოტო და ვიდეო მასალა. Scale პაკეტში დამატებით შედის სტუდიური და დრონით გადაღება." },
+        answer: "Core-ში შედის 5 პოსტი: რილსი, ვიდეო ან პოსტერი. Growth-ში ემატება ფოტოგადაღება და ვიდეოს სცენარები, Scale-ში კი ვიდეოგადაღება, სააგენტოს სპიკერები და TikTok-ის კონტენტი." },
     ],
   },
   en: {
@@ -38,11 +39,11 @@ const copy = {
     ],
     faq: [
       { question: "How much does social media management cost?",
-        answer: "Monthly prices are 1000 ₾ for Core, 1500 ₾ for Growth and 2000 ₾ for Scale. In a free consultation, we can help you choose a package based on your goals and the work you need." },
+        answer: `Approximate monthly prices: Core ${socialMediaMonthlyPrices.Core} ₾, Growth ${socialMediaMonthlyPrices.Growth} ₾, Scale ${socialMediaMonthlyPrices.Scale} ₾. We agree on the exact price for your scope in a free consultation.` },
       { question: "How many posts do you publish each month?",
-        answer: "Core includes at least 10 posts created and published each month. Growth and Scale include more content, daily management and weekly performance analysis." },
+        answer: "Core includes 5 posts a month: reels, videos or posters. In Growth and Scale we agree on the amount of content individually." },
       { question: "Do packages include photos and videos?",
-        answer: "Packages include photo and video content. Scale also includes studio and drone shoots." },
+        answer: "Core includes 5 posts: reels, videos or posters. Growth adds photo shoots and video scripts, and Scale adds video shoots, agency speakers and TikTok content." },
     ],
   },
 };
