@@ -2,7 +2,7 @@ export const marketingHubHref = "/services/marketing";
 export const marketingChannels = [
   { name: "Instagram", href: "https://www.instagram.com/vifaproduction/" },
   { name: "Facebook", href: "https://www.facebook.com/vifageo" },
-  { name: "YouTube", href: "https://www.youtube.com/@vifaprodaction3750" },
+  { name: "YouTube", href: "https://www.youtube.com/@vifadigital2" },
   { name: "TikTok", href: "https://www.tiktok.com/@vifadigital" },
 ] as const;
 
